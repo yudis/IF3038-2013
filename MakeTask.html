@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Untitled Document</title>
+        <style>
+			.label
+			{
+				width: 100px;
+				float: left;
+			}
+			#wrapper
+			{
+				width: 450px;
+				margin: 0 auto;
+				margin-top: 100px;
+				border: 1px solid black;
+				padding: 20px;
+			}
+		</style>
+</head>
+    
+<body>
+	<div id="wrapper">
+        <div class="label"> <label for="tugas" >Nama Tugas</label> </div>	
+        	: <input id="tugas" name="tugas" type="text" maxlength="25" align="middle"/> <br />
+    	<div class="label"> <label for="filebutton">Attachment</label> </div>
+        	: <input id="filebutton" name="filebutton" type="file" /> <br />
+        <div class="label"> <label for="tanggal">Deadline</label></div>	
+        	: Tanggal <input id="tanggal" name="tanggal" type="text" size="1" maxlength="2" align="middle"/> 
+        	Bulan <input name="Bulan" type="text" size="1" maxlength="2" align="middle"/> 
+            Tahun <input name="Tahun" type="text" size="1" maxlength="4" align="middle"/> <br />
+        <div class="label"> <label for="asignee">Asignee</label></div>	
+        	: <input id="asignee" name="asignee" type="text" align="middle"/> <br />
+        <div class="label"> <label for="tag">Tag</label></div>			
+        	: <input id="tag" name="tag" type="text" size="20" /> (dipisahkan dengan koma) <br />
+        <br />
+        <input id="submitbutton" name="submitbutton" type="submit" />        
+    </div>
+        
+</body>
+
+</html>
