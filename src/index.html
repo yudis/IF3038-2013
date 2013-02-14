@@ -3,41 +3,59 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="" />
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
 		<title></title>
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
 		<header>
 			<div id="header_wrap" class="wrap">
-				<a href="#"> <img id="header_logo" src="logo.png" alt="Logo Produk" /> </a>
+				<a href="#"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
 				<div id="header_title">
 					<h1> <a href="#">Title</a> </h1>
 				</div>
-				<div class="clear"></div>
-				<nav>
-					<ul>
-						<li> <a href="#">Dashboard</a> </li>
-						<li> <a href="#">Profil</a> </li>
-					</ul>
-				</nav>
-				<div id="login_button">
+				<div id="border_header"></div>
+				<div id="header_menu">
 					<nav>
 						<ul>
-							<li> <a href="#">Login</a> </li>
+							<li> <a href="#">Dashboard</a> </li>
+							<li> <a href="#">Profil</a> </li>
 						</ul>
 					</nav>
-				</div>
-				<div id="border_search"></div>
+					<div id="login_area">
+						<nav id="login_button">
+							<ul>
+								<li> <a id="login_link" href="#">Login</a> </li>
+							</ul>
+						</nav>
+						<div class="clear"></div>
+						<div id="border_login"><div id="border_login_inner"></div></div>
+						<div id="login_form_wrap">
+							<form id="login_form">
+								<div class="row">
+									<label for="username">Username</label> <br />
+									<input id="username" name="username" type="text" /> <br />
+								</div>
+								<div class="row">
+									<label for="password">Password</label> <br />
+									<input id="password" name="password" type="password" /> <br />
+								</div>
+								<input type="submit" value="Login" />
+							</form>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div id="border_search"></div>
 
-				<div id="search">
-					<div id="search_inner">
-						<div id="search_button"></div>
-						<div id="search_left"></div>
-						<form id="search_form">
-							<input id="search_text" type="text" />
-						</form>
-						<div id="search_right"></div>
+					<div id="search">
+						<div id="search_inner">
+							<div id="search_button"></div>
+							<div id="search_left"></div>
+							<form id="search_form">
+								<input id="search_text" name="search_query" type="text" />
+							</form>
+							<div id="search_right"></div>
+						</div>
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -70,11 +88,28 @@
 				}
 				search_text.onblur = function()
 				{
-					if (search_text.innerHTML=="")
+					if (search_text.value==="")
 					{
 						var search = document.getElementById("search");
 						search.className = "";
 					}
+				}
+				
+				var login_area = document.getElementById("login_area");
+				login_area.onmouseover = function()
+				{
+					document.getElementById("login_form_wrap").className = "login_form_wrap_appear";
+					document.getElementById("login_button").className = "login_button_appear";
+					document.getElementById("login_link").className = "login_link_appear";
+					document.getElementById("border_login").className = "border_login_appear";
+				}
+
+				login_area.onmouseout = function()
+				{
+					document.getElementById("login_form_wrap").className = "";
+					document.getElementById("login_button").className = "";
+					document.getElementById("login_link").className = "";
+					document.getElementById("border_login").className = "";
 				}
 			}
 		</script>
