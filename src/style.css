@@ -1,0 +1,196 @@
+/* Reset
+-----------------------------------------------------------------------------------------------*/	
+html, body, div, span, applet, object, iframe, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, 
+	del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, 
+	fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; 
+	font-size: 100%; vertical-align: baseline; background: transparent; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+:focus { outline: 0; }
+ins { text-decoration: none; }
+del { text-decoration: line-through; }
+table { border-collapse: collapse; border-spacing: 0; }
+address { font-style: normal; }
+form button {padding: 0px; margin: 0px; cursor: pointer; /* ie6 doesn't always display the correct cursor */ width: auto; 
+/* ie6 width fix */ overflow: visible; /* ie6 width fix */ vertical-align: bottom; padding-bottom: 0px;}
+
+/*--- TEMPLATE CLASS ---*/
+.clear
+{
+	clear: both;
+}
+.wrap
+{
+	width: 940px;
+	max-width: 940px;
+	position: relative;
+	margin: 0 auto;
+	clear: both;
+}
+html, body
+{
+	background-color: #F9F9F9;
+	margin: 0;
+	padding: 0 10px;
+
+	}
+
+/*--- HEADER ---*/
+header a
+{
+	text-decoration: none;
+	color: #333333;
+}
+#header_wrap
+{
+	border-bottom: 1px solid #CCCCCC;
+	margin: 10px auto;
+	position: relative;
+	-webkit-transition: all 0.25s ease-out;
+	-moz-transition: all 0.25s ease-out;
+	-ms-transition: all 0.25s ease-out;
+	-o-transition: all 0.25s ease-out;
+	transition: all 0.25s ease-out;
+}
+#header_logo
+{
+	height: 80px;
+	float: left;
+}
+#header_title
+{
+	line-height: 57px;
+	float: left;
+	margin-left: 30px;
+}
+
+/*--- HEADER NAVIGATION ---*/
+nav ul
+{
+	list-style: none;
+	display: inline;
+}
+nav, nav ul li
+{
+	float: left;
+}
+nav ul li a
+{
+	display: block;
+	font-size: 18px;
+	font-weight: bold;
+	margin: 6px 14px;
+}
+nav ul li a:hover, nav ul li a .active
+{
+	color: #258AAF;
+}
+
+/*--- HEADER SEARCH ---*/
+#search
+{
+	float: right;
+	overflow: hidden;
+	width: 35px;
+	height: 30px;
+	display: block;
+	-webkit-transition: width 0.4s ease;
+	-moz-transition: width 0.4s ease;
+	-o-transition: width 0.4s ease;
+	transition: width 0.4s ease;
+}
+#search_left, #search_right
+{
+	float: left;
+	width: 1px;
+	height: 8px;
+	position: relative;
+	top: 18px;
+	background-color: #CCCCCC;
+}
+#search_inner
+{
+	width: 300px;
+}
+#search:hover, #search.active
+{
+	width: 220px;
+}
+#search:hover #search_button
+{
+	background-position: 0 -30px;
+}
+#search:hover  #search_left, #search:hover  #search_right
+{
+	background-color: #258AAF;
+}
+#search:hover #search_text
+{
+	border-bottom: 1px solid #258AAF;
+}
+#search_button
+{
+	height: 30px;
+	width: 30px;
+	display: block;
+	background: url(search.png) no-repeat;
+	margin: 0px 4px;
+	float:left;
+}
+#search_form
+{
+	float: left;
+	padding: 6px 0px;
+}
+#search_text
+{
+	width: 180px;
+	outline: none;
+	border: none;
+	background-color: transparent;
+	border-bottom: 1px solid #CCC;
+	margin-left: 0;
+	margin-right: 0;
+}
+#border_search
+{
+	float: right;
+	width: 1px;
+	height: 28px;
+	position: relative;
+	margin: 0px 6px;
+	background-color: #CCCCCC;
+}
+
+/*--- HEADER LOGIN ---*/
+#login_button
+{
+	float: right;
+	width: 50px;
+	margin: 0px;
+	margin-right: 20px;
+}
+
+/*--- CONTENT ---*/
+#content
+{
+	height: 400px;
+	background-color: white;
+	margin: 10px auto;
+	padding: 10px;
+	box-shadow: 0 0 5px 5px #BBBBBB;
+	-moz-box-shadow: 0 0 5px 5px #BBBBBB;
+	-webkit-box-shadow: 0 0 5px 5px #BBBBBB;
+}
+
+/*--- FOOTER ---*/
+#footer_wrap
+{
+	-webkit-transition: all 0.25s ease-out;
+	-moz-transition: all 0.25s ease-out;
+	-ms-transition: all 0.25s ease-out;
+	-o-transition: all 0.25s ease-out;
+	transition: all 0.25s ease-out;
+}

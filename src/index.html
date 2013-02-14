@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="Description" content="" />
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+		<title></title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<header>
+			<div id="header_wrap" class="wrap">
+				<a href="#"> <img id="header_logo" src="logo.png" alt="Logo Produk" /> </a>
+				<div id="header_title">
+					<h1> <a href="#">Title</a> </h1>
+				</div>
+				<div class="clear"></div>
+				<nav>
+					<ul>
+						<li> <a href="#">Dashboard</a> </li>
+						<li> <a href="#">Profil</a> </li>
+					</ul>
+				</nav>
+				<div id="login_button">
+					<nav>
+						<ul>
+							<li> <a href="#">Login</a> </li>
+						</ul>
+					</nav>
+				</div>
+				<div id="border_search"></div>
+
+				<div id="search">
+					<div id="search_inner">
+						<div id="search_button"></div>
+						<div id="search_left"></div>
+						<form id="search_form">
+							<input id="search_text" type="text" />
+						</form>
+						<div id="search_right"></div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</header>
+		
+		<section>
+			<div id="content" class="wrap">
+			</div>
+		</section>
+		
+		<footer>
+			<div id="footer_wrap" class="wrap">
+				Copyright by dronJaX.
+			</div>
+		</footer>
+		<script type="text/javascript">
+			window.onload = function()
+			{
+				var search_text = document.getElementById("search_text");
+				
+				search_text.onmouseover = function()
+				{
+					this.focus();	
+				}
+				search_text.onfocus = function()
+				{
+					var search = document.getElementById("search");
+					search.className = "active";
+				}
+				search_text.onblur = function()
+				{
+					if (search_text.innerHTML=="")
+					{
+						var search = document.getElementById("search");
+						search.className = "";
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
