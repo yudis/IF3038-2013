@@ -10,7 +10,7 @@
 	<!--[if lt IE 9]>
 	<script src="html5.js" type="text/javascript"></script>
 	<![endif]-->
-	<title>LSM Hijau Lestari</title>
+	<title>SHARED TO-LIST</title>
 	<link rel="stylesheet" type="text/css" media="all" href="smokescreen.css" />
 </head>
 
@@ -24,16 +24,11 @@
 
 		<nav id="access" role="navigation">
 		<ul class="menu">
-			<li class="menu-item current_page_item"><a href="index.html">Beranda</a></li>
-			<li class="menu-item"><a href="profil.html">Profil LSM</a></li>
+			<li class="menu-item current_page_item"><a href="index.html">Dashboard</a></li>
+			<li class="menu-item"><a href="profil.html">Profile</a></li>
 			
 			
-			<li class="menu-item"><a href="anggota.html">Anggota</li>
-			<li class="menu-item"><a href="kecamatan.html">Kecamatan</a></li>
-			<li class="menu-item"><a href="produk.html">Produk</a></li>
-			<li class="menu-item"><a href="pemantauan.html">Pemantauan</a></li>
-			<li class="menu-item"><a href="kegiatan.html">Kegiatan</a></li>
-			<li class="menu-item"><a href="pkegiatan.html">Pelaksanaan</a></li>
+
 		
 		
 				<ul>
@@ -43,6 +38,28 @@
 				</ul></li>
 		</ul>
 		</nav>
+		
+		<form name="login">
+			Username<input type="text" name="userid"/>
+			Password<input type="password" name="pswrd"/>
+			<input type="button" onclick="check(this.form)" value="Login"/>
+			<input type="reset" value="Cancel"/>
+		</form>
+				<script language="javascript">
+				function check(form)/*function to check userid & password*/
+				{
+				 /*the following code checkes whether the entered userid and password are matching*/
+				 if(form.userid.value == "myuserid" && form.pswrd.value == "mypswrd")
+				  {
+					window.open('index.html')/*opens the target page while Id & password matches*/
+				  }
+				 else
+				 {
+				   alert("Error Password or Username")/*displays error message*/
+				  }
+				}
+			</script>
+		
 	</header>
 
 	<div id="main">
@@ -107,7 +124,7 @@
 
 		<footer id="colophon">
 			<div id="site-generator">
-				<p>&copy; 2012 <a href="#">K1-G014</a><br />
+				<p>&copy; 2013 <a href="#">A3</a><br />
 				<span>untuk <a href="index.html">LSM Hijau Lestari</a> </span></p>
 			</div>
 		</footer>
