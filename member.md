@@ -1,5 +1,5 @@
 Tubes 1 Member
-1. Yusuf Ardi Nugroho (13510002)
-2. Rien Nisa          (13510098)
+1. 13510002 Yusuf Ardi Nugroho yusufardi97@gmail.com  yusufardi97
+2. 13510098 Rien Nisa          riennisa92@gmail.com   rieen
 
-Penggunaan HTML, CSS, Javascript
+
