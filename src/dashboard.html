@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Todolist</title>
+        <link rel="stylesheet" type="text/css" href="default.css" />
+        <script src="scripts/popup.js" type="application/javascript"></script>
+    </head> 
+    <body>
+        <div id="blanket" style="display:none;"></div>
+        <div id="popUpDiv" style="display:none;">
+            <a href="#" onclick="popup('popUpDiv','blanket',300)">Click Me To Close</a>
+        </div>
+        <div class="page">
+            <header class="content">
+                <nav>
+                    <div class="logo"><a href="#home"><img alt="Home" src="images/logo.png" /></a></div>
+                    <ul>
+                        <li><div><a href="#dashboard">Dashboard</a></div></li><li><div><a href="#profil">Profil</a></div></li><li><div><a href="#logout">Logout</a></div></li>
+                    </ul>
+                    <div class="search">
+                        <div id="searchwrapper">
+                            <form action="#">
+                                <input type="text" class="searchbox" name="q" value="" placeholder="Enter task name here.." />
+                                <input type="image" src="images/search.png" name="sumbit" class="searchbox_submit" alt="search..."/>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <div class="content">
+                <div class="sidebar">
+                    <ul id="Kategori" class="nav">
+                        <li><a id="K1" href="#" onclick="KategoriSelected(this)">Kategori 1</a></li>
+                        <li><a id="K2" href="#">Kategori 2</a></li>
+                        <li><a id="K3" href="#">Kategori 3</a></li>
+                        <li><a id="K4" href="#">Kategori 4</a></li>
+                        <li><a id="K5" href="#">Kategori 5</a></li>
+                    </ul>
+                    <ul class="nav">
+                        <li><a href="#" onclick="popup('popUpDiv','blanket',300)">Tambah Kategori</a></li>
+                    </ul>
+                </div>
+                <div class="main">
+                    <h1>Dashboard</h1>
+                    <section>
+                        <h2>Kategori 1</h2>
+                        <div class="tugas">
+                            <div><a href="#">Tugas Pertama</a></div>
+                            <div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                </ul>
+                            </div>                            
+                        </div>
+                        <div class="tugas">
+                            <div><a href="#">Tugas Pertama</a></div>
+                            <div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                </ul>
+                            </div>                            
+                        </div>
+                        <div class="tugas">
+                            <div><a href="#">Tugas Pertama</a></div>
+                            <div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                </ul>
+                            </div>                            
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Kategori 1</h2>
+                        <div class="tugas">
+                            <div><a href="#">Tugas Pertama</a></div>
+                            <div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                </ul>
+                            </div>                            
+                        </div>
+                        <div class="tugas">
+                            <div><a href="#">Tugas Pertama</a></div>
+                            <div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                </ul>
+                            </div>                            
+                        </div>
+                        <div class="tugas">
+                            <div><a href="#">Tugas Pertama</a></div>
+                            <div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                </ul>
+                            </div>                            
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Kategori 1</h2>
+                        <div class="tugas">
+                            <div><a href="#">Tugas Pertama</a></div>
+                            <div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                </ul>
+                            </div>                            
+                        </div>
+                        <div class="tugas">
+                            <div><a href="#">Tugas Pertama</a></div>
+                            <div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                </ul>
+                            </div>                            
+                        </div>
+                        <div class="tugas">
+                            <div><a href="#">Tugas Pertama</a></div>
+                            <div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                    <li>Tag</li>
+                                </ul>
+                            </div>                            
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <footer class="content">
+                This website is created solely for the purpose of fulfilling our college task.</br>
+                IF3094 - Pemrograman Internet.
+            </footer>
+        </div>
+    </body> 
+</html>
