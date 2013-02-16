@@ -19,7 +19,7 @@
 					<nav>
 						<ul>
 							<li> <a href="#">Dashboard</a> </li>
-							<li> <a href="#">Profil</a> </li>
+							<li> <a id="profil_button" href="#">Profil</a> </li>
 							<li> <a id="register_button" href="#">Daftar</a> </li>
 						</ul>
 					</nav>
@@ -65,14 +65,22 @@
 		
 		<section>
 			<div id="content" class="wrap">
+					<div id="profil_area">
+						<div id="profil_title">Profil</div>
+						<div id="profil_avatar"><a href="#"> <img id="profil_avatar" src="images/avatar.jpg" alt="avatar profil" /></a></div>
+						<div id="profil_text">
+							Nama : Wilson Fonda
+							Alamat Email : wilsonfonda@gmail.com
+						</div>
+					</div>
 			</div>
 		</section>
-		
 		<footer>
 			<div id="footer_wrap" class="wrap">
 				Copyright by dronJaX.
 			</div>
 		</footer>
+		
 		<div id="black_trans">
 			<div id="frame_register">
 				<div id="close_button">
@@ -118,6 +126,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<script type="text/javascript">
 			window.onload = function()
 			{
@@ -194,7 +203,14 @@
 					{
 						cek = 0;
 					}
-				}				
+				}
+
+				var profil_button = document.getElementById("profil_button");
+				profil_button.onclick = function()
+				{
+					document.getElementById("profil_area").className = "appear";
+					
+				}		
 				
 				var register_area = document.getElementById("register_area");
 				register_area.onclick = function()
