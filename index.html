@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="css/defaut.css"/>
+	<script src="javascript.js">
+		
+	</script>
+</head>
+<body onload="load()">
+	<header>
+		<h1>Foo Login Dashboard</h1>
+		<nav>
+			<ul>
+				<li>Product</li>
+				<li>About Us</li>
+			</ul>
+		</nav>
+	</header>
+	<article>
+		<form id="loginform">
+			<fieldset>
+			<legend>Login</legend>
+			<p id="test"></p>
+			<p><label>Username <input id="loginform-username" onchange="login_check()" type="text"></label></p>
+			<p><label>Password <input id="loginform-password" onchange="login_check()" type="password"></label></p>
+			<p><button id="loginform-submit" type="submit">LOGIN</button></p>
+			</fieldset>
+		</form>
+	</article>
+	<article>
+		<form id="resgisterform">
+			<fieldset>
+			<legend>Register</legend>
+			<p><label>Username <input type="text"></label></p>
+			<p><label>Password <input type="password"></label></p>
+			<p><label>Confirm Password <input type="password"></label></p>
+			<p><label>Email <input type="text"></label></p>
+			<p><label>Fullname <input type="text"></label></p>
+			<p><label>Birthdate <input type="date"></label></p>
+			<p><label>Avatar <input type="text"></label></p>
+			<p><button id="registerform-submit" type="submit">LOGIN</button></p>
+			</fieldset>
+		</form>
+	</article>
+	<aside>
+		<h2>HTML5 Elsewhere</h2>
+		<p>Feed your HTML5 fix with resources from our partners:</p>
+		<ul>
+		<li><a href="http://lovinghtml5.com">Loving HTML5</a></li>
+		<li><a href="http://semanticsally.com">Semantic Sally</a></li>
+		</ul>
+	</aside>
+	<footer>
+		<p>Copyright &copy; 2013 RSA. All rights reserved</p>
+	</footer>
+</body>
+</html>
