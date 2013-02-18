@@ -5,19 +5,20 @@
 </head>
 
 <body>
-        	<!-- popup form #1 -->
-       <a href="#x" class="overlay" id="join_form"></a>
-        <div class="popup">
+       <!-- popup form #1 -->
+       <a href="#x" class="overlay" id="addCategory_form"></a>
+        <div class="popup" id = "addCategory_popup">
             <h1>Add More Category</h1>
 			<div>
                 <label for="username">Nama Kategori</label>
                 <input type="text" id="user" value="" />
+                <img src = "cross.png" id = "false">
             </div>
 			<div>
-                <label for="pass">Pengguna</label>
-                <input type="password" id="pass" value="" />
+                <label for="pengguna">Pengguna</label>
+                <input type="text" id="pengguna" value="" />
             </div>
-            <input class="lSubmit" type="button" value="Add" />
+            <input class="addCategory" type="button" value="Add"  onclick="validate()"/>
 
             <a class="close" href="#close"></a>
         </div>
@@ -34,8 +35,8 @@
 		
 		<div class="hbar">
 			<div class="hmenus">
-				<a class="hmtext" href="tes.html" >Dashboard </a>
-				<a class="hmtext" href="tes.html" >Profil </a>
+				<a class="hmtext" href="dashboardfix.html" >Dashboard </a>
+				<a class="hmtext" href="profilefix.html" >Profil </a>
 				<a class="hmtext" href="halUtama.html" >Logout </a>
 			</div>
 			<div class="hmsearch"> 
@@ -98,7 +99,7 @@
 					</li>
 				</ul>
                     <div id="add">
-                        <a href="#join_form" id="join_pop"><button class="lSubmit" >Add more category</button></a>
+                        <a href="#addCategory_form" id="addCategory_pop"><button class="addCategory" >Add more category</button></a>
                     </div>
 			</div>
 			<div id = "tasklist">
@@ -213,7 +214,7 @@ function initializekategori(){
 
 function clickalltask(){
 	document.getElementById("buttonalltask").style.fontWeight = "bold";
-	document.getElementById("buttonalltask").style.backgroundColor = "yellow";
+	document.getElementById("buttonalltask").style.backgroundColor = "rgba(255,255,255,0.6)";
 	document.getElementById("buttonhome").style.fontWeight = "normal";
 	document.getElementById("buttonhome").style.backgroundColor = "transparent";
 	document.getElementById("buttonoffice").style.fontWeight = "normal";
@@ -243,7 +244,7 @@ function clickhome(){
 	document.getElementById("buttonpersonal").style.fontWeight = "normal";
 	document.getElementById("buttonpersonal").style.backgroundColor = "transparent";
 	document.getElementById("buttonhome").style.fontWeight = "bold";
-	document.getElementById("buttonhome").style.backgroundColor = "yellow";
+	document.getElementById("buttonhome").style.backgroundColor = "rgba(255,255,255,0.6)";
 	document.getElementById("addtaskbutton").style.display = "block";
 	document.getElementById("hometask").style.display = "block";
 	document.getElementById("officetask").style.display = "none";
@@ -262,7 +263,7 @@ function clickoffice(){
 	document.getElementById("buttonpersonal").style.fontWeight = "normal";
 	document.getElementById("buttonpersonal").style.backgroundColor = "transparent";
 	document.getElementById("buttonoffice").style.fontWeight = "bold";
-	document.getElementById("buttonoffice").style.backgroundColor = "yellow";
+	document.getElementById("buttonoffice").style.backgroundColor = "rgba(255,255,255,0.6)";
 	document.getElementById("buttonhome").style = "normal";
 	document.getElementById("buttonshopping").style = "normal";
 	document.getElementById("buttonpersonal").style = "normal";
@@ -284,7 +285,7 @@ function clickpersonal(){
 	document.getElementById("buttonshopping").style.fontWeight = "normal";
 	document.getElementById("buttonshopping").style.backgroundColor = "transparent";
 	document.getElementById("buttonpersonal").style.fontWeight = "bold";
-	document.getElementById("buttonpersonal").style.backgroundColor = "yellow";
+	document.getElementById("buttonpersonal").style.backgroundColor = "white";
 	document.getElementById("buttonhome").style = "normal";
 	document.getElementById("buttonoffice").style = "normal";
 	document.getElementById("buttonshopping").style = "normal";
@@ -306,7 +307,7 @@ function clickshopping(){
 	document.getElementById("buttonpersonal").style.fontWeight = "normal";
 	document.getElementById("buttonpersonal").style.backgroundColor = "transparent";
 	document.getElementById("buttonshopping").style.fontWeight = "bold";
-	document.getElementById("buttonshopping").style.backgroundColor = "yellow";
+	document.getElementById("buttonshopping").style.backgroundColor = "rgba(255,255,255,0.6)";
 	document.getElementById("buttonhome").style = "normal";
 	document.getElementById("buttonoffice").style = "normal";
 	document.getElementById("buttonpersonal").style = "normal";
