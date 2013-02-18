@@ -339,6 +339,42 @@ nav ul li a:hover, nav ul li a .active
 	background-image: linear-gradient(to bottom,#4d90fe,#357ae8);
 }
 
+/*Profil*/
+#profil_area
+{
+	display : none;
+}
+#profil_text
+{
+	Top: 10px;
+	Left: 10px;
+	color:#6699FF;
+	font:120% Cooper Black,sans-serif auto;
+	line-height:200%;
+	text-shadow:5px 5px 10px #C0C0C0;
+	letter-spacing:1px;
+	line-height: 200%;
+	position:relative;
+	margin: 0px 20px;
+}
+#profil_avatar
+{
+	float :left;
+	height: 150px;
+}
+#avatar_form
+{
+	padding-top:50%;
+}
+#profil_title
+{
+	text-align:center;
+	color:#6699FF;
+	font:200% Cooper Black,sans-serif auto;
+	line-height:200%;
+	text-shadow:5px 5px 10px #C0C0C0;
+	letter-spacing:1px;
+}
 /*--- REGISTER FORM ---*/
 #black_trans
 {
