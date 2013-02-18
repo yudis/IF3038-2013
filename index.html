@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Banana Board - Your Online Do List</title>		
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<style type="text/css"></style>
+	</head>
+	
+	<body>
+		<div id="indexheader">
+			<img src="logo.png">					
+			<form class="login" action="" method="post" name="loginform">		
+				<ul>
+					<h1 align="left">Login</h1>
+					<li>
+						<label for="username">Username:</label>
+						<input id="username" type="text" name="username" />
+					</li>
+					<li>
+						<label for="password">Password:</label>
+						<input id="password" type="text" name="password" />
+					</li>
+					<li>
+						<input type="submit" value="Login">
+					</li>
+				</ul>
+			</form>	
+		</div>		
+		
+		<div id="register">			
+			<form class="reg" action="" method="post" name="registerform">
+				<ul>
+					<p><b>new to Banana Board?</b></p>
+					<h1 align="left">Register now!</h1>
+					<li>
+						<label for="username">Username:</label>
+						<input type="text" name="user" /><br>
+						<span>* minimal 5 karakter</span>
+					</li>
+					<li>
+						<label for="password">Password:</label>
+						<input type="text" name="user" /><br>
+						<span>* minimal 8 karakter</span>
+					</li>		
+					<li>
+						<label for="confirmpass">Confirmed Password:</label>
+						<input type="text" name="user" />
+					</li>
+					<li>
+						<label for="namalengkap">Nama Lengkap:</label>
+						<input type="text" name="user" /><br>
+						<span>* minimal 2 kata (first name, last name)</span>
+					</li>	
+					<li>
+						<label for="tgllahir">Tanggal Lahir:</label>
+						<select>
+							<option>1955</option>
+							<option>1956</option>
+							<option>1957</option>
+						</select>
+						<select>
+							<option>Januari</option>
+							<option>Februari</option>
+						</select>
+						<select>
+							<option>1</option>
+							<option>2</option>
+						</select>
+					</li>
+					<li>
+						<label for="email">Email:</label>
+						<input type="email" name="user" placeholder="test@example.com" required />
+					</li>
+					<li>
+						<label for="avatar">Avatar:</label>
+						<input class="file" type="file" name="avatar" id="avatar">
+					</li>
+					<li>
+						<button type="submit">Register</button>
+					</li>
+				</ul>
+			</form>
+		</div>
+		
+		<div id="features">
+			FEATURES
+		</div>
+	</body>
+</html>
