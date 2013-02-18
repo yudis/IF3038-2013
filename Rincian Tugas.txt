@@ -1,8 +1,0 @@
-Header 			5 	Whilda
-Halaman Utama 	23	Whilda
-Dashboard 		15	Devin
-Rincian tugas	15	Devin
-Pembuatan tugas	20	Devin
-Profil			12	Devin
-Media queries	10	Whilda
-layouting			Whilda
