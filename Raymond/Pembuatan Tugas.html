@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link href="task.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript"/>
+	
+	function checkpostal(){
+		var jpg=/\.jpg$/
+		var png=/\.png$/
+		var pdf=/\.pdf$/
+		var mp4=/\.mp4$/
+		if (document.getElementById("ali").value.search(jpg)!=-1)  
+		{
+			alert("File yang dipilih berformat jpg.");
+		}
+		else if (document.getElementById("ali").value.search(png)!=-1)
+		{
+			alert("File yang dipilih berformat png.");
+		}
+		else if (document.getElementById("ali").value.search(pdf)!=-1)
+		{
+			alert("File yang dipilih berformat pdf.");
+		}
+		else if (document.getElementById("ali").value.search(mp4)!=-1)
+		{
+			alert("File yang dipilih berformat mp4.");
+		}
+		else{
+			alert("File yang dipilih harus berformat gambar, video, atau file!");
+			document.getElementById("ali").value = "";
+		}
+	}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>LALA</title>
+</head>
+
+
+<body>
+<div class="header">
+		<div class="hbackground" >
+			<div class="hlogo">
+				<a href="tes.html">Monkey.Inc</a>
+			</div>
+			<div class="htext"> Monkey.Inc </div>
+			<div class="htagline">"See no Task, Speak no Task, Hear no Task"</div>
+		</div>
+		
+		<div class="hbar">
+			<div class="hmenus">
+				<a class="hmtext" href="tes.html" >Dashboard </a>
+				<a class="hmtext" href="tes.html" >Profil </a>
+				<a class="hmtext" href="halUtama.html" >Logout </a>
+			</div>
+			<div class="hmsearch"> 
+				<form class="hmtext">Search : <input type="text" name="firstname"></form>
+			</div>
+		</div>
+	</div>
+	
+	<br>
+
+	<div class="content">
+        <div class="rincianKiri">Nama Tugas	</div>
+        <div class="rincianKanan">
+            <input type="text" class="inputText"/>
+        </div>
+        <div class="rincianKiri">Attachment</div>
+        <div class="rincianKanan">
+            <input type="file" title="File harus berformat jpg, png, pdf, atau mp4" id="ali" name="datafile" size="40" onchange="checkpostal()">
+        </div>
+        <div class="rincianKiri">Deadline</div>
+        <div class="rincianKanan">
+            <input type="text" class="inputText"/>
+        </div>
+        <div class="rincianKiri">Assignee</div><div class="rincianKanan"><input id="ali" class="inputText" type="text"/></div>
+        <form> <ul class="listUL"><li class="listLI"><button>Done</button></li><li class="listLI"><button>Back</button></li></ul></form>
+       <div class="rincianKiri">Tag</div><div class="rincianKanan"><input class="inputText" type="text"/></div>
+        
+               
+        
+       
+	</div>
+	<br>
+	
+	<div class="footer">
+		<p class="ftext">Tubes progin 1</p>
+		<p class="ftext">Copyright © 2013 Benedikus, Janice, and Raymond</p>
+	</div>
+</body>
+</html>
