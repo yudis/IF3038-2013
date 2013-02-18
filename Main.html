@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<META name="Author" content = "Enjella Melissa Nababan">
+<META name="Publisher" content = "PROGIN ITB">
+<META http-equiv="Date" content = "Mon, 18 Feb 2013 10:02:00 GMT">
+
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>MAIN PAGE</title>
+		<link rel="stylesheet" type="text/css" href="style.css" title="style1" />
+		<link rel="stylesheet" type="text/css" href="style2.css" title="style2" />
+		<script type="text/javascript" src="script.js"></script>
+	</head>
+</html>
+<SCRIPT LANGUAGE="JavaScript">
+function validateEmail()
+{
+	var x=document.getElementById("form-email").value;
+	var atpos=x.indexOf("@");
+	var dotpos=x.lastIndexOf(".");
+	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+	  {
+		  document.getElementById("ValidEmail").innerHTML="Input email tidak valid";
+	  return false;
+	  }
+	else
+	 {
+		 x = "";
+		 document.getElementById("ValidEmail").innerHTML="Input email valid";
+	 }
+}
+function validateTaskName()
+{
+	var x=document.getElementById("txtbox").value;
+	var i = 0;
+	for(i = 0;i<x.length;i++){
+		var y = x.charAt(i);
+		
+		if ((y.charCodeAt(0)>=48 && y.charCodeAt(0)<=57) || (y.charCodeAt(0)>=65 && y.charCodeAt(0)<=90)|| (y.charCodeAt(0)>=97 && y.charCodeAt(0)<=122)){
+				document.getElementById("demo").innerHTML="Input valid";
+		}
+		else
+		{
+			document.getElementById("demo").innerHTML="Taks name tidak boleh menggunakan karakter khusus";
+			alert("Not a valid task name");
+	  			return false;
+		}
+		
+	}
+}
+
+function validateExtentionName()
+{
+	var x=document.getElementById("txtbox").value;
+	var i = 0;
+	var y="";
+	var dotpos=x.lastIndexOf(".");
+	
+	for(i = dotpos;i<=x.length;i++){
+		y =y.concat(x.charAt(i));
+		
+	}
+	if ((y==".jar")||(y==".avi")||(y==".mp4")||(y==".mp3")||(y==".jpg")||(y==".jpeg")||(y==".txt") ){
+		
+			document.getElementById("demo").innerHTML="Input valid";
+		}
+		else
+		{
+			document.getElementById("demo").innerHTML="Input tidak valid";
+			alert("Not a valid extention name");
+	  			return false;
+		}
+		
+	
+}
+
+function validateUserName()
+{
+	var x=document.getElementById("form-username").value;
+	var y = document.getElementById("form-password").value;
+	if((x.length > 4) && (x!=y))
+	{
+		document.getElementById("ValidUserName").innerHTML="Input username valid";
+	}
+	else
+	{
+			document.getElementById("ValidUserName").innerHTML="Username min. 5 karakter dan tidak boleh sama dengan password";
+	}
+	
+}
+S
+function validatePassword()
+{
+	var x=document.getElementById("form-username").value;
+	var y = document.getElementById("form-password").value;
+	var z = document.getElementById("form-email").value;
+	if((y.length > 7) && (y!=x) && (y != z))
+	{
+		document.getElementById("ValidPassword").innerHTML="Input password valid";
+	}
+	else
+	{
+			document.getElementById("ValidPassword").innerHTML="Password min. 8 karakter dan tidak boleh sama dengan email maupun username";
+	}
+	
+}
+
+function confirmPassword()
+{
+	var y = document.getElementById("form-cpass").value;
+	var x = document.getElementById("form-password").value;
+	if(y == x)
+	{
+		document.getElementById("ValidCPass").innerHTML="Correct password";
+	}
+	else
+	{
+			document.getElementById("ValidCPass").innerHTML="Incorrect confirm password";
+	  			return false;
+	}
+	
+}
+
+function validateFullName()
+{
+	var x = document.getElementById("form-nama").value;
+	var z="";
+	var truefalse = 0;
+	var i = 0;
+	for(i = 0;i<=x.length;i++){
+        z = x.charAt(i);
+		if ((z == " ") && (x.charAt(i-1) != z) && (x.charAt(i+1) != z)&& (i+1 != x.length)){
+			truefalse = 1;
+		}
+	}
+	
+	if(truefalse != 0)
+		{
+			document.getElementById("ValidNama").innerHTML="Nama valid";
+		}
+		else
+		{
+				document.getElementById("ValidNama").innerHTML="Nama lengkap minimal mengandung satu spasi di antara nama depan dan nama belakang";
+					return false;
+		}	
+}
+
+function validateAvatar()
+{
+	var x=document.getElementById("form-avatar").value;
+	var i = 0;
+	var y="";
+	var dotpos=x.lastIndexOf(".");
+	
+	for(i = dotpos;i<=x.length;i++){
+		y =y.concat(x.charAt(i));
+		
+	}
+	if ((y==".jpg")||(y==".jpeg")){
+		
+			document.getElementById("ValidAvatar").innerHTML="Input avatar valid";
+		}
+		else
+		{
+			document.getElementById("ValidAvatar").innerHTML="Input avatar harus .jpg atau .jpeg";
+	  			return false;
+		}
+}
+
+function validate()
+{
+	validateUserName();
+	validatePassword();
+	validateFullName();
+	validateAvatar();
+	confirmPassword();
+	validateEmail();
+	
+}
+
+</SCRIPT>
+	<body>
+	<H2 align="center">TUBES PROGIN NIH</H2>
+		<div id="wrapper">
+			<div id="header">
+				<div id="logo">
+					<a href="main.html"><img src="images/elephant.png" alt="Logo" width="100" height="100" /></a>
+				</div>
+				<div id="menu">
+					<ul>
+						<div id="menusignin"><a href="signin.html">SIGN IN</a></div>
+					</ul>
+				</div>
+			</div>
+		</div>	
+		
+		
+		<div class="isi">
+			<form action="" method="get">
+				<div class="register-label">Username <span class="bintang-merah">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="username" id="form-username" onkeyup="validate()" /><br><label id="ValidUserName"></label></div>
+				<div class="clear" id="error-username"></div>
+				<div class="register-label">Password <span class="bintang-merah">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="password" name="password" id="form-password" onkeyup="validate()" /><br><label id="ValidPassword"></label></div>
+				<div class="clear" id="error-password"></div>
+				<div class="register-label">Confirm password <span class="bintang-merah">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="password" name="cpass" id="form-cpass" onkeyup="validate()" /><br><label id="ValidCPass"></label></div>
+				<div class="clear" id="error-cpass"></div>
+				<div class="register-label">Nama lengkap <span class="bintang-merah">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="nama" id="form-nama" onkeyup="validate()" /><br><label id="ValidNama"></label></div>
+				<div class="clear" id="error-nama"></div>
+				<div class="register-label">Tanggal lahir <span class="bintang-merah">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="tgl" id="form-tgl" onkeyup="validate()" /><br><label id="ValidTanggal"></label></div><div id="caldad"><div id="calendar"></div><a href="javascript:showcal(2,2012);void(0);"><img src="images/cal.gif" alt="Calendar" /></a></div>
+				<div class="clear" id="error-tgl"></div>
+				<div class="register-label">Email <span class="bintang-merah">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="email" id="form-email" onkeyup="validate()" /><br><label id="ValidEmail"></label></div>
+				<div class="clear" id="error-email"></div>
+				<div class="register-label">Avatar <span class="bintang-merah">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="file" name="avatar" id="form-avatar" onchange="validate()" /><br><label id="ValidAvatar"></label></div>
+				<div class="clear" id="error-avatar"></div>
+				<div class="register-label">Jenis kelamin <span class="bintang-merah">*</span></div><div class="register-td">:</div><div class="register-input"><input type="radio" name="sex" value="male" id="form-male" onclick="validate()" /> Male <input type="radio" name="sex" value="female" id="form-female" onclick="validate()" /> Female</div>
+				<div class="clear" id="error-sex"></div>
+				<div class="post-register-submit"><input type="button" name="post" value="OK" onclick="postContent()"/></div>
+			</form>
+		</div>
+		
+		<div class="bawah">
+					</div>
+			
+	</body>

@@ -1,0 +1,77 @@
+body {
+	background: #eaeaea url('images/bg.png') repeat-x top center;
+	font-family: Arial, sans-serif;
+	color: #191919;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+#wrapper {
+	margin: 0 auto;
+	width: 1500px;
+}
+#header {
+	width: 1500px;
+	height: 100px;
+	margin: 0;
+	padding: 10px 0 0 0;
+}
+
+#logo {
+	float: left;
+	width: 0;
+	height: 0;
+	margin: 0 0 0 50px;
+	padding: 0;
+}
+
+#menu {
+	float: right;
+	width: 375px;
+	height: 57px;
+	padding: 0;
+}
+
+.isi {/* 640px */
+	margin: 120px 200px 0 750px;
+	font-size: 12px;
+	color: #191919;
+	width: 300px;
+	height: 250px;
+}
+
+.register-label {
+	font-size: 12px;
+	width: 120px;
+	float: left;
+	margin: 3px 0 0 0;
+}
+
+.register-td {
+	font-size: 12px;
+	float: auto;
+}
+
+.register-input {
+	font-size: 12px;
+	float: left;
+}
+
+.register-input-input {
+	width: 250px;
+}
+.clear {
+	clear: both;
+	height: 1px;
+	color: #db4444;
+}
+
+.post-register-submit {
+	text-align: right;
+	padding: 50px 50px 50px 50px;
+}
+
+.bintang-merah {
+	color: #db4444;
+}

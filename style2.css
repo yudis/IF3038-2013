@@ -1,0 +1,27 @@
+body {
+	background: #fff7cc url('images/bg2.png') repeat-x top center;
+	font-family: Trebuchet MS, sans-serif;
+	color: #191919;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+#calendar {
+	position: absolute;
+	background-color: #333333;
+	left: 0;
+	top: 0;
+	width: 232px;
+	z-index: -100;
+	padding: 5px;
+	color: #cccccc;
+}
+
+#calendar a {
+	color: #eeeeee;
+}
+
+#caljudul {
+	margin: 0 0 10px 0;
+}
