@@ -1,0 +1,36 @@
+#container {
+	height: 647px;
+	width: 1347px;
+	background-image:url(../../images/paper.png);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	margin: 0;
+}
+#header{
+    height:75px;
+	width:350px;
+	float:left;
+}
+#search{
+    height:75px;
+	width:500px;
+	float:left;
+}
+#home{
+    height:75px;
+	width:150px;
+	float:left;
+}
+#profile{
+    height:75px;
+	width:150px;
+	float:left;
+}
+#logout{
+    height:75px;
+	width:150px;
+	float:left;
+}
+body {
+	margin: 0px;
+}
