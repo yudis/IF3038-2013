@@ -1,1 +1,102 @@
 <!DOCTYPE html>
+<html>
+
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Untitled Document</title>
+        <style>
+			.label
+			{
+				width: 100px;
+				float: left;
+			}
+			#wrapper
+			{
+				width: 450px;
+				margin: 0 auto;
+				margin-top: 100px;
+				border: 1px solid black;
+				padding: 20px;
+			}
+			#wrapper-left, #wrapper-right
+			{
+				float:left;
+			}
+			#suatu_gambar
+			{
+				display: none;
+				width: 200px;
+				height: 150px;
+			}
+			#suatu_video
+			{
+				display: none;
+				margin-right: 0;
+			}
+		</style>
+        
+        <script type="text/javascript">
+			function loadAttachment()
+			{
+				var x = document.getElementById("filebutton").value;
+				var y = x.split(".");
+				var z = y[y.length-1];
+				if (z == "jpg" || z == "jpeg" || z == "png" || z == "gif")
+				{
+					document.getElementById("wrapper").style.width = "650px";
+					document.getElementById("suatu_gambar").style.display = "block";
+				}
+				else if (z == "avi" || z == "mp4" || z == "mkv" || z == "3gp" || z == "flv" || z == "ogg")
+				{
+					document.getElementById("wrapper").style.width = "770px";
+					document.getElementById("suatu_video").style.display = "block";
+				}
+				else
+				{
+					
+				}
+			}
+			function checkSubmission()
+			{
+				var isValid = true;
+				
+				if (isValid == true)
+				{
+					document.getElementById("tugas");
+				}
+				else if (isValid == true)
+				{
+					
+				}
+			}
+		</script>
+</head>
+    
+<body>
+	<div id="wrapper">
+    	<div id="wrapper-left">
+            <div class="label"> <label for="tugas" >Nama Tugas</label> </div> : <input id="tugas" name="tugas" type="text" maxlength="25" align="middle"/> <br />
+            <div class="label"> <label for="filebutton">Attachment</label> </div> : <input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/> <br />
+            <div class="label"> <label for="deadline">Deadline</label></div> : <input id="deadline" type="date" required> <br />
+                <!--: Tanggal <input id="tanggal" name="tanggal" type="text" size="1" maxlength="2" align="middle"/> 
+                Bulan <input name="Bulan" type="text" size="1" maxlength="2" align="middle"/>
+                Tahun <input name="Tahun" type="text" size="1" maxlength="4" align="middle"/> <br />-->
+            <div class="label"> <label for="asignee">Asignee</label></div> : <input id="asignee" name="asignee" type="text" align="middle"/> <br />
+            <div class="label"> <label for="tag">Tag</label></div> : <input id="tag" name="tag" type="text" size="20" /> (dipisahkan dengan koma) <br />
+        	<br /> 
+            <input id="submitbutton" name="submitbutton" type="submit" onClick="checkSubmission()"/>
+        </div>
+        <div id="wrapper-right">
+        	<img id="suatu_gambar" src="Troll.png" alt="Gambar tidak dapat di-load"/>    
+            <video id="suatu_video" width="320" height="240" controls/>
+            	<source src="A Caterpillar.mp4" type="video/mp4">
+                <source src="A Caterpillar.ogg" type="video/ogg">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+        
+</body>
+
+</html>
