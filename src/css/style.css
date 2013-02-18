@@ -156,7 +156,7 @@ nav ul li a:hover, nav ul li a .active
 	height: 30px;
 	width: 30px;
 	display: block;
-	background: url(images/search.png) no-repeat;
+	background: url(../images/search.png) no-repeat;
 	margin: 0px 4px;
 	float:left;
 }
@@ -243,6 +243,20 @@ nav ul li a:hover, nav ul li a .active
 	-moz-box-shadow: 0px -2px 2px #BBBBBB, -2px -2px 2px #BBBBBB, 2px -2px 2px #BBBBBB;
 	-webkit-box-shadow: 0px -2px 2px #BBBBBB, -2px -2px 2px #BBBBBB, 2px -2px 2px #BBBBBB;
 }
+.logout_link_focus
+{
+	margin: 5px 13px;
+	color: #258AAF;
+}
+.logout_button_focus
+{
+	border: 1px solid #CCCCCC;
+	border-bottom: 1px solid #FFFFFF;
+	background-color: #FFFFFF;
+	box-shadow: 0px 0px 2px 2px #BBBBBB;
+	-moz-box-shadow: 0px 0px 2px 2px #BBBBBB;
+	-webkit-box-shadow: 0px 0px 2px 2px #BBBBBB;
+}
 
 /*--- FORM ---*/
 .row
@@ -254,7 +268,34 @@ nav ul li a:hover, nav ul li a .active
 	font-size: 87%;
 	font-weight: bold;
 }
-.row input[type="text"], .row input[type="password"], .row input[type="date"], .row input[type="email"], .row input[type="image"]
+.row input:hover
+{
+	border: 1px solid #999999 !important;
+}
+.row input:focus
+{
+	border: 1px solid #3079ed !important;
+	box-shadow: inset 1px 1px 1px 1px #dadada;
+	-moz-box-shadow: inset 1px 1px 1px 1px #dadada;
+	-webkit-box-shadow: inset 1px 1px 1px 1px #dadada;
+}
+#register_form input[type="text"], #register_form_wrap input[type="password"], #register_form_wrap input[type="date"], 
+#register_form input[type="email"], #register_form_wrap input[type="file"]
+{
+	margin-top: 2px;
+	margin-left: 10px;
+	width: 200px;
+	height: 26px;
+	border: 1px solid #d9d9d9;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+}
+#login_form_wrap input[type="text"], #login_form_wrap input[type="password"], #login_form_wrap input[type="date"], 
+#login_form_wrap input[type="email"], #login_form_wrap input[type="file"]
 {
 	margin-top: 2px;
 	margin-left: 10px;
@@ -267,17 +308,6 @@ nav ul li a:hover, nav ul li a .active
 	-webkit-border-radius: 1px;
 	-moz-border-radius: 1px;
 	border-radius: 1px;
-}
-.row input:hover
-{
-	border: 1px solid #999999;
-}
-.row input:focus
-{
-	border: 1px solid #3079ed;
-	box-shadow: inset 1px 1px 1px 1px #dadada;
-	-moz-box-shadow: inset 1px 1px 1px 1px #dadada;
-	-webkit-box-shadow: inset 1px 1px 1px 1px #dadada;
 }
 #login_form_wrap  input[type="submit"], #register_form_wrap  input[type="submit"]
 {
