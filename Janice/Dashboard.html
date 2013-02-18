@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="dashboardcss.css">
+<title>Dashboard</title>
+</head>
+
+<body>
+	<div id = "popup">
+		<form>
+			<div id = "formstyle">
+				<div id="addkategoriheader">
+					<img src = "plus.png" id="addkategoriicon"> 
+				</div>
+				<div id="addkategoritext">
+					<b>Add More Header</b>
+				</div>
+				<div id="namakategori">
+					Nama Kategori : <input type= "text" name="namakategori">
+				</div>
+				<div id="penggunakategori">
+					Daftar Pengguna : <input list />
+				</div>
+				<div id="buttonkategori">
+					<div id="tombolsubmitkategori">
+						<input type="submit" value = "Submit">
+					</div>
+					<div id="tombolcancelkategori">
+						<button type "button" value = "Cancel">Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div id = "content">
+		<div class="dashboard">
+			<div id="profile">
+                <div id ="nama">
+					<img src = "profpic.jpg" id="profilepicture">
+					<b>Janice Leung</b>
+				</div>
+				<div id="kategori">
+					<b>KATEGORI</b>
+                </div>
+                <div id="alltask">
+					<button type "button" id="buttonalltask" onclick="clickalltask()" onfocus="focusonit()">
+						<img src = "alltask.png" class="homeicon">
+						All Task
+                   </button> 
+                </div> 
+				<ul id = "listkategori">
+					<li>
+                        <div class="home">
+							<button type "button" id="buttonhome" onclick="clickhome()" onfocus="focusonit()">
+								<img src = "homeicon.png" class="homeicon">
+								H o m e
+                           </button>
+                        </div>
+					</li>
+					<li>
+                        <div class="home">
+							<button type "button" id="buttonoffice" onclick="clickoffice()" onfocus="focusonit()">
+								<img src = "office.png" class="homeicon">
+								O f f i c e
+                            </button>
+                        </div>
+					</li>
+					<li>
+                        <div class="home">
+							<button type "button" id="buttonpersonal" onclick="clickpersonal()" onfocus="focusonit()">
+								<img src = "personal.png" class="homeicon">
+								P e r s o n a l
+                            </button>
+                        </div>
+					</li>
+					<li>
+                        <div class="home">
+							<button type "button" id="buttonshopping" onclick="clickshopping()" onfocus="focusonit()">
+								<img src = "shopping.png" class="homeicon">
+								S h o p p i n g
+                            </button>
+                        </div>
+					</li>
+				</ul>
+                    <div id="add">
+                        <button type "button" id="buttonadd" onclick="popitup()">
+                            <img src = "plus.png" id="addicon">
+                            Add More Category
+                        </button>
+                    </div>
+			</div>
+			<div id = "tasklist">
+				<div id = "tasktitle">
+					<img src = "book.png" id="task">
+					T  A  S  K
+				</div>
+				<div id = "task1">
+					<ul class = "listoftaskbutton">
+						<li class="taskbuttonlist" id = "hometask">
+							<button type "button" class="taskbutton">
+								<div class = "buttontitle">
+									<div class = "buttontitleicon">
+										<img src = "homeicon.png" class="iconinbutton">
+									</div>
+									<div class = "buttondescName">
+										<div>
+											Bersiin kamar!!
+										</div>
+										<div class = "buttondeadline">
+											deadline : 14 Februari 2013
+											<br>tag : kamar, valentine
+										</div>
+									</div>
+								</div>
+							</button>
+						</li>
+						<li class="taskbuttonlist" id ="officetask">
+							<button type "button" class="taskbutton" >
+								<div class = "buttontitle">
+									<div class = "buttontitleicon">
+										<img src = "office.png" class="iconinbutton">
+									</div>
+									<div class = "buttondescName">
+										<div>
+											Kerjain progin!!
+										</div>
+										<div class = "buttondeadline">
+											deadline : 22 Februari 2013
+											<br>tag : kuliah, tugas
+										</div>
+									</div>
+								</div>
+							</button>
+						</li>
+						<li class = "taskbuttonlist" id="personaltask">
+							<button type "button" class="taskbutton" >
+								<div class = "buttontitle">
+									<div class = "buttontitleicon">
+										<img src = "personal.png" class="iconinbutton">
+									 </div>
+									 <div class = "buttondescName">
+										<div>
+											Bikin coklat!!
+										</div>
+										<div class = "buttondeadline">
+											deadline : 14 Februari 2013
+											<br>tag : valentine, coklat
+										</div>
+									 </div>
+								</div>
+							</button>
+						</li>
+						<li>
+							<button type "button" class="taskbutton" id ="addtaskbutton">
+								<div class = "buttontitle">
+									<div class = "buttontitleicon">
+										<img src = "addtask.png" class="iconinbutton">
+									 </div>
+									 <div class = "buttondescAdd">
+										<div>
+											Add More Task...
+										</div>
+									 </div>
+								</div>
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+<script language="javascript" type="text/javascript">
+<!--
+function popitup() {
+	document.getElementById("buttonadd").style.color= "red";
+	document.getElementById("popup").style.display = "block";
+}
+
+function closepopup(){
+	document.getElementById("buttonadd").style.color= "purple";
+	document.getElementById("popup").style.display = "none";
+}
+
+function initializekategori(){
+	document.getElementById("buttonhome").style = "normal";
+	document.getElementById("buttonoffice").style = "normal";
+	document.getElementById("buttonshopping").style = "normal";
+	document.getElementById("buttonpersonal").style = "normal";
+}
+
+function clickalltask(){
+	document.getElementById("buttonalltask").style.fontWeight = "bold";
+	document.getElementById("buttonalltask").style.backgroundColor = "yellow";
+	document.getElementById("buttonhome").style.fontWeight = "normal";
+	document.getElementById("buttonhome").style.backgroundColor = "white";
+	document.getElementById("buttonoffice").style.fontWeight = "normal";
+	document.getElementById("buttonoffice").style.backgroundColor = "white";
+	document.getElementById("buttonshopping").style.fontWeight = "normal";
+	document.getElementById("buttonshopping").style.backgroundColor = "white";
+	document.getElementById("buttonpersonal").style.fontWeight = "normal";
+	document.getElementById("buttonpersonal").style.backgroundColor = "white";
+	document.getElementById("buttonhome").style = "normal";
+	document.getElementById("buttonshopping").style = "normal";
+	document.getElementById("buttonpersonal").style = "normal";
+	document.getElementById("addtaskbutton").style.display = "none";
+	document.getElementById("hometask").style.display = "block";
+	document.getElementById("officetask").style.display = "block";
+	document.getElementById("personaltask").style.display = "block";
+	document.getElementById("shoppingtask").style.display = "block";
+	document.getElementById("addtaskbutton").style.display = "block";
+}
+
+function clickhome(){
+	document.getElementById("buttonalltask").style.fontWeight = "normal";
+	document.getElementById("buttonalltask").style.backgroundColor = "white";
+	document.getElementById("buttonoffice").style.fontWeight = "normal";
+	document.getElementById("buttonoffice").style.backgroundColor = "white";
+	document.getElementById("buttonshopping").style.fontWeight = "normal";
+	document.getElementById("buttonshopping").style.backgroundColor = "white";
+	document.getElementById("buttonpersonal").style.fontWeight = "normal";
+	document.getElementById("buttonpersonal").style.backgroundColor = "white";
+	document.getElementById("buttonhome").style.fontWeight = "bold";
+	document.getElementById("buttonhome").style.backgroundColor = "yellow";
+	document.getElementById("addtaskbutton").style.display = "block";
+	document.getElementById("hometask").style.display = "block";
+	document.getElementById("officetask").style.display = "none";
+	document.getElementById("personaltask").style.display = "none";
+	document.getElementById("shoppingtask").style.display = "none";
+	document.getElementById("addtaskbutton").style.display = "block";
+}
+
+function clickoffice(){
+	document.getElementById("buttonalltask").style.fontWeight = "normal";
+	document.getElementById("buttonalltask").style.backgroundColor = "white";
+	document.getElementById("buttonhome").style.fontWeight = "normal";
+	document.getElementById("buttonhome").style.backgroundColor = "white";
+	document.getElementById("buttonshopping").style.fontWeight = "normal";
+	document.getElementById("buttonshopping").style.backgroundColor = "white";
+	document.getElementById("buttonpersonal").style.fontWeight = "normal";
+	document.getElementById("buttonpersonal").style.backgroundColor = "white";
+	document.getElementById("buttonoffice").style.fontWeight = "bold";
+	document.getElementById("buttonoffice").style.backgroundColor = "yellow";
+	document.getElementById("buttonhome").style = "normal";
+	document.getElementById("buttonshopping").style = "normal";
+	document.getElementById("buttonpersonal").style = "normal";
+	document.getElementById("addtaskbutton").style.display = "block";
+	document.getElementById("hometask").style.display = "none";
+	document.getElementById("officetask").style.display = "block";
+	document.getElementById("personaltask").style.display = "none";
+	document.getElementById("shoppingtask").style.display = "none";
+	document.getElementById("addtaskbutton").style.display = "block";
+}
+
+function clickpersonal(){
+	document.getElementById("buttonalltask").style.fontWeight = "normal";
+	document.getElementById("buttonalltask").style.backgroundColor = "white";
+	document.getElementById("buttonhome").style.fontWeight = "normal";
+	document.getElementById("buttonhome").style.backgroundColor = "white";
+	document.getElementById("buttonoffice").style.fontWeight = "normal";
+	document.getElementById("buttonoffice").style.backgroundColor = "white";
+	document.getElementById("buttonshopping").style.fontWeight = "normal";
+	document.getElementById("buttonshopping").style.backgroundColor = "white";
+	document.getElementById("buttonpersonal").style.fontWeight = "bold";
+	document.getElementById("buttonpersonal").style.backgroundColor = "yellow";
+	document.getElementById("buttonhome").style = "normal";
+	document.getElementById("buttonoffice").style = "normal";
+	document.getElementById("buttonshopping").style = "normal";
+	document.getElementById("addtaskbutton").style.display = "block";
+	document.getElementById("hometask").style.display = "none";
+	document.getElementById("officetask").style.display = "none";
+	document.getElementById("personaltask").style.display = "block";
+	document.getElementById("shoppingtask").style.display = "none";
+	document.getElementById("addtaskbutton").style.display = "block";
+}
+
+function clickshopping(){
+	document.getElementById("buttonalltask").style.fontWeight = "normal";
+	document.getElementById("buttonalltask").style.backgroundColor = "white";
+	document.getElementById("buttonhome").style.fontWeight = "normal";
+	document.getElementById("buttonhome").style.backgroundColor = "white";
+	document.getElementById("buttonoffice").style.fontWeight = "normal";
+	document.getElementById("buttonoffice").style.backgroundColor = "white";
+	document.getElementById("buttonpersonal").style.fontWeight = "normal";
+	document.getElementById("buttonpersonal").style.backgroundColor = "white";
+	document.getElementById("buttonshopping").style.fontWeight = "bold";
+	document.getElementById("buttonshopping").style.backgroundColor = "yellow";
+	document.getElementById("buttonhome").style = "normal";
+	document.getElementById("buttonoffice").style = "normal";
+	document.getElementById("buttonpersonal").style = "normal";
+	document.getElementById("addtaskbutton").style.display = "block";
+	document.getElementById("hometask").style.display = "none";
+	document.getElementById("officetask").style.display = "none";
+	document.getElementById("personaltask").style.display = "none";
+	document.getElementById("shoppingtask").style.display = "block";
+	document.getElementById("addtaskbutton").style.display = "block";
+}
+
+
+// -->
+</script>
+</body>
+</html>

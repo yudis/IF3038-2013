@@ -1,0 +1,291 @@
+@charset "utf-8";
+/* CSS Document */
+
+#popup{
+	background-color:rgba(153,153,153,.5);
+	position:absolute;
+	height:100%;
+	width:100%;
+	z-index:500;
+	text-align: center;
+	display:none;
+}
+
+#formstyle{
+	height:150px;
+	width:300px;
+	text-align: center;
+	border:3px solid #999;
+	background-color:#FFFFFF;
+	margin:250px auto;
+	vertical-align:middle;
+}
+
+#addkategoriheader{
+	width:60px;
+	float:left;
+	height:35px;
+	padding-top:5px;
+	text-align:left;
+	padding-left:30px;
+	background-color:#FFFF00;
+	border-bottom:3px solid #999;
+}
+
+#addkategoriicon{
+	width:47px;
+	height:30px;
+	vertical-align:middle;
+	background-color:#FFFF00;
+}
+
+#addkategoritext{
+	width:205px;
+	float:left;
+	height:35px;
+	padding-top:5px;
+	font-size:25px;
+	text-align:left;
+	padding-left:5px;
+	background-color:#FFFF00;
+	border-bottom:3px solid #999;
+}
+
+#namakategori{
+	height:30px;
+	padding-top:50px;
+}
+
+#penggunakategori{
+	height:30px;
+	padding-top:5px;
+}
+
+#buttonkategori{
+	height:30px;
+	padding-top:5px;
+}
+
+#tombolsubmitkategori{
+	width:210px;
+	float:left;
+	text-align:right;
+}
+
+#tombolcancelkategori{
+	float:left;
+	width:80px;
+}
+
+#content{
+	margin:0 auto;
+	height:550px;
+	width:850px;
+	border: 5px solid #000;
+	z-index:0;
+}
+
+#profile{
+	margin:0;
+	width:200px;
+	height:550px;
+	border-right:2px solid #999;
+	float:left;
+}
+
+#nama{
+	margin:0;
+	vertical-align:middle;
+	text-align:left;
+	font-size:16px;
+	color:#993333;
+	padding-top:20px;
+	padding-left:20px;
+	width:180px;
+	height:120px;
+}
+
+#profilepicture{
+	vertical-align:middle;
+	text-align:left;
+	width:70px;
+	height:100px;
+}
+
+#kategori{
+	text-align:left;
+	padding-top:20px;
+	padding-left:20px;
+	font-size:15px;
+	color:#666666;
+	height:30px;	
+}
+
+#buttonalltask{
+	background-color:#FFFFFF;
+	border:none;
+	margin-left:20px;
+}
+
+.homeicon{
+	vertical-align:middle;
+	width:30px;
+	height:30px;
+}
+
+#listkategori{
+	list-style-type:circle;
+	margin-top:0px;
+	padding-left:60px;
+}
+
+.home{
+	font-size:15px;
+	height:40px;
+	text-align:left;
+	margin:0px;
+}
+
+#buttonhome{
+	background-color:#FFFFFF;
+	border:none;
+}
+
+#buttonhome:hover{
+	background-color:#FFFF00;
+}
+
+#buttonoffice{
+	background-color:#FFFFFF;
+	border:none;
+}
+
+#buttonoffice:hover{
+	background-color:#FFFF00;
+}
+
+#buttonshopping{
+	background-color:#FFFFFF;
+	border:none;
+}
+
+#buttonshopping:hover{
+	background-color:#FFFF00;
+}
+
+#buttonpersonal{
+	background-color:#FFFFFF;
+	border:none;
+}
+
+#buttonpersonal:hover{
+	background-color:#FFFF00;
+}
+
+#add{
+	font-size:15px;
+	height:40px;
+	text-align:left;
+}
+
+#buttonadd{
+	border:none;
+	color:purple;
+	margin-top:0px;
+	margin-left:10px;
+}
+
+#addicon{
+	vertical-align:middle;
+	text-align:left;
+	width:20px;
+	height:20px;
+	padding-left:20px;
+}
+
+#tasklist{
+	margin:0;
+	text-align:left;
+	padding-left:30px;
+	width:600px;
+	height:796px;
+	float:left;
+}
+
+#tasktitle{
+	font-size:50px;
+	height:70px;
+	border-bottom:10px solid #000;
+	border-bottom-style:double;
+}
+
+#task{
+	width:50px;
+	height:50px;
+	vertical-align:middle;
+}
+
+#task1{
+	vertical-align:middle;
+	height:200px;
+	padding-top:30px;
+	padding-left:50px;
+}
+
+.listoftaskbutton{
+	list-style-type:none;
+	margin:0px;
+}
+
+.taskbuttonlist{
+	margin-bottom:15px;
+}
+
+.taskbutton{
+	width:500px;
+	height:125px;
+	text-align:left;
+	padding-left:30px;
+	position:relative;
+}
+
+.buttontitleicon{
+	width:130px;
+	height:150px;
+	float:left;
+}
+
+.iconinbutton{
+	width:100px;
+	height:100px;
+	padding-top:10px;
+}
+
+.buttondescName{
+	height:150px;
+	padding-top:5px;
+	font-size:40px;
+}
+
+.buttondeadline{
+	font-size:20px;
+}
+
+#addtaskbutton{
+	display:none;
+}
+
+.buttondescAdd{
+	height:150px;
+	padding-top:35px;
+	font-size:40px;
+}
+
+
+
+
+
+
+
+
+
