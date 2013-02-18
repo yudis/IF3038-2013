@@ -65,18 +65,51 @@
 		
 		<section>
 			<div id="content" class="wrap">
-					<div id="profil_area">
+			  <div id="profil_area">
 						<div id="profil_title">Profil</div>
-						<div id="profil_avatar">
-							<img id="profil_avatar" src="images/avatar.jpg" alt="avatar profil" />
-							<br>
-							<input type="file" name="datafile"> 
-						</div>
+				<div id="profil_avatar">
+				  <p><img id="profil_avatar" onClick="" src="images/avatar.jpg" alt="avatar profil" />						  </p>
+						  <p>&nbsp;</p>
+						  <p>&nbsp;</p>
+						  <p>&nbsp;</p>
+						  <p>&nbsp;</p>
+						  <p>&nbsp;</p>
+						  <p>&nbsp;</p>
+				  <p>&nbsp;</p>
+						  <p>&nbsp;</p>
+				  <p>&nbsp;</p>
+							<p>
+							  <input id="upload_avatar" name="upload avatar" type="file" title="change your avatar here">
+						  </p>
+                </div>
 						<div id="profil_text">
-							Nama : Wilson Fonda <br>
-							Alamat Email : wilsonfonda@gmail.com
+						  <table width="648" border="0">
+						    <tr>
+						      <td width="319">Nama :</td>
+						      <td width="319"><label for="Nama"></label>
+					          <input name="Nama" type="text" id="Nama" value="Admin"></td>
+					        </tr>
+						    <tr>
+						      <td>Alamat Email :</td>
+						      <td><label for="AlamatEmail"></label>
+					          <input name="AlamatEmail" type="text" id="AlamatEmail" value="Admin@itb.ac.id"></td>
+					        </tr>
+						    <tr>
+						      <td>Universitas/Perusahaan :</td>
+						      <td><form name="form1" method="post" action="">
+						        <label for="University"></label>
+						        <input name="University" type="text" id="University" value="ITB">
+						        </form></td>
+					        </tr>
+						    <tr>
+						      <td>&nbsp;</td>
+						      <td><form action="ProfilEdited.html" method="post">
+						        <input type="submit" name="submit" id="submit" value="Save">
+						      </form></td>
+					        </tr>
+					      </table>
 						</div>
-					</div>
+			  </div>
 			</div>
 		</section>
 		<footer>
@@ -262,13 +295,6 @@
 							form.pwd2.pattern = this.value;
 					}
 				}
-
-				var profil_button = document.getElementById("profil_button");
-				profil_button.onclick = function()
-				{
-					document.getElementById("profil_area").className = "appear";
-					
-				}		
 				
 				var register_area = document.getElementById("register_area");
 				register_area.onclick = function()

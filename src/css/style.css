@@ -342,7 +342,7 @@ nav ul li a:hover, nav ul li a .active
 /*Profil*/
 #profil_area
 {
-	display : none;
+	
 }
 #profil_text
 {
@@ -356,6 +356,7 @@ nav ul li a:hover, nav ul li a .active
 	line-height: 200%;
 	position:relative;
 	margin: 0px 20px;
+	align="left"
 }
 #profil_avatar
 {
@@ -370,10 +371,15 @@ nav ul li a:hover, nav ul li a .active
 {
 	text-align:center;
 	color:#6699FF;
-	font:200% Cooper Black,sans-serif auto;
 	line-height:200%;
 	text-shadow:5px 5px 10px #C0C0C0;
 	letter-spacing:1px;
+	font-family: "Cooper Black", "sans-serif auto";
+	font-size: 170%;
+}
+#success_edit {
+	color: #0C0;
+	font-size: 14px;
 }
 /*--- REGISTER FORM ---*/
 #black_trans
@@ -490,6 +496,12 @@ nav ul li a:hover, nav ul li a .active
 	box-shadow: 0 0 5px 5px #BBBBBB;
 	-moz-box-shadow: 0 0 5px 5px #BBBBBB;
 	-webkit-box-shadow: 0 0 5px 5px #BBBBBB;
+}
+
+#help_picture{
+	 width: 940px;
+	 height : 500px;
+	 border : 0px;
 }
 
 /*--- FOOTER ---*/
