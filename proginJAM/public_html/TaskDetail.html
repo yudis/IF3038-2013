@@ -3,6 +3,8 @@
     <head>
         <title>Task Detail</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" media="screen" href="TaskDetail.css">
+        <script type='text/javascript' src='TaskDetail.js'></script>
     </head>
     <body>
         <form id="task_detail_form"
@@ -31,17 +33,15 @@
                     <label for ="deadline_label">
                         Deadline:
                     </label>
-                    <label for="deadline">
-
-                    </label>
+                    
                 </li>
 
                 <li>
                     <label for="assignee_label">
                         Assignee:
                     </label>
-                    <label for="assignee">
-
+                    <label id="assignee_info">
+                        Mwaha~
                     </label>
                 </li>
 
@@ -49,10 +49,27 @@
                     <label for="commentary_label">
                         Commentary:
                     </label>
-                    <label for="commentary">
-
+                    <label id="commentary">
+                        No Comment
                     </label>
                 </li>
+                
+                <li>
+                    <label for="tag_label">
+                        Tag:
+                    </label>
+                    <label id="tag_info">
+                        College
+                    </label>
+                </li>
+                
+            <li>
+                <input type="button"
+                       id='edit_task_button'
+                       value="Edit"
+                       name="edit_task_detail"
+                       onclick="EditTaskDetail()"/>
+            </li>
 
             </ul>
         </form>

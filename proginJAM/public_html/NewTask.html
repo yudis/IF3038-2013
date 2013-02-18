@@ -6,82 +6,71 @@
         <link rel="stylesheet" media="screen" href="NewTask.css">
     </head>
     <body>
-        <a href="#openModal">Open Modal</a>
+        <form class="new_task_form"
+              action=""
+              method="post"
+              name="new_task_form"
+              enctype="multipart/form-data">
+            <ul>
+                <li>
+                    <label for="task_name">
+                        Task Name:
+                    </label>
+                    <input type="text"
+                           id="task_name"
+                           name="task_name"
+                           placeholder="New Task"
+                           pattern="[A-Za-z0-9]{1,}"
+                           maxlength=25
+                           required/>
+                </li>
 
-        <div id="openModal" class="modalDialog">
-            <div>
-                <a href="#close" title="Close" class="close">X</a>
-                <h2>Create a New Task</h2>
+                <li>
+                    <label for="attachment">
+                        Attachment:
+                    </label>
+                    <input type="file"
+                           multiple accept="image/*, video/*, audio/*"
+                           id="attachment"
+                           name="attachment"/>
+                </li>
 
-                <form class="new_task_form"
-                      action=""
-                      method="post"
-                      name="new_task_form"
-                      enctype="multipart/form-data">
-                    <ul>
-                        <li>
-                            <label for="task_name">
-                                Task Name:
-                            </label>
-                            <input type="text"
-                                   id="task_name"
-                                   name="task_name"
-                                   placeholder="New Task"
-                                   pattern="[A-Za-z0-9]{1,}"
-                                   maxlength=25
-                                   required/>
-                        </li>
+                <li>
+                    <label for="deadline">
+                        Deadline:
+                    </label>
+                    <input type="date"
+                           id="deadline"
+                           name="deadline"
+                           min="2013-02-22"
+                           required/>
+                </li>
 
-                        <li>
-                            <label for="attachment">
-                                Attachment:
-                            </label>
-                            <input type="file"
-                                   multiple accept="image/*, video/*, audio/*"
-                                   id="attachment"
-                                   name="attachment"/>
-                        </li>
+                <li>
+                    <label for="assignee">
+                        Assignee:
+                    </label>
+                    <input type="text"
+                           id="assignee"
+                           name ="assignee"/>
+                </li>
 
-                        <li>
-                            <label for="deadline">
-                                Deadline:
-                            </label>
-                            <input type="date"
-                                   id="deadline"
-                                   name="deadline"
-                                   min="2013-02-22"
-                                   required/>
-                        </li>
+                <li>
+                    <label for="tag">
+                        Tag:
+                    </label>
+                    <input type="text"
+                           id="tag"
+                           name="tag"/>
+                    <span class="form_hint">
+                        Separate different tags with comma(,)
+                    </span>
+                </li>
 
-                        <li>
-                            <label for="assignee">
-                                Assignee:
-                            </label>
-                            <input type="text"
-                                   id="assignee"
-                                   name ="assignee"
-                                   required/>
-                        </li>
-
-                        <li>
-                            <label for="tag">
-                                Tag:
-                            </label>
-                            <input type="text"
-                                   id="tag"
-                                   name="tag"/>
-                            <span class="form_hint">
-                                Separate different tags with comma(,)
-                            </span>
-                        </li>
-
-                        <li>
-                            <button class="submit" id="submit_new_task" type="submit">Submit From</button>
-                        </li>
-                    </ul>
-                </form>
-                
-            </div>
-        </div>
+                <li>
+                    <button class="submit" id="submit_new_task" type="submit">Submit From</button>
+                </li>
+            </ul>
+        </form>
     </body>
 </html>
