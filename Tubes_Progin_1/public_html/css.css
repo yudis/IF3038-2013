@@ -1,0 +1,85 @@
+/* 
+    Document   : css
+    Created on : Feb 18, 2013, 5:32:48 PM
+    Author     : frilla
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    font-family: century gothic;
+    width: 100%;
+}
+
+#header {
+    width: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding-top: 5px;
+    height: 40px;
+    position: absolute;
+    background-color: #000000;
+}
+
+#logo-small {
+    position: absolute;
+    left: 100px;
+    height: 40px;
+    top: 2px;
+}
+#profile {
+    position: absolute;
+    left: 300px;
+}
+#dashboard {
+    position: absolute;
+    left: 500px;
+}
+
+#logout {
+    position: absolute;
+    left: 1000px;
+}
+
+#search {
+    position: absolute;
+    left: 700px;
+}
+
+.category {
+    top: 45px;
+    left: 0;
+    padding-top: 100px;
+    padding-left: 75px;
+    height: 560px;
+    width: 250px;
+    position: absolute;
+    background-image: url('img/bg.jpg');
+    overflow: hidden;
+}
+
+.tugas {
+    top: 75px;
+    position:absolute;
+    background-color:transparent;
+    border:0px;
+    visibility: hidden;
+    left: 300px;
+    margin-left: 100px;
+    overflow: hidden;
+}
+
+#nama {
+    font-size: 14pt;
+    font-style: italic;
+}
+
+#tag {
+    font-size: 8pt;
+    color: red;
+}
+
+textArea {
+    height: 150px;
+}
