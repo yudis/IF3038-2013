@@ -1,0 +1,34 @@
+/* 
+    Document   : mystyle
+    Created on : 19 Feb 13, 15:15:00
+    Author     : Compaq
+    Description:
+        Purpose of the stylesheet follows.
+*/
+#header {
+    width: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+    height: 50px;
+    position: absolute;
+    background-color: #000000;
+}
+
+#login{
+	position: fixed;
+	top: 10px;
+	left: 50%;
+        color:white;
+}
+#register {
+	position:fixed;
+	top: 30%;
+	left: 70%;
+}
+#feature{
+	position:fixed;
+	top: 30%;
+	left: 20%;
+}
+
