@@ -68,7 +68,7 @@ br
 	margin-top:10px;
 	width:100px;
 	height:100px;
-	background-image:url('image/logo.png');
+	background-image:url('logo.png');
 	background-repeat:no-repeat;
 	text-indent:-999999em;
 	display:block;
@@ -262,28 +262,6 @@ br
 }
 
 #buttonshopping:hover{
-	background-color:(255,255,255,0.4);
-	-webkit-transform:scale(1,2);
-    -moz-transform:scale(1,2);
-    -ms-transform:scale(1,2);
-    -o-transform:scale(1,2);
-}
-
-#familyelement{
-	display:none;
-}
-
-#buttonfamily{
-	
-	background-color:transparent;
-	border:none;
-	-moz-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-
-#buttonfamily:hover{
 	background-color:(255,255,255,0.4);
 	-webkit-transform:scale(1,2);
     -moz-transform:scale(1,2);
@@ -810,60 +788,11 @@ br
 	width:250px;
 }
 
-.close {
-    background-color: rgb(84,48,48);
-    height: 30px;
-    line-height: 30px;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    text-decoration: none;
-    top: -15px;
-    width: 30px;
-
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    -ms-border-radius: 15px;
-    -o-border-radius: 15px;
-    border-radius: 15px;
-}
-
-.close:before {
-    color: rgba(255, 255, 255, 0.9);
-    content: "X";
-    font-size: 24px;
-    text-shadow: 0 -1px rgba(0, 0, 0, 0.9);
-}
-
-.close:hover {
-    background-color: rgba(224, 128, 128, 0.8);
-}
-
-.addcategory
-{
-	width:100px;
-	color: rgb(114,67,67);
-	text-shadow: 0 1px 1px rgb(254,240,200);
-	background: rgb(189,178,101);
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	-khtml-border-radius: 10px;
-	border-radius: 10px;
-	text-transform: uppercase;
-	visibility: visible;
-	opacity:1;
-}
-
-.addcategory a
-{
-    color: rgb(114,67,67);
-    display: block;
-    text-decoration: none;
-    text-shadow: 0 1px 1px rgb(254,240,200);
-}
-
-.addcategory:hover
-{
-	background: rgb(230,180,60);
-	cursor: pointer;
+#false{
+	height:15px;
+	width:15px;
+	vertical-align:middle;
+	text-align:left;
+	padding-left:3px;
+	display:none;
 }
