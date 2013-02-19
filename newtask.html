@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="css/defaut.css"/>
+</head>
+<body>
+	<header>
+		<h1>New Task</h1>
+			<nav>
+				<ul>
+					<li>Product</li>
+					<li>About Us</li>
+				</ul>
+			</nav>
+		<title>Insert New Task</title>
+	</header>
+	<form id="newtask">
+		<p><pre><label>Nama Tugas	:<input type="text" name="namatask"></label></pre></p>
+		<p><pre><label>Attachment	:<input id="rinciantask-attachment" type="file"></label></pre></p>
+		<p><pre><label>Deadline	:<input type="text" name="tanggalDeadline" size="2" maxlength="2"> <select name="bulanDeadline">
+		<option value="" selected="selected">Bulan</option>
+		<option value="1">Januari</option>
+		<option value="2">Februari</option>
+		<option value="3">Maret</option>
+		<option value="4">April</option>
+		<option value="5">Mei</option>
+		<option value="6">Juni</option>
+		<option value="7">Juli</option>
+		<option value="8">Agustus</option>
+		<option value="9">September</option>
+		<option value="10">Oktober</option>
+		<option value="11">November</option>
+		<option value="12">Desember</option></select> <input type="text" name="tahunDeadline" size="4" maxlength="4"></label></pre></p>
+		<p>Asignee<br>
+		<ul type="circle">
+		<li><input type="text" name="addAsignee">     <input type="submit" value="add" disabled></ul></p>
+		<p><pre><label>Tag		:<input type="text" name="insertTag"><input type="submit" value="send" disabled> <input type="submit" value="edit" disabled></label></pre></p>
+	</form>
+	<h2>HTML5 Elsewhere</h2>
+	<p>Feed your HTML5 fix with resources from our partners:</p>
+	<ul>
+		<li><a href="http://lovinghtml5.com">Loving HTML5</a></li>
+		<li><a href="http://semanticsally.com">Semantic Sally</a></li>
+	</ul>
+	<footer>
+	<p>Copyright &copy; 2013 RSA. All rights reserved</p>
+	</footer>
+</body>
+</html>
