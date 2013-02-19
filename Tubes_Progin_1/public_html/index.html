@@ -8,6 +8,7 @@ and open the template in the editor.
         <title></title>
         <link rel="stylesheet" type="text/css" href="mystyle.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
         <div id="header">
@@ -15,9 +16,9 @@ and open the template in the editor.
 			<img src="img\Logo_Big.png" alt="Logo & Tagline"></img>
 		</div>
 		<div id="login">
-			Username &nbsp <input type="text" name="liusername"> &nbsp &nbsp 
+			Username &nbsp <input type="text" id="user" name="liusername"> &nbsp &nbsp 
         		Password &nbsp <input type="password" name="lipassword"> &nbsp &nbsp 
-			<input type="submit" name="login" value="Login">
+                        <input type="submit" name="login" onclick="login();">
 		</div>
 	</div>
         <div id="frontpage">
