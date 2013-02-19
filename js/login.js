@@ -51,6 +51,31 @@ window.onload = function() {
 			}
 		}
 	}
+	
+	// init date
+	var year = $id('registerform-birthdate-year');
+	var month = $id('registerform-birthdate-month');
+	var date = $id('registerform-birthdate-date');
+	month.style.visibility = 'hidden';
+	date.style.visibility = 'hidden';
+	for(i = 1955; i <= 2013; i++) {
+		var e = document.createElement('option');
+		e.setAttribute('value', i);
+		e.innerHTML = i;
+		year.appendChild(e);
+	}
+	for(i = 1; i <= 12; i++) {
+		var e = document.createElement('option');
+		e.setAttribute('value', i);
+		e.innerHTML = i;
+		month.appendChild(e);
+	}
+	year.onchange = function() {
+		month.style.visibility = 'visible';
+	}
+	month.onchange = function() {
+		date.style.visibility = 'visible';
+	}
 }
 
 function login_check() {
