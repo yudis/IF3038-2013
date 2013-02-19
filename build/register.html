@@ -4,26 +4,28 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Pendaftaran</title>
+		<link rel="stylesheet" href="../css/style.css">
 	</head>
 
 	<body>
-		<header>  
-			<h1 id="logo"></h1>
-			<h2>Do</h2>
-		</header>
-		<nav>
-			<ul>
-				<li><a href="dashboard.html">Dashboard</a></li>
-				<li><a href="profile.html">Profile</a></li>
-				<li><a href="login.html">Logout</a></li>
-			</ul>
-			<div id="searchBox">
-				<form action="?" method="get">
-					<input type="text" name="q">
-					<input type="submit" value="Submit">
-				</form>
-			</div>
-		</nav>
+		<div class="site-container">
+			<header class="site-header">
+				<h1>Do</h1>
+
+				<nav class="site-nav">
+					<ul>
+						<li><a href="dashboard.html">Dashboard</a></li>
+						<li><a href="profile.html">Profile</a></li>
+						<li><a href="login.html">Logout</a></li>
+					</ul>
+					<div id="searchBox">
+						<form action="search.html" method="get">
+							<input type="search" name="q">
+							<button type="submit">Search</button>
+						</form>
+					</div>
+				</nav>
+			</header>
 		<form id="register" action="#" method="post">
 			<div class="row">
 				<label>Username</label>
