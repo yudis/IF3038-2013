@@ -3,26 +3,20 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8"/>
-	<script src="js/auth.js"></script>
-	</script>
+	<script src="js/login.js"></script>
+	<link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-	<header>
+	<div id="header">
 		<h1>Foo Login Dashboard</h1>
-		<nav>
-			<ul>
-				<li>Product</li>
-				<li>About Us</li>
-			</ul>
-		</nav>
-	</header>
+	</div>
 	<article>
 		<form id="loginform">
 			<fieldset>
 			<legend>Login</legend>
 			<p id="test"></p>
-			<p><input placeholder="Username" id="loginform-username" onchange="login_check()" type="text"></p>
-			<p><input placeholder="Password" id="loginform-password" onchange="login_check()" type="password"></p>
+			<p><input placeholder="Username" id="loginform-username" onkeyup="login_check()" type="text"></p>
+			<p><input placeholder="Password" id="loginform-password" onkeyup="login_check()" type="password"></p>
 			<p><button id="loginform-submit" type="submit">LOGIN</button></p>
 			</fieldset>
 		</form>
@@ -31,14 +25,36 @@
 		<form id="resgisterform">
 			<fieldset>
 			<legend>Register</legend>
-			<p><label>Username <input id="registerform-username" onchange="register_check()" type="text"></label></p> 
-			<p><label>Password <input id="registerform-password" onchange="register_check()" type="password"></label></p>
-			<p><label>Confirm Password <input id="registerform-password2" onchange="register_check()" type="password"></label></p>
-			<p><label>Email <input id="registerform-email" onchange="register_check()" type="text"></label></p>
-			<p><label>Fullname <input id="registerform-fullname" onchange="register_check()" type="text"></label></p>
-			<p><label>Birthdate <input id="registerform-birthdate" onchange="register_check()" type="date"></label></p>
-			<p><label>Avatar <input id="registerform-avatar" onchange="register_check()" type="file"></label></p>
-			<p><button id="registerform-submit" type="submit">REGISTER</button></p>
+			<div>
+				<div class="field">Username</div>
+				<input id="registerform-username" onkeyup="register_check()" type="text">
+			</div> 
+			<div>
+				<div class="field">Password</div>
+				<input id="registerform-password" onkeyup="register_check()" type="password">
+			</div>
+			<div>
+				<div class="field">Confirm Password</div>
+				<input id="registerform-password2" onkeyup="register_check()" type="password">
+			</div>
+			<div>
+				<div class="field">Email</div>
+				<input id="registerform-email" onkeyup="register_check()" type="text">
+			</div>
+			<div>
+				<div class="field">Password</div>
+				<input id="registerform-fullname" onkeyup="register_check()" type="text">
+			</div>
+			<div>
+				<div class="field">Birthdate</div>
+				<input id="registerform-birthdate" onkeyup="register_check()" type="text" placeholder="YYYY-MM-DD">
+			</div>
+			<div>
+				<div class="field">Password</div>
+				<input id="registerform-avatar" onkeyup="register_check()" type="file">
+			</div>
+			<div><div id="registerform-equalsUPE"></div></div>
+			<div><button id="registerform-submit" type="submit">REGISTER</button></div>
 			</fieldset>
 		</form>
 	</article>
@@ -55,3 +71,4 @@
 	</footer>
 </body>
 </html>
+

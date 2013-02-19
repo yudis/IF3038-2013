@@ -53,3 +53,4 @@ function mClose() {
 }
 
 document.onclick = mClose();
+
