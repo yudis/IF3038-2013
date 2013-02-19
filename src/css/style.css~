@@ -1,7 +1,3 @@
-@font-face {font-family:Oxygen-Bold; font-weight:900; src: url('Oxygen-Bold.ttf'); }
-@font-face {font-family:Oxygen-Light; font-weight:300; src: url('Oxygen-Light.ttf');}
-@font-face {font-family:Oxygen; font-weight:400; src: url('Oxygen-Regular.ttf');}
-
 /* Reset
 -----------------------------------------------------------------------------------------------*/	
 html, body, div, span, applet, object, iframe, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, 
@@ -40,10 +36,11 @@ form button {padding: 0px; margin: 0px; cursor: pointer; /* ie6 doesn't always d
 
 html, body
 {
-	font-family: 'Oxygen', sans-serif;
+	font: arial, helvetica, sans-serif;
 	background-color: #F9F9F9;
 	margin: 0;
 	padding: 0 10px;
+	overflow: hidden;
 }
 
 /*--- HEADER ---*/
@@ -111,7 +108,7 @@ nav ul li a
 {
 	display: block;
 	font-size: 18px;
-	font-weight: 400;
+	font-weight: bold;
 	margin: 6px 14px;
 }
 nav ul li a:hover, nav ul li a .active
@@ -369,7 +366,7 @@ nav ul li a:hover, nav ul li a .active
 	line-height: 200%;
 	position:relative;
 	margin: 0px 20px;
-	text-align: left;
+	align="left"
 }
 #profil_avatar
 {
@@ -507,7 +504,6 @@ nav ul li a:hover, nav ul li a .active
 	margin: 10px auto;
 	padding: 10px;
 	position: relative;
-	overflow: hidden;
 	box-shadow: 0 0 5px 5px #BBBBBB;
 	-moz-box-shadow: 0 0 5px 5px #BBBBBB;
 	-webkit-box-shadow: 0 0 5px 5px #BBBBBB;
@@ -515,25 +511,7 @@ nav ul li a:hover, nav ul li a .active
 #content_wrap_inner
 {
 	float: left;
-	position: relative;
 	width: 100000px;
-	left: 0;
-	
-	transition-property: left;
-	transition-duration: 0.6s;
-	transition-timing-function: linear;
-	-moz-transition-property: left;
-	-moz-transition-duration: 0.6s;
-	-moz-transition-timing-function: linear;
-	-ms-transition-property: left;
-	-ms-transition-duration: 0.6s;
-	-ms-transition-timing-function: linear;
-	-webkit-transition-property: left;
-	-webkit-transition-duration: 0.6s;
-	-webkit-transition-timing-function: linear;
-	-o-transition-property: left;
-	-o-transition-duration: 0.6s;
-	-o-transition-timing-function: linear;
 }
 #slide_left, #slide_right
 {
@@ -542,24 +520,8 @@ nav ul li a:hover, nav ul li a .active
 	width: 80px;
 	height: 80px;
 	top: 210px;
-	opacity: 0;
+	display: none;
 	background-color: green;
-	
-	transition-property: opacity;
-	transition-duration: 0.3s;
-	transition-timing-function: linear;
-	-moz-transition-property: opacity;
-	-moz-transition-duration: 0.3s;
-	-moz-transition-timing-function: linear;
-	-ms-transition-property: opacity;
-	-ms-transition-duration: 0.3s;
-	-ms-transition-timing-function: linear;
-	-webkit-transition-property: opacity;
-	-webkit-transition-duration: 0.3s;
-	-webkit-transition-timing-function: linear;
-	-o-transition-property: opacity;
-	-o-transition-duration: 0.3s;
-	-o-transition-timing-function: linear;
 }
 #slide_right
 {
@@ -570,31 +532,14 @@ nav ul li a:hover, nav ul li a .active
 	width: 940px;
 	height: 485px;
 }
-#slide_bullet
+.slide_item:hover #slide_right, .slide_item:hover #slide_right
 {
-	width: 100px;
-	margin: 0 auto;
-	text-align: center;
+	display: block ;
 }
-.bullet_slide
-{
-	background: none repeat scroll 0 0 #ACACAC;
-	cursor: pointer;
-	font-size: 5px;
-	margin: 0 4px;
-	float: left;
-	width: 10px;
-	height: 10px;
-	position: relative;
-	top: 3px;
-	
-	border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-}
-.bullet_slide .active
-{
-	background: none repeat scroll 0 0 #FF4C00;
+#help_picture{
+	 width: 940px;
+	 height : 500px;
+	 border : 0px;
 }
 
 /*--- FOOTER ---*/
@@ -608,12 +553,4 @@ nav ul li a:hover, nav ul li a .active
 	-ms-transition: all 0.25s ease-out;
 	-o-transition: all 0.25s ease-out;
 	transition: all 0.25s ease-out;
-}
-
-/*--- I DON't know --- */
-
-#help_picture{
-	 width: 940px;
-	 height : 500px;
-	 border : 0px;
 }

@@ -73,12 +73,8 @@
 				</div>
 				<div id="slide_right">
 				</div>
-				<div class="clear"></div>
+				<div style="clear:both"></div>
 				<div id="slide_bullet">
-					<div class="bullet_slide"> </div>
-					<div class="bullet_slide"> </div>
-					<div class="bullet_slide"> </div>
-					<div class="bullet_slide"> </div>
 				</div>
 			</div>
 		</section>
@@ -136,7 +132,6 @@
 		<script type="text/javascript">
 			window.onload = function()
 			{
-				/*----- Bagian Search ----*/
 				var search_text = document.getElementById("search_text");
 				
 				search_text.onmouseover = function()
@@ -157,7 +152,6 @@
 					}
 				}
 				
-				/*----- Bagian Munculin Register ----*/
 				var register_button = document.getElementById("register_button");
 				register_button.onclick = function()
 				{
@@ -182,7 +176,6 @@
 					}, 400);
 				}
 				
-				/*----- Bagian Login ----*/
 				var login_area = document.getElementById("login_area");
 				login_area.onmouseover = function()
 				{
@@ -210,7 +203,6 @@
 					document.getElementById("login_button").className = "";
 					document.getElementById("login_link").className = "";
 					document.getElementById("border_login").className = "";
-					
 					
 					login_area.onmouseover = function()
 					{
@@ -247,21 +239,6 @@
 					return false;
 				}
 				
-				/*----- Bagian SlideShow ----*/
-				var content_wrap = document.getElementById("content_wrap");
-				content_wrap.onmouseover = function()
-				{
-					document.getElementById("slide_left").style.opacity = "1";
-					document.getElementById("slide_right").style.opacity = "1";
-				}
-				
-				content_wrap.onmouseout = function()
-				{
-					document.getElementById("slide_left").style.opacity = "0";
-					document.getElementById("slide_right").style.opacity = "0";
-				}
-				
-				/*----- Bagian Register ----*/
 				var register_form = document.getElementById("register_form");
 				register_form.onsubmit = function()
 				{
