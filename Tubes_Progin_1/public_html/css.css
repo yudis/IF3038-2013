@@ -21,7 +21,9 @@ body {
     position: absolute;
     background-color: #000000;
 }
-
+input.liusername{
+    color: white;
+}
 #logo-small {
     position: absolute;
     left: 100px;
