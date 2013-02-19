@@ -7,6 +7,8 @@ and open the template in the editor.
     <head>
         <title>BANG!!!-DASHBOARD</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
+        <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
         <div id="header">
@@ -21,12 +23,58 @@ and open the template in the editor.
         </div>
         <div id="title">Dashboard</div>
             <div class="category">
-                <div id="male-children">Male Children</div>
-                <div id="female-children">Female Children</div>
-                <div id="male-teenager">Male Teenager</div>
-                <div id="female-teenager">Female Teenager</div>
-                <div id="male-adult">Male Adult</div>
-                <div id="female-adult">Female Adult</div>
+                <div id="male-children" onclick="showList()">Male Children</div>
+                <div id="female-children" onclick="showList()">Female Children</div>
+                <div id="male-teenager" onclick="showList()">Male Teenager</div>
+                <div id="female-teenager" onclick="showList()">Female Teenager</div>
+                <div id="male-adult" onclick="showList()">Male Adult</div>
+                <div id="female-adult" onclick="showList()">Female Adult</div>
+            </div>
+        <div id="listtugas" class="tugas">
+            <a onclick="showBuat()">tambah task</a><br/>
+            <a onclick="showRinci()">LIST</a><br/> 
+            <a onclick="showRinci()">LIST</a><br/> 
+            <a onclick="showRinci()">LIST</a><br/> 
+            <a onclick="showRinci()">LIST</a><br/> 
+        </div>
+        <div class="tugas" id="rincitugas">
+                <a onclick="showEdit()">edit task</a><br/>
+                <br/>
+                Nama task: <div id="nama">Nama Tugas</div><br/>
+                Attachment: <div id="attachment">file.zip</div><br/>
+                Deadline: <div id="deadline">17-12-2014</div><br/>
+                Assignee: <div id="asignee">X,Y,Z</div><br/>
+                Tag: <div id="tag"> X,Y,Z</div> <br/>
+                Komentar: <br/>
+                <div id="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
+                <form>
+                    <textArea></textarea>
+                    <input type="button" name="submit" value="submit">
+                </form>
+            </div>
+            <div class="tugas" id ="edittugas">
+                <a onclick="">Simpan task</a><br/>
+                <br/>
+                <form>
+                    Nama task: <div id="nama">Nama Task</div><br/>
+                    Attachment: <div id="attachment"><input type="file"></div><br/>
+                    Deadline: <div id="deadline"><input type="date"></div><br/>
+                    Assignee: <div id="asignee"><input type="text"></div><br/>
+                    Tag: <div id="tag"> <input type="text"></div> <br/>
+                    Komentar: <br/>
+                <div id="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
+                </form>
+            </div>
+            <div class="tugas" id="buattugas">
+                <a onclick="">simpan task</a><br/>
+                <br/>
+                Nama task: <div id="nama"><input type="text"></div><br/>
+                Attachment: <div id="attachment"><input type="file"></div><br/>
+                Deadline: <div id="deadline"><input type="date"></div><br/>
+                Assignee: <div id="asignee"><input type="text"></div><br/>
+                Tag: <div id="tag"> <input type="text"></div> <br/>
+                Komentar: <br/>
+                <div id="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
             </div>
     </body>
 </html>
