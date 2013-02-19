@@ -5,29 +5,37 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Untitled Document</title>
         <style>
+			body
+			{
+				background-color:lightcyan;
+			}
+			
 			.label
 			{
 				width: 100px;
 				float: left;
 			}
-			.defaultdate
+			#defaultdate
 			{
 				display:none;
 				float:left;
 			}
-			.customdate
+			#customdate
 			{
-				display:block;
+				display:none;
+				float:left;
+			}
+			.button
+			{
 				float:left;
 			}
 			
 			
 			#wrapper
 			{
-				width: 1000px;
+				width: 1160px;
 				height: 800px;
-				margin: 0 auto;
-				margin-top: 100px;
+				margin: auto;
 				padding: 20px;
 				background-color: pink;
 			}
@@ -61,15 +69,19 @@
 				var z = y[y.length-1];
 				if (z == "jpg" || z == "jpeg" || z == "png" || z == "gif")
 				{
+					document.getElementById("suatu_video").style.display = "none";
 					document.getElementById("suatu_gambar").style.display = "block";
+					
 				}
 				else if (z == "avi" || z == "mp4" || z == "mkv" || z == "3gp" || z == "flv" || z == "ogg")
 				{
+					document.getElementById("suatu_gambar").style.display = "none";
 					document.getElementById("suatu_video").style.display = "block";
 				}
 				else
 				{
-					
+					document.getElementById("suatu_gambar").style.display = "none";
+					document.getElementById("suatu_video").style.display = "none";
 				}
 			}
 			function checkSubmission()
@@ -108,23 +120,19 @@
 				browser.setAttribute("type", "date");
 				if(browser.type == "date")
 				{
-					var a = document.getElementById("deadline").className = "defaultdate";
+					var a = document.getElementById("defaultdate");
 					a.style.display = "block";
 				}
 				else
 				{
-					var a = document.getElementById("tanggal").className = "customdate";
+					var a = document.getElementById("customdate");
 					a.style.display = "block";
-					var b = document.getElementById("bulan").className = "customdate";
-					b.style.display = "block";
-					var c = document.getElementById("tahun").className = "customdate";
-					c.style.display = "block";
 				}
 			}
 		</script>
 </head>
     
-<body>
+<body onload="generateDate()">
 	<div id="content">
 		<div id="header">
 			<div id="logo">
@@ -138,21 +146,21 @@
 					<li> <a href="index.html"> LOGOUT </a> </li>
 				</ul>
 				<form action="index.html">
-					<input class="box" type="text" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Enter search query':this.value;" value="Enter search query">
+					<input class="box" type="text" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Enter search query':this.value;" value="Enter search query">	
 					<input class="button" type="submit" value="">
 				</form>
 			</div>
 		</div>
 
-		<div id="wrapper" onload="generateDate()">
+		<div id="wrapper">
 			<div id="wrapper-left">
 				<div class="label"> <label for="tugas" >Nama Tugas</label> </div> <input id="tugas" name="tugas" type="text" maxlength="25"/> <br />
 				<div class="label"> <label for="filebutton">Attachment</label> </div> <input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/> <br />
 				<div class="label"> <label for="deadline">Deadline</label> </div>
-					<div class="defaultdate">
+					<div id="defaultdate">
 						<input id="deadline" type="date" required/>
 					</div>
-					<div class="customdate">
+					<div id="customdate">
 						<div id="customtanggal"><div class="label">Tanggal</div>
 							<select>
 								<option value="date1">1</option>
