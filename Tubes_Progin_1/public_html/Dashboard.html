@@ -12,12 +12,12 @@ and open the template in the editor.
     </head>
     <body>
         <header>
-            <a href="dashboard.html" title="Home"><img id="logo-small" src="img/logo_small.png" alt="" /></a>
+            <a href="dashboard.html" title="Home"><img id="logo-small" src="img/Logo_Small.png" alt="" /></a>
             <div id="dashboard"><a title="Go to Dashboard" href="dashboard.html">Dashboard</a></div>
             <div id="profile"><a title="Go to Profile" href="profile.html">My Profile</a></div>
             <div id="logout"><a title="Log out from here" href="index.html">Log Out</a></div>
             <form id="search">
-                <input type="text" name="Search">
+                <input type="text" name="Search" id="box">
                 <input type="submit" value="Search">
             </form>
         </header>
@@ -30,7 +30,16 @@ and open the template in the editor.
                 <div class="kategori" id="male-adult" onclick="showList();">Male Adult</div>
                 <div class="kategori" id="female-adult" onclick="showList();">Female Adult</div>
             </div>
-        <div id="listtugas" class="tugas">
+        <div class="category">
+            <div id="male-children" onclick="showList();">Male Children</div>
+            <div id="female-children" onclick="showList();">Female Children</div>
+            <div id="male-teenager" onclick="showList();">Male Teenager</div>
+            <div id="female-teenager" onclick="showList();">Female Teenager</div>
+            <div id="male-adult" onclick="showList();">Male Adult</div>
+            <div id="female-adult" onclick="showList();">Female Adult</div>
+        </div>
+
+        <div id="listtugas">
             <a onclick="showBuat()">tambah task</a><br/>
             <a onclick="showRinci()">LIST</a><br/> 
             <a onclick="showRinci()">LIST</a><br/> 

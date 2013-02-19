@@ -7,8 +7,10 @@
 */
 
 body {
+    background-image: url('img/Dashboard_bg.png');
     font-family: century gothic;
     width: 100%;
+    overflow: hidden;
 }
 
 header {
@@ -16,37 +18,44 @@ header {
     left: 0;
     top: 0;
     margin: 0;
-    padding-top: 5px;
-    height: 40px;
+    padding-top: 10px;
+    height: 35px;
     position: absolute;
     background-color: #000000;
 }
+
+header a {
+    color: white;
+    font-style: italic;
+    text-decoration: none;
+}
+
 input.liusername{
     color: white;
 }
+
 #logo-small {
     position: absolute;
-    left: 100px;
+    left: 10px;
     height: 40px;
-    top: 2px;
+    top: 0px;
 }
 #profile {
     position: absolute;
-    left: 300px;
+    left: 950px;
 }
 #dashboard {
     position: absolute;
-    left: 500px;
+    left: 1070px;
 }
-
 #logout {
     position: absolute;
-    left: 1000px;
+    left: 1200px;
 }
-
 #search {
     position: absolute;
-    left: 700px;
+    left: 85px;
+    width: 120px;
 }
 
 .kategori {
@@ -59,11 +68,15 @@ input.liusername{
     border-bottom: 15px;
 }
 
+.kategori:hover {
+    background-color: white;
+}
+
 #category {
     top: 45px;
     left: 0;
     padding-top: 100px;
-    padding-left: 75px;
+    padding-left: 35px;
     height: 560px;
     width: 250px;
     position: absolute;
@@ -74,14 +87,19 @@ input.liusername{
 }
 
 .tugas {
+    font-size: 12pt;
     top: 75px;
     position:absolute;
     background-color:transparent;
     border:0px;
     visibility: hidden;
-    left: 300px;
+    left: 700px;
+    padding: 50px;
     margin-left: 100px;
     overflow: hidden;
+    background-image: url('img/kertas.png');
+    width: 350px;
+    height: 443px;
 }
 
 #nama {
@@ -95,5 +113,23 @@ input.liusername{
 }
 
 textArea {
-    height: 150px;
+    height: 70px;
+    width: 350px;
+}
+
+#listtugas{
+    font-size: 12pt;
+    top: 75px;
+    position:absolute;
+    background-color:transparent;
+    border:0px;
+    visibility: hidden;
+    left: 220px;
+    padding: 50px;
+    margin-left: 100px;
+    overflow: hidden;
+    background-image: url('img/kertas.png');
+    width: 350px;
+    height: 443px;
+    visibility: visible;
 }
