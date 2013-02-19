@@ -1,4 +1,9 @@
 function Login(){
-	document.getElementById("frontpage").style.visibility = "hidden";
-	document.getElementById("profile").style.visibility = "visible";
+    if (document.getElementById("liusername").value !== "admin"){
+        alert("Wrong username!");
+    } else if (document.getElementById("lipassword").value !== "admincool"){
+        alert("Wrong password!");
+    }else{
+        window.location = "Dashboard.html";
+        }
 }
