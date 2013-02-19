@@ -10,31 +10,49 @@
 				width: 100px;
 				float: left;
 			}
+			.defaultdate
+			{
+				display:none;
+				float:left;
+			}
+			.customdate
+			{
+				display:block;
+				float:left;
+			}
+			
+			
 			#wrapper
 			{
-				width: 450px;
+				width: 1000px;
+				height: 800px;
 				margin: 0 auto;
 				margin-top: 100px;
-				border: 1px solid black;
 				padding: 20px;
+				background-color: pink;
 			}
-			#wrapper-left, #wrapper-right
+			#wrapper-left
 			{
 				float:left;
 			}
 			#suatu_gambar
 			{
+				float:right;
 				display: none;
-				width: 200px;
-				height: 150px;
+				width: 300px;
+				height: 225px;
 			}
 			#suatu_video
 			{
+				float:right;
+				width:320px;
+				height:240px;
 				display: none;
-				margin-right: 0;
 			}
 		</style>
         
+		<link rel="stylesheet" style="text/css" href="style.css">
+		
         <script type="text/javascript">
 			function loadAttachment()
 			{
@@ -43,12 +61,10 @@
 				var z = y[y.length-1];
 				if (z == "jpg" || z == "jpeg" || z == "png" || z == "gif")
 				{
-					document.getElementById("wrapper").style.width = "650px";
 					document.getElementById("suatu_gambar").style.display = "block";
 				}
 				else if (z == "avi" || z == "mp4" || z == "mkv" || z == "3gp" || z == "flv" || z == "ogg")
 				{
-					document.getElementById("wrapper").style.width = "770px";
 					document.getElementById("suatu_video").style.display = "block";
 				}
 				else
@@ -62,41 +78,162 @@
 				
 				if (isValid == true)
 				{
-					document.getElementById("tugas");
+					var a = document.getElementById("tugas").value;
+					if (a.length != 0)
+					{
+						var index = 0;
+						while (index < a.length && isValid == true)
+						{
+							if ((a[index] >= '0' && a[index] <= '9') || (a[index] >= 'a' && a[index] <= 'z') || (a[index] >='A' && a[index] <='Z'))
+							{}
+							else
+							{
+								isValid = false;
+							}
+							index++;
+						}
+						
+						if (isValid == false)
+						{
+							alert("Nama tugas tidak boleh menggunakan karakter khusus!")
+						}
+					}
 				}
-				else if (isValid == true)
+				
+			}
+			
+			function generateDate()
+			{
+				var browser = document.createElement("input");
+				browser.setAttribute("type", "date");
+				if(browser.type == "date")
 				{
-					
+					var a = document.getElementById("deadline").className = "defaultdate";
+					a.style.display = "block";
+				}
+				else
+				{
+					var a = document.getElementById("tanggal").className = "customdate";
+					a.style.display = "block";
+					var b = document.getElementById("bulan").className = "customdate";
+					b.style.display = "block";
+					var c = document.getElementById("tahun").className = "customdate";
+					c.style.display = "block";
 				}
 			}
 		</script>
 </head>
     
 <body>
-	<div id="wrapper">
-    	<div id="wrapper-left">
-            <div class="label"> <label for="tugas" >Nama Tugas</label> </div> : <input id="tugas" name="tugas" type="text" maxlength="25" align="middle"/> <br />
-            <div class="label"> <label for="filebutton">Attachment</label> </div> : <input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/> <br />
-            <div class="label"> <label for="deadline">Deadline</label></div> : <input id="deadline" type="date" required> <br />
-                <!--: Tanggal <input id="tanggal" name="tanggal" type="text" size="1" maxlength="2" align="middle"/> 
-                Bulan <input name="Bulan" type="text" size="1" maxlength="2" align="middle"/>
-                Tahun <input name="Tahun" type="text" size="1" maxlength="4" align="middle"/> <br />-->
-            <div class="label"> <label for="asignee">Asignee</label></div> : <input id="asignee" name="asignee" type="text" align="middle"/> <br />
-            <div class="label"> <label for="tag">Tag</label></div> : <input id="tag" name="tag" type="text" size="20" /> (dipisahkan dengan ',') <br />
-        	<br /> 
-            <input id="submitbutton" name="submitbutton" type="submit" onClick="checkSubmission()"/>
-        </div>
-        <div id="wrapper-right">
-        	<img id="suatu_gambar" src="Troll.png" alt="Gambar tidak dapat di-load"/>    
-            <video id="suatu_video" width="320" height="240" controls/>
-            	<source src="A Caterpillar.mp4" type="video/mp4">
-                <source src="A Caterpillar.ogg" type="video/ogg">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div style="clear:both"></div>
+	<div id="content">
+		<div id="header">
+			<div id="logo">
+				<!-- <a href="index.html" class="header">board</a> -->
+				<img src="logo.png"/>
+			</div>
+			<div id="menu">
+				<ul>
+					<li> <a href="dashboard.html"> DASHBOARD </a> </li>
+					<li> <a href="profile.html"> PROFILE </a> </li>
+					<li> <a href="index.html"> LOGOUT </a> </li>
+				</ul>
+				<form action="index.html">
+					<input class="box" type="text" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Enter search query':this.value;" value="Enter search query">
+					<input class="button" type="submit" value="">
+				</form>
+			</div>
+		</div>
+
+		<div id="wrapper" onload="generateDate()">
+			<div id="wrapper-left">
+				<div class="label"> <label for="tugas" >Nama Tugas</label> </div> <input id="tugas" name="tugas" type="text" maxlength="25"/> <br />
+				<div class="label"> <label for="filebutton">Attachment</label> </div> <input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/> <br />
+				<div class="label"> <label for="deadline">Deadline</label> </div>
+					<div class="defaultdate">
+						<input id="deadline" type="date" required/>
+					</div>
+					<div class="customdate">
+						<div id="customtanggal"><div class="label">Tanggal</div>
+							<select>
+								<option value="date1">1</option>
+								<option value="date2">2</option>
+								<option value="date3">3</option>
+								<option value="date4">4</option>
+								<option value="date5">5</option>
+								<option value="date6">6</option>
+								<option value="date7">7</option>
+								<option value="date8">8</option>
+								<option value="date9">9</option>
+								<option value="date10">10</option>
+								<option value="date11">11</option>
+								<option value="date12">12</option>
+								<option value="date13">13</option>
+								<option value="date14">14</option>
+								<option value="date15">15</option>
+								<option value="date16">16</option>
+								<option value="date17">17</option>
+								<option value="date18">18</option>
+								<option value="date19">19</option>
+								<option value="date20">20</option>
+								<option value="date21">21</option>
+								<option value="date22">22</option>
+								<option value="date23">23</option>
+								<option value="date24">24</option>
+								<option value="date25">25</option>
+								<option value="date26">26</option>
+								<option value="date27">27</option>
+								<option value="date28">28</option>
+								<option value="date29">29</option>
+								<option value="date30">30</option>
+								<option value="date31">31</option>
+							</select>
+						</div>
+						<div class="label"> </div>
+						<div id="custombulan"><div class="label">Bulan</div>
+							<select>
+								<option value="month1">1</option>
+								<option value="month2">2</option>
+								<option value="month3">3</option>
+								<option value="month4">4</option>
+								<option value="month5">5</option>
+								<option value="month6">6</option>
+								<option value="month7">7</option>
+								<option value="month8">8</option>
+								<option value="month9">9</option>
+								<option value="month10">10</option>
+								<option value="month11">11</option>
+								<option value="month12">12</option>
+							</select>
+						</div>
+						<div class="label"> </div>
+						<div id="customtahun"><div class="label">Tahun</div>
+							<select>
+								<option value="year1">2010</option>
+								<option value="year2">2011</option>
+								<option value="year3">2012</option>
+								<option value="year4">2013</option>
+								<option value="year5">2014</option>
+								<option value="year6">2015</option>
+							</select>
+						</div>
+					</div>
+					<div style="clear:both"></div>
+				<div class="label"> <label for="asignee">Asignee</label></div> <input id="asignee" name="asignee" type="text"/> <br />
+				<div class="label"> <label for="tag">Tag</label></div> <input id="tag" name="tag" type="text" size="20"/> (dipisahkan dengan ",") <br />
+				<br /> 
+				<input id="submitbutton" name="submitbutton" type="submit" onClick="checkSubmission()"/>
+			</div>
+			<div id="wrapper-right">
+				<img id="suatu_gambar" src="Troll.png" alt="Gambar tidak dapat di-load"/>    
+				<video id="suatu_video" width="320" height="240" controls>
+					<source src="A_Caterpillar.mp4" type="video/mp4">
+					<source src="A_Caterpillar.ogg" type="video/ogg">
+					Your browser does not support the video tag.
+				</video>
+			</div>
+			<div style="clear:both"></div>
+		</div>
     </div>
-        
 </body>
 
 </html>
