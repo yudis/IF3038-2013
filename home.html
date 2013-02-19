@@ -2,9 +2,19 @@
 	<head>
 		<title> Banana Board - Home </title>
 		<link rel="stylesheet" style="text/css" href="style.css">
+		 <script src="Dashboard.js" type="text/javascript" language="javascript"> </script>
 	</head>
 	<body>
 		<div id="content">
+		<div id="popup">
+	       	</div>
+    	    <div id="popupform">
+        	    <form class="centerV">
+				    	<div class="label">Nama Kategori</div>:<input type="text" name="namakategori"><br/>
+					    <div class="label">Daftar Pengguna</div>:<input type="text" name="daftarpengguna"><br/>
+		        		<button style="margin:10px 0px 10px 200px">OK </button>
+				</form>
+            </div>
 			<div id="header">
 				<div id="logo">
 					<!-- <a href="index.html" class="header">board</a> -->
@@ -22,6 +32,7 @@
 					</form>
 				</div>
 			</div>
+			 <button onClick="javascript:AddKategori()"> AddKategori</button>
 			<!--
 			<div id="isi">
 				<div id="leftsidebar">
