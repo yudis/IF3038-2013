@@ -277,7 +277,7 @@ nav ul li a:hover, nav ul li a .active
 .row label
 {
 	font-size: 87%;
-	font-weight: bold;
+	font-weight: 400;
 }
 .row input:hover
 {
@@ -539,11 +539,10 @@ nav ul li a:hover, nav ul li a .active
 {
 	position: absolute;
 	z-index: 100;
-	width: 80px;
-	height: 80px;
-	top: 210px;
+	width: 20px;
+	height: 36px;
+	top: 230px;
 	opacity: 0;
-	background-color: green;
 	
 	transition-property: opacity;
 	transition-duration: 0.3s;
@@ -561,14 +560,25 @@ nav ul li a:hover, nav ul li a .active
 	-o-transition-duration: 0.3s;
 	-o-transition-timing-function: linear;
 }
+#slide_left
+{
+	left: 20px;
+	background: url(../images/arrow-left.png);
+}
 #slide_right
 {
-	right: 10px;
+	right: 20px;
+	background: url(../images/arrow-right.png);
+}
+#slide_left:hover, #slide_right:hover
+{
+	background-position: 0 -36px;
 }
 .slide_item
 {
 	width: 940px;
 	height: 485px;
+	margin-right: 16px;
 }
 #slide_bullet
 {
@@ -592,7 +602,7 @@ nav ul li a:hover, nav ul li a .active
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 }
-.bullet_slide .active
+.bullet_slide.active
 {
 	background: none repeat scroll 0 0 #FF4C00;
 }
