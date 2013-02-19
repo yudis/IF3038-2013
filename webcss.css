@@ -1,0 +1,158 @@
+body {
+	background-image:url(img/background.png);
+	color:#727978;
+	font-family:Tahoma;
+}
+
+a,a:hover {
+	color:#becad8;
+	text-decoration:none;
+}
+
+input, select {
+	background-color:#e2e2e2;
+	font-size:10px;
+	border:0px solid #e2e2e2;
+}
+
+.sometitle {
+	background-color:#becad8;
+	font-family:georgia;
+	font-size:8px;
+	letter-spacing:1px;
+	text-align:center;
+	text-transform:uppercase;
+	padding:2px;
+}
+
+.line{
+	background-color:#becad8;
+	height:2px;
+	
+}
+
+#wrap {
+	background-color:#ededed;
+	width:750px;
+	padding:10px;
+	border:2px solid #e2e2e2;
+	margin:0px auto;
+	min-height:500px;
+}
+
+#header a{
+	color:#727978;
+
+}
+
+#banner {
+	text-transform:lowercase;
+	text-align:center;
+	margin-bottom:20px;
+}
+
+#fleur {
+	font-size:100px;
+	color:#fff;
+	display:inline-block;
+}
+
+#textdesu{
+	display:inline-block;
+	font-size:60px;
+	letter-spacing:-6px;
+	font-family:Trajan Pro;
+	margin-left:-10px;
+}
+
+#tagline {
+	font-family:Times New Roman;
+	font-size:12px;
+	letter-spacing:2px;
+	font-style:italic;
+	margin-top:-20px;
+	margin-left:15px;
+
+}
+
+
+#topmenu {
+	text-align:center;
+}
+
+#topmenu a {	
+	-webkit-transition:opacity 0.7s linear;
+	-webkit-transition:all 0.7s ease-in-out;
+	-moz-transition:all 0.7s ease-in-out;
+	-o-transition:all 0.7s ease-in-out;
+	background-color:#ededed;
+	color:#a7b0af;
+	text-transform:lowercase;
+	font-size:15px;
+	border-bottom: 3px solid #becad8;
+	font-family: times;
+	font-weight: bold;
+	padding: 2px 10px 1px;
+	letter-spacing: 2px;
+	text-align: center;
+
+}
+
+#topmenu a:hover{
+	border-top: 3px solid #becad8;
+	-webkit-transition:opacity 0.7s linear;
+	-webkit-transition:all 0.7s ease-in-out;
+	-moz-transition:all 0.7s ease-in-out;
+	-o-transition:all 0.7s ease-in-out;
+}
+
+#searchbar {
+	display:inline-block;
+	text-align:center;
+	width:190px;
+	position:relative;
+	top:20px;
+}
+
+#inner {
+	text-align:center;
+	padding-top:20px;
+	}
+	
+#dashboard{
+	margin-top:-20px;
+	width:500px;
+	margin-left:200px;
+	font-size:12px;
+	}
+	
+#search{
+	background:url(img/search.jpg) #e2e2e2;
+	background-repeat:no-repeat;
+	background-position:top right;
+	min-height:18px;
+
+}
+
+#categoryselector{
+	display:inline-block;
+	width:200px;
+}
+
+#menus{
+	display:inline-block;
+	width:200px;
+}
+
+#menus a {
+	padding:2px 3px 0px;
+	border-bottom:3px solid #becad8;
+	text-align:center;
+	vertical-align:middle;
+	background-color:#ededed;
+	font-family:Times;
+	color:#8c9391;
+	font-size:20px;
+	text-transform:lowercase;
+	letter-spacing:-1px;
+}
