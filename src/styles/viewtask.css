@@ -89,18 +89,22 @@
 	background-color:#000;
 	text-align:center;
 }
-#category{
+#leftspace{
 	height:572px;
-	width:350px;
-	float:left;
-	border-right:thick solid #000;
-	background-color:#C0C0C0;
-}
-#task{
-	height:572px;
-	width:992px;
+	width:300px;
 	float:left;
 }
+#viewtask{
+	height:572px;
+	width:747px;
+	float:left;
+}
+#rightspace{
+	height:572px;
+	width:300px;
+	float:right;
+}
+
 body {
 	margin: 0px;
 }
