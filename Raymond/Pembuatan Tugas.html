@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link href="task.css" rel="stylesheet" type="text/css"/>
+<script language="javascript" type="text/javascript" src="datetimepicker.js"/>
 <script type="text/javascript"/>
 	
 	function checkpostal(){
@@ -60,7 +61,7 @@
 	
 	<br>
 
-	<div class="content">
+	<div class="contentku">
         <div class="rincianKiri">Nama Tugas	</div>
         <div class="rincianKanan">
             <input type="text" class="inputText"/>
@@ -71,13 +72,13 @@
         </div>
         <div class="rincianKiri">Deadline</div>
         <div class="rincianKanan">
-            <input type="text" class="inputText"/>
+            <input id="demo1" type="text" size="25"><a href="javascript:NewCal('demo1','ddmmyyyy')"><img src="./cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
         </div>
         <div class="rincianKiri">Assignee</div><div class="rincianKanan"><input id="ali" class="inputText" type="text"/></div>
-        <form> <ul class="listUL"><li class="listLI"><button>Done</button></li><li class="listLI"><button>Back</button></li></ul></form>
+       
        <div class="rincianKiri">Tag</div><div class="rincianKanan"><input class="inputText" type="text"/></div>
         
-               
+       <form> <ul class="listUL"><li class="listLI"><button>Done</button></li><li class="listLI"><button>Back</button></li></ul></form>
         
        
 	</div>
