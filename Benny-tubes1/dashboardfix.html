@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="dashboardfixcss.css">
+	<link rel="stylesheet" type="text/css" href="../Benny-tubes1/dashboardfixcss.css">
 </head>
 
 <body>
        <!-- popup form #1 -->
        <a href="#x" class="overlay" id="addCategory_form"></a>
-        <div class="popup" id = "addCategory_popup">
+        <form class="popup" id = "addCategory_popup">
             <h1>Add More Category</h1>
 			<div>
                 <label for="username">Nama Kategori</label>
-                <input type="text" id="user" value="" />
-                <img src = "image/cross.png" id = "false">
+                <input type="text" name = "categoryname" id="user" onKeyUp="validateCategoryName()"/>
+                <img src = "../Benny-tubes1/image/false.png" id = "false">
             </div>
 			<div>
                 <label for="pengguna">Pengguna</label>
                 <input type="text" id="pengguna" value="" />
             </div>
-            <input class="addCategory" type="button" value="Add"  onclick="validate()"/>
+            <input class="addcategory" type="button" value="add" id="addCategoryButton" onClick="formSubmit()"/>
 
             <a class="close" href="#close"></a>
-        </div>
+        </form>
 
 
 	<div class="header">
 		<div class="hbackground" >
 			<div class="hlogo">
-				<a href="tes.html">Monkey.Inc</a>
+				<a href="../Benny-tubes1/tes.html">Monkey.Inc</a>
 			</div>
 			<div class="htext"> Monkey.Inc </div>
 			<div class="htagline">"See no Task, Speak no Task, Hear no Task"</div>
@@ -35,9 +35,9 @@
 		
 		<div class="hbar">
 			<div class="hmenus">
-				<a class="hmtext" href="dashboardfix.html" >Dashboard </a>
-				<a class="hmtext" href="profilefix.html" >Profil </a>
-				<a class="hmtext" href="Index.html" >Logout </a>
+				<a class="hmtext" href="../Benny-tubes1/dashboardfix.html" >Dashboard </a>
+				<a class="hmtext" href="../Benny-tubes1/profilefix.html" >Profil </a>
+				<a class="hmtext" href="../Benny-tubes1/Index.html" >Logout </a>
 			</div>
 			<div class="hmsearch"> 
 				<form class="hmtext">Search : <input type="text" name="firstname"></form>
@@ -52,7 +52,7 @@
 		<div class="dashboard">
 			<div id="profile">
                 <div id ="nama">
-					<img src = "image/profpic.jpg" id="profilepicture">
+					<img src = "../Benny-tubes1/image/profpic.jpg" id="profilepicture">
 					<b>Janice Leung</b>
 				</div>
 				<div id="kategori">
@@ -60,7 +60,7 @@
                 </div>
                 <div id="alltask">
 					<button type "button" id="buttonalltask" onclick="clickalltask()" onfocus="focusonit()">
-						<img src = "image/alltask.png" class="homeicon">
+						<img src = "../Benny-tubes1/image/alltask.png" class="homeicon">
 						All Task
                    </button> 
                 </div> 
@@ -68,7 +68,7 @@
 					<li>
                         <div class="home">
 							<button type "button" id="buttonhome" onclick="clickhome()" onfocus="focusonit()">
-								<img src = "image/homeicon.png" class="homeicon">
+								<img src = "../Benny-tubes1/image/homeicon.png" class="homeicon">
 								H o m e
                            </button>
                         </div>
@@ -76,7 +76,7 @@
 					<li>
                         <div class="home">
 							<button type "button" id="buttonoffice" onclick="clickoffice()" onfocus="focusonit()">
-								<img src = "image/office.png" class="homeicon">
+								<img src = "../Benny-tubes1/image/office.png" class="homeicon">
 								O f f i c e
                             </button>
                         </div>
@@ -84,7 +84,7 @@
 					<li>
                         <div class="home">
 							<button type "button" id="buttonpersonal" onclick="clickpersonal()" onfocus="focusonit()">
-								<img src = "image/personal.png" class="homeicon">
+								<img src = "../Benny-tubes1/image/personal.png" class="homeicon">
 								P e r s o n a l
                             </button>
                         </div>
@@ -92,8 +92,16 @@
 					<li>
                         <div class="home">
 							<button type "button" id="buttonshopping" onclick="clickshopping()" onfocus="focusonit()">
-								<img src = "image/shopping.png" class="homeicon">
+								<img src = "../Benny-tubes1/image/shopping.png" class="homeicon">
 								S h o p p i n g
+                            </button>
+                        </div>
+					</li>
+                    <li id ="familyelement">
+                        <div class="home">
+							<button type "button" id="buttonfamily" onclick="clickshopping()" onfocus="focusonit()">
+								<img src = "../Benny-tubes1/image/shopping.png" class="homeicon">
+								F a m i l y
                             </button>
                         </div>
 					</li>
@@ -104,7 +112,7 @@
 			</div>
 			<div id = "tasklist">
 				<div id = "tasktitle">
-					<img src = "image/book.png" id="task">
+					<img src = "../Benny-tubes1/image/book.png" id="task">
 					T  A  S  K
 				</div>
 				<div id = "task1">
@@ -113,7 +121,7 @@
 							<button type "button" class="taskbutton">
 								<div class = "buttontitle">
 									<div class = "buttontitleicon">
-										<img src = "image/homeicon.png" class="iconinbutton">
+										<img src = "../Benny-tubes1/image/homeicon.png" class="iconinbutton">
 									</div>
 									<div class = "buttondescName">
 										<div>
@@ -131,7 +139,7 @@
 							<button type "button" class="taskbutton" >
 								<div class = "buttontitle">
 									<div class = "buttontitleicon">
-										<img src = "image/office.png" class="iconinbutton">
+										<img src = "../Benny-tubes1/image/office.png" class="iconinbutton">
 									</div>
 									<div class = "buttondescName">
 										<div>
@@ -149,7 +157,7 @@
 							<button type "button" class="taskbutton" >
 								<div class = "buttontitle">
 									<div class = "buttontitleicon">
-										<img src = "image/personal.png" class="iconinbutton">
+										<img src = "../Benny-tubes1/image/personal.png" class="iconinbutton">
 									 </div>
 									 <div class = "buttondescName">
 										<div>
@@ -167,7 +175,7 @@
 							<button type "button" class="taskbutton" id ="addtaskbutton">
 								<div class = "buttontitle">
 									<div class = "buttontitleicon">
-										<img src = "image/addtask.png" class="iconinbutton">
+										<img src = "../Benny-tubes1/image/addtask.png" class="iconinbutton">
 									 </div>
 									 <div class = "buttondescAdd">
 										<div>
@@ -317,6 +325,20 @@ function clickshopping(){
 	document.getElementById("personaltask").style.display = "none";
 	document.getElementById("shoppingtask").style.display = "block";
 	document.getElementById("addtaskbutton").style.display = "block";
+}
+
+function validateCategoryName(){
+	if(document.getElementById("user").value != ""){
+		document.getElementById("false").src = "image/true.png";
+	}else{
+		document.getElementById("false").src = "image/false.png";
+	}
+}
+
+function formSubmit(){
+	if(document.getElementById("false").src.indexOf("image/true.png")!=-1){
+		window.location = "dashboardfix.html";
+	}
 }
 
 
