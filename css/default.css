@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* CSS Document */
+header, footer, nav, article, aside, section {
+	display: block;
+}
+.field {
+	width: 400px;
+	display: block;
+}
+.fieldname {
+	display: block;
+	float: left;
+	width: 180px;
+}
+.fieldinput {
+	float: left;
+	width: 180px;
+}
+#registerbutton {
+}
+

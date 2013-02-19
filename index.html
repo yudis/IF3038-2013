@@ -5,12 +5,13 @@
 	<meta charset="utf-8"/>
 	<script src="js/login.js"></script>
 	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/default.css"/>
 </head>
 <body>
 	<div id="header">
 		<h1>Foo Login Dashboard</h1>
 	</div>
-	<article>
+	<div id="login">
 		<form id="loginform">
 			<fieldset>
 			<legend>Login</legend>
@@ -20,44 +21,47 @@
 			<p><button id="loginform-submit" type="submit">LOGIN</button></p>
 			</fieldset>
 		</form>
-	</article>
-	<article>
+	</div>
+	<div id="register">
 		<form id="resgisterform">
 			<fieldset>
 			<legend>Register</legend>
-			<div>
-				<div class="field">Username</div>
-				<input id="registerform-username" onkeyup="register_check()" type="text">
+			<div class="field">
+				<div class="fieldname">Username</div>
+				<div class="fieldinput"><input id="registerform-username" type="text"></div>
 			</div> 
-			<div>
-				<div class="field">Password</div>
-				<input id="registerform-password" onkeyup="register_check()" type="password">
+			<div class="field">
+				<div class="fieldname">Password</div>
+				<div class="fieldinput"><input id="registerform-password" type="password"></div>
 			</div>
-			<div>
-				<div class="field">Confirm Password</div>
-				<input id="registerform-password2" onkeyup="register_check()" type="password">
+			
+			<div class="field">
+				<div class="fieldname">Confirm Password</div>
+				<div class="fieldinput"><input id="registerform-password2" type="password"></div>
 			</div>
-			<div>
-				<div class="field">Email</div>
-				<input id="registerform-email" onkeyup="register_check()" type="text">
+			<div class="field">
+				<div class="fieldname">Email</div>
+				<div class="fieldinput"><input id="registerform-email" type="text"></div>
 			</div>
-			<div>
-				<div class="field">Password</div>
-				<input id="registerform-fullname" onkeyup="register_check()" type="text">
+			<div class="field">
+				<div class="fieldname">Password</div>
+				<div class="fieldinput"><input id="registerform-fullname" type="text"></div>
 			</div>
-			<div>
-				<div class="field">Birthdate</div>
-				<input id="registerform-birthdate" onkeyup="register_check()" type="text" placeholder="YYYY-MM-DD">
+			<div class="field">
+				<div class="fieldname">Birthdate</div>
+				<div class="fieldinput"><input id="registerform-birthdate" type="text" placeholder="YYYY-MM-DD"></div>
 			</div>
-			<div>
-				<div class="field">Password</div>
-				<input id="registerform-avatar" onkeyup="register_check()" type="file">
+			<div class="field">
+				<div class="fieldname">Password</div>
+				<div class="fieldinput"><input id="registerform-avatar" type="file"></div>
 			</div>
-			<div><div id="registerform-equalsUPE"></div></div>
-			<div><button id="registerform-submit" type="submit">REGISTER</button></div>
+			
+			<div class="field">
+				<button id="registerform-submit" type="submit">REGISTER</button>
+			</div>
 			</fieldset>
 		</form>
-	</article>
+	</div>
 	<aside>
 		<h2>HTML5 Elsewhere</h2>
 		<p>Feed your HTML5 fix with resources from our partners:</p>
