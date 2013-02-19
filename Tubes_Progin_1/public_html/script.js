@@ -2,13 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-function defaultCategory(){
-document.getElementById("listtugas").style.visibility="visible";
-document.getElementById("rincitugas").style.visibility="visible";
-document.getElementById("edittugas").style.visibility="visible";
-document.getElementById("buattugas").style.visibility="visible";
-self.focus();
-}
+
 function showList(){
 document.getElementById("listtugas").style.visibility="visible";
 document.getElementById("rincitugas").style.visibility="hidden";
