@@ -1,23 +1,37 @@
 		<div role="todo_list">
-			<article>
-				<a href="view_tugas.html#1"><h1>Tugas 1</h1></a>
-				<h2>Kategori : Makan</h2>
-				<p>Tanggal deadline : 22-22-2222</p>
-				<p>Tag : satu, dua, tiga</p>
-			</article>
-			<article>
-				<a href="view_tugas.html#2"><h1>Tugas 2</h1></a>
-				<h2>Kategori : Rapat</h2>
-				<p>Tanggal deadline : 22-22-2222</p>
-				<p>Tag : satu, dua, tiga</p>
-			</article>
-			<article>
-				<a href="view_tugas.html#3"><h1>Tugas 3</h1></a>
-				<h2>Kategori : Tugas</h2>
-				<p>Tanggal deadline : 22-22-2222</p>
-				<p>Tag : satu, dua, tiga</p>
+			<article class="task" data-task-id="1">
+				<header>
+					<h1>
+						<label>
+							<input type="checkbox" class="task-checkbox">
+							Tugas 1
+						</label>
+					</h1>
+				</header>
+				<div class="details">
+					<div class="details-one">
+						<p class="category">
+							<span class="detail-label">Kategori:</span>
+							<span class="detail-content">Makan</span>
+						</p>
+						<p class="deadline">
+							<span class="detail-label">Deadline:</span>
+							<span class="detail-content">
+								<date datetime="2013-02-19T23:59:59+07:00">19 Februari 2013</date>
+							</span>
+						</p>
+					</div>
+					<p class="tags">
+						<span class="detail-label">Tag:</span>
+						<span class="tag">satu</span>
+						<span class="tag">dua</span>
+						<span class="tag">tiga</span>
+						<span class="tag">empat</span>
+					</p>
+				</div>
 			</article>
 		</div>
+
 		<aside role="category">
 			<ul>
 				<li>Makan</li>
