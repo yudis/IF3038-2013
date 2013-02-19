@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Untitled Document</title>
+        
+        <style>
+			body
+			{
+				background-color:lightcyan;
+			}
+			
+			#header
+			{
+				background-color: pink;
+				border-top: 5px double #660033;
+				border-left: 5px double #660033;
+				border-right: 5px double #660033;
+				border-top-left-radius:10px;
+				border-top-right-radius:10px;
+			}
+			
+			#wrapper
+			{
+				border-left: 5px double #660033;
+				border-right: 5px double #660033;
+				border-bottom: 5px double #660033;
+				border-bottom-left-radius:10px;
+				border-bottom-right-radius:10px;
+				width: 1230px;
+				height: 800px;
+				margin: auto;
+				padding: 20px;
+				background-color: pink;
+			}
+			
+			#wrapper-main
+			{
+				width: 840px;
+				height: 760px;
+				padding: 40px;
+				border: 3px groove;
+				border-radius: 10px;
+				-moz-border-radius: 10px;
+				-webkit-border-radius: 10px;
+			}
+			
+			.label
+			{
+				width: 150px;
+				height: 25px;
+				float: left;
+			}
+			.textfields
+			{
+				padding:5px;
+				border-radius: 5px;
+				box-shadow: inset 2px 2px 5px #666666;
+				-webkit-box-shadow: inset 2px 2px 5px #666666;
+				-moz-box-shadow: inset 2px 2px 5px #666666;
+			}
+		</style>
+        
+        <link rel="stylesheet" style="text/css" href="style.css">
+    </head>
+
+    <body >
+        <div id="content">
+            <div id="header">
+                <div id="logo">
+                    <!-- <a href="index.html" class="header">board</a> -->
+                    <img src="logo.png"/>
+                </div>
+                <div id="menu">
+                    <ul>
+                        <li> <a href="dashboard.html"> DASHBOARD </a> </li>
+                        <li> <a href="profile.html"> PROFILE </a> </li>
+                        <li> <a href="index.html"> LOGOUT </a> </li>
+                    </ul>
+                    <form action="index.html">
+                        <input class="box" type="text" onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Enter search query':this.value;" value="Enter search query">	
+                        <input class="button" type="submit" value="">
+                    </form>
+                </div>
+            </div>
+            
+            <div id="wrapper">
+            	<div id="wrapper-main">
+                	<div class="label">Nama Tugas</div> <input id="tugas" class="textfields" type="text" size="50" disabled/> <br />
+                    <div class="label">Attachment</div> <input id="attach" class="textfields" type="text" size="50" disabled/> <br/>
+                    <div class="label">Deadline</div> <input id="deadline" class="textfields" type="text" size="50" disabled/> <br/> 
+                    <div class="label">Assignee</div> <input id="assignee" class="textfields" type="text" size="50" autocomplete="on" disabled/> <br/>   
+                    <div class="label">Komentar</div> <input id="komentar" class="textfields" type="text" size="50" disabled/> <br/>
+                    <div style="clear:both"></div>           
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
