@@ -11,8 +11,8 @@ and open the template in the editor.
         <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
-        <div id="header">
-            <a href="dashboard.html" title="Home"><img id="logo-small" src="img/logo_small.png"/></a>
+        <header>
+            <a href="dashboard.html" title="Home"><img id="logo-small" src="img/logo_small.png" alt="" /></a>
             <div id="dashboard"><a title="Go to Dashboard" href="dashboard.html">Dashboard</a></div>
             <div id="profile"><a title="Go to Profile" href="profile.html">My Profile</a></div>
             <div id="logout"><a title="Log out from here" href="index.html">Log Out</a></div>
@@ -20,7 +20,7 @@ and open the template in the editor.
                 <input type="text" name="Search">
                 <input type="submit" value="Search">
             </form>
-        </div>
+        </header>
             
             <div class="category">
                 <div id="male-children" onclick="showList();">Male Children</div>
@@ -40,13 +40,13 @@ and open the template in the editor.
         <div class="tugas" id="rincitugas">
                 <a onclick="showEdit()">edit task</a><br/>
                 <br/>
-                Nama task: <div id="nama">Nama Tugas</div><br/>
-                Attachment: <div id="attachment">file.zip</div><br/>
-                Deadline: <div id="deadline">17-12-2014</div><br/>
-                Assignee: <div id="asignee">X,Y,Z</div><br/>
-                Tag: <div id="tag"> X,Y,Z</div> <br/>
+                Nama task: Nama Tugas <br/>
+                Attachment: <div class="attachment">file.zip</div><br/>
+                Deadline: 17-12-2014<br/>
+                Assignee: X,Y,Z<br/>
+                Tag: <div class="tag"> X,Y,Z</div> <br/>
                 Komentar: <br/>
-                <div id="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
+                <div class="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
                 <form>
                     <textArea></textarea>
                     <input type="button" name="submit" value="submit">
@@ -56,25 +56,25 @@ and open the template in the editor.
                 <a onclick="">Simpan task</a><br/>
                 <br/>
                 <form>
-                    Nama task: <div id="nama">Nama Task</div><br/>
-                    Attachment: <div id="attachment"><input type="file"></div><br/>
-                    Deadline: <div id="deadline"><input type="date"></div><br/>
-                    Assignee: <div id="asignee"><input type="text"></div><br/>
-                    Tag: <div id="tag"> <input type="text"></div> <br/>
+                    Nama task: Nama Task<br/>
+                    Attachment: <div class="attachment"><input type="file"></div><br/>
+                    Deadline: <div class="deadline"><input type="date"></div><br/>
+                    Assignee: <div class="asignee"><input type="text"></div><br/>
+                    Tag: <div class="tag"> <input type="text"></div> <br/>
                     Komentar: <br/>
-                <div id="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
+                <div class="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
                 </form>
             </div>
             <div class="tugas" id="buattugas">
                 <a onclick="">simpan task</a><br/>
                 <br/>
-                Nama task: <div id="nama"><input type="text"></div><br/>
-                Attachment: <div id="attachment"><input type="file"></div><br/>
-                Deadline: <div id="deadline"><input type="date"></div><br/>
-                Assignee: <div id="asignee"><input type="text"></div><br/>
-                Tag: <div id="tag"> <input type="text"></div> <br/>
+                Nama task: <div class="nama"><input type="text"></div><br/>
+                Attachment: <div class="attachment"><input type="file"></div><br/>
+                Deadline: <div class="deadline"><input type="date"></div><br/>
+                Assignee: <div class="asignee"><input type="text"></div><br/>
+                Tag: <div class="tag"> <input type="text"></div> <br/>
                 Komentar: <br/>
-                <div id="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
+                <div class="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
             </div>
     </body>
 </html>

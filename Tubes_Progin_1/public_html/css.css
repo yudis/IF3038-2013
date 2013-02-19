@@ -11,7 +11,7 @@ body {
     width: 100%;
 }
 
-#header {
+header {
     width: 100%;
     left: 0;
     top: 0;
@@ -59,6 +59,8 @@ input.liusername{
     position: absolute;
     background-image: url('img/bg.jpg');
     overflow: hidden;
+    color: white;
+    font-size: 16pt;
 }
 
 .tugas {
