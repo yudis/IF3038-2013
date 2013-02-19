@@ -1,4 +1,4 @@
-No Name                          GitHub username
-1  Mohammad Anugrah Sulaeman     anugrahsulaeman
-2  Sharon Loh                    sharonloh
-3  Ruth Nattassha                MidnightStar69
+No NIM         Name                          GitHub_ID            Mail
+1  13510008    Mohammad Anugrah Sulaeman     anugrahsulaeman      anugrahsulaeman17@gmail.com
+2  13510086    Sharon Loh                    sharonloh
+3  13510096    Ruth Nattassha                MidnightStar69
