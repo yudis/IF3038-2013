@@ -9,6 +9,7 @@ document.getElementById("listtugas").style.visibility="visible";
 document.getElementById("rincitugas").style.visibility="hidden";
 document.getElementById("edittugas").style.visibility="hidden";
 document.getElementById("buattugas").style.visibility="hidden";
+document.getElementById("wanted").style.visibility="hidden";
 self.focus();
 }
 
@@ -17,6 +18,7 @@ document.getElementById("listtugas").style.visibility="hidden";
 document.getElementById("rincitugas").style.visibility="visible";
 document.getElementById("edittugas").style.visibility="hidden";
 document.getElementById("buattugas").style.visibility="hidden";
+document.getElementById("wanted").style.visibility="visible";
 self.focus();
 }
 
@@ -25,10 +27,12 @@ document.getElementById("listtugas").style.visibility="hidden";
 document.getElementById("rincitugas").style.visibility="hidden";
 document.getElementById("edittugas").style.visibility="visible";
 document.getElementById("buattugas").style.visibility="hidden";
+document.getElementById("wanted").style.visibility="visible";
 }
 function showBuat(){
 document.getElementById("listtugas").style.visibility="hidden";
 document.getElementById("rincitugas").style.visibility="hidden";
 document.getElementById("edittugas").style.visibility="hidden";
 document.getElementById("buattugas").style.visibility="visible";
+document.getElementById("wanted").style.visibility="visible";
 }
