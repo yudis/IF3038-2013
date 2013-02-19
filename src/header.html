@@ -1,17 +1,26 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{{ title }}</title>
+	</head>
+
+	<body>
 		<header>  
 			<h1 id="logo"></h1>
 			<h2>Do</h2>
 		</header>
 		<nav>
 			<ul>
-				<li>Dashboard</li>
-				<li>Profile</li>
-				<li>Logout</li>
+				<li><a href="dashboard.html">Dashboard</a></li>
+				<li><a href="profile.html">Profile</a></li>
+				<li><a href="login.html">Logout</a></li>
 			</ul>
 			<div id="searchBox">
 				<form action="?" method="get">
-					<input type="text" />
-					<input type="submit" value="Submit" />
+					<input type="text" name="q">
+					<input type="submit" value="Submit">
 				</form>
 			</div>
 		</nav>
