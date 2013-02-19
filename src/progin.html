@@ -25,9 +25,7 @@
 
 	<div class="content">
 		<div id="leftside">
-			<div id="newkategoritombol">
-				<a id="font" href="#join_form" >New Category</a>
-			</div>
+			
 			<div id="list kategori">
 				<ul class="ullistkategori">
 					<li class="lilistkategori"><a href="progin.html">Progin</a></li>
@@ -36,23 +34,32 @@
 			</div>
 		</div>
 		<div id="mainarea">
-			<table class="namatask">
-			<tr>
-				<th>Nama Task</th>
-				<th>Deadline</th>
-				<th>Tag Multivalue</th>
-			</tr>
-			<tr>
-				<td>Tubes Progin I</td>
-				<td>23 Februari 2013</td>
-				<td>html,css</td>
-			</tr>
-			<tr class="alt">
-				<td>Tubes IMK Flash</td>
-				<td>23 Februari 2013</td>
-				<td>ngeselin</td>
-			</tr>
-			</table>
+			<div id="tombolnewtask">
+				<a href="#add_task">New Task</a>
+			</div>
+			<div id="judulkategori">
+				<p>PROGIN</p>
+			</div>
+			<div id="tabellisttask">
+				<table class="namatask">
+				<tr>
+					<th>Nama Task</th>
+					<th>Deadline</th>
+					<th>Tag Multivalue</th>
+				</tr>
+				<tr>
+					<td>Tubes Progin I</td>
+					<td>23 Februari 2013</td>
+					<td>html,css</td>
+				</tr>
+				<tr class="alt">
+					<td>Tubes IMK Flash</td>
+					<td>23 Februari 2013</td>
+					<td>ngeselin</td>
+				</tr>
+				</table>
+			</div>
+			
 		</div>
 		
 	
@@ -60,16 +67,20 @@
 	
 	<div class="footer">
 	</div>
-	<a href="#" class="overlay" id="join_form"></a>
+	<a href="#" class="overlay" id="add_task"></a>
 	<div class="popup">
 		<p>Please enter the specification for new category</p>
 		<div>
-			<label for="namakategori">Nama Kategori :</label>
-			<input type="text" id="namakategori" value=""/>
+			<label for="namatask">Nama Task :</label>
+			<input type="text" id="namatask" value=""/>
 		</div>
 		<div>
-			<label for="peserta">Anggota :    </label>
-			<input type="text" id="peserta" value=""/>
+			<label for="deadline">Deadline :    </label>
+			<input type="text" id="deadline" value=""/>
+		</div>
+		<div>
+			<label for="multivalue">Tag Multivalue :    </label>
+			<input type="text" id="tagmultivalue" value=""/>
 		</div>
 		<input class="buttonOK" type="button" value="OK"></input>
 	</div>
