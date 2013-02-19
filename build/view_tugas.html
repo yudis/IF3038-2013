@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Profil</title>
+		<title>Lihat Tugas</title>
 		<link rel="stylesheet" href="../css/style.css">
 	</head>
 
@@ -27,41 +27,43 @@
 				</nav>
 			</header>
 		<div role="view_todo">
-			<div class="leftImage">
-				<figure>
-					<img src="unknown.jpg" width="300" height="300" />
-				</figure>
+			<div class="row">
+				Nama Task : Tugas 1
 			</div>
 			<div class="row">
-				Nama Lengkap : Wawa
+				Attachment
 			</div>
 			<div class="row">
-				Tanggal Lahir : 2222-22-22
+				Deadline : 2222-22-22
 			</div>
 			<div class="row">
-				Username : hawawa
+				Assignee : a, b, c
 			</div>
 			<div class="row">
-				Password : rahasia
+				Komentar :
+				<div class="comment">
+					a : hade euy
+				</div>
+				<div class="comment">
+					b : goreng tapi euy
+				</div>
+				<form id="comment" action="#" method="post">
+					<label>Beri Komentar</label>
+					<textarea name="komentar" id="password" type="text"></textarea>
+					<input type="submit" name="komentar_dong" value="Kirim">
+				</form>
 			</div>
 			<div class="row">
-				Current Task :
-				<ul>
-					<li>Tugas 3</li>
-				</ul>
-			</div>
-			<div class="row">
-				Task done :
-				<ul>
-					<li>Tugas 1</li>
-					<li>Tugas 2</li>
-				</ul>
-			</div>
-
-			<div class="row">
-				<button>Edit</button>
+				Tag : satu, dua, tiga
 			</div>
 		</div>
+		<aside role="edit_todo">
+			<ul>
+				<li>Edit Assignee</li>
+				<li>Edit Deadline</li>
+				<li>Edit Tag</li>
+			</ul>
+		</aside>
 		<footer>
 			Created by Gichie, Kamil, and Alex
 		</footer>
