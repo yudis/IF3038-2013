@@ -19,8 +19,8 @@ function concat(opts) {
     console.log(' '+ distPath +' built.');
 }
 
-var files = ['login', 'new_tugas', 'profile', 'register', 'dashboard'];
-var titles = ['Login', 'Tugas Baru', 'Profil', 'Pendaftaran', 'Dashboard'];
+var files = ['login', 'new_tugas', 'profile', 'register', 'dashboard', 'view_tugas'];
+var titles = ['Login', 'Tugas Baru', 'Profil', 'Pendaftaran', 'Dashboard', 'Lihat Tugas'];
 
 files.forEach(function(v, k) {
     var title = titles[k];
