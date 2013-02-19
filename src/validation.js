@@ -46,3 +46,26 @@ for(var a = fields.length, i = 0; i < a; i ++){
 		});
 	}
 }
+
+function displayResult()
+{
+	var x=document.getElementById("fileupld").name;
+	alert(x);
+}
+
+function CheckFiles()
+{
+	var fup = document.getElementById('fileupld');
+        var fileName = fup.value;
+        var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+
+    if(ext =="GIF" || ext=="gif" || ext=="mp4" || ext=="avi" || ext=="flv")
+    {
+        return true;
+    }
+    else
+    {
+        alert("Upload Gif Images only");
+        return false;
+    }
+}
