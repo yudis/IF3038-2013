@@ -14,7 +14,9 @@
     <div id="header_menu"> 
    		<h3><a href="Dashboard.html">Dashboard</a> | 
         <a href="Profil.html">Profil</a> |
-        <a href="Register.html">Logout</a></h3>
+        <a href="Register.html">Logout</a>
+        <a href="#join_form" id="join_pop">Sign Up</a>
+        </h3>
     </div>
     <div id="header_search">
     	<input name="txSearch" type="text" size="30"/> 
@@ -25,7 +27,30 @@
 <div id="content">
 	<h1>Registration</h1>
     <hr>
-	<form name="foRegister">
+	
+</div>
+
+<div id="menu">
+<h1>Login</h1>
+<hr />
+    <form name="login" action="">
+        <h2> Username <input name="txUsername" type="text" /></h2>
+        <h2>password <input name="txUsername" type="password" /></h2>
+        <input name="cbRememberme" type="checkbox"/>Keep me logged in<br />
+        <input name="btLogin" type="submit" value="Login"/> <br />
+        <a href="">Forgot your password? </a>
+    
+    </form>
+</div>
+
+<div id="footer">
+	<p> Copyright &copy; 2013 Tugas Besar IF3038 Pemrograman Internet. Design By <a href="http://www.facebook.com/wchaq">Whilda Chaq</a> & <a href="http://www.facebook.com/5quall">Devin Hoesen</a></p>
+</div>
+
+
+        <a href="#x" class="overlay" id="join_form"></a>
+        <div class="popup">
+            <form name="foRegister">
 		<div class="attribute">Username &nbsp;&emsp;&emsp;&emsp;
         	: <input type="text" id="txUsername" onkeyup="vdUsername()">
             <img src="Image/notaccept.png" id="icoUsername"></img></div>
@@ -51,24 +76,6 @@
         <div class="attribute"><input type="button" id="btSubmit" value="Register"></div>
     
 </form>
-</div>
-
-<div id="menu">
-<h1>Login</h1>
-<hr />
-    <form name="login" action="">
-        <h2> Username <input name="txUsername" type="text" /></h2>
-        <h2>password <input name="txUsername" type="password" /></h2>
-        <input name="cbRememberme" type="checkbox"/>Keep me logged in<br />
-        <input name="btLogin" type="submit" value="Login"/> <br />
-        <a href="">Forgot your password? </a>
-    
-    </form>
-</div>
-
-<div id="footer">
-	<p> Copyright &copy; 2013 Tugas Besar IF3038 Pemrograman Internet. Design By <a href="http://www.facebook.com/wchaq">Whilda Chaq</a> & <a href="http://www.facebook.com/5quall">Devin Hoesen</a></p>
-</div>
-
+        </div>
 </body>
 </html>
