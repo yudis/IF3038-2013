@@ -1,0 +1,6 @@
+git config --global user.name "Enjellamelissan"
+git config --global user.email "enjellamelissan@yahoo.com"
+
+mkdir tubes1prog
+cd users\enjell melissa\documents\if3038 - pemrograman internet\tubes\1\enjella
+git init
