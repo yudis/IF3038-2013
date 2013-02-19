@@ -2,9 +2,91 @@
 <head>
 <title>View Task</title>
 <link href="styles/newtask.css" rel="stylesheet" type="text/css" />
+<script>
+	var attach = "../videos/attachmentsample.ogg";
+	var tanggal = 1;
+	var bulan = "Januari";
+	var tahun = 2013;
+	
+	function makeTgl(){
+		for(var i=1; i<=31; i++){
+			var isi=document.createTextNode(i);
+			var opsi = document.createElement("option");
+			opsi.setAttribute("value",i);
+			opsi.appendChild(isi);
+			document.getElementById("tgl").appendChild(opsi);
+		}
+	}
+		
+	function makeThn(){
+		for(var i=1955; i<=2013; i++){
+			var isi=document.createTextNode(i);
+			var opsi = document.createElement("option");
+			opsi.setAttribute("value",i);
+			opsi.appendChild(isi);
+			document.getElementById("thn").appendChild(opsi);
+		}
+	}
+	
+	function showHide(id)
+	{
+	if(document.getElementById(id).style.display == 'none')
+	{
+	document.getElementById(id).style.display='block';
+	}
+	else
+	{
+	document.getElementById(id).style.display = 'none';
+	}
+	}
+	
+	function renameButton(id)
+	{
+	var elem = document.getElementById(id);
+	if (elem.value=="Edit") elem.value = "Cancel";
+	else elem.value = "Edit";
+	}
+	
+	function clearContents(id) {
+	document.getElementById(id).value = '';
+	}
+	
+	function editValue(id1,id2)
+	{
+	var value = document.getElementById(id1).value;
+	
+	document.getElementById(id2).innerHTML = value;
+	}
+	
+	function setDateValue() {
+		document.getElementById("dlvalue").innerHTML = tanggal+"-"+bulan+"-"+tahun;
+	}
+	
+	function getDateValue() {
+		tanggal = document.edit.tgl.value;
+		bulan = document.edit.bln.value;
+		tahun = document.edit.thn.value;
+	}
+	
+	function checkEdit(e,id1,id2,id3) {
+	if (e && e.keyCode == 13) {
+		editValue(id1,id2);
+		showHide(id1);
+		showHide(id2);
+		renameButton(id3);
+	}
+	}
+	
+	function checkSubmit(e) {
+	if (e && e.keyCode == 13) {
+		displayComment();
+	}
+	}
+	
+	</script>
 </head>
 
-<body>
+<body onload="makeTgl();makeThn();">
 	<div id="container">
 		<div id="header" align="left">
         	<img src="../images/header.png"/>
@@ -33,7 +115,106 @@
         	
         </div>
 		<div id="viewtask">
-        	
+        	<form name=edit>
+			<table width=225 border=1 cellpadding=3>
+				<tr>
+					<td><p>Task Name</p></td>
+					<td colspan=2><p>Mengerjakan tugas progin</p></td>
+				</tr>
+				<tr>
+				<td colspan=3>
+				<img id=image width="320" height="240" onError="this.style.display = 'none';">
+				<video id=video width="320" height="240" controls onError="this.style.display = 'none';">
+					<source type="video/mp4">
+					<source type="video/ogg">
+					<source type="video/webm">
+					<object width="320" height="240">
+						<embed width="320" height="240">
+					</object> 
+				</video>
+				<fieldset>
+				<legend>Download Link</legend>
+				<a id=link><script>document.write(attach)</script></a>
+				</fieldset>
+				<script>
+				document.getElementById("image").setAttribute("src", attach);
+				document.getElementById("video").setAttribute("src", attach);
+				document.getElementById("link").setAttribute("href", attach);
+				</script>
+				</td>
+				</tr>
+				<tr>
+					<td><p>Deadline</p></td>
+					<td>
+					<div>
+						<p id="dlvalue" style="DISPLAY: block"><script>document.write(tanggal+"-"+bulan+"-"+tahun)</script></p>
+					</div>
+					<div style="DISPLAY: none" id="dl">
+						<select name="tanggal" id="tgl">
+							<option>--Tanggal--</option>
+						</select>
+						<select name="bulan" id="bln">
+							<option>--Bulan--</option>
+							<option value="Januari">Januari</option>
+							<option value="Februari">Februari</option>
+							<option value="Maret">Maret</option>
+							<option value="April">April</option>
+							<option value="Mei">Mei</option>
+							<option value="Juni">Juni</option>
+							<option value="Juli">Juli</option>
+							<option value="Agustus">Agustus</option>
+							<option value="September">September</option>
+							<option value="Oktober">Oktober</option>
+							<option value="November">November</option>
+							<option value="Desember">Desember</option>
+						</select>
+						<select name="tahun" id="thn">
+							<option>--Tahun--</option>
+						</select>
+					</div>
+					</td>
+					<td>
+						<input type=button value="Edit" id="dlbutton" onClick="showHide('dl');showHide('dlvalue');showHide('dlbutton');showHide('savebutton')">
+						<input type=button value="Save" id="savebutton" style="DISPLAY: none" onClick="showHide('dl');showHide('dlvalue');showHide('dlbutton');showHide('savebutton');getDateValue();setDateValue()">
+					</td>
+				</tr>
+				<tr>
+					<td><p>Assignee</p></td>
+					<td>
+					<p id="asvalue" style="DISPLAY: block">Bambang</p>
+					<input type=text name=as id="as" style="DISPLAY: none" onKeyPress="checkEdit(event,'as','asvalue','asbutton')">
+					</td>
+					<td><input type=button value="Edit" id="asbutton" onClick="showHide('as');showHide('asvalue');renameButton('asbutton');clearContents('as')"></td>
+				</tr>
+				<tr>
+					<td><p>Tag</p></td>
+					<td>
+					<p id="tagvalue" style="DISPLAY: block">Urgent; Kuliah</p>
+					<input type=text name=tag id="tag" style="DISPLAY: none" onKeyPress="checkEdit(event,'tag','tagvalue','tagbutton')">
+					</td>
+					<td><input type=button value="Edit" id="tagbutton" onClick="showHide('tag');showHide('tagvalue');renameButton('tagbutton');clearContents('tag')"></td>
+				</tr>
+				<tr>
+					<td colspan=3><p id="comment"><b>Comment</b></p></td>
+					<script>
+					function displayComment()
+					{
+					var newpara = document.createElement("P")
+					text = document.createTextNode(commentField.value);
+					newpara.appendChild(text)
+					document.getElementById("comment").appendChild(newpara);
+					commentField.value = '';
+					}
+					</script>
+				</tr>
+				<tr>
+					<td colspan=3><textarea id="commentField" rows="3" cols="30" onKeyPress="checkSubmit(event)"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan=3><input type=button value="Submit Comment" onClick="displayComment()"></td>
+				</tr>
+			</table>
+			</form>
         </div>
 		<div id="rightspace">
         	
