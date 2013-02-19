@@ -270,11 +270,14 @@ br
 }
 
 #familyelement{
+	list-style-type:circle;
+	margin-top:-15px;
+	padding-left:60px;
+	margin-bottom:5px;
 	display:none;
 }
 
 #buttonfamily{
-	
 	background-color:transparent;
 	border:none;
 	-moz-transition: all 0.5s ease;
@@ -655,6 +658,7 @@ br
 	border-radius: 10px;
 	text-transform: uppercase;
 	margin-left:30px;
+	margin-top:-5px;
 }
 
 .addCategory a
@@ -810,34 +814,6 @@ br
 	width:250px;
 }
 
-.close {
-    background-color: rgb(84,48,48);
-    height: 30px;
-    line-height: 30px;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    text-decoration: none;
-    top: -15px;
-    width: 30px;
-
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    -ms-border-radius: 15px;
-    -o-border-radius: 15px;
-    border-radius: 15px;
-}
-
-.close:before {
-    color: rgba(255, 255, 255, 0.9);
-    content: "X";
-    font-size: 24px;
-    text-shadow: 0 -1px rgba(0, 0, 0, 0.9);
-}
-
-.close:hover {
-    background-color: rgba(224, 128, 128, 0.8);
-}
 
 .addcategory
 {

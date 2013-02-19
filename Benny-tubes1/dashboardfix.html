@@ -11,15 +11,14 @@
             <h1>Add More Category</h1>
 			<div>
                 <label for="username">Nama Kategori</label>
-                <input type="text" name = "categoryname" id="user" onKeyUp="validateCategoryName()"/>
+                <input type="text" name = "categoryname" value = "" id="user" onKeyUp="validateCategoryName()"/>
                 <img src = "../Benny-tubes1/image/false.png" id = "false">
             </div>
 			<div>
                 <label for="pengguna">Pengguna</label>
                 <input type="text" id="pengguna" value="" />
             </div>
-            <input class="addcategory" type="button" value="add" id="addCategoryButton" onClick="formSubmit()"/>
-
+            <a onClick="addingit()" href = "#close" id="test"><input class="addcategory" type="button" value="add"  id="addCategoryButton"/></a>
             <a class="close" href="#close"></a>
         </form>
 
@@ -97,17 +96,19 @@
                             </button>
                         </div>
 					</li>
-                    <li id ="familyelement">
+               </ul>
+               <ul id = "familyelement">
+                    <li>
                         <div class="home">
 							<button type "button" id="buttonfamily" onclick="clickshopping()" onfocus="focusonit()">
-								<img src = "../Benny-tubes1/image/shopping.png" class="homeicon">
+								<img src = "../Benny-tubes1/image/family.png" class="homeicon">
 								F a m i l y
                             </button>
                         </div>
 					</li>
 				</ul>
                     <div id="add">
-                        <a href="#addCategory_form" id="addCategory_pop"><button class="addCategory" >Add more category</button></a>
+                        <a href="#addCategory_form" id="addCategory_pop"><button class="addCategory" onClick="activeit()">Add more category</button></a>
                     </div>
 			</div>
 			<div id = "tasklist">
@@ -330,17 +331,24 @@ function clickshopping(){
 function validateCategoryName(){
 	if(document.getElementById("user").value != ""){
 		document.getElementById("false").src = "image/true.png";
+		document.getElementById("addCategoryButton").disabled = false;
 	}else{
 		document.getElementById("false").src = "image/false.png";
+		document.getElementById("test").disabled = true;
 	}
 }
 
-function formSubmit(){
-	if(document.getElementById("false").src.indexOf("image/true.png")!=-1){
-		window.location = "dashboardfix.html";
+function addingit(){
+	if(document.getElementById("false").src.indexOf("image/true.png")!=-1) {
+		document.getElementById("familyelement").style.display = "block";
 	}
 }
 
+function activeit(){
+	document.getElementById("user").value = "";
+	document.getElementById("pengguna").value = "";
+	document.getElementById("false").src = "image/false.png";
+}
 
 // -->
 </script>
