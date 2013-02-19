@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Monkey.Inc</title>
+	<link rel="stylesheet" type="text/css" href="task.css">
+	
+	
+	<script>	
+		function validateLogin() {
+			var user = document.login.user.value;
+			var password = document.login.password.value;
+			
+			if (user == "admin" ){
+				if (password == "admin"){
+					window.location="tes.html";
+				}
+				else {
+					alert("Password Salah!");
+				}
+			} else{
+				alert("User Salah!");
+			}
+		}
+		
+		function checkSubmit(e) {
+		   if (e && e.keyCode == 13) {
+			  validateLogin();
+		   }
+		}
+		
+		function checkUser(){
+			var Ruser = document.regis.Ruser.value;
+			var Rpass = document.regis.RPass.value;
+			
+			if ((Ruser.length>=5) && (Ruser != Rpass)){
+				<!-- benar -->
+				document.getElementById("userpic").src="true.png";
+			} else{
+				document.getElementById("userpic").src="false.png";
+			}
+			
+			openReg();
+		}
+		
+		function checkPass(){
+			var Ruser = document.regis.Ruser.value;
+			var RPass = document.regis.RPass.value;
+			var Remail = document.regis.REmail.value;
+			
+			if ((RPass.length>=8) && (Ruser != RPass) && (RPass != Remail)){
+				<!-- benar -->
+				document.getElementById("passpic").src="true.png";
+			} else{
+				document.getElementById("passpic").src="false.png";
+			}
+			
+			
+		}
+		
+		function checkConfPass(){
+			var Rpass = document.regis.RPass.value;
+			var RConfpass = document.regis.RConfpass.value;
+			
+			if (Rpass ==RConfpass){
+				<!-- benar -->
+				document.getElementById("confpasspic").src="true.png";
+			} else{
+				document.getElementById("confpasspic").src="false.png";
+			}
+			
+			openReg();
+		}
+		
+		function checkNLengkap(){
+			var RNlengkap = document.regis.RNlengkap.value;
+			
+			if (RNlengkap.match(/([a-zA-Z])+(\s)+([a-zA-Z])/))
+			{
+				<!-- benar -->
+				document.getElementById("nlengkappic").src="true.png";
+			} else{
+				document.getElementById("nlengkappic").src="false.png";
+			}
+			
+			openReg();
+		}
+		
+		function checkEmail(){
+			var REmail = document.regis.REmail.value;
+			
+			if (REmail.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/))
+			{
+				<!-- benar -->
+				document.getElementById("emailpic").src="true.png";
+			} else{
+				document.getElementById("emailpic").src="false.png";
+			}
+			
+			openReg();
+		}
+		
+		function openReg(){
+			if ((document.getElementById("emailpic").src.indexOf("true.png")!=-1) 
+			&& (document.getElementById("nlengkappic").src.indexOf("true.png")!=-1) 
+			&& (document.getElementById("confpasspic").src.indexOf("true.png")!=-1) 
+			&& (document.getElementById("passpic").src.indexOf("true.png")!=-1)
+			&& (document.getElementById("userpic").src.indexOf("true.png")!=-1))
+			{
+				document.getElementById('regButton').disabled = false;
+			} else{
+				document.getElementById('regButton').disabled = true;
+			}
+		}
+		
+		function disButton(){
+			document.getElementById('regButton').disabled = true;
+		}
+		
+		
+	</script>
+	
+</head>
+
+<body>
+
+	<div class="header">
+		<div class="hbackground" >
+			<div class="hlogo">
+				<a href="tes.html">Monkey.Inc</a>
+			</div>
+			<div class="htext"> Monkey.Inc </div>
+			<div class="htagline">"See no Task, Speak no Task, Hear no Task"</div>
+		</div>
+		<div class="loginBD">
+			<div class="lText">
+				User
+				<br>
+				Password
+			</div>
+			<form name="login" class="lForm">
+				: <input type=text name=user onKeyPress="checkSubmit(event)">
+				<br>
+				: <input type=password name=password onKeyPress="checkSubmit(event)">
+			</form>
+			<button class="lSubmit" onClick="validateLogin()">Login</button>
+			<a href="#join_form" id="join_pop"><button class="lSubmit"  >Register</button></a>
+		</div>
+	</div>
+	
+	<br>
+	
+	<div class="content">
+
+	
+		<div class="pss_main"> <!-- main parallax scrolling slider object -->
+			<input id="r_1" type="radio" name="p" class="sel_page_1" checked="checked" /> <!-- hidden radios -->
+			<input id="r_2" type="radio" name="p" class="sel_page_2" />
+			<input id="r_3" type="radio" name="p" class="sel_page_3" />
+			<input id="r_4" type="radio" name="p" class="sel_page_4" />
+
+			<label for="r_1" class="pss_contr c1"></label> <!-- controls -->
+			<label for="r_2" class="pss_contr c2"></label>
+			<label for="r_3" class="pss_contr c3"></label>
+			<label for="r_4" class="pss_contr c4"></label>
+
+			<div class="pss_slides">
+				<div class="pss_background"></div>
+				<ul> <!-- slides -->
+					<li><img src="tes.png" alt="image01" />
+						<div>Model DT 770</div>
+					</li>
+					<li><img src="tes.png" alt="image02" />
+						<div>Model DT 990</div>
+					</li>
+					<li><img src="tes.png" alt="image03" />
+						<div>Model DT 234</div>
+					</li>
+					<li><img src="tes.png" alt="image04" />
+						<div>Model DT 880</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<br>
+	
+	<div class="footer">
+		<p class="ftext">Tubes progin 1</p>
+		<p class="ftext">Copyright &copy; 2013 Benedikus, Janice, and Raymond</p>
+	</div>
+	
+	<!-- popup form #1 -->
+	<a href="#x" class="overlay" id="join_form" ></a>
+	<form class="popup" name="regis">
+		<h1>Registrasi</h1>
+		<div>
+			<label for="username">Username</label>
+			<input type="text" id="user" name=Ruser value="" onkeyup="checkUser()"/>
+			<img src="false.png" alt="False01" id="userpic" />
+		</div>
+		<div>
+			<label for="Rpass">Password</label>
+			<input type="password" id="Rpass" name=RPass value="" onkeyup="checkPass()"/>
+			<img src="false.png" alt="False02" id="passpic"/>
+		</div>
+		<div>
+			<label for="confpass">Konfirmasi Password</label>
+			<input type="password" id="confpass" name=RConfpass value="" onkeyup="checkConfPass()" />
+			<img src="false.png" alt="False03" id="confpasspic"/>
+		</div>
+		<div>
+			<label for="Rnama">Nama Lengkap</label>
+			<input type="text" id="nama" name=RNlengkap value="" onkeyup="checkNLengkap()" />
+			<img src="false.png" alt="False04" id="nlengkappic"/>
+		</div>
+		<div>
+			<label class="main" for="ttl">Tanggal Lahir</label>
+			<select name="day">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+				<option value="24">24</option>
+				<option value="25">25</option>
+				<option value="26">26</option>
+				<option value="27">27</option>
+				<option value="28">28</option>
+				<option value="29">29</option>
+				<option value="30">30</option>
+				<option value="31">31</option>
+			</select>
+			<select name="month">
+				<option value="1">January</option>
+				<option value="2">February</option>
+				<option value="3">March</option>
+				<option value="4">April</option>
+				<option value="5">May</option>
+				<option value="6">June</option>
+				<option value="7">July</option>
+				<option value="8">August</option>
+				<option value="9">September</option>
+				<option value="10">October</option>
+				<option value="11">November</option>
+				<option value="12">December</option>
+			</select>	
+			<select name="year">
+				<option value="2012">2012</option>
+				<option value="2011">2011</option>
+				<option value="2010">2010</option>
+				<option value="2009">2009</option>
+				<option value="2009">2008</option>
+				<option value="2007">2007</option>
+				<option value="2006">2006</option>
+				<option value="2005">2005</option>
+				<option value="2004">2004</option>
+				<option value="2003">2003</option>
+				<option value="2002">2002</option>
+				<option value="2001">2001</option>
+				<option value="2000">2000</option>
+				<option value="1999">1999</option>
+				<option value="1998">1998</option>
+				<option value="1997">1997</option>
+				<option value="1996">1996</option>
+				<option value="1995">1995</option>
+				<option value="1994">1994</option>
+				<option value="1993">1993</option>
+				<option value="1992">1992</option>
+				<option value="1991">1991</option>
+				<option value="1990">1990</option>
+				<option value="1989">1989</option>
+				<option value="1988">1988</option>
+				<option value="1987">1987</option>
+				<option value="1986">1986</option>
+				<option value="1985">1985</option>
+				<option value="1984">1984</option>
+				<option value="1983">1983</option>
+				<option value="1982">1982</option>
+				<option value="1981">1981</option>
+				<option value="1980">1980</option>
+				<option value="1979">1979</option>
+				<option value="1978">1978</option>
+				<option value="1977">1977</option>
+				<option value="1976">1976</option>
+				<option value="1975">1975</option>
+				<option value="1974">1974</option>
+				<option value="1973">1973</option>
+				<option value="1972">1972</option>
+				<option value="1971">1971</option>
+				<option value="1970">1970</option>
+				<option value="1969">1969</option>
+				<option value="1968">1968</option>
+				<option value="1967">1967</option>
+				<option value="1966">1966</option>
+				<option value="1965">1965</option>
+				<option value="1964">1964</option>
+				<option value="1963">1963</option>
+				<option value="1962">1962</option>
+				<option value="1961">1961</option>
+				<option value="1960">1960</option>
+				<option value="1959">1959</option>
+				<option value="1958">1958</option>
+				<option value="1957">1957</option>
+				<option value="1956">1956</option>
+				<option value="1955">1955</option>
+			</select>
+		</div>
+		<div>
+			<label for="email">Email</label>
+			<input type="text" id="email" name=REmail value="" onkeyup="checkEmail()"/>
+			<img src="false.png" alt="False05" id="emailpic"/>
+		</div>
+		<div>
+			<label for="avatar">Avatar</label>
+			<input type="file" id="avatar" value="" />
+		</div>
+		<input class="lSubmit" type="button" value="Register" id="regButton"/>
+
+		<a class="close" href="#close"></a>
+	</form>
+</body>
+</html>
+
