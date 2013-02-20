@@ -245,12 +245,20 @@ footer {
 	display:none;
 	margin-left:10%;
 	border-style:solid;
+	border-color:#007bc1;
+}
+
+#save_button_td:hover {
 	border-color:#0092dd;
 }
 
 #edit_task_button {
 	display:block;
 	border-style:solid;
+	border-color:#007bc1;
+}
+
+#edit_task_button:hover {
 	border-color:#0092dd;
 }
 
