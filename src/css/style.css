@@ -619,6 +619,27 @@ nav ul li a:hover, nav ul li a .active
 	-o-transition: all 0.25s ease-out;
 	transition: all 0.25s ease-out;
 }
+#footer_left
+{
+	float: left;
+}
+#footer_left a
+{
+	text-decoration: none;
+	color: #333333;
+}
+#footer_left a.active
+{
+	font-weight: bold;
+}
+#footer_left a:hover
+{
+	color: #258AAF;
+}
+#footer_right
+{
+	float: right;
+}
 
 /*--- I DON't know --- */
 
