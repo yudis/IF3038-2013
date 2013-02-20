@@ -328,7 +328,7 @@ nav ul li a:hover, nav ul li a .active
 	-moz-border-radius: 1px;
 	border-radius: 1px;
 }
-#login_form_wrap  input[type="submit"], #register_form_wrap  input[type="submit"]
+#login_form_wrap  input[type="submit"], #register_form_wrap  input[type="submit"], #profil_form_wrap  input[type="submit"]
 {
 	float: right;
 	font-weight: bold;
@@ -357,59 +357,119 @@ nav ul li a:hover, nav ul li a .active
 	background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
 	background-image: linear-gradient(to bottom,#4d90fe,#357ae8);
 }
-
+#profil_form input[type="text"], #profil_form_wrap input[type="password"], #profil_form_wrap input[type="date"], 
+#profil_form input[type="email"], #profil_form_wrap input[type="file"]
+{
+	margin-top: 2px;
+	margin-left: 10px;
+	width: 200px;
+	height: 26px;
+	border: 1px solid #d9d9d9;
+	background-position: right top;
+    background-repeat: no-repeat;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+}
 /*---DASH BOARD---*/
 #dashboard_category
 {
-    padding-left : 50px;
-    width : 60px;
+    width : 250px;
+    float : left;
+}
+
+#dashboard_tugas
+{
+    padding-left : 10px;
+    width : 670px;
+    margin-left: 260px;
 }
 
 .dashboard_category_element
 {
     display : block;
-    padding : 6px 30px;
+    width : 220px;
+    padding : 6px 10px;
     font : arial 150%;
     border-style : outset;
     border-width : 5px;
+    border-color : #000000
 }
 
 .dashboard_category_element:hover
 {
-    display : block;
-    padding : 6px 30px;
-    font : arial 150%;
-    border-style : inset;
-    border-width : 5px;
+    display: block;
+    width: 220px;
+    padding: 6px 10px;
+    font: arial 150%;
+    border-style: inset;
+    border-width: 5px;
+    border-color : #000000    
+}
+
+.dashboard_tugas_element
+{
+    display: block;
+    width: 650px;
+    padding: 0px 0px;
+    font: arial 150%;
+    border-style: outset;
+    border-width: 5px;
+    border-color : #000000       
+}
+
+.dashboard_tugas_element:hover
+{
+    display: block;
+    width: 650px;
+    padding: 0px 0px;
+    font: arial 150%;
+    border-style: inset;
+    border-width: 5px;
+    border-color: #000000   
+}
+
+.dashboard_tugas_judul
+{
+    display: block;
+    width: 450 px;
+    float: left;
+    padding: 6px; 
+}
+
+.dashboard_tugas_tanggal
+{
+    display: block;
+    width: 200px;
+    margin-left: 450px;
+    border-left: 2px solid grey;
+    padding: 6px 10px;
+}
+
+.dashboard_tugas_tag
+{
+    display: block;
+    width: 630px;
+    padding: 10px;
+    border-top: 2px solid grey;
 }
 
 /*Profil*/
 #profil_area
 {
-	
+	float : left;
 }
-#profil_text
+#avatar_image1
 {
-	Top: 10px;
-	Left: 10px;
-	color:#6699FF;
-	font:120% Cooper Black,sans-serif auto;
-	line-height:200%;
-	text-shadow:5px 5px 10px #C0C0C0;
-	letter-spacing:1px;
-	line-height: 200%;
-	position:relative;
-	margin: 0px 20px;
-	text-align: left;
+	height: 100px;
 }
-#profil_avatar
+#avatar_image2
 {
-	float :left;
-	height: 150px;
-}
-#avatar_form
-{
-	padding-top:50%;
+	height: 100px;
+	padding-left : 160px;
 }
 #profil_title
 {
@@ -424,6 +484,27 @@ nav ul li a:hover, nav ul li a .active
 #success_edit {
 	color: #0C0;
 	font-size: 14px;
+	padding-left: 150px;
+}
+#profil_form_wrap
+{
+	padding: 15px;
+}
+#profil_form_wrap label
+{
+	float: left;
+	display: block;
+	width: 150px;
+	line-height: 32px;
+}
+#profil_head h1
+{
+	margin: 8px 0;
+}
+#profil_head
+{
+	margin-bottom: 14px;
+	border-bottom: 1px solid #AAAAAA;
 }
 /*--- REGISTER FORM ---*/
 #black_trans

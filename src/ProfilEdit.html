@@ -10,7 +10,7 @@
 	<body>
 		<header>
 			<div id="header_wrap" class="wrap">
-				<a href="#"> <img id="header_logo" src="images/icon1.png" alt="Logo Produk" /> </a>
+				<a href="#"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
 				<div id="header_title">
 					<h1> <a href="#">MOA</a> </h1>
 					<h4>Multiuser Online Agenda</h4>
@@ -69,31 +69,38 @@
 				<div id="profil_title">Profil</div>
 				<div id="profil_area">
 					<div id="profil_form_wrap">
-						<form id="profil_form" action="ProfilEdit.html">
+						<form id="profil_form" action="ProfilEdited.html">
 							<div id="profil_head">
 								<h1>Admin</h1>
 							</div>
 							<div class="row">
-								<label for="profil_username">Username</label>
-								<label id="profil_text">admin</label>
+								<label for="profil_password">Sandi</label>
+								<input id="profil_password" value="adminadmin" name="password" pattern="^.{8,}$" type="password" title="Sandi minimal harus terdiri dari 8 karakter."/>							
+							</div>
+							<div class="row">
+								<label for="profil_confirm_password">Konfirmasi Sandi</label>
+								<input id="profil_confirm_password" value="adminadmin" name="confirm_password" pattern="^.{8,}$" type="password" title="Konfirmasi sandi harus sama dengan sandi."/>
 							</div>
 							<div class="row">
 								<label for="profil_name">Nama Lengkap</label>
-								<label for="profil_text">admin admin</label>
+								<input id="profil_name" name="name" value="admin admin"pattern="^.+ .+$" type="text" title="Nama lengkap harus terdiri dari 2 kata dipisah oleh sebuah spasi."/>
 							</div>
 							<div class="row">
 								<label for="profil_birth_date">Tanggal Lahir</label>
-								<label for="profil_text">01/01/2013</label>
+								<input id="profil_birth_date" name="birth_date" type="date" pattern="^.+$"/>
 							</div>
 							<div class="row">
 								<label for="profil_email">Email</label>
-								<label for="profil_text">admin@admin.itb.ac.id</label>
+								<input id="profil_email" name="email" value="admin@admin.itb.ac.id" pattern="^.+@.+\...+$" type="text" title="Email yang dimasukkan harus benar."/>
 							</div>
 							<div class="row">
 								<label for="profil_avatar">Avatar</label>
-								<img id="avatar_image1" src="images/avatar.jpg" alt="avatar profil" />
+								<input id="profil_avatar" name="avatar" type="file" title="Avatar yang diupload harus berekstensi jpg atau jpeg."/>
 							</div>
-							<input id="profil_submit" type="submit" value="Edit" title="Semua elemen form harus diisi dengan benar dahulu."/>
+							<div class="row">
+								<img id="avatar_image2" src="images/avatar.jpg" alt="avatar profil" />
+							</div>
+							<input id="profil_submit" type="submit" value="Save" title="Semua elemen form harus diisi dengan benar dahulu."/>
 						</form>
 					</div>
 				</div>
