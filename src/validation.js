@@ -55,17 +55,22 @@ function displayResult()
 
 function CheckFiles()
 {
-	var fup = document.getElementById('fileupld');
-        var fileName = fup.value;
-        var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
-
-    if(ext =="GIF" || ext=="gif" || ext=="mp4" || ext=="avi" || ext=="flv")
-    {
-        return true;
-    }
-    else
-    {
-        alert("Upload Gif Images only");
-        return false;
-    }
+	var value = document.getElementById('filename').value.split('.');
+	var lenghtValue = value.length;
+	if(lenghtValue <= 1) alert("file undefined")
+	else {
+		if(value[lenghtValue-1].toLowerCase() == "jpeg"||
+			value[lenghtValue-1].toLowerCase() == "jpg"||
+			value[lenghtValue-1].toLowerCase() == "bmp") alert("file benar");
+		else alert("file salah");
+	}
 }
+
+function playPause()
+{ 
+	var myVideo=document.getElementById("video1"); 
+	if (myVideo.paused) 
+		myVideo.play(); 
+	else 
+		myVideo.pause(); 
+} 

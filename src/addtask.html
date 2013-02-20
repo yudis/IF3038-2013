@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Shared To Do List</title>
+		<title>Shared To Do List - Add Task</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="shortcut icon" href="favicon.ico">
 		<script type="text/javascript" src="validation.js"></script>
@@ -8,9 +8,10 @@
 	<body>
 		<div id="navigation">
 			<a href="#home">HOME</a>
+			<a href="#dashboard">DASHBOARD</a>
 			<a href="#logout">LOGOUT</a>
 		</div>
-		<div class="clearall container" id="features">
+		<div class="clearall container" id="tasks">
 			<br><br><br>
 			<h2>Add Task</h2>
 			<div class="box">
@@ -19,7 +20,7 @@
 			</div>		
 			<div class="box2">
 				<h3></h3>
-				<form method="link" action="index.html">
+				<form method="link" action="">
 				<fieldset>
 					<p>
 						<label>Task Name<abbr title="Required">*</abbr></label>
@@ -52,12 +53,13 @@
 					</p>
 					<p>
 						<label>Attachment<abbr title="Required">*</abbr></label>
-						<input type="file" id="filename" onsubmit="return Checkfiles();"
-						required="required" aria-required="true"/>
+						<input type="file" id="filename" 
+						required="required" aria-required="true"
+						title="Picture or Video related to this task"/>
 					</p>			
 				</fieldset>
 				<fieldset>
-				<button name="addtask" type="submit">Add Task</button>
+				<button name="addtask" type="submit" onClick="CheckFiles();">Add Task</button>
 				</fieldset>
 				</form>
 			</div>
