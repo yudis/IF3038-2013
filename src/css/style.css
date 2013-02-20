@@ -352,6 +352,31 @@ nav ul li a:hover, nav ul li a .active
 	background-image: linear-gradient(to bottom,#4d90fe,#357ae8);
 }
 
+/*---DASH BOARD---*/
+#dashboard_category
+{
+    padding-left : 50px;
+    width : 60px;
+}
+
+.dashboard_category_element
+{
+    display : block;
+    padding : 6px 30px;
+    font : arial 150%;
+    border-style : outset;
+    border-width : 5px;
+}
+
+.dashboard_category_element:hover
+{
+    display : block;
+    padding : 6px 30px;
+    font : arial 150%;
+    border-style : inset;
+    border-width : 5px;
+}
+
 /*Profil*/
 #profil_area
 {
