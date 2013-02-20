@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Rincian Tugas</title>
+		<script type="text/javascript">
+			var idActiveTask;
+			var ActiveButton;
+			function display(id,button){
+				if (idActiveTask == null) {
+					idActiveTask = "edited";
+				}
+				document.getElementById(idActiveTask).style.display = "none";
+				idActiveTask = id;
+				document.getElementById(id).style.display = "block";
+				displaybutton(button);
+			}
+			function displaybutton(but){
+				if (ActiveButton == null){
+					ActiveButton = "tombol_edit";
+				}
+				document.getElementById(ActiveButton).style.display = "none";
+				ActiveButton = but;
+				document.getElementById(but).style.display = "block";
+			}
+		</script>
+	</head>
+	<body>
+		<div id="header" style="height:50px">
+		</div>
+		<center>
+			<div id="container" style="width:700px;">
+				<div id="edited" style="width:475px;height:200px;border-style:dotted; border-width:1px; float:left;">
+					<div id="rincian" style="height:176px;width:100px;float:left;">
+						<p style="text-align:left;margin-left:15%;">Nama task</p>
+						<p style="text-align:left;margin-left:15%;">Attachment</p>
+						<p style="text-align:left;margin-left:15%;">Deadline</p>
+						<p style="text-align:left;margin-left:15%;">Asignee</p>
+						<p style="text-align:left;margin-left:15%;">Tag</p>
+					</div>
+					<div id="isi" style="height:176px;width:300px;float:left;">
+						<p style="text-align:left; margin-left:16%"></p>
+						<p style="text-align:left; margin-left:16%"></p>
+						<p style="text-align:left; margin-left:16%"></p>
+						<p style="text-align:left; margin-left:16%"></p>
+						<p style="text-align:left; margin-left:16%"></p>
+					</div>
+				</div>
+				<div id="editing" style="display:none;width:475px;height:200px;border-style:dotted; border-width:1px; float:left;">
+					<div id="rincian" style="height:176px;width:100px;float:left;">
+						<p style="text-align:left;margin-left:15%;">Nama task</p>
+						<p style="text-align:left;margin-left:15%;">Attachment</p>
+						<p style="text-align:left;margin-left:15%;">Deadline</p>
+						<p style="text-align:left;margin-left:15%;">Asignee</p>
+						<p style="text-align:left;margin-left:15%;">Tag</p>
+					</div>
+					<div id="isi" style="height:176px;width:300px;float:left;">
+						<p style="text-align:left; margin-left:30%">:</p>
+						<p style="text-align:left; margin-left:30%">:</p>
+						<p style="text-align:left; margin-left:30%"><select id="tanggal" style="width:50px;">
+							<option value = "1">1</option>
+							<option value = "2">2</option>
+							<option value = "3">3</option>
+							<option value = "4">4</option>
+							<option value = "5">5</option>
+							<option value = "6">6</option>
+							<option value = "7">7</option>
+							<option value = "8">8</option>
+							<option value = "9">9</option>
+							<option value = "10">10</option>
+							<option value = "11">11</option>
+							<option value = "12">12</option>
+							<option value = "13">13</option>
+							<option value = "14">14</option>
+							<option value = "15">15</option>
+							<option value = "16">16</option>
+							<option value = "17">17</option>
+							<option value = "18">18</option>
+							<option value = "19">19</option>
+							<option value = "20">20</option>
+							<option value = "21">21</option>
+							<option value = "22">22</option>
+							<option value = "23">23</option>
+							<option value = "24">24</option>
+							<option value = "25">25</option>
+							<option value = "26">26</option>
+							<option value = "27">27</option>
+							<option value = "28">28</option>
+							<option value = "29">29</option>
+							<option value = "30">30</option>
+							<option value = "31">31</option>
+							</select>
+							<select id="bulan" style="width:50px;">
+								<option value = "1">1</option>
+								<option value = "2">2</option>
+								<option value = "3">3</option>
+								<option value = "4">4</option>
+								<option value = "5">5</option>
+								<option value = "6">6</option>
+								<option value = "7">7</option>
+								<option value = "8">8</option>
+								<option value = "9">9</option>
+								<option value = "10">10</option>
+								<option value = "11">11</option>
+								<option value = "12">12</option>
+							</select>
+							<select id="tahun" style="width:70px;">
+								<option value = "2013">2013</option>
+								<option value = "2014">2014</option>
+								<option value = "2015">2015</option>
+								<option value = "2016">2016</option>
+								<option value = "2017">2017</option>
+								<option value = "2018">2018</option>
+								<option value = "2019">2019</option>
+								<option value = "2020">2020</option>
+								<option value = "2021">2021</option>
+								<option value = "2022">2022</option>
+							</select></p>
+						<p style="text-align:left; margin-left:30%"><input type="text" id="asignee" size="25"></p>
+						<p style="text-align:left; margin-left:30%"><input type="text" id="tag" size="25"></p>
+					</div>
+				</div>
+				<div id="tombol_edit" style="height:200px;width:125px;float:left;">
+					<input type="button" value="Edit Task" onclick="display('editing','done_edit')">
+				</div>
+				<div id="done_edit" style="display:none;height:200px;width:125px;float:left;">
+					<input type="button" value="Done Editing" onclick="display('edited','tombol_edit')">
+				</div>
+				<div id="comment" style="width:700px; height:300px;clear:both;">
+					<div id="komentar" style="width:100px;float:left">
+						<p style="text-align:left;margin-left:15%;">Komentar</p>
+					</div>
+					<div id="isi" style="height:300px;width:80px;float:left;">
+						<p style="margin-left:26%">:</p>
+					</div>
+					<div id="tuliskomen" style="height:300;width:300;float:left;">
+						<form>
+							<p style="text-align:left;"><b>
+								Fadhil
+							</p></b>
+							<p style="text-align:left;">
+								Tes Komentar
+							</p>
+							<p>
+								<textarea id="areatulis" rows="4" cols="34" placeholder="Tulis komentar anda" style="resize:none;"></textarea>
+							</p>
+						</form>
+						<input type="submit" value="Tulis Komentar" style="float:right;">
+					</div>
+				</div>
+			</div>
+		</center>
+	</body>
+</html>
