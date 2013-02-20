@@ -1,39 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 <link href="task.css" rel="stylesheet" type="text/css"/>
-<script language="javascript" type="text/javascript" src="datetimepicker.js"/>
-<script type="text/javascript">
-	
-	function checkpostal(){
-		var jpg=/\.jpg$/
-		var png=/\.png$/
-		var pdf=/\.pdf$/
-		var mp4=/\.mp4$/
-		if (document.getElementById("ali").value.search(jpg)!=-1)  
-		{
-			alert("File yang dipilih berformat jpg.");
-		}
-		else if (document.getElementById("ali").value.search(png)!=-1)
-		{
-			alert("File yang dipilih berformat png.");
-		}
-		else if (document.getElementById("ali").value.search(pdf)!=-1)
-		{
-			alert("File yang dipilih berformat pdf.");
-		}
-		else if (document.getElementById("ali").value.search(mp4)!=-1)
-		{
-			alert("File yang dipilih berformat mp4.");
-		}
-		else{
-			alert("File yang dipilih harus berformat gambar, video, atau file!");
-			document.getElementById("ali").value = "";
-		}
-	}
-</script>
+<script type="text/javascript" src="datetimepicker.js"></script>
+<script type="text/javascript" src="Index.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>LALA</title>
+<title>Pembuatan Tugas</title>
 </head>
 
 
@@ -58,26 +31,30 @@
 	
 	<br>
 
-	<div class="content">
-        <div class="rincianKiri">Nama Tugas	</div>
-        <div class="rincianKanan">
-            <input type="text" class="inputText"/>
-        </div>
-        <div class="rincianKiri">Attachment</div>
-        <div class="rincianKanan">
-            <input type="file" title="File harus berformat jpg, png, pdf, atau mp4" id="ali" name="datafile" size="40" onchange="checkpostal()">
-        </div>
-        <div class="rincianKiri">Deadline</div>
-        <div class="rincianKanan">
-            <input id="demo1" type="text" size="25"><a href="javascript:NewCal('demo1','ddmmyyyy')"><img src="../image/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
-        </div>
-        <div class="rincianKiri">Assignee</div><div class="rincianKanan"><input id="ali" class="inputText" type="text"/></div>
-       
-       <div class="rincianKiri">Tag</div><div class="rincianKanan"><input class="inputText" type="text"/></div>
+	<div class="contentku">
+		
+			<label class="rincianKiri">Nama Tugas</label>
+
+			<input type="text" class="inputText"/><br/>
+
+			
+        <label class="rincianKiri">Attachment</label>
+
+        <input type="file" title="File harus berformat jpg, png, pdf, atau mp4" name="datafile" onchange="checkpostal()"><br/>
+
         
-       <form> <ul class="listUL"><li class="listLI"><button>Done</button></li><li class="listLI"><button>Back</button></li></ul></form>
-        
+        <label class="rincianKiri">Deadline</label>
+
+        <div class="rincianKanan">
+            <input id="demo1" type="text" size="25"><a href="javascript:NewCal('demo1','ddmmyyyy')"><img src="../image/cal.gif" class="kalender" alt="Pick a date"></a>
+        </div>
+        <label class="rincianKiri">Assignee</label><input class="inputText" type="text"/><br/>
        
+       <label class="rincianKiri">Tag</label><input class="inputText" type="text"/><br/>
+        
+       <form><ul class="listUL"><li class="listLI"><button class="tombol" onclick="doneAdd(event);">Done</button></li><li class="listLI"><input type="button" value="Back" class="tombol" onclick="window.history.back()"/></li></ul></form>
+        
+      
 	</div>
 	
 	<div class="footer">
