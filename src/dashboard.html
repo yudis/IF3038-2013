@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var idActiveTask;
+function display(id)
+{
+if (idActiveTask == null) {
+}
+else {
+document.getElementById(idActiveTask).style.display = "none";
+}
+idActiveTask = id;
+document.getElementById(id).style.display = "block";
+
+}
+
+</script>
+
+<head>
+<title>Dashboard - TargET</title>
+<link rel="stylesheet" type="text/css" href="dashboard.css">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+	
+	
+	<div id="topnavTut">
+			<img class="logoImage" src="img/namalogo.png" alt="Nama & Logo"> <h1 class="dashboardTitle"> Dashboard </h1>
+			<a class="topnav" href="user.html" target="_top">User </a>
+			<a class="topnav" href="home.html" target="_top">Log Out </a>
+			<a class="topnav" href="search.html" target="_top">Search </a>
+	</div>
+
+	<div id="content">
+		<div id="categoryMenu">
+		Category</br>
+			<a id="link1" href="javascript:display('task1')">Cat1</a></br>
+			<a id="link1" href="javascript:display('task2')">Cat2</a></br>
+			Cat3</br>
+		</div>
+		
+		<div id="taskSpace">
+		<a href="newtask.html"> NEW TASK </a>
+			<img id="task1" src="img/logo.png" alt="Logo">
+			<img id="task2" src="img/namalogo.png" alt="Logo">
+		</div>
+	</div>
+	
+	
+	
+</body>
+
+</html>

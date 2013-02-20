@@ -1,0 +1,45 @@
+body {
+background-color: White
+}
+.topnav{
+height:25px;background-color:#d3d3d3;border:1px solid #d3d3d3;border-top-right-radius:2px;border-top-left-radius:2px;
+}
+#topnavTut{
+width:600px;font-size:90%;padding-left:15px;padding-top:6px;white-space:nowrap;
+}
+#profileMenu {
+}
+
+.logoImage{
+}
+
+.dashboardTitle{
+}
+
+#task1{
+display:none;
+}
+#task2{
+display:none;
+}
+
+#content {
+ position:relative;
+ height:100%;
+}
+#categoryMenu {
+ position:absolute;
+ border: 2px solid red;
+ top:0;
+ left:0;
+ width:30%;
+ height:1000px;
+}
+#taskSpace {
+ position:absolute;
+ border: 2px solid green;
+ top:0;
+ right:0;
+ width:69%;
+ height:1000px;
+}
