@@ -1,0 +1,68 @@
+/*--- FORM ---*/
+#profil_form input[type="text"], #profil_form_wrap input[type="password"], #profil_form_wrap input[type="date"], 
+#profil_form input[type="email"], #profil_form_wrap input[type="file"]
+{
+	margin-top: 2px;
+	margin-left: 10px;
+	width: 200px;
+	height: 26px;
+	border: 1px solid #d9d9d9;
+	background-position: right top;
+    background-repeat: no-repeat;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+}
+
+/*Profil*/
+#profil_area
+{
+	float : left;
+}
+#avatar_image1
+{
+	height: 100px;
+}
+#avatar_image2
+{
+	height: 100px;
+	padding-left : 160px;
+}
+#profil_title
+{
+	text-align:center;
+	color:#6699FF;
+	line-height:200%;
+	text-shadow:5px 5px 10px #C0C0C0;
+	letter-spacing:1px;
+	font-family: "Cooper Black", "sans-serif auto";
+	font-size: 170%;
+}
+#success_edit {
+	color: #0C0;
+	font-size: 14px;
+	padding-left: 150px;
+}
+#profil_form_wrap
+{
+	padding: 15px;
+}
+#profil_form_wrap label
+{
+	float: left;
+	display: block;
+	width: 150px;
+	line-height: 32px;
+}
+#profil_head h1
+{
+	margin: 8px 0;
+}
+#profil_head
+{
+	margin-bottom: 14px;
+	border-bottom: 1px solid #AAAAAA;
+}
