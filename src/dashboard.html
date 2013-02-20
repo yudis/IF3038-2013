@@ -28,10 +28,9 @@
 			<div id="newkategoritombol">
 				<a id="font" href="#join_form" >New Category</a>
 			</div>
-			<div id="list kategori">
-				<ul class="ullistkategori">
-					<li class="lilistkategori"><a href="progin.html">Progin</a></li>
-					<li class="lilistkategori"><a href="konten4.html">KAP</a></li>
+			<div id="listkategori">
+				<ul id="listkategory" class="ullistkategori">
+					<li class="lilistkategori" >PROGIN</li>
 				</ul>
 			</div>
 		</div>
@@ -57,13 +56,28 @@
 		
 	
 	</div>
-	
+	<script language="javascript">
+		function addElement(){
+			var element = document.getElementById('namakategori').value;
+			if(element==""){
+				document.getElementById('listkategori').style.display="block";
+				document.getElementById('listkategori').innerHTML= "Error! Insert a description for the element";
+			}	else{
+				var container = document.getElementById('listkategory');
+				var new_element = document.createElement('li');
+				new_element.className="lilistkategori";
+				new_element.innerHTML = element;
+				container.insertBefore(new_element,container.firstChild);
+			
+			}
+		}
+	</script>
 	<div class="footer">
 	</div>
 	<a href="#" class="overlay" id="join_form"></a>
 	<div class="popup">
 		<p>Please enter the specification for new category</p>
-		<div>
+		<div >
 			<label for="namakategori">Nama Kategori :</label>
 			<input type="text" id="namakategori" value=""/>
 		</div>
@@ -71,7 +85,15 @@
 			<label for="peserta">Anggota :    </label>
 			<input type="text" id="peserta" value=""/>
 		</div>
-		<input class="buttonOK" type="button" value="OK"></input>
+		<div class="tombol">
+			<div id="buttonOK" >
+				<input class="btok" type="button" value="OK" onClick="addElement()"></input>
+			</div>
+			<div id="close">
+				<a  href="#close"  >CLOSE</a>
+			</div>
+			
+		</div>
 	</div>
 </body>
 </html>

@@ -41,22 +41,13 @@
 				<p>PROGIN</p>
 			</div>
 			<div id="tabellisttask">
-				<table class="namatask">
+				<table id="idnamatask" class="namatask">
 				<tr>
 					<th>Nama Task</th>
 					<th>Deadline</th>
 					<th>Tag Multivalue</th>
 				</tr>
-				<tr>
-					<td>Tubes Progin I</td>
-					<td>23 Februari 2013</td>
-					<td>html,css</td>
-				</tr>
-				<tr class="alt">
-					<td>Tubes IMK Flash</td>
-					<td>23 Februari 2013</td>
-					<td>ngeselin</td>
-				</tr>
+			
 				</table>
 			</div>
 			
@@ -64,7 +55,41 @@
 		
 	
 	</div>
-	
+	<script language="javascript">
+		function addTask(){
+			var elemenjudultask = document.getElementById('namatask').value;
+			var elemendeadline = document.getElementById('deadline').value;
+			var elementag = document.getElementById('multivalue').value;
+			var tabTabel = document.getElementById('idnamatask');
+			row = document.createElement("tr");
+			
+			cell1 = document.createElement("td");
+			cell1.className="namatask";
+			a1=document.createElement("a");
+			a1.className="atabelkategori";
+			a1.href="buattugasbaru.html";
+			cell1.appendChild(a1);
+			
+			cell2 = document.createElement("td");
+			cell3 = document.createElement("td");
+			
+			
+			cell2.className="namatask";
+			cell3.className="namatask";			
+			row.className="namatask";
+			
+			a1.appendChild(document.createTextNode(elemenjudultask));
+			cell2.appendChild(document.createTextNode(elemendeadline));
+			cell3.appendChild(document.createTextNode(elementag));
+			
+			tabTabel.appendChild(row);			
+			
+			row.appendChild(cell1);
+			row.appendChild(cell2);
+			row.appendChild(cell3);
+			
+		}
+	</script>
 	<div class="footer">
 	</div>
 	<a href="#" class="overlay" id="add_task"></a>
@@ -80,9 +105,17 @@
 		</div>
 		<div>
 			<label for="multivalue">Tag Multivalue :    </label>
-			<input type="text" id="tagmultivalue" value=""/>
+			<input type="text" id="multivalue" value=""/>
 		</div>
-		<input class="buttonOK" type="button" value="OK"></input>
+			<div class="tombol">
+			<div id="buttonOK" >
+				<input type="button" value="OK" onClick="addTask()"></input>
+			</div>
+			<div id="close">
+				<a  href="#close"  >CLOSE</a>
+			</div>
+			
+		</div>
 	</div>
 </body>
 </html>

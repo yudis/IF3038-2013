@@ -109,6 +109,7 @@ a#login_pop:hover, a#join_pop:hover {
     -o-border-radius: 15px;
     border-radius: 15px;
 }
+
 .close:before {
     color: rgba(255, 255, 255, 0.9);
     content: "X";

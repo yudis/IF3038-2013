@@ -128,7 +128,10 @@ a:hover
 	text-transform:uppercase;
 
 }
-
+a.atabelkategori{
+	color:#000000;
+	
+}
 .ullistkategori{
 
 	list-style-type:none;
@@ -152,19 +155,36 @@ table {
 }
 
 
-.buttonOK{
+.tombol #buttonOK{
 		color: white;
 	font : bold 90% 'Arial',Helvetica,sans-serif;
 	height: 40px;
 	width: 100px;
 	position: center;
 	margin-top:10% ;
-	margin-left: 30%;
-	margin-right: 50%;
+	margin-left: 10%;
+	/*margin-right: 50%;*/
 	border:0px;
 	background-color: #E0E0E0 ;
+	float:left;
 }
 
+.tombol #close{
+	color: white;
+	font : bold 90% 'Arial',Helvetica,sans-serif;
+	height: 30px;
+	width: 100px;
+	position: center;
+	float:left;
+	/*margin-left:50%;*/
+	margin-right: 10%;
+	margin-top:10% ;
+	margin-left: 10%;
+	border:0px;
+	background-color: #E0E0E0 ;
+	
+	
+}
 
 /*tabel*/
 
@@ -265,3 +285,4 @@ table {
     opacity: 1;
     visibility: visible;
 }
+
