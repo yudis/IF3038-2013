@@ -15,41 +15,49 @@
 		<!-- Web Header -->
 		<header>
 			<div id="header_container"> 
-				<div class="link_lightblue right top45" onclick="javascript:toggle_visibility('login_form_container');"> LOGIN </div>
 				<div class="left">
-					<div id="fleur">&#9884;</div><div id="textdesu">Eurilys</div>
-					<div id="tagline">For your better organization</div>
+					<img src="img/logo.png"/>
 				</div>
 			</div>
 			<div class="thin_line"></div>
 		</header>
-		<div id="login_form_container">
-			<form id="login_form">
-				<label> Username </label> <input type="text" name="username"/>
-				<label> Password </label> <input type="password" name="password"/> 
-				<div id="login_button_submit" class="right link_red top10"> OK </div>
-			</form>
-		</div>
-	
+		
 		<!-- Web Content -->
 		<section>
 			<div id="index_left">
 				* mau isi slider / gambar
 			</div>
 			<div id="index_right">
+				<div id="login_form_container">
+					<form id="login_form">
+						<label> Username </label> <input type="text" id="username" name="username"/>
+						<label> Password </label> <input type="password" id="password" name="password"/> 
+						<div id="login_button_submit" class="right link_red top10"> Login </div>
+						<input type="checkbox" id="remember_me" name="remember_me"/> <label id="remember_me"> Remember me </label>
+					</form>
+				</div>
+				
 				<div class="signup_label">
 					Have No Account ? 
 				</div>
 				<div id="signup_form_container">
 					<form id="signup_form">
-						<label> Username </label>	<input type="text" name="username">
-						<label> Password </label> 	<input type="password" name="password">
-						<label> Email </label> 		<input type="text" name="email">
+						<label> Username </label>	<input type="text" name="username" required>
+						<label> Password </label> 	<input type="password" name="password" required>
+						<label> Email </label> 		<input type="text" name="email" required>
 						<div id="signup_button_submit" class="right link_tosca top10 bold"> SIGN UP </div>
 					</form>
 				</div>
 			</div>
 		</section>
+		
+		<!-- Footer Section -->
+		<div class="thin_line"></div>
+		<footer>
+			<div id="footer_container"> 
+				
+			</div>
+		</footer>
 	</body>
 
 <!-- ini nanti jadiin footer -->

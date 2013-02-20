@@ -5,10 +5,9 @@ body {width:100%; height:300px; display:block; margin:0px;background-image:url('
 ------------------------------------------------------------------------------------------- */
 header {
 	width:100%;
-	height:140px;
+	height:90px;
 	background-color:#35283C;
 	display:block;
-	left:0px;
 }
 #header_container {
 	width:80%; 
@@ -17,32 +16,23 @@ header {
 	margin-right:auto;
 	display:block;
 }
-#login_button {
-	float:right;
-	background-color:#6FBEC6;
-	display:block;
-	color:#fff;
-	size:20px; 
-	width:120px;
-	height:30px;
-	margin-top:20px;
-	
-}
+
 #login_form_container {
+	position:relative;
 	background-color:#35283C;
-	display:none;
 	float:right;
-	width:300px;
-	height:150px;
+	width:87%;
+	height:130px;
 	margin-right:5%;
-	z-index:50;
+	z-index:100;
 }
 #login_form {
 	font-family:Helvetica;
 	width:90%;
 	margin-left:auto;
 	margin-right:auto;
-	margin-top:25px;
+	margin-top:15px;
+	z-index:200;
 }
 #login_form label {
 	color:#fff;
@@ -56,21 +46,31 @@ header {
 	margin-left:7px;
 	width:55%;
 }
+input#remember_me {
+	margin-top:20px;float:left;
+	width:auto;
+}
+label#remember_me {
+	float:left; font-size:12px; width:auto; margin-top:20px; 
+}
 .header_menu {
-	float:right; margin-top:25px;background-color:#53455B; height:60%; width:60%;
+	float:right; margin-top:17px;background-color:#53455B; height:60%; width:45%;
 	
 }
 .header_menu_button {
-	padding-top:15px; padding-bottom:15px; 
-	width:20%; display:block;color:white;
-	background-color:#6FBEC6; margin-left:20px;margin-top:15px; text-align:center; 
+	padding-top:8px; padding-bottom:8px; 
+	width:28%; display:block;color:white;
+	margin-left:20px;margin-top:8px; text-align:center; 
 	font-size:18px; cursor:pointer; float:left;
 }
-.header_menu_button:hover {
-	background-color:#bae4d3;text-decoration:none;
+.header_menu_button:hover , .header_menu_button:active {
+	background-color:#6FBEC6;text-decoration:none;
+}
+.current_header_menu {
+	background-color:#6FBEC6;
 }
 #search_box {
-	float:left;margin-left:20px; height:25px; margin-top:40px;
+	float:left; margin-left:50px; height:25px; margin-top:46px; width:20%;
 }
 /* LOGO 
 ----------------------------------------------------------------------------------------------------------------- */
@@ -99,20 +99,20 @@ header {
 
 /* SECTION 
 --------------------------------------------------------------------------------------------------------------------- */
-section {width:80%;background-color:#F9F9F9; height:500px; margin-left:auto; margin-right:auto; margin-top:40px;}
+section {width:80%;background-color:#F9F9F9; height:550px; margin-left:auto; margin-right:auto; margin-top:40px; margin-bottom:40px; z-index:1;}
 #index_left {
 	height:100%;
 	width:65%;
-	background-color:yellow;
+	background-color:#f9f9f9;
 	float:left;
 }
 #index_right {
 	height:100%;
 	width:35%;
 	float:left;
+	padding-top:40px;
 }
 .signup_label {
-	margin-top:40px;
 	width:65%;
 	background-color:#FF5544; color:#fff; padding-left:25px; padding-right:25px; padding-top:8px; padding-bottom:8px; 
 	border:none;
@@ -124,12 +124,13 @@ section {width:80%;background-color:#F9F9F9; height:500px; margin-left:auto; mar
 	font-size:25px;
 	font-family:Helvetica;
 	font-weight:bold;
+	margin-top:170px;
 }
 #signup_form_container {
 	width:90%;
 	margin-left:auto;
 	margin-right:auto;
-	margin-top:40px;
+	margin-top:10px;
 	background-color:#EBEBE9;
 	color:#gray;
 	padding-top:20px;
@@ -156,6 +157,24 @@ section {width:80%;background-color:#F9F9F9; height:500px; margin-left:auto; mar
 	margin-bottom:10px;
 }
 
+/* FOOTER SECTION
+--------------------------------------------------------------------------------------------------------------------- */
+#footer_container {
+	width:80%; 
+	height:100%; 
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+	color:#fff;
+}
+
+footer {
+	width:100%; 
+	background-color:#35283C;
+	height:80px; 
+	display:block;
+	bottom:0px;
+}
 /* STYLING 
 --------------------------------------------------------------------------------------------------------------------- */
 .bold {font-weight:bold;}
