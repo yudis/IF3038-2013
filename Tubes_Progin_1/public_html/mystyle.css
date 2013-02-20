@@ -20,7 +20,13 @@
     left: 40px;
     top: 10px;
 }
-
+#logo-big{
+    position: fixed;
+    left: 20px;
+    top: 100px;
+    width: 50%;
+    heigth: 50%;
+}
 #login{
     position: fixed;
     top: 20px;
