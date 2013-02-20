@@ -1,42 +1,57 @@
 <!DOCTYPE html>
 <html>
+	<!--
+	<IFRAME name="iframe" src="src/header.html" width='100%' height='auto' marginwidth=0 marginheight=0 hspace=0 vspace=0 frameborder=0 scrolling=auto></IFRAME>
+	-->
+	
 	<head>
-		<link href='webcss.css' rel='stylesheet' type='text/css'>
+		<link href='css/desktop_style.css' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="js/animation.js"> </script> 
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-		
-		<title>Homepage</title>
-	</head>	
+		<title> Eurilys </title>
+	</head>
 	
 	<body>
-		<div id="wrap">
-			<div class="left_div">
-				<div id="banner" class="pad-top-80">
+		<!-- Web Header -->
+		<header>
+			<div id="header_container"> 
+				<div class="link_lightblue right top45" onclick="javascript:toggle_visibility('login_form_container');"> LOGIN </div>
+				<div class="left">
 					<div id="fleur">&#9884;</div><div id="textdesu">Eurilys</div>
 					<div id="tagline">For your better organization</div>
 				</div>
-				What is Eurilys?
-				* dll nanti gw isi
 			</div>
-			
-			<div class="right_div">
-				<div id="registration_form_container">
-					Are you new to Eurilys? 
-					<br><br><br>
-					<form id="registration_form"> 
-						
-						<label class="form_label"> Username </label> 
-						<input type="text">
-						<div class="clear"></div> <br>
-						<label class="form_label"> Password </label> 
-						<input type="text"> 
-						<div class="clear"></div> <br>
-						<label class="form_label"> Email </label> 
-						<input type="text">
-						<
-					</form>
-				</div>
-			</div> 
-			
+			<div class="thin_line"></div>
+		</header>
+		<div id="login_form_container">
+			<form id="login_form">
+				<label> Username </label> <input type="text" name="username"/>
+				<label> Password </label> <input type="password" name="password"/> 
+				<div id="login_button_submit" class="right link_red top10"> OK </div>
+			</form>
 		</div>
+	
+		<!-- Web Content -->
+		<section>
+			<div id="index_left">
+				* mau isi slider / gambar
+			</div>
+			<div id="index_right">
+				<div class="signup_label">
+					Have No Account ? 
+				</div>
+				<div id="signup_form_container">
+					<form id="signup_form">
+						<label> Username </label>	<input type="text" name="username">
+						<label> Password </label> 	<input type="password" name="password">
+						<label> Email </label> 		<input type="text" name="email">
+						<div id="signup_button_submit" class="right link_tosca top10 bold"> SIGN UP </div>
+					</form>
+					
+				</div>
+			</div>
+		</section>
 	</body>
+
+<!-- ini nanti jadiin footer -->
 </html>

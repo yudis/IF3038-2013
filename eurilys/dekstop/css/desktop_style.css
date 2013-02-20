@@ -1,5 +1,5 @@
-html {width:100%; height:100%; overflow:none;}
-body {width:100%; height:100%;}
+html {width:100%; height:100%; overflow-x:hidden; font-family:Helvetica;}
+body {width:100%; height:300px; display:block; margin:0px;background-image:url('../img/bg.jpg');}
 
 /* HEADER SECTION 
 ------------------------------------------------------------------------------------------- */
@@ -8,6 +8,7 @@ header {
 	height:140px;
 	background-color:#35283C;
 	display:block;
+	left:0px;
 }
 #header_container {
 	width:80%; 
@@ -34,6 +35,7 @@ header {
 	width:300px;
 	height:150px;
 	margin-right:5%;
+	z-index:50;
 }
 #login_form {
 	font-family:Helvetica;
@@ -79,13 +81,75 @@ header {
 	color:#fff;
 }
 
+/* SECTION 
+--------------------------------------------------------------------------------------------------------------------- */
+section {width:80%;background-color:#F9F9F9; height:500px; margin-left:auto; margin-right:auto; margin-top:40px;}
+#index_left {
+	height:100%;
+	width:65%;
+	background-color:yellow;
+	float:left;
+}
+#index_right {
+	height:100%;
+	width:35%;
+	float:left;
+}
+.signup_label {
+	margin-top:40px;
+	width:65%;
+	background-color:#FF5544; color:#fff; padding-left:25px; padding-right:25px; padding-top:8px; padding-bottom:8px; 
+	border:none;
+	-webkit-box-shadow: 2px 3px 5px rgba(50, 50, 50, 0.17);
+	-moz-box-shadow:    2px 3px 5px rgba(50, 50, 50, 0.17);
+	box-shadow:         2px 3px 5px rgba(50, 50, 50, 0.17);
+	margin-left:auto;margin-right:auto; letter-spacing:1px;
+	text-align:center;
+	font-size:25px;
+	font-family:Helvetica;
+	font-weight:bold;
+}
+#signup_form_container {
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:40px;
+	background-color:#EBEBE9;
+	color:#gray;
+	padding-top:20px;
+	height:220px;
+	display:block;
+}
+#signup_form {
+	width:90%;
+	margin-top:20px;
+	margin-left:20px;
+}
+#signup_form label {
+	float:left;
+	font-size:20px;
+	font-family:Arial;
+	color:gray;
+	width:35%;
+}
+#signup_form input {
+	float:left;
+	height:25px;
+	font-size:20px;
+	width:60%;
+	margin-bottom:10px;
+}
+
 /* STYLING 
 --------------------------------------------------------------------------------------------------------------------- */
+.bold {font-weight:bold;}
 .clear {clear:both;}
 .left {float:left;}
 .right {float:right;}
 .top10 {margin-top:10px;}
 .top45 {margin-top:45px;}
+
+.thin_line {display:block;height:8px;margin-left:0px;width:100%;background-color:#524459;}
 
 .link_blue {background-color:#007bc1; color:#fff; padding-left:10px; padding-right:10px; padding-top:8px; padding-bottom:8px; 
 text-decoration:none;border-radius:20px;-webkit-border-radius:20px;-moz-border-radius:20px;border:none;
@@ -114,3 +178,12 @@ box-shadow:         2px 3px 5px rgba(50, 50, 50, 0.17);
 margin-left:auto;margin-right:auto; letter-spacing:1px; cursor:pointer; margin-right:10px;
 }
 .link_red:hover{background-color:#ff786b;text-decoration:none;}
+
+.link_tosca {background-color:#A8DBC6; color:#fff; padding-left:25px; padding-right:25px; padding-top:8px; padding-bottom:8px; 
+text-decoration:none;border-radius:20px;-webkit-border-radius:20px;-moz-border-radius:20px;border:none;
+-webkit-box-shadow: 2px 3px 5px rgba(50, 50, 50, 0.17);
+-moz-box-shadow:    2px 3px 5px rgba(50, 50, 50, 0.17);
+box-shadow:         2px 3px 5px rgba(50, 50, 50, 0.17);
+margin-left:auto;margin-right:auto; letter-spacing:1px; cursor:pointer; margin-right:10px;
+}
+.link_tosca:hover{background-color:#bae4d3;text-decoration:none;}
