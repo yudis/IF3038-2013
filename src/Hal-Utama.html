@@ -6,29 +6,17 @@
 
 <body>
 	<!-- Header -->
-	<div class="header">
-    <table width="800" cellspacing="0" cellpadding="0">
-  <tr>
-    <td colspan="3">&nbsp;</td>
-    </tr>
-  <tr>
-    <td width="460" rowspan="2" align="center"><img src="../images/TulisanHeader2.png" width="379" height="106" alt=""> 
-    
-    <br>
-    <img src="../images/TulisanHeader.png" width="227" height="47" alt=""></td>
-    <td width="303"><img src="../images/images/Header_03.gif" width="303" height="123" alt="Logo"></td>
-    <td width="37" rowspan="2">&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    </tr>
-</table>
-	</div>
+<div class="header">
+
+	<img src="../images/images/Header_01.gif" />
+    <img src="../images/images/Header_02.gif" /><img src="../images/images/Header_03.gif" align="top"/><img src="../images/images/Header_04.gif" />
+
+</div>
     
     
 	<!-- Content -->
-	<div>
-	<table width="800" cellspacing="0" cellpadding="0">
+<div class="LoginBoard">
+<!--	<table width="800" cellspacing="0" cellpadding="0">
   		<tr>
     	<td height="415" bgcolor="#FFFFFF">
         	<table width="400" cellspacing="0" cellpadding="0" align="center" class="Login">
@@ -114,8 +102,85 @@
 </table>
         </td>
   		</tr>
-	</table>
-    </div>
+	</table>-->
+
+  	<div class="Login"> 
+    	Login User <br/>
+        <div>
+        <div class="ukuranmenu1"> Username </div><span class="ukuranmenu2"><input type="text" id="username" value=""> </span>
+        </div>
+    	<div class="ukuranmenu1"> Password </div><span class="ukuranmenu2"><input type="password" id="pass" value="">
+    	<br>
+    	<div align="right">
+        <a href="#join_form" id="join_pop">
+        	<input name="Button" type="button" value="Register"/> </a>
+      		<input name="Button" type="button" value="Login" onClick="login()"/></div></span>
+        </div>
+		</div>
+        
+        <a href="#x" class="overlay" id="join_form"> </a>
+        <div class="popup">
+            <h2>Register</h2>
+            <p>Please enter your details here</p>
+            <form id="registration">
+            
+            <div class="iinfo" id="name_info"></div>
+            <div>
+                <label for="userid">Username</label>
+                <input type="text" id="userid" value="" onChange="validate_userid()"/>
+                <div class="requirement">Min. 5 characters, only space and alphabet.</div>
+            </div>
+            
+            <div class="iinfo" id="pass_info"></div>
+            <div>
+                <label for="passid">Password</label>
+                <input type="password" id="passid" value="" onChange="validate_passid()"/>
+                <div class="requirement">Min. 8 characters.</div>
+            </div>
+            
+            <div class="iinfo" id="confpass_info"></div>
+            <div>
+                <label for="confirmpass">Confirm Password</label>
+                <input type="password" id="confirmpass" value="" onChange="validate_confirmpass()"/>
+                <div class="requirement">Must be equal with password</div>
+            </div>
+            
+            <div class="iinfo" id="fullname_info"></div>
+            <div>
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" value="" onChange="validate_fullname()"/>
+                <div class="requirement">Must have space between two character.</div>
+            </div>
+            
+            <div class="iinfo" id="birth_info"></div>
+            <div>
+                <label for="birth">Birth Date</label>
+                <input type="text" id="birth" value="" />
+                <div class="requirement">YYYY-MM-DD</div>
+            </div>
+            
+            <div class="iinfo" id="email_info"></div>
+            <div>
+                <label for="email">Email</label>
+                <input type="text" id="email" value="" onChange="validate_email()"/>
+                <div class="requirement">Min. 1 character before @.<br/>Min. 1 character between @ and'.'<br/>Top level domain should contain at least 2 characters.<br/>ex. x@x.xx</div>
+            </div>
+            
+             <div class="iinfo" id="avatar_info"></div>
+            <div>
+                <label for="avatar">Avatar</label>
+                <input type="file" id="avatar" value="" onChange="validate_avatar()"/>
+                <div class="requirement">File must be .jpg or .jpeg.</div>
+            </div>
+           
+       		<input type="submit" value="Register" name="register"/>
+            
+			</form>
+            <a class="close" href="#close"></a>
+  		</div>
+	
+	</div>
+</div>
     
     
     <div class="footer">This Website is created for Internet Programming Assignment<br />

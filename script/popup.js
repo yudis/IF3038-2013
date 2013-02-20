@@ -7,43 +7,6 @@ function login(){
    	window.location="Dashboard.html";
 }
 
-/*function formValidation(){
-	var uid = document.registration.userid;
-	var passid = document.registration.passid;
-	var confpass = document.registration.confirmpass;
-	var fullname = document.registration.fullname;
-	var birth = document.registration.birth;
-	var email = document.registration.email;
-	var avatar = document.registration.avatar;
-	if (username_validation(uid,5)){
-		if (passid_validation(passid,8)){
-			if (confpass_validation(passid,confpass)){
-				if (fullname_validation(fullname)){
-					if (email_validation(email)){
-						if(avatar_validation(avatar)){
-							
-						}
-					}
-				}
-			}
-		}
-	}
-	return false;
-}*/
-
-/*function username_validation(){
-	validToWrite = '<span class="valid">' + validToWrite + '</span>';
-	errorToWrite = '<span class="error">' + errorToWrite + '</span>';
-	var uid = document.getElementById('userid').value
-	var uid_len = uid.value.length;
-	if (uid_len <= 4){
-		return false;
-		document.getElementById('userid').innerHTML = errorToWrite;
-	}
-	return true;
-	document.getElementById(idToWrite).innerHTML = validToWrite;
-}*/
-
 function validate_Output(regexp, input, syntaxerror, syntaxvalid, idToWrite) {
 	var valid = (regexp.test(input));	
 	syntaxvalid = '<span class="valid">' + syntaxvalid + '</span>';
@@ -53,11 +16,11 @@ function validate_Output(regexp, input, syntaxerror, syntaxvalid, idToWrite) {
 }
 
 function validate_userid() {
-	var userid = document.getElementById('userid').value;
+	/*var userid = document.getElementById('userid').value;
 	var passid = document.getElementById('passid').value;
 	if(userid = passid)
 		document.getElementById('userid').innerHTML = '<span class="error">ERROR!</span>';
-	else
+	else*/
 		validate_Output(/^.{5,}$/, document.getElementById('userid').value,'ERROR!','OK','name_info');
 }
 

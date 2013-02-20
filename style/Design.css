@@ -72,6 +72,7 @@ body {
 	color:#aaaaaa;
 	font-size:0.8em;
 	font-family:Tahoma;
+	width:400px;
 	
 	-webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -86,6 +87,21 @@ body {
 
 .Login input[type="password"]:hover {
 	border-color: #555 #888 #888;
+}
+
+.ukuranmenu1 {
+	width:122px;
+	float:left;
+}
+
+.ukuranmenu2 {
+	width:293;
+}
+
+.LoginBoard {
+	width:800px;
+	height:415px;
+	background-color:#FFF;
 }
 
 .panel {
@@ -230,8 +246,7 @@ a#join_pop:hover {
 }
 
 .iinfo {
-	/*position:absolute;*/
-	padding-right:70;
+	padding-right:55;
 	font-size:0.8em;
 	text-align:right;
 	float:right;
