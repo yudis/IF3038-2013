@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>TUBES PROGIN</title>
+	<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<div id="topbar">
+			<div id="topbar_logo">
+				<img id="logo" src="img/logo.png">
+			</div>
+			<div id="topbar_logo2">
+				<img id="logo2" src="img/namalogo.png">
+			</div>
+			<div id="topbar_search">  
+				<input type="search" results="5" placeholder="search"/>
+			</div>
+		</div>
+	</div>
+	<section>
+		<div id="content" class="wrap">
+			<div id="tagline">
+				<div id="texttag">
+				<b>Welcome to to-do shared</b>
+				</div>
+			</div>
+			<div id="login">
+				<form class="form">
+					<p>
+						<label for="login">Username</label>
+						<input type="text" name="login" placeholder="Username">
+					</p>
+					<p>
+						<label for="password">Password</label>
+						<input type="password" name="password" placeholder="Password">
+					</p>
+					<p>
+						<input type="checkbox" name="remember">
+						<label for="remember">Remember me</label>
+					</p>
+					<p>
+						<input type="submit" name="submit" value="Sign in" >
+					</p>
+				</form>
+			</div>
+			<div id="register">
+			<form class="daftar">
+				<p>
+					<label for="daftar">Create an account</label>
+				</p>
+				<div>
+					<input id="username" type="text" name="username" placeholder="Username" pattern="^.{5,}$" required>
+					<img id="valid1" src="">
+				</div>
+				<div>
+					<input id="password" type="password" name="password" placeholder="Password" pattern="^.{8,}$" required>
+					<img id="valid2" src="">
+				</div>
+				<div>
+					<input id="copassword" type="password" name="copassword" placeholder="Confirm Password" pattern="^.{8,}$" required>
+					<img id="valid3" src="">
+				</div>
+				<div>
+					<input id="namalengkap" type="text" name="namalengkap" placeholder="Nama Lengkap" pattern="^.+ .+$" required>
+					<img id="valid4" src="">
+				</div>
+				<p>
+					<label for="tanggal">Tanggal Lahir</label>
+				</p>
+				<div>
+					<input id="email" type="text" name="email" placeholder="Email" pattern="^.+@.+\...+$" required>
+					<img id="valid5" src="">
+				</div>
+				<p>
+					<label for="avatar">Foto Profil</label>
+				</p>
+				<p>
+					<input type="file" name="upload" id="inputfile" onchange="check_image_jpg();">
+					<img id="valid6" src="">
+				</p>
+				<p>
+					<input id="submit" type="submit" name="submit" value="Daftar" disabled="disabled">
+				</p>
+			</form>
+			</div>
+		</div>
+	</section>
+	<footer id="footer_wrap">
+		<hr>about us
+	</footer>
+	
+	<script type="text/javascript" src="fungsi.js">
+	</script>
+</body>
+</html>
