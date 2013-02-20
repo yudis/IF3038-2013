@@ -1,0 +1,73 @@
+<!--coba login-->
+<head>
+	<title>ToDo</title>
+	<link rel="stylesheet" type="text/css" media="all" href="css.css" />
+</head>
+
+<body>
+
+<header >	
+			
+			<div id="tes">
+			<br></br>
+			<h1 id="site-title">   <img src="images/ToDo2.png"/>
+			</div>
+		
+	</header>
+
+			<div id="center">
+		<div id="primary">
+			<div id="content" role="main">
+					<article class="post">	
+						
+						<div id="logincontent">
+						 <div style="float: left; width: 50%; border:50px;">
+							<form name="login">
+							<p>Username<input type="text" name="userid"/></p>
+							<p>Password<input type="password" name="pswrd"/></p>
+							<input type="button" onclick="check(this.form)" value="Login"/>
+							<input type="reset" value="Cancel"/>
+							</form>
+					
+						</div>
+						 
+						 <div style="float: right; width: 50%;">
+							<video width="320" height="240" controls="controls">
+							  <source src="video/movie.mp4" type="video/mp4">
+							  
+							Your browser does not support the video tag.
+							</video>
+						</div>
+						 <br style="clear: left;" />
+						</div>	
+	
+				<script language="javascript">
+					function check(form)/*function to check userid & password*/
+					{
+					 /*the following code checkes whether the entered userid and password are matching*/
+					 if(form.userid.value == "myuserid" && form.pswrd.value == "mypswrd")
+					  {
+						window.open('index.html')/*opens the target page while Id & password matches*/
+					  }
+					 else
+					 {
+					   alert("Error Password or Username")/*displays error message*/
+					  }
+					}
+				</script>			
+					</article>		
+				</div>			
+			</div>
+					
+		
+
+		<footer id="colophon">
+			<div id="site-generator">
+				<p>&copy; <a href="#">AAA</a>-IF3038 Pemrograman Internet 2013 <br />
+				</p>
+			</div>
+		</footer>
+	</div>
+	
+</div>	
+</body>
