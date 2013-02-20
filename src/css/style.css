@@ -144,11 +144,11 @@ nav ul li a:hover, nav ul li a .active
 }
 #search_inner
 {
-	width: 220px;
+	width: 228px;
 }
 #search:hover, #search.active
 {
-	width: 220px;
+	width: 228px;
 }
 #search:hover #search_button
 {
@@ -169,20 +169,26 @@ nav ul li a:hover, nav ul li a .active
 	display: block;
 	background: url(../images/search.png) no-repeat;
 	margin: 0px 4px;
+	padding: 0px;
 	float:left;
 }
 #search_form
 {
 	float: left;
-	padding: 6px 0px;
+	margin: 6px 0px;
 }
 #search_text
 {
 	width: 180px;
 	outline: none;
 	border: none;
+	position: relative;
+	top: -2px;
 	background-color: transparent;
 	border-bottom: 1px solid #CCC;
+	padding-bottom: 3px;
+	padding-left: 3px;
+	padding-right: 3px;
 	margin-left: 0;
 	margin-right: 0;
 }
