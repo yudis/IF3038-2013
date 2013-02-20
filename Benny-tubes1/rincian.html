@@ -5,7 +5,7 @@
 <script type="text/javascript"/>
 	function editing(){
 		if(document.getElementById("changeOrEdit").value =="Edit"){
-			document.getElementById("deadline").removeAttribute("disabled");
+			document.getElementById("deadline").style.display="none";
 			document.getElementById("dua").removeAttribute("disabled");
 			document.getElementById("tiga").removeAttribute("disabled");
 			document.getElementById("tag").removeAttribute("disabled");
@@ -13,7 +13,7 @@
 			document.getElementById("changeOrEdit").value ="Save";
 		}
 		else{
-			document.getElementById("deadline").setAttribute("disabled");
+			document.getElementById("deadline").style.display="block";
 			document.getElementById("dua").setAttribute("disabled");
 			document.getElementById("tiga").setAttribute("disabled");
 			document.getElementById("tag").setAttribute("disabled");
@@ -77,13 +77,6 @@
             </form>
         </div>
         <div style="text-align:center" id="namaTugas">Nama Tugas</div>
-        <style>
-			#tanggal{
-				display:none;
-			}
-			
-		</style>
-           
             <div class="rincianKiri">Deadline</div><div class="rincianKanan"><input id="deadline" class="inputText" type="text" disabled="disabled"/></div>
 			<div id="tanggal">
 				<select name="day">

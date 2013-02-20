@@ -608,3 +608,9 @@ br
 	width:85%;	
 	float:left;
 }
+#tanggal{
+	display:none;
+}
+#namaTugas{
+	font-size:20px;
+}
