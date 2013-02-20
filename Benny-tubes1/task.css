@@ -590,3 +590,23 @@ br
     visibility: hidden;
 	opacity = 0.1;
 }
+.listUL{
+
+
+	list-style-type: none;
+}
+.listLI{
+	width: 50%;
+	float:left;
+}
+.inputText{
+	width:238px;	
+}
+.rincianKiri{
+	width:15%;	
+	float:left;
+}
+.rincianKanan{
+	width:85%;	
+	float:left;
+}
