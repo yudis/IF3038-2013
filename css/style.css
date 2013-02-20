@@ -1,3 +1,66 @@
 body {
+	margin: 0;
 	font-family: sans-serif;
+	font-size: 14px;
+	line-height: 1.35;
+}
+
+/** Base Layout **/
+.site-container {
+	margin-left: auto;
+	margin-right: auto;
+}
+.site-footer {
+	clear: both;
+}
+
+/** Header **/
+.site-header {
+	float: left;
+	width: 100%;
+	padding: 15px 0;
+	border-bottom: 1px solid #eee
+}
+.site-header h1 {
+	margin: 0;
+	float: left;
+}
+.site-header ul {
+	margin: 0;
+}
+
+/** Responsive design **/
+
+/* Handhelds - smartphones */
+@media (max-width: 767px) {
+}
+
+/* Tablets in portrait */
+@media (min-width: 768px) and (max-width: 979px) {
+}
+
+/* Landscape tablets and desktops in small windows */
+/* Two-column design, use floats */
+@media screen and (min-width: 980px) {
+	body {
+		background: #eee;
+	}
+	.site-container {
+		width: 920px;
+		background: white;
+		padding: 0 20px;
+	}
+	.primary {
+		float: left;
+		width: 80%;
+	}
+	.secondary {
+		float: left;
+		width: 20%;
+	}
+}
+
+/* Full-screen desktops and other large-format media */
+@media (min-width: 1200px) {
+
 }
