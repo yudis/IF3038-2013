@@ -1,8 +1,8 @@
 // JavaScript Document
 
 function login(){
-	var username = "username";
-	var password = "pass";
+	var username = document.getElementById('userlogin').value;
+	var password = document.getElementById('passlogin').value;
 	if(username=="admin" && password=="admin")
    	window.location="Dashboard.html";
 }

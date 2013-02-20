@@ -68,11 +68,11 @@ body {
 
 .Login {
 	background-color:#201B1B;
-	text-align:center;
 	color:#aaaaaa;
 	font-size:0.8em;
 	font-family:Tahoma;
-	width:400px;
+	width:800px;
+	text-align:center;
 	
 	-webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -90,18 +90,19 @@ body {
 }
 
 .ukuranmenu1 {
-	width:122px;
-	float:left;
-}
-
-.ukuranmenu2 {
-	width:293;
+	width:385px;
+	text-align:right
 }
 
 .LoginBoard {
 	width:800px;
 	height:415px;
 	background-color:#FFF;
+	
+}
+
+.LoginMatch {
+	height:120px;	
 }
 
 .panel {
