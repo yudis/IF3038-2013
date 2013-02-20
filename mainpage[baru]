@@ -1,0 +1,91 @@
+<!-- created by Enjella-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>TUBESPROGIN - MAINPAGE</title>
+		<link rel="stylesheet" type="text/css" href="style.css" title="style1" />
+		<link rel="stylesheet" type="text/css" href="style2.css" title="style2" />
+		<script type="text/javascript" src="script.js"></script>
+	</head>
+	
+	<body style="background-image:url(images/profil.jpg)" background-size= 100% 100% repeat-x top center>
+		<div id="wrapper">
+			<div id="header">
+				<div id="logo">
+					<a href="mainpage.html"><img src="images/logo.png" alt="Logo" width="300" height="100" /></a>
+				</div>
+				
+				<div>
+					<ul>
+						<div><a href="signin.html" float=right>SIGN IN</a></div>
+					</ul>
+				</div>
+				
+				<div id="menu">
+					<ul>
+						<li id="menuhome2"><a href="dashboard.html">DASHBOARD</a></li>
+						<li id="menudkonten2"><a href="profil.html">PROFIL</a></li>
+						<li id="menuregister2"><a href="logout.html">LOGOUT</a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="main">
+				<div id="konten">
+					<div class="atas">
+					</div>
+					<div class="tengah">
+						<div class="judul">
+							SIGN UP
+						</div>
+						<div class="isi">
+							<form action="" method="get">
+								<div class="register-label btg-mrh" id="btg">*) wajib diisi</div>
+								<div class="clear"></div>
+								<div class="register-label">Username <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="username" id="form-username" onkeyup="validate()" /></div>
+								<div class="clear" id="error-username"></div>
+								<div class="register-label">Password <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="password" name="password" id="form-password" onkeyup="validate()" /></div>
+								<div class="clear" id="error-password"></div>
+								<div class="register-label">Confirm password <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="password" name="cpass" id="form-cpass" onkeyup="validate()" /></div>
+								<div class="clear" id="error-cpass"></div>
+								<div class="register-label">Nama lengkap <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="nama" id="form-nama" onkeyup="validate()" /></div>
+								<div class="clear" id="error-nama"></div>
+								<div class="register-label">Tanggal lahir <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="tgl" id="form-tgl" onkeyup="validate()" /></div><div id="caldad"><div id="calendar"></div><a href="javascript:showcal(2,2012);void(0);"><img src="images/cal.gif" alt="Calendar" /></a></div>
+								<div class="clear" id="error-tgl"></div>
+								<div class="register-label">Email <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="email" id="form-email" onkeyup="validate()" /></div>
+								<div class="clear" id="error-email"></div>
+								<div class="register-label">Avatar <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="file" name="avatar" id="form-avatar" onchange="validate()" /></div>
+								<div class="clear" id="error-avatar"></div>
+								<div class="register-label">Jenis kelamin <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><input type="radio" name="sex" value="male" id="form-male" onclick="validate()" /> Male <input type="radio" name="sex" value="female" id="form-female" onclick="validate()" /> Female</div>
+								<div class="clear" id="error-sex"></div>
+								<div class="register-label">About me</div><div class="register-td">:</div><div class="register-input"><textarea class="register-input-input" name="about" rows="5" cols="50"></textarea></div>
+								<div class="clear"></div>
+								<div class="register-submit"><input type="button" name="register" value="Daftar" disabled="disabled" id="form-button" onclick="window.location='dkonten.html'" /></div>
+							</form>
+						</div>
+					</div>
+					<div class="bawah">
+					</div>
+				</div>
+				</div>
+				
+			<div id="footer">
+				<div id="little">
+				</div>
+				<div id="siteinfo">
+					&copy; 2013. Sukasukaguelah.<br />
+					Hak cipta dilindung oleh Gue.
+				</div>
+				<div id="botlink">
+				<ul>
+					<li><a href="dashboard.html">DASHBOARD</a></li>
+					<li><a href="profil.html">PROFIL</a></li>
+					<li><a href="logout.html">LOGOUT</a></li>
+				</ul>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="register.js"></script>
+	</body>
+</html>
