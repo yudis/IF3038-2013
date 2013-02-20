@@ -3,15 +3,6 @@
  * and open the template in the editor.
  */
 
-function login () {
-    var user = document.getElementsById("user").value;
-    if  (true) {
-        window.open("/dashboard.html", "_self");
-        document.getElementById("logo").style.visibility="hidden";
-    } else {
-        document.getElementById("register").style.visibility="hidden";
-    }
-}
 
 function showList(){
 document.getElementById("listtugas").style.visibility="visible";
