@@ -136,24 +136,6 @@
 								</div>
 							</button>
 						</li>
-						<li class="taskbuttonlist" id ="officetask">
-							<button type "button" class="taskbutton" >
-								<div class = "buttontitle">
-									<div class = "buttontitleicon">
-										<img src = "../image/office.png" class="iconinbutton">
-									</div>
-									<div class = "buttondescName">
-										<div>
-											Kerjain progin!!
-										</div>
-										<div class = "buttondeadline">
-											deadline : 22 Februari 2013
-											<br>tag : kuliah, tugas
-										</div>
-									</div>
-								</div>
-							</button>
-						</li>
 						<li class = "taskbuttonlist" id="personaltask">
 							<button type "button" class="taskbutton" >
 								<div class = "buttontitle">
@@ -169,6 +151,24 @@
 											<br>tag : valentine, coklat
 										</div>
 									 </div>
+								</div>
+							</button>
+						</li>
+						<li class="taskbuttonlist" id ="officetask">
+							<button type "button" class="taskbutton" >
+								<div class = "buttontitle">
+									<div class = "buttontitleicon">
+										<img src = "../image/office.png" class="iconinbutton">
+									</div>
+									<div class = "buttondescName">
+										<div>
+											Kerjain progin!!
+										</div>
+										<div class = "buttondeadline">
+											deadline : 22 Februari 2013
+											<br>tag : kuliah, tugas
+										</div>
+									</div>
 								</div>
 							</button>
 						</li>
@@ -332,14 +332,18 @@ function validateCategoryName(){
 	if(document.getElementById("user").value != ""){
 		document.getElementById("false").src = "../image/true.png";
 		document.getElementById("addCategoryButton").disabled = false;
+		document.getElementById("test").disabled = false;
 	}else{
 		document.getElementById("false").src = "../image/false.png";
+		document.getElementById("addCategoryButton").disabled = true;
 		document.getElementById("test").disabled = true;
 	}
 }
 
 function addingit(){
 	if(document.getElementById("false").src.indexOf("image/true.png")!=-1) {
+		document.getElementById("addCategoryButton").disabled = false;
+		document.getElementById("test").disabled = false;
 		document.getElementById("familyelement").style.display = "block";
 	}
 }
@@ -348,7 +352,10 @@ function activeit(){
 	document.getElementById("user").value = "";
 	document.getElementById("pengguna").value = "";
 	document.getElementById("false").src = "../image/false.png";
+	document.getElementById("addCategoryButton").disabled = true;
+	document.getElementById("test").disabled = true;
 }
+
 
 // -->
 </script>
