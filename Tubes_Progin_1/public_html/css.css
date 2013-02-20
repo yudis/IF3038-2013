@@ -1,7 +1,7 @@
 /* 
     Document   : css
     Created on : Feb 18, 2013, 5:32:48 PM
-    Author     : frilla
+    Author     : frilla, timo, stefan
     Description:
         Purpose of the stylesheet follows.
 */
@@ -55,7 +55,10 @@ input.liusername{
 #search {
     position: absolute;
     left: 85px;
-    width: 120px;
+}
+
+#box {
+	width: 120px;
 }
 
 .kategori {
@@ -66,10 +69,11 @@ input.liusername{
     background-color: black;
     -webkit-border-radius: 10px 10px 10px 10px;
     border-bottom: 15px;
+	opacity: 0.8;
 }
 
 .kategori:hover {
-    background-color: white;
+    opacity: 1;
 }
 
 #category {
@@ -115,6 +119,18 @@ input.liusername{
 textArea {
     height: 70px;
     width: 350px;
+}
+
+#wanted{
+    top: 75px;
+    position:absolute;
+    background-color:transparent;
+    border:0px;
+    left: 220px;
+    margin-left: 100px;
+    width: 350px;
+    height: 443px;
+    visibility: hidden;
 }
 
 #listtugas{
