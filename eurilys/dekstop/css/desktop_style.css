@@ -56,6 +56,22 @@ header {
 	margin-left:7px;
 	width:55%;
 }
+.header_menu {
+	float:right; margin-top:25px;background-color:#53455B; height:60%; width:60%;
+	
+}
+.header_menu_button {
+	padding-top:15px; padding-bottom:15px; 
+	width:20%; display:block;color:white;
+	background-color:#6FBEC6; margin-left:20px;margin-top:15px; text-align:center; 
+	font-size:18px; cursor:pointer; float:left;
+}
+.header_menu_button:hover {
+	background-color:#bae4d3;text-decoration:none;
+}
+#search_box {
+	float:left;margin-left:20px; height:25px; margin-top:40px;
+}
 /* LOGO 
 ----------------------------------------------------------------------------------------------------------------- */
 #fleur {
