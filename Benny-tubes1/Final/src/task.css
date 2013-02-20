@@ -15,7 +15,7 @@ body
 	background: -ms-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
 	background: -o-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
 	background: -webkit-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
-	background: linear-gradient(top,rgb(239,228,171), rgb(255,255,255));
+	background: linear-gradient(rgb(239,228,171), rgb(255,255,255));
 	background-repeat:no-repeat;
 }
 
