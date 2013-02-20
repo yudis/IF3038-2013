@@ -1,48 +1,67 @@
 <!DOCTYPE html>
 <html>
+	<!--
+	<IFRAME name="iframe" src="src/header.html" width='100%' height='auto' marginwidth=0 marginheight=0 hspace=0 vspace=0 frameborder=0 scrolling=auto></IFRAME>
+	-->
+	
 	<head>
-		<link href='webcss.css' rel='stylesheet' type='text/css'>
+		<link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
+		<script type="../text/javascript" src="js/animation.js"> </script> 
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-		
-		<title>Dashboard</title>
-	</head>	
+		<title> Eurilys </title>
+	</head>
 	
 	<body>
-		<div id="wrap">
-			<div id="header">
-				<div id="topmenu">
-					<a href="">Profile</a>
-					<a href="dashboard.html">Dashboard</a>
-					<a href="">Logout</a>
+		<!-- Web Header -->
+		<header>
+			<div id="header_container"> 
+				<div class="left">
+					<img src="../img/logo.png">
+				</div>
+				<input id="search_box" type="text" placeholder="search...">
+				<div class="header_menu"> 
+					<div class="header_menu_button current_header_menu"> DASHBOARD </div>
+					<div class="header_menu_button"> PROFILE </div>
+					<div class="header_menu_button"> LOGOUT </div>
 				</div>
 				
-				<a href="dashboard.html"><div id="banner">
-					<div id="fleur">&#9884;</div><div id="textdesu">Eurilys</div>
-					<div id="tagline">For your better organization</div>
-					
-			
-				</div></a>
-					<div id="searchbar">
-					
-					<input type="text" class="forminput" size="40" id="search" value="Cari tugas...">
-					
+			</div>
+			<div class="thin_line"></div>
+		</header>	
+	
+		
+		<!-- Web Content -->
+		<section>
+			<div id="navbar">
+				<div id="short_profile">
+					<img id="profile_picture" src="../img/avatar1.png">
+					<div id="profile_info">
+						Cindy Kartika
+					</div>
+					<input type="file" id="profile_pic_upload" name="profile_picture"/> 
+				</div>
+				<div id="task_list">
+					All Task
+					<ul>
+						<li> Kuliah </li>
+						<li> Proyek </li>
+						<li> Tugas </li>
+					</ul>
 				</div>
 			</div>
-				
-			<div id="inner">
-				<div id="dashboard">
-				Selamat datang di dashboard Anda, *username*! Berikut adalah daftar tugas Anda:
-				<br/><br/><div id="tasks"> (gak ngerti dinamisnya gimana @.@ pake js?)</div>
-				<br/><br/><div id="categoryselector">Kategori: <select id="categories">
-					<option>All</option>
-					<option>Kategori 1</option>
-					<option>Kategori 2</option>
-					<option>Kategori 3</option>
-				</select> </div>
-				<div id="menus"><a href="">New Category</a> <a href="">New Task</a></div>
-				</div>
+			<div id="dynamic_content">
+				isi dynamic content disini
 			</div>
+		</section>
+		
+		<!-- Footer Section -->
+		<div class="thin_line"></div>
+		<footer>
+			<div id="footer_container"> 
 				
-		</div>
+			</div>
+		</footer>
 	</body>
+
+<!-- ini nanti jadiin footer -->
 </html>
