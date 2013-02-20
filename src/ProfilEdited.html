@@ -10,7 +10,7 @@
 	<body>
 		<header>
 			<div id="header_wrap" class="wrap">
-				<a href="#"> <img id="header_logo" src="images/icon1.png" alt="Logo Produk" /> </a>
+				<a href="#"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
 				<div id="header_title">
 					<h1> <a href="#">MOA</a> </h1>
 					<h4>Multiuser Online Agenda</h4>
@@ -93,6 +93,9 @@
 								<label for="profil_avatar">Avatar</label>
 								<img id="avatar_image1" src="images/avatar.jpg" alt="avatar profil" />
 							</div>
+							<div class="row">
+								<div id="success_edit">Perubahan berhasil dilakukan <img src="images/tick.jpg" width="23" height="13"></div>
+							</div>
 							<input id="profil_submit" type="submit" value="Edit" title="Semua elemen form harus diisi dengan benar dahulu."/>
 						</form>
 					</div>
@@ -117,8 +120,7 @@
 						</div>
 						<form id="register_form" >
 							<div class="row">
-								<label for="register_username">Username</label>
-								<input id="register_username" name="username" pattern="^.{5,}$" type="text" title="Username minimal harus terdiri dari 5 karakter." required />
+								<label id="profil_username">admin</label>
 							</div>
 							<div class="row">
 								<label for="register_password">Sandi</label>
