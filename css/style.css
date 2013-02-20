@@ -76,8 +76,8 @@ body {
 	transition: background .2s;
 }
 .site-nav li.active a {
-	background: white;
-	box-shadow: 1px 1px 2px #eee;
+	background: rgba(0, 0, 0, 0.7);
+	color: white;
 }
 .search-box {
 	float: left;
@@ -86,7 +86,63 @@ body {
 	padding-top: 7px;
 }
 
-
+/* Dashboard */
+.task {
+	padding: 7px 0;
+	position: relative;
+	margin-bottom: 5px;
+}
+.task:nth-child(odd) {
+	background: #f6f6f6;
+}
+.task:hover {
+	background: #eee;
+}
+.task h1 {
+	margin: 0;
+	font-size: 16px;
+	font-weight: normal;
+	vertical-align: middle;
+}
+.task-checkbox {
+	vertical-align: middle;
+	display: block;
+	float: left;
+	width: 2em;
+	text-align: left;
+}
+.task-checkbox input {
+	margin: 5px 0;
+	margin-left: 0;
+	margin-right: 0;
+	padding: 0;
+}
+.task .category {
+	display: none;
+}
+.task p, .task .details div {
+	display: inline;
+}
+.task .details {
+	position: absolute;
+	top: 7px;
+	right: 10px;
+	font-size: 16px;
+	color: #999;
+}
+.task .detail-label {
+	display: none;
+}
+.task .details .tags {
+	margin-left: 10px;
+}
+.tag {
+	font-size: 12px;
+	color: #666;
+	background: #ccc;
+	padding: 2px 4px;
+	border-radius: 3px;
+}
 
 /** Responsive design **/
 
