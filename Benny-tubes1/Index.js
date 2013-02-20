@@ -108,3 +108,37 @@ function openReg(){
 function doneReg(){
 	alert("Registrasi Berhasil! (tapi bohong) ");
 }
+
+function doneAdd(e){
+	e.preventDefault();
+	alert("Penambahan Tugas Berhasil! (tapi bohong) ");
+	
+	window.location = "./dashboardfix.html"; 	
+}
+
+function checkpostal(){
+		var jpg=/\.jpg$/
+		var png=/\.png$/
+		var pdf=/\.pdf$/
+		var mp4=/\.mp4$/
+		if (document.getElementById("ali").value.search(jpg)!=-1)  
+		{
+			alert("File yang dipilih berformat jpg.");
+		}
+		else if (document.getElementById("ali").value.search(png)!=-1)
+		{
+			alert("File yang dipilih berformat png.");
+		}
+		else if (document.getElementById("ali").value.search(pdf)!=-1)
+		{
+			alert("File yang dipilih berformat pdf.");
+		}
+		else if (document.getElementById("ali").value.search(mp4)!=-1)
+		{
+			alert("File yang dipilih berformat mp4.");
+		}
+		else{
+			alert("File yang dipilih harus berformat gambar, video, atau file!");
+			document.getElementById("ali").value = "";
+		}
+	}
