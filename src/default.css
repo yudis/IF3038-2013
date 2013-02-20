@@ -133,6 +133,9 @@ nav ul li a:link, nav ul li a:visited {
     float: left;
     margin: 0;
 }
+.inlineblock {
+    display: inline-block;
+}
 h1 {
     color: #5fae53;
     padding: 5px 12px 12px 12px;
@@ -142,7 +145,20 @@ h2 {
     background-color: #5fae53;
     color: #fff;
     padding: 8px 12px 4px 12px;
+    margin: 3px 0 3px 0;
+}
+button, .button {
+    display: inline-block;
+    background-color: #78c368;
+    padding: 3px 6px;
+    font: 80%;
     margin: 0;
+    color: #fff;
+    border: #499b3d 2px solid;
+}
+button:active, button:hover, .button:active, .button:hover {
+    color: #499b3d;
+    cursor: pointer;
 }
 .tugas {
     padding: 12px;
@@ -194,15 +210,25 @@ h2 {
     top: 0px;
     left: 0px;
     width: 100%;
+    display: none;
 }
 #popUpDiv {
     position: absolute;
-    width: 300px;
+    width: 600px;
     height: 300px;
     z-index: 9002;
     border: 5px #5fae53 solid;
     background-color: #fff;
     box-shadow: 0px 0px 20px #000;
+    display: none;
+    overflow-x: scroll;
+}
+.rightalign {
+    text-align: right;
+}
+.padding12px {
+    padding: 0 12px;
+    margin: 0px;
 }
 footer.content {
     clear: both;
@@ -253,4 +279,15 @@ footer.content {
     border: #5fae53 dashed 2px;
     padding: 12px;
     margin: 12px;
+}
+
+.rincianLabel {
+    width: 15%;
+    display: inline-block;
+    vertical-align: text-top;
+}
+.rincianDetail {
+    width: 85%;
+    display: inline-block;
+    vertical-align: text-top;
 }

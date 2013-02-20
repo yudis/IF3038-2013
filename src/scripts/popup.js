@@ -1,6 +1,13 @@
+/**
+ * Display an HTML Pop-Up
+ * Original Soruce: http://www.pat-burt.com/web-development/how-to-do-a-css-popup-without-opening-a-new-window/
+ * Modified for College Task (IF3094 - Pemrograman Internet)
+ * IF-ITB 2013
+ */
+
 function toggle_display(elmt_id) {
     var element = document.getElementById(elmt_id);
-    if ( element.style.display == 'none' ) {
+    if (element.style.display == 'none' || element.style.display == '') {
         element.style.display = 'block';
     } else {
         element.style.display = 'none';
@@ -29,7 +36,7 @@ function blanket_size(content, blanket, height) {
     popUpDiv.style.top = popUpDiv_height + 'px';
 }
 
-function popup_pos(content, height) {
+function popup_pos(content, width) {
     if (typeof window.innerWidth != 'undefined') {
         viewportwidth = window.innerHeight;
     } else {
@@ -45,13 +52,15 @@ function popup_pos(content, height) {
         }
     }
     var popUpDiv = document.getElementById(content);
-    window_width=window_width/2-(height/2);
+    window_width=(window_width-width)/2;
     popUpDiv.style.left = window_width + 'px';
 }
 
-function popup(content, blanket, height) {
+function popup(content, blanket, height, width) {
     blanket_size(content, blanket, height);
-    popup_pos(content, height);
+    popup_pos(content, width);
     toggle_display(blanket);
-    toggle_display(content);	
+    toggle_display(content);
+    
+    return false;
 }
