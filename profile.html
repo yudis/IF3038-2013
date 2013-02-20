@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> Banana Board - Home </title>
+<link rel="stylesheet" style="text/css" href="style.css">
+</head>
+
+<body>
+    <div id="header">
+        <div id="logo">
+            <img src="logo.png"/>
+        </div>
+        <div id="menu">
+			<ul>
+                <li> <a href="home.html"> DASHBOARD </a> </li>
+                <li> <a href="profile.html"> PROFILE </a> </li>
+                <li> <a href="index.html"> LOGOUT </a> </li>
+            </ul>
+            <form action="index.html">
+				<input class="box" type="text" onClick="this.value='';" onFocus="this.select()" onBlur="this.value=!this.value?'Enter search query':this.value;" value="Enter search query">
+				<input class="button" type="submit" value="">
+            </form>
+        </div>          
+    </div>
+    
+    <!-- Foto profile -->
+    <div id="backgroundprofile">
+    	<img id="gambarprofile" src="logo.png" alt="Smiley face" height="300" width="500" style="margin-right:50px">
+        <div style="margin:50px;">
+        	<div class="label">Nama Lengkap</div>: Yulianti Oenang<br/>
+            <div class="label">Email</div>: 13510059@std.stei.itb.ac.id<br/>
+			<div style="width:300px; float:left">Tugas yang sedang dikerjakan</div>:<br/>
+            <div></div>Progin<br/>
+            <div style="width:300px; float:left">Tugas yang sedang telah selesai dikerjakan</div>: <br/> 
+            <div>AI</div>        
+        </div>
+        <button>Edit</button>
+    </div>
+</body>
+</html>
