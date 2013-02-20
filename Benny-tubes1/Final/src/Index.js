@@ -97,14 +97,13 @@ function checkEmail(){
 }
 
 function openReg(){
-	if ((document.getElementById("emailpic").src.indexOf("../image/true.png")!=-1) 
-	&& (document.getElementById("nlengkappic").src.indexOf("../image/true.png")!=-1) 
-	&& (document.getElementById("confpasspic").src.indexOf("../image/true.png")!=-1) 
-	&& (document.getElementById("passpic").src.indexOf("../image/true.png")!=-1)
-	&& (document.getElementById("userpic").src.indexOf("../image/true.png")!=-1))
+	if ((document.getElementById("emailpic").src.indexOf("image/true.png")!=-1) 
+	&& (document.getElementById("nlengkappic").src.indexOf("image/true.png")!=-1) 
+	&& (document.getElementById("confpasspic").src.indexOf("image/true.png")!=-1) 
+	&& (document.getElementById("passpic").src.indexOf("image/true.png")!=-1)
+	&& (document.getElementById("userpic").src.indexOf("image/true.png")!=-1))
 	{
 		document.getElementById('regButton').className  = "lSubmit";
-		document.getElementById('regButton').diasble = true;
 	} else{
 		document.getElementById('regButton').className  = "popupbutton";
 	}
