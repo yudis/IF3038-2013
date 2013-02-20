@@ -12,7 +12,7 @@
 			<div>
                 <label for="username">Nama Kategori</label>
                 <input type="text" name = "categoryname" value = "" id="user" onKeyUp="validateCategoryName()"/>
-                <img src = "image/false.png" id = "false">
+                <img src = "../image/false.png" id = "false">
             </div>
 			<div>
                 <label for="pengguna">Pengguna</label>
@@ -25,13 +25,10 @@
 
 	<div class="header">
 		<div class="hbackground" >
-			<div class="hlogo">
-				<a href="dashboardfix.html">Monkey.Inc</a>
-			</div>
+			<a href="dashboardfix.html"><img class="hlogo" src="../image/logo.png" alt="image01" /></a>
 			<div class="htext"> Monkey.Inc </div>
 			<div class="htagline">"See no Task, Speak no Task, Hear no Task"</div>
 		</div>
-		
 		<div class="hbar">
 			<div class="hmenus">
 				<a class="hmtext" href="dashboardfix.html" >Dashboard </a>
@@ -51,15 +48,15 @@
 		<div class="dashboard">
 			<div id="profile">
                 <div id ="nama">
-					<img src = "image/profpic.jpg" id="profilepicture">
-					<b>Janice Leung</b>
+					<img src = "../image/profpic.jpg" id="profilepicture">
+					<b>Lazy Monkey</b>
 				</div>
 				<div id="kategori">
 					<b>KATEGORI</b>
                 </div>
                 <div id="alltask">
 					<button type "button" id="buttonalltask" onclick="clickalltask()" onfocus="focusonit()">
-						<img src = "image/alltask.png" class="homeicon">
+						<img src = "../image/alltask.png" class="homeicon">
 						All Task
                    </button> 
                 </div> 
@@ -67,7 +64,7 @@
 					<li>
                         <div class="home">
 							<button type "button" id="buttonhome" onclick="clickhome()" onfocus="focusonit()">
-								<img src = "image/homeicon.png" class="homeicon">
+								<img src = "../image/homeicon.png" class="homeicon">
 								H o m e
                            </button>
                         </div>
@@ -75,7 +72,7 @@
 					<li>
                         <div class="home">
 							<button type "button" id="buttonoffice" onclick="clickoffice()" onfocus="focusonit()">
-								<img src = "image/office.png" class="homeicon">
+								<img src = "../image/office.png" class="homeicon">
 								O f f i c e
                             </button>
                         </div>
@@ -83,7 +80,7 @@
 					<li>
                         <div class="home">
 							<button type "button" id="buttonpersonal" onclick="clickpersonal()" onfocus="focusonit()">
-								<img src = "image/personal.png" class="homeicon">
+								<img src = "../image/personal.png" class="homeicon">
 								P e r s o n a l
                             </button>
                         </div>
@@ -91,7 +88,7 @@
 					<li>
                         <div class="home">
 							<button type "button" id="buttonshopping" onclick="clickshopping()" onfocus="focusonit()">
-								<img src = "image/shopping.png" class="homeicon">
+								<img src = "../image/shopping.png" class="homeicon">
 								S h o p p i n g
                             </button>
                         </div>
@@ -101,7 +98,7 @@
                     <li>
                         <div class="home">
 							<button type "button" id="buttonfamily" onclick="clickshopping()" onfocus="focusonit()">
-								<img src = "image/family.png" class="homeicon">
+								<img src = "../image/family.png" class="homeicon">
 								F a m i l y
                             </button>
                         </div>
@@ -113,16 +110,16 @@
 			</div>
 			<div id = "tasklist">
 				<div id = "tasktitle">
-					<img src = "image/book.png" id="task">
+					<img src = "../image/book.png" id="task">
 					T  A  S  K
 				</div>
 				<div id = "task1">
 					<ul class = "listoftaskbutton">
 						<li class="taskbuttonlist" id = "hometask">
-							<button type "button" class="taskbutton" onClick="window.location.href='./rincian.html?^Bersiin kamar!!^14 Februari 2013^kamar, valentine'">
+							<button type "button" class="taskbutton">
 								<div class = "buttontitle">
 									<div class = "buttontitleicon">
-										<img src = "image/homeicon.png" class="iconinbutton">
+										<img src = "../image/homeicon.png" class="iconinbutton">
 									</div>
 									<div class = "buttondescName">
 										<div>
@@ -137,10 +134,10 @@
 							</button>
 						</li>
 						<li class = "taskbuttonlist" id="personaltask">
-							<button type "button" class="taskbutton" onClick="window.location.href='./rincian.html?^Bikin coklat!!^14 Februari 2013^valentine, coklat'">
+							<button type "button" class="taskbutton" >
 								<div class = "buttontitle">
 									<div class = "buttontitleicon">
-										<img src = "image/personal.png" class="iconinbutton">
+										<img src = "../image/personal.png" class="iconinbutton">
 									 </div>
 									 <div class = "buttondescName">
 										<div>
@@ -155,10 +152,10 @@
 							</button>
 						</li>
 						<li class="taskbuttonlist" id ="officetask">
-							<button type "button" class="taskbutton" onClick="window.location.href='./rincian.html?^Kerjain progin!!^22 Februari 2013^kuliah, tugas'">
+							<button type "button" class="taskbutton" >
 								<div class = "buttontitle">
 									<div class = "buttontitleicon">
-										<img src = "image/office.png" class="iconinbutton">
+										<img src = "../image/office.png" class="iconinbutton">
 									</div>
 									<div class = "buttondescName">
 										<div>
@@ -173,10 +170,10 @@
 							</button>
 						</li>
 						<li>
-							<button type "button" class="taskbutton" id ="addtaskbutton" onClick="window.location.href='./Pembuatan Tugas.html'">
+							<button type "button" class="taskbutton" id ="addtaskbutton">
 								<div class = "buttontitle">
 									<div class = "buttontitleicon">
-										<img src = "image/addtask.png" class="iconinbutton">
+										<img src = "../image/addtask.png" class="iconinbutton">
 									 </div>
 									 <div class = "buttondescAdd">
 										<div>
@@ -192,8 +189,6 @@
 		</div>
 	</div>
 	</div>
-	
-	<br>
 	
 	<div class="footer">
 		<p class="ftext">Tubes progin 1</p>
@@ -330,11 +325,11 @@ function clickshopping(){
 
 function validateCategoryName(){
 	if(document.getElementById("user").value != ""){
-		document.getElementById("false").src = "image/true.png";
+		document.getElementById("false").src = "../image/true.png";
 		document.getElementById("addCategoryButton").disabled = false;
 		document.getElementById("test").disabled = false;
 	}else{
-		document.getElementById("false").src = "image/false.png";
+		document.getElementById("false").src = "../image/false.png";
 		document.getElementById("addCategoryButton").disabled = true;
 		document.getElementById("test").disabled = true;
 	}
@@ -351,10 +346,11 @@ function addingit(){
 function activeit(){
 	document.getElementById("user").value = "";
 	document.getElementById("pengguna").value = "";
-	document.getElementById("false").src = "image/false.png";
+	document.getElementById("false").src = "../image/false.png";
 	document.getElementById("addCategoryButton").disabled = true;
 	document.getElementById("test").disabled = true;
 }
+
 
 // -->
 </script>
