@@ -9,6 +9,8 @@
 	border: 1px solid #d9d9d9;
 	background-position: right top;
     background-repeat: no-repeat;
+	background-image: url('../images/valid.png');
+	
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -53,14 +55,9 @@
 	float : left;
 	width : 400px;
 }
-#avatar_image1
+#avatar_image
 {
 	height: 100px;
-}
-#avatar_image2
-{
-	height: 100px;
-	padding-left : 160px;
 }
 #profil_title
 {
@@ -81,7 +78,7 @@
 {
 	padding: 15px;
 }
-#profil_form_wrap label
+#profil_form_wrap label, #profil_form_wrap span
 {
 	float: left;
 	display: block;

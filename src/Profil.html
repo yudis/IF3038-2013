@@ -5,6 +5,7 @@
 		<meta name="Description" content="" />
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
 		<title>MOA - Profil</title>
+		<script type="text/javascript" src="js/is_login.js"></script>
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/profil.css" />
 	</head>
@@ -21,7 +22,7 @@
 					<nav>
 						<ul>
 							<li> <a href="dashboard.html">Dashboard</a> </li>
-							<li> <a href="profil.html">Profil</a> </li>
+							<li> <a href="profil.html" class="active">Profil</a> </li>
 						</ul>
 					</nav>
 					<div id="login_area">
@@ -52,32 +53,31 @@
 		
 		<section>
 			<div id="content_wrap" class="wrap">
-				<div id="profil_title">Profil</div>
 				<div id="profil_area">
 					<div id="profil_form_wrap">
-						<form id="profil_form" action="ProfilEdit.html">
+						<form id="profil_form" action="profiledit.html" method="post">
 							<div id="profil_head">
 								<h1>Admin</h1>
 							</div>
 							<div class="row">
 								<label for="profil_username">Username</label>
-								<label id="profil_text">admin</label>
+								<span id="profil_username"></span>
 							</div>
 							<div class="row">
 								<label for="profil_name">Nama Lengkap</label>
-								<label for="profil_text">admin admin</label>
+								<span id="profil_name"></span>
 							</div>
 							<div class="row">
 								<label for="profil_birth_date">Tanggal Lahir</label>
-								<label for="profil_text">01/01/2013</label>
+								<span id="profil_birth_date"></span>
 							</div>
 							<div class="row">
 								<label for="profil_email">Email</label>
-								<label for="profil_text">admin@admin.itb.ac.id</label>
+								<span id="profil_email"></span>
 							</div>
 							<div class="row">
-								<label for="profil_avatar">Avatar</label>
-								<img id="avatar_image1" src="images/avatar.jpg" alt="avatar profil" />
+								<label for="avatar_image">Avatar</label>
+								<img id="avatar_image" src="images/avatar.jpg" alt="avatar profil" />
 							</div>
 							<input id="profil_submit" type="submit" value="Edit" title="Semua elemen form harus diisi dengan benar dahulu."/>
 						</form>
@@ -109,57 +109,27 @@
 		<footer>
 			<div id="footer_wrap" class="wrap">
 				<div id="footer_left">
-					<a href="dashboard.html">Dashboard</a>
+					<a href="dashboard.html">Dashboard</a> >>
 					<a href="profil.html" class="active">Profil</a>
+				</div>
+				<div id="footer_right">
+					Copyright by dronJaX.
 				</div>
 			</div>
 		</footer>
 		
+		<script type="text/javascript" src="js/search.js"></script>
+		<script type="text/javascript" src="js/logout.js"></script>
 		<script type="text/javascript">
-			/*----- Bagian Search ----*/
-			var search_text = document.getElementById("search_text");
-			
-			search_text.onmouseover = function()
-			{
-				this.focus();	
-			}
-			search_text.onfocus = function()
-			{
-				var search = document.getElementById("search");
-				search.className = "active";
-			}
-			search_text.onblur = function()
-			{
-				if (search_text.value==="")
-				{
-					var search = document.getElementById("search");
-					search.className = "";
-				}
-			}
-			
-			/*----- Bagian Login ----*/
-			var login_area = document.getElementById("login_area");
-			login_area.onmouseover = function()
-			{
-				document.getElementById("login_link").className = "logout_link_focus";
-				document.getElementById("login_button").className = "logout_button_focus";
-			}
-			
-			login_area.onmouseout = function()
-			{
-				document.getElementById("login_link").className = "";
-				document.getElementById("login_button").className = "";
-			}
-			
-			login_area.onclick = function()
-			{
-				// to do check session
-				window.location = "index.html";
-			}
-			
 			window.onload = function()
 			{
-				// cek session, jika belum login maka redirect
+				var userlist =  JSON.parse(localStorage.userList);
+				document.getElementById("profil_head").innerHTML = "<h1>"+userlist[sessionStorage.userId].fullName+"</h1>";
+				document.getElementById("profil_username").innerHTML = userlist[sessionStorage.userId].userName;
+				document.getElementById("profil_name").innerHTML = userlist[sessionStorage.userId].fullName;
+				document.getElementById("profil_birth_date").innerHTML = userlist[sessionStorage.userId].birthDate;
+				document.getElementById("profil_email").innerHTML = userlist[sessionStorage.userId].emailAddress;
+				document.getElementById("avatar_image").src = userlist[sessionStorage.userId].Avatar;
 			}
 		</script>
 	</body>
