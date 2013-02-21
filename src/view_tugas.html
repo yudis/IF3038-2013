@@ -1,17 +1,21 @@
 
 		<div class="content">
-			<div class="primary">
-				<div class="task-details">
-					<header>
-						<form method="POST">
-							<h1>
-								<label>
-									<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
-									<span class="task-title">Tugas 1</span>
-								</label>
-							</h1>
-						</form>
-					</header>
+			<div class="task-details not-editing">
+				<header>
+					<form method="POST">
+						<h1>
+							<label>
+								<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+								<span class="task-title">Tugas 1</span>
+							</label>
+						</h1>
+					</form>
+
+					<ul>
+						<li><a href="#" id="editTaskLink">Edit Task</a></li>
+					</ul>
+				</header>
+				<div id="unedited">
 					<section class="details">
 						<header>
 							<h3>Details</h3>
@@ -40,58 +44,52 @@
 						<header>
 							<h3>Attachment</h3>
 						</header>
-					</section>
-					<section class="comments">
-						<header>
-							<h3>2 Comments</h3>
-						</header>
-						<article class="comment">
-							<header>
-								<h4>Komentator</h4>
-							</header>
-							<p>Lorem ipsum dolor sit amet.</p>
-						</article>
-
-						<article class="comment">
-							<header>
-								<h4>Komentator</h4>
-							</header>
-							<p>Lorem ipsum dolor sit amet.</p>
-						</article>
-
-						<article class="comment">
-							<header>
-								<h4>Komentator</h4>
-							</header>
-							<p>Lorem ipsum dolor sit amet.</p>
-						</article>
-
-						<article class="comment">
-							<header>
-								<h4>Komentator</h4>
-							</header>
-							<p>Lorem ipsum dolor sit amet.</p>
-						</article>
-
-						<div class="comment-form">
-							<h3>Add Comment</h3>
-							<form id="comment" action="#" method="post">
-								<textarea name="komentar" id="comment-body" type="text"></textarea>
-								<button type="submit">Send</button>
-							</form>
-						</div>
+						<figure>
+							<img src="../assets/photo.jpg" alt="">
+						</figure>
 					</section>
 				</div>
-			</div>
+				<div id="editing">
+				</div>
+				<section class="comments">
+					<header>
+						<h3>2 Comments</h3>
+					</header>
+					<article class="comment">
+						<header>
+							<h4>Komentator</h4>
+						</header>
+						<p>Lorem ipsum dolor sit amet.</p>
+					</article>
 
-			<div class="secondary">
-				<nav class="site-nav">
-					<section class="main">
-						<ul class="main-links">
-							<li class="dashboard-link"><a href="dashboard.html">Dashboard</a></li>
-							<li class="profile-link"><a href="profile.html">Profile</a></li>
-						</ul>
-					</section>
-				</nav>
+					<article class="comment">
+						<header>
+							<h4>Komentator</h4>
+						</header>
+						<p>Lorem ipsum dolor sit amet.</p>
+					</article>
+
+					<article class="comment">
+						<header>
+							<h4>Komentator</h4>
+						</header>
+						<p>Lorem ipsum dolor sit amet.</p>
+					</article>
+
+					<article class="comment">
+						<header>
+							<h4>Komentator</h4>
+						</header>
+						<p>Lorem ipsum dolor sit amet.</p>
+					</article>
+
+					<div class="comment-form">
+						<h3>Add Comment</h3>
+						<form id="comment" action="#" method="post">
+							<textarea name="komentar" id="comment-body" type="text"></textarea>
+							<button type="submit">Send</button>
+						</form>
+					</div>
+				</section>
 			</div>
 		</div>
