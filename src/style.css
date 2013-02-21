@@ -1,0 +1,183 @@
+body {
+
+}
+
+#header {
+	height:100px;
+}
+
+#logo {
+	float:left;
+}
+
+#title {
+	float:left;
+	font-size:24px;
+}
+
+#dashboard-link {
+	text-align:center;
+	width:100%;
+	float:left;
+}
+
+#big-name {
+	font-size:24px;
+	text-align:center;
+}
+
+#login-form {
+	border-style:solid;
+}
+
+#register-form {
+	border-style:solid;
+}
+
+#right-side {
+	float:right;
+}
+
+#right-bottom-side {
+	display:block;
+}
+
+#right-bottom-side ul {
+	display:none;
+	position:absolute;
+	list-style:none;
+	margin-top:0px;
+}
+
+#right-bottom-side:hover > ul {
+	display:block;
+}
+
+#left-main-body {
+	width:50%;
+	float:left;
+}
+
+#right-main-body {
+	width:50%;
+	float:right;
+}
+
+#left-profile-body {
+	width:25%;
+	float:left;
+}
+
+#right-profile-body {
+	width:75%;
+	float:right;
+}
+
+#left-comment-body {
+	width:5%;
+	height:60px;
+	float:left;
+}
+
+#right-comment-body {
+	width:95%;
+	height:60px;
+	float:right;
+}
+
+#left-profile-header {
+	width:20%;
+	height:300px;
+	float:left;
+	
+}
+
+#about {
+	width:50%;
+	text-align:justify;
+}
+
+#right-profile-header {
+	width:80%;
+	height:300px;
+	float:right;
+}
+
+#user-info {
+
+}
+
+#comment-box {
+	width:50%;
+	margin-top:10px;
+	text-align:justify;
+	padding-top:10px;
+}
+
+#dashboard-body {
+	
+}
+
+#profile-pic {
+	width:15%;
+	padding:50px 50px 50px 50px;
+	float:left;
+}
+
+#main-dashboard {
+	float:left;
+	padding:50px 50px 50px 50px;
+}
+
+#dashboard-title {
+	font-size:24px;
+}
+
+#category-list {
+	text-align:left;
+}
+
+#category-title {
+	font-size:24px;
+	text-align:left;
+}
+
+#sort {
+}
+
+.task-page-body {
+	display:block;
+	padding-bottom:20px;
+}
+
+.task-page-body ul {
+	display:none;
+	list-style-type:square
+	margin-top:0px;
+	padding-left:30px;
+	margin-bottom:0px;
+}
+
+.task-page-body:hover > ul {
+	display:block;
+}
+
+#task-page-title {
+
+}
+
+#add-task-body {
+
+}
+
+#profile-body {
+	
+}
+
+#commentator {
+	font-size:12px;
+}
+
+#post-date {
+	font-size:12px;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Add New Task</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script>
+			var chktaskname = false;
+			var chkattach = false;
+			var chkassignee = false;
+			var chktag = false;
+			function hide_create_button() {
+				document.getElementById("create").style.display = 'none';
+			}
+			function show_create_button() {
+				if (chktaskname == true && chkattach == true && chkassignee == true && chktag == true) {
+					document.getElementById("create").style.display = 'block';
+				}
+			}
+			function check_string() {
+				var i;
+				var str = document.getElementById("taskname").value;
+				for (i = 0; i < str.length; i++) {
+					if ((str.charAt(i) != ' ' && str.charCodeAt(i) < 48) || (str.charCodeAt(i) > 57 && str.charCodeAt(i) < 65) || (str.charCodeAt(i) > 90 && str.charCodeAt(i) < 97) || str.charCodeAt(i) > 122) {
+						return false;
+					}
+				}
+				return true;
+			}
+			function check_task_name() {
+				if (document.getElementById("taskname").value.length > 0 && document.getElementById("taskname").value.length < 26) {
+					chktaskname = check_string();
+					if (chktaskname == true) {
+						show_create_button();	
+					} else {
+						hide_create_button();
+					}
+				} else {
+					chktaskname = false;
+					hide_create_button();
+				}
+			}
+			function check_attachment() {
+				var str = document.getElementById("attached").value;
+				var ext = str.substring(str.lastIndexOf('.') + 1, str.length);
+				if (ext == "pdf" || ext == "doc" || ext == "docx" || ext == "ppt" || ext == "pptx" || ext == "java") {
+					chkattach = true;
+					show_create_button();
+				} else {
+					chkattach = false;
+					hide_create_button();
+				}
+			}
+			function check_assignee() {
+				if (document.getElementById("assignee").value.length > 0) {
+					chkassignee = true;
+					show_create_button();
+				} else {
+					chkassignee = false;
+					hide_create_button();
+				}
+			}
+			function check_tag() {
+				if (document.getElementById("tag").value.length > 0) {
+					chktag = true;
+					show_create_button();
+				} else {
+					chktag = false;
+					hide_create_button();
+				}
+			}
+		</script>
+	</head>
+	<body onLoad="hide_create_button()">
+		<div id="header">
+			<!--Website logo-->
+			<img id="logo" src="#" />
+			<div id="title"><b>NAMA<br /> APLIKASI</b></div>
+			<div id="right-side">
+				<!--Search bar-->
+				<div><input type="text" value="Search Tasks"><button>Search</button></div>
+				<!--Profile page-->
+				<!--Logout button-->
+				<div id="right-bottom-side">
+					Nama User
+					<ul>
+						<li>Go to Profile</li>
+						<li>Sign Out</li>
+					</ul>
+				</div>
+			</div>
+			<!--Dashboard-->
+			<div id="dashboard-link">Go Home</div>
+		</div>
+		<hr>
+		<div id="add-task-body">
+			<h1>Category: Kategori 1</h1>
+			<form>
+				<!--Name-->
+				Task name: <input type="text" id="taskname" onKeyUp="check_task_name()"/><br />
+				<!--Attachment-->
+				Attach file: <input type="file" id="attached" onChange="check_attachment()"/><br />
+				<!--Deadline-->
+				Deadline: <input type="date" id="deadline" /><br />
+				<!--Assignee-->
+				Assignee: <input type="text" id="assignee" onKeyUp="check_assignee()"/><br />
+				<!--Tag (multivalue)-->
+				Tag: <input type="text" id="tag" onKeyUp="check_tag()"/><br />
+				<input type="button" id="create" value="Create" />
+			</form>
+		</div>
+	</body>
+</html>

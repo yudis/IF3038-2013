@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dashboard</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<div id="header">
+			<!--Website logo-->
+			<img id="logo" src="#" />
+			<div id="title"><b>NAMA<br /> APLIKASI</b></div>
+			<div id="right-side">
+				<!--Search bar-->
+				<div><input type="text" value="Search Tasks"><button>Search</button></div>
+				<!--Profile page-->
+				<!--Logout button-->
+				<div id="right-bottom-side">
+					Nama User
+					<ul>
+						<li>Go to Profile</li>
+						<li>Sign Out</li>
+					</ul>
+				</div>
+			</div>
+			<!--Dashboard-->
+			<div id="dashboard-link">Go Home</div>
+		</div>
+		<hr>
+		<div id="dashboard-body">
+			<div id="profile-pic">
+				<img id="photo" src="#" /><br />
+				Nama User
+			</div>
+			<div id="main-dashboard">
+				<div id="dashboard-title"><b>MY TASK<br /></b><br /></div>
+				<div id="sort">
+					<button>+AddCategory<br /></button>&nbsp;
+					Sort by :
+					<select name="Sort by">
+						<option value="Auto">Auto</option>
+						<option value="Name">Name</option>
+						<option value="Date">Date</option>
+					</select>&nbsp;			
+				</div>
+				<!--Category list (static)-->
+				<div id="category-list">
+					<div class="task-page-body">
+					<div id="category-title"><b>Kategori 1</b></div>
+					<!--Task list (dynamic)-->
+					<ul>
+						<li>task 1</li>
+						<li>task 2</li>
+						<li>task 3</li>
+					</ul>
+					<!--Name-->
+					<!--Deadline-->
+					<!--Tag (multivalue)-->
+					</div>
+					<hr>
+					<div class="task-page-body">
+					<div id="category-title"><b>Kategori 2</b></div>
+					<!--Task list (dynamic)-->
+					<ul>
+						<li>task 4</li>
+						<li>task 5</li>
+						<li>task 6</li>
+					</ul>
+					<!--Name-->
+					<!--Deadline-->
+					<!--Tag (multivalue)-->
+					</div>
+				<!--New category button ==> popup-->
+					<!--Name-->
+					<!--List of priveleged users-->
+				<!--New task button ==> new_task.html (this button only appears if a category is selected)-->
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
