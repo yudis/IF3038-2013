@@ -19,26 +19,30 @@ function catchange(catnum){
 			document.getElementById("kuliah").style.backgroundColor = "#fff";
 			document.getElementById("proyek").style.backgroundColor = "#fff";
 			document.getElementById("tugas").style.backgroundColor = "#fff";
+			
+			document.getElementById("add_task_link").style.display = "none";
 		}
 		
-		else {if (catnum == 1){
-				document.getElementById("curtask3").style.opacity = "0";
-				document.getElementById("curtask4").style.opacity = "0";
-				document.getElementById("curtask5").style.opacity = "0";
-				document.getElementById("curtask1").style.opacity = "1";
-				document.getElementById("curtask1").style.top = "20px";
-				document.getElementById("curtask2").style.opacity = "1";
-				document.getElementById("curtask2").style.top = "200px";
-				document.getElementById("kuliah").style.backgroundColor = "#ff5645";
-				document.getElementById("kuliah").style.color = "#fff";
-				document.getElementById("proyek").style.color = "#6FBEC6";
-				document.getElementById("tugas").style.color = "#6FBEC6";
-				document.getElementById("lomba").style.color = "#6FBEC6";
-				document.getElementById("lomba").style.backgroundColor = "#fff";
-				document.getElementById("proyek").style.backgroundColor = "#fff";
-				document.getElementById("tugas").style.backgroundColor = "#fff";
-				document.getElementById("category_title").style.backgroundColor = "#007bc1";
-			}
+		else {if (catnum == 1) {
+			document.getElementById("curtask3").style.opacity = "0";
+			document.getElementById("curtask4").style.opacity = "0";
+			document.getElementById("curtask5").style.opacity = "0";
+			document.getElementById("curtask1").style.opacity = "1";
+			document.getElementById("curtask1").style.top = "20px";
+			document.getElementById("curtask2").style.opacity = "1";
+			document.getElementById("curtask2").style.top = "200px";
+			document.getElementById("kuliah").style.backgroundColor = "#ff5645";
+			document.getElementById("kuliah").style.color = "#fff";
+			document.getElementById("proyek").style.color = "#6FBEC6";
+			document.getElementById("tugas").style.color = "#6FBEC6";
+			document.getElementById("lomba").style.color = "#6FBEC6";
+			document.getElementById("lomba").style.backgroundColor = "#fff";
+			document.getElementById("proyek").style.backgroundColor = "#fff";
+			document.getElementById("tugas").style.backgroundColor = "#fff";
+			document.getElementById("category_title").style.backgroundColor = "#007bc1";
+			
+			document.getElementById("add_task_link").style.display = "block";
+		}
 		else {
 			if (catnum==2) {
 				document.getElementById("curtask1").style.opacity = "0";
@@ -57,6 +61,8 @@ function catchange(catnum){
 				document.getElementById("kuliah").style.backgroundColor = "#fff";
 				document.getElementById("tugas").style.backgroundColor = "#fff";
 				document.getElementById("category_title").style.backgroundColor = "#007bc1";
+				
+				document.getElementById("add_task_link").style.display = "block";
 			}
 			else if (catnum == 4) {
 				document.getElementById("curtask1").style.opacity = "0";
@@ -74,7 +80,9 @@ function catchange(catnum){
 				document.getElementById("proyek").style.backgroundColor = "#fff";
 				document.getElementById("tugas").style.backgroundColor = "#fff";
 				document.getElementById("category_title").style.backgroundColor = "#007bc1";
-				}
+				
+				document.getElementById("add_task_link").style.display = "block";
+			}
 			else {
 				document.getElementById("curtask1").style.opacity = "0";
 				document.getElementById("curtask2").style.opacity = "0";
@@ -90,10 +98,12 @@ function catchange(catnum){
 				document.getElementById("kuliah").style.backgroundColor = "#fff";
 				document.getElementById("proyek").style.backgroundColor = "#fff";
 				document.getElementById("category_title").style.backgroundColor = "#007bc1";
-				}
+				
+				document.getElementById("add_task_link").style.display = "block";
 			}
 		}
-    }
+	}
+}
 	
 function add_category2() {
 	add_category();
