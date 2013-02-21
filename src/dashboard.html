@@ -7,6 +7,7 @@
 		<title>MOA - Dashboard</title>
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/dashboard.css" />
+        <link rel="stylesheet" href="css/index.css" />
 	</head>
 	<body>
 		<header>
@@ -59,6 +60,7 @@
                             <li> <a href="?category=pemrograman%20internet"><div class="dashboard_category_element">Pemrograman Internet</div></a></li>
                             <li> <a href="?category=kriptografi"><div class="dashboard_category_element">Kriptografi</div></a></li>
                             <li> <a href="?category=metode%20numerik"><div class="dashboard_category_element">Metode Numerik</div></a></li>
+                            <li> <a href="javascript:new_category();"><div id="new_category">New Category</div></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -86,6 +88,12 @@
                                         <li>JavaScript</li>
                                     </ul></div>
                             </div></a></li>
+                            
+                            <li> <a href="new_task.html"><div class="dashboard_tugas_element">
+                                <div class="dashboard_tugas_judul">New Task</div>
+                                <div class="dashboard_tugas_tanggal">Tanggal : TBD</div>
+                                <div class="dashboard_tugas_tag_area"></div>
+                            </div></a></li>                            
                         </ul>                    
                     </nav>
                 </div>
@@ -103,6 +111,33 @@
 			</div>
 		</footer>
 		
+		<div id="black_trans">
+			<div id="frame_register">
+				<div id="close_button">
+					<a href="javascript:close();">X</a>
+				</div>
+				<div id="register_area">
+					<div id="register_form_wrap">
+						<div id="register_head">
+							<h1>Form Pembuatan Kategori Baru</h1>
+						</div>
+						<form id="register_form" method="post">
+							<div class="row">
+								<label for="register_username">Category Name</label>
+								<input id="register_username" name="Categoryname" pattern="^.{5,}$" type="text" title="Nama kategori minimal harus terdiri dari 5 karakter." required />
+							</div>
+							<div class="row">
+								<label for="register_name">Username</label>
+								<input id="register_name" name="username" pattern="^[.{5,};]+$" type="text" title="Username yang dimasukkan harus diakhiri tanda spasi." required />
+							</div>
+							<input id="register_submit" type="submit" value="Daftar" disabled="disabled" title="Semua elemen form harus diisi dengan benar dahulu."/>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 		<script type="text/javascript">
 			var search_text = document.getElementById("search_text");
 			
@@ -143,6 +178,69 @@
 				window.location = "index.html";
 			}
 			
+            /*Bagian menampilkan pembuatan new_category*/
+			function new_category()
+			{
+				document.getElementById("black_trans").className = "appear";
+				document.getElementById("register_area").className = "appear";
+				document.getElementById("close_button").className = "appear";
+				setTimeout(function()
+				{
+					document.getElementById("frame_register").className = "frame_register_enter";
+				}, 100);
+			}
+			
+			function close()
+			{
+				document.getElementById("frame_register").className = "";
+				setTimeout(function()
+				{
+					document.getElementById("black_trans").className = "";
+					document.getElementById("register_area").className = "";
+					document.getElementById("close_button").className = "";
+				}, 400);
+			}
+            
+            /*--- Bagian Validasi Pembuatan Kategori Baru ---*/
+			var register_form = document.getElementById("register_form");
+			register_form.onsubmit = function()
+			{
+            
+			}
+			
+			var register_username = document.getElementById("register_username");
+			var register_name = document.getElementById("register_name");
+			
+			register_username.onkeyup = function()
+			{
+				if (this.checkValidity())
+					this.style.backgroundImage = "url('images/valid.png')";
+				else
+					this.style.backgroundImage = "url('images/warning.png')";
+				check_submit_register();
+			}
+						
+			register_name.onkeyup = function()
+			{
+				if (this.checkValidity())
+					this.style.backgroundImage = "url('images/valid.png')";
+				else
+					this.style.backgroundImage = "url('images/warning.png')";
+				check_submit_register();
+			}
+						
+			function check_submit_register()
+			{
+				if (register_username.checkValidity() && register_name.checkValidity())
+				{
+					document.getElementById("register_submit").disabled="";
+				}
+				else
+				{
+					document.getElementById("register_submit").disabled="disabled";
+				}
+			}
+            
 			window.onload = function()
 			{
 				// cek session, jika belum login maka redirect

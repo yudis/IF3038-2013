@@ -16,21 +16,21 @@
     display : block;
     width : 220px;
     padding : 6px 10px;
-    font : arial 150%;
-    border-style : outset;
-    border-width : 5px;
-    border-color : #000000
+    font-size: 80%;
+    font-weight: bold;
+    background-color: #1E90FF;
+    color: white;
 }
 
 .dashboard_category_element:hover
 {
-    display: block;
-    width: 220px;
-    padding: 6px 10px;
-    font: arial 150%;
-    border-style: inset;
-    border-width: 5px;
-    border-color : #000000    
+    display : block;
+    width : 220px;
+    padding : 6px 10px;
+    font-size: 100%;
+    font-weight: bold;
+    background-color: #1E90FF;
+    color: white;
 }
 
 .dashboard_tugas_element
@@ -84,8 +84,31 @@
     text-decoration: none;
 }
 
+#new_category
+{
+    display : block;
+    width : 220px;
+    padding : 6px 10px;
+    font-size: 80%;
+    font-weight: bold;
+    background-color: #1E90FF;
+    color: white;
+}
+
+#new_category:hover
+{
+    display : block;
+    width : 220px;
+    padding : 6px 10px;
+    font-size: 100%;
+    font-weight: bold;
+    background-color: #1E90FF;
+    color: white;
+}
+
 nav ul li a
 {
+    font-color: white;
     text-decoration: none;
 }
 
@@ -93,5 +116,7 @@ nav ul li a div div  ul li
 {
     float: none;
     display: inline;
-    margin-right: 30px;
+    margin-right: 10px;
+    background-color: white;
+    border: 1px dashed;
 }
