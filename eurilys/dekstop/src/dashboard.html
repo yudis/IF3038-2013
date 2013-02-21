@@ -45,21 +45,14 @@
 					<input type="file" id="profile_pic_upload" name="profile_picture"/> 
 				</div>
 				<div id="category_list">
-					<div class="link_blue_rect" id="category_title"> <a href="Dashboard.html"> All Categories </a> </div>
+					<div class="link_blue_rect" id="category_title"><a href="#" onclick="catchange(0)">All Categories </a> </div>
 					<ul id="category_item">
-						<li> Kuliah </li>
-						<li> Proyek </li>
-						<li> Tugas </li>
-						<li> Lomba</li>
+						<li><a href="#" onclick="catchange(1)" id="kuliah">Kuliah</a></li>
+						<li><a href="#" onclick="catchange(2)" id="proyek">Proyek</a></li>
+						<li><a href="#" onclick="catchange(3)" id="tugas">Tugas</a></li>
+						<li><a href="#" onclick="catchange(4)" id="lomba">Lomba</a></li>
 					</ul>
-					Pilih kategori: <select id='catselector' name='catselector' onchange="catchange(this.value);">
-						<option value="0">All</option>
-						<option value="1">Kuliah</option>
-						<option value="2">Proyek</option>
-						<option value="3">Tugas</option>
-						<option value="4">Lomba</option>
-					</select>
-					<br/><br/><div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
+					<div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
 					<div id="category_form">
 						<div id="category_form_inner">
 							Category name : <br>

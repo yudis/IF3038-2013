@@ -253,12 +253,17 @@ footer {
 	padding-top:5px;
 	margin-left:-10px;
 }
-#category_list ul li {
+#category_list ul li a {
 	cursor:pointer;
+	color:#6FBEC6;
 	padding-bottom:5px;
 }
-#category_list ul li:hover {
+#category_list ul li a:hover {
 	color:#6FBEC6;
+}
+
+#category_list ul li a:active{
+	color:#ff5645;
 }
 #add_new_category {
 	color:gray;
@@ -500,3 +505,21 @@ margin-left:auto;margin-right:auto; letter-spacing:1px; cursor:pointer; margin-r
 #curtask3{top:380px;}
 #curtask4{top:560px;}
 #curtask5{top:740px;}
+
+/* PROFILE CONTENT 
+------------------------------------------------------------------------------------------------- */
+
+#profile_content {
+	padding:20px;
+	text-align:center;
+
+}
+
+#upperprof{
+height:220px;
+}
+
+#upperprof img {
+padding: 4px;
+border: 1px solid rgb(204, 204, 204);}
+

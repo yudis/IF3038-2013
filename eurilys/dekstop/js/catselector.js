@@ -10,6 +10,10 @@ function catchange(catnum){
 			document.getElementById("curtask4").style.top = "560px";
 			document.getElementById("curtask5").style.opacity = "1";
 			document.getElementById("curtask5").style.top = "740px";
+			document.getElementById("kuliah").style.color = "#6FBEC6";
+			document.getElementById("proyek").style.color = "#6FBEC6";
+			document.getElementById("tugas").style.color = "#6FBEC6";
+			document.getElementById("lomba").style.color = "#6FBEC6";
 		}
 		
 		else {if (catnum == 1){
@@ -20,6 +24,10 @@ function catchange(catnum){
 				document.getElementById("curtask1").style.top = "20px";
 				document.getElementById("curtask2").style.opacity = "1";
 				document.getElementById("curtask2").style.top = "200px";
+				document.getElementById("kuliah").style.color = "#ff5645";
+				document.getElementById("proyek").style.color = "#6FBEC6";
+				document.getElementById("tugas").style.color = "#6FBEC6";
+				document.getElementById("lomba").style.color = "#6FBEC6";
 			}
 		else {
 			if (catnum==2) {
@@ -30,6 +38,10 @@ function catchange(catnum){
 				document.getElementById("curtask4").style.top = "20px";
 				document.getElementById("curtask5").style.opacity = "1";
 				document.getElementById("curtask5").style.top = "200px";
+				document.getElementById("proyek").style.color = "#ff5645";
+				document.getElementById("kuliah").style.color = "#6FBEC6";
+				document.getElementById("tugas").style.color = "#6FBEC6";
+				document.getElementById("lomba").style.color = "#6FBEC6";
 			}
 			else if (catnum == 4) {
 				document.getElementById("curtask1").style.opacity = "0";
@@ -38,6 +50,10 @@ function catchange(catnum){
 				document.getElementById("curtask5").style.opacity = "0";
 				document.getElementById("curtask3").style.opacity = "1";
 				document.getElementById("curtask3").style.top = "20px";
+				document.getElementById("lomba").style.color = "#ff5645";
+				document.getElementById("proyek").style.color = "#6FBEC6";
+				document.getElementById("kuliah").style.color = "#6FBEC6";
+				document.getElementById("tugas").style.color = "#6FBEC6";
 				}
 			else {
 				document.getElementById("curtask1").style.opacity = "0";
@@ -45,6 +61,10 @@ function catchange(catnum){
 				document.getElementById("curtask3").style.opacity = "0";
 				document.getElementById("curtask4").style.opacity = "0";
 				document.getElementById("curtask5").style.opacity = "0";
+				document.getElementById("tugas").style.color = "#ff5645";
+				document.getElementById("proyek").style.color = "#6FBEC6";
+				document.getElementById("lomba").style.color = "#6FBEC6";
+				document.getElementById("kuliah").style.color = "#6FBEC6";
 				}
 			}
 		}
