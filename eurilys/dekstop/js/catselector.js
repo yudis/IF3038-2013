@@ -1,20 +1,47 @@
 function catchange(catnum){
-	var taskcatlist = document.getElementsByClassName("taskcat");
-	if (catnum != 0){	
-		for(i = 0; i < taskcatlist.length;i++){
-				taskcatlist[i].style.display = 'none';
-				}
-		taskcatlist[catnum-1].style.display = 'block';		
+		if (catnum == 0) {
+			document.getElementById("curtask1").style.display= "block";
+			document.getElementById("curtask2").style.display= "block";
+			document.getElementById("curtask3").style.display= "block";
+			document.getElementById("curtask4").style.display= "block";
+			document.getElementById("curtask5").style.display= "block";
 		}
-	else {
-			for(i = 0; i < taskcatlist.length;i++){
-				taskcatlist[i].style.display = 'block';
+		
+		else {if (catnum == 1){
+				document.getElementById("curtask3").style.display= "none";
+				document.getElementById("curtask4").style.display= "none";
+				document.getElementById("curtask5").style.display= "none";
+				document.getElementById("curtask1").style.display= "block";
+				document.getElementById("curtask2").style.display= "block";
+			}
+		else {
+			if (catnum==2) {
+				document.getElementById("curtask1").style.display= "none";
+				document.getElementById("curtask2").style.display= "none";
+				document.getElementById("curtask3").style.display= "none";
+				document.getElementById("curtask4").style.display= "block";
+				document.getElementById("curtask5").style.display= "block";
+			}
+			else if (catnum == 4) {
+				document.getElementById("curtask1").style.display= "none";
+				document.getElementById("curtask2").style.display= "none";
+				document.getElementById("curtask4").style.display= "none";
+				document.getElementById("curtask5").style.display= "none";
+				document.getElementById("curtask3").style.display= "block";
 				}
+			else {
+				document.getElementById("curtask1").style.display= "none";
+				document.getElementById("curtask2").style.display= "none";
+				document.getElementById("curtask3").style.display= "none";
+				document.getElementById("curtask4").style.display= "none";
+				document.getElementById("curtask5").style.display= "none";
+				}
+			}
 		}
     }
 	
 function add_category2() {
-	
+	add_category();
 	var taskcatlist = document.getElementsByClassName("taskcat");
 	var selc = document.getElementById("catselector");
 	var newcat = document.getElementById("add_category_name").value;

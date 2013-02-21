@@ -6,7 +6,8 @@
 	
 	<head>
 		<link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
-		<script type="text/javascript" src="../js/animation.js"> </script> 
+		<script type="text/javascript" src="../js/animation.js"> </script>
+		<script type="text/javascript" src="../js/catselector.js"> </script> 		
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 		<title> Eurilys </title>
 	</head>
@@ -51,7 +52,14 @@
 						<li> Tugas </li>
 						<li> Lomba</li>
 					</ul>
-					<div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
+					Pilih kategori: <select id='catselector' name='catselector' onchange="catchange(this.value);">
+						<option value="0">All</option>
+						<option value="1">Kuliah</option>
+						<option value="2">Proyek</option>
+						<option value="3">Tugas</option>
+						<option value="4">Lomba</option>
+					</select>
+					<br/><br/><div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
 					<div id="category_form">
 						<div id="category_form_inner">
 							Category name : <br>
@@ -60,14 +68,14 @@
 							Assignee(s) : <br>
 							<input type="text" id="add_category_asignee_name" value="">
 							<br><br>
-							<div id="add_category_button" class="link_red" onclick="add_category()"> Add </div>
+							<div id="add_category_button" class="link_red" onclick="add2_category()"> Add </div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div id="dynamic_content">
 				<br><br><br>
-				<div class="task_view">
+				<div class="task_view" id="curtask1">
 					<div id="task_name_ltd" class="left dynamic_content_left">Task Name</div>
 					<div id="task_name_rtd" class="left dynamic_content_right"> <a href="taskdetail_img.html"> Catatan Progin </a> </div>
 					<br><br>
@@ -81,7 +89,7 @@
 					<br>
 				</div>
 				<br><br>
-				<div class="task_view">
+				<div class="task_view" id="curtask2">
 					<div id="task_name_ltd_2" class="left dynamic_content_left">Task Name</div>
 					<div id="task_name_rtd_2" class="left dynamic_content_right"> <a href="taskdetail_file.html"> Tubes Progin I </a> </div>
 					<br><br>
@@ -95,7 +103,7 @@
 					<br>
 				</div>
 				<br><br>
-				<div class="task_view">
+				<div class="task_view" id="curtask3">
 					<div id="task_name_ltd_3" class="left dynamic_content_left">Task Name</div>
 					<div id="task_name_rtd_3" class="left dynamic_content_right"> <a href="taskdetail_file.html"> Imagine Cup </a> </div>
 					<br><br>
@@ -109,7 +117,7 @@
 					<br>
 				</div>
 				<br><br>
-				<div class="task_view">
+				<div class="task_view" id="curtask4">
 					<div id="task_name_ltd_4" class="left dynamic_content_left">Task Name</div>
 					<div id="task_name_rtd_4" class="left dynamic_content_right"> <a href="taskdetail_file.html"> Proyek BNI </a> </div>
 					<br><br>
@@ -123,7 +131,7 @@
 					<br>
 				</div>
 				<br><br>
-				<div class="task_view">
+				<div class="task_view" id="curtask5">
 					<div id="task_name_ltd_5" class="left dynamic_content_left">Task Name</div>
 					<div id="task_name_rtd_5" class="left dynamic_content_right"> <a href="taskdetail_file.html"> Database Sekolah </a> </div>
 					<br><br>
