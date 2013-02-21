@@ -55,10 +55,10 @@
                 <div id="dashboard_category">
                     <nav>
                         <ul>
-                            <li> <a href="?category=all"><div class="dashboard_category_element">All Category</div></a></li>
-                            <li> <a href="?category=pemrograman%20internet"><div class="dashboard_category_element">Pemrograman Internet</div></a></li>
-                            <li> <a href="?category=kriptografi"><div class="dashboard_category_element">Kriptografi</div></a></li>
-                            <li> <a href="?category=metode%20numerik"><div class="dashboard_category_element">Metode Numerik</div></a></li>
+                            <li> <a href="#" onclick="check(1);"><div class="dashboard_category_element">All Category</div></a></li>
+                            <li> <a href="#" onclick="check(2);"><div class="dashboard_category_element">Pemrograman Internet</div></a></li>
+                            <li> <a href="#" onclick="check(3);"><div class="dashboard_category_element">Kriptografi</div></a></li>
+                            <li> <a href="#" onclick="check(4);"><div class="dashboard_category_element">Metode Numerik</div></a></li>
                             <li> <a href="javascript:new_category();"><div id="new_category">New Category</div></a></li>
                         </ul>
                     </nav>
@@ -85,7 +85,8 @@
                                     <ul>
                                         <li>JQuery</li>
                                         <li>JavaScript</li>
-                                    </ul></div>
+                                    </ul>
+                                </div>
                             </div></a></li>
                             
                             <li> <a href="new_task.html"><div class="dashboard_tugas_element">
@@ -177,6 +178,59 @@
 				window.location = "index.html";
 			}
 			
+            function category_click()
+            {
+                var ads = document.getElementsByTagName("a");
+                for (var j=0;j < ads.length; ++j)
+                {
+                    if (ads[j].children.length === 1) {
+                        /*alert(ads[j].nodeName);*/
+                        if (ads[j].children[0].className === "dashboard_category_element_aktif")
+                        {
+                            /*alert("Hore Ketemu");*/
+                            ads[j].children[0].className = "dashboard_category_element";
+                            break;
+                        }
+                    }
+                }
+                alert(this);
+                //alert(this.children.length + " " + this.children[0].className);
+                this.children[0].className = "dashboard_category_element_aktif";
+            }
+            
+            function check(n)
+            {
+                var ads = document.getElementsByTagName("a");
+                var k = 0;
+                
+                for (var j=0;j < ads.length; ++j)
+                {
+                    if (ads[j].children.length === 1) {
+                        if (ads[j].children[0].className === "dashboard_category_element_aktif")
+                        {
+                            ++k;
+                            ads[j].children[0].className = "dashboard_category_element";
+                        } else if (ads[j].children[0].className === "dashboard_category_element") {
+                            ++k;
+                        }
+                        
+                        if (ads[j].children[0].className === "dashboard_category_element" && k === n) {
+                            ads[j].children[0].className = "dashboard_category_element_aktif";
+                        }
+                    }
+                }
+            }
+            
+            /*var as = document.getElementsByTagName("a");
+            for (var i=0;i < as.length;++i) {
+                if (as[i].children.length === 1) {
+                    if (as[i].children[0].className === "dashboard_category_element") {
+                        alert(as[i].children[0].className);
+                        as[i].onclick = function(){category_click();};
+                    }                
+                }
+            }*/
+            
             /*Bagian menampilkan pembuatan new_category*/
 			function new_category()
 			{
