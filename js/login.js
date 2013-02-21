@@ -1,10 +1,3 @@
-(function($) {
-	$.$id = function(id) {
-		var ret = document.getElementById(id);
-		return ret;
-	}
-})(window);
-
 window.onload = function() {
 	window.registerform = {
 		username: $id("registerform-username"),
@@ -16,7 +9,7 @@ window.onload = function() {
 		avatar: $id("registerform-avatar"),
 		//equalsUPE: $id("registerform-equalsUPE")
 	}
-	window.error_message = {
+	window.registerform_error_message = {
 		username: 'Minimal 5 characters, only alphabetic, numeric and underscore allowed',
 		password: 'Minimal 8 characters',
 		password2: 'Must same with password',
@@ -40,7 +33,7 @@ window.onload = function() {
 				if(!hasClass(window.registerform[key], 'error')) {
 					var e = document.createElement('div');
 					addClass(e, 'errorMessage');
-					e.innerHTML = error_message[key];
+					e.innerHTML = registerform_error_message[key];
 			
 					addClass(window.registerform[key], 'error');
 					window.registerform[key].parentNode.appendChild(e);
