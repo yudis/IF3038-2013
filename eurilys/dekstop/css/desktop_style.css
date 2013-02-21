@@ -104,7 +104,7 @@ label#remember_me {
 
 /* SECTION 
 --------------------------------------------------------------------------------------------------------------------- */
-section {width:80%;background-color:#F9F9F9; height:550px; margin-left:auto; margin-right:auto; margin-top:40px; margin-bottom:40px; z-index:1;}
+section {width:80%;background-color:#F9F9F9; height:680px; margin-left:auto; margin-right:auto; margin-top:40px; margin-bottom:40px; z-index:1;}
 #index_left {
 	height:100%;
 	width:65%;
@@ -139,7 +139,7 @@ section {width:80%;background-color:#F9F9F9; height:550px; margin-left:auto; mar
 	background-color:#EBEBE9;
 	color:gray;
 	padding-top:20px;
-	height:220px;
+	height:370px;
 	display:block;
 }
 #signup_form {
@@ -161,6 +161,7 @@ section {width:80%;background-color:#F9F9F9; height:550px; margin-left:auto; mar
 	width:60%;
 	margin-bottom:10px;
 }
+input#avatar_upload {font-size:12px;}
 
 /* FOOTER SECTION
 --------------------------------------------------------------------------------------------------------------------- */
@@ -220,7 +221,7 @@ footer {
 	clear:both;
 	margin-top:20px;
 }
-#task_list {
+#category_list {
 	width:80%;
 	margin-left:auto;
 	margin-right:auto;
@@ -265,6 +266,13 @@ footer {
 #taskdetail_image {
 	height:100%;
 	width:auto;
+}	
+#add_category {
+	font-size:11px; 
+	cursor:pointer;
+}
+#add_category:hover {
+	color:gray;
 }
 
 /* STYLING 
@@ -277,6 +285,8 @@ footer {
 .top45 {margin-top:45px;}
 .top30 {margin-top:30px;}
 .line10 {line-height:50%;}
+a {text-decoration:none;}
+#logout {color:#fff;}
 
 .thin_line {display:block;height:8px;margin-left:0px;width:100%;background-color:#524459;}
 
@@ -291,6 +301,7 @@ box-shadow:         2px 3px 5px rgba(50, 50, 50, 0.17);
 .link_blue_rect {
 	background-color:#007bc1;
 	color:#fff;
+	cursor:pointer;
 }
 .link_blue_rect:hover{
 	background-color:#0092dd;
