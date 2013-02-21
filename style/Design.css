@@ -14,8 +14,15 @@ body {
 
 .content {
 	width:auto;
+	height:auto;
+	background-color:#FFF;
+}
+
+.contentprofile {
+	width:610px;
 	height:350px;
 	background-color:#FFF;
+	float:left;
 }
 
 .navigation {
@@ -47,12 +54,13 @@ body {
 
 .footer {
 	background-color:#201B1B;
-	margin-top:1px;
+	margin-top:10px;
 	color:#aaaaaa;
 	padding:20px;
 	text-align:center;
 	font-size:0.75em;
 	font-family:Tahoma;
+	clear:both;
 }
 	
 .kategori {
@@ -255,7 +263,7 @@ a#join_pop:hover {
 
 .valid {
 	border:1px solid #b4c66e;
-	background-color:#cef436;
+	background-color:#0F0;
 	padding:4px;
 	color:#4f6300;
 }

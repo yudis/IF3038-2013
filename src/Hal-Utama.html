@@ -16,93 +16,6 @@
     
 	<!-- Content -->
 <div class="LoginBoard">
-<!--	<table width="800" cellspacing="0" cellpadding="0">
-  		<tr>
-    	<td height="415" bgcolor="#FFFFFF">
-        	<table width="400" cellspacing="0" cellpadding="0" align="center" class="Login">
-  <tr>
-    <td colspan="2">Login User</td>
-    </tr>
-  <tr>
-    <td width="122">Username</td>
-    <td width="276"> <input type="text" id="username" value=""> </td>
-  </tr>
-  <tr>
-    <td>Password</td>
-    <td><input type="password" id="pass" value=""></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="right">
-    	<a href="#join_form" id="join_pop">
-        <input name="Button" type="button" value="Register"/> </a>
-        
-        <a href="#x" class="overlay" id="join_form"> </a>
-        <div class="popup">
-            <h2>Register</h2>
-            <p>Please enter your details here</p>
-            <form id="registration" onSubmit="return formValidation();">
-            
-            <div class="iinfo" id="name_info"></div>
-            <div>
-                <label for="userid">Username</label>
-                <input type="text" id="userid" value="" onChange="validate_userid()"/>
-                <div class="requirement">Min. 5 characters, only space and alphabet.</div>
-            </div>
-            
-            <div class="iinfo" id="pass_info"></div>
-            <div>
-                <label for="passid">Password</label>
-                <input type="password" id="passid" value="" onChange="validate_passid()"/>
-                <div class="requirement">Min. 8 characters.</div>
-            </div>
-            
-            <div class="iinfo" id="confpass_info"></div>
-            <div>
-                <label for="confirmpass">Confirm Password</label>
-                <input type="password" id="confirmpass" value="" onChange="validate_confirmpass()"/>
-                <div class="requirement">Must be equal with password</div>
-            </div>
-            
-            <div class="iinfo" id="fullname_info"></div>
-            <div>
-                <label for="fullname">Full Name</label>
-                <input type="text" id="fullname" value="" onChange="validate_fullname()"/>
-                <div class="requirement">Must have space between two character.</div>
-            </div>
-            
-            <div class="iinfo" id="birth_info"></div>
-            <div>
-                <label for="birth">Birth Date</label>
-                <input type="text" id="birth" value="" />
-                <div class="requirement">YYYY-MM-DD</div>
-            </div>
-            
-            <div class="iinfo" id="email_info"></div>
-            <div>
-                <label for="email">Email</label>
-                <input type="text" id="email" value="" onChange="validate_email()"/>
-                <div class="requirement">Min. 1 character before @.<br/>Min. 1 character between @ and'.'<br/>Top level domain should contain at least 2 characters.<br/>ex. x@x.xx</div>
-            </div>
-            
-             <div class="iinfo" id="avatar_info"></div>
-            <div>
-                <label for="avatar">Avatar</label>
-                <input type="file" id="avatar" value="" onChange="validate_avatar()"/>
-                <div class="requirement">File must be .jpg or .jpeg.</div>
-            </div>
-           
-       		<input type="submit" value="Register" name="register"/>
-            
-			</form>
-            <a class="close" href="#close"></a>
-  		</div>
-         
-    	<input name="Button" type="button" value="Login" onClick="login()"/></td>
-    </tr>
-</table>
-        </td>
-  		</tr>
-	</table>-->
     
     <div class="LoginMatch">
     </div>
@@ -110,6 +23,7 @@
   	<div class="Login" align=""> 
     	<h2> Login User </h2>
         <div>
+        	<div class="iinfo" id="login_info"></div>
         	<div class="ukuranmenu1"> Username </div><input type="text" id="userlogin" value=""></div>
     		<div class="ukuranmenu1"> Password </div><input type="password" id="passlogin" value="">
     		<br>
@@ -184,7 +98,7 @@
 	</div>
 </div>
     
-    
+<!-- Footer -->
     <div class="footer">This Website is created for Internet Programming Assignment<br />
     By Patrick Lumban Tobing, Hanif Eridaputra, Novriady Saputra<br />
     Februari 2013

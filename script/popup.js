@@ -3,8 +3,9 @@
 function login(){
 	var username = document.getElementById('userlogin').value;
 	var password = document.getElementById('passlogin').value;
-	if(username=="admin" && password=="admin")
-   	window.location="Dashboard.html";
+	if((username=="hanif" && password=="hanif") || (username=="patrick" && password=="patrick") || (username=="novry" && password=="novry"))
+   		window.location="Dashboard.html";
+	else alert("Invalid Username or Password!")
 }
 
 function validate_Output(regexp, input, syntaxerror, syntaxvalid, idToWrite) {
@@ -21,30 +22,30 @@ function validate_userid() {
 	if(userid = passid)
 		document.getElementById('userid').innerHTML = '<span class="error">ERROR!</span>';
 	else*/
-		validate_Output(/^.{5,}$/, document.getElementById('userid').value,'ERROR!','OK','name_info');
+		validate_Output(/^.{5,}$/, document.getElementById('userid').value,'INVALID','VALID','name_info');
 }
 
 function validate_passid() {
-	validate_Output(/^.{8,}$/, document.getElementById('passid').value,'ERROR!','OK','pass_info');
+	validate_Output(/^.{8,}$/, document.getElementById('passid').value,'INVALID','VALID','pass_info');
 }
 
 function validate_confirmpass() {
 	var pw1 = document.getElementById('passid').value;
 	var pw2 = document.getElementById('confirmpass').value;
-	if(pw2 != pw1)	document.getElementById('confpass_info').innerHTML = '<span class="error">ERROR!</span>';
-	else			document.getElementById('confpass_info').innerHTML = '<span class="valid">OK</span>';
+	if(pw2 != pw1)	document.getElementById('confpass_info').innerHTML = '<span class="error">INVALID</span>';
+	else			document.getElementById('confpass_info').innerHTML = '<span class="valid">VALID</span>';
 }
 
 function validate_fullname() {
-	validate_Output(/^[a-zA-Z ]{1,}$/,document.getElementById('fullname').value,'ERROR!','OK','fullname_info');
+	validate_Output(/^[a-zA-Z ]{1,}$/,document.getElementById('fullname').value,'INVALID','VALID','fullname_info');
 }
 
 function validate_email() {
-	validate_Output(/^\w+@(\w+\.)+\w{2,}$/, document.getElementById('email').value,'ERROR!','OK','email_info');
+	validate_Output(/^\w+@(\w+\.)+\w{2,}$/, document.getElementById('email').value,'INVALID','VALID','email_info');
 }
 
 function validate_avatar() {
-	validate_Output(/\.(jpg|jpeg)$/, document.getElementById('avatar').value,'ERROR!','OK','avatar_info');
+	validate_Output(/\.(jpg|jpeg)$/, document.getElementById('avatar').value,'INVALID','VALID','avatar_info');
 }
 
 
