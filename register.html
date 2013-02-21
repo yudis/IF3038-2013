@@ -1,0 +1,80 @@
+<!--coba login-->
+<head>
+	<title>ToDo</title>
+	<link rel="stylesheet" type="text/css" media="all" href="css.css" />
+</head>
+
+<body>
+
+<header >	
+			
+			<div id="tes">
+			<br></br>
+			<h1 id="site-title"><img src="images/ToDo2.png"  /> 
+			</div>
+		
+	</header>
+
+			<div id="elemenkiri">
+		<div id="primary">
+			<div id="content" role="main">
+					<article class="post">	
+						
+						
+							
+							
+							<form action="registersukses.html" method="post">
+							<strong>Username </strong> <br />
+							<input name="username" size="30" type="text" >
+							<br/><br/>
+							
+							<strong>Password </strong> <br />
+							<input name="pwd" type="text" size="30" maxlength="20" >
+							<br/><br/>
+							
+							<strong>Confirm Password </strong> <br />
+							<input name="cpwd" type="text" size="30" maxlength="20"> 
+							<br/><br/>
+							
+							<strong>Full Name </strong> <br />
+							<input name="FullName" type="text" size="30" maxlength="20"> 
+							<br/><br/>
+							
+							<strong>Birth</strong> <br />
+							<input name="Birth" type="date" >
+							<br/><br/>
+							
+							<input type="submit" name="btnsubmit" value="Register Me!">
+							</form>
+							
+	
+				<script language="javascript">
+					function check(form)/*function to check userid & password*/
+					{
+					 /*the following code checkes whether the entered userid and password are matching*/
+					 if(form.userid.value == "myuserid" && form.pswrd.value == "mypswrd")
+					  {
+						window.open('index.html')/*opens the target page while Id & password matches*/
+					  }
+					 else
+					 {
+					   alert("Error Password or Username")/*displays error message*/
+					  }
+					}
+				</script>			
+					</article>		
+				</div>			
+			</div>
+					
+		
+
+		<footer id="colophon">
+			<div id="site-generator">
+				<p>&copy; <a href="#">AAA</a>-IF3038 Pemrograman Internet 2013 <br />
+				</p>
+			</div>
+		</footer>
+	</div>
+	
+</div>	
+</body>

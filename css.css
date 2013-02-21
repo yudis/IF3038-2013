@@ -1,0 +1,96 @@
+body{background:#E6E6E6 center center no-repeat;font:110% 'Maven Pro',Calibri,sans-serif;padding:0;}
+a{color:#2a5a9a;text-decoration:none; font-weight:400;}
+a:hover{color:#333;}
+article{margin:0 0 30px 0;display:block;}
+
+/*diubah */header{margin:50 50 10px;text-align:center;}
+nav{margin:0 0 20px 0;}
+#page{display:block;width:940px;margin:0 auto 15px auto;line-height:1.5em;padding-top:30px;}
+#primary{float:left;margin:0  0 -260px 0 0;width:100%;}
+#content{margin:0 260px 0 0;}
+/*diubah*/#center{width: 50%;
+text-align:center;
+border: 0px;
+padding: 0;
+margin: 0 auto;}
+
+#content header {text-align:left;}
+#main .widget-area{float:right;overflow:hidden;width:240px;}
+
+/*tambahan*/ 
+#logincontent{width: 100%; padding:20%;}
+#tes{
+	width:100%;
+	height:150px;
+	border-radius: 30px;
+}
+#elemenkiri{padding:80px; margin-left:70px ; }
+
+/* H1-H6 */
+h1,h2,h3,h4,h5,h6{font-weight:400;color:#555;letter-spacing:-.5px;line-height:1em;margin:0 0 5px;padding:0;text-shadow:#aaa 1px 1px 2px;}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a{font-weight:400;}
+h1{font-size:2.0em;}
+h2{font-size:1.8em;}
+h3{font-size:1.6em;}
+h4{font-size:1.4em;}
+
+/* Footer */
+#colophon{clear:both;display:block;padding:2em 0 0;width:100%;text-align:center;}
+#colophon p{margin:0;padding:0;color:#777;padding-top:1em;border-top:1px dotted #aaa;}
+#colophon a{font-weight:400;color:#555;}
+#colophon span{font-size:0.8em;}
+
+/* Alignment */
+.alignleft{display:inline;float:left;}
+.alignright{display:inline;float:right;}
+.aligncenter{clear:both;display:block;margin-left:auto;margin-right:auto;}
+
+
+
+/* Header */
+#site-title{font-size:2.4em;font-weight:400;margin:0;text-shadow: 5px 5px 5px #ccff66;
+}
+#site-title a{font-weight:400;width:100%;
+	height:30px;
+	background:#333;}
+#site-description{color:#777;font-size:1.3em;font-weight:400;margin:10px 0 12px 0;}
+
+/* Menu */
+#access{display:block;float:left;margin:0 auto 20px;width:100%;text-align:left;}
+#access ul{list-style:none;margin:0;padding-left:0;}
+#access li{float:left;position:relative;}
+#access a{display:block;line-height:3em;font-size:1.10em;font-weight:400;padding:0 1em;text-decoration:none;text-shadow:#ddd 1px 1px 3px;}
+#access a:hover{text-shadow:#aaa 1px 1px 5px;}
+#access .current_page_item a {color:#555; text-shadow:#aaa 1px 1px 5px;}
+#access ul ul{display:none;float:left;left:0;position:absolute;top:3.1em;z-index:99999;}
+#access ul ul ul{left:100%;top:0;}
+#access ul ul a{background:#fff;height:auto;line-height:1em;padding:.5em .5em .5em 1em;width:10em;}
+#access ul ul a:hover{}
+#access ul li:hover > ul{display:block;}
+
+/* Content */
+.entry-meta, .entry-meta-2{clear:both;display:block;font-size:1em;color:#777;font-weight:400;}
+.entry-meta a, .entry-meta-2 a{font-weight:400;color:#777;}
+.entry-meta{border-top:1px dotted #aaa;padding:8px 0; color:#777;}
+.entry-meta-2{margin:10px 0;font-size:1.2em;}
+#content nav{display:block;overflow:hidden;}
+#content nav .nav-previous{float:left;width:50%;}
+#content nav .nav-next{float:right;text-align:right;width:50%;}
+#content #nav-above{display:none;}
+.paged #content #nav-above,.single #content #nav-above{display:block;}
+#nav-below{margin:1.2em 0 0;}
+.page-link{margin:0 0 1.2em;}
+
+/* Secondary */
+#secondary .widget{margin:0 0 25px 0;}
+#secondary h1{font-size:1.4em; border-bottom:1px dotted #aaa;}
+#secondary p{margin:0 0 15px 0;}
+#secondary ul{list-style:none;margin:0 0 15px 0;padding:0;}
+#secondary ul ul{margin:5px 0 5px 20px;font-size:0.9em;}
+#secondary ul li{margin:0 0 5px 0;}
+#secondary ul li a{font-size:1.2em;font-weight:400;}
+#secondary table{width:100%;}
+
+/* Images */
+a img{border:none;}
+p img{margin-bottom:0.5em;}
