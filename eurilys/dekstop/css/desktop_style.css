@@ -104,7 +104,7 @@ label#remember_me {
 
 /* SECTION 
 --------------------------------------------------------------------------------------------------------------------- */
-section {width:80%;background-color:#F9F9F9; height:680px; margin-left:auto; margin-right:auto; margin-top:40px; margin-bottom:40px; z-index:1;}
+section {width:80%;background-color:#F9F9F9; height:630px; margin-left:auto; margin-right:auto; margin-top:40px; margin-bottom:40px; z-index:1;}
 #index_left {
 	height:100%;
 	width:65%;
@@ -139,7 +139,7 @@ section {width:80%;background-color:#F9F9F9; height:680px; margin-left:auto; mar
 	background-color:#EBEBE9;
 	color:gray;
 	padding-top:20px;
-	height:370px;
+	height:310px;
 	display:block;
 }
 #signup_form {
@@ -149,14 +149,14 @@ section {width:80%;background-color:#F9F9F9; height:680px; margin-left:auto; mar
 }
 #signup_form label {
 	float:left;
-	font-size:20px;
+	font-size:16px;
 	font-family:Arial;
 	color:gray;
 	width:35%;
 }
 #signup_form input {
 	float:left;
-	height:25px;
+	height:20px;
 	font-size:20px;
 	width:60%;
 	margin-bottom:10px;
