@@ -52,8 +52,10 @@ h3{
 }
 #header_menu {
 	position:absolute;
-	margin-left:670px;
+	left: 50%;
+	width:450px;
 	margin-top: 0px;
+	text-align: right;
 }
 #header_search{
 	position:absolute;
@@ -76,7 +78,7 @@ h3{
 	position:absolute;
     left: 50%;
     width:950px;
-    margin-left: -475px;
+    margin-left: -225px;
 	margin-top: 180px;  
 	padding-bottom: 50px;
 	background: rgba(255, 255, 255, .7);
