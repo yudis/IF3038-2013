@@ -9,6 +9,10 @@ header {
 	background-color:#35283C;
 	display:block;
 }
+.header_menu a {
+	color:white;
+	text-decoration:none;
+	}
 
 textarea {
 	font-family:Segoe UI light;
@@ -124,6 +128,7 @@ section {width:80%;background-color:#F9F9F9; height:630px; margin-left:auto; mar
 	-moz-box-shadow:    2px 3px 5px rgba(50, 50, 50, 0.17);
 	box-shadow:         2px 3px 5px rgba(50, 50, 50, 0.17);
 }
+
 #index_left {
 	height:100%;
 	width:65%;
