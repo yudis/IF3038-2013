@@ -100,6 +100,25 @@
 						</form>
 					</div>
 				</div>
+				<div id="profil_do">
+					<div id="profil_head">
+						<h1>Work Done</h1>
+					</div>
+					<div class="row">
+						<div id="profil_do_text" ><li><a href="#">progin</a></li></div>
+					</div>
+				</div>
+				<div id="profil_do">
+					<div id="profil_head">
+						<h1>Work Undone</h1>
+					</div>
+					<div class="row">
+						<div id="profil_do_text" ><li><a href="#">Kriptografi</a></li></div>
+					</div>
+					<div class="row">
+						<div id="profil_do_text" ><li><a href="#">Intelegensi Buatan</a></li></div>
+					</div>
+				</div>
 			</div>
 		</section>
 		
@@ -121,6 +140,7 @@
 						<form id="register_form" >
 							<div class="row">
 								<label id="profil_username">admin</label>
+								<input id="register_username" name="username" pattern="^.{5,}$" type="text" title="Username minimal harus terdiri dari 5 karakter." required />
 							</div>
 							<div class="row">
 								<label for="register_password">Sandi</label>
@@ -146,7 +166,6 @@
 								<label for="register_avatar">Avatar</label>
 								<input id="register_avatar" name="avatar" type="file" title="Avatar yang diupload harus berekstensi jpg atau jpeg." required />
 							</div>
-							<div id="success_edit">Perubahan berhasil dilakukan <img src="images/tick.jpg" width="23" height="13"></div>
 							<input id="register_submit" type="submit" value="Daftar" disabled="disabled" title="Semua elemen form harus diisi dengan benar dahulu."/>
 						</form>
 					</div>
