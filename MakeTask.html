@@ -88,30 +88,36 @@
 			{
 				var isValid = true;
 				
-				if (isValid == true)
+				var a = document.getElementById("tugas").value;
+				if (a.length != 0)
 				{
-					var a = document.getElementById("tugas").value;
-					if (a.length != 0)
+					var index = 0;
+					while (index < a.length && isValid == true)
 					{
-						var index = 0;
-						while (index < a.length && isValid == true)
+						if ((a[index] >= '0' && a[index] <= '9') || (a[index] >= 'a' && a[index] <= 'z') || (a[index] >='A' && a[index] <='Z'))
+						{}
+						else
 						{
-							if ((a[index] >= '0' && a[index] <= '9') || (a[index] >= 'a' && a[index] <= 'z') || (a[index] >='A' && a[index] <='Z'))
-							{}
-							else
-							{
-								isValid = false;
-							}
-							index++;
+							isValid = false;
 						}
-						
-						if (isValid == false)
-						{
-							alert("Nama tugas tidak boleh menggunakan karakter khusus!")
-						}
+						index++;
+					}
+					
+					if (isValid == false)
+					{
+						alert("Nama tugas tidak boleh menggunakan karakter khusus!")
 					}
 				}
+				else
+				{
+					isValid = false;
+					alert("Nama tugas tidak boleh kosong!");
+				}
 				
+				if (isValid == true)
+				{
+					alert("Tugas berhasil ditambahkan!");
+				}
 			}
 			
 			function generateDate()
@@ -127,6 +133,99 @@
 				{
 					var a = document.getElementById("customdate");
 					a.style.display = "block";
+					var b = document.getElementById("tanggallist");
+					for (var i = 1; i <= 31; i++)
+					{
+						var option = document.createElement("option");
+						option.text = "" + i;
+						option.value = "date" + i;
+						b.appendChild(option);
+					}
+					
+					var c = document.getElementById("bulanlist");
+					for (var i = 1; i <= 12; i++)
+					{
+						var option = document.createElement("option");
+						option.text = "" + i;
+						option.value = "month" + i;
+						c.appendChild(option);
+					}
+					
+					var d = document.getElementById("tahunlist");
+					for (var i = 1955; i <= 2013; i++)
+					{
+						var option = document.createElement("option");
+						option.text = "" + i;
+						option.value = "month" + i;
+						d.appendChild(option);
+					}
+				}
+			}
+			
+			function monthChange()
+			{
+				var a = document.getElementById("bulanlist");
+				var z = document.getElementById("tanggallist");
+				if (a.text == "1" || a.text == "3" || a.text == "5" || a.text == "7" || a.text == "8" || a.text == "10" || a.text == "12")
+				{
+					alert("z.length");
+					if (z.length==30)
+					{
+						var b = document.createElement("option");
+						b.text = "31";
+						b.value = "date31";
+						z.add(b);
+					}
+					else if (z.length==28)
+					{
+						var b = document.createElement("option");
+						b.text = "29";
+						b.value = "date29";
+						z.add(b);
+						
+						var c = document.createElement("option");
+						c.text = "30";
+						c.value = "date30";
+						z.add(c);
+						
+						var d = document.createElement("option");
+						d.text = "31";
+						d.value = "date31";
+						z.add(d);
+					}
+				}
+				else if (a.text == "4" || a.text == "6" || a.text == "9" || a.text == "11")
+				{
+					if (z.length==31)
+					{
+						z.remove(30);
+					}
+					else if (z.length==28)
+					{
+						var b = document.createElement("option");
+						b.text = "29";
+						b.value = "date29";
+						z.add(b);
+						
+						var c = document.createElement("option");
+						c.text = "30";
+						c.value = "date30";
+						z.add(c);
+					}
+				}
+				else if (a.text == "2")
+				{
+					if (z.length==31)
+					{
+						z.remove(30);
+						z.remove(29);
+						z.remove(28);
+					}
+					else if (z.length==30)
+					{
+						z.remove(29);
+						z.remove(28);
+					}
 				}
 			}
 		</script>
@@ -154,6 +253,7 @@
 
 		<div id="wrapper">
 			<div id="wrapper-left">
+            <form name="MakeForm" action="taskdetails.html" onsubmit="submitThis()">
 				<div class="label"> <label for="tugas" >Nama Tugas</label> </div> <input id="tugas" name="tugas" type="text" maxlength="25"/> <br />
 				<div class="label"> <label for="filebutton">Attachment</label> </div> <input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/> <br />
 				<div class="label"> <label for="deadline">Deadline</label> </div>
@@ -162,74 +262,26 @@
 					</div>
 					<div id="customdate">
 						<div id="customtanggal"><div class="label">Tanggal</div>
-							<select>
-								<option value="date1">1</option>
-								<option value="date2">2</option>
-								<option value="date3">3</option>
-								<option value="date4">4</option>
-								<option value="date5">5</option>
-								<option value="date6">6</option>
-								<option value="date7">7</option>
-								<option value="date8">8</option>
-								<option value="date9">9</option>
-								<option value="date10">10</option>
-								<option value="date11">11</option>
-								<option value="date12">12</option>
-								<option value="date13">13</option>
-								<option value="date14">14</option>
-								<option value="date15">15</option>
-								<option value="date16">16</option>
-								<option value="date17">17</option>
-								<option value="date18">18</option>
-								<option value="date19">19</option>
-								<option value="date20">20</option>
-								<option value="date21">21</option>
-								<option value="date22">22</option>
-								<option value="date23">23</option>
-								<option value="date24">24</option>
-								<option value="date25">25</option>
-								<option value="date26">26</option>
-								<option value="date27">27</option>
-								<option value="date28">28</option>
-								<option value="date29">29</option>
-								<option value="date30">30</option>
-								<option value="date31">31</option>
+							<select id="tanggallist">
 							</select>
 						</div>
 						<div class="label"> </div>
 						<div id="custombulan"><div class="label">Bulan</div>
-							<select>
-								<option value="month1">1</option>
-								<option value="month2">2</option>
-								<option value="month3">3</option>
-								<option value="month4">4</option>
-								<option value="month5">5</option>
-								<option value="month6">6</option>
-								<option value="month7">7</option>
-								<option value="month8">8</option>
-								<option value="month9">9</option>
-								<option value="month10">10</option>
-								<option value="month11">11</option>
-								<option value="month12">12</option>
+							<select id="bulanlist" onChange="monthChange()">
 							</select>
 						</div>
 						<div class="label"> </div>
 						<div id="customtahun"><div class="label">Tahun</div>
-							<select>
-								<option value="year1">2010</option>
-								<option value="year2">2011</option>
-								<option value="year3">2012</option>
-								<option value="year4">2013</option>
-								<option value="year5">2014</option>
-								<option value="year6">2015</option>
+							<select id="tahunlist">
 							</select>
 						</div>
 					</div>
 					<div style="clear:both"></div>
-				<div class="label"> <label for="asignee">Asignee</label></div> <input id="asignee" name="asignee" type="text"/> <br />
+				<div class="label"> <label for="asignee">Assignee</label></div> <input id="asignee" name="asignee" type="text"/> <br />
 				<div class="label"> <label for="tag">Tag</label></div> <input id="tag" name="tag" type="text" size="20"/> (dipisahkan dengan ",") <br />
 				<br /> 
 				<input id="submitbutton" name="submitbutton" type="submit" onClick="checkSubmission()"/>
+            </form>
 			</div>
 			<div id="wrapper-right">
 				<img id="suatu_gambar" src="Troll.png" alt="Gambar tidak dapat di-load"/>    
