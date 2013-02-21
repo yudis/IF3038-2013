@@ -89,7 +89,7 @@
                                 </div>
                             </div></a></li>
                             
-                            <li> <a href="new_task.html"><div class="dashboard_tugas_element">
+                            <li> <a href="newWork.html"><div class="dashboard_tugas_element">
                                 <div class="dashboard_tugas_judul">New Task</div>
                                 <div class="dashboard_tugas_tanggal">Tanggal : TBD</div>
                                 <div class="dashboard_tugas_tag_area"></div>
@@ -177,26 +177,6 @@
 				// to do check session
 				window.location = "index.html";
 			}
-			
-            function category_click()
-            {
-                var ads = document.getElementsByTagName("a");
-                for (var j=0;j < ads.length; ++j)
-                {
-                    if (ads[j].children.length === 1) {
-                        /*alert(ads[j].nodeName);*/
-                        if (ads[j].children[0].className === "dashboard_category_element_aktif")
-                        {
-                            /*alert("Hore Ketemu");*/
-                            ads[j].children[0].className = "dashboard_category_element";
-                            break;
-                        }
-                    }
-                }
-                alert(this);
-                //alert(this.children.length + " " + this.children[0].className);
-                this.children[0].className = "dashboard_category_element_aktif";
-            }
             
             function check(n)
             {
@@ -220,16 +200,6 @@
                     }
                 }
             }
-            
-            /*var as = document.getElementsByTagName("a");
-            for (var i=0;i < as.length;++i) {
-                if (as[i].children.length === 1) {
-                    if (as[i].children[0].className === "dashboard_category_element") {
-                        alert(as[i].children[0].className);
-                        as[i].onclick = function(){category_click();};
-                    }                
-                }
-            }*/
             
             /*Bagian menampilkan pembuatan new_category*/
 			function new_category()
