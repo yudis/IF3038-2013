@@ -18,7 +18,7 @@
                         Task name:
                     </span>
                     <div>
-                        <input name="taskname" type="text" />
+                        <input name="taskname" type="text" value="Tugas besar 1 progin" disabled />
                     </div>
                 </div>
                 <div class="newline">
@@ -34,7 +34,10 @@
                         Deadline:
                     </span>
                     <div>
-                        <input type="date" />
+                        <input name="deadline" type="date" disabled />
+                        <span class="button" onclick="enable('deadline')">
+                            Edit
+                        </span>
                     </div>
                 </div>
                 <div class="newline">
@@ -42,7 +45,21 @@
                         Assignee:
                     </span>
                     <div>
-                        <input name="assignee" type="text" />
+                        <input name="assignee" type="text" disabled />
+                        <span class="button" onclick="enable('assignee')">
+                            Edit
+                        </span>
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Comments:
+                    </span>
+                    <div>
+                        <input name="comments" type="text" value="Still 80%" />
+                        <span class="button" onclick="submit('comments')">
+                            Submit
+                        </span>
                     </div>
                 </div>
                 <div class="newline">
@@ -50,13 +67,11 @@
                         Tag:
                     </span>
                     <div>
-                        <input name="tag" type="text" />
+                        <input name="tag" type="text" disabled />
+                        <span class="button" onclick="enable('tag')">
+                            Edit
+                        </span>
                     </div>
-                </div>
-                <div class="newline">
-                    <span class="button" onclick="doCreatingTask()">
-                        Submit
-                    </span>
                 </div>
             </div>
         </div>
