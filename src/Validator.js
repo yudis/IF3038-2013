@@ -137,3 +137,7 @@ function login(){
 	else
 		alert("Username & Password is incorrect");
 }
+
+function loadIndex(){
+	window.location = "src/Register.html";
+}
