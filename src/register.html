@@ -1,50 +1,70 @@
-		<form id="register" action="#" method="post">
-			<div class="row">
-				<label>Username</label>
-				<input size="50" maxlength="50" name="username" id="username" type="text">
+		<div class="content">
+			<div class="primary">
+				<div class="register">
+					<header>
+						<h1>Register</h1>
+					</header>
+
+					<form id="register" action="#" method="post">
+						<div class="field">
+							<label>Username</label>
+							<input size="50" maxlength="50" name="username" id="username" type="text">
+						</div>
+						<div class="field">
+							<label>Password</label>
+							<input size="50" maxlength="50" name="password" id="password" type="password">
+						</div>
+						<div class="field">
+							<label>Confirm Password</label>
+							<input size="50" maxlength="50" name="password_k" id="password_k" type="password">
+						</div>
+						<div class="field">
+							<label>Nama Lengkap</label>
+							<input size="50" maxlength="50" name="nama_lengkap" id="nama_lengkap" type="text">
+						</div>
+						<div class="field">
+							<label>Tangal Lahir</label>
+							<select id="tahun">
+								<option value = "2000">2000</option>
+								<option value = "2001">2001</option>
+								<option value = "2002">2002</option>
+								<option value = "2003">2003</option>
+							</select>
+							<select id="bulan">
+								<option value = "2000">2000</option>
+								<option value = "2001">2001</option>
+								<option value = "2002">2002</option>
+								<option value = "2003">2003</option>
+							</select>
+							<select id="tanggal">
+								<option value = "2000">2000</option>
+								<option value = "2001">2001</option>
+								<option value = "2002">2002</option>
+								<option value = "2003">2003</option>
+							</select>
+						</div>
+						<div class="field">
+							<label>Email</label>
+							<input size="50" maxlength="50" name="email" id="email" type="email">
+						</div>
+						<div class="field">
+							<label>Avatar</label>
+							<input name="avatar" id="avatar" type="file">
+						</div>
+						<div class="row buttons">
+							<input type="submit" name="register_dong" value="Register">
+						</div>
+					</form>
+				</div>
 			</div>
-			<div class="row">
-				<label>Password</label>
-				<input size="50" maxlength="50" name="password" id="password" type="password">
+
+			<div class="secondary">
+				<nav class="site-nav">
+					<section class="main">
+						<ul class="main-links">
+							<li class="login-link"><a href="login.html">Login</a></li>
+						</ul>
+					</section>
+				</nav>
 			</div>
-			<div class="row">
-				<label>Konfirmasi Password</label>
-				<input size="50" maxlength="50" name="password_k" id="password_k" type="password">
-			</div>
-			<div class="row">
-				<label>Nama Lengkap</label>
-				<input size="50" maxlength="50" name="nama_lengkap" id="nama_lengkap" type="text">
-			</div>
-			<div class="row">
-				<label>Tangal Lahir</label>
-				<select id="tahun">
-					<option value = "2000">2000</option>
-					<option value = "2001">2001</option>
-					<option value = "2002">2002</option>
-					<option value = "2003">2003</option>
-				</select>
-				<select id="bulan">
-					<option value = "2000">2000</option>
-					<option value = "2001">2001</option>
-					<option value = "2002">2002</option>
-					<option value = "2003">2003</option>
-				</select>
-				<select id="tanggal">
-					<option value = "2000">2000</option>
-					<option value = "2001">2001</option>
-					<option value = "2002">2002</option>
-					<option value = "2003">2003</option>
-				</select>
-			</div>
-			<div class="row">
-				<label>Email</label>
-				<input size="50" maxlength="50" name="email" id="email" type="email">
-			</div>
-			<div class="row">
-				<label>Avatar</label>
-				<input name="avatar" id="avatar" type="file">
-			</div>
-			<div class="row buttons">
-				<input type="submit" name="register_dong" value="Register">
-			</div>
-		</form>	
+		</div>
