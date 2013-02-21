@@ -1,0 +1,70 @@
+#addtask{
+    background-color: #ececec;
+    width: 139px;
+    height: 68px;
+    border-radius:20px;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    box-shadow: 1px 1px 5px 0px #e1e1e1;
+    margin-left: 118px;
+    margin-top: 64px;
+    background-image: url("../pict/tulisantask.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#addtask:hover{
+    background-color: #361a2c;
+}
+
+#namaicon{
+	height: 20px;
+}
+
+#attaicon{
+	height: 20px;
+}
+
+#back{
+    background-color: #ececec;
+    width: 139px;
+    height: 68px;
+    border-radius:20px;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    box-shadow: 1px 1px 5px 0px #e1e1e1;
+    margin-left: 118px;
+    margin-top: 30px;
+    background-image: url("../pict/back.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#back:hover{
+    background-color: #361a2c;
+}
+
+#formtask2{
+    margin-left: 83px;
+    margin-top: 20px;
+}
+
+#judulform{
+    background-image: url("../pict/formjudul.png");
+    height: 145px;
+    width:267px;
+    background-repeat: no-repeat;
+    margin-left: 83px;
+}
+#formtask{
+    padding-top: 30px;
+    width: 485px;
+    height: 575px;
+    background-color: #ececec;
+    border-radius:20px;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    box-shadow: 1px 1px 5px 0px #e1e1e1;
+    margin-left: 300px;
+    margin-top: -165px;
+}

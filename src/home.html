@@ -163,18 +163,6 @@
 						}
 				}
 			
-			function isformvalid()
-				{
-					var uservalid = document.getElementById("usericon").src;
-					var userid = document.registration.username.value;
-					var userpass = document.registration.password.value;
-					
-					if((userid.length >= "5") && (userid != userpass))
-						{
-							document.getElementsByName("submit")[0].disabled = false;
-						}
-				}
-			
         </script>
     </head>
     <body>
@@ -220,7 +208,7 @@
                     <form name="registration">
                         <label>username</label>
                         <input name="username" type="text" placeholder="username"  onkeyup="user_validating()" onchange="logingg()" />
-						<img src="pict/blank.png" alt="icon2" id="usericon" onchange="isformvalid()" />
+						<img src="pict/blank.png" alt="icon2" id="usericon"  />
                         <label>password</label>
                         <input name="password" type="password" placeholder="password" onkeyup="pass_validating()" onchange="logingg()" />
                         <img src="pict/blank.png" alt="icon3" id="passicon" />
