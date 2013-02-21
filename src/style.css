@@ -245,6 +245,8 @@ body
 	margin: auto;
 }
 
+
+/*---header---*/
 #header{
 	box-shadow: 0 0 10px black;
 	width: 100%;
@@ -265,6 +267,44 @@ body
 	width: 900px;
 	line-height: 15px;
 	
+}
+
+#topbar_border
+{
+	float: left;
+	width: 1px;
+	height: 42px;
+	position: relative;
+	top: 6px;
+	margin: 0px 6px;
+	background-color: #000;
+}
+
+header a
+{
+	text-decoration: none;
+	color: #333333;
+}
+
+nav ul
+{
+	list-style: none;
+	display: inline;
+}
+nav, nav ul li
+{
+	float: left;
+}
+nav ul li a
+{
+	display: block;
+	font-size: 18px;
+	font-weight: bold;
+	margin: 6px 14px;
+}
+nav ul li a:hover, nav ul li a .active
+{
+	color: rgb(213, 134, 19);
 }
 
 #topbar_logo{
@@ -319,6 +359,8 @@ input[type="search"], isindex {
 	cursor: auto;
 	margin-top: 15px;
 }
+
+/*---Content---*/
 
 #content
 {
@@ -378,48 +420,81 @@ input[type="search"], isindex {
 	background: #fff;
 }
 
+#foto_profil
+{
+	float: left;
+	width: 300px;
+	height: 550px;
+}
+
+#foto
+{
+	width: 200px;
+	height: 200px;
+	border: 1px solid #000;
+}
+
+#user_info
+{
+	font-weight: 700;
+	font-family: Arial, san-serif;
+	font-size: 25px;
+	margin: 10px auto;
+}
+
+.user
+{
+	font-family: Arial, san-serif;
+	font-size: 16px;
+}
+
+#biodata1
+{
+	float: left;
+	width: 120px;
+	height: 100px;
+}
+
+#biodata2
+{
+	float: left;
+	width: 170px;
+	height: 100px;
+}
+
+#edit
+{
+	margin-left: 230px;
+	text-decoration: none;
+	color: rgb(61, 107, 194);
+	font-size: 14px;
+}
+
+#list
+{
+	float: left;
+}
+
+#listTugas
+{
+	width: 400px;
+	height: 250px;
+	border: 1px solid #000;
+}
+
+#doneTugas
+{
+	width: 400px;
+	height: 250px;
+	border: 1px solid #000;
+}
+
+/*---footer---*/
+
 #footer_wrap
 {
 	background-color: #fff;
 	height:20px;
 	width: 1000px;
 	margin: auto;
-}
-
-#topbar_border
-{
-	float: left;
-	width: 1px;
-	height: 42px;
-	position: relative;
-	top: 6px;
-	margin: 0px 6px;
-	background-color: #000;
-}
-
-header a
-{
-	text-decoration: none;
-	color: #333333;
-}
-
-nav ul
-{
-	list-style: none;
-	display: inline;
-}
-nav, nav ul li
-{
-	float: left;
-}
-nav ul li a
-{
-	display: block;
-	font-size: 18px;
-	font-weight: bold;
-	margin: 6px 14px;
-}
-nav ul li a:hover, nav ul li a .active
-{
-	color: rgb(213, 134, 19);
 }
