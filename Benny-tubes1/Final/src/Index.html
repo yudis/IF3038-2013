@@ -5,6 +5,7 @@
 	<title>Monkey.Inc</title>
 	<link rel="stylesheet" type="text/css" href="task.css">
 	<script type="text/javascript" src="index.js"></script>
+	<script language="javascript" type="text/javascript" src="datetimepicker.js"> </script>
 </head>
 
 <body>
@@ -99,6 +100,11 @@
 		</div>
 		<div>
 			<label >Tanggal Lahir</label>
+			<input id="Rtanggal" name=Rtanggal type="text" onkeyup="checkTanggal()" />
+			<a href="javascript:NewCal('Rtanggal','ddmmyyyy')" ><img src="../image/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
+			<img src="../image/false.png" alt="False04" id="ntanggalpic"/>
+			
+			<!--
 			<select name="day">
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -206,6 +212,7 @@
 				<option value="1956">1956</option>
 				<option value="1955">1955</option>
 			</select>
+			-->
 		</div>
 		<div>
 			<label for="email">Email</label>
@@ -214,7 +221,8 @@
 		</div>
 		<div>
 			<label for="avatar">Avatar</label>
-			<input type="file" id="avatar" />
+			<input type="file" id="avatar" name=Ravatar onkeyup="checkAvatar()" />
+			<img src="../image/false.png" alt="False05" id="avatarpic"/>
 		</div>
 		<input class="popupbutton" type="button" value="Register" id="regButton" onclick="doneReg()"/>
 		<a class="close" href="#close"></a>

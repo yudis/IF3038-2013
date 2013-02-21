@@ -15,7 +15,7 @@ body
 	background: -ms-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
 	background: -o-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
 	background: -webkit-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
-	/*background: linear-gradient(top,rgb(239,228,171), rgb(255,255,255));*/
+	background: linear-gradient(top,rgb(239,228,171), rgb(255,255,255));
 	background-repeat:no-repeat;
 }
 
@@ -42,7 +42,7 @@ br
 
 .htext {
 	margin-left:110px;
-	width:800px;
+	width:auto;
 	color: rgb(114,47,47);
 	/*3d*/
 	/*
@@ -60,7 +60,7 @@ br
 	background: -ms-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	background: -o-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	background: -webkit-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
-	/*background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));*/
+	background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 }
 
 .hlogo
@@ -188,6 +188,7 @@ br
 }
 
 #buttonalltask:hover{
+	background-color:(255,255,255,0.4);
 	-webkit-transform:scale(1,2);
     -moz-transform:scale(1,2);
     -ms-transform:scale(1,2);
@@ -223,6 +224,7 @@ br
 }
 
 #buttonhome:hover{
+	background-color:(255,255,255,0.4);
 	-webkit-transform:scale(1,2);
     -moz-transform:scale(1,2);
     -ms-transform:scale(1,2);
@@ -239,6 +241,7 @@ br
 }
 
 #buttonoffice:hover{
+	background-color:(255,255,255,0.4);
 	-webkit-transform:scale(1,2);
     -moz-transform:scale(1,2);
     -ms-transform:scale(1,2);
@@ -255,6 +258,7 @@ br
 }
 
 #buttonshopping:hover{
+	background-color:(255,255,255,0.4);
 	-webkit-transform:scale(1,2);
     -moz-transform:scale(1,2);
     -ms-transform:scale(1,2);
@@ -279,6 +283,7 @@ br
 }
 
 #buttonfamily:hover{
+	background-color:(255,255,255,0.4);
 	-webkit-transform:scale(1,2);
     -moz-transform:scale(1,2);
     -ms-transform:scale(1,2);
@@ -295,6 +300,7 @@ br
 }
 
 #buttonpersonal:hover{
+	background-color:rgba(255,255,255,0.4);
 	-webkit-transform:scale(1,2);
     -moz-transform:scale(1,2);
     -ms-transform:scale(1,2);
@@ -362,32 +368,27 @@ br
 
 .taskbutton{
 	width:450px;
-	height:100px;
-	text-align:center;
-	vertical-align:middle;
+	height:125px;
+	text-align:centre;
 	position:relative;
-	padding-bottom:10px;
 }
 
 .buttontitleicon{
 	width:130px;
-	height:50px;
+	height:150px;
 	float:left;
 }
 
 .iconinbutton{
-	text-align:left;
-	vertical-align:middle;
 	width:100px;
 	height:100px;
-	padding-left:20px;
+	padding-top:10px;
 }
 
 .buttondescName{
 	height:150px;
-	padding-right:50px;
+	padding-top:5px;
 	font-size:40px;
-	float:right;
 }
 
 .buttondeadline{
@@ -396,8 +397,6 @@ br
 
 #addtaskbutton{
 	display:none;
-	position:relative;
-	float:left;
 }
 
 .buttondescAdd{
@@ -468,6 +467,42 @@ br
 	margin:0px;
 }
 
+#buttonhome{
+	background-color:transparent;
+	border:none;
+}
+
+#buttonhome:hover{
+	background-color:(255,255,255,0.4);
+}
+
+#buttonoffice{
+	background-color:transparent;
+	border:none;
+}
+
+#buttonoffice:hover{
+	background-color:(255,255,255,0.4);
+}
+
+#buttonshopping{
+	background-color:transparent;
+	border:none;
+}
+
+#buttonshopping:hover{
+	background-color:(255,255,255,0.4);
+}
+
+#buttonpersonal{
+	background-color:transparent;
+	border:none;
+}
+
+#buttonpersonal:hover{
+	background-color:(255,255,255,0.4);
+}
+
 #add{
 	font-size:15px;
 	height:40px;
@@ -531,13 +566,10 @@ br
 
 .taskbutton{
 	width:450px;
-	height:100px;
-	text-align:center;
-	vertical-align:middle;
+	height:125px;
+	text-align:centre;
 	position:relative;
 	background-color:#CCCCCC;
-	border-left:2px solid #FFF;
-	border-top:2px solid #FFF;
 	border-radius:8px;
 	-moz-border-radius:8px;
 	-webkit-border-radius:8px;
@@ -549,8 +581,7 @@ br
 .taskbutton:hover {
 	position:relative;
 	top:3px;
-	border-left:none;
-	border-top:none;
+	color: #fqq;
 	box-shadow:none;
 	-moz-box-shadow:none;
 	-webkit-box-shadow:none;
@@ -558,7 +589,7 @@ br
 
 .buttontitleicon{
 	width:130px;
-	height:110px;
+	height:150px;
 	float:left;
 }
 
@@ -569,7 +600,7 @@ br
 }
 
 .buttondescName{
-	height:100px;
+	height:150px;
 	padding-top:5px;
 	font-size:40px;
 }
@@ -583,7 +614,7 @@ br
 }
 
 .buttondescAdd{
-	height:100px;
+	height:150px;
 	padding-top:35px;
 	font-size:40px;
 }
@@ -597,7 +628,7 @@ br
 	background: -ms-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	background: -o-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	background: -webkit-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
-	/*background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));*/
+	background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	box-shadow: 10px 10px 5px #888888;
 }
 

@@ -38,7 +38,7 @@ br
 	padding:0px;
 	box-shadow: 10px 10px 5px #888888;
 	width:800px;
-	height:180px;
+	height:170px;
 }
 
 .contentRincian
@@ -47,7 +47,7 @@ br
 	padding:0px;
 	box-shadow: 10px 10px 5px #888888;
 	width:800px;
-	height:370px;
+	height:520px;
 }
 
 
@@ -628,25 +628,4 @@ br
 .rincianKanan{
 	width:85%;	
 	float:left;
-}
-.kalender{
-	width:16px; 
-	height:16px; 
-	border:0px;
-}
-
-#tanggal{
-	display:none;
-}
-#namaTugas{
-	font-size:20px;
-}
-.tombol{
-	border:none;
-	background-color:rgba(204,204,204,1);
-	-moz-border-radius:8px;
-	-webkit-border-radius:8px;
-	box-shadow: 0px 3px 5px #999;
-	-moz-box-shadow: 0px 3px 5px #999;
-	-webkit-box-shadow: 0px 3px 5px #999;
 }

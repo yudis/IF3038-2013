@@ -15,7 +15,7 @@ body
 	background: -ms-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
 	background: -o-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
 	background: -webkit-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
-	/*background: linear-gradient(top,rgb(239,228,171), rgb(255,255,255));*/
+	background: linear-gradient(top,rgb(239,228,171), rgb(255,255,255));
 	background-repeat:no-repeat;
 }
 
@@ -42,7 +42,7 @@ br
 
 .htext {
 	margin-left:110px;
-	width:800px;
+	width:auto;
 	color: rgb(114,47,47);
 	/*3d*/
 	/*
@@ -60,7 +60,7 @@ br
 	background: -ms-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	background: -o-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	background: -webkit-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
-	/*background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));*/
+	background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 }
 
 .hlogo
@@ -291,6 +291,7 @@ br
 #editmyprofile-button:hover {
 	position:relative;
 	top:3px;
+	color: #fqq;
 	box-shadow:none;
 	-moz-box-shadow:none;
 	-webkit-box-shadow:none;
@@ -433,7 +434,7 @@ br
 	background: -ms-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	background: -o-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	background: -webkit-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
-	/*background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));*/
+	background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	box-shadow: 10px 10px 5px #888888;
 }
 
