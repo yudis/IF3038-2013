@@ -1,0 +1,91 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    font-size: large;
+    font-family: sans-serif;
+}
+
+a
+{
+    text-decoration: none;
+    color: white;
+}
+
+.header
+{
+    background: #222222;  
+    margin: 0 auto;
+    color: white;
+    width: 100%;
+}
+
+.logo
+{
+    margin: 10px 10px 10px 10px;   
+}
+
+.search
+{
+    margin-right: auto;
+}
+
+.container
+{
+    margin: 0 auto;
+}
+
+.inline
+{
+    display: inline-block;
+}
+
+.hidden
+{
+    display: none;
+}
+
+.container
+{
+    margin: 0 auto;
+}
+
+.button
+{
+    font-family: sans-serif;
+    font-size: 20px;
+    padding: 5px 1em 5px 1em;
+    background-color: #000000;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    color: white;
+}
+
+.button:hover
+{
+    background: #aaaaaa;
+    color: black;
+    cursor: context-menu;
+    
+}
+.button a:hover
+{
+    color: black;
+}
+.search
+{
+    float: right;
+}
+
+.newspaper
+{
+    -moz-column-rule:3px outset #ff00ff; /* Firefox */
+    -webkit-column-rule:3px outset #ff00ff; /* Safari and Chrome */
+    column-rule:3px outset #ff00ff;
+}
+
+.form
+{
+    margin: 0 auto;
+}

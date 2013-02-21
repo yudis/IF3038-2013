@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="icon" type="image/png" href="../images/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type="text/javascript" src="mpquery.js"></script>
+        <script type="text/javascript" src="indexController.js"></script>
+    </head>
+    <body>
+        <!--video penjelasan fitur (dummy video)-->
+        <video width="320" height="200" controls>
+            <source src="../videos/tutorial.mp4" type="video/mp4">
+        </video>
+        <!--register-->
+        <div class="container inline">
+            <div class="row">
+                <label class="row">Username: </label>
+                <input class="row" name="username" type="text" onkeyup="validate(this)"/>
+                <label class="hidden" name="valid_username" >Valid</label>
+            </div>
+            <div class="row">
+                <label class="row">Password: </label>
+                <input class="row" name="password" type="password" onkeyup="validate(this)" />
+                <label class="hidden" name="valid_password" >Valid</label>
+            </div>
+            <div class="row">
+                <label class="row">Confirm Password: </label>
+                <input class="row" name="confirmpassword" type="password" onkeyup="validate(this)" />
+                <label class="hidden" name="valid_confirmpassword" >Valid</label>
+            </div>
+            <div class="row">
+                <label class="row">Full Name: </label>
+                <input class="row" name="fullname" type="text" onkeyup="validate(this)" />
+                <label class="hidden" name="valid_fullname" >Valid</label>
+            </div>
+            <div class="row">
+                <label class="row">Date of Birth: </label>
+                <input class="row" name="dateofbirth" type="date" onkeyup="validate(this)" />
+                <label class="hidden" name="valid_dateofbirth" >Valid</label>
+            </div>
+            <div class="row">
+                <label class="row">Email: </label>
+                <input class="row" name="email" type="text" onkeyup="validate(this)" />
+                <label class="hidden" name="valid_email" >Valid</label>
+            </div>
+            <div class="row">
+                <label class="row">Mother's Name: </label>
+                <input class="row" name="mothername" type="text" onkeyup="validate(this)" />
+                <label class="hidden" name="valid_mothername" >Valid</label>
+            </div>
+            <div class="row">
+                <label class="row">Avatar: </label>
+                <input class="row" name="avatar" type="file" accept="image/jpg|image/jpeg" onkeyup="validate(this)" />
+                <label class="hidden" name="valid_avatar" >Valid</label>
+            </div>
+            <div class="button" onclick="doRegistration()">
+                Submit
+            </div>
+        </div>
+    </body>
+</html>

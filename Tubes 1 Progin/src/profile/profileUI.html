@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="icon" type="image/png" href="../../images/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <script type="text/javascript" src="../mpquery.js"></script>
+        <script type="text/javascript" src="../header.js"></script>
+        <script type="text/javascript" src="profileController.js"></script>
+    </head>
+    <body>
+        <div class="container inline">
+            <div class="inline">
+                <div class="form">
+                    <div class="row">
+                        <span class="column">
+                            <label for="username">Username: </label>
+                        </span>
+                        <span class="column">
+                            <input name="username" type="text" disabled />
+                        </span>
+                        <span class="button" onclick="enable('username')">
+                            Edit
+                        </span>
+                    </div>
+                    <div class="row">
+                        <span class="column">
+                            <label for="password">Password: </label>
+                        </span>
+                        <span class="column">
+                            <input name="password" type="password" disabled />
+                        </span>
+                        <span class="button" onclick="enable('password')">
+                            Edit
+                        </span>
+                    </div>
+                    <div class="row">
+                        <span class="column">
+                            <label for="confirmpassword">Confirm Password: </label>
+                        </span>
+                        <span class="column">
+                            <input name="confirmpassword" type="password" disabled />
+                        </span>
+                        <span class="button" onclick="enable('confirmpassword')">
+                            Edit
+                        </span>
+                    </div>
+                    <div class="row">
+                        <span class="column">
+                            <label for="fullname">Full Name: </label>
+                        </span>
+                        <span class="column">
+                            <input name="fullname" type="text" disabled />
+                        </span>
+                        <span class="button" onclick="enable('fullname')">
+                            Edit
+                        </span>
+                    </div>
+                    <div class="row">
+                        <span class="column">
+                            <label for="dateofbirth">Date of Birth: </label>
+                        </span>
+                        <span class="column">
+                            <input name="dateofbirth" type="date" disabled />
+                        </span>
+                        <span class="button" onclick="enable('dateofbirth')">
+                            Edit
+                        </span>
+                    </div>
+                    <div class="row">
+                        <span class="column">
+                            <label for="email">Email: </label>
+                        </span>
+                        <span class="column">
+                            <input name="email" type="text" disabled />
+                        </span>
+                        <span class="button" onclick="enable('email')">
+                            Edit
+                        </span>
+                    </div>
+                    <div class="row">
+                        <span class="column">
+                            <label for="mothername">Mother's Name: </label>
+                        </span>
+                        <span class="column">
+                            <input name="mothername" type="text" disabled />
+                        </span>
+                        <span class="button" onclick="enable('mothername')">
+                            Edit
+                        </span>
+                    </div>
+                    <div class="row">
+                        <span class="column">
+                            <label for="avatar">Avatar: </label>
+                        </span>
+                        <span class="column">
+                            <input name="avatar" type="file" accept="image/jpg|image/jpeg" disabled />
+                        </span>
+                        <span class="button" onclick="enable('avatar')">
+                            Edit
+                        </span>
+                    </div>
+                    <div class="row">
+                         <span class="button" onclick="doEditing()">
+                            Submit
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
