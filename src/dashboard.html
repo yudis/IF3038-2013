@@ -2,6 +2,51 @@
 <head>
 <title>Dashboard</title>
 <link href="styles/dashboard.css" rel="stylesheet" type="text/css" />
+
+<script>
+	function showK1(){
+		document.getElementById('k1').style.borderColor = '#836fff';
+		document.getElementById('k2').style.borderColor = '#d9d9d9';
+		document.getElementById('k3').style.borderColor = '#d9d9d9';
+		document.getElementById('k11').style.display = 'block';
+		document.getElementById('k12').style.display = 'block';
+		document.getElementById('k13').style.display = 'block';
+		document.getElementById('k14').style.display = 'block';
+		document.getElementById('k21').style.display = 'none';
+		document.getElementById('k22').style.display = 'none';
+		document.getElementById('k31').style.display = 'none';
+	}
+</script>
+
+<script>
+	function showK2(){
+		document.getElementById('k1').style.borderColor = '#d9d9d9';
+		document.getElementById('k2').style.borderColor = '#836fff';
+		document.getElementById('k3').style.borderColor = '#d9d9d9';
+		document.getElementById('k11').style.display = 'none';
+		document.getElementById('k12').style.display = 'none';
+		document.getElementById('k13').style.display = 'none';
+		document.getElementById('k14').style.display = 'none';
+		document.getElementById('k21').style.display = 'block';
+		document.getElementById('k22').style.display = 'block';
+		document.getElementById('k31').style.display = 'none';
+	}
+</script>
+
+<script>
+	function showK3(){
+		document.getElementById('k1').style.borderColor = '#d9d9d9';
+		document.getElementById('k2').style.borderColor = '#d9d9d9';
+		document.getElementById('k3').style.borderColor = '#836fff';
+		document.getElementById('k11').style.display = 'none';
+		document.getElementById('k12').style.display = 'none';
+		document.getElementById('k13').style.display = 'none';
+		document.getElementById('k14').style.display = 'none';
+		document.getElementById('k21').style.display = 'none';
+		document.getElementById('k22').style.display = 'none';
+		document.getElementById('k31').style.display = 'block';
+	}
+</script>
 </head>
 
 <body>
@@ -31,7 +76,8 @@
         	<div id="category_head">
 				Kategori
 			</div>
-			<div class="category_block">
+			
+			<div class="category_block" id="k1" onclick="showK1()">
 				<div class="category_pic">
 					<img src="../images/Book-icon.png"/>
 				</div>
@@ -39,9 +85,8 @@
 					Kuliah
 				</div>
 			</div>
-			<div class="category_pemisah">
-			</div>
-			<div class="category_block">
+			
+			<div class="category_block" id="k2" onclick="showK2()">
 				<div class="category_pic">
 					<img src="../images/Book-icon.png"/>
 				</div>
@@ -49,9 +94,8 @@
 					Eksperimen
 				</div>
 			</div>
-			<div class="category_pemisah">
-			</div>
-			<div class="category_block">
+			
+			<div class="category_block" id="k3" onclick="showK3()">
 				<div class="category_pic">
 					<img src="../images/menguasai-dunia.png"/>
 				</div>
@@ -59,9 +103,8 @@
 					Menguasai Dunia
 				</div>
 			</div>
-			<div class="category_pemisah">
-			</div>
-			<div class="category_block" id="tambah_kategori">
+			
+			<div class="category_block" id="tambah_kategori" onclick="location.href='#category_form'">
 				<div class="category_pic">
 					<img src="../images/tambah.png"/>
 				</div>
@@ -71,10 +114,105 @@
 			</div>
 		</div>
 		<div id="task">
-        	
+        	<div id="task_header">
+				Tasks
+			</div>
+			
+			<div class="task_block" id="tambah_task" onclick="location.href='newtask.html'">
+				<p>Tambah Task...</p>
+			</div>
+			
+			<div class="task_block" id="k11">
+				<div class="task_judul">
+					Cari Buku
+				</div>
+				<div class="task_deadline">
+					Deadline: <font color="red">21 February 2013</font>
+				</div>
+				<div class="task_tag">
+					Tags: kuliah
+				</div>
+			</div>
+			
+			<div class="task_block" id="k12">
+				<div class="task_judul">
+					Tugas Intelegensia Buatan
+				</div>
+				<div class="task_deadline">
+					Deadline: <font color="red">22 February 2013</font>
+				</div>
+				<div class="task_tag">
+					Tags: kuliah, IB, tugas
+				</div>
+			</div>
+			
+			<div class="task_block" id="k21">
+				<div class="task_judul">
+					Cari Monyet
+				</div>
+				<div class="task_deadline">
+					Deadline: <font color="red">24 February 2013</font>
+				</div>
+				<div class="task_tag">
+					Tags: eksperimen
+				</div>
+			</div>
+			
+			<div class="task_block" id="k22">
+				<div class="task_judul">
+					Beli Formalin
+				</div>
+				<div class="task_deadline">
+					Deadline: <font color="red">25 February 2013</font>
+				</div>
+				<div class="task_tag">
+					Tags: eksperimen
+				</div>
+			</div>
+			
+			<div class="task_block"id="k13">
+				<div class="task_judul">
+					Tugas IMK
+				</div>
+				<div class="task_deadline">
+					Deadline: <font color="red">25 February 2013</font>
+				</div>
+				<div class="task_tag">
+					Tags: kuliah, IMK, tugas
+				</div>
+			</div>
+			
+			<div class="task_block" id="k14">
+				<div class="task_judul">
+					Kuis IMK
+				</div>
+				<div class="task_deadline">
+					Deadline: <font color="red">28 February 2013</font>
+				</div>
+				<div class="task_tag">
+					Tags: kuliah, IMK, kuis
+				</div>
+			</div>
+			
+			<div class="task_block" id="k31">
+				<div class="task_judul">
+					Latihan Silat
+				</div>
+				<div class="task_deadline">
+					Deadline: <font color="red">28 February 2013</font>
+				</div>
+				<div class="task_tag">
+					Tags: bela diri
+				</div>
+			</div>
 		</div>
     </div>
 		
-	
+	<!--Popup bikin kategori baru -->
+	<a href="#x" class="overlay" id="category_form"></a>
+	<div class="popup">
+		form tambah kategori
+		<a class="close" href="#close"></a>
+	</div>
 </body>
 </html>
