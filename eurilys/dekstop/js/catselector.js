@@ -14,6 +14,11 @@ function catchange(catnum){
 			document.getElementById("proyek").style.color = "#6FBEC6";
 			document.getElementById("tugas").style.color = "#6FBEC6";
 			document.getElementById("lomba").style.color = "#6FBEC6";
+			document.getElementById("category_title").style.backgroundColor = "#ff5645";
+			document.getElementById("lomba").style.backgroundColor = "#fff";
+			document.getElementById("kuliah").style.backgroundColor = "#fff";
+			document.getElementById("proyek").style.backgroundColor = "#fff";
+			document.getElementById("tugas").style.backgroundColor = "#fff";
 		}
 		
 		else {if (catnum == 1){
@@ -24,10 +29,14 @@ function catchange(catnum){
 				document.getElementById("curtask1").style.top = "20px";
 				document.getElementById("curtask2").style.opacity = "1";
 				document.getElementById("curtask2").style.top = "200px";
-				document.getElementById("kuliah").style.color = "#ff5645";
+				document.getElementById("kuliah").style.backgroundColor = "#ff5645";
+				document.getElementById("kuliah").style.color = "#fff";
 				document.getElementById("proyek").style.color = "#6FBEC6";
 				document.getElementById("tugas").style.color = "#6FBEC6";
 				document.getElementById("lomba").style.color = "#6FBEC6";
+				document.getElementById("lomba").style.backgroundColor = "#fff";
+				document.getElementById("proyek").style.backgroundColor = "#fff";
+				document.getElementById("tugas").style.backgroundColor = "#fff";
 			}
 		else {
 			if (catnum==2) {
@@ -38,10 +47,14 @@ function catchange(catnum){
 				document.getElementById("curtask4").style.top = "20px";
 				document.getElementById("curtask5").style.opacity = "1";
 				document.getElementById("curtask5").style.top = "200px";
-				document.getElementById("proyek").style.color = "#ff5645";
+				document.getElementById("proyek").style.backgroundColor = "#ff5645";
+				document.getElementById("proyek").style.color = "#fff";
 				document.getElementById("kuliah").style.color = "#6FBEC6";
 				document.getElementById("tugas").style.color = "#6FBEC6";
 				document.getElementById("lomba").style.color = "#6FBEC6";
+				document.getElementById("lomba").style.backgroundColor = "#fff";
+				document.getElementById("kuliah").style.backgroundColor = "#fff";
+				document.getElementById("tugas").style.backgroundColor = "#fff";
 			}
 			else if (catnum == 4) {
 				document.getElementById("curtask1").style.opacity = "0";
@@ -50,10 +63,14 @@ function catchange(catnum){
 				document.getElementById("curtask5").style.opacity = "0";
 				document.getElementById("curtask3").style.opacity = "1";
 				document.getElementById("curtask3").style.top = "20px";
-				document.getElementById("lomba").style.color = "#ff5645";
+				document.getElementById("lomba").style.backgroundColor = "#ff5645";
+				document.getElementById("lomba").style.color = "#fff";
 				document.getElementById("proyek").style.color = "#6FBEC6";
 				document.getElementById("kuliah").style.color = "#6FBEC6";
 				document.getElementById("tugas").style.color = "#6FBEC6";
+				document.getElementById("kuliah").style.backgroundColor = "#fff";
+				document.getElementById("proyek").style.backgroundColor = "#fff";
+				document.getElementById("tugas").style.backgroundColor = "#fff";
 				}
 			else {
 				document.getElementById("curtask1").style.opacity = "0";
@@ -61,10 +78,14 @@ function catchange(catnum){
 				document.getElementById("curtask3").style.opacity = "0";
 				document.getElementById("curtask4").style.opacity = "0";
 				document.getElementById("curtask5").style.opacity = "0";
-				document.getElementById("tugas").style.color = "#ff5645";
+				document.getElementById("tugas").style.backgroundColor = "#ff5645";
+				document.getElementById("tugas").style.color = "#fff";
 				document.getElementById("proyek").style.color = "#6FBEC6";
 				document.getElementById("lomba").style.color = "#6FBEC6";
 				document.getElementById("kuliah").style.color = "#6FBEC6";
+				document.getElementById("lomba").style.backgroundColor = "#fff";
+				document.getElementById("kuliah").style.backgroundColor = "#fff";
+				document.getElementById("proyek").style.backgroundColor = "#fff";
 				}
 			}
 		}
