@@ -8,7 +8,7 @@ function toggle_visibility(id) {
 
 var loginForm = document.getElementById("login_form");
 function logincheck()  {
-	if ((document.getElementById("login_username").value =="admin") && (document.getElementById("login_password").value =="admin"))
+	if ((document.getElementById("login_username").value =="admin") && (document.getElementById("login_password").value =="adminadmin"))
 		window.location.href = "src/Dashboard.html";
 	else
 	{
