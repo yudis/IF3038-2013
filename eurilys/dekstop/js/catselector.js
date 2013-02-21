@@ -12,3 +12,16 @@ function catchange(catnum){
 				}
 		}
     }
+	
+function add_category2() {
+	
+	var taskcatlist = document.getElementsByClassName("taskcat");
+	var selc = document.getElementById("catselector");
+	var newcat = document.getElementById("add_category_name").value;
+	selc.innerHTML += '<option value="' + taskcatlist.length + '">' + newcat +'</option>';
+	
+	var content = document.getElementById("dynamic_content");
+	var curcatnum = taskcatlist.length+1;
+	content.innerHTML += '<div class="taskcat" id="taskcat' + curcatnum + '">Task di Category ' + curcatnum + '</div>';
+	catchange(curcatnum);
+	}
