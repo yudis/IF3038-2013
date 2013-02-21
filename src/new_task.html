@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="Description" content="" />
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+		<title>MOA - Dashboard</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/dashboard.css" />
+	</head>
+	<body>
+		<header>
+			<div id="header_wrap" class="wrap">
+				<a href="dashboard.html"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
+				<div id="header_title">
+					<h1> <a href="dashboard.html">MOA</a> </h1>
+					<h4>Multiuser Online Agenda</h4>
+				</div>
+				<div id="border_header"></div>
+				<div id="header_menu">
+					<nav>
+						<ul>
+							<li> <a href="dashboard.html">Dashboard</a> </li>
+							<li> <a href="profil.html">Profil</a> </li>
+						</ul>
+					</nav>
+					<div id="login_area">
+						<nav id="login_button">
+							<ul>
+								<li> <a id="login_link" href="index.html">Keluar</a> </li>
+							</ul>
+						</nav>
+						<div class="clear"></div>
+						<div class="clear"></div>
+					</div>
+					<div id="border_search"></div>
+
+					<div id="search">
+						<div id="search_inner">
+							<div id="search_button"></div>
+							<div id="search_left"></div>
+							<form id="search_form">
+								<input id="search_text" name="search_query" type="text" />
+							</form>
+							<div id="search_right"></div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</header>
+		
+		<section>
+			<div id="content_wrap" class="wrap">
+                
+			</div>
+		</section>
+		
+		<footer>
+			<div id="footer_wrap" class="wrap">
+				<div id="footer_left">
+					<a href="dashboard.html">Dashboard</a>
+                    >>
+                    <a href="new_category.html" class="active">New Category</a>
+				</div>
+				<div id="footer_right">
+					Copyright by dronJaX.
+				</div>
+			</div>
+		</footer>
+		
+		<script type="text/javascript">
+			var search_text = document.getElementById("search_text");
+			
+			search_text.onmouseover = function()
+			{
+				this.focus();	
+			}
+			search_text.onfocus = function()
+			{
+				var search = document.getElementById("search");
+				search.className = "active";
+			}
+			search_text.onblur = function()
+			{
+				if (search_text.value==="")
+				{
+					var search = document.getElementById("search");
+					search.className = "";
+				}
+			}
+			
+			var login_area = document.getElementById("login_area");
+			login_area.onmouseover = function()
+			{
+				document.getElementById("login_link").className = "logout_link_focus";
+				document.getElementById("login_button").className = "logout_button_focus";
+			}
+			
+			login_area.onmouseout = function()
+			{
+				document.getElementById("login_link").className = "";
+				document.getElementById("login_button").className = "";
+			}
+			
+			login_area.onclick = function()
+			{
+				// to do check session
+				window.location = "index.html";
+			}
+			
+			window.onload = function()
+			{
+				// cek session, jika belum login maka redirect
+			}
+		</script>
+	</body>
+</html>
