@@ -3,7 +3,9 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8"/>
-	<link rel="stylesheet" href="css/task.css"/>
+	<script src="js/global.js"></script>
+	<script src="js/new_task.js"></script>
+	<link rel="stylesheet" href="css/form.css"/>
 	<link rel="stylesheet" href="css/style.css"/>
 	<title>Insert New Task</title>
 </head>
@@ -20,7 +22,7 @@
 						Nama Tugas
 					</div>
 					<div class="fieldholder">
-						<input type="text" class="fieldinput" name="namatask">
+						<input type="text" id="newtaskform-nametask" class="fieldinput" name="namatask">
 					</div>
 				</div>
 				<div class="field">
@@ -28,7 +30,7 @@
 						Attachment
 					</div>
 					<div class="fieldholder">
-						<input id="rinciantask-attachment" class="fieldinput" type="file">
+						<input id="newtaskform-attachment" class="fieldinput" type="file">
 					</div>
 				</div>
 				<div class="field">
@@ -36,7 +38,7 @@
 						Deadline
 					</div>
 					<div class="fieldholder">
-						<input type="date" class="fieldinput" name="tanggalDeadline">
+						<input id="newtaskform-deadline" type="date" class="fieldinput" name="tanggalDeadline">
 					</div>
 				</div>
 				<div class="field">
@@ -46,8 +48,9 @@
 					<div class="fieldholder">
 						<ul>
 							<li>
-								<input type="text" name="addAsignee">
-								<input type="submit" value="add" disabled>
+								<input id="newtaskform-asigneetext" type="text" name="addAsignee">
+								<input id="newtaskform-asigneeadd" type="submit" value="add" disabled>
+								<input id="newtaskform-asigneedelete" type="submit" value="delete" disabled>
 							</li>
 						</ul>
 					</div>
@@ -57,8 +60,17 @@
 						Tag
 					</div>
 					<div class="fieldholder">
-						<input type="text" name="insertTag"><input type="submit" value="send" disabled> <input type="submit" value="edit" disabled>
+						<ul>
+							<li>
+								<input id="newtaskform-tagtext" type="text" name="insertTag">
+								<input id="newtaskform-tagadd" type="submit" value="add" disabled>
+								<input id="newtaskform-tagdelete" type="submit" value="delete" disabled>
+							</li>
+						</ul>
 					</div>
+				</div>
+				<div class="field">
+					<input id="newtaskform-submit" type="submit">
 				</div>
 			</fieldset>
 		</form>
