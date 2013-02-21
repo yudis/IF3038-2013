@@ -88,6 +88,8 @@ label#remember_me {
 	-o-transition: all 0.7s ease-in-out;
 }
 
+
+
 .header_menu_button:hover{background-color:#ff5645;}
 
 .current_header_menu {
@@ -428,6 +430,7 @@ margin-left:auto;margin-right:auto; letter-spacing:1px; cursor:pointer; margin-r
 	float:right;
 	overflow:auto;
 	color:#55565B;
+	position:relative;
 }
 .dynamic_content_head {
 	display:block;
@@ -481,7 +484,19 @@ margin-left:auto;margin-right:auto; letter-spacing:1px; cursor:pointer; margin-r
 	border-radius:20px;
 	-webkit-border-radius:20px;
 	-moz-border-radius:20px;
+	-webkit-transition: opacity 0.7s linear;
+	-webkit-transition: all 0.7s ease-in-out;
+	-moz-transition: all 0.7s ease-in-out;
+	-o-transition: all 0.7s ease-in-out;
+	position:absolute;
+	left:5%;
 }
 .task_view a:hover {
 	color:#ff5544;
 }
+
+#curtask1{top:20px;}
+#curtask2{top:200px;}
+#curtask3{top:380px;}
+#curtask4{top:560px;}
+#curtask5{top:740px;}

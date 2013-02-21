@@ -1,40 +1,50 @@
 function catchange(catnum){
 		if (catnum == 0) {
-			document.getElementById("curtask1").style.display= "block";
-			document.getElementById("curtask2").style.display= "block";
-			document.getElementById("curtask3").style.display= "block";
-			document.getElementById("curtask4").style.display= "block";
-			document.getElementById("curtask5").style.display= "block";
+			document.getElementById("curtask1").style.opacity = "1";
+			document.getElementById("curtask1").style.top = "20px";
+			document.getElementById("curtask2").style.opacity = "1";
+			document.getElementById("curtask2").style.top = "200px";
+			document.getElementById("curtask3").style.opacity = "1";
+			document.getElementById("curtask3").style.top = "380px";
+			document.getElementById("curtask4").style.opacity = "1";
+			document.getElementById("curtask4").style.top = "560px";
+			document.getElementById("curtask5").style.opacity = "1";
+			document.getElementById("curtask5").style.top = "740px";
 		}
 		
 		else {if (catnum == 1){
-				document.getElementById("curtask3").style.display= "none";
-				document.getElementById("curtask4").style.display= "none";
-				document.getElementById("curtask5").style.display= "none";
-				document.getElementById("curtask1").style.display= "block";
-				document.getElementById("curtask2").style.display= "block";
+				document.getElementById("curtask3").style.opacity = "0";
+				document.getElementById("curtask4").style.opacity = "0";
+				document.getElementById("curtask5").style.opacity = "0";
+				document.getElementById("curtask1").style.opacity = "1";
+				document.getElementById("curtask1").style.top = "20px";
+				document.getElementById("curtask2").style.opacity = "1";
+				document.getElementById("curtask2").style.top = "200px";
 			}
 		else {
 			if (catnum==2) {
-				document.getElementById("curtask1").style.display= "none";
-				document.getElementById("curtask2").style.display= "none";
-				document.getElementById("curtask3").style.display= "none";
-				document.getElementById("curtask4").style.display= "block";
-				document.getElementById("curtask5").style.display= "block";
+				document.getElementById("curtask1").style.opacity = "0";
+				document.getElementById("curtask2").style.opacity = "0";
+				document.getElementById("curtask3").style.opacity = "0";
+				document.getElementById("curtask4").style.opacity = "1";
+				document.getElementById("curtask4").style.top = "20px";
+				document.getElementById("curtask5").style.opacity = "1";
+				document.getElementById("curtask5").style.top = "200px";
 			}
 			else if (catnum == 4) {
-				document.getElementById("curtask1").style.display= "none";
-				document.getElementById("curtask2").style.display= "none";
-				document.getElementById("curtask4").style.display= "none";
-				document.getElementById("curtask5").style.display= "none";
-				document.getElementById("curtask3").style.display= "block";
+				document.getElementById("curtask1").style.opacity = "0";
+				document.getElementById("curtask2").style.opacity = "0";
+				document.getElementById("curtask4").style.opacity = "0";
+				document.getElementById("curtask5").style.opacity = "0";
+				document.getElementById("curtask3").style.opacity = "1";
+				document.getElementById("curtask3").style.top = "20px";
 				}
 			else {
-				document.getElementById("curtask1").style.display= "none";
-				document.getElementById("curtask2").style.display= "none";
-				document.getElementById("curtask3").style.display= "none";
-				document.getElementById("curtask4").style.display= "none";
-				document.getElementById("curtask5").style.display= "none";
+				document.getElementById("curtask1").style.opacity = "0";
+				document.getElementById("curtask2").style.opacity = "0";
+				document.getElementById("curtask3").style.opacity = "0";
+				document.getElementById("curtask4").style.opacity = "0";
+				document.getElementById("curtask5").style.opacity = "0";
 				}
 			}
 		}
