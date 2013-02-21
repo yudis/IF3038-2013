@@ -128,3 +128,9 @@ function vdAvatar(){
     }
 	Validation();
 }
+
+function login(){
+	var username = document.getElementById('txUsername').value;
+	var password = document.getElementById('txPassword').value;
+	alert(username + " " +password);
+}

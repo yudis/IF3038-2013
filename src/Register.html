@@ -14,7 +14,6 @@
     <div id="header_menu"> 
    		<h3><a href="Dashboard.html">Dashboard</a> | 
         <a href="Profil.html">Profil</a> |
-        <a href="Register.html">Logout</a>
         <a href="#join_form" id="join_pop">Sign Up</a>
         </h3>
     </div>
@@ -25,21 +24,20 @@
 </div>
 
 <div id="content">
-	
+	<h1>Welcome</h1>
 	
 </div>
 
 <div id="menu">
 <h1>Login</h1>
 <hr />
-    <form name="login" action="">
+    
         <h2> Username <input name="txUsername" type="text" /></h2>
-        <h2>password <input name="txUsername" type="password" /></h2>
+        <h2> password <input name="txPassword" type="password" /></h2>
         <input name="cbRememberme" type="checkbox"/>Keep me logged in<br />
-        <input name="btLogin" type="submit" value="Login"/> <br />
+        <input name="btLogin" type="button" value="Login"/> <br />
         <a href="">Forgot your password? </a>
     
-    </form>
 </div>
 
 <div id="footer">
@@ -55,7 +53,7 @@
         <div class="popup">
 		<h1>Registration</h1>
 		<hr>
-            <form name="foRegister">
+            <form name="foRegister" action="Dashboard.html">
 		<div class="attribute">Username &nbsp;&emsp;&emsp;&emsp;
         	: <input type="text" id="txUsername" onkeyup="vdUsername()">
             <img src="Image/notaccept.png" id="icoUsername"></img></div>
