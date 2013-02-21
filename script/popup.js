@@ -14,15 +14,15 @@ function validate_Output(regexp, input, syntaxerror, syntaxvalid, idToWrite) {
 	syntaxerror = '<span class="error">' + syntaxerror + '</span>';
 	document.getElementById(idToWrite).innerHTML = valid ? syntaxvalid : syntaxerror;
 	return valid;
+	if (valid == syntaxvalid) {}
 }
 
 function validate_userid() {
-	/*var userid = document.getElementById('userid').value;
-	var passid = document.getElementById('passid').value;
-	if(userid = passid)
-		document.getElementById('userid').innerHTML = '<span class="error">ERROR!</span>';
-	else*/
 		validate_Output(/^.{5,}$/, document.getElementById('userid').value,'INVALID','VALID','name_info');
+}
+
+function halo(){
+	if (validate_userid==true) return 1;
 }
 
 function validate_passid() {
@@ -48,7 +48,9 @@ function validate_avatar() {
 	validate_Output(/\.(jpg|jpeg)$/, document.getElementById('avatar').value,'INVALID','VALID','avatar_info');
 }
 
-
+function validate_register(){
+	document.getElementsByName("register")[0].disabled = true;
+}
 
 
 /*
@@ -60,10 +62,6 @@ function validateBirthdate() {
 	validDate = new Date(date[0], date[1], date[2]);
 	valid = validDate.getFullYear() == date[0] && validDate.getMonth() == date[1] && validDate.getDate() == date[2];
 	validateAndOutput(/^.$/, valid ? 'a' : 'asdf','ERROR!','OK','bd_info');
-}
-
-function validateDesc() {
-	validateAndOutput(/^.{5,}$/, document.getElementById('desc').value,'ERROR!','OK','desc_info');
 }
 
 function validateKeyword() {

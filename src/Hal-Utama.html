@@ -14,28 +14,41 @@
 	<!-- Content -->
 <div class="LoginBoard">
     
-    <div class="LoginMatch">
-    </div>
+   
+    
+    <div>
+    	<div class="panel">
+          	<a href="#login_form" id="register_pop">Log In</a>
+        	<a href="#register_form" id="register_pop">Register</a>
+    	</div>
 
-  	<div class="Login" align=""> 
-    	<h2> Login User </h2>
-        <div>
-        	<div class="iinfo" id="login_info"></div>
-        	<div class="ukuranmenu1"> Username </div><input type="text" id="userlogin" value=""></div>
-    		<div class="ukuranmenu1"> Password </div><input type="password" id="passlogin" value="">
-    		<br>
-    			<div align="center">
-        		<a href="#join_form" id="join_pop">
-        			<input name="Button" type="button" value="Register"/> </a>
-      				<input name="Button" type="button" value="Login" onClick="login()"/>
-              
-		</div>
-        
-        <a href="#x" class="overlay" id="join_form"> </a>
+	</div>
+    
+    <!-- Popup Login -->
+    <a href="#x" class="overlay" id="login_form"> </a>
+        <div class="popup">
+            <h2>User Login</h2>
+            <p>Please enter Username and Password</p>
+            <div>
+                <label for="userlogin">Username</label>
+                <input type="text" id="userlogin" value="" />
+            </div>
+            <div>
+                <label for="passlogin">Password</label>
+                <input type="password" id="passlogin" value="" />
+            </div>
+            <div align="right">
+            	<input name="Button" type="button" value="Login" onClick="login()"/>
+            </div>
+
+            <a class="close" href="#close"></a>
+  		</div>
+    
+    <!-- Popup Register -->
+    <a href="#x" class="overlay" id="register_form"> </a>
         <div class="popup">
             <h2>Register</h2>
             <p>Please enter your details here</p>
-            
             
             <div class="iinfo" id="name_info"></div>
             <div>
@@ -86,19 +99,24 @@
                 <div class="requirement">File must be .jpg or .jpeg.</div>
             </div>
            
-       		<div align="right"><input type="submit" value="Register" name="register"/></div>
+       		<div align="right"><input type="submit" value="Register" name="register">
+            <script type="text/javascript">
+				validate_register();
+			</script>
+            </div>
             
 			
             <a class="close" href="#close"></a>
   		</div>
-	
-	</div>
+    
+    
 </div>
     
 <!-- Footer -->
-    <div class="footer">This Website is created for Internet Programming Assignment<br />
-    By Patrick Lumban Tobing, Hanif Eridaputra, Novriady Saputra<br />
+<div class="footer">This Website is created for Internet Programming Assignment<br />
+    By <a href="http://www.facebook.com/patrick.ltobing?fref=ts" target="_blank">Patrick Lumban Tobing</a>, <a href="http://www.facebook.com/hanif.eridaputra" target="_blank">Hanif Eridaputra</a>, <a href="http://www.facebook.com/novriady.saputra.3?fref=ts" target="_blank">Novriady Saputra</a><br />
     Februari 2013
-    </div>
+</div>
+
 </body>
 
