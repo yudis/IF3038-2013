@@ -6,6 +6,87 @@ body {
 	background: #f6f6f6;
 }
 
+/** General element styling **/
+a {
+	text-decoration: none;
+}
+a:hover, a:active {
+	text-decoration: underline;
+}
+button,
+input,
+select,
+textarea {
+	margin: 0;
+	font-family: inherit;
+	font-size: 100%;
+	vertical-align: middle;
+}
+button {
+	cursor: pointer;
+}
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+	margin-bottom: 7px;
+	display: inline-block;
+	height: 22px;
+	padding: 4px 6px;
+	font-size: 14px;
+	border-radius: 2px;
+	border: 1px solid #ccc;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	transition: border .1s, box-shadow linear .2s;
+}
+select:focus,
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus
+{
+	border-color: #666;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #CCC;
+}
+textarea {
+	height: auto;
+}
+button {
+	padding: 4px 15px;
+	border-radius: 2px;
+	border: 1px solid #999;
+	background: #f6f6f6;
+	box-shadow: inset 0 -10px 10px rgba(0, 0, 0, 0.1);
+}
+button:active {
+	background: #eee;
+	padding: 5px 15px 3px;
+	box-shadow: inset 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
 /** Base Layout **/
 .site-container {
 	margin-left: auto;
@@ -87,16 +168,43 @@ body {
 }
 
 /* Dashboard */
+.primary > div > header {
+	position: relative;
+}
+.primary > div > header > ul {
+	position: absolute;
+	top: 15px;
+	right: 10px;
+	margin: 0;
+	padding: 0 0 0 16px;
+	list-style: none;
+	font-size: 14px;
+	line-height: 25px;
+}
+.primary > div > header > ul li {
+	display: inline-block;
+}
+.primary > div > header > ul li a {
+	color: #999;
+	display: inline-block;
+	background: #eee;
+	padding: 0 10px;
+	border-radius: 2px;
+}
+.primary > div > header > ul li a:hover {
+	color: #666
+}
+#searchForm button {
+	display: none;
+}
 .task {
 	padding: 7px 0;
 	position: relative;
 	margin-bottom: 5px;
-}
-.task:nth-child(odd) {
-	background: #f6f6f6;
+	border-radius: 2px;
 }
 .task:hover {
-	background: #eee;
+	background: #f6f6f6;
 }
 .task h1 {
 	margin: 0;
@@ -116,6 +224,9 @@ body {
 	margin-left: 0;
 	margin-right: 0;
 	padding: 0;
+}
+.task a {
+	color: #666;
 }
 .dashboard .task .category {
 	display: none;
@@ -145,13 +256,16 @@ body {
 }
 
 /* Task details header */
-.task-details > header h1 {
+.primary > div > header {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.primary > div > header h1 {
+	display: inline-block;
 	font-size: 22px;
 	line-height: 1;
 	font-weight: normal;
 	margin: 0;
-	padding-top: 15px;
-	padding-bottom: 15px;
 }
 .task-details > header .task-checkbox {
 	width: 20px;
@@ -159,7 +273,7 @@ body {
 .task-details > header .task-checkbox input {
 	width: 10px;
 }
-.task-details > section h3 {
+section h3 {
 	font-size: 12px;
 	font-weight: normal;
 	text-transform: uppercase;
@@ -174,12 +288,12 @@ body {
 .task-details > section.details p {
 	margin: 0 0 6px;
 }
-.task-details > section.details .detail-label {
+.detail-label {
 	color: #666;
-	width: 5em;
+	min-width: 5em;
 	display: inline-block;
 }
-.task-details > section.details p.description .detail-label {
+p.description .detail-label {
 	display: none;
 }
 .task-details > section.attachment {
@@ -214,6 +328,23 @@ body {
 	width: 20em;
 	height: 4em;
 	display: block;
+}
+
+/* Profile */
+.profile-details {
+	margin-bottom: 14px;
+}
+.profile-details p {
+	margin: 0 0 6px;
+}
+.profile-image {
+	float:right;
+	max-width: 30%;
+	margin: 0;
+	padding: 0;
+}
+.profile-image img {
+	max-width: 100%;
 }
 
 /** Responsive design **/
