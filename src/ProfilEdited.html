@@ -4,47 +4,33 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="" />
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-		<title></title>
+		<title>MOA - Edit Profil</title>
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/profil.css" />
 	</head>
 	<body>
 		<header>
 			<div id="header_wrap" class="wrap">
-				<a href="#"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
+				<a href="dashboard.html"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
 				<div id="header_title">
-					<h1> <a href="#">MOA</a> </h1>
+					<h1> <a href="dashboard.html">MOA</a> </h1>
 					<h4>Multiuser Online Agenda</h4>
 				</div>
 				<div id="border_header"></div>
 				<div id="header_menu">
 					<nav>
 						<ul>
-							<li> <a href="#">Dashboard</a> </li>
-							<li> <a href="Profil.html">Profil</a> </li>
-							<li> <a id="register_button" href="#">Daftar</a> </li>
+							<li> <a href="dashboard.html">Dashboard</a> </li>
+							<li> <a href="profil.html">Profil</a> </li>
 						</ul>
 					</nav>
 					<div id="login_area">
 						<nav id="login_button">
 							<ul>
-								<li> <a id="login_link" href="#">Masuk</a> </li>
+								<li> <a id="login_link" href="index.html">Keluar</a> </li>
 							</ul>
 						</nav>
 						<div class="clear"></div>
-						<div id="border_login"><div id="border_login_inner"></div></div>
-						<div id="login_form_wrap">
-							<form id="login_form">
-								<div class="row">
-									<label for="login_username">Username</label> <br />
-									<input id="login_username" name="username" type="text" required /> <br />
-								</div>
-								<div class="row">
-									<label for="login_password">Sandi</label> <br />
-									<input id="login_password" name="password" type="password" required /> <br />
-								</div>
-								<input type="submit" value="Masuk" />
-							</form>
-						</div>
 						<div class="clear"></div>
 					</div>
 					<div id="border_search"></div>
@@ -100,59 +86,38 @@
 						</form>
 					</div>
 				</div>
+				<div id="profil_do">
+					<div id="profil_head">
+						<h1>Work Done</h1>
+					</div>
+					<div class="row">
+						<div id="profil_do_text" ><li><a href="#">progin</a></li></div>
+					</div>
+				</div>
+				<div id="profil_do">
+					<div id="profil_head">
+						<h1>Work Undone</h1>
+					</div>
+					<div class="row">
+						<div id="profil_do_text" ><li><a href="#">Kriptografi</a></li></div>
+					</div>
+					<div class="row">
+						<div id="profil_do_text" ><li><a href="#">Intelegensi Buatan</a></li></div>
+					</div>
+				</div>
 			</div>
 		</section>
 		
 		<footer>
 			<div id="footer_wrap" class="wrap">
-				Copyright by dronJaX.
+				<div id="footer_left">
+					<a href="dashboard.html">Dashboard</a>
+					<a href="profil.html" class="active">Profil</a>
+				</div>
 			</div>
 		</footer>
-		<div id="black_trans">
-			<div id="frame_register">
-				<div id="close_button">
-					<a href="javascript:close()">X</a>
-				</div>
-				<div id="register_area">
-					<div id="register_form_wrap">
-						<div id="register_head">
-							<h1>Form Pendaftaran</h1>
-						</div>
-						<form id="register_form" >
-							<div class="row">
-								<label id="profil_username">admin</label>
-							</div>
-							<div class="row">
-								<label for="register_password">Sandi</label>
-								<input id="register_password" name="password" pattern="^.{8,}$" type="password" title="Sandi minimal harus terdiri dari 8 karakter." required />							
-							</div>
-							<div class="row">
-								<label for="register_confirm_password">Konfirmasi Sandi</label>
-								<input id="register_confirm_password" name="confirm_password" pattern="^.{8,}$" type="password" title="Konfirmasi sandi harus sama dengan sandi." required />
-							</div>
-							<div class="row">
-								<label for="register_name">Nama Lengkap</label>
-								<input id="register_name" name="name" pattern="^.+ .+$" type="text" title="Nama lengkap harus terdiri dari 2 kata dipisah oleh sebuah spasi." required />
-							</div>
-							<div class="row">
-								<label for="register_birth_date">Tanggal Lahir</label>
-								<input id="register_birth_date" name="birth_date" type="date" pattern="^.+$"/>
-							</div>
-							<div class="row">
-								<label for="register_email">Email</label>
-								<input id="register_email" name="email" pattern="^.+@.+\...+$" type="text" title="Email yang dimasukkan harus benar." required />
-							</div>
-							<div class="row">
-								<label for="register_avatar">Avatar</label>
-								<input id="register_avatar" name="avatar" type="file" title="Avatar yang diupload harus berekstensi jpg atau jpeg." required />
-							</div>
-							<div id="success_edit">Perubahan berhasil dilakukan <img src="images/tick.jpg" width="23" height="13"></div>
-							<input id="register_submit" type="submit" value="Daftar" disabled="disabled" title="Semua elemen form harus diisi dengan benar dahulu."/>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
+		
+		
 		<script type="text/javascript">
 			/*----- Bagian Search ----*/
 			var search_text = document.getElementById("search_text");

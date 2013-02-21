@@ -51,6 +51,7 @@
 #profil_area
 {
 	float : left;
+	width : 400px;
 }
 #avatar_image1
 {
@@ -95,4 +96,13 @@
 {
 	margin-bottom: 14px;
 	border-bottom: 1px solid #AAAAAA;
+}
+#profil_do
+{
+	float:right;
+	padding-right:300px;
+	padding : 30px
+}
+#profil_do_text
+{
 }

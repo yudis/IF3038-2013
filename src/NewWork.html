@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="Description" content="" />
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+		<title>MOA</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/work.css" />
+	</head>
+	<body>
+		<header>
+			<div id="header_wrap" class="wrap">
+				<a href="index.html"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
+				<div id="header_title">
+					<h1> <a href="index.html">MOA</a> </h1>
+					<h4>Multiuser Online Agenda</h4>
+				</div>
+				<div id="border_header"></div>
+				<div id="header_menu">
+					<nav>
+						<ul>
+							<li> <a href="#">Dashboard</a> </li>
+							<li> <a href="#">Profil</a> </li>
+						</ul>
+					</nav>
+					<div id="login_area">
+						<nav id="login_button">
+							<ul>
+								<li> <a id="login_link" href="#">Masuk</a> </li>
+							</ul>
+						</nav>
+						<div class="clear"></div>
+						<div id="border_login"><div id="border_login_inner"></div></div>
+						<div id="login_form_wrap">
+							<form id="login_form" action="dashboard.html" method="post">
+								<div class="row">
+									<label for="login_username">Username</label> <br />
+									<input id="login_username" name="username" type="text" required /> <br />
+								</div>
+								<div class="row">
+									<label for="login_password">Sandi</label> <br />
+									<input id="login_password" name="password" type="password" required /> <br />
+								</div>
+								<input type="submit" value="Masuk" />
+							</form>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div id="border_search"></div>
+
+					<div id="search">
+						<div id="search_inner">
+							<div id="search_button"></div>
+							<div id="search_left"></div>
+							<form id="search_form">
+								<input id="search_text" name="search_query" type="text" />
+							</form>
+							<div id="search_right"></div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</header>
+		
+		<section>
+			<div id="content_wrap" class="wrap">
+				<div id="work_head">
+					<h1>Tugas Baru</h1>
+				</div>
+				<div="work_area">
+					<div id="work_form_wrap">
+						<form id="work_form" action="dashboard.html">
+					<div class="row">
+						<label for="work_name">Nama Task</label>
+						<input id="work_name" name="name" pattern="^.{1,25}$" type="text" title="nama maksimal 25 karakter dan tidak mengandung karakter khusus." required />
+					</div>
+					<div class="row">
+						<label for="work_attachment">Attachment</label>
+						<input id="work_attachment" name="attachment" type="file" title="attachment yang diupload dapat berupa file, gambar ataupun video." required />
+					</div>
+					<div class="row">
+						<label for="work_deadline">Deadline </label>
+						<input id="work_deadline" name="deadline" type="date" pattern="^.+$"/>
+					</div>
+					<div class="row">
+						<label for="work_asignee">Asignee</label>
+						<input id="work_asignee" name="asignee" pattern="^.+ .+$" type="text" title="Nama asignee harus nama lengkap dan terdiri dari 2 kata dipisah oleh sebuah spasi." required />
+					</div>
+					<div class="row">
+						<label for="work_tag">tag</label>
+						<input id="work_tag" name="tag" pattern="^.+" type="text" title="tag dipisahkan dengan koma." required />
+					</div>
+					<input id="work_submit" type="submit" value="Tambah Tugas" disabled="disabled" title="Semua elemen form harus diisi dengan benar dahulu."/>
+				</form>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<footer>
+			<div id="footer_wrap" class="wrap">
+				<div id="footer_left">
+					<a href="dashboard.html">Dashboard</a>
+				</div>
+			</div>
+		</footer>
+		
+		<script type="text/javascript">
+			/*----- Bagian Search ----*/
+			var search_text = document.getElementById("search_text");
+			
+			search_text.onmouseover = function()
+			{
+				this.focus();	
+			}
+			search_text.onfocus = function()
+			{
+				var search = document.getElementById("search");
+				search.className = "active";
+			}
+			search_text.onblur = function()
+			{
+				if (search_text.value==="")
+				{
+					var search = document.getElementById("search");
+					search.className = "";
+				}
+			}
+			
+			/*----- Bagian tugas baru ----*/
+			var work_form = document.getElementById("work_form");
+			
+			var work_name = document.getElementById("work_name");
+			var work_asignee = document.getElementById("work_asignee");
+			var work_deadline = document.getElementById("work_deadline");
+			var work_tag = document.getElementById("work_tag");
+			var work_attachment = document.getElementById("work_attachment");
+			
+			work_name.onkeyup = function()
+			{
+				if (this.checkValidity())
+					this.style.backgroundImage = "url('images/valid.png')";
+				else
+					this.style.backgroundImage = "url('images/warning.png')";
+				check_submit_work();
+			}
+			
+			work_asignee.onkeyup = function()
+			{
+				if (this.checkValidity())
+					this.style.backgroundImage = "url('images/valid.png')";
+				else
+					this.style.backgroundImage = "url('images/warning.png')";
+				check_submit_work();
+			}
+			
+			work_tag.onkeyup = function()
+			{
+				if (this.checkValidity())
+					this.style.backgroundImage = "url('images/valid.png')";
+				else
+					this.style.backgroundImage = "url('images/warning.png')";
+				check_submit_work();
+			}
+			
+			work_attachment.onchange = function()
+			{
+				if (check_file(this))
+					this.style.backgroundImage = "url('images/valid.png')";
+				else
+					this.style.backgroundImage = "url('images/warning.png')";
+				check_submit_work();
+			}
+			
+			function check_file(image)
+			{
+				return (image.value.match("^.+\.(jpe?g|JPE?G|txt|TXT|pdf|PDF|avi|mkv)$"));
+			}
+			
+			function check_submit_work()
+			{
+				if (work_name.checkValidity()&& work_asignee.checkValidity() && 
+					work_deadline.checkValidity() && work_tag.checkValidity() && 
+					check_file(work_attachment))
+				{
+					document.getElementById("work_submit").disabled="";
+				}
+				else
+				{
+					document.getElementById("work_submit").disabled="disabled";
+				}
+			}
+			
+			window.onload = function()
+			{
+				// cek session, jika sudah login maka redirect
+				setInterval(function(){next_image();}, 5500);
+			}
+		</script>
+	</body>
+</html>

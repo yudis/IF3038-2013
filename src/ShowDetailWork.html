@@ -4,9 +4,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="" />
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-		<title>MOA - Profil</title>
+		<title>MOA - Dashboard</title>
 		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/profil.css" />
+		<link rel="stylesheet" href="css/dashboard.css" />
 	</head>
 	<body>
 		<header>
@@ -52,57 +52,7 @@
 		
 		<section>
 			<div id="content_wrap" class="wrap">
-				<div id="profil_title">Profil</div>
-				<div id="profil_area">
-					<div id="profil_form_wrap">
-						<form id="profil_form" action="ProfilEdit.html">
-							<div id="profil_head">
-								<h1>Admin</h1>
-							</div>
-							<div class="row">
-								<label for="profil_username">Username</label>
-								<label id="profil_text">admin</label>
-							</div>
-							<div class="row">
-								<label for="profil_name">Nama Lengkap</label>
-								<label for="profil_text">admin admin</label>
-							</div>
-							<div class="row">
-								<label for="profil_birth_date">Tanggal Lahir</label>
-								<label for="profil_text">01/01/2013</label>
-							</div>
-							<div class="row">
-								<label for="profil_email">Email</label>
-								<label for="profil_text">admin@admin.itb.ac.id</label>
-							</div>
-							<div class="row">
-								<label for="profil_avatar">Avatar</label>
-								<img id="avatar_image1" src="images/avatar.jpg" alt="avatar profil" />
-							</div>
-							<input id="profil_submit" type="submit" value="Edit" title="Semua elemen form harus diisi dengan benar dahulu."/>
-						</form>
-						
-					</div>
-				</div>
-				<div id="profil_do">
-					<div id="profil_head">
-						<h1>Work Done</h1>
-					</div>
-					<div class="row">
-						<div id="profil_do_text" ><li><a href="#">progin</a></li></div>
-					</div>
-				</div>
-				<div id="profil_do">
-					<div id="profil_head">
-						<h1>Work Undone</h1>
-					</div>
-					<div class="row">
-						<div id="profil_do_text" ><li><a href="#">Kriptografi</a></li></div>
-					</div>
-					<div class="row">
-						<div id="profil_do_text" ><li><a href="#">Intelegensi Buatan</a></li></div>
-					</div>
-				</div>
+                
 			</div>
 		</section>
 		
@@ -110,13 +60,16 @@
 			<div id="footer_wrap" class="wrap">
 				<div id="footer_left">
 					<a href="dashboard.html">Dashboard</a>
-					<a href="profil.html" class="active">Profil</a>
+                    >>
+                    <a href="new_category.html" class="active">New Category</a>
+				</div>
+				<div id="footer_right">
+					Copyright by dronJaX.
 				</div>
 			</div>
 		</footer>
 		
 		<script type="text/javascript">
-			/*----- Bagian Search ----*/
 			var search_text = document.getElementById("search_text");
 			
 			search_text.onmouseover = function()
@@ -137,7 +90,6 @@
 				}
 			}
 			
-			/*----- Bagian Login ----*/
 			var login_area = document.getElementById("login_area");
 			login_area.onmouseover = function()
 			{
@@ -164,4 +116,3 @@
 		</script>
 	</body>
 </html>
-
