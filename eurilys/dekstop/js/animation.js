@@ -18,3 +18,10 @@ function logincheck()  {
 		return false;
 	}
 }
+
+function add_category() {
+	var t = "<li>";
+	t += document.getElementById("add_category_name").value;
+	t += "</li>";
+	document.getElementById("category_item").innerHTML += t;
+}

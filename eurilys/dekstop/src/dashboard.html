@@ -44,22 +44,24 @@
 					<input type="file" id="profile_pic_upload" name="profile_picture"/> 
 				</div>
 				<div id="category_list">
-					All Categories
-					<ul>
+					<div class="link_blue_rect" id="category_title"> All Categories </div>
+					<ul id="category_item">
 						<li> Kuliah </li>
 						<li> Proyek </li>
 						<li> Tugas </li>
+						<li> Lomba </li>
+						<li> Travel </li>
 					</ul>
 					<div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
 					<div id="category_form">
 						<div id="category_form_inner">
 							Category name : <br>
-							<input type="text" id="add_category_name">
+							<input type="text" id="add_category_name" value="">
 							<br><br>
 							Assignee(s) : <br>
-							<input type="text" id="add_category_asignee_name">
+							<input type="text" id="add_category_asignee_name" value="">
 							<br><br>
-							<div id="add_category_button" class="link_red"> Add </div>
+							<div id="add_category_button" class="link_red" onclick="add_category()"> Add </div>
 						</div>
 					</div>
 				</div>
