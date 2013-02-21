@@ -5,7 +5,8 @@ body {
 	width:800px;
 	margin-left:auto;
 	margin-right:auto;
-	background-color:#CCC;
+	/*background-image:url(../images/mobile-website-backgrounds-3.jpg);*/
+	background-color:#FFF;
 }
 
 .header {
@@ -26,11 +27,12 @@ body {
 }
 
 .navigation {
-	background-color:#111111;
+	background-image:url(../images/images/Header_3_ip_05.gif);
 	font-family:Tahoma;
-	margin-top: 1px;
+	margin-top: 0px;
 	padding: 3px 3px;
 	height:26px;
+	text-align:right;
 }
 
 .navigation li {
@@ -39,7 +41,7 @@ body {
 }
 
 .navigation a {
-	color:#aaaaaa;
+	color:#000;
 	text-decoration:none;
 	font-size:0.8em;
 	padding:10px 15px;
@@ -48,12 +50,12 @@ body {
 }
 
 .navigation a:hover{
-	background-color:#666;
+	background-color:#000;
 	color:#aaaaaa;
 }
 
 .footer {
-	background-color:#201B1B;
+	background-color:#000;
 	margin-top:10px;
 	color:#aaaaaa;
 	padding:20px;
@@ -64,7 +66,7 @@ body {
 }
 	
 .kategori {
-	background-color:#201B1B;
+	background-color:#000;
 	float:left;
 	width:150px;
 	height:305px;
@@ -75,7 +77,7 @@ body {
 }
 
 .Login {
-	background-color:#201B1B;
+	background-color:#000;
 	color:#aaaaaa;
 	font-size:0.8em;
 	font-family:Tahoma;
@@ -110,7 +112,7 @@ body {
 }
 
 .LoginMatch {
-	height:120px;	
+	height:100px;	
 }
 
 .panel {
