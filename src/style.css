@@ -246,45 +246,61 @@ body
 }
 
 #header{
-	background: #e18728;
 	box-shadow: 0 0 10px black;
 	width: 100%;
 	margin: 0;
-	height: 30px;
+	height: 50px;
 	padding: 10px;
 	display: table;
+	background-image: linear-gradient(bottom, rgb(219, 219, 219) 45%, rgb(238, 238, 238) 73%, rgb(255, 255, 255) 87%);
+	background-image: -o-linear-gradient(bottom, rgb(219, 219, 219) 45%, rgb(238, 238, 238) 73%, rgb(255, 255, 255) 87%);
+	background-image: -moz-linear-gradient(bottom, rgb(219, 219, 219) 45%, rgb(238, 238, 238) 73%, rgb(255, 255, 255) 87%);
+	background-image: -webkit-linear-gradient(bottom, rgb(219, 219, 219) 45%, rgb(238, 238, 238) 73%, rgb(255, 255, 255) 87%);
+	background-image: -ms-linear-gradient(bottom, rgb(219, 219, 219) 45%, rgb(238, 238, 238) 73%, rgb(255, 255, 255) 87%);
 }
 
 #topbar {
 	margin-left:auto;
 	margin-right:auto;
 	width: 900px;
+	line-height: 15px;
+	
 }
 
 #topbar_logo{
 	float: left;
 	display: block;
 	background-color: transparent;
-	width: 30px;
-	height: 30px;
+	width: 50px;
+	height: 50px;
 }
 
 #topbar_logo2{
 	float: left;
-	width: 80px;
-	height: 30px;
+	width: 130px;
+	height: 50px;
 }
 
 #logo
 {
-	width: 30px;
-	height: 30px;
+	width: 50px;
+	height: 50px;
 }
 
 #logo2
 {
-	width: 80px;
+	width: 130px;
+	height: 60px;
+}
+
+#topbar_dashboard
+{
+	margin: auto;
+	padding-top: 15px;
+	float: left;
 	height: 30px;
+	width: 400px;
+	vertical-align: baseline;
 }
 
 #topbar_search{
@@ -301,45 +317,56 @@ input[type="search"], isindex {
 	-webkit-rtl-ordering: logical;
 	-webkit-user-select: text;
 	cursor: auto;
+	margin-top: 15px;
 }
 
 #content
 {
-	height: 530px;
+	height: 570px;
 	background-color: white;
 	margin: 10px auto;
 	padding: 10px;
-	/*box-shadow: 0 0 5px 5px #BBBBBB;*/
 }
 
 #tagline
 {
-	/*box-shadow: 0 0 5px 5px #BBBBBB;*/
 	height:100%;
 	width:50%;
 	float:left;
 }
 
+#taglinelogo
+{
+	margin: 20px auto;
+	height: 150px;
+	width: 150px;
+}
+
+#taglinenamalogo
+{
+	margin-top: 80px;
+	height: 170px;
+	width: 340px;
+}
+
 #texttag
 {
 	text-align: center;
-	padding-top: 200px;
 	font-size: 40px;
 	font-family:calibri;
 }
 
 #login
 {
-	/*box-shadow: 0 0 5px 5px #BBBBBB;*/
-	height:150px;
+	margin-top: 20px;
+	height:160px;
 	width:50%;
 	float:left;
 }
 
 #register
 {
-	/*box-shadow: 0 0 5px 5px #BBBBBB;*/
-	height:70%;
+	height:390px;
 	width:50%;
 	float:left;
 }
@@ -357,4 +384,42 @@ input[type="search"], isindex {
 	height:20px;
 	width: 1000px;
 	margin: auto;
+}
+
+#topbar_border
+{
+	float: left;
+	width: 1px;
+	height: 42px;
+	position: relative;
+	top: 6px;
+	margin: 0px 6px;
+	background-color: #000;
+}
+
+header a
+{
+	text-decoration: none;
+	color: #333333;
+}
+
+nav ul
+{
+	list-style: none;
+	display: inline;
+}
+nav, nav ul li
+{
+	float: left;
+}
+nav ul li a
+{
+	display: block;
+	font-size: 18px;
+	font-weight: bold;
+	margin: 6px 14px;
+}
+nav ul li a:hover, nav ul li a .active
+{
+	color: rgb(213, 134, 19);
 }
