@@ -20,8 +20,6 @@
 				<div id="header_menu">
 					<nav>
 						<ul>
-							<!--<li> <a href="#">Dashboard</a> </li>
-							<li> <a href="#">Profil</a> </li>-->
 							<li> <a id="register_button" href="javascript:register();">Daftar</a> </li>
 						</ul>
 					</nav>
@@ -111,11 +109,11 @@
 						<form id="register_form" method="post">
 							<div class="row">
 								<label for="register_username">Username</label>
-								<input id="register_username" name="username" pattern="^.{5,}$" type="text" title="Username minimal harus terdiri dari 5 karakter." required />
+								<input id="register_username" name="username" pattern="^.{5,}$" type="text" title="Username minimal harus terdiri dari 5 karakter dan tidak sama dengan sandi." required />
 							</div>
 							<div class="row">
 								<label for="register_password">Sandi</label>
-								<input id="register_password" name="password" pattern="^.{8,}$" type="password" title="Sandi minimal harus terdiri dari 8 karakter." required />							
+								<input id="register_password" name="password" pattern="^.{8,}$" type="password" title="Sandi minimal harus terdiri dari 8 karakter dan tidak sama dengan username dan email." required />							
 							</div>
 							<div class="row">
 								<label for="register_confirm_password">Konfirmasi Sandi</label>
@@ -127,11 +125,11 @@
 							</div>
 							<div class="row">
 								<label for="register_birth_date">Tanggal Lahir</label>
-								<input id="register_birth_date" name="birth_date" type="date" pattern="^.+$"/>
+								<input id="register_birth_date" name="birth_date" type="text" pattern="^[0-3][0-9]/[0-1][0-9]/[1-9][0-9][0-9][0-9]$" onblur="datePicker.blur();" onclick="datePicker.showCalendar(event);" title="Tahun harus minimal dari tahun 1955." required/>
 							</div>
 							<div class="row">
 								<label for="register_email">Email</label>
-								<input id="register_email" name="email" pattern="^.+@.+\...+$" type="text" title="Email yang dimasukkan harus benar." required />
+								<input id="register_email" name="email" pattern="^.+@.+\...+$" type="text" title="Email yang dimasukkan harus benar dan tidak sama dengan sandi." required />
 							</div>
 							<div class="row">
 								<label for="register_avatar">Avatar</label>
@@ -143,6 +141,30 @@
 				</div>
 			</div>
 		</div>
+		
+		<div id="calendar">
+			<a id="date_button_left" class="date_button" title="Prev" onclick="datePicker.prevMonth();">
+				<img alt="arrow_left" src="images/date-left.png" />
+			</a>
+			<a id="date_button_right" class="date_button" title="Next" onclick="datePicker.nextMonth();">
+				<img alt="arrow_right" src="images/date-right.png" />
+			</a>
+			<div id="tableHeader"></div>
+			<table id="calendarTable" border=1>
+				<tbody id="tableBody">
+					<tr>
+						<th>Su</th>
+						<th>Mo</th>
+						<th>Tu</th>
+						<th>We</th>
+						<th>Th</th>
+						<th>Fr</th>
+						<th>Sa</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
 		<script type="text/javascript">
 			/*----- Bagian Search ----*/
 			var search_text = document.getElementById("search_text");
@@ -289,15 +311,6 @@
 			
 			/*----- Bagian Register ----*/
 			var register_form = document.getElementById("register_form");
-			register_form.onsubmit = function()
-			{
-				var register_password = document.getElementById("register_password");
-				var register_confirm_password = document.getElementById("register_confirm_password");
-				if (register_password.value!=register_confirm_password.value)
-				{
-					alert("ampas");
-				}
-			}
 			
 			var register_username = document.getElementById("register_username");
 			var register_password = document.getElementById("register_password");
@@ -307,9 +320,30 @@
 			var register_email = document.getElementById("register_email");
 			var register_avatar = document.getElementById("register_avatar");
 			
+			register_form.onsubmit = function()
+			{
+				if ((register_password.value==register_confirm_password.value) && (register_username.value!=register_password.value) &&
+					(register_email.value!=register_password.value))
+				{
+					alert("ampas");
+				}
+				else if (register_password.value!=register_confirm_password.value)
+				{
+					alert("Konfirmasi sandi harus sama dengan sandi");
+				}
+				else if (register_email.value==register_password.value)
+				{
+					alert("Alamat email tidak boleh sama dengan sandi");
+				}
+				else if (register_username.value==register_password.value)
+				{
+					alert("Username tidak boleh sama dengan sandi");
+				}
+			}
+			
 			register_username.onkeyup = function()
 			{
-				if (this.checkValidity())
+				if (this.checkValidity() && (register_username.value != register_password.value))
 					this.style.backgroundImage = "url('images/valid.png')";
 				else
 					this.style.backgroundImage = "url('images/warning.png')";
@@ -318,7 +352,7 @@
 			
 			register_password.onkeyup = function()
 			{
-				if (this.checkValidity())
+				if (this.checkValidity() && (register_username.value != register_password.value) && (register_email.value != register_password.value))
 				{
 					this.style.backgroundImage = "url('images/valid.png')";
 					document.getElementById("register_confirm_password").pattern = this.value;
@@ -347,9 +381,18 @@
 				check_submit_register();
 			}
 			
+			register_birth_date.onkeyup = function()
+			{
+				if ((this.checkValidity()) && (check_date(this.value)))
+					this.style.backgroundImage = "url('images/valid.png')";
+				else
+					this.style.backgroundImage = "url('images/warning.png')";
+				check_submit_register();
+			}
+			
 			register_email.onkeyup = function()
 			{
-				if (this.checkValidity())
+				if (this.checkValidity() && (register_email.value != register_password.value))
 					this.style.backgroundImage = "url('images/valid.png')";
 				else
 					this.style.backgroundImage = "url('images/warning.png')";
@@ -365,6 +408,19 @@
 				check_submit_register();
 			}
 			
+			function check_date(date)
+			{
+				var temp = date.split("/");
+				var d = new Date(parseInt(temp[2]), parseInt(temp[1]) - 1, parseInt(temp[0]));
+				if ((d) && ((d.getMonth() + 1) == parseInt(temp[1])) && (d.getDate() == Number(parseInt(temp[0]))) && (parseInt(temp[2]) >= 1955))
+				{
+					datePicker.populateTable(d.getMonth(),d.getFullYear());
+					return true;
+				}
+				else
+					return false;
+			}
+			
 			function check_file_jpeg(image)
 			{
 				return (image.value.match("^.+\.(jpe?g|JPE?G)$"));
@@ -372,10 +428,11 @@
 			
 			function check_submit_register()
 			{
-				if (register_username.checkValidity() && register_password.checkValidity() && 
-					register_confirm_password.checkValidity() && register_name.checkValidity() && 
-					register_birth_date.checkValidity() && register_email.checkValidity() && 
-					check_file_jpeg(register_avatar))
+				if ((register_username.checkValidity()) && (register_password.checkValidity()) && 
+					(register_confirm_password.checkValidity()) && (register_name.checkValidity()) && 
+					(register_birth_date.checkValidity()) && (register_email.checkValidity()) && 
+					(check_file_jpeg(register_avatar)) && (register_email.value != register_password.value) &&
+					(register_email.value != register_password.value))
 				{
 					document.getElementById("register_submit").disabled="";
 				}
@@ -385,11 +442,219 @@
 				}
 			}
 			
-			window.onload = function()
+		</script>
+		<script type="text/javascript">
+			var monthNames = [ "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+								"Juli", "Agustus", "September", "Oktober", "Nopember", "Desember" ];
+			var datePicker = 
 			{
+				/*******************
+				  REFERENCE PROPERTIES
+				********************/
+				calendarDiv : null,
+				destinationForm : null,
+				today : null,
+				thisYear : null,
+				thisMonth : null,
+				
+				/*******************
+				  INITIALIZATIONS
+				********************/
+				// init dispatcher
+				init: function(calendarDiv, destinationForm) 
+				{
+					this.calendarDiv = calendarDiv;
+					this.destinationForm = destinationForm;
+					this.initDate();
+					this.populateTable(thisMonth, thisYear);
+				},
+				// create dynamic list of year choices
+				initDate : function() 
+				{
+					today = new Date();
+					thisYear = today.getFullYear();
+					thisMonth = today.getMonth();
+				},
+				
+				/*******************
+				  UTILITY METHODS
+				********************/
+				// day of week of month's first day
+				getFirstDay : function (theYear, theMonth)
+				{
+					var firstDate = new Date(theYear,theMonth,1);
+					return firstDate.getDay();
+				},
+				// number of days in the month
+				getMonthLen : function(theYear, theMonth) 
+				{
+					var nextMonth = new Date(theYear, theMonth + 1, 1);
+					nextMonth.setHours(nextMonth.getHours() - 3);
+					return nextMonth.getDate();
+				},
+				getElementPosition : function(elemID) 
+				{
+					var offsetTrail = document.getElementById(elemID);
+					var offsetLeft = 0;
+					var offsetTop = 0;
+					while (offsetTrail) 
+					{
+						offsetLeft += offsetTrail.offsetLeft;
+						offsetTop += offsetTrail.offsetTop;
+						offsetTrail = offsetTrail.offsetParent;
+					}
+					return {left:offsetLeft, top:offsetTop};
+				},
+				// position and show [url=""]calendar
+				showCalendar : function(evt) 
+				{
+					evt = (evt) ? evt : event;
+					if (evt) 
+					{
+						if (this.calendarDiv.style.display != "block") 
+						{
+							var elem = (evt.target) ? evt.target : evt.srcElement;
+							var position = this.getElementPosition(elem.id);
+							this.calendarDiv.style.top = position.top + "px";
+							this.calendarDiv.style.left = position.left + elem.offsetWidth + "px";
+							this.calendarDiv.style.display = "block";
+							setTimeout(function () {datePicker.calendarDiv.style.width = "218px";}, 50);
+							setTimeout(function () {datePicker.calendarDiv.style.height = "222px";}, 150);
+						} else 
+						{
+							this.calendarDiv.style.display = "none";
+						}
+					}
+				},
+
+				/************************
+				  DRAW CALENDAR CONTENTS
+				*************************/
+				// clear and re-populate table based on form's selections
+				populateTable : function(theMonth, theYear) 
+				{
+					// initialize date-dependent variables
+					var firstDay = this.getFirstDay(theYear, theMonth);
+					var howMany = this.getMonthLen(theYear, theMonth);
+
+					// fill in month/year in table header
+					document.getElementById("tableHeader").innerHTML = monthNames[theMonth]+ " " + theYear;
+
+					// initialize vars for table creation
+					var dayCounter = 1;
+					var TBody = document.getElementById("tableBody");
+					// clear any existing rows
+					while (TBody.rows.length > 1) 
+					{
+						TBody.deleteRow(1);
+					}
+					var newR, newC, dateNum;
+					var done=false;
+					while (!done) 
+					{
+						// create new row at end
+						newR = TBody.insertRow(TBody.rows.length);
+						if (newR) 
+						{
+							for (var i = 0; i < 7; i++) 
+							{
+								// create new cell at end of row
+								newC = newR.insertCell(newR.cells.length);
+								if (TBody.rows.length == 2 && i < firstDay) 
+								{
+									// empty boxes before first day
+									newC.innerHTML = " ";
+									continue;
+								}
+								if (dayCounter == howMany) 
+								{
+									// no more rows after this one
+									done = true;
+								}
+								// plug in link/date (or empty for boxes after last day)
+								if (dayCounter <= howMany) 
+								{
+									if (today.getFullYear() == theYear &&
+										today.getMonth() == theMonth &&
+										today.getDate() == dayCounter) 
+									{
+										newC.id = "today";
+									}
+									newC.innerHTML = "<a href='#' onclick='datePicker.chooseDate(" +
+										dayCounter + "," + theMonth + "," + theYear +
+										"); return false;'>" + dayCounter + "</a>";
+									dayCounter++;
+								} else 
+								{
+									newC.innerHTML = " ";
+								}
+							}
+						} else 
+						{
+							done = true;
+						}
+					}
+				},
+
+				/*******************
+				   PROCESS CHOICE
+				********************/
+				chooseDate : function(date, month, year) 
+				{
+					var tempdate = (date<10) ? "0":"";
+					var temp = ((month+1)<10) ? "0":"";
+					var result = tempdate + date + "/" + temp + (month+1) + "/" +year;
+					this.destinationForm.register_birth_date.value = result;
+					blur();
+					
+					if ((register_birth_date.checkValidity()) && (check_date(register_birth_date.value)))
+						register_birth_date.style.backgroundImage = "url('images/valid.png')";
+					else
+						register_birth_date.style.backgroundImage = "url('images/warning.png')";
+					check_submit_register();
+				},
+				
+				blur: function()
+				{
+					setTimeout(function () {datePicker.calendarDiv.style.height = "0px";}, 50);
+					setTimeout(function () {datePicker.calendarDiv.style.width = "0px";}, 150);
+					setTimeout(function () {datePicker.calendarDiv.style.display = "none";}, 300);
+				},
+				
+				prevMonth: function()
+				{
+					if (thisYear>=1955)
+					{
+						if ((thisMonth==0)&&(thisYear!=1955))
+						{
+							
+							thisMonth = 11;
+							thisYear--;
+						}
+						else
+							thisMonth--;
+					}
+					this.populateTable(thisMonth, thisYear);
+				},
+				
+				nextMonth: function()
+				{
+					thisMonth++;
+					if (thisMonth==12)
+					{
+						thisMonth = 0;
+						thisYear++;
+					}
+					this.populateTable(thisMonth, thisYear);
+				}
+			}
+			window.onload = function() 
+			{
+				datePicker.init(document.getElementById("calendar"),
+					document.getElementById("register_form"));
 				// cek session, jika sudah login maka redirect
 				setInterval(function(){next_image();}, 5500);
 			}
-		</script>
+			</script>
 	</body>
 </html>
