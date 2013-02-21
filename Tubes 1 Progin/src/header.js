@@ -3,14 +3,14 @@ function createHeader()
     document.write("\
         <!--header-->\n\
         <div class=\"header inline\">\n\
-            <div class=\"inline\" name=\"logo\">\n\
-                <div class=\"logo\">\n\
-                    <a href=\"../dashboard/dashboardUI.html\">\n\
-                        <img src=\"../../images/logo.png\" alt=\"Home Page\"/>\n\
-                    </a>\n\
-                </div>\n\
-            </div>\n\
             <div class=\"container\">\n\
+                <div class=\"inline\" name=\"logo\">\n\
+                    <div class=\"logo\">\n\
+                        <a href=\"../dashboard/dashboardUI.html\">\n\
+                            <img src=\"../../images/logo.png\" alt=\"Home Page\"/>\n\
+                        </a>\n\
+                    </div>\n\
+                </div>\n\
                 <div class=\"newline\">\n\
                 </div>\n\
                 <div class=\"inline\" name=\"home\">\n\
@@ -18,7 +18,7 @@ function createHeader()
                         <a href=\"../dashboard/dashboardUI.html\">Home</a>\n\
                     </div>\n\
                 </div>\n\
-                <div class=\"inline\" name=\"profil\">\n\
+                <div class=\"inline\" name=\"profile\">\n\
                     <div class=\"button\">\n\
                         <a href=\"../profile/profileUI.html\">Profile</a>\n\
                     </div>\n\
@@ -34,7 +34,7 @@ function createHeader()
                     </div>\n\
                 </div>\n\
                 <div class=\"inline\" name=\"search\">\n\
-                    <div class=\"form search\" align=\"right\">\n\
+                    <div class=\"form search\">\n\
                         <span class=\"row\">\n\
                             <input name=\"searchtextbox\" type=\"search\" value=\"search\" />\n\
                             <span class=\"button\" onclick=\"doSearch()\">\n\
