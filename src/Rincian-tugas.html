@@ -2,19 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>My Profile</title>
-	<link rel='stylesheet' type="text/css" href="../style/Design.css"/>
-    <script type="text/javascript" src="../script/validation.js"> </script>
-</head>
+<title>Task Detail</title>
+<link rel='stylesheet' type="text/css" href="../style/Design.css"/>
 </head>
 
 <body class="main">
 
 <!-- Header -->
-<div>
+<div id="header">
 <img src="../images/images/Header_3_ip_01.gif" width="800" height="47" alt="" /><img src="../images/images/Header_3_ip_02.gif" width="369" height="146" alt="" /><a href="Dashboard.html"><img src="../images/images/Header_3_ip_03.gif" width="431" height="146" alt="" /></a><img src="../images/images/Header_3_ip_04.gif" width="800" height="34" alt="" />
 
-  <ul class="navigation">
+  	<ul class="navigation">
 		<li> <a href="Dashboard.html"> Dashboard </a> </li>
         <li> <a href="profile.html"> Profile </a> </li>
         <li> <a href="Index.html"> Log Out </a> </li>
@@ -23,42 +21,53 @@
 </div>
 
 <!-- Content -->
-<div class="kategori">
-	<h2> Profile </h2>
-    <div><img src="../images/ibuOADTSPD3HEK.gif" width="148" height="137" border="5"/></div><br />
-      Hyosung, 23 years old
+<div class="TaskBoard">
+
+<h2 align="center"> Tubes Progin </h2>
+<div align="center">
+    <a href="../doc/TUBES I.pdf" target="_blank">Download Soal Tubes Progin</a>
 </div>
+
+<div align="center">
+	<a href="#photo1" id="register_pop">
+	<img src="../images/secret01-1024x682.jpg" width="259" height="172" class="imagedetail"/></a>
     
-<div class="contentprofile">
+    <a href="#photo2" id="register_pop">
+    <img src="../images/217123_425142407550158_487812540_n.jpg" width="239" height="173" class="imagedetail"/></a>
+    
+    <!-- Image 1 -->
+    <a href="#x" class="overlay" id="photo1"> </a>
+        <div class="popup">
+        	<img src="../images/secret01-1024x682.jpg" width="937" height="624" />
+            <a class="close" href="#close"></a>
+        </div>
+	<!-- Image 2 -->
+	<a href="#x" class="overlay" id="photo2"> </a>
+    	<div class="popup">
+        	<img src="../images/217123_425142407550158_487812540_n.jpg" />
+        	<a class="close" href="#close"></a>
+        </div>
+</div>
+
+<div align="center">
+	<p>Video about Tubes Progin </p>
+	<iframe width="420" height="345" src="http://www.youtube.com/embed/bw9CALKOvAI"></iframe>
+</div>
+
+<div>
 	
-	<p>Nama : Jun Hyo Sung<br />
-      Birth   : October 13, 1989<br />
-      Email : hyosung@korean.com</p>
-      <p>Task :</p>
-      <ul>
-        <li>Tubes Progin</li>
-        <li>Tubes AI</li>
-        <li>Tugas Individu IMK 2</li>
-        <li>Tugas Mingguan KAP</li>
-        </ul>
-  <p>Done :</p>
-      <ul>
-        <li>Tugas Kecil AI</li>
-        <li>Tugas Individu IMK</li>
-      </ul>
-<div align="right"> <input type="button" value="Edit Profile"/> </div>
+    
+    
+</div>
 
 </div>
 
-
-        
-
-<!-- FOoter -->
-    
+<!-- Footer -->
 <div class="footer">This Website is created for Internet Programming Assignment<br />
     By <a href="http://www.facebook.com/patrick.ltobing?fref=ts" target="_blank">Patrick Lumban Tobing</a>, <a href="http://www.facebook.com/hanif.eridaputra" target="_blank">Hanif Eridaputra</a>, <a href="http://www.facebook.com/novriady.saputra.3?fref=ts" target="_blank">Novriady Saputra</a><br />
     Februari 2013
 </div>
+
 
 </body>
 </html>
