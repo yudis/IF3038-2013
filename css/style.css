@@ -7,11 +7,63 @@ body {
 }
 
 /** General element styling **/
+
+/* Links */
 a {
 	text-decoration: none;
 }
 a:hover, a:active {
 	text-decoration: underline;
+}
+
+/* Page elements */
+section {
+	margin-bottom: 16px;
+}
+section h3 {
+	font-size: 12px;
+	font-weight: normal;
+	text-transform: uppercase;
+	color: #ccc;
+	margin: 0 0 6px;
+}
+.primary > div > header {
+	position: relative;
+}
+.primary > div > header > ul {
+	position: absolute;
+	top: 15px;
+	right: 10px;
+	margin: 0;
+	padding: 0 0 0 16px;
+	list-style: none;
+	font-size: 14px;
+	line-height: 25px;
+}
+.primary > div > header > ul li {
+	display: inline-block;
+}
+.primary > div > header > ul li a {
+	color: #999;
+	display: inline-block;
+	background: #eee;
+	padding: 0 10px;
+	border-radius: 2px;
+}
+.primary > div > header > ul li a:hover {
+	color: #666
+}
+
+/* Forms */
+form {
+	display: block;
+}
+form label {
+	display: inline-block;
+	width: 100px;
+	height: 22px;
+	padding: 4px 20px 0 0;
+	text-align: right;
 }
 button,
 input,
@@ -168,32 +220,6 @@ button:active {
 }
 
 /* Dashboard */
-.primary > div > header {
-	position: relative;
-}
-.primary > div > header > ul {
-	position: absolute;
-	top: 15px;
-	right: 10px;
-	margin: 0;
-	padding: 0 0 0 16px;
-	list-style: none;
-	font-size: 14px;
-	line-height: 25px;
-}
-.primary > div > header > ul li {
-	display: inline-block;
-}
-.primary > div > header > ul li a {
-	color: #999;
-	display: inline-block;
-	background: #eee;
-	padding: 0 10px;
-	border-radius: 2px;
-}
-.primary > div > header > ul li a:hover {
-	color: #666
-}
 #searchForm button {
 	display: none;
 }
@@ -228,23 +254,23 @@ button:active {
 .task a {
 	color: #666;
 }
-.dashboard .task .category {
+task .category {
 	display: none;
 }
-.dashboard .task p, .task .details div {
+.task p, .task .details div {
 	display: inline;
 }
-.dashboard .task .details {
+.task .details {
 	position: absolute;
 	top: 7px;
 	right: 10px;
 	font-size: 16px;
 	color: #999;
 }
-.dashboard .task .detail-label {
+.task .detail-label {
 	display: none;
 }
-.dashboard .task .details .tags {
+.task .details .tags {
 	margin-left: 10px;
 }
 .tag {
@@ -272,13 +298,6 @@ button:active {
 }
 .task-details > header .task-checkbox input {
 	width: 10px;
-}
-section h3 {
-	font-size: 12px;
-	font-weight: normal;
-	text-transform: uppercase;
-	color: #ccc;
-	margin: 0 0 6px;
 }
 .task-details > section.details {
 	width: 50%;
@@ -338,10 +357,12 @@ p.description .detail-label {
 	margin: 0 0 6px;
 }
 .profile-image {
-	float:right;
+	float: left;
 	max-width: 30%;
-	margin: 0;
+	margin: 0 20px 0 0;
 	padding: 0;
+	position: relative;
+	z-index: 2;
 }
 .profile-image img {
 	max-width: 100%;
@@ -371,6 +392,7 @@ p.description .detail-label {
 		float: left;
 		width: 80%;
 		background: white;
+		min-height: 30em;
 	}
 	.primary > div {
 		padding: 19px;
