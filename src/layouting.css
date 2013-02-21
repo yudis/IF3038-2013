@@ -42,8 +42,8 @@ h1{
 	color:#007;
 	
 }
-h3{
-	color: #000;
+h2{
+	color: #007;
 }
 
 #logo {
@@ -98,7 +98,7 @@ h3{
 
 #footer {
 	position: absolute;
-	margin-top: 620px;
+	margin-top: 745px;
 	width: 100%;
 	padding-left:12px;
 	margin-left: -20px;

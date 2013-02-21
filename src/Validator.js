@@ -132,5 +132,8 @@ function vdAvatar(){
 function login(){
 	var username = document.getElementById('txUsername').value;
 	var password = document.getElementById('txPassword').value;
-	alert(username + " " +password);
+	if(username == "admin" && password == "admin")
+		window.location= "Dashboard.html";
+	else
+		alert("Username & Password is incorrect");
 }
