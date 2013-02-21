@@ -37,6 +37,7 @@ function catchange(catnum){
 				document.getElementById("lomba").style.backgroundColor = "#fff";
 				document.getElementById("proyek").style.backgroundColor = "#fff";
 				document.getElementById("tugas").style.backgroundColor = "#fff";
+				document.getElementById("category_title").style.backgroundColor = "#007bc1";
 			}
 		else {
 			if (catnum==2) {
@@ -55,6 +56,7 @@ function catchange(catnum){
 				document.getElementById("lomba").style.backgroundColor = "#fff";
 				document.getElementById("kuliah").style.backgroundColor = "#fff";
 				document.getElementById("tugas").style.backgroundColor = "#fff";
+				document.getElementById("category_title").style.backgroundColor = "#007bc1";
 			}
 			else if (catnum == 4) {
 				document.getElementById("curtask1").style.opacity = "0";
@@ -71,6 +73,7 @@ function catchange(catnum){
 				document.getElementById("kuliah").style.backgroundColor = "#fff";
 				document.getElementById("proyek").style.backgroundColor = "#fff";
 				document.getElementById("tugas").style.backgroundColor = "#fff";
+				document.getElementById("category_title").style.backgroundColor = "#007bc1";
 				}
 			else {
 				document.getElementById("curtask1").style.opacity = "0";
@@ -86,6 +89,7 @@ function catchange(catnum){
 				document.getElementById("lomba").style.backgroundColor = "#fff";
 				document.getElementById("kuliah").style.backgroundColor = "#fff";
 				document.getElementById("proyek").style.backgroundColor = "#fff";
+				document.getElementById("category_title").style.backgroundColor = "#007bc1";
 				}
 			}
 		}
