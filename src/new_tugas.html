@@ -1,26 +1,46 @@
+		<div class="content">
+			<div class="primary">
+				<div class="add-task">
+					<header>
+						<h1>Add Task</h1>
+					</header>
 
-		<form id="new_tugas" action="#" method="post">
-			<div class="row">
-				<label>Nama Tugas</label>
-				<input size="25" maxlength="25" name="nama" id="nama" type="text">
+					<form id="new_tugas" action="#" method="post">
+						<div class="field">
+							<label>Task Name</label>
+							<input size="25" maxlength="25" name="nama" id="nama" type="text">
+						</div>
+						<div class="field">
+							<label>Attachment</label>
+							<input name="attachment" id="attachment" type="file">
+						</div>
+						<div class="field">
+							<label>Deadline</label>
+							<input name="deadline" id="deadline" type="date">
+						</div>
+						<div class="field">
+							<label>Assignee</label>
+							<input name="assignee" id="assignee" type="text">
+						</div>
+						<div class="field">
+							<label>Tag</label>
+							<input name="tag" id="tag" type="text">
+						</div>
+						<div class="buttons">
+							<button type="submit">Save</button>
+						</div>
+					</form>
+				</div>
 			</div>
-			<div class="row">
-				<label>Attachment</label>
-				<input name="attachment" id="attachment" type="file">
+
+			<div class="secondary">
+				<nav class="site-nav">
+					<section class="main">
+						<ul class="main-links">
+							<li class="dashboard-link"><a href="dashboard.html">Dashboard</a></li>
+							<li class="profile-link active"><a href="profile.html">Profile</a></li>
+						</ul>
+					</section>
+				</nav>
 			</div>
-			<div class="row">
-				<label>Deadline</label>
-				<input name="deadline" id="deadline" type="date">
-			</div>
-			<div class="row">
-				<label>Assignee</label>
-				<input size="50" maxlength="50" name="assignee" id="assignee" type="text">
-			</div>
-			<div class="row">
-				<label>Tag</label>
-				<input size="50" maxlength="50" name="tag" id="tag" type="text">
-			</div>
-			<div class="row buttons">
-				<input type="submit" name="register_dong" value="Buat">
-			</div>
-		</form>
+		</div>
