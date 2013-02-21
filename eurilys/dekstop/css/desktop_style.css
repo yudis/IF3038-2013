@@ -359,9 +359,29 @@ footer {
 #taskdetail_image {
 	height:100%;
 	width:auto;
+}
+
+/* ADD TASK
+--------------------------------------------------------------------------------------------------------------------- */
+#task_name_input, #assignee_input, #deadline_input, #tag_input, #attachment_upload {
+	width:35%;
+}
+
+#add_task_button{
+	display:block;
+	margin-left:22%;
+	border-style:solid;
+	border-color:#007bc1;
+	text-align:center;
+	width:80px;
+	font-size:15px;
+	padding-top:5px; 
+	padding-bottom:5px;
+}
+
+#add_task_button:hover {
+	border-color:#0092dd;
 }	
-
-
 
 /* STYLING 
 --------------------------------------------------------------------------------------------------------------------- */
