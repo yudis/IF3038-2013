@@ -7,7 +7,6 @@
 		<title>MOA - Dashboard</title>
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/dashboard.css" />
-        <link rel="stylesheet" href="css/index.css" />
 	</head>
 	<body>
 		<header>
@@ -112,25 +111,25 @@
 		</footer>
 		
 		<div id="black_trans">
-			<div id="frame_register">
+			<div id="frame_new_category">
 				<div id="close_button">
 					<a href="javascript:close();">X</a>
 				</div>
-				<div id="register_area">
-					<div id="register_form_wrap">
-						<div id="register_head">
+				<div id="new_category_area">
+					<div id="new_category_form_wrap">
+						<div id="new_category_head">
 							<h1>Form Pembuatan Kategori Baru</h1>
 						</div>
-						<form id="register_form" method="post">
+						<form id="new_category_form" method="post">
 							<div class="row">
-								<label for="register_username">Category Name</label>
-								<input id="register_username" name="Categoryname" pattern="^.{5,}$" type="text" title="Nama kategori minimal harus terdiri dari 5 karakter." required />
+								<label for="new_category_name">Category Name</label>
+								<input id="new_category_name" name="Categoryname" pattern="^.{5,}$" type="text" title="Nama kategori minimal harus terdiri dari 5 karakter." required />
 							</div>
 							<div class="row">
-								<label for="register_name">Username</label>
-								<input id="register_name" name="username" pattern="^[.{5,};]+$" type="text" title="Username yang dimasukkan harus diakhiri tanda spasi." required />
+								<label for="new_category_username">Username</label>
+								<input id="new_category_username" name="username" pattern="^(.{5,}\x2C)+$" type="text" title="Username yang dimasukkan harus diakhiri tanda koma." required />
 							</div>
-							<input id="register_submit" type="submit" value="Daftar" disabled="disabled" title="Semua elemen form harus diisi dengan benar dahulu."/>
+							<input id="new_category_submit" type="submit" value="Simpan" disabled="disabled" title="Semua elemen form harus diisi dengan benar dahulu."/>
 						</form>
 					</div>
 				</div>
@@ -182,36 +181,36 @@
 			function new_category()
 			{
 				document.getElementById("black_trans").className = "appear";
-				document.getElementById("register_area").className = "appear";
+				document.getElementById("new_category_area").className = "appear";
 				document.getElementById("close_button").className = "appear";
 				setTimeout(function()
 				{
-					document.getElementById("frame_register").className = "frame_register_enter";
+					document.getElementById("frame_new_category").className = "frame_new_category_enter";
 				}, 100);
 			}
 			
 			function close()
 			{
-				document.getElementById("frame_register").className = "";
+				document.getElementById("frame_new_category").className = "";
 				setTimeout(function()
 				{
 					document.getElementById("black_trans").className = "";
-					document.getElementById("register_area").className = "";
+					document.getElementById("new_category_area").className = "";
 					document.getElementById("close_button").className = "";
 				}, 400);
 			}
             
             /*--- Bagian Validasi Pembuatan Kategori Baru ---*/
-			var register_form = document.getElementById("register_form");
-			register_form.onsubmit = function()
+			var new_category_form = document.getElementById("new_category_form");
+			new_category_form.onsubmit = function()
 			{
-            
+                alert("Data berhasil disimpan");
 			}
 			
-			var register_username = document.getElementById("register_username");
-			var register_name = document.getElementById("register_name");
+			var new_category_name = document.getElementById("new_category_name");
+			var new_category_username = document.getElementById("new_category_username");
 			
-			register_username.onkeyup = function()
+			new_category_name.onkeyup = function()
 			{
 				if (this.checkValidity())
 					this.style.backgroundImage = "url('images/valid.png')";
@@ -220,7 +219,7 @@
 				check_submit_register();
 			}
 						
-			register_name.onkeyup = function()
+			new_category_username.onkeyup = function()
 			{
 				if (this.checkValidity())
 					this.style.backgroundImage = "url('images/valid.png')";
@@ -231,13 +230,13 @@
 						
 			function check_submit_register()
 			{
-				if (register_username.checkValidity() && register_name.checkValidity())
+				if (new_category_name.checkValidity() && new_category_username.checkValidity())
 				{
-					document.getElementById("register_submit").disabled="";
+					document.getElementById("new_category_submit").disabled="";
 				}
 				else
 				{
-					document.getElementById("register_submit").disabled="disabled";
+					document.getElementById("new_category_submit").disabled="disabled";
 				}
 			}
             
