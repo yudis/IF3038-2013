@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>QuestmeIndex</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="styleindex.css" />
+    </head>
+
+    <body>
+        <div class="header">
+            <div class="hbackground">
+                <a href="#"><div id="hlogo">
+                    </div>
+                    <div id="htitle"> QUESTme 
+                    </div>
+                <div class="tagline">"anywhere, anytime, always ready"</div></a>			
+
+                <div id="login">
+                    <form class="login" name="formLogin"> 
+                        Username <input id="login_username" type="text" name="username" required />
+                        Password <input id="login_password" type="password" name="pass" required />
+                        <input id ="blogin" type="submit" value="login" onclick="validateLogin();" />
+                    </form>
+                </div>
+                <div class="registerq">	
+                    you don't have an account? <a id="register_link" href="#" onclick="reg();">REGISTER</a> here!
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            
+            <div id="alpha"></div>
+            <div id="form_register">
+                <div id="border_register_in">
+                    <form id="formRegister">
+                        <div class="row">
+                            <div class="labelrow">Username </div> <input type="text" name="regusername" onchange="validate();" pattern="^.{5,}$">  username minimal 5 karakter<br>
+                        </div>
+                        <div class="row">
+                            <div class="labelrow">Password </div> <input type="password" name="regpass" onchange="validate();" pattern="^.{8,}$">  password minimal 8 karakter<br>
+                        </div>
+                        <div class="row">	
+                            <div class="labelrow">Confirm Password</div> <input type="password" name="passconf" onchange="validate();"> <br>
+                        </div>
+                        <div class="row">	
+                            <div class="labelrow">Nama Lengkap </div> <input type="text" name="nama" onchange="validate();" pattern="^.+ .+"> harap pisahkan dengan spasi<br>
+                        </div>
+                        <div class="row">	
+                            <div class="labelrow">Tanggal Lahir </div>  <input type="date" name="ttl" onchange="validate();"><br>
+                        </div>
+                        <div class="row">	
+                            <div class="labelrow">Email </div> <input type="email" name="regemail" onchange="validate();" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"> <br>
+                        </div>
+                        <div class="row">	
+                            <div class="labelrow">Avatar </div> <input type="file" name="avatar" accept="image/*" onchange="validate();"> <br>
+                        </div>	
+                        <button type="submit" name="subreg" onclick="validateReg();" disabled="true"  > Submit </button>
+                        <button type="submit" name="subregs" onclick="cancel();" >Cancel</button>
+                    </form>
+                </div>
+            </div>
+			<div class="homepicture">
+				<img src="QuestMeIcon.png">
+			</div>
+        </div>
+        <br>
+        <div class="footer">
+            <div id="fbackground">
+                <p class="ftext">Copyright © 2013 Afif, Endy, and Monca </p>
+            </div>
+        </div>
+    </body>
+	
+        <script src="javascript.js" type="application/javascript"> </script>
+</html>

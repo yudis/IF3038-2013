@@ -1,0 +1,225 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>QuestMeDashboard</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="styledashboard.css" type="text/css">
+    </head>
+    <body>
+        <!--body dari header-->
+        <div class="header">
+            <div class="hbackground">
+                <a href="dashboard.html"><div id="hlogo">
+                    </div>
+                    <div id="htitle"> QUESTme 
+                    </div></a>
+                <div class="tagline">"anywhere, anytime, always ready"</div>			
+                <div  id="hmenus">
+                    <a class="mtext" href="dashboard.html">Dashboard</a>
+                    <a class="mtext" href="profil.html"> Profil </a>
+                    <a class="mtext" href="index.html"> Logout</a>
+                </div>
+                <div id="search">
+                    <form class="search"> Search : <input type="text" name="firstname">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+		
+		<!--body dashboard-->
+		<div class="back">
+			<div class="dashboard">
+				<div class="dashboardutama">
+					<div id="dashboardu">
+						<h1><b>DASHBOARD</b></h1>
+					</div>
+				</div>
+			</div>
+			<br>	
+		
+			<div id="popup">
+				<h1>Create new category</h1>
+				<div>
+					<label>Category name :</label> <input id="txtNewKategori" type="text" placeholder="eg: IF3099" /><br>
+					<label>Members       </label> <input id="Members" type="text"/>
+				</div>
+				<div><button onclick="NewKategori(); hidePopUp();">OK</button><button onclick="hidePopUp();">Cancel</button>
+				</div>
+			</div>
+			<div class="page">
+				<div class="content">
+                <div id="sidebar">
+                    <ul id="category"><li><a id="Call" href="#" onclick="CancelDisplayDetail();
+                            cancelAddTask();
+                            hideAddTaskButton();
+                            return ShowAllTask(this);"><b>Dashboard</b></a></li>
+                        <li><a id="C0" href="#" onclick="showAddTaskButton();
+                            CancelDisplayDetail();
+                            cancelAddTask();
+                            return ShowTaskinCategory(this);"><b>Category 1</b></a></li>
+                        <li><a id="C1" href="#" onclick="showAddTaskButton();
+                            CancelDisplayDetail();
+                            cancelAddTask();
+                            return ShowTaskinCategory(this);"><b>Category 2</b></a></li>
+                        <li><a id="C2" href="#" onclick="showAddTaskButton();
+                            CancelDisplayDetail();
+                            cancelAddTask();
+                            return ShowTaskinCategory(this);"><b>Category 3</b></a></li>
+                    </ul>
+                    <ul id="newcategories">
+                        <li id="addnew"><a href="#" onclick="showPopUp();"><b>Add new!</b></a></li>
+                        <li><div id="popup">
+                                <h2>Create new category</h2>
+								<br>
+                                <div>
+                                    <form>
+                                        Category Name <br> <input id="txtNewKategori" type="text" placeholder="eg: IF3099"/><br>
+										Members       <br> <input id="Members" type="text"/>
+                                    </form>
+                                </div>
+                                <div><button onclick="NewKategori();">OK</button><button onclick="hidePopUp();">Cancel</button>
+                                </div>
+                            </div></li>
+                    </ul>
+                </div>
+				<div class="side">
+					<a id ="addTask" href="#" onclick="addTask();">Add new Task</a>
+					<div id="createTask">
+						<b>Task Name  : </b><br><input class="t" type="text" id="taskname" name="taskname"><br>
+						<b>Attachment : </b><br><input class="t" type="file" id="attachment" name="attachment"><br>
+						<b>Deadline   : </b><br><input class="t" type="text" id="deadline" name="deadline"><br>
+						<b>Assignee   : </b><br><input class="t" type="text" id="assignee" name="assignee"> <br>
+						<b>Tag        : </b><br><input class="t" type="text" id="tag" name="tag"><br>
+						<button onclick="submitAddTask();">OK</button><br>
+						<button onclick="cancelAddTask();">Cancel</button>
+					</div>
+					<div id="details">
+						<ul class="taskdetails">
+							<li>Tugas Pertama</li>
+							<li>Attachment  :<br><a href="tes.jpg">tes.jpg</a><br><a href="video.mp4">video.mp4</a><br><a href="file.zip">file.zip</a><br></li>
+							<li>Deadline: <strong>22 April 2012 17:00 WIT</strong></li>
+							<li>Assignee    : Afif, Flora, Monica</li>
+							<li>Comments    : <ul id="comments"><li>Afif : Gimana nihh?</li><li>Flora: Ya gitu deh..</li></ul>
+							</li>
+							<li><form id="formcomment">
+									Comments:<br />
+									<textarea name="comments" id="comment">
+										Hey... say something!
+									</textarea><br />
+									<input type="submit" value="Submit" />
+								</form>
+							</li>
+							<li>
+								<button onclick="editTask();">Edit Task</button>
+								<button onclick="CancelDisplayDetail();
+								hideAddTaskButton();">Back</button>
+							</li>
+						</ul>
+					</div>
+					<div id="editTask">
+						<form>
+							Assignee : <input id="editAssignee" list="browsers" name="browser"><br>
+							<datalist id="browsers">
+								<option value="Nugroho Satrijandi">
+								<option value="Afif Al-hawari">
+								<option value="Flora Monica">
+								<option value="Om Google">
+							</datalist>
+							Tag      : <input id="editTag" type="text" name="tag"><br>
+							Deadline : <input id="editDeadline" type="text" name="deadline"><br>
+							<button onclick="submitEditTask();">OK</button><br>
+							<button onclick="cancelEditTask();">Cancel</button>
+						</form>
+					</div>
+					<div id="task">
+						<section id="main-C0">
+							<h2>Kategori 1</h2>
+							<div class="todo">
+								<div><a href="#" class="rincian" onclick="DisplayDetail();">Tugas Pertama</a></div>
+								<div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+								<div>
+									Tags: pemrograman, internet, soal
+								</div>                            
+							</div>
+							<div class="todo">
+								<div><a href="#" class="rincian" onclick="DisplayDetail();">Tugas Kedua</a></div>
+								<div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+								<div>
+									Tags: pemrograman, internet, soal
+								</div>                            
+							</div>
+							<div class="todo">
+								<div><a href="#" class="rincian" onclick="DisplayDetail();">Tugas Ketiga</a></div>
+								<div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+								<div>
+									Tags: pemrograman, internet, soal
+								</div>                            
+							</div>
+						</section>
+						<section id="main-C1">
+							<h2>Kategori 2</h2>
+							<div class="todo">
+								<div><a href="#" class="rincian" onclick="DisplayDetail();">Tugas Pertama</a></div>
+								<div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+								<div>
+									Tags: pemrograman, internet, soal
+								</div>                            
+							</div>
+							<div class="todo">
+								<div><a href="#" class="rincian" onclick="DisplayDetail();">Tugas Kedua</a></div>
+								<div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+								<div>
+									Tags: pemrograman, internet, soal
+								</div>                            
+							</div>
+							<div class="todo">
+								<div><a href="#" class="rincian" onclick="DisplayDetail();">Tugas Ketiga</a></div>
+								<div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+								<div>
+									Tags: pemrograman, internet, soal
+								</div>                            
+							</div>
+						</section>
+						<section id="main-C2">
+							<h2>Kategori 3</h2>
+							<div class="todo">
+								<div><a href="#" class="rincian" onclick="DisplayDetail();">Tugas Pertama</a></div>
+								<div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+								<div>
+									Tags: pemrograman, internet, soal
+								</div>                            
+							</div>
+							<div class="todo">
+								<div><a href="#" class="rincian" onclick="DisplayDetail();">Tugas Kedua</a></div>
+								<div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+								<div>
+									Tags: pemrograman, internet, soal
+								</div>                            
+							</div>
+							<div class="todo">
+								<div><a href="#" class="rincian" onclick="DisplayDetail();">Tugas Ketiga</a></div>
+								<div>Deadline: <strong>22 April 2012 17:00 WIT</strong></div>
+								<div>
+									Tags: pemrograman, internet, soal
+								</div>                            
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+				<!--<footer>Created by Nugroho Satrijandi, M. Afif Al-hawari, Flora Monica for Internet Programming Task</footer>-->
+			</div>
+			<div class="footer">
+				<div id="fbackground">
+					<p class="ftext">Copyright © 2013 Afif, Endy, and Monca </p>
+				</div>
+			</div>
+		</div>
+    </body>
+        <script src="dashboard.js" type="application/javascript"></script>
+</html>

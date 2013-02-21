@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html>
+	<title>
+		header web
+	</title>
+	
+	<!--body dari header-->
+	<body>
+		<div class="header">
+			<div class="hbackground">
+				<a href="dashboard.html"><div id="hlogo">
+				</div>
+				<div id="htitle"> QUESTme 
+				</div></a>
+				<div class="tagline">"anywhere, anytime, always ready"</div>			
+				
+				<div id="login">
+					<form class="login"> 
+						<label for="login_username">Username <input id="login_username" type="text" name="username" required />
+						<label for="login_password">Password <input id="login_password" type="password" name="pass" required />
+						<button id ="login" type="submit" onclick="validateLogin();">login</button>
+					</form>
+				</div>
+				<div class="registerq">	
+						you don't have an account? <a id="register_link" href="#">REGISTER</a> here!
+				</div>
+			</div>
+		</div>
+		<br>
+				
+	</body>	
+	
+	<style>
+		@font-face{
+			font-family:"biodata";
+			src:url("LoveYaLikeASister.ttf");
+		}
+		
+		
+		@font-face{
+			font-family:"headerfont";
+			src : url("RPRSSTMP.ttf");
+		}
+
+		@font-face{
+			font-family:"tagline";
+			src :url("Fh_Scribble.ttf");
+		}
+	
+		.header{
+			box-shadow: 5px 5px 5px #333333;
+		}
+		
+		.hbackground{
+			border:2 px solid black;
+			background:#000000;
+			width : 1280px;
+			height:100px;
+			padding: 0 px 0 px;
+			position:fixed;
+		}
+		
+		#hlogo{
+			float: left;
+			margin-left: 10px;
+			width:100px;
+			height:100px;
+			background-image:url('logosmall.jpg');
+			background-repeat:no-repeat;
+			text-indent:-999999em;
+			clear:none
+		}
+		
+		#htitle{
+			float: left;
+			margin-left:-20px;
+			font-size:65px;
+			font-family:"headerfont";
+			color:white;
+		}
+		
+		#htitle:hover{
+			float: left;
+			font-size:65px;
+			font-family:"headerfont";
+			color:#E6B85C;
+		}
+		
+		.tagline{
+			float:left;
+			position:absolute;
+			margin-left:110px;
+			margin-top:68px;
+			font-family:"tagline";
+			font-size:30 px;
+			color:white;
+		}
+		
+		.tagline:hover{
+			float:left;
+			position:fixed;
+			margin-left:110px;
+			margin-top:68px;
+			font-family:"tagline";
+			font-size:28 px;
+			color:#E6B85C;
+		}
+		
+		
+		#login{
+			margin-top:25px;
+			margin-left:550px;
+			padding: 5px 10px;
+		}
+		
+		.login{
+			font-family:"headerfont";
+			font-size:13px;
+			color:white;
+		}
+		
+		input{
+			font-family:"biodata";
+		}
+		
+		input:hover{
+			border: 1px solid #999999 !important;
+		}
+	
+		.registerq{
+			float:left;
+			position:absolute;
+			margin-left:790px;
+			margin-top:-60px;
+			font-family:"biodata";
+			font-size:5 px;
+			color:white;
+		}
+		
+		.registerq a{
+			color:#800000;
+			text-decoration:none;
+		}
+		
+		.registerq a:hover{
+			text-shadow:0px 0px 10px #323436;
+		}
+	
+	</style>
+</html>
