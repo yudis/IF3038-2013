@@ -4,24 +4,25 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="" />
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-		<title></title>
+		<title>MOA</title>
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/index.css" />
 	</head>
 	<body>
 		<header>
 			<div id="header_wrap" class="wrap">
-				<a href="#"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
+				<a href="index.html"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
 				<div id="header_title">
-					<h1> <a href="#">MOA</a> </h1>
+					<h1> <a href="index.html">MOA</a> </h1>
 					<h4>Multiuser Online Agenda</h4>
 				</div>
 				<div id="border_header"></div>
 				<div id="header_menu">
 					<nav>
 						<ul>
-							<li> <a href="#">Dashboard</a> </li>
-							<li> <a href="#">Profil</a> </li>
-							<li> <a id="register_button" href="#">Daftar</a> </li>
+							<!--<li> <a href="#">Dashboard</a> </li>
+							<li> <a href="#">Profil</a> </li>-->
+							<li> <a id="register_button" href="javascript:register();">Daftar</a> </li>
 						</ul>
 					</nav>
 					<div id="login_area">
@@ -33,7 +34,7 @@
 						<div class="clear"></div>
 						<div id="border_login"><div id="border_login_inner"></div></div>
 						<div id="login_form_wrap">
-							<form id="login_form">
+							<form id="login_form" action="dashboard.html" method="post">
 								<div class="row">
 									<label for="login_username">Username</label> <br />
 									<input id="login_username" name="username" type="text" required /> <br />
@@ -69,10 +70,10 @@
 				<div id="slide_left">
 				</div>
 				<div id="content_wrap_inner">
-					<img class="slide_item" src="images/tes.jpg" />
-					<img class="slide_item" src="images/tes2.jpg" />
-					<img class="slide_item" src="images/tes3.jpg" />
-					<img class="slide_item" src="images/tes4.jpg" />
+					<img class="slide_item" src="images/tes.jpg" alt="gambar 1" />
+					<img class="slide_item" src="images/tes2.jpg" alt="gambar 2" />
+					<img class="slide_item" src="images/tes3.jpg" alt="gambar 3" />
+					<img class="slide_item" src="images/tes4.jpg" alt="gambar 4" />
 				</div>
 				<div id="slide_right">
 				</div>
@@ -88,20 +89,26 @@
 		
 		<footer>
 			<div id="footer_wrap" class="wrap">
-				Copyright by dronJaX.
+				<div id="footer_left">
+					<a href="index.html" class="active">Beranda</a>
+				</div>
+				<div id="footer_right">
+					Copyright by dronJaX.
+				</div>
 			</div>
 		</footer>
+		
 		<div id="black_trans">
 			<div id="frame_register">
 				<div id="close_button">
-					<a href="javascript:close()">X</a>
+					<a href="javascript:close();">X</a>
 				</div>
 				<div id="register_area">
 					<div id="register_form_wrap">
 						<div id="register_head">
 							<h1>Form Pendaftaran</h1>
 						</div>
-						<form id="register_form">
+						<form id="register_form" method="post">
 							<div class="row">
 								<label for="register_username">Username</label>
 								<input id="register_username" name="username" pattern="^.{5,}$" type="text" title="Username minimal harus terdiri dari 5 karakter." required />
@@ -159,8 +166,7 @@
 			}
 			
 			/*----- Bagian Munculin Register ----*/
-			var register_button = document.getElementById("register_button");
-			register_button.onclick = function()
+			function register()
 			{
 				document.getElementById("black_trans").className = "appear";
 				document.getElementById("register_area").className = "appear";
@@ -171,8 +177,7 @@
 				}, 100);
 			}
 			
-			var close_button = document.getElementById("close_button")
-			close_button.onclick = function()
+			function close()
 			{
 				document.getElementById("frame_register").className = "";
 				setTimeout(function()
@@ -204,48 +209,16 @@
 			var form_login = document.getElementById("login_form");
 			form_login.onsubmit = function()
 			{
-				document.getElementById("login_link").innerHTML = "Keluar";
-				document.getElementById("login_username").value = "";
-				document.getElementById("login_password").value = "";
-				document.getElementById("login_form_wrap").className = "";
-				document.getElementById("login_button").className = "";
-				document.getElementById("login_link").className = "";
-				document.getElementById("border_login").className = "";
-				
-				
-				login_area.onmouseover = function()
+				if ((document.getElementById("login_username").value =="admin") &&
+					(document.getElementById("login_password").value =="admin123"))
+					return true;
+				else
 				{
-					document.getElementById("login_link").className = "logout_link_focus";
-					document.getElementById("login_button").className = "logout_button_focus";
+					alert("Username dan password yang dimasukkan salah.");
+					document.getElementById("login_username").value = "";
+					document.getElementById("login_password").value = "";
+					return false;
 				}
-				
-				login_area.onmouseout = function()
-				{
-					document.getElementById("login_link").className = "";
-					document.getElementById("login_button").className = "";
-				}
-				
-				login_area.onclick = function()
-				{
-					document.getElementById("login_link").innerHTML ="Masuk";
-					login_area.onmouseover = function()
-					{
-						document.getElementById("login_form_wrap").className = "appear";
-						document.getElementById("login_button").className = "login_button_appear";
-						document.getElementById("login_link").className = "login_link_appear";
-						document.getElementById("border_login").className = "appear";
-					}
-
-					login_area.onmouseout = function()
-					{
-						document.getElementById("login_form_wrap").className = "";
-						document.getElementById("login_button").className = "";
-						document.getElementById("login_link").className = "";
-						document.getElementById("border_login").className = "";
-					}
-				}
-				
-				return false;
 			}
 			
 			/*----- Bagian SlideShow ----*/
@@ -320,7 +293,7 @@
 			{
 				var register_password = document.getElementById("register_password");
 				var register_confirm_password = document.getElementById("register_confirm_password");
-				if (register_password!=register_confirm_password)
+				if (register_password.value!=register_confirm_password.value)
 				{
 					alert("ampas");
 				}
@@ -410,6 +383,12 @@
 				{
 					document.getElementById("register_submit").disabled="disabled";
 				}
+			}
+			
+			window.onload = function()
+			{
+				// cek session, jika sudah login maka redirect
+				setInterval(function(){next_image();}, 5500);
 			}
 		</script>
 	</body>

@@ -1,0 +1,97 @@
+#dashboard_category
+{
+    width : 250px;
+    float : left;
+}
+
+#dashboard_tugas
+{
+    padding-left : 10px;
+    width : 670px;
+    margin-left: 260px;
+}
+
+.dashboard_category_element
+{
+    display : block;
+    width : 220px;
+    padding : 6px 10px;
+    font : arial 150%;
+    border-style : outset;
+    border-width : 5px;
+    border-color : #000000
+}
+
+.dashboard_category_element:hover
+{
+    display: block;
+    width: 220px;
+    padding: 6px 10px;
+    font: arial 150%;
+    border-style: inset;
+    border-width: 5px;
+    border-color : #000000    
+}
+
+.dashboard_tugas_element
+{
+    display: block;
+    width: 650px;
+    padding: 0px 0px;
+    font: arial 150%;
+    border-style: outset;
+    border-width: 5px;
+    border-color : #000000       
+}
+
+.dashboard_tugas_element:hover
+{
+    display: block;
+    width: 650px;
+    padding: 0px 0px;
+    font: arial 150%;
+    border-style: inset;
+    border-width: 5px;
+    border-color: #000000   
+}
+
+.dashboard_tugas_judul
+{
+    display: block;
+    width: 450 px;
+    float: left;
+    padding: 6px; 
+}
+
+.dashboard_tugas_tanggal
+{
+    display: block;
+    width: 200px;
+    margin-left: 450px;
+    border-left: 2px solid grey;
+    padding: 6px 10px;
+    text-decoration: none;
+}
+
+.dashboard_tugas_tag_area
+{
+    display: block;
+    width: 630px;
+    padding: 10px;
+    border-top: 2px solid grey;
+    font-size: 14px;
+    font-family: "Times new Roman";
+    text-decoration: none;
+}
+
+nav ul li a
+{
+    text-decoration: none;
+}
+
+nav ul li a div div  ul li
+{
+    float: none;
+    display: inline;
+    margin-right: 30px;
+}
