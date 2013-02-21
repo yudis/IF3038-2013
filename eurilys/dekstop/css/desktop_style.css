@@ -83,6 +83,9 @@ label#remember_me {
 	-moz-transition: all 0.7s ease-in-out;
 	-o-transition: all 0.7s ease-in-out;
 }
+
+.header_menu_button:hover{background-color:#ff5645;}
+
 .current_header_menu {
 	background-color:#6FBEC6;
 }
