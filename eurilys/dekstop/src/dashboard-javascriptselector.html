@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<!--
+	<IFRAME name="iframe" src="src/header.html" width='100%' height='auto' marginwidth=0 marginheight=0 hspace=0 vspace=0 frameborder=0 scrolling=auto></IFRAME>
+	-->
+	
+	<head>
+		<link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="../js/animation.js"> </script> 
+		<script type="text/javascript" src="../js/catselector.js"> </script> 
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+		<title> Eurilys </title>
+	</head>
+	
+	<body>
+		<!-- Web Header -->
+		<header>
+			<div id="header_container"> 
+				<div class="left">
+					<img src="../img/logo.png">
+				</div>
+				<input id="search_box" type="text" placeholder="search...">
+				<div class="header_menu"> 
+					<div class="header_menu_button current_header_menu"> DASHBOARD </div>
+					<div class="header_menu_button"> PROFILE </div>
+					<div class="header_menu_button"> <a id="logout" href="../index.html"> LOGOUT </a> </div>
+				</div>
+				
+			</div>
+			<div class="thin_line"></div>
+		</header>	
+	
+		
+		<!-- Web Content -->
+		<section>
+			<div id="navbar">
+				<div id="short_profile">
+					<img id="profile_picture" src="../img/avatar1.png">
+					<div id="profile_info">
+						Ruth Natasha 
+						<br><br>
+						<div class="link_tosca" style="letter-spacing:0px;padding-left:8px; padding-right:8px;"> Edit Profile </div>
+					</div>
+					
+					<input type="file" id="profile_pic_upload" name="profile_picture"/> 
+				</div>
+				<div id="category_list">
+					<div class="link_blue_rect" id="category_title"> All Categories </div>
+					<ul id="category_item">
+						<li> Kuliah </li>
+						<li> Proyek </li>
+						<li> Tugas </li>
+						<li> Lomba </li>
+						<li> Travel </li>
+					</ul>
+					<select id='catselector' name='catselector' onchange="catchange(this.value);">
+						<option value="0">All</option>
+						<option value="1">Category 1</option>
+						<option value="2">Category 2</option>
+						<option value="3">Category 3</option>
+						<option value="4">Category 4</option>
+					</select>
+					<div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
+					<div id="category_form">
+						<div id="category_form_inner">
+							Category name : <br>
+							<input type="text" id="add_category_name" value="">
+							<br><br>
+							Assignee(s) : <br>
+							<input type="text" id="add_category_asignee_name" value="">
+							<br><br>
+							<div id="add_category_button" class="link_red" onclick="add_category()"> Add </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="dynamic_content">
+				<div class="taskcat" id="taskcat1">Task Category 1</div>
+				<div class="taskcat" id="taskcat2">Task Category 2</div>
+				<div class="taskcat" id="taskcat3">Task Category 3</div>
+				<div class="taskcat" id="taskcat4">Task Category 4</div>
+			</div>
+		</section>
+		
+		<!-- Footer Section -->
+		<div class="thin_line"></div>
+		<footer>
+			<div id="footer_container"> 
+				
+			</div>
+		</footer>
+	</body>
+
+<!-- ini nanti jadiin footer -->
+</html>
