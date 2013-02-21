@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>My Dashboard</title>
     <link rel='stylesheet' type="text/css" href="../style/Design.css"/>
-    <script type="text/javascript" src="../script/popup.js"> </script>
+    <script type="text/javascript" src="../script/validation.js"> </script>
 </head>
 
 <body class="main">
@@ -14,24 +14,21 @@
 <div>
 <img src="../images/images/Header_3_ip_01.gif" width="800" height="47" alt="" /><img src="../images/images/Header_3_ip_02.gif" width="369" height="146" alt="" /><a href="Dashboard.html"><img src="../images/images/Header_3_ip_03.gif" width="431" height="146" alt="" /></a><img src="../images/images/Header_3_ip_04.gif" width="800" height="34" alt="" />
 
-  <ul class="navigation">
+  	<ul class="navigation">
 		<li> <a href="Dashboard.html"> Dashboard </a> </li>
         <li> <a href="profile.html"> Profile </a> </li>
-        <li> <a href="Hal-Utama.html"> Log Out </a> </li>
+        <li> <a href="Index.html"> Log Out </a> </li>
     </ul>
   
 </div>
     
 
-
 <div class="kategori">
 	<h3> Kategori </h3>
-    <ul>
-    <li> All </li>
-    <li> 
-    <a href="#personal" id="register_pop"> Personal </a>
-    </li>
-    <li> Public </li>
+    <ul class="navigation2">
+    <li> <a href="Kategori-All.html" target="categoryframe"> All </a></li>
+    <li> <a href="Kategori-Personal.html" target="categoryframe">  Personal </a></li>
+    <li> <a href="Kategori-Public.html" target="categoryframe"> Public </a></li>
     </ul>
     <div align="right" >
     <a href="#category_form" id="register_pop">
@@ -50,7 +47,9 @@
                 <label for="name">User (Seperated with ";")</label>
                 <input type="text" id="name" value="" />
             </div>
-            <input type="button" value="Add Category" />
+            <div align="right">
+            	<input type="button" value="Add Category" />
+     		</div>
 
             <a class="close" href="#close"></a>
   		</div>
@@ -60,13 +59,10 @@
 
 <!-- Content -->
 <div>
-	<iframe src="Kategori-All.html" width="605" height="340">  </iframe>
+	<iframe src="Kategori-All.html" width="605" height="340" name="categoryframe">  </iframe>
+
 </div>
 
-<a href="#x" id="personal"> </a>
-<div>
-	<iframe src="Kategori-Personal.html" width="605" height="340">  </iframe>
-</div>
 
     
 <!-- Footer -->

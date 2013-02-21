@@ -8,10 +8,6 @@
 	background-color:#FFF;
 }
 
-.header {
-	background-color:#201B1B;
-}
-
 .content {
 	width:auto;
 	height:auto;
@@ -30,7 +26,6 @@
 	font-family:Tahoma;
 	margin-top: 0px;
 	padding: 3px 3px;
-	height:26px;
 	text-align:right;
 }
 
@@ -51,6 +46,28 @@
 .navigation a:hover{
 	background-color:#000;
 	color:#aaaaaa;
+}
+
+.navigation2 {
+	padding: 3px 3px;
+	list-style-type:none;
+}
+
+.navigation2 li {
+	margin:10px;
+}
+
+.navigation2 a {
+	text-decoration:none;
+	padding:10px 0px;
+	margin:40px;
+	color:#aaaaaa;
+	text-align:center;
+}
+
+.navigation2 a:hover{
+	background-color:#CCC;
+	color:#000;
 }
 
 .footer {
@@ -270,4 +287,6 @@ a#register_pop:hover {
 .categoryfont{
 	font-family:Tahoma;
 	color:#003;
+	font-size:0.9em;
+	background-color:#FFF
 }
