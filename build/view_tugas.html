@@ -14,44 +14,93 @@
 				<p>A to-do list for getting things done.</p>
 			</header>
 
-		<div role="view_todo">
-			<div class="row">
-				Nama Task : Tugas 1
-			</div>
-			<div class="row">
-				Attachment
-			</div>
-			<div class="row">
-				Deadline : 2222-22-22
-			</div>
-			<div class="row">
-				Assignee : a, b, c
-			</div>
-			<div class="row">
-				Komentar :
-				<div class="comment">
-					a : hade euy
+
+		<div class="content">
+			<div class="primary">
+				<div class="task-details">
+					<header>
+						<form method="POST">
+							<h1>
+								<label>
+									<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+									<span class="task-title">Tugas 1</span>
+								</label>
+							</h1>
+						</form>
+					</header>
+					<section class="details">
+						<header>
+							<h3>Details</h3>
+						</header>
+						<p class="description">
+							<span class="detail-label">Description:</span>
+							<span>Lorem ipsum dolor sit amet, task description goes here.</span>
+						</p>
+						<p class="assignee">
+							<span class="detail-label">Assignee:</span>
+							<span class="detail-content">Irfan Kamil</span>
+						</p>
+						<p class="category">
+							<span class="detail-label">Kategori:</span>
+							<span class="detail-content">Makan</span>
+						</p>
+						<p class="tags">
+							<span class="detail-label">Tag:</span>
+							<span class="tag">satu</span>
+							<span class="tag">dua</span>
+							<span class="tag">tiga</span>
+							<span class="tag">empat</span>
+						</p>
+					</section>
+					<section class="attachment">
+						<header>
+							<h3>Attachment</h3>
+						</header>
+					</section>
+					<!-- <div class="row">
+						Attachment
+					</div> -->
+					<section class="comments">
+						<header>
+							<h3>2 Comments</h3>
+						</header>
+						<article class="comment">
+						</article>
+					</section>
+					<div class="row">
+						Komentar :
+						<div class="comment">
+							a : hade euy
+						</div>
+						<div class="comment">
+							b : goreng tapi euy
+						</div>
+						<form id="comment" action="#" method="post">
+							<label>Beri Komentar</label>
+							<textarea name="komentar" id="password" type="text"></textarea>
+							<input type="submit" name="komentar_dong" value="Kirim">
+						</form>
+					</div>
 				</div>
-				<div class="comment">
-					b : goreng tapi euy
-				</div>
-				<form id="comment" action="#" method="post">
-					<label>Beri Komentar</label>
-					<textarea name="komentar" id="password" type="text"></textarea>
-					<input type="submit" name="komentar_dong" value="Kirim">
-				</form>
 			</div>
-			<div class="row">
-				Tag : satu, dua, tiga
+
+			<div class="secondary">
+				<nav class="site-nav">
+					<section class="main">
+						<ul class="main-links">
+							<li class="dashboard-link"><a href="dashboard.html">Dashboard</a></li>
+						</ul>
+
+						<div class="search-box">
+							<form action="search.html" method="get" id="searchForm">
+								<input type="search" name="q">
+								<button type="submit">Search</button>
+							</form>
+						</div>
+					</section>
+				</nav>
 			</div>
 		</div>
-		<aside role="edit_todo">
-			<ul>
-				<li>Edit Assignee</li>
-				<li>Edit Deadline</li>
-				<li>Edit Tag</li>
-			</ul>
-		</aside>
 			<footer class="site-footer">
 				Created by Gichie, Kamil, and Alex
 			</footer>

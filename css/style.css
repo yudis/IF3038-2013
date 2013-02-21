@@ -16,14 +16,14 @@ body {
 }
 
 /** Header **/
-.site-header {
+.site-container > header {
 	float: left;
 	width: 100%;
 	padding: 15px 0;
 	color: #999;
 	font-size: 15px;
 }
-.site-header h1 {
+.site-container > header h1 {
 	margin: 0;
 	float: left;
 	font-weight: bold;
@@ -35,14 +35,14 @@ body {
 	border-right: 1px solid #eee;
 	line-height: 2;
 }
-.site-header p {
+.site-container > header p {
 	margin: 0;
 	float: left;
 	font-family: 'Source Sans Pro Light';
 	font-size: inherit;
 	line-height: 2;
 }
-.site-header ul {
+.site-container > header ul {
 	margin: 0;
 }
 
@@ -117,23 +117,23 @@ body {
 	margin-right: 0;
 	padding: 0;
 }
-.task .category {
+.dashboard .task .category {
 	display: none;
 }
-.task p, .task .details div {
+.dashboard .task p, .task .details div {
 	display: inline;
 }
-.task .details {
+.dashboard .task .details {
 	position: absolute;
 	top: 7px;
 	right: 10px;
 	font-size: 16px;
 	color: #999;
 }
-.task .detail-label {
+.dashboard .task .detail-label {
 	display: none;
 }
-.task .details .tags {
+.dashboard .task .details .tags {
 	margin-left: 10px;
 }
 .tag {
@@ -142,6 +142,78 @@ body {
 	background: #ccc;
 	padding: 2px 4px;
 	border-radius: 3px;
+}
+
+/* Task details header */
+.task-details > header h1 {
+	font-size: 22px;
+	line-height: 1;
+	font-weight: normal;
+	margin: 0;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.task-details > header .task-checkbox {
+	width: 20px;
+}
+.task-details > header .task-checkbox input {
+	width: 10px;
+}
+.task-details > section h3 {
+	font-size: 12px;
+	font-weight: normal;
+	text-transform: uppercase;
+	color: #ccc;
+	margin: 0 0 6px;
+}
+.task-details > section.details {
+	width: 50%;
+	padding-left: 20px;
+	float: left;
+}
+.task-details > section.details p {
+	margin: 0 0 6px;
+}
+.task-details > section.details .detail-label {
+	color: #666;
+	width: 5em;
+	display: inline-block;
+}
+.task-details > section.details p.description .detail-label {
+	display: none;
+}
+.task-details > section.attachment {
+	float: left;
+	padding-left: 20px;
+}
+.task-details > section.comments {
+	clear: both;
+	padding-left: 20px;
+	padding-top: 15px;
+}
+.task-details > section.comments article h4 {
+	margin: 0;
+	font-weight: normal;
+	font-size: 1em;
+	float: left;
+}
+.task-details > section.comments article h4:after {
+	content: ':';
+	padding-right: 7px;
+}
+.task-details > section.comments article p {
+	margin: 0 0 6px;
+	color: #666;
+}
+.task-details > section.comments .comment-form {
+	margin-top: 15px;
+}
+.task-details > section.comments .comment-form textarea {
+	padding: 5px;
+	font: inherit;
+	width: 20em;
+	height: 4em;
+	display: block;
 }
 
 /** Responsive design **/
@@ -161,15 +233,15 @@ body {
 		width: 920px;
 		padding: 0 20px;
 	}
-	.site-header h1 {
+	.site-container > header h1 {
 		padding-left: 20px;
 	}
 	.primary {
 		float: left;
 		width: 80%;
-	}
-	.dashboard {
 		background: white;
+	}
+	.primary > div {
 		padding: 19px;
 	}
 	.secondary {
