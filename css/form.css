@@ -1,0 +1,21 @@
+body {
+
+}
+.field {
+	width: 850px;
+	display: block;
+}
+.fieldname {
+	display: block;
+	float: left;
+	width: 160px;
+}
+.fieldholder {
+	float: left;
+	width: 680px;
+}
+.errorMessage {
+	background: #FF0000;
+	float:right;
+	width:500px;
+}

@@ -19,24 +19,6 @@ header, footer, nav, article, aside, section {
 	height: 230px;
 	display: block;
 }
-.field {
-	width: 850px;
-	display: block;
-}
-.fieldname {
-	display: block;
-	float: left;
-	width: 160px;
-}
-.fieldholder {
-	float: left;
-	width: 680px;
-}
-.errorMessage {
-	background: #FF0000;
-	float:right;
-	width:500px;
-}
 #footer {
 	display:block;
 	width: 100%;
