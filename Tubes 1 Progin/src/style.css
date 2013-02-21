@@ -15,24 +15,19 @@ a
 .header
 {
     background: #222222;  
+    width: 100%;
     margin: 0 auto;
     color: white;
-    width: 100%;
 }
 
-.logo
+.search input
 {
-    margin: 10px 10px 10px 10px;   
+    width: 200px;
 }
 
-.search
+.container, .logo
 {
-    margin-right: auto;
-}
-
-.container
-{
-    margin: 0 auto;
+    padding: 0 10em;
 }
 
 .inline
@@ -65,27 +60,36 @@ a
 .button:hover
 {
     background: #aaaaaa;
+    cursor: pointer;
     color: black;
-    cursor: context-menu;
-    
 }
-.button a:hover
+
+.button:hover a
 {
     color: black;
 }
+
 .search
 {
     float: right;
 }
 
-.newspaper
-{
-    -moz-column-rule:3px outset #ff00ff; /* Firefox */
-    -webkit-column-rule:3px outset #ff00ff; /* Safari and Chrome */
-    column-rule:3px outset #ff00ff;
-}
-
 .form
 {
     margin: 0 auto;
+}
+
+.newline
+{
+    padding: 1em 0em 0em 0em;
+}
+
+.row
+{
+    padding-right: 10em;
+}
+
+input, textarea
+{
+    width: 300px;
 }

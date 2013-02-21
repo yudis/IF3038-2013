@@ -11,8 +11,54 @@
         <script type="text/javascript" src="taskdetailController.js"></script>
     </head>
     <body>
-        <div>
-            
+        <div class="container inline">
+            <div class="form inline">
+                <div class="newline">
+                    <span class="row">
+                        Task name:
+                    </span>
+                    <div>
+                        <input name="taskname" type="text" />
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Attachment:
+                    </span>
+                    <div>
+                        <input name="attachment" type="file" accept="audio/*,video/*,image/*,MIME_type" />                        
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Deadline:
+                    </span>
+                    <div>
+                        <input type="date" />
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Assignee:
+                    </span>
+                    <div>
+                        <input name="assignee" type="text" />
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Tag:
+                    </span>
+                    <div>
+                        <input name="tag" type="text" />
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="button" onclick="doCreatingTask()">
+                        Submit
+                    </span>
+                </div>
+            </div>
         </div>
     </body>
 </html>

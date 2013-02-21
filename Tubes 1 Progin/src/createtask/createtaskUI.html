@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Task</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="icon" type="image/png" href="../../images/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <script type="text/javascript" src="../mpquery.js"></script>
+        <script type="text/javascript" src="../header.js"></script>
+        <script type="text/javascript" src="createtaskController.js"></script>
+    </head>
+    <body>
+        <div class="container inline">
+            <div class="form inline">
+                <div class="newline">
+                    <span class="row">
+                        Task name:
+                    </span>
+                    <div>
+                        <input name="taskname" type="text" />
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Attachment:
+                    </span>
+                    <div>
+                        <input name="attachment" type="file" accept="audio/*,video/*,image/*,MIME_type" />                        
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Deadline:
+                    </span>
+                    <div>
+                        <input name="deadline" type="date" />
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Assignee:
+                    </span>
+                    <div>
+                        <input name="assignee" type="text" />
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Tag:
+                    </span>
+                    <div>
+                        <input name="tag" type="text" />
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="button" onclick="doCreatingTask()">
+                        Submit
+                    </span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

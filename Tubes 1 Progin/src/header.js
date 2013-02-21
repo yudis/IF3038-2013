@@ -5,41 +5,43 @@ function createHeader()
         <div class=\"header inline\">\n\
             <div class=\"inline\" name=\"logo\">\n\
                 <div class=\"logo\">\n\
-                <a href=\"../dashboard/dashboardUI.html\">\n\
-                    <img src=\"../../images/logo.png\" alt=\"Home Page\"/>\n\
-                </a>\n\
+                    <a href=\"../dashboard/dashboardUI.html\">\n\
+                        <img src=\"../../images/logo.png\" alt=\"Home Page\"/>\n\
+                    </a>\n\
                 </div>\n\
             </div>\n\
-            <div class=\"row\">\n\
-            </div>\n\
-            <div class=\"inline\" name=\"home\">\n\
-                <div class=\"button\">\n\
-                    <a href=\"../dashboard/dashboardUI.html\">Home</a>\n\
+            <div class=\"container\">\n\
+                <div class=\"newline\">\n\
                 </div>\n\
-            </div>\n\
-            <div class=\"inline\" name=\"profil\">\n\
-                <div class=\"button\">\n\
-                    <a href=\"../profile/profileUI.html\">Profile</a>\n\
+                <div class=\"inline\" name=\"home\">\n\
+                    <div class=\"button\">\n\
+                        <a href=\"../dashboard/dashboardUI.html\">Home</a>\n\
+                    </div>\n\
                 </div>\n\
-            </div>\n\
-            <div class=\"hidden\" name=\"login\">\n\
-                <div class=\"button\" onclick=\"doLogin()\">\n\
-                    Login\n\
+                <div class=\"inline\" name=\"profil\">\n\
+                    <div class=\"button\">\n\
+                        <a href=\"../profile/profileUI.html\">Profile</a>\n\
+                    </div>\n\
                 </div>\n\
-            </div>\n\
-            <div class=\"inline\" name=\"logout\">\n\
-                <div class=\"button\" onclick=\"doLogout()\">\n\
-                    Logout\n\
+                <div class=\"hidden\" name=\"login\">\n\
+                    <div class=\"button\" onclick=\"doLogin()\">\n\
+                        Login\n\
+                    </div>\n\
                 </div>\n\
-            </div>\n\
-            <div class=\"inline\" name=\"search\">\n\
-                <div class=\"form search\">\n\
-                    <span class=\"row\">\n\
-                        <input name=\"searchtextbox\" type=\"search\" value=\"search\" />\n\
-                        <span class=\"button\" onclick=\"doSearch()\">\n\
-                            Search\n\
+                <div class=\"inline\" name=\"logout\">\n\
+                    <div class=\"button\" onclick=\"doLogout()\">\n\
+                        Logout\n\
+                    </div>\n\
+                </div>\n\
+                <div class=\"inline\" name=\"search\">\n\
+                    <div class=\"form search\" align=\"right\">\n\
+                        <span class=\"row\">\n\
+                            <input name=\"searchtextbox\" type=\"search\" value=\"search\" />\n\
+                            <span class=\"button\" onclick=\"doSearch()\">\n\
+                                Search\n\
+                            </span>\n\
                         </span>\n\
-                    </span>\n\
+                    </div>\n\
                 </div>\n\
             </div>\n\
         </div>");
