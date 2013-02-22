@@ -43,11 +43,11 @@
 						<pab>Tag</pab>
 					</div>
 					<div id="isi">
-						<pad>:</pad><br/>
-						<pad>:</pad><br/>
-						<pad>:</pad><br/>
-						<pad>:</pad><br/>
-						<pad>:</pad><br/>
+						<pae>Contoh Tugas</pae><br>
+						<pae>help.txt</pae><br>
+						<pae>12</pae><br>
+						<pae>Arie</pae><br>
+						<pae>example</pae><br>
 					</div>
 				</div>
 				<div id="editing">
@@ -59,8 +59,8 @@
 						<pab>Tag</pab>
 					</div>
 					<div id="isi">
-						<pae>:</pae>
-						<pae>:</pae>
+						<pae>Contoh Tugas</pae><br>
+						<pae>help.txt</pae><br>
 						<pae><select id="tanggal">
 							<option value = "1">1</option>
 							<option value = "2">2</option>
@@ -119,16 +119,16 @@
 								<option value = "2020">2020</option>
 								<option value = "2021">2021</option>
 								<option value = "2022">2022</option>
-							</select></pae>
-						<pae><input type="text" id="asignee" size="25"></pae>
-						<pae><input type="text" id="tag" size="25"></pae>
+							</select></pae><br>
+						<pae><input type="text" id="asignee" size="25"></pae><br>
+						<pae><input type="text" id="tag" size="25"></pae><br>
 					</div>
 				</div>
 				<div id="tombol_edit">
-					<input type="button" value="Edit Task" onclick="display('editing','done_edit')">
+					<input type="button" id="edit_button" value="Edit Task" onclick="display('editing','done_edit')">
 				</div>
 				<div id="done_edit">
-					<input type="button" value="Done Editing" onclick="display('edited','tombol_edit');">
+					<input type="button" id="done_button" value="Done Editing" onclick="display('edited','tombol_edit');">
 				</div>
 				<div id="comment">
 					<div id="komentar">
@@ -140,12 +140,12 @@
 					<div id="tuliskomen">
 						<form>
 							<pag><b>
-								Fadhil
+								Dummies
 							</pag></b>
 							<br>
-							<pag>
+							<pah>
 								Tes Komentar
-							</pag>
+							</pah>
 							<p>
 								<textarea id="areatulis" rows="4" cols="34" placeholder="Tulis komentar anda"></textarea>
 							</p>
