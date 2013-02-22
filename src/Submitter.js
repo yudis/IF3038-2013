@@ -104,3 +104,66 @@ function submitCategory() {
         self.close();
 	}
 }
+
+function editTask(code){
+	if (document.getElementById("edit1").innerHTML != ""){
+		document.getElementById("edit1").innerHTML = "";
+	}else if(document.getElementById("edit2").innerHTML != ""){
+		document.getElementById("edit2").innerHTML = "";
+	}else if(document.getElementById("edit3").innerHTML != ""){
+		document.getElementById("edit3").innerHTML = "";
+	}else if(document.getElementById("edit4").innerHTML != ""){
+		document.getElementById("edit4").innerHTML = "";
+	}else if(document.getElementById("edit5").innerHTML != ""){
+		document.getElementById("edit5").innerHTML = "";
+	}else if(code == 'openedit1'){
+		var form ="Tanggal Deadline : <input type=\"text\"><br />";
+		form +=   "Tag &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;: <input type=\"text\"><br />";
+		document.getElementById("edit1").innerHTML = form;
+	}else if(code == 'openedit2'){
+		var form ="Tanggal Deadline : <input type=\"text\"><br />";
+		form +=   "Tag &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;: <input type=\"text\"><br />";
+		document.getElementById("edit2").innerHTML = form;
+	}else if(code == 'openedit3'){
+		var form ="Tanggal Deadline : <input type=\"text\"><br />";
+		form +=   "Tag &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;: <input type=\"text\"><br />";
+		document.getElementById("edit3").innerHTML = form;
+	}else if(code == 'openedit4'){
+		var form ="Tanggal Deadline : <input type=\"text\"><br />";
+		form +=   "Tag &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;: <input type=\"text\"><br />";
+		document.getElementById("edit4").innerHTML = form;
+	}else if(code == 'openedit5'){
+		var form ="Tanggal Deadline : <input type=\"text\"><br />";
+		form +=   "Tag &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;: <input type=\"text\"><br />";
+		document.getElementById("edit5").innerHTML = form;
+	}
+}
+
+function addAssignee(code){	
+	if (document.getElementById("adassignee1").innerHTML != ""){
+		document.getElementById("adassignee1").innerHTML = "";
+	}else if(document.getElementById("adassignee2").innerHTML != ""){
+		document.getElementById("adassignee2").innerHTML = "";
+	}else if(document.getElementById("adassignee3").innerHTML != ""){
+		document.getElementById("adassignee3").innerHTML = "";
+	}else if(document.getElementById("adassignee4").innerHTML != ""){
+		document.getElementById("adassignee4").innerHTML = "";
+	}else if(document.getElementById("adassignee5").innerHTML != ""){
+		document.getElementById("adassignee5").innerHTML = "";
+	}else if(code == '1'){
+		var form ="Assignee : <input type=\"text\">";
+		document.getElementById("adassignee1").innerHTML = form;
+	}else if(code == '2'){
+		var form ="Assignee : <input type=\"text\">";
+		document.getElementById("adassignee2").innerHTML = form;
+	}else if(code == '3'){
+		var form ="Assignee : <input type=\"text\">";
+		document.getElementById("adassignee3").innerHTML = form;
+	}else if(code == '4'){
+		var form ="Assignee : <input type=\"text\">";
+		document.getElementById("adassignee4").innerHTML = form;
+	}else if(code == '5'){
+		var form ="Assignee : <input type=\"text\">";
+		document.getElementById("adassignee5").innerHTML = form;
+	}
+}

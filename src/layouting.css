@@ -7,22 +7,6 @@ body{
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
-img {
-	vertical-align: bottom;
-}
-
-a:visited{
-	text-decoration:none;
-}
-a:hover{
-	text-decoration:none;
-}
-a:link{
-	text-decoration:none;
-}
-a:active{
-	text-decoration:none;
-}
 #wrapper {
     height: auto !important;
     min-height: 100%;
@@ -128,7 +112,18 @@ h2{
 	text-align:center;
 	padding-bottom: 50px;
 }
-
+#menu a:link{
+	text-decoration:none;	
+}
+#menu a:hover{
+	text-decoration:none;	
+}
+#menu a:active{
+	text-decoration:none;	
+}
+#menu a:visited{
+	text-decoration:none;	
+}
 #footer {
 	position: absolute;
 	margin-top: 745px;
@@ -161,7 +156,7 @@ h2{
 .attribute{
 	margin-left: 30px;
 	color:#007;
-	text-align: left;
+	text-align: left;	
 	vertical-align: text-bottom;
 	font-family:Arial, Helvetica, sans-serif;
 	font-weight:bolder;
