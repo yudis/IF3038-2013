@@ -73,11 +73,11 @@ function ValidateFileType() {
         var videoHint = document.getElementById('video_detected');
         var fileHint = document.getElementById('file_detected');
         if (image_valid_extensions.test(id_value)) {
-            imageHint.style.display = "box";
+            imageHint.style.display = "inline";
         } else if (video_valid_extensions.test(id_value)) {
-            videoHint.style.display = "box";
+            videoHint.style.display = "inline";
         } else {
-            fileHint.style.display = "box";
+            fileHint.style.display = "inline";
         }
     }
 }
