@@ -1,4 +1,4 @@
-html {width:100%; height:100%; overflow-x:hidden; font-family:Segoe UI light;}
+html {width:100%; height:100%; overflow-x:hidden; font-family:Segoe UI; font-weight: lighter;}
 body {width:100%; height:300px; display:block; margin:0px;background-image:url('../img/bg.jpg');}
 
 /* HEADER SECTION 
