@@ -110,37 +110,37 @@ function editDate(code){
 	switch(code) {
 		case('1') :
 			if (document.getElementById('editdate1').value != "OK"){
-				document.getElementById('editdate1').value == "OK";
+				document.getElementById('editdate1').value = "OK";
 				document.getElementById("deadline1").innerHTML = "Tanggal Penyelesaian : <select name='taskDay' id='taskDay1'></select><select name='taskMonth' id='taskMonth1'></select><select name='taskYear' id='taskYear1'></select>";
 				initDateOfTask();
 			}
 			else {
 				var tanggal = document.getElementById('taskDay1').value + ' ' + document.getElementById('taskMonth1').value + ' ' + document.getElementById('taskYear1').value;
-				document.getElementById('editdate1').value == "Ubah";
+				document.getElementById('editdate1').value = "Ubah";
 				document.getElementById("deadline1").innerHTML = "Tanggal Penyelesaian : " + tanggal;
 			}
 			break;
 		case('2') :
 			if (document.getElementById('editdate2').value != "OK"){
-				document.getElementById('editdate2').value == "OK";
+				document.getElementById('editdate2').value = "OK";
 				document.getElementById("deadline2").innerHTML = "Tanggal Penyelesaian : <select name='taskDay' id='taskDay2'></select><select name='taskMonth' id='taskMonth2'></select><select name='taskYear' id='taskYear2'></select>";
 				initDateOfTask();
 			}
 			else {
 				var tanggal = document.getElementById('taskDay2').value + ' ' + document.getElementById('taskMonth2').value + ' ' + document.getElementById('taskYear2').value;
-				document.getElementById('editdate2').value == "Ubah";
+				document.getElementById('editdate2').value = "Ubah";
 				document.getElementById("deadline2").innerHTML = "Tanggal Penyelesaian : " + tanggal;
 			}
 			break;
 		case('3') :
 			if (document.getElementById('editdate3').value != "OK"){
-				document.getElementById('editdate3').value == "OK";
+				document.getElementById('editdate3').value = "OK";
 				document.getElementById("deadline3").innerHTML = "Tanggal Penyelesaian : <select name='taskDay' id='taskDay3'></select><select name='taskMonth' id='taskMonth3'></select><select name='taskYear' id='taskYear3'></select>";
 				initDateOfTask();
 			}
 			else {
 				var tanggal = document.getElementById('taskDay3').value + ' ' + document.getElementById('taskMonth3').value + ' ' + document.getElementById('taskYear3').value;
-				document.getElementById('editdate3').value == "Ubah";
+				document.getElementById('editdate3').value = "Ubah";
 				document.getElementById("deadline3").innerHTML = "Tanggal Penyelesaian : " + tanggal;
 			}
 			break;
@@ -152,19 +152,19 @@ function editDate(code){
 			}
 			else {
 				var tanggal = document.getElementById('taskDay4').value + ' ' + document.getElementById('taskMonth4').value + ' ' + document.getElementById('taskYear4').value;
-				document.getElementById('editdate4').value == "Ubah";
+				document.getElementById('editdate4').value = "Ubah";
 				document.getElementById("deadline4").innerHTML = "Tanggal Penyelesaian : " + tanggal;
 			}
 			break;
 		case('5') :
 			if (document.getElementById('editdate5').value != "OK"){
-				document.getElementById('editdate5').value == "OK";
+				document.getElementById('editdate5').value = "OK";
 				document.getElementById("deadline5").innerHTML = "Tanggal Penyelesaian : <select name='taskDay' id='taskDay5'></select><select name='taskMonth' id='taskMonth5'></select><select name='taskYear' id='taskYear5'></select>";
 				initDateOfTask();
 			}
 			else {
 				var tanggal = document.getElementById('taskDay5').value + ' ' + document.getElementById('taskMonth5').value + ' ' + document.getElementById('taskYear5').value;
-				document.getElementById('editdate5').value == "Ubah";
+				document.getElementById('editdate5').value = "Ubah";
 				document.getElementById("deadline5").innerHTML = "Tanggal Penyelesaian : " + tanggal;
 			}
 			break;
