@@ -144,6 +144,18 @@ function validateEmail() {
     changeRegister();
 }
 
+function validateLogin() 
+{
+	var xUsername=document.forms["login"]["uname"].value;
+	var xPassword=document.forms["login"]["pwd"].value;
+	if (xUsername == "admin" && xPassword == "adminpwd") {
+		return true;
+	} else {
+		alert("Username and password combination doesn't match or couldn't be found");
+		return false;
+	}
+}
+
 function validateForm()
 {
     var xUsername=document.forms["registration"]["uname"].value;
@@ -200,7 +212,6 @@ function validateForm()
     //	alert(date);
     //	return false;
     //}
-    alert("ROARRRRRRRRRRR");
     var xAvatar=document.forms["registration"]["ava"].value;
     var str1=/\.jpg/g;
     var str2=/\.jpeg/g;
