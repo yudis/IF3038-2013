@@ -45,14 +45,14 @@ bajuri.prototype = {
 				this.nodes.push(node);
 			}
 		}
-		else if (m = selector.match(/^#(.*)$/)) {
-			this.nodes.push(document.getElementById(m[1]));
-		}
-		else if (document.querySelectorAll) {
+		else if (document.querySelectorAll && typeof selector == 'string') {
 			n = document.querySelectorAll(selector);
 			for (i = 0; i < n.length; i++) {
 				this.nodes.push(n.item(i));
 			}
+		}
+		else if (m = selector.match(/^#(.*)$/)) {
+			this.nodes.push(document.getElementById(m[1]));
 		}
 		else if (m = selector.match(/^([a-zA-Z\-]*)(?:.([a-zA-Z_\-]+)|)?$/)) {
 			tagName = m[1] ? m[1] : '*';

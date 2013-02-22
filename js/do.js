@@ -48,7 +48,19 @@ Rp(function() {
 			window.location.href = 'dashboard.html';
 		else
 			alert('Invalid username/password combination.');
-	})
+	});
+
+	Rp('#editTaskLink').on('click', function(e) {
+		e.preventDefault();
+		mel = Rp('.task-details').first();
+
+		if (mel.hasClass('editing')) {
+			Rp('#editTaskLink').node[0].innerHTML = 'Edit Task';
+		}
+		else {
+			Rp('#editTaskLink').node[0].innerHTML = 'Save';
+		}
+	});
 
 	
 });

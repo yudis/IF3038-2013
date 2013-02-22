@@ -195,6 +195,9 @@ button:active {
 	border-right: 1px solid #eee;
 	line-height: 2;
 }
+.site-container > header h1 a {
+	color: #000;
+}
 .site-container > header p {
 	margin: 0;
 	float: left;
@@ -293,9 +296,10 @@ button:active {
 	display: none;
 }
 .task {
-	padding: 7px 0;
+	padding: 7px 0 7px 10px;
 	position: relative;
 	margin-bottom: 5px;
+	margin-left: -10px;
 	border-radius: 2px;
 }
 .task:hover {
@@ -311,7 +315,7 @@ button:active {
 	vertical-align: middle;
 	display: block;
 	float: left;
-	width: 2em;
+	width: 20px;
 	text-align: left;
 }
 .task-checkbox input {
@@ -373,7 +377,7 @@ task .category {
 .task-details section.details p {
 	margin: 0 0 6px;
 }
-.task-details .edit-task {
+.task-details #edit-task {
 	display: none;
 	width: 400px;
 	padding-left: 20px;
