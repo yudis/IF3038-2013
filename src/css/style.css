@@ -55,6 +55,7 @@ a.button_link
 	background-image: -ms-linear-gradient(top,#4d90fe,#4787ed);
 	background-image: -o-linear-gradient(top,#4d90fe,#4787ed);
 	background-image: linear-gradient(to bottom,#4d90fe,#4787ed);
+	margin: 10px;
 }
 a.button_link:hover
 {
