@@ -4,81 +4,96 @@
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="Dashboard.css"/>
-		
-		<script>
-			$(document).ready(function() {
-				$("#done_edit_button").hide();
-			});
-			
-		
-		</script>
+
+        <script>
+            $(document).ready(function() {
+                $("#done_edit_button").hide();
+
+            });
+
+        </script>
     </head>
     <body>
         <div id="page">
             <!-- =============== H E A D E R =============== -->
-            
-                
+                <a id="logoimage" href="Dashboard.html">
+                    <img id="logo" src="Images/logo.png"/>
+                </a>
 
-			   <div class="menubar">
-					<a href="Dashboard.html">
-						
-					</a>
-                    <ul>
-						<li id="logoimage">
-							<a href="Dashboard.html">
-                                <img id="logo" src="Images/Date.png"/>
-                            </a>
-						</li>
-                        <li>
-                            <a href="Dashboard.html">
-                                Dashboard
-                            </a>
-                        </li>
+        <div class="menubar">
+            <ul>
 
-                        <li>
-                            <a href="Profile.html">
-                                Profile
-                            </a>
-                        </li>
+                <li>
+                    <a href="Dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
 
-                        <li>
-                            <a href="MainPage.html">
-                                Logout
-                            </a>
-                        </li>
+                <li>
+                    <a href="Profile.html">
+                        Profile
+                    </a>
+                </li>
 
-                        <li>
-                            <input type="search" id="search_box"
-                                   placeholder="Search Task"
-                                   autocomplete="on"/>
-                        </li>
-                    </ul>
-                </div>
-            <!--=============== S I D E B A R ===============--> 
+                <li>
+                    <a href="MainPage.html">
+                        Logout
+                    </a>
+                </li>
+
+                <li>
+                    <input type="search" id="search_box"
+                           placeholder="Search Task"
+                           autocomplete="on"/>
+                </li>
+            </ul>
+        </div>
+
+        <!--=============== S I D E B A R ===============--> 
+        <div class="content">
             <div class="sidebar">
                 <h2>Categories</h2>
                 <ul>
                     <li>
-                        <a href="#allTask" class="task_existing_category">
+                        <a href="#allTask" class="task_existing_category"
+                           onclick="HideAllIDs();
+                showdiv('task_set_1');
+                showdiv('task_set_2');
+                showdiv('task_set_3');">
                             All
                         </a>
                     </li>
 
                     <li>
-                        <a href="#taskCategory1" class="task_existing_category">
+                        <a href="#taskCategory1" class="task_existing_category"
+                           onclick="HideAllIDs();
+                showdiv('task_set_1');
+                showdiv('add_task_div');">
                             Personal
                         </a>
                     </li>
 
                     <li>
-                        <a href="#taskCategory2" class="task_existing_category">
+                        <a href="#taskCategory2" class="task_existing_category"
+                           onclick="HideAllIDs();
+                showdiv('task_set_2');
+                showdiv('add_task_div');">
                             Household
                         </a>
                     </li>
 
                     <li>
-                        <a href="#taskCategory3" class="task_existing_category">
+                        <a href="#taskCategory3" class="task_existing_category"
+                           onclick="HideAllIDs();
+                showdiv('task_set_3');
+                showdiv('add_task_div');">
                             College
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#taskCategory4" class="task_existing_category">
+                            New Category
                         </a>
                     </li>
 
@@ -87,98 +102,36 @@
                     </li>
                 </ul>
             </div>
-        </div>
 
-        <!--=============== N E W   C A T E G O R Y ===============--> 
-<<<<<<< HEAD
-        <div class="popup" id="new_category">
-            <a href="#close" title="Close" class="close_popup">X</a>
-            <h2>Add New Category</h2>
-            <form class="allform" id="new_category_form" action="">
-=======
-        <!--<a href="#x" class="overlay" id="new_category_form"></a>
-        <div class="popup" id="new_category_popup">
-            <h2>add CATEGORY</h2>
-            <form>
-                <label for="category_name">Name:</label>
-                <input type="text" id="category_name" required/>
-                <input type="submit" onclick="AddNewCategory();"/>
-            </form>
-            <a class="close_popup" href="#close"></a>
-        </div> -->
-
-        <!--=============== T A S K   L I S T ===============--> 
-        <div class="content">
+            <!--=============== T A S K   L I S T ===============--> 
             <div class="task_list">
->>>>>>> f3de6e1c9aa162c283bb4cf1df07b1e897a8d8ae
-                <ul>
-                    <li>
-                        <label class="all_label">
-                            Category Name:
-                        </label>
-                        <input type="text" required/>
-                    </li>
-                    <li>
-                        <label class="all_label">
-                            Authorized Users:
-                        </label>
-                        <input type="text" required/>
-                    </li>
-                    <li>
-                        <input type="submit" class="submit"/>
-                    </li>
-                </ul>
-            </form>
-        </div>
-
-        <!--=============== T A S K   L I S T ===============--> 
-        <div class="content">
-            <div class="task_list">
-                <div id="task_1">
+                <div id="task_set_1">
                     <h3>Personal</h3>
                     <ul>
                         <li>
                             <a href="#task1">Task 1</a>
                         </li>
+                    </ul>
+                </div>
+
+                <div id="task_set_2">
+                    <h3>Household</h3>
+                    <ul>
                         <li>
                             <a href="#task2">Task 2</a>
                         </li>
+                    </ul>
+                </div>
+
+                <div id="task_set_3">
+                    <h3>College</h3>
+                    <ul>
                         <li>
                             <a href="#task3">Task 3</a>
                         </li>
                     </ul>
                 </div>
-                
-                <div id="task_2">
-                    <h3>Household</h3>
-                    <ul>
-                        <li>
-                            <a href="#task4">Task 4</a>
-                        </li>
-                        <li>
-                            <a href="#task5">Task 5</a>
-                        </li>
-                        <li>
-                            <a href="#task6">Task 6</a>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div id="task_3">
-                    <h3>College</h3>
-                    <ul>
-                        <li>
-                            <a href="#task1">Task 7</a>
-                        </li>
-                        <li>
-                            <a href="#task2">Task 8</a>
-                        </li>
-                        <li>
-                            <a href="#task3">Task 9</a>
-                        </li>
-                    </ul>
-                </div>
-                
+
                 <div id="add_task_div">
                     <a class="add_button" href="#new_category">+</a>
                 </div>
@@ -241,114 +194,128 @@
                                 College
                             </label>
                         </li>
-
                     </ul>
                 </form>
-							<div id="edit_task_button" class="show">
-                            <input type="button"
-                                   value="Edit"
-                                   onclick="EditTaskDetail();"/>
-							</div>
+                <div id="edit_task_button" class="show">
+                    <input type="button"
+                           value="Edit"
+                           onclick="EditTaskDetail();"/>
+                </div>
 
-
-							<div id="done_edit_button" class="hide">
-                            <input type="submit"
-                                   class="submit"
-                                   value="Done"
-<<<<<<< HEAD
-                                   onblur="DoneEditDetail();"/>
-                        </li>
-                    </ul>
-                </form>
-                
-                <form>
-                    
-                </form>
+                <div id="done_edit_button" class="hide">
+                    <input type="submit"
+                           class="submit"
+                           value="Done"
+                           onblur="DoneEditDetail();"/>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <!-- =============== N E W   T A S K =============== -->
-            <div class="new_task">
-                <form class="allform"
-=======
-                                   onclick="DoneEditDetail();"/>
-							</div>
-            </div>
+    <!--=============== N E W   T A S K ===============--> 
+    <div class="popup" id="new_task_popup">
+        <div>
+            <a href="#close" title="Close" class="close_popup">X</a>
+            <h2>Add New Task</h2>
+            <form class="new_task_form"
+                  action=""
+                  method="post"
+                  name="new_task_form"
+                  enctype="multipart/form-data">
+                <ul>
+                    <li>
+                        <label class="all_label" for="task_name">
+                            Task Name:
+                        </label>
+                        <input type="text"
+                               id="task_name"
+                               name="task_name"
+                               placeholder="New Task"
+                               pattern="[A-Za-z0-9]{1,}"
+                               maxlength=25
+                               required/>
+                    </li>
 
-            <!-- =============== N E W   T A S K =============== -->
-            <!--<div class="new_task">
-                <form class="new_task_form"
->>>>>>> f3de6e1c9aa162c283bb4cf1df07b1e897a8d8ae
-                      action=""
-                      method="post"
-                      name="new_task_form"
-                      enctype="multipart/form-data">
-                    <ul>
-                        <li>
-                            <label class="all_label" for="task_name">
-                                Task Name:
-                            </label>
-                            <input type="text"
-                                   id="task_name"
-                                   name="task_name"
-                                   placeholder="New Task"
-                                   pattern="[A-Za-z0-9]{1,}"
-                                   maxlength=25
-                                   required/>
-                        </li>
+                    <li>
+                        <label class="all_label" for="attachment">
+                            Attachment:
+                        </label>
+                        <input type="file"
+                               id="attachment"
+                               name="attachment"
+                               onsubmit="ValidateFileType();"/>
+                        <span class="form_hint" id="image_detected">Detected an image file</span>
+                        <span class="form_hint" id="video_detected">Detected a video file</span>
+                        <span class="form_hint" id="file_detected">Detected a common file format</span>
+                    </li>
 
-                        <li>
-                            <label class="all_label" for="attachment">
-                                Attachment:
-                            </label>
-                            <input type="file"
-                                   id="attachment"
-                                   name="attachment"
-                                   onsubmit="ValidateFileType();"/>
-                            <span class="form_hint" id="image_detected">Detected an image file</span>
-                            <span class="form_hint" id="video_detected">Detected a video file</span>
-                            <span class="form_hint" id="file_detected">Detected a common file format</span>
-                        </li>
+                    <li>
+                        <label class="all_label" for="deadline">
+                            Deadline:
+                        </label>
+                        <input id="deadline"
+                               type="text"
+                               placeholder="22-Feb-2013"
+                               required/>
+                    </li>
 
-                        <li>
-                            <label class="all_label" for="deadline">
-                                Deadline:
-                            </label>
-                            <input id="deadline"
-                                   type="text"
-                                   placeholder="22-Feb-2013"
-                                   required/>
-                        </li>
+                    <li>
+                        <label class="all_label" for="assignee">
+                            Assignee:
+                        </label>
+                        <input type="text"
+                               id="assignee"
+                               name ="assignee"/>
+                    </li>
 
-                        <li>
-                            <label class="all_label" for="assignee">
-                                Assignee:
-                            </label>
-                            <input type="text"
-                                   id="assignee"
-                                   name ="assignee"/>
-                        </li>
+                    <li>
+                        <label class="all_label" for="tag">
+                            Tag:
+                        </label>
+                        <input type="text"
+                               id="tag"
+                               name="tag"
+                               placeholder="tag1, tag2, tag3"/>
+                        <span class="form_hint">
+                            Separate different tags with comma(,)
+                        </span>
+                    </li>
 
-                        <li>
-                            <label class="all_label" for="tag">
-                                Tag:
-                            </label>
-                            <input type="text"
-                                   id="tag"
-                                   name="tag"
-                                   placeholder="tag1, tag2, tag3"/>
-                            <span class="form_hint">
-                                Separate different tags with comma(,)
-                            </span>
-                        </li>
+                    <li>
+                        <button class="submit" id="submit_new_task" type="submit">Submit From</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
 
-                        <li>
-                            <button class="submit" id="submit_new_task" type="submit">Submit From</button>
-                        </li>
-                    </ul>
-                </form>
-            </div>
-        </div>-->
+    <!--=============== N E W   C A T E G O R Y ===============--> 
+    <div class="popup" id="new_category">
+        <div>
+            <a href="#close" title="Close" class="close_popup">X</a>
+            <h2>Add New Category</h2>
+            <form class="allforma" id="new_category_form">
+                <ul>
+                    <li>
+                        <label class="all_label" for="new_category_name">
+                            Category Name:
+                        </label>
+                        <input id="new_category_name" type="text" required/>
+                    </li>
+                    <li>
+                        <label class="all_label"  for="authorized_users">
+                            Authorized Users:
+                        </label>
+                        <input type="text" required/>
+                    </li>
+                    <li>
+                        <input id="authorized_users" type="submit" class="submit"/>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
 
-        <script type="text/javascript" src="Dashboard.js"></script>
-    </body>
+    <script type="text/javascript" src="Dashboard.js"></script>
+</body>
 </html>
