@@ -37,14 +37,14 @@
 			#wrapper-main
 			{
 				width: 840px;
-				height: 760px;
+				height: 720px;
 				padding: 40px;
 				border: 3px groove;
 				border-radius: 10px;
 				-moz-border-radius: 10px;
 				-webkit-border-radius: 10px;
 			}
-			#edit
+			#edit, #commentbutton
 			{
 				font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 				font-size: 14px;
@@ -52,7 +52,78 @@
 				width: 100px;
 				border: 4px inset;
 				border-radius: 4px;
-				border-color: #93F;
+				border-color: #FC3;
+				
+				background-image: linear-gradient(bottom, rgb(255,238,153) 12%, rgb(232,203,14) 56%);
+				background-image: -o-linear-gradient(bottom, rgb(255,238,153) 12%, rgb(232,203,14) 56%);
+				background-image: -moz-linear-gradient(bottom, rgb(255,238,153) 12%, rgb(232,203,14) 56%);
+				background-image: -webkit-linear-gradient(bottom, rgb(255,238,153) 12%, rgb(232,203,14) 56%);
+				background-image: -ms-linear-gradient(bottom, rgb(255,238,153) 12%, rgb(232,203,14) 56%);
+				
+				background-image: -webkit-gradient(
+					linear,
+					left bottom,
+					left top,
+					color-stop(0.12, rgb(255,238,153)),
+					color-stop(0.56, rgb(232,203,14))
+				);
+			}
+			
+			#edit:hover, #commentbutton:hover
+			{
+				background-image: linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
+				background-image: -o-linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
+				background-image: -moz-linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
+				background-image: -webkit-linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
+				background-image: -ms-linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
+				
+				background-image: -webkit-gradient(
+					linear,
+					left bottom,
+					left top,
+					color-stop(0.12, rgb(232,203,14)),
+					color-stop(0.56, rgb(255,238,153))
+				);
+			}
+			
+			#commentbox
+			{
+				margin-top:20px;
+				min-width: 300px;
+				max-width: 400px
+				width: 400px
+				height: 250px;
+				min-height: 200px;
+				max-height: 300px;
+				border: 5px ridge;
+				background-color:#FF9;
+				font-family:Verdana, Geneva, sans-serif;
+				padding:10px;
+				
+				box-shadow: 5px 5px 20px 5px #333333;
+				
+				background-image: linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
+				background-image: -o-linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
+				background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
+				background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
+				background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
+				
+				background-image: -webkit-gradient(
+					linear,
+					left bottom,
+					left top,
+					color-stop(0.12, rgb(255,255,255)),
+					color-stop(0.56, rgb(241,255,186))
+				);
+			}
+			#commentfield
+			{
+				margin-top:20px;
+			}
+			#commentbutton
+			{
+				min-height:30px;
+				min-width: 100px;
 			}
 			
 			.label
@@ -73,29 +144,7 @@
         
         <link rel="stylesheet" style="text/css" href="style.css">
         
-        <script	type="text/javascript">
-			function editTask()
-			{
-				if (document.getElementById("edit").value == "Edit")
-				{
-					document.getElementById("tugas").disabled = false;
-					document.getElementById("attach").disabled = false;
-					document.getElementById("deadline").disabled = false;
-					document.getElementById("assignee").disabled = false;
-					document.getElementById("tag").disabled = false;
-					document.getElementById("edit").value = "Finished";
-				}
-				else if (document.getElementById("edit").value == "Finished")
-				{
-					document.getElementById("tugas").disabled = true;
-					document.getElementById("attach").disabled = true;
-					document.getElementById("deadline").disabled = true;
-					document.getElementById("assignee").disabled = true;
-					document.getElementById("tag").disabled = true;
-					document.getElementById("edit").value = "Edit";
-				}
-			}
-		</script>
+        
     </head>
 
     <body >
@@ -126,10 +175,60 @@
                     <div class="label">Assignee</div> <input id="assignee" class="textfields" type="text" size="50" autocomplete="on" disabled/> <br/>   
                     <div class="label">Tag</div> <input id="tag" class="textfields" type="text" size="50" disabled/> <br/>
                     <br/>
-                    <input id="edit" name="edit" value="Edit" type="button" onClick="editTask()">
-                    <div style="clear:both"></div>           
+                    <input id="edit" name="edit" value="Edit" type="button" onClick="editTask()"/>
+                    <div style="clear:both"></div>  
+                    <br/>
+                    <div id="comment">
+            			<textarea id="commentbox" name="commentbox" cols="100" rows="20" disabled></textarea>
+                        <form id="commentform">
+                        	<input id="commentfield" class="textfields" name="commentfield" type="text" size="50"/> 
+                            <input id="commentbutton" name="commentbutton" type="submit" value="Comment"/>
+                        </form>
+            		</div>         
                 </div>
             </div>
         </div>
+        
+        <script	type="text/javascript">
+			var temp = document.getElementById("commentform");
+			temp.onsubmit = function()
+			{
+				postComment();
+				return false;
+			}
+			
+			function editTask()
+			{
+				if (document.getElementById("edit").value == "Edit")
+				{
+					document.getElementById("tugas").disabled = false;
+					document.getElementById("attach").disabled = false;
+					document.getElementById("deadline").disabled = false;
+					document.getElementById("assignee").disabled = false;
+					document.getElementById("tag").disabled = false;
+					document.getElementById("edit").value = "Finished";
+				}
+				else if (document.getElementById("edit").value == "Finished")
+				{
+					document.getElementById("tugas").disabled = true;
+					document.getElementById("attach").disabled = true;
+					document.getElementById("deadline").disabled = true;
+					document.getElementById("assignee").disabled = true;
+					document.getElementById("tag").disabled = true;
+					document.getElementById("edit").value = "Edit";
+				}
+			}
+			
+			function postComment()
+			{
+				var form = document.getElementById("commentform");
+			
+				var a = document.getElementById("commentbox");
+				var b = document.getElementById("commentfield")
+				a.value += "User: " + b.value + "\n\n";
+				
+				b.value = "";
+			}
+		</script>
     </body>
 </html>
