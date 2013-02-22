@@ -46,3 +46,31 @@ for(var a = fields.length, i = 0; i < a; i ++){
 		});
 	}
 }
+
+function displayResult()
+{
+	var x=document.getElementById("fileupld").name;
+	alert(x);
+}
+
+function CheckFiles()
+{
+	var value = document.getElementById('filename').value.split('.');
+	var lenghtValue = value.length;
+	if(lenghtValue <= 1) alert("file undefined")
+	else {
+		if(value[lenghtValue-1].toLowerCase() == "jpeg"||
+			value[lenghtValue-1].toLowerCase() == "jpg"||
+			value[lenghtValue-1].toLowerCase() == "bmp") alert("file benar");
+		else alert("file salah");
+	}
+}
+
+function playPause()
+{ 
+	var myVideo=document.getElementById("video1"); 
+	if (myVideo.paused) 
+		myVideo.play(); 
+	else 
+		myVideo.pause(); 
+} 
