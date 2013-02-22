@@ -12,7 +12,7 @@ and open the template in the editor.
     </head>
     <body>
         <header>
-            <a href="dashboard.html" title="Home"><img id="logo-small" src="img/Logo_Small.png" alt="" /></a>
+            <a href="dashboard.html" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
             <div id="dashboard"><a title="Go to Dashboard" href="dashboard.html">Dashboard</a></div>
             <div id="profile"><a title="Go to Profile" href="profile.html">My Profile</a></div>
             <div id="logout"><a title="Log out from here" href="index.html">Log Out</a></div>
@@ -67,18 +67,17 @@ and open the template in the editor.
         </div>
         
         <div class="tugas" id="rincitugas">
-                Nama task: Nama Tugas <br/>
+                Name: Nama Tugas <br/>
                 Attachment: 
                     <div class="attachment">
-                        file.zip<br/>
-                        picture.jpg<br/>
-                        video.mp4<br/>
+                        <a href="img/file.zip">file.zip</a><br/>
+                        <a href="img/badge.png">picture.png</a><br/>
                     </div><br/>
                 Deadline: 17-12-2014<br/>
                 Assignee: <a href="" class="asignee">Timo</a>, <a href="" class="asignee">Stefan</a>, <a href="" class="asignee">Frilla</a><br/>
                 Tag: <a href="" class="tag">dangerous</a>, <a href="" class="tag">novice</a> <br/>
-                <br/>Komentar:<br/>
-                <div class="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
+                <br/>Comment:<br/>
+                <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
                 <form>
                     <textArea></textarea>
                     <input type="button" name="submit" value="submit">
@@ -92,17 +91,18 @@ and open the template in the editor.
                 <option value="Stefan" />
                 <option value="Timo" />
                 <option value="Yosef" />
+                <option value="Hasby" />
             </datalist>
         
             <div class="tugas" id ="edittugas">
                 <form>
-                    Nama task: Nama Task<br/>
+                    Name: Nama Task<br/>
                     Attachment: <div class="attachment"><input id="upload" type="file"></div><br/>
-                    Deadline:  <div id='calendar'></div><div class="deadline"><input type="date"></div><br/>
+                    Deadline: <input type="date"><br/>
                     Assignee: <div class="assignee"><input type="text" list="assignee"></div><br/>
                     Tag: <div class="tag"> <input type="text"></div> <br/>
-                    Komentar: <br/>
-                <div class="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
+                    Comment: <br/>
+                <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
                 </form> <br/>
                 <a onclick="showRinci()" class="button">save</a><br/>
             </div>
@@ -113,7 +113,7 @@ and open the template in the editor.
         
             <div class="tugas" id="buattugas">
                 <br/>
-                Nama task: <div class="nama"><input type="text" id="namaTask"></div><br/>
+                Name: <div class="nama"><input type="text" id="namaTask"></div><br/>
                 Attachment: <div class="attachment"><input type="file"></div><br/>
                 Deadline: <div class="deadline"><input type="date"></div><br/>
                 Assignee: <div class="asignee"><input type="text"></div><br/>
