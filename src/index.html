@@ -84,6 +84,29 @@
 				}
 			}
 		</script>
+		<script>
+		function validateLogin() {
+			var flag = 0;
+			var username = document.login.login_email.value;
+			var password = document.login.login_pass.value;
+
+			if (username == "admin" && password == "admin") {
+				window.location="dashboard.html";
+				flag = 1;
+			}
+
+			if (flag == 0) {
+				alert("Invalid login!");
+			}
+		}
+		</script>
+		<script>
+		function checkSubmit(e) {
+		   if (e && e.keyCode == 13) {
+			  validateLogin();
+		   }
+		}
+		</script>
 </head>
 
 <body onload="makeTgl();makeThn();">
@@ -92,15 +115,17 @@
         	<div class=logo id="logo">
 				<a href="home.html"><img src="../images/logo.png" title="Home" alt="Home"/></a>
 			</div>
+			<form name=login>
 			<div class="login_form">
-				<input type="submit" name="submit" value="Login">
+				<input type="button" name="submit" value="Login" onClick="validateLogin()">
 			</div>
 			<div class="login_form">
-				Password: <input type="password" name="login_pass">
+				Password: <input type="password" name="login_pass" onKeyPress="checkSubmit(event)">
 			</div>
 			<div class="login_form">
-				Email: <input type="text" name="login_email">
+				Email: <input type="text" name="login_email" onKeyPress="checkSubmit(event)">
 			</div>
+			</form>
 			
 			
         </div>
