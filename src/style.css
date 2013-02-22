@@ -403,30 +403,3 @@ a,a:visited {
 	font-weight:bold;
 	box-shadow:0 0 10px #FFF;
 }
-
-/*rincian task*/
-#rinciantask {
-/*gimana caranya menjadi min-height*/
-	float:left;
-	height:160%;
-	width:100%;
-	background:#CF0;
-}
-
-/*new task*/
-#newtask {
-/*gimana caranya menjadi min-height*/
-	float:left;
-	height:70%;
-	width:100%;
-	background:#CF0;
-}
-
-/*index*/
-#content {
-/*gimana caranya menjadi min-height*/
-	float:left;
-	height:90%;
-	width:100%;
-	background:#CF0;
-}
