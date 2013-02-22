@@ -3,6 +3,19 @@
   <title>Halaman Daftar</title>
   <link rel="shortcut icon" href="favicon.ico"> 
   <link rel="stylesheet" type="text/css" href="style.css" />
+  
+<script>
+  function validateForm() {
+    var x=document.forms["signup"]["user"].value;
+    var y=document.forms["signup"]["mail"].value;
+    if (x == y) {
+      alert("Kok sama kayak imel?");
+      return false;
+    }
+  }
+</script>
+  
+  
 </head>
 
 <body>
@@ -19,26 +32,39 @@
         
         <!-- Ini untuk SIGN UP -->
         <div id="login" class="form">
-          <form  action="???.php" autocomplete="on"> 
+          <form name="signup" action="???.php" autocomplete="on"> 
             <h1> Sign up </h1> 
             <p> 
-              <label class="uname" data-icon="u">Your username</label>
-              <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
+              <label class="uname" data-icon="u" name="user">Nama Pengguna (min 5 karakter)</label>
+              <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" pattern="^[a-zA-Z0-9]{5,20}$"/>
+            </p>
+             <p> 
+              <label class="youpasswd" data-icon="p" name="pwd"> Sandi Lewat (min 8 karakter)</label>
+              <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="mis. thereisnospoon" pattern="^[a-zA-Z0-9]{8,20}$" />
             </p>
             <p> 
-              <label class="youmail" data-icon="e" > Your email</label>
+              <label class="youpasswd" data-icon="p" name="cpwd">Ulangi Sandi Lewat </label>
+              <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="mis. thereisnospoon"/>
+            </p>
+            <p> 
+              <label class="youmail" data-icon="e" name="mail"> Surat Elektronik </label>
               <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/> 
             </p>
             <p> 
-              <label class="youpasswd" data-icon="p">Your password </label>
-              <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+              <label class="youmail" data-icon="e" name="mail"> Nama Lengkap </label>
+              <input id="emailsignup" name="emailsignup" required="required" type="text" placeholder="mysupermail@mail.com" pattern="^[a-zA-Z0-9]{3,20}\s[a-zA-Z0-9]{3,20}$"/> 
             </p>
+            
             <p> 
-              <label class="youpasswd" data-icon="p">Please confirm your password </label>
-              <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+              <label class="youmail" name="mail"> Avatar </label>
+              <input type="file" name="imagefilename" accept="image/x-png, image/gif, image/jpeg" /> 
             </p>
+
+
+            
+            
             <p class="signin button"> 
-              <input type="submit" value="Sign up"/> 
+              <input type="submit" value="submit"/> 
             </p>
             <p class="change_link">  
             Sudah punya akun?
