@@ -52,6 +52,20 @@ Rp(function() {
 			Rp('#submitButton').attr('disabled', 'disabled');
 		}
 	});
+	Rp('#nama').on('keyup', function() {
+		match = this.value.match(/\W/g);
+		console.log(match);
+		if (match){
+			//error
+			console.log('Invalid');
+			Rp(this).addClass('invalid');
+			Rp('#submitButton').attr('disabled', 'disabled');
+		}else{
+			//valid
+			Rp(this).removeClass('invalid');
+			Rp('#submitButton').removeAttr('disabled');
+		}
+	});
 });
 
 // settings

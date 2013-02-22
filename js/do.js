@@ -35,5 +35,32 @@ Rp(function() {
 		Rp('#login_username').nodes[0].focus();
 	})
 
+	Rp('#loginForm').on('submit', function(e) {
+		validate = function() {
+			u = Rp('#login_username').val();
+			p = Rp('#login_password').val();
+			return u == username && p == password;
+		};
+
+		e.preventDefault();
+
+		if (validate())
+			window.location.href = 'dashboard.html';
+		else
+			alert('Invalid username/password combination.');
+	});
+
+	Rp('#editTaskLink').on('click', function(e) {
+		e.preventDefault();
+		mel = Rp('.task-details').first();
+
+		if (mel.hasClass('editing')) {
+			Rp('#editTaskLink').node[0].innerHTML = 'Edit Task';
+		}
+		else {
+			Rp('#editTaskLink').node[0].innerHTML = 'Save';
+		}
+	});
+
 	
 });
