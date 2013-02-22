@@ -2,6 +2,7 @@
 <html>
 
 <script type="text/javascript">
+var strWindowFeatures = "menubar=no,location=no,resizable=no,scrollbars=no,status=no,height=500,width=500";
 function display(id)
 {
 document.getElementById(id).style.display = "block";
@@ -13,7 +14,7 @@ document.getElementById("task2").style.display = "none";
 document.getElementById("task3").style.display = "none";
 }
 function popitup(url) {
-	newwindow=window.open(url,'name','resizable=0,height=500,width=500,location=no');
+	newwindow=window.open(url,'name',strWindowFeatures);
 	if (window.focus) {newwindow.focus()}
 	return false;
 }
