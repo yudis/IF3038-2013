@@ -2,16 +2,39 @@ root {
     display: block;
 }
 
-/* ================= H E A D E R ================= */
-.header {
-    margin: 0 0 0 0;
+body, html {
+    margin: 0;
+    padding: 0;
+    color: #000;
+    background: #a7a09a;
+}
+
+#page {
+    width: 800px;
+    margin: 0 auto;
+    background: #99c;
+}
+
+/* ================= S I T E   L O G O   &   H E A D E R ================= */
+#header {
+    clear: both;
+    padding: 5px 10px;
+    background: #ddd;
+    float: top;
+}
+
+.site_logo {
+    width: 256px;
+    float: left;
+}
+
+.menubar {
     display: block;
-    width: 100%;
-    overflow: hidden;
+    width: 800px;
     float: right;
 }
 
-.header ul {
+.menubar ul {
     padding: 7px;
     float: left;
     list-style: none;
@@ -25,11 +48,11 @@ root {
     box-shadow: 0 1px 0 rgba(255, 255, 255, .2), 0 2px 1px rgba(0, 0, 0, .8) inset;
 }
 
-.header li {
+.menubar li {
     float: left;
 }
 
-.header a {
+.menubar a {
     float:left;
     padding: .8em 1.5em;
     text-decoration: none;
@@ -49,7 +72,7 @@ root {
     background: linear-gradient(#f5f5f5, #c1c1c1);
 }
 
-.header a:hover, .header a:focus {
+.menubar a:hover, .menubar a:focus {
     outline: 0;
     color: #fff;
     text-shadow: 0 1px 0 rgba(0,0,0,.2);
@@ -64,28 +87,186 @@ root {
     transition: padding .25s;
 }
 
-.header a:active {
+.menubar a:active {
     -moz-box-shadow: 0 0 2px 2px rgba(0,0,0,.3) inset;
     -webkit-box-shadow: 0 0 2px 2px rgba(0,0,0,.3) inset;
     box-shadow: 0 0 2px 2px rgba(0,0,0,.3) inset;
 }
 
-.header li:first-child a {
+.menubar li:first-child a {
     border-left: 0;
     -moz-border-radius: 4px 0 0 4px;
     -webkit-border-radius: 4px 0 0 4px;
     border-radius: 4px 0 0 4px;            
 }
 
-.header li:last-child a {
+.menubar li:last-child a {
     border-right: 0;
     -moz-border-radius: 0 4px 4px 0;
     -webkit-border-radius: 0 4px 4px 0;
-    border-radius: 0 4px 4px 0;            
+    border-radius: 0 4px 4px 0;
+}
+
+#search_box {
+    float: right;
+    margin: 10px 10px 0 10px;
+    height: 20px;
+    width: 200px;
+    background-color: #fff;
+    background-image: url(Images/search.png);
+    background-repeat: no-repeat;
+    background-position: 98%;
+    background-size: 15px 15px;
 }
 
 /* ================= S I D E B A R ================= */
+.sidebar {
+    color: #c3c3c3;
+    font-family: Tahoma, Geneva, sans-serif;
+    background: #eff3f0;
+    border: thin solid #e8ece9;
+    width: 200px;
+    padding: 14px;
+    float: left;
+}
 
+.sidebar ul {
+    padding: 0;
+    margin: 0;
+    margin-left: 33px;
+    float: left;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #c3c3c3;
+}
+
+.sidebar ul li a:hover {
+    color: #e0993e;
+}
+
+/* ================= T A S K   L I S T ================= */
+.task_list {
+    width: 400px;
+    float: left;
+    background: #20911e;
+}
+
+/* ================= T A S K   D E T A I L ================= */
+.task_detail {
+    width: 200px;
+    float: left;
+    background: #b03535;
+}
+
+/* ================= N E W   T A S K ================= */
+/*.overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    bottom: 0;
+    cursor: default;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    visibility: hidden;
+    z-index: 1;
+
+    -webkit-transition: opacity .5s;
+    -moz-transition: opacity .5s;
+    -ms-transition: opacity .5s;
+    -o-transition: opacity .5s;
+    transition: opacity .5s;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    background-color: #fff;
+    border: 3px solid #fff;
+    display: inline-block;
+    left: 50%;
+    opacity: 0;
+    padding: 15px;
+    position: fixed;
+    text-align: justify;
+    top: 40%;
+    visibility: hidden;
+    z-index: 10;
+
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px;
+
+    -webkit-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+    -moz-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+    -ms-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+    -o-box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+    box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
+
+    -webkit-transition: opacity .5s, top .5s;
+    -moz-transition: opacity .5s, top .5s;
+    -ms-transition: opacity .5s, top .5s;
+    -o-transition: opacity .5s, top .5s;
+    transition: opacity .5s, top .5s;
+}
+
+.overlay:target+.popup {
+    top: 50%;
+    opacity: 1;
+    visibility: visible;
+}
+
+.close {
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    text-decoration: none;
+    top: -15px;
+    width: 30px;
+
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.close:before {
+    color: rgba(255, 255, 255, 0.9);
+    content: "X";
+    font-size: 24px;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.9);
+}
+
+.close:hover {
+    background-color: rgba(64, 128, 128, 0.8);
+}
+
+.popup div {
+    margin-bottom: 10px;
+}
+
+.popup label {
+    display: inline-block;
+    text-align: left;
+    width: 120px;
+}*/
 
 /* ================= T A S K   F O R M   S T Y L I N G ================= */
 .new_task_form input, .task_detail_form input, .task_detail_form textarea {
@@ -106,25 +287,25 @@ root {
 }
 
 input:required, textarea:required {
-    background: #fff url(Images/red_asterisk.png) no-repeat 98% center;
+    background-color: #fff;
+    background-image: url(Images/warning.png);
+    background-repeat: no-repeat;
+    background-position: 98%;
+    background-size: 15px 15px;
 }
 
 .new_task_form input:focus:invalid {
-    background: #fff url(Images/invalid.png) no-repeat 98% center;
+    background: #fff url(Images/invalid.png) no-repeat 98%;
+    background-size: 15px 15px;
     box-shadow: 0 0 5px #d45252;
     border-color: #b03535;
 }
 
 .new_task_form input:required:valid {
     background: #fff url(Images/valid.png) no-repeat 98% center;
+    background-size: 15px 15px;
     box-shadow: 0 0 5px #5cd053;
     border-color: #28921f;
-}
-
-
-/* ================= T A S K   D E T A I L ================= */
-#done_edit_button {
-    display: none;
 }
 
 /* ================= F O R M   H I N T ================= */
@@ -186,6 +367,8 @@ button.submit:active {
     -webkit-box-shadow:0 0 10px 5px #356b0b inset ;
 }
 
-#search_box {
-    width: 200px;
+.add_button {
+    border: #999999;
+    padding: 4px 4px 4px 4px;
+    alignment-adjust: central;
 }
