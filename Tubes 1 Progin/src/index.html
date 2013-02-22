@@ -4,7 +4,7 @@
     <head>
         <title>Home Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="icon" type="image/png" href="../images/favicon.ico">
+        <link rel="icon" type="image/png" href="images/favicon.ico">
         <link rel="stylesheet" type="text/css" href="style.css">
         <script type="text/javascript" src="mpquery.js"></script>
         <script type="text/javascript" src="indexController.js"></script>
@@ -16,7 +16,7 @@
             <!--video penjelasan fitur (dummy video)-->
             <div class="row">
                 <video width="320" height="200" controls>
-                    <source src="../videos/tutorial.mp4" type="video/mp4">
+                    <source src="videos/tutorial.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="newline">
@@ -25,7 +25,7 @@
                 </span>
                 <div>
                     <input name="username" type="text" onkeyup="validate(this)"/>
-                    <label class="hidden" name="valid_username" >Valid</label>
+                    <span class="hidden" id="valid_username">Valid</span>
                 </div>
             </div>
             <div class="newline">
@@ -34,7 +34,7 @@
                 </span>
                 <div>
                     <input name="password" type="password" onkeyup="validate(this)" />
-                    <label class="hidden" name="valid_password" >Valid</label>
+                    <span class="hidden" id="valid_password" >Valid</span>
                 </div>
             </div>
             <div class="newline">
@@ -43,7 +43,7 @@
                 </span>
                 <div>                    
                     <input name="confirmpassword" type="password" onkeyup="validate(this)" />
-                    <label class="hidden" name="valid_confirmpassword" >Valid</label>
+                    <span class="hidden" id="valid_confirmpassword" >Valid</span>
                 </div>
             </div>
             <div class="newline">
@@ -52,7 +52,7 @@
                 </span>
                 <div>
                     <input name="fullname" type="text" onkeyup="validate(this)" />
-                    <label class="hidden" name="valid_fullname" >Valid</label>
+                    <span class="hidden" id="valid_fullname" >Valid</span>
                 </div>
             </div>
             <div class="newline">
@@ -60,8 +60,8 @@
                     Date of Birth: 
                 </span>
                 <div>
-                    <input name="dateofbirth" type="date" onkeyup="validate(this)" />
-                    <label class="hidden" name="valid_dateofbirth" >Valid</label>
+                    <input name="dateofbirth" type="date" onchange="validate(this)" />
+                    <span class="hidden" id="valid_dateofbirth" >Valid</span>
                 </div>
             </div>
             <div class="newline">
@@ -70,7 +70,7 @@
                 </span>
                 <div>
                     <input name="email" type="text" onkeyup="validate(this)" />
-                    <label class="hidden" name="valid_email" >Valid</label>
+                    <span class="hidden" id="valid_email" >Valid</span>
                 </div>
             </div>
             <div class="newline">
@@ -79,7 +79,7 @@
                 </span>
                 <div>
                     <input name="mothername" type="text" onkeyup="validate(this)" />
-                    <label class="hidden" name="valid_mothername" >Valid</label>
+                    <span class="hidden" id="valid_mothername" >Valid</span>
                 </div>
             </div>
             <div class="newline">
@@ -87,12 +87,12 @@
                     Avatar:
                 </span>
                 <div>
-                    <input name="avatar" type="file" accept="image/jpg|image/jpeg" onkeyup="validate(this)" />
-                    <label class="hidden" name="valid_avatar" >Valid</label>
+                    <input name="avatar" type="file" accept="image/jpg,image/jpeg" onchange="validate(this)" />
+                    <span class="hidden" id="valid_avatar" >Valid</span>
                 </div>
             </div>
             <div class="newline">
-                <span class="button" onclick="doRegistration()">
+                <span class="button" id="submitbutton" onclick="doRegistration()">
                     Submit
                 </span>
             </div>

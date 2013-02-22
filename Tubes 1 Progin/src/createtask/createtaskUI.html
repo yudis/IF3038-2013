@@ -4,7 +4,7 @@
     <head>
         <title>Create Task</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="icon" type="image/png" href="../../images/favicon.ico">
+        <link rel="icon" type="image/png" href="../images/favicon.ico">
         <link rel="stylesheet" type="text/css" href="../style.css">
         <script type="text/javascript" src="../mpquery.js"></script>
         <script type="text/javascript" src="../header.js"></script>
@@ -12,13 +12,19 @@
     </head>
     <body>
         <div class="container inline">
+            <div class="newline">
+                <span class="row">
+                    Create New Task
+                </span>
+            </div>
             <div class="form inline">
                 <div class="newline">
                     <span class="row">
                         Task name:
                     </span>
                     <div>
-                        <input name="taskname" type="text" />
+                        <input name="taskname" type="text" onkeyup="validate(this)" />
+                        <span class="hidden" id="valid_taskname" >Valid</span>
                     </div>
                 </div>
                 <div class="newline">
@@ -26,7 +32,8 @@
                         Attachment:
                     </span>
                     <div>
-                        <input name="attachment" type="file" accept="audio/*,video/*,image/*,MIME_type" />                        
+                        <input name="attachment" type="file" accept="audio/*,video/*,image/*,MIME_type" onchange="validate(this)" />  
+                        <span class="hidden" id="valid_attachment" >Valid</span>
                     </div>
                 </div>
                 <div class="newline">
@@ -34,7 +41,8 @@
                         Deadline:
                     </span>
                     <div>
-                        <input name="deadline" type="date" />
+                        <input name="deadline" type="date" onchange="validate(this)" />
+                        <span class="hidden" id="valid_deadline" >Valid</span>
                     </div>
                 </div>
                 <div class="newline">
@@ -42,7 +50,8 @@
                         Assignee:
                     </span>
                     <div>
-                        <input name="assignee" type="text" />
+                        <input name="assignee" type="text" onkeyup="validate(this)" />
+                        <span class="hidden" id="valid_assignee" >Valid</span>
                     </div>
                 </div>
                 <div class="newline">
@@ -50,11 +59,12 @@
                         Tag:
                     </span>
                     <div>
-                        <input name="tag" type="text" />
+                        <input name="tag" type="text" onkeyup="validate(this)" />
+                        <span class="hidden" id="valid_tag" >Valid</span>
                     </div>
                 </div>
                 <div class="newline">
-                    <span class="button" onclick="doCreatingTask()">
+                    <span class="button" onclick="doCreatingTask()" >
                         Submit
                     </span>
                 </div>

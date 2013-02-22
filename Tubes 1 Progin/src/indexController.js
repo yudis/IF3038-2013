@@ -1,5 +1,5 @@
 var formdata = new Array("username", "password", "confirmpassword", "fullname", "dateofbirth", "email", "mothername", "avatar");
-var isValid = new Array();
+var isValid = new Array(false,false,false,false,false,false,false,false);
 var usernamevalue;
 var passwordvalue;
 var emailvalue;
@@ -19,7 +19,7 @@ function doValid(index, regexp, value, validElement)
         validstatus = false;
     }
     
-    changeClassName($("name", validElement)[0], new_class);
+    changeClassName($("id", validElement), new_class);
     isValid[index] = validstatus;
 }
 
@@ -39,8 +39,7 @@ function checkPassword(value)
     passwordvalue = value;
     var index = 2;
     var regularExpresion = /^([a-zA-Z0-9]{8,})+$/;
-    doValid(index, regularExpresion, value, "valid_password");
-    
+    doValid(index, regularExpresion, value, "valid_password");    
 }
 
 function checkConfirmPassword(value)
@@ -55,44 +54,58 @@ function checkConfirmPassword(value)
         validstatus = true;
     }
     
-    changeClassName($("name", "valid_confirmpassword")[0], new_status);
+    changeClassName($("id", "valid_confirmpassword"), new_status);
     isValid[index] = validstatus;
 }
 function checkFullName(value)
 {
-    
+    var index = 3;
+    var regularExpresion = /^([a-zA-Z0-9])+ +([a-zA-Z0-9 ])+$/;
+    doValid(index, regularExpresion, value, "valid_fullname");
 }
 
 function checkDateOfBirth(value)
 {
+    var index = 4;
+    var new_class;
+    var validstatus;
+
+    new_class = "inline";
+    validstatus = true;
     
+    changeClassName($("id", "valid_dateofbirth"), new_class);
+    isValid[index] = validstatus;
 }
 
 function checkEmail(value)
 {
-    /*
-    var email = document.getElementById('emailaddress');
-    var filter = /^([a-zA-Z0-9]{1,})+\@(([a-zA-Z0-9]{1,})+\.)+([a-zA-Z0-9]{2,})+$/;
-    if (!filter.test(email.value)) 
+    emailvalue = value;
+    var index = 5;
+    var regularExpresion = /^([a-zA-Z0-9]{1,})+\@(([a-zA-Z0-9]{1,})+\.)+([a-zA-Z0-9]{2,})+$/;
+    if (emailvalue != passwordvalue)
     {
-
-    alert('Please provide a valid email address');
-    email.focus;
-    return false;
+        doValid(index, regularExpresion, value, "valid_email");
     }
-
-    Read more: http://www.marketingtechblog.com/javascript-regex-emailaddress/#ixzz2LPZmF02r
-    */
 }
 
 function checkMotherName(value)
 {
-    
+    var index = 6;
+    var regularExpresion = /^([a-zA-Z0-9])+ +([a-zA-Z0-9 ])+$/;
+    doValid(index, regularExpresion, value, "valid_mothername");
 }
 
 function checkAvatar(value)
 {
+    var index = 7;
+    var new_class;
+    var validstatus;
+
+    new_class = "inline";
+    validstatus = true;
     
+    changeClassName($("id", "valid_avatar"), new_class);
+    isValid[index] = validstatus;
 }
 
 function validate(element)
@@ -132,22 +145,30 @@ function validate(element)
     {
         checkAvatar(value);
     }
+    
+    
 }
 
 function doRegistration()
 {
     var valid = true;
+    var new_class = "inline";
+    var validstatus;
     var i = 0;
     while((valid) && (i < isValid.length))
     {
         if (!isValid[i])
         {
             valid = false;
+            new_class = "hidden";
         }
         
         ++i;
     }
     
+    //validstatus = valid;
+    //alert(validstatus);
+    //changeClassName($("id", "submitbutton"), new_class);
     if (valid)
     {
         alert("Successfully register to this website.");

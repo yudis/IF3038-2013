@@ -7,7 +7,7 @@ function createHeader()
                 <div class=\"inline\" name=\"logo\">\n\
                     <div class=\"logo\">\n\
                         <a href=\"../dashboard/dashboardUI.html\">\n\
-                            <img src=\"../../images/logo.png\" alt=\"Home Page\"/>\n\
+                            <img src=\"../images/logo.png\" alt=\"Home Page\"/>\n\
                         </a>\n\
                     </div>\n\
                 </div>\n\
