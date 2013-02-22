@@ -103,7 +103,7 @@ a{
 	 font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
 }
 
-/** fonts used for the icons **/ 
+
 @font-face {
     font-family: 'FontomasCustomRegular';
     src: url('fonts/fontomas-webfont.eot');
@@ -128,7 +128,7 @@ a{
 a.hiddenanchor{
 	display: none;
 }
-/** The wrapper that will contain our two forms **/
+
 #wrapper{
 	width: 60%;
 	right: 0px;
@@ -137,9 +137,8 @@ a.hiddenanchor{
 	width: 500px;
 	position: relative;	
 }
-/**** Styling the form elements **/
 
-/**** general text styling ****/
+
 #wrapper a{
 	color: rgb(95, 155, 198);
 	text-decoration: underline;
@@ -154,7 +153,7 @@ a.hiddenanchor{
 	text-align: center;
 	padding-bottom: 30px;
 }
-/** For the moment only webkit supports the background-clip:text; */
+
 #wrapper h1{
     background: -webkit-repeating-linear-gradient(-45deg, 
 	rgb(18, 83, 93) , 
@@ -190,8 +189,6 @@ a.hiddenanchor{
 	position: relative;
 }
 
-/**** advanced input styling ****/
-/* placeholder */
 ::-webkit-input-placeholder  { 
 	color: rgb(190, 188, 188); 
 	font-style: italic;
@@ -205,7 +202,6 @@ input {
   outline: none;
 }
 
-/* all the input except submit and checkbox */
 #wrapper input:not([type="checkbox"]){
 	width: 92%;
 	margin-top: 4px;
@@ -229,7 +225,6 @@ input {
 	background: rgba(238, 236, 240, 0.2);	
 } 
 
-/** the magic icon trick ! **/
 [data-icon]:after {
     content: attr(data-icon);
     font-family: 'FontomasCustomRegular';
@@ -240,7 +235,6 @@ input {
 	width: 30px;
 }
 
-/*styling both submit buttons */
 #wrapper p.button input{
 	width: 30%;
 	cursor: pointer;	
@@ -277,7 +271,6 @@ p.signin.button{
 }
 
 
-/* styling the checkbox "keep me logged in"*/
 .keeplogin{
 	margin-top: -5px;
 }
@@ -295,7 +288,6 @@ p.signin.button{
 }
 
 
-/*styling the links to change from one form to another */
 
 p.change_link{
 	position: absolute;
@@ -340,7 +332,7 @@ p.change_link{
 	position: relative;
 	top: 1px;
 }
-/** Styling both forms **/
+
 #register, 
 #login{
 	position: absolute;
@@ -381,7 +373,6 @@ p.change_link{
 	animation-name: fadeOutLeft;
 }
 
-/** the actual animation, credit where due : http://daneden.me/animate/ ***/
 .animate{
 	-webkit-animation-duration: 0.5s;
 	-webkit-animation-timing-function: ease;
@@ -404,7 +395,6 @@ p.change_link{
 	animation-fill-mode: both;
 }
 
-/** yerk some ugly IE fixes 'cause I know someone will ask "why does it look ugly in IE?", no matter how many warnings I will put in the article */
 
 .lt8 #wrapper input{
 	padding: 10px 5px 10px 32px;
@@ -426,3 +416,16 @@ p.change_link{
 	height: 90px;
 	background: transparent;
 }
+
+.styled-select select {
+   display:inline-block;
+   background: #eee;
+   width: 150px;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   height: 34px;
+   -webkit-appearance: none;
+   }
