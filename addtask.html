@@ -1,0 +1,80 @@
+<html>
+  <head>
+	<link href="stylesheet.css" rel="stylesheet" type="text/css" />
+	</head>
+<body>	
+
+<div id="containerd">
+		<!--TITLE MULAI-->
+		<div id="title">
+			<h1><a href='#'>Do.me</a></h1>
+		</div>
+		<div id="searchbox"> 
+			<form method="get" action="/search" id="search">
+				<input name="q" type="text" size="40" placeholder="Search..." />
+			</form>
+		</div>
+		<div id="menubar">
+			<nav>
+				<ul>
+					<li><a href='#'>Home</a></li>
+					<li><a href='dashboard.html'>Dashboard</a></li>
+					<li><a href='#'>About</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="stylized" id="taskformpop">
+			<form id="form" name="form" onclick="return validasiADD();">
+				<p><strong>TASK</strong></p>
+				<br>
+				<br>
+				<label>Nama Task
+				</label>
+				<input type="text" name="name" id="name" />
+				<label>Assignee
+				</label>
+				<input type="text" name="email" id="email" />
+				<label>Tag
+				</label>
+				<input type="text" name="tag" id="tag" />
+				<label>Deadline
+				</label>
+				<input type="date" name="date" id="date" />
+				<label>Attachment
+				</label>
+				<input type="file" name="att">
+				<button type="submit">Create Task</button>
+
+			</form>
+		</div>
+</div>
+</body>
+<script>
+			function validasiADD()
+			{
+				var peringatan = ""; // Merupakan string yang akan menyimpan kata-kata peringatan
+				var terima = true; // Boolean yang menentukan apakah form valid atau tidak
+				
+				// Validasi Form Nama
+					var user_name = document.forms.form.name.value;
+					if (user_name.length > 25)
+						{
+							peringatan += "Nama task maksimal 25 karakter \n";
+							terima = false;
+						}
+				
+				// Validasi Attachment
+					var eks_jpg = /.jpg/i;
+					var eks_jpg = /.jpge/i;
+					var eks_jpg = /.doc/i;
+					var eks_jpg = /.pdf/i;
+					var eks_jpg = /.3gp/i;
+					var eks_jpg = /.mpeg/i;
+					
+				
+				// Menampilkan Alert jika terdapat kesalahan
+				if (!terima)alert(peringatan);  
+				return terima;  
+			}
+		</script>
+</html>
