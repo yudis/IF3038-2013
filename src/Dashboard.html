@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Register</title>
+<title>Dashboard</title>
 <script type="text/javascript" src="Validator.js"></script>
 <link rel="stylesheet" type="text/css" href="layouting.css">
 </head>
@@ -26,20 +26,40 @@
 <div id="contentdashboard">
 	<h1>Dashboard</h1>
 	<ul class="buttonlist">
+		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> Tambah Kategori </li>
+		<li></li>
+		<li></li>
 		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> Kuliah </li>
-		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> Unit </li>
-		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> Pekerjaan </li>
-		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> Tugas Asisten </li>
 		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> PKM-T </li>
-		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> Imagine Cup </li>
+		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> Tugas Asisten </li>
 	</ul>
+	<div id="tasklist">
+		<ul>
+			<li>
+				<a href="#taskdetail">
+					<h2> Tugas Besar Pemrograman Internet </h2>
+				</a>
+				Tanggal Penyelesaian : 22 Februari 2013, 22:02 <br />
+				Tag : Tugas, Besar, Progin, IF3038
+			</li>
+			<li>
+				<a href="#taskdetail">
+					<h2> Tugas Besar Inteligensia Buatan </h2>
+				</a>
+				Tanggal Penyelesaian : 22 Februari 2013, 17:23 <br />
+				Tag : Tugas, Besar, IB, AI, IF3052
+			</li>
+		</ul>
+	</div>
 </div>
 
 <div id="footer">
-Footer
+	<p> Copyright &copy; 2013 Tugas Besar IF3038 Pemrograman Internet. Design By <a href="http://www.facebook.com/wchaq">Whilda Chaq</a> & <a href="http://www.facebook.com/5quall">Devin Hoesen</a></p>
 </div>
 
-
+<a href="#x" class="overlay" id="taskdetail"></a>
+<div class="popup">
+	<h1>Registration</h1>
 
 </body>
 </html>

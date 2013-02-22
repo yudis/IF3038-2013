@@ -78,12 +78,27 @@ h2{
 	position:absolute;
     left: 50%;
     width:900px;
+	height: 500px;
     margin-left: -475px;
 	margin-top: 180px;  
 	padding-left: 50px;
 	padding-bottom: 50px;
 	background: rgba(255, 255, 255, .7);
 	text-align: left;
+}
+
+#tasklist{
+	position:absolute;
+	float: left;
+    left: 50%;
+    width: 660px;
+	height: 395px;
+    margin-left: -255px;
+	margin-top: 0px;
+	padding: 25px 25px 25px 25px;
+	background: rgba(255, 255, 255, .8);
+	text-align: left;
+	overflow: auto;
 }
 
 #menu{
@@ -241,19 +256,21 @@ h2{
 }
 
 .buttonlist {
-	padding: 50px 0 0 0;
+	float: left;
+	padding: 0 0 0 0;
 	margin: 0;
-	width: 245px;
+	width: 220px;
 }
  
 .buttonlist li{
 	list-style: none;
-	padding: 0 0 0 0;
+	padding-bottom: 10px;
 	margin: 0;
 }
 
 .buttonnormal {
-	background-image:url(../Image/normal.png);
+	background-image:url(Image/normal.png);
+	background-repeat: no-repeat;
 	width:145px;
     height:30px;
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
@@ -263,15 +280,16 @@ h2{
 }
 
 .buttonnormal:hover {
-	background-image:url(../Image/hover.png);
+	background-image:url(Image/hover.png);
 }
 
 .buttonnormal:active {
-	background-image:url(../Image/pressed.png);
+	background-image:url(Image/pressed.png);
 }
 
 .buttonpressed {
-	background-image:url(../Image/pressed.png);
+	background-image:url(Image/pressed.png);
+	background-repeat: no-repeat;
 	width:145px;
     height:30px;
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
