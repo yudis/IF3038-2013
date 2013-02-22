@@ -1,0 +1,47 @@
+function validating(){
+	var name = document.forms["input"]["nama"].value;
+	var tag = document.forms["input"]["tag"].value;
+	var file = document.forms["input"]["attach"].value;
+	if (name == ""){
+		alert("Nama task tidak boleh kosong");
+		return false;
+	}
+	else if (name.length > 25){
+		alert("Nama task salah");
+		return false;
+	}
+	else if (!name.match(/[a-zA-Z0-9]+$/i)){
+		//document.getElementById("nameicon").src="pict/centang.png";
+		alert("Nama task salah");
+		return false;
+	}
+	else if (tag == ""){
+		alert("Tag tidak boleh kosong");
+		return false;
+	}
+	else if (!file.match(/[^\s]+(\.(?i)(jpg|png|gif|bmp|txt|wmv|avi|flv|doc|docx))$/i)){
+		alert("File tidak valid");
+		return false;
+	}
+}
+
+var idActiveTask;
+var ActiveButton;
+function display(id,button){
+	if (idActiveTask == null) {
+		idActiveTask = "edited";
+	}
+	document.getElementById(idActiveTask).style.display = "none";
+	idActiveTask = id;
+	document.getElementById(id).style.display = "block";
+	displaybutton(button);
+}
+			
+function displaybutton(but){
+	if (ActiveButton == null){
+		ActiveButton = "tombol_edit";
+	}
+	document.getElementById(ActiveButton).style.display = "none";
+	ActiveButton = but;
+	document.getElementById(but).style.display = "block";
+}

@@ -1,0 +1,154 @@
+#inputarea{
+	width:600px;
+	height:260px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#metadata{
+	width:200px;
+	height:125px;
+	float:left;
+}
+
+#input{
+	width:400px;
+	height:125px;
+	float:left;
+}
+
+paa {
+	text-align:left;
+	margin-left:35%;
+}
+
+pab {
+	text-align:left;
+	margin-left:15%;
+}
+
+pac {
+	margin-left:43%;
+	margin-right:auto;
+}
+
+pad {
+	text-align:left; 
+	margin-left:16%;
+}
+
+pae {
+	text-align:left; 
+	margin-left:30%;
+}
+
+paf {
+	margin-left:26%;
+}
+
+pag {
+	text-align:left;
+}
+
+#tanggal{
+	width:50px;
+}
+
+#bulan{
+	width:50px;
+}
+
+#tahun{
+	width:70px;
+}
+
+#tombol{
+	width:600px;
+	height:50px;
+	clear:both;
+}
+
+#container{
+	width:650px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#edited{
+	width:475px;
+	height:200px;
+	border-style:dotted; 
+	border-width:1px; 
+	float:left;
+	display:block;
+}
+
+#editing{
+	display:none;
+	width:475px;
+	height:200px;
+	border-style:dotted; 
+	border-width:1px; 
+	float:left;
+}
+
+#rincian{
+	height:176px;
+	width:100px;
+	float:left;
+}
+
+#isi{
+	height:176px;
+	width:300px;
+	float:left;
+}
+
+#tombol_edit{
+	height:200px;
+	width:125px;
+	float:left;
+	display:block;
+}
+
+#done_edit{
+	display:none;
+	height:200px;
+	width:125px;
+	float:left;
+}
+
+#comment{
+	width:650px; 
+	height:300px;
+	clear:both;
+}
+
+#komentar{
+	width:100px;
+	float:left;
+}
+
+#isi2{
+	height:300px;
+	width:80px;
+	float:left;
+}
+
+#tuliskomen{
+	height:300;
+	width:300;
+	float:left;
+}
+
+#areatulis{
+	resize:none;
+}
+
+#submitdone{
+	float:right;
+}
+
+#tombolcreate{
+	width:8em;
+}
