@@ -6,223 +6,260 @@
         <link rel="stylesheet" type="text/css" href="Dashboard.css"/>
     </head>
     <body>
-        <!-- =============== H E A D E R =============== -->
-        <a href="Dashboard.html">
-            <img src="Images/"/>
-        </a>
-
-        <nav class="header">
-            <ul>
-                <li>
+        <div id="page">
+            <!-- =============== H E A D E R =============== -->
+            <div id="header">
+                <div class="site_logo">
                     <a href="Dashboard.html">
-                        Dashboard
+                        <img id="logo" src="Images/Date.png"/>
                     </a>
-                    <span class="header_hint">
-                        Dashboard
-                    </span>
-                </li>
+                </div>
 
-                <li>
-                    <a href="Profile.html">
-                        Profile
-                    </a>
-                    <span class="header_hint">
-                        Go to profile
-                    </span>
-                </li>
+                <div class="menubar">
+                    <ul>
+                        <li>
+                            <a href="Dashboard.html">
+                                Dashboard
+                            </a>
+                        </li>
 
-                <li>
-                    <a href="MainPage.html">
-                        Logout
-                    </a>
-                    <span class="header_hint">
+                        <li>
+                            <a href="Profile.html">
+                                Profile
+                            </a>
+                        </li>
 
-                    </span>
-                </li>
+                        <li>
+                            <a href="MainPage.html">
+                                Logout
+                            </a>
+                        </li>
 
-                <li>
-                    <input type="search" id="search_box" placeholder="Search Task" autocomplete="on"/>
-                </li>
-            </ul>
-        </nav>
+                        <li>
+                            <input type="search" id="search_box"
+                                   placeholder="Search Task"
+                                   autocomplete="on"/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-        <!-- =============== S I D E B A R =============== -->
-        <nav id="sidebar">
-            <ul>
-                <li>
-                    <a href="#allTask" class="task_existing_category">
-                        All
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#taskCategory1" class="task_existing_category">
-                        Personal
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#taskCategory2" class="task_existing_category">
-                        Household
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#taskCategory3" class="task_existing_category">
-                        College
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#newCategory" id="new_category_popup">
-                        <img src="Images/"/>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- =============== T A S K   D E T A I L =============== -->
-        <div class="task_detail" id="task1">
-            <form class ="task_detail_form"
-                  action=""
-                  enctype="multipart/form-data">
+            <!--=============== S I D E B A R ===============--> 
+            <div class="sidebar">
+                <h2>Categories</h2>
                 <ul>
                     <li>
-                        <label>
-                            Task Name:
-                        </label>
+                        <a href="#allTask" class="task_existing_category">
+                            All
+                        </a>
                     </li>
 
                     <li>
-                        <label>
-                            Attachment:
-                        </label>
-
+                        <a href="#taskCategory1" class="task_existing_category">
+                            Personal
+                        </a>
                     </li>
 
                     <li>
-                        <label>
-                            Deadline:
-                        </label>
-                        <label id="deadline_info">
-                            22-Feb-2013
-                        </label>
+                        <a href="#taskCategory2" class="task_existing_category">
+                            Household
+                        </a>
                     </li>
 
                     <li>
-                        <label>
-                            Assignee:
-                        </label>
-                        <label id="assignee_info">
-                            Mwaha~
-                        </label>
-                    </li>
-
-                    <li>
-                        <label>
-                            Commentary:
-                        </label>
-                        <label id="commentary">
-                            No Comment
-                        </label>
-                    </li>
-
-                    <li>
-                        <label>
-                            Tag:
-                        </label>
-                        <label id="tag_info">
+                        <a href="#taskCategory3" class="task_existing_category">
                             College
-                        </label>
+                        </a>
                     </li>
 
                     <li>
-                        <input type="button"
-                               class='edit_task_button'
-                               value="Edit"
-                               onclick="EditTaskDetail();"/>
-                    </li>
-                    
-                    <li id="done_edit_button">
-                        <input type="submit"
-                               class="submit"
-                               value="Done"
-                               onblur="DoneEditDetail();"/>
+                        <a class="add_button" id="add_category" href="#new_category_form">+</a>
                     </li>
                 </ul>
-            </form>
+            </div>
         </div>
 
-        <!-- =============== N E W   T A S K =============== -->
-        <form class="new_task_form"
-              action=""
-              method="post"
-              name="new_task_form"
-              enctype="multipart/form-data">
-            <ul>
-                <li>
-                    <label for="task_name">
-                        Task Name:
-                    </label>
-                    <input type="text"
-                           id="task_name"
-                           name="task_name"
-                           placeholder="New Task"
-                           pattern="[A-Za-z0-9]{1,}"
-                           maxlength=25
-                           required/>
-                </li>
+        <!--=============== N E W   C A T E G O R Y ===============--> 
+        <a href="#x" class="overlay" id="new_category_form"></a>
+        <div class="popup" id="new_category_popup">
+            <h2>add CATEGORY</h2>
+            <form>
+                <label for="category_name">Name:</label>
+                <input type="text" id="category_name" required/>
+                <input type="submit" onclick="AddNewCategory();"/>
+            </form>
+            <a class="close_popup" href="#close"></a>
+        </div>
 
-                <li>
-                    <label for="attachment">
-                        Attachment:
-                    </label>
-                    <input type="file"
-                           id="attachment"
-                           name="attachment"
-                           onsubmit="ValidateFileType();"/>
-                    <span class="form_hint" id="image_detected">Detected an image file</span>
-                    <span class="form_hint" id="video_detected">Detected a video file</span>
-                    <span class="form_hint" id="file_detected">Detected a common file format</span>
-                </li>
+        <!--=============== T A S K   L I S T ===============--> 
+        <div class="content">
+            <div class="task_list">
+                <ul>
+                    <li>
+                        <a href="#task1">Task 1</a>
+                    </li>
+                    <li>
+                        <a href="#task2">Task 2</a>
+                    </li>
+                    <li>
+                        <a href="#task3">Task 3</a>
+                    </li>
+                    <li>
+                        <a class="add_button" href="#new_task">
+                            +
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-                <li>
-                    <label for="deadline">
-                        Deadline:
-                    </label>
-                    <input id="deadline"
-                           type="text"
-                           placeholder="22-Feb-2013"
-                           required/>
-                </li>
+            <!--=============== T A S K   D E T A I L ===============--> 
+            <div class="task_detail" id="task1">
+                <form class ="task_detail_form"
+                      action=""
+                      enctype="multipart/form-data">
+                    <ul>
+                        <li>
+                            <label class="lbl">
+                                Task Name:
+                            </label>
+                            <label>
 
-                <li>
-                    <label for="assignee">
-                        Assignee:
-                    </label>
-                    <input type="text"
-                           id="assignee"
-                           name ="assignee"/>
-                </li>
+                            </label>
+                        </li>
 
-                <li>
-                    <label for="tag">
-                        Tag:
-                    </label>
-                    <input type="text"
-                           id="tag"
-                           name="tag"
-                           placeholder="tag1, tag2, tag3"/>
-                    <span class="form_hint">
-                        Separate different tags with comma(,)
-                    </span>
-                </li>
+                        <li>
+                            <label class ="lbl">
+                                Attachment:
+                            </label>
 
-                <li>
-                    <button class="submit" id="submit_new_task" type="submit">Submit From</button>
-                </li>
-            </ul>
-        </form>
+                        </li>
+
+                        <li>
+                            <label class="lbl">
+                                Deadline:
+                            </label>
+                            <label id="deadline_info">
+                                22-Feb-2013
+                            </label>
+                        </li>
+
+                        <li>
+                            <label class="lbl">
+                                Assignee:
+                            </label>
+                            <label id="assignee_info">
+                                Mwaha~
+                            </label>
+                        </li>
+
+                        <li>
+                            <label class="lbl">
+                                Commentary:
+                            </label>
+                            <label id="commentary">
+                                No Comment
+                            </label>
+                        </li>
+
+                        <li>
+                            <label class="lbl">
+                                Tag:
+                            </label>
+                            <label id="tag_info">
+                                College
+                            </label>
+                        </li>
+
+                        <li>
+                            <input type="button"
+                                   class='edit_task_button'
+                                   value="Edit"
+                                   onclick="EditTaskDetail();"/>
+                        </li>
+
+                        <li id="done_edit_button">
+                            <input type="submit"
+                                   class="submit"
+                                   value="Done"
+                                   onblur="DoneEditDetail();"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+
+            <!-- =============== N E W   T A S K =============== -->
+            <div class="new_task">
+                <form class="new_task_form"
+                      action=""
+                      method="post"
+                      name="new_task_form"
+                      enctype="multipart/form-data">
+                    <ul>
+                        <li>
+                            <label for="task_name">
+                                Task Name:
+                            </label>
+                            <input type="text"
+                                   id="task_name"
+                                   name="task_name"
+                                   placeholder="New Task"
+                                   pattern="[A-Za-z0-9]{1,}"
+                                   maxlength=25
+                                   required/>
+                        </li>
+
+                        <li>
+                            <label for="attachment">
+                                Attachment:
+                            </label>
+                            <input type="file"
+                                   id="attachment"
+                                   name="attachment"
+                                   onsubmit="ValidateFileType();"/>
+                            <span class="form_hint" id="image_detected">Detected an image file</span>
+                            <span class="form_hint" id="video_detected">Detected a video file</span>
+                            <span class="form_hint" id="file_detected">Detected a common file format</span>
+                        </li>
+
+                        <li>
+                            <label for="deadline">
+                                Deadline:
+                            </label>
+                            <input id="deadline"
+                                   type="text"
+                                   placeholder="22-Feb-2013"
+                                   required/>
+                        </li>
+
+                        <li>
+                            <label for="assignee">
+                                Assignee:
+                            </label>
+                            <input type="text"
+                                   id="assignee"
+                                   name ="assignee"/>
+                        </li>
+
+                        <li>
+                            <label for="tag">
+                                Tag:
+                            </label>
+                            <input type="text"
+                                   id="tag"
+                                   name="tag"
+                                   placeholder="tag1, tag2, tag3"/>
+                            <span class="form_hint">
+                                Separate different tags with comma(,)
+                            </span>
+                        </li>
+
+                        <li>
+                            <button class="submit" id="submit_new_task" type="submit">Submit From</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
 
         <script type="text/javascript" src="Dashboard.js"></script>
     </body>
