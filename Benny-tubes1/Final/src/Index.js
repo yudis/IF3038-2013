@@ -195,7 +195,6 @@ function editing(){
 	if(document.getElementById("changeOrEdit").value =="Edit"){
 		document.getElementById("deadline").style.display="none";
 		document.getElementById("dua").removeAttribute("disabled");
-		document.getElementById("tiga").removeAttribute("disabled");
 		document.getElementById("tag").removeAttribute("disabled");
 		document.getElementById("tanggal").style.display = "block";
 		document.getElementById("changeOrEdit").value ="Save";
@@ -203,7 +202,6 @@ function editing(){
 	else{
 		document.getElementById("deadline").style.display="block";
 		document.getElementById("dua").setAttribute("disabled");
-		document.getElementById("tiga").setAttribute("disabled");
 		document.getElementById("tag").setAttribute("disabled");
 		document.getElementById("tanggal").style.display = "none";
 		document.getElementById("changeOrEdit").value ="Edit";
