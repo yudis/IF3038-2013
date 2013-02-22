@@ -1,59 +1,86 @@
-<!-- rinciantugas.html -->
-
 <!DOCTYPE html>
-
-<head>
-	<link type="text/css" rel="stylesheet" href="rinciantugas.css">
-	<script type="text/javascript" href="rinciantugas.js"></script>
-</head>
-
-<body class "bgutama">
-	<header class = "header-cont header">
-		<ul id="menu">
-			<li><a href="index.html" class="homeicon">Home</a></li>
-			<li><a href="index.html">Dashboard</a></li>
-			<li><a href="profile.html">Profile</a></li>
-			<li><a href="#">Log Out</a></li>
-			<div  id="menu2">
-				<li>
-					<form method="get" action="/search" id="search">
-						<input name="q" type="text" size="36" placeholder="Search..." />
-					</form>
-				</li>
-			</div>
-		</ul>
-	</header>
-		
-	<article>
-		<section>
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="index.css">
+	</head>
+	<body class "bgutama">
+		<header class="header-cont header">
+			<ul id="menu">Welcome in CHUI... </ul>
+		</header>
+		<article>
 			<div id = "commentbox" class = "container2 bgcontent">
-				<div id = "commenttext">
-					<a> Your Task Collection</a>
+				<div id = "commenttext" class = "subcontainer2" >
+					<a>CHUI, Japananese Task Management <br/>
+					   what chui can help you?
+					</a>
 					<br>
-					<br>
-					<br>
-					<br>
+					<div><p>1. manage your task<br>
+					2. sharing your task <br>
+					3. place to do your task<br>
+					4. remember you deadline of your task<br>
+					5. hurahurahura<p></div>
+				</div>				
+			</div>
+		</article>
+		<aside>
+			<div id = "sidebar" class="container bgcontent">
+				<div id="sidetext"> 
+					<div id="h">
+						<a> Please Login </a>
+					</div>
+				<br>
+					<form id="login">
+						<label>Username</label>
+						<input type="text" name="username" size="25" /> <br>
+						<label>Password</label>
+						<input type="password" name="userpassword" size="25"/><br>
+						<p><button type="submit">Login</p>
+					</form>
 				</div>
-				
+				<br>
 			</div>
-		</section>
-		
-		<section>
-		</section>
-	</article>
-	<aside>
-		<div id = "sidebar" class = "container bgcontent">
-			<div id = "sidetext" >
-				<a> Category </a>
+		</aside>
+		<aside>
+			<div id = "sidebar" class="container bgcontent">
+				<div id="sidetext"> 
+					<a> Dont have account? <br> Register here </a>
+				<br>
+				<br>
+					<form id="register">
+						<label>Fullname
+						<span class="small"> at least 2 word </span>
+						</label>
+						<input type="text" name="name" size="25" />
+						<label>Username
+						<span class="small"> min 5 character </span>
+						</label>
+						<input type="text" name="username" size="25" />
+						<label>Password
+						<span class="small"> min 8 character </span>
+						</label>
+						<input type="password" name="userpassword" size="25"/><br>
+						<label>Confirm
+						<span class="small"> retype your password </span>
+						</label>
+						<input type="password" name="confirmpassword" size="25"/><br>
+						<label>Birthday
+						<span class="small"></span>
+						</label>
+						<input type="date" name="birthday" /><br>
+						<label>Email
+						<span class="small"> (ex: a@b.cc) </span>
+						</label>
+						<input type="text" name="email" size="25" /> <br>
+						<label>Photo
+						<span class="small"></span>
+						</label>
+						<input type="file" name="photo" /> <br>
+						<p><button type="submit">Register</p>
+					</form>
+				</div>
+				<br>
 			</div>
-				<br>
-				<br>
-				<h5><a href="academic.html">Academic<a></h5>
-				<h5><a href="hura.html">Hura-hura<a></h5>
-				<h5><a href="org.html"> Organization<a></h5>
-				<h5><a href="add.html">+ Add Category</a></h5>
-				<br>
-		</div>
-	</aside>
+		</aside>
 	
-</body>
+	</body>
+</html>
