@@ -5,6 +5,7 @@
 		<meta name="Description" content="" />
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
 		<title>MOA - Dashboard</title>
+		<script type="text/javascript" src="js/is_login.js"></script>
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/dashboard.css" />
 	</head>
@@ -20,7 +21,7 @@
 				<div id="header_menu">
 					<nav>
 						<ul>
-							<li> <a href="dashboard.html">Dashboard</a> </li>
+							<li> <a href="dashboard.html" class="active">Dashboard</a> </li>
 							<li> <a href="profil.html">Profil</a> </li>
 						</ul>
 					</nav>
@@ -55,10 +56,10 @@
                 <div id="dashboard_category">
                     <nav>
                         <ul>
-                            <li> <a href="?category=all"><div class="dashboard_category_element">All Category</div></a></li>
-                            <li> <a href="?category=pemrograman%20internet"><div class="dashboard_category_element">Pemrograman Internet</div></a></li>
-                            <li> <a href="?category=kriptografi"><div class="dashboard_category_element">Kriptografi</div></a></li>
-                            <li> <a href="?category=metode%20numerik"><div class="dashboard_category_element">Metode Numerik</div></a></li>
+                            <li> <a href="#" onclick="check(1);"><div class="dashboard_category_element">All Category</div></a></li>
+                            <li> <a href="#" onclick="check(2);"><div class="dashboard_category_element">Pemrograman Internet</div></a></li>
+                            <li> <a href="#" onclick="check(3);"><div class="dashboard_category_element">Kriptografi</div></a></li>
+                            <li> <a href="#" onclick="check(4);"><div class="dashboard_category_element">Metode Numerik</div></a></li>
                             <li> <a href="javascript:new_category();"><div id="new_category">New Category</div></a></li>
                         </ul>
                     </nav>
@@ -85,10 +86,11 @@
                                     <ul>
                                         <li>JQuery</li>
                                         <li>JavaScript</li>
-                                    </ul></div>
+                                    </ul>
+                                </div>
                             </div></a></li>
                             
-                            <li> <a href="new_task.html"><div class="dashboard_tugas_element">
+                            <li> <a href="newWork.html"><div class="dashboard_tugas_element">
                                 <div class="dashboard_tugas_judul">New Task</div>
                                 <div class="dashboard_tugas_tanggal">Tanggal : TBD</div>
                                 <div class="dashboard_tugas_tag_area"></div>
@@ -136,47 +138,32 @@
 			</div>
 		</div>
 
-
+		<script type="text/javascript" src="js/search.js"></script>
+		<script type="text/javascript" src="js/logout.js"></script>
 		<script type="text/javascript">
-			var search_text = document.getElementById("search_text");
-			
-			search_text.onmouseover = function()
-			{
-				this.focus();	
-			}
-			search_text.onfocus = function()
-			{
-				var search = document.getElementById("search");
-				search.className = "active";
-			}
-			search_text.onblur = function()
-			{
-				if (search_text.value==="")
-				{
-					var search = document.getElementById("search");
-					search.className = "";
-				}
-			}
-			
-			var login_area = document.getElementById("login_area");
-			login_area.onmouseover = function()
-			{
-				document.getElementById("login_link").className = "logout_link_focus";
-				document.getElementById("login_button").className = "logout_button_focus";
-			}
-			
-			login_area.onmouseout = function()
-			{
-				document.getElementById("login_link").className = "";
-				document.getElementById("login_button").className = "";
-			}
-			
-			login_area.onclick = function()
-			{
-				// to do check session
-				window.location = "index.html";
-			}
-			
+            function check(n)
+            {
+                var ads = document.getElementsByTagName("a");
+                var k = 0;
+                
+                for (var j=0;j < ads.length; ++j)
+                {
+                    if (ads[j].children.length === 1) {
+                        if (ads[j].children[0].className === "dashboard_category_element_aktif")
+                        {
+                            ++k;
+                            ads[j].children[0].className = "dashboard_category_element";
+                        } else if (ads[j].children[0].className === "dashboard_category_element") {
+                            ++k;
+                        }
+                        
+                        if (ads[j].children[0].className === "dashboard_category_element" && k === n) {
+                            ads[j].children[0].className = "dashboard_category_element_aktif";
+                        }
+                    }
+                }
+            }
+            
             /*Bagian menampilkan pembuatan new_category*/
 			function new_category()
 			{
@@ -238,11 +225,6 @@
 				{
 					document.getElementById("new_category_submit").disabled="disabled";
 				}
-			}
-            
-			window.onload = function()
-			{
-				// cek session, jika belum login maka redirect
 			}
 		</script>
 	</body>

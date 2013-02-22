@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="" />
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
 		<title>MOA</title>
+		<script type="text/javascript" src="js/is_logout.js"></script>
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/index.css" />
 	</head>
@@ -20,8 +21,6 @@
 				<div id="header_menu">
 					<nav>
 						<ul>
-							<!--<li> <a href="#">Dashboard</a> </li>
-							<li> <a href="#">Profil</a> </li>-->
 							<li> <a id="register_button" href="javascript:register();">Daftar</a> </li>
 						</ul>
 					</nav>
@@ -111,11 +110,11 @@
 						<form id="register_form" method="post">
 							<div class="row">
 								<label for="register_username">Username</label>
-								<input id="register_username" name="username" pattern="^.{5,}$" type="text" title="Username minimal harus terdiri dari 5 karakter." required />
+								<input id="register_username" name="username" pattern="^.{5,}$" type="text" title="Username minimal harus terdiri dari 5 karakter dan tidak sama dengan sandi." required />
 							</div>
 							<div class="row">
 								<label for="register_password">Sandi</label>
-								<input id="register_password" name="password" pattern="^.{8,}$" type="password" title="Sandi minimal harus terdiri dari 8 karakter." required />							
+								<input id="register_password" name="password" pattern="^.{8,}$" type="password" title="Sandi minimal harus terdiri dari 8 karakter dan tidak sama dengan username dan email." required />							
 							</div>
 							<div class="row">
 								<label for="register_confirm_password">Konfirmasi Sandi</label>
@@ -126,12 +125,12 @@
 								<input id="register_name" name="name" pattern="^.+ .+$" type="text" title="Nama lengkap harus terdiri dari 2 kata dipisah oleh sebuah spasi." required />
 							</div>
 							<div class="row">
-								<label for="register_birth_date">Tanggal Lahir</label>
-								<input id="register_birth_date" name="birth_date" type="date" pattern="^.+$"/>
+								<label for="birth_date">Tanggal Lahir</label>
+								<input id="birth_date" name="birth_date" type="text" pattern="^[0-3][0-9]/[0-1][0-9]/[1-9][0-9][0-9][0-9]$" onblur="datePicker.blur();" onclick="datePicker.showCalendar(event);" title="Tahun harus minimal dari tahun 1955." required/>
 							</div>
 							<div class="row">
 								<label for="register_email">Email</label>
-								<input id="register_email" name="email" pattern="^.+@.+\...+$" type="text" title="Email yang dimasukkan harus benar." required />
+								<input id="register_email" name="email" pattern="^.+@.+\...+$" type="text" title="Email yang dimasukkan harus benar dan tidak sama dengan sandi." required />
 							</div>
 							<div class="row">
 								<label for="register_avatar">Avatar</label>
@@ -143,28 +142,34 @@
 				</div>
 			</div>
 		</div>
+		
+		<div id="calendar">
+			<a id="date_button_left" class="date_button" title="Prev" onclick="datePicker.prevMonth();">
+				<img alt="arrow_left" src="images/date-left.png" />
+			</a>
+			<a id="date_button_right" class="date_button" title="Next" onclick="datePicker.nextMonth();">
+				<img alt="arrow_right" src="images/date-right.png" />
+			</a>
+			<div id="tableHeader"></div>
+			<table id="calendarTable" border=1>
+				<tbody id="tableBody">
+					<tr>
+						<th>Su</th>
+						<th>Mo</th>
+						<th>Tu</th>
+						<th>We</th>
+						<th>Th</th>
+						<th>Fr</th>
+						<th>Sa</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<script type="text/javascript" src="js/first_time.js"></script>
+		<script type="text/javascript" src="js/search.js"></script>
+		<script type="text/javascript" src="js/login.js"></script>
 		<script type="text/javascript">
-			/*----- Bagian Search ----*/
-			var search_text = document.getElementById("search_text");
-			
-			search_text.onmouseover = function()
-			{
-				this.focus();	
-			}
-			search_text.onfocus = function()
-			{
-				var search = document.getElementById("search");
-				search.className = "active";
-			}
-			search_text.onblur = function()
-			{
-				if (search_text.value==="")
-				{
-					var search = document.getElementById("search");
-					search.className = "";
-				}
-			}
-			
 			/*----- Bagian Munculin Register ----*/
 			function register()
 			{
@@ -186,39 +191,6 @@
 					document.getElementById("register_area").className = "";
 					document.getElementById("close_button").className = "";
 				}, 400);
-			}
-			
-			/*----- Bagian Login ----*/
-			var login_area = document.getElementById("login_area");
-			login_area.onmouseover = function()
-			{
-				document.getElementById("login_form_wrap").className = "appear";
-				document.getElementById("login_button").className = "login_button_appear";
-				document.getElementById("login_link").className = "login_link_appear";
-				document.getElementById("border_login").className = "appear";
-			}
-
-			login_area.onmouseout = function()
-			{
-				document.getElementById("login_form_wrap").className = "";
-				document.getElementById("login_button").className = "";
-				document.getElementById("login_link").className = "";
-				document.getElementById("border_login").className = "";
-			}
-			
-			var form_login = document.getElementById("login_form");
-			form_login.onsubmit = function()
-			{
-				if ((document.getElementById("login_username").value =="admin") &&
-					(document.getElementById("login_password").value =="admin123"))
-					return true;
-				else
-				{
-					alert("Username dan password yang dimasukkan salah.");
-					document.getElementById("login_username").value = "";
-					document.getElementById("login_password").value = "";
-					return false;
-				}
 			}
 			
 			/*----- Bagian SlideShow ----*/
@@ -289,43 +261,67 @@
 			
 			/*----- Bagian Register ----*/
 			var register_form = document.getElementById("register_form");
-			register_form.onsubmit = function()
-			{
-				var register_password = document.getElementById("register_password");
-				var register_confirm_password = document.getElementById("register_confirm_password");
-				if (register_password.value!=register_confirm_password.value)
-				{
-					alert("ampas");
-				}
-			}
 			
 			var register_username = document.getElementById("register_username");
 			var register_password = document.getElementById("register_password");
 			var register_confirm_password = document.getElementById("register_confirm_password");
 			var register_name = document.getElementById("register_name");
-			var register_birth_date = document.getElementById("register_birth_date");
+			var birth_date = document.getElementById("birth_date");
 			var register_email = document.getElementById("register_email");
 			var register_avatar = document.getElementById("register_avatar");
 			
+			register_form.onsubmit = function()
+			{
+				if ((register_password.value==register_confirm_password.value) && (register_username.value!=register_password.value) &&
+					(register_email.value!=register_password.value))
+				{
+					var user = new Object();
+					user.userName = register_username.value;
+					user.passWord = register_password.value;
+					user.fullName = register_name.value;
+					user.birthDate = birth_date.value;
+					user.emailAddress = register_email.value;
+					
+					var tempavatar = "images/"+register_avatar.value.split("\\")[register_avatar.value.split("\\").length-1];
+					user.Avatar = tempavatar;
+					
+					var userlist = JSON.parse(localStorage.userList);
+					userlist[userlist.length] = user;
+					localStorage.userList = JSON.stringify(userlist);
+				}
+				else if (register_password.value!=register_confirm_password.value)
+				{
+					alert("Konfirmasi sandi harus sama dengan sandi");
+				}
+				else if (register_email.value==register_password.value)
+				{
+					alert("Alamat email tidak boleh sama dengan sandi");
+				}
+				else if (register_username.value==register_password.value)
+				{
+					alert("Username tidak boleh sama dengan sandi");
+				}
+			}
+			
 			register_username.onkeyup = function()
 			{
-				if (this.checkValidity())
+				if (this.checkValidity() && (register_username.value != register_password.value))
 					this.style.backgroundImage = "url('images/valid.png')";
 				else
 					this.style.backgroundImage = "url('images/warning.png')";
-				check_submit_register();
+				check_submit();
 			}
 			
 			register_password.onkeyup = function()
 			{
-				if (this.checkValidity())
+				if (this.checkValidity() && (register_username.value != register_password.value) && (register_email.value != register_password.value))
 				{
 					this.style.backgroundImage = "url('images/valid.png')";
 					document.getElementById("register_confirm_password").pattern = this.value;
 				}
 				else
 					this.style.backgroundImage = "url('images/warning.png')";
-				check_submit_register();
+				check_submit();
 			}
 			
 			register_confirm_password.onkeyup = function()
@@ -335,7 +331,7 @@
 				else
 				
 					this.style.backgroundImage = "url('images/warning.png')";
-				check_submit_register();
+				check_submit();
 			}
 			
 			register_name.onkeyup = function()
@@ -344,16 +340,25 @@
 					this.style.backgroundImage = "url('images/valid.png')";
 				else
 					this.style.backgroundImage = "url('images/warning.png')";
-				check_submit_register();
+				check_submit();
+			}
+			
+			birth_date.onkeyup = function()
+			{
+				if ((this.checkValidity()) && (check_date(this.value)))
+					this.style.backgroundImage = "url('images/valid.png')";
+				else
+					this.style.backgroundImage = "url('images/warning.png')";
+				check_submit();
 			}
 			
 			register_email.onkeyup = function()
 			{
-				if (this.checkValidity())
+				if (this.checkValidity() && (register_email.value != register_password.value))
 					this.style.backgroundImage = "url('images/valid.png')";
 				else
 					this.style.backgroundImage = "url('images/warning.png')";
-				check_submit_register();
+				check_submit();
 			}
 			
 			register_avatar.onchange = function()
@@ -362,7 +367,20 @@
 					this.style.backgroundImage = "url('images/valid.png')";
 				else
 					this.style.backgroundImage = "url('images/warning.png')";
-				check_submit_register();
+				check_submit();
+			}
+			
+			function check_date(date)
+			{
+				var temp = date.split("/");
+				var d = new Date(parseInt(temp[2]), parseInt(temp[1]) - 1, parseInt(temp[0]));
+				if ((d) && ((d.getMonth() + 1) == parseInt(temp[1])) && (d.getDate() == Number(parseInt(temp[0]))) && (parseInt(temp[2]) >= 1955))
+				{
+					datePicker.populateTable(d.getMonth(),d.getFullYear());
+					return true;
+				}
+				else
+					return false;
 			}
 			
 			function check_file_jpeg(image)
@@ -370,12 +388,13 @@
 				return (image.value.match("^.+\.(jpe?g|JPE?G)$"));
 			}
 			
-			function check_submit_register()
+			function check_submit()
 			{
-				if (register_username.checkValidity() && register_password.checkValidity() && 
-					register_confirm_password.checkValidity() && register_name.checkValidity() && 
-					register_birth_date.checkValidity() && register_email.checkValidity() && 
-					check_file_jpeg(register_avatar))
+				if ((register_username.checkValidity()) && (register_password.checkValidity()) && 
+					(register_confirm_password.checkValidity()) && (register_name.checkValidity()) && 
+					(birth_date.checkValidity()) && (register_email.checkValidity()) && 
+					(check_file_jpeg(register_avatar)) && (register_email.value != register_password.value) &&
+					(register_email.value != register_password.value) && (check_date(birth_date.value)))
 				{
 					document.getElementById("register_submit").disabled="";
 				}
@@ -385,9 +404,12 @@
 				}
 			}
 			
-			window.onload = function()
+		</script>
+		<script type="text/javascript" src="js/datepicker.js"></script>
+		<script type="text/javascript">	
+			window.onload = function() 
 			{
-				// cek session, jika sudah login maka redirect
+				datePicker.init(document.getElementById("calendar"), document.getElementById("register_form"));
 				setInterval(function(){next_image();}, 5500);
 			}
 		</script>
