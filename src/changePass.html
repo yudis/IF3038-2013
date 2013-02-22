@@ -4,8 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="" />
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-		<title>MOA - Profil</title>
-		<script type="text/javascript" src="js/is_login.js"></script>
+		<title>MOA - ganti password</title>
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/profil.css" />
 	</head>
@@ -55,34 +54,20 @@
 			<div id="content_wrap" class="wrap">
 				<div id="profil_area">
 					<div id="profil_form_wrap">
-						<form id="profil_form" action="profiledit.html" method="post">
-							<div id="profil_head">
-								<h1>Admin</h1>
+						<div id="profil_head">
+							<h1>Form ganti password</h1>
+						</div>
+						<form id="profil_form" method="post" action="#">
+							<div class="row">
+								<label for="profil_password">Sandi baru</label>
+								<input id="profil_password" name="password" pattern="^.{8,}$" type="password" title="Sandi minimal harus terdiri dari 8 karakter dan tidak sama dengan username dan email." required />							
 							</div>
 							<div class="row">
-								<label for="profil_username">Username</label>
-								<span id="profil_username"></span>
+								<label for="profil_confirm_password">Konfirmasi Sandi baru</label>
+								<input id="profil_confirm_password" name="confirm_password" pattern="^.{8,}$" type="password" title="Konfirmasi sandi harus sama dengan sandi." required />
 							</div>
-							<div class="row">
-								<label for="profil_name">Nama Lengkap</label>
-								<span id="profil_name"></span>
-							</div>
-							<div class="row">
-								<label for="profil_birth_date">Tanggal Lahir</label>
-								<span id="profil_birth_date"></span>
-							</div>
-							<div class="row">
-								<label for="profil_email">Email</label>
-								<span id="profil_email"></span>
-							</div>
-							<div class="row">
-								<label for="avatar_image">Avatar</label>
-								<img id="avatar_image" src="images/avatar.jpg" alt="avatar profil" />
-							</div>
-							<input id="profil_submit" type="submit" value="Change Password" title="Semua elemen form harus diisi dengan benar dahulu."/>
-							<input id="profil_submit" type="submit" value="Edit" title="Semua elemen form harus diisi dengan benar dahulu."/>
+							<input id="profil_submit" type="submit" value="Ganti Sandi" disabled="disabled" title="Semua elemen form harus diisi dengan benar dahulu."/>
 						</form>
-						
 					</div>
 				</div>
 				<div id="profil_do">
@@ -119,20 +104,68 @@
 			</div>
 		</footer>
 		
+			
+		</div>
+		
 		<script type="text/javascript" src="js/search.js"></script>
-		<script type="text/javascript" src="js/logout.js"></script>
+		<script type="text/javascript" src="js/login.js"></script>
 		<script type="text/javascript">
-			window.onload = function()
+			
+			/*----- Bagian pass ----*/
+			var pass_form = document.getElementById("pass_form");
+			
+			var profil_password = document.getElementById("profil_password");
+			var profil_confirm_password = document.getElementById("profil_confirm_password");
+			
+			profil_form.onsubmit = function()
 			{
-				var userlist =  JSON.parse(localStorage.userList);
-				document.getElementById("profil_head").innerHTML = "<h1>"+userlist[sessionStorage.userId].fullName+"</h1>";
-				document.getElementById("profil_username").innerHTML = userlist[sessionStorage.userId].userName;
-				document.getElementById("profil_name").innerHTML = userlist[sessionStorage.userId].fullName;
-				document.getElementById("profil_birth_date").innerHTML = userlist[sessionStorage.userId].birthDate;
-				document.getElementById("profil_email").innerHTML = userlist[sessionStorage.userId].emailAddress;
-				document.getElementById("avatar_image").src = userlist[sessionStorage.userId].Avatar;
+				if ((profil_password.value==profil_confirm_password.value))
+				{
+					var userlist = JSON.parse(localStorage.userList);
+					userlist[sessionStorage.userId].passWord=profil_password.value;
+				}
+				else if (profil_password.value!=profil_confirm_password.value)
+				{
+					alert("Konfirmasi sandi harus sama dengan sandi");
+				}
 			}
+			
+			profil_password.onkeyup = function()
+			{
+				if (this.checkValidity())
+				{
+					this.style.backgroundImage = "url('images/valid.png')";
+					document.getElementById("profil_confirm_password").pattern = this.value;
+				}
+				else
+					this.style.backgroundImage = "url('images/warning.png')";
+				check_submit();
+			}
+			
+			profil_confirm_password.onkeyup = function()
+			{
+				if (this.checkValidity() && profil_password.checkValidity())
+					this.style.backgroundImage = "url('images/valid.png')";
+				else
+				
+					this.style.backgroundImage = "url('images/warning.png')";
+				check_submit();
+			}
+			
+			function check_submit()
+			{
+				if ((profil_password.checkValidity()) && 
+					(profil_confirm_password.checkValidity()))
+				{
+					document.getElementById("profil_submit").disabled="";
+				}
+				else
+				{
+					document.getElementById("profil_submit").disabled="disabled";
+				}
+			}
+			
 		</script>
+		
 	</body>
 </html>
-
