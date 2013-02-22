@@ -3,13 +3,21 @@
 
 Tweak biar website kita bagus banget haha :3, ini gw tulis dulu yang gw tau dan inget, kalo ada tambahan silahkan
 
+- validasi form input pada saat add task [done]
+- Tombol X buat ngilangin task, kalo habis diilangin kalo bisa di rearrange lagi task nya [done] -> tapi task yg di bawah nya ga naik
+- Metro-style scroll bar [udah, tp agak aneh :p haha]
+
 - Animasi pindah kategori udah bagus banget, tapi kadang jalan kadang ga, tolong benerin ya Ruth [BELUM]
+
 - Hover di kategori nya mati kalo udah milih kategori, dibenerin juga ya [BELUM]
-- AddedNewCategory ga bisa dipilih [BELUM]
+
+- AddedNewCategory ga bisa dipilih [BELUM] 
+
 - Enter saat box password "focused" buat redirect ke dashboard (LOGIN) [BELUM]
+
 - disabled enabled tombol submit [BELUM]
-- validasi form input pada saat add task [BELUM]
-- Tombol X buat ngilangin task, kalo habis diilangin kalo bisa di rearrange lagi task nya [BELUM]
+
 - Inputan tanggal buat mozilla firefox sama IE [BELUM]
+
 - Media queries buat width yang beda2. [BELUM]
-- Metro-style scroll bar [BELUM]
+
