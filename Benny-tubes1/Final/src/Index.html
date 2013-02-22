@@ -5,7 +5,7 @@
 	<title>Monkey.Inc</title>
 	<link rel="stylesheet" type="text/css" href="task.css">
 	<script type="text/javascript" src="index.js"></script>
-	<script language="javascript" type="text/javascript" src="datetimepicker.js"> </script>
+	<script type="text/javascript" src="datetimepicker.js"> </script>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
 				</div>
 			</div>
 			<div class="lForm">
-					<button class="lSubmit" onClick="validateLogin()">Login</button>
+					<button class="lSubmit" onClick="validateLogin(event)">Login</button>
 					<button class="lSubmit" onClick="location.href='#join_form'">Register</button>
 			</div>
 		</form>
@@ -100,8 +100,9 @@
 		</div>
 		<div>
 			<label >Tanggal Lahir</label>
+			
 			<input id="Rtanggal" name=Rtanggal type="text" onkeyup="checkTanggal()" />
-			<a href="javascript:NewCal('Rtanggal','ddmmyyyy')" ><img src="../image/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
+			<a href="javascript:NewCal('Rtanggal','ddmmyyyy')" ><img src="../image/cal.gif" width="16" height="16" alt="Pick a date"></a>
 			<img src="../image/false.png" alt="False04" id="ntanggalpic"/>
 			
 			<!--
@@ -221,7 +222,7 @@
 		</div>
 		<div>
 			<label for="avatar">Avatar</label>
-			<input type="file" id="avatar" name=Ravatar onkeyup="checkAvatar()" />
+			<input type="file" id="avatar" name=Ravatar onchange="checkAvatar()" />
 			<img src="../image/false.png" alt="False05" id="avatarpic"/>
 		</div>
 		<input class="popupbutton" type="button" value="Register" id="regButton" onclick="doneReg()"/>

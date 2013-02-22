@@ -11,11 +11,11 @@ body
 	height : auto;
 	width:800px;
 	margin:auto;
-	background: -moz-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
-	background: -ms-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
-	background: -o-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
-	background: -webkit-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
-	background: linear-gradient(top,rgb(239,228,171), rgb(255,255,255));
+	background: -moz-linear-gradient(top, rgb(239,228,171), rgb(255,255,141));
+	background: -ms-linear-gradient(top, rgb(239,228,171), rgb(255,255,141));
+	background: -o-linear-gradient(top, rgb(239,228,171), rgb(255,255,141));
+	background: -webkit-linear-gradient(top, rgb(239,228,171), rgb(255,255,141));
+	background: linear-gradient(rgb(239,228,171), rgb(255,255,141));
 	background-repeat:no-repeat;
 }
 
@@ -26,6 +26,7 @@ br
 
 .content
 {
+	background-color:rgb(250,242,200);
 	margin:0px;
 	padding:0px;
 	box-shadow: 10px 10px 5px #888888;
@@ -60,7 +61,7 @@ br
 	background: -ms-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	background: -o-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	background: -webkit-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
-	background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
+	/*background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));*/
 }
 
 .hlogo
@@ -291,7 +292,6 @@ br
 #editmyprofile-button:hover {
 	position:relative;
 	top:3px;
-	color: #fqq;
 	box-shadow:none;
 	-moz-box-shadow:none;
 	-webkit-box-shadow:none;
@@ -434,7 +434,7 @@ br
 	background: -ms-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	background: -o-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
 	background: -webkit-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
-	background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
+	/*background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));*/
 	box-shadow: 10px 10px 5px #888888;
 }
 

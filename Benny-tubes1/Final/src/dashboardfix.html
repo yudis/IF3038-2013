@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<title>Dashboard</title>
 	<link rel="stylesheet" type="text/css" href="dashboardfixcss.css">
+	<script type="text/javascript" src="dashboard.js"></script>
 </head>
 
 <body>
@@ -11,14 +14,15 @@
             <h1>Add More Category</h1>
 			<div>
                 <label for="username">Nama Kategori</label>
-                <input type="text" name = "categoryname" value = "" id="user" onKeyUp="validateCategoryName()"/>
-                <img src = "../image/false.png" id = "false">
+                <input type="text" name = "categoryname" value = "" id="username" onKeyUp="validateCategoryName()"/>
+                <img alt = "" src = "../image/false.png" id = "false">
             </div>
 			<div>
                 <label for="pengguna">Pengguna</label>
                 <input type="text" id="pengguna" value="" />
             </div>
-            <a onClick="addingit()" href = "#close" id="test"><input class="addcategory" type="button" value="add"  id="addCategoryButton"/></a>
+          
+			<button onClick="addingit()" class="addcategory" id="addCategoryButton">Add</button>
             <a class="close" href="#close"></a>
         </form>
 
@@ -48,47 +52,47 @@
 		<div class="dashboard">
 			<div id="profile">
                 <div id ="nama">
-					<img src = "../image/profpic.jpg" id="profilepicture">
+					<img alt="" src = "../image/profpic.jpg" id="profilepicture">
 					<b>Lazy Monkey</b>
 				</div>
 				<div id="kategori">
 					<b>KATEGORI</b>
                 </div>
                 <div id="alltask">
-					<button type "button" id="buttonalltask" onclick="clickalltask()" onfocus="focusonit()">
-						<img src = "../image/alltask.png" class="homeicon">
+					<button type="button" id="buttonalltask" onclick="clickalltask()" onfocus="focusonit()">
+						<img alt = "" src = "../image/alltask.png" class="homeicon">
 						All Task
                    </button> 
                 </div> 
 				<ul id = "listkategori">
 					<li>
                         <div class="home">
-							<button type "button" id="buttonhome" onclick="clickhome()" onfocus="focusonit()">
-								<img src = "../image/homeicon.png" class="homeicon">
+							<button type="button" id="buttonhome" onclick="clickhome()" onfocus="focusonit()">
+								<img alt = "" src = "../image/homeicon.png" class="homeicon">
 								H o m e
                            </button>
                         </div>
 					</li>
 					<li>
                         <div class="home">
-							<button type "button" id="buttonoffice" onclick="clickoffice()" onfocus="focusonit()">
-								<img src = "../image/office.png" class="homeicon">
+							<button type="button" id="buttonoffice" onclick="clickoffice()" onfocus="focusonit()">
+								<img alt = "" src = "../image/office.png" class="homeicon">
 								O f f i c e
                             </button>
                         </div>
 					</li>
 					<li>
                         <div class="home">
-							<button type "button" id="buttonpersonal" onclick="clickpersonal()" onfocus="focusonit()">
-								<img src = "../image/personal.png" class="homeicon">
+							<button type="button" id="buttonpersonal" onclick="clickpersonal()" onfocus="focusonit()">
+								<img alt = "" src = "../image/personal.png" class="homeicon">
 								P e r s o n a l
                             </button>
                         </div>
 					</li>
 					<li>
                         <div class="home">
-							<button type "button" id="buttonshopping" onclick="clickshopping()" onfocus="focusonit()">
-								<img src = "../image/shopping.png" class="homeicon">
+							<button type="button" id="buttonshopping" onclick="clickshopping()" onfocus="focusonit()">
+								<img alt = "" src = "../image/shopping.png" class="homeicon">
 								S h o p p i n g
                             </button>
                         </div>
@@ -97,29 +101,29 @@
                <ul id = "familyelement">
                     <li>
                         <div class="home">
-							<button type "button" id="buttonfamily" onclick="clickshopping()" onfocus="focusonit()">
-								<img src = "../image/family.png" class="homeicon">
+							<button type="button" id="buttonfamily" onclick="clickshopping()" onfocus="focusonit()">
+								<img alt="" src = "../image/family.png" class="homeicon">
 								F a m i l y
                             </button>
                         </div>
 					</li>
 				</ul>
+                       <button class="addCategory" onClick="activeit()">Add more category</button>
                     <div id="add">
-                        <a href="#addCategory_form" id="addCategory_pop"><button class="addCategory" onClick="activeit()">Add more category</button></a>
                     </div>
 			</div>
 			<div id = "tasklist">
 				<div id = "tasktitle">
-					<img src = "../image/book.png" id="task">
+					<img alt = "" src = "../image/book.png" id="task">
 					T  A  S  K
 				</div>
 				<div id = "task1">
 					<ul class = "listoftaskbutton">
 						<li class="taskbuttonlist" id = "hometask">
-							<button type "button" class="taskbutton">
+							<div class="taskbutton" onClick="window.location.href='./rincian.html?^Bersiin kamar!!^14 Februari 2013^kamar, valentine'">
 								<div class = "buttontitle">
 									<div class = "buttontitleicon">
-										<img src = "../image/homeicon.png" class="iconinbutton">
+										<img alt = "" src = "../image/homeicon.png" class="iconinbutton">
 									</div>
 									<div class = "buttondescName">
 										<div>
@@ -130,14 +134,14 @@
 											<br>tag : kamar, valentine
 										</div>
 									</div>
-								</div>
-							</button>
+                                 </div>
+							</div>
 						</li>
 						<li class = "taskbuttonlist" id="personaltask">
-							<button type "button" class="taskbutton" >
+							<div class="taskbutton" onClick="window.location.href='./rincian.html?^Bikin coklat!!^14 Februari 2013^valentine, coklat'">
 								<div class = "buttontitle">
 									<div class = "buttontitleicon">
-										<img src = "../image/personal.png" class="iconinbutton">
+										<img alt = "" src = "../image/personal.png" class="iconinbutton">
 									 </div>
 									 <div class = "buttondescName">
 										<div>
@@ -149,13 +153,13 @@
 										</div>
 									 </div>
 								</div>
-							</button>
+							</div>
 						</li>
 						<li class="taskbuttonlist" id ="officetask">
-							<button type "button" class="taskbutton" >
+							<div class="taskbutton" onClick="window.location.href='./rincian.html?^Kerjain progin!!^22 Februari 2013^kuliah, tugas'">
 								<div class = "buttontitle">
 									<div class = "buttontitleicon">
-										<img src = "../image/office.png" class="iconinbutton">
+										<img alt = "" src = "../image/office.png" class="iconinbutton">
 									</div>
 									<div class = "buttondescName">
 										<div>
@@ -167,13 +171,13 @@
 										</div>
 									</div>
 								</div>
-							</button>
+							</div>
 						</li>
 						<li>
-							<button type "button" class="taskbutton" id ="addtaskbutton">
+							<div class="taskbutton" id ="addtaskbutton" onClick="window.location.href='./Pembuatan Tugas.html'">
 								<div class = "buttontitle">
 									<div class = "buttontitleicon">
-										<img src = "../image/addtask.png" class="iconinbutton">
+										<img alt="" src = "../image/addtask.png" class="iconinbutton">
 									 </div>
 									 <div class = "buttondescAdd">
 										<div>
@@ -181,7 +185,7 @@
 										</div>
 									 </div>
 								</div>
-							</button>
+							</div>
 						</li>
 					</ul>
 				</div>
@@ -192,167 +196,10 @@
 	
 	<div class="footer">
 		<p class="ftext">Tubes progin 1</p>
-		<p class="ftext">Copyright © 2013 Benedikus, Janice, and Raymond</p>
+		<p class="ftext">Copyright &copy; 2013 Benedikus, Janice, and Raymond</p>
 	</div>
 	
 </body>
 
-<script language="javascript" type="text/javascript">
-<!--
-function popitup() {
-	document.getElementById("buttonadd").style.color= "red";
-	document.getElementById("popup").style.display = "block";
-}
-
-function closepopup(){
-	document.getElementById("buttonadd").style.color= "purple";
-	document.getElementById("popup").style.display = "none";
-}
-
-function initializekategori(){
-	document.getElementById("buttonhome").style = "normal";
-	document.getElementById("buttonoffice").style = "normal";
-	document.getElementById("buttonshopping").style = "normal";
-	document.getElementById("buttonpersonal").style = "normal";
-}
-
-function clickalltask(){
-	document.getElementById("buttonalltask").style.fontWeight = "bold";
-	document.getElementById("buttonalltask").style.backgroundColor = "rgba(255,255,255,0.6)";
-	document.getElementById("buttonhome").style.fontWeight = "normal";
-	document.getElementById("buttonhome").style.backgroundColor = "transparent";
-	document.getElementById("buttonoffice").style.fontWeight = "normal";
-	document.getElementById("buttonoffice").style.backgroundColor = "transparent";
-	document.getElementById("buttonshopping").style.fontWeight = "normal";
-	document.getElementById("buttonshopping").style.backgroundColor = "transparent";
-	document.getElementById("buttonpersonal").style.fontWeight = "normal";
-	document.getElementById("buttonpersonal").style.backgroundColor = "transparent";
-	document.getElementById("buttonhome").style = "normal";
-	document.getElementById("buttonshopping").style = "normal";
-	document.getElementById("buttonpersonal").style = "normal";
-	document.getElementById("addtaskbutton").style.display = "none";
-	document.getElementById("hometask").style.display = "block";
-	document.getElementById("officetask").style.display = "block";
-	document.getElementById("personaltask").style.display = "block";
-	document.getElementById("shoppingtask").style.display = "block";
-	document.getElementById("addtaskbutton").style.display = "block";
-}
-
-function clickhome(){
-	document.getElementById("buttonalltask").style.fontWeight = "normal";
-	document.getElementById("buttonalltask").style.backgroundColor = "transparent";
-	document.getElementById("buttonoffice").style.fontWeight = "normal";
-	document.getElementById("buttonoffice").style.backgroundColor = "transparent";
-	document.getElementById("buttonshopping").style.fontWeight = "normal";
-	document.getElementById("buttonshopping").style.backgroundColor = "transparent";
-	document.getElementById("buttonpersonal").style.fontWeight = "normal";
-	document.getElementById("buttonpersonal").style.backgroundColor = "transparent";
-	document.getElementById("buttonhome").style.fontWeight = "bold";
-	document.getElementById("buttonhome").style.backgroundColor = "rgba(255,255,255,0.6)";
-	document.getElementById("addtaskbutton").style.display = "block";
-	document.getElementById("hometask").style.display = "block";
-	document.getElementById("officetask").style.display = "none";
-	document.getElementById("personaltask").style.display = "none";
-	document.getElementById("shoppingtask").style.display = "none";
-	document.getElementById("addtaskbutton").style.display = "block";
-}
-
-function clickoffice(){
-	document.getElementById("buttonalltask").style.fontWeight = "normal";
-	document.getElementById("buttonalltask").style.backgroundColor = "transparent";
-	document.getElementById("buttonhome").style.fontWeight = "normal";
-	document.getElementById("buttonhome").style.backgroundColor = "transparent";
-	document.getElementById("buttonshopping").style.fontWeight = "normal";
-	document.getElementById("buttonshopping").style.backgroundColor = "transparent";
-	document.getElementById("buttonpersonal").style.fontWeight = "normal";
-	document.getElementById("buttonpersonal").style.backgroundColor = "transparent";
-	document.getElementById("buttonoffice").style.fontWeight = "bold";
-	document.getElementById("buttonoffice").style.backgroundColor = "rgba(255,255,255,0.6)";
-	document.getElementById("buttonhome").style = "normal";
-	document.getElementById("buttonshopping").style = "normal";
-	document.getElementById("buttonpersonal").style = "normal";
-	document.getElementById("addtaskbutton").style.display = "block";
-	document.getElementById("hometask").style.display = "none";
-	document.getElementById("officetask").style.display = "block";
-	document.getElementById("personaltask").style.display = "none";
-	document.getElementById("shoppingtask").style.display = "none";
-	document.getElementById("addtaskbutton").style.display = "block";
-}
-
-function clickpersonal(){
-	document.getElementById("buttonalltask").style.fontWeight = "normal";
-	document.getElementById("buttonalltask").style.backgroundColor = "transparent";
-	document.getElementById("buttonhome").style.fontWeight = "normal";
-	document.getElementById("buttonhome").style.backgroundColor = "transparent";
-	document.getElementById("buttonoffice").style.fontWeight = "normal";
-	document.getElementById("buttonoffice").style.backgroundColor = "transparent";
-	document.getElementById("buttonshopping").style.fontWeight = "normal";
-	document.getElementById("buttonshopping").style.backgroundColor = "transparent";
-	document.getElementById("buttonpersonal").style.fontWeight = "bold";
-	document.getElementById("buttonpersonal").style.backgroundColor = "white";
-	document.getElementById("buttonhome").style = "normal";
-	document.getElementById("buttonoffice").style = "normal";
-	document.getElementById("buttonshopping").style = "normal";
-	document.getElementById("addtaskbutton").style.display = "block";
-	document.getElementById("hometask").style.display = "none";
-	document.getElementById("officetask").style.display = "none";
-	document.getElementById("personaltask").style.display = "block";
-	document.getElementById("shoppingtask").style.display = "none";
-	document.getElementById("addtaskbutton").style.display = "block";
-}
-
-function clickshopping(){
-	document.getElementById("buttonalltask").style.fontWeight = "normal";
-	document.getElementById("buttonalltask").style.backgroundColor = "transparent";
-	document.getElementById("buttonhome").style.fontWeight = "normal";
-	document.getElementById("buttonhome").style.backgroundColor = "transparent";
-	document.getElementById("buttonoffice").style.fontWeight = "normal";
-	document.getElementById("buttonoffice").style.backgroundColor = "transparent";
-	document.getElementById("buttonpersonal").style.fontWeight = "normal";
-	document.getElementById("buttonpersonal").style.backgroundColor = "transparent";
-	document.getElementById("buttonshopping").style.fontWeight = "bold";
-	document.getElementById("buttonshopping").style.backgroundColor = "rgba(255,255,255,0.6)";
-	document.getElementById("buttonhome").style = "normal";
-	document.getElementById("buttonoffice").style = "normal";
-	document.getElementById("buttonpersonal").style = "normal";
-	document.getElementById("addtaskbutton").style.display = "block";
-	document.getElementById("hometask").style.display = "none";
-	document.getElementById("officetask").style.display = "none";
-	document.getElementById("personaltask").style.display = "none";
-	document.getElementById("shoppingtask").style.display = "block";
-	document.getElementById("addtaskbutton").style.display = "block";
-}
-
-function validateCategoryName(){
-	if(document.getElementById("user").value != ""){
-		document.getElementById("false").src = "../image/true.png";
-		document.getElementById("addCategoryButton").disabled = false;
-		document.getElementById("test").disabled = false;
-	}else{
-		document.getElementById("false").src = "../image/false.png";
-		document.getElementById("addCategoryButton").disabled = true;
-		document.getElementById("test").disabled = true;
-	}
-}
-
-function addingit(){
-	if(document.getElementById("false").src.indexOf("image/true.png")!=-1) {
-		document.getElementById("addCategoryButton").disabled = false;
-		document.getElementById("test").disabled = false;
-		document.getElementById("familyelement").style.display = "block";
-	}
-}
-
-function activeit(){
-	document.getElementById("user").value = "";
-	document.getElementById("pengguna").value = "";
-	document.getElementById("false").src = "../image/false.png";
-	document.getElementById("addCategoryButton").disabled = true;
-	document.getElementById("test").disabled = true;
-}
-
-
-// -->
-</script>
 </html>
 
