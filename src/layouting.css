@@ -352,3 +352,8 @@ textarea {
 .header_profile{
 	color:#903;
 }
+
+#kotak_menu{
+	margin-left: 50px;
+	text-align:center;	
+}
