@@ -27,7 +27,6 @@ window.onload = function() {
 		window.registerform[key].onkeyup = function(e) {
 			register_check();
 			var key = $id(this.id).id.split('-')[1];
-			console.log(key);
 			
 			if(!window.registerform_validation[key]) {
 				if(!hasClass(window.registerform[key], 'error')) {

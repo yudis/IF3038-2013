@@ -10,7 +10,6 @@
 })(window);
 
 function hasClass(x, y) {
-	console.log(x);
 	var classes = x.className.split(' ');
 	return (classes.indexOf(y) != -1);
 }
