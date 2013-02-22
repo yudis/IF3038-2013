@@ -154,3 +154,17 @@ function checkTaskName() {
 	}
 	document.getElementById('taskname_validation').style.display = "block";
 }
+
+function checkTaskAttachment() {
+	var attachmentName = document.getElementById('attachment_upload').value;
+	var dot = ".";
+	if (attachmentName.indexOf(dot) != -1) {
+		//valid
+		document.getElementById('task_attachment_validation').src = "../img/yes.png";
+	}
+	else {
+		//not valid
+		document.getElementById('task_attachment_validation').src = "../img/no.png";
+	}
+	document.getElementById('task_attachment_validation').style.display = "block";
+}
