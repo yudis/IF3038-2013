@@ -46,6 +46,7 @@ background-color:#FC0;
 opacity:1;
 width: 400px;
 list-style-type: none;
+z-index: 1000;
 }
 .centerV li{
 list-style-type: none;
@@ -537,7 +538,6 @@ font-size: 24px;
 background-color: #fe9227;
 margin: 0;
 width: 350px;
-z-index: -1;
 }
 #kegiatan b.design2 a{
 color: #351b02;
@@ -549,7 +549,6 @@ background-color: #fe9227;
 margin: 0;
 float: right;
 text-decoration: none;
-z-index: 0;
 }
 #kegiatan a.list {
 background-color: #feff95;
@@ -565,7 +564,6 @@ text-decoration: none;
 border-bottom-color: #fe9227;
 border-bottom-width: 1px;
 border-bottom-style: solid;
-z-index: -1;
 }
 #kegiatan input{
 margin: 20px 20px 0 20px;

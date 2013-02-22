@@ -1,5 +1,3 @@
-var i;
-
 function ShowTask(s,jum){
 	var obj=document.getElementById("Task2");
 	obj.style.display="none";
@@ -21,6 +19,7 @@ function ShowTask(s,jum){
 	}
 	
 }
+
 function FormAddKategori(){
 	var form=document.getElementById("popupform");
 	form.style.display="block";
@@ -42,6 +41,7 @@ function AddKategori(){
 
 	var obj= document.getElementById("popup");
 	obj.style.display="none";
+	}
 	}
 
 function DelPopUp(){
