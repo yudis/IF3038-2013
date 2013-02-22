@@ -65,9 +65,7 @@ Rp(function() {
 			Rp('#current-task').hide();
 			Rp('#edit-task').nodes[0].style.display = 'block';
 
-			
+
 		}
 	});
-
-	Rp('#submitButton').attr('disabled', 'disabled');
 });
