@@ -27,6 +27,10 @@ section h3 {
 	color: #ccc;
 	margin: 0 0 6px;
 }
+
+.content > div {
+	padding: 20px;
+}
 .content > div > header {
 	position: relative;
 }
@@ -75,6 +79,9 @@ form.vertical .field label {
 }
 form .buttons {
 	padding-left: 120px;
+}
+form.vertical .buttons {
+	padding-left: 0;
 }
 button,
 input,
@@ -160,6 +167,11 @@ button:active {
 }
 .site-footer {
 	clear: both;
+	background: #fff;
+	padding: 20px;
+	margin-bottom: 40px;
+	font-size: 12px;
+	color: #999;
 }
 
 /** Header **/
@@ -171,6 +183,7 @@ button:active {
 	font-size: 15px;
 }
 .site-container > header h1 {
+	padding-left: 20px;
 	margin: 0;
 	float: left;
 	font-weight: bold;
@@ -303,8 +316,6 @@ button:active {
 }
 .task-checkbox input {
 	margin: 5px 0;
-	margin-left: 0;
-	margin-right: 0;
 	padding: 0;
 }
 .task a {
@@ -317,10 +328,6 @@ task .category {
 	display: inline;
 }
 .task .details {
-	position: absolute;
-	top: 7px;
-	right: 10px;
-	font-size: 16px;
 	color: #999;
 }
 .task .detail-label {
@@ -328,6 +335,9 @@ task .category {
 }
 .task .details .tags {
 	margin-left: 10px;
+}
+.completed.tasks .task a {
+	text-decoration: line-through;
 }
 .tag {
 	font-size: 12px;
@@ -422,14 +432,18 @@ p.description .detail-label {
 /* Profile */
 .profile-details {
 	margin-bottom: 14px;
+	padding-left: 220px;
+}
+.profile .tasks {
+	padding-left: 220px;
 }
 .profile-details p {
 	margin: 0 0 6px;
 }
 .profile-image {
 	float: left;
-	max-width: 30%;
-	margin: 0 20px 0 0;
+	max-width: 200px;
+	margin: 0 20px 0 -220px;
 	padding: 0;
 	position: relative;
 	z-index: 2;
@@ -442,39 +456,32 @@ p.description .detail-label {
 
 /* Handhelds - smartphones */
 @media (max-width: 767px) {
+	#loginLink {
+		display: none;
+	}
 }
 
 /* Tablets in portrait */
-@media (min-width: 768px) and (max-width: 979px) {
-}
-
-/* Landscape tablets and desktops in small windows */
-/* Two-column design, use floats */
-@media screen and (min-width: 980px) {
+@media (min-width: 768px) {
 	.site-container {
-		width: 920px;
+		width: 720px;
 		position: relative;
 	}
 	.content > div {
 		position: relative;
-	}
-	.site-container > header h1 {
-		padding-left: 20px;
-	}
-	.site-container > header nav {
 	}
 	.primary {
 		float: left;
-		width: 600px;
+		width: 480px;
 		min-height: 30em;
-	}
-	.content > div {
-		padding: 20px;
 	}
 	.secondary {
 		float: left;
-		width: 260px;
+		width: 180px;
 		margin: 0 0 0 20px;
+	}
+	.secondary input {
+		width: 156px;
 	}
 
 	/** Main Page **/
@@ -499,9 +506,61 @@ p.description .detail-label {
 		border-top-right-radius: 0;
 		width: 230px;
 	}
+
+	/** Dashboard **/
+	.task .details {
+		position: absolute;
+		top: 7px;
+		right: 10px;
+		font-size: 16px;
+	}
+}
+
+/* Landscape tablets and desktops in small windows */
+/* Two-column design, use floats */
+@media screen and (min-width: 980px) {
+	.site-container {
+		width: 920px;
+		position: relative;
+	}
+	.content > div {
+		position: relative;
+	}
+	.primary {
+		width: 600px;
+	}
+	.secondary {
+		width: 260px;
+		margin: 0 0 0 20px;
+	}
+	.secondary input {
+		width: 236px;
+	}
+	#loginBox {
+		width: 230px;
+	}
 }
 
 /* Full-screen desktops and other large-format media */
 @media (min-width: 1200px) {
-
+	.site-container {
+		width: 1140px;
+		position: relative;
+	}
+	.content > div {
+		position: relative;
+	}
+	.primary {
+		width: 820px;
+	}
+	.secondary {
+		width: 260px;
+		margin: 0 0 0 20px;
+	}
+	.secondary input {
+		width: 236px;
+	}
+	#loginBox {
+		width: 230px;
+	}
 }
