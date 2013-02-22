@@ -70,6 +70,13 @@ body {
 	margin-left:1%;
 }
 
+#namaprogram{
+	position:relative;
+	bottom:20%;
+	text-decoration:underline;
+	font-size:40px;
+}
+
 #dashboardLink {
 	position:relative;
 	bottom:30%;
@@ -102,6 +109,14 @@ a,a:visited {
 
 #searchForm:hover {
 	width:40%;
+}
+
+#profilename {
+	position:relative;
+	left:55%;
+	bottom:30%;
+	text-transform:uppercase;
+	text-decoration:overline;
 }
 
 #submitForm {
@@ -448,7 +463,6 @@ a,a:visited {
 
 /*rincian task*/
 #rinciantask {
-/*gimana caranya menjadi min-height*/
 	float:left;
 	height:160%;
 	width:100%;
@@ -457,7 +471,6 @@ a,a:visited {
 
 /*new task*/
 #newtask {
-/*gimana caranya menjadi min-height*/
 	float:left;
 	height:70%;
 	width:100%;
@@ -466,7 +479,6 @@ a,a:visited {
 
 /*index*/
 #content {
-/*gimana caranya menjadi min-height*/
 	float:left;
 	height:90%;
 	width:100%;
