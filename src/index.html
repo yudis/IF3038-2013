@@ -27,7 +27,7 @@
 			</div>
 		</div>
 		<div id="register">
-			<form id="resgisterform" method="post" action="Profil.html">
+			<div id="resgisterform">
 				<fieldset>
 				<legend>Register</legend>
 				<div class="field">
@@ -56,27 +56,16 @@
 					<div class="fieldholder"><input class="fieldinput" id="registerform-birthdate" type="date"></div>
 				</div>
 				<div class="field">
-					<div class="fieldname">Date</div>
-					<div class="fieldholder">
-						<select id="registerform-birthdate-year">
-						</select>
-						<select id="registerform-birthdate-month">
-						</select>
-						<select id="registerform-birthdate-date">
-						</select>
-					</div>
-				</div>
-				<div class="field">
 					<div class="fieldname">Avatar</div>
 					<div class="fieldholder">
 						<input class="fieldinput" id="registerform-avatar" type="file">
 					</div>
 				</div>
 				<div class="field">
-					<button id="registerform-submit" type="submit">REGISTER</button>
+					<button id="registerform-submit" type="submit" onclick="register()">REGISTER</button>
 				</div>
 				</fieldset>
-			</form>
+			</div>
 		</div>
 	</div>
 	<div id="footer">

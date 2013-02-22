@@ -43,9 +43,6 @@ window.onload = function() {
 			}
 		}
 	}
-	
-	//init_date();
-	
 }
 
 function login_check() {
@@ -80,13 +77,13 @@ function register_check() {
 
 	for(key in registerform_validation) {
 		if(!registerform_validation[key]) {
-			
 			$id("registerform-submit").disabled = true;
 			ok = false;
 		} 
 	}
-	if(ok)
+	if(ok) {
 		$id("registerform-submit").disabled = false;
+	}
 }
 
 function init_date() {
@@ -146,5 +143,22 @@ function try_login() {
 		//alert("Login success");
 		window.location = "Profil.html"
 	}
+}
+
+function register() {
+	Users.add(new User(
+		registerform['username'].value,
+		registerform['password'].value,
+		registerform['email'].value,
+		registerform['fullname'].value,
+		registerform['birthdate'].value,
+		registerform['avatar'].value
+	));
+	console.log(registerform['username'].value);
+	Session.login(
+		registerform['username'].value,
+		registerform['password'].value
+	);
+	window.location = "Profil.html"
 }
 
