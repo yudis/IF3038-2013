@@ -7,7 +7,7 @@
         <link rel="stylesheet" style="text/css" href="style.css"> 
     </head>
 
-    <body >
+    <body onload="initialize()">
         <div id="content">
             <div id="header">
                 <div id="logo">
@@ -30,11 +30,11 @@
             <div id="wrappertd">
             	<li id="wrapper-main">
                 	<label for="tugas">Nama Tugas</label> <input id="tugas" class="textfields" type="text" size="50" disabled/> <br />
-                    <label for="attach">Attachment</label> <input id="attach" class="textfields" type="text" size="50" disabled/> <br/>
+                    <label for="attach">Attachment</label> <input id="attach" class="textfields" type="file" size="50" onChange="loadAttachment()"/> <br/>
                     <label for="deadline">Deadline</label> <input id="deadline" class="textfields" type="text" size="50" disabled/> <br/> 
                     <label for="assignee">Assignee</label> <input id="assignee" class="textfields" type="text" size="50" autocomplete="on" disabled/> <br/>   
                     <label for="textfields">Tag</label> <input id="tag" class="textfields" type="text" size="50" disabled/> <br/>
-                    <br/>
+                    <br/> 
                     <input id="edit" name="edit" value="Edit" type="button" onClick="editTask()"/>
                     <br/>
                     <div id="comment">
@@ -44,6 +44,16 @@
                             <input id="commentbutton" name="commentbutton" type="submit" value="Comment"/>
                         </form>
             		</div>
+                    
+                    <div id="wrapper-right">
+						<img id="suatu_gambar" src="Troll.png" alt="Gambar tidak dapat di-load"/>    
+						<video id="suatu_video" width="320" height="240" controls>
+							<source src="A_Caterpillar.mp4" type="video/mp4">
+							<source src="A_Caterpillar.ogv" type="video/ogv">
+							Your browser does not support the video tag.
+						</video>
+						<a id="linkoflink" href="http://www.cblt.soton.ac.uk/multimedia/PDFs08/Podcasting%20in%20education.pdf">Link here</a>
+					</div>
                 </li>
             </div>
         </div>
@@ -61,16 +71,14 @@
 				if (document.getElementById("edit").value == "Edit")
 				{
 					document.getElementById("tugas").disabled = false;
-					document.getElementById("attach").disabled = false;
 					document.getElementById("deadline").disabled = false;
 					document.getElementById("assignee").disabled = false;
 					document.getElementById("tag").disabled = false;
-					document.getElementById("edit").value = "Finished";
+					document.getElementById("edit").value = "Save";
 				}
-				else if (document.getElementById("edit").value == "Finished")
+				else if (document.getElementById("edit").value == "Save")
 				{
 					document.getElementById("tugas").disabled = true;
-					document.getElementById("attach").disabled = true;
 					document.getElementById("deadline").disabled = true;
 					document.getElementById("assignee").disabled = true;
 					document.getElementById("tag").disabled = true;
@@ -87,6 +95,39 @@
 				a.value += "User: " + b.value + "\n\n";
 				
 				b.value = "";
+			}
+			
+			function loadAttachment()
+			{
+				var x = document.getElementById("attach").value;
+				var y = x.split(".");
+				var z = y[y.length-1];
+				if (z == "jpg" || z == "ogg" || z == "jpeg" || z == "png" || z == "gif")
+				{
+					document.getElementById("suatu_video").style.display = "none";
+					document.getElementById("suatu_gambar").style.display = "block";
+					document.getElementById("linkoflink").style.display = "none";
+				}
+				else if (z == "avi" || z == "mp4" || z == "mkv" || z == "3gp" || z == "flv" || z == "ogv" || z == "ogg")
+				{
+					document.getElementById("suatu_gambar").style.display = "none";
+					document.getElementById("suatu_video").style.display = "block";
+					document.getElementById("linkoflink").style.display = "none";
+				}
+				else
+				{
+					document.getElementById("suatu_gambar").style.display = "none";
+					document.getElementById("suatu_video").style.display = "none";
+					document.getElementById("linkoflink").style.display = "block";
+				}
+			}
+			
+			function initialize()
+			{
+				document.getElementById("tugas").value = "Tugas progin super nyebelin";
+				document.getElementById("deadline").value = "22-2-2013";
+				document.getElementById("assignee").value = "John";
+				document.getElementById("tag").value = "Yuli, Amel, Adriel";
 			}
 		</script>
     </body>
