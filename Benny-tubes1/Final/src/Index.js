@@ -169,25 +169,12 @@ function checkpostal(){
 	var png=/\.png$/
 	var pdf=/\.pdf$/
 	var mp4=/\.mp4$/
-	if (document.getElementById("ali").value.search(jpg)!=-1)  
+	if ((document.getElementById("ali").value.search(jpg)!=-1) || (document.getElementById("ali").value.search(png)!=-1)|| (document.getElementById("ali").value.search(pdf)!=-1)|| (document.getElementById("ali").value.search(mp4)!=-1))
 	{
-		alert("File yang dipilih berformat jpg.");
+		document.getElementById("nfile").src="../image/true.png";
 	}
-	else if (document.getElementById("ali").value.search(png)!=-1)
-	{
-		alert("File yang dipilih berformat png.");
-	}
-	else if (document.getElementById("ali").value.search(pdf)!=-1)
-	{
-		alert("File yang dipilih berformat pdf.");
-	}
-	else if (document.getElementById("ali").value.search(mp4)!=-1)
-	{
-		alert("File yang dipilih berformat mp4.");
-	}
-	else{
-		alert("File yang dipilih harus berformat gambar, video, atau file!");
-		document.getElementById("ali").value = "";
+	else{	
+		document.getElementById("nfile").src="../image/false.png";
 	}
 }
 
@@ -225,6 +212,19 @@ function changeEdit(){
 	document.getElementById("changeOrEdit").value ="Edit";
 	}
 		
+}
+
+function checkNamaTugas(){
+	var NamaTugas = document.getElementById("namaTugas").value;
+	if (NamaTugas.match(/^[a-zA-Z0-9 ]+$/) && NamaTugas.length <= 25)
+	{
+		<!-- benar -->
+		document.getElementById("nlengkappic").src="../image/true.png";
+	} else{
+		document.getElementById("nlengkappic").src="../image/false.png";
+	}
+	
+	openReg();
 }
 
 

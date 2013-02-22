@@ -33,20 +33,20 @@
 
 	<div class="contentku">
 		
-			<label class="rincianKiri">Nama Tugas</label>
+			<label class="rincianKiri" >Nama Tugas</label>
 
-			<input type="text" class="inputText"/><br/>
+			<input type="text" id="namaTugas" class="inputText" onkeyup="checkNamaTugas()"/><img src="../image/false.png" alt="False04" id="nlengkappic"/><br/>
 
 			
         <label class="rincianKiri">Attachment</label>
 
-        <input type="file" title="File harus berformat jpg, png, pdf, atau mp4" name="datafile" onchange="checkpostal()"><br/>
+        <input type="file" id="ali" title="File harus berformat jpg, png, pdf, atau mp4" name="datafile" onchange="checkpostal()"/><img src="../image/false.png" alt="False04" id="nfile"/><br/>
 
         
         <label class="rincianKiri">Deadline</label>
 
         <div class="rincianKanan">
-            <input id="demo1" type="text" size="25"><a href="javascript:NewCal('demo1','ddmmyyyy')"><img src="../image/cal.gif" class="kalender" alt="Pick a date"></a>
+            <input id="demo1" type="text" size="25"/><a href="javascript:NewCal('demo1','ddmmyyyy')"><img src="../image/cal.gif" class="kalender" alt="Pick a date"></a>
         </div>
         <label class="rincianKiri">Assignee</label><input class="inputText" type="text"/><br/>
        

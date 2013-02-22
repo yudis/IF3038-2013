@@ -59,7 +59,7 @@ function NewCal(pCtrl,pFormat,pShowTime,pTimeMode)
 	if (pFormat!=null)
 		Cal.Format=pFormat.toUpperCase();
 	exDateTime=document.getElementById(pCtrl).value;
-	checkTanggal();	
+	//checkTanggal();	
 	if (exDateTime!="")//Parse Date String
 	{
 		var Sp1;//Index of Date Separator 1
@@ -106,7 +106,7 @@ function NewCal(pCtrl,pFormat,pShowTime,pTimeMode)
 			Cal.Year=parseInt(strYear,10);
 		//end parse year
 		//parse time
-		checkTanggal();	
+		//checkTanggal();	
 		if (Cal.ShowTime==true)
 		{
 			tSp1=exDateTime.indexOf(":",0)
@@ -122,7 +122,7 @@ function NewCal(pCtrl,pFormat,pShowTime,pTimeMode)
 	winCal=window.open("","DateTimePicker","toolbar=0,status=0,menubar=0,fullscreen=no,width=195,height=245,resizable=0,top="+cnTop+",left="+cnLeft);
 	docCal=winCal.document;	
 	RenderCal();
-	checkTanggal();	
+	//checkTanggal();	
 }
 
 function RenderCal()
@@ -209,7 +209,7 @@ function RenderCal()
 		}
 	}
 	docCal.writeln(vCalData);
-	checkTanggal();		
+	//checkTanggal();		
 	//Time picker
 	if (Cal.ShowTime)
 	{
@@ -238,7 +238,7 @@ function RenderCal()
 	docCal.writeln("\n</table>");
 	docCal.writeln("</form></body></html>");
 	docCal.close();
-	checkTanggal();	
+	//checkTanggal();	
 }
 
 function GenCell(pValue,pHighLight,pColor)//Generate table cell with value
@@ -273,7 +273,7 @@ function GenCell(pValue,pHighLight,pColor)//Generate table cell with value
 	else
 		vTimeStr="";		
 	PCellStr="<td "+vColor+" width="+CellWidth+" align='center'><font face='verdana' size='2'"+vHLstr1+"<a href=\"javascript:winMain.document.getElementById('"+Cal.Ctrl+"').value='"+Cal.FormatDate(PValue)+"';"+vTimeStr+";window.close();\">"+PValue+"</a>"+vHLstr2+"</font></td>";
-	checkTanggal();	
+	//checkTanggal();	
 	return PCellStr;
 }
 
@@ -304,7 +304,7 @@ function Calendar(pDate,pCtrl)
 		this.AMorPM="AM";
 	else
 		this.AMorPM="PM";
-	checkTanggal();	
+	//checkTanggal();	
 }
 
 function GetMonthIndex(shortMonthName)
@@ -477,7 +477,7 @@ Calendar.prototype.IsLeapYear=IsLeapYear;
 
 function FormatDate(pDate)
 {
-	checkTanggal();	
+	//checkTanggal();	
 	if (this.Format.toUpperCase()=="DDMMYYYY"){
 		return (pDate+DateSeparator+(this.Month+1)+DateSeparator+this.Year);
 	}
