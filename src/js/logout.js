@@ -13,6 +13,6 @@ login_area.onmouseout = function()
 
 login_area.onclick = function()
 {
-	sessionStorage.removeItem('userSession');
+	sessionStorage.removeItem('MOA_userSession');
 	window.location = "index.html";
 }

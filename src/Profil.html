@@ -53,54 +53,57 @@
 		
 		<section>
 			<div id="content_wrap" class="wrap">
-				<div id="profil_area">
+				<div id="profil_left">
 					<div id="profil_form_wrap">
-						<form id="profil_form" action="profiledit.html" method="post">
-							<div id="profil_head">
-								<h1>Admin</h1>
-							</div>
-							<div class="row">
-								<label for="profil_username">Username</label>
-								<span id="profil_username"></span>
-							</div>
-							<div class="row">
-								<label for="profil_name">Nama Lengkap</label>
-								<span id="profil_name"></span>
-							</div>
-							<div class="row">
-								<label for="profil_birth_date">Tanggal Lahir</label>
-								<span id="profil_birth_date"></span>
-							</div>
-							<div class="row">
-								<label for="profil_email">Email</label>
-								<span id="profil_email"></span>
-							</div>
-							<div class="row">
-								<label for="avatar_image">Avatar</label>
-								<img id="avatar_image" src="images/avatar.jpg" alt="avatar profil" />
-							</div>
-							<input id="profil_submit" type="submit" value="Edit" title="Semua elemen form harus diisi dengan benar dahulu."/>
-						</form>
+						<div id="profil_head">
+							<h1>Admin</h1>
+						</div>
+						<div class="row">
+							<label for="profil_username">Username</label>
+							<span id="profil_username"></span>
+						</div>
+						<div class="row">
+							<label for="profil_name">Nama Lengkap</label>
+							<span id="profil_name"></span>
+						</div>
+						<div class="row">
+							<label for="profil_birth_date">Tanggal Lahir</label>
+							<span id="profil_birth_date"></span>
+						</div>
+						<div class="row">
+							<label for="profil_email">Email</label>
+							<span id="profil_email"></span>
+						</div>
+						<div class="row">
+							<label for="avatar_image">Avatar</label>
+							<img id="avatar_image" src="images/avatar.jpg" alt="avatar profil" />
+						</div>
+						<a href="profiledit.html" class="button_link"> Edit </a>
 						
 					</div>
 				</div>
-				<div id="profil_do">
-					<div id="profil_head">
-						<h1>Work Done</h1>
+				<div id="profil_right">
+					<div id="task_head">
+						<h1>Tugas</h1>
 					</div>
-					<div class="row">
-						<div id="profil_do_text" ><li><a href="#">progin</a></li></div>
+					<div id="task_left">
+						<div class="profil_sub_head">
+							<h4>Dalam Proses</h4>
+						</div>
+						<div class="row">
+							<div id="profil_do_text" ><li><a href="#">Pemrograman Internet</a></li></div>
+						</div>
 					</div>
-				</div>
-				<div id="profil_do">
-					<div id="profil_head">
-						<h1>Work Undone</h1>
-					</div>
-					<div class="row">
-						<div id="profil_do_text" ><li><a href="#">Kriptografi</a></li></div>
-					</div>
-					<div class="row">
-						<div id="profil_do_text" ><li><a href="#">Intelegensi Buatan</a></li></div>
+					<div id="task_right">
+						<div class="profil_sub_head">
+							<h4>Selesai</h4>
+						</div>
+						<div class="row">
+							<div id="profil_do_text" ><li><a href="#">Kriptografi</a></li></div>
+						</div>
+						<div class="row">
+							<div id="profil_do_text" ><li><a href="#">Intelegensi Buatan</a></li></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -123,13 +126,13 @@
 		<script type="text/javascript">
 			window.onload = function()
 			{
-				var userlist =  JSON.parse(localStorage.userList);
-				document.getElementById("profil_head").innerHTML = "<h1>"+userlist[sessionStorage.userId].fullName+"</h1>";
-				document.getElementById("profil_username").innerHTML = userlist[sessionStorage.userId].userName;
-				document.getElementById("profil_name").innerHTML = userlist[sessionStorage.userId].fullName;
-				document.getElementById("profil_birth_date").innerHTML = userlist[sessionStorage.userId].birthDate;
-				document.getElementById("profil_email").innerHTML = userlist[sessionStorage.userId].emailAddress;
-				document.getElementById("avatar_image").src = userlist[sessionStorage.userId].Avatar;
+				var userlist =  JSON.parse(localStorage.MOA_userList);
+				document.getElementById("profil_head").innerHTML = "<h1>"+userlist[sessionStorage.MOA_userId].fullName+"</h1>";
+				document.getElementById("profil_username").innerHTML = userlist[sessionStorage.MOA_userId].userName;
+				document.getElementById("profil_name").innerHTML = userlist[sessionStorage.MOA_userId].fullName;
+				document.getElementById("profil_birth_date").innerHTML = userlist[sessionStorage.MOA_userId].birthDate;
+				document.getElementById("profil_email").innerHTML = userlist[sessionStorage.MOA_userId].emailAddress;
+				document.getElementById("avatar_image").src = userlist[sessionStorage.MOA_userId].Avatar;
 			}
 		</script>
 	</body>

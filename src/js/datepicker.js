@@ -170,9 +170,9 @@ var datePicker =
 	
 	blur: function()
 	{
-		setTimeout(function () {datePicker.calendarDiv.style.height = "0px";}, 50);
-		setTimeout(function () {datePicker.calendarDiv.style.width = "0px";}, 150);
-		setTimeout(function () {datePicker.calendarDiv.style.display = "none";}, 300);
+		setTimeout(function () {datePicker.calendarDiv.style.height = "0px";}, 250);
+		setTimeout(function () {datePicker.calendarDiv.style.width = "0px";}, 350);
+		setTimeout(function () {datePicker.calendarDiv.style.display = "none";}, 600);
 	},
 	
 	prevMonth: function()

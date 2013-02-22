@@ -105,7 +105,7 @@
 				<div id="register_area">
 					<div id="register_form_wrap">
 						<div id="register_head">
-							<h1>Form Pendaftaran</h1>
+							<h2>Form Pendaftaran</h2>
 						</div>
 						<form id="register_form" method="post">
 							<div class="row">
@@ -285,9 +285,20 @@
 					var tempavatar = "images/"+register_avatar.value.split("\\")[register_avatar.value.split("\\").length-1];
 					user.Avatar = tempavatar;
 					
-					var userlist = JSON.parse(localStorage.userList);
+					var userlist = JSON.parse(localStorage.MOA_userList);
 					userlist[userlist.length] = user;
 					localStorage.userList = JSON.stringify(userlist);
+					
+					close();
+					register_form.reset();
+					
+					register_username.backgroundImage = "";
+					register_password.backgroundImage = "";
+					register_confirm_password.backgroundImage = "";
+					register_name.backgroundImage = "";
+					birth_date.backgroundImage = "";
+					register_email.backgroundImage = "";
+					register_avatar.backgroundImage = "";
 				}
 				else if (register_password.value!=register_confirm_password.value)
 				{
@@ -301,6 +312,7 @@
 				{
 					alert("Username tidak boleh sama dengan sandi");
 				}
+				return false;
 			}
 			
 			register_username.onkeyup = function()

@@ -53,11 +53,11 @@
 		
 		<section>
 			<div id="content_wrap" class="wrap">
-				<div id="profil_area">
+				<div id="profil_left">
 					<div id="profil_form_wrap">
 						<form id="profil_form" action="profil.html" method="post">
 							<div id="profil_head">
-								<h1>Admin</h1>
+								<h1>Edit Profil</h1>
 							</div>
 							<div class="row">
 								<label for="profil_name">Nama Lengkap</label>
@@ -80,6 +80,30 @@
 							</div>
 							<input id="profil_submit" type="submit" value="Save" title="Semua elemen form harus diisi dengan benar dahulu."/>
 						</form>
+					</div>
+				</div>
+				<div id="profil_right">
+					<div id="task_head">
+						<h1>Tugas</h1>
+					</div>
+					<div id="task_left">
+						<div class="profil_sub_head">
+							<h4>Dalam Proses</h4>
+						</div>
+						<div class="row">
+							<div id="profil_do_text" ><li><a href="#">Pemrograman Internet</a></li></div>
+						</div>
+					</div>
+					<div id="task_right">
+						<div class="profil_sub_head">
+							<h4>Selesai</h4>
+						</div>
+						<div class="row">
+							<div id="profil_do_text" ><li><a href="#">Kriptografi</a></li></div>
+						</div>
+						<div class="row">
+							<div id="profil_do_text" ><li><a href="#">Intelegensi Buatan</a></li></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -128,18 +152,18 @@
 			var profil_form = document.getElementById("profil_form");
 			profil_form.onsubmit = function()
 			{
-				var userlist = JSON.parse(localStorage.userList);
-				var profil_password = userlist[sessionStorage.userId].passWord;
+				var userlist = JSON.parse(localStorage.MOA_userList);
+				var profil_password = userlist[sessionStorage.MOA_userId].passWord;
 				if (profil_email.value!=profil_password)
 				{
-					userlist[sessionStorage.userId].fullName = profil_name.value;
-					userlist[sessionStorage.userId].birthDate = birth_date.value;
-					userlist[sessionStorage.userId].emailAddress = profil_email.value;
+					userlist[sessionStorage.MOA_userId].fullName = profil_name.value;
+					userlist[sessionStorage.MOA_userId].birthDate = birth_date.value;
+					userlist[sessionStorage.MOA_userId].emailAddress = profil_email.value;
 					
-					var tempavatar = (profil_avatar.value=="") ? userlist[sessionStorage.userId].Avatar : "images/"+profil_avatar.value.split("\\")[profil_avatar.value.split("\\").length-1];
-					userlist[sessionStorage.userId].Avatar = tempavatar;
+					var tempavatar = (profil_avatar.value=="") ? userlist[sessionStorage.MOA_userId].Avatar : "images/"+profil_avatar.value.split("\\")[profil_avatar.value.split("\\").length-1];
+					userlist[sessionStorage.MOA_userId].Avatar = tempavatar;
 					
-					localStorage.userList = JSON.stringify(userlist);
+					localStorage.MOA_userList = JSON.stringify(userlist);
 					return true;
 				}
 				return false;
@@ -170,8 +194,8 @@
 			
 			profil_email.onkeyup = function()
 			{
-				var userlist =  JSON.parse(localStorage.userList);
-				var profil_password = userlist[sessionStorage.userId].passWord;
+				var userlist =  JSON.parse(localStorage.MOA_userList);
+				var profil_password = userlist[sessionStorage.MOA_userId].passWord;
 				if ((this.checkValidity())&&(this.value!=profil_password))
 					this.style.backgroundImage = "url('images/valid.png')";
 				else
@@ -208,8 +232,8 @@
 			
 			function check_submit()
 			{
-				var userlist = JSON.parse(localStorage.userList);
-				var profil_password = userlist[sessionStorage.userId].passWord;
+				var userlist = JSON.parse(localStorage.MOA_userList);
+				var profil_password = userlist[sessionStorage.MOA_userId].passWord;
 				if ((profil_name.checkValidity()) && (birth_date.checkValidity()) && 
 					(profil_email.checkValidity()) && ((profil_avatar.value=="")||(check_file_jpeg(profil_avatar))) &&
 					(profil_email.value != profil_password.value) && (check_date(birth_date.value)))
@@ -228,12 +252,11 @@
 			{
 				datePicker.init(document.getElementById("calendar"), document.getElementById("profil_form"));
 				
-				var userlist =  JSON.parse(localStorage.userList);
-				document.getElementById("profil_head").innerHTML = "<h1>"+userlist[sessionStorage.userId].fullName+"</h1>";
-				document.getElementById("profil_name").value = userlist[sessionStorage.userId].fullName;
-				document.getElementById("birth_date").value = userlist[sessionStorage.userId].birthDate;
-				document.getElementById("profil_email").value = userlist[sessionStorage.userId].emailAddress;
-				document.getElementById("avatar_image").src = userlist[sessionStorage.userId].Avatar;
+				var userlist =  JSON.parse(localStorage.MOA_userList);
+				document.getElementById("profil_name").value = userlist[sessionStorage.MOA_userId].fullName;
+				document.getElementById("birth_date").value = userlist[sessionStorage.MOA_userId].birthDate;
+				document.getElementById("profil_email").value = userlist[sessionStorage.MOA_userId].emailAddress;
+				document.getElementById("avatar_image").src = userlist[sessionStorage.MOA_userId].Avatar;
 			}
 		</script>
 	</body>

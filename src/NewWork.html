@@ -4,24 +4,25 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="" />
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-		<title>MOA</title>
+		<title>MOA - Tambah Tugas</title>
+		<script type="text/javascript" src="js/is_login.js"></script>
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/work.css" />
 	</head>
 	<body>
 		<header>
 			<div id="header_wrap" class="wrap">
-				<a href="index.html"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
+				<a href="dashboard.html"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
 				<div id="header_title">
-					<h1> <a href="index.html">MOA</a> </h1>
+					<h1> <a href="dashboard.html">MOA</a> </h1>
 					<h4>Multiuser Online Agenda</h4>
 				</div>
 				<div id="border_header"></div>
 				<div id="header_menu">
 					<nav>
 						<ul>
-							<li> <a href="#">Dashboard</a> </li>
-							<li> <a href="#">Profil</a> </li>
+							<li> <a href="dashboard.html" class="active">Dashboard</a> </li>
+							<li> <a href="profil.html">Profil</a> </li>
 						</ul>
 					</nav>
 					<div id="login_area">
@@ -66,34 +67,38 @@
 		
 		<section>
 			<div id="content_wrap" class="wrap">
-				<div id="work_head">
-					<h1>Tugas Baru</h1>
-				</div>
 				<div="work_area">
-					<div id="work_form_wrap">
-						<form id="work_form" action="dashboard.html">
-					<div class="row">
-						<label for="work_name">Nama Task</label>
-						<input id="work_name" name="name" pattern="^.{1,25}$" type="text" title="nama maksimal 25 karakter dan tidak mengandung karakter khusus." required />
-					</div>
-					<div class="row">
-						<label for="work_attachment">Attachment</label>
-						<input id="work_attachment" name="attachment" type="file" title="attachment yang diupload dapat berupa file, gambar ataupun video." required />
-					</div>
-					<div class="row">
-						<label for="work_deadline">Deadline </label>
-						<input id="work_deadline" name="deadline" type="date" pattern="^.+$"/>
-					</div>
-					<div class="row">
-						<label for="work_asignee">Asignee</label>
-						<input id="work_asignee" name="asignee" pattern="^.+ .+$" type="text" title="Nama asignee harus nama lengkap dan terdiri dari 2 kata dipisah oleh sebuah spasi." required />
-					</div>
-					<div class="row">
-						<label for="work_tag">tag</label>
-						<input id="work_tag" name="tag" pattern="^.+" type="text" title="tag dipisahkan dengan koma." required />
-					</div>
-					<input id="work_submit" type="submit" value="Tambah Tugas" disabled="disabled" title="Semua elemen form harus diisi dengan benar dahulu."/>
-				</form>
+					<div id="new_task_form_wrap">
+						<div id="work_head">
+							<h1>Tambah Tugas Baru</h1>
+						</div>
+						<form id="new_task_form" method="post">
+							<div class="row">
+								<label for="category_name">Nama Kategori</label>
+								<span id="category_name"></span>
+							</div>
+							<div class="row">
+								<label for="new_task_name">Nama Tugas</label>
+								<input id="new_task_name" name="new_task_name" pattern="^.{5,}$" type="text" title="Nama kategori minimal harus terdiri dari 5 karakter." required />
+							</div>
+							<div class="row">
+								<label for="new_task_attachment">Attachment</label>
+								<input id="new_task_attachment" name="new_task_attachment" type="file" title="Avatar yang diupload harus berekstensi jpg atau jpeg." required />
+							</div>
+							<div class="row">
+								<label for="birth_date">Deadline</label>
+								<input id="birth_date" name="birth_date" type="text" pattern="^[0-3][0-9]/[0-1][0-9]/[1-9][0-9][0-9][0-9]$" onblur="datePicker.blur();" onclick="datePicker.showCalendar(event);" title="Tahun harus minimal dari tahun 1955." required/>
+							</div>
+							<div class="row">
+								<label for="new_task_username">Asignee</label>
+								<input id="new_task_username" name="new_task_username" pattern="^(.{5,}\x2C)+$" type="text" title="Username yang dimasukkan harus diakhiri tanda koma." required />
+							</div>
+							<div class="row">
+								<label for="new_task_tag">Tag</label>
+								<input id="new_task_tag" name="new_task_tag" pattern="^(.{5,}\x2C)+$" type="text" title="Username yang dimasukkan harus diakhiri tanda koma." required />
+							</div>
+							<input id="new_category_submit" type="submit" value="Tambah" disabled="disabled" title="Semua elemen form harus diisi dengan benar dahulu."/>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -102,33 +107,38 @@
 		<footer>
 			<div id="footer_wrap" class="wrap">
 				<div id="footer_left">
-					<a href="dashboard.html">Dashboard</a>
+					<a href="dashboard.html">Dashboard</a> >>
+					<a href="#" class="active">Tambah Tugas Baru</a>
 				</div>
 			</div>
 		</footer>
 		
-		<script type="text/javascript">
-			/*----- Bagian Search ----*/
-			var search_text = document.getElementById("search_text");
-			
-			search_text.onmouseover = function()
-			{
-				this.focus();	
-			}
-			search_text.onfocus = function()
-			{
-				var search = document.getElementById("search");
-				search.className = "active";
-			}
-			search_text.onblur = function()
-			{
-				if (search_text.value==="")
-				{
-					var search = document.getElementById("search");
-					search.className = "";
-				}
-			}
-			
+		<div id="calendar">
+			<a id="date_button_left" class="date_button" title="Prev" onclick="datePicker.prevMonth();">
+				<img alt="arrow_left" src="images/date-left.png" />
+			</a>
+			<a id="date_button_right" class="date_button" title="Next" onclick="datePicker.nextMonth();">
+				<img alt="arrow_right" src="images/date-right.png" />
+			</a>
+			<div id="tableHeader"></div>
+			<table id="calendarTable" border=1>
+				<tbody id="tableBody">
+					<tr>
+						<th>Su</th>
+						<th>Mo</th>
+						<th>Tu</th>
+						<th>We</th>
+						<th>Th</th>
+						<th>Fr</th>
+						<th>Sa</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<script type="text/javascript" src="js/search.js"></script>
+		<script type="text/javascript" src="js/logout.js"></script>
+		<script type="text/javascript">			
 			/*----- Bagian tugas baru ----*/
 			var work_form = document.getElementById("work_form");
 			
@@ -192,11 +202,12 @@
 					document.getElementById("work_submit").disabled="disabled";
 				}
 			}
-			
+		</script>
+		<script type="text/javascript" src="js/datepicker.js"></script>
+		<script type="text/javascript">
 			window.onload = function()
 			{
-				// cek session, jika sudah login maka redirect
-				setInterval(function(){next_image();}, 5500);
+				datePicker.init(document.getElementById("calendar"), document.getElementById("new_task_form"));
 			}
 		</script>
 	</body>

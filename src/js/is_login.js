@@ -1,7 +1,7 @@
 if (typeof(Storage)!== "undefined") 
 {
 	// Web storage is supported
-	if (sessionStorage.userSession == null)
+	if (sessionStorage.MOA_userSession == null)
 	{
 		window.location = "index.html";
 	}

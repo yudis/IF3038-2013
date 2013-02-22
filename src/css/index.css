@@ -1,6 +1,5 @@
 /*--- FORM ---*/
-#register_form input[type="text"], #register_form_wrap input[type="password"], #register_form_wrap input[type="date"], 
-#register_form input[type="email"], #register_form_wrap input[type="file"]
+#register_form input[type="text"], #register_form_wrap input[type="password"], #register_form_wrap input[type="file"]
 {
 	margin-top: 2px;
 	margin-left: 10px;
@@ -141,7 +140,7 @@
 	width: 150px;
 	line-height: 32px;
 }
-#register_head h1
+#register_head h2
 {
 	margin: 8px 0;
 }
