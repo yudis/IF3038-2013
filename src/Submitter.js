@@ -1,5 +1,51 @@
-function initButton() {
+function init() {
 	document.getElementById('addtask').disabled = true;
+	document.getElementById('sbTask').disabled = true;
+	initDateOfTask();
+}
+
+function initDateOfTask(){
+	initTaskYears();
+	initTaskMonth();
+	initTaskDay();
+}
+
+function initTaskYears(){
+	var sel = document.getElementsByName('taskYear');
+	var opt = null;
+	for(j = 0; j < sel.length; j++) {
+		for(i = 2000; i<=2099; i++) { 
+			opt = document.createElement('option');
+			opt.value = i;
+			opt.innerHTML = i;
+			sel[j].appendChild(opt);
+		}
+	}
+}
+function initTaskMonth(){
+	var sel = document.getElementsByName('taskMonth');
+	var opt = null;
+	var bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+	for(j = 0; j < sel.length; j++) {
+		for(i = 0; i<12; i++) { 
+			opt = document.createElement('option');
+			opt.value = i + 1;
+			opt.innerHTML = bulan[i];
+			sel[j].appendChild(opt);
+		}
+	}
+}
+function initTaskDay(){
+	var sel = document.getElementsByName('taskDay');
+	var opt = null;
+	for(j = 0; j < sel.length; j++) {
+		for(i = 1; i<=31; i++) { 
+			opt = document.createElement('option');
+			opt.value = i;
+			opt.innerHTML = i;
+			sel[j].appendChild(opt);
+		}
+	}
 }
 
 function submitComment(id1,id2) {

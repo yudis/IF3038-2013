@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="layouting.css">
 </head>
 
-<body onload="initButton()">
+<body onload="init()">
 
 <div id="header">
     <div id="logo"><a href="Dashboard.html"><img src="Image/logo.png" width="186" height="187" alt="Simpan agendamu pada e-List" /></a></div> 
@@ -84,7 +84,7 @@
 	<p> Copyright &copy; 2013 Tugas Besar IF3038 Pemrograman Internet. Design By <a href="http://www.facebook.com/wchaq">Whilda Chaq</a> & <a href="http://www.facebook.com/5quall">Devin Hoesen</a></p>
 </div>
 
-<a class="overlay" id="taskdetail1"></a>
+<a href='#' class="overlay" id="taskdetail1"></a>
 <div class="popup">
 	<h1>Tugas Besar Pemrograman Internet</h1>
 	<hr>
@@ -110,7 +110,7 @@
 	</form>
 </div>
 
-<a class="overlay" id="taskdetail2"></a>
+<a href='#' class="overlay" id="taskdetail2"></a>
 <div class="popup">
 	<h1>Tugas Besar Inteligensia Buatan</h1>
 	<hr>
@@ -139,7 +139,7 @@
 	</form>
 </div>
 
-<a class="overlay" id="taskdetail3"></a>
+<a href='#' class="overlay" id="taskdetail3"></a>
 <div class="popup">
 	<h1>Penyerahan Proposal</h1>
 	<hr>
@@ -162,7 +162,7 @@
 	</form>
 </div>
 
-<a class="overlay" id="taskdetail4"></a>
+<a href='#' class="overlay" id="taskdetail4"></a>
 <div class="popup">
 	<h1>Periksa Kuis</h1>
 	<hr>
@@ -187,7 +187,7 @@
 	</form>
 </div>
 
-<a class="overlay" id="taskdetail5"></a>
+<a href='#' class="overlay" id="taskdetail5"></a>
 <div class="popup">
 	<h1>Memasukkan Nilai</h1>
 	<hr>
@@ -242,19 +242,38 @@
 	<hr>
 	<form name="foRegister" action="Dashboard.html">
 		<div class="attribute">
-			Nama Kategori : <input type="text" id="txCatName"><br /><br />
-			Pengerja (<i>Assignee</i>) : <br />
-			<ul id="inputlist">
-				<li><input type="text"></li>
-				<li><input type="text"></li>
-				<li><input type="text"></li>
-				<li><input type="text"></li>
-				<li><input type="text"></li>
-				<li><input type="text"></li>
-				<li><input type="text"></li>
-				<li><input type="text"></li>
-			</ul>
-			<input type="button" class="sbComment" value="Tambah" onclick="submitCategory();">
+			<div class="attribute">
+				Nama Tugas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" id="txTaskName" onkeyup="vdTaskName()">
+				<img src="Image/notaccept.png" id="icoTaskName" title="Maksimal 25 karakter"></img>
+			</div>
+			<div class="attribute">
+				Lampiran&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="file"> 				
+			</div>
+			<div class="attribute">
+				Tanggal Penyelesaian&nbsp;:
+				<select name="taskYear"></select>
+				<select name="taskMonth"></select>
+				<select name="taskDay"></select>
+			</div>
+			<div class="attribute">
+				Pengerja (<i>Assignee</i>) : <br />
+				<ul id="inputlist">
+					<li><input type="text"></li>
+					<li><input type="text"></li>
+					<li><input type="text"></li>
+					<li><input type="text"></li>
+					<li><input type="text"></li>
+					<li><input type="text"></li>
+					<li><input type="text"></li>
+					<li><input type="text"></li>
+				</ul>
+			</div>
+			<div class="attribute">
+				Tag &nbsp;: <input type="text" title="Tag bisa lebih dari 1, masing-masing dipisahkan tanda koma">
+			</div>
+			<input type="button" class="sbComment" id="sbTask" value="Tambah" onclick="location.href='#'">
 			<input type="button" class="sbComment" value="Kembali" onclick="location.href='#'">
 		</div>
 	</form>
