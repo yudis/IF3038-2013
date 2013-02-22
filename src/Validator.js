@@ -6,9 +6,8 @@ function Initialization(){
 function initDateofBirth(){
 	initYears();
 	initMonth();
-	initDay();
+	initDay();	
 }
-
 function initYears(){
 	var sel = document.getElementById('cbYear');
 	var opt = null;
@@ -22,11 +21,10 @@ function initYears(){
 function initMonth(){
 	var sel = document.getElementById('cbMonth');
 	var opt = null;
-	var bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-	for(i = 0; i<12; i++) { 
+	for(i = 1; i<=12; i++) { 
 		opt = document.createElement('option');
-		opt.value = i + 1;
-		opt.innerHTML = bulan[i];
+		opt.value = i;
+		opt.innerHTML = i;
 		sel.appendChild(opt);
 	}
 }
@@ -59,7 +57,6 @@ function getSrc(ico){
 	var nameFile = fullPath.substring(fullPath.lastIndexOf('/') + 1);
 	return nameFile;
 }
-
 function vdUsername(){
 	var temporary = document.getElementById('txUsername').value;
 	var temporary_password = document.getElementById('txPassword').value;
@@ -130,25 +127,6 @@ function vdAvatar(){
         alert("Upload jpg or jpeg Images only");       
     }
 	Validation();
-}
-
-function validateTask() {
-	var valid = "accept.png";
-	if(	getSrc('icoTaskName') == valid)
-		document.getElementById('sbTask').disabled = false;
-	else
-		document.getElementById('sbTask').disabled = true;
-}
-
-function vdTaskName(){
-	var temporary = document.getElementById('txTaskName').value;
-	var pattern = /([a-zA-Z0-9 ])/;
-	if(pattern.test(temporary) && temporary.length > 0 && temporary.length <= 25){
-		document.getElementById('icoTaskName').src="Image/accept.png";
-	} else {
-		document.getElementById('icoTaskName').src="Image/notaccept.png";	
-	}
-	validateTask();
 }
 
 function login(){
