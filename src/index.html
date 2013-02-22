@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html> 
 	<head> 
+		<title> Welcome To Todolist! </title>
 		<link rel="stylesheet" type="text/css" href="index.css">
 		<script src="scripts/index.js"></script>
 	</head> 
@@ -11,17 +12,17 @@
 					<div class="logo"><a href="#home"><img alt="Home" src="images/logo.png" /></a></div>
 					<div id="slogan">Share your to do list with everyone!</div>
 					<div id="loginwrapper">
-						<form action="">
-							<div id=username>
-								&nbspUsername</br>
+						<form name="login">
+							<div id=login_username>
+								Username <br>
 								<input type="text" class="textbox" name="uname" value="" />
 							</div>
-							<div id=password>
-								&nbspPassword</br>
+							<div id=login_password>
+								Password <br>
 								<input type="password" class="textbox" name="pwd" value="" />
 							</div>
 							<div id=login_button>
-								<button onclick="login()"><img src="images/loginbutton.png" id="login_submit"></img></button>
+								<button onclick="login()"><img src="images/loginbutton.png" id="login_submit" alt="login../"></button>
 							</div>
 						</form>
 					</div>
@@ -31,47 +32,49 @@
 				<div id="leftcolumn">
 					<h1>So How Does Our System Work? </h1>
 					Let's see the brief explanation from these video below.. 
-					<video width="550" height="309" controls id="teaservid">
-						<source src="teaser2.mp4" type="video/mp4">
-					</video>
-					<h2> It's easy, beautiful, important to have, and </br> the best part is.. it's FREE to use! </h2>
-					What are you waiting for? </br>Join our system and start sharing your to do list right now! </br>
+					<div id="slider">
+						<div><img src="images/image-1.jpg" name="slider_picture"></div>
+						<button onclick="back()" class="slider_button">Back</button>
+						<button onclick="next()" class="slider_button">Next</button>
+					</div>
+					<h2> It's easy, beautiful, important to have, and <br> the best part is.. it's FREE to use! </h2>
+					What are you waiting for? <br>Join our system and start sharing your to do list right now! <br>
 					If you find any trouble registering, please contact us asap!
 				</div>
 				<div id="rightcolumn">
 					<div id="registerwrapper">
 						<h1>Register Now!</h1>
 						It only takes you a few more steps!
-						<form name="registration" onsubmit="return validateForm();" method="post" action="">
+						<form name="registration" onsubmit="return validateForm();" method="post">
 							<div id=username>
-								<input type="text" class="regbox" name="uname" placeholder="Username.." required/>
+								<input type="text" class="regbox" name="uname" placeholder="Username.." required="required"/>
 							</div>
 							<div id=password>
-								<input type="password" class="regbox" name="pwd" placeholder="Password.." required/>
+								<input type="password" class="regbox" name="pwd" placeholder="Password.." required="required"/>
 							</div>
 							<div id=password_confirm>
-								<input type="password" class="regbox" name="pwd_confirm" placeholder="Confirm Password.." required/>
+								<input type="password" class="regbox" name="pwd_confirm" placeholder="Confirm Password.." required="required"/>
 							</div>
 							<div id=nama>
-								<input type="text" class="regbox" name="name" placeholder="Full Name.." required/>
+								<input type="text" class="regbox" name="name" placeholder="Full Name.." required="required"/>
 							</div>
 							<div id=email>
-								<input type="email" class="regbox" name="email" placeholder="Your Email.." required">
+								<input type="email" class="regbox" name="email" placeholder="Your Email.." required="required"/>
 							</div>
 							<div id=birthday>
-								<p class="regtext">Birthday:</p><input type="date" class="regbox" name="bday" required>
+								<p class="regtext">Birthday:</p><input type="date" class="regbox" name="bday" required="required"/>
 							</div>
 							<div id=avatar>
-								<p class="regtext">Profile Image:</br></p><input type="file" name="ava" required/>
+								<p class="regtext">Profile Image:<br></p><input type="file" name="ava" required="required"/>
 							</div>
 							<p id="terms"> By clicking Sign Up, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use. </p>
-							<button onclick="register()"><img src="images/signupbutton.png"></img></button>
+							<button onclick="register()"><img src="images/signupbutton.png" alt="sign up.."/></button>
 						</form>
 					</div>
 				</div>
 			</div>
 			<footer class="content">
-				This website is created solely for the purpose of fulfilling our college task.</br>
+				This website is created solely for the purpose of fulfilling our college task.<br>
 				IF3094 - Pemrograman Internet.
 			</footer>
 		</div>
