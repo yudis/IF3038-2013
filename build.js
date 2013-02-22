@@ -19,8 +19,13 @@ function concat(opts) {
     console.log(' '+ distPath +' built.');
 }
 
-var files = ['login', 'new_tugas', 'profile', 'register', 'dashboard', 'view_tugas'];
-var titles = ['Login', 'Tugas Baru', 'Profil', 'Pendaftaran', 'Dashboard', 'Lihat Tugas'];
+var files = ['index', 'new_tugas', 'profile', 'register', 'dashboard'];
+var titles = ['Home', 'New Task', 'Profile', 'Register', 'Dashboard'];
+
+for (i = 1; i <= 8; i++) {
+    files.push('view_tugas_' + i);
+    titles.push('Task Details');
+}
 
 files.forEach(function(v, k) {
     var title = titles[k];
