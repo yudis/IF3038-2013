@@ -107,9 +107,13 @@ bajuri.prototype = {
 	},
 
 	addClass: function(cls) {
-		for (node in this.nodes) {
+		this.nodes.forEach(function(node) {
 			this._addClassToNode(node, cls);
-		}
+		});
+	},
+
+	removeClass: function(cls) {
+
 	},
 
 	first: function() {
