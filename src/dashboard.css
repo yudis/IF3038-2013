@@ -117,6 +117,68 @@ input[type="search"], isindex {
 }
 /*End of Header*/
 
+/*Content*/
+#content {
+	position:relative;
+	height:100%;
+}
+#categoryMenu {
+	float:left;
+	margin: 15px 0px 0px 20px;
+	padding: 15px 0px 0px 20px;
+	border-right: 5px groove;	
+	/*background: aqua;*/
+	/*box-shadow: 0 0 10px black;*/
+	top:0;
+	left:0;
+	width:17%;
+	height:1000px;
+}
+
+#cattitle{
+	font-size:150%;
+}
+
+.categoryhighlight{
+	background: white;
+	border: 1px solid;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+	text-align:center;
+	cursor: pointer;
+	height:20px;
+	width:80%;
+}
+
+.categorynormal{
+	background: gray;
+	border: 1px solid;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+	text-align:center;
+	height:20px;
+	width:80%;
+}
+
+#newcatcontent{
+	text-align:center;
+	float:center;
+}
+
+#taskSpace {
+	float:left;
+	margin: 50px 0px 0px 20px;
+	/*background: lemonchiffon;*/
+	/*box-shadow: 0 0 0px black;*/
+	top:0;
+	right:0;
+	width:70%;
+	height:1000px;
+}
 
 #task1{
 	display:block;
@@ -151,68 +213,6 @@ input[type="search"], isindex {
 	padding: 0px 15px;
 }
 
-#content {
-	position:relative;
-	height:100%;
-}
-#categoryMenu {
-	float:left;
-	margin: 15px 0px 0px 20px;
-	padding: 15px 0px 0px 20px;
-	border-right: 5px groove;	
-	/*background: aqua;*/
-	/*box-shadow: 0 0 10px black;*/
-	top:0;
-	left:0;
-	width:17%;
-	height:800px;
-}
-
-#cattitle{
-	font-size:150%;
-}
-
-.categoryhighlight{
-	background: white;
-	border: 1px solid;
-	border-top-left-radius:10px;
-	border-top-right-radius:10px;
-	border-bottom-left-radius:10px;
-	border-bottom-right-radius:10px;
-	text-align:center;
-	cursor: pointer;
-	height:20px;
-	width:80%;
-}
-
-.categorynormal{
-	background: gray;
-	border: 1px solid;
-	border-top-left-radius:10px;
-	border-top-right-radius:10px;
-	border-bottom-left-radius:10px;
-	border-bottom-right-radius:10px;
-	text-align:center;
-	height:20px;
-	width:80%;
-}
-
-#taskSpace {
-	float:left;
-	margin: 50px 0px 0px 20px;
-	/*background: lemonchiffon;*/
-	/*box-shadow: 0 0 0px black;*/
-	top:0;
-	right:0;
-	width:70%;
-	height:1000px;
-}
-
-#newcatcontent{
-	text-align:center;
-	float:center;
-}
-
 #atribut{
 	width:50%;
 	float:left;
@@ -224,3 +224,5 @@ input[type="search"], isindex {
 	float:left;
 	text-align:left;
 }
+
+/*End of Content */
