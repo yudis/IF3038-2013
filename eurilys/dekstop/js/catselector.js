@@ -83,7 +83,7 @@ function catchange(catnum){
 				
 				document.getElementById("add_task_link").style.display = "block";
 			}
-			else {
+			else if (catnum == 3){
 				document.getElementById("curtask1").style.opacity = "0";
 				document.getElementById("curtask2").style.opacity = "0";
 				document.getElementById("curtask3").style.opacity = "0";
