@@ -36,13 +36,13 @@ Rp(function() {
 	})
 
 	Rp('#loginForm').on('submit', function(e) {
+
+		e.preventDefault();
 		validate = function() {
 			u = Rp('#login_username').val();
 			p = Rp('#login_password').val();
 			return u == username && p == password;
 		};
-
-		e.preventDefault();
 
 		if (validate())
 			window.location.href = 'dashboard.html';
@@ -52,15 +52,22 @@ Rp(function() {
 
 	Rp('#editTaskLink').on('click', function(e) {
 		e.preventDefault();
-		mel = Rp('.task-details').first();
 
-		if (mel.hasClass('editing')) {
-			Rp('#editTaskLink').node[0].innerHTML = 'Edit Task';
+		if (Rp('#editTaskLink').hasClass('editing')) {
+			Rp('#editTaskLink').nodes[0].innerHTML = 'Edit Task';
+			Rp('#editTaskLink').removeClass('editing');
+			Rp('#edit-task').hide();
+			Rp('#current-task').show();
 		}
 		else {
-			Rp('#editTaskLink').node[0].innerHTML = 'Save';
+			Rp('#editTaskLink').nodes[0].innerHTML = 'Save';
+			Rp('#editTaskLink').addClass('editing');
+			Rp('#current-task').hide();
+			Rp('#edit-task').nodes[0].style.display = 'block';
+
+			
 		}
 	});
 
-	
+	Rp('#submitButton').attr('disabled', 'disabled');
 });

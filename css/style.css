@@ -433,6 +433,28 @@ p.description .detail-label {
 	display: block;
 }
 
+.intro h2 {
+	font-size: 30px;
+	font-family: 'Source Sans Pro';
+	font-weight: normal;
+	line-height: 1.2;
+	margin: 0;
+}
+.intro p {
+	font-size: 30px;
+	font-family: 'Source Sans Pro Light';
+	line-height: 1.2;
+	margin: 0;
+	color: #999;
+}
+.features {
+	margin-top: 20px;
+}
+.features ul {
+	margin: 0;
+	padding: 0 0 0 20px;
+}
+
 /* Profile */
 .profile-details {
 	margin-bottom: 14px;
