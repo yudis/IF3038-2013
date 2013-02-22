@@ -100,9 +100,7 @@ h1, h2 {
 	padding-left: 8px;
 	padding-right: 8px;
 }
-#registerwrapper form #username, #registerwrapper form #password, 
-#registerwrapper form #password_confirm, #registerwrapper form #nama, 
-#registerwrapper form #email, #registerwrapper form #avatar {
+#registerwrapper form .wrapper {
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
@@ -117,4 +115,13 @@ footer {
 	text-align: center;
 	color: #FFFFFF;
 	font-size: 70%;
+}
+button, .button {
+    display: inline-block;
+    background-color: #78c368;
+    padding: 3px 6px;
+    font: 80%;
+    margin: 0;
+    color: #fff;
+    border: #499b3d 2px solid;
 }
