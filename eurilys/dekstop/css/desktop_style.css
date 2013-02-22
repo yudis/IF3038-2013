@@ -677,8 +677,10 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 		width:100%;
 	}
 	
-	div#.task_view{
-		padding:0px;
+	div#curtask1.task_view, div#curtask2.task_view, div#curtask3.task_view,
+	div#curtask4.task_view, div#curtask5.task_view{
+		padding:none;
+		width:80%
 	}
 	
 	.dynamic_content_left{
