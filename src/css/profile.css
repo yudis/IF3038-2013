@@ -1,5 +1,5 @@
 body {
-	background-image: url('../images/bg.jpg');
+	background-image: url('../images/bg2.jpg');
 	background-size:cover;
 	overflow : hidden;
 }
@@ -14,6 +14,7 @@ a:active {color:#000;}  /* selected link */
 	color: #fff;
 	font-family: 'Skranji', cursive;
 	font-size: 28px;
+	margin-top: 12px;
 }
 .footer {
 	height: 70px;
@@ -137,13 +138,13 @@ a:active {color:#000;}  /* selected link */
 	-moz-border-radius:25px; /* Old Firefox */
 }
 .kategori {
-	margin:20px;
+	margin:5px;
 	margin-left: 10%;
 	width: 80%;
 	padding: 15px;
 	background-color: #3CF;
 	font-family: 'Merienda', cursive;
-	padding-top: 10px;
+	padding-top: 5px;
 	height: 330px;
 	border:2px solid;
 	border-radius:25px;
