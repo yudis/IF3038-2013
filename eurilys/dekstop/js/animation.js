@@ -83,6 +83,7 @@ function regCheck() {
 	document.getElementById("email_validation").style.display = "block";
 	
 	//check birthday
+	document.getElementById("birthdate_validation").style.display = "block";
 	
 	//check avatar
 	var extension = avatar.split('.');
