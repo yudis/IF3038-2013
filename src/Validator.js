@@ -141,3 +141,6 @@ function login(){
 function loadIndex(){
 	window.location = "src/Register.html";
 }
+function whoisadmin(){
+	alert("username & password : admin");
+}
