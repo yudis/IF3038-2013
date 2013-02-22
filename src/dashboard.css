@@ -1,11 +1,66 @@
 body {
 background-color: White
 }
+#header{
+	float:top;
+	background: #e18728;
+	box-shadow: 0 0 10px black;
+	width: 100%;
+	margin: 0;
+	height: 30px;
+	padding: 10px;
+	display: table;
+}
+#topbar {
+	float:left;
+	margin-left:auto;
+	margin-right:auto;
+	width: 900px;
+}
+#topbar_logo{
+	float:left;
+	width: 30px;
+	height: 30px;
+}
+#logo
+{
+	width: 30px;
+	height: 30px;
+}
+
+#logo2
+{
+	width: 80px;
+	height: 30px;
+}
+
+#topbar_logo2{
+	float:left
+	width: 200px;
+	height: 30px;
+}
+#topbar_dashboard{
+	float:left
+	height: 30px;
+}
+#topbar_search{
+	float: right;
+	height: 30px;
+}
 .topnav{
-height:25px;background-color:#d3d3d3;border:1px solid #d3d3d3;border-top-right-radius:2px;border-top-left-radius:2px;
+height:25px;
+background-color:#d3d3d3;
+border:1px solid #d3d3d3;
+border-top-right-radius:2px;
+border-top-left-radius:2px;
 }
 #topnavTut{
-width:600px;font-size:90%;padding-left:15px;padding-top:6px;white-space:nowrap;
+float:right;
+width:600px;
+font-size:90%;
+padding-left:15px;
+padding-top:6px;
+white-space:nowrap;
 }
 #profileMenu {
 }
@@ -22,24 +77,84 @@ display:none;
 #task2{
 display:none;
 }
+#task3{
+display:none;
+}
+#taskbox{
+float:left;
+width:80%;
+}
+#taskimg{
+float:left;
+}
+#taskdesc{
+float:left;
+}
+#newtask{
+float:left;
+padding: 5px 15px;
+width:100%;
+display:none;
+}
+#newtaskbutton{
+float:left;
+}
+#newtasktext{
+float:left;
+padding: 0px 15px;
+}
 
 #content {
  position:relative;
  height:100%;
 }
 #categoryMenu {
- position:absolute;
- border: 2px solid red;
+ float:left;
+ padding: 15px 0px 0px 20px;
+ border-width:5px;	
+border-style:groove;
+ /*background: aqua;*/
+ /*box-shadow: 0 0 10px black;*/
  top:0;
  left:0;
- width:30%;
+ width:17%;
  height:1000px;
 }
+#cattitle{
+font-size:150%;
+}
+.categoryhighlight{
+background: white;
+border: 1px solid;
+border-top-left-radius:10px;
+border-top-right-radius:10px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+text-align:center;
+cursor: pointer;
+height:20px;
+width:80%;
+}
+.categorynormal{
+background: gray;
+border: 1px solid;
+border-top-left-radius:10px;
+border-top-right-radius:10px;
+border-bottom-left-radius:10px;
+border-bottom-right-radius:10px;
+text-align:center;
+height:20px;
+width:80%;
+}
 #taskSpace {
- position:absolute;
- border: 2px solid green;
+ float:left;
+ /*background: lemonchiffon;*/
+ /*box-shadow: 0 0 0px black;*/
  top:0;
  right:0;
- width:69%;
+ width:78%;
  height:1000px;
+}
+#newcatcontent{
+text-align:center;
 }
