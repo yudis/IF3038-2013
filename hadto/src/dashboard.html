@@ -9,9 +9,9 @@
 	<body>
         <header>
             <nav id="menu_navigasi">
-                <a class="menu_navigasi_element" href="dashboard.html">Dashboard</a>
-                <a class="menu_navigasi_element" href="#cover" onclick="smoothScroll('cover')">Profile</a>
-                <a class="menu_navigasi_element" >Logout</a>
+                <a id="dashboard" class="menu_navigasi_element" href="dashboard.html">Dashboard</a>
+                <a class="menu_navigasi_element" href="#profile_body1" onclick="smoothScroll('profile_body1')">Profile</a>
+                <a class="menu_navigasi_element" href="welcomepage.html">Logout</a>
                 <div class="menu_navigasi_element"><input id="search" type="text" name="search" placeholder="search.."></div>
             </nav>
         </header>
@@ -19,42 +19,42 @@
         <div class="div_space"></div>
         <div id="body_dashboard">
             <div id="kategori" class="center_horizontal">
-                <div class="box" onclick="">
-                    <img src="image_kategori/1.jpg">
+                <div class="box" onclick="showDivById('tugas_kategori1'); hideDivById('tugas_kategori2'); hideDivById('tugas_kategori3'); hideDivById('tugas_kategori4'); hideDivById('tugas_kategori5')">
+                    <img src="image_kategori/html.png">
                     <span class="caption full_caption">
                         <h4>Kategori 1</h4>
                         <p>Kategori1adalahentang apake yooi</p>
                     </span>
                 </div>
                             
-                <div class="box" onclick="">
-                    <img src="image_kategori/1.jpg">
+                <div class="box" onclick="showDivById('tugas_kategori2'); hideDivById('tugas_kategori1'); hideDivById('tugas_kategori3'); hideDivById('tugas_kategori4'); hideDivById('tugas_kategori5')">
+                    <img src="image_kategori/html.png">
                     <span class="caption full_caption">
-                        <h4>Kategori 1</h4>
+                        <h4>Kategori 2</h4>
                         <p>Kategori 1 adalah tentang apake yooi</p>
                     </span>
                 </div>
                 
-                <div class="box" onclick="">
-                    <img src="image_kategori/1.jpg">
+                <div class="box" onclick="showDivById('tugas_kategori3'); hideDivById('tugas_kategori1'); hideDivById('tugas_kategori2'); hideDivById('tugas_kategori4'); hideDivById('tugas_kategori5')">
+                    <img src="image_kategori/html.png">
                     <span class="caption full_caption">
-                        <h4>Kategori 1</h4>
+                        <h4>Kategori 3</h4>
                         <p>Kategori 1 adalah tentang apake yooi</p>
                     </span>
                 </div>
                 
-                <div class="box" onclick="">
-                    <img src="image_kategori/1.jpg">
+                <div class="box" onclick="showDivById('tugas_kategori4'); hideDivById('tugas_kategori1'); hideDivById('tugas_kategori3'); hideDivById('tugas_kategori2'); hideDivById('tugas_kategori5')">
+                    <img src="image_kategori/html.png">
                     <span class="caption full_caption">
-                        <h4>Kategori 1</h4>
+                        <h4>Kategori 4</h4>
                         <p>Kategori 1 adalah tentang apake yooi</p>
                     </span>
                 </div>
                             
-                <div class="box" onclick="">
-                    <img src="image_kategori/1.jpg">
+                <div class="box" onclick="showDivById('tugas_kategori5'); hideDivById('tugas_kategori1'); hideDivById('tugas_kategori3'); hideDivById('tugas_kategori4'); hideDivById('tugas_kategori2')">
+                    <img src="image_kategori/html.png">
                     <span class="caption full_caption">
-                        <h4>Kategori 1</h4>
+                        <h4>Kategori 5</h4>
                         <p>Kategori 1 adalah tentang apake yooi</p>
                     </span>
                 </div>
@@ -64,12 +64,28 @@
             <div class="div_space"></div>
             
             <div id="tugas_tugas" class="center_horizontal">
-                
+                <div id="tugas_kategori1">
+                    Tugas - Kategori1
+                </div>
+                <div id="tugas_kategori2">
+                    Tugas - Kategori2
+                </div>
+                <div id="tugas_kategori3">
+                    Tugas - Kategori3
+                </div>
+                <div id="tugas_kategori4">
+                    Tugas - Kategori4
+                </div>
+                <div id="tugas_kategori5">
+                    Tugas - Kategori5
+                </div>
             </div>
             
         </div> <!-- div body dashboard -->
         
-        <div id="cover"></div>
+        <div id="cover" name="cover">
+            <div id="profpic" style="vertical-align: middle" class="center_horizontal shadow1"></div>
+        </div>
         <div id="profile_body1" class="border_effect">
             <h3>Biodata</h3>
             <pre>Nama Lengkap   : Mountain Lion</pre>
@@ -82,5 +98,6 @@
             <pre>Tugas 2</pre>
             <pre>Tugas 3</pre>
         </div>
+        <a href="#dashboard" onclick="smoothScroll('dashboard')">dashboard</a>
     </body>
 </html>
