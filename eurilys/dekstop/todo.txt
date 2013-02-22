@@ -30,4 +30,8 @@ Bonus yang BELUM dikerjakan :
 VALIDATION PASSED : 
 	- index.html
 	- addtask.html
-	- 
+	- dashboard.html
+	- profile.html
+	- taskdetail_file.html
+	- taskdetail_img.html
+	- taskdetail_video.html
