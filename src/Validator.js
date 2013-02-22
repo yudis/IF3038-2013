@@ -23,8 +23,13 @@ function initMonth(){
 	var opt = null;
 	for(i = 1; i<=12; i++) { 
 		opt = document.createElement('option');
+<<<<<<< .mine
+		opt.value = bulan[i];
+		opt.innerHTML = bulan[i];
+=======
 		opt.value = i;
 		opt.innerHTML = i;
+>>>>>>> .r28
 		sel.appendChild(opt);
 	}
 }

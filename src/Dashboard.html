@@ -90,17 +90,17 @@
 	<hr>
 	<form name="foRegister" action="Dashboard.html">
 		<div class="attribute">
-			<span id="deadline1">Tanggal Penyelesaian : 22 Februari 2013</span><br />
+			<span id="deadline1">Tanggal Penyelesaian : 22 Februari 2013</span>
+			<input type="button" id="editdate1" onclick="editDate('1')" value="Ubah"><br />
 			Lampiran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail1> Download </a><br />
 			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
-			<ul id="assignee1">
+			<ul class="assigneelist" id="assignee1">
 				<li>Whilda Chaq</li>
 				<li>Devin Hoesen</li>
 			</ul>
-            <input type="button" value="add" onclick="addAssignee('1')"><div id="adassignee1"></div>
+			<input type="button" value="Tambah" id="add1" onclick="addAssignee('1')"><div id="adassignee1"></div>
 			Tag : Tugas, Besar, Progin, IF3038
-			<br />
 			<input type="button" name="btedit" id="btedit" onclick="editTask('openedit1')" value="Edit">
             <div id="edit1">
             </div>
@@ -122,19 +122,19 @@
 	<form name="foRegister" action="Dashboard.html">
 		<div class="attribute">
 			<span id="deadline2">Tanggal Penyelesaian : 22 Februari 2013</span><br />
+			<input type="button" id="editdate2" onclick="editDate('2')" value="Ubah"><br />
 			Lampiran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail2> Download </a><br />
 			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
-			<ul id="assignee2">
+			<ul class="assigneelist" id="assignee2">
 				<li>Nicholas Rio</li>
 				<li>Devin Hoesen</li>
 				<li>Stefan Lauren</li>
 				<li>Aji Nugraha Santosa Kasmaji</li>
 				<li>Abraham Krisnanda Santoso</li>
 			</ul>
-            <input type="button" value="add" onclick="addAssignee('2')"><div id="adassignee2"></div>
+            <input type="button" value="Tambah" id="add2" onclick="addAssignee('2')"><div id="adassignee2"></div>
 			Tag : Tugas, Besar, IB, AI, IF3052
-			<br />
             <input type="button" name="btedit" id="btedit" onclick="editTask('openedit2')" value="Edit">
             <div id="edit2">
             </div>
@@ -156,13 +156,13 @@
 	<form name="foRegister" action="Dashboard.html">
 		<div class="attribute">
 			<span id="deadline1">Tanggal Penyelesaian : 28 Februari 2013</span><br />
+			<input type="button" id="editdate3" onclick="editDate('3')" value="Ubah"><br />
 			Lampiran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail3> Download </a><br />
 			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
-			<ul id="assignee3"></ul>
-            <input type="button" value="add" onclick="addAssignee('3')"><div id="adassignee3"></div>
+			<ul class="assigneelist" id="assignee3"></ul>
+            <input type="button" value="Tambah" id="add3" onclick="addAssignee('3')"><div id="adassignee3"></div>
 			Tag : PKM
-			<br />
              <input type="button" name="btedit" id="btedit" onclick="editTask('openedit3')" value="Edit">
             <div id="edit3">
             </div>
@@ -184,15 +184,15 @@
 	<form name="foRegister" action="Dashboard.html">
 		<div class="attribute">
 			<span id="deadline1">Tanggal Penyelesaian : 7 Maret 2013</span><br />
+			<input type="button" id="editdate4" onclick="editDate('4')" value="Ubah"><br />
 			Lampiran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail4> Download </a><br />
 			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
-			<ul id="assignee">
+			<ul class="assigneelist" id="assignee">
 				<li>Devin Hoesen</li>
 			</ul>
-            <input type="button" value="add" onclick="addAssignee('4')"><div id="adassignee4"></div>
+            <input type="button" value="Tambah" id="add4" onclick="addAssignee('4')"><div id="adassignee4"></div>
 			Tag : TBO, Kuis
-			<br />
              <input type="button" name="btedit" id="btedit" onclick="editTask('openedit4')" value="Edit">
             <div id="edit4">
             </div>
@@ -214,15 +214,15 @@
 	<form name="foRegister" action="Dashboard.html">
 		<div class="attribute">
 			<span id="deadline1">Tanggal Penyelesaian : 1 Januari 2013</span><br />
+			<input type="button" id="editdate5" onclick="editDate('5')" value="Ubah"><br />
 			Lampiran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail5> Download </a><br />
 			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
-			<ul id="assignee">
+			<ul class="assigneelist" id="assignee">
 				<li>Devin Hoesen</li>
 			</ul>
-            <input type="button" value="add" onclick="addAssignee('5')"><div id="adassignee5"></div>
+            <input type="button" value="Tambah" id="add5" onclick="addAssignee('5')"><div id="adassignee5"></div>
 			Tag : Probstat, Nilai
-			<br />
             <input type="button" name="btedit" id="btedit" onclick="editTask('openedit5')" value="Edit">
             <div id="edit5">
             </div>
