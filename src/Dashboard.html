@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Dashboard</title>
 <script type="text/javascript" src="Validator.js"></script>
+<script type="text/javascript" src="Submitter.js"></script>
 <link rel="stylesheet" type="text/css" href="layouting.css">
 </head>
 
-<body onload="Initialization()">
+<body>
 
 <div id="header">
     <div id="logo"><a href="Dashboard.html"><img src="Image/logo.png" width="186" height="187" alt="Simpan agendamu pada e-List" /></a></div> 
@@ -25,28 +26,33 @@
 
 <div id="contentdashboard">
 	<h1>Dashboard</h1>
-	<ul class="buttonlist">
+	<ul class="buttonlist" id="listtugas">
 		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> Tambah Kategori </li>
 		<li></li>
 		<li></li>
-		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> Kuliah </li>
-		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> PKM-T </li>
-		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> Tugas Asisten </li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li class="buttonnormal" onmouseup="this.className='buttonpressed'">Semua Kategori</li>
+		<li class="buttonnormal" onmouseup="this.className='buttonpressed'">Kuliah</li>
+		<li class="buttonnormal" onmouseup="this.className='buttonpressed'">Tugas Asisten</li>
+		<li class="buttonnormal" onmouseup="this.className='buttonpressed'">PKM-T</li>
 	</ul>
 	<div id="tasklist">
+		<input type="Submit" id="addtask" value="Tambah Tugas" action="#x">
 		<ul>
 			<li>
-				<a href="#taskdetail">
+				<a href="#taskdetail1">
 					<h2> Tugas Besar Pemrograman Internet </h2>
 				</a>
-				Tanggal Penyelesaian : 22 Februari 2013, 22:02 <br />
+				Tanggal Penyelesaian : 22 Februari 2013 <br />
 				Tag : Tugas, Besar, Progin, IF3038
 			</li>
 			<li>
-				<a href="#taskdetail">
+				<a href="#taskdetail2">
 					<h2> Tugas Besar Inteligensia Buatan </h2>
 				</a>
-				Tanggal Penyelesaian : 22 Februari 2013, 17:23 <br />
+				Tanggal Penyelesaian : 22 Februari 2013 <br />
 				Tag : Tugas, Besar, IB, AI, IF3052
 			</li>
 		</ul>
@@ -57,9 +63,54 @@
 	<p> Copyright &copy; 2013 Tugas Besar IF3038 Pemrograman Internet. Design By <a href="http://www.facebook.com/wchaq">Whilda Chaq</a> & <a href="http://www.facebook.com/5quall">Devin Hoesen</a></p>
 </div>
 
-<a href="#x" class="overlay" id="taskdetail"></a>
+<a href="#x" class="overlay" id="taskdetail1"></a>
 <div class="popup">
-	<h1>Registration</h1>
+	<h1>Tugas Besar Pemrograman Internet</h1>
+	<hr>
+	<form name="foRegister" action="Dashboard.html">
+		<div class="attribute">
+			<span id="deadline1">Tanggal Penyelesaian : 22 Februari 2013</span><br />
+			Lampiran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail1> Download </a><br />
+			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
+			<ul id="assignee">
+				<li>Whilda Chaq</li>
+				<li>Devin Hoesen</li>
+			</ul>
+			Komentar: <br />
+			<h4 class="comment" id="comment1">Waktu pengumpulannya berbarengan dengan AI</h4><br />
+			Ganti Komentar: <br />
+			<textarea class="changecomment" id="changecomment1" title="Silakan memasukkan komentar baru di sini"></textarea><br />
+			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment();">
+		</div>
+	</form>
+</div>
+
+<a href="#x" class="overlay" id="taskdetail2"></a>
+<div class="popup">
+	<h1>Tugas Besar Inteligensia Buatan</h1>
+	<hr>
+	<form name="foRegister" action="Dashboard.html">
+		<div class="attribute">
+			<span id="deadline2">Tanggal Penyelesaian : 22 Februari 2013</span><br />
+			Lampiran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail1> Download </a><br />
+			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
+			<ul id="assignee">
+				<li>Nicholas Rio</li>
+				<li>Devin Hoesen</li>
+				<li>Stefan Lauren</li>
+				<li>Aji Nugraha Santosa Kasmaji</li>
+				<li>Abraham Krisnanda Santoso</li>
+			</ul>
+			Komentar: <br />
+			<h4 class="comment" id="comment1">Waktu pengumpulannya berbarengan dengan Progin</h4><br />
+			Ganti Komentar: <br />
+			<textarea class="changecomment" id="changecomment1" title="Silakan memasukkan komentar baru di sini"></textarea><br />
+			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment();">
+		</div>
+	</form>
+</div>
 
 </body>
 </html>

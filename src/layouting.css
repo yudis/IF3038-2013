@@ -96,7 +96,7 @@ h2{
     margin-left: -255px;
 	margin-top: 0px;
 	padding: 25px 25px 25px 25px;
-	background: rgba(255, 255, 255, .8);
+	background: rgba(255, 255, 255, .6);
 	text-align: left;
 	overflow: auto;
 }
@@ -296,4 +296,28 @@ h2{
 	color: white;
 	text-align: center;
 	cursor: pointer;
+}
+
+.comment {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	font-size: 14px;
+}
+
+.changecomment {
+	width: 435px;
+	height: 75px;
+	border: 1px solid;
+    border-color: #999 #ccc #ccc;
+    margin: 0;
+    padding: 2px;
+	overflow: auto;
+}
+
+.changecomment:hover {
+	border-color: #555 #888 #888;
+}
+
+.sbComment {
+	margin-top: 5px;
 }
