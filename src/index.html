@@ -3,28 +3,28 @@
 				<header>
 					<h1>Welcome to DO</h1>
 					<ul>
-						<li class="login"><a href="new_tugas.html">Login</a></li>
+						<li class="login"><a href="#" id="loginLink">Login</a></li>
 					</ul>
 				</header>
 				
-				<div class="login-box" id="loginBox">
+				<section class="login-box" id="loginBox">
 					<header>
 						<h3>Login</h3>
 					</header>
-					<form id="loginForm" action="#" method="post">
-						<div class="row">
-							<label>Username</label><br>
+					<form id="loginForm" action="#" method="post" class="vertical">
+						<div class="field">
+							<label>Username</label>
 							<input size="30" maxlength="50" name="username" id="login_username" type="text">
 						</div>
-						<div class="row">
-							<label>Password</label><br>
+						<div class="field">
+							<label>Password</label>
 							<input size="30" maxlength="50" name="password" id="login_password" type="password">
 						</div>
-						<div class="row buttons">
-							<input type="submit" name="login_dong" value="Login">
+						<div class="field">
+							<button type="submit" id="loginButton">Login</button>
 						</div>
 					</form>
-				</div>
+				</section>
 				
 				<div class="primary">
 					<section class="welcome">
@@ -37,7 +37,7 @@
 				<div class="secondary">
 					<section class="register">
 						<header>
-							<h1>Register</h1>
+							<h3>Sign Up Now!</h3>
 						</header>
 
 						<form id="register" action="#" method="post">
@@ -70,7 +70,7 @@
 								<input name="avatar" id="avatar" type="file">
 							</div>
 							<div class="row buttons">
-								<input type="submit" name="register_dong" value="Register">
+								<button type="submit" name="register_dong" id="submitButton">Register</button>
 							</div>
 						</form>
 					</section>

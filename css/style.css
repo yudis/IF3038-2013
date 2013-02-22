@@ -65,6 +65,14 @@ form .field label {
 	padding: 4px 20px 0 0;
 	text-align: right;
 }
+form.vertical .field label {
+	display: block;
+	width: auto;
+	height: auto;
+	text-align: left;
+	padding: 0;
+	margin-bottom: 4px;
+}
 form .buttons {
 	padding-left: 120px;
 }
@@ -229,6 +237,7 @@ button:active {
 	margin: 0;
 }
 
+/** Dashboard **/
 .categories ul {
 	list-style: none;
 	margin: 0;
@@ -444,6 +453,10 @@ p.description .detail-label {
 @media screen and (min-width: 980px) {
 	.site-container {
 		width: 920px;
+		position: relative;
+	}
+	.content > div {
+		position: relative;
 	}
 	.site-container > header h1 {
 		padding-left: 20px;
@@ -462,6 +475,29 @@ p.description .detail-label {
 		float: left;
 		width: 260px;
 		margin: 0 0 0 20px;
+	}
+
+	/** Main Page **/
+	#loginBox {
+		display: none;
+		opacity: 0;
+	}
+	#loginBox.visible {
+		display: block;
+		opacity: 1;
+	}
+	#loginBox h3 {
+		display: none;
+	}
+	#loginBox {
+		position: absolute;
+		right: 30px;
+		background: #eee;
+		padding: 20px;
+		margin-top: -15px;
+		border-radius: 3px;
+		border-top-right-radius: 0;
+		width: 230px;
 	}
 }
 
