@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>Dashboard</title>
+	
+<link href="profile.css" rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+    <script type="text/javascript" language="javascript" src="dashboard.js"></script>
+	
+<div class="header">
+	<a href="dashboard.html"><img align="left" src="logo.png" width="150" height="50" />
+	<h6>Dashboard</a> | <a href="profile.html">Profile</a> | <a href="index.html">Logout</a>
+	
+   | Search: <input type="search">
+  <input type="submit" value="GO">
+	</div>
+    <center>
+		<img src="newcat.png" id="addCategory" onclick="showCatPrompt()"></button>
+	</center>
+	
+	<div class="kategori">
+	<center><h2 class="judul">Daftar Tugas</h2>
+	<table>
+	<tr><td><div class="judulkat"
+        onmouseover="document.getElementById('div2').style.display = 'none'; document.getElementById('addtask').style.display = 'block';"
+		onmouseout="document.getElementById('div2').style.display = 'block'; document.getElementById('addtask').style.display = 'none';">Akademik
+		
+   <div id="div1" style="display: block;"> <div class="ganjil"><a href="rincian.html">Ngerjain Tubes <br>22-02-2013<br>akademik, capek</a></div>
+   <div class="genap"><a href="rincian2.html">Belajar <br>23-02-2013<br>akademik, capek</a></div> 
+	<div id="addtask" style="display: none;">
+		<a href="tambah.html"><img src="newtask.png"></a>
+	</div></div>
+   </td>
+   
+   <td><div class="judulkat"
+        onmouseover="document.getElementById('div1').style.display = 'none'; document.getElementById('addtask2').style.display = 'block';"
+		onmouseout="document.getElementById('div1').style.display = 'block'; document.getElementById('addtask2').style.display = 'none';">Hiburan
+		
+   <div id="div2" style="display: block;"> <div class="ganjil"><a href="rincian3.html">Futsal <br>24-02-2013<br>olahraga, capek</a></div>
+   <div class="genap"><a href="rincian4.html">Nonton <br>25-02-2013<br>asik, capek</a></div>
+   <div id="addtask2" style="display: none;">
+		<a href="tambah.html"><img src="newtask.png"></a>
+	</div></div>
+   </td>
+   
+   <td><div class="judulkat"
+        onmouseover="document.getElementById('div1').style.display = 'none'; document.getElementById('addtask3').style.display = 'block';"
+		onmouseout="document.getElementById('div1').style.display = 'block'; document.getElementById('addtask3').style.display = 'none';"><p id="cats"></p>
+		<div id="addtask3" style="display: none;">
+		<a href="tambah.html"><img src="newtask.png"></a>
+	</div>
+   </td>
+   
+   </tr></table>  
+   
+ 
+	
+</center>
+</body>
+</html>
