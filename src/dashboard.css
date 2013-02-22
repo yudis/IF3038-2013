@@ -1,5 +1,6 @@
 body {
-background-color: White
+background-color: White;
+margin: 0px;
 }
 
 /*Header*/
@@ -223,4 +224,12 @@ input[type="search"], isindex {
 	width:50%;
 	float:left;
 	text-align:left;
+}
+
+#footer_wrap
+{
+	background-color: #fff;
+	height:20px;
+	width: 1000px;
+	margin: auto;
 }
