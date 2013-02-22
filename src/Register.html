@@ -12,8 +12,7 @@
 <div id="header">
     <div id="logo"><a href="Dashboard.html"><img src="Image/logo.png" width="186" height="187" alt="Simpan agendamu pada e-List" /></a></div> 
     <div id="header_menu"> 
-   		<h3><a href="Dashboard.html">Dashboard</a> | 
-        <a href="Profil.html">Profil</a> |
+   		<h3>
         <a href="#join_form" id="join_pop">Sign Up</a>
         </h3>
     </div>
@@ -52,25 +51,26 @@
 		<hr>
             <form name="foRegister" action="Dashboard.html">
 		<div class="attribute">Username &nbsp;&emsp;&emsp;&emsp;
-        	: <input type="text" id="txUsername" onkeyup="vdUsername()">
+        	: <input type="text" id="txUsername" onkeyup="vdUsername()" title="Minimal 5 karakter">
             <img src="Image/notaccept.png" id="icoUsername"></img></div>
         <div class="attribute">Password 		&nbsp;&emsp;&emsp;&emsp;
-        	: <input type="password" id="txPassword" onkeyup="vdPassword()">		
+        	: <input type="password" id="txPassword" onkeyup="vdPassword()" title="Minimal 8 karakter, tidak boleh sama dengan username maupun emai">		
             <img src="Image/notaccept.png" id="icoPassword"></img></div>
         <div class="attribute">Confirm Pasword
-        	: <input type="password" id="txConfirmPassword" onkeyup="vdConfirmPassword()">	
+        	: <input type="password" id="txConfirmPassword" onkeyup="vdConfirmPassword()" title="harus sama dengan password">	
         	<img src="Image/notaccept.png" id="icoConfirmPassword"></img></div>
         <div class="attribute">Nama Lengkap	&emsp;
-        	: <input type="text" id="txName" onkeyup="vdName()"> 				
+        	: <input type="text" id="txName" onkeyup="vdName()" title="Minimal  mengandung  satu  spasi  di  antara  2  karakter  (ada  nama  depan  dan  nama 
+belakang)"> 				
         	<img src="Image/notaccept.png" id="icoName"></img></div>
         <div class="attribute">Tanggal Lahir	&emsp;&nbsp;&nbsp;
         	: <select id="cbYear"></select><select id="cbMonth"></select><select id="cbDay"></select>
 			<img src="Image/accept.png" id="icoDateofBirth"></img></div>
         <div class="attribute">Email	&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;		
-        	: <input type="text" id="txEmail" onkeyup="vdEmail()"> 				
+        	: <input type="text" id="txEmail" onkeyup="vdEmail()" title="harus sesuai dengan email biasa  (x@x.xx)"> 				 				
         	<img src="Image/notaccept.png" id="icoEmail"></img></div>
         <div class="attribute">Avatar	&emsp;&emsp;&emsp;&emsp;&emsp;		
-        	: <input type="file" name="fileForUpload" id="filename" onChange="vdAvatar()"> 				
+        	: <input type="file" name="fileForUpload" id="filename" onChange="vdAvatar()" title="Hanya menerima file ber ekstensi .jpg atau .jpeg"> 				
             <img src="Image/notaccept.png" id="icoAvatar"></img></div>
             
         <div class="attribute"><input type="Submit" id="btSubmit" value="Register"></div>

@@ -108,6 +108,18 @@ h2{
 	text-align:center;
 }
 
+#footer_profile {
+	position: absolute;
+	margin-top: 1000px;
+	width: 100%;
+	padding-left:12px;
+	margin-left: -20px;
+	background: rgba(255, 255, 255, .7);
+}
+#footer_profile p{
+	text-align:center;
+}
+
 .attribute{
 	margin-left: 30px;
 	color:#007;
