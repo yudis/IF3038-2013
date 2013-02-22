@@ -53,12 +53,12 @@
 		
 		<section>
 			<div id="content_wrap" class="wrap">
-				<div id="profil_area">
+				<div id="profil_left">
 					<div id="profil_form_wrap">
 						<div id="profil_head">
-							<h1>Form ganti password</h1>
+							<h1>Ganti Password</h1>
 						</div>
-						<form id="profil_form" method="post" action="#">
+						<form id="profil_form" method="post" action="profil.html">
 							<div class="row">
 								<label for="profil_password">Sandi baru</label>
 								<input id="profil_password" name="password" pattern="^.{8,}$" type="password" title="Sandi minimal harus terdiri dari 8 karakter dan tidak sama dengan username dan email." required />							
@@ -71,24 +71,24 @@
 						</form>
 					</div>
 				</div>
-				<div id="profil_do">
-					<div id="profil_head">
-						<h1>Work Done</h1>
+				<div id="task_right">
+					<div class="profil_sub_head">
+						<h4>Selesai</h4>
 					</div>
-					<div class="row">
-						<div id="profil_do_text" ><li><a href="#">progin</a></li></div>
-					</div>
-				</div>
-				<div id="profil_do">
-					<div id="profil_head">
-						<h1>Work Undone</h1>
-					</div>
-					<div class="row">
-						<div id="profil_do_text" ><li><a href="#">Kriptografi</a></li></div>
-					</div>
-					<div class="row">
-						<div id="profil_do_text" ><li><a href="#">Intelegensi Buatan</a></li></div>
-					</div>
+					<ul>
+						<li>
+							<div class="row">
+								<div><a href="#">Kriptografi</a></div>
+							</div>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<div class="row">
+								<div><a href="#">Intelegensi Buatan</a></div>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</section>
@@ -97,19 +97,17 @@
 			<div id="footer_wrap" class="wrap">
 				<div id="footer_left">
 					<a href="dashboard.html">Dashboard</a> >>
-					<a href="profil.html" class="active">Profil</a>
+					<a href="profil.html">Profil</a> >>
+					<a href="profil.html" class="active">Ganti Sandi</a>
 				</div>
 				<div id="footer_right">
 					Copyright by dronJaX.
 				</div>
 			</div>
 		</footer>
-		
-			
-		</div>
-		
+
 		<script type="text/javascript" src="js/search.js"></script>
-		<script type="text/javascript" src="js/login.js"></script>
+		<script type="text/javascript" src="js/logout.js"></script>
 		<script type="text/javascript">
 			
 			/*----- Bagian pass ----*/
@@ -122,8 +120,9 @@
 			{
 				if ((profil_password.value==profil_confirm_password.value))
 				{
-					var userlist = JSON.parse(localStorage.userList);
-					userlist[sessionStorage.userId].passWord=profil_password.value;
+					var userlist = JSON.parse(localStorage.MOA_userList);
+					userlist[sessionStorage.MOA_userId].passWord=profil_password.value;
+					localStorage.MOA_userList = JSON.stringify(userlist);
 				}
 				else if (profil_password.value!=profil_confirm_password.value)
 				{

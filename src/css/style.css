@@ -37,6 +37,13 @@ form button {padding: 0px; margin: 0px; cursor: pointer; /* ie6 doesn't always d
 {
 	display: block !important;
 }
+span.label
+{
+	float: left;
+	display: block;
+	width: 150px;
+	line-height: 32px;
+}
 a.button_link
 {
 	float: right;

@@ -7,13 +7,16 @@ if (localStorage.MOA_userList == null)
 	user.fullName = "Administrator Jordan";
 	user.birthDate = "20/11/1992";
 	user.emailAddress = "fernandojordan.92@gmail.com";
-	user.Avatar = "images/tes.jpg";
+	user.Avatar = "images/avatar.jpg";
 	
 	var listuser = new Array();
 	listuser[0] = user;
 	
 	localStorage.MOA_userList = JSON.stringify(listuser);
-	
+}
+
+if (localStorage.MOA_categoryList == null)
+{
 	var users = new Array();
 	users[0] = "admin";
 	
@@ -35,4 +38,29 @@ if (localStorage.MOA_userList == null)
 	listcategory[2] = category;
 	
 	localStorage.MOA_categoryList = JSON.stringify(listcategory);
+}
+
+if (localStorage.MOA_taskList == null)
+{
+	var task = new Object();
+	task.category = 0;
+	task.name = "Tubes 1";
+	task.attachment = "task_files/sesuatu.jpg";
+	task.deadline = "22/02/2013";
+	
+	var asignee = new Array();
+	asignee[0] = "admin";
+	task.asignee = asignee;
+	
+	var tag = new Array();
+	tag[0] = "HTML";
+	tag[1] = "CSS";
+	tag[2] = "Javascript";
+	
+	task.tag = tag;
+	
+	var listtask = new Array();
+	listtask[0] = task;
+	
+	localStorage.MOA_taskList = JSON.stringify(listtask);
 }

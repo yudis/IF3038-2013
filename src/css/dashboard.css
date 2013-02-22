@@ -1,7 +1,13 @@
 #dashboard_category
 {
     width: 280px;
+	height: 500px;
+	overflow: hidden;
     float: left;
+}
+#dashboard_category:hover
+{
+	overflow-y: scroll;
 }
 #dashboard_category a
 {
@@ -14,13 +20,25 @@
 #dashboard_tugas
 {
     width: 650px;
+	height: 500px;
+	overflow: hidden;
 	float: right;
 }
+#dashboard_tugas:hover
+{
+	overflow-y: scroll;
+}
+#dashboard_tugas a
+{
+    text-decoration: none;
+	display: block;
+}
+
 
 .dashboard_category_element
 {
     display : block;
-    width : 250px;
+    width : 240px;
     padding : 4px 8px;
     background-color: #1E90FF;
 	border: 2px solid #CCCCCC;
@@ -34,7 +52,7 @@
 .dashboard_category_element_aktif
 {
     display : block;
-    width : 250px;
+    width : 240px;
     padding : 4px 8px;
     font-weight: bold;
     background-color: #1360F3;
@@ -55,7 +73,7 @@
 .dashboard_tugas_element
 {
     display: block;
-    width: 630px;
+    width: 610px;
 	height: 64px;
     padding: 0px 0px;
     background-color: #F8F8F8;
@@ -77,7 +95,7 @@
 .dashboard_tugas_judul
 {
     display: block;
-    width: 440px;
+    width: 430px;
     float: left;
 	font-weight: bold;
 	font-style: italic;
@@ -88,7 +106,7 @@
 {
     display: block;
     width: 190px;
-    margin-left: 450px;
+    margin-left: 420px;
     border-left: 2px solid #666666;
     padding: 6px 10px;
     text-decoration: none;
@@ -97,7 +115,7 @@
 .dashboard_tugas_tag_area
 {
     display: block;
-    width: 610px;
+    width: 590px;
     padding: 10px;
     border-top: 2px solid grey;
     font-size: 14px;
@@ -105,20 +123,18 @@
     text-decoration: none;
 }
 
-nav ul li a
-{
-    text-decoration: none;
-}
-
-nav ul li a div div  ul li
+.dashboard_tugas_tag_area ul li
 {
     float: none;
     display: inline;
-    margin-right: 10px;
+    margin-right: 4px;
     background-color: white;
     border: 1px dashed;
-    border-radius: 8px;
     padding: 4px;
+	
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
 }
 
 /*--- FORM NEW CATEGORY ---*/
@@ -221,19 +237,19 @@ nav ul li a div div  ul li
 	overflow: hidden;
 
 	transition-property: top, opacity;
-	transition-duration: 0.4s;
+	transition-duration: 0.3s;
 	transition-timing-function: linear;
 	-moz-transition-property: top, opacity;
-	-moz-transition-duration: 0.4s;
+	-moz-transition-duration: 0.3s;
 	-moz-transition-timing-function: linear;
 	-ms-transition-property: top, opacity;
-	-ms-transition-duration: 0.4s;
+	-ms-transition-duration: 0.3s;
 	-ms-transition-timing-function: linear;
 	-webkit-transition-property: top, opacity;
-	-webkit-transition-duration: 0.4s;
+	-webkit-transition-duration: 0.3s;
 	-webkit-transition-timing-function: linear;
 	-o-transition-property: top, opacity;
-	-o-transition-duration: 0.4s;
+	-o-transition-duration: 0.3s;
 	-o-transition-timing-function: linear;
 }
 

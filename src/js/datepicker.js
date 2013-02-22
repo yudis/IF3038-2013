@@ -159,7 +159,7 @@ var datePicker =
 		var temp = ((month+1)<10) ? "0":"";
 		var result = tempdate + date + "/" + temp + (month+1) + "/" +year;
 		this.destinationForm.birth_date.value = result;
-		blur();
+		this.blur();
 		
 		if ((birth_date.checkValidity()) && (check_date(birth_date.value)))
 			birth_date.style.backgroundImage = "url('images/valid.png')";

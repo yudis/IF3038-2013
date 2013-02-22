@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="" />
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-		<title>MOA - Tambah Tugas</title>
+		<title>MOA - Edit Tugas</title>
 		<script type="text/javascript" src="js/is_login.js"></script>
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/work.css" />
@@ -68,39 +68,39 @@
 		<section>
 			<div id="content_wrap" class="wrap">
 				<div id="work_area">
-					<div id="new_task_form_wrap">
+					<div id="edit_task_form_wrap">
 						<div id="work_head">
-							<h1>Tambah Tugas Baru</h1>
+							<h1>Edit Tugas</h1>
 						</div>
-						<form id="new_task_form" action="dashboard.html" method="post">
+						<form id="edit_task_form" action="dashboard.html" method="post">
 							<div class="row">
 								<label for="category_name">Nama Kategori</label>
 								<select id="category_name"></select>
 							</div>
 							<div class="row">
-								<label for="new_task_name">Nama Tugas</label>
-								<input id="new_task_name" name="new_task_name" pattern="^[a-zA-Z0-9 ]{1,25}$" type="text" title="Nama tugas maksimal 25 karakter terdiri dari karakter alfanumerik dan spasi." required />
+								<label for="edit_task_name">Nama Tugas</label>
+								<input id="edit_task_name" name="edit_task_name" pattern="^[a-zA-Z0-9 ]{1,25}$" type="text" title="Nama tugas maksimal 25 karakter terdiri dari karakter alfanumerik dan spasi." required />
 							</div>
 							<div class="row">
-								<label for="new_task_attachment">Attachment</label>
-								<input id="new_task_attachment" name="new_task_attachment" type="file" title="Attachment dari tugas." required />
+								<label for="edit_task_attachment">Attachment</label>
+								<input id="edit_task_attachment" name="edit_task_attachment" type="file" title="Attachment dari tugas." />
 							</div>
 							<div class="row">
 								<label for="birth_date">Deadline</label>
 								<input id="birth_date" name="birth_date" type="text" pattern="^[0-3][0-9]/[0-1][0-9]/[1-9][0-9][0-9][0-9]$" onclick="datePicker.showCalendar(event);" title="Deadlinenya harus setelah hari ini." required/>
 							</div>
 							<div class="row">
-								<label for="new_task_username">Asignee</label>
-								<input id="new_task_username" name="new_task_username" list="asignee_option" pattern="^[^;]{5,}(;[^;]{5,})*$" type="text" title="Asignee yang dimasukkan dan terdaftar dan dipisahkan tanda titik-koma. Jika tidak dimasukkan akan jadi task pribadi."/>
+								<label for="edit_task_username">Asignee</label>
+								<input id="edit_task_username" name="edit_task_username" list="asignee_option" pattern="^[^;]{5,}(;[^;]{5,})*$" type="text" title="Asignee yang dimasukkan dan terdaftar dan dipisahkan tanda titik-koma. Jika tidak dimasukkan akan jadi task pribadi."/>
 								<datalist id="asignee_option">
 									<option value="admin">
 								</datalist>
 							</div>
 							<div class="row">
-								<label for="new_task_tag">Tag</label>
-								<input id="new_task_tag" name="new_task_tag" pattern="^[^,]+(,[^,]+)*$" type="text" title="Tag harus dimasukkan dan dipisahkan tanda koma jika banyak." required />
+								<label for="edit_task_tag">Tag</label>
+								<input id="edit_task_tag" name="edit_task_tag" pattern="^[^,]+(,[^,]+)*$" type="text" title="Tag harus dimasukkan dan dipisahkan tanda koma jika banyak." required />
 							</div>
-							<input id="new_task_submit" type="submit" value="Tambah" disabled="disabled" title="Semua elemen form harus diisi dengan benar dahulu."/>
+							<input id="edit_task_submit" type="submit" value="Edit" disabled="disabled" title="Semua elemen form harus diisi dengan benar dahulu."/>
 						</form>
 					</div>
 				</div>
@@ -111,7 +111,7 @@
 			<div id="footer_wrap" class="wrap">
 				<div id="footer_left">
 					<a href="dashboard.html">Dashboard</a> >>
-					<a href="#" class="active">Tambah Tugas Baru</a>
+					<a href="#" class="active">Edit Tugas</a>
 				</div>
 			</div>
 		</footer>
@@ -143,30 +143,31 @@
 		<script type="text/javascript" src="js/logout.js"></script>
 		<script type="text/javascript">			
 			/*----- Bagian tugas baru ----*/
-			var new_task_form = document.getElementById("new_task_form");
+			var edit_task_form = document.getElementById("edit_task_form");
 			
-			var new_task_name = document.getElementById("new_task_name");
-			var new_task_attachment = document.getElementById("new_task_attachment");
+			var edit_task_name = document.getElementById("edit_task_name");
+			var edit_task_attachment = document.getElementById("edit_task_attachment");
 			var birth_date = document.getElementById("birth_date");
-			var new_task_username = document.getElementById("new_task_username");
-			var new_task_tag = document.getElementById("new_task_tag");
+			var edit_task_username = document.getElementById("edit_task_username");
+			var edit_task_tag = document.getElementById("edit_task_tag");
 			
-			new_task_form.onsubmit = function()
+			edit_task_form.onsubmit = function()
 			{
 				var listcategory = JSON.parse(localStorage.MOA_categoryList);
+				var listtask = JSON.parse(localStorage.MOA_taskList);
 				var category_name = document.getElementById("category_name");
 				if ((category_name.value >= 0)&&(category_name.value < listcategory.length))
 				{
 					var userlist = JSON.parse(localStorage.MOA_userList);
-					var task = new Object();
+					var task = listtask[number];
 					task.category = category_name.value;
-					task.name = new_task_name.value;
-					task.attachment = "task_files/"+new_task_attachment.value.split("\\")[new_task_attachment.value.split("\\").length-1];
+					task.name = edit_task_name.value;
+					task.attachment = (edit_task_attachment.value=="")? task.attachment : "task_files/"+edit_task_attachment.value.split("\\")[edit_task_attachment.value.split("\\").length-1];
 					task.deadline = birth_date.value;
 					var asignee = new Array();
-					if (new_task_username.value!="")
+					if (edit_task_username.value!="")
 					{
-						var names = new_task_username.value.split(";");
+						var names = edit_task_username.value.split(";");
 						for (i=0;i<names.length;++i)
 						{
 							if (names[i]!='')
@@ -179,16 +180,15 @@
 					}
 					task.asignee = asignee;
 					var tag = new Array();
-					var tags = new_task_tag.value.split(",");
+					var tags = edit_task_tag.value.split(",");
 					for (i=0;i<tags.length;++i)
 					{
 						if (tags[i]!='')
 							tag[i] = tags[i];
 					}
 					task.tag = tag;
-				
-					var listtask = JSON.parse(localStorage.MOA_taskList);
-					listtask[listtask.length] = task;
+					
+					listtask[number] = task;
 					localStorage.MOA_taskList = JSON.stringify(listtask);
 					return true;
 				}
@@ -200,7 +200,7 @@
 				return false;
 			}
 			
-			new_task_name.onkeyup = function()
+			edit_task_name.onkeyup = function()
 			{
 				if (this.checkValidity())
 					this.style.backgroundImage = "url('images/valid.png')";
@@ -209,7 +209,7 @@
 				check_submit();
 			}
 			
-			new_task_username.onkeyup = function()
+			edit_task_username.onkeyup = function()
 			{
 				if ((this.checkValidity())&&(check_username(this.value)))
 					this.style.backgroundImage = "url('images/valid.png')";
@@ -227,7 +227,7 @@
 				check_submit();
 			}
 			
-			new_task_tag.onkeyup = function()
+			edit_task_tag.onkeyup = function()
 			{
 				if (this.checkValidity())
 					this.style.backgroundImage = "url('images/valid.png')";
@@ -236,7 +236,7 @@
 				check_submit();
 			}
 			
-			new_task_attachment.onchange = function()
+			edit_task_attachment.onchange = function()
 			{
 				if (check_file(this))
 					this.style.backgroundImage = "url('images/valid.png')";
@@ -262,6 +262,8 @@
 			
 			function check_file(image)
 			{
+				if (image.value=="")
+					return true;
 				return (image.value.match("^.+\.(jpe?g|JPE?G|png|PNG|gif|GIF|txt|TXT|pdf|PDF|mp4|ogv|webm|MP4|OGV|WEBM)$"));
 			}
 			
@@ -297,37 +299,56 @@
 			
 			function check_submit()
 			{
-				if (new_task_name.checkValidity()&& new_task_username.checkValidity() && 
-					birth_date.checkValidity() && new_task_tag.checkValidity() && 
-					check_file(new_task_attachment) && check_date(birth_date.value) && check_username(new_task_username.value))
+				if (edit_task_name.checkValidity()&& edit_task_username.checkValidity() && 
+					birth_date.checkValidity() && edit_task_tag.checkValidity() && 
+					check_file(edit_task_attachment) && check_date(birth_date.value) && check_username(edit_task_username.value))
 				{
-					document.getElementById("new_task_submit").disabled="";
+					document.getElementById("edit_task_submit").disabled="";
 				}
 				else
 				{
-					document.getElementById("new_task_submit").disabled="disabled";
+					document.getElementById("edit_task_submit").disabled="disabled";
 				}
 			}
 		</script>
 		<script type="text/javascript" src="js/datepicker.js"></script>
 		<script type="text/javascript">
+			var number;
 			window.onload = function()
 			{
-				datePicker.init(document.getElementById("calendar"), document.getElementById("new_task_form"));
+				datePicker.init(document.getElementById("calendar"), document.getElementById("edit_task_form"));
 				var category_name = document.getElementById("category_name");
 				var listcategory = JSON.parse(localStorage.MOA_categoryList);
-				var category = window.location.search.replace( "?", "" )=='' ? "category=0" : window.location.search.replace( "?", "" );
-				category = category.split("=")[category.split("=").length-1];
+				var listtask = JSON.parse(localStorage.MOA_taskList);
+				number = window.location.search.replace( "?", "" )=='' ? "taskId=0" : window.location.search.replace( "?", "" );
+				number = number.split("=")[number.split("=").length-1];
 				for (i=0;i<listcategory.length;++i)
 				{
 					var tempstring = "";
 					tempstring += '<option';
-					if (i==category)
+					if (i==listtask[number].category)
 						tempstring += ' selected="selected"';
 					tempstring += ' value="'+i+'">';
 					tempstring += listcategory[i].name+'</option';
 					category_name.innerHTML += tempstring;
 				}
+				document.getElementById("edit_task_name").value = listtask[number].name;
+				document.getElementById("birth_date").value = listtask[number].deadline;
+				var asignee = listtask[number].asignee;
+				for (j=0;j<asignee.length-1;++j)
+				{
+					document.getElementById("edit_task_username").value += asignee[j];
+					document.getElementById("edit_task_username").value += ";";
+				}
+				document.getElementById("edit_task_username").value += asignee[asignee.length-1];
+				var tags = listtask[number].tag;
+				for (j=0;j<tags.length-1;++j)
+				{
+					document.getElementById("edit_task_tag").value += tags[j];
+					document.getElementById("edit_task_tag").value += ",";
+				}
+				document.getElementById("edit_task_tag").value += tags[tags.length-1];
+				
 				category_name.pattern = "^[0-9]+$";
 				check_submit();
 			}
