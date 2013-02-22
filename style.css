@@ -1,5 +1,4 @@
 body {
-/*background-image:url('yellowbg.jpg');*/
 background-repeat:no-repeat;
 background-position:top center;
 width:100%;
@@ -32,11 +31,7 @@ padding:0;
 margin-left: auto;
 margin-right: auto;
 width:500px;
-<<<<<<< HEAD
 z-index:1000;
-=======
-z-index:1;
->>>>>>> 96ffa7d63328ef306afdbba14b564eb49fe5882b
 display:none;
 }
 .centerV ul{
@@ -87,10 +82,7 @@ font-size: 18px;
 .centerV button:hover{
 background-color: #fcff00;
 color: #351b02;
-<<<<<<< HEAD
 
-=======
->>>>>>> 96ffa7d63328ef306afdbba14b564eb49fe5882b
 }
 
 /*--------- index ---------*/
@@ -218,10 +210,7 @@ font-size: 15px;
 .reg button:hover{
 background-color: #fcff00;
 color: #351b02;
-<<<<<<< HEAD
 
-=======
->>>>>>> 96ffa7d63328ef306afdbba14b564eb49fe5882b
 }
 
 .reg input[type=file]{
@@ -594,7 +583,6 @@ border-bottom-width: 1px;
 border-bottom-style: solid;
 }
 
-<<<<<<< HEAD
 #kegiatan a, #kegiatan a:visited
 {
 	position:relative;
@@ -625,8 +613,6 @@ border-bottom-style: solid;
 	z-index: 0;
 }
 
-=======
->>>>>>> 96ffa7d63328ef306afdbba14b564eb49fe5882b
 /* SQUARED TWO */
 .squaredTwo {
 	width: 28px;

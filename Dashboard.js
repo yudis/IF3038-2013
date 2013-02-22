@@ -31,12 +31,9 @@ function FormAddKategori(){
 
 function AddKategori(){
 	var d1 = document.getElementById('namakategori').value;
-<<<<<<< HEAD
 	if (d1==""){
 		
 	}else{
-=======
->>>>>>> 96ffa7d63328ef306afdbba14b564eb49fe5882b
 	var div = document.getElementById ("kategori");
 	div.innerHTML += "<a onClick=\"ShowTask('2','5')\">"+d1+"</a>";
   
