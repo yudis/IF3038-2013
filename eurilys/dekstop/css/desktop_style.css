@@ -60,7 +60,7 @@ input#remember_me {
 	width:auto;
 }
 label#remember_me {
-	float:left; font-size:12px; width:auto; margin-top:20px; 
+	float:left; font-size:12px; width:auto; margin-top:-20px; 
 }
 .header_menu a {
 	color:white;
