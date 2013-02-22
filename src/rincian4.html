@@ -3,12 +3,14 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Rincian Tugas | DTD</title>
-	<link href="profile.css" rel="stylesheet" type="text/css" />
-	<link href='http://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'>
+<link href="css/utama.css" rel="stylesheet" type="text/css" />
+<link href="css/mediaqueries.css" rel="stylesheet" type ="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<div class="header">
-	<a href="dashboard.html"><img align="left" src="logo.png" width="150" height="50" />
+	<a href="dashboard.html"><img align="left" src="images/logo.png" width="150" height="50" />
 	<h6>Dashboard</a> | <a href="profile.html">Profile</a> | <a href="index.html">Logout</a> | Search: <input type="search"><input type="submit" value="GO">
 	</div>
 	<div class="container"><br>
@@ -16,20 +18,20 @@
 				<form name="rincian">
 				<h1 class="judul">Rincian Tugas</h1>
 				Nama Task : <input  type="text" readonly="true" id="namatask" value="Nonton" border="0" /> <br>
-				Attachment : <br><img src="ava1.jpg" width="300"></img>
+				Attachment : <br><img src="images/ava1.jpg" width="300"></img>
 				<br>
 				Deadline : <input  type="text" readonly="true" id="deadline" value="25-02-2013" border="0" /><br>
 				Assignee : <input  type="text" onKeyUp="autoassignee(this, event)" readonly="true" id="assignee" value="" border="0" /><br>
 				Tag : <input  type="text" readonly="true" id="tag" value="asik, capek" border="0" /> <br>
-				<img src="edit.png" width="150" id="edit-button" value="EDIT" onClick="edit()" />
-				<img src="save.png" width="150" id="save-button" value="SAVE" onClick="save()" /><br><br>			
+				<img src="images/edit.png" width="150" id="edit-button" value="EDIT" onClick="edit()" />
+				<img src="images/save.png" width="150" id="save-button" value="SAVE" onClick="save()" /><br><br>			
 			</div>
 			<div class="comment">
 				<h1 class="judul">Komentar</h1>
 				<textarea id="comment" rows="4" cols="45"> </textarea> <br> <input type="button" value="SUBMIT"> <br><br>
-				<img class="avatar" src="ava1.jpg"> Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! 
+				<img class="avatar" src="images/ava1.jpg"> Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! 
 				<hr>
-				<img class="avatar" src="ava2.jpg"> Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya!<br>				
+				<img class="avatar" src="images/ava2.jpg"> Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya!<br>				
 				<center>
 					Prev | 1 | 2 | Next
 				</center>
@@ -48,8 +50,8 @@ function save()
 	document.getElementById("assignee").readOnly=true;
 }
 </script>
-<script type="text/javascript" language="javascript" src="autocomplete.js"></script>
-<script type="text/javascript" src="datepickr.min.js"></script>
+<script type="text/javascript" language="javascript" src="js/autocomplete.js"></script>
+<script type="text/javascript" src="js/datepickr.min.js"></script>
 <script type="text/javascript">			
 			new datepickr('datepick2', {
 				'dateFormat': 'm/d/y'

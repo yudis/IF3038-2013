@@ -1,8 +1,7 @@
-
 body {
-	background-image: url('bg2.jpg');
+	background-image: url('../images/bg.jpg');
 	background-size:cover;
-	overflow: hidden;
+	overflow: scroll;
 }
 a:link {color:#FFF;}      /* unvisited link */
 a:visited {color:#FFF;}  /* visited link */
@@ -25,7 +24,17 @@ a:active {color:#000;}  /* selected link */
 	border-radius:25px;
 	-moz-border-radius:25px; /* Old Firefox */
 }
-
+.fitur {
+	overflow:hidden;
+	width : 500px;
+	height: 500px;
+	float :left;
+	margin-left:10%;
+	margin-top: 30px;
+	border:2px solid;
+	border-radius:25px;
+	-moz-border-radius:25px; /* Old Firefox */
+}
 .container {
 	height: 100%;
 	overflow:hidden;
@@ -82,7 +91,7 @@ a:active {color:#000;}  /* selected link */
 	width : 30%;
 	float :left;
 	margin-left:55%;
-	margin-top: 30px;
+	margin-top: -130px;
 	margin-bottom: 10px;
 	background-color: #3CF;
 	color: #000;
@@ -97,6 +106,7 @@ a:active {color:#000;}  /* selected link */
 	height: 100%;
 	overflow:hidden;
 	width : 30%;
+	margin-top:30px;
 	margin-left:55%;
 	background-color: #3CF;
 	color: #000;
@@ -187,13 +197,11 @@ h1{
 .colmid{
    position: relative;
    width: 100%;
-   right: undefined%;
    background-color: #66ccff
 }
 .colleft{
    position: relative;
    width: 100%;
-   right: undefined%;
    background-color: #66ccff
 }
 .col1{
@@ -201,21 +209,18 @@ h1{
    overflow: hidden;
    float: left;
    width: 66%;
-   left: undefined%;
 }
 .col2{
    position: relative;
    overflow: hidden;
    float: left;
    width: 27%;
-   left: undefined%;
 }
 .col3{
    position: relative;
    overflow: hidden;
    float: left;
    width:6%;
-   left: undefined%;
 }
 input[type="text"]
 {
@@ -228,5 +233,3 @@ input[type="password"]
 width:150px;
 background-color:#0AF;
 }
-
-

@@ -150,40 +150,57 @@ function validateFormLogin()
 
 function validateFormRegistrasi()
 {
-	if (document.registrasi.DID.value.search(ck_username)==-1) 
-	alert("Masukan username salah")
-	else 
-	{
-		if (document.registrasi.DP.value.search(ck_password)==-1) 
-		alert("Masukan password salah")
-		else 
-		{
-			if (document.registrasi.DCP.value != document.registrasi.DP.value)
-			alert("Masukan konfirmasi password berbeda")
-			else 
-			{
-				if (document.registrasi.DName.value.search(ck_name)==-1) 
-				alert("Masukan nama salah")
-				else 
-				{	
-					if (document.registrasi.DMail.value.search(ck_email)==-1) 
-					alert("Masukan email salah")
-					else 
-					{ 	
-						if (document.registrasi.DAvatar.value.search(file)==-1) 
-						alert("Masukan avatar salah")
-						else
-						{
-							alert("Registrasi sukses!")
-							document.write('<a href="dashboard.html">Lihat dashboard</a>');
-						}
-					}
-				}
-			}
-		}
-	}
+	alert("Registrasi sukses");
 }
-*/
+function formValidation(oEvent) { 
+oEvent = oEvent || window.event;
+var txtField = oEvent.target || oEvent.srcElement; 
+var ck_username = /^[A-Za-z0-9_]{5,20}$/;
+var ck_password = /^[A-Za-z0-9!@#$%^&*()_]{8,20}$/;
+var ck_cpassword = /^[A-Za-z0-9!@#$%^&*()_]{8,20}$/;
+var ck_name = /^[A-Za-z0-9 ]{5,20}$/;
+var file = /.*\.(jpeg)|(jpg)$/;
+var ck_email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+var check=true;
+var msg=" ";
+if(document.getElementById("DID").value.search(ck_username)==-1 )
+{ check=false; }
+if(document.getElementById("DP").value.search(ck_password)==-1 )
+{ check=false }
+if (document.registrasi.DCP.value != document.registrasi.DP.value)
+{ check=false }
+if(document.getElementById("DName").value.search(ck_name)==-1 )
+{ check=false }
+if(document.getElementById("DMail").value.search(ck_email)==-1 )
+{ check=false }
+if(check){document.getElementById("signup").disabled = false; }
+else{document.getElementById("signup").disabled = true; }
+} 
+
+function resetForm(){
+document.getElementById("signup").disabled = true; 
+var frmMain = document.forms[0]; 
+frmMain.reset();
+}
+
+window.onload = function () { 
+
+var signup = document.getElementById("signup"); 
+
+var DID = document.getElementById("DID"); 
+var DP = document.getElementById("DP"); 
+var DCP = document.getElementById("DCP"); 
+var DName = document.getElementById("DName");
+var DMail = document.getElementById("DMail");  
+
+var check=false;
+document.getElementById("signup").disabled = true;
+DID.onkeyup = formValidation; 
+DP.onkeyup = formValidation; 
+DCP.onkeyup = formValidation; 
+DName.onkeyup = formValidation; 
+DMail.onkeyup = formValidation; 
+}
 
 function reportErrors(errors)
 {
