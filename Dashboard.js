@@ -45,5 +45,5 @@ function AddKategori(){
 	var obj= document.getElementById("popup");
 	obj.style.display="none";
 //	alert(d1);
-
 }
+
