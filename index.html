@@ -3,6 +3,7 @@
 	<head>
 		<title>Banana Board - Your Online Do List</title>		
 		<link rel="stylesheet" href="style.css" type="text/css">
+		 <script src="index.js" type="text/javascript" language="javascript"> </script>
 		<style type="text/css"></style>
 	</head>
 	
@@ -34,21 +35,21 @@
 					<h1 align="left">Register now!</h1>
 					<li>
 						<label for="username">Username:</label>
-						<input type="text" name="user" /><br>
+						<input type="text" name="user"  id="user" onchange="checkUsername()" required/><br>
 						<span>* minimal 5 karakter</span>
 					</li>
 					<li>
 						<label for="password">Password:</label>
-						<input type="text" name="user" /><br>
+						<input type="password" name="pass" id="pass" onchange="checkPassword()" required/><br>
 						<span>* minimal 8 karakter</span>
 					</li>		
 					<li>
 						<label for="confirmpass">Confirmed Password:</label>
-						<input type="text" name="user" />
+						<input type="password" name="passconfirmed" id="passconfirmed" onChange="checkConfirmedPass()" required/>
 					</li>
 					<li>
 						<label for="namalengkap">Nama Lengkap:</label>
-						<input type="text" name="user" /><br>
+						<input type="text" nama="namalengkap" id="namalengkap" onChange="checkNamaLengkap()" /><br>
 						<span>* minimal 2 kata (first name, last name)</span>
 					</li>	
 					<li>
@@ -109,14 +110,14 @@
 					</li>
 					<li>
 						<label for="email">Email:</label>
-						<input type="email" name="user" placeholder="test@example.com" required />
+						<input type="email" nama="email" id="email" required onchange="checkEmail()"/>
 					</li>
 					<li>
 						<label for="avatar">Avatar:</label>
 						<input class="file" type="file" name="avatar" id="avatar">
 					</li>
 					<li>
-						<button type="submit">Register</button>
+						<button type="submit" disabled id="registerbutton" onClick="submit()">Register</button>
 					</li>
 				</ul>
 			</form>
