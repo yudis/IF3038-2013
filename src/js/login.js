@@ -159,6 +159,6 @@ function register() {
 		registerform['username'].value,
 		registerform['password'].value
 	);
-	window.location = "Profil.html"
+	window.location = "dashboard.html"
 }
 
