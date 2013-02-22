@@ -110,3 +110,13 @@ function showdiv(id) {
         }
     }
 }
+
+function addNewCategory() {
+    showdiv('the_new_category');
+}
+
+function addNewTask() {
+    showdiv('new_task_1');
+    showdiv('new_task_2');
+    showdiv('new_task_3');
+}

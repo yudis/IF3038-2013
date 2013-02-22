@@ -151,7 +151,7 @@ body, html {
 
 /* ================= T A S K   L I S T ================= */
 .task_list {
-    width: 400px;
+    width: 250px;
     float: left;
     background: #20911e;
 }
@@ -389,21 +389,57 @@ input:required, textarea:required {
 
 .close_popup:hover { background: #00d9ff; }
 
+#the_new_category {
+    display: none;
+}
+
 /*--PROFILE--*/
+#backmain{
+    margin-left: 10px;
+    width: 91%;
+    float: left;
+    padding: 5px;
+    background: #444;
+    background: rgba(0, 0, 0, .6);
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .2), 0 2px 1px rgba(0, 0, 0, .8) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .2), 0 2px 1px rgba(0, 0, 0, .8) inset;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .2), 0 2px 1px rgba(0, 0, 0, .8) inset;
+}
+
 #profilepicture{
-	float:left;
+    float:left;
+    margin-left: 10px;
 }
 .biodata{
-	float:left;
-	margin-left:20px;
-	background-color:#BFC1C9;
-	padding:10px;
+    float:left;
+    margin-left:20px;
+    padding:10px;
+    height: 320px;
+    background: #444;
+    background: rgba(110, 110, 10, .6);
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .2), 0 2px 1px rgba(0, 0, 0, .8) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .2), 0 2px 1px rgba(0, 0, 0, .8) inset;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .2), 0 2px 1px rgba(0, 0, 0, .8) inset;
 }
 
 .hide{
-	display:none;
+    display:none;
 }
 
 .show{
-	display:box;
+    display:box;
+}
+
+#new_task_1, #new_task_2, #new_task_3 {
+    display: none;
+}
+
+.task_details {
+    display: none;
 }
