@@ -18,7 +18,7 @@ function onload() {
     document.getElementById('deadlineDisplayDiv').innerHTML = decodeURIComponent(deadline);
     
     var tags = getQueryParameter('tags');
-    var temp = tags.value.split(",");
+    var temp = tags.split(",");
     tagsTugas.length = 0;
     temp.forEach(function(obj) {
         tagsTugas.push(obj.trim());

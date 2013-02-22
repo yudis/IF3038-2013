@@ -16,10 +16,17 @@ function NewKategori() {
     var newitemK = '<li><a id="K' + nKategori + '" href="#" onclick="return KategoriSelected(this)">' + element.value + '</a></li>'
     var currentK = document.getElementById('Kategori');
     currentK.innerHTML += newitemK;
-        
-    var newitemC = '<section id="main-K' + nKategori + '"><h2>' + element.value + '</h2></section>'
-    var currentC = document.getElementById('listTugas');
-    currentC.innerHTML += newitemC;
+    
+    
+    if (selectedIndex < 0) {
+        var newitemC = '<section id="main-K' + nKategori + '"><h2>' + element.value + '</h2></section>'
+        var currentC = document.getElementById('listTugas');
+        currentC.innerHTML += newitemC;
+    } else {
+        var newitemC1 = '<section id="main-K' + nKategori + '" style="display: none;"><h2>' + element.value + '</h2></section>'
+        var currentC1 = document.getElementById('listTugas');
+        currentC1.innerHTML += newitemC1;
+    }
     
     nKategori++;
     return false;
