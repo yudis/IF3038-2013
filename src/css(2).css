@@ -1,34 +1,53 @@
-body{background:#E6E6E6 center center no-repeat;font:110% 'Maven Pro',Calibri,sans-serif;padding:0;}
-a{color:#2a5a9a;text-decoration:none; font-weight:400;}
+body{background:#CCCCCC center top no-repeat;
+	font:110% 'Maven Pro',Dadhand,sans-serif;
+	padding:15px;
+	background-image: url('images/back2.png');
+	background-position: absolute
+	border: 0.5px solid blue;}
+a{	color:#2a5a9a;
+	text-decoration:none; 
+	font-weight:400;}
 a:hover{color:#333;}
-article{margin:0 0 30px 0;display:block;}
+article{margin:0 0 30px 0;
+	display:block;}
 
-/*diubah */header{margin:50 50 10px;text-align:center;}
+/*diubah */
+header{margin:50 50 10px;
+	text-align:center;}
 nav{margin:0 0 20px 0;}
-#page{display:block;width:940px;margin:0 auto 15px auto;line-height:1.5em;padding-top:30px;}
-#primary{float:left;margin:0  0 -260px 0 0;width:100%;}
+#page{display:block;
+	width:940px;
+	margin:0 auto 15px auto;
+	line-height:1.5em;
+	padding-top:30px;}
+#primary{float:left;
+		margin:0  0 -260px 0 0;
+		width:100%;}
 #content{margin:0 260px 0 0;}
-/*diubah*/#center{width: 50%;
-text-align:center;
-border: 0px;
-padding: 0;
-margin: 0 auto;}
+
+/*diubah*/
+#center{width: 50%;
+		text-align:center;
+		border: 0px;
+		padding: 0;
+		margin: 0 auto;}
 
 #content header {text-align:left;}
-#main .widget-area{float:right;overflow:hidden;width:240px;}
+#main .widget-area{float:right;
+				overflow:hidden;
+				width:240px;}
 
 /*tambahan*/ 
-#logincontent{
-	width: 100%; 
-	padding:20%;}
+#logincontent{margin-left:20%;}
 #tes{
 	width:100%;
 	height:150px;
 	border-radius: 30px;
 }
-#elemenkiri{
-	padding:80px; 
-	margin-left:70px ; }
+#elemenkiri{margin-top:10px; margin-left:140px;}
+/* id login */
+ #video{float: left; width: 50%; border:50px;}
+ #formlogin{float: right; width: 50%; border:50px; border-width:10;}
 
 /* H1-H6 */
 h1,h2,h3,h4,h5,h6{font-weight:400;color:#555;letter-spacing:-.5px;line-height:1em;margin:0 0 5px;padding:0;text-shadow:#aaa 1px 1px 2px;}
@@ -52,11 +71,9 @@ h4{font-size:1.4em;}
 
 
 /* Header */
-#site-title{font-size:2.4em;font-weight:400;margin:0;text-shadow: 5px 5px 5px #ccff66;
-}
-#site-title a{font-weight:400;width:100%;
-	height:30px;
-	background:#333;}
+#site-title{font-size:2.4em;font-weight:400;margin:0;text-shadow: 5px 5px 5px;}
+#site-title a{font-weight:200;width:100%; height:20px;}
+/*diubah*/#logo {position: absolute ;top: 1%; left: 41%}
 #site-description{color:#777;font-size:1.3em;font-weight:400;margin:10px 0 12px 0;}
 
 /* Menu */
@@ -86,7 +103,7 @@ h4{font-size:1.4em;}
 .page-link{margin:0 0 1.2em;}
 
 /* Secondary */
-#secondary .widget{margin:0 0 25px 0;}
+#secondary .widget{margin:0 0 0 0;}
 #secondary h1{font-size:1.4em; border-bottom:1px dotted #aaa;}
 #secondary p{margin:0 0 15px 0;}
 #secondary ul{list-style:none;margin:0 0 15px 0;padding:0;}
