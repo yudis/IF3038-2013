@@ -66,3 +66,9 @@ document.getElementById("edittugas").style.visibility="hidden";
 document.getElementById("buattugas").style.visibility="visible";
 document.getElementById("wanted").style.visibility="visible";
 }
+
+function createTask() {
+    var k = document.getElementById("listtugas");
+    k.innerHTML = "<a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a onclick='showBuat()' class='addTask'></a>"
+    showList();
+}

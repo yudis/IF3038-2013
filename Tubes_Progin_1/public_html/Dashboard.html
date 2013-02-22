@@ -65,9 +65,14 @@ and open the template in the editor.
         
         <div class="tugas" id="rincitugas">
                 Nama task: Nama Tugas <br/>
-                Attachment: <div class="attachment">file.zip</div><br/>
+                Attachment: 
+                    <div class="attachment">
+                        file.zip<br/>
+                        picture.jpg<br/>
+                        video.mp4<br/>
+                    </div><br/>
                 Deadline: 17-12-2014<br/>
-                Assignee: X,Y,Z<br/>
+                Assignee: <a href="" class="asignee">Timo</a>, <a href="" class="asignee">Stefan</a>, <a href="" class="asignee">Frilla</a><br/>
                 Tag: <a href="" class="tag">dangerous</a>, <a href="" class="tag">novice</a> <br/>
                 <br/>Komentar:<br/>
                 <div class="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
@@ -75,11 +80,11 @@ and open the template in the editor.
                     <textArea></textarea>
                     <input type="button" name="submit" value="submit">
                 </form>
-                <br/><br/><br/>
+                <br/><br/>
                 <a onclick="showEdit();" class="button">edit</a><br/>
             </div>
+        
             <div class="tugas" id ="edittugas">
-                <br/>
                 <form>
                     Nama task: Nama Task<br/>
                     Attachment: <div class="attachment"><input type="file"></div><br/>
@@ -89,11 +94,13 @@ and open the template in the editor.
                     Komentar: <br/>
                 <div class="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
                 </form> <br/>
-                <a onclick="" class="button">save</a><br/>
+                <a onclick="showRinci()" class="button">save</a><br/>
             </div>
+        
 			<div id="wanted">
 			<img src="img/kertas2.png">
 			</div>
+        
             <div class="tugas" id="buattugas">
                 <br/>
                 Nama task: <div class="nama"><input type="text"></div><br/>
@@ -102,7 +109,7 @@ and open the template in the editor.
                 Assignee: <div class="asignee"><input type="text"></div><br/>
                 Tag: <div class="tag"> <input type="text"></div> <br/>
                 <br/>
-                <a onclick="" class="button">create</a><br/>
+                <a onclick="createTask();" class="button">create</a><br/>
             </div>
     </body>
 </html>
