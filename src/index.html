@@ -17,14 +17,14 @@
 	</div>
 	<div id="content">
 		<div id="login">
-			<form id="loginform" method="post">
+			<div id="loginform">
 				<fieldset>
 					<legend>Login</legend>
 					<p><input placeholder="Username" id="loginform-username" onkeyup="login_check()" type="text"></p>
 					<p><input placeholder="Password" id="loginform-password" onkeyup="login_check()" type="password"></p>
 					<p><button onclick="try_login()" id="loginform-submit" type="submit">LOGIN</button></p>
 				</fieldset>
-			</form>
+			</div>
 		</div>
 		<div id="register">
 			<form id="resgisterform" method="post" action="Profil.html">
@@ -84,19 +84,4 @@
 	</div>
 </body>
 </html>
-
-<script>
-	function try_login() {
-		if (!Session.login(
-			$id("loginform-username").value,
-			$id("loginform-password").value
-		)) {
-			alert("Incorrect username or password");
-		} else{
-			alert("Login success");
-			window.location = "Profil.html";
-		}
-		
-	}
-</script>
 
