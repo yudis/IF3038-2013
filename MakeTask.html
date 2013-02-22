@@ -3,13 +3,9 @@
 
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Untitled Document</title>
+        <title> Banana Board - New Task </title>
+		<link rel="stylesheet" style="text/css" href="style.css">
         <style>
-			body
-			{
-				background-color:lightcyan;
-			}
-			
 			.label
 			{
 				width: 100px;
@@ -59,8 +55,6 @@
 			}
 		</style>
         
-		<link rel="stylesheet" style="text/css" href="style.css">
-		
         <script type="text/javascript">
 			function loadAttachment()
 			{
@@ -251,6 +245,7 @@
 			</div>
 		</div>
 
+<<<<<<< HEAD
 		<div id="wrapper">
 			<div id="wrapper-left">
             <form name="MakeForm" action="taskdetails.html" onsubmit="submitThis()">
@@ -269,29 +264,104 @@
 						<div id="custombulan"><div class="label">Bulan</div>
 							<select id="bulanlist" onChange="monthChange()">
 							</select>
-						</div>
-						<div class="label"> </div>
-						<div id="customtahun"><div class="label">Tahun</div>
-							<select id="tahunlist">
-							</select>
-						</div>
-					</div>
-					<div style="clear:both"></div>
-				<div class="label"> <label for="asignee">Assignee</label></div> <input id="asignee" name="asignee" type="text"/> <br />
-				<div class="label"> <label for="tag">Tag</label></div> <input id="tag" name="tag" type="text" size="20"/> (dipisahkan dengan ",") <br />
-				<br /> 
-				<input id="submitbutton" name="submitbutton" type="submit" onClick="checkSubmission()"/>
-            </form>
+=======
+		<div id="isi">
+			<div id="leftsidebar">
+					<b>Create new task >></b>
+					<img src="leftmenu.png"/>
 			</div>
-			<div id="wrapper-right">
-				<img id="suatu_gambar" src="Troll.png" alt="Gambar tidak dapat di-load"/>    
-				<video id="suatu_video" width="320" height="240" controls>
-					<source src="A_Caterpillar.mp4" type="video/mp4">
-					<source src="A_Caterpillar.ogg" type="video/ogg">
-					Your browser does not support the video tag.
-				</video>
+			
+			<div id="rightsidebar">
+				<div id="wrapper-left">
+				<form class="reg" name="MakeForm" action="taskdetails.html" onsubmit="submitThis()">
+					<ul>
+						<li>
+							<label for="tugas" >Nama Tugas</label>
+							<input id="tugas" name="tugas" type="text" maxlength="25"/><br>
+						</li>
+						<li>
+							<label for="filebutton">Attachment</label>
+							<input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/><br>
+						</li>		
+						<li>
+							<label for="deadline">Deadline</label>
+							<div id="defaultdate">
+								<input id="deadline" type="date" required/>
+							</div>
+							<div id="customdate">
+								<div id="customtanggal">
+									<div class="label">Tanggal</div>
+									<select id="tanggallist"/>
+								</div>								
+								<div id="custombulan">
+									<div class="label">Bulan</div>
+									<select id="bulanlist" onChange="monthChange()"/>
+								</div>
+								<div id="customtahun">
+									<div class="label">Tahun</div>
+									<select id="tahunlist"/>
+								</div>
+							</div>
+						</li>
+						<li>
+							<label for="asignee">Assignee</label>
+							<input id="asignee" name="asignee" type="text"/>
+						</li>
+						<li>
+							<label for="tag">Tag</label>
+							<input id="tag" name="tag" type="text" size="20"/> (dipisahkan dengan ",")
+						</li>
+						<li>
+							<button id="submitbutton" name="submitbutton" type="submit" onClick="checkSubmission()"><b>Submit</b></button>
+						</li>
+					</ul>
+					<!--
+					<div class="label"> <label for="tugas" >Nama Tugas</label> </div> <input id="tugas" name="tugas" type="text" maxlength="25"/> <br />
+					<div class="label"> <label for="filebutton">Attachment</label> </div> <input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/> <br />
+					<div class="label"> <label for="deadline">Deadline</label> </div>
+						<div id="defaultdate">
+							<input id="deadline" type="date" required/>
+>>>>>>> 117f8dc809e8aab82ec04c64b9401950b6634209
+						</div>
+						<div id="customdate">
+							<div id="customtanggal"><div class="label">Tanggal</div>
+								<select id="tanggallist">
+								</select>
+							</div>
+							<div class="label"> </div>
+							<div id="custombulan"><div class="label">Bulan</div>
+								<select id="bulanlist" onChange="monthChange()">
+								</select>
+							</div>
+							<div class="label"> </div>
+							<div id="customtahun"><div class="label">Tahun</div>
+								<select id="tahunlist">
+								</select>
+							</div>
+						</div>
+						<div style="clear:both"></div>
+					<div class="label"> <label for="asignee">Assignee</label></div> <input id="asignee" name="asignee" type="text"/> <br />
+					<div class="label"> <label for="tag">Tag</label></div> <input id="tag" name="tag" type="text" size="20"/> (dipisahkan dengan ",") <br />
+					<br /> 
+					<input id="submitbutton" name="submitbutton" type="submit" onClick="checkSubmission()"/>
+				</form>
+				</div>
+				-->
+				<div id="wrapper-right">
+					<img id="suatu_gambar" src="Troll.png" alt="Gambar tidak dapat di-load"/>    
+					<video id="suatu_video" width="320" height="240" controls>
+						<source src="A_Caterpillar.mp4" type="video/mp4">
+						<source src="A_Caterpillar.ogg" type="video/ogg">
+						Your browser does not support the video tag.
+					</video>
+				</div>
 			</div>
-			<div style="clear:both"></div>
+		</div>
+		
+		<div id="footer" class="home">
+				<p>&copy Copyright 2013. All rights reserved<br>
+				Chalkz Team<br>
+				Yulianti - Adriel - Amelia</p>			
 		</div>
     </div>
 </body>
