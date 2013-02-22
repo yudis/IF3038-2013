@@ -68,7 +68,20 @@ document.getElementById("wanted").style.visibility="visible";
 }
 
 function createTask() {
-    var k = document.getElementById("listtugas");
-    k.innerHTML = "<a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a onclick='showBuat()' class='addTask'></a>"
-    showList();
+    var regex = /^[a-zA-Z0-9]{5,25}$/;
+    
+    if (regex.test(document.getElementById("namaTask").value)){
+        var k = document.getElementById("listtugas");
+        k.innerHTML = "<a class='listTugas' onclick='showRinci();'><a class='listTugas' onclick='showRinci();'></a> <a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a onclick='showBuat()' class='addTask'></a>";
+        document.getElementById("namaTask").value = 0;
+        showList();
+    } else {
+        alert("Task's name must be between 5-25");
+    }
+}
+
+function addCat() {
+        var k = document.getElementById("category");
+        k.innerHTML += "<div class='kategori' id='female-adult' onclick='showList2();'>Female Adult</div>";
+        showList();
 }
