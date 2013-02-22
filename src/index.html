@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html> 
     <head> 
+<<<<<<< HEAD
         <title> Welcome To Todolist! </title>
         <link rel="stylesheet" type="text/css" href="index.css" />
         <link rel="stylesheet" type="text/css" href="mediaqueries.css" />
         <script src="scripts/index.js"></script>
+=======
+>>>>>>> 58fd42f9e09e7f20b723c18d6fd80dd322b6c801
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+        <title>Welcome to Todolist!</title>
+        <link rel="stylesheet" type="text/css" href="index.css" />
+        <link rel="stylesheet" type="text/css" href="mediaqueries.css" />
+        <script src="scripts/index.js"></script>
     </head> 
     <body>
         <div class="page">
@@ -15,7 +22,7 @@
                     <div class="logo"><a href="#home"><img alt="Home" src="images/logo.png" /></a></div>
                     <div id="slogan">Share your to do list with everyone!</div>
                     <div id="loginwrapper">
-                        <form name="login">
+                        <form name="login"  onsubmit="return validateLogin();" method="post" action="dashboard.html">
                             <div id=login_username>
                                 Username <br>
                                 <input type="text" class="textbox" name="uname" value="" />
@@ -40,8 +47,8 @@
                         <button onclick="back()" class="slider_button">Back</button>
                         <button onclick="next()" class="slider_button">Next</button>
                     </div>
-                    <h2> It's easy, beautiful, important to have, and <br> the best part is.. it's FREE to use! </h2>
-                    What are you waiting for? <br>Join our system and start sharing your to do list right now! <br>
+                    <h2>It's easy, beautiful, important to have, and <br /> the best part is.. it's FREE to use!</h2>
+                    What are you waiting for?<br />Join our system and start sharing your to do list right now!<br />
                     If you find any trouble registering, please contact us asap!
                 </div>
                 <div id="rightcolumn">
@@ -49,29 +56,29 @@
                         <h1>Register Now!</h1>
                         It only takes you a few more steps!
                         <form name="registration" onsubmit="return validateForm();" method="post">
-                            <div id=username>
-                                <input type="text" class="regbox" name="uname" placeholder="Username.." required="required"/>
+                            <div class="wrapper">
+                                <input type="text" class="regbox" id="uname" name="uname" placeholder="Username.." required="required" onkeyup="validateUName();" onchange="validateUName();" />
                             </div>
-                            <div id=password>
-                                <input type="password" class="regbox" name="pwd" placeholder="Password.." required="required"/>
+                            <div class="wrapper">
+                                <input type="password" class="regbox" id="pwd" name="pwd" placeholder="Password.." required="required" onkeyup="validatePassword();" onchange="validatePassword();"/>
                             </div>
-                            <div id=password_confirm>
-                                <input type="password" class="regbox" name="pwd_confirm" placeholder="Confirm Password.." required="required"/>
+                            <div class="wrapper">
+                                <input type="password" class="regbox" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm Password.." required="required" onkeyup="validateRePassword();" onchange="validateRePassword();"/>
                             </div>
-                            <div id=nama>
-                                <input type="text" class="regbox" name="name" placeholder="Full Name.." required="required"/>
+                            <div class="wrapper">
+                                <input type="text" class="regbox" id="name" name="name" placeholder="Full Name.." required="required" onkeyup="validateFullName();" onchange="validateFullName();" />
                             </div>
-                            <div id=email>
-                                <input type="email" class="regbox" name="email" placeholder="Your Email.." required="required"/>
+                            <div class="wrapper">
+                                <input type="email" class="regbox" id="email" name="email" placeholder="Your Email.." required="required" onkeyup="validateEmail();" onchange="validateEmail();" />
                             </div>
-                            <div id=birthday>
-                                <p class="regtext">Birthday:</p><input type="date" class="regbox" name="bday" required="required"/>
+                            <div class="wrapper">
+                                <p class="regtext">Birthday:</p><input type="date" class="regbox" id="bday" name="bday" required="required" />
                             </div>
-                            <div id=avatar>
-                                <p class="regtext">Profile Image:<br></p><input type="file" name="ava" required="required"/>
+                            <div class="wrapper">
+                                <p class="regtext">Profile Image:<br /></p><input type="file" id="ava" name="ava" accept="image/*" required="required"  />
                             </div>
-                            <p id="terms"> By clicking Sign Up, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use. </p>
-                            <button onclick="register()"><img src="images/signupbutton.png" alt="sign up.."/></button>
+                            <p>By clicking Sign Up, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use. </p>
+                            <input type="submit" class="button" id="register" onclick="register()" value="Sign Up" />
                         </form>
                     </div>
                 </div>
