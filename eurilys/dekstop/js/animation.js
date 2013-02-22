@@ -58,7 +58,7 @@ function regCheck() {
 	if (confirm != password) {
 		document.getElementById("confirm_validation").src = "img/no.png";
 	}
-	else {
+	if (password.length > 7) {
 		document.getElementById("confirm_validation").src = "img/yes.png";
 	}
 	document.getElementById("confirm_validation").style.display = "block";

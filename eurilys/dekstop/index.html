@@ -26,7 +26,17 @@
 		<!-- Web Content -->
 		<section>
 			<div id="index_left">
-				* mau isi slider / gambar
+				<div id="tutorial_container">
+					<img src="img/tutorial.png" alt="tutorial_pic"/>
+					<div id="tutorial">
+						<span class="red"> Eurilys </span> is an online to-do-list website which is easy to use, user-friendly, and the most important 
+						thing of all, it's <span class="blue">FREE</span>!
+						<br>
+						You can add task, category for each task, and you can write down all the task's details here. 
+						<br>
+						No more papers, pen, and confusion. <span class="red"> Eurilys </span> is here to be your organization's partner.
+					</div>
+				</div>
 			</div>
 			<div id="index_right">
 				<div id="login_form_container">
@@ -68,7 +78,7 @@
 						<img src="img/yes.png" id="birthdate_validation" class="signup_form_validation"/>
 						
 						<label> Avatar </label>
-						<input type="file" name="avatar_upload" id="avatar_upload"> 
+						<input type="file" onchange="javascript:regCheck();" name="avatar_upload" id="avatar_upload"> 
 						<img src="img/yes.png" id="avatar_validation" class="signup_form_validation"/>
 						
 						<div id="signup_button_submit" onclick="javascript:regCheck();" class="right link_tosca top10 bold" title="Semua elemen form harus diisi dengan benar dahulu."> SIGN UP </div>
@@ -81,7 +91,10 @@
 		<div class="thin_line"></div>
 		<footer>
 			<div id="footer_container"> 
-				
+				<br><br>
+				About &nbsp;&nbsp;&nbsp; FAQ &nbsp;&nbsp;&nbsp; Feedback &nbsp;&nbsp;&nbsp; Terms &nbsp;&nbsp;&nbsp; Privay &nbsp;&nbsp;&nbsp; Copyright 
+				<br>
+				Eurilys 2013
 			</div>
 		</footer>
 	</body>

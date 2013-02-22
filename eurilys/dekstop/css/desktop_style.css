@@ -204,6 +204,8 @@ input#avatar_upload {font-size:12px;}
 	margin-right:auto;
 	display:block;
 	color:#fff;
+	font-size:12px;
+	text-align:center;
 }
 
 footer {
@@ -584,4 +586,21 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 #edit_profile_button {letter-spacing:0px;padding-left:8px; padding-right:8px;}
 
 .ul_none {list-style:none; margin:auto; width:200px; margin-top:5px;}
-.ul_none li {text-align:left; }
+.ul_none li {text-align:left;}
+.red {color:#ff5544; font-weight:bold;}
+.blue {color:#007bc1; font-weight:bold;}
+
+/* MAIN PAGE 
+--------------------------------------------------------------------------------- */
+#tutorial_container {
+	width:90%;
+	margin:auto;
+	margin-top:60px;
+	display:block;	
+}
+#tutorial {
+	width:85%;
+	display:block;
+	margin:auto;
+	margin-top:20px;
+}
