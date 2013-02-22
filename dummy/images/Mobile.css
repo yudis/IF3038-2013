@@ -1,4 +1,5 @@
-@media screen and (max-width: 1200px) {
+
+@media screen and (max-width: 480px) {
 
 body, div, h1,h2, form, fieldset, input, textarea, footer,p {
 	margin: 0; padding: 0; border: 0; outline: none;
@@ -134,15 +135,11 @@ font-size:18px;
 
 
 #kiri{
-width:450px;
-float:left;
+height:280px;
 padding:10 px 10 px 10 px 10 px;
-position:fixed;
 }
 
 #kanan{
-width:600px;
-float:right;
 padding:10 px 10 px 10 px 10 px;
 }
 
@@ -152,7 +149,7 @@ padding:10 px 10 px 10 px 10 px;
 	color: #999;
 	padding: 10px;
 	margin: 20px auto 0px auto;
-	width: 500px;
+	width: 400px;
 }
 
 .accordionMenu h1 {
