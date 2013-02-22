@@ -647,5 +647,46 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 }
 .half_tall {
 	height:200px;
-	
 }
+
+/* MEDIA QUERIES
+---------------------------------------------------------------------------------- */
+@media screen and (max-width:480px) {
+	#signup_form_container, #navbar, #search_box, .header_menu, #remember_me,
+	#remember_me_check {display:none}
+	
+	#index_left{
+		height:300px;
+		width:100%;
+	}
+	
+	#tutorial_container{font-size:12px}
+	
+	#index_right{width:100%; margin-top:0px}
+	
+	#login_form_container {
+		width:100%;
+		float:left;
+	}
+	.signup_label{
+		width:60%;
+	}
+	
+	div#dynamic_content{
+		border-left:none;
+		width:100%;
+	}
+	
+	div#.task_view{
+		padding:0px;
+	}
+	
+	.dynamic_content_left{
+		font-size:15px;
+	}
+	
+	.dynamic_content_right{
+		font-size:15px;
+	}
+	
+	
