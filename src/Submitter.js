@@ -146,7 +146,7 @@ function editDate(code){
 			break;
 		case('4') :
 			if (document.getElementById('editdate4').value != "OK"){
-				document.getElementById('editdate4').value == "OK";
+				document.getElementById('editdate4').value = "OK";
 				document.getElementById("deadline4").innerHTML = "Tanggal Penyelesaian : <select name='taskDay' id='taskDay4'></select><select name='taskMonth' id='taskMonth4'></select><select name='taskYear' id='taskYear4'></select>";
 				initDateOfTask();
 			}
@@ -171,32 +171,58 @@ function editDate(code){
 	}
 }
 
-function editTask(code){
-	if (document.getElementById("edit1").innerHTML != ""){
-		document.getElementById("edit1").innerHTML = "";
-	}else if(document.getElementById("edit2").innerHTML != ""){
-		document.getElementById("edit2").innerHTML = "";
-	}else if(document.getElementById("edit3").innerHTML != ""){
-		document.getElementById("edit3").innerHTML = "";
-	}else if(document.getElementById("edit4").innerHTML != ""){
-		document.getElementById("edit4").innerHTML = "";
-	}else if(document.getElementById("edit5").innerHTML != ""){
-		document.getElementById("edit5").innerHTML = "";
-	}else if(code == 'openedit1'){
-		form =   "Tag &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;: <input type=\"text\"><br />";
-		document.getElementById("edit1").innerHTML = form;
-	}else if(code == 'openedit2'){
-		form =   "Tag &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;: <input type=\"text\"><br />";
-		document.getElementById("edit2").innerHTML = form;
-	}else if(code == 'openedit3'){
-		form =   "Tag &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;: <input type=\"text\"><br />";
-		document.getElementById("edit3").innerHTML = form;
-	}else if(code == 'openedit4'){
-		form =   "Tag &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;: <input type=\"text\"><br />";
-		document.getElementById("edit4").innerHTML = form;
-	}else if(code == 'openedit5'){
-		form =   "Tag &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;: <input type=\"text\"><br />";
-		document.getElementById("edit5").innerHTML = form;
+function editTag(code){
+	switch(code) {
+		case('1') :
+			if (document.getElementById('tag1').value != "OK"){
+				document.getElementById('tag1').value = "OK";
+				document.getElementById("tanda1").innerHTML = "Tag : <input type='text' id='edittag1' />";
+			}
+			else {
+				document.getElementById('tag1').value = "Ubah";
+				document.getElementById("tanda1").innerHTML = "Tag : " + document.getElementById('edittag1').value;
+			}
+			break;
+		case('2') :
+			if (document.getElementById('tag2').value != "OK"){
+				document.getElementById('tag2').value = "OK";
+				document.getElementById("tanda2").innerHTML = "Tag : <input type='text' id='edittag2' />";
+			}
+			else {
+				document.getElementById('tag2').value = "Ubah";
+				document.getElementById("tanda2").innerHTML = "Tag : " + document.getElementById('edittag2').value;
+			}
+			break;
+		case('3') :
+			if (document.getElementById('tag3').value != "OK"){
+				document.getElementById('tag3').value = "OK";
+				document.getElementById("tanda3").innerHTML = "Tag : <input type='text' id='edittag3' />";
+			}
+			else {
+				document.getElementById('tag3').value = "Ubah";
+				document.getElementById("tanda3").innerHTML = "Tag : " + document.getElementById('edittag3').value;
+			}
+			break;
+		case('4') :
+			if (document.getElementById('tag4').value != "OK"){
+				document.getElementById('tag4').value = "OK";
+				document.getElementById("tanda4").innerHTML = "Tag : <input type='text' id='edittag4' />";
+			}
+			else {
+				document.getElementById('tag4').value = "Ubah";
+				document.getElementById("tanda4").innerHTML = "Tag : " + document.getElementById('edittag4').value;
+			}
+			break;
+		case('5') :
+			if (document.getElementById('tag5').value != "OK"){
+				document.getElementById('tag5').value = "OK";
+				document.getElementById("tanda5").innerHTML = "Tag : <input type='text' id='edittag5' />";
+			}
+			else {
+				document.getElementById('tag5').value = "Ubah";
+				document.getElementById("tanda5").innerHTML = "Tag : " + document.getElementById('edittag5').value;
+			}
+			break;
 	}
 }
 
