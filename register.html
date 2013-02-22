@@ -13,6 +13,16 @@
       return false;
     }
   }
+ 
+function beforeSubmit()
+{
+    var fname = document.getElementById("avatar").value;
+    if (fname.slice(-3) !== jpg || fname.slice(-4) !== jpeg) {
+        alert("Kok sama kayak imel?");;
+    } else {
+        return false;
+    }
+}
 </script>
   
   
@@ -57,7 +67,7 @@
             
             <p> 
               <label class="youmail" name="mail"> Avatar </label>
-              <input type="file" name="imagefilename" accept="image/x-png, image/gif, image/jpeg" /> 
+              <input type="file" id="avatar" accept="image/x-png, image/gif, image/jpeg" /> 
             </p>
 
 
