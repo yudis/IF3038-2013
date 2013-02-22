@@ -1,2 +1,0 @@
-/* Rincian Tugas.js */
-
