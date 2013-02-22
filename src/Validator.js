@@ -60,6 +60,7 @@ function getSrc(ico){
 function vdUsername(){
 	var temporary = document.getElementById('txUsername').value;
 	var temporary_password = document.getElementById('txPassword').value;
+	alert("| "+temporary+" | "+temporary_password+" |");
 	if(temporary.length >= 5 && temporary != temporary_password){
 		document.getElementById('icoUsername').src="Image/accept.png";
 	} else {
@@ -130,8 +131,8 @@ function vdAvatar(){
 }
 
 function login(){
-	var username = document.getElementById('txUsername').value;
-	var password = document.getElementById('txPassword').value;
+	var username = document.getElementById('txUsername_login').value;
+	var password = document.getElementById('txPassword_login').value;
 	if(username == "admin" && password == "admin")
 		window.location= "Dashboard.html";
 	else
