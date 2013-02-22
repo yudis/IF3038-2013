@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<title>Untask.Me</title>
-    
-<link rel="stylesheet" title="Default" href="images/Default.css" type="text/css" media="screen">
-<link rel="stylesheet" title="Mobile" href="images/Mobile.css" type="text/css" media="screen">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width; initial-scale=1.0">
+<title>Untask.Me</title>
+
+<link rel="stylesheet" href="images/Mobile.css" />
+<link rel="stylesheet" href="images/Default.css" />
+<link rel="stylesheet" href="images/Sexyred.css" />
+<link href="calendar.css" rel="stylesheet">
 	<!--[if IE]><script>
 	$(document).ready(function() { 
 
@@ -39,43 +42,50 @@ $("#form_wrap").addClass('hide');
     <!-- popup Register -->
         <a href="mytask.html#all" class="overlay" id="join_form"></a>
 <div class="popup">
+			
             <h2>Register Form</h2>
             <p>Please enter your details here</p>
             <div>
                 <label for="email">Username  :</label>
-                <input type="text" id="email" value="" />
+                <input type="text" id="regusername" value="" />
             </div>
                <div>
-                <label for="email">Password  :</label>
-                <input type="password" id="email" value="" />
+                <label for="password">Password  :</label>
+                <input type="password" id="password" value="" />
             </div>
                    <div>
-                <label for="email">Confirm Password  :</label>
-                <input type="password" id="email" value="" />
+                <label for="cpassword">Confirm Password  :</label>
+                <input type="password" id="cpassword" value="" />
             </div>
                    <div>
-                <label for="email">Fullname  :</label>
-                <input type="text" id="email" value="" />
+                <label for="fullname">Fullname  :</label>
+                <input type="text" id="fullname" value="" />
             </div>
                    <div>
-                <label for="email">Birth Date  :</label>
-                <input type="text" id="email" value="" />
+				   <div id="calendarDiv"></div>
+                <label for="birthday">Birth Date  :</label>
+                <input type="text" id="birthday" class="calendarSelectDate" />
             </div>
             <div>
                 <label for="email">Email  :</label>
-                <input type="text" id="email" value="" />
+                <input type="text" id="regemail" value="" />
             </div>
             <div>
-                <label for="email">Avatar  :</label>
-                <input type="file" name="attachment" id="attachment"><p id="att_valid"></p><br>
+                <label for="attachment">Avatar  :</label>
+                <input type="file" name="attachment" id="attachment" onChange="avatarValid()"><p id="att_valid" ></p><br>
             </div>
             
             <div align="right">
-              <input type="button" onClick="login_click()" value="Register!" />
+              <input type="button" onClick="validateFormRegister()" value="Register!" /><p id="att_valid2"></p>
               
-              <a class="close" href="mytask.html#all"></a>
+              <a class="close" href="index.html"></a>
                 </div>
+				
+				
+				
         </div>
+
 <script type="application/javascript" src="newtask.js"></script>
+<script src="calendar.js"></script>
 </body>
 </html>

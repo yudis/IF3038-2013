@@ -3,14 +3,18 @@
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width; initial-scale=1.0">
 <title>Untask.Me</title>
 
-
 <link rel="stylesheet" href="images/Mobile.css" />
+<link rel="stylesheet" href="images/Default.css" />
+<link rel="stylesheet" href="images/Sexyred.css" />
+<link rel="stylesheet" href="calendar.css">
+
 
 
 </head>
-<body>
+<body onload="set_style_from_cookie()">
 <div id="mobile">
 <div id="kiri">
 <div id="kiridalem">
@@ -22,7 +26,7 @@
   		<nav class="nav">
 				<a href="mytask.html#all"><span>My Task</span></a>
 			  <a href="myprofile.html#all"><span>My Profile</span></a>
-				<a href="login.html"><span>Logout</span></a>
+				<a href="index.html"><span>Logout</span></a>
                 
 	  	</nav>
         <div id="searchboxluar">	
@@ -64,21 +68,19 @@
 <div id="school" class="menuSection">
   <h2><a href="#school">Schoolicious</a> </h2>
   <h3>Tugas IMK<h4>13 Maret 2013 : School</h4></h3>
-  <h3>Tugas IMK<h4>13 Maret 2013 : School</h4></h3>
-  <h3>Tugas IMK<h4>13 Maret 2013 : School</h4></h3>
+  <h3>Tugas 2 IMK<h4>14 Maret 2013 : School</h4></h3>
+  <h3>Tugas 3 IMK<h4>15 Maret 2013 : School</h4></h3>
 </div>
 <div id="private" class="menuSection">
   <h2><a href="#private">Private</a> </h2>
- <h3>Tugas IMK<h4>13 Maret 2013 : School</h4></h3>
-  <h3>Tugas IMK<h4>13 Maret 2013 : School</h4></h3>
-  <h3>Tugas IMK<h4>13 Maret 2013 : School</h4></h3>
+ <h3>Kepo di FB<h4>23 Maret 2013 : Mobile phone</h4></h3>
      <h3><a href="#newtask" id="task_pop">+ Add New Task</a></h3>
 </div>
 <div id="house" class="menuSection">
   <h2><a href="#house">Households</a> </h2>
- <h3>Tugas IMK<h4>13 Maret 2013 : School</h4></h3>
-  <h3>Tugas IMK<h4>13 Maret 2013 : School</h4></h3>
-  <h3>Tugas IMK<h4>13 Maret 2013 : School</h4></h3>
+ <h3>Belanja<h4>15 Maret 2013 : House</h4></h3>
+  <h3>Ngepel<h4>16 Maret 2013 : House</h4></h3>
+  <h3>Tidur<h4>17 Maret 2013 : Everywheres</h4></h3>
      <h3><a href="#newtask" id="task_pop">+ Add New Task</a></h3>
 </div>
 
@@ -108,8 +110,9 @@
 		<input type="file" name="attachment" id="attachment"><p id="att_valid"></p><br>
 	</div>
 	<div>
+		<div id="calendarDiv"></div>
 		<label for="deadline">Deadline : </label>
-		<input type="text" name="deadline" id="deadline"><p id="deadline_valid"></p><br>
+		<input type="text" name="deadline" id="deadline" class="calendarSelectDate"><p id="deadline_valid"></p><br>
 	</div>
 	<div>
 		<label for="asignee">Asignee : </label>
@@ -144,6 +147,7 @@
               <a class="close" href="#close"></a>                </div>
         </div>
 <script type="application/javascript" src="newtask.js"></script>
+<script src="calendar.js"></script>
 </div>
 </body>
 </html>
