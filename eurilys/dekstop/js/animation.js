@@ -26,6 +26,7 @@ function add_category() {
 	document.getElementById("category_item").innerHTML += t;
 }
 
+var regValid = 0;
 function regCheck() {
 	var username = document.getElementById("reg_username").value;
 	var password = document.getElementById("reg_password").value;
@@ -39,36 +40,44 @@ function regCheck() {
 	//check username
 	if ((username.length > 4) && (username != password)) {
 		document.getElementById("username_validation").src = "img/yes.png";
+		regValid = 1;
 	}
 	else {
 		document.getElementById("username_validation").src = "img/no.png";
+		regValid = 0;
 	}
 	document.getElementById("username_validation").style.display = "block";
 	
 	//check password
 	if ((password.length > 7) && (password != username) && (password != email)) {
 		document.getElementById("password_validation").src = "img/yes.png";
+		regValid = 1;
 	}
 	else {
 		document.getElementById("password_validation").src = "img/no.png";
+		regValid = 0;
 	}
 	document.getElementById("password_validation").style.display = "block";
 
 	//check confirm
 	if (confirm != password) {
 		document.getElementById("confirm_validation").src = "img/no.png";
+		regValid = 0;
 	}
 	if (password.length > 7) {
 		document.getElementById("confirm_validation").src = "img/yes.png";
+		regValid = 1;
 	}
 	document.getElementById("confirm_validation").style.display = "block";
 	
 	//check name
 	if (name.indexOf(' ') >= 0) {
 		document.getElementById("name_validation").src = "img/yes.png";
+		regValid = 1;
 	}
 	else {
 		document.getElementById("name_validation").src = "img/no.png";
+		regValid = 0;
 	}
 	document.getElementById("name_validation").style.display = "block";
 	
@@ -76,22 +85,43 @@ function regCheck() {
 	var emailRegEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 	if ((email==password) || (email.search(emailRegEx) == -1)) {
 		document.getElementById("email_validation").src = "img/no.png";
+		regValid = 0;
 	}
 	else {
 		document.getElementById("email_validation").src = "img/yes.png";
+		regValid = 1;
 	}
 	document.getElementById("email_validation").style.display = "block";
 	
 	//check birthday
+	if (birthdate != "") {
+		document.getElementById("birthdate_validation").src = "img/yes.png";
+		regValid = 1;
+	}
+	else {
+		document.getElementById("birthdate_validation").src = "img/no.png";
+		regValid = 0;
+	}
 	document.getElementById("birthdate_validation").style.display = "block";
 	
 	//check avatar
 	var extension = avatar.split('.');
 	if ( (extension[1] == "jpg") || (extension[1] == "jpeg") ) {
 		document.getElementById("avatar_validation").src = "img/yes.png";
+		regValid = 1;
 	}
 	else {
 		document.getElementById("avatar_validation").src = "img/no.png";
+		regValid = 0;
 	}
 	document.getElementById("avatar_validation").style.display = "block";
+}
+
+function signup() {
+	if (regValid == 1) {
+		window.location.href = "src/Dashboard.html";
+	}
+	else {
+		alert("Fill your registration form correctly");
+	}
 }
