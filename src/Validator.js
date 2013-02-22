@@ -21,15 +21,11 @@ function initYears(){
 function initMonth(){
 	var sel = document.getElementById('cbMonth');
 	var opt = null;
-	for(i = 1; i<=12; i++) { 
+	var bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+	for(i = 0; i<12; i++) { 
 		opt = document.createElement('option');
-<<<<<<< .mine
 		opt.value = bulan[i];
 		opt.innerHTML = bulan[i];
-=======
-		opt.value = i;
-		opt.innerHTML = i;
->>>>>>> .r28
 		sel.appendChild(opt);
 	}
 }
