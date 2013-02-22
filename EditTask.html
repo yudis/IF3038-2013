@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> Toe Doe List!!! </title>
+  <!-- CSS HERE -->
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <!-- FAVICON HERE -->
+  <!-- JS HERE -->
+  
+</head>
+
+ 
+<body id="index" class="home">
+ 
+	<header>
+      <h1>TOE DOE LISTAH</h1>
+      <span>Betapa tidak enaknya hidup tanpa kerjaan.</br>Hidup yang enak adalah hidup yang banyak kerjaan, tapi gak dilakuin.</span>
+      </nav>
+    </header>
+ 
+<section id="Task" class="body">
+	<div class="Task1">
+		<h2>Task1</h2>
+ 
+		<ul>
+			<div>
+			  <label class="deadline">Deadline : </label>
+			  <input id="dead" name="dday" required="required" type="date" maxlength=2 cols=2 placeholder="DD" >
+			  <input id="dead" name="dmonth" required="required" type="date" maxlength=2 cols=2 placeholder="MM" >
+			  <input id="dead" name="dyear" required="required" type="date" maxlength=4 cols=4 placeholder="YY">
+			</div>
+			<p> Attachment :</p>
+					<script>
+					 function failed(e) {
+					   // video playback failed - show a message saying why
+					   switch (e.target.error.code) {
+						 case e.target.error.MEDIA_ERR_ABORTED:
+						   alert('You aborted the video playback.');
+						   break;
+						 case e.target.error.MEDIA_ERR_NETWORK:
+						   alert('A network error caused the video download to fail part-way.');
+						   break;
+						 case e.target.error.MEDIA_ERR_DECODE:
+						   alert('The video playback was aborted due to a corruption problem or because the video used features your browser did not support.');
+						   break;
+						 case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+						   alert('The video could not be loaded, either because the server or network failed or because the format is not supported.');
+						   break;
+						 default:
+						   alert('An unknown error occurred.');
+						   break;
+					   }
+					 }
+					</script>
+					<p><video src="tgif.vid" autoplay controls onerror="failed(event)"></video></p>
+					<p><a href="tgif.vid">Download the video file</a>.</p>
+			<p> <label> Pengawas : <input type=assignee name=assignee autocomplete="assignee"> </label></p>
+			<p> Comment : </p>
+			<p> 1. hmm gak jelas? </p>
+			<p> NewComment : </p>
+			<p> <textarea cols=80 name=comments maxlength=200></textarea></p>
+			<button type=button
+			onclick="alert('This Button Does Nothing')">
+			SUBMIT
+			</button>
+			<a Tag :</a>
+			<li><a href="#" rel="external">Task2</a></li>
+ 
+		</ul>
+	</div><!-- /.Task1 -->
+ 
+	<div class="Unfinished Task">
+ 
+		<h2>Unfinished Task</h2>
+		<ul>
+			<li><a href="#" rel="external">Task1</a></li>
+			<li><a href="#" rel="external">Task2</a></li>
+		</ul>
+	</div><!-- /.Unfinished Task -->
+</section><!-- /#Task-->
+ 
+</body>
+</html>
