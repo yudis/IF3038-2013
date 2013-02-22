@@ -4,8 +4,7 @@
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title> Banana Board - New Task </title>
-		
-		<link rel="stylesheet" style="text/css" href="style.css">
+		<link rel="stylesheet" style="text/css" href="style.css">        
 </head>
     
 <body onload="generateDate()">
@@ -17,7 +16,7 @@
 			</div>
 			<div id="menu">
 				<ul>
-					<li> <a href="dashboard.html"> DASHBOARD </a> </li>
+					<li> <a href="home.html"> DASHBOARD </a> </li>
 					<li> <a href="profile.html"> PROFILE </a> </li>
 					<li> <a href="index.html"> LOGOUT </a> </li>
 				</ul>
@@ -28,108 +27,55 @@
 			</div>
 		</div>
 
-<<<<<<< HEAD
-		<div id="wrapper">
-			<div id="wrapper-left">
-            <form name="MakeForm" action="taskdetails.html" onsubmit="submitThis()">
-				<div class="namelabel"> <label for="tugas" >Nama Tugas</label> </div> <input id="tugas" name="tugas" type="text" maxlength="25" required/> <br />
-				<div class="namelabel"> <label for="filebutton">Attachment</label> </div> <input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/> <br />
-				<div class="namelabel"> <label for="deadline">Deadline</label> </div>
-					<div id="defaultdate">
-						<input id="deadline" type="date" required/>
-					</div>
-					<div id="customdate">
-						<div id="customtanggal"><div class="namelabel">Tanggal</div>
-							<select id="tanggallist">
-							</select>
-						</div>
-						<div class="namelabel"> </div>
-						<div id="custombulan"><div class="namelabel">Bulan</div>
-							<select id="bulanlist" onChange="monthChange()">
-							</select>
-=======
 		<div id="isi">
 			<div id="leftsidebar">
-					<b>Create new task >></b>
+					<b>CREATE NEW TASK</b>
 					<img src="leftmenu.png"/>
 			</div>
-			
+		
 			<div id="rightsidebar">
 				<div id="wrapper-left">
-				<form class="reg" name="MakeForm" action="taskdetails.html" onsubmit="submitThis()">
-					<ul>
-						<li>
-							<label for="tugas" >Nama Tugas</label>
-							<input id="tugas" name="tugas" type="text" maxlength="25"/><br>
-						</li>
-						<li>
-							<label for="filebutton">Attachment</label>
-							<input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/><br>
-						</li>		
-						<li>
-							<label for="deadline">Deadline</label>
-							<div id="defaultdate">
-								<input id="deadline" type="date" required/>
-							</div>
-							<div id="customdate">
-								<div id="customtanggal">
-									<div class="namelabel">Tanggal</div>
-									<select id="tanggallist"/>
-								</div>								
-								<div id="custombulan">
-									<div class="namelabel">Bulan</div>
-									<select id="bulanlist"/>
+					<form class="task" name="MakeForm" action="taskdetails.html" onsubmit="submitThis()">
+						<ul>
+							<h1>Details</h1>
+							<li>
+								<label for="tugas" >Nama Tugas</label>
+								<input id="tugas" name="tugas" type="text" maxlength="25"/><br>
+							</li>
+							<li>
+								<label for="filebutton">Attachment</label>
+								<input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/><br>
+							</li>		
+							
+							<li>
+								<label for="asignee">Assignee</label>
+								<input id="asignee" name="asignee" type="text"/>
+							</li>
+							<li>
+								<label for="tag">Tag</label>
+								<input id="tag" name="tag" type="text" size="20"/><br>
+								<span>*dipisahkan dengan ","</span>
+							</li>							
+							<li>
+								<label for="deadline">Deadline</label>
+								<div id="defaultdate">
+									<input id="deadline" type="date" required/>
 								</div>
-								<div id="customtahun">
-									<div class="namelabel">Tahun</div>
-									<select id="tahunlist"/>
+								<div id="customdate">
+									<select id="tanggallist">
+									</select>
+									<select id="bulanlist">
+									</select>
+									<select id="tahunlist">
+									</select>
 								</div>
-							</div>
-						</li>
-						<li>
-							<label for="asignee">Assignee</label>
-							<input id="asignee" name="asignee" type="text"/>
-						</li>
-						<li>
-							<label for="tag">Tag</label>
-							<input id="tag" name="tag" type="text" size="20"/> (dipisahkan dengan ",")
-						</li>
-						<li>
-							<button id="submitbutton" name="submitbutton" type="submit" onClick="checkSubmission()"><b>Submit</b></button>
-						</li>
-					</ul>
-					<!--
-					<div class="label"> <label for="tugas" >Nama Tugas</label> </div> <input id="tugas" name="tugas" type="text" maxlength="25"/> <br />
-					<div class="label"> <label for="filebutton">Attachment</label> </div> <input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/> <br />
-					<div class="label"> <label for="deadline">Deadline</label> </div>
-						<div id="defaultdate">
-							<input id="deadline" type="date" required/>
->>>>>>> 117f8dc809e8aab82ec04c64b9401950b6634209
-						</div>
-						<div id="customdate">
-							<div id="customtanggal"><div class="label">Tanggal</div>
-								<select id="tanggallist">
-								</select>
-							</div>
-							<div class="label"> </div>
-							<div id="custombulan"><div class="label">Bulan</div>
-								<select id="bulanlist" onChange="monthChange()">
-								</select>
-							</div>
-							<div class="label"> </div>
-							<div id="customtahun"><div class="label">Tahun</div>
-								<select id="tahunlist">
-								</select>
-							</div>
-						</div>
-						<div style="clear:both"></div>
-					<div class="label"> <label for="asignee">Assignee</label></div> <input id="asignee" name="asignee" type="text"/> <br />
-					<div class="label"> <label for="tag">Tag</label></div> <input id="tag" name="tag" type="text" size="20"/> (dipisahkan dengan ",") <br />
-					<br /> 
-					<input id="submitbutton" name="submitbutton" type="submit" onClick="checkSubmission()"/>
-				</form>
+							</li>
+							<li>
+								<button class="task" name="submitbutton" type="submit" onClick="checkSubmission()"><b>Submit</b></button>
+							</li>
+						</ul>
+					</form>
 				</div>
-				-->
 				<div id="wrapper-right">
 					<img id="suatu_gambar" src="Troll.png" alt="Gambar tidak dapat di-load"/>    
 					<video id="suatu_video" width="320" height="240" controls>
@@ -140,7 +86,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<div id="footer" class="home">
 				<p>&copy Copyright 2013. All rights reserved<br>
 				Chalkz Team<br>
@@ -148,7 +93,7 @@
 		</div>
     </div>
 	
-	<script type="text/javascript">
+		<script type="text/javascript">
 		function loadAttachment()
 		{
 			var x = document.getElementById("filebutton").value;
@@ -249,6 +194,7 @@
 			}
 		}
 	</script>
+
 </body>
 
 </html>

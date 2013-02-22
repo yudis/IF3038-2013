@@ -3,6 +3,7 @@
 	<head>
 		<title> Banana Board - Home </title>
 		<link rel="stylesheet" style="text/css" href="style.css">
+		<script src="Dashboard.js" type="text/javascript" language="javascript"> </script>
 	</head>
 	<body>
 		<div id="content">
@@ -28,18 +29,19 @@
 			<div id="isi">
 				<div id="leftsidebar">
 					<ul>
-						<li><a href="home.html">Show All</a></li>
-						<li><a href="home.html">Kategori 1</a></li>
-						<li><a href="home.html">Kategori 2</a></li>
+						<a class="addcateg" href="home.html"><i class="addcateg" onClick="javascript:FormAddKategori()">Add new category...</i></a>
+						<li><a onClick="ShowTask('1','5')">tes1</a></li>
+						<li><a onClick="ShowTask('2','5')">tes2</a></li>
+						<li id="kategori"></li> 
 					</ul>
 					<img src="leftmenu.png"/>
 				</div>
 				
 				<div id="rightsidebar">
 					<ul id="kegiatan">
-						<li>
+						<li id="Task1">
 							<div>
-							<b class="design2"><a class="design2" href="">+</a></b>
+							<b class="design2"><a href="MakeTask.html">+</a></b>
 							<b class="design1">Kategori 1</b>
 							</div>
 							<div>
@@ -52,10 +54,10 @@
 								<p>22/02/12</p>
 								</div>
 							</div>
-						</li>
+						</li id="Task2">
 						<li>
 							<div>
-							<b class="design2"><a href="">+</a></b>
+							<b class="design2"><a href="MakeTask.html">+</a></b>
 							<b class="design1">Kategori 2</b>
 							</div>
 							<div>
@@ -73,9 +75,9 @@
 								</div>
 							</div>
 						</li>
-						<li>
+						<li id="Task3">
 							<div>
-							<b class="design2"><a href="">+</a></b>
+							<b class="design2"><a href="MakeTask.html">+</a></b>
 							<b class="design1">Kategori 3</b>
 							</div>
 							<div>
@@ -97,9 +99,9 @@
 								</div>
 							</div>
 						</li>
-						<li>
+						<li "Task4">
 							<div>
-							<b class="design2"><a href="">+</a></b>
+							<b class="design2"><a href="MakeTask.html">+</a></b>
 							<b class="design1">Kategori 4</b>
 							</div>
 							<div>
@@ -117,9 +119,9 @@
 								</div>								
 							</div>
 						</li>
-						<li>
+						<li id="Task5">
 							<div>
-							<b class="design2"><a href="">+</a></b>
+							<b class="design2"><a href="MakeTask.html">+</a></b>
 							<b class="design1">Kategori 5</b>
 							</div>
 							<div>
