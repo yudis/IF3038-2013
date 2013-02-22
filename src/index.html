@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Website name</title>
+  <head>
+		<title>Shared to-do List</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script>
 			function login() {
-				if (document.getElementById("login1").value == 'danny' && document.getElementById("login2").value == 'xxxx') {
+				if (document.getElementById("login1").value == 'meckyr' && document.getElementById("login2").value == 'meckyr') {
 					self.location='dashboard.html';
 				}
 			}
@@ -14,11 +14,12 @@
 			var cnfrmpassword = false;
 			var chkfullname = false;
 			var chkemail = false;
+			var chkavatar = false;
 			function hide_submit_button() {
 				document.getElementById("submit").style.display = 'none';
 			}
 			function show_submit_button() {
-				if(chkusername == true && chkpassword == true && cnfrmpassword == true && chkfullname == true && chkemail == true) {
+				if(chkusername == true && chkpassword == true && cnfrmpassword == true && chkfullname == true && chkemail == true && chkavatar == true) {
 					document.getElementById("submit").style.display = 'block';
 				}
 			}
@@ -79,44 +80,74 @@
 					hide_submit_button();
 				}
 			}
+			function check_avatar() {
+				var str = document.getElementById("avatar").value;
+				var ext = str.substring(str.lastIndexOf('.') + 1, str.length);
+				if (ext.toLowerCase() == "jpeg" || ext.toLowerCase() == "jpg") {
+					chkavatar = true;
+					show_submit_button();
+				} else {
+					chkavatar = false;
+					hide_submit_button();
+				}
+			}
 			function show_register_form() {
 				document.getElementById("login-form").style.display = "none";
+				document.getElementById("login-bottom").style.display = "none";
 				document.getElementById("register-form").style.display = "block";
+				document.getElementById("register-bottom").style.display = "block";
 			}
 			function show_login_form() {
 				document.getElementById("register-form").style.display = "none";
+				document.getElementById("register-bottom").style.display = "none";
 				document.getElementById("login-form").style.display = "block";
+				document.getElementById("login-bottom").style.display = "block";
 			}
 		</script>
 	</head>
 	<body onLoad="hide_submit_button();show_register_form();">
-		<div id="left-main-body">
+		<div id="index-body">
+		<div id="left-body">
 			<!--Website logo + tagline-->
-			penjelasan, penjelasan, penjelasan, penjelasan, penjelasan, penjelasan, bla bla bla bla<br />
-			[Di sini ada gambar logo]<br />
+			<div id="header-title"><a href="dashboard.html"><img src="title.png" width="250px" height="80px"/></a></div><br />
 			<!--Site explanantion (image, video, etc)-->
-			Tambahan space bisa gambar, video, dll
+			<div id="web-description">Browse, Manage and Share Your Task!<br /></div>
 		</div>
-		<div id="right-main-body">
-			<div id="big-name">NAMA<br />APLIKASI</div>
+		<div id="right-body">
+			<div id="big-name">Get Started<br /></div>
 			<!--Login form-->
-			<form id="login-form">
-				Username: <input type="text" id="login1" /><br />
-				Password: <input type="password" id="login2" /><br />
+			<div id="login-form">
+			<div id="input-description">
+				Username: <br>
+				Password: <br>
+			</div>
+			<form>
+				<input type="text" id="login1" /><br />
+				<input type="password" id="login2" /><br />
 				<input type="button" value="Sign In" onClick="login()">
 			</form>
+			</div>
 			<!--Register form-->
-			<form id="register-form">
+			<div id="register-form">
+			<div id="input-description">
+				Username: <br>
+				Password: <br>
+				Confirm: <br>
+				Full name: <br>
+				BirthDate&nbsp; <br>
+				Email: <br>
+				Your Avatar: <br>
+			</div>
+			<form>
 				<!--Username (min. 5 characters != password)-->
-				Username: <input type="text" id="username" onKeyUp="check_username()"/><br />
+				<input type="text" id="username" onKeyUp="check_username()"/><br />
 				<!--Password (min. 8 characters) != username and email-->
-				Password: <input type="password" id="password" onKeyUp="check_password()"/><br />
+				<input type="password" id="password" onKeyUp="check_password()"/><br />
 				<!--Confirm password == password-->
-				Confirm: <input type="password" id="password2" onKeyUp="confirm_password()"/><br />
+				<input type="password" id="password2" onKeyUp="confirm_password()"/><br />
 				<!--Full name (min. 2 spaces between 2 characters)-->
-				Full name: <input type="text" id="fullname" onKeyUp="check_full_name()"/><br />
+				<input type="text" id="fullname" onKeyUp="check_full_name()"/><br />
 				<!--Birth date (drop down, year >= 1955)-->
-				BirthDate&nbsp;
 				<select id="day">
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -229,13 +260,16 @@
 					min. 1 character between @ and .
 					min. 2 characters after .
 					!= password-->
-				Email: <input type="text" id="email" onKeyUp="check_email()"/><br />
+				<input type="text" id="email" onKeyUp="check_email()"/><br />
 				<!--Avatar, input file, extension == .jpg or .jpeg-->
-				Your Avatar: <input type="file" id="avatar" /><br />
+				<input type="file" id="avatar" onChange="check_avatar()"/><br />
 				<!--Register button, disabled if invalid input exists-->
 				<input id="submit" type="button" value="Sign Up"/>
-			</form><br />
-			Already have a account? <a href="#" onClick="show_login_form()">sign in</a>
+			</form><br /></div>
+			<div id="login-bottom">Don't have an account? <a href="#" onCLick="show_register_form()">Register</a></div>
+			<div id="register-bottom">Already have a account? <a href="#" onClick="show_login_form()">Sign in</a></div>
+		</div>
+		<div id="big-logo"><a href="dashboard.html"><img src="logo.png" width="400px" height="240px"/></a></div>
 		</div>
 	</body>
 </html>
