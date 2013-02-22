@@ -32,6 +32,10 @@ function category_click(){
 	window.location = "mytask.html";
 }
 
+function login_click(){
+	window.location = "mytask.html#all";
+}
+
 function task_click(){
 	window.location = "mytask.html";
 }

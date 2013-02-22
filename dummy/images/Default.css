@@ -1,4 +1,4 @@
-@media screen and (max-width: 1200px) {
+
 
 body, div, h1,h2, form, fieldset, input, textarea, footer,p {
 	margin: 0; padding: 0; border: 0; outline: none;
@@ -134,7 +134,7 @@ font-size:18px;
 
 
 #kiri{
-width:450px;
+width:400px;
 float:left;
 padding:10 px 10 px 10 px 10 px;
 position:fixed;
@@ -651,5 +651,4 @@ a#login_pop:hover, a#join_pop:hover {
 
 .popup input[type="text"]:hover, .popup input[type="password"]:hover {
     border-color: #555 #888 #888;
-}
 }
