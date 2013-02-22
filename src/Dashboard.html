@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="layouting.css">
 </head>
 
-<body>
+<body onload="initButton()">
 
 <div id="header">
     <div id="logo"><a href="Dashboard.html"><img src="Image/logo.png" width="186" height="187" alt="Simpan agendamu pada e-List" /></a></div> 
@@ -27,20 +27,20 @@
 <div id="contentdashboard">
 	<h1>Dashboard</h1>
 	<ul class="buttonlist" id="listtugas">
-		<li class="buttonnormal" onclick="Dashboard.html#taskdetail1"> Tambah Kategori </li>
+		<li class="buttonnormal" onclick="location.href='#addcategory'"> Tambah Kategori </li>
 		<li></li>
 		<li></li>
 		<li></li>
 		<li></li>
 		<li></li>
-		<li class="buttonnormal" id="allcategories" name="category">Semua Kategori</li>
-		<li class="buttonnormal" id="category1" name="category">Kuliah</li>
-		<li class="buttonnormal" id="category2" name="category">Tugas Asisten</li>
-		<li class="buttonnormal" id="category3" name="category">PKM-T</li>
+		<li class="buttonpressed" id="allcategories" name="category" onclick="onClickButton('allcategories')">Semua Kategori</li>
+		<li class="buttonnormal" id="category1" name="category" onclick="onClickButton('category1')">Kuliah</li>
+		<li class="buttonnormal" id="category2" name="category" onclick="onClickButton('category2')">Tugas Asisten</li>
+		<li class="buttonnormal" id="category3" name="category" onclick="onClickButton('category3')">PKM-T</li>
 	</ul>
 	<div id="tasklist">
 		<input type="Submit" id="addtask" value="Tambah Tugas" action="#x">
-		<ul>
+		<ul id="tasks">
 			<li>
 				<a href="#taskdetail1">
 					<h2> Tugas Besar Pemrograman Internet </h2>
@@ -102,7 +102,7 @@
 			<h4 class="comment" id="comment1">Waktu pengumpulannya berbarengan dengan AI</h4><br />
 			Ganti Komentar: <br />
 			<textarea class="changecomment" id="changecomment1" title="Silakan memasukkan komentar baru di sini"></textarea><br />
-			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment1();"><br />
+			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment('changecomment1','comment1');"><br />
 			<a href="#" class="close"><h5>Close</h5></a>
 		</div>
 	</form>
@@ -129,7 +129,7 @@
 			<h4 class="comment" id="comment2">Waktu pengumpulannya berbarengan dengan Progin</h4><br />
 			Ganti Komentar: <br />
 			<textarea class="changecomment" id="changecomment2" title="Silakan memasukkan komentar baru di sini"></textarea><br />
-			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment2();"><br />
+			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment('changecomment2','comment2');"><br />
 			<a href="#" class="close"><h5>Close</h5></a>
 		</div>
 	</form>
@@ -150,7 +150,7 @@
 			<h4 class="comment" id="comment3">Ngeribetin</h4><br />
 			Ganti Komentar: <br />
 			<textarea class="changecomment" id="changecomment3" title="Silakan memasukkan komentar baru di sini"></textarea><br />
-			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment3();"><br />
+			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment('changecomment3','comment3');"><br />
 			<a href="#" class="close"><h5>Close</h5></a>
 		</div>
 	</form>
@@ -173,7 +173,7 @@
 			<h4 class="comment" id="comment4">Periksa Kuis 1 TBO</h4><br />
 			Ganti Komentar: <br />
 			<textarea class="changecomment" id="changecomment4" title="Silakan memasukkan komentar baru di sini"></textarea><br />
-			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment4();"><br />
+			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment('changecomment4','comment4');"><br />
 			<a href="#" class="close"><h5>Close</h5></a>
 		</div>
 	</form>
@@ -196,8 +196,25 @@
 			<h4 class="comment" id="comment5">Memasukkan nilai Probstat</h4><br />
 			Ganti Komentar: <br />
 			<textarea class="changecomment" id="changecomment5" title="Silakan memasukkan komentar baru di sini"></textarea><br />
-			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment1();"><br />
+			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment('changecomment5','comment5');"><br />
 			<a href="#" class="close"><h5>Close</h5></a>
+		</div>
+	</form>
+</div>
+
+<a href="#x" class="overlay" id="addcategory"></a>
+<div class="popup">
+	<h1>Tambah Kategori</h1>
+	<hr>
+	<form name="foRegister" action="Dashboard.html">
+		<div class="attribute">
+			Nama Kategori : <input type="text" id="txCatName"><br />
+			Pengerja (<i>Assignee</i>) : <br />
+			<ul id="inputlist">
+				<li><input type="text"></li>
+			</ul>
+			<input type="submit" class="sbComment" value="Tambah" onclick="submitCategory();">
+			<input type="submit" class="sbComment" value="Kembali">
 		</div>
 	</form>
 </div>
