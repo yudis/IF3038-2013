@@ -75,7 +75,35 @@ bajuri.prototype = {
 
 	removeClass: function(cls) {
 		this.nodes.forEach(function(node) {
-			node.className.replace(/(?:^|\s)red(?:\s|$)/, ' ');
+			console.log('removeCLass ' + cls);
+			console.log(new RegExp('((?:^|\\s)' + cls + '(?:\\s|$))*'));
+			pattern = new RegExp(cls +' | ' + cls + '|^' + cls + '$');
+			while (node.className.match(pattern)) {
+				node.className = node.className.replace(pattern, ' ');
+			}
+		});
+	},
+
+	attr: function(a, b) {
+		if (b !== undefined) {
+			this.nodes.forEach(function(node) {
+				node.setAttribute(a, b);
+			});
+
+			return this;
+		}
+		else {
+			return this.nodes[0].getAttribute(a);
+		}
+	},
+
+	hasAttribute: function(a) {
+		return this.nodes[0].getAttribute(a) && true;
+	},
+
+	removeAttribute: function(a) {
+		this.nodes.forEach(function(node) {
+			node.removeAttribute(a);
 		});
 	},
 
