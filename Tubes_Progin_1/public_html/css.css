@@ -61,6 +61,13 @@ input.liusername{
 	width: 120px;
 }
 
+.listTugas {
+    width: 150px;
+    height: 181px;
+    float: left;
+    background-image: url('img/tugas.png');
+}
+
 .kategori {
     width: 200px;
     height: 30px;
@@ -140,12 +147,11 @@ textArea {
     background-color:transparent;
     border:0px;
     visibility: hidden;
-    left: 220px;
-    padding: 50px;
+    left: 250px;
+    padding: 0px;
     margin-left: 100px;
     overflow: hidden;
-    background-image: url('img/kertas.png');
-    width: 350px;
+    width: 750px;
     height: 443px;
     visibility: visible;
 }
