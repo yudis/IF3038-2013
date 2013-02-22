@@ -9,28 +9,26 @@
 /* tampilan untuk portrait ipad */
 @media screen and (max-width: 768px) {
     .page {
-        float : left;
-        width : 524px;
-        min-width: 0px;
+        min-width: 524px;
     }
     
     .page div.content {
-        width : 768px;
+        width : 524px;
         margin: auto;
     }
     
     .page .content {
-        width: 768px;
-        float: left;
-        margin: 0px;
+        margin: 0px auto;
+        width: 524px;
     }
     
     nav {
-        width:768px;
+        width: 100%;
+        min-width:524px;
     }
     
     nav .logo {
-        width: 140px;
+        width: 192px;
         display: inline-block;
         padding: 20px 10px 5px 10px;
     }
@@ -40,29 +38,36 @@
     }
     
     .search {
-        padding : 21px 25px 21px 0px;
+        padding : 21px 0px 21px 0px;
         background-color: #5fae53;
-        width: 250px;
+        width: 524px;
+        float:none;
     }
     
     #searchwrapper {
-        width: 250px;
+        width: 500px;
+        margin-left: 12px;
+        margin-right: 12px;
     }
     
     #searchwrapper input.searchbox {
-        width: 200px;
+        width: 435px;
     }
     
     .searchbox_submit {
-        left:215px;
+        left:465px;
+    }
+    
+    .sidebar {
+        width: 524px;
     }
     
     .main {
-        width: 588px;
+        width: 524px;
     }
     
     footer.content {
-        width : 768px;
+        width : 524px;
     }
     
     .profile {
@@ -70,7 +75,7 @@
     }
     
     .profiledetail {
-        top: 380px;
+        top: 480px;
     }
     
     .profilepict {
