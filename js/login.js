@@ -135,7 +135,7 @@ function init_date() {
 		}
 	}
 }
-
+/*
 function try_login() {
 	if (!Session.login(
 		$id("loginform-username").value,
@@ -143,8 +143,10 @@ function try_login() {
 	)) {
 		alert("Incorrect username or password");
 	} else{
-		alert("Login success");
-		window.location("Profil.html");
+		//alert("Login success");
+		//window.location = "Profil.html"
+		redirect();
 	}
 }
+*/
 
