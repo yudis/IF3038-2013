@@ -190,12 +190,22 @@
 	font:normal 20px "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
+#donetask .task_deadline{
+	margin-left:10px;
+	margin-bottom:5px;
+	width:50%;
+	float:left;
+	font:normal 15px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color:#15ff00;
+}
+
 .task_deadline{
 	margin-left:10px;
 	margin-bottom:5px;
 	width:50%;
 	float:left;
 	font:normal 15px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color:#ff0000;
 }
 
 .task_tag{
