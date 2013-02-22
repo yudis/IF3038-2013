@@ -1,5 +1,9 @@
 // JavaScript Document
 
+window.onload = function() {
+	$id("profilename").innerHTML = JSON.parse(window.localStorage['login_user']).fullname;
+}
+
 function keProfil() {
 	window.location = 'Profil.html';
 }

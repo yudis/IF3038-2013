@@ -4,6 +4,8 @@ window.onload = function() {
 	$id("rinciantaskform-input-tag").style.visibility = "hidden";
 	$id("rinciantaskform-input-asigneeadd").style.visibility = "hidden";
 	$id("rinciantaskform-OK").style.visibility = "hidden";
+	
+	$id("profilename").innerHTML = JSON.parse(window.localStorage['login_user']).fullname;
 }
 
 function edit_field() {

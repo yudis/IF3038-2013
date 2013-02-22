@@ -45,7 +45,7 @@ window.onload = function() {
 		}
 	}
 	
-	
+	$id("profilename").innerHTML = JSON.parse(window.localStorage['login_user']).fullname;
 }
 
 function newtask_check() {
