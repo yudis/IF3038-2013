@@ -321,3 +321,12 @@ h2{
 .sbComment {
 	margin-top: 5px;
 }
+
+textarea {
+	resize: none;
+	overflow: auto;
+}
+
+.close {
+	text-align: right;
+}

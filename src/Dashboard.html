@@ -27,16 +27,16 @@
 <div id="contentdashboard">
 	<h1>Dashboard</h1>
 	<ul class="buttonlist" id="listtugas">
-		<li class="buttonnormal" onmouseup="this.className='buttonpressed'"> Tambah Kategori </li>
+		<li class="buttonnormal" onclick="Dashboard.html#taskdetail1"> Tambah Kategori </li>
 		<li></li>
 		<li></li>
 		<li></li>
 		<li></li>
 		<li></li>
-		<li class="buttonnormal" onmouseup="this.className='buttonpressed'">Semua Kategori</li>
-		<li class="buttonnormal" onmouseup="this.className='buttonpressed'">Kuliah</li>
-		<li class="buttonnormal" onmouseup="this.className='buttonpressed'">Tugas Asisten</li>
-		<li class="buttonnormal" onmouseup="this.className='buttonpressed'">PKM-T</li>
+		<li class="buttonnormal" id="allcategories" name="category">Semua Kategori</li>
+		<li class="buttonnormal" id="category1" name="category">Kuliah</li>
+		<li class="buttonnormal" id="category2" name="category">Tugas Asisten</li>
+		<li class="buttonnormal" id="category3" name="category">PKM-T</li>
 	</ul>
 	<div id="tasklist">
 		<input type="Submit" id="addtask" value="Tambah Tugas" action="#x">
@@ -54,6 +54,27 @@
 				</a>
 				Tanggal Penyelesaian : 22 Februari 2013 <br />
 				Tag : Tugas, Besar, IB, AI, IF3052
+			</li>
+			<li>
+				<a href="#taskdetail3">
+					<h2> Penyerahan Proposal </h2>
+				</a>
+				Tanggal Penyelesaian : 28 Februari 2013 <br />
+				Tag : PKM
+			</li>
+			<li>
+				<a href="#taskdetail4">
+					<h2> Periksa Kuis </h2>
+				</a>
+				Tanggal Penyelesaian : 7 Maret 2013 <br />
+				Tag : TBO, Kuis
+			</li>
+			<li>
+				<a href="#taskdetail5">
+					<h2> Memasukkan Nilai </h2>
+				</a>
+				Tanggal Penyelesaian : 1 Januari 2013 <br />
+				Tag : Probstat, Nilai
 			</li>
 		</ul>
 	</div>
@@ -73,7 +94,7 @@
 			Lampiran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail1> Download </a><br />
 			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
-			<ul id="assignee">
+			<ul id="assignee1">
 				<li>Whilda Chaq</li>
 				<li>Devin Hoesen</li>
 			</ul>
@@ -81,7 +102,8 @@
 			<h4 class="comment" id="comment1">Waktu pengumpulannya berbarengan dengan AI</h4><br />
 			Ganti Komentar: <br />
 			<textarea class="changecomment" id="changecomment1" title="Silakan memasukkan komentar baru di sini"></textarea><br />
-			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment();">
+			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment1();"><br />
+			<a href="#" class="close"><h5>Close</h5></a>
 		</div>
 	</form>
 </div>
@@ -94,9 +116,9 @@
 		<div class="attribute">
 			<span id="deadline2">Tanggal Penyelesaian : 22 Februari 2013</span><br />
 			Lampiran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail1> Download </a><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail2> Download </a><br />
 			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
-			<ul id="assignee">
+			<ul id="assignee2">
 				<li>Nicholas Rio</li>
 				<li>Devin Hoesen</li>
 				<li>Stefan Lauren</li>
@@ -104,10 +126,78 @@
 				<li>Abraham Krisnanda Santoso</li>
 			</ul>
 			Komentar: <br />
-			<h4 class="comment" id="comment1">Waktu pengumpulannya berbarengan dengan Progin</h4><br />
+			<h4 class="comment" id="comment2">Waktu pengumpulannya berbarengan dengan Progin</h4><br />
 			Ganti Komentar: <br />
-			<textarea class="changecomment" id="changecomment1" title="Silakan memasukkan komentar baru di sini"></textarea><br />
-			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment();">
+			<textarea class="changecomment" id="changecomment2" title="Silakan memasukkan komentar baru di sini"></textarea><br />
+			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment2();"><br />
+			<a href="#" class="close"><h5>Close</h5></a>
+		</div>
+	</form>
+</div>
+
+<a href="#x" class="overlay" id="taskdetail3"></a>
+<div class="popup">
+	<h1>Penyerahan Proposal</h1>
+	<hr>
+	<form name="foRegister" action="Dashboard.html">
+		<div class="attribute">
+			<span id="deadline1">Tanggal Penyelesaian : 28 Februari 2013</span><br />
+			Lampiran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail3> Download </a><br />
+			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
+			<ul id="assignee3"></ul>
+			Komentar: <br />
+			<h4 class="comment" id="comment3">Ngeribetin</h4><br />
+			Ganti Komentar: <br />
+			<textarea class="changecomment" id="changecomment3" title="Silakan memasukkan komentar baru di sini"></textarea><br />
+			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment3();"><br />
+			<a href="#" class="close"><h5>Close</h5></a>
+		</div>
+	</form>
+</div>
+
+<a href="#x" class="overlay" id="taskdetail4"></a>
+<div class="popup">
+	<h1>Periksa Kuis</h1>
+	<hr>
+	<form name="foRegister" action="Dashboard.html">
+		<div class="attribute">
+			<span id="deadline1">Tanggal Penyelesaian : 7 Maret 2013</span><br />
+			Lampiran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail4> Download </a><br />
+			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
+			<ul id="assignee">
+				<li>Devin Hoesen</li>
+			</ul>
+			Komentar: <br />
+			<h4 class="comment" id="comment4">Periksa Kuis 1 TBO</h4><br />
+			Ganti Komentar: <br />
+			<textarea class="changecomment" id="changecomment4" title="Silakan memasukkan komentar baru di sini"></textarea><br />
+			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment4();"><br />
+			<a href="#" class="close"><h5>Close</h5></a>
+		</div>
+	</form>
+</div>
+
+<a href="#x" class="overlay" id="taskdetail5"></a>
+<div class="popup">
+	<h1>Memasukkan Nilai</h1>
+	<hr>
+	<form name="foRegister" action="Dashboard.html">
+		<div class="attribute">
+			<span id="deadline1">Tanggal Penyelesaian : 1 Januari 2013</span><br />
+			Lampiran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail5> Download </a><br />
+			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
+			<ul id="assignee">
+				<li>Devin Hoesen</li>
+			</ul>
+			Komentar: <br />
+			<h4 class="comment" id="comment5">Memasukkan nilai Probstat</h4><br />
+			Ganti Komentar: <br />
+			<textarea class="changecomment" id="changecomment5" title="Silakan memasukkan komentar baru di sini"></textarea><br />
+			<input type="submit" class="sbComment" value="Ubah" onclick="return submitComment1();"><br />
+			<a href="#" class="close"><h5>Close</h5></a>
 		</div>
 	</form>
 </div>
