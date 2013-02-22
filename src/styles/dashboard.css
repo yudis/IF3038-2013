@@ -98,6 +98,7 @@
 .task_deadline{
 	margin-left:10px;
 	margin-bottom:5px;
+	color:red;
 	width:30%;
 	float:left;
 	font:normal 15px "Trebuchet MS", Arial, Helvetica, sans-serif;
