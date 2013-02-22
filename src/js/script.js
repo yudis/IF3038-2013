@@ -156,3 +156,7 @@ function showPopUp() {
 	var popUpArea = document.getElementById("popUp");
 	popUpArea.style.visibility = "visible";
 }
+
+function keNewTask() {
+	window.location = "newtask.html";
+}
