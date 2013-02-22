@@ -25,13 +25,28 @@ form button {padding: 0px; margin: 0px; cursor: pointer; /* ie6 doesn't always d
 {
 	clear: both;
 }
-.wrap
+
+@media (min-width: 900px) 
 {
-	width: 940px;
-	max-width: 940px;
-	position: relative;
-	margin: 0 auto;
-	clear: both;
+	.wrap
+	{
+		width: 940px;
+		max-width: 940px;
+		position: relative;
+		margin: 0 auto;
+		clear: both;
+	}
+}
+@media (max-width: 900px) 
+{
+	.wrap
+	{
+		width: 90%;
+		max-width: 100%;
+		position: relative;
+		margin: 0 auto;
+		clear: both;
+	}
 }
 .appear
 {

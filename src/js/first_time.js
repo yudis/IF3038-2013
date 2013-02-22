@@ -59,6 +59,14 @@ if (localStorage.MOA_taskList == null)
 	
 	task.tag = tag;
 	
+	var comment = new Object();
+	comment.commentator = "admin";
+	comment.talk = "tes dong";
+	var comments = new Array();
+	comments[0] = comment;
+	
+	task.comment = comments;
+	
 	var listtask = new Array();
 	listtask[0] = task;
 	

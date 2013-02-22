@@ -5,6 +5,7 @@
 		<meta name="Description" content="" />
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
 		<title>MOA - Detail Tugas</title>
+		<script type="text/javascript" src="js/is_login.js"></script>
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/work.css" />
 	</head>
@@ -90,18 +91,12 @@
 						<h1>Komentar</h1>
 					</div>
 					<div id="comments">
-						<div class="comment">
-							Apa sih?
-						</div>
-						<div class="comment">
-							Apaan woi?
-						</div>
 					</div>
 					<div id="comment_form_wrap">
 						<form id="comment_form" method="post">
 							<div class="row">
 								<label for="comment_input">Komentar</label>
-								<textarea id="comment_input" cols="36" rows="5"></textarea>
+								<textarea id="comment_input"></textarea>
 							</div>
 							<input id="comment_submit" type="submit" value="Komen"/>
 						</form>
@@ -117,7 +112,7 @@
 					<a href="#" class="active">Detail Tugas</a>
 				</div>
 				<div id="footer_right">
-					Copyright by dronJaX.
+					Copyright by ImbAlAncE.
 				</div>
 			</div>
 		</footer>
@@ -130,15 +125,31 @@
 			var comment_input = document.getElementById("comment_input");
 			comment_form.onsubmit = function()
 			{
-				comments.innerHTML += '<div class="comment">'+comment_input.value+'</div>';
+				var listtask = JSON.parse(localStorage.MOA_taskList);
+				var userlist = JSON.parse(localStorage.MOA_userList);
+				var commentars = listtask[number].comment;
+				var username = userlist[sessionStorage.MOA_userId].userName;
+				var tempstring = '<div class="comment">';
+					tempstring += username+': '+comment_input.value;
+				tempstring += '</div>';
+				comments.innerHTML += tempstring;
+				
+				var comment = new Object();
+				comment.commentator = username;
+				comment.talk = comment_input.value;
+				commentars[commentars.length] = comment;
+				listtask[number].comment = commentars;
+
+				localStorage.MOA_taskList = JSON.stringify(listtask);
 				comment_input.value = "";
 				return false;
 			}
+			var number;
 			window.onload = function()
 			{
 				var listtask = JSON.parse(localStorage.MOA_taskList);
 				var listcategory = JSON.parse(localStorage.MOA_categoryList);
-				var number = window.location.search.replace( "?", "" )=='' ? "taskId=0" : window.location.search.replace( "?", "" );
+				number = window.location.search.replace( "?", "" )=='' ? "taskId=0" : window.location.search.replace( "?", "" );
 				number = number.split("=")[number.split("=").length-1];
 				document.getElementById("category_name").innerHTML = listcategory[listtask[number].category].name;
 				document.getElementById("task_name").innerHTML = listtask[number].name;
@@ -160,6 +171,10 @@
 					tempstring += "</video>";
 					task_attachment.innerHTML = tempstring;
 				}
+				else
+				{
+					task_attachment.innerHTML = "<span>Attachment tidak didukung.</span>"
+				}
 				
 				document.getElementById("birth_date").innerHTML = listtask[number].deadline;
 				var asignee = listtask[number].asignee;
@@ -176,6 +191,16 @@
 					document.getElementById("task_tag").innerHTML += ",";
 				}
 				document.getElementById("task_tag").innerHTML += tags[tags.length-1];
+				
+				var commentars = listtask[number].comment;
+				comments.innerHTML = "";
+				for (i=0;i<commentars.length;++i)
+				{
+					var tempstring = '<div class="comment">';
+					tempstring += commentars[i].commentator+': '+commentars[i].talk;
+					tempstring += '</div>';
+					comments.innerHTML += tempstring;
+				}
 				
 				var edit_button = document.getElementById("edit_button");
 				edit_button.href = "edittugas.html?taskId="+number;
