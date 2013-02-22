@@ -486,6 +486,174 @@ border-bottom-width: 1px;
 border-bottom-style: solid;
 }
 
+/* taskdetails.html */
+#wrappertd
+{
+	border-left: 5px double #660033;
+	border-right: 5px double #660033;
+	border-bottom: 5px double #660033;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+	width: 1230px;
+	height: 800px;
+	margin: auto;
+	padding: 20px;
+	background-color: pink;
+}
+
+#wrapper-main
+{
+	width: 840px;
+	height: 720px;
+	padding: 40px;
+	border: 3px groove;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+#edit, #commentbutton
+{
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	height: 30px;
+	width: 100px;
+	border: 4px inset;
+	border-radius: 4px;
+	border-color: #FC3;
+	
+	background-image: linear-gradient(bottom, rgb(255,238,153) 12%, rgb(232,203,14) 56%);
+	background-image: -o-linear-gradient(bottom, rgb(255,238,153) 12%, rgb(232,203,14) 56%);
+	background-image: -moz-linear-gradient(bottom, rgb(255,238,153) 12%, rgb(232,203,14) 56%);
+	background-image: -webkit-linear-gradient(bottom, rgb(255,238,153) 12%, rgb(232,203,14) 56%);
+	background-image: -ms-linear-gradient(bottom, rgb(255,238,153) 12%, rgb(232,203,14) 56%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.12, rgb(255,238,153)),
+		color-stop(0.56, rgb(232,203,14))
+	);
+}
+
+#edit:hover, #commentbutton:hover
+{
+	background-image: linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
+	background-image: -o-linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
+	background-image: -moz-linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
+	background-image: -webkit-linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
+	background-image: -ms-linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.12, rgb(232,203,14)),
+		color-stop(0.56, rgb(255,238,153))
+	);
+}
+
+#commentbox
+{
+	margin-top:20px;
+	min-width: 300px;
+	max-width: 400px
+	width: 400px
+	height: 250px;
+	min-height: 200px;
+	max-height: 300px;
+	border: 5px ridge;
+	background-color:#FF9;
+	font-family:Verdana, Geneva, sans-serif;
+	padding:10px;
+	
+	box-shadow: 5px 5px 20px 5px #333333;
+	
+	background-image: linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
+	background-image: -o-linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
+	background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
+	background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
+	background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.12, rgb(255,255,255)),
+		color-stop(0.56, rgb(241,255,186))
+	);
+}
+#commentfield
+{
+	margin-top:20px;
+}
+#commentbutton
+{
+	min-height:30px;
+	min-width: 100px;
+}
+
+.namelabel
+{
+	width: 150px;
+	height: 25px;
+	float: left;
+}
+
+.textfields
+{
+	padding:5px;
+	border-radius: 5px;
+	box-shadow: inset 2px 2px 5px #666666;
+	-webkit-box-shadow: inset 2px 2px 5px #666666;
+	-moz-box-shadow: inset 2px 2px 5px #666666;
+}
+
+/* maketask.html */
+
+#defaultdate
+{
+	display:none;
+	float:left;
+}
+#customdate
+{
+	display:none;
+	float:left;
+}
+.button
+{
+	float:left;
+}
+
+#wrapper
+{
+	width: 1160px;
+	height: 800px;
+	margin: auto;
+	padding: 20px;
+	background-color: pink;
+}
+#wrapper-left
+{
+	float:left;
+}
+#suatu_gambar
+{
+	float:right;
+	display: none;
+	width: 300px;
+	height: 225px;
+}
+#suatu_video
+{
+	float:right;
+	width:320px;
+	height:240px;
+	display: none;
+}
+
 /* SQUARED TWO */
 .squaredTwo {
 	width: 28px;
