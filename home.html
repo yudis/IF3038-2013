@@ -6,15 +6,26 @@
 		<script src="Dashboard.js" type="text/javascript" language="javascript"> </script>
 	</head>
 	<body>
+	<div id="black">
+	       	</div>
 		<div id="content">
+			
+    	    <div id="popupform">
+        	    <form class="centerV">
+				    	<div class="label">Nama Kategori</div>:<input id="namakategori" type="text" name="namakategori" id="namakategori"><br/>
+					    <div class="label">Daftar Pengguna</div>:<input type="text" name="daftarpengguna"id="daftarpengguna"><br/>
+                        <input style="margin:10px 0px 10px 200px" type="Button" value="Ok" onClick="AddKategori()">
+				</form>
+            </div>
+			
 			<div id="header">
 				<div id="logo">
-					<!-- <a href="index.html" class="header">board</a> -->
-					<img src="logo.png"/>
+					<a href="home.html" class="header">
+					<img src="logo.png"/></a>
 				</div>
 				<div id="menu">
 					<ul>
-						<li> <a href="dashboard.html"> DASHBOARD </a> </li>
+						<li> <a href="home.html"> DASHBOARD </a> </li>
 						<li> <a href="profile.html"> PROFILE </a> </li>
 						<li> <a href="index.html"> LOGOUT </a> </li>
 					</ul>
@@ -29,10 +40,10 @@
 			<div id="isi">
 				<div id="leftsidebar">
 					<ul>
-						<a class="addcateg" href="home.html"><i class="addcateg" onClick="javascript:FormAddKategori()">Add new category...</i></a>
+						<a class="addcateg"><i class="addcateg" onClick="javascript:FormAddKategori()">Add new category...</i></a>
 						<li><a onClick="ShowTask('1','5')">tes1</a></li>
 						<li><a onClick="ShowTask('2','5')">tes2</a></li>
-						<li id="kategori"></li> 
+						<li id="kategori"></li>
 					</ul>
 					<img src="leftmenu.png"/>
 				</div>
@@ -46,11 +57,11 @@
 							</div>
 							<div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas1</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 3 orang</span><label for="squaredTwo"></label>tugas1</a>
 									<p>22/02/12</p>
 								</div>
 								<div>
-								<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas2</a>
+								<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: perorangan, 1 orang</span><label for="squaredTwo"></label>tugas2</a>
 								<p>22/02/12</p>
 								</div>
 							</div>
@@ -62,15 +73,15 @@
 							</div>
 							<div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas1</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 2 orang</span><label for="squaredTwo"></label>tugas1</a>
 									<p>22/02/12</p>
 								</div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas2</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 5 orang</span><label for="squaredTwo"></label>tugas2</a>
 									<p>22/02/12</p>
 								</div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas3</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"><span>Tag: perorangan, 1 orang</span></label>tugas3</a>
 									<p>22/02/12</p>
 								</div>
 							</div>
@@ -82,19 +93,19 @@
 							</div>
 							<div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas1</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 3 orang</span><label for="squaredTwo"></label>tugas1</a>
 									<p>22/02/12</p>
 								</div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas2</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 3 orang</span><label for="squaredTwo"></label>tugas2</a>
 									<p>22/02/12</p>
 								</div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas3</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 3 orang</span><label for="squaredTwo"></label>tugas3</a>
 									<p>22/02/12</p>
 								</div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas4</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 3 orang</span><label for="squaredTwo"></label>tugas4</a>
 									<p>22/02/12</p>
 								</div>
 							</div>
@@ -106,15 +117,15 @@
 							</div>
 							<div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas1</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 3 orang</span><label for="squaredTwo"></label>tugas1</a>
 									<p>22/02/12</p>
 								</div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas2</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 3 orang</span><label for="squaredTwo"></label>tugas2</a>
 									<p>22/02/12</p>
 								</div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas3</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 3 orang</span><label for="squaredTwo"></label>tugas3</a>
 									<p>22/02/12</p>
 								</div>								
 							</div>
@@ -126,15 +137,15 @@
 							</div>
 							<div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas a</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 3 orang</span><label for="squaredTwo"></label>tugas a</a>
 									<p>22/02/12</p>
 								</div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas b</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 3 orang</span><label for="squaredTwo"></label>tugas b</a>
 									<p>22/02/12</p>
 								</div>
 								<div>
-									<a class="list" href=""><input type="checkbox" value="None" id="squaredTwo" name="check" /><label for="squaredTwo"></label>tugas c</a>
+									<a class="list" href="taskdetails.html"><input type="checkbox" value="None" id="squaredTwo" name="check" /><span>Tag: kelompok, 3 orang</span><label for="squaredTwo"></label>tugas c</a>
 									<p>22/02/12</p>
 								</div>
 							</div>

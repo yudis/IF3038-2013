@@ -22,7 +22,7 @@ function ShowTask(s,jum){
 	
 }
 function FormAddKategori(){
-		var form=document.getElementById("popupform");
+	var form=document.getElementById("popupform");
 	form.style.display="block";
 
 	var obj= document.getElementById("popup");

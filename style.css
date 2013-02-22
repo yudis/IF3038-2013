@@ -1,13 +1,55 @@
 body {
-/*background-image:url('yellowbg.jpg');*/
 background-repeat:no-repeat;
 background-position:top center;
 width:100%;
 font-family: 'segoe ui';
 background-color: #ffffd6;
+position:absolute;
+z-index:0;
 }
 
 *:focus{outline: none;}
+
+*---- Pop Up Tambah Kategori----*/
+#black{
+	z-index:1;
+	background-color:#666;
+	opacity: 0.9;
+	width:100%;
+	height:500px;
+	margin:0 auto;
+	display:block;
+	position:fixed;
+	top:0;
+	left:0;
+	padding:0;
+}
+#popupform
+{
+	margin-left: auto;
+    margin-right: auto;
+	width:290px;
+	z-index:1000;
+	opacity:1;
+	display:none;
+	
+}
+.centerV{
+	padding:10 10 10 10;
+    display: table-cell;
+	top:50%;
+	margin-top:-50px;
+	position:absolute;
+    vertical-align: middle;
+	border:5px solid #000000;
+	background-color:#FC0;
+	opacity:1;
+	}
+.label
+{
+	width:130px;
+	float:left;	
+}
 
 /*--------- index ---------*/
 #indexheader {
@@ -411,14 +453,18 @@ margin-top: 18px;
 padding: 40px;
 background-color: #fcff00;
 }
-.addcateg a, .addcateg i{
+.addcateg, .addcateg i{
 text-decoration:none;
 font-size: 16px;
 font-family: 'segoe ui';
 background-color: #fcff00;
 display: block;
-padding: 12px 0 12px 130px;
+padding: 12px 0 12px 70px;
 margin: 0;
+color: #351b02
+}
+.addcateg:hover{
+color: #fe9227;
 }
 #rightsidebar {
 width: 900px;
@@ -492,6 +538,32 @@ font-size: 18px;
 border-bottom-color: #fe9227;
 border-bottom-width: 1px;
 border-bottom-style: solid;
+}
+
+#kegiatan a, #kegiatan a:visited
+{
+	position:relative;
+}
+
+#kegiatan a span
+{
+	display: none;
+}
+
+#kegiatan a:hover span
+{
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 120px;
+	width: 160px;
+	margin: 0px;
+	padding: 10px;
+	color: #335500;
+	font-size: 12px;
+	background: #e5e5e5;
+	text-align: left;
+	border: 1px solid #666;
 }
 
 /* SQUARED TWO */
@@ -570,32 +642,7 @@ border-bottom-style: solid;
 }
 
 /* taskdetails.html */
-#wrappertd
-{
-	border-left: 5px double #660033;
-	border-right: 5px double #660033;
-	border-bottom: 5px double #660033;
-	border-bottom-left-radius:10px;
-	border-bottom-right-radius:10px;
-	width: 1230px;
-	height: 800px;
-	margin: auto;
-	padding: 20px;
-	background-color: pink;
-}
-
-#wrapper-main
-{
-	width: 840px;
-	height: 720px;
-	padding: 40px;
-	border: 3px groove;
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-}
-
-#edit, #commentbutton
+#commentbutton
 {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 14px;
@@ -620,7 +667,7 @@ border-bottom-style: solid;
 	);
 }
 
-#edit:hover, #commentbutton:hover
+#commentbutton:hover
 {
 	background-image: linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
 	background-image: -o-linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
@@ -640,50 +687,31 @@ border-bottom-style: solid;
 #commentbox
 {
 	margin-top:20px;
-	min-width: 300px;
-	max-width: 400px
-	width: 400px
+	min-width: 400px;
+	max-width: 400px;
+	min-height: 250px;
+	max-height: 250px;
+	width: 400px;
 	height: 250px;
-	min-height: 200px;
-	max-height: 300px;
 	border: 5px ridge;
-	background-color:#FF9;
-	font-family:Verdana, Geneva, sans-serif;
+	background-color:#feff95;
+	font-family:'segoe ui';
 	padding:10px;
-
-	box-shadow: 5px 5px 20px 5px #333333;
-
-	background-image: linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
-	background-image: -o-linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
-	background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
-	background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
-	background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 12%, rgb(241,255,186) 56%);
-
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.12, rgb(255,255,255)),
-		color-stop(0.56, rgb(241,255,186))
-	);
 }
 #commentfield
 {
-	margin-top:20px;
+margin-top:20px;
+mergin-right: 20px;
+height: 15px;
+width: 290px;
+padding: 5px 8px;
+border-radius: 5px;
 }
 #commentbutton
 {
 	min-height:30px;
 	min-width: 100px;
-}
-
-.textfields
-{
-	padding:5px;
-	border-radius: 5px;
-	box-shadow: inset 2px 2px 5px #666666;
-	-webkit-box-shadow: inset 2px 2px 5px #666666;
-	-moz-box-shadow: inset 2px 2px 5px #666666;
+	margin-left: 15px;
 }
 
 /* maketask.html */
@@ -723,6 +751,19 @@ border-bottom-style: solid;
 {
 	width: 350px;
 	float: right;
+	margin-top: 20px;
+}
+#linkoflink{
+color: white;
+text-decoration: none;
+font-size: 20px;
+font-family: 'segoe ui';
+}
+#linkoflink:hover{
+color: #fcff00;
+text-decoration: none;
+font-size: 20px;
+font-family: 'segoe ui';
 }
 #suatu_gambar
 {
