@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html>
 <head>
 
@@ -53,24 +55,24 @@
 
 <body>
 	<div id="container">
-		<div id="header" align="left">
-        	<div class=logo id="logo" align="left">
-				
+		<div id="header">
+        	<div class=logo id="logo">
+				<a href="dashboard.html"><img src="../images/logo.png" title="Home" alt="Home"/></a>
 			</div>
 			<div id="space">
 			</div>
-			<div id="search" align="left">
+			<div id="search">
 				<input type="text" name="search" id="searchbox">
 				<button type="submit" id="searchbutton"></button>
 			</div>
 			<div class="menu" id="logout">
-				<a href="home.html"><font color=white>Logout</font></a>
+				<a href="home.html">Logout</a>
 			</div>
 			<div class="menu" id="profile">
-				<a href="profile.html"><font color=white>Profile</font></a>
+				<a href="profile.html">Profile</a>
 			</div>
 			<div class="menu" id="home">
-				<a href="dashboard.html"><font color=white>Home</font></a>
+				<a href="dashboard.html">Home</a>
 			</div>
         </div>
 		
@@ -81,7 +83,7 @@
 			
 			<div class="category_block" id="k1" onclick="showK1()">
 				<div class="category_pic">
-					<img src="../images/Book-icon.png"/>
+					<img src="../images/Book-icon.png" alt=""/>
 				</div>
 				<div class="category_name">
 					Kuliah
@@ -90,7 +92,7 @@
 			
 			<div class="category_block" id="k2" onclick="showK2()">
 				<div class="category_pic">
-					<img src="../images/Book-icon.png"/>
+					<img src="../images/Book-icon.png" alt=""/>
 				</div>
 				<div class="category_name">
 					Eksperimen
@@ -99,7 +101,7 @@
 			
 			<div class="category_block" id="k3" onclick="showK3()">
 				<div class="category_pic">
-					<img src="../images/menguasai-dunia.png"/>
+					<img src="../images/menguasai-dunia.png" alt=""/>
 				</div>
 				<div class="category_name">
 					Menguasai Dunia
@@ -108,7 +110,7 @@
 			
 			<div class="category_block" id="tambah_kategori" onclick="location.href='#category_form'">
 				<div class="category_pic">
-					<img src="../images/tambah.png"/>
+					<img src="../images/tambah.png" alt=""/>
 				</div>
 				<div class="category_name">
 					Tambah kategori...
@@ -129,7 +131,7 @@
 					Cari Buku
 				</div>
 				<div class="task_deadline">
-					Deadline: <font color="red">21 February 2013</font>
+					Deadline: 21 February 2013
 				</div>
 				<div class="task_tag">
 					Tags: kuliah
@@ -141,7 +143,7 @@
 					Tugas Intelegensia Buatan
 				</div>
 				<div class="task_deadline">
-					Deadline: <font color="red">22 February 2013</font>
+					Deadline: 22 February 2013
 				</div>
 				<div class="task_tag">
 					Tags: kuliah, IB, tugas
@@ -153,7 +155,7 @@
 					Cari Monyet
 				</div>
 				<div class="task_deadline">
-					Deadline: <font color="red">24 February 2013</font>
+					Deadline: 24 February 2013
 				</div>
 				<div class="task_tag">
 					Tags: eksperimen
@@ -165,19 +167,19 @@
 					Beli Formalin
 				</div>
 				<div class="task_deadline">
-					Deadline: <font color="red">25 February 2013</font>
+					Deadline: 25 February 2013
 				</div>
 				<div class="task_tag">
 					Tags: eksperimen
 				</div>
 			</div>
 			
-			<div class="task_block"id="k13">
+			<div class="task_block" id="k13">
 				<div class="task_judul">
 					Tugas IMK
 				</div>
 				<div class="task_deadline">
-					Deadline: <font color="red">25 February 2013</font>
+					Deadline: 25 February 2013
 				</div>
 				<div class="task_tag">
 					Tags: kuliah, IMK, tugas
@@ -189,7 +191,7 @@
 					Kuis IMK
 				</div>
 				<div class="task_deadline">
-					Deadline: <font color="red">28 February 2013</font>
+					Deadline: 28 February 2013
 				</div>
 				<div class="task_tag">
 					Tags: kuliah, IMK, kuis
@@ -201,7 +203,7 @@
 					Latihan Silat
 				</div>
 				<div class="task_deadline">
-					Deadline: <font color="red">28 February 2013</font>
+					Deadline: 28 February 2013
 				</div>
 				<div class="task_tag">
 					Tags: bela diri
@@ -218,17 +220,17 @@
 				Nama Kategori: 
 			</div>
 			<div class="form_kanan">
-				<input type="text"></input>
+				<input type="text"/>
 			</div>
 		</div>
 		<div id="fs">
 			<fieldset>
 				<legend>Pengguna yang Bisa Mengubah</legend>
-				<div class="gambar_kecil"><img src="../images/ranger1.jpg"/><input type="checkbox" name="user_berhak" value="ranger1"/></div>
-				<div class="gambar_kecil"><img src="../images/ranger2.jpg"/><input type="checkbox" name="user_berhak" value="ranger2"/></div>
-				<div class="gambar_kecil"><img src="../images/ranger3.jpg"/><input type="checkbox" name="user_berhak" value="ranger3"/></div>
-				<div class="gambar_kecil"><img src="../images/ranger4.jpg"/><input type="checkbox" name="user_berhak" value="ranger4"/></div>
-				<div class="gambar_kecil"><img src="../images/ranger5.jpg"/><input type="checkbox" name="user_berhak" value="ranger5"/></div>
+				<div class="gambar_kecil"><img src="../images/ranger1.jpg" title="Ranger1" alt="Ranger1"/><input type="checkbox" name="user_berhak" value="ranger1"/></div>
+				<div class="gambar_kecil"><img src="../images/ranger2.jpg" title="Ranger2" alt="Ranger2"/><input type="checkbox" name="user_berhak" value="ranger2"/></div>
+				<div class="gambar_kecil"><img src="../images/ranger3.jpg" title="Ranger3" alt="Ranger3"/><input type="checkbox" name="user_berhak" value="ranger3"/></div>
+				<div class="gambar_kecil"><img src="../images/ranger4.jpg" title="Ranger4" alt="Ranger4"/><input type="checkbox" name="user_berhak" value="ranger4"/></div>
+				<div class="gambar_kecil"><img src="../images/ranger5.jpg" title="Ranger5" alt="Ranger5"/><input type="checkbox" name="user_berhak" value="ranger5"/></div>
 			</fieldset>
 		</div>
 		<div class="form_baris">
