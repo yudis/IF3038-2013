@@ -1,0 +1,84 @@
+/* 
+    Document   : mediaqueries
+    Created on : Feb 21, 2013, 2:01:50 PM
+    Author     : Abraham Krisnanda S
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* tampilan untuk portrait ipad */
+@media screen and (max-width: 768px) {
+    .page {
+        float : left;
+        width : 524px;
+        min-width: 0px;
+    }
+    
+    .page div.content {
+        width : 768px;
+        margin: auto;
+    }
+    
+    .page .content {
+        width: 768px;
+        float: left;
+        margin: 0px;
+    }
+    
+    nav {
+        width:768px;
+    }
+    
+    nav .logo {
+        width: 140px;
+        display: inline-block;
+        padding: 20px 10px 5px 10px;
+    }
+    
+    nav ul li a:link, nav ul li a:visited {
+        padding: 30px 0px;
+    }
+    
+    .search {
+        padding : 21px 25px 21px 0px;
+        background-color: #5fae53;
+        width: 250px;
+    }
+    
+    #searchwrapper {
+        width: 250px;
+    }
+    
+    #searchwrapper input.searchbox {
+        width: 200px;
+    }
+    
+    .searchbox_submit {
+        left:215px;
+    }
+    
+    .main {
+        width: 588px;
+    }
+    
+    footer.content {
+        width : 768px;
+    }
+    
+    .profile {
+        height: 400px;
+    }
+    
+    .profiledetail {
+        top: 380px;
+    }
+    
+    .profilepict {
+        left: 0px;
+        top: 0px;
+    }
+    
+    .edit_button {
+        top: 12px;
+    }
+}
