@@ -383,7 +383,6 @@ footer {
 #task_name_input, #assignee_input, #deadline_input, #tag_input, #attachment_upload {
 	width:35%;
 }
-
 #add_task_button{
 	display:block;
 	margin-left:22%;
@@ -399,6 +398,10 @@ footer {
 #add_task_button:hover {
 	border-color:#0092dd;
 }	
+#add_task_container {
+	width:90%;
+	margin:auto;
+}
 
 /* STYLING 
 --------------------------------------------------------------------------------------------------------------------- */
@@ -570,16 +573,20 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 }
 
 
-#kuliah,#proyek, #tugas,#lomba{display:block;padding:10px;-webkit-transition: opacity 0.7s linear;
+#newCategoryAdded, #kuliah,#proyek, #tugas, #lomba {
+	display:block;padding:10px;-webkit-transition: opacity 0.7s linear;
 	-webkit-transition: all 0.7s ease-in-out;
 	-moz-transition: all 0.7s ease-in-out;
-	-o-transition: all 0.7s ease-in-out;}
+	-o-transition: all 0.7s ease-in-out;
+}
 
-#kuliah:hover,#proyek:hover, #tugas:hover,#lomba:hover{background-color:#007bc1;
+#newCategoryAdded:hover, #kuliah:hover,#proyek:hover, #tugas:hover,#lomba:hover {
+	background-color:#007bc1;
 	color:#fff;-webkit-transition: opacity 0.7s linear;
 	-webkit-transition: all 0.7s ease-in-out;
 	-moz-transition: all 0.7s ease-in-out;
-	-o-transition: all 0.7s ease-in-out;}
+	-o-transition: all 0.7s ease-in-out;
+}
 	
 #login_form input{margin-bottom:5px;}
 #edit_profile_button {letter-spacing:0px;padding-left:8px; padding-right:8px;}

@@ -21,7 +21,9 @@ function logincheck()  {
 
 function add_category() {
 	var t = "<li>";
+	t += "<a href ='#' onclick='catchange(10)' id='newCategoryAdded'>";
 	t += document.getElementById("add_category_name").value;
+	t += "</a>";
 	t += "</li>";
 	document.getElementById("category_item").innerHTML += t;
 }
@@ -129,4 +131,26 @@ function signup() {
 function finishTask(i) {
 	document.getElementById("curtask"+i).style.display = "none";
 	document.getElementById("curtask"+i+1).style.top = "200px";
+}
+
+function checkTaskName() {
+	var taskName = document.getElementById('task_name_input').value;
+	var taskNameValid = 0;
+	var iChars = "~=-_^&.\\|*|,\":<>[]{}`\';()@&$#%";
+	for (var i = 0; i < taskName.length; i++) {
+		if (iChars.indexOf(taskName.charAt(i)) != -1){
+			taskNameValid = 1; 
+			break;
+		}
+	}
+	
+	if ((taskName.length > 25) || (taskNameValid == 1)) {
+		//tidak valid
+		document.getElementById('taskname_validation').src = "../img/no.png";
+	}
+	else {
+		//valid
+		document.getElementById('taskname_validation').src = "../img/yes.png";
+	}
+	document.getElementById('taskname_validation').style.display = "block";
 }
