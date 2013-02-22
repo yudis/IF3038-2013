@@ -13,7 +13,8 @@
         <title>Welcome to Todolist!</title>
         <link rel="stylesheet" type="text/css" href="index.css" />
         <link rel="stylesheet" type="text/css" href="mediaqueries.css" />
-        <script src="scripts/index.js"></script>
+        <script type="text/javascript" src="scripts/index.js"></script>
+        <script type="text/javascript" src="scripts/datetimepicker.js"></script>
     </head> 
     <body>
         <div class="page">
@@ -23,15 +24,15 @@
                     <div id="slogan">Share your to do list with everyone!</div>
                     <div id="loginwrapper">
                         <form name="login"  onsubmit="return validateLogin();" method="post" action="dashboard.html">
-                            <div id=login_username>
+                            <div id="login_username">
                                 Username <br>
                                 <input type="text" class="textbox" name="uname" value="" />
                             </div>
-                            <div id=login_password>
+                            <div id="login_password">
                                 Password <br>
                                 <input type="password" class="textbox" name="pwd" value="" />
                             </div>
-                            <div id=login_button>
+                            <div id="login_button">
                                 <button onclick="login()"><img src="images/loginbutton.png" id="login_submit" alt="login../"></button>
                             </div>
                         </form>
@@ -43,7 +44,7 @@
                     <h1>So How Does Our System Work? </h1>
                     Let's see the brief explanation from these video below.. 
                     <div id="slider">
-                        <div><img src="images/image-1.jpg" name="slider_picture"></div>
+                        <div><img src="images/image-1.jpg" id="slide" name="slider_picture"></div>
                         <button onclick="back()" class="slider_button">Back</button>
                         <button onclick="next()" class="slider_button">Next</button>
                     </div>
@@ -72,7 +73,7 @@
                                 <input type="email" class="regbox" id="email" name="email" placeholder="Your Email.." required="required" onkeyup="validateEmail();" onchange="validateEmail();" />
                             </div>
                             <div class="wrapper">
-                                <p class="regtext">Birthday:</p><input type="date" class="regbox" id="bday" name="bday" required="required" />
+                                <input type="text" class="regbox" id="bday" name="bday" required="required" placeholder="Birthday (yyyy-mm-dd)" /><a href="javascript:NewCal('bday','yyyymmdd')"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
                             </div>
                             <div class="wrapper">
                                 <p class="regtext">Profile Image:<br /></p><input type="file" id="ava" name="ava" accept="image/*" required="required"  />

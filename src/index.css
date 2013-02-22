@@ -81,13 +81,16 @@ nav .logo img {
 h1, h2 {
 	color: #5fae53;
 }
+#slide {
+	border: 2px solid black;
+}
 #terms {
 	font-size: 70%;
 	color: gray;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
-.slider_button {
+.r_button {
 	background-color: #5fae53;
 	color: #ffffff;
 	border: 0px;
