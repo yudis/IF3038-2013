@@ -1,0 +1,213 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  	
+ <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">  
+	<head>
+	<link href="stylesheet.css" rel="stylesheet" type="text/css"></link>			
+	</head>
+	<div id="container">
+		<!--TITLE MULAI-->
+		<div id="title">
+			<h1><a href='#'>Do.me</a></h1>
+			
+		</div>
+		<div id="searchbox"> 
+			<form method="get" action="/search" id="search">
+				<input name="q" type="text" size="40" placeholder="Search..." />
+			</form>
+		</div>
+		
+		<div id="menubar">
+			<nav>
+				<ul>
+					<li><a href='#'>Home</a></li>
+					<li><a href='dashboard.html'>Dashboard</a></li>
+					<li><a href='#'>About</a></li>	
+					<li id="profil"><a href='profil.html' >Profil</a></li>
+					<li id="logout"><a onclick="logout();">Logout</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="stylized">
+					<form id="daftar" name="formHalamanUtama" method="post" action="dashboard.html" onsubmit="return validasiHU();">
+						<br>
+						<br>
+						<label>Name
+						</label>
+						<input type="text" name="user_name" id="name" placeholder="input your name"/>
+						<label>Email
+						</label>
+						<input type="email" name="mail" id="email" placeholder="input your email"/>
+						<label>Password
+						</label>
+						<input type="password" name="pass" id="password" placeholder="input your password"/>
+						<label>Confirm Password
+						</label>
+						<input type="password" name="confirm_pass" id="cpassword" placeholder="re-type your password"/>
+						<label>Tanggal Lahir
+						</label>
+						<input type="date" name="date" id="date" placeholder="input your birth date"/>
+						<label>Avatar
+						</label>
+						<input type="file" name="pic">
+						<button type="submit">Sign-up</button>
+					</form>
+					
+					<div class="inners">
+				<br>
+					<form id="masuk" name="login">
+						<br>
+						<br>
+						<label>Username
+						</label>
+						<input type="text" name="loginuser" id="name" />
+						<label>Password
+						</label>
+						<input type="password" name="loginpass" id="password" />
+						<button onclick="return validasilogin();">Login</button>
+					</form>
+					
+				</div>
+					
+				</div>
+				
+				
+				
+		<div id ="maindisplay">
+		<!--Main Display Laptop-->
+			<div id = "maindisplay-image">
+				<img src="laptop.jpg" alt="Do.me"/>
+			</div>
+			<!--Main Display Text-->
+			<div id ="maindisplay-laptop"> 
+				<h3>About 2 million students use Do.me to perform better</h3>
+				<p>Whether you're organizing your business, sharing a shopping list with a loved one or simply keeping track of your daily life, Wunderlist is the best to-do list for you, your team or your family</p>
+				
+				<br></br>
+				
+				
+				
+			</div>
+			
+		</div>
+		<div id="featured">
+			<img src="fungsi2.png" alt="Website Feature"/>
+		</div>
+	</div>
+	<div id = "copyright">
+		<copyright>Copyright 2013 JDH</copyright>
+	</div>
+	
+	<script>
+			var element=document.getElementById("profil");
+			var element2=document.getElementById("logout");
+			var element3=document.getElementById("masuk");
+			var element4=document.getElementById("daftar");
+			element.style.visibility = "hidden";
+			element2.style.visibility = "hidden";
+			function logout(){
+				element.style.visibility = "hidden";
+				element2.style.visibility = "hidden";
+				element3.style.visibility = "visible";
+				element4.style.visibility = "visible";
+			}
+			function validasilogin() {				
+				var user_name = document.forms.login.loginuser.value;
+				var password = document.forms.login.loginpass.value;
+				if ((user_name.length > 0)&&(password.length > 0)){
+					if ((user_name != "a")||(password != "a"))
+							{
+								alert("User name atau password tidak sesuai");
+							}
+					else {
+						login = true;
+						document.forms.login.loginuser.value = "";
+						document.forms.login.loginpass.value = "";
+						element.style.visibility = "visible";
+						element2.style.visibility = "visible";
+						element3.style.visibility = "hidden";
+						element4.style.visibility = "hidden";
+					}
+				}
+				else{
+					alert("User name atau password tidak sesuai");
+				}
+				return false;	
+			}
+	</script>
+	
+	<script>
+			function validasiHU()
+			{
+				var peringatan = ""; // Merupakan string yang akan menyimpan kata-kata peringatan
+				var terima = true; // Boolean yang menentukan apakah form valid atau tidak
+				
+				// Validasi Form Nama
+					var user_name = document.forms.formHalamanUtama.user_name.value;
+					if (user_name.length < 5)
+						{
+							peringatan += "User Name minimal terdiri dari 5 karakter \n";
+							terima = false;
+						}
+				
+				
+				// Validasi Form Password
+					// Validasi Panjang Form
+						var pass = document.forms.formHalamanUtama.pass.value;
+						if (pass.length < 5)
+							{
+								peringatan += "Password minimal terdiri dari 8 karakter \n";
+								terima = false;
+							}
+					
+					// Validasi Kesamaan dengan Form Nama
+							if (pass == user_name)
+								{
+									peringatan += "Password tidak boleh sama dengan User Name \n";
+									terima = false;	
+								}
+					
+				
+				// Validasi Confirm Password
+					var confirm_pass = document.forms.formHalamanUtama.confirm_pass.value;
+					if ( confirm_pass != pass )
+						{
+							peringatan += "Password tidak sesuai";
+							terima = false;
+						}
+				// Validasi Email
+					var mail = document.forms.formHalamanUtama.mail.value;
+					var atpos = mail.indexOf("@");	 // Posisi @
+					var dotpos = mail.lastIndexOf("."); // Posisi .
+					
+					// Validasei Email tidak sama dengan Password
+					if (pass == mail)
+								{
+									peringatan += "Password tidak boleh sama dengan Email \n";
+									terima = false;	
+								}
+					// Validasi Email
+					if (atpos<1 || dotpos-atpos < 1 || email.length - dotpos < 2)
+					{
+						peringatan += "Email tidak valid \n"
+						terima = false;
+					}	
+				// Validasi File Gambar
+					//var eks_jpg = new RegExp(".jpg");
+					var eks_jpg = /.jpg/i;
+					var eks_jpeg = /.jpeg/i;
+					var picname = document.forms.formHalamanUtama.pic.value;
+					if(picname.length>0){	
+						if (!((eks_jpg.test(picname))||(eks_jpeg.test(picname))))
+						{
+							peringatan += "File harus berekstensi .jpg atau .jpeg \n";
+							terima = false;
+						}
+					}	
+					
+				// Menampilkan Alert jika terdapat kesalahan
+				if (!terima)alert(peringatan);  
+				return terima;  
+			}
+		</script>
+</html>
