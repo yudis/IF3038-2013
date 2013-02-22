@@ -1,3 +1,6 @@
+username = 'admin';
+password = 'admin';
+
 Rp(function() {
 	genComment = function(author, body) {
 		article = document.createElement('article');
@@ -23,6 +26,14 @@ Rp(function() {
 		comment = genComment(author, body);
 		Rp('#commentsList').append(comment);
 	});
+
+	Rp('#loginLink').on('click', function(e) {
+		e.preventDefault();
+
+		Rp('#loginBox').toggleClass('visible');
+
+		Rp('#login_username').nodes[0].focus();
+	})
 
 	
 });

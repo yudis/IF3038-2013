@@ -23,45 +23,6 @@ bajuri.prototype = {
 		return this;
 	},
 
-	// Split classes from an element's class attribute, case-insensitively
-	_parseClasses: function(className) {
-		return className.toLowerCase().split(/\s+/);
-	},
-
-	_addClassToNode: function(node, className) {
-		// case insensitivity
-		className = className.toLowerCase();
-
-		// split classes
-		classes = this._parseClasses(classes);
-		found = false;
-		for (cls in classes) {
-			if (cls === className.toLowerCase()) {
-				found = true;
-				break;
-			}
-		}
-
-		if (!found)
-			classes.push(className);
-
-		node.className = classes.join(' ');
-	},
-
-	_nodeHasClass: function(node, className) {
-		// case insensitivity
-		className = className.toLowerCase();
-
-		// split classes
-		classes = this._parseClasses(classes);
-		found = false;
-		for (cls in classes) {
-			if (cls === className.toLowerCase()) {
-				return true;
-			}
-		}
-	},
-
 	add: function(selector, context) {
 		if (typeof selector == 'function') {
 			// http://stackoverflow.com/questions/799981/document-ready-equivalent-without-jquery
@@ -90,7 +51,7 @@ bajuri.prototype = {
 		else if (document.querySelectorAll) {
 			n = document.querySelectorAll(selector);
 			for (i = 0; i < n.length; i++) {
-				this.nodes.push(n);
+				this.nodes.push(n.item(i));
 			}
 		}
 		else if (m = selector.match(/^([a-zA-Z\-]*)(?:.([a-zA-Z_\-]+)|)?$/)) {
@@ -106,14 +67,54 @@ bajuri.prototype = {
 		return this;
 	},
 
+	hasClass: function(cls) {
+		pattern = new RegExp(cls +' | ' + cls + '|^' + cls + '$');
+		return this.nodes[0].className.match(pattern);
+	},
+
+	toggleClass: function(cls) {
+		if (this.hasClass(cls))
+			this.removeClass(cls);
+		else
+			this.addClass(cls);
+	},
+
 	addClass: function(cls) {
 		this.nodes.forEach(function(node) {
-			this._addClassToNode(node, cls);
+			bajuri._addClassToNode(node, cls);
 		});
 	},
 
 	removeClass: function(cls) {
+		this.nodes.forEach(function(node) {
+			pattern = new RegExp(cls +' | ' + cls + '|^' + cls + '$');
+			while (node.className.match(pattern)) {
+				node.className = node.className.replace(pattern, ' ');
+			}
+		});
+	},
 
+	attr: function(a, b) {
+		if (b !== undefined) {
+			this.nodes.forEach(function(node) {
+				node.setAttribute(a, b);
+			});
+
+			return this;
+		}
+		else {
+			return this.nodes[0].getAttribute(a);
+		}
+	},
+
+	hasAttribute: function(a) {
+		return this.nodes[0].getAttribute(a) && true;
+	},
+
+	removeAttribute: function(a) {
+		this.nodes.forEach(function(node) {
+			node.removeAttribute(a);
+		});
 	},
 
 	first: function() {
@@ -199,6 +200,37 @@ bajuri.prototype = {
 }
 
 bajuri.cache = {};
+
+// Split classes from an element's class attribute, case-insensitively
+bajuri._parseClasses = function(className) {
+	return className.toLowerCase().split(/\s+/);
+};
+
+bajuri._addClassToNode = function(node, className) {
+	// case insensitivity
+	// className = className.toLowerCase();
+
+	// found = node.className.toLowerCase().match(new RegExp('(?:^|\\s)' + className + '(?:\\s|$)'));
+
+	// console.log(found);
+
+	// if (!found)
+		node.className += ' ' + className;
+};
+
+bajuri._nodeHasClass = function(node, className) {
+	// case insensitivity
+	className = className.toLowerCase();
+
+	// split classes
+	classes = this._parseClasses(classes);
+	found = false;
+	for (cls in classes) {
+		if (cls === className.toLowerCase()) {
+			return true;
+		}
+	}
+};
 
 bajuri.factory = function(tagName) {
 	return bajuri(document.createElement(tagName));
