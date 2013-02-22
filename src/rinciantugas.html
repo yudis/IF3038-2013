@@ -1,26 +1,25 @@
+<!DOCTYPE html>
 <!-- rinciantugas.html -->
 
-<!DOCTYPE html>
-
 <head>
+	<meta charset="UTF-8">
 	<link type="text/css" rel="stylesheet" href="rinciantugas.css">
-	<script type="text/javascript" href="rinciantugas.js"></script>
+	<script type="text/javascript"></script>
+	<title></title>
 </head>
 
-<body class "bgutama">
+<body class = "bgutama">
 	<header class = "header-cont header">
 		<ul id="menu">
 			<li><a href="index.html" class="homeicon">Home</a></li>
 			<li><a href="index.html">Dashboard</a></li>
 			<li><a href="profile.html">Profile</a></li>
 			<li><a href="#">Log Out</a></li>
-			<div  id="menu2">
-				<li>
+				<li id="menu2">
 					<form method="get" action="/search" id="search">
 						<input name="q" type="text" size="36" placeholder="Search..." />
 					</form>
 				</li>
-			</div>
 		</ul>
 	</header>
 		
@@ -32,17 +31,15 @@
 					<br>
 					<br>
 					<div class="containergambar3">
-						
 					</div>
 					<div class="subcontainer3">
 						<p> Ini adalah contoh text comment ... </p>
 					</div>
 					<br>
 					<form name="komentar" method="get" >
-						<a><input type="text" name="komentar" placeholder="Masukkan Komentar Anda ..."></a>
-						<a> <input type="submit" value="submit"></a>
+						<input type="text" name="komentar" placeholder="Masukkan Komentar Anda ...">
+						<input type="submit" value="submit">
 					</form>
-					<br>
 					<br>
 				</div>
 				
@@ -60,10 +57,76 @@
 				<br>
 				<br>
 				<h5> Attachment </h5>
-				<p> <img src="images/note.jpg"></p>
+				<p> <img src="images/note.jpg" alt="attachment"></p>
 				<h5> Deadline </h5>
 				<form>
-					<div><p> 22 February 2013, 10.00 PM </p></div>
+					<div>
+						<p>
+						<select name="DD">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30">30</option>
+							<option value="31">31</option>
+						</select>
+						<a>-</a>
+						<select name = "MM">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+						</select>
+						<a>-</a>
+						<select name = "YYYY">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+						</select>
+						</p>
+					</div>
 				</form>
 				<h5> Assignee </h5>
 				<p> Yusuf Ardi Nugroho , Rien Nisa </p>

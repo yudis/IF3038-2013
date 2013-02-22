@@ -49,7 +49,7 @@ div.container2
 {
 	position: absolute;
 	left : 375px;
-	margin-right: 3;
+	margin-right: 10px;
 	margin: 20px 0 0 25px;
 	width: 935px;
 }
@@ -97,7 +97,6 @@ div#tasktext p
 	font-family : Georgia, Serif;
 	font-size : 2.5em;
 	color : #E0FFFF;
-	text-shadow : #ffc130, 1em 1em 0;
 	display:inline-block;
 	
 }
@@ -165,7 +164,6 @@ div#sidetext a
 	font-family : Georgia, Serif;
 	font-size : 2.5em;
 	color : #E0FFFF;
-	text-shadow : #ffc130, 1em 1em 0;
 }
 /* Data Diri */
 h5
@@ -193,22 +191,14 @@ h5:after, h5:before
 h5:after
 {
 	background-image: -webkit-gradient(linear, left top, right top, from(#777), to(#fff));
-	background-image: -webkit-linear-gradient(left, #E0FFFF, #95B9C7);
-	background-image: -moz-linear-gradient(left, #E0FFFF, #95B9C7);
-	background-image: -ms-linear-gradient(left, #E0FFFF, #95B9C7);
-	background-image: -o-linear-gradient(left, #E0FFFF, #95B9C7);
-	background-image: linear-gradient(left, #E0FFFF, #95B9C7);
+	background-image: linear-gradient(#95B9C7, #E0FFFF, #95B9C7);
 	right: 15px;
 }
 
 h5:before
 {
 	background-image: -webkit-gradient(linear, right top, left top, from(#777), to(#fff));
-	background-image: -webkit-linear-gradient(right, #E0FFFF, #95B9C7);
-	background-image: -moz-linear-gradient(right, #E0FFFF, #95B9C7);
-	background-image: -ms-linear-gradient(right, #E0FFFF, #95B9C7);
-	background-image: -o-linear-gradient(right, #E0FFFF, #95B9C7);
-	background-image: linear-gradient(right, #E0FFFF, #95B9C7);
+	background-image: linear-gradient(#95B9C7, #E0FFFF, #95B9C7);
 	left: 15px;
 }
 /* DashText in Task To Do*/
@@ -239,11 +229,7 @@ h6:after
 	width: 500px;   
 
 	background-image: -webkit-gradient(linear, left top, right top, from(#777), to(#fff));
-	background-image: -webkit-linear-gradient(left, #E0FFFF, #95B9C7);
-	background-image: -moz-linear-gradient(left, #E0FFFF, #95B9C7);
-	background-image: -ms-linear-gradient(left, #E0FFFF, #95B9C7);
-	background-image: -o-linear-gradient(left, #E0FFFF, #95B9C7);
-	background-image: linear-gradient(left, #E0FFFF, #95B9C7);
+	background-image: linear-gradient(#95B9C7, #E0FFFF, #95B9C7);
 	left:150px;
 }
 
@@ -258,11 +244,7 @@ h6:before
 	width: 40px;   
 
 	background-image: -webkit-gradient(linear, right top, left top, from(#777), to(#fff));
-	background-image: -webkit-linear-gradient(right, #E0FFFF, #95B9C7);
-	background-image: -moz-linear-gradient(right, #E0FFFF, #95B9C7);
-	background-image: -ms-linear-gradient(right, #E0FFFF, #95B9C7);
-	background-image: -o-linear-gradient(right, #E0FFFF, #95B9C7);
-	background-image: linear-gradient(right, #E0FFFF, #95B9C7);
+	background-image: linear-gradient(#95B9C7, #E0FFFF, #95B9C7);
 	left: -50px;
 }
 
@@ -291,7 +273,7 @@ h6:before
 	padding: 0 0 5px 0;
 	position: relative;
 }
-#menu2 li
+#menu2 form
 {
 	float: left;
 	padding: 0 0 0 575px;
