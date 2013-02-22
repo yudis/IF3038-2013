@@ -4,7 +4,7 @@
 body{
 	background-image:url(Image/bg.jpg);
 	background-repeat:repeat;
-		font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
 #wrapper {
@@ -77,12 +77,13 @@ h2{
 #contentdashboard{
 	position:absolute;
     left: 50%;
-    width:950px;
-    margin-left: -225px;
+    width:900px;
+    margin-left: -475px;
 	margin-top: 180px;  
+	padding-left: 50px;
 	padding-bottom: 50px;
 	background: rgba(255, 255, 255, .7);
-	text-align: center;
+	text-align: left;
 }
 
 #menu{
@@ -237,4 +238,44 @@ h2{
 }
 .popup input[type="text"]:hover, .popup input[type="password"]:hover {
     border-color: #555 #888 #888;
+}
+
+.buttonlist {
+	padding: 50px 0 0 0;
+	margin: 0;
+	width: 245px;
+}
+ 
+.buttonlist li{
+	list-style: none;
+	padding: 0 0 0 0;
+	margin: 0;
+}
+
+.buttonnormal {
+	background-image:url(../Image/normal.png);
+	width:145px;
+    height:30px;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+}
+
+.buttonnormal:hover {
+	background-image:url(../Image/hover.png);
+}
+
+.buttonnormal:active {
+	background-image:url(../Image/pressed.png);
+}
+
+.buttonpressed {
+	background-image:url(../Image/pressed.png);
+	width:145px;
+    height:30px;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	color: white;
+	text-align: center;
+	cursor: pointer;
 }
