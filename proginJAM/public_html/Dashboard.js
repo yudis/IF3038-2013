@@ -34,10 +34,9 @@ value=" + oldDeadline + "\n\
 required/>";
     document.getElementById('deadline_info').innerHTML = editDeadline;
     
-    var editButton = document.getElementById('edit_task_button');
-    var doneButton = document.getElementById('done_edit_button');
-    editButton.style.display = "none";
-    doneButton.style.display = "box";
+	document.getElementById("edit_task_button").className = "hide";
+	document.getElementById("done_edit_button").className = "show";
+	
 }
 
 function DoneEditDetail() {
@@ -57,10 +56,8 @@ function DoneEditDetail() {
     var setNewDeadline = "<label id='deadline_info'>" + newDeadline + "</label>";
     document.getElementById('edit_deadline').innerHTML = setNewDeadline;
     
-    var editButton = document.getElementById('edit_task_button');
-    var doneButton = document.getElementById('done_edit_button');
-    editButton.style.display = "box";
-    doneButton.style.display = "none";
+    document.getElementById("edit_task_button").className = "show";
+	document.getElementById("done_edit_button").className = "hide";
 }
 
 function ValidateFileType() {

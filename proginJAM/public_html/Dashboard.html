@@ -4,19 +4,31 @@
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="Dashboard.css"/>
+		
+		<script>
+			$(document).ready(function() {
+				$("#done_edit_button").hide();
+			});
+			
+		
+		</script>
     </head>
     <body>
         <div id="page">
             <!-- =============== H E A D E R =============== -->
-            <div id="header">
-                <div class="site_logo">
-                    <a href="Dashboard.html">
-                        <img id="logo" src="Images/Date.png"/>
-                    </a>
-                </div>
+            
+                
 
-                <div class="menubar">
+			   <div class="menubar">
+					<a href="Dashboard.html">
+						
+					</a>
                     <ul>
+						<li id="logoimage">
+							<a href="Dashboard.html">
+                                <img id="logo" src="Images/Date.png"/>
+                            </a>
+						</li>
                         <li>
                             <a href="Dashboard.html">
                                 Dashboard
@@ -42,8 +54,6 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-
             <!--=============== S I D E B A R ===============--> 
             <div class="sidebar">
                 <h2>Categories</h2>
@@ -80,7 +90,7 @@
         </div>
 
         <!--=============== N E W   C A T E G O R Y ===============--> 
-        <a href="#x" class="overlay" id="new_category_form"></a>
+        <!--<a href="#x" class="overlay" id="new_category_form"></a>
         <div class="popup" id="new_category_popup">
             <h2>add CATEGORY</h2>
             <form>
@@ -89,7 +99,7 @@
                 <input type="submit" onclick="AddNewCategory();"/>
             </form>
             <a class="close_popup" href="#close"></a>
-        </div>
+        </div> -->
 
         <!--=============== T A S K   L I S T ===============--> 
         <div class="content">
@@ -170,25 +180,25 @@
                             </label>
                         </li>
 
-                        <li>
+                    </ul>
+                </form>
+							<div id="edit_task_button" class="show">
                             <input type="button"
-                                   class='edit_task_button'
                                    value="Edit"
                                    onclick="EditTaskDetail();"/>
-                        </li>
+							</div>
 
-                        <li id="done_edit_button">
+
+							<div id="done_edit_button" class="hide">
                             <input type="submit"
                                    class="submit"
                                    value="Done"
-                                   onblur="DoneEditDetail();"/>
-                        </li>
-                    </ul>
-                </form>
+                                   onclick="DoneEditDetail();"/>
+							</div>
             </div>
 
             <!-- =============== N E W   T A S K =============== -->
-            <div class="new_task">
+            <!--<div class="new_task">
                 <form class="new_task_form"
                       action=""
                       method="post"
@@ -259,7 +269,7 @@
                     </ul>
                 </form>
             </div>
-        </div>
+        </div>-->
 
         <script type="text/javascript" src="Dashboard.js"></script>
     </body>
