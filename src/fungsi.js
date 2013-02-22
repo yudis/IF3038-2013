@@ -15,6 +15,10 @@ var submitlogin = document.getElementById("submitlogin");
 var idlogin = document.getElementById("idlogin");
 var passlogin = document.getElementById("passlogin");
 var form = document.getElementById("form");
+var tahun = document.getElementById("tahun");
+var bulan = document.getElementById("bulan");
+var tanggal = document.getElementById("tanggal");
+var daftar = document.getElementById("daftar");
 
 	form.onsubmit = function(){
 		if ((idlogin.value == "admin") && (passlogin.value == "admin1234"))
@@ -26,6 +30,16 @@ var form = document.getElementById("form");
 			alert("username atau password Anda salah")
 			window.location = "index.html";
 		}
+		return false;
+	}
+	
+	daftar.onsubmit = function(){
+		if (submit.disabled == "")
+		{
+			alert("register berhasil");
+			window.location = "index.html"
+		}
+		
 		return false;
 	}
 
@@ -115,14 +129,25 @@ var form = document.getElementById("form");
 	
 	function cekvalid(){
 		if (username.checkValidity() && (username.value != password.value) && (password.checkValidity()) && (password.value != email.value)
-		&& (password.value == copassword.value)  && (namalengkap.checkValidity()) && (email.checkValidity()) && (inputfile.value.match("^.+\.(jpe?g|JPE?G)$")))
+		&& (password.value == copassword.value)  && (namalengkap.checkValidity()) && (email.checkValidity()) && (inputfile.value.match("^.+\.(jpe?g|JPE?G)$")) && (tahun.value != "") && (bulan.value !="") && (tanggal.value != ""))
 		{
 			submit.disabled="";
-			alert("registrasi berhasil");
 		}
 		else
 		{
 			submit.disabled="disabled";
+		}
+	}
+	
+	function cekulta()
+	{
+		if (tahun.value != "" && bulan.value !="" && tanggal.value != "")
+		{
+			valid7.src = "img/benar.png";
+		}
+		else
+		{
+			valid7.src = "img/salah.png";
 		}
 	}
 	

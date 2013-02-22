@@ -43,7 +43,7 @@
 				</form>
 			</div>
 			<div id="register">
-			<form class="daftar">
+			<form id="daftar" class="daftar">
 				<p>
 					<label for="daftar">Create an account</label>
 				</p>
@@ -67,8 +67,9 @@
 					<label for="tanggal">Tanggal Lahir</label>
 				</p>
 				<div>
-					<input id="date" type="text" name="date" >
-					<select id="tahun">
+					<label id="date" for="date">Tahun - Bulan - Hari </label>
+					<select id="tahun" onchange="cekulta();">
+						<option></option>
 						<option>1955</option>
 						<option>1956</option>
 						<option>1957</option>
@@ -129,7 +130,8 @@
 						<option>2012</option>
 						<option>2013</option>
 					</select>
-					<select id="bulan">
+					<select id="bulan" onchange="cekulta();">
+						<option></option>
 						<option value = "1">1</option>
 						<option value = "2">2</option>
 						<option value = "3">3</option>
@@ -143,7 +145,8 @@
 						<option value = "11">11</option>
 						<option value = "12">12</option>
 					</select>
-					<select id="tanggal">
+					<select id="tanggal" onchange="cekulta();">
+						<option></option>
 						<option value = "1">1</option>
 						<option value = "2">2</option>
 						<option value = "3">3</option>
