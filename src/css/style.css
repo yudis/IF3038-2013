@@ -105,7 +105,7 @@ a,a:visited {
 	border:dotted;
 	
 	/*image background*/
-	background: url(background1.png) no-repeat center center fixed; 
+	background: url(../res/background1.png) no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -215,7 +215,7 @@ a,a:visited {
 	margin-left:5%;
 	border:dotted;
 	float:left;
-	background:#666;
+	background:#999;
 }
 
 #semuaTugas {
@@ -357,16 +357,66 @@ a,a:visited {
 	background:#FF0;
 	border-style:groove;
 	border-radius:5px;
-	/*visibility:hidden;*/
+	visibility:hidden;
 }
 
 #newTugasTitle {
 	height:30%;
 	background:#FFF;
+	position:relative;
+	top:-10%;
+}
+
+#newTugasTitle > h2 {
+	line-height:3;
+	text-align:center;
 }
 
 #newTugasForm {
 	height:40%;
-	border:dotted;
-	margin-top:4%;
+	width:100%;
+	margin-left:25%;
+	margin-top:0.5%;
+}
+
+.Task {
+	float:left;
+	margin-top:1%;
+}
+
+.TaskContent {
+	margin-left:15%;
+//	background:#933;
+}
+
+#submitNewKategori {
+	margin-left:60%;
+}
+
+#submitNewKategori > button {
+	border-radius:5px;
+	width:50%;
+	margin-left:-20%;
+}
+
+#submitNewKategori > button:hover {
+	background:#FFF;
+	font-weight:bold;
+	box-shadow:0 0 10px #FFF;
+}
+
+.addTask{
+	margin-left:75%;
+	margin-top:45%;
+	width:20%;
+}
+
+.addTask > button {
+	width:100%;
+}
+
+.addTask > button:hover {
+	background:#FFF;
+	font-weight:bold;
+	box-shadow:0 0 8px #FFF;
 }

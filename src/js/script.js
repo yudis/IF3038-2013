@@ -112,3 +112,8 @@ function showPopUp() {
 	var popUpArea = document.getElementById("popUp");
 	popUpArea.style.visibility = "visible";
 }
+
+function closeKategoriForm() {
+	var popUpElmt = document.getElementById("popUp");
+	popUpElmt.style.visibility = "hidden";
+}
