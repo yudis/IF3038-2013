@@ -17,49 +17,64 @@ $("#form_wrap").addClass('hide');
 <body>
 	<div id="wrap">
 		<h1 align="center"><img src="images/Untitled-1.png" width="531" height="154"></h1>
-            <div id='tuts'>
-        	<b>ORGANIZING YOURSELF IS EASY AS 1-2-3!</b><br>
-            <p>&nbsp;</p>
-            1. Log yourself in, or register if you don't have any account <br>
-            2. Insert all of your tasks and mark it if you have finished it already <br>
-            3. Be an awesome organizator! (That includes organizing yourself) <br>
-            <p>&nbsp;</p>
-        </div>
 <div id='form_wrap'>
 			<form action="mytask.html#all">
-				
-              <p> </p>
+            <p class="p">Welcome Back!</p><br><br>
 				<label for="name">Username: </label>
 				<input type="text" name="username" value="" id="username" />
+                <p> </p>
 				<label for="email">Password: </label>
-				<input type="text" name="email" value="" id="email" />
+				<input type="password" name="email" value="" id="email" />
+                <br>
 				<input type="submit" name ="submit" value="Log me in!" />
-             <p class="p"> <a href="#join_form" id="join_pop">Wait, are you new here?</a></p>
+                
+              <br><br>
+              <p class="p"><a href="#join_form" id="join_pop">Wait, are you new here?</a></p>
 			
             </form>
 		</div>
-    
 	</div>
     
-    <!-- popup form #2 -->
-        <a href="#x" class="overlay" id="join_form"></a>
+    <!-- popup Register -->
+        <a href="mytask.html#all" class="overlay" id="join_form"></a>
 <div class="popup">
-            <h2>Sign Up</h2>
+            <h2>Register Form</h2>
             <p>Please enter your details here</p>
             <div>
-                <label for="email">Category Name  :</label>
+                <label for="email">Username  :</label>
+                <input type="text" id="email" value="" />
+            </div>
+               <div>
+                <label for="email">Password  :</label>
+                <input type="password" id="email" value="" />
+            </div>
+                   <div>
+                <label for="email">Confirm Password  :</label>
+                <input type="password" id="email" value="" />
+            </div>
+                   <div>
+                <label for="email">Fullname  :</label>
+                <input type="text" id="email" value="" />
+            </div>
+                   <div>
+                <label for="email">Birth Date  :</label>
                 <input type="text" id="email" value="" />
             </div>
             <div>
-                <label for="firstname">Participant Names :</label>
-                <input type="text" id="firstname" value="" />
-                <label for="firstname">*use comma (,)</label>
+                <label for="email">Email  :</label>
+                <input type="text" id="email" value="" />
             </div>
+            <div>
+                <label for="email">Avatar  :</label>
+                <input type="file" name="attachment" id="attachment"><p id="att_valid"></p><br>
+            </div>
+            
             <div align="right">
-              <input type="button" value="Save Category" />
+              <input type="button" onclick="category_click()" value="Register!" />
               
-              <a class="close" href="#close"></a>
+              <a class="close" href="mytask.html#all"></a>
                 </div>
         </div>
+<script type="application/javascript" src="newtask.js"></script>
 </body>
 </html>

@@ -89,10 +89,10 @@ font-size:18px;
 	margin-bottom: 0;
 		}
 
-		input[type=text], textarea {
+		input[type=text], textarea, [type=password] {
 			font: 14px normal normal uppercase helvetica, arial, serif;
 			color: #7c7873;background:none;
-			width: 380px; height: 36px; padding: 0px 10px; margin: 0 0 10px 0;
+			width: 200px; height: 24px; padding: 0px 10px; margin: 0 0 10px 0;
 			border:1px solid #f8f5f1;
 			-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
 			-moz-box-shadow: inset 0px 0px 1px #726959;
@@ -107,7 +107,7 @@ font-size:18px;
 	margin-left: 40px;
 }
 
-		textarea:focus, input[type=text]:focus {background:rgba(255,255,255,.35);}
+		textarea:focus, input[type=text], input[type=password]:focus {background:rgba(255,255,255,.35);}
 
 		#form_wrap input[type=submit] {
 			position:relative;font-family: 'YanoneKaffeesatzRegular'; 
@@ -206,6 +206,13 @@ color:#FFF;
 	transition: height 0.5s ease-in;
 	font-size: 18px;
 		color: #7f9db9;
+}
+
+.accordionMenu h3 a{
+	text-shadow:0 1px 0 #fff;
+	font-style: normal;
+	text-decoration: none;
+	color: #7f9db9;	
 }
 
 .accordionMenu h3:hover{

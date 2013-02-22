@@ -10,12 +10,19 @@
 <body>
 <div id="kiri">
   <div align="center"><img src="images/Untitled-1.png" alt="" width="450" height="125" />
-  <header>
+    <header>
+	
   		<nav class="nav">
-				<a href="#dashboard"><span>My Task</span></a>
-			  <a href="#profile"><span>My Profile</span></a>
-				<a href="#logout"><span>Logout</span></a>				
-	  </nav>
+				<a href="mytask.html#all"><span>My Task</span></a>
+			  <a href="myprofile.html#all"><span>My Profile</span></a>
+				<a href="login.html"><span>Logout</span></a>
+                
+	  	</nav>
+	<form id="searchbox">
+    		<input id="search" type="text" placeholder="Type here">
+    		<input id="submitsearch" type="submitsearch" value="Search">
+	</form>	
+
 </header>
   </div>
 </div>
@@ -28,13 +35,13 @@
 
 
   <h2><div class="triangle-r1"></div>
-  <a href="#all">TUGAS 1 IMK</a>
+  <a href="#all">Task Detail</a>
   <div class="triangle-l1" display></div></h2>
 				<label for="name">TASK NAME : </label>
       			<p class="p">Tugas 1 IMK</p>
       			<p class="p">&nbsp;</p>
       			  <label for="name">Attachment : </label>
-      			<p align="center" class="p"><img src="../../Downloads/beautysalon/images/pic_2.jpg" alt="" width="82" height="53" /></p>
+      			<p align="center" class="p"><img src="images/tugas.png" alt="" width="250" height=150" /></p>
       <p class="p">&nbsp;</p>
                 <label for="name">Deadline : </label>
       			<p class="p">13 Maret 2013</p>
@@ -46,7 +53,8 @@
                 <p class="p">Penting gila bro kerjain lah</p>
                   <p class="p">&nbsp;</p>
                 <label for="name">Insert Comment : </label>
-                <textarea name="username" value="" id="username" /></textarea>>
+                <textarea name="username" value="" id="username" /></textarea><br>
+                <input type="button" onclick="task_click()" value="Save">
 	  <p>&nbsp;</p>
                 <label for="name">Tags : </label>
                 <p class="p">Seksi</p>
@@ -56,7 +64,7 @@
 
 <div id="add" class="menuSection">
 <h2><div class="triangle-r"></div>
-<a href="#add"><img src="images/ic_edit_profile.png" alt="" width="25" height="25" /> Edit Task</a>
+<a href="#newtask" id="task_pop"><img src="images/ic_edit_profile.png" alt="" width="25" height="25" /> Edit Task</a>
 <div class="triangle-l" display></div>
 </h2>
 
@@ -68,5 +76,37 @@
 	
 
 </div>
+<!-- popup form newtask -->
+<a href="#y" class="overlay" id="newtask"></a>
+<div class="popup">
+	<h2>Edit Task</h2>
+	<p>Please edit your details here</p>
+	<div>
+		<label for="taskname">Nama task : </label>
+		<input type="text" name="taskname" id="taskname" onkeyup="validateTaskName()" onchange="validateTaskName()">
+		<div id="taskvalid" style="display: none">Nama task tidak boleh mengandung karakter alfanumerik dan tidak boleh kosong</div><br>
+	</div>
+	<div>
+		<label for="attachment">Attachment :</label>
+		<input type="file" name="attachment" id="attachment"><p id="att_valid"></p><br>
+	</div>
+	<div>
+		<label for="deadline">Deadline : </label>
+		<input type="text" name="deadline" id="deadline"><p id="deadline_valid"></p><br>
+	</div>
+	<div>
+		<label for="asignee">Asignee : </label>
+		<input type="text" name="asignee" id="asignee"><p id="asignee_valid"></p><br>
+	</div>
+	<div>
+		<label for="tag">Tag : </label>
+		<input type="text" name="tag" id="tag"><p id="tag_valid"></p><br>
+	</div>
+    <p>Please seperate tag with comma (,)</p>
+	<div>
+	<input type="button" onclick="task_click()" value="Submit">
+	<a class="close" href="#close"></a>
+	</div>
+</div> 
 </body>
 </html>

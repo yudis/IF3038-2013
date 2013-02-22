@@ -1,0 +1,17 @@
+<html>
+<head>
+</head>
+<body>
+<form method="POST">
+Nama task : <input type="text" name="taskname" id="taskname" onkeyup="validateTaskName()" onchange="validateTaskName()">
+<div id="taskvalid" style="display: none">Nama task tidak boleh mengandung karakter alfanumerik dan tidak boleh kosong</div><br>
+Attachment : <input type="file" name="attachment" id="attachment"><p id="att_valid"></p><br>
+Deadline : <input type="text" name="deadline" id="deadline"><p id="deadline_valid"></p><br>
+Asignee : <input type="text" name="asignee" id="asignee"><p id="asignee_valid"></p><br>
+Tag : <input type="text" name="tag" id="tag"><p id="tag_valid"></p><br>
+<input type="submit" value="Submit">
+</form>
+</body>
+
+<script type="application/javascript" src="newtask.js"></script>
+</html>

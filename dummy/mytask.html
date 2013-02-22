@@ -10,10 +10,10 @@
 <body>
 <div id="kiri">
   <div align="center"><a href="mytask.html#all"><img src="images/Untitled-1.png" alt="" width="450" height="125" /></a>
-  <header>
+    <header>
 	
   		<nav class="nav">
-				<a href="mytask.html"><span>My Task</span></a>
+				<a href="mytask.html#all"><span>My Task</span></a>
 			  <a href="myprofile.html#all"><span>My Profile</span></a>
 				<a href="login.html"><span>Logout</span></a>
                 
@@ -35,13 +35,13 @@
 
 <div id="all" class="menuSection">
   <h2><div class="triangle-r1"></div><a href="#all">All Tasks</a><div class="triangle-l1" display></div></h2>
-  <h3>Tugas IMK<h4>13 Maret 2013 : School</h4>
+  <h3><a href="taskdetail.html">Tugas IMK</a><h4>13 Maret 2013 : School</h4>
     <p>&nbsp;</p>
   </h3>
   <h3>Tugas IMK<h4>13 Maret 2013 : School</h4>
     <p>&nbsp;</p>
   </h3>
-   <h3>+ Add New Task</h3>
+   <h3><a href="#newtask" id="task_pop">+ Add New Task</a></h3>
    <p>&nbsp;</p>
    <p>&nbsp;</p>
    <p>&nbsp;</p>
@@ -80,10 +80,42 @@
 	
 
 </div>
-<!-- popup form #2 -->
+<!-- popup form newtask -->
+<a href="#y" class="overlay" id="newtask"></a>
+<div class="popup">
+	<h2> New Task</h2>
+	<p>Please enter your details here</p>
+	<div>
+		<label for="taskname">Nama task : </label>
+		<input type="text" name="taskname" id="taskname" onkeyup="validateTaskName()" onchange="validateTaskName()">
+		<div id="taskvalid" style="display: none">Nama task tidak boleh mengandung karakter alfanumerik dan tidak boleh kosong</div><br>
+	</div>
+	<div>
+		<label for="attachment">Attachment :</label>
+		<input type="file" name="attachment" id="attachment"><p id="att_valid"></p><br>
+	</div>
+	<div>
+		<label for="deadline">Deadline : </label>
+		<input type="text" name="deadline" id="deadline"><p id="deadline_valid"></p><br>
+	</div>
+	<div>
+		<label for="asignee">Asignee : </label>
+		<input type="text" name="asignee" id="asignee"><p id="asignee_valid"></p><br>
+	</div>
+	<div>
+		<label for="tag">Tag : </label>
+		<input type="text" name="tag" id="tag"><p id="tag_valid"></p><br>
+	</div>
+    <p>Please seperate tag with comma (,)</p>
+	<div>
+	<input type="button" onclick="task_click()" value="Submit">
+	<a class="close" href="#close"></a>
+	</div>
+</div> 
+<!-- popup form -->
         <a href="#x" class="overlay" id="join_form"></a>
 <div class="popup">
-            <h2>Sign Up</h2>
+            <h2>Add New Category</h2>
             <p>Please enter your details here</p>
             <div>
                 <label for="email">Category Name  :</label>
@@ -95,10 +127,11 @@
                 <label for="firstname">*use comma (,)</label>
             </div>
             <div align="right">
-              <input type="button" value="Save Category" />
+              <input type="button" onclick="category_click()" value="Save Category" />
               
               <a class="close" href="#close"></a>
                 </div>
         </div>
+<script type="application/javascript" src="newtask.js"></script>
 </body>
 </html>
