@@ -351,6 +351,12 @@ task .category {
 .task-details section.details p {
 	margin: 0 0 6px;
 }
+.task-details .edit-task {
+	display: none;
+	width: 400px;
+	padding-left: 20px;
+	float: left;
+}
 .detail-label {
 	color: #666;
 	min-width: 5em;
