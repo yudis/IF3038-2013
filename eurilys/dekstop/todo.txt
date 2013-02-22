@@ -14,3 +14,4 @@ Tweak biar website kita bagus banget haha :3, ini gw tulis dulu yang gw tau dan 
 - Tombol X buat ngilangin task, kalo habis diilangin kalo bisa di rearrange lagi task nya [BELUM]
 - Inputan tanggal buat mozilla firefox sama IE [BELUM]
 - Media queries buat width yang beda2. [BELUM]
+- Metro-style scroll bar [BELUM]
