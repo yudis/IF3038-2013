@@ -8,7 +8,7 @@
 
 body {
     background-image: url('img/Dashboard_bg.png');
-    font-family: century gothic;
+    font-family: cambria;
     width: 100%;
     overflow: hidden;
 }
@@ -62,10 +62,28 @@ input.liusername{
 }
 
 .listTugas {
-    width: 150px;
-    height: 181px;
+    width: 160px;
+    height: 191px;
     float: left;
     background-image: url('img/tugas.png');
+}
+
+.addTask {
+    width: 160px;
+    height: 191px;
+    float: left;
+    background-image: url('img/addtask.png');
+}
+
+.button {
+    height: 20px;
+    padding: 10px;
+    color: white;
+    opacity: 0.6;
+    background-color: black;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    text-indent: 40%;
 }
 
 .kategori {
@@ -140,7 +158,7 @@ textArea {
     visibility: hidden;
 }
 
-#listtugas{
+.list{
     font-size: 12pt;
     top: 75px;
     position:absolute;
@@ -150,8 +168,12 @@ textArea {
     left: 250px;
     padding: 0px;
     margin-left: 100px;
-    overflow: hidden;
-    width: 750px;
-    height: 443px;
+    overflow: auto;
+    width: 850px;
+    height: 603px;
+    visibility: hidden;
+}
+
+#listtugas {
     visibility: visible;
 }

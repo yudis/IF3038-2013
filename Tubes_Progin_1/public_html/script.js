@@ -5,6 +5,8 @@
 
 
 function showList(){
+document.getElementById("listtugas3").style.visibility="hidden";
+document.getElementById("listtugas2").style.visibility="hidden";
 document.getElementById("listtugas").style.visibility="visible";
 document.getElementById("rincitugas").style.visibility="hidden";
 document.getElementById("edittugas").style.visibility="hidden";
@@ -13,7 +15,31 @@ document.getElementById("wanted").style.visibility="hidden";
 self.focus();
 }
 
+function showList2(){
+document.getElementById("listtugas").style.visibility="hidden";
+document.getElementById("listtugas2").style.visibility="visible";
+document.getElementById("listtugas3").style.visibility="hidden";
+document.getElementById("rincitugas").style.visibility="hidden";
+document.getElementById("edittugas").style.visibility="hidden";
+document.getElementById("buattugas").style.visibility="hidden";
+document.getElementById("wanted").style.visibility="hidden";
+self.focus();
+}
+
+function showList3(){
+document.getElementById("listtugas").style.visibility="hidden";
+document.getElementById("listtugas2").style.visibility="hidden";
+document.getElementById("listtugas3").style.visibility="visible";
+document.getElementById("rincitugas").style.visibility="hidden";
+document.getElementById("edittugas").style.visibility="hidden";
+document.getElementById("buattugas").style.visibility="hidden";
+document.getElementById("wanted").style.visibility="hidden";
+self.focus();
+}
+
 function showRinci(){
+document.getElementById("listtugas3").style.visibility="hidden";
+document.getElementById("listtugas2").style.visibility="hidden";
 document.getElementById("listtugas").style.visibility="hidden";
 document.getElementById("rincitugas").style.visibility="visible";
 document.getElementById("edittugas").style.visibility="hidden";
@@ -23,6 +49,8 @@ self.focus();
 }
 
 function showEdit(){
+document.getElementById("listtugas3").style.visibility="hidden";
+document.getElementById("listtugas2").style.visibility="hidden";
 document.getElementById("listtugas").style.visibility="hidden";
 document.getElementById("rincitugas").style.visibility="hidden";
 document.getElementById("edittugas").style.visibility="visible";
@@ -30,6 +58,8 @@ document.getElementById("buattugas").style.visibility="hidden";
 document.getElementById("wanted").style.visibility="visible";
 }
 function showBuat(){
+document.getElementById("listtugas3").style.visibility="hidden";
+document.getElementById("listtugas2").style.visibility="hidden";
 document.getElementById("listtugas").style.visibility="hidden";
 document.getElementById("rincitugas").style.visibility="hidden";
 document.getElementById("edittugas").style.visibility="hidden";

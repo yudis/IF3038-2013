@@ -24,50 +24,61 @@ and open the template in the editor.
 
             <div id="category">
                 <div class="kategori" id="male-children" onclick="showList();">Male Children</div>
-                <div class="kategori" id="female-children" onclick="showList();">Female Children</div>
-                <div class="kategori" id="male-teenager" onclick="showList();">Male Teenager</div>
+                <div class="kategori" id="female-children" onclick="showList3();">Female Children</div>
+                <div class="kategori" id="male-teenager" onclick="showList2();">Male Teenager</div>
                 <div class="kategori" id="female-teenager" onclick="showList();">Female Teenager</div>
-                <div class="kategori" id="male-adult" onclick="showList();">Male Adult</div>
-                <div class="kategori" id="female-adult" onclick="showList();">Female Adult</div>
+                <div class="kategori" id="male-adult" onclick="showList3();">Male Adult</div>
+                <div class="kategori" id="female-adult" onclick="showList2();">Female Adult</div>
             </div>
-        <div class="category">
-            <div id="male-children" onclick="showList();">Male Children</div>
-            <div id="female-children" onclick="showList();">Female Children</div>
-            <div id="male-teenager" onclick="showList();">Male Teenager</div>
-            <div id="female-teenager" onclick="showList();">Female Teenager</div>
-            <div id="male-adult" onclick="showList();">Male Adult</div>
-            <div id="female-adult" onclick="showList();">Female Adult</div>
-        </div>
 
-        <div id="listtugas">
-            <a onclick="showBuat()">tambah task</a><br/>
+        <div id ="listtugas" class="list">
             <a class="listTugas" onclick="showRinci();"></a> 
             <a class="listTugas" onclick="showRinci();"></a>
             <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas "onclick="showRinci();"></a>
-            <a class="listTugas "onclick="showRinci();"></a>
-            <a class="listTugas "onclick="showRinci();"></a>
-            <a class="listTugas "onclick="showRinci();"></a>
-            <a class="listTugas "onclick="showRinci();"></a>
-            <a class="listTugas "onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a onclick="showBuat()" class="addTask"></a>
         </div>
+        <div id ="listtugas2" class="list">
+            <a class="listTugas" onclick="showRinci();"></a> 
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a onclick="showBuat()" class="addTask"></a>
+        </div>
+        <div id ="listtugas3" class="list">
+            <a class="listTugas" onclick="showRinci();"></a> 
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a class="listTugas" onclick="showRinci();"></a>
+            <a onclick="showBuat()" class="addTask"></a>
+        </div>
+        
         <div class="tugas" id="rincitugas">
-                <a onclick="showEdit()">edit task</a><br/>
-                <br/>
                 Nama task: Nama Tugas <br/>
                 Attachment: <div class="attachment">file.zip</div><br/>
                 Deadline: 17-12-2014<br/>
                 Assignee: X,Y,Z<br/>
-                Tag: <div class="tag"> X,Y,Z</div> <br/>
-                Komentar: <br/>
+                Tag: <a href="" class="tag">dangerous</a>, <a href="" class="tag">novice</a> <br/>
+                <br/>Komentar:<br/>
                 <div class="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
                 <form>
                     <textArea></textarea>
                     <input type="button" name="submit" value="submit">
                 </form>
+                <br/><br/><br/>
+                <a onclick="showEdit();" class="button">edit</a><br/>
             </div>
             <div class="tugas" id ="edittugas">
-                <a onclick="">Simpan task</a><br/>
                 <br/>
                 <form>
                     Nama task: Nama Task<br/>
@@ -77,21 +88,21 @@ and open the template in the editor.
                     Tag: <div class="tag"> <input type="text"></div> <br/>
                     Komentar: <br/>
                 <div class="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
-                </form>
+                </form> <br/>
+                <a onclick="" class="button">save</a><br/>
             </div>
 			<div id="wanted">
 			<img src="img/kertas2.png">
 			</div>
             <div class="tugas" id="buattugas">
-                <a onclick="">simpan task</a><br/>
                 <br/>
                 Nama task: <div class="nama"><input type="text"></div><br/>
                 Attachment: <div class="attachment"><input type="file"></div><br/>
                 Deadline: <div class="deadline"><input type="date"></div><br/>
                 Assignee: <div class="asignee"><input type="text"></div><br/>
                 Tag: <div class="tag"> <input type="text"></div> <br/>
-                Komentar: <br/>
-                <div class="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
+                <br/>
+                <a onclick="" class="button">create</a><br/>
             </div>
     </body>
 </html>
