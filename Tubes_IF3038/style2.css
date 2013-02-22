@@ -1,0 +1,446 @@
+body {
+	font-family: Trebuchet MS, sans-serif;
+	color: #191919;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+}
+a img {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+#wrapper {
+	margin: 0 auto;
+	width: 1080px;
+}
+#header {
+	width: 980px;
+	height: 100px;
+	margin: 0;
+	padding: 10px 0 0 0;
+}
+#logo {
+	float: left;
+	width: 325px;
+	height: 100px;
+	margin: 0 0 0 0;
+	padding: 0;
+}
+#menu {
+	float: left;
+	width: 375px;
+	height: 57px;
+	padding: 68px 0 0 45px;
+}
+#menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#menuhome{
+	display: inline;
+	font-family: Impact, sans-serif;
+	font-size: 20px;
+	padding: 15px;
+}
+#menuhome2{
+	display: inline;
+	font-family: Impact, sans-serif;
+	font-size: 20px;
+	padding: 15px;
+}
+#menudkonten{
+	display: inline;
+	font-family: Impact, sans-serif;
+	font-size: 20px;
+	padding: 15px;
+}
+#menudkonten2{
+	display: inline;
+	font-family: Impact, sans-serif;
+	font-size: 20px;
+	padding: 15px;
+}
+#menuregister{
+	display: inline;
+	font-family: Impact, sans-serif;
+	font-size: 20px;
+	padding: 15px;
+}
+#menuregister2{
+	display: inline;
+	font-family: Impact, sans-serif;
+	font-size: 20px;
+	padding: 15px;
+}
+#menu li {
+	display: inline;
+	font-family: Arial Black, sans-serif;
+	font-size: 14px;
+	padding: 15px;
+}
+#menu li a {
+	color: #191919;
+	text-decoration: none;
+}
+#menu li a:hover {
+	color: #db4444;
+}
+
+#main {
+	clear: both;
+	margin: 0;
+	padding: 0 0 10px 0;
+}
+#konten {
+	background-color: #ffffff;
+	margin: 0 5px 0 0;
+	padding: 0;
+	width: 670px;
+	float: left;
+}
+.atas {
+	background: #fff7cc url('images/atas2.png') no-repeat top center;
+	width: 711px;
+	height: 56px;
+}
+.atas-register {
+	background: #fff7cc url('images/atas2-register.png') no-repeat top center;
+	width: 711px;
+	height: 56px;
+}
+.atas-post {
+	background: #fff7cc url('images/atas2-post.png') no-repeat top center;
+	width: 711px;
+	height: 56px;
+}
+.tengah {
+	background: #fff7cc url('images/tengah2.png') repeat-y top center;
+	width: 711px;
+	padding: 0;
+	margin: 0;
+}
+.bawah {
+	background: #fff7cc url('images/bawah2.png') no-repeat top center;
+	width: 711px;
+	height: 56px;
+}
+.bawah-register {
+	background: #fff7cc url('images/bawah2-register.png') no-repeat top center;
+	width: 711px;
+	height: 56px;
+}
+.judul {
+	font-family: Arial Black, sans-serif;
+	font-size: 16px;
+	margin: 0;
+	padding: 10px 25px 15px 25px;
+}
+.isi {/* 640px */
+	margin: 0;
+	padding: 0 25px 0 25px;
+}
+.detail {
+	margin: 0;
+	padding: 0 25px 0 25px;
+}
+.byon {
+	margin: 0;
+	padding: 5px 0 5px 0;
+	color: #555555;
+}
+.by {
+	color: #db4444;
+}
+.likedislike {
+	margin: -10px 0 30px 0;
+	padding: 0;
+	float: left;
+	width: 108px;
+}
+.ldbuttons {
+	position: relative;
+}
+.ldbuttons li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: absolute;
+	top: 0;
+}
+.ldbuttons li, .ldbuttons a {
+	height: 33px;
+	display: block;
+}
+.like {
+	left: 0px;
+	width: 70px;
+}
+.like {
+	background: url('images/like.png') 0 0;
+}
+.like a:hover {
+	background: url('images/like.png') 0 -33px;
+}
+.like a:active {
+	background: url('images/like.png') 0 -66px;
+}
+.dislike {
+	left: 70px;
+	width: 38px;
+}
+.dislike {
+	background: url('images/like.png') -70px 0;
+}
+.dislike a:hover {
+	background: url('images/like.png') -70px -33px;
+}
+.dislike a:active {
+	background: url('images/like.png') -70px -66px;
+}
+.count {
+	margin: 11px 0 0 10px;
+	padding: 0;
+	float: left;
+	color: #555555;
+}
+.komen {
+	clear: both;
+	margin: 0;
+	padding: 30px 25px 10px 25px;
+}
+.komenjudul {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	font-size: 14px;
+}
+.line {
+	margin: 10px 0 10px 0;
+	padding: 0;
+	background: #fff7cc url('images/line2-home.png') no-repeat top center;
+	height: 9px;
+}
+.line-konten {
+	margin: 10px 0 10px 0;
+	padding: 0;
+	background: #fff7cc url('images/line2.png') no-repeat top center;
+	height: 9px;
+}
+.komen-nama {
+	font-weight: bold;
+	color: #db4444;
+	float: left;
+}
+.komen-tgl {
+	margin: 1px 0 0 5px;
+	font-size: 10px;
+	color: #999999;
+	float: left;
+}
+.komen-isi {
+	padding: 5px 0 0 0;
+	clear: both;
+}
+
+#footer {
+	margin: 0;
+	padding: 10px 0 0 0;
+	clear: both;
+}
+#little {
+	margin: 0;
+	background: #fff7cc url('images/logo2.png') no-repeat center center;
+	padding: 0 0 0 10px;
+	height: 31px;
+	width: 31px;
+	float: left;
+}
+#siteinfo {
+	float: left;
+	color: #191919;
+	margin: 0;
+	padding: 0 0 50px 0;
+}
+#botlink {
+	float: left;
+	padding: 6px 0 0 69px;
+}
+#botlink ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#botlink li {
+	display: inline;
+	padding: 15px;
+}
+#botlink li a {
+	color: #191919;
+	text-decoration: none;
+}
+#botlink li a:hover {
+	color: #db4444;
+}
+.register-label {
+	width: 120px;
+	float: left;
+	margin: 3px 0 0 0;
+}
+.register-td {
+	float: left;
+	margin: 3px 3px 0 3px;
+}
+.register-input {
+	float: left;
+	margin: 0 0 5px 0;
+}
+.register-input-input {
+	width: 200px;
+}
+.clear {
+	clear: both;
+	height: 1px;
+}
+.register-submit {
+	text-align: right;
+	padding: 20px 285px 20px 0;
+}
+.btg-mrh {
+	color: #db4444;
+}
+#btg {
+	padding: 0 0 12px 0;
+}
+.komen-label {
+	width: 70px;
+	float: left;
+	margin: 3px 0 0 0;
+}
+.komen-tulis {
+	width: 100px;
+	float: left;
+	margin: 3px 0 0 0;
+}
+.komen-submit {
+	text-align: right;
+	padding: 10px 335px 20px 0;
+}
+#komen-btg {
+	padding: 0 0 10px 0;
+}
+
+.home-atas-like {
+	background: #fff7cc url('images/home-atas-like.png') no-repeat top center;
+	width: 364px;
+	height: 56px;
+}
+.home-tengah {
+	background: #fff7cc url('images/home-tengah2.png') repeat-y top center;
+	width: 364px;
+	padding: 0;
+	margin: 0;
+}
+.home-bawah-like {
+	background: #fff7cc url('images/home-bawah-like.png') no-repeat top center;
+	width: 364px;
+	height: 56px;
+	clear: both;
+}
+.home-atas-komen {
+	background: #fff7cc url('images/home-atas-komen.png') no-repeat top center;
+	width: 364px;
+	height: 56px;
+}
+.home-bawah-komen {
+	background: #fff7cc url('images/home-bawah-komen.png') no-repeat top center;
+	width: 364px;
+	height: 56px;
+	clear: both;
+}
+
+.home-detail {
+	margin: 0;
+	padding: 0 25px 15px 25px;
+}
+.home-judul {
+	font-family: Arial Black, sans-serif;
+	font-size: 16px;
+	margin: 0;
+	padding: 0 25px 5px 25px;
+}
+.commenter {
+	margin: 0;
+	padding: 0 0 5px 0;
+	color: #555555;
+}
+#konten-commenter {
+	margin: 0;
+	padding: 5px 0 0 0;
+	color: #555555;
+}
+.home-judul a {
+	color: #191919;
+	text-decoration: none;
+}
+.home-judul a:hover {
+	color: #db4444;
+}
+.judul a {
+	color: #191919;
+	text-decoration: none;
+}
+.judul a:hover {
+	color: #db4444;
+}
+.dkonten-clear {
+	clear: both;
+	height: 15px;
+}
+.dkonten-bawah {
+	background: #fff7cc url('images/bawah2.png') no-repeat top center;
+	width: 711px;
+	height: 56px;
+	padding: 0 0 20px 0;
+}
+#artikel {
+	display: none;
+}
+#gambar {
+	display: none;
+}
+#youtube {
+	display: none;
+}
+#caldad {
+	float: left;
+	width: 50px;
+	margin: 0 0 0 5px;
+	position: relative;
+}
+#calendar {
+	position: absolute;
+	background-color: #333333;
+	left: 0;
+	top: 0;
+	width: 232px;
+	z-index: -100;
+	padding: 5px;
+	color: #cccccc;
+}
+#calendar a {
+	color: #eeeeee;
+}
+#caljudul {
+	margin: 0 0 10px 0;
+}
+.grid {
+	float: left;
+	width: 31px;
+	height: 15px;
+	margin: 1px;
+	background-color: black;
+	color: white;
+	text-align: center;
+}
