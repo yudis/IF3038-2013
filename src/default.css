@@ -291,3 +291,22 @@ footer.content {
     display: inline-block;
     vertical-align: text-top;
 }
+
+/* CSS untuk halaman create tugas */
+.main .formtugas {
+    background-color: #e8f3df;
+    border: #5fae53 dashed 2px;
+    padding: 12px;
+    margin: 12px;
+}
+
+.formtugas ul.tag{
+    display: inline;
+    list-style-type: none;
+    margin:0;
+}
+
+.formtugas ul.tag li {
+    list-style: none;
+    padding: 3px;
+}
