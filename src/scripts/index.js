@@ -31,9 +31,9 @@ function back()
 function changeRegister() {
     var registerBtn = document.getElementById("register");
     if (isValidUname && isValidPassword && isValidRePassword && isValidFullName && isValidEmail && isValidBday && isValidPhoto) {
-        registerBtn.enabled = 'true';
+        registerBtn.disabled = 'false';
     } else {
-        registerBtn.enabled = 'false';
+        registerBtn.disabled = 'true';
     }
 }
 
@@ -144,6 +144,54 @@ function validateEmail() {
     changeRegister();
 }
 
+
+function validateBday() {
+    var bday = document.getElementById("bday");
+    var regex = /^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4,4}$/g;
+    
+    isValidBday = true;
+    if (!regex.test(bday.value)) {
+        isValidBday = false;
+    }
+    
+    if (isValidBday) {
+        if (bday.value.substr(bday.value.length - 4) < 1955) {
+            isValidBday = false;
+        }
+    }
+    
+    if (isValidBday) {
+        bday.style.border = '2px #5fae53 solid';
+    } else {
+        bday.style.border = '2px red solid';
+    }
+    
+    changeRegister();
+}
+
+function validateAvatar() {
+    var xAvatar = document.getElementById("ava");
+    var str1=/\.jpg/g;
+    var str2=/\.jpeg/g;
+    
+    isValidPhoto = true;
+
+    if (!str1.test(xAvatar.value) && !str2.test(xAvatar.value)) {
+        isValidPhoto = false;
+    }
+    
+    if (isValidPhoto) {
+        xAvatar.style.border = '2px #5fae53 solid';
+    } else {
+        xAvatar.style.border = '2px red solid';
+    }
+}
+
+function bdayPicker() {
+    NewCal('bday','ddmmyyyy');
+    return false;
+}
+
 function validateLogin() 
 {
 	var xUsername=document.forms["login"]["uname"].value;
@@ -231,4 +279,8 @@ function validateForm()
             return false;
         }
     }
+}
+
+function register() {
+    window.location.replace("dashboard.html");
 }

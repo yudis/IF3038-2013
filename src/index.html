@@ -37,7 +37,7 @@
                     <h1>So How Does Our System Work? </h1>
                     Let's see the brief explanation from these video below.. 
                     <div id="slider">
-                        <div><img src="images/image-1.jpg" id="slide" name="slider_picture"></div>
+                        <div><img src="images/image-1.jpg" id="slide" alt="" /></div>
                         <button onclick="back()" class="slider_button">Back</button>
                         <button onclick="next()" class="slider_button">Next</button>
                     </div>
@@ -66,13 +66,13 @@
                                 <input type="email" class="regbox" id="email" name="email" placeholder="Your Email.." required="required" onkeyup="validateEmail();" onchange="validateEmail();" />
                             </div>
                             <div class="wrapper">
-                                <input type="text" class="regbox" id="bday" name="bday" required="required" placeholder="Birthday (yyyy-mm-dd)" /><a href="javascript:NewCal('bday','yyyymmdd')"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
+                                <input type="text" class="regbox" id="bday" name="bday" required="required" placeholder="Birthday (dd-mm-yyyy)" onkeyup="validateBday();" onchange="validateBday();" /><a href="#" onclick="return bdayPicker();"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
                             </div>
                             <div class="wrapper">
-                                <p class="regtext">Profile Image:<br /></p><input type="file" id="ava" name="ava" accept="image/*" required="required"  />
+                                <p class="regtext">Profile Image:<br /></p><input type="file" id="ava" name="ava" accept="image/*" required="required"  onkeyup="validateAvatar();" onchange="validateAvatar();" />
                             </div>
                             <p>By clicking Sign Up, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use. </p>
-                            <input type="submit" class="button" id="register" onclick="register()" value="Sign Up" />
+                            <input type="submit" class="button" id="register" onclick="register()" value="Sign Up" disabled="true" />
                         </form>
                     </div>
                 </div>
