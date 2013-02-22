@@ -25,28 +25,61 @@
 </div>
 
 <div id="content">
-	<h1 id="profile">Profile</h1><hr />
-    <img src="Image/profile.jpg" alt="<img src=Image/profile.jpg>" height="200" width="150"/><br />
-    Username : Jokosusilo <br />
-	Full Name : Joko Susilo <br />
-    Date of Birth : 2 Februari 1978 <br />
-    Email : joko_susilo48@jambu.com <br />
+	<h1 id="profile" class="header_profile">Profile</h1><hr />
+                <img src="Image/just-foto.jpg" alt="<img src=Image/profile.jpg>" height="200" width="150"/><br /><br />
+                <b>Username</b> : Jokosusilo <br />
+                <b>Full Name</b> : Joko Susilo <br />
+                <b>Date of Birth</b> : 2 Februari 1978 <br />
+                <b>Email</b> : joko_susilo48@jambu.com <br />
     
-    <hr /><h1 id="listtodo">Lists that you need to do</h1><hr />
+    <hr /><h1 id="listtodo" class="header_profile">Lists that you need to do</h1><hr />
+   	
+				<a href="#taskdetail1">
+					<h2> Tugas Besar Pemrograman Internet </h2>
+				</a>
+				<b>Tanggal Penyelesaian</b> : 22 Februari 2013 <br />
+				<b>Tag</b> : Tugas, Besar, Progin, IF3038
+			
+				<a href="#taskdetail2">
+					<h2> Tugas Besar Inteligensia Buatan </h2>
+				</a>
+				<b>Tanggal Penyelesaian </b>: 22 Februari 2013 <br />
+				<b>Tag </b>: Tugas, Besar, IB, AI, IF3052
+			
+				<a href="#taskdetail3">
+					<h2> Penyerahan Proposal </h2>
+				</a>
+				<b>Tanggal Penyelesaian </b>: 28 Februari 2013 <br />
+				<b>Tag </b>: PKM
+                
+    <hr /><h1 id="completelist" class="header_profile">A complete list you do</h1><hr />
     
-    <hr /><h1 id="completelist">A complete list you do</h1><hr />
+    
+				<a href="#taskdetail4">
+					<h2> Periksa Kuis </h2>
+				</a>
+				<b>Tanggal Penyelesaian </b>: 7 Maret 2013 <br />
+				<b>Tag </b>: TBO, Kuis
+			
+				<a href="#taskdetail5">
+					<h2> Memasukkan Nilai </h2>
+				</a>
+				<b>Tanggal Penyelesaian </b>: 1 Januari 2013 <br />
+				<b>Tag </b>: Probstat, Nilai			
 </div>
 
 <div id="menu">
-    <h1>Menu</h1><hr />
-    <h4><a href="#profile">Profile</a></h4>
-    <h4><a href="#listtodo">Lists that you need to do</a></h4>
-    <h4><a href="#completelist">A complete list you do</a></h4>
+    <h1 class="header_profile">Menu</h1><hr />
+    <ul class="buttonlist" id="listtugas">
+   		<a href="#profile"><li class="buttonnormal" id="category1" name="category" onclick="onClickButton('category1')">Profile</li></a>
+		<a href="#listtodo"><li class="buttonnormal" id="category2" name="category" onclick="onClickButton('category2')">To do List</li></a>
+		<a href="#completelist"><li class="buttonnormal" id="category3" name="category" onclick="onClickButton('category3')">Complete List</li></a>
+	</ul>
 </div>
 
 <div id="footer_profile">
-    Footer
-    </div>
+	<p> Copyright &copy; 2013 Tugas Besar IF3038 Pemrograman Internet. Design By <a href="http://www.facebook.com/wchaq">Whilda Chaq</a> & <a href="http://www.facebook.com/5quall">Devin Hoesen</a></p>
+</div>
 
 
 </body>

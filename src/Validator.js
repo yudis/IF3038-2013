@@ -60,7 +60,6 @@ function getSrc(ico){
 function vdUsername(){
 	var temporary = document.getElementById('txUsername').value;
 	var temporary_password = document.getElementById('txPassword').value;
-	alert("| "+temporary+" | "+temporary_password+" |");
 	if(temporary.length >= 5 && temporary != temporary_password){
 		document.getElementById('icoUsername').src="Image/accept.png";
 	} else {
