@@ -1,3 +1,22 @@
+/**KODE BUAT DETAIL
+ 
+ <div id="detail">
+                    
+                        <label>DEADLINE</label>
+                        <a id="deadline">11/08/2013</a>
+                        
+                         <label>ASSIGNEE</label>
+                        <a id="assignee">Faiz</a>
+                        
+                         <label>TAG</label>
+                        <a id="tag">KAP</a>
+                        
+                         <label>ATTACHMENT</label>
+                        <a href ="#" id="attach">Download Here</a>
+                    
+                </div>
+*/
+
 #addtask{
     background-color: #ececec;
     width: 139px;
@@ -13,16 +32,31 @@
     background-position: center;
 }
 
+#edit{
+    background-color: #ececec;
+    width: 139px;
+    height: 68px;
+    border-radius:20px;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    box-shadow: 1px 1px 5px 0px #e1e1e1;
+    margin-left: 118px;
+    margin-top: 64px;
+    background-image: url("../pict/tulisanedit.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+
+
+
 #addtask:hover{
     background-color: #361a2c;
 }
 
-#namaicon{
-	height: 20px;
-}
-
-#attaicon{
-	height: 20px;
+#edit:hover{
+    background-color: #361a2c;
 }
 
 #back{
@@ -67,4 +101,63 @@
     box-shadow: 1px 1px 5px 0px #e1e1e1;
     margin-left: 300px;
     margin-top: -165px;
+}
+#rinciantugas{
+    padding-top: 30px;
+    width: 400px;
+    height: 445px;
+    background-color: #ececec;
+    border-radius:20px;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    box-shadow: 1px 1px 5px 0px #e1e1e1;
+    margin-left: 300px;
+    margin-top: -165px;
+}
+
+#komen{
+    width: 337px;
+    height: 440px;
+    margin-left: 760px;
+    margin-top: -465px;
+}
+
+#daftarkomen{
+    width: 305px;
+    height: 83px;
+    background-color: #ececec;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5x;
+    margin-bottom: 15px;
+    color: #333333;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-family: Calibri;
+}
+
+textarea{
+    width: 305px;
+    height: 83px;
+}
+
+/***RINCIAN TUGAS**/
+#judultugas{
+    font-family: Calibri;
+    font-size: 40px;
+    font-weight: 800;
+    text-align: center;
+}
+#detail{
+    margin-left: 100px;
+    margin-top: 30px;
+    font-family: Calibri;
+    font-size: 20px;
+}
+
+#detailedit{
+    margin-left: 100px;
+    margin-top: -220px;
+    font-family: Calibri;
+    font-size: 20px;
 }
