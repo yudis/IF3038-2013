@@ -19,8 +19,8 @@ function concat(opts) {
     console.log(' '+ distPath +' built.');
 }
 
-var files = ['index', 'new_tugas', 'profile', 'register', 'dashboard'];
-var titles = ['Home', 'New Task', 'Profile', 'Register', 'Dashboard'];
+var files = ['index', 'new_tugas', 'profile', 'dashboard'];
+var titles = ['Home', 'New Task', 'Profile', 'Dashboard'];
 
 for (i = 1; i <= 8; i++) {
     files.push('view_tugas_' + i);
