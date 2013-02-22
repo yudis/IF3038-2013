@@ -125,3 +125,8 @@ function signup() {
 		alert("Fill your registration form correctly");
 	}
 }
+
+function finishTask(i) {
+	document.getElementById("curtask"+i).style.display = "none";
+	document.getElementById("curtask"+i+1).style.top = "200px";
+}
