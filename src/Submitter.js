@@ -264,7 +264,11 @@ function addAssignee(code){
 		document.getElementById("add5").setAttribute("value","Tambah");
 	}else if(code == '1'){
 		document.getElementById("add1").setAttribute("value","OK");
-		var form ="Assignee : <input type=\"text\" id='name1'>";
+		var form ="Assignee : <input type=\"text\" id=\"name1\">";
+		form += "<datalist id=\"name1\">";
+		form += "<option>Whilda Chaq</option>";
+		form += "<option>Devin Hoesen</option>";
+		form += "</datalist>";
 		document.getElementById("adassignee1").innerHTML = form;
 	}else if(code == '2'){
 		document.getElementById("add2").setAttribute("value","OK");
