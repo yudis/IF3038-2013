@@ -1,6 +1,4 @@
-To-Do : 
-- login if admin admin
-- validasi & disable submit button (sign up)
+1. Media Queries 
 
 
 Tweak biar website kita bagus banget haha :3, ini gw tulis dulu yang gw tau dan inget, kalo ada tambahan silahkan

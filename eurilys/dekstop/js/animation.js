@@ -144,7 +144,7 @@ function checkTaskName() {
 		}
 	}
 	
-	if ((taskName.length > 25) || (taskNameValid == 1)) {
+	if ((taskName.length > 25) || (taskNameValid == 1) || (taskName == "")) {
 		//tidak valid
 		document.getElementById('taskname_validation').src = "../img/no.png";
 	}
