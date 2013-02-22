@@ -244,7 +244,7 @@ width: 354px;
 
 #menu form input.box {
 background:url('searchbox.jpg') no-repeat;
-width: 240px;
+width: 230px;
 height: 30px;
 border: 0;
 padding-left: 10px;
@@ -456,14 +456,31 @@ margin: 0;
 float: right;
 text-decoration: none;
 }
-#kegiatan p {
+#kegiatan a.list {
 background-color: #feff95;
 display: block;
 padding: 12px;
 font-family: 'Segoe UI';
 font-size: 18px;
 color: #351b02;
+margin: 0 20px 0 0;
+width: 250px;
+float: left;
+text-decoration: none;
+border-bottom-color: #fe9227;
+border-bottom-width: 1px;
+border-bottom-style: solid;
+}
+#kegiatan input{
+margin-right: 12px;
+}
+#kegiatan p{
+color: #351b02;
+background-color: #feff95;
+padding: 12px;
 margin: 0;
+font-family: 'Segoe UI';
+font-size: 18px;
 border-bottom-color: #fe9227;
 border-bottom-width: 1px;
 border-bottom-style: solid;
