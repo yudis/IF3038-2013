@@ -7,102 +7,63 @@
 		<link rel="stylesheet" type="text/css" href="style2.css" title="style2" />
 		<script type="text/javascript" src="script.js"></script>
 	</head>
-	<body>
+	<body id="dashboardbackground">
 		<div id="wrapper">
 			<div id="header">
 				<div id="logo">
-					<a href="#"><img src="images/gajah.png" alt="Logo" width="100" height="100" /></a>
+					<a href="dashboard.html"><img src="images/logo.png" alt="Logo" width="300" height="100" /></a>
 				</div>
 				<div id="menu">
 					<ul>
 						<li id="menudb"><a href="dashboard.html">DASHBOARD</a></li>
 						<li id="menuprof"><a href="profil.html">PROFIL</a></li>
 						<li id="menulo"><a href="mainpage.html">LOGOUT</a></li>
+						<!--search masih belum nih-->
 					</ul>
-				</div>
+                                    <div class ="searchoption">
+                                        <input class="searchbox" type="text" value="Input search" onfocus="javascript:this.value=''" onblur="searchBox(this)" />
+                                    </div>
+                                 </div>
 			</div>
 			
-			<div id="main">
-				<div id="rincian">
-					<div class="atas">
-					</div>
-					<div class="tengah">
-                                                <!--ini buat munculin panelnya-->
-                                                <div class ="letterpanel">
-                                                    <a href="#login_form" id="login_pop">Kategori</a>
-                                                </div>
-                                                <!-- popup form #1 jadi ceritanya awalnya gk keliatan -->
-                                                <a href="#x" class="overlay" id="login_form"></a>
-                                                <div class="popup">
-                                                    <h2>Kategori Tugas</h2>
-                                                    <!--<h2>Welcome Guest!</h2>
-                                                    <p>Please enter your login and password here</p>-->
-                                                    <div>
-                                                        <label>Nama Kategori</label>
-                                                        <div id ="kategorifont">Pemrograman Internet</div>
-                                                    </div>
-                                                    <div>
-                                                        <label for="password">Pengguna Terkait</label>
-                                                        <label>
-                                                            <a href="#">Ujang</a>
-                                                            <tt>,</tt>
-                                                            <a href="#">Susi</a>
-                                                        </label>
-                                                    </div>
-                                                    <input type="button" value="Ok" />
+			<div id="main2">
+                            <div id ="dashboardcontainer">
+                                <div id ="staticcomponentlist">
+                                    <div class ="letterpanel">
+                                    <a href="#login_form" id="login_pop">Kategori</a>
+                                    </div>
+                                    <!-- popup form #1 jadi ceritanya awalnya gk keliatan -->
+                                    <a href="#x" class="overlay" id="login_form"></a>
+                                    <div class="popup">
+                                        <h2>Tambah Kategori Tugas</h2>
+                                        <!--<h2>Welcome Guest!</h2>
+                                        <p>Please enter your login and password here</p>-->
+                                        <div>
+                                            <label>Nama Kategori &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </label>
+                                            <input type ="text" name="category"></input>
+                                        </div>
+                                        <div>
+                                            <label for="password">Pengguna Terkait :</label>
+                                            <input type ="text" name="relateduser"></input>
+                                        </div>
+                                        <input type="button" value="Ok" />
 
-                                                    <a class="close" href="#close"></a>
-                                                </div>
-                                                <!--end of pop up-->
-						<div class="judul">
-							Komponen Statis
-						</div>
-						<div class="isi">
-							<img src="images/niouw.jpg" alt="gambar 1" height="230" width="230"/>
-						</div>
-						<div class="detail">
-							<div class="byon">
-								Posted by <strong><span class="by">Enjella</span></strong> on <strong>January 18, 2013</strong>
-							</div>
-							<div class="likedislike">
-								<ul class="ldbuttons">
-									<li class="like"><a href="javascript:void(0);"></a></li>
-									<li class="dislike"><a href="javascript:void(0);"></a></li>
-								</ul>
-							</div>
-							<div class="count">
-								<strong><span class="jmllike">2</span></strong> likes, <strong><span class="jmldislike">1</span></strong> dislikes
-							</div>
-						</div>
-						<div class="komen">
-							<div class="komenjudul">Comments</div>
-							<div id="konten-komentar">
-								<strong>2</strong> komentar
-							</div>
-							<div class="line-konten"></div>
-							<div class="komen-nama">Vincentius Martin</div>
-							<div class="komen-tgl">| February 19, 2013</div>
-							<div class="komen-isi">Ini komen komen komen</div>
-							<div class="line-konten"></div>
-							<div class="komen-nama">Kevin Jangtjik</div>
-							<div class="komen-tgl">| February 20, 2013</div>
-							<div class="komen-isi">dang ding dong.</div>
-							<div class="line-konten"></div>
-							<form action="" method="GET">
-								<div id="komen-tulis"><strong>Tulis Komentar</strong></div>
-								<div class="clear"></div>
-								<div class="komen-label btg-mrh" id="komen-btg">*) wajib diisi</div>
-								<div class="clear"></div>
-								<div class="komen-label">Nama <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="nama" /></div>
-								<div class="clear error" id="error-username"></div>
-								<div class="komen-label">Komentar <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><textarea class="register-input-input" name="komentar" rows="5"></textarea></div>
-								<div class="clear"></div>
-								<div class="komen-submit"><input type="button" name="submit" value="Submit" /></div>
-							</form>
-						</div>
-					</div>
-					<div class="bawah">
-					</div>
+                                        <a class="close" href="#close"></a>
+                                    </div>
+                                    <a href ="rinciantugas.html">
+                                        <img onmouseover="javascript:getDashboardFocus('task1');" src ="images/Prog_In.png" id="task1" alt="task" style="cursor:pointer" />
+                                    </a>
+                                    <img onmouseover="javascript:getDashboardFocus('task2');" src ="images/dateschedule.png" id="task2" alt="task2" style="cursor:pointer" />
+                                    <input id ="newtask" type="button" name="Tugas Baru" value="newtask" disabled="true"/>
+                                </div>
+                                <div id="rincian">
+
+                                    <!--end of pop up-->
+                                    <div class="atas"></div>
+									<div class="tengah"><img src ="images/ProginBig.png" alt="task" />
+									<img src ="images/DateBig.png" alt="tasklv" /></div>
+									<div class="bawah"></div>";
+									</div>
 				</div>
 			
 		<div id="footer">

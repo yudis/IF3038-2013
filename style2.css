@@ -1,5 +1,4 @@
 body {
-	background: #fff7cc url('images/bg2.png') repeat-x top center;
 	font-family: Trebuchet MS, sans-serif;
 	color: #191919;
 	font-size: 12px;
@@ -22,7 +21,6 @@ a img {
 	padding: 10px 0 0 0;
 }
 #logo {
-	background: url('images/logobg.png') no-repeat top center;
 	float: left;
 	width: 325px;
 	height: 100px;
@@ -41,42 +39,36 @@ a img {
 	padding: 0;
 }
 #menuhome{
-	background: url('images/homebg.png') no-repeat top center;
 	display: inline;
 	font-family: Impact, sans-serif;
 	font-size: 20px;
 	padding: 15px;
 }
-#menudb{
-	background: url('images/homebg2.png') no-repeat top center;
+#menuhome2{
 	display: inline;
 	font-family: Impact, sans-serif;
 	font-size: 20px;
 	padding: 15px;
 }
-#menuprof{
-	background: url('images/dkontenbg.png') no-repeat top center;
+#menudkonten{
 	display: inline;
 	font-family: Impact, sans-serif;
 	font-size: 20px;
 	padding: 15px;
 }
-#menurt2{
-	background: url('images/dkontenbg2.png') no-repeat top center;
+#menudkonten2{
 	display: inline;
 	font-family: Impact, sans-serif;
 	font-size: 20px;
 	padding: 15px;
 }
-#menump{
-	background: url('images/registerbg.png') no-repeat top center;
+#menuregister{
 	display: inline;
 	font-family: Impact, sans-serif;
 	font-size: 20px;
 	padding: 15px;
 }
-#menulo{
-	background: url('images/registerbg2.png') no-repeat top center;
+#menuregister2{
 	display: inline;
 	font-family: Impact, sans-serif;
 	font-size: 20px;
@@ -95,26 +87,19 @@ a img {
 #menu li a:hover {
 	color: #db4444;
 }
-#theming {
-	float: right;
-	text-align: right;
-	width: 230px;
-	font-family: Arial Black, sans-serif;
-	font-size: 12px;
-	margin: 0;
-	padding: 68px 0 0 0;
-}
-#theming a {
-	color: #2e395e;
-	text-decoration: none;
-}
 
 #main {
 	clear: both;
 	margin: 0;
 	padding: 0 0 10px 0;
 }
-
+#konten {
+	background-color: #ffffff;
+	margin: 0 5px 0 0;
+	padding: 0;
+	width: 670px;
+	float: left;
+}
 .atas {
 	background: #fff7cc url('images/atas2.png') no-repeat top center;
 	width: 711px;
@@ -155,6 +140,7 @@ a img {
 .isi {/* 640px */
 	margin: 0;
 	padding: 0 25px 0 25px;
+	color: #555555;
 }
 .detail {
 	margin: 0;
@@ -279,7 +265,7 @@ a img {
 }
 #little {
 	margin: 0;
-	background: #fff7cc url('images/little.png') no-repeat center center;
+	background: #fff7cc url('images/logo2.png') no-repeat center center;
 	padding: 0 0 0 10px;
 	height: 31px;
 	width: 31px;
@@ -287,7 +273,6 @@ a img {
 }
 #siteinfo {
 	float: left;
-	background-color: #fff7cc;
 	color: #191919;
 	margin: 0;
 	padding: 0 0 50px 0;
@@ -407,16 +392,7 @@ a img {
 	height: 56px;
 	clear: both;
 }
-#most-liked-judul {
-	text-align: center;
-	font-family: Arial Black, sans-serif;
-	font-size: 16px;
-}
-#most-commented-judul {
-	text-align: center;
-	font-family: Arial Black, sans-serif;
-	font-size: 16px;
-}
+
 .home-detail {
 	margin: 0;
 	padding: 0 25px 15px 25px;
@@ -469,4 +445,35 @@ a img {
 }
 #youtube {
 	display: none;
+}
+#caldad {
+	float: left;
+	width: 50px;
+	margin: 0 0 0 5px;
+	position: relative;
+}
+#calendar {
+	position: absolute;
+	background-color: #333333;
+	left: 0;
+	top: 0;
+	width: 232px;
+	z-index: -100;
+	padding: 5px;
+	color: #cccccc;
+}
+#calendar a {
+	color: #eeeeee;
+}
+#caljudul {
+	margin: 0 0 10px 0;
+}
+.grid {
+	float: left;
+	width: 31px;
+	height: 15px;
+	margin: 1px;
+	background-color: black;
+	color: white;
+	text-align: center;
 }

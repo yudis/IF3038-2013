@@ -7,39 +7,66 @@
 		<link rel="stylesheet" type="text/css" href="style2.css" title="style2" />
 		<script type="text/javascript" src="script.js"></script>
 	</head>
-	<body>
+	<body style="background-image:url(images/profil.jpg)" background-size= 100% 100% repeat-x top center>
 		<div id="wrapper">
 			<div id="header">
 				<div id="logo">
-					<a href="#"><img src="images/gajah.png" alt="Logo" width="100" height="100" /></a>
+					<a href="dashboard.html"><img src="images/logo.png" alt="Logo" width="300" height="100" /></a>
 				</div>
 				<div id="menu">
 					<ul>
-						<li id="menudb"><a href="dashboard.html">DASHBOARD</a></li>
-						<li id="menuprof"><a href="profil.html">PROFIL</a></li>
-						<li id="menulo"><a href="mainpage.html">LOGOUT</a></li>
-						<!--search masih belum nih-->
+						<li id="menuhome2"><a href="dashboard.html">DASHBOARD</a></li>
+						<li id="menudkonten"><a href="profil.html">PROFIL</a></li>
+						<li id="menuregister2"><a href="javascript:void(0)" onclick="validateLogout()">LOGOUT</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		
-				<div id="footer">
-					<div id="logo2">
-						<a href="#"><img src="images/gajah.png" alt="Logo" width="30" height="30" /></a>
+		<div id="main">
+				<div id="konten">
+					<div class="atas">
 					</div>
+					<div class="tengah">
+						<div class="judul">
+							PROFIL
+						</div>
+						<div class="isi">
+							<img src="images/enjella.jpg" alt="gambar 1" height="400" width="600"/>
+						</div>
+						
+					
+						<div> Username		: enjellan </div>
+						<div> Nama Lengkap	: Enjella Melissa Nababan </div>
+						<div> Tanggal lahir : 3 Maret 1991 </div>
+						<div> Email			: enjellamelissan@yahoo.com </div>
+						<div> Jenis Kelamin : perempuan </div>
+						<div> About me		: ................. </div>
+						<div class="register-submit"><input type="button" name="register" value="Edit" disabled="able" id="form-button"  /></div>
+						
+						
+						
+					<div class="bawah">
+					</div>
+				</div>
+				</div>
+		
+			<div id="footer">
+				<div id="little">
+				</div>
 				<div id="siteinfo">
 					&copy; 2013. Sukasukaguelah.<br />
-					Hak cipta dilindung oleh gue.
+					Hak cipta dilindung oleh Gue.
 				</div>
 				<div id="botlink">
-				<ul>
-					<li><a href="home.html">DASHBOARD</a></li>
-					<li><a href="dkonten.html">PROFIL</a></li>
-					<li><a href="register.html">LOGOUT</a></li>
-				</ul>
+					<ul>
+						<li><a href="dashboard.html">DASHBOARD</a></li>
+						<li><a href="profil.html">PROFIL</a></li>
+						<li><a href="javascript:void(0)" onclick="validateLogout()">LOGOUT</a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="profil.js"></script>
 	</body>
 </html>
