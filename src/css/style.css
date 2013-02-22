@@ -105,11 +105,7 @@ a,a:visited {
 	border:dotted;
 	
 	/*image background*/
-<<<<<<< HEAD
-	background: url(../res/background1.png) no-repeat center center fixed; 
-=======
-	background: url(background1.png) no-repeat center center fixed; 
->>>>>>> dafa4fe8610067347224d921ecc71d88394cafb7
+	background: url(../res/background1.png) no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -219,11 +215,7 @@ a,a:visited {
 	margin-left:5%;
 	border:dotted;
 	float:left;
-<<<<<<< HEAD
 	background:#999;
-=======
-	background:#666;
->>>>>>> dafa4fe8610067347224d921ecc71d88394cafb7
 }
 
 #semuaTugas {
@@ -365,11 +357,7 @@ a,a:visited {
 	background:#FF0;
 	border-style:groove;
 	border-radius:5px;
-<<<<<<< HEAD
 	visibility:hidden;
-=======
-	//visibility:hidden;
->>>>>>> dafa4fe8610067347224d921ecc71d88394cafb7
 }
 
 #newTugasTitle {
@@ -387,13 +375,8 @@ a,a:visited {
 #newTugasForm {
 	height:40%;
 	width:100%;
-<<<<<<< HEAD
 	margin-left:25%;
 	margin-top:0.5%;
-=======
-	margin-top:0.5%;
-	margin-left:25%;
->>>>>>> dafa4fe8610067347224d921ecc71d88394cafb7
 }
 
 .Task {
@@ -408,19 +391,13 @@ a,a:visited {
 
 #submitNewKategori {
 	margin-left:60%;
-<<<<<<< HEAD
-=======
 	background:#F00;
->>>>>>> dafa4fe8610067347224d921ecc71d88394cafb7
 }
 
 #submitNewKategori > button {
 	border-radius:5px;
-<<<<<<< HEAD
 	width:50%;
 	margin-left:-20%;
-=======
->>>>>>> dafa4fe8610067347224d921ecc71d88394cafb7
 }
 
 #submitNewKategori > button:hover {
@@ -429,7 +406,6 @@ a,a:visited {
 	box-shadow:0 0 10px #FFF;
 }
 
-<<<<<<< HEAD
 .addTask{
 	margin-left:75%;
 	margin-top:45%;
@@ -445,7 +421,6 @@ a,a:visited {
 	font-weight:bold;
 	box-shadow:0 0 8px #FFF;
 }
-=======
 /*rincian task*/
 #rinciantask {
 /*gimana caranya menjadi min-height*/
@@ -472,4 +447,3 @@ a,a:visited {
 	width:100%;
 	background:#CF0;
 }
->>>>>>> dafa4fe8610067347224d921ecc71d88394cafb7
