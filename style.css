@@ -5,50 +5,84 @@ width:100%;
 font-family: 'segoe ui';
 background-color: #ffffd6;
 position:absolute;
-z-index:0;
 }
 
 *:focus{outline: none;}
-
+#add{
+float: left;
+margin: 10px 0 10px 200px;
+width: 70px;
+}
+#cancel{
+margin: 10px 10px 0 0;
+}
 *---- Pop Up Tambah Kategori----*/
-#black{
-	z-index:1;
-	background-color:#666;
-	opacity: 0.9;
-	width:100%;
-	height:500px;
-	margin:0 auto;
-	display:block;
-	position:fixed;
-	top:0;
-	left:0;
-	padding:0;
+#popup{
+z-index:0;
+background-color:#666;
+opacity: 0.7;
+width:100%;
+position:absolute;
+top:0;
+left:0;
+padding:0;
 }
-#popupform
-{
-	margin-left: auto;
-    margin-right: auto;
-	width:290px;
-	z-index:1000;
-	opacity:1;
-	display:none;
-	
+#popupform{
+margin-left: auto;
+margin-right: auto;
+width:500px;
+z-index:1000;
+display:none;
 }
-.centerV{
-	padding:10 10 10 10;
-    display: table-cell;
-	top:50%;
-	margin-top:-50px;
-	position:absolute;
-    vertical-align: middle;
-	border:5px solid #000000;
-	background-color:#FC0;
-	opacity:1;
-	}
-.label
-{
-	width:130px;
-	float:left;	
+.centerV ul{
+padding:10px 10px 10px 10px;
+display: table-cell;
+top:50%;
+margin-top:-50px;
+position:absolute;
+vertical-align: middle;
+border:5px solid #000000;
+background-color:#FC0;
+opacity:1;
+width: 400px;
+list-style-type: none;
+}
+.centerV li{
+list-style-type: none;
+position: relative;
+color: black;
+padding: 20px 10px 20px;
+}
+.centerV label{
+width: 130px;
+display: inline-block;
+float: left;
+font-size: 16px;
+font-family: 'segoe ui';
+padding: 3px;
+}
+.centerV input{
+height: 15px;
+width: 200px;
+padding: 5px 8px;
+margin-left: 15px;
+border-radius: 5px;
+}
+.centerV button{
+float: right;
+height: 30px;
+margin: 0;
+border-radius: 5px;
+border-color: #351b02;
+background-color: #351b02;
+color: white;
+font-family: 'segoe ui';
+font-size: 18px;
+}
+.centerV button:hover{
+background-color: #fcff00;
+color: #351b02;
+
 }
 
 /*--------- index ---------*/
@@ -172,6 +206,11 @@ background-color: #351b02;
 color: white;
 font-family: 'segoe ui';
 font-size: 15px;
+}
+.reg button:hover{
+background-color: #fcff00;
+color: #351b02;
+
 }
 
 .reg input[type=file]{
@@ -417,7 +456,7 @@ text-decoration:none;
 background-color:#fcff00;
 display:block;
 height: 30px;
-width:300px;
+width:268px;
 padding: 16px;
 }
 #leftsidebar ul li a:link{
@@ -498,6 +537,7 @@ font-size: 24px;
 background-color: #fe9227;
 margin: 0;
 width: 350px;
+z-index: -1;
 }
 #kegiatan b.design2 a{
 color: #351b02;
@@ -509,6 +549,7 @@ background-color: #fe9227;
 margin: 0;
 float: right;
 text-decoration: none;
+z-index: 0;
 }
 #kegiatan a.list {
 background-color: #feff95;
@@ -518,15 +559,17 @@ font-family: 'Segoe UI';
 font-size: 18px;
 color: #351b02;
 margin: 0 20px 0 0;
-width: 250px;
+width: 200px;
 float: left;
 text-decoration: none;
 border-bottom-color: #fe9227;
 border-bottom-width: 1px;
 border-bottom-style: solid;
+z-index: -1;
 }
 #kegiatan input{
-margin-right: 12px;
+margin: 20px 20px 0 20px;
+float: left;
 }
 #kegiatan p{
 color: #351b02;
@@ -543,11 +586,14 @@ border-bottom-style: solid;
 #kegiatan a, #kegiatan a:visited
 {
 	position:relative;
+	z-index: 0;
 }
 
 #kegiatan a span
 {
 	display: none;
+	z-index: 0;
+	
 }
 
 #kegiatan a:hover span
@@ -564,6 +610,7 @@ border-bottom-style: solid;
 	background: #e5e5e5;
 	text-align: left;
 	border: 1px solid #666;
+	z-index: 0;
 }
 
 /* SQUARED TWO */
@@ -642,7 +689,7 @@ border-bottom-style: solid;
 }
 
 /* taskdetails.html */
-#commentbutton
+#edit, #commentbutton
 {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 14px;
@@ -667,7 +714,7 @@ border-bottom-style: solid;
 	);
 }
 
-#commentbutton:hover
+#edit:hover, #commentbutton:hover
 {
 	background-image: linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
 	background-image: -o-linear-gradient(bottom, rgb(232,203,14) 12%, rgb(255,238,153) 56%);
