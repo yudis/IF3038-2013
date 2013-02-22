@@ -31,15 +31,10 @@ function FormAddKategori(){
 
 function AddKategori(){
 	var d1 = document.getElementById('namakategori').value;
-//	var para=document.createElement("a");
-	//var node=document.createTextNode(d1);
-	//para.appendChild(node);
-	//var element=document.getElementById("kategori");
-//	element.appendChild(para);
-  var div = document.getElementById ("kategori");
-  div.innerHTML = "<a onClick=\"ShowTask('2','5')\">"+d1+"</a>";
+	var div = document.getElementById ("kategori");
+	div.innerHTML += "<a onClick=\"ShowTask('2','5')\">"+d1+"</a>";
   
-		var form=document.getElementById("popupform");
+	var form=document.getElementById("popupform");
 	form.style.display="none";
 
 	var obj= document.getElementById("popup");

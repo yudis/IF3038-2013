@@ -7,10 +7,10 @@
 		<style type="text/css"></style>
 	</head>
 	
-	<body onload="generateDate()">
+	<body>
 		<div id="indexheader">
 			<img src="logo.png">					
-			<form id="loginform" class="login" action="home.html" method="post" name="loginform">		
+			<form class="login" action="" method="post" name="loginform">		
 				<ul>
 					<h1 align="left">Login</h1>
 					<li>
@@ -19,7 +19,7 @@
 					</li>
 					<li>
 						<label for="password">Password:</label>
-						<input class="loginbox" id="password" type="password" name="password" />
+						<input class="loginbox" id="password" type="text" name="password" />
 					</li>
 					<li>
 						<button class="loginbutton" type="submit"><b>Login</b></button>
@@ -54,11 +54,58 @@
 					</li>	
 					<li>
 						<label for="tgllahir">Tanggal Lahir:</label>
-						<select id="tahunlist" name="tahun">
+						<select name="tahun">
+							<option>1955</option>
+							<option>1956</option>
+							<option>1957</option>
+							<option>1958</option>
+						</select name="bulan">
+						<select>
+							<option value="month1">1</option>
+							<option value="month2">2</option>
+							<option value="month3">3</option>
+							<option value="month4">4</option>
+							<option value="month5">5</option>
+							<option value="month6">6</option>
+							<option value="month7">7</option>
+							<option value="month8">8</option>
+							<option value="month9">9</option>
+							<option value="month10">10</option>
+							<option value="month11">11</option>
+							<option value="month12">12</option>
 						</select>
-						<select id="bulanlist" name="bulan">
-						</select>
-						<select id="tanggallist" name="tanggal">
+						<select name="tanggal">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>
+							<option>13</option>
+							<option>14</option>
+							<option>15</option>
+							<option>16</option>
+							<option>17</option>
+							<option>18</option>
+							<option>19</option>
+							<option>20</option>
+							<option>21</option>
+							<option>22</option>
+							<option>23</option>
+							<option>24</option>
+							<option>25</option>
+							<option>26</option>
+							<option>27</option>
+							<option>28</option>
+							<option>29</option>
+							<option>30</option>
+							<option>31</option>
 						</select>
 					</li>
 					<li>
@@ -79,10 +126,10 @@
 		<div id="featuresbar">
 			<ul id="features">
 				<li>
-					<b>Banana is here to remind you of your tasks</b>
+					<b>Feature 1</b>
 				</li>
 				<li>
-					<b>Banana lets you synchronize your tasks with members</b>
+					<b>feature 2</b>
 				</li>
 			</ul>
 		</div>
@@ -92,30 +139,5 @@
 			Chalkz Team<br>
 			Yulianti - Adriel - Amelia</p>			
 		</div>
-		
-		<script type="text/javascript">
-			var temp = document.getElementById("loginform");
-			temp.onsubmit = function()
-			{
-				var flag = true;
-				var a = document.getElementById("username");
-				if (a.value == "yuli")
-				{
-					var b = document.getElementById("password");
-					if (b.value != "amel")
-					{
-						alert("Password salah!");
-						flag = false;
-					}
-				}
-				else
-				{
-					alert("Username salah!");
-					flag = false;
-				}
-				
-				return flag;
-			}
-		</script>
 	</body>
 </html>

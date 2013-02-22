@@ -10,8 +10,8 @@
         <div id="content">
             <div id="header">
                 <div id="logo">
-                    <a href="home.html" class="header">
-					<img src="logo.png"/></a>
+                    <!-- <a href="index.html" class="header">board</a> -->
+                    <img src="logo.png"/>
                 </div>
                 <div id="menu">
                     <ul>
@@ -45,12 +45,7 @@
 							</li>
 							<li>
 								<label for="deadline">Deadline</label>
-								<select id="tanggallist" class="deadline" disabled>
-								</select>
-								<select id="bulanlist" class="deadline" disabled>
-								</select>
-								<select id="tahunlist" class="deadline" disabled>
-								</select>
+								<input id="deadline" type="text" size="50" disabled/>
 							</li>
 							<li>
 								<label for="assignee">Assignee</label>
@@ -59,7 +54,7 @@
 							<li>
 								<label for="textfields">Tag</label>
 								<input id="tag" type="text" size="50" disabled/><br>
-								<button id="edit" name="edit" type="button" onclick="editTask()"><b>Edit</b></button><br>
+								<button name="edit" type="button" onClick="editTask()"/><b>Edit</b></button><br>
 							</li>
 						</ul>
 						
@@ -100,26 +95,21 @@
 			
 			function editTask()
 			{
-				if (document.getElementById("edit").innerHTML == "<b>Edit</b>")
+				if (document.getElementById("edit").value == "Edit")
 				{
 					document.getElementById("tugas").disabled = false;
-					document.getElementById("tanggallist").disabled = false;
-					document.getElementById("bulanlist").disabled = false;
-					document.getElementById("tahunlist").disabled = false;
+					document.getElementById("deadline").disabled = false;
 					document.getElementById("assignee").disabled = false;
 					document.getElementById("tag").disabled = false;
-					document.getElementById("edit").innerHTML = "<b>Save</b>";
-					document.getElementById("edit").innerHTML.style = bold;
+					document.getElementById("edit").value = "Save";
 				}
-				else if (document.getElementById("edit").innerHTML == "<b>Save</b>")
+				else if (document.getElementById("edit").value == "Save")
 				{
 					document.getElementById("tugas").disabled = true;
-					document.getElementById("tanggallist").disabled = true;
-					document.getElementById("bulanlist").disabled = true;
-					document.getElementById("tahunlist").disabled = true;
+					document.getElementById("deadline").disabled = true;
 					document.getElementById("assignee").disabled = true;
 					document.getElementById("tag").disabled = true;
-					document.getElementById("edit").innerHTML = "<b>Edit</b>";
+					document.getElementById("edit").value = "Edit";
 				}
 			}
 			
@@ -161,40 +151,10 @@
 			
 			function initialize()
 			{
-				generateDate();
 				document.getElementById("tugas").value = "Tugas progin super nyebelin";
+				document.getElementById("deadline").value = "22-2-2013";
 				document.getElementById("assignee").value = "John";
 				document.getElementById("tag").value = "Yuli, Amel, Adriel";
-			}
-			
-			function generateDate()
-			{
-				var b = document.getElementById("tanggallist");
-				for (var i = 1; i <= 31; i++)
-				{
-					var option = document.createElement("option");
-					option.text = "" + i;
-					option.value = "date" + i;
-					b.appendChild(option);
-				}
-				
-				var c = document.getElementById("bulanlist");
-				for (var i = 1; i <= 12; i++)
-				{
-					var option = document.createElement("option");
-					option.text = "" + i;
-					option.value = "month" + i;
-					c.appendChild(option);
-				}
-				
-				var d = document.getElementById("tahunlist");
-				for (var i = 1955; i <= 2013; i++)
-				{
-					var option = document.createElement("option");
-					option.text = "" + i;
-					option.value = "month" + i;
-					d.appendChild(option);
-				}
 			}
 		</script>
     </body>

@@ -51,7 +51,7 @@ function checkConfirmedPass(){
 	}
 	else
 	{
-		isFilled();
+		isFilled();		
 	}
 }
 
@@ -124,36 +124,6 @@ if ((namauser==null || namauser=="") &&(password==null || password=="") && (conf
   else
   {
 		  button.disabled=false;
-	}
-}
-
-function generateDate()
-{
-	var b = document.getElementById("tanggallist");
-	for (var i = 1; i <= 31; i++)
-	{
-		var option = document.createElement("option");
-		option.text = "" + i;
-		option.value = "date" + i;
-		b.appendChild(option);
-	}
-	
-	var c = document.getElementById("bulanlist");
-	for (var i = 1; i <= 12; i++)
-	{
-		var option = document.createElement("option");
-		option.text = "" + i;
-		option.value = "month" + i;
-		c.appendChild(option);
-	}
-	
-	var d = document.getElementById("tahunlist");
-	for (var i = 1955; i <= 2013; i++)
-	{
-		var option = document.createElement("option");
-		option.text = "" + i;
-		option.value = "month" + i;
-		d.appendChild(option);
 	}
 }
 
