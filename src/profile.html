@@ -7,42 +7,169 @@
 <body>
 	<div id="container">
 		<div id="header" align="left">
-        	<img src="../images/header.png"/>
+        	<div class=logo id="logo" align="left">
+				
+			</div>
+			<div id="space">
+			</div>
+			<div id="search" align="left">
+				<input type="text" name="search" id="searchbox">
+				<button type="submit" id="searchbutton"></button>
+			</div>
+			<div class="menu" id="logout">
+				<a href="home.html"><font color=white>Logout</font></a>
+			</div>
+			<div class="menu" id="profile">
+				<a href="profile.html"><font color=white>Profile</font></a>
+			</div>
+			<div class="menu" id="home">
+				<a href="dashboard.html"><font color=white>Home</font></a>
+			</div>
         </div>
-		<div class=logo id="logo" align="left">
-			<a href="dashboard.html">
-				<img src="../images/headerlogo.png">
-			</a>
-        </div>
-		<div id="space" align="left">
-        	
-        </div>
-		<div id="search" align="left">
-        	
-        </div>
-		<div class="menu" id="home">
-			<a href="dashboard.html">Home</a>
-        </div>
-		<div class="menu" id="profile">
-        	<a href="profile.html">Profile</a>
-        </div>
-		<div class="menu" id="logout">
-        	<a href="home.html">Logout</a>
-        </div>
-		<div id="leftspace">
-        	
-        </div>
-		<div id="profilephoto">
-        	<img src="../images/profilebg.png"/>
-        </div>
-		<div id="biodata">
-        	
-        </div>
-		<div id="rightspace">
-        	
-        </div>
-		<div id="list">
-        	
+		<div id="profilearea">
+			<div class="profilephoto">
+				<img src="../images/zz.jpg"/>
+			</div>
+			<div class="biodata">
+				<br>
+				Username  : dummy<br><br>
+				Fullname  : Dummy<br><br>
+				Birthdate : 20 Feb 2013<br><br>
+				Handphone : 081912345-XXX<br><br>
+				Email	  : dummy@students.itb.ac.id<br>
+				<button type="button" id="editbutton"></button>
+			</div>
+		</div>
+		<div id="listarea">
+			<div id="undonetasktitle">
+				Undone Task
+			</div>
+			<div id="donetasktitle">
+				Done Task
+			</div>
+        	<div id="undonetask">
+				<div class="task_block" id="k11">
+					<div class="task_judul">
+						Cari Buku
+					</div>
+					<div class="task_deadline">
+						Deadline: <font color="red">21 February 2013</font>
+					</div>
+					<div class="task_tag">
+						Tags: kuliah
+					</div>
+				</div>
+				
+				<div class="task_block" id="k12">
+					<div class="task_judul">
+						Tugas Intelegensia Buatan
+					</div>
+					<div class="task_deadline">
+						Deadline: <font color="red">22 February 2013</font>
+					</div>
+					<div class="task_tag">
+						Tags: kuliah, IB, tugas
+					</div>
+				</div>
+		
+				<div class="task_block" id="k21">
+					<div class="task_judul">
+						Cari Monyet
+					</div>
+					<div class="task_deadline">
+						Deadline: <font color="red">24 February 2013</font>
+					</div>
+					<div class="task_tag">
+						Tags: eksperimen
+					</div>
+				</div>
+				
+				<div class="task_block" id="k22">
+					<div class="task_judul">
+						Beli Formalin
+					</div>
+					<div class="task_deadline">
+						Deadline: <font color="red">25 February 2013</font>
+					</div>
+					<div class="task_tag">
+						Tags: eksperimen
+					</div>
+				</div>
+				
+				<div class="task_block"id="k13">
+					<div class="task_judul">
+						Tugas IMK
+					</div>
+					<div class="task_deadline">
+						Deadline: <font color="red">25 February 2013</font>
+					</div>
+					<div class="task_tag">
+						Tags: kuliah, IMK, tugas
+					</div>
+				</div>
+				
+				<div class="task_block" id="k14">
+					<div class="task_judul">
+						Kuis IMK
+					</div>
+					<div class="task_deadline">
+						Deadline: <font color="red">28 February 2013</font>
+					</div>
+					<div class="task_tag">
+						Tags: kuliah, IMK, kuis
+					</div>
+				</div>
+				
+				<div class="task_block" id="k31">
+					<div class="task_judul">
+						Latihan Silat
+					</div>
+					<div class="task_deadline">
+						Deadline: <font color="red">28 February 2013</font>
+					</div>
+					<div class="task_tag">
+						Tags: bela diri
+					</div>
+				</div>
+	
+			</div>
+			<div id="donetask">
+				<div class="task_block" id="k41">
+					<div class="task_judul">
+						Ngulang Pelajaran
+					</div>
+					<div class="task_deadline">
+						Deadline: <font color="green">12 February 2013</font>
+					</div>
+					<div class="task_tag">
+						Tags: kuliah
+					</div>
+				</div>
+				
+				<div class="task_block" id="k42">
+					<div class="task_judul">
+						Beli Racun
+					</div>
+					<div class="task_deadline">
+						Deadline: <font color="green">15 February 2013</font>
+					</div>
+					<div class="task_tag">
+						Tags: eksperimen
+					</div>
+				</div>
+		
+				<div class="task_block" id="k43">
+					<div class="task_judul">
+						Belajar Progin
+					</div>
+					<div class="task_deadline">
+						Deadline: <font color="green">18 February 2013</font>
+					</div>
+					<div class="task_tag">
+						Tags: kuliah
+					</div>
+				</div>
+			</div>
         </div>
 	</div>
 </body>
