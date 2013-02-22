@@ -23,45 +23,6 @@ bajuri.prototype = {
 		return this;
 	},
 
-	// Split classes from an element's class attribute, case-insensitively
-	_parseClasses: function(className) {
-		return className.toLowerCase().split(/\s+/);
-	},
-
-	_addClassToNode: function(node, className) {
-		// case insensitivity
-		className = className.toLowerCase();
-
-		// split classes
-		classes = this._parseClasses(classes);
-		found = false;
-		for (cls in classes) {
-			if (cls === className.toLowerCase()) {
-				found = true;
-				break;
-			}
-		}
-
-		if (!found)
-			classes.push(className);
-
-		node.className = classes.join(' ');
-	},
-
-	_nodeHasClass: function(node, className) {
-		// case insensitivity
-		className = className.toLowerCase();
-
-		// split classes
-		classes = this._parseClasses(classes);
-		found = false;
-		for (cls in classes) {
-			if (cls === className.toLowerCase()) {
-				return true;
-			}
-		}
-	},
-
 	add: function(selector, context) {
 		if (typeof selector == 'function') {
 			// http://stackoverflow.com/questions/799981/document-ready-equivalent-without-jquery
@@ -90,7 +51,7 @@ bajuri.prototype = {
 		else if (document.querySelectorAll) {
 			n = document.querySelectorAll(selector);
 			for (i = 0; i < n.length; i++) {
-				this.nodes.push(n);
+				this.nodes.push(n.item(i));
 			}
 		}
 		else if (m = selector.match(/^([a-zA-Z\-]*)(?:.([a-zA-Z_\-]+)|)?$/)) {
@@ -108,12 +69,14 @@ bajuri.prototype = {
 
 	addClass: function(cls) {
 		this.nodes.forEach(function(node) {
-			this._addClassToNode(node, cls);
+			bajuri._addClassToNode(node, cls);
 		});
 	},
 
 	removeClass: function(cls) {
-
+		this.nodes.forEach(function(node) {
+			node.className.replace(/(?:^|\s)red(?:\s|$)/, ' ');
+		});
 	},
 
 	first: function() {
@@ -199,6 +162,37 @@ bajuri.prototype = {
 }
 
 bajuri.cache = {};
+
+// Split classes from an element's class attribute, case-insensitively
+bajuri._parseClasses = function(className) {
+	return className.toLowerCase().split(/\s+/);
+};
+
+bajuri._addClassToNode = function(node, className) {
+	// case insensitivity
+	// className = className.toLowerCase();
+
+	// found = node.className.toLowerCase().match(new RegExp('(?:^|\\s)' + className + '(?:\\s|$)'));
+
+	// console.log(found);
+
+	// if (!found)
+		node.className += ' ' + className;
+};
+
+bajuri._nodeHasClass = function(node, className) {
+	// case insensitivity
+	className = className.toLowerCase();
+
+	// split classes
+	classes = this._parseClasses(classes);
+	found = false;
+	for (cls in classes) {
+		if (cls === className.toLowerCase()) {
+			return true;
+		}
+	}
+};
 
 bajuri.factory = function(tagName) {
 	return bajuri(document.createElement(tagName));
