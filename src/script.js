@@ -15,12 +15,16 @@ function validating(){
 		alert("Nama task salah");
 		return false;
 	}
-	else if (tag == ""){
-		alert("Tag tidak boleh kosong");
+	else if(file == ""){
+		alert("Attachment tidak boleh kosong");
 		return false;
 	}
-	else if (!file.match(/[^\s]+(\.(?i)(jpg|png|gif|bmp|txt|wmv|avi|flv|doc|docx))$/i)){
+	else if (!file.match("^.+(\.(?i)(jpg|jpeg|png|gif|bmp|wmv|avi|flv|doc|docx))$")){
 		alert("File tidak valid");
+		return false;
+	}
+	else if (tag == ""){
+		alert("Tag tidak boleh kosong");
 		return false;
 	}
 }
