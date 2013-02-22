@@ -67,6 +67,18 @@ bajuri.prototype = {
 		return this;
 	},
 
+	hasClass: function(cls) {
+		pattern = new RegExp(cls +' | ' + cls + '|^' + cls + '$');
+		return this.nodes[0].className.match(pattern);
+	},
+
+	toggleClass: function(cls) {
+		if (this.hasClass(cls))
+			this.removeClass(cls);
+		else
+			this.addClass(cls);
+	},
+
 	addClass: function(cls) {
 		this.nodes.forEach(function(node) {
 			bajuri._addClassToNode(node, cls);
@@ -75,8 +87,6 @@ bajuri.prototype = {
 
 	removeClass: function(cls) {
 		this.nodes.forEach(function(node) {
-			console.log('removeCLass ' + cls);
-			console.log(new RegExp('((?:^|\\s)' + cls + '(?:\\s|$))*'));
 			pattern = new RegExp(cls +' | ' + cls + '|^' + cls + '$');
 			while (node.className.match(pattern)) {
 				node.className = node.className.replace(pattern, ' ');
