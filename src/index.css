@@ -97,6 +97,8 @@ h1, h2 {
 	width: 340px;
 	height: 40px;
 	font-size: 110%;
+	padding-left: 8px;
+	padding-right: 8px;
 }
 #registerwrapper form #username, #registerwrapper form #password, 
 #registerwrapper form #password_confirm, #registerwrapper form #nama, 

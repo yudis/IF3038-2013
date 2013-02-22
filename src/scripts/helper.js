@@ -1,3 +1,5 @@
+String.prototype.trim = function(){return this.replace(/^\s+|\s+$/g, '');};
+
 // create function, it expects 2 values.
 // http://snipplr.com/view/2107
 function insertAfter(newElement,targetElement) {

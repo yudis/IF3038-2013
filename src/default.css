@@ -1,24 +1,29 @@
-* {
+*:not(ul) {
     padding-top: 0px;
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
     margin: 0px;
 }
+
 body {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
+
 img {
     border: 0px;
 }
+
 .page {
     width: 100%;
     min-width: 1017px;
 }
+
 .page .content {
     width: 960px;
     margin: 0px auto;
 }
+
 nav {
     clear: both;
     width: 960px;
@@ -34,6 +39,11 @@ nav .logo img {
     margin-bottom: -10px;
 }
 nav ul {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 0px;
     list-style-type:none;
     display: inline;
 }
@@ -155,10 +165,12 @@ button, .button {
     color: #fff;
     border: #499b3d 2px solid;
 }
+
 button:active, button:hover, .button:active, .button:hover {
     color: #499b3d;
     cursor: pointer;
 }
+
 .tugas {
     padding: 12px;
     margin: 12px;
@@ -175,13 +187,13 @@ button:active, button:hover, .button:active, .button:hover {
 .tugas a:hover, .tugas a:active {
     color: #499b3d;
 }
-.tugas ul.tag {
+ul.tag {
     display: inline;
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
-.tugas ul.tag li {
+ul.tag li {
     list-style: none;
     border: 0px;
     text-align: left;
@@ -193,7 +205,7 @@ button:active, button:hover, .button:active, .button:hover {
     display: inline-block;
     font-size: 70%;
 }
-.tugas ul.tag li a {
+ul.tag li a {
     display: block;
     text-decoration: none;
     border-right: solid 3px #5fae53;
@@ -279,7 +291,6 @@ footer.content {
     padding: 12px;
     margin: 12px;
 }
-
 .rincianLabel {
     width: 15%;
     display: inline-block;
@@ -299,13 +310,14 @@ footer.content {
     margin: 12px;
 }
 
-.formtugas ul.tag{
+
+.formtugas ul.item {
     display: inline;
     list-style-type: none;
     margin:0;
 }
 
-.formtugas ul.tag li {
+.formtugas ul.item li {
     list-style: none;
     padding: 3px;
 }

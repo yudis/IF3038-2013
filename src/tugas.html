@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html> 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0" />
         <title>Todolist</title>
         <link rel="stylesheet" type="text/css" href="default.css" />
+        <link rel="stylesheet" type="text/css" href="styles/tugas.css" />
         <script src="scripts/tugas.js" type="application/javascript"></script>
         <script src="scripts/helper.js" type="application/javascript"></script>
     </head>
@@ -11,9 +13,9 @@
         <div class="page">
             <header class="content">
                 <nav>
-                    <div class="logo"><a href="#home"><img alt="Home" src="images/logo.png" /></a></div>
+                    <div class="logo"><a href="dashboard.html"><img alt="Home" src="images/logo.png" /></a></div>
                     <ul>
-                        <li><div><a href="#dashboard">Dashboard</a></div></li><li><div><a href="#profil">Profil</a></div></li><li><div><a href="#logout">Logout</a></div></li>
+                        <li><div><a href="dashboard.html">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="index.html">Logout</a></div></li>
                     </ul>
                     <div class="search">
                         <div id="searchwrapper">
@@ -30,13 +32,43 @@
                 <div class="padding12px">
                     <form action="#">
                         <div class="rincianLabel">Nama:</div><div class="rincianDetail"><div id="namaTugas">Tugas 1</div></div>
-                        <div class="rincianLabel">Attachment:</div><div class="rincianDetail">Attachment</div>
-                        <div class="rincianLabel">Deadline:</div><div class="rincianDetail"><input type="date" id="deadline" name="deadline" value="" /></div>
-                        <div class="rincianLabel">Assignee:</div><div class="rincianDetail"><div id="attachment"></div></div>
-                        <div class="rincianLabel">Komentar:</div><div class="rincianDetail"><div id="komentar"><b>Abraham Krisnanda Santoso</b> - 20 Februari 2013 23:06<hr />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor nunc, posuere sit amet facilisis quis, ullamcorper nec sapien. Donec placerat nisi in dui auctor posuere. Etiam quis urna tortor. Mauris aliquet porta tellus, a tristique arcu congue vel. Ut scelerisque, lacus vel sodales tristique, neque leo facilisis metus, quis posuere dui eros vel sem. Aliquam turpis quam, vehicula quis malesuada vel, tincidunt sit amet nunc. Vivamus orci augue, volutpat sed egestas eget, luctus eget lacus. Curabitur ut quam non dolor pellentesque dapibus. Quisque ut semper ante. Donec lobortis rutrum elit, eget consequat leo ultrices non. Nam mauris magna, fermentum vel pulvinar ac, varius condimentum nulla. Maecenas ac odio non ligula vestibulum congue. Ut nunc risus, vestibulum sit amet consectetur molestie, porttitor nec.<br /><br /><b>Stefanus Thobi Sinaga</b> - 20 Februari 2013 23:06<hr />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor nunc, posuere sit amet facilisis quis, ullamcorper nec sapien. Donec placerat nisi in dui auctor posuere. Etiam quis urna tortor. Mauris aliquet porta tellus, a tristique arcu congue vel. Ut scelerisque, lacus vel sodales tristique, neque leo facilisis metus, quis posuere dui eros vel sem. Aliquam turpis quam, vehicula quis malesuada vel, tincidunt sit amet nunc. Vivamus orci augue, volutpat sed egestas eget, luctus eget lacus. Curabitur ut quam non dolor pellentesque dapibus. Quisque ut semper ante. Donec lobortis rutrum elit, eget consequat leo ultrices non. Nam mauris magna, fermentum vel pulvinar ac, varius condimentum nulla. Maecenas ac odio non ligula vestibulum congue. Ut nunc risus, vestibulum sit amet consectetur molestie, porttitor nec.<br /><br /><b>Edward Samuel Pasaribu</b> - 20 Februari 2013 23:06<hr />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor nunc, posuere sit amet facilisis quis, ullamcorper nec sapien. Donec placerat nisi in dui auctor posuere. Etiam quis urna tortor. Mauris aliquet porta tellus, a tristique arcu congue vel. Ut scelerisque, lacus vel sodales tristique, neque leo facilisis metus, quis posuere dui eros vel sem. Aliquam turpis quam, vehicula quis malesuada vel, tincidunt sit amet nunc. Vivamus orci augue, volutpat sed egestas eget, luctus eget lacus. Curabitur ut quam non dolor pellentesque dapibus. Quisque ut semper ante. Donec lobortis rutrum elit, eget consequat leo ultrices non. Nam mauris magna, fermentum vel pulvinar ac, varius condimentum nulla. Maecenas ac odio non ligula vestibulum congue. Ut nunc risus, vestibulum sit amet consectetur molestie, porttitor nec.<br /><br /></div><textarea id="txtKomentar" rows="4" cols="80" placeholder="Your comment here..."></textarea><br /><button onclick="return addKomentar();">Submit</button></div>
-                        <div class="rincianLabel">Tags:</div><div class="rincianDetail"><input type="text" id="tag" name="tag" value="IF3030" /></div>
+                        <div class="rincianLabel">Attachment:</div><div class="rincianDetail"><div class="inlineblock"><a href="./files/test.zip" target="_blank">test.zip</a></div></div>
+                        <div class="rincianLabel">Deadline:</div><div class="rincianDetail">
+                            <div id="deadlineDisplayDiv" class="inlineblock">02/22/2013</div>
+                            <div id="deadlineEditDiv">
+                                <input type="date" id="deadline" name="deadline" value="2013-02-22" />
+                            </div>
+                        </div>
+                        <div class="rincianLabel">Assignee:</div><div class="rincianDetail">
+                            <ul id="assigneesList" class="tag"></ul>
+                            <div id="assigneeEditDiv">
+                                <input type="text" id="assignee" name="assignee" list="user" />
+                                <datalist id="user">
+                                    <option value="Abraham Krisnanda Santoso">
+                                    <option value="Edward Samuel Pasaribu">
+                                    <option value="Stefanus Thobi Sinaga">
+                                </datalist>
+                                <button onclick="return addAssignees();">Add</button>
+                            </div>
+                        </div>
+                        <div class="rincianLabel">Tags:</div><div class="rincianDetail">
+                            <div id="tagsDisplayDiv">
+                                <ul id="tagsList" class="tag">
+                                </ul>
+                            </div>
+                            <div id="tagsEditDiv">
+                                <input type="text" id="tags" name="tags" value="IF3030" />
+                            </div>
+                        </div>
+                        <br /><br />
+                        <button id="editButton" onclick="return editTugas();">Edit</button><button id="doneButton" onclick="return saveTugas();">Done</button>
+                        <br /><br /><br />
+                        <div class="rincianLabel">Komentar:</div><div class="rincianDetail">
+                            <div id="komentar"><b>Abraham Krisnanda Santoso</b> - 20 Februari 2013 23:06<hr />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor nunc, posuere sit amet facilisis quis, ullamcorper nec sapien. Donec placerat nisi in dui auctor posuere. Etiam quis urna tortor. Mauris aliquet porta tellus, a tristique arcu congue vel. Ut scelerisque, lacus vel sodales tristique, neque leo facilisis metus, quis posuere dui eros vel sem. Aliquam turpis quam, vehicula quis malesuada vel, tincidunt sit amet nunc. Vivamus orci augue, volutpat sed egestas eget, luctus eget lacus. Curabitur ut quam non dolor pellentesque dapibus. Quisque ut semper ante. Donec lobortis rutrum elit, eget consequat leo ultrices non. Nam mauris magna, fermentum vel pulvinar ac, varius condimentum nulla. Maecenas ac odio non ligula vestibulum congue. Ut nunc risus, vestibulum sit amet consectetur molestie, porttitor nec.<br /><br /><b>Stefanus Thobi Sinaga</b> - 20 Februari 2013 23:06<hr />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor nunc, posuere sit amet facilisis quis, ullamcorper nec sapien. Donec placerat nisi in dui auctor posuere. Etiam quis urna tortor. Mauris aliquet porta tellus, a tristique arcu congue vel. Ut scelerisque, lacus vel sodales tristique, neque leo facilisis metus, quis posuere dui eros vel sem. Aliquam turpis quam, vehicula quis malesuada vel, tincidunt sit amet nunc. Vivamus orci augue, volutpat sed egestas eget, luctus eget lacus. Curabitur ut quam non dolor pellentesque dapibus. Quisque ut semper ante. Donec lobortis rutrum elit, eget consequat leo ultrices non. Nam mauris magna, fermentum vel pulvinar ac, varius condimentum nulla. Maecenas ac odio non ligula vestibulum congue. Ut nunc risus, vestibulum sit amet consectetur molestie, porttitor nec.<br /><br /><b>Edward Samuel Pasaribu</b> - 20 Februari 2013 23:06<hr />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor nunc, posuere sit amet facilisis quis, ullamcorper nec sapien. Donec placerat nisi in dui auctor posuere. Etiam quis urna tortor. Mauris aliquet porta tellus, a tristique arcu congue vel. Ut scelerisque, lacus vel sodales tristique, neque leo facilisis metus, quis posuere dui eros vel sem. Aliquam turpis quam, vehicula quis malesuada vel, tincidunt sit amet nunc. Vivamus orci augue, volutpat sed egestas eget, luctus eget lacus. Curabitur ut quam non dolor pellentesque dapibus. Quisque ut semper ante. Donec lobortis rutrum elit, eget consequat leo ultrices non. Nam mauris magna, fermentum vel pulvinar ac, varius condimentum nulla. Maecenas ac odio non ligula vestibulum congue. Ut nunc risus, vestibulum sit amet consectetur molestie, porttitor nec.<br /><br /></div><textarea id="txtKomentar" rows="4" cols="80" placeholder="Your comment here..."></textarea><br /><button onclick="return addKomentar();">Submit</button>
+                        </div>
                     </form>
                 </div>
+                <br />
             </div>
             <footer class="content">
                 This website is created solely for the purpose of fulfilling our college task.<br />

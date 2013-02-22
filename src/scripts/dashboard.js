@@ -1,5 +1,14 @@
-var nKategori = 5;
+var nKategori = 3;
 var selectedIndex = -1;
+
+function updateAddButtonVisibility() {
+    var elmt = document.getElementById('addTask');
+    if (selectedIndex < 0) {
+        elmt.style.display = 'none';
+    } else {
+        elmt.style.display = 'inline-block';
+    }
+}
 
 function NewKategori() {
     var element = document.getElementById('txtNewKategori');
@@ -20,7 +29,7 @@ function NewTask() {
     if (selectedIndex == -1) {
         alert("Please select the categori first, by click on left sidebar.", "Todolist");
     } else {
-        window.location = "home.html";
+        window.location = "createtugas.html";
     }
 }
 
@@ -35,6 +44,7 @@ function RemoveKategoriFilter(elmt) {
     }
     
     elmt.style.backgroundColor = '#e8f3df';
+    updateAddButtonVisibility();
     return false;
 }
 
@@ -52,6 +62,7 @@ function KategoriSelected(elmt) {
     document.getElementById('main-' + elmt.id).style.display = 'block';
     
     elmt.style.backgroundColor = '#e8f3df';
+    updateAddButtonVisibility();
     return false;
 }
 
