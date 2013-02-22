@@ -23,48 +23,6 @@ body {
 	z-index:1;
 }
 
-#spasi {
-	height:15%;
-	margin-top:5%;
-	border:dotted;
-	
-	/*image background*/
-	background: url(background1.png) no-repeat center center fixed; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-}
-
-#rinciantaskTitle {
-	width:10%;
-	height:30%;
-	margin:auto;
-	line-height:2;
-	margin-top:2.5%;
-	
-	/*Transistion Effect*/
-	transition: width 2s;
-	-moz-transition: font-size 2s, -moz-transform 2s; /* Firefox 4 */
-	-webkit-transition: font-size 2s, -webkit-transform 2s; /* Safari and Chrome */
-	-o-transition: font-size 2s, -o-transform 2s; /* Opera */
-}
-
-#rinciantaskTitle:hover {
-	cursor:none;
-	font-size:36px;
-	margin-top:1%;
-	
-	/*tulisan berputar*/
-	-moz-transform:rotate(360deg);
-	-webkit-transform:rotate(360deg);
-	-o-transform:rotate(360deg);
-}
-
-#rinciantaskTitle > p {
-	text-align:center;
-}
-
 #logo{
 	height:80%;
 	margin-left:1%;
@@ -162,7 +120,7 @@ a,a:visited {
 	border:dotted;
 	
 	/*image background*/
-	background: url(background1.png) no-repeat center center fixed; 
+	background: url(../res/background1.png) no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -272,7 +230,7 @@ a,a:visited {
 	margin-left:5%;
 	border:dotted;
 	float:left;
-	background:#666;
+	background:#999;
 }
 
 #semuaTugas {
@@ -414,7 +372,7 @@ a,a:visited {
 	background:#FF0;
 	border-style:groove;
 	border-radius:5px;
-	//visibility:hidden;
+	visibility:hidden;
 }
 
 #newTugasTitle {
@@ -432,8 +390,8 @@ a,a:visited {
 #newTugasForm {
 	height:40%;
 	width:100%;
-	margin-top:0.5%;
 	margin-left:25%;
+	margin-top:0.5%;
 }
 
 .Task {
@@ -453,6 +411,8 @@ a,a:visited {
 
 #submitNewKategori > button {
 	border-radius:5px;
+	width:50%;
+	margin-left:-20%;
 }
 
 #submitNewKategori > button:hover {
@@ -461,6 +421,21 @@ a,a:visited {
 	box-shadow:0 0 10px #FFF;
 }
 
+.addTask{
+	margin-left:75%;
+	margin-top:45%;
+	width:20%;
+}
+
+.addTask > button {
+	width:100%;
+}
+
+.addTask > button:hover {
+	background:#FFF;
+	font-weight:bold;
+	box-shadow:0 0 8px #FFF;
+}
 /*rincian task*/
 #rinciantask {
 	float:left;
