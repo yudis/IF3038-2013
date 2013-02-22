@@ -29,10 +29,10 @@
 				var pattern = /[^a-zA-Z0-9 ]/
 				var l = taskName.length;
 				if(!pattern.test(taskName)){         
-					document.getElementById('v_tname').innerHTML='<font color="green" face="Trebuchet MS">Benar</font>';
+					document.getElementById('v_tname').innerHTML='<img src="../images/Check.png" title="Benar"/img>';
 					return true;
 				}else{   
-					document.getElementById('v_tname').innerHTML='<font color="red" face="Trebuchet MS">Jangan gunakan karakter khusus</font>';
+					document.getElementById('v_tname').innerHTML='<img src="../images/Cross.png" title="Nama task tidak boleh menggunakan karakter khusus"/img>';
 					return false;
 				}
 			}
@@ -40,10 +40,10 @@
 			function checkAssignee(assignee){
 				var pattern = /[a-zA-Z] [a-zA-Z]/
 				if(pattern.test(assignee)){         
-					document.getElementById('v_assignee').innerHTML='<font color="green" face="Trebuchet MS">Benar</font>'; 
+					document.getElementById('v_assignee').innerHTML='<img src="../images/Check.png" title="Benar"/img>'; 
 					return true;
 				}else{   
-					document.getElementById('v_assignee').innerHTML='<font color="red" face="Trebuchet MS">Nama assignee minimal terdiri dari 2 frasa</font>';
+					document.getElementById('v_assignee').innerHTML='<img src="../images/Cross.png" title="Nama harus tersusun dari minimal 2 kata"/img>';
 					return false;
 				}
 			}
@@ -58,10 +58,10 @@
 					if(filename == "docx"|| filename == "jpeg" || filename == "bmp" || filename == "gif" || filename == "pdf" || filename == "doc" 
 						|| filename == "docx" || filename == "xls" || filename == "xlsx" || filename == "ppt" || filename == "pptx" || filename == "mp4"
 						|| filename == "ogg"|| filename == "webm"|| filename == "3gp"){         
-						document.getElementById('v_attachment').innerHTML='<font color="green" face="Trebuchet MS">File attachment valid</font>'; 
+						document.getElementById('v_attachment').innerHTML='<img src="../images/Check.png" title="Benar"/img>'; 
 						return true;
 					}else{   
-						document.getElementById('v_attachment').innerHTML='<font color="red" face="Trebuchet MS">File attachment tidak valid</font>';
+						document.getElementById('v_attachment').innerHTML='<img src="../images/Cross.png" title="Ekstensi file tidak valid"/img>';
 						return false;
 					}
 				}
@@ -72,28 +72,25 @@
 	<body onload="makeTgl();makeThn();">
 		<div id="container">
 			<div id="header" align="left">
-				<img src="../images/header.png"/>
-			</div>
-			<div class=logo id="logo" align="left">
-				<a href="dashboard.html">
-					<img src="../images/headerlogo.png">
-				</a>
-			</div>
-			<div id="space" align="left">
+        	<div class=logo id="logo" align="left">
 				
+			</div>
+			<div id="space">
 			</div>
 			<div id="search" align="left">
-				
-			</div>
-			<div class="menu" id="home">
-				<a href="dashboard.html">Home</a>
-			</div>
-			<div class="menu" id="profile">
-				<a href="profile.html">Profile</a>
+				<input type="text" name="search" id="searchbox">
+				<button type="submit" id="searchbutton"></button>
 			</div>
 			<div class="menu" id="logout">
-				<a href="home.html">Logout</a>
+				<a href="home.html"><font color=white>Logout</font></a>
 			</div>
+			<div class="menu" id="profile">
+				<a href="profile.html"><font color=white>Profile</font></a>
+			</div>
+			<div class="menu" id="home">
+				<a href="dashboard.html"><font color=white>Home</font></a>
+			</div>
+        </div>
 			<div id="leftspace">
 				
 			</div>

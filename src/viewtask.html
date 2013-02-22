@@ -28,12 +28,29 @@
 				}
 			}
 			
-			function showHide(id){
-				if(document.getElementById(id).style.display == 'none'){
-					document.getElementById(id).style.display='inline';
-				}else{
-					document.getElementById(id).style.display = 'none';
-				}
+			function getStyle(el, name)
+			{
+			  if ( document.defaultView && document.defaultView.getComputedStyle )
+			  {
+				var style = document.defaultView.getComputedStyle(el, null);
+				if ( style )
+				  return style[name];
+			  }
+			  else if ( el.currentStyle )
+				return el.currentStyle[name];
+
+			  return null;
+			}
+
+			function showHide(a){
+			  var e=document.getElementById(a);
+			  if(!e)return true;
+			  if(getStyle(e, "display") == "none"){
+				e.style.display="inline"
+			  } else {
+				e.style.display="none"
+			  }
+			  return true;
 			}
 			
 			function renameButton(id){
@@ -87,30 +104,27 @@
 			</script>
 	</head>
 
-	<body onload="makeTgl();makeThn();">
+	<body onload="makeTgl();makeThn()">
 		<div id="container">
 			<div id="header" align="left">
-				<img src="../images/header.png"/>
-			</div>
-			<div class=logo id="logo" align="left">
-				<a href="dashboard.html">
-					<img src="../images/headerlogo.png">
-				</a>
-			</div>
-			<div id="space" align="left">
-				
-			</div>
-			<div id="search" align="left">
-				
-			</div>
-			<div class="menu" id="home">
-				<a href="dashboard.html">Home</a>
-			</div>
-			<div class="menu" id="profile">
-				<a href="profile.html">Profile</a>
-			</div>
-			<div class="menu" id="logout">
-				<a href="home.html">Logout</a>
+				<div class=logo id="logo" align="left">
+					
+				</div>
+				<div id="space">
+				</div>
+				<div id="search" align="left">
+					<input type="text" name="search" id="searchbox">
+					<button type="submit" id="searchbutton"></button>
+				</div>
+				<div class="menu" id="logout">
+					<a href="home.html"><font color=white>Logout</font></a>
+				</div>
+				<div class="menu" id="profile">
+					<a href="profile.html"><font color=white>Profile</font></a>
+				</div>
+				<div class="menu" id="home">
+					<a href="dashboard.html"><font color=white>Home</font></a>
+				</div>
 			</div>
 			<div id="leftspace">
 				
@@ -159,9 +173,9 @@
 						</div>
 						<div class="viewtask_field">
 							<div>
-								<p id="dlvalue" style="DISPLAY: inline"><script>document.write(tanggal+"-"+bulan+"-"+tahun)</script></p>
+								<p id="dlvalue"><script>document.write(tanggal+"-"+bulan+"-"+tahun)</script></p>
 							</div>
-							<div style="DISPLAY: none" id="dl">
+							<div id="dl">
 								<select name="tanggal" id="tgl">
 								</select>
 								<select name="bulan" id="bln">
@@ -184,7 +198,7 @@
 						</div>
 						<div class="viewtask_edit">
 							<input type=button value="Edit" id="dlbutton" onClick="showHide('dl');showHide('dlvalue');showHide('dlbutton');showHide('savebutton')">
-							<input type=button value="Save" id="savebutton" style="DISPLAY: none" onClick="showHide('dl');showHide('dlvalue');showHide('dlbutton');showHide('savebutton');getDateValue();setDateValue()">
+							<input type=button value="Save" id="savebutton" onClick="showHide('dl');showHide('dlvalue');showHide('dlbutton');showHide('savebutton');getDateValue();setDateValue()">
 						</div>
 					</div>
 					<div class="form_field">
@@ -192,8 +206,14 @@
 							Assignee
 						</div>
 						<div class="viewtask_field">
-							<p id="asvalue" style="DISPLAY: inline">Bambang</p>
-							<input type=text name=as id="as" style="DISPLAY: none" onKeyPress="checkEdit(event,'as','asvalue','asbutton')">
+							<p id="asvalue">Bambang</p>
+							<input type=text name=as id="as" onKeyPress="checkEdit(event,'as','asvalue','asbutton')" list="suggest"/>
+							<datalist id="suggest">
+								<option value="Mario Orlando">
+								<option value="Luthfi Chandra">
+								<option value="Rubiano Adityas">
+							</datalist>
+							
 						</div>
 						<div class="viewtask_edit">
 							<input type=button value="Edit" id="asbutton" onClick="showHide('as');showHide('asvalue');renameButton('asbutton');clearContents('as')">
@@ -205,8 +225,8 @@
 							Tag
 						</div>
 						<div class="viewtask_field">
-							<p id="tagvalue" style="DISPLAY: inline">Urgent; Kuliah</p>
-							<input type=text name=tag id="tag" style="DISPLAY: none" onKeyPress="checkEdit(event,'tag','tagvalue','tagbutton')">
+							<p id="tagvalue">Urgent; Kuliah</p>
+							<input type=text name=tag id="tag" onKeyPress="checkEdit(event,'tag','tagvalue','tagbutton')">
 						</div>
 						<div class="viewtask_edit">
 							<input type=button value="Edit" id="tagbutton" onClick="showHide('tag');showHide('tagvalue');renameButton('tagbutton');clearContents('tag')">
