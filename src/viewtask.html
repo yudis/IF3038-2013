@@ -2,6 +2,7 @@
 	<head>
 		<title>View Task</title>
 		<link href="styles/viewtask.css" rel="stylesheet" type="text/css" />
+		<link href="styles/header.css" rel="stylesheet" type="text/css" />
 		<script>
 			var attach = "../videos/attachmentsample.ogg";
 			var tanggal = 1;
@@ -106,24 +107,24 @@
 
 	<body onload="makeTgl();makeThn()">
 		<div id="container">
-			<div id="header" align="left">
-				<div class=logo id="logo" align="left">
+			<div id="header">
+				<div class=logo id="logo">
 					
 				</div>
 				<div id="space">
 				</div>
-				<div id="search" align="left">
+				<div id="search">
 					<input type="text" name="search" id="searchbox">
 					<button type="submit" id="searchbutton"></button>
 				</div>
 				<div class="menu" id="logout">
-					<a href="home.html"><font color=white>Logout</font></a>
+					<a href="home.html">Logout</a>
 				</div>
 				<div class="menu" id="profile">
-					<a href="profile.html"><font color=white>Profile</font></a>
+					<a href="profile.html">Profile</a>
 				</div>
 				<div class="menu" id="home">
-					<a href="dashboard.html"><font color=white>Home</font></a>
+					<a href="dashboard.html">Home</a>
 				</div>
 			</div>
 			<div id="leftspace">
@@ -140,32 +141,17 @@
 						</div>
 					</div>
 					<div class="form_attachment">
-						<div>
-							<img id=image width="320" height="240" onError="this.style.display = 'none';">
-						</div>
-						<div>
-							<video id=video width="320" height="240" controls onError="this.style.display = 'none';">
-								<source type="video/mp4">
-								<source type="video/ogg">
-								<source type="video/webm">
-								<object width="320" height="240">
-									<embed width="320" height="240">
-								</object> 
+							<img id=image src="../videos/attachmentsample.ogg" width="320" height="240" alt="" onError="this.style.display = 'none';"/>
+							<video  id=video width="320"  height="240" src="../videos/attachmentsample.ogg"  controls onError="this.style.display = 'none';">
 							</video>
-						</div>
 					</div>
 					<div class="form_field">
 						<div class="viewtask_label">
 							Attachment
 						</div>
 						<div class="viewtask_field">
-							<a id=link target="_blank"><script>document.write(attach)</script></a>
+							<a id=link href="../videos/attachmentsample.ogg" target="_blank"><script>document.write(attach)</script></a>
 						</div>
-						<script>
-						document.getElementById("image").setAttribute("src", attach);
-						document.getElementById("video").setAttribute("src", attach);
-						document.getElementById("link").setAttribute("href", attach);
-						</script>
 					</div>
 					<div class="form_field">
 						<div class="viewtask_label">

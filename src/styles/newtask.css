@@ -106,17 +106,17 @@
 }
 #leftspace{
 	height:572px;
-	width:300px;
+	width:20%;
 	float:left;
 }
 #newtask{
 	height:572px;
-	width:997px;
+	width:60%;
 	float:left;
 }
 #rightspace{
 	height:572px;
-	width:50px;
+	width:20%;
 	float:right;
 }
 
@@ -138,6 +138,20 @@ body {
 	width:100%;
 }
 
+#formulir {
+	width:95%;
+	border: solid 1px #e2e2e2;
+	margin-left: 20px;
+	margin-bottom:10px;
+	box-shadow: 3px 3px 3px #535353;
+	background-color:white;
+}
+
+#newtask_space{
+	height:40%;
+	width:100%;
+}
+
 .newtask_label {
 	margin-top:5px;
 	margin-left: 10px;
@@ -149,7 +163,7 @@ body {
 .newtask_field {
 	margin-top:5px;
 	margin-left: 10px;
-	width:30%;
+	width:40%;
 	float:left;
 }
 
@@ -159,7 +173,10 @@ body {
 	float:left;
 }
 
-#inputtext {
+.inputtext {
 	height:25px;
 	font-size:16px;
+}
+body {
+	background-color:gray;
 }

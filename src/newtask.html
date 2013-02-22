@@ -2,6 +2,7 @@
 	<head>
 		<title>Insert New Task</title>
 		<link href="styles/newtask.css" rel="stylesheet" type="text/css" />
+		<link href="styles/header.css" rel="stylesheet" type="text/css" />
 		<script>
 			var fullPath = "empty";
 
@@ -71,38 +72,41 @@
 
 	<body onload="makeTgl();makeThn();">
 		<div id="container">
-			<div id="header" align="left">
-        	<div class=logo id="logo" align="left">
+			<div id="header">
+        	<div class=logo id="logo">
 				
 			</div>
 			<div id="space">
 			</div>
-			<div id="search" align="left">
+			<div id="search">
 				<input type="text" name="search" id="searchbox">
 				<button type="submit" id="searchbutton"></button>
 			</div>
 			<div class="menu" id="logout">
-				<a href="home.html"><font color=white>Logout</font></a>
+				<a href="home.html">Logout</a>
 			</div>
 			<div class="menu" id="profile">
-				<a href="profile.html"><font color=white>Profile</font></a>
+				<a href="profile.html">Profile</a>
 			</div>
 			<div class="menu" id="home">
-				<a href="dashboard.html"><font color=white>Home</font></a>
+				<a href="dashboard.html">Home</a>
 			</div>
         </div>
 			<div id="leftspace">
 				
 			</div>
 			<div id="newtask">
+				
 				<form name="newtask_form">
+					<div id="newtask_space">
+					</div>
 					<div id="formulir">
 						<div class="form_field">
 							<div class="newtask_label">
 								Nama Tugas
 							</div>
 							<div class="newtask_field">
-								<input name="taskname" type="text" size="35" maxlength="25" onkeyup="checkTaskName(document.newtask_form.taskname.value)" id="inputtext">
+								<input name="taskname" type="text" size="35" maxlength="25" onkeyup="checkTaskName(document.newtask_form.taskname.value)" class="inputtext">
 							</div>
 							<div class="newtask_warning" id="v_tname">
 							</div>
@@ -149,7 +153,7 @@
 								Assignee
 							</div>
 							<div class="newtask_field">
-								<input type="text" name="assignee" size="35" maxlength="256" onkeyup="checkAssignee(document.newtask_form.assignee.value)" id="inputtext">
+								<input type="text" name="assignee" size="35" maxlength="256" onkeyup="checkAssignee(document.newtask_form.assignee.value)" class="inputtext">
 							</div>
 							<div class="newtask_warning" id="v_assignee">
 							</div>
@@ -159,7 +163,7 @@
 								Tag
 							</div>
 							<div class="newtask_field">
-								<input type="text" name="tag" size="35" maxlength="256"  id="inputtext">
+								<input type="text" name="tag" size="35" maxlength="256"  class="inputtext">
 							</div>
 							<div class="newtask_warning" id="v_tag">
 							</div>
