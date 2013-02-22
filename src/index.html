@@ -14,7 +14,7 @@
                     <div class="logo"><a href="#home"><img alt="Home" src="images/logo.png" /></a></div>
                     <div id="slogan">Share your to do list with everyone!</div>
                     <div id="loginwrapper">
-                        <form name="login">
+                        <form name="login"  onsubmit="return validateLogin();" method="post" action="dashboard.html">
                             <div id=login_username>
                                 Username <br>
                                 <input type="text" class="textbox" name="uname" value="" />
