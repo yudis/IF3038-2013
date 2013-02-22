@@ -249,6 +249,10 @@ margin-left:5px;
 	width:50%;
 }
 
+.form_kanan input{
+	width:98%;
+}
+
 #fs{
 	margin-top:10px;
 	float:left;
@@ -257,4 +261,11 @@ margin-left:5px;
 
 #button_buat_kategori{
 	margin-top:10px;
+}
+
+.gambar_kecil{
+	float:left;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	border: solid #606060 1px;
 }
