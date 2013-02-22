@@ -19,10 +19,3 @@ body {
 	float:right;
 	width:500px;
 }
-.tumpuk1 {
-	z-index:100;
-}
-.tumpuk2 {
-	float:left;
-	z-index:0;
-}

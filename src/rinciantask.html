@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8"/>
 	<script src="js/global.js"></script>
-	<script src="js/edit_task.js"></script>
+	<script src="js/new_task.js"></script>
 	<link rel="stylesheet" href="css/form.css"/>
 	<link rel="stylesheet" href="css/style.css"/>
 	<link rel="stylesheet" href="css/default.css"/>
@@ -14,91 +14,33 @@
 	<div id="header">
 		<h1>Tugas 1</h1>
 	</div>
-	<div id="rinciantask">
-		<div id="rinciantaskform">
-			<fieldset>
-				<legend>Rincian Task</legend>
-					<div class="field">
-						<div class="fieldname">
-							Kategori
-						</div>
-						<div class="fieldholder">
-							Pemrograman Internet
-						</div>
-					</div>
-					<div class="field">
-						<div class="fieldname">
-							Attachment
-						</div>
-						<div class="fieldholder">
-							<video width="320" height="240" controls>
-						  		<source src="tes.mp4" type="video/mp4">
-							Your browser does not support the video tag.
-							</video>
-							<img src="Koala.jpg" width="400" height="400"></img>
-						</div>
-					</div>
-					<div class="field">
-						<div class="fieldname">
-							Deadline
-						</div>
-						<div class="fieldholder">
-							<div id="rinciantaskform-deadline" class="tumpuk1">
-								2013-02-22
-							</div>
-							<input id="rinciantaskform-input-deadline" type="date" class="fieldinput tumpuk2" placeholder="YYYY-MM-DD" name="tanggalDeadline" value="2013-02-22">
-						</div>
-					</div>
-					<div class="field">
-						<div class="fieldname">
-							Asignee
-						</div>
-						<div class="fieldholder">
-							<ul type="circle">
-								<li>Abdurrosyid Handoyo</li>
-								<li>Sonny Theo Tumbur</li>
-								<li>Fabrian Oktavino H</li>
-								<li>
-									<input id="rinciantaskform-input-asigneetext" type="text" onkeyup="activate_asignee_add()" name="addAsignee">
-									<input id="rinciantaskform-input-asigneeadd" type="submit" value="add" disabled>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<fieldset>
-						<legend>
-							Komentar
-						</legend>
-						<div class="field">
-							<div class="fieldname">
-								<ul type="circle" id="rinciantaskform-komentar">
-								</ul>
-							</div>
-							<div class="fieldholder">
-								<input id="rinciantaskform-komentartext" type="text" onkeyup="activate_komentar_send()" name="addKomentar">
-								<input id="rinciantaskform-komentarsend" type="submit" onkeyup="komentar_send()" value="send" disabled>
-							</div>
-						</div>
-					</fieldset>
-					<div class="field">
-						<div class="fieldname">
-							Tag
-						</div>
-						<div class="fieldholder">
-							<div id="rinciantaskform-tag" class="tumpuk1">
-								#tubes, #progin, #html, #css, #javascript
-							</div>
-							<input class="tumpuk2" id="rinciantaskform-input-tag" type="text" name="editTag">
-						</div>
-					</div>
-					<div class="field">
-						<div class="fieldname">
-							<input id="rinciantaskform-edit" type="submit" value="Edit" onclick="edit_field()">
-							<input id="rinciantaskform-OK" type="submit" value="OK" onclick="OK_field()">
-						</div>
-					</div>
-			</fieldset>
-		</div>
+	<form id="rinciantask">
+		<p><label>Attachment   <input id="rinciantask-attachment" type="file"></label></p>
+		<p>Deadline : 22 Februari 2013<br>
+		<label>Ubah Deadline : <input type="text" name="tanggalDeadline" size="2" maxlength="2"> <select name="bulanDeadline">
+		<option value="" selected="selected">Bulan</option>
+		<option value="1">Januari</option>
+		<option value="2">Februari</option>
+		<option value="3">Maret</option>
+		<option value="4">April</option>
+		<option value="5">Mei</option>
+		<option value="6">Juni</option>
+		<option value="7">Juli</option>
+		<option value="8">Agustus</option>
+		<option value="9">September</option>
+		<option value="10">Oktober</option>
+		<option value="11">November</option>
+		<option value="12">Desember</option></select> <input type="text" name="tahunDeadline" size="4" maxlength="4"></label></p>
+		<p>Asignee<br>
+		<ul type="circle">
+		<li>Abdurrosyid Handoyo
+		<li>Sonny Theo Tumbur
+		<li>Fabrian Oktavino H
+		<li><input type="text" name="addAsignee">     <input type="submit" value="add" disabled></ul></p>
+		<p>Komentar : Tugas ini merupakan tugas 1 progin<br>
+		<input type="text" name="addKomentar"><input type="submit" value="send" disabled></p>
+		<p>Tag : #progin, #html, #css, #javascript     <input type="submit" value="edit" disabled></p>
+	</form>
 		<footer>
 		<p>Copyright &copy; 2013 RSA. All rights reserved</p>
 		</footer>
