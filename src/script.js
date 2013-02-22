@@ -1,25 +1,3 @@
-var month = document.forms["input"]["bulan"].value;
-var day = document.forms["input"]["tanggal"].value;
-var year = document.forms["input"]["tahun"].value;
-
-function validDate( month, day, year) 
-{  
-    if ((year % 400 == 0) || (year % 4 == 0) && !(year % 100 == 0)) 
-        leap = true; 
-    else 
-        leap = false; 
-    if ((month < 1) || (month > 12) || (day < 1) || (day > 31)) 
-        return false;      
-    else if (((month == 4) || (month == 6) || (month == 9) || (month == 11)) && (day == 31)) 
-        return false;      
-    else if (month == 2 && leap && day > 29)      
-        return false;          
-    else if (month == 2 &&  !leap && day > 28)    
-        return false;          
-    else 
-        return true;                              
-} 
-
 function validating(month, day, year){
 	var name = document.forms["input"]["nama"].value;
 	var tag = document.forms["input"]["tag"].value;
@@ -44,10 +22,6 @@ function validating(month, day, year){
 	}
 	else if (!file.match("^.+(\.(?i)(jpg|jpeg|png|gif|bmp|wmv|avi|flv|doc|docx))$")){
 		alert("File tidak valid");
-		return false;
-	}
-	else if (!validDate(month, day, year)){
-		alert("Format tanggal salah");
 		return false;
 	}
 	else if (asignee == ""){
