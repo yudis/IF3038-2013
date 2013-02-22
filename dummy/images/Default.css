@@ -134,10 +134,13 @@ font-size:18px;
 
 
 #kiri{
-width:400px;
+width:450px;
 float:left;
 padding:10 px 10 px 10 px 10 px;
 position:fixed;
+}
+#kiridalem{
+text-align:center;
 }
 
 #kanan{
@@ -335,7 +338,8 @@ height:15px;
 
 .nav
 {
-
+width:450px;
+margin:0 auto;
 }
 
 .nav ul
@@ -354,7 +358,7 @@ height:15px;
 {
 	text-shadow: 0 -1px 0 rgba(0,0,0,.8);
     color: #eee;
-    margin: 0 5px;
+    margin: 0 auto;
     padding: 3px;
     text-decoration: none;
 	border: 1px solid #7f9db9;
@@ -425,7 +429,7 @@ height:15px;
         #search
         {
             height: 23px;
-            width: 200px;
+            width: 300px;
             border: 1px solid #a4c3ca;
             font: normal 13px 'trebuchet MS', arial, helvetica;
             background: #f1f1f1;
@@ -446,7 +450,7 @@ height:15px;
 	border-width: 1px;
 	border-style: solid;
 	border-color: #c4d9df #a4c3ca #83afb7;
-	width: 280px;
+	width: 400px;
 	height: 25px;
 	overflow: hidden;
 	background-color: #eaf8fc;
