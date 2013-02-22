@@ -86,21 +86,23 @@
 				
 				
 			
-				<div id="catlist" onmouseover="mOver(categ1)" onmouseout="mOut(tasklist)">
+				<div id="catlist" onmouseover="mOver(categ1)" onmouseout="mOut(categ1)">
 					<b>Miscellaneous</b>
 					
 					
 				</div>
 				
-				<div id="catlist" onmouseover="mOver(categ2)" onmouseout="mOut(tasklist)">
+				<div id="catlist" onmouseover="mOver(categ2)" onmouseout="mOut(categ2)">
 					<b>Work</b>
 					
 				</div>
 				
-				<div id="catlist" onmouseover="mOver(categ3)" onmouseout="mOut(tasklist)">
+				<div id="catlist" onmouseover="mOver(categ3)" onmouseout="mOut(categ3)">
 					<b>Projects</b>
 					
 				</div>
+				
+				
 				
 				<div class="nav-previous"><a href="#openModal">+ Add category</a>
 					<div id="openModal" class="modalDialog">
@@ -108,10 +110,10 @@
 							<a href="#close" title="Close" class="close">X</a>
 							<form action="" method="GET">
 							<strong>Add New Category</strong> <br />
-							<input name="newcateg" size="30" type="text" >
+							<input name="newcateg" size="30" type="text">
 							<br/><br/>
 				
-							<input type="submit" name="btnsubmit" value="Add" onClick="addcateg(this.form)">
+							<input type="submit" name="btnsubmit" value="Add" onClick="addcateg(newcateg)">
 							</form>
 						</div>
 					</div>
