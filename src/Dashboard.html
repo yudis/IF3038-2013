@@ -39,7 +39,7 @@
 		<li class="buttonnormal" id="category3" name="category" onclick="onClickButton('category3')">PKM-T</li>
 	</ul>
 	<div id="tasklist">
-		<input type="Submit" id="addtask" value="Tambah Tugas" action="#x">
+		<input type="button" id="addtask" value="Tambah Tugas" onclick="location.href='#tambahtugas'">
 		<ul id="tasks">
 			<li>
 				<a href="#taskdetail1">
@@ -84,7 +84,7 @@
 	<p> Copyright &copy; 2013 Tugas Besar IF3038 Pemrograman Internet. Design By <a href="http://www.facebook.com/wchaq">Whilda Chaq</a> & <a href="http://www.facebook.com/5quall">Devin Hoesen</a></p>
 </div>
 
-<a href="#x" class="overlay" id="taskdetail1"></a>
+<a class="overlay" id="taskdetail1"></a>
 <div class="popup">
 	<h1>Tugas Besar Pemrograman Internet</h1>
 	<hr>
@@ -98,6 +98,8 @@
 				<li>Whilda Chaq</li>
 				<li>Devin Hoesen</li>
 			</ul>
+			Tag : Tugas, Besar, Progin, IF3038
+			<br /><br />
 			Komentar: <br />
 			<h4 class="comment" id="comment1">Waktu pengumpulannya berbarengan dengan AI</h4><br />
 			Ganti Komentar: <br />
@@ -108,7 +110,7 @@
 	</form>
 </div>
 
-<a href="#x" class="overlay" id="taskdetail2"></a>
+<a class="overlay" id="taskdetail2"></a>
 <div class="popup">
 	<h1>Tugas Besar Inteligensia Buatan</h1>
 	<hr>
@@ -125,6 +127,8 @@
 				<li>Aji Nugraha Santosa Kasmaji</li>
 				<li>Abraham Krisnanda Santoso</li>
 			</ul>
+			Tag : Tugas, Besar, IB, AI, IF3052
+			<br /><br />
 			Komentar: <br />
 			<h4 class="comment" id="comment2">Waktu pengumpulannya berbarengan dengan Progin</h4><br />
 			Ganti Komentar: <br />
@@ -135,7 +139,7 @@
 	</form>
 </div>
 
-<a href="#x" class="overlay" id="taskdetail3"></a>
+<a class="overlay" id="taskdetail3"></a>
 <div class="popup">
 	<h1>Penyerahan Proposal</h1>
 	<hr>
@@ -146,6 +150,8 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: foo.jpeg <a href=#taskdetail3> Download </a><br />
 			Pengerja (<i>Assignee</i>) &nbsp;&nbsp;&nbsp;&nbsp;: <br />
 			<ul id="assignee3"></ul>
+			Tag : PKM
+			<br /><br />
 			Komentar: <br />
 			<h4 class="comment" id="comment3">Ngeribetin</h4><br />
 			Ganti Komentar: <br />
@@ -156,7 +162,7 @@
 	</form>
 </div>
 
-<a href="#x" class="overlay" id="taskdetail4"></a>
+<a class="overlay" id="taskdetail4"></a>
 <div class="popup">
 	<h1>Periksa Kuis</h1>
 	<hr>
@@ -169,6 +175,8 @@
 			<ul id="assignee">
 				<li>Devin Hoesen</li>
 			</ul>
+			Tag : TBO, Kuis
+			<br /><br />
 			Komentar: <br />
 			<h4 class="comment" id="comment4">Periksa Kuis 1 TBO</h4><br />
 			Ganti Komentar: <br />
@@ -179,7 +187,7 @@
 	</form>
 </div>
 
-<a href="#x" class="overlay" id="taskdetail5"></a>
+<a class="overlay" id="taskdetail5"></a>
 <div class="popup">
 	<h1>Memasukkan Nilai</h1>
 	<hr>
@@ -192,6 +200,8 @@
 			<ul id="assignee">
 				<li>Devin Hoesen</li>
 			</ul>
+			Tag : Probstat, Nilai
+			<br /><br />
 			Komentar: <br />
 			<h4 class="comment" id="comment5">Memasukkan nilai Probstat</h4><br />
 			Ganti Komentar: <br />
@@ -202,19 +212,50 @@
 	</form>
 </div>
 
-<a href="#x" class="overlay" id="addcategory"></a>
+<a href="#" class="overlay" id="addcategory"></a>
 <div class="popup">
 	<h1>Tambah Kategori</h1>
 	<hr>
 	<form name="foRegister" action="Dashboard.html">
 		<div class="attribute">
-			Nama Kategori : <input type="text" id="txCatName"><br />
+			Nama Kategori : <input type="text" id="txCatName"><br /><br />
 			Pengerja (<i>Assignee</i>) : <br />
 			<ul id="inputlist">
 				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
 			</ul>
-			<input type="submit" class="sbComment" value="Tambah" onclick="submitCategory();">
-			<input type="submit" class="sbComment" value="Kembali">
+			<input type="button" class="sbComment" value="Tambah" onclick="submitCategory();">
+			<input type="button" class="sbComment" value="Kembali" onclick="location.href='#'">
+		</div>
+	</form>
+</div>
+
+<a href="#" class="overlay" id="tambahtugas"></a>
+<div class="popup">
+	<h1>Tambah Kategori</h1>
+	<hr>
+	<form name="foRegister" action="Dashboard.html">
+		<div class="attribute">
+			Nama Kategori : <input type="text" id="txCatName"><br /><br />
+			Pengerja (<i>Assignee</i>) : <br />
+			<ul id="inputlist">
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+				<li><input type="text"></li>
+			</ul>
+			<input type="button" class="sbComment" value="Tambah" onclick="submitCategory();">
+			<input type="button" class="sbComment" value="Kembali" onclick="location.href='#'">
 		</div>
 	</form>
 </div>

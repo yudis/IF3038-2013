@@ -50,3 +50,11 @@ function onClickButton(id) {
 			break;
 	}
 }
+
+function submitCategory() {
+	if(document.getElementById("txCatName").value != "") {
+		document.getElementById("listtugas").innerHTML = document.getElementById("listtugas").innerHTML + "<li class='buttonnormal' name='category'>" + document.getElementById("txCatName").value + "</li>";
+		window.location.href="Dashboard.html#";
+        self.close();
+	}
+}

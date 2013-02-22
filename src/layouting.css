@@ -149,6 +149,11 @@ h2{
 	text-align:center;
 }
 
+#inputlist {
+	list-style: none;
+	padding: 0 0 0 0;
+}
+
 .attribute{
 	margin-left: 30px;
 	color:#007;
