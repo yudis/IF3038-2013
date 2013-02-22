@@ -27,4 +27,7 @@ Bonus yang BELUM dikerjakan :
 - Perbedaan tampilan tersedia untuk 3jenis tampilan layar?
 
 
-
+VALIDATION PASSED : 
+	- index.html
+	- addtask.html
+	- 
