@@ -371,7 +371,7 @@ input[type="search"], isindex {
 
 #content2
 {
-	height: 520px;
+	height: 500px;
 	background-color: white;
 	margin: 10px auto;
 	padding: 10px;
@@ -400,9 +400,29 @@ input[type="search"], isindex {
 
 #texttag
 {
-	text-align: center;
-	font-size: 40px;
-	font-family:calibri;
+	text-align: left;
+	font-family:Arial,san-serif;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.8);
+}
+
+#text1
+{
+	font-weight: bold;
+	color: rgb(21, 179, 235);
+	font-size: 32px;
+}
+
+#text2
+{
+	font-size: 24px;
+	color: rgb(70, 76, 70);
+	font-weight: 400;
+}
+
+#slide
+{
+	width: 500px;
+	height: 300px;
 }
 
 #login
