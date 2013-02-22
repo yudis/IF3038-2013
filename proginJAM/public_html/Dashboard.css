@@ -12,7 +12,6 @@ body, html {
 #page {
     width: 800px;
     margin: 0 auto;
-    background: #99c;
 }
 
 /* ================= S I T E   L O G O   &   H E A D E R ================= */
@@ -20,18 +19,11 @@ body, html {
     clear: both;
     padding: 5px 10px;
     background: #ddd;
-    float: top;
-}
-
-.site_logo {
-    width: 256px;
-    float: left;
 }
 
 .menubar {
     display: block;
     width: 800px;
-    float: right;
 }
 
 .menubar ul {
@@ -119,6 +111,15 @@ body, html {
     background-size: 15px 15px;
 }
 
+#logoimage {
+    display: block;
+    width: 100px;
+}
+
+#logoimage #logo{
+	width:60%;
+	padding:-5px;
+}
 /* ================= S I D E B A R ================= */
 .sidebar {
     color: #c3c3c3;
@@ -161,6 +162,7 @@ body, html {
 }
 
 /* ================= N E W   T A S K ================= */
+<<<<<<< HEAD
 .new_task {
     display: none;
 }
@@ -185,6 +187,30 @@ body, html {
 }
 
 .allform input, .task_detail_form input, .task_detail_form textarea {
+=======
+.overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    bottom: 0;
+    cursor: default;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    visibility: hidden;
+    z-index: 1;
+
+    -webkit-transition: opacity .5s;
+    -moz-transition: opacity .5s;
+    -ms-transition: opacity .5s;
+    -o-transition: opacity .5s;
+    transition: opacity .5s;
+}
+
+
+/* ================= T A S K   F O R M   S T Y L I N G ================= */
+.new_task_form input, .task_detail_form input, .task_detail_form textarea {
+>>>>>>> f3de6e1c9aa162c283bb4cf1df07b1e897a8d8ae
     border:1px solid #aaa;
     box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
     border-radius: 2px;
@@ -305,6 +331,7 @@ input:required, textarea:required {
     alignment-adjust: central;
 }
 
+<<<<<<< HEAD
 /* ================= A L L   P O P U P S ================= */
 .popup {
     position: fixed;
@@ -362,3 +389,23 @@ input:required, textarea:required {
 }
 
 .close_popup:hover { background: #00d9ff; }
+=======
+/*--PROFILE--*/
+#profilepicture{
+	float:left;
+}
+.biodata{
+	float:left;
+	margin-left:20px;
+	background-color:#BFC1C9;
+	padding:10px;
+}
+
+.hide{
+	display:none;
+}
+
+.show{
+	display:box;
+}
+>>>>>>> f3de6e1c9aa162c283bb4cf1df07b1e897a8d8ae
