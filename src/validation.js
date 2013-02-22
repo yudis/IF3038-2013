@@ -74,3 +74,40 @@ function playPause()
 	else 
 		myVideo.pause(); 
 } 
+
+function checkUsername(){
+	if(document.getElementById('username').value == document.getElementById('password').value){
+		document.getElementById('register').setAttribute('disabled', 'true');
+	}
+	else{
+		document.getElementById('register').removeAttribute('disabled');
+	}
+}
+
+function checkPassword(){
+	if(document.getElementById('password').value == document.getElementById('username').value ||
+		document.getElementById('password').value == document.getElementById('email').value){
+		document.getElementById('register').setAttribute('disabled', 'true');
+	}
+	else{
+		document.getElementById('register').removeAttribute('disabled');
+	}
+}
+
+function checkConfirmPassword(){
+	if(document.getElementById('password').value != document.getElementById('confirmpassword').value){
+		document.getElementById('register').setAttribute('disabled', 'true');
+	}
+	else{
+		document.getElementById('register').removeAttribute('disabled');
+	}
+}
+
+function checkDOB(){
+	if(!document.getElementById('dob').getAttribute('aria-invalid')){
+		document.getElementById('register').setAttribute('disabled', 'true');
+	}
+	else{
+		document.getElementById('register').removeAttribute('disabled');
+	}
+}
