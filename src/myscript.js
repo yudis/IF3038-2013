@@ -17,26 +17,7 @@ function addtask(task, deadline, assignee, comment, tag){
 }
 
 function addcateg(newcateg){
-	var ni = document.getElementById("catlist");
-	//var numi = document.getElementById('theValue');
-	//var num = (document.getElementById('theValue').value -1)+2;
-	//numi.value = num;
-	var newdiv = document.createElement("catlist");
-	var divIdName = newcateg;
-	newdiv.setAttribute('id',divIdName);
-	newdiv.innerHTML = '<b>'+divIdName+'</b>';
-	ni.appendChild(newdiv);
-	//this.categ = newcateg;
-}
-
-function removeElement(divNum) {
-
-  var d = document.getElementById('myDiv');
-
-  var olddiv = document.getElementById(divNum);
-
-  d.removeChild(olddiv);
-
+	this.categ = newcateg;
 }
 
 function createcateg(){
@@ -51,43 +32,25 @@ function createcateg(){
 }
 
 
-function gettask(categ){
-	//createcateg();
-	return categ.assignee;
-}
-
-
 
 function mOver(categ)
 {
 	
 	createcateg();
-	 
-	//var ni = document.getElementById("tasklist");
-	//var newdiv = document.createElement("tasklist");
-	
-	
 	
 	for (var i in categ.task)
 	{
-		//newdiv.setAttribute('id',myfunc(categ, i));
-		//newdiv.innerHTML = '<b>'+myfunc(categ,i)+'</b>';
-		//ni.appendChild(newdiv);
-		document.getElementById("tasklist").innerHTML='<b><a href="task.html">'+myfunc(categ,i)+'</b></a>';
+		
+		document.getElementById("tasklist").innerHTML=myfunc(categ,i);
+			
 	}
-	
-	//document.getElementById("tasklist").onclick	= "window.open('task.html')";
 	
 }
 
-function mOut(categ)
+function mOut(obj)
 {
 	//document.getElementById("tasklist").innerHTML=mclk(tasklist);
-	//var d = document.getElementById("tasklist");
-
-  //var olddiv = document.getElementById(categ);
-
-  //d.removeChild(olddiv);
+	
 	
 }
 
