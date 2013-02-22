@@ -6,10 +6,11 @@
 	</head>
 	<body>
 		<div id="navigation">
-			<a href="#">HOME</a>
+			<img src="images/logo.gif">
+			<a>HOME</a>
 			<a href="#features">FEATURES</a>
-			<a href="#register">REGISTER</a>
-			<a href="#login">LOGIN</a>
+			<a href="#registerform">REGISTER</a>
+			<a href="#loginform">LOGIN</a>
 		</div>
 		<div class="clearall container topcontainer" id="home">
 			<div class="videobox">
@@ -20,7 +21,7 @@
 			<div class="besidevideobox">
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat</p>
 				<div class="centered">
-					<a href="" class="cta">REGISTER NOW!</a>
+					<a href="#registerform" class="cta">REGISTER NOW!</a>
 				</div>
 			</div>
 		</div>
@@ -103,9 +104,12 @@
 					title="Your date of birth"
 					type="date" spellcheck="false" size="20" />
 				</p>
+				
+				<output id="list"></output>
+				<input type="file" id="files" name="files[]" onchange="CheckFiles()" />				
 			</fieldset>
 			<fieldset>
-			<button id="register" type="submit">Register</button>
+			<button id="register" type="submit" onclick="alert('Successfully registered!')">Register</button>
 			</fieldset>
 			</form>
 		</div>
@@ -131,7 +135,7 @@
 				</p>				
 			</fieldset>
 			<fieldset>
-			<button id="login" type="submit">Login</button>
+			<button id="login" type="submit" onclick="checkLogin(); return false;">Login</button>
 			</fieldset>
 			</form>
 		</div>

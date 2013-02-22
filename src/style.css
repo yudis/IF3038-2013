@@ -77,6 +77,15 @@ h3 img{
     vertical-align:middle;
 }
 
+#plustask{
+	display:none;
+}
+
+h2 img{
+	width:32px;
+	height:32px;
+}
+
 .box p{
 	line-height:160%;
 	margin:0 40px 0 0;
@@ -168,7 +177,7 @@ a.cta:hover{
 	border:1px solid #0f2557;
 }
 
-#navigation {
+#navigation{
 	font-weight:bold;
 	position:fixed;
 	top:0;
@@ -177,16 +186,11 @@ a.cta:hover{
 	height:35px;
 	text-align:center;
 	padding-top:15px;
-	/* shadow */
-	-webkit-box-shadow:0px 0px 8px 0px #000000;
-	-moz-box-shadow:0px 0px 8px 0px #000000;
-	box-shadow:0px 0px 8px 0px #000000;
-	/* transparent */
 	background-color:rgba(1, 1, 1, 0.8);
 	color:rgba(1, 1, 1, 0.8);
 }
 
-#navigation a {
+#navigation a{
 	font-size:16px;
 	padding-left:25px;
 	padding-right:25px;
@@ -194,6 +198,59 @@ a.cta:hover{
 	text-decoration:none;
 }
 
-#navigation a:hover {
+#navigation a:hover{
 	color:grey;
 } 
+
+#search{
+	display:none;
+	font-weight:bold;
+	position:fixed;
+	top:50px;
+	width:100%;
+	color:#ffffff;
+	height:35px;
+	text-align:center;
+	padding-top:15px;
+	background-color:rgba(1, 1, 1, 0.8);
+	color:rgba(1, 1, 1, 0.8);
+}
+
+.centered{
+	align:center;
+}
+
+.row{
+	display:table-row;
+	width:960px;
+	margin:0 auto;
+}
+
+.cell{
+	display:table-cell;
+	vertical-align:top;
+	padding-left:10px;
+	color:#666;
+}
+
+.th{
+	font-weight:bold;
+	color:#ffffff;
+	text-shadow:-1px -1px 2px #618926;
+	background:-moz-linear-gradient(#98ba40, #a6c250 35%, #618926);
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0, #98ba40),color-stop(.35, #a6c250),color-stop(1, #618926));
+}
+
+.selected{
+	background-color:#94DBFF;
+}
+
+.even{
+	background-color:#CCFF99;	
+}
+
+.thumb{
+    height:75px;
+    border:1px solid #000;
+    margin:10px 5px 0 0;
+}

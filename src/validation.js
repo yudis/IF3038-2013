@@ -111,3 +111,131 @@ function checkDOB(){
 		document.getElementById('register').removeAttribute('disabled');
 	}
 }
+
+function checkLogin(){
+	if(document.getElementById('usernamelogin').value == 'proginkeren' &&
+		document.getElementById('passwordlogin').value == '12345678'){
+		window.location="dashboard.html";
+	}
+	else{
+		alert('Username/password salah!');
+	}
+}
+
+function toggleSearch(){
+	if(getStyle(document.getElementById('search'), 'display') == 'none'){
+		document.getElementById('search').style.display = 'inline';
+	}
+	else{
+		document.getElementById('search').style.display = 'none';
+	}
+}
+
+function getStyle(oElm, strCssRule){
+	var strValue = "";
+	if(document.defaultView && document.defaultView.getComputedStyle){
+		strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
+	}
+	else if(oElm.currentStyle){
+		strCssRule = strCssRule.replace(/\-(\w)/g, function (strMatch, p1){
+			return p1.toUpperCase();
+		});
+		strValue = oElm.currentStyle[strCssRule];
+	}
+	return strValue;
+}
+
+function redirDetails(){
+	window.location="taskdetails.html";
+}
+
+function toggleSelectProgin(){
+	if(getStyle(document.getElementById('proginrow'), 'background-color') != '#94DBFF'){
+		var a = document.getElementById('proginrow').getAttribute('class').split(' ');
+		a.splice(1,1,'selected');
+		var s = a.join(' ');		
+		document.getElementById('proginrow').setAttribute('class', s);
+
+		var a = document.getElementById('kriptorow').getAttribute('class').split(' ');
+		a.splice(1,1,'even');
+		var s = a.join(' ');
+		document.getElementById('kriptorow').setAttribute('class', s);
+		
+		document.getElementById('plustask').style.display = 'inline';
+		document.getElementById('progin').style.display = 'table-row';
+		document.getElementById('kripto').style.display = 'none';
+	}
+	else{
+		var a = document.getElementById('proginrow').getAttribute('class').split(' ');
+		a.pop();
+		var s = a.join(' ');
+		document.getElementById('proginrow').setAttribute('class', s);
+
+		document.getElementById('plustask').style.display = 'none';
+		document.getElementById('progin').style.display = 'table-row';
+		document.getElementById('kripto').style.display = 'table-row';
+	}
+}
+
+function toggleSelectKripto(){
+	if(getStyle(document.getElementById('kriptorow'), 'background-color') != '#94DBFF'){
+		var a = document.getElementById('kriptorow').getAttribute('class').split(' ');
+		a.splice(1,1,'selected');
+		var s = a.join(' ');		
+		document.getElementById('kriptorow').setAttribute('class', s);
+		
+		var a = document.getElementById('proginrow').getAttribute('class').split(' ');
+		a.pop();
+		var s = a.join(' ');
+		document.getElementById('proginrow').setAttribute('class', s);
+		
+		document.getElementById('plustask').style.display = 'inline';
+		document.getElementById('kripto').style.display = 'table-row';
+		document.getElementById('progin').style.display = 'none';
+	}
+	else{
+		var a = document.getElementById('kriptorow').getAttribute('class').split(' ');
+		a.splice(1,1,'even');
+		var s = a.join(' ');
+		document.getElementById('kriptorow').setAttribute('class', s);
+		
+		document.getElementById('plustask').style.display = 'none';
+		document.getElementById('progin').style.display = 'table-row';
+		document.getElementById('kripto').style.display = 'table-row';
+	}
+}
+
+function redirAdd(){
+	window.location="addtask.html";
+}
+
+function handleFileSelect(evt) {
+	var files = evt.target.files;
+
+	for (var i = 0, f; f = files[i]; i++) {
+
+	  if (!f.type.match('image.*')) {
+		continue;
+	  }
+
+	  var reader = new FileReader();
+
+	  reader.onload = (function(theFile) {
+		return function(e) {
+		  var span = document.createElement('span');
+		  span.innerHTML = ['<img class="thumb" src="', e.target.result,
+							'" title="', escape(theFile.name), '"/>'].join('');
+		  document.getElementById('list').insertBefore(span, null);
+		};
+	  })(f);
+
+	  // Read in the image file as a data URL.
+	  reader.readAsDataURL(f);
+	}
+}
+
+document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+function popupcat(){
+	window.open( "addcat.html" )
+}
