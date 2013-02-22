@@ -3,16 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Monkey.Inc</title>
-	<link rel="stylesheet" type="text/css" href="task.css">
-	<script type="text/javascript" src="index.js"></script>
-	<script type="text/javascript" src="datetimepicker.js"> </script>
+	<link rel="stylesheet" type="text/css" href="src/task.css">
+	<script type="text/javascript" src="src/index.js"></script>
+	<script type="text/javascript" src="src/datetimepicker.js"> </script>
 </head>
 
 <body>
 
 	<div class="header">
 		<div class="hbackground" >
-			<a href="Index.html"><img class="hlogo" src="../image/logo.png" alt="image01" /></a>
+			<a href="Index.html"><img class="hlogo" src="image/logo.png" alt="image01" /></a>
 			<div class="htext"> Monkey.Inc </div>
 			<div class="htagline">"See no Task, Speak no Task, Hear no Task"</div>
 		</div>
@@ -52,16 +52,16 @@
 			<div class="pss_slides">
 				<div class="pss_background"></div>
 				<ul> <!-- slides -->
-					<li><img src="../image/ssimage1.png" alt="image01" />
+					<li><img src="image/ssimage1.png" alt="image01" />
 						<div>Problem??</div>
 					</li>
-					<li><img src="../image/ssimage2.png" alt="image02" />
+					<li><img src="image/ssimage2.png" alt="image02" />
 						<div>Create your task</div>
 					</li>
-					<li><img src="../image/ssimage3.png" alt="image03" />
+					<li><img src="image/ssimage3.png" alt="image03" />
 						<div>Edit your profile</div>
 					</li>
-					<li><img src="../image/ssimage4.png" alt="image04" />
+					<li><img src="image/ssimage4.png" alt="image04" />
 						<div>Thanks to</div>
 					</li>
 				</ul>
@@ -81,29 +81,29 @@
 		<div>
 			<label for="user">Username</label>
 			<input type="text" id="user" name=Ruser value="" onkeyup="checkUser()"/>
-			<img src="../image/false.png" alt="False01" id="userpic" />
+			<img src="image/false.png" alt="False01" id="userpic" />
 		</div>
 		<div>
 			<label for="Rpass">Password</label>
 			<input type="password" id="Rpass" name=RPass value="" onkeyup="checkPass()"/>
-			<img src="../image/false.png" alt="False02" id="passpic"/>
+			<img src="image/false.png" alt="False02" id="passpic"/>
 		</div>
 		<div>
 			<label for="confpass">Konfirmasi Password</label>
 			<input type="password" id="confpass" name=RConfpass value="" onkeyup="checkConfPass()" />
-			<img src="../image/false.png" alt="False03" id="confpasspic"/>
+			<img src="image/false.png" alt="False03" id="confpasspic"/>
 		</div>
 		<div>
 			<label for="nama">Nama Lengkap</label>
 			<input type="text" id="nama" name=RNlengkap value="" onkeyup="checkNLengkap()" />
-			<img src="../image/false.png" alt="False04" id="nlengkappic"/>
+			<img src="image/false.png" alt="False04" id="nlengkappic"/>
 		</div>
 		<div>
 			<label >Tanggal Lahir</label>
 			
 			<input id="Rtanggal" name=Rtanggal type="text" onkeyup="checkTanggal()" />
-			<a href="javascript:NewCal('Rtanggal','ddmmyyyy')" ><img src="../image/cal.gif" width="16" height="16" alt="Pick a date"></a>
-			<img src="../image/false.png" alt="False04" id="ntanggalpic"/>
+			<a href="javascript:NewCal('Rtanggal','ddmmyyyy')" ><img src="image/cal.gif" width="16" height="16" alt="Pick a date"></a>
+			<img src="image/false.png" alt="False04" id="ntanggalpic"/>
 			
 			<!--
 			<select name="day">
@@ -218,12 +218,12 @@
 		<div>
 			<label for="email">Email</label>
 			<input type="text" id="email" name=REmail value="" onkeyup="checkEmail()"/>
-			<img src="../image/false.png" alt="False05" id="emailpic"/>
+			<img src="image/false.png" alt="False05" id="emailpic"/>
 		</div>
 		<div>
 			<label for="avatar">Avatar</label>
 			<input type="file" id="avatar" name=Ravatar onchange="checkAvatar()" />
-			<img src="../image/false.png" alt="False05" id="avatarpic"/>
+			<img src="image/false.png" alt="False05" id="avatarpic"/>
 		</div>
 		<input class="popupbutton" type="button" value="Register" id="regButton" onclick="doneReg()"/>
 		<a class="close" href="#close"></a>

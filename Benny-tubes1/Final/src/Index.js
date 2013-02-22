@@ -6,7 +6,7 @@ function validateLogin(e) {
 	if (user == "admin" ){
 		if (password == "admin"){
 			alert("Berhasil");
-			window.location="./dashboardfix.html";
+			window.location="./src/dashboardfix.html";
 		}
 		else {
 			alert("Password Salah!");
@@ -32,9 +32,9 @@ function checkUser(){
 	
 	if ((Ruser.length>=5) && (Ruser != Rpass)){
 		<!-- benar -->
-		document.getElementById("userpic").src="../image/true.png";
+		document.getElementById("userpic").src="image/true.png";
 	} else{
-		document.getElementById("userpic").src="../image/false.png";
+		document.getElementById("userpic").src="image/false.png";
 	}
 	
 	openReg();
@@ -47,9 +47,9 @@ function checkPass(){
 	
 	if ((RPass.length>=8) && (Ruser != RPass) && (RPass != Remail)){
 		<!-- benar -->
-		document.getElementById("passpic").src="../image/true.png";
+		document.getElementById("passpic").src="image/true.png";
 	} else{
-		document.getElementById("passpic").src="../image/false.png";
+		document.getElementById("passpic").src="image/false.png";
 	}
 	
 	checkConfPass();
@@ -61,9 +61,9 @@ function checkConfPass(){
 	
 	if (Rpass ==RConfpass){
 		<!-- benar -->
-		document.getElementById("confpasspic").src="../image/true.png";
+		document.getElementById("confpasspic").src="image/true.png";
 	} else{
-		document.getElementById("confpasspic").src="../image/false.png";
+		document.getElementById("confpasspic").src="image/false.png";
 	}
 	
 	openReg();
@@ -75,9 +75,9 @@ function checkNLengkap(){
 	if (RNlengkap.match(/([a-zA-Z])+(\s)+([a-zA-Z])/))
 	{
 		<!-- benar -->
-		document.getElementById("nlengkappic").src="../image/true.png";
+		document.getElementById("nlengkappic").src="image/true.png";
 	} else{
-		document.getElementById("nlengkappic").src="../image/false.png";
+		document.getElementById("nlengkappic").src="image/false.png";
 	}
 	
 	openReg();
@@ -89,9 +89,9 @@ function checkEmail(){
 	if (REmail.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/))
 	{
 		<!-- benar -->
-		document.getElementById("emailpic").src="../image/true.png";
+		document.getElementById("emailpic").src="image/true.png";
 	} else{
-		document.getElementById("emailpic").src="../image/false.png";
+		document.getElementById("emailpic").src="image/false.png";
 	}
 	
 	openReg();
@@ -115,9 +115,9 @@ function checkAvatar(){
 	}
 	
 	if (flag==1){
-		document.getElementById("avatarpic").src="../image/true.png";
+		document.getElementById("avatarpic").src="image/true.png";
 	}else{
-		document.getElementById("avatarpic").src="../image/false.png";
+		document.getElementById("avatarpic").src="image/false.png";
 	}
 	
 	openReg();
@@ -144,9 +144,9 @@ function checkTanggal(){
 	if (Rtanggal.match(/([0-9])+(-)+([0-9])+(-)+([0-9])/))
 	{
 		<!-- benar -->
-		document.getElementById("ntanggalpic").src="../image/true.png";
+		document.getElementById("ntanggalpic").src="image/true.png";
 	} else{
-		document.getElementById("ntanggalpic").src="../image/false.png";
+		document.getElementById("ntanggalpic").src="image/false.png";
 	}
 	
 	openReg();

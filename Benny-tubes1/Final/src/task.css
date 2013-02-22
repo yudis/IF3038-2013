@@ -272,7 +272,7 @@ br
     display:none;
 }
 .pss_contr {
-    background:url('../image/left.png') no-repeat center center;
+    background:url('image/left.png') no-repeat center center;
     cursor:pointer;
     display:none;
     height:50px;
@@ -297,13 +297,13 @@ br
 }
 
 .sel_page_1:checked ~ .pss_contr.c2, .sel_page_2:checked ~ .pss_contr.c3, .sel_page_3:checked ~ .pss_contr.c4, .sel_page_4:checked ~ .pss_contr.c1 {
-    background-image:url('../image/right.png');
+    background-image:url('image/right.png');
     display:block;
     Left:85%;
 }
 
 .sel_page_2:checked ~ .pss_contr.c1, .sel_page_3:checked ~ .pss_contr.c2, .sel_page_4:checked ~ .pss_contr.c3, .sel_page_1:checked ~ .pss_contr.c4  {
-    background-image:url('../image/left.png');
+    background-image:url('image/left.png');
     display:block;
 }
 
@@ -316,7 +316,7 @@ br
 }
 
 .pss_background {
-    background:url('../image/Background.jpg') no-repeat scroll 0 0;
+    background:url('image/Background.jpg') no-repeat scroll 0 0;
     height:100%;
     left:0;
 	overflow:hidden;
