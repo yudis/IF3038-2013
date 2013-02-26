@@ -287,7 +287,7 @@
 					
 					var userlist = JSON.parse(localStorage.MOA_userList);
 					userlist[userlist.length] = user;
-					localStorage.userList = JSON.stringify(userlist);
+					localStorage.MOA_userList = JSON.stringify(userlist);
 					
 					close();
 					register_form.reset();
