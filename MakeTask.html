@@ -3,238 +3,20 @@
 
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title> Banana Board - Home </title>
-		<link rel="stylesheet" style="text/css" href="style.css">
-        <style>
-			.label
-			{
-				width: 100px;
-				float: left;
-			}
-			#defaultdate
-			{
-				display:none;
-				float:left;
-			}
-			#customdate
-			{
-				display:none;
-				float:left;
-			}
-			.button
-			{
-				float:left;
-			}
-			
-			
-			#wrapper
-			{
-				width: 1160px;
-				height: 800px;
-				margin: auto;
-				padding: 20px;
-				background-color: pink;
-			}
-			#wrapper-left
-			{
-				float:left;
-			}
-			#suatu_gambar
-			{
-				float:right;
-				display: none;
-				width: 300px;
-				height: 225px;
-			}
-			#suatu_video
-			{
-				float:right;
-				width:320px;
-				height:240px;
-				display: none;
-			}
-		</style>
-        
-        <script type="text/javascript">
-			function loadAttachment()
-			{
-				var x = document.getElementById("filebutton").value;
-				var y = x.split(".");
-				var z = y[y.length-1];
-				if (z == "jpg" || z == "jpeg" || z == "png" || z == "gif")
-				{
-					document.getElementById("suatu_video").style.display = "none";
-					document.getElementById("suatu_gambar").style.display = "block";
-					
-				}
-				else if (z == "avi" || z == "mp4" || z == "mkv" || z == "3gp" || z == "flv" || z == "ogg")
-				{
-					document.getElementById("suatu_gambar").style.display = "none";
-					document.getElementById("suatu_video").style.display = "block";
-				}
-				else
-				{
-					document.getElementById("suatu_gambar").style.display = "none";
-					document.getElementById("suatu_video").style.display = "none";
-				}
-			}
-			function checkSubmission()
-			{
-				var isValid = true;
-				
-				var a = document.getElementById("tugas").value;
-				if (a.length != 0)
-				{
-					var index = 0;
-					while (index < a.length && isValid == true)
-					{
-						if ((a[index] >= '0' && a[index] <= '9') || (a[index] >= 'a' && a[index] <= 'z') || (a[index] >='A' && a[index] <='Z'))
-						{}
-						else
-						{
-							isValid = false;
-						}
-						index++;
-					}
-					
-					if (isValid == false)
-					{
-						alert("Nama tugas tidak boleh menggunakan karakter khusus!")
-					}
-				}
-				else
-				{
-					isValid = false;
-					alert("Nama tugas tidak boleh kosong!");
-				}
-				
-				if (isValid == true)
-				{
-					alert("Tugas berhasil ditambahkan!");
-				}
-			}
-			
-			function generateDate()
-			{
-				var browser = document.createElement("input");
-				browser.setAttribute("type", "date");
-				if(browser.type == "date")
-				{
-					var a = document.getElementById("defaultdate");
-					a.style.display = "block";
-				}
-				else
-				{
-					var a = document.getElementById("customdate");
-					a.style.display = "block";
-					var b = document.getElementById("tanggallist");
-					for (var i = 1; i <= 31; i++)
-					{
-						var option = document.createElement("option");
-						option.text = "" + i;
-						option.value = "date" + i;
-						b.appendChild(option);
-					}
-					
-					var c = document.getElementById("bulanlist");
-					for (var i = 1; i <= 12; i++)
-					{
-						var option = document.createElement("option");
-						option.text = "" + i;
-						option.value = "month" + i;
-						c.appendChild(option);
-					}
-					
-					var d = document.getElementById("tahunlist");
-					for (var i = 1955; i <= 2013; i++)
-					{
-						var option = document.createElement("option");
-						option.text = "" + i;
-						option.value = "month" + i;
-						d.appendChild(option);
-					}
-				}
-			}
-			
-			function monthChange()
-			{
-				var a = document.getElementById("bulanlist");
-				var z = document.getElementById("tanggallist");
-				if (a.text == "1" || a.text == "3" || a.text == "5" || a.text == "7" || a.text == "8" || a.text == "10" || a.text == "12")
-				{
-					alert("z.length");
-					if (z.length==30)
-					{
-						var b = document.createElement("option");
-						b.text = "31";
-						b.value = "date31";
-						z.add(b);
-					}
-					else if (z.length==28)
-					{
-						var b = document.createElement("option");
-						b.text = "29";
-						b.value = "date29";
-						z.add(b);
-						
-						var c = document.createElement("option");
-						c.text = "30";
-						c.value = "date30";
-						z.add(c);
-						
-						var d = document.createElement("option");
-						d.text = "31";
-						d.value = "date31";
-						z.add(d);
-					}
-				}
-				else if (a.text == "4" || a.text == "6" || a.text == "9" || a.text == "11")
-				{
-					if (z.length==31)
-					{
-						z.remove(30);
-					}
-					else if (z.length==28)
-					{
-						var b = document.createElement("option");
-						b.text = "29";
-						b.value = "date29";
-						z.add(b);
-						
-						var c = document.createElement("option");
-						c.text = "30";
-						c.value = "date30";
-						z.add(c);
-					}
-				}
-				else if (a.text == "2")
-				{
-					if (z.length==31)
-					{
-						z.remove(30);
-						z.remove(29);
-						z.remove(28);
-					}
-					else if (z.length==30)
-					{
-						z.remove(29);
-						z.remove(28);
-					}
-				}
-			}
-		</script>
+        <title> Banana Board - New Task </title>
+		<link rel="stylesheet" style="text/css" href="style.css">        
 </head>
     
 <body onload="generateDate()">
 	<div id="content">
 		<div id="header">
 			<div id="logo">
-				<!-- <a href="index.html" class="header">board</a> -->
-				<img src="logo.png"/>
+				<a href="home.html" class="header">
+				<img src="logo.png"/></a>
 			</div>
 			<div id="menu">
 				<ul>
-					<li> <a href="dashboard.html"> DASHBOARD </a> </li>
+					<li> <a href="home.html"> DASHBOARD </a> </li>
 					<li> <a href="profile.html"> PROFILE </a> </li>
 					<li> <a href="index.html"> LOGOUT </a> </li>
 				</ul>
@@ -247,85 +29,53 @@
 
 		<div id="isi">
 			<div id="leftsidebar">
-					<b>Create new task >></b>
+					<b>CREATE NEW TASK</b>
 					<img src="leftmenu.png"/>
 			</div>
-			
+		
 			<div id="rightsidebar">
 				<div id="wrapper-left">
-				<form class="reg" name="MakeForm" action="taskdetails.html" onsubmit="submitThis()">
-					<ul>
-						<li>
-							<label for="tugas" >Nama Tugas</label>
-							<input id="tugas" name="tugas" type="text" maxlength="25"/><br>
-						</li>
-						<li>
-							<label for="filebutton">Attachment</label>
-							<input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/><br>
-						</li>		
-						<li>
-							<label for="deadline">Deadline</label>
-							<div id="defaultdate">
-								<input id="deadline" type="date" required/>
-							</div>
-							<div id="customdate">
-								<div id="customtanggal">
-									<div class="label">Tanggal</div>
-									<select id="tanggallist"/>
-								</div>								
-								<div id="custombulan">
-									<div class="label">Bulan</div>
-									<select id="bulanlist" onChange="monthChange()"/>
+					<form class="task" name="MakeForm" action="home.html" onsubmit="submitThis()">
+						<ul>
+							<h1>Fill Details</h1>
+							<li>
+								<label for="tugas" >Nama Tugas</label>
+								<input id="tugas" name="tugas" type="text" maxlength="25"/><br>
+							</li>
+							<li>
+								<label for="filebutton">Attachment</label>
+								<input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/><br>
+							</li>		
+							
+							<li>
+								<label for="asignee">Assignee</label>
+								<input id="asignee" name="asignee" type="text"/>
+							</li>
+							<li>
+								<label for="tag">Tag</label>
+								<input id="tag" name="tag" type="text" size="20"/><br>
+								<span>*dipisahkan dengan ","</span>
+							</li>							
+							<li>
+								<label for="deadline">Deadline</label>
+								<div id="defaultdate">
+									<input id="deadline" type="date" required/>
 								</div>
-								<div id="customtahun">
-									<div class="label">Tahun</div>
-									<select id="tahunlist"/>
+								<div id="customdate">
+									<select id="tanggallist">
+									</select>
+									<select id="bulanlist">
+									</select>
+									<select id="tahunlist">
+									</select>
 								</div>
-							</div>
-						</li>
-						<li>
-							<label for="asignee">Assignee</label>
-							<input id="asignee" name="asignee" type="text"/>
-						</li>
-						<li>
-							<label for="tag">Tag</label>
-							<input id="tag" name="tag" type="text" size="20"/> (dipisahkan dengan ",")
-						</li>
-						<li>
-							<button id="submitbutton" name="submitbutton" type="submit" onClick="checkSubmission()"><b>Submit</b></button>
-						</li>
-					</ul>
-					<!--
-					<div class="label"> <label for="tugas" >Nama Tugas</label> </div> <input id="tugas" name="tugas" type="text" maxlength="25"/> <br />
-					<div class="label"> <label for="filebutton">Attachment</label> </div> <input id="filebutton" name="filebutton" type="file" onChange="loadAttachment()"/> <br />
-					<div class="label"> <label for="deadline">Deadline</label> </div>
-						<div id="defaultdate">
-							<input id="deadline" type="date" required/>
-						</div>
-						<div id="customdate">
-							<div id="customtanggal"><div class="label">Tanggal</div>
-								<select id="tanggallist">
-								</select>
-							</div>
-							<div class="label"> </div>
-							<div id="custombulan"><div class="label">Bulan</div>
-								<select id="bulanlist" onChange="monthChange()">
-								</select>
-							</div>
-							<div class="label"> </div>
-							<div id="customtahun"><div class="label">Tahun</div>
-								<select id="tahunlist">
-								</select>
-							</div>
-						</div>
-						<div style="clear:both"></div>
-					<div class="label"> <label for="asignee">Assignee</label></div> <input id="asignee" name="asignee" type="text"/> <br />
-					<div class="label"> <label for="tag">Tag</label></div> <input id="tag" name="tag" type="text" size="20"/> (dipisahkan dengan ",") <br />
-					<br /> 
-					<input id="submitbutton" name="submitbutton" type="submit" onClick="checkSubmission()"/>
-				</form>
+							</li>
+							<li>
+								<button class="task" name="submitbutton" type="submit" onClick="checkSubmission()"><b>Submit</b></button>
+							</li>
+						</ul>
+					</form>
 				</div>
-				-->
 				<div id="wrapper-right">
 					<img id="suatu_gambar" src="Troll.png" alt="Gambar tidak dapat di-load"/>    
 					<video id="suatu_video" width="320" height="240" controls>
@@ -336,13 +86,115 @@
 				</div>
 			</div>
 		</div>
-		
 		<div id="footer" class="home">
 				<p>&copy Copyright 2013. All rights reserved<br>
 				Chalkz Team<br>
 				Yulianti - Adriel - Amelia</p>			
 		</div>
     </div>
+	
+		<script type="text/javascript">
+		function loadAttachment()
+		{
+			var x = document.getElementById("filebutton").value;
+			var y = x.split(".");
+			var z = y[y.length-1];
+			if (z == "jpg" || z == "jpeg" || z == "png" || z == "gif")
+			{
+				document.getElementById("suatu_video").style.display = "none";
+				document.getElementById("suatu_gambar").style.display = "block";
+				
+			}
+			else if (z == "avi" || z == "mp4" || z == "mkv" || z == "3gp" || z == "flv" || z == "ogg")
+			{
+				document.getElementById("suatu_gambar").style.display = "none";
+				document.getElementById("suatu_video").style.display = "block";
+			}
+			else
+			{
+				document.getElementById("suatu_gambar").style.display = "none";
+				document.getElementById("suatu_video").style.display = "none";
+			}
+		}
+		function checkSubmission()
+		{
+			var isValid = true;
+			
+			var a = document.getElementById("tugas").value;
+			if (a.length != 0)
+			{
+				var index = 0;
+				while (index < a.length && isValid == true)
+				{
+					if ((a[index] >= '0' && a[index] <= '9') || (a[index] >= 'a' && a[index] <= 'z') || (a[index] >='A' && a[index] <='Z'))
+					{}
+					else
+					{
+						isValid = false;
+					}
+					index++;
+				}
+				
+				if (isValid == false)
+				{
+					alert("Nama tugas tidak boleh menggunakan karakter khusus!")
+				}
+			}
+			else
+			{
+				isValid = false;
+				alert("Nama tugas tidak boleh kosong!");
+			}
+			
+			if (isValid == true)
+			{
+				alert("Tugas berhasil ditambahkan!");
+			}
+		}
+		
+		function generateDate()
+		{
+			var browser = document.createElement("input");
+			browser.setAttribute("type", "date");
+			if(browser.type == "date")
+			{
+				var a = document.getElementById("defaultdate");
+				a.style.display = "block";
+			}
+			else
+			{
+				var a = document.getElementById("customdate");
+				a.style.display = "block";
+				var b = document.getElementById("tanggallist");
+				for (var i = 1; i <= 31; i++)
+				{
+					var option = document.createElement("option");
+					option.text = "" + i;
+					option.value = "date" + i;
+					b.appendChild(option);
+				}
+				
+				var c = document.getElementById("bulanlist");
+				for (var i = 1; i <= 12; i++)
+				{
+					var option = document.createElement("option");
+					option.text = "" + i;
+					option.value = "month" + i;
+					c.appendChild(option);
+				}
+				
+				var d = document.getElementById("tahunlist");
+				for (var i = 1955; i <= 2013; i++)
+				{
+					var option = document.createElement("option");
+					option.text = "" + i;
+					option.value = "month" + i;
+					d.appendChild(option);
+				}
+			}
+		}
+	</script>
+
 </body>
 
 </html>
