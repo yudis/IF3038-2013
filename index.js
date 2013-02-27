@@ -117,13 +117,14 @@ function isFilled(){
 	var confpassword=document.forms["registerform"]["passconfirmed"].value;
 	var namalengkap=document.forms["registerform"]["namalengkap"].value;
 	var email=document.forms["registerform"]["email"].value;
-if ((namauser==null || namauser=="") &&(password==null || password=="") && (confpassword==null || confpassword=="") &&(namalengkap==null || namalengkap=="") && (email==null || email==""))
+if ((namauser==null || namauser=="") ||(password==null || password=="") || (confpassword==null || confpassword=="") ||(namalengkap==null || namalengkap=="") || (email==null || email==""))
   {
- 		
+ 		alert("sesuatu");
   }
   else
   {
 		  button.disabled=false;
+		  alert("betulll");
 	}
 }
 
