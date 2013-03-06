@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="Description" content="" />
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+		<title>MOA - Profil</title>
+		<script type="text/javascript" src="js/is_login.js"></script>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/profil.css" />
+	</head>
+	<body>
+		<header>
+			<div id="header_wrap" class="wrap">
+				<a href="dashboard.html"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
+				<div id="header_title">
+					<h1> <a href="dashboard.html">MOA</a> </h1>
+					<h4>Multiuser Online Agenda</h4>
+				</div>
+				<div id="border_header"></div>
+				<div id="header_menu">
+					<nav>
+						<ul>
+							<li> <a href="dashboard.html">Dashboard</a> </li>
+							<li> <a href="profil.html" class="active">Profil</a> </li>
+						</ul>
+					</nav>
+					<div id="login_area">
+						<nav id="login_button">
+							<ul>
+								<li> <a id="login_link" href="index.html">Keluar</a> </li>
+							</ul>
+						</nav>
+						<div class="clear"></div>
+						<div class="clear"></div>
+					</div>
+					<div id="border_search"></div>
+
+					<div id="search">
+						<div id="search_inner">
+							<div id="search_button"></div>
+							<div id="search_left"></div>
+							<form id="search_form">
+								<input id="search_text" name="search_query" type="text" />
+							</form>
+							<div id="search_right"></div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</header>
+		
+		<section>
+			<div id="content_wrap" class="wrap">
+				<div id="profil_left">
+					<div id="profil_form_wrap">
+						<div id="profil_head">
+							<h1>Admin</h1>
+						</div>
+						<div class="row">
+							<span class="label">Username</span>
+							<span id="profil_username"></span>
+						</div>
+						<div class="row">
+							<span class="label">Nama Lengkap</span>
+							<span id="profil_name"></span>
+						</div>
+						<div class="row">
+							<span class="label">Tanggal Lahir</span>
+							<span id="profil_birth_date"></span>
+						</div>
+						<div class="row">
+							<span class="label">Email</span>
+							<span id="profil_email"></span>
+						</div>
+						<div class="row">
+							<span class="label">Avatar</span>
+							<img id="avatar_image" src="images/avatar.jpg" alt="avatar profil" />
+						</div>
+						<a href="changepass.html" class="button_link"> Ganti Sandi</a>
+						<a href="profiledit.html" class="button_link"> Edit Profil </a>
+						
+					</div>
+				</div>
+				<div id="profil_right">
+					<div id="task_head">
+						<h1>Tugas</h1>
+					</div>
+					<div id="task_left">
+						<div class="profil_sub_head">
+							<h4>Dalam Proses</h4>
+						</div>
+						<ul>
+							<li>
+								<div class="row">
+									<div><a href="#">Pemrograman Internet</a></div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div id="task_right">
+						<div class="profil_sub_head">
+							<h4>Selesai</h4>
+						</div>
+						<ul>
+							<li>
+								<div class="row">
+									<div><a href="#">Kriptografi</a></div>
+								</div>
+							</li>
+						</ul>
+						<ul>
+							<li>
+								<div class="row">
+									<div><a href="#">Intelegensi Buatan</a></div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<footer>
+			<div id="footer_wrap" class="wrap">
+				<div id="footer_left">
+					<a href="dashboard.html">Dashboard</a> >>
+					<a href="profil.html" class="active">Profil</a>
+				</div>
+				<div id="footer_right">
+					Copyright by ImbAlAncE.
+				</div>
+			</div>
+		</footer>
+		
+		<script type="text/javascript" src="js/search.js"></script>
+		<script type="text/javascript" src="js/logout.js"></script>
+		<script type="text/javascript">
+			window.onload = function()
+			{
+				var userlist =  JSON.parse(localStorage.MOA_userList);
+				document.getElementById("profil_head").innerHTML = "<h1>"+userlist[sessionStorage.MOA_userId].fullName+"</h1>";
+				document.getElementById("profil_username").innerHTML = userlist[sessionStorage.MOA_userId].userName;
+				document.getElementById("profil_name").innerHTML = userlist[sessionStorage.MOA_userId].fullName;
+				document.getElementById("profil_birth_date").innerHTML = userlist[sessionStorage.MOA_userId].birthDate;
+				document.getElementById("profil_email").innerHTML = userlist[sessionStorage.MOA_userId].emailAddress;
+				document.getElementById("avatar_image").src = userlist[sessionStorage.MOA_userId].Avatar;
+			}
+		</script>
+	</body>
+</html>
+
