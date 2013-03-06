@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="task.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="datetimepicker.js"></script>
+<script type="text/javascript" src="Index.js">
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Rincian</title>
+</head>
+
+
+<body onload="gantiNama();">
+<div class="header">
+		<div class="hbackground" >
+			<a href="dashboardfix.html"><img class="hlogo" src="../image/logo.png" alt="image01" /></a>
+
+
+
+			<div class="htext"> Monkey.Inc </div>
+			<div class="htagline">"See no Task, Speak no Task, Hear no Task"</div>
+		</div>
+
+		<div class="hbar">
+			<div class="hmenus">
+				<a class="hmtext" href="dashboardfix.html" >Dashboard </a>
+				<a class="hmtext" href="profilefix.html" >Profil </a>
+				<a class="hmtext" href="../Index.html" >Logout </a>
+			</div>
+			<div class="hmsearch"> 
+				<form class="hmtext">Search : <input type="text" name="firstname"/></form>
+			</div>
+		</div>
+	</div>
+	
+	<br/>
+
+    <div class="contentRincian">
+        <div>
+            <form>
+                <ul class="listUL"><li class="listLI"><input id="changeOrEdit" type="button" class="tombol" onclick="editing();" value="Edit"></li><li class="listLI"><input type="button" value="Done" class="tombol" onclick="window.history.back()"></li></ul>
+            </form>
+        </div>
+        <div style="text-align:center" id="namaTugas">Nama Tugas</div>
+            <div class="rincianKiri">Deadline</div><div class="rincianKanan"><input id="deadline" class="inputText" type="text" disabled="disabled"/></div>
+			<div id="tanggal">
+				<input id="demo1" type="text" size="25"><a href="javascript:NewCal('demo1','ddmmyyyy')"><img src="../image/cal.gif" class="kalender" alt="Pick a date"></a>
+			</div>
+            <div class="rincianKiri">Assignee</div>
+			<div class="rincianKanan">
+				<input id="dua" class="inputText" type="text" value="admin" disabled="disabled" list="user"/>
+				<datalist id="user">
+					<option value="Admin">
+					<option value="Monkichi">
+					<option value="Monkey Magic">
+				</datalist>
+			</div>
+            <div class="rincianKiri">Tag</div><div class="rincianKanan"><input id="tag" class="inputText" type="text" disabled="disabled"/></div>
+             <div class="rincianKiri">Attachment</div><div class="rincianKanan"><video src="../video/a.webm" autoplay>
+    Your browser does not support the <code>video</code> element.
+    </video></div>
+            <br/>
+            <div class="rincianKiri">Komentar</div><input class="inputText" type="text"/><input type="button" class="tombol" value="post"/>
+    </div>
+	<br/>
+</body>
+</html>

@@ -1,0 +1,448 @@
+/*
+Tubes 1 Progin
+Penggunaan HTML, CSS, dan Javascript
+*/
+
+body
+{
+	position:relative;
+	min-height:100%;
+	min-width:800px;
+	height : auto;
+	width:800px;
+	margin:auto;
+	background: -moz-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
+	background: -ms-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
+	background: -o-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
+	background: -webkit-linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
+	background: linear-gradient(top, rgb(239,228,171), rgb(255,255,255));
+	background-repeat:no-repeat;
+	float:center;
+}
+
+br
+{
+	opacity:0;
+	filter:alpha(opacity=0);
+}
+
+.content
+{
+	margin:0px;
+	padding:0px;
+	box-shadow: 10px 10px 5px #888888;
+}
+
+/* Header */
+
+.header
+{
+	box-shadow: 10px 10px 5px #888888;
+}
+
+.htext {
+	width:800px;
+	color: rgb(114,47,47);
+	/*3d*/
+	text-shadow: 0px 1px 0px rgb(164,67,67), 0px 2px 0px rgb(144,60,60), 0px 3px 0px rgb(124,43,43), 0px 4px 0px rgb(104,35,35), 0px 5px 0px rgb(84,27,27), 0px 6px 0px rgb(64,20,20), 0px 7px 0px rgb(44,10,10), 0px 8px 7px rgb(0,0,0);
+	text-align:center;
+	font-size:80px;
+	opacity: 0.5;
+	text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+}
+
+.hbackground{
+	width:auto;
+	height : 120px;
+	background: -moz-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
+	background: -ms-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
+	background: -o-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
+	background: -webkit-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
+	background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
+}
+
+.hlogo a
+{
+	float: left;
+	margin-left:10px;
+	margin-top:10px;
+	width:100px;
+	height:100px;
+	background-image:url('image/logo.png');
+	background-repeat:no-repeat;
+	text-indent:-999999em;
+	display:block;
+	clear:none;
+}
+
+.hmenus a
+{
+	-o-transition:1s;
+	-ms-transition:1s;
+	-moz-transition:1s;
+	-webkit-transition:1s;
+	transition:1s;
+	display:inline-block;
+	width:100px;
+	text-align:center;
+	text-decoration:none;
+}
+
+.hmenus
+{
+	position:absolute;
+	width:50%;
+	font-size:20px;
+	float:left;
+}
+
+.hmenus a:hover
+{
+	color:brown;
+	text-shadow: 0px 1px 1px rgba(0,0,0,1);
+}
+
+.hmtext
+{
+	color: rgb(189,178,101);
+	font-family:'LeagueGothicRegular'
+}
+
+.hbar
+{
+	width:auto;
+	height:25px;
+	background-color:rgb(239,228,171);
+	border:1px solid #d3d3d3;
+}
+
+.hmsearch
+{
+	width:50%;
+	float:right;
+	word-spacing:6px;
+	color:#888888;
+	padding-top:1px;
+	padding-right:10px;
+	white-space:nowrap;
+	text-align:right;
+}
+
+.htagline
+{
+	text-align:center;
+	text-shadow: 0px 1px 1px rgb(244,90,90);
+    color: rgb(170,85,40);
+
+}
+
+#contenthalamanprofile{
+	margin:0 auto;
+	height:500px;
+	width:800px;
+	z-index:0;
+}
+
+#biodata{
+	height:500px;
+	width:410px;
+	border-right:2px solid #999;
+	float : left;
+}
+
+#biodata-foto{
+	height: 150px;
+	width : 200px;
+	vertical-align:middle;
+	padding-left : 10px;
+	padding-top: 10px;
+}
+
+#biodatanama-profpic{
+	height: 170px;
+	width : 240px;
+	float:left;
+}
+
+#biodatanama-nama{
+	height: 170px;
+	width : 165px;
+	float:left;
+	font-size:40px;
+	text-align:left;
+	vertical-align:middle;
+}
+
+#basic-info{
+	height:155px;
+	width:405px;
+	float:left;
+}
+
+#headerbasic-info{
+	height:30px;
+	width:395px;
+	font-size:25px;
+	margin-left:10px;
+	margin-right:20px;
+	vertical-align:middle;
+	border-bottom:thin solid rgba(153,153,153,1);
+}
+
+#basic-home{
+	height:30px;
+	width:395px;
+	font-size:20px;
+	margin-left:20px;
+	margin-right:10px;
+	padding-top:10px;
+	vertical-align:middle;
+}
+
+#home-icon{
+	height:50px;
+	width:50px;
+	vertical-align:middle;
+	padding-right:10px;
+}
+
+#basic-birthday{
+	height:30px;
+	width:395px;
+	font-size:20px;
+	margin-left:20px;
+	margin-right:10px;
+	padding-top:30px;
+	vertical-align:middle;
+}
+
+#calendar-icon{
+	height:50px;
+	width:50px;
+	vertical-align:middle;
+	padding-right:10px;
+}
+
+#task-info{
+	height:130px;
+	width:415px;
+	float:left;
+}
+
+#headertask-info{
+	height:30px;
+	width:385px;
+	font-size:25px;
+	margin-left:5px;
+	margin-right:20px;
+	vertical-align:middle;
+	border-bottom:thin solid rgba(153,153,153,1);
+}
+
+#homecategory-icon{
+	height:80px;
+	width:80px;
+	padding-top:10px;
+	margin-left:20px;
+	float:left;
+}
+
+#officecategory-icon{
+	height:80px;
+	width:80px;
+	padding-top:10px;
+	margin-left:20px;
+	float : left;
+}
+
+#personalcategory-icon{
+	height:80px;
+	width:80px;
+	padding-top:10px;
+	margin-left:20px;
+	float : left;
+}
+
+#shoppingcategory-icon{
+	height:80px;
+	width:80px;
+	padding-top:10px;
+	margin-left:20px;
+	float : left;
+}
+
+#editmyprofile{
+	text-align:right;
+	font-size: 14px;
+	margin-right:15px;
+	float:right;
+	height:30px;
+	width:129px;
+}
+
+#editmyprofile-button{
+	border:none;
+	background-color:rgba(204,204,204,1);
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	box-shadow: 0px 3px 5px #999;
+	-moz-box-shadow: 0px 3px 5px #999;
+	-webkit-box-shadow: 0px 3px 5px #999;
+}
+
+#editmyprofile-button:hover {
+	position:relative;
+	top:3px;
+	color: #fqq;
+	box-shadow:none;
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+}
+
+#editmyprofile-icon{
+	height:20px;
+	width:20px;
+	vertical-align:middle;
+}
+
+#usertask{
+	height:500px;
+	width:388px;
+	float : left;
+}
+
+#usertask-header{
+	height:80px;
+	width:370px;
+	font-size:50px;
+	text-align:center;
+	padding-top:10px;
+	border-bottom:3px double #000000;
+	margin-left:10px;
+}
+
+#usertask-done{
+	height:190px;
+	width:380px;
+	float : left;
+}
+
+#usertaskdone-header{
+	height:30px;
+	width:370px;
+	font-size:25px;
+	margin-left:10px;
+	margin-right:5px;
+	vertical-align:middle;
+	border-bottom:thin solid rgba(153,153,153,1);
+}
+
+#userdone-list{
+	list-style-type:none;
+}
+
+#userdoneelement-list{
+	text-align:left;
+}
+
+.userdonelist-icon{
+	height:50px;
+	width:50px;
+	vertical-align:middle;
+	float:left;
+}
+
+.userdonelist-iconspace{
+	height:60px;
+	width:50px;
+	vertical-align:middle;
+	margin-left:-20px;
+	float : left;
+}
+
+.userdonelist-taskname{
+	height:30px;
+	width:310px;
+	vertical-align:middle;
+	float:right;
+	font-size:24px;
+	font-weight:bold;
+}
+
+.userdonelist-taskdesc{
+	height:30px;
+	width:310px;
+	vertical-align:middle;
+	float:right;
+}
+
+#usertask-undone{
+	height:190px;
+	width:423px;
+	float : left;
+}
+
+#usertaskundone-header{
+	height:30px;
+	width:370px;
+	font-size:25px;
+	margin-left:10px;
+	margin-right:5px;
+	vertical-align:middle;
+	border-bottom:thin solid rgba(153,153,153,1);
+}
+
+#userundone-list{
+	list-style-type:none;
+}
+
+.userundonelist-icon{
+	height:50px;
+	width:50px;
+	vertical-align:middle;
+}
+
+.userundonelist-iconspace{
+	height:60px;
+	width:50px;
+	vertical-align:middle;
+	margin-left:-20px;
+	float : left;
+}
+
+.userundonelist-taskname{
+	height:30px;
+	width:325px;
+	vertical-align:middle;
+	float:left;
+	font-size:24px;
+	font-weight:bold;
+}
+
+.userundonelist-taskdesc{
+	height:30px;
+	width:325px;
+	vertical-align:middle;
+	float:left;
+}
+
+/* Footer */
+.footer
+{
+	width:auto;
+	height : auto;
+	margin-bottom:10px;
+	background: -moz-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
+	background: -ms-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
+	background: -o-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
+	background: -webkit-linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
+	background: linear-gradient(top, rgb(170,85,40), rgb(255,140,60));
+	box-shadow: 10px 10px 5px #888888;
+}
+
+.ftext
+{
+	color: rgba(0,0,0,0.6);
+	text-shadow: 2px 8px 6px rgba(0,0,0,0.2),0px -5px 35px rgba(255,255,255,0.5);
+	text-align:center;
+}

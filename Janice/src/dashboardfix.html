@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>Monkey.Inc</title>
+	<link rel="stylesheet" type="text/css" href="dashboardfixcss.css">
+    <script type="text/javascript" src="dashboard.js"></script>
+</head>
+
+<body>
+       <!-- popup form #1 -->
+       <a href="#x" class="overlay" id="addCategory_form"></a>
+        <form class="popup" id = "addCategory_popup">
+            <h1>Add More Category</h1>
+			<div>
+                <label for="username">Nama Kategori</label>
+                <input type="text" name = "categoryname" value = "" id="user" onKeyUp="validateCategoryName()"/>
+                <img alt = "" src = "../image/false.png" id = "false">
+            </div>
+			<div>
+                <label for="pengguna">Pengguna</label>
+                <input type="text" id="pengguna" value="" />
+            </div>
+            <a onClick="addingit()" href = "#close" id="test"><button type="button" class="addcategory" id="addCategoryButton">Add</button></a>
+            <a class="close" href="#close"></a>
+        </form>
+
+
+	<div class="header">
+		<div class="hbackground" >
+			<div class="hlogo">
+				<a href="../tes.html">Monkey.Inc</a>
+			</div>
+			<div class="htext"> Monkey.Inc </div>
+			<div class="htagline">"See no Task, Speak no Task, Hear no Task"</div>
+		</div>
+		
+		<div class="hbar">
+			<div class="hmenus">
+				<a class="hmtext" href="dashboardfix.html" >Dashboard </a>
+				<a class="hmtext" href="profilefix.html" >Profil </a>
+				<a class="hmtext" href="Index.html" >Logout </a>
+			</div>
+			<div class="hmsearch"> 
+				<form class="hmtext">Search : <input type="text" name="firstname"></form>
+			</div>
+		</div>
+	</div>
+	
+	<br>
+	
+	<div class="content">
+			<div id = "contentdashboard">
+		<div class="dashboard">
+			<div id="profile">
+                <div id ="nama">
+					<img alt="" src = "../image/profpic.jpg" id="profilepicture">
+					<b>Janice Leung</b>
+				</div>
+				<div id="kategori">
+					<b>KATEGORI</b>
+                </div>
+                <div id="alltask">
+					<button type="button" id="buttonalltask" onclick="clickalltask()" onfocus="focusonit()">
+						<img alt = "" src = "../image/alltask.png" class="homeicon">
+						All Task
+                   </button> 
+                </div> 
+				<ul id = "listkategori">
+					<li>
+                        <div class="home">
+							<button type="button" id="buttonhome" onclick="clickhome()" onfocus="focusonit()">
+								<img alt = "" src = "../image/homeicon.png" class="homeicon">
+								H o m e
+                           </button>
+                        </div>
+					</li>
+					<li>
+                        <div class="home">
+							<button type="button" id="buttonoffice" onclick="clickoffice()" onfocus="focusonit()">
+								<img alt = "" src = "../image/office.png" class="homeicon">
+								O f f i c e
+                            </button>
+                        </div>
+					</li>
+					<li>
+                        <div class="home">
+							<button type="button" id="buttonpersonal" onclick="clickpersonal()" onfocus="focusonit()">
+								<img alt="" src = "../image/personal.png" class="homeicon">
+								P e r s o n a l
+                            </button>
+                        </div>
+					</li>
+					<li>
+                        <div class="home">
+							<button type="button" id="buttonshopping" onclick="clickshopping()" onfocus="focusonit()">
+								<img alt = "" src = "../image/shopping.png" class="homeicon">
+								S h o p p i n g
+                            </button>
+                        </div>
+					</li>
+               </ul>
+               <ul id = "familyelement">
+                    <li>
+                        <div class="home">
+							<button type="button" id="buttonfamily" onclick="clickshopping()" onfocus="focusonit()">
+								<img alt = "" src = "../image/family.png" class="homeicon">
+								F a m i l y
+                            </button>
+                        </div>
+					</li>
+				</ul>
+                    <div id="add">
+                        <a href="#addCategory_form" id="addCategory_pop"><button class="addCategory" onClick="activeit()">Add more category</button></a>
+                    </div>
+			</div>
+			<div id = "tasklist">
+				<div id = "tasktitle">
+					<img alt = "" src = "../image/book.png" id="task">
+					T  A  S  K
+				</div>
+				<div id = "task1">
+					<ul class = "listoftaskbutton">
+						<li class="taskbuttonlist" id = "hometask">
+							<button type="button" class="taskbutton">
+								<div class = "buttontitle">
+									<div class = "buttontitleicon">
+										<img alt = "" src = "../image/homeicon.png" class="iconinbutton">
+									</div>
+									<div class = "buttondescName">
+										<div>
+											Bersiin kamar!!
+										</div>
+										<div class = "buttondeadline">
+											deadline : 14 Februari 2013
+											<br>tag : kamar, valentine
+										</div>
+									</div>
+								</div>
+							</button>
+						</li>
+						<li class = "taskbuttonlist" id="personaltask">
+							<button type="button" class="taskbutton" >
+								<div class = "buttontitle">
+									<div class = "buttontitleicon">
+										<img alt = "" src = "../image/personal.png" class="iconinbutton">
+									 </div>
+									 <div class = "buttondescName">
+										<div>
+											Bikin coklat!!
+										</div>
+										<div class = "buttondeadline">
+											deadline : 14 Februari 2013
+											<br>tag : valentine, coklat
+										</div>
+									 </div>
+								</div>
+							</button>
+						</li>
+						<li class="taskbuttonlist" id ="officetask">
+							<button type="button" class="taskbutton" >
+								<div class = "buttontitle">
+									<div class = "buttontitleicon">
+										<img alt = "" src = "../image/office.png" class="iconinbutton">
+									</div>
+									<div class = "buttondescName">
+										<div>
+											Kerjain progin!!
+										</div>
+										<div class = "buttondeadline">
+											deadline : 22 Februari 2013
+											<br>tag : kuliah, tugas
+										</div>
+									</div>
+								</div>
+							</button>
+						</li>
+						<li>
+							<button type="button" class="taskbutton" id ="addtaskbutton">
+								<div class = "buttontitle">
+									<div class = "buttontitleicon">
+										<img alt = "" src = "../image/addtask.png" class="iconinbutton">
+									 </div>
+									 <div class = "buttondescAdd">
+										<div>
+											Add More Task...
+										</div>
+									 </div>
+								</div>
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	
+	<br>
+	
+	<div class="footer">
+		<p class="ftext">Tubes progin 1</p>
+		<p class="ftext">Copyright 2013 Benedikus, Janice, and Raymond</p>
+	</div>
+	
+</body>
+</html>
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link href="task.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript"/>
+	function editing(){
+		if(document.getElementById("changeOrEdit").value =="Edit"){
+			document.getElementById("satu").removeAttribute("disabled");
+			document.getElementById("dua").removeAttribute("disabled");
+			document.getElementById("tiga").removeAttribute("disabled");
+			document.getElementById("empat").removeAttribute("disabled");
+			document.getElementById("changeOrEdit").value ="Save";
+		}
+		else{
+			document.getElementById("satu").setAttribute("disabled");
+			document.getElementById("dua").setAttribute("disabled");
+			document.getElementById("tiga").setAttribute("disabled");
+			document.getElementById("empat").setAttribute("disabled");
+			document.getElementById("changeOrEdit").value ="Edit";
+		}
+	}
+	function gantiNama(){
+		var parame = window.top.location.search.substring(1);
+		var val = parame.indexOf("=");
+		document.getElementById("namaTugas").innerHTML = decodeURI(parame.substr(val+1));
+	}
+	function changeEdit(){
+		if(document.getElementById("changeOrEdit").value =="Edit"){
+			document.getElementById("changeOrEdit").value ="Save";
+			alert("ddd");
+		}
+		else{
+		document.getElementById("changeOrEdit").value ="Edit";
+		}
+			
+	}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>LALA</title>
+</head>
+
+
+<body onload="gantiNama();">
+<div class="header">
+		<div class="hbackground" >
+			<div class="hlogo">
+				<a href="tes.html">Monkey.Inc</a>
+			</div>
+			<div class="htext"> Monkey.Inc </div>
+			<div class="htagline">"See no Task, Speak no Task, Hear no Task"</div>
+		</div>
+		
+		<div class="hbar">
+			<div class="hmenus">
+				<a class="hmtext" href="tes.html" >Dashboard </a>
+				<a class="hmtext" href="tes.html" >Profil </a>
+				<a class="hmtext" href="halUtama.html" >Logout </a>
+			</div>
+			<div class="hmsearch"> 
+				<form class="hmtext">Search : <input type="text" name="firstname"></form>
+			</div>
+		</div>
+	</div>
+	
+	<br>
+
+    <div class="contentRincian">
+        <div>
+            <form>
+                <ul class="listUL"><li class="listLI"><input id="changeOrEdit" type="button" onclick="editing();" value="Edit"></li><li class="listLI"><input type="button" value="Done" onclick="window.history.back()"></li></ul>
+            </form>
+        </div>
+        <div style="text-align:center" id="namaTugas">Nama Tugas</div>
+        
+           
+            <div class="rincianKiri">Deadline</div><div class="rincianKanan"><input id="satu" class="inputText" type="text" disabled="disabled"/></div>
+            <div class="rincianKiri">Assignee</div><div class="rincianKanan"><input id="dua" class="inputText" type="text" disabled="disabled"/></div>
+            <div class="rincianKiri">Komentar</div><div class="rincianKanan"><input id="tiga" class="inputText" type="text" disabled="disabled"/></div>
+            <div class="rincianKiri">Tag</div><div class="rincianKanan"><input id="empat" class="inputText" type="text" disabled="disabled"/></div>
+             <div class="rincianKiri">Attachment</div><div class="rincianKanan"><video src="E:\a.WebM" type="video/webm" autoplay>
+    Your browser does not support the <code>video</code> element.
+    </video></div>
+            <br/>
+    </div>
+	<br/>
+</body>
+</html>
