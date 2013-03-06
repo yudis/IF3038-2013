@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="Dashboard.css"/>
+
+        <script>
+            $(document).ready(function() {
+                $("#done_edit_button").hide();
+
+            });
+
+        </script>
+    </head>
+    <body>
+        <div id="page">
+            <!-- =============== H E A D E R =============== -->
+            <a id="logoimage" href="Dashboard.html">
+                <img id="logo" src="Images/logo.png"/>
+            </a>
+
+            <div class="menubar">
+                <ul>
+
+                    <li>
+                        <a href="Dashboard.html">
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="Profile.html">
+                            Profile
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="MainPage.html">
+                            Logout
+                        </a>
+                    </li>
+
+                    <li>
+                        <input type="search" id="search_box"
+                               placeholder="Search Task"
+                               autocomplete="on"/>
+                    </li>
+                </ul>
+            </div>
+
+            <!--=============== S I D E B A R ===============--> 
+            <div class="content">
+                <div class="sidebar">
+                    <h2>Categories</h2>
+                    <ul>
+                        <li>
+                            <a href="#allTask" class="task_existing_category"
+                               onclick="HideAllIDs();
+                showdiv('task_set_1');
+                showdiv('task_set_2');
+                showdiv('task_set_3');">
+                                All
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#taskCategory1" class="task_existing_category"
+                               onclick="HideAllIDs();
+                showdiv('task_set_1');
+                showdiv('add_task_div');">
+                                Personal
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#taskCategory2" class="task_existing_category"
+                               onclick="HideAllIDs();
+                showdiv('task_set_2');
+                showdiv('add_task_div');">
+                                Household
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#taskCategory3" class="task_existing_category"
+                               onclick="HideAllIDs();
+                showdiv('task_set_3');
+                showdiv('add_task_div');">
+                                College
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#taskCategory4" id="the_new_category" class="task_existing_category">
+                                New Category
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="add_button" id="add_category" href="#new_category">+</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--=============== T A S K   L I S T ===============--> 
+                <div class="task_list">
+                    <div id="task_set_1">
+                        <h3>Personal</h3>
+                        <ul>
+                            <li>
+                                <a href="#task1" onclick="showdiv('task_detail_1'); HideDiv('task_detail_2'); HideDiv('task_details_3')">Task 1</a>
+                            </li>
+                            <li id="new_task_1">
+                                <a href="#task1">New Task 1</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="task_set_2">
+                        <h3>Household</h3>
+                        <ul>
+                            <li>
+                                <a href="#task2" onclick="showdiv('task_detail_2'); HideDiv('task_detail_1'); HideDiv('task_detail_3')">Task 2</a>
+                            </li>
+                            <li id="new_task_2">
+                                <a href="#task1">New Task 2</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="task_set_3">
+                        <h3>College</h3>
+                        <ul>
+                            <li>
+                                <a href="#task3" onclick="showdiv('task_detail_3'); HideDiv('task_detail_1'); HideDiv('task_detail_2')">Task 3</a>
+                            </li>
+                            <li id="new_task_3">
+                                <a href="#task1">New Task 3</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="add_task_div">
+                        <a class="add_button" href="#new_task_popup">+</a>
+                    </div>
+                </div>
+
+                <!--=============== T A S K   D E T A I L ===============--> 
+                <div class="task_detail">
+                    <div class="task_details" id="task_detail_1">
+                        <form class ="task_detail_form"
+                              action=""
+                              enctype="multipart/form-data">
+                            <ul>
+                                <li>
+                                    <label class="lbl">
+                                        Task Name:
+                                    </label>
+                                    <label id="t_name">
+                                        Task 1
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class ="lbl">
+                                        Attachment:
+                                    </label>
+                                    <img src="Images/logo.png"/>
+                                </li>
+
+                                <li>
+                                    <label class="lbl">
+                                        Deadline:
+                                    </label>
+                                    <label id="deadline_info">
+                                        22-Feb-2013
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class="lbl">
+                                        Assignee:
+                                    </label>
+                                    <label id="assignee_info">
+                                        Mwaha~
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class="lbl">
+                                        Commentary:
+                                    </label>
+                                    <label id="commentary">
+                                        No Comment
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class="lbl">
+                                        Tag:
+                                    </label>
+                                    <label id="tag_info">
+                                        College
+                                    </label>
+                                </li>
+                            </ul>
+                        </form>
+                        <div id="edit_task_button" class="show">
+                            <input type="button"
+                                   value="Edit"
+                                   onclick="EditTaskDetail();"/>
+                        </div>
+
+                        <div id="done_edit_button" class="hide">
+                            <input type="submit"
+                                   class="submit"
+                                   value="Done"
+                                   onblur="DoneEditDetail();"/>
+                        </div>
+                    </div>
+
+                    <div class="task_details" id="task_detail_2">
+                        <form class ="task_detail_form"
+                              action=""
+                              enctype="multipart/form-data">
+                            <ul>
+                                <li>
+                                    <label class="lbl">
+                                        Task Name:
+                                    </label>
+                                    <label id="t_name">
+                                        Task 2
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class ="lbl">
+                                        Attachment:
+                                    </label>
+                                    <video src="Images/a.FLV"/>
+                                </li>
+
+                                <li>
+                                    <label class="lbl">
+                                        Deadline:
+                                    </label>
+                                    <label id="deadline_info">
+                                        22-Feb-2013
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class="lbl">
+                                        Assignee:
+                                    </label>
+                                    <label id="assignee_info">
+                                        Mwehe~
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class="lbl">
+                                        Commentary:
+                                    </label>
+                                    <label id="commentary">
+                                        No Comment
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class="lbl">
+                                        Tag:
+                                    </label>
+                                    <label id="tag_info">
+                                        College
+                                    </label>
+                                </li>
+                            </ul>
+                        </form>
+                        <div id="edit_task_button" class="show">
+                            <input type="button"
+                                   value="Edit"
+                                   onclick="EditTaskDetail();"/>
+                        </div>
+
+                        <div id="done_edit_button" class="hide">
+                            <input type="submit"
+                                   class="submit"
+                                   value="Done"
+                                   onblur="DoneEditDetail();"/>
+                        </div>
+                    </div>
+
+                    <div class="task_details" id="task_detail_3">
+                        <form class ="task_detail_form"
+                              action=""
+                              enctype="multipart/form-data">
+                            <ul>
+                                <li>
+                                    <label class="lbl">
+                                        Task Name:
+                                    </label>
+                                    <label id="t_name">
+
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class ="lbl">
+                                        Attachment:
+                                    </label>
+                                    <label id="t_att">
+                                        No Attachment
+                                    </label>
+
+                                </li>
+
+                                <li>
+                                    <label class="lbl">
+                                        Deadline:
+                                    </label>
+                                    <label id="deadline_info">
+                                        22-Feb-2013
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class="lbl">
+                                        Assignee:
+                                    </label>
+                                    <label id="assignee_info">
+                                        Mwaha~
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class="lbl">
+                                        Commentary:
+                                    </label>
+                                    <label id="commentary">
+                                        No Comment
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class="lbl">
+                                        Tag:
+                                    </label>
+                                    <label id="tag_info">
+                                        College
+                                    </label>
+                                </li>
+                            </ul>
+                        </form>
+                        <div id="edit_task_button" class="show">
+                            <input type="button"
+                                   value="Edit"
+                                   onclick="EditTaskDetail();"/>
+                        </div>
+
+                        <div id="done_edit_button" class="hide">
+                            <input type="submit"
+                                   class="submit"
+                                   value="Done"
+                                   onblur="DoneEditDetail();"/>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+
+        <!--=============== N E W   T A S K ===============--> 
+        <div class="popup" id="new_task_popup">
+            <div>
+                <a href="#close" title="Close" class="close_popup">X</a>
+                <h2>Add New Task</h2>
+                <form class="new_task_form"
+                      action="#close">
+                    <ul>
+                        <li>
+                            <label class="all_label" for="task_name">
+                                Task Name:
+                            </label>
+                            <input type="text"
+                                   id="task_name"
+                                   name="task_name"
+                                   placeholder="New Task"
+                                   pattern="[A-Za-z0-9]{1,}"
+                                   maxlength=25
+                                   required/>
+                        </li>
+
+                        <li>
+                            <label class="all_label" for="attachment">
+                                Attachment:
+                            </label>
+                            <input type="file"
+                                   id="attachment"
+                                   name="attachment"
+                                   onsubmit="ValidateFileType();"/>
+                            <span class="form_hint" id="image_detected">Detected an image file</span>
+                            <span class="form_hint" id="video_detected">Detected a video file</span>
+                            <span class="form_hint" id="file_detected">Detected a common file format</span>
+                        </li>
+
+                        <li>
+                            <label class="all_label" for="deadline">
+                                Deadline:
+                            </label>
+                            <input id="deadline"
+                                   type="text"
+                                   placeholder="22-Feb-2013"
+                                   required/>
+                        </li>
+
+                        <li>
+                            <label class="all_label" for="assignee">
+                                Assignee:
+                            </label>
+                            <input type="text"
+                                   id="assignee"
+                                   name ="assignee"/>
+                        </li>
+
+                        <li>
+                            <label class="all_label" for="tag">
+                                Tag:
+                            </label>
+                            <input type="text"
+                                   id="tag"
+                                   name="tag"
+                                   placeholder="tag1, tag2, tag3"/>
+                            <span class="form_hint">
+                                Separate different tags with comma(,)
+                            </span>
+                        </li>
+
+                        <li>
+                            <input class="submit" id="submit_new_task" type="submit" onclick="AddNewTask();"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+
+        <!--=============== N E W   C A T E G O R Y ===============--> 
+        <div class="popup" id="new_category">
+            <div>
+                <a href="#close" title="Close" class="close_popup">X</a>
+                <h2>Add New Category</h2>
+                <form class="allforma" id="new_category_form" action="#close">
+                    <ul>
+                        <li>
+                            <label class="all_label" for="new_category_name">
+                                Category Name:
+                            </label>
+                            <input id="new_category_name" type="text" required/>
+                        </li>
+                        <li>
+                            <label class="all_label"  for="authorized_users">
+                                Authorized Users:
+                            </label>
+                            <input type="text" required/>
+                        </li>
+                        <li>
+                            <input id="authorized_users" type="submit" class="submit" onclick="addNewCategory();"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="Dashboard.js"></script>
+    </body>
+</html>
