@@ -1,10 +1,11 @@
 NIM		: 13511601
 NAMA 	: Whilda Chaq
 MAIL 	: chaqjozz@rocketmail.com
+GITHUB_ID  : wchaq
 
-NIM		:
+NIM		: 13510081
 NAMA	: Devin Hoesen
-MAIL	: 
+MAIL	: dvnh.squall.ff8@gmail.com
+GITHUB_ID	: v1nz
 
-GITHUB_ID	: wchaq
 URL REPO	: https://github.com/wchaq/IF3038-2013.git
