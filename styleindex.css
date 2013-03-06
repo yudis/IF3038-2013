@@ -1,0 +1,265 @@
+@font-face{
+			font-family:"biodata";
+			src:url("LoveYaLikeASister.ttf");
+		}
+		
+		
+		@font-face{
+			font-family:"headerfont";
+			src : url("RPRSSTMP.ttf");
+		}
+
+		@font-face{
+			font-family:"tagline";
+			src :url("Fh_Scribble.ttf");
+		}
+		
+		body{
+			position: relative;
+			min-height:100%;
+			width:1366px;
+			margin: 0px;
+			background-image: url('oldbook.png');
+			background-attachment:fixed;
+			background-repeat:no-repeat;
+			float:center;
+		}
+		
+		.header{
+			box-shadow: 0px 10px 4px #333333;
+		}
+		
+		.hbackground{
+			border:2 px solid black;
+			border-radius: 5px;
+			box-shadow: 0px 7px 4px #333333;
+			background:#000000;
+			width : 1366px;
+			height:100px;
+			padding: 0 px 0 px;
+			position:fixed;
+		}
+		
+		.footer{
+			border:2 px solid black;
+			background:#000000;
+			width:1366px;
+			height:55px;
+			position:fixed;
+			margin-top:620px;
+			padding: 0 px 0 px;
+		}
+		
+		.ftext{
+			font-family:"headerfont";
+			font-size : 15px;
+			color:white;
+			text-align: center;
+			margin-top: 10px;
+		}
+		
+		.ftext:hover{
+			text-transform:upperscript;
+			color:#E6B85C;
+		}
+		
+		#hlogo{
+			float: left;
+			margin-left: 10px;
+			width:100px;
+			height:100px;
+			background-image:url('logosmall.jpg');
+			background-repeat:no-repeat;
+			text-indent:-999999em;
+			clear:none
+		}
+		
+		#htitle{
+			float: left;
+			margin-left:-20px;
+			font-size:65px;
+			font-family:"headerfont";
+			color:white;
+		}
+		
+		#htitle:hover{
+			float: left;
+			font-size:65px;
+			font-family:"headerfont";
+			color:#E6B85C;
+		}
+		
+		.tagline{
+			float:left;
+			position:absolute;
+			margin-left:110px;
+			margin-top:68px;
+			font-family:"tagline";
+			font-size:30 px;
+			color:white;
+		}
+		
+		.tagline:hover{
+			float:left;
+			position:fixed;
+			margin-left:110px;
+			margin-top:68px;
+			font-family:"tagline";
+			font-size:28 px;
+			color:#E6B85C;
+		}
+		
+		#login{	
+			float:right;
+			margin-top:10px;
+			margin-right:100px;
+			padding: 5px 5px;
+		}
+		
+		.login{
+			font-family:"headerfont";
+			font-size:13px;
+			color:white;
+		}
+		
+		input{
+			font-family:"biodata";
+		}
+		
+		input:hover{
+			border: 1px solid #999999 !important;
+		}
+	
+		.registerq{
+			float:left;
+			position:absolute;
+			margin-left:880px;
+			margin-top:65px;
+			font-family:"biodata";
+			font-size: 12px;
+			color: white;
+		}
+		
+		.registerq a{
+			color:#800000;
+			text-decoration:none;
+		}
+		
+		.registerq a:hover{
+			text-shadow:0px 0px 10px #323436;
+		}
+		
+		.content{
+                        z-index: 0;
+			position:absolute;
+			margin-top:150px;
+			text-align:justified;
+		}
+		
+		.row{
+			font-family:"biodata";
+			font-size:8px;
+			color:black;
+			margin-bottom: 8px;
+		}
+		
+		.labelrow{
+                    float: left;
+                        width: 150px;
+			font-size: 12px;
+			font-weight: 400;
+		}
+		.row input:hover{
+			border: 1px solid #999999 !important;
+		}
+		
+		.row input:focus{
+			border: 1px solid orange !important;
+			box-shadow: inset 1px 1px 1px 1px #dadada;
+			-moz-box-shadow: inset 1px 1px 1px 1px #dadada;
+			-webkit-box-shadow: inset 1px 1px 1px 1px #dadada;
+		}
+		
+                #alpha{
+                    position: absolute;
+                    z-index: 200;
+                    width: 1366px;
+                    height: 800px;
+                    margin-top: -200px;
+                    opacity: 0.8;
+                    background-color: black;
+                    display: none;
+                }
+                #form_register{
+                    position: relative;
+                    z-index: 10000;
+                    margin-left: 300px;
+                    margin-top: -50px;
+                    padding-top: 50px;
+                    padding-left: 50px;
+                    border-radius: 10%;
+                    border-style: solid;
+                    border-color: #E6B85C;
+                    border-width: 3px;
+                    background-color: white;
+                    width: 600px;
+                    height: 350px;
+                    display: none;
+                }
+		
+		#formRegister input[type="text"], #border_register_in input[type="password"], #border_register_in input[type="date"], 
+		#formRegister input[type="email"], #border_register_in input[type="file"]{
+			margin-top: 2px;
+			margin-left: 10px;
+			width: 155px;
+			height: 26px;
+			border: 1px solid #d9d9d9;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			-webkit-border-radius: 1px;
+			-moz-border-radius: 1px;
+			border-radius: 1px;
+		}
+		
+		#border_register_in input[type="submit"]{
+			float: right;
+			font-weight: bold;
+			color: #ffffff;
+			padding: 5px 12px;
+			border: 1px solid #3079ed;
+			text-shadow: 0 1px rgba(0,0,0,0.1);
+			background-color: #4d90fe;
+			background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#4787ed));
+			background-image: -webkit-linear-gradient(top,#4d90fe,#4787ed);
+			background-image: -moz-linear-gradient(top,#4d90fe,#4787ed);
+			background-image: -ms-linear-gradient(top,#4d90fe,#4787ed);
+			background-image: -o-linear-gradient(top,#4d90fe,#4787ed);
+			background-image: linear-gradient(to bottom,#4d90fe,#4787ed);
+		}
+		
+		#border_register_in  input[type="submit"]:hover{
+			border: 1px solid #2f5bb7;
+			color: #fff;
+			text-shadow: 0 1px rgba(0,0,0,0.3);
+			background-color: #357ae8;
+			background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
+			background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
+			background-image: -moz-linear-gradient(top,#4d90fe,#357ae8);
+			background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);
+			background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
+			background-image: linear-gradient(to bottom,#4d90fe,#357ae8);
+		}
+		
+		#login_submit{
+			position:relative;
+			margin-right:5px;
+			float:right;
+		}
+		
+		img{
+			width:600px;
+			height:450px;
+			margin-left:450px;
+		}
+	

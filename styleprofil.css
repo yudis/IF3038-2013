@@ -1,0 +1,274 @@
+
+		@font-face{
+			font-family:"biodata";
+			src:url("LoveYaLikeASister.ttf");
+		}
+		
+		
+		@font-face{
+			font-family:"headerfont";
+			src : url("RPRSSTMP.ttf");
+		}
+
+		@font-face{
+			font-family:"tagline";
+			src :url("Fh_Scribble.ttf");
+		}
+		
+		body{
+			position: relative;
+			min-height:100%;
+			width:1366px;
+			margin: 0px;
+			background-image: url('latar.png');
+			background-attachment:fixed;
+			background-repeat:no-repeat;
+			float:center;
+		}
+		
+		.profil{
+			position:fixed;
+			width:125px;
+			height:700px;
+			background-image:url('pembatas 2.png');
+			background-repeat:no-repeat;
+			margin-left:100px;
+		}
+		
+		.back{
+			margin-top:80px;
+		}
+		
+		.header{
+			box-shadow: 0px 10px 4px #333333;
+		}
+		
+		.hbackground{
+			border:2 px solid black;
+			border-radius: 5px;
+			box-shadow: 0px 7px 4px #333333;
+			background:#000000;
+			width : 1366px;
+			height:100px;
+			padding: 0 px 0 px;
+			position:fixed;
+		}
+		
+		.footer{
+			border:2 px solid black;
+			background:#000000;
+			width:1366px;
+			height:55px;
+			position:fixed;
+			padding: 0 px 0 px;
+		}
+		
+		.ftext{
+			font-family:"headerfont";
+			font-size : 15px;
+			color:white;
+			text-align: center;
+			margin-top: 10px;
+		}
+		
+		.ftext:hover{
+			text-transform:upperscript;
+			color:#E6B85C;
+		}
+			
+		
+		#hlogo{
+			float: left;
+			margin-left: 10px;
+			width:100px;
+			height:100px;
+			background-image:url('logosmall.jpg');
+			background-repeat:no-repeat;
+			text-indent:-999999em;
+			clear:none
+		}
+		
+		#htitle{
+			float: left;
+			margin-left:-20px;
+			font-size:65px;
+			font-family:"headerfont";
+			color:white;
+		}
+		
+		#htitle:hover{
+			float: left;
+			font-size:65px;
+			font-family:"headerfont";
+			color:#E6B85C;
+		}
+		
+		.tagline{
+			float:left;
+			position:absolute;
+			margin-left:110px;
+			margin-top:68px;
+			font-family:"tagline";
+			font-size:30 px;
+			color:white;
+		}
+		
+		.tagline:hover{
+			float:left;
+			position:fixed;
+			margin-left:110px;
+			margin-top:68px;
+			font-family:"tagline";
+			font-size:28 px;
+			color:#E6B85C;
+		}
+		
+		#hmenus{
+			float:left;
+			position:absolute;
+			margin-left:55px;
+			margin-top:55px;
+			font-size:23px;
+			font-family:"headerfont";
+			color:white;
+			display: inline-block;
+		}
+		
+		#hmenus a{
+			text-decoration: none;
+			-o-transition:0.5s;
+			-ms-transition:0.5s;
+			-moz-transition:0.5s;
+			-webkit-transition:0.5s;
+			transition:0.5s;
+			color:white;
+		}
+		
+		#hmenus a:hover{
+			color:#E6B85C;
+			text-shadow: 0px 1px 1px rgba(0,0,0,1);
+			text-decoration: none;
+			text-transform: uppercase;
+		}
+		
+		
+		#search{
+			float: right;
+			margin-right: 100px;
+			margin-top:55px;
+		}
+		
+		#search:hover{
+			float:right;
+			margin-right: 100px;
+			margin-top:55px;
+			background-image:url('splashs.png');
+			background-repeat:no-repeat;
+			background-attachment:fixed;
+			width:100 px;
+			height:30 px;
+		}
+		
+		.search{
+			font-family:"headerfont";
+			font-size:21px;
+			color:white;
+			float:right;
+		}
+		
+		input{
+			font-family:"biodata";
+		}
+
+		
+		.profilutama{
+			margin-left:15px;
+		}
+		
+		#profilu{
+			position:fixed;
+			margin-top: 385px;
+		}
+		
+		h1{
+			font-family:"headerfont";
+			font-size: 20px;
+			float:left;
+			text-shadow: 0px 5px 0px #2F4F4F;
+		}
+		
+		.biodata{
+			height: auto;
+			width:800px;
+			margin-left: 25px;
+		}
+		
+		#picture{
+			margin-left: 550px;
+			margin-top	: 5px;
+			border: 4px dashed black;
+			width: 165px;
+			height: 235px;
+		}
+		
+		img{
+			width: 165px;
+			height: 235px;
+			float:center;
+		}
+		
+		.biolengkap{
+			font-family:"biodata";
+			font-size: 15px;
+			float:left;
+			margin-left: 220px;
+			margin-top	:50px;
+		}
+		
+		.biolengkap a{
+			text-decoration: none;
+			color:#144fa0;;
+		}
+		
+		.biolengkap a:hover{
+			text-decoration: none;
+			font-size:16px;
+			color:#144fa0;
+		}
+		
+		.judul{
+			text-shadow: 3px 3px 2px #b18121;
+		}
+		
+		#listquest{
+			float:center;
+			font-family:"biodata";
+			font-size: 20px;
+			margin-left: 700px;
+		}
+		
+		p.tquest{
+			margin-left:90px;
+			text-shadow: 3px 3px 2px #b18121;
+		}
+	
+		.quest{
+			float: center;
+			font-family:"biodata";
+			font-size: 15px;
+			
+		}
+		
+		li:hover{
+			text-shadow: 0px 0px 1px #323436;
+		}
+		
+		.done{
+			color:#8B0000;
+		}
+		
+		.done:hover{
+			color:#8B0000;
+			font-size:16px;
+		}
+		
