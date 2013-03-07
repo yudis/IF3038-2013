@@ -37,31 +37,47 @@ register_form.onsubmit = function()
 	if ((register_password.value==register_confirm_password.value) && (register_username.value!=register_password.value) &&
 		(register_email.value!=register_password.value))
 	{
-		var user = new Object();
-		user.userName = register_username.value;
-		user.passWord = register_password.value;
-		user.fullName = register_name.value;
-		user.birthDate = birth_date.value;
-		user.emailAddress = register_email.value;
-		
-		var tempavatar = "images/"+register_avatar.value.split("\\")[register_avatar.value.split("\\").length-1];
-		user.Avatar = tempavatar;
-		
-		var userlist = JSON.parse(localStorage.MOA_userList);
-		userlist[userlist.length] = user;
-		localStorage.MOA_userList = JSON.stringify(userlist);
-		
-		close();
-		register_form.reset();
-		
-		register_username.backgroundImage = "";
-		register_password.backgroundImage = "";
-		register_confirm_password.backgroundImage = "";
-		register_name.backgroundImage = "";
-		birth_date.backgroundImage = "";
-		register_email.backgroundImage = "";
-		register_avatar.backgroundImage = "";
-		alert("Registrasi berhasil, silahkan login");
+		var data = serialize(register_form);
+		var request = new ajaxRequest();
+		request.onreadystatechange = function()
+		{
+			if (request.readyState==4)
+			{
+				if (request.status==200 || window.location.href.indexOf("http")==-1)
+				{
+					var result = JSON.parse(request.responseText);
+					if (result.status == "success")
+					{
+						close();
+						register_form.reset();
+						
+						register_username.backgroundImage = "";
+						register_password.backgroundImage = "";
+						register_confirm_password.backgroundImage = "";
+						register_name.backgroundImage = "";
+						birth_date.backgroundImage = "";
+						register_email.backgroundImage = "";
+						register_avatar.backgroundImage = "";
+						alert("Registrasi berhasil, silahkan login");
+						window.location = "dashboard.php";
+					}
+					else
+					{
+						for (var temp in result.error)
+						{
+							alert(result.error[temp]);
+						}
+					}
+				}
+				else
+				{
+					alert("Mohon maaf, sedang ada kesalahan pada server.");
+				}
+			}
+		}
+		request.open("POST", base_url+"ws/register_check.php", true);
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		request.send(data);		
 	}
 	else if (register_password.value!=register_confirm_password.value)
 	{
@@ -81,9 +97,9 @@ register_form.onsubmit = function()
 register_username.onkeyup = function()
 {
 	if (this.checkValidity() && (register_username.value != register_password.value))
-		this.style.backgroundImage = "url('images/valid.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/valid.png')";
 	else
-		this.style.backgroundImage = "url('images/warning.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/warning.png')";
 	check_submit();
 }
 
@@ -91,57 +107,57 @@ register_password.onkeyup = function()
 {
 	if (this.checkValidity() && (register_username.value != register_password.value) && (register_email.value != register_password.value))
 	{
-		this.style.backgroundImage = "url('images/valid.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/valid.png')";
 		document.getElementById("register_confirm_password").pattern = this.value;
 	}
 	else
-		this.style.backgroundImage = "url('images/warning.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/warning.png')";
 	check_submit();
 }
 
 register_confirm_password.onkeyup = function()
 {
 	if (this.checkValidity() && register_password.checkValidity())
-		this.style.backgroundImage = "url('images/valid.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/valid.png')";
 	else
 	
-		this.style.backgroundImage = "url('images/warning.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/warning.png')";
 	check_submit();
 }
 
 register_name.onkeyup = function()
 {
 	if (this.checkValidity())
-		this.style.backgroundImage = "url('images/valid.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/valid.png')";
 	else
-		this.style.backgroundImage = "url('images/warning.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/warning.png')";
 	check_submit();
 }
 
 birth_date.onkeyup = function()
 {
 	if ((this.checkValidity()) && (check_date(this.value)))
-		this.style.backgroundImage = "url('images/valid.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/valid.png')";
 	else
-		this.style.backgroundImage = "url('images/warning.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/warning.png')";
 	check_submit();
 }
 
 register_email.onkeyup = function()
 {
 	if (this.checkValidity() && (register_email.value != register_password.value))
-		this.style.backgroundImage = "url('images/valid.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/valid.png')";
 	else
-		this.style.backgroundImage = "url('images/warning.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/warning.png')";
 	check_submit();
 }
 
 register_avatar.onchange = function()
 {
 	if (check_file_jpeg(this))
-		this.style.backgroundImage = "url('images/valid.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/valid.png')";
 	else
-		this.style.backgroundImage = "url('images/warning.png')";
+		this.style.backgroundImage = "url('"+base_url+"images/warning.png')";
 	check_submit();
 }
 

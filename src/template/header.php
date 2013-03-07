@@ -1,8 +1,8 @@
 <header>
 	<div id="header_wrap" class="wrap">
-		<a href="index.html"> <img id="header_logo" src="images/logo.png" alt="Logo Produk" /> </a>
+		<a href="index.php"> <img id="header_logo" src="<?php echo $_SESSION['base_url']; ?>images/logo.png" alt="Logo Produk" /> </a>
 		<div id="header_title">
-			<h1> <a href="index.html">MOA</a> </h1>
+			<h1> <a href="index.php">MOA</a> </h1>
 			<h4>Multiuser Online Agenda</h4>
 		</div>
 		<div id="border_header"></div>
@@ -26,7 +26,6 @@
 			</nav>
 			<div id="login_area">
 				<?php 
-					// check login
 					if (!ISSET($_SESSION['user_id']))
 					{
 				?>
@@ -65,21 +64,44 @@
 				?>
 				<div class="clear"></div>
 			</div>
-			<div id="border_search"></div>
+			<?php 
+				if (ISSET($_SESSION['user_id']))
+				{
+			?>
+					<div id="border_search"></div>
 
-			<div id="search">
-				<div id="search_inner">
-					<div id="search_button"></div>
-					<div id="search_left"></div>
-					<form id="search_form">
-						<input id="search_text" name="search_query" type="text" />
-					</form>
-					<div id="search_right"></div>
-				</div>
-			</div>
+					<div id="search">
+						<div id="search_inner">
+							<div id="search_button"></div>
+							<div id="search_left"></div>
+							<form id="search_form">
+								<input id="search_text" name="search_query" type="text" />
+							</form>
+							<div id="search_right"></div>
+						</div>
+					</div>
+			<?php
+				}
+			?>
 		</div>
 		<div class="clear"></div>
 	</div>
 </header>
-<script type="text/javascript" src="js/search.js"></script>
-<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript">
+	var base_url = "<?php echo $_SESSION['base_url']; ?>";
+</script>
+<?php 
+	if (!ISSET($_SESSION['user_id']))
+	{
+?>
+		<script type="text/javascript" src="<?php echo $_SESSION['base_url']; ?>js/login.js"></script>
+<?php
+	}
+	else
+	{
+?>
+		<script type="text/javascript" src="<?php echo $_SESSION['base_url']; ?>js/search.js"></script>
+		<script type="text/javascript" src="<?php echo $_SESSION['base_url']; ?>js/logout.js"></script>
+<?php
+	}
+?>

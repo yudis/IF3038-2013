@@ -162,9 +162,9 @@ var datePicker =
 		this.blur();
 		
 		if ((birth_date.checkValidity()) && (check_date(birth_date.value)))
-			birth_date.style.backgroundImage = "url('images/valid.png')";
+			birth_date.style.backgroundImage = "url('"+base_url+"images/valid.png')";
 		else
-			birth_date.style.backgroundImage = "url('images/warning.png')";
+			birth_date.style.backgroundImage = "url('"+base_url+"images/warning.png')";
 		check_submit();
 	},
 	

@@ -1,29 +1,43 @@
-<?php include "template/is_logout.php"; ?>
+<?php
+	$session_time = 30*24*60*60;
+	ini_set('session.gc-maxlifetime', $session_time);
+
+	session_start();
+	if ((!ISSET($_SESSION['base_url'])) || (!ISSET($_SESSION['full_url'])) || (!ISSET($_SESSION['full_path'])))
+	{
+		$folder = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], "/")+1);  
+		$protocol = (ISSET($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+		$_SESSION['base_url'] = $folder;
+		$_SESSION['full_url'] = $protocol . "://" . $_SERVER['HTTP_HOST'] . $folder;
+		$_SESSION['full_path'] = $_SERVER['DOCUMENT_ROOT'].$folder;
+	}
+?>
+<?php include $_SESSION['full_path']."template/is_logout.php"; ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="" />
-		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+		<link rel="shortcut icon" type="image/x-icon" href="<?php echo $_SESSION['base_url']; ?>images/favicon.ico" />
 		<title>MOA</title>
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="<?php echo $_SESSION['base_url']; ?>css/style.css" />
+		<link rel="stylesheet" href="<?php echo $_SESSION['base_url']; ?>css/index.css" />
 	</head>
 	<body>
 		<?php
 			$menu = array();
 			$menu["Daftar"] =  array("id" => "register_button", "href" => "javascript:register();");
 		?>
-		<?php include "template/header.php"; ?>
+		<?php include $_SESSION['full_path']."template/header.php"; ?>
 		<section>
 			<div id="content_wrap" class="wrap">
 				<div id="slide_left">
 				</div>
 				<div id="content_wrap_inner">
-					<img class="slide_item" src="images/tes.jpg" alt="gambar 1" />
-					<img class="slide_item" src="images/tes2.jpg" alt="gambar 2" />
-					<img class="slide_item" src="images/tes3.jpg" alt="gambar 3" />
-					<img class="slide_item" src="images/tes4.jpg" alt="gambar 4" />
+					<img class="slide_item" src="<?php echo $_SESSION['base_url']; ?>images/tes.jpg" alt="gambar 1" />
+					<img class="slide_item" src="<?php echo $_SESSION['base_url']; ?>images/tes2.jpg" alt="gambar 2" />
+					<img class="slide_item" src="<?php echo $_SESSION['base_url']; ?>images/tes3.jpg" alt="gambar 3" />
+					<img class="slide_item" src="<?php echo $_SESSION['base_url']; ?>images/tes4.jpg" alt="gambar 4" />
 				</div>
 				<div id="slide_right">
 				</div>
@@ -40,7 +54,7 @@
 			$breadcrumbs = array();
 			$breadcrumbs["Beranda"] = array("href" => "index.php", "class" => "active");
 		?>
-		<?php include "template/footer.php"; ?>
+		<?php include $_SESSION['full_path']."template/footer.php"; ?>
 		
 		<div id="black_trans">
 			<div id="frame_register">
@@ -88,10 +102,10 @@
 			</div>
 		</div>
 		
-		<?php include "template/calendar.php"; ?>
+		<?php include $_SESSION['full_path']."template/calendar.php"; ?>
 		
-		<script type="text/javascript" src="js/request.js"></script>
-		<script type="text/javascript" src="js/register.js"></script>
+		<script type="text/javascript" src="<?php echo $_SESSION['base_url']; ?>js/request.js"></script>
+		<script type="text/javascript" src="<?php echo $_SESSION['base_url']; ?>js/register.js"></script>
 		<script type="text/javascript">
 			/*----- Bagian SlideShow ----*/
 			var content_wrap = document.getElementById("content_wrap");

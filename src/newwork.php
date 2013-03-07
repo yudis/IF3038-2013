@@ -1,13 +1,27 @@
-<?php include "template/is_login.php"; ?>
+<?php
+	$session_time = 30*24*60*60;
+	ini_set('session.gc-maxlifetime', $session_time);
+
+	session_start();
+	if ((!ISSET($_SESSION['base_url'])) || (!ISSET($_SESSION['full_url'])) || (!ISSET($_SESSION['full_path'])))
+	{
+		$folder = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], "/")+1);  
+		$protocol = (ISSET($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+		$_SESSION['base_url'] = $folder;
+		$_SESSION['full_url'] = $protocol . "://" . $_SERVER['HTTP_HOST'] . $folder;
+		$_SESSION['full_path'] = $_SERVER['DOCUMENT_ROOT'].$folder;
+	}
+?>
+<?php include $_SESSION['full_path']."template/is_login.php"; ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="" />
-		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+		<link rel="shortcut icon" type="image/x-icon" href="<?php echo $_SESSION['base_url']; ?>images/favicon.ico" />
 		<title>MOA - Tambah Tugas</title>
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/work.css" />
+		<link rel="stylesheet" href="<?php echo $_SESSION['base_url']; ?>css/style.css" />
+		<link rel="stylesheet" href="<?php echo $_SESSION['base_url']; ?>css/work.css" />
 	</head>
 	<body>
 		<?php
@@ -15,7 +29,7 @@
 			$menu["Dashboard"] =  array("href" => "dashboard.php", "class" => "active");
 			$menu["Profil"] = array("href" => "profil.php");
 		?>
-		<?php include "template/header.php";?>				
+		<?php include $_SESSION['full_path']."template/header.php";?>				
 		<section>
 			<div id="content_wrap" class="wrap">
 				<div id="work_area">
@@ -62,12 +76,12 @@
 			$breadcrumbs["Dashboard"] = array("href" => "dashboard.php");
 			$breadcrumbs["Tambah Tugas Baru"] = array("href" => "#", "class" => "active");
 		?>
-		<?php include "template/footer.php";?>
+		<?php include $_SESSION['full_path']."template/footer.php";?>
 		
-		<?php include "template/calendar.php"; ?>
+		<?php include $_SESSION['full_path']."template/calendar.php"; ?>
 		
-		<script type="text/javascript" src="js/search.js"></script>
-		<script type="text/javascript" src="js/logout.js"></script>
+		<script type="text/javascript" src="<?php echo $_SESSION['base_url']; ?>js/search.js"></script>
+		<script type="text/javascript" src="<?php echo $_SESSION['base_url']; ?>js/logout.js"></script>
 		<script type="text/javascript">			
 			/*----- Bagian tugas baru ----*/
 			var new_task_form = document.getElementById("new_task_form");

@@ -43,7 +43,7 @@ form_login.onsubmit = function()
 			}
 		}
 	}
-	request.open("POST", "ws/login.php", true);
+	request.open("POST", base_url+"ws/login.php", true);
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.send(data);
 	
