@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html dir="ltr" xml:lang="de" xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width; initial-scale=1.0">
+<title>Untask.Me</title>
+
+<link rel="stylesheet" href="images/Mobile.css" />
+<link rel="stylesheet" href="images/Default.css" />
+<link rel="stylesheet" href="images/Sexyred.css" />
+<link rel="stylesheet" href="calendar.css">
+
+
+
+</head>
+<body onload="set_style_from_cookie()">
+<div id="mobile">
+<div id="kiri">
+<div id="kiridalem">
+
+   <header>
+ <a href="mytask.html#all"><img src="images/Untitled-1.png" alt="" width="450" height="125" /></a>
+ 
+	
+  		<nav class="nav">
+				<a href="mytask.html#all"><span>My Task</span></a>
+			  <a href="myprofile.html#all"><span>My Profile</span></a>
+				<a href="index.html"><span>Logout</span></a>
+                
+	  	</nav>
+        <div id="searchboxluar">	
+        <form id="searchbox">
+    		<input id="search" type="text" placeholder="Type here">
+    		<input id="submitsearch" type="submitsearch" value="Search">
+	</form>	
+    </div>
+
+
+ </header>
+</div>
+</div>
+
+<div id="haha">
+</div>
+<div id="kanan">
+	  
+         
+<div class="accordionMenu">
+<div class="bubbleluar">
+  <div class="bubble">
+
+<div id="all" class="menuSection">
+  <h2><div class="triangle-r1"></div><a href="#all">All Tasks</a><div class="triangle-l1" display></div></h2>
+  <h3><a href="taskdetail.html">Tugas IMK</a><h4>13 Maret 2013 : School</h4>
+    <p>&nbsp;</p>
+  </h3>
+  <h3>Tugas IMK<h4>13 Maret 2013 : School</h4>
+    <p>&nbsp;</p>
+  </h3>
+   <h3><a href="#newtask" id="task_pop">+ Add New Task</a></h3>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+</div>
+
+
+<div id="school" class="menuSection">
+  <h2><a href="#school">Schoolicious</a> </h2>
+  <h3>Tugas IMK<h4>13 Maret 2013 : School</h4></h3>
+  <h3>Tugas 2 IMK<h4>14 Maret 2013 : School</h4></h3>
+  <h3>Tugas 3 IMK<h4>15 Maret 2013 : School</h4></h3>
+</div>
+<div id="private" class="menuSection">
+  <h2><a href="#private">Private</a> </h2>
+ <h3>Kepo di FB<h4>23 Maret 2013 : Mobile phone</h4></h3>
+     <h3><a href="#newtask" id="task_pop">+ Add New Task</a></h3>
+</div>
+<div id="house" class="menuSection">
+  <h2><a href="#house">Households</a> </h2>
+ <h3>Belanja<h4>15 Maret 2013 : House</h4></h3>
+  <h3>Ngepel<h4>16 Maret 2013 : House</h4></h3>
+  <h3>Tidur<h4>17 Maret 2013 : Everywheres</h4></h3>
+     <h3><a href="#newtask" id="task_pop">+ Add New Task</a></h3>
+</div>
+
+<div id="add" class="menuSection">
+<h2><div class="triangle-r"></div><img src="images/ic_add.png" alt="" width="25" height="25" /><a href="#join_form" id="join_pop">Add New Category</a></h2>
+<div class="triangle-l" display></div>
+</div>
+</div>
+
+</div>
+	   </div>
+	</div>
+
+</div>
+<!-- popup form newtask -->
+<a href="#y" class="overlay" id="newtask"></a>
+<div class="popup">
+	<h2> New Task</h2>
+	<p>Please enter your details here</p>
+	<div>
+		<label for="taskname">Nama task : </label>
+		<input type="text" name="taskname" id="taskname" onkeyup="validateTaskName()" onchange="validateTaskName()">
+		<div id="taskvalid" style="display: none">Nama task tidak boleh mengandung karakter alfanumerik dan tidak boleh kosong</div><br>
+	</div>
+	<div>
+		<label for="attachment">Attachment :</label>
+		<input type="file" name="attachment" id="attachment"><p id="att_valid"></p><br>
+	</div>
+	<div>
+		<div id="calendarDiv"></div>
+		<label for="deadline">Deadline : </label>
+		<input type="text" name="deadline" id="deadline" class="calendarSelectDate"><p id="deadline_valid"></p><br>
+	</div>
+	<div>
+		<label for="asignee">Asignee : </label>
+		<input type="text" name="asignee" id="asignee"><p id="asignee_valid"></p><br>
+	</div>
+	<div>
+		<label for="tag">Tag : </label>
+		<input type="text" name="tag" id="tag"><p id="tag_valid"></p><br>
+	</div>
+    <p>Please seperate tag with comma (,)</p>
+	<div>
+	<input type="button" onclick="task_click()" value="Submit">
+	<a class="close" href="#close"></a>	</div>
+</div> 
+<!-- popup form -->
+        <a href="#x" class="overlay" id="join_form"></a>
+<div class="popup">
+            <h2>Add New Category</h2>
+            <p>Please enter your details here</p>
+            <div>
+                <label for="email">Category Name  :</label>
+                <input type="text" id="email" value="" />
+            </div>
+            <div>
+                <label for="firstname">Participant Names :</label>
+                <input type="text" id="firstname" value="" />
+                <label for="firstname">*use comma (,)</label>
+            </div>
+            <div align="right">
+              <input type="button" onclick="category_click()" value="Save Category" />
+              
+              <a class="close" href="#close"></a>                </div>
+        </div>
+<script type="application/javascript" src="newtask.js"></script>
+<script src="calendar.js"></script>
+</div>
+</body>
+</html>
