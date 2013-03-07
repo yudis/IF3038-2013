@@ -1,3 +1,3 @@
-13510029 Stefanus_Thobi_Sinaga dibunuhgakmati@yahoo.com sthobis
-13510033 Abraham_Krisnanda_Santoso abraham.krisnanda@gmail.com abrahamks
+13510015 Wilson_Fonda wilsonfonda@gmail.com	wilsonfonda
+13510039 Felix_Terahadi 13510039@std.stei.itb.ac.id 13510039
 13510065 Edward_Samuel_Pasaribu edward_samuel_esp@yahoo.com edwardsamuel
