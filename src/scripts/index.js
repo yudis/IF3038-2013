@@ -16,7 +16,7 @@ function next()
     if (num == 4) {
         num = 1
     }
-    document.slider_picture.src=eval("img"+num+".src")
+    document.getElementById("slider_picture").src=eval("img"+num+".src")
 }
 
 function back()
@@ -25,15 +25,15 @@ function back()
     if (num == 0) {
         num = 3
     }
-    document.slider_picture.src=eval("img"+num+".src")
+    document.getElementById("slider_picture").src=eval("img"+num+".src")
 }
 
 function changeRegister() {
     var registerBtn = document.getElementById("register");
     if (isValidUname && isValidPassword && isValidRePassword && isValidFullName && isValidEmail && isValidBday && isValidPhoto) {
-        registerBtn.disabled = 'false';
+        registerBtn.disabled = false;
     } else {
-        registerBtn.disabled = 'true';
+        registerBtn.disabled = true;
     }
 }
 
@@ -185,10 +185,12 @@ function validateAvatar() {
     } else {
         xAvatar.style.border = '2px red solid';
     }
+	
+    changeRegister();
 }
 
 function bdayPicker() {
-    NewCal('bday','ddmmyyyy');
+    NewCal('bday', 'ddmmyyyy');
     return false;
 }
 

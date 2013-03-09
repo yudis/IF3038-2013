@@ -268,7 +268,7 @@ function GenCell(pValue,pHighLight,pColor)//Generate table cell with value
 	}	
 	else
 		vTimeStr="";		
-	PCellStr="<td "+vColor+" width="+CellWidth+" align='center'><font face='verdana' size='2'"+vHLstr1+"<a href=\"javascript:winMain.document.getElementById('"+Cal.Ctrl+"').value='"+Cal.FormatDate(PValue)+"';"+vTimeStr+";window.close();\">"+PValue+"</a>"+vHLstr2+"</font></td>";
+	PCellStr="<td "+vColor+" width="+CellWidth+" align='center'><font face='verdana' size='2'"+vHLstr1+"<a href=\"javascript:winMain.document.getElementById('"+Cal.Ctrl+"').value='"+Cal.FormatDate(PValue)+"';"+vTimeStr+";winMain.document.getElementById('"+Cal.Ctrl+"').onchange();window.close();\">"+PValue+"</a>"+vHLstr2+"</font></td>";
 	return PCellStr;
 }
 
