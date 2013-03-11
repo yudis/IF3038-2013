@@ -8,7 +8,9 @@ class App {
 	private $templateDir = 'template';
 	private $apiEndpoint = 'api';
 	private $defaultPage = 'index';
+
 	private $isPartial = false;
+	private $javascripts = array();
 
 	// bootstrap
 	public function bootstrap() {
@@ -111,6 +113,13 @@ class App {
 	// Load the template specified in $tpl
 	protected function loadTemplate($tpl) {
 		include $this->templateDir . '/' . $tpl . '.php';
+	}
+
+	// Require a JS file to be loaded in the footer
+	// $js should not have '.js' appended to it
+	protected function requireJS($js) {
+		if (!in_array($js, $this->javascripts))
+			$this->javascripts[] = $js;
 	}
 
 	protected function header() {
