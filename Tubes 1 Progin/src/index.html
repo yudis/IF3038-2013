@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--halaman utama-->
+<html>
+    <head>
+        <title>Home Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="icon" type="image/png" href="images/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type="text/javascript" src="mpquery.js"></script>
+        <script type="text/javascript" src="indexController.js"></script>
+    </head>
+    <body>
+        
+        <!--register-->
+        <div class="container inline">
+            <!--video penjelasan fitur (dummy video)-->
+            <div class="row">
+                <video width="320" height="200" controls>
+                    <source src="videos/tutorial.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="newline">
+                <span class="row">
+                    Username:
+                </span>
+                <div>
+                    <input name="username" type="text" onkeyup="validate(this)"/>
+                    <span class="hidden" id="valid_username">Valid</span>
+                </div>
+            </div>
+            <div class="newline">
+                <span class="row">
+                    Password:
+                </span>
+                <div>
+                    <input name="password" type="password" onkeyup="validate(this)" />
+                    <span class="hidden" id="valid_password" >Valid</span>
+                </div>
+            </div>
+            <div class="newline">
+                <span class="row">
+                    Confirm Password:
+                </span>
+                <div>                    
+                    <input name="confirmpassword" type="password" onkeyup="validate(this)" />
+                    <span class="hidden" id="valid_confirmpassword" >Valid</span>
+                </div>
+            </div>
+            <div class="newline">
+                <span class="row">
+                    Full Name:
+                </span>
+                <div>
+                    <input name="fullname" type="text" onkeyup="validate(this)" />
+                    <span class="hidden" id="valid_fullname" >Valid</span>
+                </div>
+            </div>
+            <div class="newline">
+                <span class="row">
+                    Date of Birth: 
+                </span>
+                <div>
+                    <input name="dateofbirth" type="date" onchange="validate(this)" />
+                    <span class="hidden" id="valid_dateofbirth" >Valid</span>
+                </div>
+            </div>
+            <div class="newline">
+                <span class="row">
+                    Email:
+                </span>
+                <div>
+                    <input name="email" type="text" onkeyup="validate(this)" />
+                    <span class="hidden" id="valid_email" >Valid</span>
+                </div>
+            </div>
+            <div class="newline">
+                <span class="row">
+                    Mother's Name:
+                </span>
+                <div>
+                    <input name="mothername" type="text" onkeyup="validate(this)" />
+                    <span class="hidden" id="valid_mothername" >Valid</span>
+                </div>
+            </div>
+            <div class="newline">
+                <span class="row">
+                    Avatar:
+                </span>
+                <div>
+                    <input name="avatar" type="file" accept="image/jpg,image/jpeg" onchange="validate(this)" />
+                    <span class="hidden" id="valid_avatar" >Valid</span>
+                </div>
+            </div>
+            <div class="newline">
+                <span class="button" id="submitbutton" onclick="doRegistration()">
+                    Submit
+                </span>
+            </div>
+        </div>
+    </body>
+</html>

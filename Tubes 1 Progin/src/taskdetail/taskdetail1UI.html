@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--halaman dashboard-->
+<html>
+    <head>
+        <title>Tubes 1 progin</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="icon" type="image/png" href="../../images/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <script type="text/javascript" src="../mpquery.js"></script>
+        <script type="text/javascript" src="../header.js"></script>
+        <script type="text/javascript" src="taskdetailController.js"></script>
+    </head>
+    <body>
+        <div class="container inline">
+            <div class="form inline">
+                <div class="newline">
+                    <span class="row">
+                        Task name:
+                    </span>
+                    <div>
+                        <input name="taskname" type="text" value="Tugas besar 1 progin" disabled />
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Attachment:
+                    </span>
+                    <div>
+                        <input name="attachment" type="file" accept="audio/*,video/*,image/*,MIME_type" />                        
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Deadline:
+                    </span>
+                    <div>
+                        <input name="deadline" type="date" disabled />
+                        <span class="button" onclick="enable('deadline')">
+                            Edit
+                        </span>
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Assignee:
+                    </span>
+                    <div>
+                        <input name="assignee" type="text" disabled />
+                        <span class="button" onclick="enable('assignee')">
+                            Edit
+                        </span>
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Comments:
+                    </span>
+                    <div>
+                        <input name="comments" type="text" value="Still 80%" />
+                        <span class="button" onclick="submit('comments')">
+                            Submit
+                        </span>
+                    </div>
+                </div>
+                <div class="newline">
+                    <span class="row">
+                        Tag:
+                    </span>
+                    <div>
+                        <input name="tag" type="text" disabled />
+                        <span class="button" onclick="enable('tag')">
+                            Edit
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
