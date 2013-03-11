@@ -1,6 +1,5 @@
-<footer>
-	<div id="footer_wrap" class="wrap">
-		<div id="footer_left">
+			</div>
+			<footer class="site-footer">
 			<?php
 				$total = count($breadcrumbs);
 				foreach ($breadcrumbs as $key => $value)
@@ -16,9 +15,12 @@
 						echo " >> ";
 				}
 			?>
+			</footer>
 		</div>
-		<div id="footer_right">
-			Copyright by ImbAlAncE.
-		</div>
-	</div>
-</footer>
+		<script src="js/bajuri.js"></script>
+		<!--
+		<script src="js/do.js"></script>	
+		<script src="js/checker.js"></script>
+		-->
+	</body>
+</html>
