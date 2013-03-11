@@ -8,6 +8,8 @@ class App {
 	private $templateDir = 'template';
 	private $apiEndpoint = 'api';
 	private $defaultPage = 'index';
+	private $appName = 'MOA';
+	private $appTagline = 'Multiuser Online Agenda';
 
 	private $isPartial = false;
 	private $javascripts = array();
@@ -94,6 +96,7 @@ class App {
 
 	public function startSession() {
 		session_start();
+		$this->loggedIn = (bool) $_SESSION['user_id'];
 	}
 
 	public function destroySession() {
@@ -122,13 +125,17 @@ class App {
 			$this->javascripts[] = $js;
 	}
 
-	protected function header() {
-		if (!$this->isPartial)
+	protected function header($title = '') {
+		if (!$this->isPartial) {
+			$this->title = $title;
 			$this->loadTemplate('header');
+		}
 	}
 
-	protected function footer() {
-		$this->loadTemplate('footer');
+	protected function footer($breadcrumbs = array()) {
+		if (!$this->isPartial) {
+			$this->loadTemplate('footer');
+		}
 	}
 
 	protected function calendar() {
