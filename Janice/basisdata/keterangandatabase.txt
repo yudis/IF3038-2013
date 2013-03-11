@@ -13,7 +13,7 @@
 3. tabel task
 	> task_id (key) -> isi T-001, T-002, dst
 	> task_name
-	> status -> boolean
+	> status -> boolean //0=false; 1=true
 	> deadline -> tipe date - format YYYY-MM-DD
 	> task_category (=category_id)
 	
