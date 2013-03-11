@@ -1,0 +1,190 @@
+<html>
+  <head>
+		<script>
+			function makeTgl(){
+				for(var i=1; i<=31; i++){
+					var isi=document.createTextNode(i);
+					var opsi = document.createElement("option");
+					opsi.setAttribute("value",i);
+					opsi.appendChild(isi);
+					document.getElementById("tgl").appendChild(opsi);
+				}
+			}
+		</script>
+		<script>
+			function makeThn(){
+				for(var i=1955; i<=2013; i++){
+					var isi=document.createTextNode(i);
+					var opsi = document.createElement("option");
+					opsi.setAttribute("value",i);
+					opsi.appendChild(isi);
+					document.getElementById("thn").appendChild(opsi);
+				}
+			}
+		</script>
+		<script>
+			function enableRegister(){
+				document.getElementById("register_button").disabled = false;
+			}
+		</script>
+		<script language="javascript">
+			function checkEmail(email){	
+				var pattern=/^([a-zA-Z0-9_.-])+([a-zA-Z0-9_.-])+([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+				if(pattern.test(email)){         
+					document.getElementById('v_email').innerHTML='<font color="green">Benar</font>'; 
+					return true;
+				}else{   
+					document.getElementById('v_email').innerHTML='<font color="red">Salah</font>';
+					return false;
+				}
+			}			
+		</script>
+		<script language="javascript">
+			function checkUserName(uname){	
+				var pattern=/^([a-zA-Z0-9_.-])+([a-zA-Z0-9_.-])+([a-zA-Z0-9_.-])+([a-zA-Z0-9_.-])+([a-zA-Z0-9_.-])+/;
+				if(pattern.test(uname)){         
+					document.getElementById('v_uname').innerHTML='<font color="green">Benar</font>';
+					return true;
+				}else{   
+					document.getElementById('v_uname').innerHTML='<font color="red">Salah</font>';
+					return false;
+				}
+			}			
+		</script>
+		<script>
+			function checkCPass(cpass, pass){
+				if(cpass == pass){
+					document.getElementById('v_cpass').innerHTML='<font color="green">Benar</font>';
+					return true;					
+				}else{
+					document.getElementById('v_cpass').innerHTML='<font color="red">Salah</font>'; 
+					return false;
+				}
+			}
+		</script>
+		<script>
+			function checkPass(pass, uname, email){
+				if((pass != uname) && (pass != email)){
+					document.getElementById('v_pass').innerHTML='<font color="green">Benar</font>';
+					return true;					
+				}else if(pass == uname){
+					document.getElementById('v_pass').innerHTML='<font color="red">Password tidak boleh sama dengan username</font>'; 
+					return false;
+				}
+				else if(pass == email){
+					document.getElementById('v_pass').innerHTML='<font color="red">Password tidak boleh sama dengan email</font>'; 
+					return false;
+				}
+				else{
+					document.getElementById('v_pass').innerHTML='<font color="red">Password tidak boleh sama dengan username/email</font>'; 
+					return false;
+				}
+			}
+		</script>
+	</head>
+	
+	<body onload="makeTgl();makeThn();">
+		<form name="register_form">
+			<div id="formulir">
+				<div class="form_field">
+					<div>
+						Username: 
+					</div>
+					<div>
+						<input name="username" type="text" size="35" maxlength="256" onkeyup="checkUserName(document.register_form.username.value)">
+					</div>
+					<div id="v_uname">
+					</div>
+				</div>
+				<div class="form_field">
+					<div>
+						Password: 
+					</div>
+					<div>
+						<input name="password" type="password" size="35" maxlength="24" onkeyup="checkPass(document.register_form.password.value, document.register_form.username.value, document.register_form.email.value)">
+					</div>
+					<div id="v_pass">
+					</div>
+				</div>
+				<div class="form_field">
+					<div>
+						Confirm Password: 
+					</div>
+					<div>
+						<input name="confirm_password" type="password" size="35" maxlength="24" onkeyup="checkCPass(document.register_form.confirm_password.value, document.register_form.password.value)">
+					</div>
+					<div id="v_cpass">
+					</div>
+				</div>
+				<div class="form_field">
+					<div>
+						Nama lengkap: 
+					</div>
+					<div>
+						<input name="text" type="nama_lengkap" size="35" maxlength="256">
+					</div>
+					<div id="v_nama">
+					</div>
+				</div>
+				<div class="form_field">
+					<div>
+						Tanggal lahir: 
+					</div>
+					<div>
+						<select name="tanggal" id="tgl">
+							<option>--Tanggal--</option>
+						</select>
+						<select name="bulan">
+							<option>--Bulan--</option>
+							<option value="Januari">Januari</option>
+							<option value="Februari">Februari</option>
+							<option value="Maret">Maret</option>
+							<option value="April">April</option>
+							<option value="Mei">Mei</option>
+							<option value="Juni">Juni</option>
+							<option value="Juli">Juli</option>
+							<option value="Agustus">Agustus</option>
+							<option value="September">September</option>
+							<option value="Oktober">Oktober</option>
+							<option value="November">November</option>
+							<option value="Desember">Desember</option>
+						</select>
+						<select name="tahun" id="thn">
+							<option>--Tahun--</option>
+						</select>
+					</div>
+					<div id="v_lahir">
+					</div>
+				</div>
+				<div class="form_field">
+					<div>
+						Email: 
+					</div>
+					<div>
+						<input type="text" name="email" size="35" maxlength="256" onkeyup="checkEmail(document.register_form.email.value)">
+					</div>
+					<div id="v_email">
+					</div>
+				</div>
+				<div class="form_field">
+					<div>
+						Avatar: 
+					</div>
+					<div>
+						<input type="file" name="avatar">
+					</div>
+					<div id="v_avatar">
+					</div>
+				</div>
+				<div class="form_field">
+					<div>
+						<input type="submit" value="Register" disabled id="register_button">
+					</div>
+					<div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</body>
+
+</html>
