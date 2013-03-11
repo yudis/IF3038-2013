@@ -14,9 +14,12 @@ class App {
 	private $isPartial = false;
 	private $javascripts = array();
 
+	public $basePath;
+	public $baseUrl;
+
 	// bootstrap
 	public function bootstrap() {
-		error_reporting(E_ALL ^ E_NOTICE);
+		error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 
 		$req = $_SERVER['REQUEST_URI'];
 		$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -26,6 +29,11 @@ class App {
 		$selfFile = basename($self);
 		$path = substr($path, strlen($root));
 		$fragments = explode('/', $path);
+
+		// url-related params
+		$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+		$this->basePath = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], "/")+1);
+		$this->baseUrl = $protocol . '://' . $_SERVER['HTTP_HOST'] . $basePath;
 
 		// Start session
 		$this->startSession();
@@ -95,7 +103,18 @@ class App {
 	}
 
 	public function startSession() {
+		$session_time = 30*24*60*60;
+		ini_set('session.gc-maxlifetime', $session_time);
+
 		session_start();
+		if ((!ISSET($_SESSION['base_url'])) || (!ISSET($_SESSION['full_url'])) || (!ISSET($_SESSION['full_path'])))
+		{
+			$folder = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], "/")+1);  
+			$protocol = (ISSET($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+			$_SESSION['base_url'] = $folder;
+			$_SESSION['full_url'] = $protocol . "://" . $_SERVER['HTTP_HOST'] . $folder;
+			$_SESSION['full_path'] = $_SERVER['DOCUMENT_ROOT'].$folder;
+		}
 		$this->loggedIn = (bool) $_SESSION['user_id'];
 	}
 

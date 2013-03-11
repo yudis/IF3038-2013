@@ -18,8 +18,13 @@
 			</footer>
 		</div>
 		<script src="js/bajuri.js"></script>
+		<script src="js/do.js"></script>
+		<?php foreach ($this->javascripts as $js): ?>
+
+		<script src="js/<?php echo $js ?>.js"></script>
+
+		<?php endforeach; ?>
 		<!--
-		<script src="js/do.js"></script>	
 		<script src="js/checker.js"></script>
 		-->
 	</body>

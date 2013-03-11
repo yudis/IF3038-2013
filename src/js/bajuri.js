@@ -196,6 +196,40 @@ bajuri.prototype = {
 		});
 
 		return this;
+	},
+
+	length: function() {
+		return this.nodes.length;
+	},
+
+	css: function(style) {
+		if (arguments.length > 1) {
+			var value;
+			value = arguments[1];
+			this.each(function() {
+				this.style[style] = value;
+			});
+
+			return this;
+		}
+		else {
+			return this.nodes[0].style[style];
+		}
+	},
+
+	prop: function(prop) {
+		if (arguments.length > 1) {
+			var value;
+			value = arguments[1];
+			this.each(function() {
+				this[prop] = value;
+			});
+
+			return this;
+		}
+		else {
+			return this.nodes[0][prop];
+		}
 	}
 }
 
