@@ -66,16 +66,27 @@ nav ul li a:link, nav ul li a:visited {
     display: inline-block;
     float: right;
     padding-top: 21px;
-    padding-right: 25px;
+    padding-right: 130px;
     border: 0px;
 }
-#searchwrapper {
-    width:300px;
+
+#combobox{
+	width:100px;
     height:40px;
     background-color: white;
-    padding:0px;
+	margin-left:200px;
+	text-indent:5px;
+    position:relative; 
+}
+
+#searchwrapper {
+    width:200px;
+    height:40px;
+    background-color: white;
+	padding:0px;
     margin:0px;
     position:relative; 
+	text-align:left;
 }
 #searchwrapper form { 
     display: inline; 
@@ -87,7 +98,7 @@ nav ul li a:link, nav ul li a:visited {
     position:absolute;
     top:4px;
     left:9px;
-    width:250px;
+    width:140px;
     height:32px;
 }
 #searchwrapper input.searchbox:active {
@@ -98,11 +109,10 @@ nav ul li a:link, nav ul li a:visited {
     background-color:transparent;
     position:absolute;
     top:4px;
-    left:265px;
+    left:160px;
     width:32px;
     height:32px;
 }
-
 .sidebar {
     width: 180px;
     float: left;
