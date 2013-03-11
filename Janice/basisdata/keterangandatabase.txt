@@ -1,0 +1,47 @@
+1. tabel user
+	> username (key)
+	> password
+	> fullname
+	> email
+	> birthday -> tipe date - format YYYY-MM-DD
+	//avatar ditentuin aja link nya misalnya dibentuk avatar/username
+	
+2. tabel category
+	> category_id (key) -> isi C-001, C-002, dst
+	> category_name
+	
+3. tabel task
+	> task_id (key) -> isi T-001, T-002, dst
+	> task_name
+	> status -> boolean
+	> deadline -> tipe date - format YYYY-MM-DD
+	> task_category (=category_id)
+	
+4. comment
+	> comment_id (key) -> isi CM-001, CM-002, dst
+	> commented_task (=task_id)
+	> writer (=username)
+	> writing_time -> tipe datetime
+	> comment -> tipe text
+	
+5. category_incharge
+	> category_id (=category_id)
+	> people_incharge (=username)
+	
+6. task_incharge
+	> task_id (=task_id)
+	> people_incharge_task (=username)
+	
+7. attachment
+	> attachment_id (key)
+	> task_id (=task_id)
+	> link
+	
+8. tag
+	> tag_id (key)
+	> tag_name
+	
+9. tasktag
+	> task_id (=task_id)
+	> tag_id (=tag_id)
+	
