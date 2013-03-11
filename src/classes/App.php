@@ -27,7 +27,9 @@ class App {
 		$self = $_SERVER['PHP_SELF'];
 		$root = str_replace('\\', '/', dirname($self));
 		$selfFile = basename($self);
+		$root = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], "/")+1);
 		$path = substr($path, strlen($root));
+		// $path = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], "/")+1);
 		$fragments = explode('/', $path);
 
 		// url-related params
@@ -39,6 +41,10 @@ class App {
 		$this->startSession();
 
 		// Check whether loading REST API or a page
+		if ($fragments[0] == 'index.php') {
+			array_shift($fragments);
+		}
+
 		if ($fragments[0] == $this->apiEndpoint) {
 			// Load the REST API.
 			require_once 'RestApi.php';
@@ -85,9 +91,6 @@ class App {
 			if ($fragments[0] == 'partial') {
 				// Don't load the header; used for AJAX page navigation
 				$this->isPartial = true;
-				$page = count($fragments) > 1 ? $fragments[1] : $this->defaultPage;
-			}
-			elseif ($fragments[0] == $selfFile) {
 				$page = count($fragments) > 1 ? $fragments[1] : $this->defaultPage;
 			}
 			else {
