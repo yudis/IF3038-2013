@@ -75,7 +75,7 @@ register_form.onsubmit = function()
 				}
 			}
 		}
-		request.open("POST", base_url+"ws/register_check.php", true);
+		request.open("POST", base_url+"api/register_check", true);
 		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		request.send(data);		
 	}

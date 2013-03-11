@@ -13,5 +13,5 @@ login_area.onmouseout = function()
 
 login_area.onclick = function()
 {
-	window.location = base_url+"ws/logout.php";
+	window.location = base_url+"api/logout";
 }

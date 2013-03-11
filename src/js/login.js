@@ -1,4 +1,5 @@
 /*----- Bagian Login ----*/
+/*
 var login_area = document.getElementById("login_area");
 login_area.onmouseover = function()
 {
@@ -15,10 +16,13 @@ login_area.onmouseout = function()
 	document.getElementById("login_link").className = "";
 	document.getElementById("border_login").className = "";
 }
+*/
 
 var form_login = document.getElementById("login_form");
-form_login.onsubmit = function()
+form_login.onsubmit = function(e)
 {
+	e.preventDefault();
+
 	var data = serialize(form_login);
 	var request = new ajaxRequest();
 	request.onreadystatechange = function()
@@ -28,6 +32,7 @@ form_login.onsubmit = function()
 			if (request.status==200 || window.location.href.indexOf("http")==-1)
 			{
 				var result = eval("("+request.responseText+")");
+				console.log(result);
 				if (result.status == "success")
 				{
 					window.location = "dashboard.php";
@@ -43,7 +48,7 @@ form_login.onsubmit = function()
 			}
 		}
 	}
-	request.open("POST", base_url+"ws/login.php", true);
+	request.open("POST", "api/login", true);
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.send(data);
 	
