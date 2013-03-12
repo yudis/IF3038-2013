@@ -4,21 +4,6 @@
 		<title>Dashboard - meckyr</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
         <link href="modal.css" rel="stylesheet" type="text/css" />
-		<script>
-		function myFunction()
-		{
-			var x;
-			var name=prompt("Masukkan nama kategori baru : ","Kategori Baru");
-			var list=prompt("Masukkan ID pengguna yang berhak modifikasi :","<id1>,<id2>,...");
-			if (name!=null)
-			  {
-			  x="<div class=task-category-body><div class=category-title><b>"+name+
-			  "</b></div><ul><li>There's no task in this category</li><br><div class = add-task>"+
-			  "<a href = add_task.php>Create New Task</a></div></ul><br><div><hr id=border></div>";
-			  document.getElementById("new-category").innerHTML=x;
-			  }
-		}
-		</script>
 	</head>
 	<body>
 		<div id="main-body-general">
