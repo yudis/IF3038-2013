@@ -53,6 +53,22 @@
 		}
 	}
 	
+	function getTagname($tagid){
+		$con = getConnection();
+		$query = "SELECT tagname FROM tag WHERE tagid = '$tagid'";
+		$result = mysqli_query($con,$query);
+		$row = mysqli_fetch_array($result);
+		return $row['tagname'];
+	}
+	
+	function getTaskId($taskname,$categoryid){
+		$con = getConnection();
+		$query = "SELECT taskid FROM task WHERE taskname = '$taskname' AND categoryid='$categoryid'";
+		$result = mysqli_query($con,$query);
+		$row = mysqli_fetch_array($result);
+		return $row['taskid'];
+	}
+	
 	function isTagExist($tag){
 		$con = getConnection();
 		$query = "SELECT count(*) as count FROM tag WHERE tagname = '$tag'";
