@@ -18,7 +18,7 @@
 	else
 	  {
 		  $extension = end(explode(".", $file["name"]));
-		  move_uploaded_file ($file['tmp_name'],"avatar/$username.$extension");
+		  move_uploaded_file ($file['tmp_name'],"../avatar/$username.$extension");
 	  }
 	}
 ?>

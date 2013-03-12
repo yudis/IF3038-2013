@@ -13,6 +13,7 @@
 	mysqli_close($con);
 	
 	// Process File
-	upload_file($_FILES['avatar'],$username);
+	$file = $_FILES['textAvatar'];
+	upload_file($file,$username);
 	header("Location: ../page/dashboard.php");
 ?>
