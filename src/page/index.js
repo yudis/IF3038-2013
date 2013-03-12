@@ -1,4 +1,33 @@
 // JavaScript Document
+var AjaxRequest;
+
+function getAjax() //a function to get AJAX from browser
+{
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e) 
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Can't get AJAX, browser error");
+				return false;
+			}
+		}
+	}
+}
+
 function login() {
 				if (document.getElementById("login1").value == 'meckyr' && document.getElementById("login2").value == 'meckyr') {
 					self.location="page/dashboard.php";
@@ -18,17 +47,30 @@ function login() {
 					document.getElementById("submit").style.display = 'block';
 				}
 			}
+			
 			function check_username() {
+				getAjax();
+				
 				if (document.getElementById("username").value.length > 4 && document.getElementById("username").value != document.getElementById("password").value) {
-					chkusername = true;	
-					show_submit_button();
-					document.getElementById("warning-message").innerHTML="";
+					var result;
+					
+					ajaxRequest.open("GET","php/checkavailid.php?idinput="+document.getElementById("username").value,false);
+					ajaxRequest.onreadystatechange = function()
+					{
+						document.getElementById("warning-message").innerHTML = ajaxRequest.responseText;
+						if(document.getElementById("warning-message").innerHTML == ""){
+							chkusername = true;	
+							show_submit_button();
+						}
+					}
+					ajaxRequest.send();
 				} else {
 					chkusername = false;
 					hide_submit_button();
 					document.getElementById("warning-message").innerHTML="Username must be more than 4 characters";
 				}
 			}
+			
 			function check_password() {
 				if (document.getElementById("password").value.length > 7 && document.getElementById("password").value != document.getElementById("username").value && document.getElementById("password").value != document.getElementById("email").value) {
 					chkpassword = true;
