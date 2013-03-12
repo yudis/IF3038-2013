@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 10, 2013 at 08:20 AM
--- Server version: 5.5.8
--- PHP Version: 5.3.5
+-- Generation Time: Mar 09, 2013 at 03:25 AM
+-- Server version: 5.5.16
+-- PHP Version: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -22,88 +23,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `assignee`
---
-
-CREATE TABLE IF NOT EXISTS `assignee` (
-  `username` varchar(12) NOT NULL,
-  `idtugas` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `assignee`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `hak`
---
-
-CREATE TABLE IF NOT EXISTS `hak` (
-  `username` varchar(12) NOT NULL,
-  `idkategori` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `hak`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `kategori`
---
-
-CREATE TABLE IF NOT EXISTS `kategori` (
-  `idkategori` varchar(10) NOT NULL,
-  `namakategori` varchar(20) NOT NULL,
-  PRIMARY KEY (`idkategori`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `kategori`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `komentar`
---
-
-CREATE TABLE IF NOT EXISTS `komentar` (
-  `idtugas` varchar(10) NOT NULL,
-  `username` varchar(12) NOT NULL,
-  `isikomentar` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `komentar`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tag`
---
-
-CREATE TABLE IF NOT EXISTS `tag` (
-  `idtugas` varchar(10) NOT NULL,
-  `isitag` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tag`
---
-
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tugas`
 --
 
@@ -114,35 +33,22 @@ CREATE TABLE IF NOT EXISTS `tugas` (
   `deadline` date NOT NULL,
   `idkategori` varchar(10) NOT NULL,
   `username` varchar(12) NOT NULL,
-  PRIMARY KEY (`idtugas`)
+  UNIQUE KEY `idtugas` (`idtugas`),
+  KEY `tugas_ibfk_1` (`username`),
+  KEY `tugas_ibfk_2` (`idkategori`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tugas`
+-- Constraints for dumped tables
 --
 
-
--- --------------------------------------------------------
-
 --
--- Table structure for table `user`
+-- Constraints for table `tugas`
 --
+ALTER TABLE `tugas`
+  ADD CONSTRAINT `tugas_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`),
+  ADD CONSTRAINT `tugas_ibfk_2` FOREIGN KEY (`idkategori`) REFERENCES `kategori` (`idkategori`);
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `username` varchar(12) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `fullname` varchar(25) NOT NULL,
-  `birthdate` date NOT NULL,
-  `phonenumber` varchar(12) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `avatar` varchar(50) NOT NULL,
-  PRIMARY KEY (`username`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`username`, `password`, `fullname`, `birthdate`, `phonenumber`, `email`, `avatar`) VALUES
-('admin', 'admin', 'Admin Z', '2013-03-08', '081977972383', 'admin@gmail.com', '');
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
