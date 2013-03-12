@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="mediaqueries.css" />
         <script src="scripts/helper.js" type="application/javascript"></script>
         <script src="scripts/popup.js" type="application/javascript"></script>
-        <script src="scripts/dashboard.js" type="application/javascript"></script>
+        <script src="scripts/search.js" type="application/javascript"></script>
     </head>
     <body onload="updateAddButtonVisibility();">
         <div id="blanket"></div>
@@ -34,13 +34,13 @@
                 <nav>
                     <div class="logo"><a href="dashboard.html"><img alt="Home" src="images/logo.png" /></a></div>
                     <ul>
-                        <li><div><a href="dashboard.html">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="search.html">Search</a></div></li><li><div><a href="index.html">Logout</a></div></li>
+                        <li><div><a href="dashboard.html">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="dashboard.html">Search</a></div></li><li><div><a href="index.html">Logout</a></div></li>
                     </ul>
                     <div class="search">
                         <div id="searchwrapper">
                             <form action="#">
                                 <input type="text" class="searchbox" name="q" value="" placeholder="Search.." />
-                                <a href = "search.html"><div class="searchbox_submit"><img src = "images/search.png" class="searchbox_image"></div></a>
+                                <input type="image" src="images/search.png" name="sumbit" class="searchbox_submit" alt="search..."/>
                                 <button type="button" name="filter" class="filter_submit" onClick="showfilterbox()"><img src = "images/filterarrow.png" class="filter_image"></button>
                             </form>
                             
@@ -68,20 +68,19 @@
             </header>
             <div class="content">
                 <div class="sidebar">
-                    <ul id="Kategori" class="nav">
-                        <li><a id="K-All" href="#" onclick="return RemoveKategoriFilter(this)">All</a></li>
-                        <li><a id="K0" href="#" onclick="return KategoriSelected(this)">IF3054 - Intelegensia Buatan</a></li>
-                        <li><a id="K1" href="#" onclick="return KategoriSelected(this)">IF3094 - Komunikasi Antar Personal</a></li>
-                        <li><a id="K2" href="#" onclick="return KategoriSelected(this)">IF3038 - Pemrograman Internet</a></li>
-                    </ul>
-                    <ul class="nav">
-                        <li><a href="#" onclick="popup('popUpDiv','blanket',300,600)">Tambah Kategori...</a></li>
+                    <ul id="Search" class="nav">
+                        <li><a id="F0" href="#" onclick="return FilterSelected(this)"><input type = "checkbox" name="filter" value="all" id = "all">All</input></a></li>
+                        <li id = "menusidebar"><a id="F1" href="#"><input type = "checkbox" name="filter" value="username" id = "user" onclick="filterusername()">Username</input></a></li>
+                        <li id = "menusidebar"><a id="F2" href="#" onclick="return FilterSelected(this)"><input type = "checkbox" name="filter" value="category" id="categ">Judul Kategori</input></a></li>
+                        <li id = "menusidebar"><a id="F3" href="#" onclick="return FilterSelected(this)"><input type = "checkbox" name="filter" value="task" id="task" onclick="checkedchild()">Task</input></a></li>
+                        <li id = "submenusidebar"><a id="F4" href="#" onclick="return FilterSelected(this)"><input type = "checkbox" name="filter" value="judultask" id="taskname">Judul Task</input></a></li>
+                        <li id = "submenusidebar"><a id="F5" href="#" onclick="return FilterSelected(this)"><input type = "checkbox" name="filter" value="judultask" id="tag">Tag</input></a></li>
                     </ul>
                 </div>
                 <div id="listTugas" class="main">
-                    <h1 class="inlineblock">Dashboard</h1> <button id="addTask" onclick="NewTask()">add new task...</button>
-                    <section id="main-K0">
-                        <h2>IF3054 - Intelegensia Buatan</h2>
+                    <h1 class="inlineblock">Search</h1>
+                    <section id="main-F0">
+                        <h2>Username</h2>
                         <div class="tugas">
                             <div><a href="tugas.html?name=Tugas%20Besar%201%3A%20Algoritma%20Genetik&amp;deadline=2013-02-22&amp;tags=AI%2C%20Genetics%2C%20Algorithm">Tugas Besar 1: Algoritma Genetik</a></div>
                             <div>Deadline: <strong>22 Februari 2013</strong></div>
@@ -94,7 +93,7 @@
                                 </ul>
                             </div>                            
                         </div>
-                        <div class="tugas">
+                        <!--<div class="tugas">
                             <div><a href="tugas.html?name=PR%20CSP%20Problem&amp;deadline=2013-02-22&amp;tags=AI%2C%20CSP">PR CSP Problem</a></div>
                             <div>Deadline: <strong>22 Februari 2013</strong></div>
                             <div>
@@ -136,7 +135,7 @@
                             </div>                            
                         </div>
                     </section>
-                </div>
+                </div>-->
             </div>
             <footer class="content">
                 This website is created solely for the purpose of fulfilling our college task.<br />

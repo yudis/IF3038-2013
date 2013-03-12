@@ -107,7 +107,7 @@ nav ul li a:link, nav ul li a:visited {
     height:32px;
 }
 
-#searchbox_image{
+.searchbox_image{
 	width:32px;
 	height:32px;
 }
@@ -162,6 +162,14 @@ nav ul li a:link, nav ul li a:visited {
 	float:left;
 	margin-left:5px;
 	margin-bottom:5px;
+}
+
+#submenusidebar{
+	padding-left:40px;
+}
+
+#menusidebar{
+	padding-left:20px;
 }
 
 .sidebar {
@@ -382,3 +390,4 @@ footer.content {
     list-style: none;
     padding: 3px;
 }
+
