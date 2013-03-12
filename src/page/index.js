@@ -28,10 +28,26 @@ function getAjax() //a function to get AJAX from browser
 	}
 }
 
-function login() {
-				if (document.getElementById("login1").value == 'meckyr' && document.getElementById("login2").value == 'meckyr') {
-					self.location="page/dashboard.php";
+				function login() {
+					getAjax();
+					
+					if(document.getElementById("login1")!="" && document.getElementById("login2")!=""){
+						ajaxRequest.open("GET","php/checkidexistence.php?id="+document.getElementById("login1").value+"&pass="+document.getElementById("login2").value,false);//+"&pass="+document.getElementById("input2").value
+						ajaxRequest.onreadystatechange = function()
+						{
+							var loginresponse = ajaxRequest.responseText;
+							if(loginresponse == "true"){
+								alert("true");
+							}else{
+								alert("false");
+							}
+							
+						}
+						ajaxRequest.send();
 				}
+				//if (document.getElementById("login1").value == 'meckyr' && document.getElementById("login2").value == 'meckyr') {
+				//	self.location="page/dashboard.php";
+				//}
 			}
 			var chkusername = false;
 			var chkpassword = false;
@@ -165,4 +181,9 @@ function login() {
 				document.getElementById("register-bottom").style.display = "none";
 				document.getElementById("login-form").style.display = "block";
 				document.getElementById("login-bottom").style.display = "block";
+			}
+			
+			//---buatan martin---
+			function checkAutenthication(){
+				
 			}
