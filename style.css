@@ -1,0 +1,809 @@
+@media screen and (min-width:300px) {
+	body {
+		background-color:white;
+	}
+
+	#left-body {
+		float:left;
+	}
+
+	#right-body {
+		width:650px;
+		float:right;
+		padding-top:100px;
+		padding-right:30px;
+	}
+
+	#big-logo {
+		float:left;
+		padding-left:40px;
+		padding-top:100px;
+	}
+
+	#index-body {
+		background-image:url('taskpagem.jpg');
+		width:1300px;
+		height:600px;
+		font-family:"Trebuchet MS", Helvetica, sans-serif;
+	}
+
+	#body {
+		background-color:white;
+	}
+
+	#border {
+		color:white;
+		margin-bottom:0px;
+	}
+
+	#main-body {
+		margin:0px;
+		width:1300px;
+		height:1600px;
+	}
+
+	#main-body-general {
+		margin:0px;
+		width:1300px;
+		height:1000px;
+	}
+
+	#header {
+		height:110px;
+		background-image:url('headerm.jpg');
+		background-color:blue;
+		font-family:"Trebuchet MS", Helvetica, sans-serif;
+	}
+
+	#header-logo {
+		float:left;
+		width:150px;
+		padding-top:18px;
+		padding-left:20px;
+	}
+
+	#header-title {
+		float:left;
+		font-size:24px;
+		width:280px;
+		text-align:justify;
+		padding-top:15px;
+	}
+
+	#header-link {
+		float:left;
+		float:bottom;
+		width:400px;
+		text-align:center;
+		padding-top:80px;
+	}
+
+	#header-right-side {
+		float:left;
+		width:250px;
+		padding-left:200px;
+		padding-top:10px;
+	}
+
+	#task-page-body {
+		height:890px;
+		padding-left:20px;
+		padding-top:1px;
+		background-image:url('taskpagem.jpg');
+		font-family:"Trebuchet MS", Helvetica, sans-serif;
+	}
+
+	#add-task-form {
+		width:1100px;
+		float:right;
+	}
+
+	#add-task {
+		float:left;
+		font-size:19px;
+	}
+
+	#input-description {
+		float:left;
+		padding-right:50px;
+		font-size:19px;
+	}
+
+	#profile-page-body {
+		height:890px;
+		padding-left:20px;
+		padding-top:1px;
+		background-image:url('taskpagem.jpg');
+		font-family:"Trebuchet MS", Helvetica, sans-serif;
+	}
+	#nomargin {
+		margin-bottom:0px;
+	}
+
+	#other-attachment {
+		height:140px;
+	}
+
+	#new-comment {
+		width:770px;
+		margin-bottom:20px;
+	}
+
+	#comment {
+		width:770px;
+		margin-bottom:20px;
+	}
+
+	#web-description {
+		float:left;
+		font-family:"Trebuchet MS", Helvetica, sans-serif;
+		font-size:22px;
+	}
+
+	#task-comment {
+		background-image:url('taskcommentm.jpg');
+		height:650px;
+		padding-top:1px;
+		padding-left:20px;
+		font-family:"Trebuchet MS", Helvetica, sans-serif;
+	}
+
+	#komentator {
+		font-size:18px;
+	}
+
+	#left-main-body {
+		width:450px;
+		float:left;
+	}
+
+	#right-main-body {
+		width:100px;
+		float:left;
+	}
+
+	#user-info {
+		height:60px;
+		box-shadow: 5px 5px 8px #888888;
+		background-color:white;
+	}
+
+	#left-comment-body {
+		padding-top:5px;
+		padding-left:5px;
+		width:60px;
+		float:left;
+	}
+
+	#right-comment-body {
+		padding-top:10px;
+		padding-left:5px;
+		width:690px;
+		float:left;
+	}
+
+	#comment-box {
+		text-align:justify;
+		padding-left:5px;
+	}
+
+	#video-attachment {
+		background-color:grey;
+		box-shadow: 5px 5px 10px #888888;
+		width:325px;
+		padding-left:5px;
+		padding-top:5px;
+	}
+
+	#screenshots {
+		height:200px;
+		width:200px;
+		box-shadow: 5px 5px 10px #888888;
+	}
+
+	#task-page-title {
+		height:120px;
+	}
+
+	#header-right-user {
+		padding-top:5px;
+		display:block;
+	}
+
+	#header-right-user ul {
+		display:none;
+		list-style:square;
+		margin-top:0px;
+	}
+
+	#header-right-user:hover > ul {
+		display:block;
+	}
+
+	#dashboard-link {
+		text-align:center;
+		width:100%;
+		float:left;
+	}
+
+	#big-name {
+		font-size:24px;
+		text-align:center;
+		padding-bottom:10px;
+		font-family:"Trebuchet MS", Helvetica, sans-serif;
+	}
+
+	#login-form {
+		padding: 10px 10px 10px 10px;
+		box-shadow: 2px 2px 5px #888888;
+		background-color:green;
+	}
+
+	#register-form {
+		padding: 10px 10px 10px 10px;
+		box-shadow: 2px 2px 5px #888888;
+		background-color:green;
+	}
+
+	#right-side {
+		float:right;
+	}
+
+	#left-profile-body {
+		width:25%;
+		float:left;
+	}
+
+	#right-profile-body {
+		width:75%;
+		float:right;
+	}
+
+	#profile-header {
+		padding-top:5px;
+		height:310px;
+	}
+
+	#left-profile-header {
+		width:20%;
+		height:300px;
+		float:left;
+		padding-top:5px;
+	}
+
+	#about {
+		width:50%;
+		text-align:justify;
+	}
+
+	#right-profile-header {
+		width:80%;
+		height:300px;
+		float:right;
+	}
+
+	#dashboard-body {
+		height:900px;
+		background-image:url("taskpagem.jpg");
+		font-family:"Trebuchet MS", Helvetica, sans-serif;
+		padding-top:5px;
+		text-align:center;
+	}
+
+	#profile-pic {
+		width:300px;
+		padding:80px 0px 0px 2px;
+		float:left;
+	}
+
+	#main-dashboard {
+		padding-top:10px;
+		width:800px;
+		float:left;
+	}
+
+	#dashboard-title {
+		font-size:24px;
+		text-align:center
+	}
+
+	#category-list {
+		text-align:left;
+	}
+
+	.category-title {
+		font-size:24px;
+		text-align:left;
+	}
+
+	#add-category {
+		float:left;
+	}
+
+	#sort {
+		padding-bottom:20px;
+		text-align:right;
+	}
+
+	.task-category-body {
+		display:block;
+		padding-bottom:25px;
+	}
+
+	.task-category-body ul {
+		display:none;
+		padding-left:30px;
+		margin-bottom:0px;
+		font-size:18px;
+	}
+
+	.task-category-body:hover > ul {
+		display:block;
+	}
+
+	.task-tag {
+		float:right;
+		font-size:12px;
+	}
+
+	.add-task {
+		padding : 2px 2px 2px 2px;
+		box-shadow: 2px 2px 5px #888888;
+		font-size:12px;
+		width:100px;
+	}
+
+	#new-category {
+		font-size:24px;
+		text-align:left;
+	}
+
+	#task-page-title {
+
+	}
+
+	#add-task-body {
+
+	}
+
+	#profile-body {
+		
+	}
+
+	#post-date {
+		font-size:12px;
+	}
+
+	#deadline_edit {
+		display:none;
+	}
+
+	#assignee_edit {
+		display:none;
+	}
+
+	#tag_edit {
+		display:none;
+	}
+
+	#label {
+		float:left;
+	}
+
+	#date_html {
+		float:left;
+	}
+
+	#date_html5 {
+		float:left;
+	}
+
+	#create {
+		display:none;
+	}
+}
+
+@media screen and (min-width:1000px) {
+body {
+	background-color:white;
+}
+
+#left-body {
+	float:left;
+}
+
+#right-body {
+	width:650px;
+	float:right;
+	padding-top:100px;
+	padding-right:30px;
+}
+
+#big-logo {
+	float:left;
+	padding-left:40px;
+	padding-top:100px;
+}
+
+#index-body {
+	background-image:url('taskpage.jpg');
+	width:1300px;
+	height:600px;
+	font-family:"Trebuchet MS", Helvetica, sans-serif;
+}
+
+#body {
+	background-color:white;
+}
+
+#border {
+	color:white;
+	margin-bottom:0px;
+}
+
+#main-body {
+	margin:0px;
+	width:1300px;
+	height:1600px;
+}
+
+#main-body-general {
+	margin:0px;
+	width:1300px;
+	height:1000px;
+}
+
+#header {
+	height:110px;
+	background-image:url('header.jpg');
+	background-color:blue;
+	font-family:"Trebuchet MS", Helvetica, sans-serif;
+}
+
+#header-logo {
+	float:left;
+	width:150px;
+	padding-top:18px;
+	padding-left:20px;
+}
+
+#header-title {
+	float:left;
+	font-size:24px;
+	width:280px;
+	text-align:justify;
+	padding-top:15px;
+}
+
+#header-link {
+	float:left;
+	float:bottom;
+	width:400px;
+	text-align:center;
+	padding-top:80px;
+}
+
+#header-right-side {
+	float:left;
+	width:250px;
+	padding-left:200px;
+	padding-top:10px;
+}
+
+#task-page-body {
+	height:890px;
+	padding-left:20px;
+	padding-top:1px;
+	background-image:url('taskpage.jpg');
+	font-family:"Trebuchet MS", Helvetica, sans-serif;
+}
+
+#add-task-form {
+	width:1100px;
+	float:right;
+}
+
+#add-task {
+	float:left;
+	font-size:19px;
+}
+
+#input-description {
+	float:left;
+	padding-right:50px;
+	font-size:19px;
+}
+
+#profile-page-body {
+	height:890px;
+	padding-left:20px;
+	padding-top:1px;
+	background-image:url('taskpage.jpg');
+	font-family:"Trebuchet MS", Helvetica, sans-serif;
+}
+#nomargin {
+	margin-bottom:0px;
+}
+
+#other-attachment {
+	height:140px;
+}
+
+#new-comment {
+	width:770px;
+	margin-bottom:20px;
+}
+
+#comment {
+	width:770px;
+	margin-bottom:20px;
+}
+
+#web-description {
+	float:left;
+	font-family:"Trebuchet MS", Helvetica, sans-serif;
+	font-size:22px;
+}
+
+#task-comment {
+	background-image:url('taskcomment.jpg');
+	height:650px;
+	padding-top:1px;
+	padding-left:20px;
+	font-family:"Trebuchet MS", Helvetica, sans-serif;
+}
+
+#komentator {
+	font-size:18px;
+}
+
+#left-main-body {
+	width:450px;
+	float:left;
+}
+
+#right-main-body {
+	width:100px;
+	float:left;
+}
+
+#user-info {
+	height:60px;
+	box-shadow: 5px 5px 8px #888888;
+	background-color:white;
+}
+
+#left-comment-body {
+	padding-top:5px;
+	padding-left:5px;
+	width:60px;
+	float:left;
+}
+
+#right-comment-body {
+	padding-top:10px;
+	padding-left:5px;
+	width:690px;
+	float:left;
+}
+
+#comment-box {
+	text-align:justify;
+	padding-left:5px;
+}
+
+#video-attachment {
+	background-color:grey;
+	box-shadow: 5px 5px 10px #888888;
+	width:325px;
+	padding-left:5px;
+	padding-top:5px;
+}
+
+#screenshots {
+	height:200px;
+	width:200px;
+	box-shadow: 5px 5px 10px #888888;
+}
+
+#task-page-title {
+	height:120px;
+}
+
+#header-right-user {
+	padding-top:5px;
+	display:block;
+}
+
+#header-right-user ul {
+	display:none;
+	list-style:square;
+	margin-top:0px;
+}
+
+#header-right-user:hover > ul {
+	display:block;
+}
+
+#dashboard-link {
+	text-align:center;
+	width:100%;
+	float:left;
+}
+
+#big-name {
+	font-size:24px;
+	text-align:center;
+	padding-bottom:10px;
+	font-family:"Trebuchet MS", Helvetica, sans-serif;
+}
+
+#login-form {
+	padding: 10px 10px 10px 10px;
+	box-shadow: 2px 2px 5px #888888;
+	background-color:#DEB887;
+}
+
+#register-form {
+	padding: 10px 10px 10px 10px;
+	box-shadow: 2px 2px 5px #888888;
+	background-color:#DEB887;
+}
+
+#right-side {
+	float:right;
+}
+
+#left-profile-body {
+	width:25%;
+	float:left;
+}
+
+#right-profile-body {
+	width:75%;
+	float:right;
+}
+
+#profile-header {
+	padding-top:5px;
+	height:310px;
+}
+
+#left-profile-header {
+	width:20%;
+	height:300px;
+	float:left;
+	padding-top:5px;
+}
+
+#about {
+	width:50%;
+	text-align:justify;
+}
+
+#right-profile-header {
+	width:80%;
+	height:300px;
+	float:right;
+}
+
+#dashboard-body {
+	height:900px;
+	background-image:url("taskpage.jpg");
+	font-family:"Trebuchet MS", Helvetica, sans-serif;
+	padding-top:5px;
+	text-align:center;
+}
+
+#profile-pic {
+	width:300px;
+	padding:80px 0px 0px 2px;
+	float:left;
+}
+
+#main-dashboard {
+	padding-top:10px;
+	width:800px;
+	float:left;
+}
+
+#dashboard-title {
+	font-size:24px;
+	text-align:center
+}
+
+#category-list {
+	text-align:left;
+}
+
+.category-title {
+	font-size:24px;
+	text-align:left;
+}
+
+#add-category {
+	float:left;
+}
+
+#sort {
+	padding-bottom:20px;
+	text-align:right;
+}
+
+.task-category-body {
+	display:block;
+	padding-bottom:25px;
+}
+
+.task-category-body ul {
+	display:none;
+	padding-left:30px;
+	margin-bottom:0px;
+	font-size:18px;
+}
+
+.task-category-body:hover > ul {
+	display:block;
+}
+
+.task-tag {
+	float:right;
+	font-size:12px;
+}
+
+.add-task {
+	padding : 2px 2px 2px 2px;
+	box-shadow: 2px 2px 5px #888888;
+	font-size:12px;
+	width:100px;
+}
+
+#new-category {
+	font-size:24px;
+	text-align:left;
+}
+
+#task-page-title {
+
+}
+
+#add-task-body {
+
+}
+
+#profile-body {
+	
+}
+
+#post-date {
+	font-size:12px;
+}
+
+#deadline_edit {
+	display:none;
+}
+
+#assignee_edit {
+	display:none;
+}
+
+#tag_edit {
+	display:none;
+}
+
+#label {
+	float:left;
+}
+
+#date_html {
+	float:left;
+}
+
+#date_html5 {
+	float:left;
+}
+
+#create {
+	display:none;
+}
+}
