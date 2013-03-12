@@ -80,7 +80,7 @@
 		</script>
 	</head>
 	<body onLoad="check_html5()">
-		<div id="main-body">
+		<div id="main-body-general">
 			<!--Header-->
 			<div id="header">
 				<?php

@@ -14,7 +14,7 @@
 		<div id="header-title"><a href="dashboard.php"><img src="../image/title.png" width="250px" height="80px"/></a></div>
 		<div id="header-link"><a href="dashboard.php"><b>Go To Dashboard</b></a></div>
 		<div id="header-right-side">
-			<div><input type="text" placeholder="Search Tasks"><button>Search</button></div>
+			<div><a href="search_result.php"><input type="text" placeholder="Search Tasks"><button>Search</button></a></div>
 			<div id="header-right-user">
 				You logged as, <b><?php echo $_SESSION["userlistapp"]?></b>
 				<ul>

@@ -3,7 +3,6 @@
 	<head>
 		<title>Dashboard - meckyr</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
-		<link href="layout.css" rel="stylesheet" type="text/css" />
         <link href="modal.css" rel="stylesheet" type="text/css" />
 		<script>
 		function myFunction()
@@ -76,7 +75,6 @@
 						<!--Name-->
 						<!--List of priveleged users-->
 					<!--New task button ==> new_task.html (this button only appears if a category is selected)-->
-						</div>
 				</div>
 			</div>
 		</div>
