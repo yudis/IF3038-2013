@@ -151,6 +151,10 @@
 		font-size:18px;
 	}
 
+	#warning-message {
+		color:red;
+	}
+	
 	#left-main-body {
 		width:450px;
 		float:left;

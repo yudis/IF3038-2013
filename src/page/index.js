@@ -22,27 +22,33 @@ function login() {
 				if (document.getElementById("username").value.length > 4 && document.getElementById("username").value != document.getElementById("password").value) {
 					chkusername = true;	
 					show_submit_button();
+					document.getElementById("warning-message").innerHTML="";
 				} else {
 					chkusername = false;
 					hide_submit_button();
+					document.getElementById("warning-message").innerHTML="Username must be more than 4 characters";
 				}
 			}
 			function check_password() {
 				if (document.getElementById("password").value.length > 7 && document.getElementById("password").value != document.getElementById("username").value && document.getElementById("password").value != document.getElementById("email").value) {
 					chkpassword = true;
 					show_submit_button();
+					document.getElementById("warning-message").innerHTML="";
 				} else {
 					chkpassword = false;
 					hide_submit_button();
+					document.getElementById("warning-message").innerHTML="Password must be more than 7 characters";
 				}
 			}
 			function confirm_password() {
 				if (document.getElementById("password").value == document.getElementById("password2").value) {
-						cnfrmpassword = true;
-						show_submit_button();
+					cnfrmpassword = true;
+					show_submit_button();
+					document.getElementById("warning-message").innerHTML="";
 				} else {
 					cnfrmpassword = false;
 					hide_submit_button();
+					document.getElementById("warning-message").innerHTML="Passwords are not match";
 				}
 			}
 			function check_full_name() {
@@ -54,13 +60,16 @@ function login() {
 					if (chr1 != ' ' && chr2 != ' ') {
 						chkfullname = true;
 						show_submit_button();
+						document.getElementById("warning-message").innerHTML="";
 					} else {
 						chkfullname = false;
 						hide_submit_button();
+						document.getElementById("warning-message").innerHTML="Name is not valid";
 					}
 				} else {
 					chkfullname = false;
 					hide_submit_button();
+					document.getElementById("warning-message").innerHTML="Name is not valid";
 				}
 			}
 			function check_email() {
@@ -70,20 +79,24 @@ function login() {
 				if (at > 0 && (dot - at) > 1 && dot < str.length - 2) {
 					chkemail = true;
 					show_submit_button();
+					document.getElementById("warning-message").innerHTML="";
 				} else {
 					chkemail = false;
 					hide_submit_button();
+					document.getElementById("warning-message").innerHTML="Email is not valid";
 				}
 			}
 			function check_avatar() {
 				var str = document.getElementById("avatar").value;
 				var ext = str.substring(str.lastIndexOf('.') + 1, str.length);
-				if (ext.toLowerCase() == "jpeg" || ext.toLowerCase() == "jpg") {
+				if (ext.toLowerCase() == "jpeg" || ext.toLowerCase() == "jpg" || ext.toLowerCase() == "png") {
 					chkavatar = true;
 					show_submit_button();
+					document.getElementById("warning-message").innerHTML="";
 				} else {
 					chkavatar = false;
 					hide_submit_button();
+					document.getElementById("warning-message").innerHTML="File is not an image";
 				}
 			}
 			function show_register_form() {

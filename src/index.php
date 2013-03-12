@@ -115,6 +115,7 @@
 				<input type="file" id="avatar" name="textAvatar" onChange="check_avatar()"/><br />
 				<!--Register button, disabled if invalid input exists-->
 				<input id="submit" type="submit" value="Sign Up"/>
+				<div id="warning-message"></div>
 			</form><br /></div>
 			<div id="login-bottom">Don't have an account? <a href="#" onCLick="show_register_form()">Register</a></div>
 			<div id="register-bottom">Already have a account? <a href="#" onClick="show_login_form()">Sign in</a></div>
