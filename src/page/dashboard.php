@@ -40,8 +40,6 @@
 							<label for="asignee">Assignee:</label>
 							<input type="text" id="asignee" value="" name="listAssignee" onKeyUp="autoCompleteAsignee()" />
 						</div>
-						<br />
-						<div id = "testt">:)</div>
 						<div align="right"><input type="submit" value="Finish"/></div>
 						</form>
 

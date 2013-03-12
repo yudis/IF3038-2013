@@ -46,13 +46,18 @@ function autoCompleteAsignee(){
 	getAjax();
 
 	var asignee = document.getElementById("asignee").value;
+	var suggestion = "";
+	var suggestionarray;
 	
 	if(asignee!=""){
 		ajaxRequest.open("GET","../php/autocompleteasignee.php?asignee="+document.getElementById("asignee").value,false);
 
 		ajaxRequest.onreadystatechange = function()
 		{
-			document.getElementById("testt").innerHTML =  ajaxRequest.responseText;
+			suggestion =  ajaxRequest.responseText;
+			suggestion = suggestion.substr(0,suggestion.length-1);
+			suggestionarray = suggestion.split("|");
+			//alert(suggestionarray);
 		}
 		
 		ajaxRequest.send();
