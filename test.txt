@@ -1,13 +1,9 @@
-<<<<<<< .mine
 hai ini test
->>>>
-=======
+
 test doank
 
 ini ecky
 
 g peduli
->>>>>>> .r5
-
 
 hai aku martin
