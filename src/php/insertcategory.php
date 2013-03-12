@@ -10,13 +10,15 @@
 	
 	$con = getConnection();
 	// insert categori
-	$query = "INSERT INTO category VALUES ('$nextTaskId', '$namecategory', '$username','$datetime')";
+	$query = "INSERT INTO category VALUES ('$nextCategoryId', '$namecategory', '$username','$datetime')";
 	mysqli_query($con,$query);
-	
+	$query = "INSERT INTO responsibility VALUES ('$username','$nextCategoryId')";
+	mysqli_query($con,$query);	
 	// insert assigne
 	for($i = 0; $i < count($Assignee) ; $i++){
-			$query = "INSERT INTO responsibility VALUES ('$username','$nextCategoryId')";
+			$query = "INSERT INTO responsibility VALUES ('$Assignee[$i]','$nextCategoryId')";
 			mysqli_query($con,$query);
 	}
 	mysqli_close($con);
+	header("Location: ../page/dashboard.php");
 ?>

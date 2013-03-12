@@ -38,7 +38,7 @@
 						</div>
 						<div>
 							<label for="asignee">Assignee:</label>
-							<input type="text" id="asignee" value="" onKeyUp="autoCompleteAsignee()" />
+							<input type="text" id="asignee" value="" name="listAssignee" onKeyUp="autoCompleteAsignee()" />
 						</div>
 						<br />
 						<div id = "testt">:)</div>
