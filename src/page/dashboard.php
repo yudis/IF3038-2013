@@ -50,7 +50,7 @@
 						</div>
 						<div>
 							<label for="password">Assignee:</label>
-							<input type="password" id="password" value="" />
+							<input type="text" id="password" value="" />
 						</div>
 						<div align="right"><input type="button" value="Finish"/></div>
 
