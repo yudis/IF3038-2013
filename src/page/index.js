@@ -37,9 +37,9 @@ function getAjax() //a function to get AJAX from browser
 						{
 							var loginresponse = ajaxRequest.responseText;
 							if(loginresponse == "true"){
-								alert("true");
+								self.location="page/dashboard.php";
 							}else{
-								alert("false");
+								alert("Username or password is wrong");
 							}
 							
 						}

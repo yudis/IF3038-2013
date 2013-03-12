@@ -12,6 +12,8 @@ $row = mysqli_fetch_array($result);
 if(strcmp($row['isexist'],"0") == 0){
 	echo "false";
 }else{
+	session_start();
+    $_SESSION["userlistapp"]=$id;
 	echo "true";
 }
 ?>
