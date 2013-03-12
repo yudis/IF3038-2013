@@ -34,21 +34,35 @@
                 <nav>
                     <div class="logo"><a href="dashboard.html"><img alt="Home" src="images/logo.png" /></a></div>
                     <ul>
-                        <li><div><a href="dashboard.html">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="index.html">Logout</a></div></li>
+                        <li><div><a href="dashboard.html">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="dashboard.html">Search</a></div></li><li><div><a href="index.html">Logout</a></div></li>
                     </ul>
                     <div class="search">
                         <div id="searchwrapper">
                             <form action="#">
-                                <input type="text" class="searchbox" name="q" value="" placeholder="Enter task name here.." />
-                                <input type="image" src="images/search.png" name="sumbit" class="searchbox_submit" alt="search..."/>
+                                <input type="text" class="searchbox" name="q" value="" placeholder="Search.." />
+                                <button type="button" name="sumbit" class="searchbox_submit" alt="search..."/><img src = "images/search.png" class="searchbox_image"></button>
+                                <button type="button" name="filter" class="filter_submit" onClick="showfilterbox()"><img src = "images/filterarrow.png" class="filter_image"></button>
                             </form>
-                            <select id = "combobox">
-                            	<option selected = "Filter">All</option>
-                                <option value = "Username">Username</option>
-                                <option value = "Category">Category</option>
-                                <option value = "Task">Task</option>
-                            </select>
+                            
                         </div>
+                        
+                        <div id = "f_menu">
+                        <form>
+                            	<div id= "menuleft">
+                                    <div id = "mainfilter"><input type = "checkbox" name="filter" value="username" id = "user">Username</input></div>
+                                    <!--<div id = "subfilter"><input type = "checkbox" name="filter" value="user_otherfiltering" id = "other_user">Other Filtering</input></div>-->
+                                    <div id = "mainfilter"><input type = "checkbox" name="filter" value="category" id="categ">Judul Kategori</input></div>
+                                </div>
+                                <div id = "verticalline"></div>
+                                <div id = "menuright">
+                                    <div id = "mainfilter"><input type = "checkbox" name="filter" value="task" id="task" onclick="checkedchild()">Task</input></div>
+                                    <div id = "subfilter"><input type = "checkbox" name="filter" value="judultask" id="taskname">Judul Task</input></div>
+                                    <div id = "subfilter"><input type = "checkbox" name="filter" value="judultask" id="tag">Tag</input></div>
+                                    <!--<div id = "subfilter"><input type = "checkbox" name="filter" value="judultask" id="other_task">Other Filtering</input></div>-->
+                                </div>
+                                 </form>
+                            </div>
+                           
                     </div>
                 </nav>
             </header>

@@ -1,6 +1,27 @@
 var nKategori = 3;
 var selectedIndex = -1;
 
+function showfilterbox(){
+    var div = document.getElementById('f_menu');
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'block';
+    }
+}
+
+function checkedchild(){
+	var elmt = document.getElementById('task');
+	var status = elmt.checked;
+	
+	if(status = 'true'){
+		document.getElementById('taskname').checked = true;
+		document.getElementById('tag').checked = true;
+	}
+	
+}
+
 function updateAddButtonVisibility() {
     var elmt = document.getElementById('addTask');
     if (selectedIndex < 0) {

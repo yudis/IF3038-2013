@@ -66,27 +66,20 @@ nav ul li a:link, nav ul li a:visited {
     display: inline-block;
     float: right;
     padding-top: 21px;
-    padding-right: 130px;
+    /*padding-right: 130px;*/
+	padding-right:8px;
     border: 0px;
 }
 
-#combobox{
-	width:100px;
-    height:40px;
-    background-color: white;
-	margin-left:200px;
-	text-indent:5px;
-    position:relative; 
-}
-
 #searchwrapper {
-    width:200px;
+    /*width:200px;*/
+	width:210px;
     height:40px;
-    background-color: white;
 	padding:0px;
     margin:0px;
     position:relative; 
 	text-align:left;
+	background-color:white;
 }
 #searchwrapper form { 
     display: inline; 
@@ -97,8 +90,8 @@ nav ul li a:link, nav ul li a:visited {
     background-color:transparent;
     position:absolute;
     top:4px;
-    left:9px;
-    width:140px;
+    left:5px;
+    width:120px;
     height:32px;
 }
 #searchwrapper input.searchbox:active {
@@ -109,10 +102,68 @@ nav ul li a:link, nav ul li a:visited {
     background-color:transparent;
     position:absolute;
     top:4px;
-    left:160px;
+    left:130px;
     width:32px;
     height:32px;
 }
+
+#searchbox_image{
+	width:32px;
+	height:32px;
+}
+
+.filter_submit {
+    border:0px;
+    position:absolute;
+	left:160px;
+    width:40px;
+    height:35px;
+	background-color:transparent;
+	margin-top:-3px;
+}
+
+#f_menu{
+	width:210px;
+	padding-top:10px;
+	list-style:none;
+	float:none;
+	background-color:white;
+	font-size:10px;
+	position:absolute;
+	display:none;
+}
+
+#verticalline{
+	width : 2px;
+	height: 60px;
+	float:left;
+	background-color:rgba(153,153,153,1);
+	margin-top:2px;
+}
+
+#menuleft{
+	width:100px;
+	float:left;
+}
+
+#menuright{
+	width:100px;
+	float:right;
+}
+
+#subfilter{
+	margin-left:20px;
+	margin-bottom:3px;
+}
+
+#mainfilter{
+	text-align:left;
+	width:115px;
+	float:left;
+	margin-left:5px;
+	margin-bottom:5px;
+}
+
 .sidebar {
     width: 180px;
     float: left;
