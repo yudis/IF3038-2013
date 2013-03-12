@@ -26,11 +26,11 @@
 					 <button type="submit" id="searchbutton"></button>
 				 </form>
 			</div>
-			<div class="menu" id="logout">
+			<div class="menu" id="logout" action="logout.php">
 				<a href="index.html">Logout</a>
 			</div>
 			<div class="menu" id="profile">
-				<a href="profile.html">Profile</a>
+				<a href="profile.php">Profile</a>
 			</div>
 			<div class="menu" id="home">
 				<a href="dashboard.html">Home</a>
@@ -38,15 +38,38 @@
         </div>
 		<div id="profilearea">
 			<div class="profilephoto">
-				<img alt="" src="images/zz.jpg"/>
+				<?php
+				session_start();
+				if(!isset($_SESSION['id']))
+				  header("location:index.html");
+				  
+				$con = mysql_connect("localhost:3306","root","");
+				if (!$con)
+				  {
+				  die('Could not connect: ' . mysql_error());
+				  }
+
+				mysql_select_db("progin_405_13510057", $con);
+				
+				$result = mysql_query("SELECT * FROM user WHERE username='$_SESSION[id]'");
+				while($row = mysql_fetch_array($result)) {
+					echo "<img alt=\"\" src=\"".$row['avatar']."\"/>";
+				}
+				?>
 			</div>
 			<div class="biodata">
-				<br>
-				Username  : dummy<br><br>
-				Fullname  : Dummy<br><br>
-				Birthdate : 20 Feb 2013<br><br>
-				Handphone : 081912345-XXX<br><br>
-				Email	  : dummy@students.itb.ac.id<br>
+				<?php
+				$result = mysql_query("SELECT * FROM user WHERE username='$_SESSION[id]'");
+				while($row = mysql_fetch_array($result)) {
+					echo "<br>";
+					echo "Username  : ".$row['username']."<br><br>";
+					echo "Fullname  : ".$row['fullname']."<br><br>";
+					echo "Birthdate : ".date('d F Y',strtotime($row['birthdate']))."<br><br>";
+					echo "Handphone : ".$row['phonenumber']."<br><br>";
+					echo "Email	  	: ".$row['email']."<br>";
+				}
+				mysql_close($con);
+				?>
 				<button type="button" id="editbutton"></button>
 			</div>
 		</div>
