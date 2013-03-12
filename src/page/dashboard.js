@@ -66,3 +66,21 @@ function autoCompleteAsignee(){
 	//ajaxRequest.open("GET","php/checkavailid.php?idinput="+document.getElementById("username").value,false);
 	
 }
+
+function setCompleteStatus(){
+	getAjax();
+	var status = document.getElementById("red-text").value;
+	alert("aaaaaaaaa "+status);
+	if(status!=""){
+		ajaxRequest.open("GET","../php/updatecompletestatus.php?status="+status.value,false);
+	
+		ajaxRequest.onreadystatechange = function()
+		{
+			suggestion =  ajaxRequest.responseText;
+			
+			//alert(suggestionarray);
+		}
+		
+		ajaxRequest.send();
+	}
+}

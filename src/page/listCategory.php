@@ -25,7 +25,7 @@
 			while($row2 = mysqli_fetch_array($result2))
   			{
 				echo "    	<li><a href = \"task_page.php\">".$row2['taskname']."</a><div class=\"task-tag\">submit by : <b><i>".$row2['username']."</i></b>, deadline : ".$row2['deadline'].", status : <b id=\"red-text\">".$row2['status']."</b></div>";
-				echo "		<br><div><div id=\"task-tag-delete\"><a href=\"#\" onClick=\"confirmTask()\"><i>Delete Task</i></a></div><div class=\"task-tag\">Set as <a href=\"#\">Completed Task</a></div></div><br><br>";
+				echo "		<br><div><div id=\"task-tag-delete\"><a href=\"#\" onClick=\"confirmTask()\"><i>Delete Task</i></a></div><div class=\"task-tag\">Set as <a href=\"javascript:setCompleteStatus()\">Completed Task</a></div></div><br><br>";
 				echo "		<div id=\"task-tag\">Tag :<br>";
 				$taskid = getTaskId($row2['taskname'],$row['categoryid']);
 				$con3 = getConnection();
