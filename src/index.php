@@ -138,15 +138,15 @@
 				Email: <br>
 				Your Avatar: <br>
 			</div>
-			<form>
+			<form enctype="multipart/form-data" method="post" action="php/registration.php">
 				<!--Username (min. 5 characters != password)-->
-				<input type="text" id="username" onKeyUp="check_username()"/><br />
+				<input type="text" id="username" name="textUsername" onKeyUp="check_username()"/><br />
 				<!--Password (min. 8 characters) != username and email-->
-				<input type="password" id="password" onKeyUp="check_password()"/><br />
+				<input type="password" id="password" name="textPassword" onKeyUp="check_password()"/><br />
 				<!--Confirm password == password-->
-				<input type="password" id="password2" onKeyUp="confirm_password()"/><br />
+				<input type="password" id="password2" name="textPassword2" onKeyUp="confirm_password()"/><br />
 				<!--Full name (min. 2 spaces between 2 characters)-->
-				<input type="text" id="fullname" onKeyUp="check_full_name()"/><br />
+				<input type="text" id="fullname" name="textFullName" onKeyUp="check_full_name()"/><br />
 				<!--Birth date (drop down, year >= 1955)-->
 				<select id="day">
 					<option value="1">1</option>
@@ -210,11 +210,11 @@
 					min. 1 character between @ and .
 					min. 2 characters after .
 					!= password-->
-				<input type="text" id="email" onKeyUp="check_email()"/><br />
+				<input type="text" id="email" name="textEmail" onKeyUp="check_email()"/><br />
 				<!--Avatar, input file, extension == .jpg or .jpeg-->
-				<input type="file" id="avatar" onChange="check_avatar()"/><br />
+				<input type="file" id="avatar" name="textAvatar" onChange="check_avatar()"/><br />
 				<!--Register button, disabled if invalid input exists-->
-				<input id="submit" type="button" value="Sign Up"/>
+				<input id="submit" type="submit" value="Sign Up"/>
 			</form><br /></div>
 			<div id="login-bottom">Don't have an account? <a href="#" onCLick="show_register_form()">Register</a></div>
 			<div id="register-bottom">Already have a account? <a href="#" onClick="show_login_form()">Sign in</a></div>
