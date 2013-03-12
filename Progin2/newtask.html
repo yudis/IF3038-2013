@@ -78,9 +78,18 @@
 			</div>
 			<div id="space">
 			</div>
-			<div id="search">
-				<input type="text" name="search" id="searchbox">
-				<button type="submit" id="searchbutton"></button>
+			<div class = "menu" id = "search">
+				 <form name="search" method="post" action="search.php">
+					 Search for: <input type="text" name="find" /> in 
+					 <Select NAME="field">
+					 <Option VALUE="semua">Semua</option>
+					 <Option VALUE="username">Username</option>
+					 <Option VALUE="namakategori">Judul Kategori</option>
+					 <Option VALUE="tasktag">Task atau Tag</option>
+					 </Select>
+					 <input type="hidden" name="searching" value="yes" />
+					 <button type="submit" id="searchbutton"></button>
+				 </form>
 			</div>
 			<div class="menu" id="logout">
 				<a href="index.html">Logout</a>

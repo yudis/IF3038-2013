@@ -14,7 +14,8 @@ $field = $_POST['field'];
  if ($searching =="yes") 
  { 
  echo "<h2>Hasil Pencarian</h2><p>"; 
- 
+  echo "<b>Anda mencari : </b> " .$find; 
+  echo "<br></br>";
  //If they did not enter a search term we give them an error 
  if ($find == "") 
  { 
@@ -32,8 +33,55 @@ $field = $_POST['field'];
  
  if ($field == "semua" )
  {
-	echo "semua";
+	//Pencarian Username
+	 $data = mysql_query("SELECT * FROM user WHERE upper(username) LIKE'%$find%'"); 
+	 while($result = mysql_fetch_array( $data )) 
+	 { 
+		 echo "Username : ";
+		 echo $result['username']; 
+		 echo " "; 
+		 echo " "; 
+		 echo $result['fullname']; 
+		 echo " "; 
+		 echo " "; 
+		 echo "avatarnya"; 
+		 echo "<br>"; 
+		 echo "<br>";
+	 } 
+	  $anymatches=mysql_num_rows($data); 
+	  
+	 //Pencarian nama kategori
+	 $data = mysql_query("SELECT * FROM kategori WHERE upper(namakategori) LIKE'%$find%'"); 
+	 while($result = mysql_fetch_array( $data )) 
+	 { 
+		echo "Nama kategori : ";
+		 echo $result['namakategori']; 
+		 echo "<br>"; 
+		 echo "<br>"; 
+	 } 
+	  $anymatches=$anymatches + mysql_num_rows($data); 
+	  
+	//Pencarian task
+	 //Now we search for our search term, in the field the user specified 
+	$data = mysql_query("SELECT * FROM tag,tugas WHERE upper(isitag) LIKE'%$find%' AND tag.idtugas = tugas.idtugas"); 
+	 
+	 //And we display the results 
+	while($result = mysql_fetch_array( $data )) 
+	{ 
+		echo "Tugas : ";
+		 echo $result['namatugas']; 
+		 echo " ";
+		 echo "Deadline : ";
+		 echo $result['deadline']; 
+		 echo " ";
+		echo "Tag : ";
+		 echo $result['isitag']; 
+		 echo "<br>"; 
+		echo "<br>"; 
+	} 
+	  $anymatches= $anymatches + mysql_num_rows($data); 
  }
+ 
   if ($field == "username" )
  {
 	 //Now we search for our search term, in the field the user specified 
@@ -43,7 +91,12 @@ $field = $_POST['field'];
 	 while($result = mysql_fetch_array( $data )) 
 	 { 
 		 echo $result['username']; 
-		 echo "<br>"; 
+		 echo " "; 
+		 echo " "; 
+		 echo $result['fullname']; 
+		 echo " "; 
+		 echo " "; 
+		 echo "avatarnya"; 
 		 echo "<br>"; 
 	 } 
 	  $anymatches=mysql_num_rows($data); 
@@ -62,20 +115,27 @@ $field = $_POST['field'];
 	 } 
 	  $anymatches=mysql_num_rows($data); 
  }
- // if ($field == "tasktag" )
- //{
+  if ($field == "tasktag" )
+ {
 	//Now we search for our search term, in the field the user specified 
-	// $data = mysql_query("SELECT * FROM kategori WHERE upper($field) LIKE'%$find%'"); 
+	$data = mysql_query("SELECT * FROM tag,tugas WHERE upper(isitag) LIKE'%$find%' AND tag.idtugas = tugas.idtugas"); 
 	 
 	 //And we display the results 
-	// while($result = mysql_fetch_array( $data )) 
-	// { 
-	//	 echo $result['namakategori']; 
-	//	 echo "<br>"; 
-	//	 echo "<br>"; 
-	// } 
-	//  $anymatches=mysql_num_rows($data); 
- //}
+	while($result = mysql_fetch_array( $data )) 
+	{ 
+		echo "Tugas : ";
+		 echo $result['namatugas']; 
+		 echo " ";
+		 echo "Deadline : ";
+		 echo $result['deadline']; 
+		 echo " ";
+		echo "Tag : ";
+		 echo $result['isitag']; 
+		 echo "<br>"; 
+		echo "<br>"; 
+	} 
+	  $anymatches=mysql_num_rows($data); 
+ }
  
  //This counts the number or results - and if there wasn't any it gives them a little message explaining that 
 
@@ -84,9 +144,6 @@ $field = $_POST['field'];
  echo "Maaf data yang anda cari tidak terdaftar<br><br>"; 
  } 
  echo "Hasil pencarian : ".$anymatches;
- echo "<br>"; 
- //And we remind them what they searched for 
- echo "<b>Searched For:</b> " .$find; 
  } 
 
 mysql_close($con);
