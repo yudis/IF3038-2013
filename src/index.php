@@ -1,3 +1,8 @@
+<?php 
+	session_start();
+	if (isset($_SESSION["userlistapp"]))
+		header("Location: page/dashboard.php");
+?>
 <!DOCTYPE html>
 <html>
 	<head>
