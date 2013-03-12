@@ -3,6 +3,8 @@
 	<head>
 		<title>Dashboard - meckyr</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<link href="layout.css" rel="stylesheet" type="text/css" />
+        <link href="modal.css" rel="stylesheet" type="text/css" />
 		<script>
 		function myFunction()
 		{
@@ -36,7 +38,26 @@
 				</div>
 				<div id="main-dashboard">
 					<div id="dashboard-title"><b>MY TASK<br /></b><br /></div>
-					<div id="add-category"><button onclick="myFunction()">+ New Category</button>&nbsp;</div>
+					<div id="add-category"><a href="#add_task"><button>+ New Category</button></a>&nbsp;</div>
+					
+					<!-- popup form #1 -->
+					<a href="#x" class="overlay" id="add_task"></a>
+					<div class="popup">
+						<h2>Add New Category</h2>
+						<br>
+						<div>
+							<label for="login">Name:</label>
+							<input type="text" id="login" value="" />
+						</div>
+						<div>
+							<label for="password">Assignee:</label>
+							<input type="password" id="password" value="" />
+						</div>
+						<div align="right"><input type="button" value="Finish"/></div>
+
+						<a class="close" href="#close"></a>
+					</div>
+					
 					<div id="sort">	
 						Sort by :
 						<select name="Sort by">
