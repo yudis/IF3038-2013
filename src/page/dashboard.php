@@ -31,9 +31,10 @@
 					<div class="popup">
 						<h2>Add New Category</h2>
 						<br>
+                        <form action="../php/insertcategory.php" method="post">
 						<div>
 							<label for="login">Name:</label>
-							<input type="text" id="login" value="" />
+							<input type="text" id="login" value="" name="newCategory"/>
 						</div>
 						<div>
 							<label for="asignee">Assignee:</label>
@@ -41,7 +42,8 @@
 						</div>
 						<br />
 						<div id = "testt">:)</div>
-						<div align="right"><input type="button" value="Finish"/></div>
+						<div align="right"><input type="submit" value="Finish"/></div>
+						</form>
 
 						<a class="close" href="#close"></a>
 					</div>
