@@ -83,11 +83,6 @@ function NewCal(pCtrl,pFormat,pShowTime,pTimeMode)
 			strMonth=exDateTime.substring(Sp1+1,Sp2);
 			strDate=exDateTime.substring(0,Sp1);
 		}
-		else if ((Cal.Format.toUpperCase()=="YYYYMMDD"))
-		{
-			strMonth=exDateTime.substring(Sp1+1,Sp2);
-			strDate=exDateTime.substring(Sp2+1);
-		}
 		else if ((Cal.Format.toUpperCase()=="MMDDYYYY") || (Cal.Format.toUpperCase()=="MMMDDYYYY"))
 		{
 			strMonth=exDateTime.substring(0,Sp1);
@@ -105,11 +100,7 @@ function NewCal(pCtrl,pFormat,pShowTime,pTimeMode)
 			Cal.Date=strDate;
 		//end parse Date
 		//parse year
-		if ((Cal.Format.toUpperCase()=="YYYYMMDD")) {
-			strYear=exDateTime.substring(0, 4);
-		} else {
-			strYear=exDateTime.substring(Sp2+1,Sp2+5);
-		}
+		strYear=exDateTime.substring(Sp2+1,Sp2+5);
 		YearPattern=/^\d{4}$/;
 		if (YearPattern.test(strYear))
 			Cal.Year=parseInt(strYear,10);
@@ -482,8 +473,6 @@ function FormatDate(pDate)
 {
 	if (this.Format.toUpperCase()=="DDMMYYYY")
 		return (pDate+DateSeparator+(this.Month+1)+DateSeparator+this.Year);
-	else if (this.Format.toUpperCase()=="YYYYMMDD")
-		return (this.Year+DateSeparator+(this.Month+1)+DateSeparator+pDate);
 	else if (this.Format.toUpperCase()=="DDMMMYYYY")
 		return (pDate+DateSeparator+this.GetMonthName(false)+DateSeparator+this.Year);
 	else if (this.Format.toUpperCase()=="MMDDYYYY")

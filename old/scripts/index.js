@@ -147,7 +147,7 @@ function validateEmail() {
 
 function validateBday() {
     var bday = document.getElementById("bday");
-    var regex = /^[0-9]{4,4}-[0-9]{1,2}-[0-9]{1,2}$/g;
+    var regex = /^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4,4}$/g;
     
     isValidBday = true;
     if (!regex.test(bday.value)) {
@@ -155,7 +155,7 @@ function validateBday() {
     }
     
     if (isValidBday) {
-        if (bday.value.substr(0, 4) < 1955) {
+        if (bday.value.substr(bday.value.length - 4) < 1955) {
             isValidBday = false;
         }
     }
@@ -190,7 +190,7 @@ function validateAvatar() {
 }
 
 function bdayPicker() {
-    NewCal('bday', 'YYYYMMDD');
+    NewCal('bday', 'ddmmyyyy');
     return false;
 }
 
@@ -285,25 +285,4 @@ function validateForm()
 
 function register() {
     window.location.replace("dashboard.html");
-}
-
-function loginX() {
-	var xmlhttp = getXmlHttpRequest();
-	if (!xmlhttp) return;
-	
-	var qry = 'username=' + encodeURIComponent(document.forms["login"]["username"].value) + '&password=' + encodeURIComponent(document.forms["login"]["password"].value);
-	
-	xmlhttp.open("POST", "./ajax/login.php", true);
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			var loginres = JSON.parse(xmlhttp.responseText);
-			if (loginres.status == 200) {
-				window.location.replace("dashboard.php");
-			} else {
-				alert(loginres.message);
-			}
-		}
-	}
-	xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xmlhttp.send(qry);
 }

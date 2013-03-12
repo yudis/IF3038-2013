@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Mar 07, 2013 at 02:55 PM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Host: 127.0.0.1
+-- Generation Time: Mar 12, 2013 at 11:09 AM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.7
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `asignee` (
 --
 
 INSERT INTO `asignee` (`id_tugas`, `username`) VALUES
-(1, 'admin');
+(1, 'edwardsp');
 
 -- --------------------------------------------------------
 
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `pemilik` (
 --
 
 INSERT INTO `pemilik` (`username`, `id_tugas`) VALUES
-('admin', 1);
+('edwardsp', 1);
 
 -- --------------------------------------------------------
 
@@ -145,26 +145,29 @@ INSERT INTO `tugas-tag` (`id_tugas`, `tag`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `username` varchar(25) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `username` varchar(32) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(25) NOT NULL,
-  `full_name` text NOT NULL,
+  `password` char(32) NOT NULL,
+  `full_name` varchar(100) NOT NULL,
   `tgl_lahir` date NOT NULL,
-  `avatar` varchar(200) NOT NULL,
+  `avatar` varchar(50) NOT NULL,
   PRIMARY KEY (`username`),
-  UNIQUE KEY `email` (`email`)
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `email_2` (`email`),
+  UNIQUE KEY `email_3` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `user` (`username`, `email`, `password`, `full_name`, `tgl_lahir`, `avatar`) VALUES
-('admin', 'admin@admin.com', 'adminadmin', 'admin admin', '2013-03-07', 'D:/image.jpg');
+INSERT INTO `users` (`username`, `email`, `password`, `full_name`, `tgl_lahir`, `avatar`) VALUES
+('edogawa', 'edward_samuel_esp@yahoo.com', '19b13f6bbc0d19a5dba84b209a22a487', 'Edward Samuel', '0000-00-00', 'image-1.jpg'),
+('edwardsp', 'edward_samuel_esp@hotmail.com', '9aa6e5f2256c17d2d430b100032b997c', 'Edward Samuel Pasaribu', '1992-07-16', 'edwardsp.jpg');
 
 --
 -- Constraints for dumped tables
@@ -174,22 +177,22 @@ INSERT INTO `user` (`username`, `email`, `password`, `full_name`, `tgl_lahir`, `
 -- Constraints for table `asignee`
 --
 ALTER TABLE `asignee`
-  ADD CONSTRAINT `asignee_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `asignee_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `asignee_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `asignee_ibfk_2` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pemilik`
 --
 ALTER TABLE `pemilik`
-  ADD CONSTRAINT `pemilik_ibfk_2` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pemilik_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pemilik_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pemilik_ibfk_2` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tugas-kategori`
 --
 ALTER TABLE `tugas-kategori`
-  ADD CONSTRAINT `tugas@002dkategori_ibfk_2` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tugas@002dkategori_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tugas@002dkategori_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tugas@002dkategori_ibfk_2` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tugas-tag`
