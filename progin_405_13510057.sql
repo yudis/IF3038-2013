@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 12, 2013 at 01:06 PM
+-- Generation Time: Mar 12, 2013 at 05:35 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -135,6 +135,7 @@ CREATE TABLE IF NOT EXISTS `tugas` (
   `deadline` date NOT NULL,
   `idkategori` varchar(10) NOT NULL,
   `username` varchar(12) NOT NULL,
+  `status` varchar(10) NOT NULL,
   UNIQUE KEY `idtugas` (`idtugas`),
   KEY `tugas_ibfk_1` (`username`),
   KEY `tugas_ibfk_2` (`idkategori`)
@@ -144,9 +145,9 @@ CREATE TABLE IF NOT EXISTS `tugas` (
 -- Dumping data for table `tugas`
 --
 
-INSERT INTO `tugas` (`idtugas`, `namatugas`, `attachment`, `deadline`, `idkategori`, `username`) VALUES
-('1', 'Tubes 2 Progin', 'upload/tubes2progin.pdf', '2013-03-23', '1', 'moonray'),
-('2', 'UTS Psiter', 'upload/utspsiter.pdf', '2013-03-14', '2', 'moonray');
+INSERT INTO `tugas` (`idtugas`, `namatugas`, `attachment`, `deadline`, `idkategori`, `username`, `status`) VALUES
+('1', 'Tubes 2 Progin', 'upload/tubes2progin.pdf', '2013-03-23', '1', 'moonray', 'undone'),
+('2', 'UTS Psiter', 'upload/utspsiter.pdf', '2013-03-14', '2', 'moonray', 'done');
 
 -- --------------------------------------------------------
 
@@ -161,6 +162,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `birthdate` date NOT NULL,
   `phonenumber` varchar(12) NOT NULL,
   `email` varchar(20) NOT NULL,
+  `avatar` varchar(50) NOT NULL,
   PRIMARY KEY (`username`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -169,9 +171,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`username`, `password`, `fullname`, `birthdate`, `phonenumber`, `email`) VALUES
-('iLol', '87654321', 'Kevin Winata', '1992-12-25', '081987654321', 'kevin@gmail.com'),
-('moonray', '12345678', 'Raymond Lukanta', '1992-12-01', '081912345678', 'raymond@gmail.com');
+INSERT INTO `user` (`username`, `password`, `fullname`, `birthdate`, `phonenumber`, `email`, `avatar`) VALUES
+('iLol', '87654321', 'Kevin Winata', '1992-12-25', '081987654321', 'kevin@gmail.com', 'upload/kevin.jpg'),
+('moonray', '12345678', 'Raymond Lukanta', '1992-12-01', '081912345678', 'raymond@gmail.com', 'upload/raymond.jpg');
 
 --
 -- Constraints for dumped tables
