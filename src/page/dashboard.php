@@ -38,7 +38,8 @@
 						</div>
 						<div>
 							<label for="asignee">Assignee:</label>
-							<input type="text" id="asignee" value="" name="listAssignee" onKeyUp="autoCompleteAsignee()" />
+							<input type="text" id="asignee" value="" name="listAssignee" onKeyUp="autoCompleteAsignee()" list="assignee" placeholder="tag1,tag2,tag3"/>
+							<div id="assignee-suggest"></div>
 						</div>
 						<div align="right"><input type="submit" value="Finish"/></div>
 						</form>

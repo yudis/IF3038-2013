@@ -1,5 +1,7 @@
 //Dashboard javascript
 var ajaxRequest;
+var iskonkat = false;
+var konkat;
 
 function confirmCategory()
 {
@@ -49,7 +51,16 @@ function autoCompleteAsignee(){
 	var suggestion = "";
 	var suggestionarray;
 	
-	if(asignee!=""){
+	var index = asignee.length;
+	
+	if(asignee!="")
+	{
+		if ((asignee.charAt(index - 1) == ',') && (iskonkat == false))
+		{
+			iskonkat = true;
+			konkat = asignee.substr(0,index);
+		}
+	
 		ajaxRequest.open("GET","../php/autocompleteasignee.php?asignee="+document.getElementById("asignee").value,false);
 
 		ajaxRequest.onreadystatechange = function()
@@ -58,6 +69,21 @@ function autoCompleteAsignee(){
 			suggestion = suggestion.substr(0,suggestion.length-1);
 			suggestionarray = suggestion.split("|");
 			//alert(suggestionarray);
+			
+			var x;
+			x="<datalist id=\"assignee\">";
+			for (var i = 0; i < suggestionarray.length; i++) {
+				if (iskonkat)
+				{
+					x += "<option value=\""+konkat+suggestionarray[i]+"\">";
+				}
+				else
+				{
+					x += "<option value=\""+suggestionarray[i]+"\">";
+				}
+			}
+			x += "</datalist>";
+			document.getElementById("assignee-suggest").innerHTML=x;
 		}
 		
 		ajaxRequest.send();
