@@ -357,6 +357,19 @@ body {
 	font-size:12px;
 }
 
+#task-tag {
+	float:left;
+	font-size:12px;
+	padding-top:5px;
+}
+
+#task-tag-delete {
+	float:left;
+	font-size:12px;
+	padding-top:5px;
+	padding-left:10px;
+}
+
 #delete-category {
 	float:left;
 }

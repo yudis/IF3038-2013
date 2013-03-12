@@ -1,6 +1,20 @@
 //Dashboard javascript
 var ajaxRequest;
 
+function confirmCategory()
+{
+	var x=window.confirm("Are you sure you want to delete this category ?\n(All the tasks in this category will also be deleted)")
+	if (x)
+		window.alert("Category is succesfully deleted")
+}
+
+function confirmTask()
+{
+	var x=window.confirm("Are you sure you want to delete this task ?")
+	if (x)
+		window.alert("Task is succesfully deleted")
+}
+
 function getAjax() //a function to get AJAX from browser
 {
 	try

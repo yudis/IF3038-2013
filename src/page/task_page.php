@@ -211,6 +211,7 @@
 						<div id="left-main-body">Shared with : <input type="text" list="assignee"/>
 						<datalist id="assignee">
 							<option value="dhanui">
+							<option value="darara">
 							<option value="kevinkw">
 						</datalist>
 						</div>
