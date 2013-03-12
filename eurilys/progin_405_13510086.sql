@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `CATEGORY` (
 INSERT INTO `CATEGORY` (`cat_id`, `cat_name`, `cat_creator`) VALUES
 (1, 'Schoolicious', 'kennyazrina'),
 (2, 'Household', 'sharonloh');
+(3, 'BeautyStuff', 'nflubis');
 
 -- --------------------------------------------------------
 
@@ -91,7 +92,7 @@ INSERT INTO `CAT_ASIGNEE` (`cat_id`, `username`) VALUES
 CREATE TABLE IF NOT EXISTS `COMMENT` (
   `comment_id` int(11) NOT NULL AUTO_INCREMENT,
   `comment_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `content` text NOT NULL,
+  `comment_content` text NOT NULL,
   `task_id` int(11) NOT NULL,
   `comment_creator` varchar(50) NOT NULL,
   PRIMARY KEY (`comment_id`),
@@ -102,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `COMMENT` (
 -- Dumping data for table `COMMENT`
 --
 
-INSERT INTO `COMMENT` (`comment_id`, `comment_timestamp`, `content`, `task_id`, `comment_creator`) VALUES
+INSERT INTO `COMMENT` (`comment_id`, `comment_timestamp`, `comment_content`, `task_id`, `comment_creator`) VALUES
 (1, '2013-03-12 11:44:26', 'asdasdasdas', 1, 'sharonloh'),
 (2, '2013-03-12 11:44:26', 'sndajasndnsajkdans', 1, 'nflubis');
 
@@ -134,8 +135,8 @@ INSERT INTO `TAG` (`tag_name`, `task_id`) VALUES
 CREATE TABLE IF NOT EXISTS `TASK` (
   `task_id` int(11) NOT NULL AUTO_INCREMENT,
   `task_name` varchar(50) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `deadline` date NOT NULL,
+  `task_status` tinyint(1) NOT NULL DEFAULT '0',
+  `task_deadline` date NOT NULL,
   `cat_name` varchar(50) NOT NULL,
   `task_creator` varchar(50) NOT NULL,
   PRIMARY KEY (`task_id`),
@@ -146,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `TASK` (
 -- Dumping data for table `TASK`
 --
 
-INSERT INTO `TASK` (`task_id`, `task_name`, `status`, `deadline`, `cat_name`, `task_creator`) VALUES
+INSERT INTO `TASK` (`task_id`, `task_name`, `task_status`, `task_deadline`, `cat_name`, `task_creator`) VALUES
 (1, 'Tubes Progin 2', 0, '2013-03-23', 'Schoolicious', 'kennyazrina'),
 (2, 'Tubes Progin 3', 0, '2013-04-25', 'Schoolicious', 'nflubis');
 
