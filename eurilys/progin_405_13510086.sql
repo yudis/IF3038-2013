@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(20) NOT NULL,
   `full_name` varchar(100) NOT NULL,
   `birthdate` date NOT NULL,
-  `avatar` text NOT NULL,
+  `avatar` blob,
   `email` varchar(50) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -193,9 +193,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `full_name`, `birthdate`, `avatar`, `email`) VALUES
-('kennyazrina', 'kennyazrina', 'Kania Azrina', '1992-03-13', 'abcdefg', 'kaniaazrina@gmail.com'),
-('nflubis', 'nflubis', 'Nurul Fithria Lubis', '1992-04-17', 'dasjndjksndkas', 'nflubis@gmail.com'),
-('sharonloh', 'sharonloh', 'Sharon Loh', '1992-02-10', 'dsddsdsa', 'sharonloh@gmail.com');
+('kennyazrina', 'kennyazrina', 'Kania Azrina', '1992-03-13', NULL, 'kaniaazrina@gmail.com'),
+('nflubis', 'nflubis', 'Nurul Fithria Lubis', '1992-04-17', NULL, 'nflubis@gmail.com'),
+('sharonloh', 'sharonloh', 'Sharon Loh', '1992-02-10', NULL, 'sharonloh@gmail.com');
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

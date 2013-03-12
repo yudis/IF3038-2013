@@ -1,3 +1,4 @@
+<?php include 'db_creator.php'; ?>	
 <?php include 'header.php'; ?>	
 
 <!-- Web Content -->

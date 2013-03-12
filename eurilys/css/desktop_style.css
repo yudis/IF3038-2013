@@ -96,7 +96,10 @@ label#remember_me {
 	background-color:#6FBEC6;
 }
 #search_box {
-	float:left; margin-left:50px; height:25px; margin-top:45px; width:20%;
+	float:left; margin-left:45px; height:25px; margin-top:45px; width:20%;
+}
+#search_box_filter {
+	float:left; height:30px; margin-top:45px; margin-left:5px; 
 }
 /* LOGO 
 ----------------------------------------------------------------------------------------------------------------- */
