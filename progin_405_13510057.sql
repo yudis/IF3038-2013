@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 12, 2013 at 07:43 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Generation Time: Mar 12, 2013 at 01:06 PM
+-- Server version: 5.5.8
+-- PHP Version: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -33,6 +32,13 @@ CREATE TABLE IF NOT EXISTS `assignee` (
   KEY `assignee_ibfk_2` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `assignee`
+--
+
+INSERT INTO `assignee` (`username`, `idtugas`) VALUES
+('iLol', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -45,6 +51,15 @@ CREATE TABLE IF NOT EXISTS `hak` (
   KEY `hak_ibfk_1` (`username`),
   KEY `hak_ibfk_2` (`idkategori`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `hak`
+--
+
+INSERT INTO `hak` (`username`, `idkategori`) VALUES
+('iLol', '1'),
+('moonray', '1'),
+('moonray', '2');
 
 -- --------------------------------------------------------
 
@@ -63,7 +78,8 @@ CREATE TABLE IF NOT EXISTS `kategori` (
 --
 
 INSERT INTO `kategori` (`idkategori`, `namakategori`) VALUES
-('1', 'Kuliah');
+('1', 'Tugas Kelompok'),
+('2', 'Tugas Pribadi');
 
 -- --------------------------------------------------------
 
@@ -79,6 +95,11 @@ CREATE TABLE IF NOT EXISTS `komentar` (
   KEY `komentar_ibfk_2` (`idtugas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `komentar`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -90,6 +111,16 @@ CREATE TABLE IF NOT EXISTS `tag` (
   `isitag` varchar(20) NOT NULL,
   KEY `tag_ibfk_1` (`idtugas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tag`
+--
+
+INSERT INTO `tag` (`idtugas`, `isitag`) VALUES
+('1', 'kuliah'),
+('1', 'tubes'),
+('2', 'kuliah'),
+('2', 'uts');
 
 -- --------------------------------------------------------
 
@@ -114,7 +145,8 @@ CREATE TABLE IF NOT EXISTS `tugas` (
 --
 
 INSERT INTO `tugas` (`idtugas`, `namatugas`, `attachment`, `deadline`, `idkategori`, `username`) VALUES
-('1', 'tugas sister', '', '2013-03-08', '1', 'admin');
+('1', 'Tubes 2 Progin', 'upload/tubes2progin.pdf', '2013-03-23', '1', 'moonray'),
+('2', 'UTS Psiter', 'upload/utspsiter.pdf', '2013-03-14', '2', 'moonray');
 
 -- --------------------------------------------------------
 
@@ -138,7 +170,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `fullname`, `birthdate`, `phonenumber`, `email`) VALUES
-('admin', 'admin', 'Admin Z', '2013-03-08', '081977972383', 'admin@gmail.com');
+('iLol', '87654321', 'Kevin Winata', '1992-12-25', '081987654321', 'kevin@gmail.com'),
+('moonray', '12345678', 'Raymond Lukanta', '1992-12-01', '081912345678', 'raymond@gmail.com');
 
 --
 -- Constraints for dumped tables
@@ -177,7 +210,3 @@ ALTER TABLE `tag`
 ALTER TABLE `tugas`
   ADD CONSTRAINT `tugas_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`),
   ADD CONSTRAINT `tugas_ibfk_2` FOREIGN KEY (`idkategori`) REFERENCES `kategori` (`idkategori`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
