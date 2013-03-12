@@ -114,14 +114,26 @@ function login() {
 					document.getElementById("warning-message").innerHTML="Name is not valid";
 				}
 			}
+			
 			function check_email() {
+				getAjax();
+			
 				var str = document.getElementById("email").value;
 				var at = str.indexOf('@');
 				var dot = str.lastIndexOf('.');
 				if (at > 0 && (dot - at) > 1 && dot < str.length - 2) {
-					chkemail = true;
-					show_submit_button();
-					document.getElementById("warning-message").innerHTML="";
+					var result;
+					
+					ajaxRequest.open("GET","php/checkavailemail.php?emailinput="+document.getElementById("email").value,false);
+					ajaxRequest.onreadystatechange = function()
+					{
+						document.getElementById("warning-message").innerHTML = ajaxRequest.responseText;
+						if(document.getElementById("warning-message").innerHTML == ""){
+							chkemail = true;
+							show_submit_button();
+						}
+					}
+					ajaxRequest.send();
 				} else {
 					chkemail = false;
 					hide_submit_button();
