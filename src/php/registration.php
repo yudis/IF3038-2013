@@ -17,5 +17,9 @@
 	// Process File
 	$file = $_FILES['textAvatar'];
 	upload_file($file,$username);
+	
+	// Set Cookies & Session
+	session_start();
+    $_SESSION["userlistapp"]=$username;
 	header("Location: ../page/dashboard.php");
 ?>

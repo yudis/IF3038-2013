@@ -1,3 +1,8 @@
+<?php 
+	session_start();
+	if (!isset($_SESSION["userlistapp"]))
+		header("Location: ../index.php");
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,10 +16,10 @@
 		<div id="header-right-side">
 			<div><input type="text" placeholder="Search Tasks"><button>Search</button></div>
 			<div id="header-right-user">
-				You logged as, <b>meckyr</b>
+				You logged as, <b><?php echo $_SESSION["userlistapp"]?></b>
 				<ul>
 					<li><a href="profile.php">Go to Profile</a></li>
-					<li><a href="../index.php">Sign Out</a></li>
+					<li><a href="../php/signout.php">Sign Out</a></li>
 				</ul>
 			</div>
 		</div>
