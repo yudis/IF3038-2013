@@ -17,8 +17,9 @@
 			<!--Body-->
 			<div id="dashboard-body">
 				<div id="profile-pic">
-					<img id="photo" src="../image/ecky.jpg" width=120/><br />
-					<b>meckyr</b>
+					<img id="photo" src="../avatar/<?php echo $_SESSION["userlistapp"]?>.png" width=120 height="150"/>
+   					<img id="photo" src="../avatar/<?php echo $_SESSION["userlistapp"]?>.jpg" width=120 height="150"/><br />
+					<b><?php echo $_SESSION["userlistapp"]?></b>
 				</div>
 				<div id="main-dashboard">
 					<div id="dashboard-title"><b>MY TASK<br /></b><br /></div>
