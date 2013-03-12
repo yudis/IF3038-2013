@@ -1,5 +1,5 @@
 // JavaScript Document
-var AjaxRequest;
+var ajaxRequest;
 
 function getAjax() //a function to get AJAX from browser
 {
@@ -140,6 +140,7 @@ function login() {
 					document.getElementById("warning-message").innerHTML="Email is not valid";
 				}
 			}
+			
 			function check_avatar() {
 				var str = document.getElementById("avatar").value;
 				var ext = str.substring(str.lastIndexOf('.') + 1, str.length);
