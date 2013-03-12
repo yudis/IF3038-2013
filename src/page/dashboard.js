@@ -70,7 +70,7 @@ function autoCompleteAsignee(){
 function setCompleteStatus(){
 	getAjax();
 	var status = document.getElementById("red-text").value;
-	alert("aaaaaaaaa "+status);
+	alert("aaaaaaaaa "+document.getElementById("red-text").value);
 	if(status!=""){
 		ajaxRequest.open("GET","../php/updatecompletestatus.php?status="+status.value,false);
 	
