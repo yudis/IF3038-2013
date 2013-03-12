@@ -50,7 +50,7 @@
 				<!--Full name (min. 2 spaces between 2 characters)-->
 				<input type="text" id="fullname" name="textFullName" onKeyUp="check_full_name()"/><br />
 				<!--Birth date (drop down, year >= 1955)-->
-				<input type="text" class="calendarSelectDate" /><div id="calendarDiv"></div>
+				<input type="text" class="calendarSelectDate" name="textBirthday"/><div id="calendarDiv"></div>
 				<br />
 				<!--email, validation:
 					min. 1 character before @
