@@ -39,8 +39,8 @@
                     <div class="search">
                         <div id="searchwrapper">
                             <form action="#">
-                                <input type="text" class="searchbox" name="q" value="" placeholder="Search.." />
-                                <input type="image" src="images/search.png" name="sumbit" class="searchbox_submit" alt="search..."/>
+                                <input type="text" id="search" class="searchbox" name="q" value="" placeholder="Search.." />
+                                <input type="image" src="images/search.png" name="sumbit" class="searchbox_submit" alt="search..." onClick="Search()"/>
                                 <button type="button" name="filter" class="filter_submit" onClick="showfilterbox()"><img src = "images/filterarrow.png" class="filter_image"></button>
                             </form>
                             
@@ -68,20 +68,20 @@
             </header>
             <div class="content">
                 <div class="sidebar">
-                    <ul id="Search" class="nav">
-                        <li><a id="F0" href="#" onclick="return FilterSelected(this)"><input type = "checkbox" name="filter" value="all" id = "all">All</input></a></li>
-                        <li id = "menusidebar"><a id="F1" href="#"><input type = "checkbox" name="filter" value="username" id = "user" onclick="filterusername()">Username</input></a></li>
-                        <li id = "menusidebar"><a id="F2" href="#" onclick="return FilterSelected(this)"><input type = "checkbox" name="filter" value="category" id="categ">Judul Kategori</input></a></li>
-                        <li id = "menusidebar"><a id="F3" href="#" onclick="return FilterSelected(this)"><input type = "checkbox" name="filter" value="task" id="task" onclick="checkedchild()">Task</input></a></li>
-                        <li id = "submenusidebar"><a id="F4" href="#" onclick="return FilterSelected(this)"><input type = "checkbox" name="filter" value="judultask" id="taskname">Judul Task</input></a></li>
-                        <li id = "submenusidebar"><a id="F5" href="#" onclick="return FilterSelected(this)"><input type = "checkbox" name="filter" value="judultask" id="tag">Tag</input></a></li>
+                    <ul id="FilterKategori" class="nav">
+                        <li><a id="F-All" href="#" onclick="return RemoveKategoriFilter(this)">All</a></li>
+                        <li><a id="F0" href="#" onclick="return KategoriSelected(this)">Username</a></li>
+                        <li><a id="F1" href="#" onclick="return KategoriSelected(this)">Category</a></li>
+                        <li><a id="F2" href="#" onclick="return KategoriSelected(this)">Task</a></li>
+                        <li id = "menusidebar"><a id="F2" href="#" onclick="return KategoriSelected(this)">TaskName</a></li>
+                        <li id = "menusidebar"><a id="F2" href="#" onclick="return KategoriSelected(this)">Tag</a></li>
                     </ul>
                 </div>
                 <div id="listTugas" class="main">
-                    <h1 class="inlineblock">Search</h1>
+                    <h1 class="inlineblock">Search Result : </h1>
                     <section id="main-F0">
                         <h2>Username</h2>
-                        <div class="tugas">
+                        <div id="testtt" class="tugas">
                             <div><a href="tugas.html?name=Tugas%20Besar%201%3A%20Algoritma%20Genetik&amp;deadline=2013-02-22&amp;tags=AI%2C%20Genetics%2C%20Algorithm">Tugas Besar 1: Algoritma Genetik</a></div>
                             <div>Deadline: <strong>22 Februari 2013</strong></div>
                             <div>
@@ -104,10 +104,11 @@
                                 </ul>
                             </div>                            
                         </div>
+                    </section>-->
                     </section>
-                    <section id="main-K1">
+                    <!--<section id="main-F1">
                         <h2>IF3094 - Komunikasi Antar Personal</h2>
-                        <div class="tugas">
+                        <div class="tugas1">
                             <div><a href="tugas.html?name=Cerita%20Liburan&amp;deadline=2013-02-27&amp;tags=KAP%2C%20Cerita">Cerita Liburan</a></div>
                             <div>Deadline: <strong>27 Februari 2013</strong></div>
                             <div>
@@ -118,8 +119,8 @@
                                 </ul>
                             </div>                            
                         </div>
-                    </section>
-                    <section id="main-K2">
+                    </section>-->
+                    <!--<section id="main-K2">
                         <h2>IF3038 - Pemrograman Internet</h2>
                         <div class="tugas">
                             <div><a href="tugas.html?name=Tugas%20Besar%201%3A%20Pengenalan%20HTML%20%2B%20CSS%20%2B%20JS&amp;deadline=2013-02-22&amp;tags=Internet%2C%20HTML%2C%20CSS%2C%20JS">Tugas Besar 1: Pengenalan HTML + CSS + JS</a></div>

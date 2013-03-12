@@ -391,3 +391,18 @@ footer.content {
     padding: 3px;
 }
 
+#usernamefilter{
+	text-align:left;
+	vertical-align:middle;
+	border:none;
+	font-size: 100%;
+	color:black;
+	background-color:transparent;
+}
+
+#trueicon{
+	position:absolute;
+	margin-top:-16px;
+	display:none;
+}
+
