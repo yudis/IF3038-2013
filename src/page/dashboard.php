@@ -35,9 +35,11 @@
 							<input type="text" id="login" value="" />
 						</div>
 						<div>
-							<label for="password">Assignee:</label>
-							<input type="text" id="password" value="" />
+							<label for="asignee">Assignee:</label>
+							<input type="text" id="asignee" value="" onKeyUp="autoCompleteAsignee()" />
 						</div>
+						<br />
+						<div id = "testt">:)</div>
 						<div align="right"><input type="button" value="Finish"/></div>
 
 						<a class="close" href="#close"></a>
