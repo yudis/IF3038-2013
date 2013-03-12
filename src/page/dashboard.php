@@ -4,6 +4,7 @@
 		<title>Dashboard - meckyr</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
         <link href="modal.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="dashboard.js"></script>
 	</head>
 	<body>
 		<div id="main-body-general">
