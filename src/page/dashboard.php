@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Dashboard - meckyr</title>
+		<title>Dashboard</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
         <link href="modal.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="dashboard.js"></script>

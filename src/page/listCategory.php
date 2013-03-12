@@ -7,7 +7,7 @@
 	echo "<div id=\"category-list\">";
 	
 	echo "<div><hr id=\"border\"></div>";
-	
+	$i = 0;
 	while($row = mysqli_fetch_array($result))
   	{
 		echo "<div class=\"task-category-body\">";
@@ -24,8 +24,10 @@
 			$result2 = mysqli_query($con2,"SELECT * FROM task WHERE categoryid = ".$row['categoryid']);
 			while($row2 = mysqli_fetch_array($result2))
   			{
-				echo "    	<li><a href = \"task_page.php\">".$row2['taskname']."</a><div class=\"task-tag\">submit by : <b><i>".$row2['username']."</i></b>, deadline : ".$row2['deadline'].", status : <b id=\"red-text\">".$row2['status']."</b></div>";
-				echo "		<br><div><div id=\"task-tag-delete\"><a href=\"#\" onClick=\"confirmTask()\"><i>Delete Task</i></a></div><div class=\"task-tag\">Set as <a href=\"javascript:setCompleteStatus()\">Completed Task</a></div></div><br><br>";
+				echo "    	<li><a href = \"task_page.php\">".$row2['taskname']."</a><div class=\"task-tag\">submit by : <b><i>".$row2['username']."</i></b>, deadline : ".$row2['deadline'].", status : <b id=\"red-text".$i++."\">".$row2['status']."</b></div>";
+				echo "		<br><div><div id=\"task-tag-delete\">";
+				echo "		<a href=\"#\" onClick=\"confirmTask()\"><i>Delete Task</i></a>";
+				echo "      </div><div class=\"task-tag\">Set as <a href=\"javascript:setCompleteStatus()\">Completed Task</a></div></div><br><br>";
 				echo "		<div id=\"task-tag\">Tag :<br>";
 				$taskid = getTaskId($row2['taskname'],$row['categoryid']);
 				$con3 = getConnection();
