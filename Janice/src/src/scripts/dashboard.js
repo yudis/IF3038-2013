@@ -95,10 +95,9 @@ function KategoriSelected(elmt) {
 }
 
 function Search(){
-	var search_word = document.getElementById('search').value;
+	//var search_word = document.getElementById('search').value;
 	
-	window.location.href = './search.html';
-	
+	//window.location.href = './search.html';
 	var newdiv = document.createElement('div');
 	newdiv.innerHTML = search_word;
 	div.setAttribute('class','tugas');

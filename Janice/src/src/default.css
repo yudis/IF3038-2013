@@ -62,6 +62,14 @@ nav ul li a:link, nav ul li a:visited {
     text-decoration: none;
     font: Arial;
 }
+
+.judulhasilsearch{
+	font-weight:bold;
+    text-decoration: none;
+    font: Arial;
+	color: #5fae53;
+}
+
 .search {
     display: inline-block;
     float: right;
@@ -404,5 +412,38 @@ footer.content {
 	position:absolute;
 	margin-top:-16px;
 	display:none;
+}
+
+.search_image{
+	width:32px;
+	height:32px;
+}
+
+#searchtextfield{
+	width:650px;
+	height:60px;
+	float:right;
+}
+
+.searchbox_textfield{
+	width:500px;
+	height:40px;
+	margin-top:5px;
+	margin-left:5px;
+}
+
+.searchbox_submit_textfield{
+	width:40px;
+	height:40px;
+	vertical-align:middle;
+	background-color:white;
+	border:none;
+}
+
+.search_image_textfield{
+	width:40px;
+	height:40px;
+	margin-left:-5px;
+	margin-top:-3px;
 }
 
