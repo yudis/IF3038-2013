@@ -337,8 +337,8 @@ textArea {
 
 #editProfileForm {
     position:fixed;
-    top: 30%;
-    left: 60%;
+    top: 38%;
+    left: 35%;
     line-height: 200%;
     font-family: Cambria, Georgia, serif;
 }
@@ -356,8 +356,8 @@ textArea {
 
 #inputEditProfile {
     position: fixed;
-    top: 35.5%;
-    left: 73%;
+    top: 38%;
+    left: 48%;
     line-height: 200%;
 }
 

@@ -84,7 +84,6 @@ and open the template in the editor.
         </div>
 		<div id='edit'>
 			<div id='editProfileForm'>
-					<br>
 					Full Name<br>
 					Date of birth<br>
 					Avatar<br>
@@ -93,13 +92,13 @@ and open the template in the editor.
 			</div>
 			<div id='inputEditProfile'>
 				<form method="post">
-					<input type="text" id="editname"><br>
-					<input type="date" id="editdob"><br>
-					<input type="file" id="editavatar"><br>
-					<input type="password" id="editpassword1"><br>
-					<input type="password" id="editpassword2"><br>
+					<input type="text" id="editname" onkeyup="edit();"><br>
+					<input type="date" id="editdob" onkeyup="edit();"><br>
+					<input type="file" id="editavatar" onkeyup=""><br>
+					<input type="password" id="editpassword1" onkeyup=""><br>
+					<input type="password" id="editpassword2" onkeyup=""><br>
 					<input type="submit" onclick="edit();" value="edit">
-					<input type="submit" onclick="profileRestore();" value="cancel">
+					<input type="button" onclick="profileRestore();" value="cancel">
 				</form>
 			</div>
 		</div>

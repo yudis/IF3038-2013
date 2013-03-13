@@ -154,7 +154,7 @@ function Register(){
         alert("Password should be at least 8 characters long.");
     } else if ((document.getElementById("regusername").value === document.getElementById("regpassword1").value) && (document.getElementById("regusername").value !== "") && (document.getElementById("regpassword1").value !== "")){
         alert("Username and password cannot be identical.");
-    } else if ((document.getElementById("regpassword1").value !== document.getElementById("regpassword2").value) && (document.getElementById("regpassword2").value !== "") && (document.getElementById("regpassword2").value !== "")){
+    } else if ((document.getElementById("regpassword1").value !== document.getElementById("regpassword2").value) && (document.getElementById("regpassword2").value !== "")){
         alert("Confirmed password and password are not the same.");
     } else if ((document.getElementById("regname").value.indexOf(" ") < 0) && (document.getElementById("regname").value !== "")) {
         alert("Name should be constructed by two or more words separated by space.");
@@ -175,6 +175,16 @@ function Register(){
         document.getElementById("regbutton").style.fontWeight = "normal";
         clickable = false;
     }
+}
+
+function edit(){
+	if ((document.getElementById("regname").value.indexOf(" ") < 0)) {
+        //alert("Name should be constructed by two or more words separated by space.");
+	} else if ((document.getElementById("regpassword1").value.length < 8)){
+        alert("Password should be at least 8 characters long.");
+    } else if ((document.getElementById("regpassword1").value !== document.getElementById("regpassword2").value)){
+		alert("Confirmed password and password are not the same.");
+	}
 }
 
 function Submit(){
