@@ -327,6 +327,13 @@ body {
 	text-align:left;
 }
 
+.kosong {
+	padding-top:8px;
+	text-indent:20px;
+	font-size:14px;
+	text-align:left;
+}
+
 #add-category {
 	float:left;
 }

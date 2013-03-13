@@ -15,10 +15,15 @@
 		
 		if(strcmp($useractive,$row['username']) == 0){
 			echo "	<a href=\"../php/deletecategory.php?id=".$row['categoryid']."\"><input name=\"delete\" type=\"button\" value=\"Delete Category\"/></a>";
+			echo "</div>";
+			echo "</div>";
+			echo "	<div class=\"category-title-secondary\">Created by : <i>".$row['username']."</i>, at ".$row['createddate']."</div><br>";
 		}
-		echo "</div>";
-		echo "</div>";
-		echo "	<div class=\"category-title-secondary\">Created by : <i>".$row['username']."</i>, at ".$row['createddate']."</div><br>";
+		else {
+			echo "</div>";
+			echo "</div>";
+			echo "	<div class=\"kosong\">Created by : <i>".$row['username']."</i>, at ".$row['createddate']."</div><br>";
+		}
 		echo "	<ul>";
 			$con2 = getConnection();
 			$result2 = mysqli_query($con2,"SELECT * FROM task WHERE categoryid = ".$row['categoryid']);
