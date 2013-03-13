@@ -79,4 +79,23 @@
 		else 
 			return true;
 	}
+	
+	function getCategoryName($categoryid){
+		$con = getConnection();
+		$query = "SELECT categoryname FROM category WHERE categoryid='$categoryid'";
+		$result = mysqli_query($con,$query);
+		$row = mysqli_fetch_array($result);
+		return $row['categoryname'];
+	}
+	
+	function isResponsibility($categoryid,$useractive){
+		$con = getConnection();
+		$query = "SELECT count(*) as responsibility FROM responsibility WHERE categoryid='$categoryid' and username='$useractive'";
+		$result = mysqli_query($con,$query);
+		$row = mysqli_fetch_array($result);
+		if (strcmp($row['responsibility'],"0") == 0)
+			return false;
+		else 
+			return true;
+	}
 ?>

@@ -90,20 +90,32 @@
 			<div><hr id="border"></div>
 			<!--Body-->
 			<div id="task-page-body">
-				<h1>Category: IF3054 Inteligensi Buatan</h1>
+				<h1>Category: 
+                <?php 
+					require('../php/init_function.php');
+					$categoryid = $_GET['categoryid'];
+					echo getCategoryName($categoryid);
+				?>
+                </h1>
 				<div id="add-task">
 					Task name:<br>
-					Attach file:<br>
+					Attach file:<br><br><br><br><br>
 					Deadline:<br><br>
 					Asignee:<br>
 					Tag:<br>
 				</div>
 				<div id="add-task-form">
-				<form>
+				<form action="../php/inserttask.php" method="post">
 					<!--Name-->
-					<input type="text" id="taskname" onKeyUp="check_task_name()"/><br />
-					<!--Attachment-->
-					<input type="file" id="attached" onChange="check_attachment()"/><br />
+					<input type="text" id="taskname" onKeyUp="check_task_name()" name="textTaskName"/><br />
+					<!--Attachment
+                    "
+                    -->
+					<input id="attached" onChange="check_attachment()" type="file" name="attachment1"/><br />
+  					<input type="file" name="attachment2"/><br />
+					<input type="file" name="attachment3"/><br />
+					<input type="file" name="attachment4"/><br />
+					<input type="file" name="attachment5"/><br />                                                            
 					<!--Deadline-->
 					<input type="date" id="date_html5" /><div id="date_html">
 							<select>
@@ -215,9 +227,9 @@
 							</select>
 						</div><br /><br />
 					<!--Assignee-->
-					<input type="text" id="assignee" onKeyUp="check_assignee()"/><br />
+					<input type="text" id="assignee" onKeyUp="check_assignee()" name="textAssignee"/><br />
 					<!--Tag (multivalue)-->
-					<input type="text" id="tag" onKeyUp="check_tag()"/><br />
+					<input type="text" id="tag" onKeyUp="check_tag()" name="textTag"/><br />
 					<br>
 					<button id="create">Add Task</button>
 				</form>

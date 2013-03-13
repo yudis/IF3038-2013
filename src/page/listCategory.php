@@ -42,7 +42,10 @@
 				echo "</div>";
 				echo "		</li>";
 			}
-        echo "   <br><br><br><div class = \"add-task\"><a href = \"add_task.php\"><button>+New Task</button></a></div>";
+		echo "<br><br><br>";
+		if(isResponsibility($row['categoryid'],$useractive)){
+        	echo "   <div class = \"add-task\"><a href = \"add_task.php?categoryid=".$row['categoryid']."\"><button>+New Task</button></a></div>";
+		}
         echo "  </ul>";
 		echo "</div>";
 		echo "<div><hr id=\"border\"></div>";
