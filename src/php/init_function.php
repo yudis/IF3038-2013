@@ -10,7 +10,7 @@
 		return $con;
 	}
 	
-	function upload_file($file,$username){
+	function upload_avatar($file,$username){
 		if ($file["error"] > 0)
 	  {
 		  echo "Error: " . $file["error"] . "<br>";
@@ -19,6 +19,18 @@
 	  {
 		  $extension = end(explode(".", $file["name"]));
 		  move_uploaded_file ($file['tmp_name'],"../avatar/$username.$extension");
+	  }
+	}
+	
+	function upload_attachment($file,$username){
+		if ($file["error"] > 0)
+	  {
+		  echo "Error: " . $file["error"] . "<br>";
+	  }
+	else
+	  {
+		  $filename = $file["name"];
+		  move_uploaded_file ($file['tmp_name'],"../attachment/$username-$filename");
 	  }
 	}
 	
@@ -97,5 +109,21 @@
 			return false;
 		else 
 			return true;
+	}
+	
+	function getUser($useractive){
+		$con = getConnection();
+		$query = "SELECT * FROM user WHERE username='$useractive'";
+		$result = mysqli_query($con,$query);
+		$row = mysqli_fetch_array($result);
+		return $row;
+	}
+	
+	function getTask($taskid){
+		$con = getConnection();
+		$query = "SELECT * FROM task WHERE taskid='$taskid'";
+		$result = mysqli_query($con,$query);
+		$row = mysqli_fetch_array($result);
+		return $row;
 	}
 ?>

@@ -18,9 +18,9 @@
 			<!--Body-->
 			<div id="dashboard-body">
 				<div id="profile-pic">
-					<img alt="" id="photo" src="../avatar/<?php echo $_SESSION["userlistapp"]?>.png" width=120 height="150"/>
+					<a href="profile.php"><img alt="" id="photo" src="../avatar/<?php echo $_SESSION["userlistapp"]?>.png" width=120 height="150"/>
    					<img alt="" id="photo" src="../avatar/<?php echo $_SESSION["userlistapp"]?>.jpg" width=120 height="150"/><br />
-					<b><?php echo $_SESSION["userlistapp"]?></b>
+					<b><?php echo $_SESSION["userlistapp"]?></b></a>
 				</div>
 				<div id="main-dashboard">
 					<div id="dashboard-title"><b>MY TASK<br /></b><br /></div>

@@ -104,6 +104,12 @@
 					Attach file:<br><br><br><br><br>
 					Deadline:<br>
 					Asignee:<br>
+					Tag:<br><br>
+                    
+                    Task name:<br>
+					Attach file:<br><br><br><br><br>
+					Deadline:<br><br>
+					Asignee:<br>
 					Tag:<br>
 				</div>
 				<div id="add-task-form">
@@ -127,6 +133,28 @@
 					<input type="text" id="tag" onKeyUp="check_tag()" name="textTag"/><br />
 					<br>
 					<button id="create">Add Task</button>
+				</form>
+                
+                <!-- BUATAN WHILDA TEST ADD TASK JANGAN DIHAPUS KY ATI2 KLO CONFLICT -->
+				<form enctype="multipart/form-data" method="post" action="../php/inserttask.php?categoryid=<?php echo $categoryid;?>">
+					<!--Name-->
+					<input type="text" id="taskname"name="textTaskNameb"/><br />
+					<!--Attachment
+                    "
+                    -->
+					<input type="file" name="attachment1b"/><br />
+  					<input type="file" name="attachment2b"/><br />
+					<input type="file" name="attachment3b"/><br />
+					<input type="file" name="attachment4b"/><br />
+					<input type="file" name="attachment5b"/><br />                                                            
+					<!--Deadline-->
+					<input type="date" id="date_html5" /><br /><br />
+					<!--Assignee-->
+					<input type="text" id="assignee" name="textAssigneeb"/><br />
+					<!--Tag (multivalue)-->
+					<input type="text" id="tag" name="textTagb"/><br />
+					<br>
+					<input type="submit" value="Submit NOW!!"/>
 				</form>
 				</div>
 			</div>
