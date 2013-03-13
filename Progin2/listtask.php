@@ -7,6 +7,7 @@ if (!$con)
 
 mysql_select_db("progin_405_13510057", $con);
 
+$response = '';
 //get the q parameter from URL
 $idkategori=$_GET["q"];
 
@@ -14,7 +15,7 @@ $idkategori=$_GET["q"];
 $result = mysql_query("SELECT * FROM tugas WHERE idkategori = '$idkategori'");
 while($row = mysql_fetch_array($result)) {
 	$response .= "<div class=task_block><div class=task_judul>".$row['namatugas']."</div><div class=task_deadline> Deadline : ".$row['deadline']."</div><div class=task_tag>Tags: ";
-	$result2 = mysql_query("SELECT isitag FROM tugas JOIN tag WHERE tugas.idtugas = '$row['idtugas']' AND tag.idtugas = '$row['idtugas']'");
+	$result2 = mysql_query("SELECT isitag FROM tugas JOIN tag WHERE tugas.idtugas = $row[idtugas] AND tag.idtugas = $row[idtugas]");
 	while($row2 = mysql_fetch_array($result2))
 		$response .= "|".$row2['isitag']."| ";
 	$response .= "</div></div>";

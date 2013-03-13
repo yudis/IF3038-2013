@@ -81,7 +81,7 @@
 				$result = mysql_query("SELECT namakategori,hak.idkategori FROM kategori JOIN hak 
 									WHERE kategori.idkategori = hak.idkategori AND hak.username = '$_SESSION[id]'");
 				while($row = mysql_fetch_array($result))
-					echo "<div class=category_block onclick=showTask(".$row['idkategori']."><div class=category_name>".$row['namakategori']."</div></div>";
+					echo "<div class=category_block onclick=showTask(".$row['idkategori'].")><div class=category_name>".$row['namakategori']."</div></div>";
 			?>
 				
 			<div class="category_block" id="tambah_kategori" onclick="location.href='#category_form'">
@@ -119,11 +119,17 @@
 		<div id="fs">
 			<fieldset>
 				<legend>Pengguna yang Bisa Mengubah</legend>
-				<div class="gambar_kecil"><img src="images/ranger1.jpg" title="Ranger1" alt="Ranger1"/><input type="checkbox" name="user_berhak" value="ranger1"/></div>
-				<div class="gambar_kecil"><img src="images/ranger2.jpg" title="Ranger2" alt="Ranger2"/><input type="checkbox" name="user_berhak" value="ranger2"/></div>
-				<div class="gambar_kecil"><img src="images/ranger3.jpg" title="Ranger3" alt="Ranger3"/><input type="checkbox" name="user_berhak" value="ranger3"/></div>
-				<div class="gambar_kecil"><img src="images/ranger4.jpg" title="Ranger4" alt="Ranger4"/><input type="checkbox" name="user_berhak" value="ranger4"/></div>
-				<div class="gambar_kecil"><img src="images/ranger5.jpg" title="Ranger5" alt="Ranger5"/><input type="checkbox" name="user_berhak" value="ranger5"/></div>
+				<?php
+				$con = mysql_connect("localhost:3306","root","");
+				if (!$con)
+				  {
+				  die('Could not connect: ' . mysql_error());
+				  }
+				mysql_select_db("progin_405_13510057", $con);
+				$result = mysql_query("SELECT * FROM user");
+				while($row = mysql_fetch_array($result))
+					echo "<div class=gambar_kecil><img src=".$row['avatar']." width=50px height=50px><input type=checkbox name=user_berhak value=".$row['username']."></div>";
+				?>
 			</fieldset>
 		</div>
 		<div class="form_baris">
