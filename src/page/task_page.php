@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>TASK-Scheduler Iboy</title>
+		<title>TASK</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script>
 			function edit_deadline() {
@@ -45,6 +45,9 @@
 			<div id="header">
 				<?php
 					include("header.php");
+					require('../php/init_function.php');
+					$taskid = $_GET['taskid'];
+					$task = getTask($taskid);
 				?>
 			</div>
 			
@@ -54,13 +57,13 @@
 			<div id="task-page-body">
 				<div id="task-page-title">
 					<div>
-						<h1>Scheduler Iboy</h1>
-						Submit by <b><i>meckyr</i></b> at. February 21st, 2013
+						<h1><?php echo $task['taskname']?></h1>
+						Submit by <b><i><?php echo $task['username']?></i></b> at. <?php echo $task['createddate']?>
 					</div>
 					<div id="deadline_done">
-						<div id="left-main-body">Deadline : March 22nd, 2013</div>
+						<div id="left-main-body">Deadline : <?php echo $task['deadline']?></div>
 						<div id="right-main-body"><a href="#" onCLick="edit_deadline()"><u>edit</u></a></div>
-					</div>
+					</div><br/>
 					<div id="deadline_edit">
 						<div id="left-main-body"><div id="label">Deadline : </div><input type="date" id="date_html5" />
 						<div id="date_html">
@@ -171,40 +174,74 @@
 								<option value="2011">2011</option>
 								<option value="2012">2012</option>
 							</select>
-						</div>
+						</div>              
 						</div>
 						<div id="right-main-body"><a href="#" onCLick="finish_deadline()"><u>done</u></a></div>
 					</div>
+                    <div>Status : <?php echo $task['status']?> <input name="changeStatus" type="button" value="Change Status"></div>
 				</div>
 				<div id="attachment">
-					<div id="video-attachment">
-						<video width="320" height="240" controls>
-							<source src="test.mp4" type="video/mp4">
-						</video>
-					</div>
 					<div id="image-attachment">
 						<div>
 						<br>
 						<br>
-							<img id="screenshots" src="../image/images.jpg">
-							<img id="screenshots" src="../image/images1.jpg">
-							<img id="screenshots" src="../image/images2.jpg">
-							<img id="screenshots" src="../image/images3.jpg">
+                        	<?php 
+								$con = getConnection();
+								$query = "SELECT filename FROM attachment WHERE taskid = $taskid";
+								$result = mysqli_query($con,$query);
+								while($row = mysqli_fetch_array($result)){
+									$filename = $row['filename'];
+									if(typeFile($filename) == 0){
+										echo "<img id=\"screenshots\" src=\"../attachment/$filename\" alt=\"$filename\" title=\"$filename\"\">";
+									}
+								}
+							?>
 						</div>
+					</div>
+                    <div id="video-attachment">
+                    	<?php 
+								$con = getConnection();
+								$query = "SELECT filename FROM attachment WHERE taskid = $taskid";
+								$result = mysqli_query($con,$query);
+								while($row = mysqli_fetch_array($result)){
+									$filename = $row['filename'];
+									if(typeFile($filename) == 1){
+										echo "<video width=\"320\" height=\"240\" controls>";
+										echo "<source src=\"../attachment/$filename\" type=\"video/mp4\">";
+										echo "</video>";
+									}
+								}
+						?>
 					</div>
 					<div id="other-attachment">
 						<p>External File:</p>
 						<ul>
-							<li><a href="#">spek-tubes-1-AI.pdf</a></li>
-							<li><a href="#">jadwal-Iboy.txt</a></li>
-							<li><a href="#">jadwal-kandidat.txt</a></li>
-							<li><a href="#">AI-GUI.java</a></li>
+                        	<?php 
+								$con = getConnection();
+								$query = "SELECT filename FROM attachment WHERE taskid = $taskid";
+								$result = mysqli_query($con,$query);
+								while($row = mysqli_fetch_array($result)){
+									$filename = $row['filename'];
+									if(typeFile($filename) == 2){
+										echo "<li><a href=\"../attachment/$filename\">$filename</a></li>";
+									}
+								}
+							?>
 						<ul>
 					</div>
 				</div>
 				<div>
 					<div id="task-nomargin" name="1"><div id="assignee_done">
-						<div id="left-main-body">Shared with : <i>dhanui, kevinkw</i></div>
+						<div id="left-main-body">Shared with : <i>
+                        	<?php 
+								$con = getConnection();
+								$query = "SELECT username FROM assignee WHERE taskid = $taskid";
+								$result = mysqli_query($con,$query);
+								while($row = mysqli_fetch_array($result)){
+									echo "<a href=\"profile.php?username=".$row['username']."\"><u>".$row['username']."</u></a> ";
+								}
+							?>
+                        </i></div>
 						<div id="right-main-body"><a href="#2" onClick="edit_assignee()"><u>edit</u></a></div>
 					</div></div>
 					<div id="assignee_edit" name="2">
@@ -220,7 +257,17 @@
 					<br>
 					<br>
 					<div id="task-nomargin" name="3"><div id="tag_done">
-						<div id="left-main-body">Tag : <i>tubes, informatika, kuliah, ITB</i></div>
+						<div id="left-main-body">Tag : <i>
+                        <?php 
+								$con3 = getConnection();
+								$result3 = mysqli_query($con3,"SELECT tagid FROM task_tag WHERE taskid = '".$taskid."'");
+								while($row3 = mysqli_fetch_array($result3))
+								{
+									$tagname = getTagname($row3['tagid']);
+									echo "<u>".$tagname."</u> ";
+								}
+							?>
+                        </i></div>
 						<div id="right-main-body"><a href="#3" onClick="edit_tag()"><u>edit</u></a></div>
 					</div></div>
 					<div id="tag_edit" name="4">
@@ -235,42 +282,33 @@
 			<!--Comment-->
 			<div id="task-comment">
 				<div id="user-comment">
-					<p><b>2 Comment</b></p>
+					<p><b><?php echo getNComment($taskid);?></b></p>
 					<div id="comment-list">
-						<div id="comment">
-							<div id="user-info">
-								<div id="left-comment-body">
-									<img src="../image/bian.jpg" width="50px" height="50px"/>
-								</div>
-								<div id="right-comment-body">
-									<b id="komentator">rubiano</b>
-									<br>
-									<b id="post-date">Post at 4.30 AM, February 4th, 2013</b>
-								</div>
-							</div>
-							<div id="comment-box">
-								<p>
-									Wah ini tugas susah banget sumpah, sampe begadang loh ngerjain ini, ditambah ada tugas progin !!
-								</p>
-							</div>
-						</div>
-						<div id="comment">
-							<div id="user-info">
-								<div id="left-comment-body">
-									<img src="../image/fadhil.jpg" width="50px" height="50px"/>
-								</div>
-								<div id="right-comment-body">
-									<b id="komentator">fadhil</b>
-									<br>
-									<b id="post-date">Post at 2.30 AM, February 15th, 2013</b>
-								</div>
-							</div>
-							<div id="comment-box">
-								<p>
-									Mendingan ngerjain tugas progin deh, lebih gampang dari genetic algorithm, hahahaa !!! Tapi aing udah beres sih sbetulnya dua-duanya ahahahaa....
-								</p>
-							</div>
-						</div>
+						<?php
+                        	$con = getConnection();
+							$query = "SELECT * FROM comment WHERE taskid = $taskid";
+							$result = mysqli_query($con,$query);
+							while($row = mysqli_fetch_array($result)){
+ 								echo " <div id=\"comment\">";
+								echo " 	<div id=\"user-info\">";
+								echo " 		<div id=\"left-comment-body\">";
+								echo " 			<img src=\"../avatar/".getAvatar($row['username'])."\" width=\"50px\" height=\"50px\"/>";
+								echo " 		</div>";
+								echo " 		<div id=\"right-comment-body\">";
+								echo " 			<b id=\"komentator\">".$row['username']."</b>";
+								echo " 			<br>";
+								echo " 			<b id=\"post-date\">Post at ".$row['createdate']."</b>";
+								echo " 		</div>";
+								echo " 	</div>";
+								echo " 	<div id=\"comment-box\">";
+								echo " 		<p>";
+								echo $row['message'];
+								echo " 		</p>";
+								echo " 	</div>";
+								echo " </div>";
+							}
+						?>
+						
 						<div id="new-comment"></div>
 					</div>
 				</div>

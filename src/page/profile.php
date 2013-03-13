@@ -21,9 +21,10 @@
    					<img alt="" id="photo" src="../avatar/<?php echo $_SESSION["userlistapp"]?>.jpg" width=235 height="240"/>
 				</div>
 				<div id="right-profile-header">
-					<h2><?php echo $_SESSION['userlistapp'];
+					<h2><?php $username = $_GET['username'];
+							  echo $username;
 							  require('../php/init_function.php');
-						      $user = getUser($_SESSION['userlistapp']);?></h2>
+						      $user = getUser($username);?></h2>
 					<br>
 					<p>Joined on : <?php echo $user['join']?></p>
 					<div>

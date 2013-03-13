@@ -126,4 +126,33 @@
 		$row = mysqli_fetch_array($result);
 		return $row;
 	}
+	
+	function typeFile($filename){
+		$explode = explode(".", $filename);
+		$extension = end($explode);
+		$extension = strtolower($extension);
+		if(strcmp($extension,"jpg") == 0 || strcmp($extension,"png") == 0){
+			return 0;
+		}else if(strcmp($extension,"mp4") == 0){
+			return 1;
+		}else{
+			return 2;	
+		}
+	}
+	
+	function getNComment($taskid){
+		$con = getConnection();
+		$query = "SELECT count(*) as total FROM comment WHERE taskid='$taskid'";
+		$result = mysqli_query($con,$query);
+		$row = mysqli_fetch_array($result);
+		return $row['total']." Comment";
+	}
+	
+	function getAvatar($username){
+		$con = getConnection();
+		$query = "SELECT avatar FROM user WHERE username='$username'";
+		$result = mysqli_query($con,$query);
+		$row = mysqli_fetch_array($result);
+		return $row['avatar'];
+	}
 ?>
