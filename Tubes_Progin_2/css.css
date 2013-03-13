@@ -127,7 +127,25 @@ input.liusername{
     opacity: 1;
 }
 
+#editProfile {
+	width: 100px;
+    height: 25px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: black;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-bottom: 15px;
+	color : white;
+	font-size: 16pt;
+	position : absolute;
+	left : 0px;
+	bottom : 0px;
+	opacity: 0.8;
+}
 
+#editProfile:hover{
+	opacity: 1;
+}
 
 #category {
     top: 45px;
@@ -226,6 +244,23 @@ textArea {
   border-radius: 10px;
 }
 
+#edit {
+  position: absolute;
+  z-index: 1000;
+  left: 380px;
+  top: 200px;
+  display: none;
+  color: white;
+  font-weight: bold;
+  background-color: #261d12;
+  padding: 70px;
+  width: 300px;
+  height: 100px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
 .list{
     font-size: 12pt;
     top: 75px;
@@ -299,11 +334,27 @@ textArea {
     line-height: 200%;
     font-family: Cambria, Georgia, serif;
 }
+
+#editProfileForm {
+    position:fixed;
+    top: 30%;
+    left: 60%;
+    line-height: 200%;
+    font-family: Cambria, Georgia, serif;
+}
+
 #register b {
     font-size: 20pt;
     padding-bottom: 20%;
 }
 #inputregister {
+    position: fixed;
+    top: 35.5%;
+    left: 73%;
+    line-height: 200%;
+}
+
+#inputEditProfile {
     position: fixed;
     top: 35.5%;
     left: 73%;
