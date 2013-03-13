@@ -62,11 +62,13 @@ function regCheck() {
 	document.getElementById("password_validation").style.display = "block";
 
 	//check confirm
-	if (confirm != password) {
+	//alert("confirm = " + confirm);
+	if ((confirm != password) || (confirm == '') || (confirm == null)) {
 		document.getElementById("confirm_validation").src = "img/no.png";
 		regValid = 0;
 	}
-	if (password.length > 7) {
+	else
+	if ( (confirm == password) && (password.length > 7) ) {
 		document.getElementById("confirm_validation").src = "img/yes.png";
 		regValid = 1;
 	}
@@ -117,6 +119,16 @@ function regCheck() {
 		regValid = 0;
 	}
 	document.getElementById("avatar_validation").style.display = "block";
+	
+	//alert("regvalid = " + regValid);
+	if (regValid == 1) {
+		document.getElementById('signup_submit').removeAttribute("disabled");
+		//alert("yey");
+	}
+	else {
+		document.getElementById('signup_submit').disabled = "disabled";
+		//alert("Fill your registration form correctly");
+	}
 }
 
 function signup() {
