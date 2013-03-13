@@ -1,9 +1,33 @@
+<?php 
+	ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
+	
+	/* Configuring Server & Database */
+	$host        =    'localhost';
+	$user        =    'root';
+	$password    =    '';
+	$database    =    'progin_405_13510086';
+	$con        =    mysql_connect($host,$user,$password) or die('Server information is not correct.');
+	mysql_select_db($database,$con) or die('Database information is not correct');
+
+	if (isset($_SESSION['fullname'])) {
+		$username = $_SESSION['fullname']; 
+	}
+	
+	$query	= "SELECT avatar FROM user WHERE username='$username' LIMIT 1";
+	$result	=  mysql_query($query) or die(mysql_error());
+	
+	
+	while ($row = mysql_fetch_row($result)) {
+		echo '<img src="data:image/jpg;base64,'.base64_encode($row[0]).'" alt="photo">';
+	}
+
+?>
 <div id="navbar">
 	<div id="short_profile">
 		<img id="profile_picture" src="../img/avatar1.png" alt="">
 		<div id="profile_info">
 			Welcome, <br>
-			<a href="profile.php"> <?php if (isset($_SESSION['fullname'])) {echo $_SESSION['fullname']; }?> </a>
+			<a href="profile.php" class="darkBlue"> <?php if (isset($_SESSION['fullname'])) {echo $_SESSION['fullname']; }?> </a>
 			<br><br>
 			<div class="link_tosca" id="edit_profile_button"> Edit Profile </div>
 		</div>

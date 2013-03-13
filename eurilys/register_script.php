@@ -28,6 +28,7 @@
 		
 		$res	=    mysql_query($query);
 		
+		$_SESSION['username'] = $username;
 		$_SESSION['fullname'] = $name;
 		
 		header('location:src/dashboard.php'); //Redirect To Success Page
