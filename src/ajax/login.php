@@ -35,7 +35,7 @@ else
 	}
 	else
 	{
-		// user sudah login, dialihkan ke halaman lain
+		// user belum login, dialihkan ke halaman lain
 		header('Location: ../index.php');
 	}	
 }
