@@ -21,7 +21,7 @@ if($count >= 1){
 	session_start();
 	// store session data
 	$_SESSION['id'] = $myusername;
-	header("location:dashboard.html");
+	header("location:dashboard.php");
 }
 else {
 	header("location:index.html");

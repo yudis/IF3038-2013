@@ -9,7 +9,7 @@
 	<div id="container">
 		<div id="header">
         	<div class=logo id="logo">
-				<a href="dashboard.html"><img src="images/logo.png" title="Home" alt="Home"/></a>
+				<a href="dashboard.php"><img src="images/logo.png" title="Home" alt="Home"/></a>
 			</div>
 			<div id="space">
 			</div>
@@ -33,7 +33,7 @@
 				<a href="profile.php">Profile</a>
 			</div>
 			<div class="menu" id="home">
-				<a href="dashboard.html">Home</a>
+				<a href="dashboard.php">Home</a>
 			</div>
         </div>
 		<div id="profilearea">
