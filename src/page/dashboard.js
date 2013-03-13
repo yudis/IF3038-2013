@@ -60,6 +60,10 @@ function autoCompleteAsignee(){
 			iskonkat = true;
 			konkat = asignee.substr(0,index);
 		}
+		else if ((asignee.charAt(index - 1) == ',') && (iskonkat == true))
+		{
+			konkat = asignee.substr(0,index);
+		}
 	
 		ajaxRequest.open("GET","../php/autocompleteasignee.php?asignee="+document.getElementById("asignee").value,false);
 
