@@ -60,16 +60,17 @@
                 </div>
                 <div id="listTugas" class="main">
                     <h1 class="inlineblock">Search </h1>
+                    
                     <div id = "searchtextfield">
                     	<input type="text" id="search_textfield" class="searchbox_textfield" name="q" value="" placeholder="Search.." />
                         <button type="button"  name="sumbit" class="searchbox_submit_textfield" alt="search..." onClick="Searchmode()"/><img src="images/search.png" class="search_image_textfield"></button>
                     </div>
+                    
                     <section id="main-F0">
-                        
-                        
                     </section>
                     
                 </div>
+               
             </div>
             
             <footer class="content">
@@ -82,7 +83,12 @@
         <script src="scripts/search.js" type="application/javascript"></script>
         <script type="text/javascript">
         <?php
-			if ((ISSET($_GET['s']))&&(ISSET($_GET['m'])))
+			
+			
+			if ((ISSET($_GET['s']))&&(ISSET($_GET['m']))&&(ISSET($_GET['page'])))
+			{
+				echo "Searchbypage('".$_GET['s']."','".$_GET['m']."','".$_GET['page']."');";
+			}else if ((ISSET($_GET['s']))&&(ISSET($_GET['m'])))
 			{
 				echo "Search('".$_GET['s']."','".$_GET['m']."');";
 			}
