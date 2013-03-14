@@ -328,3 +328,18 @@ footer.content {
     list-style: none;
     padding: 3px;
 }
+
+/* CSS untuk halaman profile */
+
+.rincianLabelProfile {
+    width: 25%;
+	float: left;
+    display: inline-block;
+    vertical-align: text-top;
+}
+
+.rincianDetailProfile {
+    width: 75%;
+    display: inline-block;
+    vertical-align: text-top;
+}

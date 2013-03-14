@@ -1,0 +1,6 @@
+#nameEditDiv, #assigneeEditDiv, #birthEditDiv, #passEditLabel, #passEditDetail, #repassEditLabel, #repassEditDetail , #changeAvatarLabel, #changeAvatarDetail, #doneButton{
+    display: none;
+}
+#nameDisplayDiv, #tagsDisplayDiv, #birthDisplayDiv, #editButton {
+    display: block;
+}

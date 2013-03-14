@@ -1,0 +1,1 @@
+<?php/* Standard Header */require 'utilities/db.php';require 'utilities/model.php';require 'utilities/view.php';session_start();if (!isset($_SESSION["user"])){	// user sudah login, dialihkan ke halaman lain	header('Location: index.php');}else{	$view = new View('views/profile/profile.tpl');	echo $view->output();}
