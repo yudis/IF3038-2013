@@ -3,7 +3,8 @@
 // Bootstrap
 // Load this on the beginning of every page.
 
-class App {
+class App 
+{
 	private $pagesDir = 'pages';
 	private $templateDir = 'template';
 	private $apiEndpoint = 'api';

@@ -1,6 +1,10 @@
 <?php
 
 	include_once "User.php";
+	include_once "Category.php";
+	include_once "Task.php";
+	include_once "Tag.php";
+	include_once "Comment.php";
 	include_once "Connection.php";
 	
 	abstract class SimpleRecord
@@ -9,7 +13,7 @@
 		private static $models = array();
 		protected $data = array();
 		
-		abstract protected function tableName();
+		abstract public static function tableName();
 		
 		public function __construct()
 		{
@@ -31,6 +35,10 @@
 			{
 				return $this->data[$property];
 			}
+			else
+			{
+				return null;
+			}
 		}
 
 		public function __set($property, $value) 
@@ -39,7 +47,7 @@
 			return $this;
 		}
 		
-		public function find($query="")
+		public function find($query="", $selection = array())
 		{
 			$ret = new self::$class_name();
 
@@ -47,7 +55,22 @@
 			
 			if ($query != "")
 				$query = " WHERE ".$query;
-			$result = DBConnection::DBquery("SELECT * FROM ".$this->tableName().$query);
+			
+			$select = "":
+			if ($selection)
+			{
+				foreach($selection as $tempselect)
+				{
+					$select .= $tempselect.",";
+				}
+				$select[strlen($select)-1] = "";
+			}
+			else
+			{
+				$select = "*";
+			}
+				
+			$result = DBConnection::DBquery("SELECT ".$select." FROM ".$this->tableName().$query);
 			$fields = $result->fetch_fields();
 
 			$i = 0;
@@ -66,16 +89,7 @@
 			return $ret;
 		}
 		
-		public function findByAttributes($query)
-		{
-			DBConnection::openDBconnection();
-			
-			
-			
-			DBConnection::closeDBconnection();
-		}
-		
-		public function findAll($query="")
+		public function findAll($query="", $selection = array())
 		{
 			$ret = array();
 		
@@ -83,7 +97,22 @@
 			
 			if ($query != "")
 				$query = " WHERE ".$query;
-			$result = DBConnection::DBquery("SELECT * FROM ".$this->tableName().$query);
+				
+			$select = "":
+			if ($selection)
+			{
+				foreach($selection as $tempselect)
+				{
+					$select .= $tempselect.",";
+				}
+				$select[strlen($select)-1] = "";
+			}
+			else
+			{
+				$select = "*";
+			}
+			
+			$result = DBConnection::DBquery("SELECT ".$select." FROM ".$this->tableName().$query);
 			$fields = $result->fetch_fields();
 
 			$i = 0;
@@ -103,15 +132,6 @@
 			DBConnection::closeDBconnection();
 			
 			return $ret;
-		}
-		
-		public function findAllByAttributes($query)
-		{
-			DBConnection::openDBconnection();
-			
-			
-			
-			DBConnection::closeDBconnection();
 		}
 	}
 

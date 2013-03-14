@@ -3,6 +3,13 @@
 // REST API Wrapper
 // How to use:
 // * Every public method of this class will be 
+
+include_once "model/User.php";
+include_once "model/Category.php";
+include_once "model/Task.php";
+include_once "model/Tag.php";
+include_once "model/Comment.php";
+
 class RestApi 
 {
 	protected $app;
@@ -11,20 +18,119 @@ class RestApi
 	{
 		$this->app = $app;
 	}
-
+	
+	public function fetch_latest_task($params)
+	{
+		$ret = array();
+		if (isset($params['task_id']))
+		{
+			if (isset($params['category_id']))
+			{
+				// TODO check session current user
+				// retrieve based on category
+				$ret = Task::model()->findAll("task_id > ".$params['task_id']." AND EXISTS (SELECT * FROM ".Categoory::tableName().
+					" WHERE category_id = " . $params['category_id']." AND task_id = task.id)");
+			}
+			else
+			{
+				// retrieve all
+				$ret = Task::model()->findAll("task_id > ".$params['task_id']);
+			}
+		}
+		return $ret;
+	}
+	
+	public function retreive_tags($params)
+	{
+		$ret = array();
+		if (isset($params['tags']))
+		{
+			// retrieve based on existing tags
+			$condition = "";
+			foreach($params['tags'] as $tag)
+			{
+				$condition .= "tag_name != ".$tag." ";
+			}
+			$ret = Tag::model()->findAll($condition);
+		}
+		else
+		{
+			// retrieve all
+			$ret = Tag::model()->findAll();
+		}
+		return $ret;
+	}
+	
+	public function retreive_users($params)
+	{
+		$ret = array();
+		if (isset($params['users']))
+		{
+			// retrieve based on existing users
+			$condition = "";
+			foreach($params['users'] as $user)
+			{
+				$condition .= "username != ".$user." ";
+			}
+			$ret = User::model()->findAll($condition, array("username"));
+		}
+		else
+		{
+			// retrieve all
+			$ret = User::model()->findAll("", array("username"));
+		}
+		return $ret;
+	}
+	
+	public function retreive_tasks($params)
+	{
+		$ret = array();
+		if (isset($params['category_id']))
+		{
+			// TODO check if user session is in some category
+			// retrieve based on category
+			$ret = Task::model()->findAll("EXISTS (SELECT * FROM ".Categoory::tableName()." WHERE category_id = " . 
+							$params['category_id']." AND task_id = task.id)");
+		}
+		else
+		{
+			// retrieve all
+			$ret = Task::model()->findAll();
+		}
+		return $ret;
+	}
+	
+	public function comment($params)
+	{
+		$return = "fail";
+		if (($_SERVER['REQUEST_METHOD'] === 'POST') && (isset($params['comment'])) && (isset($params['commentator'])))
+		{
+			// TODO cek validasi comentator sesuai dengan session
+			$comment = new Comment();
+			$comment->data = $params;
+			if (Comment->save())
+			{
+				$return = "success";
+			}
+		}
+		return $return;
+	}
+	
 	public function login($params) 
 	{
 		$return = array();
 		if (($_SERVER['REQUEST_METHOD'] === 'POST') &&
-			(isset($_POST['username'])) && (isset($_POST['password']))) {
-			if (($_POST['username'] == "admin") && ($_POST['password'] == "admin123")) {
-				// TODO add database
+			(isset($params['username'])) && (isset($params['password']))) {
+			
+			if (($params['username'] == "admin") && ($params['password'] == "admin123")) {
+				// TODO add database using user model
 				$_SESSION['user_id'] = 1;
 				$return["status"] = "success";
 			}
 			else {
 				$return["status"] = "fail";
 			}
+			
 		}
 		else {
 			$return["status"] = "fail";
@@ -43,49 +149,33 @@ class RestApi
 	public function register_check($params) 
 	{
 		$return = array();
-		if (($_SERVER['REQUEST_METHOD'] === 'POST') && (ISSET($_POST['username'])) && (ISSET($_POST['email']))
-			&& (ISSET($_POST['password'])) && (ISSET($_POST['confirm_password'])) 
-			&& (ISSET($_POST['name'])) && (ISSET($_POST['birth_date']))
+		if (($_SERVER['REQUEST_METHOD'] === 'POST') && (ISSET($params['username'])) && (ISSET($params['email']))
+			&& (ISSET($params['password'])) && (ISSET($params['confirm_password'])) 
+			&& (ISSET($params['name'])) && (ISSET($params['birth_date']))
 			//&& (ISSET($_POST['avatar']))
 			)
 		{
 			$return["status"] = "success";
 			$return["error"] = array();
-			if ($_POST['username'] == "admin")
+			
+			$user = new User();
+			$user->data = $params;
+			$temperror = $user->checkValidity();
+			
+			if ($temperror)
 			{
 				$return["status"] = "fail";
-				$return["error"]["username"] = "Username sudah digunakan.";
+				array_merge($return["error"], $temperror);
 			}
-			if ($_POST['email'] == "fernandojordan.92@gmail.com")
+			
+			if (!$user->save())
 			{
+				// record exist
 				$return["status"] = "fail";
-				$return["error"]["email"] = "Email sudah digunakan.";
+				$return["error"]["exist"] = "Username/email already exists";
 			}
-			if (!preg_match("/^.{5,}$/", $_POST['username']))
-			{
-				$return["status"] = "fail";
-				$return["error"]["username"] = "Username harus minimal 5 karakter.";
-			}
-			if ((!preg_match("/^.{8,}$/", $_POST['password']))||($_POST['password']!=$_POST['confirm_password'])||($_POST['password']==$_POST['email'])||($_POST['password']==$_POST['username']))
-			{
-				$return["status"] = "fail";
-				$return["error"]["password"] = "Sandi harus minimal 8 karakter, tidak sama dengan email dan username.";
-			}
-			if (!preg_match("/^.+ .+$/", $_POST['name']))
-			{
-				$return["status"] = "fail";
-				$return["error"]["name"] = "Nama lengkap harus terdiri dari 2 kata dipisah oleh spasi.";
-			}
-			if ((!preg_match("#^[0-3][0-9]/[0-1][0-9]/[1-9][0-9][0-9][0-9]$#", $_POST['birth_date']))&&(explode("/", $_POST['birth_date'])[sizeof(explode("/", $_POST['birth_date']))-1]>=1955))
-			{
-				$return["status"] = "fail";
-				$return["error"]["birth_date"] = "Format tanggal lahir yang dimasukkan salah.";
-			}
-			if (!preg_match("/^.+@.+\...+$/", $_POST['email']))
-			{
-				$return["status"] = "fail";
-				$return["error"]["email"] = "Format email yang dimasukkan salah.";
-			}		}
+			return $status;
+		}
 		else
 		{
 			$return["status"] = "fail";
@@ -93,5 +183,6 @@ class RestApi
 
 		return $return;
 	}
-
 }
+
+?>
