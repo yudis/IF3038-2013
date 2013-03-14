@@ -20,12 +20,15 @@
 				<div class="left">
 					<a href="dashboard.php"> <img src="../img/logo.png" alt="logo"> </a>					
 				</div>
-				<input id="search_box" type="text" placeholder="Search...">
+				
+				<input id="search_box" type="text" onkeyup="showHint(this.value)" placeholder="Search...">
+				<div id="txtHint"> </div>
+				
 				<select id="search_box_filter">
-					<option> All </option>
-					<option> User </option> <!-- username, email, nama lengkap, birthdate -->
-					<option> Category </option>
-					<option> Task </option> <!-- task name, tag, comment -->
+					<option value="1"> All </option>
+					<option value="2"> User </option> <!-- username, email, nama lengkap, birthdate -->
+					<option value="3"> Category </option>
+					<option value="4"> Task </option> <!-- task name, tag, comment -->
 				</select>				
 				<div class="header_menu"> 
 					<div id="menu_dashboard" class="header_menu_button current_header_menu"> <a href="dashboard.php"> DASHBOARD </a>  </div>

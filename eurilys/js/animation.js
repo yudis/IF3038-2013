@@ -207,3 +207,29 @@ function checkTaskAttachment() {
 	}
 	document.getElementById('task_attachment_validation').style.display = "block";
 }
+
+function showHint(str) {
+	if (str.length==0) { 
+		document.getElementById("txtHint").innerHTML="";
+		return;
+	}
+	
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else {// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+		}
+	}
+	
+	var selectOption = document.getElementById("search_box_filter");
+	var filter = selectOption.options[selectOption.selectedIndex].value;
+	
+	xmlhttp.open("GET","searchAutoComplete.php?q="+str+"&filter="+filter,true);
+	xmlhttp.send();
+}
