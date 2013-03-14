@@ -223,10 +223,10 @@
                     <a href="index.html">Logout</a>
                 </div>
                 <div class="menu" id="profile">
-                    <a href="profile.html">Profile</a>
+                    <a href="profile.php">Profile</a>
                 </div>
                 <div class="menu" id="home">
-                    <a href="dashboard.html">Home</a>
+                    <a href="dashboard.php">Home</a>
                 </div>
             </div>
 

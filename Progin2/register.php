@@ -18,6 +18,8 @@ $avatar = ("upload/" . $_FILES["avatar"]["name"]);
 
 mysql_query("INSERT INTO user (username, password, fullname, birthdate, phonenumber, email, avatar) VALUES ('$username', '$password', '$fullname', '$birthdate', '', '$email', '$avatar')");
 
+move_uploaded_file($_FILES["avatar"]["tmp_name"], "upload/" . $_FILES["avatar"]["name"]);
+
 header("location:index.html");
 
 mysql_close($con);
