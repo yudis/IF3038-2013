@@ -1,4 +1,4 @@
-#nameEditDiv, #emailEditDiv, #dateEditDiv, #majorEditDiv, #doneProfileButton, #changeProfilePictureButton{
+#nameEditDiv, #emailEditDiv, #dateEditDiv, #majorEditDiv, #passwordEditDiv, #doneProfileButton, #changeProfilePictureButton{
     display: none;
 }
 #nameDisplayDiv, #emailDisplayDiv, #dateDisplayDiv, #majorDisplayDiv, #editProfileButton{
@@ -7,4 +7,9 @@
 #emailDisplayDiv, #nameDisplayDiv, #dateDisplayDiv, #majorDisplayDiv
 {
 	font-weight: bold;
+}
+.edit_button_profile
+{
+	position: relative;
+	top: 50px;
 }

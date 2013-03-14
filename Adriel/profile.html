@@ -1,4 +1,9 @@
+<?php
+	
+?>
+
 <!DOCTYPE html>
+
 <html> 
     <head>
         <link rel="stylesheet" type="text/css" href="default.css" />
@@ -59,9 +64,13 @@
 							<span id="majorDisplayDiv"> Teknik Informatika</span>
 							<div id="majorEditDiv"><input type="text" id="major" name="major" /></div>
 						</div>
-						<div id="editProfileButton" class="edit_button"><button type="button" onClick="return editProfil();">Edit</button> </div>
-						<div id="doneProfileButton" class="edit_button"><button type="button" onClick="return doneProfil();">Done</button> </div>
-						<div id="changeProfilePictureButton" class="edit_button"><button type="button" onClick="#">Change Profile Picture</button> </div>
+						<div>
+							<span class="rincianLabel">Password: </span>
+							<div id="passwordEditDiv"><input type="password" id="password" name="password" /></div>
+						</div>
+						<div id="editProfileButton" class="edit_button_profile"><button type="button" onClick="return editProfil();">Edit</button> </div>
+						<div id="doneProfileButton" class="edit_button_profile"><button type="button" onClick="return doneProfil();">Done</button> </div>
+						<div id="changeProfilePictureButton" class="edit_button_profile"><button type="button" onClick="#">Change Profile Picture</button> </div>
                     </div>
                     <div class="profilepict"><img src="images/avatar.png" width="200" height="200" alt="Edo Thobi Bram"/></div>
                 </div>
