@@ -21,6 +21,7 @@ class Tugas extends Model
 	public function get_last_mod() { return $this->_last_mod; } 
 	public function get_pemilik() { return $this->_pemilik; } 
 	public function get_kategori() { return $this->_kategori; } 
+	public function get_id_kategori() { return $this->_id_kategori; } 
 	public function get_tag() { return $this->_tag; } 
 	public function get_tag2($i) { return $this->_tag[$i]; } 
 	public function set_id_tugas($x) { $this->_id_tugas = ($x); } 
@@ -32,6 +33,7 @@ class Tugas extends Model
 	public function set_last_mod($x) { $this->_last_mod = $x; } 
 	public function set_pemilik($x) { $this->_pemilik = $x; } 
 	public function set_kategori($x) { $this->_kategori = $x; } 
+	public function set_id_kategori($x) { $this->_id_kategori = $x; } 
 	public function set_tag($x) { $this->_tag = $x; } 
 	public function set_tag2($i,$x) { $this->_tag[$i] = $x; } 
 	
@@ -46,6 +48,7 @@ class Tugas extends Model
 		$this->_pemilik = $tugas["pemilik"];
 		$this->_tag = $tugas["tag"];
 		$this->_kategori = $tugas["kategori"];
+		$this->_id_kategori = $tugas["id_kategori"];
 	}
 	
 	public function toArray()
@@ -60,6 +63,7 @@ class Tugas extends Model
 		$tugas["pemilik"] = $this->_pemilik;
 		$tugas["tag"] = $this->_tag;
 		$tugas["kategori"] = $this->_kategori;
+		$tugas["id_kategori"] = $this->_id_kategori;
 		
 		return $tugas;
 	}
@@ -108,6 +112,7 @@ class Tugas extends Model
         {
             return false;
         }
+		$this->_id_kategori=$result["id_kategori"];
 		$this->_kategori=$result2["nama"];
 	}
 	
@@ -127,7 +132,7 @@ class Tugas extends Model
 		$i=0;
 		while(!empty($r[$i]["tag"]))
 		{
-			$this->_tag = $r[$i]["tag"];
+			$this->_tag[$i] = $r[$i]["tag"];
 			$i++;
 		}
 	}

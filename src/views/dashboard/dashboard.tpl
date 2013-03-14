@@ -4,11 +4,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width; initial-scale=1.0" />
         <title>Todolist</title>
-        <link rel="stylesheet" type="text/css" href="default.css" />
-        <link rel="stylesheet" type="text/css" href="mediaqueries.css" />
+        <link rel="stylesheet" type="text/css" href="styles/default.css" />
+        <link rel="stylesheet" type="text/css" href="styles/mediaqueries.css" />
         <script src="scripts/helper.js" type="application/javascript"></script>
         <script src="scripts/popup.js" type="application/javascript"></script>
         <script src="scripts/dashboard.js" type="application/javascript"></script>
+        <script src="scripts/kategori.js" type="application/javascript"></script>
     </head>
     <body onload="updateAddButtonVisibility();">
         <div id="blanket"></div>
@@ -48,74 +49,17 @@
             </header>
             <div class="content">
                 <div class="sidebar">
-                    <ul id="Kategori" class="nav">
-                        <li><a id="K-All" href="#" onclick="return RemoveKategoriFilter(this)">All</a></li>
-                        <li><a id="K0" href="#" onclick="return KategoriSelected(this)">IF3054 - Intelegensia Buatan</a></li>
-                        <li><a id="K1" href="#" onclick="return KategoriSelected(this)">IF3094 - Komunikasi Antar Personal</a></li>
-                        <li><a id="K2" href="#" onclick="return KategoriSelected(this)">IF3038 - Pemrograman Internet</a></li>
-                    </ul>
+				<ul id="Kategori" class="nav">     
+						<li><a href=\"#\"  onclick="loadtugas(''); return false;">All</button></a></li>
+						<div id="nama_k"></div>
+					</ul>
                     <ul class="nav">
                         <li><a href="#" onclick="popup('popUpDiv','blanket',300,600)">Tambah Kategori...</a></li>
                     </ul>
                 </div>
                 <div id="listTugas" class="main">
                     <h1 class="inlineblock">Dashboard</h1> <button id="addTask" onclick="NewTask()">add new task...</button>
-                    <section id="main-K0">
-                        <h2>IF3054 - Intelegensia Buatan</h2>
-                        <div class="tugas">
-                            <div><a href="tugas.html?name=Tugas%20Besar%201%3A%20Algoritma%20Genetik&amp;deadline=2013-02-22&amp;tags=AI%2C%20Genetics%2C%20Algorithm">Tugas Besar 1: Algoritma Genetik</a></div>
-                            <div>Deadline: <strong>22 Februari 2013</strong></div>
-                            <div>
-                                Tags: 
-                                <ul class="tag">
-                                    <li>AI</li>
-                                    <li>Genetics</li>
-                                    <li>Algorithm</li>
-                                </ul>
-                            </div>                            
-                        </div>
-                        <div class="tugas">
-                            <div><a href="tugas.html?name=PR%20CSP%20Problem&amp;deadline=2013-02-22&amp;tags=AI%2C%20CSP">PR CSP Problem</a></div>
-                            <div>Deadline: <strong>22 Februari 2013</strong></div>
-                            <div>
-                                Tags: 
-                                <ul class="tag">
-                                    <li>AI</li>
-                                    <li>CSP</li>
-                                </ul>
-                            </div>                            
-                        </div>
-                    </section>
-                    <section id="main-K1">
-                        <h2>IF3094 - Komunikasi Antar Personal</h2>
-                        <div class="tugas">
-                            <div><a href="tugas.html?name=Cerita%20Liburan&amp;deadline=2013-02-27&amp;tags=KAP%2C%20Cerita">Cerita Liburan</a></div>
-                            <div>Deadline: <strong>27 Februari 2013</strong></div>
-                            <div>
-                                Tags: 
-                                <ul class="tag">
-                                    <li>KAP</li>
-                                    <li>Cerita</li>
-                                </ul>
-                            </div>                            
-                        </div>
-                    </section>
-                    <section id="main-K2">
-                        <h2>IF3038 - Pemrograman Internet</h2>
-                        <div class="tugas">
-                            <div><a href="tugas.html?name=Tugas%20Besar%201%3A%20Pengenalan%20HTML%20%2B%20CSS%20%2B%20JS&amp;deadline=2013-02-22&amp;tags=Internet%2C%20HTML%2C%20CSS%2C%20JS">Tugas Besar 1: Pengenalan HTML + CSS + JS</a></div>
-                            <div>Deadline: <strong>22 Februari 2013</strong></div>
-                            <div>
-                                Tags: 
-                                <ul class="tag">
-                                    <li>Internet</li>
-                                    <li>HTML</li>
-                                    <li>CSS</li>
-                                    <li>JS</li>
-                                </ul>
-                            </div>                            
-                        </div>
-                    </section>
+                    <div id="tugasT" ></div>
                 </div>
             </div>
             <footer class="content">
