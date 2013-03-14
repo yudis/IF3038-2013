@@ -288,22 +288,13 @@ function register() {
 }
 
 function loginX() {
-	var xmlhttp = getXmlHttpRequest();
-	if (!xmlhttp) return;
-	
 	var qry = 'username=' + encodeURIComponent(document.forms["login"]["username"].value) + '&password=' + encodeURIComponent(document.forms["login"]["password"].value);
-	
-	xmlhttp.open("POST", "./ajax/login.php", true);
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			var loginres = JSON.parse(xmlhttp.responseText);
-			if (loginres.status == 200) {
-				window.location.replace("dashboard.php");
-			} else {
-				alert(loginres.message);
-			}
+	ajax_post("./ajax/login.php", qry, function(xhr) {
+		var loginres = JSON.parse(xhr.responseText);
+		if (loginres.status == 200) {
+			window.location.replace("dashboard.php");
+		} else {
+			alert(loginres.message);
 		}
-	}
-	xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xmlhttp.send(qry);
+	});
 }

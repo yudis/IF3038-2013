@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-var ck_taskname = /[a-zA-Z0-9 ]{1,25}$/;
+var ck_taskname = /[a-zA-Z0-9]{1,25}$/;
 function validate(form) {
     var taskname = form.namatask.value;
     var attachment = form.attachment.value;
@@ -30,7 +30,6 @@ function validate(form) {
         reportErrors(errors);
         return false;
     }
-    
     return true;
 }
 

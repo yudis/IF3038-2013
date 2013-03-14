@@ -8,7 +8,8 @@ session_start();
 if (isset($_SESSION["user"]))
 {
 	// user sudah login, dialihkan ke halaman lain
-	header('Location: ../dashboard.php');	
+	//header('Location: ../dashboard.php');	
+	echo "dashboard";
 }
 else
 {
@@ -36,6 +37,7 @@ else
 	else
 	{
 		// user sudah login, dialihkan ke halaman lain
-		header('Location: ../index.php');
+		//header('Location: ../index.php');
+		echo "index";
 	}	
 }

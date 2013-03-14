@@ -1,4 +1,4 @@
-*:not(ul) {
+*:not(ul,input,button) {
     padding-top: 0px;
     padding-bottom: 0px;
     padding-left: 0px;
@@ -101,6 +101,13 @@ nav ul li a:link, nav ul li a:visited {
     left:265px;
     width:32px;
     height:32px;
+}
+button.search {
+    display: inline-block;
+    padding: 0;
+	margin-top: -4px;
+	margin-left: -10px;
+    border: none;
 }
 
 .sidebar {
