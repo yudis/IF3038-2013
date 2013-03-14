@@ -22,6 +22,8 @@
 			document.getElementById("listtaskdefault").style.display = 'none';
 			document.getElementById("listtask").style.display = 'block';
 			document.getElementById("tambahtaskblock").innerHTML="<div class=task_block id=tambah_task onclick=\"location.href='newtask.php?q="+uidkategori+"'\"><p>Tambah Task...</p></div>";
+			document.getElementById("deletecategory").innerHTML="<div class=hapus_category_block onclick=\"location.href='deletecategory.php?q="+uidkategori+"'\"><div class=category_name>Hapus Kategori...</div></div>";
+			document.getElementById("deletecategory").style.display = 'block';
 		  }
 		}
 		xmlhttp.open("GET","listtask.php?q="+uidkategori,true);
@@ -30,15 +32,32 @@
 </script>
 <script>
 	function showTaskDefault(){
-		document.getElementById("listtaskdefault").style.display = 'block';
-		document.getElementById("listtask").style.display = 'none';
-		document.getElementById("tambahtaskblock").innerHTML="";
+		var xmlhttp;
+		if (window.XMLHttpRequest) {
+		  // code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp=new XMLHttpRequest();
+		}
+		else {
+		  // code for IE6, IE5
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function() {
+		  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("listtaskdefault").innerHTML=xmlhttp.responseText;
+			document.getElementById("listtaskdefault").style.display = 'block';
+			document.getElementById("listtask").style.display = 'none';
+			document.getElementById("deletecategory").style.display = 'none';
+			document.getElementById("tambahtaskblock").innerHTML="";
+			}
+		}
+		xmlhttp.open("GET","listtaskdefault.php",true);
+		xmlhttp.send();
 	}
 </script>
 		
 </head>
 
-<body>
+<body onLoad="showTaskDefault()">
 	<div id="container">
 		<div id="header">
         	<div class=logo id="logo">
@@ -113,42 +132,9 @@
 			<div id = "listtask">
 			</div>
 			<div id = "listtaskdefault">
-			<?php
-			$response = '';
-			//get the q parameter from URL
-			$username=$_SESSION['id'];
-			// Fill up array with names
-			$tugaspribadi = mysql_query("SELECT * FROM tugas WHERE username = '$username'");
-			while($row = mysql_fetch_array($tugaspribadi)) {
-				$response .= "<div class=task_block><div class=task_judul>".$row['namatugas']."</div><div class=task_deadline> Deadline : ".$row['deadline']."</div><div class=task_tag>Tags: ";
-				$tagpribadi = mysql_query("SELECT isitag FROM tugas JOIN tag WHERE tugas.idtugas = $row[idtugas] AND tag.idtugas = $row[idtugas]");
-				$count = mysql_num_rows($tagpribadi);
-				while($row = mysql_fetch_array($tagpribadi)) {
-					if ($count > 1)
-						$response .= $row['isitag'].", ";
-					else 
-						$response .= $row['isitag'];
-					$count--;
-				}
-				$response .= "</div></div>";
-			}
-			$tugasassign = mysql_query("SELECT * FROM tugas JOIN assignee WHERE assignee.username = '$username' AND tugas.idtugas = assignee.idtugas");
-			while($row = mysql_fetch_array($tugasassign)) {
-				$response .= "<div class=task_block><div class=task_judul>".$row['namatugas']."</div><div class=task_deadline> Deadline : ".$row['deadline']."</div><div class=task_tag>Tags: ";
-				$tagassign = mysql_query("SELECT isitag FROM tugas JOIN tag WHERE tugas.idtugas = $row[idtugas] AND tag.idtugas = $row[idtugas]");
-				$count = mysql_num_rows($tagassign);
-				while($row = mysql_fetch_array($tagassign)) {
-					if ($count > 1)
-						$response .= $row['isitag'].", ";
-					else 
-						$response .= $row['isitag'];
-					$count--;
-				}
-				$response .= "</div></div>";
-			}
-			//output the response
-			echo $response;
-			?>
+			</div>
+			<div id = "deletecategory">
+			</div>
 			</div>
 		</div>
 		

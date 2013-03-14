@@ -7,6 +7,8 @@ if (!$con)
 
 mysql_select_db("progin_405_13510057", $con);
 
+session_start();
+$username = $_SESSION['id'];
 $response = '';
 //get the q parameter from URL
 $idkategori=$_GET["q"];
@@ -24,8 +26,10 @@ while($row = mysql_fetch_array($result)) {
 			$response .= $row2['isitag'];
 		$count--;
 	}
-	$response .= "</div></div>";
-}
+	if ($row['username'] == $username)
+		$response .= "</div><button onclick=\"location.href='deletetask.php?q=".$row['idtugas']."'\">Hapus Task...</button></div>";
+	else
+		$response .= "</div></div>";}
 //output the response
 echo $response;
 ?>
