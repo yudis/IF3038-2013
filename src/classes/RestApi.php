@@ -3,14 +3,17 @@
 // REST API Wrapper
 // How to use:
 // * Every public method of this class will be 
-class RestApi {
+class RestApi 
+{
 	protected $app;
 
-	public function __construct($app) {
+	public function __construct($app) 
+	{
 		$this->app = $app;
 	}
 
-	public function login($params) {
+	public function login($params) 
+	{
 		$return = array();
 		if (($_SERVER['REQUEST_METHOD'] === 'POST') &&
 			(isset($_POST['username'])) && (isset($_POST['password']))) {
@@ -30,13 +33,15 @@ class RestApi {
 		return $return;
 	}
 
-	public function logout($params) {
+	public function logout($params) 
+	{
 		$full_url = $_SESSION['full_url'];
 		$this->app->destroySession();
 		header("Location:".$full_url."index.php");
 	}
 
-	public function register_check($params) {
+	public function register_check($params) 
+	{
 		$return = array();
 		if (($_SERVER['REQUEST_METHOD'] === 'POST') && (ISSET($_POST['username'])) && (ISSET($_POST['email']))
 			&& (ISSET($_POST['password'])) && (ISSET($_POST['confirm_password'])) 

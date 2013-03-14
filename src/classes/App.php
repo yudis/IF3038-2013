@@ -18,7 +18,8 @@ class App {
 	public $baseUrl;
 
 	// bootstrap
-	public function bootstrap() {
+	public function bootstrap() 
+	{
 		error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 
 		$req = $_SERVER['REQUEST_URI'];
@@ -41,11 +42,13 @@ class App {
 		$this->startSession();
 
 		// Check whether loading REST API or a page
-		if ($fragments[0] == 'index.php') {
+		if ($fragments[0] == 'index.php') 
+		{
 			array_shift($fragments);
 		}
 
-		if ($fragments[0] == $this->apiEndpoint) {
+		if ($fragments[0] == $this->apiEndpoint) 
+		{
 			// Load the REST API.
 			require_once 'RestApi.php';
 
@@ -58,13 +61,16 @@ class App {
 			$method = $fragments[1];
 
 			$success = true;
-			if (method_exists($restApi, $method)) {
+			if (method_exists($restApi, $method)) 
+			{
 				// Method exists
 				// TODO wrap this in try..catch (if tubes spec allows)
-				try {
+				try 
+				{
 					$output = call_user_func(array($restApi, $method), $restApi->params);
 				}
-				catch (Exception $e) {
+				catch (Exception $e) 
+				{
 					$success = false;
 					$output = array(
 						'error_type' => 'exception',
@@ -72,7 +78,8 @@ class App {
 					);
 				}
 			}
-			else {
+			else 
+			{
 				$success = false;
 				$output = array(
 					'error_type' => 'not_found',
@@ -88,12 +95,14 @@ class App {
 			while ($fragments[0] == '' && count($fragments) > 1) {
 				array_shift($fragments);
 			}
-			if ($fragments[0] == 'partial') {
+			if ($fragments[0] == 'partial') 
+			{
 				// Don't load the header; used for AJAX page navigation
 				$this->isPartial = true;
 				$page = count($fragments) > 1 ? $fragments[1] : $this->defaultPage;
 			}
-			else {
+			else 
+			{
 				$page = $fragments[0] ? $fragments[0] : $this->defaultPage;
 			}
 
@@ -121,12 +130,14 @@ class App {
 		$this->loggedIn = (bool) $_SESSION['user_id'];
 	}
 
-	public function destroySession() {
+	public function destroySession() 
+	{
 		session_destroy();
 	}
 
 	// Load the page specified in $page
-	protected function loadPage($page) {
+	protected function loadPage($page) 
+	{
 		$file = $this->pagesDir . '/' . $page . '.php';
 
 		if (file_exists($file))
@@ -142,25 +153,29 @@ class App {
 
 	// Require a JS file to be loaded in the footer
 	// $js should not have '.js' appended to it
-	protected function requireJS($js) {
+	protected function requireJS($js) 
+	{
 		if (!in_array($js, $this->javascripts))
 			$this->javascripts[] = $js;
 	}
 
-	protected function header($title = '') {
+	protected function header($title = '') 
+	{
 		if (!$this->isPartial) {
 			$this->title = $title;
 			$this->loadTemplate('header');
 		}
 	}
 
-	protected function footer($breadcrumbs = array()) {
+	protected function footer($breadcrumbs = array()) 
+	{
 		if (!$this->isPartial) {
 			$this->loadTemplate('footer');
 		}
 	}
 
-	protected function calendar() {
+	protected function calendar() 
+	{
 		$this->loadTemplate('calendar');
 	}
 }
