@@ -1,7 +1,7 @@
 //Dashboard javascript
 var ajaxRequest;
 var iskonkat = false;
-var konkat;
+var konkat = "";
 
 function confirmCategory()
 {
@@ -55,12 +55,7 @@ function autoCompleteAsignee(){
 	
 	if(asignee!="")
 	{
-		if ((asignee.charAt(index - 1) == ',') && (iskonkat == false))
-		{
-			iskonkat = true;
-			konkat = asignee.substr(0,index);
-		}
-		else if ((asignee.charAt(index - 1) == ',') && (iskonkat == true))
+		if (asignee.charAt(index - 1) == ',')
 		{
 			konkat = asignee.substr(0,index);
 		}
@@ -77,20 +72,17 @@ function autoCompleteAsignee(){
 			var x;
 			x="<datalist id=\"assignee\">";
 			for (var i = 0; i < suggestionarray.length; i++) {
-				if (iskonkat)
-				{
-					x += "<option value=\""+konkat+suggestionarray[i]+"\">";
-				}
-				else
-				{
-					x += "<option value=\""+suggestionarray[i]+"\">";
-				}
+				x += "<option value=\""+konkat+suggestionarray[i]+"\">";
 			}
 			x += "</datalist>";
 			document.getElementById("assignee-suggest").innerHTML=x;
 		}
 		
 		ajaxRequest.send();
+	}
+	else
+	{
+		konkat = "";
 	}
 	
 	//ajaxRequest.open("GET","php/checkavailid.php?idinput="+document.getElementById("username").value,false);

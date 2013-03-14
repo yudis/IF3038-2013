@@ -101,12 +101,27 @@ body {
 	font-family:"Trebuchet MS", Helvetica, sans-serif;
 }
 
+#spacing {
+	height:47px;
+}
+
+#spacing-attach {
+	height:162px;
+}
+
+#spacing-deadline {
+	height:68px;
+}
+
 #add-task-form {
-	width:1100px;
-	float:right;
+	height:450px;
+	float:left;
+	width:300px;
 }
 
 #add-task {
+	height:450px;
+	width:125px;
 	float:left;
 	font-size:19px;
 }

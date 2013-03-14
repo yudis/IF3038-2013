@@ -45,7 +45,7 @@
 					echo "<u>".$tagname."</u> ";
 				}
 				echo "</div>";
-				echo "		</li>";
+				echo "		</li><br>";
 			}
 		echo "<br><br><br>";
 		if(isResponsibility($row['categoryid'],$useractive)){
