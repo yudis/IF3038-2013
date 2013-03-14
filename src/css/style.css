@@ -1,0 +1,461 @@
+@charset "utf-8";
+/* CSS Document */
+
+html {
+	height:100%;
+}
+
+/*PAGE HEADER*/
+body {
+	margin:0 0 auto 0;
+	height:100%;
+	//background:#0F0;
+}
+
+#header{
+	position:fixed;
+	left:0;
+	top:0;
+	min-width:100%;
+	height:10%; //ganti jadi max-height
+	border:thick;
+	background:#F90;
+	z-index:1;
+}
+
+#logo{
+	height:80%;
+	margin-left:1%;
+}
+
+#namaprogram{
+	position:relative;
+	bottom:20%;
+	text-decoration:underline;
+	font-size:40px;
+}
+
+#dashboardLink {
+	position:relative;
+	bottom:30%;
+	left:1%;
+	width:5%;
+	text-transform:uppercase;
+	text-decoration:overline;
+}
+
+a,a:visited {
+	cursor:crosshair;
+	color:#000;
+	text-decoration:none;
+	border:none;
+}
+
+#searchForm{
+	float:right;
+	position:relative;
+	right:40%;
+	top:35%;
+	width:20%;
+	
+	/*Transistion Effect*/
+	transition: width 2s;
+	-moz-transition: width 2s, -moz-transform 2s; /* Firefox 4 */
+	-webkit-transition: width 2s, -webkit-transition 2s; /* Safari and Chrome */
+	-o-transition: width 2s; /* Opera */
+}
+
+#searchForm:hover {
+	width:40%;
+}
+
+#profilename {
+	position:relative;
+	left:55%;
+	bottom:30%;
+	text-transform:uppercase;
+	text-decoration:overline;
+}
+
+#submitForm {
+	position:relative;
+	left:47%;
+	bottom:31%;
+}
+
+#profile {
+	position:relative;
+	left:57%;
+	height:80%;
+	padding-top:0.5%;
+	border-radius:15px;
+}
+
+#logout {
+	position:relative;
+	left:58%;
+	bottom:30%;
+	text-transform:uppercase;
+	text-decoration:overline;
+}
+
+/*LOGIN SECTION*/
+#formContainer {
+	border:dotted;
+	height:40%;
+	width:50%;
+	margin:10% auto 0 auto;
+}
+
+#formHeader {
+	height:20%;
+	background:#999;
+}
+
+
+/*HALAMAN PROFIL*/
+#spasi {
+	height:15%;
+	margin-top:5%;
+	border:dotted;
+	
+	/*image background*/
+	background: url(../res/background1.png) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+#photoSpace {
+	float:left;
+	width:20%;
+	height:50%;
+	/*background:#F00;*/
+	margin-left:10%;
+}
+
+#userPhoto {
+	width:70%;
+	margin:5% auto 0 auto;
+}
+
+#user {
+	width:100%;
+	box-shadow: 10px 10px 10px #333;
+	border-radius:10px;
+}
+
+#userData {
+/*gimana caranya menjadi min-height*/
+	float:left;
+	height:160%;
+	width:50%;
+	background:#CF0;
+}
+
+#biodataTitle {
+	text-align:right;
+	margin-right:10%;
+}
+
+#biodataContent {
+	min-height:35%;
+	width:80%;
+	margin-left:10%;
+	border:dashed;
+}
+
+#taskTitle {
+	text-align:right;
+	margin-right:10%;
+	margin-top:5%;
+}
+
+#taskContent {
+	border:dotted;
+	width:80%;
+	margin-left:10%;
+	min-height:15%;
+}
+
+#doneTaskTitle {
+	text-align:right;
+	margin-right:10%;
+	margin-top:5%;
+}
+
+#doneTask {
+	width:80%;
+	border:dotted;
+	margin-left:10%;
+	min-height:15%;
+}
+
+
+/*DASHBOARD*/
+
+#dashboardTitle {
+	width:10%;
+	height:30%;
+	margin:auto;
+	line-height:2;
+	margin-top:2.5%;
+	
+	/*Transistion Effect*/
+	transition: width 2s;
+	-moz-transition: font-size 2s, -moz-transform 2s; /* Firefox 4 */
+	-webkit-transition: font-size 2s, -webkit-transform 2s; /* Safari and Chrome */
+	-o-transition: font-size 2s, -o-transform 2s; /* Opera */
+}
+
+#dashboardTitle:hover {
+	cursor:none;
+	font-size:36px;
+	margin-top:1%;
+	
+	/*tulisan berputar*/
+	-moz-transform:rotate(360deg);
+	-webkit-transform:rotate(360deg);
+	-o-transform:rotate(360deg);
+}
+
+#dashboardTitle > p {
+	text-align:center;
+}
+
+#staticContainer {
+	width:25%;
+	height:75%;
+	margin-left:5%;
+	border:dotted;
+	float:left;
+	background:#999;
+}
+
+#semuaTugas {
+	margin-top:40%;
+	margin-bottom:auto;
+}
+
+#dynamicContainer {
+	width:60%;
+	height:70%;
+	float:left;
+	margin-left::1%;
+	border:dotted;
+	position:relative;
+}
+
+#kategoriTitle {
+	height:15%;
+	border:dotted;
+}
+
+#kategoriTitle > p {
+	text-align:right;
+	margin-right:10%;
+	vertical-align:middle;
+	line-height:3;
+}
+
+#kategoriContent {
+	border:dotted;
+	height:80%;
+	margin-top:5%;
+}
+
+.kategoriElmt {
+	border:dotted;
+	height:6.5%;
+	background:#0F3;
+}
+
+.kategoriElmt:hover {
+	cursor:pointer;
+	font-weight:bold;
+}
+
+.kategoriElmt > p {
+	/*background:#9F0;*/
+	margin-top:0;
+}
+
+.dynamicElmt {
+	/*saling bertindihan*/
+	position:absolute;
+	left:0;
+	top:0;
+}
+
+#dynamic_1 {
+	background:#C90;
+	width:100%;
+	height:100%;
+	z-index:0;
+}
+
+#dynamic_2 {
+	background:#09C;
+	width:100%;
+	height:100%;
+	z-index:-1;
+}
+
+#dynamic_3 {
+	background:#FC6;
+	width:100%;
+	height:100%;
+	z-index:-2;
+}
+
+#dynamic_semuaTugas {
+	background:#F6C;
+	width:100%;
+	height:180%;
+}
+
+.rincianTitleDiv {
+	height:15%;
+	width:100%;
+	background:#0F0;
+}
+
+.rincianTitleDiv > h2 {
+	line-height:3;
+}
+
+.rincianTitleDivSemua {
+	height:10%;
+	width:100%;
+	background:#3CC;
+}
+
+.rincianTitleDivSemua > h2 {
+	line-height:3;
+}
+
+.rincianText {
+	margin:1% auto auto 70%;
+}
+
+#addKategori {
+	margin-top:15%;
+	margin-left:55%;
+}
+
+#addKategori > button {
+	border-radius:8px;
+	width:100%;
+}
+
+#addKategori > button:hover {
+	background:#FFF;
+	font-weight:bold;
+	box-shadow:0 0 8px #FFF;
+}
+
+.dyn_elmt {
+	height:200%;
+	border:dotted;
+	margin-top:3%;
+	margin-bottom:3%;
+}
+
+#popUp {
+	position:fixed;
+	top:25%;
+	left:30%;
+	z-index:2;
+	height:30%;
+	width:40%;
+	background:#FF0;
+	border-style:groove;
+	border-radius:5px;
+	visibility:hidden;
+}
+
+#newTugasTitle {
+	height:30%;
+	background:#FFF;
+	position:relative;
+	top:-10%;
+}
+
+#newTugasTitle > h2 {
+	line-height:3;
+	text-align:center;
+}
+
+#newTugasForm {
+	height:40%;
+	width:100%;
+	margin-left:25%;
+	margin-top:0.5%;
+}
+
+.Task {
+	float:left;
+	margin-top:1%;
+}
+
+.TaskContent {
+	margin-left:15%;
+//	background:#933;
+}
+
+#submitNewKategori {
+	margin-left:60%;
+	background:#F00;
+}
+
+#submitNewKategori > button {
+	border-radius:5px;
+	width:50%;
+	margin-left:-20%;
+}
+
+#submitNewKategori > button:hover {
+	background:#FFF;
+	font-weight:bold;
+	box-shadow:0 0 10px #FFF;
+}
+
+.addTask{
+	margin-left:75%;
+	margin-top:45%;
+	width:20%;
+}
+
+.addTask > button {
+	width:100%;
+}
+
+.addTask > button:hover {
+	background:#FFF;
+	font-weight:bold;
+	box-shadow:0 0 8px #FFF;
+}
+/*rincian task*/
+#rinciantask {
+	float:left;
+	height:160%;
+	width:100%;
+	background:#CF0;
+}
+
+/*new task*/
+#newtask {
+	float:left;
+	height:70%;
+	width:100%;
+	background:#CF0;
+}
+
+/*index*/
+#content {
+	float:left;
+	height:90%;
+	width:100%;
+	background:#CF0;
+}

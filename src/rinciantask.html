@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<script src="js/global.js"></script>
+	<script src="js/edit_task.js"></script>
+	<link rel="stylesheet" href="css/form.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/default.css"/>
+	<title>Rincian Tugas</Title>
+</head>
+<body>
+    	<div id="header">
+        	<img id="logo" src="res/logo1.png" alt="to-do list"></img>
+            <a id="dashboardLink" href="dashboard.html">dashboard</a>
+            <input id="searchForm" type="search" name="keyword"></input>
+            <input id="submitForm" type="submit" name="search" value="search">
+			<a id="profilename" href="#">Sonny Theo Tumbur</a>
+			<a href="#"><img id="profile" src="res/profileLogo.png" onclick="keProfil()";/></a>
+            <a id="logout" href="#">Log Out</a>
+        </div>
+        <div id="spasi">
+        	<div id="rinciantaskTitle">
+            	<p>Tugas 1</p>
+            </div>
+        </div>		
+	<div id="rinciantask">
+		<div id="rinciantaskform">
+			<fieldset>
+				<legend>Rincian Task</legend>
+					<div class="field">
+						<div class="fieldname">
+							Kategori
+						</div>
+						<div class="fieldholder">
+							Pemrograman Internet
+						</div>
+					</div>
+					<div class="field">
+						<div class="fieldname">
+							Attachment
+						</div>
+						<div class="fieldholder">
+							<video width="320" height="240" controls>
+						  		<source src="res/tes.mp4" type="video/mp4">
+							Your browser does not support the video tag.
+							</video>
+							<img src="res/Koala.jpg" width="400" height="400"></img>
+						</div>
+					</div>
+					<div class="field">
+						<div class="fieldname">
+							Deadline
+						</div>
+						<div class="fieldholder">
+							<div id="rinciantaskform-deadline" class="tumpuk1">
+								2013-02-22
+							</div>
+							<input id="rinciantaskform-input-deadline" type="date" class="fieldinput tumpuk2" placeholder="YYYY-MM-DD" name="tanggalDeadline" value="2013-02-22">
+						</div>
+					</div>
+					<div class="field">
+						<div class="fieldname">
+							Asignee
+						</div>
+						<div class="fieldholder">
+							<ul type="circle">
+								<li>Abdurrosyid Handoyo</li>
+								<li>Sonny Theo Tumbur</li>
+								<li>Fabrian Oktavino H</li>
+								<li>
+									<input id="rinciantaskform-input-asigneetext" type="text" onkeyup="activate_asignee_add()" name="addAsignee">
+									<input id="rinciantaskform-input-asigneeadd" type="submit" value="add" disabled>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<fieldset>
+						<legend>
+							Komentar
+						</legend>
+						<div class="field">
+							<div class="fieldname">
+								<ul type="circle" id="rinciantaskform-komentar">
+								</ul>
+							</div>
+							<div class="fieldholder">
+								<input id="rinciantaskform-komentartext" type="text" onkeyup="activate_komentar_send()" name="addKomentar">
+								<input id="rinciantaskform-komentarsend" type="submit" onkeyup="komentar_send()" value="send" disabled>
+							</div>
+						</div>
+					</fieldset>
+					<div class="field">
+						<div class="fieldname">
+							Tag
+						</div>
+						<div class="fieldholder">
+							<div id="rinciantaskform-tag" class="tumpuk1">
+								#tubes, #progin, #html, #css, #javascript
+							</div>
+							<input class="tumpuk2" id="rinciantaskform-input-tag" type="text" name="editTag">
+						</div>
+					</div>
+					<div class="field">
+						<div class="fieldname">
+							<input id="rinciantaskform-edit" type="submit" value="Edit" onclick="edit_field()">
+							<input id="rinciantaskform-OK" type="submit" value="OK" onclick="OK_field()">
+						</div>
+					</div>
+			</fieldset>
+		</div>
+		<footer>
+			<p>Copyright &copy; 2013 RSA. All rights reserved</p>
+		</footer>
+</body>
+</html>

@@ -15,3 +15,4 @@ Rule dan Konvensi:
   - MEMEBER.md - berisi NIM NAMA MAIL GITHUB_ID dari anggota grup ini
   - src/ - berisi semua kode sumber dari aplikasi yang akan anda kumplukan
   - docs/ - berisi dokumentasi dari aplikasi, jika diperlukan
+

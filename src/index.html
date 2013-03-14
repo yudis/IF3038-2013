@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<script src="js/global.js"></script>
+	<script src="js/session.js"></script>
+	<script src="js/login.js"></script>
+	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/default.css"/>
+	<link rel="stylesheet" href="css/form.css"/>
+	<title>FooTaskManager</title>
+</head>
+<body>
+    	<div id="header">
+        	<img id="logo" src="res/logo1.png"></img>
+			<a id="namaprogram">Foo Task List</a>
+        </div>
+        <div id="spasi">
+        	<div id="rinciantaskTitle">
+            	<p>Login and Register</p>
+            </div>
+        </div>	
+	<div id="content">
+		<div id="login">
+			<div id="loginform">
+				<fieldset>
+					<legend>Login</legend>
+					<p><input placeholder="Username" id="loginform-username" onkeyup="login_check()" type="text"></p>
+					<p><input placeholder="Password" id="loginform-password" onkeyup="login_check()" type="password"></p>
+					<p><button onclick="try_login()" id="loginform-submit" type="submit">LOGIN</button></p>
+				</fieldset>
+			</div>
+		</div>
+		<div id="register">
+			<div id="resgisterform">
+				<fieldset>
+				<legend>Register</legend>
+				<div class="field">
+					<div class="fieldname">Username</div>
+					<div class="fieldholder"><input class="fieldinput" id="registerform-username" type="text"></div>
+				</div> 
+				<div class="field">
+					<div class="fieldname">Password</div>
+					<div class="fieldholder"><input class="fieldinput" id="registerform-password" type="password"></div>
+				</div>
+			
+				<div class="field">
+					<div class="fieldname">Confirm Password</div>
+					<div class="fieldholder"><input class="fieldinput" id="registerform-password2" type="password"></div>
+				</div>
+				<div class="field">
+					<div class="fieldname">Email</div>
+					<div class="fieldholder"><input class="fieldinput" id="registerform-email" type="text"></div>
+				</div>
+				<div class="field">
+					<div class="fieldname">Fullname</div>
+					<div class="fieldholder"><input class="fieldinput" id="registerform-fullname" type="text"></div>
+				</div>
+				<div class="field">
+					<div class="fieldname">Birthdate</div>
+					<div class="fieldholder"><input class="fieldinput" id="registerform-birthdate" type="date"></div>
+				</div>
+				<div class="field">
+					<div class="fieldname">Avatar</div>
+					<div class="fieldholder">
+						<input class="fieldinput" id="registerform-avatar" type="file">
+					</div>
+				</div>
+				<div class="field">
+					<button id="registerform-submit" type="submit" onclick="register()">REGISTER</button>
+				</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<p>Copyright &copy; 2013 RSA. All rights reserved</p>
+	</div>
+</body>
+</html>
+

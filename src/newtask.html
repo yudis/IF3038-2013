@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<script src="js/global.js"></script>
+	<script src="js/new_task.js"></script>
+	<link rel="stylesheet" href="css/form.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/default.css"/>
+	<title>Insert New Task</title>
+</head>
+<body>
+    	<div id="header">
+        	<img id="logo" src="res/logo1.png" alt="to-do list"></img>
+            <a id="dashboardLink" href="dashboard.html">dashboard</a>
+            <input id="searchForm" type="search" name="keyword"></input>
+            <input id="submitForm" type="submit" name="search" value="search">
+			<a id="profilename" href="#">Sonny Theo Tumbur</a>
+			<a href="#"><img id="profile" src="res/profileLogo.png" onclick="keProfil()";/></a>
+            <a id="logout" href="#">Log Out</a>
+        </div>
+        <div id="spasi">
+        	<div id="rinciantaskTitle">
+            	<p>New Task</p>
+            </div>
+        </div>	
+	<div id="newtask">
+		<form id="newtaskform">
+			<fieldset>
+				<legend>Make New Task</legend>
+				<div class="field">
+					<div class="fieldname">
+						Kategori
+					</div>
+					<div class="fieldholder">
+						Pemrograman Internet
+					</div>
+				</div>
+				<div class="field">
+					<div class="fieldname">
+						Task Name
+					</div>
+					<div class="fieldholder">
+						<input type="text" id="newtaskform-nametask" class="fieldinput" name="namatask">
+					</div>
+				</div>
+				<div class="field">
+					<div class="fieldname">
+						Attachment
+					</div>
+					<div class="fieldholder">
+						<input id="newtaskform-attachment" class="fieldinput" type="file">
+					</div>
+				</div>
+				<div class="field">
+					<div class="fieldname">
+						Deadline
+					</div>
+					<div class="fieldholder">
+						<input id="newtaskform-deadline" type="date" class="fieldinput" placeholder="YYYY-MM-DD" name="tanggalDeadline">
+					</div>
+				</div>
+				<div class="field">
+					<div class="fieldname">
+						Asignee
+					</div>
+					<div class="fieldholder">
+						<ul>
+							<li>
+								<input id="newtaskform-asigneetext" type="text" name="addAsignee">
+								<input id="newtaskform-asigneeadd" type="submit" value="add" disabled>
+								<input id="newtaskform-asigneedelete" type="submit" value="delete" disabled>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="field">
+					<div class="fieldname">
+						Tag
+					</div>
+					<div class="fieldholder">
+						<input id="newtaskform-tagtext" type="text" name="insertTag">
+					</div>
+				</div>
+				<div class="field">
+					<input id="newtaskform-submit" type="submit" disabled>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<footer>
+	<p>Copyright &copy; 2013 RSA. All rights reserved</p>
+	</footer>
+</body>
+</html>
