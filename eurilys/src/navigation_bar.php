@@ -9,8 +9,8 @@
 	$con        =    mysql_connect($host,$user,$password) or die('Server information is not correct.');
 	mysql_select_db($database,$con) or die('Database information is not correct');
 
-	if (isset($_SESSION['fullname'])) {
-		$username = $_SESSION['fullname']; 
+	if (isset($_SESSION['username'])) {
+		$username = $_SESSION['username']; 
 	}
 	
 	$query	= "SELECT avatar FROM user WHERE username='$username' LIMIT 1";

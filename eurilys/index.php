@@ -20,10 +20,14 @@
 	</div>
 	<div id="index_right">
 		<div id="login_form_container">
-			<form id="login_form">
+			<form id="login_form" method="POST" action="login_script.php">
 				<label> Username </label> <input type="text" id="login_username" name="username"/>
 				<br/><label> Password </label> <input type="password" id="login_password" name="password"/> 
+				<!--
 				<div id="login_button_submit" class="right link_red top10" onclick="javascript:logincheck();"> Login </div>
+				-->
+				<input type="submit" name="login_submit" id="login_submit" class="link_red top10 bold" value="LOG IN">
+				<br>
 				<input type="checkbox" id="remember_me_check" name="remember_me_checkbox"/> <label id="remember_me"> Remember me </label>
 			</form>
 		</div>
