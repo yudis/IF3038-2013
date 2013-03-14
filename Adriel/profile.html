@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <link rel="stylesheet" type="text/css" href="default.css" />
+        <link rel="stylesheet" type="text/css" href="mediaqueries.css" />
+		<link rel="stylesheet" type="text/css" href="styles/profile.css" />
+		<script src="scripts/profile.js" type="application/javascript"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+        <title>Todolist: User Profile</title>
+    </head> 
+    <body>
+        <div class="page">
+            <header class="content">
+                <nav>
+                    <div class="logo"><a href="dashboard.html"><img alt="Home" src="images/logo.png" /></a></div>
+                    <ul>
+                        <li><div><a href="dashboard.html">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="index.html">Logout</a></div></li>
+                    </ul>
+                    <div class="search">
+                        <div id="searchwrapper">
+                            <form action="#">
+                                <input type="text" class="searchbox" name="q" value="" placeholder="Enter task name here.." />
+                                <input type="image" src="images/search.png" name="sumbit" class="searchbox_submit" alt="search..."/>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <div class="content">
+                <h1> User Profile </h1>
+                <div class="profile">
+                    <div class="profiledetail">
+						<a href="#">Edo Thobi Bram</a>
+						<div>
+							<span class="rincianLabel">Full Name:</span>
+							<span id="nameDisplayDiv">Edward Samuel</span>
+							<div id = "nameEditDiv">
+								<input type="text" id="fullname" name="fullname" list="names" />
+                                <datalist id="names">
+                                    <option value="Abraham Krisnanda Santoso">
+                                    <option value="Edward Samuel Pasaribu">
+                                    <option value="Stefanus Thobi Sinaga">
+                                </datalist>
+							</div>
+						</div>
+						<div>
+							<span class="rincianLabel">E-mail: </span>
+							<span id="emailDisplayDiv">13510xxx@std.stei.itb.ac.id</span>
+							<div id="emailEditDiv"><input type="text" id="email" name="email" /></div>
+						</div>
+						<div>
+							<span class="rincianLabel">Born date: </span>
+							<span id="dateDisplayDiv"> 16 Februari 2013, 17:00 WIT</span>
+							<div id="dateEditDiv"><input type="text" id="date" name="date" /></div>
+						</div>
+						<div>
+							<span class="rincianLabel">Major: </span>
+							<span id="majorDisplayDiv"> Teknik Informatika</span>
+							<div id="majorEditDiv"><input type="text" id="major" name="major" /></div>
+						</div>
+						<div id="editProfileButton" class="edit_button"><button type="button" onClick="return editProfil();">Edit</button> </div>
+						<div id="doneProfileButton" class="edit_button"><button type="button" onClick="return doneProfil();">Done</button> </div>
+						<div id="changeProfilePictureButton" class="edit_button"><button type="button" onClick="#">Change Profile Picture</button> </div>
+                    </div>
+                    <div class="profilepict"><img src="images/avatar.png" width="200" height="200" alt="Edo Thobi Bram"/></div>
+                </div>
+                <h1> Activity </h1>
+                <h2>Kategori 1</h2>
+                <div class="tugas">
+                    <div><a href="#">Tugas Pertama</a></div>
+                         <div>Submission: <strong>22 April 2012 17:00 WIT</strong></div>
+                         <div>
+                             Tags: 
+                             <ul class="tag">
+                                 <li>Tag</li>
+                                 <li>Tag</li>
+                                 <li>Tag</li>
+                                 <li>Tag</li>
+                              </ul>
+                         </div>
+                </div>
+                <div class="tugas">
+                     <div><a href="#">Tugas Pertama</a></div>
+                         <div>Submission: <strong>22 April 2012 17:00 WIT</strong></div>
+                         <div>
+                             Tags: 
+                             <ul class="tag">
+                                 <li>Tag</li>
+                                 <li>Tag</li>
+                                 <li>Tag</li>
+                                 <li>Tag</li>
+                              </ul>
+                         </div>
+               </div>
+               
+               <h2>Kategori 4</h2>
+                <div class="tugas">
+                    <div><a href="#">Tugas Pertama</a></div>
+                         <div>Submission: <strong>22 April 2012 17:00 WIT</strong></div>
+                         <div>
+                             Tags: 
+                             <ul class="tag">
+                                 <li>Tag</li>
+                                 <li>Tag</li>
+                                 <li>Tag</li>
+                                 <li>Tag</li>
+                              </ul>
+                         </div>
+                </div>
+                <div class="tugas">
+                     <div><a href="#">Tugas Pertama</a></div>
+                         <div>Submission: <strong>22 April 2012 17:00 WIT</strong></div>
+                         <div>
+                             Tags: 
+                             <ul class="tag">
+                                 <li>Tag</li>
+                                 <li>Tag</li>
+                                 <li>Tag</li>
+                                 <li>Tag</li>
+                              </ul>
+                         </div>
+               </div>
+            </div>
+            <footer class="content">
+                This website is created solely for the purpose of fulfilling our college task.<br />
+                IF3094 - Pemrograman Internet.
+            </footer>
+        </div>
+    </body> 
+</html>
