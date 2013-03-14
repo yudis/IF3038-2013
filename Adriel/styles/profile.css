@@ -1,0 +1,10 @@
+#nameEditDiv, #emailEditDiv, #dateEditDiv, #majorEditDiv, #doneProfileButton, #changeProfilePictureButton{
+    display: none;
+}
+#nameDisplayDiv, #emailDisplayDiv, #dateDisplayDiv, #majorDisplayDiv, #editProfileButton{
+    display: inline;
+}
+#emailDisplayDiv, #nameDisplayDiv, #dateDisplayDiv, #majorDisplayDiv
+{
+	font-weight: bold;
+}
