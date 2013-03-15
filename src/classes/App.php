@@ -1,7 +1,9 @@
 <?php
 
-// Bootstrap
-// Load this on the beginning of every page.
+// App
+// The engine of the app
+
+require_once 'DBConnection.php';
 
 class App 
 {
