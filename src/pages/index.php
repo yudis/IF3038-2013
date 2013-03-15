@@ -1,6 +1,6 @@
 <?php
 if ($this->loggedIn) {
-	require_once 'dashboard.php';
+	header('Location: /dashboard');
 	return;
 }
 
@@ -62,7 +62,7 @@ $this->header();
 							<h3>Sign Up Now!</h3>
 						</header>
 
-						<form id="register" action="#" method="post" class="vertical">
+						<form id="register_form" action="#" method="post" class="vertical">
 							<div class="field">
 								<label for="register_username">Username</label>
 								<input id="register_username" name="username" pattern="^.{5,}$" type="text" title="Username minimal harus terdiri dari 5 karakter dan tidak sama dengan sandi." required data-neq="register_password">
