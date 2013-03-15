@@ -17,10 +17,61 @@
 				document.getElementById("right-main-body").innerHTML = "<div id=\"right-main-body\"><a href=\"#\" onClick=\"edit_aboutme()\"><u><p>edit</p></u></a></div>";
 			}
 			
+			function edit_fullname(){
+				document.getElementById("left-profile-newname").style.display = 'block';
+				var val = document.getElementById("left-profile-name").innerHTML;
+				var l = val.length;
+				val = val.substring(15, l - 4);
+				document.getElementById("newname").value = val;
+				document.getElementById("left-profile-name").style.display = 'none';
+				document.getElementById("right-profile-editname").innerHTML = "<a href=\"#\" onclick=\"just_edit_fullname()\"><u><p>done</p></u></a>";
+			}
+			function just_edit_fullname(){
+				document.getElementById("left-profile-newname").style.display = 'none';
+				document.getElementById("left-profile-name").style.display = 'block';
+				document.getElementById("right-profile-editname").innerHTML = "<a href=\"#\" onclick=\"edit_fullname()\"><u><p>edit</p></u></a>";
+			}
 			
+			function edit_birthday(){
+				document.getElementById("left-profile-newbirthday").style.display = 'block';
+				var val = document.getElementById("left-profile-birthday").innerHTML;
+				var l = val.length;
+				val = val.substring(16, l - 4);
+				document.getElementById("newbirthday").value = val;
+				document.getElementById("left-profile-birthday").style.display = 'none';
+				document.getElementById("right-profile-editbirthday").innerHTML = "<a href=\"#\" onclick=\"just_edit_birthday()\"><u><p>done</p></u></a>";
+			}
+			function just_edit_birthday(){
+				document.getElementById("left-profile-newbirthday").style.display = 'none';
+				document.getElementById("left-profile-birthday").style.display = 'block';
+				document.getElementById("right-profile-editbirthday").innerHTML = "<a href=\"#\" onclick=\"edit_birthday()\"><u><p>edit</p></u></a>";
+			}
+			
+			
+			function edit_email(){
+				document.getElementById("left-profile-newemail").style.display = 'block';
+				var val = document.getElementById("left-profile-email").innerHTML;
+				var l = val.length;
+				val = val.substring(14, l - 8);
+				document.getElementById("newemail").value = val;
+				document.getElementById("left-profile-email").style.display = 'none';
+				document.getElementById("right-profile-editemail").innerHTML = "<a href=\"#\" onclick=\"just_edit_email()\"><u><p>done</p></u></a>";
+			}
+			function just_edit_email(){
+				document.getElementById("left-profile-newemail").style.display = 'none';
+				document.getElementById("left-profile-email").style.display = 'block';
+				document.getElementById("right-profile-editemail").innerHTML = "<a href=\"#\" onclick=\"edit_email()\"><u><p>edit</p></u></a>";
+			}
+			
+			function hidden_update_box(){
+				document.getElementById("aboutme_edit").style.display = 'none';
+				document.getElementById("left-profile-newemail").style.display = 'none';
+				document.getElementById("left-profile-newname").style.display = 'none';
+				document.getElementById("left-profile-newbirthday").style.display = 'none';
+			}
 		</script>
 	</head>
-	<body>
+	<body onLoad="hidden_update_box()">
 		<div id="main-body-general">
 			<!--Header-->
 			<div id="header">
@@ -57,18 +108,18 @@
 			<div id="biodata">
 				<div>
 					<div id="left-profile-name"><p>Full Name : <?php echo $user['fullname']; ?></p></div>
-					<div id="left-profile-newname"><p>Full Name : <?php echo $user['fullname']; ?></p></div>
-					<div id="right-profile-editname"><a href="#" ><u><p>edit</p></u></a></div>
+					<div id="left-profile-newname"><p>Full Name : <input type="text" id="newname"></p></div>
+					<div id="right-profile-editname"><a href="#" onclick="edit_fullname()"><u><p>edit</p></u></a></div>
 				</div>
 				<div>
 					<div id="left-profile-birthday"><p>Birth Date : <?php echo $user['birthday'];?></p></div>
-					<div id="left-profile-newbirthday"><p>Birth Date : <?php echo $user['birthday'];?></p></div>
-					<div id="right-profile-editbirthday"><a href="#"><u><p>edit</p></u></a></div>
+					<div id="left-profile-newbirthday"><p>Birth Date : <input type="text" id="newbirthday"></p></div>
+					<div id="right-profile-editbirthday"><a href="#" onClick="edit_birthday()"><u><p>edit</p></u></a></div>
 				</div>
 				<div>
 					<div id="left-profile-email"><p>Email : <i><?php echo $user['email'];?></i></p></div>
-					<div id="left-profile-newemail"><p>Email : <i><?php echo $user['email'];?></i></p></div>
-					<div id="right-profile-editemail"><a href="#"><u><p>edit</p></u></a></div>
+					<div id="left-profile-newemail"><p>Email : <input type="text" id="newemail"></i></p></div>
+					<div id="right-profile-editemail"><a href="#" onClick="edit_email()"><u><p>edit</p></u></a></div>
 				</div>
 			</div>
 			
