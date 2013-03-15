@@ -13,7 +13,7 @@ $username=$_SESSION['id'];
 // Fill up array with names
 $tugaspribadi = mysql_query("SELECT * FROM tugas WHERE username = '$username'");
 while($row = mysql_fetch_array($tugaspribadi)) {
-	$response .= "<div class=task_block><div class=task_judul>".$row['namatugas']."</div><div class=task_deadline> Deadline : ".$row['deadline']."</div><div class=task_tag>Tags: ";
+	$response .= "<div class=task_block><div class=task_judul><a href=\"viewtask.php?q=".$row['idtugas']."\">".$row['namatugas']."</a></div><div class=task_deadline> Deadline : ".$row['deadline']."</div><div class=task_tag>Tags: ";
 	$tagpribadi = mysql_query("SELECT isitag FROM tugas JOIN tag WHERE tugas.idtugas = $row[idtugas] AND tag.idtugas = $row[idtugas]");
 	$count = mysql_num_rows($tagpribadi);
 	while($row2 = mysql_fetch_array($tagpribadi)) {
@@ -32,7 +32,7 @@ while($row = mysql_fetch_array($tugaspribadi)) {
 }
 $tugasassign = mysql_query("SELECT * FROM tugas JOIN assignee WHERE assignee.username = '$username' AND tugas.idtugas = assignee.idtugas");
 while($row = mysql_fetch_array($tugasassign)) {
-	$response .= "<div class=task_block><div class=task_judul>".$row['namatugas']."</div><div class=task_deadline> Deadline : ".$row['deadline']."</div><div class=task_tag>Tags: ";
+	$response .= "<div class=task_block><div class=task_judul><a href=\"viewtask.php?q=".$row['idtugas']."\">".$row['namatugas']."</a></div><div class=task_deadline> Deadline : ".$row['deadline']."</div><div class=task_tag>Tags: ";
 	$tagassign = mysql_query("SELECT isitag FROM tugas JOIN tag WHERE tugas.idtugas = $row[idtugas] AND tag.idtugas = $row[idtugas]");
 	$count = mysql_num_rows($tagassign);
 	while($row2 = mysql_fetch_array($tagassign)) {
