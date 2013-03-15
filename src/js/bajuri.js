@@ -155,14 +155,18 @@ bajuri.prototype = {
 	},
 
 	append: function(content) {
-		this.each(function(node) {
+		this.each(function() {
 			if (content instanceof HTMLElement)
-				node.appendChild(content);
-			else if (content instanceof bajuri)
-				content.forEach(function(subnode) {
-					node.appendChild(subnode);
+				this.appendChild(content);
+			else if (content instanceof bajuri) {
+				var node = this;
+				content.each(function() {
+					node.appendChild(this);
 				});
+			}
 		});
+
+		return this;
 	},
 
 	each: function(callback) {
