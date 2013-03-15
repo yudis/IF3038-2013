@@ -13,7 +13,7 @@
 		private static $models = array();
 		protected $data = array();
 		
-		abstract public static function tableName();
+		public static function tableName() {}
 		
 		public function __construct()
 		{
@@ -56,7 +56,7 @@
 			if ($query != "")
 				$query = " WHERE ".$query;
 			
-			$select = "":
+			$select = "";
 			if ($selection)
 			{
 				foreach($selection as $tempselect)
@@ -98,7 +98,7 @@
 			if ($query != "")
 				$query = " WHERE ".$query;
 				
-			$select = "":
+			$select = "";
 			if ($selection)
 			{
 				foreach($selection as $tempselect)

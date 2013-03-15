@@ -30,7 +30,7 @@
 			if ($this->id==null)
 			{
 				// new task
-				DBConnection::openDBconnection();\
+				DBConnection::openDBconnection();
 				
 				$result = DBConnection::DBquery("INSERT into ".tableName()."");
 				
