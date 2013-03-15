@@ -56,22 +56,22 @@
 			<div><hr id="border"></div>
 			<div id="biodata">
 				<div>
-					<div id="left-profile-body"><p>Full Name : <?php echo $user['fullname']; ?></p></div>
-					<div id="right-profile-body"><a href="#"><u><p>edit</p></u></a></div>
+					<div id="left-profile-name"><p>Full Name : <?php echo $user['fullname']; ?></p></div>
+					<div id="right-profile-editname"><a href="#"><u><p>edit</p></u></a></div>
 				</div>
 				<div>
-					<div id="left-profile-body"><p>Birth Date : <?php echo $user['birthday'];?></p></div>
-					<div id="right-profile-body"><a href="#"><u><p>edit</p></u></a></div>
+					<div id="left-profile-birthday"><p>Birth Date : <?php echo $user['birthday'];?></p></div>
+					<div id="right-profile-editbirthday"><a href="#"><u><p>edit</p></u></a></div>
 				</div>
 				<div>
-					<div id="left-profile-body"><p>Email : <i><?php echo $user['email'];?></i></p></div>
-					<div id="right-profile-body"><a href="#"><u><p>edit</p></u></a></div>
+					<div id="left-profile-email"><p>Email : <i><?php echo $user['email'];?></i></p></div>
+					<div id="right-profile-editemail"><a href="#"><u><p>edit</p></u></a></div>
 				</div>
 			</div>
 			
 			<div id="unfinished-task">
 				<div>
-					<div id="left-profile-body"><h3>Unfinished Task</h3></div>
+					<div id="left-profile-unfinished"><h3>Unfinished Task</h3></div>
 					<div id="right-profile-body"><p></p>
 						<br>
 						<br>
@@ -99,7 +99,7 @@
 		
 			<div id="finished-task">
 				<div>
-					<div id="left-profile-body"><h3>Finished Task</h3></div>
+					<div id="left-profile-finished"><h3>Finished Task</h3></div>
 					
 					<div id="right-profile-body"><p></p>
 						<br>

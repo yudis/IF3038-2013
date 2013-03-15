@@ -24,7 +24,6 @@
                             <option value="4">Task</option>
 						</select>    
 				<input type="text" name="search_text" id="search_text" value="" onKeyUp="checkHeaderValidation()" />
-				<div id ="test">VM</div>
                 <input type="submit" value="Search">
             </form>
             </div>

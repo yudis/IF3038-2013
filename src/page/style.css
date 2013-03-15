@@ -285,6 +285,46 @@ body {
 	float:right;
 }
 
+#left-profile-name {
+	width:25%;
+	float:left;
+}
+
+#right-profile-editname {
+	width:75%;
+	float:right;
+}
+
+#left-profile-birthday {
+	width:25%;
+	float:left;
+}
+
+#right-profile-editbirthday {
+	width:75%;
+	float:right;
+}
+
+#left-profile-email {
+	width:25%;
+	float:left;
+}
+
+#right-profile-editemail {
+	width:75%;
+	float:right;
+}
+
+#left-profile-unfinished {
+	width:25%;
+	float:left;
+}
+
+#left-profile-finished {
+	width:25%;
+	float:left;
+}
+
 #profile-header {
 	padding-top:5px;
 	height:310px;
