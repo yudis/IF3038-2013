@@ -36,6 +36,7 @@ and open the template in the editor.
         <div id="panel"></div>
         <div id="donelist">
             <?php
+				$done_list = mysqli_query($con,$sql_done_list);
 				while($done_row = mysqli_fetch_array($done_list)){
 					echo $done_row['name'];
 					echo "<br />";
@@ -44,6 +45,7 @@ and open the template in the editor.
         </div>
         <div id="todolist">
             <?php
+				$not_done_list = mysqli_query($con,$sql_notdone_list);
 				while($not_done_row = mysqli_fetch_array($not_done_list)){
 					echo $not_done_row['name'];
 					echo "<br />";
@@ -55,6 +57,8 @@ and open the template in the editor.
             <img id="badge" src="img/badge.png">
             <div id="biousername">
 				<?php
+					$user = mysqli_query($con,$sql);
+					$current_user = mysqli_fetch_array($user);
 					echo $current_user['username'];
 				?>
 			</div>
@@ -63,20 +67,9 @@ and open the template in the editor.
                 Date of Birth<br>
                 Email<br>
             </div>
-            <div id="bioright">
-                : 	
-				<?php
-					echo $current_user['fullname'];
-				?><br>
-                : 
-				<?php
-					echo $current_user['birthday'];
-				?><br>
-                : 
-				<?php
-					echo $current_user['email'];
-				?>
-				<br>
+            <div id="bioright">: <?php echo $current_user['fullname'];?><br>
+                :<?php echo $current_user['birthday'];?><br>
+                :<?php echo $current_user['email'];?><br>
             </div>
 			<div id="editProfile">
 				<a onclick="editProfile();">Edit Profile</a>
@@ -91,13 +84,13 @@ and open the template in the editor.
 					Confirm Password<br>
 			</div>
 			<div id='inputEditProfile'>
-				<form method="post">
-					<input type="text" id="editname" onkeyup="edit();"><br>
-					<input type="date" id="editdob" onkeyup="edit();"><br>
-					<input type="file" id="editavatar" onkeyup=""><br>
-					<input type="password" id="editpassword1" onkeyup=""><br>
-					<input type="password" id="editpassword2" onkeyup=""><br>
-					<input type="submit" onclick="edit();" value="edit">
+				<form method="post" action="edit.php" enctype="multipart/form-data">
+					<input type="text" name="editname"><br>
+					<input type="date" name="editdob"><br>
+					<input type="file" name="editavatar"><br>
+					<input type="password" name="editpassword1"><br>
+					<input type="password" name="editpassword2"><br>
+					<input type="submit" value="edit">
 					<input type="button" onclick="profileRestore();" value="cancel">
 				</form>
 			</div>
