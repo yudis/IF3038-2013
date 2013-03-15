@@ -26,6 +26,11 @@ while($row = mysql_fetch_array($result)) {
 			$response .= $row2['isitag'];
 		$count--;
 	}
+	if ($row['status'] == "done")
+		$status = "checked";
+	else 
+		$status = '';
+	$response .= "<div>Status : <input type=checkbox name=\"status\" value=\"done\" ".$status."/ onchange=\"location.href='changestatus.php?q=".$row['idtugas']."&p=".$idkategori."'\"></div>";
 	if ($row['username'] == $username)
 		$response .= "</div><button onclick=\"location.href='deletetask.php?q=".$row['idtugas']."'\">Hapus Task...</button></div>";
 	else

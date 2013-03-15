@@ -23,6 +23,11 @@ while($row = mysql_fetch_array($tugaspribadi)) {
 			$response .= $row2['isitag'];
 		$count--;
 	}
+	if ($row['status'] == "done")
+		$status = "checked";
+	else 
+		$status = '';
+	$response .= "<div>Status : <input type=checkbox name=\"status\" value=\"done\" ".$status."/ onchange=\"location.href='changestatus.php?q=".$row['idtugas']."'\"></div>";
 	$response .= "</div><button onclick=\"location.href='deletetask.php?q=".$row['idtugas']."'\">Hapus Task...</button></div>";
 }
 $tugasassign = mysql_query("SELECT * FROM tugas JOIN assignee WHERE assignee.username = '$username' AND tugas.idtugas = assignee.idtugas");
@@ -37,6 +42,11 @@ while($row = mysql_fetch_array($tugasassign)) {
 			$response .= $row2['isitag'];
 		$count--;
 	}
+	if ($row['status'] == "done")
+		$status = "checked";
+	else 
+		$status = '';
+	$response .= "<div>Status : <input type=checkbox name=\"status\" value=\"done\" ".$status."/ onchange=\"location.href='changestatus.php?q=".$row['idtugas']."'\"></div>";
 	$response .= "</div></div>";
 }
 //output the response

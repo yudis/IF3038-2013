@@ -106,7 +106,7 @@
 			</div>
 			<div id="newtask">
 				<?php
-					echo "<form name=newtask_form method=post action=addtask.php?q=".$_GET["q"].">";
+					echo "<form name=newtask_form method=post action=addtask.php?q=".$_GET["q"]." enctype=\"multipart/form-data\">";
 				?>
 					<div id="newtask_space">
 					</div>

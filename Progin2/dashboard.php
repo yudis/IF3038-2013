@@ -57,7 +57,12 @@
 		
 </head>
 
-<body onLoad="showTaskDefault()">
+<?php
+if (isset($_GET["q"])) {
+	if ($_GET["q"] == '')		echo "<body onLoad=\"showTaskDefault()\">";	else
+		echo "<body onLoad=\"showTask(".$_GET["q"].")\">";}
+else echo "<body onLoad=\"showTaskDefault()\">";
+?>
 	<div id="container">
 		<div id="header">
         	<div class=logo id="logo">
