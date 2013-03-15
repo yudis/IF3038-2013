@@ -89,18 +89,16 @@ function autoCompleteAsignee(){
 	
 }
 
-function setCompleteStatus(idx){
+function setCompleteStatus(idx,taskid){
 	getAjax();
 	var status = document.getElementById("red-text"+idx).innerHTML;
-	alert("aaaaaaaaa "+document.getElementById("red-text"+idx).innerHTML);
+	//alert("aaaaaaaaa "+document.getElementById("red-text"+idx).innerHTML);
 	if(status!=""){
-		ajaxRequest.open("GET","../php/updatecompletestatus.php?status="+status.value,false);
+		ajaxRequest.open("GET","../php/updatecompletestatus.php?status="+status+"&taskid="+taskid,false);
 	
 		ajaxRequest.onreadystatechange = function()
 		{
-			suggestion =  ajaxRequest.responseText;
-			
-			//alert(suggestionarray);
+			document.getElementById("red-text"+idx).innerHTML =  ajaxRequest.responseText;
 		}
 		
 		ajaxRequest.send();
