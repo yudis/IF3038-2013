@@ -79,7 +79,7 @@
                         while ($info = mysql_fetch_array($data_p)) {
 							echo "<div id=\"isi1\">";
                             echo "<p style='margin-left: 1em;'>Tugas : ";
-                            echo $info['namatugas'];
+                            echo "<p style='margin-left: 1em;'> Nama Task : <a href=\"viewtask.php?q=". $info['idtugas']."\">". $info['namatugas'] ."</a></p>";
                             echo "<br>";
                             echo "Deadline : ";
                             echo $info['deadline'];
