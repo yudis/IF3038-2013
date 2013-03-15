@@ -391,7 +391,6 @@ body {
 	background-image:url("..//image//taskpage.jpg");
 	font-family:"Trebuchet MS", Helvetica, sans-serif;
 	padding-top:5px;
-	text-align:center;
 	padding-left:50px;
 }
 
@@ -461,14 +460,20 @@ body {
 }
 
 .task-tag {
+	margin: 0px 0px 0px 0px;
 	float:right;
 	font-size:12px;
 }
 
+#task-result {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
 #task-tag {
+	margin: 0px 0px 0px 0px;
 	float:left;
 	font-size:12px;
-	padding-top:5px;
 }
 
 #task-tag-delete {
