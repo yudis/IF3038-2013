@@ -1,357 +1,297 @@
 <?php
-	$session_time = 30*24*60*60;
-	ini_set('session.gc-maxlifetime', $session_time);
 
-	session_start();
-	if ((!ISSET($_SESSION['base_url'])) || (!ISSET($_SESSION['full_url'])) || (!ISSET($_SESSION['full_path'])))
-	{
-		$folder = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], "/")+1);  
-		$protocol = (ISSET($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http";
-		$_SESSION['base_url'] = $folder;
-		$_SESSION['full_url'] = $protocol . "://" . $_SERVER['HTTP_HOST'] . $folder;
-		$_SESSION['full_path'] = $_SERVER['DOCUMENT_ROOT'].$folder;
-	}
+// Business Logic Here
+
+// Temporary fix until DB is done
+function createDummyTask() {
+	$task = new Task;
+}
+
+// Presentation Logic Here
+
+$this->header()
 ?>
-<?php include $_SESSION['full_path']."template/is_login.php"; ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="Description" content="" />
-		<link rel="shortcut icon" type="image/x-icon" href="<?php echo $_SESSION['base_url']; ?>images/favicon.ico" />
-		<title>MOA - Dashboard</title>
-		<link rel="stylesheet" href="<?php echo $_SESSION['base_url']; ?>css/style.css" />
-		<link rel="stylesheet" href="<?php echo $_SESSION['base_url']; ?>css/dashboard.css" />
-	</head>
-	<body>
-		<?php
-			$menu = array();
-			$menu["Dashboard"] =  array("href" => "dashboard.php", "class" => "active");
-			$menu["Profil"] = array("href" => "profil.php");
-		?>
-		<?php include $_SESSION['full_path']."template/header.php";?>
-		<section>
-			<div id="content_wrap" class="wrap">
-                <div id="dashboard_category">
-                    <nav>
-                        <ul id="categories">
-                            <li class="dashboard_category_element_aktif"> <a href="javascript:check(1);">Semua Kategori</a></li>
-                        </ul>
-                    </nav>
-					<div id="new_category" class="dashboard_category_element">
-						<a href="javascript:new_category();">Tambah Kategori Baru</a>
-					</div>
-                </div>
-                <div id="dashboard_tugas">
-                    <nav>
-                        <ul id="tasks">                           
-                        </ul>       
-                    </nav>
-					<a id="new_task_link" href="newwork.html">
-						<div class="dashboard_tugas_element">
-							<div class="dashboard_tugas_judul">New Task</div>
-						</div>
-					</a>
-                </div>
-			</div>
-		</section>
-		<?php
-			$breadcrumbs = array();
-			$breadcrumbs["Dashboard"] = array("href" => "dashboard.php", "class" => "active");
-		?>
-		<?php include $_SESSION['full_path']."template/footer.php";?>
-		
-		<div id="black_trans">
-			<div id="frame_new_category">
-				<div id="close_button">
-					<a href="javascript:close();">X</a>
-				</div>
-				<div id="new_category_area">
-					<div id="new_category_form_wrap">
-						<div id="new_category_head">
-							<h2>Tambah Kategori Baru</h2>
-						</div>
-						<form id="new_category_form">
-							<div class="row">
-								<label for="new_category_name">Nama Kategori</label>
-								<input id="new_category_name" name="new_category_name" type="text" title="Nama kategori harus diisi." required />
-							</div>
-							<div class="row">
-								<label for="new_category_username">Username</label>
-								<input id="new_category_username" name="new_category_username" pattern="^[^;]{5,}(;[^;]{5,})*$" type="text" title="Username harus terdaftar dan dipisahkan tanda titik-koma. Kosongkan jika private." />
-							</div>
-							<input id="new_category_submit" type="submit" value="Tambah" disabled="disabled" title="Semua elemen form harus diisi dengan benar dahulu."/>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
+		<div class="content">
+			<div class="dashboard">	
+				<header>
+					<h1>Dashboard</h1>
+					<ul>
+						<li class="add-task-link"><a href="new_tugas.html">New Task</a></li>
+					</ul>
+				</header>
+				<div class="primary">
+					<section class="tasks current">
+						<header>
+							<h3>Current Tasks</h3>
+						</header>
 
-		<script type="text/javascript" src="<?php echo $_SESSION['base_url']; ?>js/search.js"></script>
-		<script type="text/javascript" src="<?php echo $_SESSION['base_url']; ?>js/logout.js"></script>
-		<script type="text/javascript">
-            function check(n)
-            {
-                var categories = document.getElementById("categories");               
-				var count = 0;
-				var j = 0;
-				
-				while (j<categories.childNodes.length)
-				{
-					if (categories.childNodes[j].nodeName!="#text")
-					{
-						count++;
-						if (count==n)
-							categories.childNodes[j].className = "dashboard_category_element_aktif";
-						else
-							categories.childNodes[j].className = "dashboard_category_element";
-					}
-					j++;
-				}
-				
-				var tasks = document.getElementById("tasks");
-				var listtask = JSON.parse(localStorage.MOA_taskList);
-				tasks.innerHTML = "";
-				for (i=0;i<listtask.length;++i)
-				{
-					if ((n==1)||((n-2)==listtask[i].category))
-					{
-						var tempstring = "";
-						tempstring += "<li>";
-							tempstring += "<a id='task_link' href='tugas.html?taskId="+i+"'>";
-								tempstring += '<div class="dashboard_tugas_element">';
-									tempstring += '<div class="dashboard_tugas_judul">'+listtask[i].name+'</div>';
-									tempstring += '<div class="dashboard_tugas_tanggal">Deadline: '+listtask[i].deadline+'</div>';
-									tempstring += '<div class="dashboard_tugas_tag_area">';
-										tempstring += "<ul>";										
-											var tags = listtask[i].tag;
-											for (j=0;j<tags.length;++j)
-											{
-												tempstring += "<li>";
-												tempstring += tags[j];
-												tempstring += "</li>";
-											}
-										tempstring += "</ul>";
-									tempstring += "</div>";
-								tempstring += "</div>";	
-							tempstring += "</a>";			
-						tempstring += "</li>";		
-						tasks.innerHTML += tempstring;
-					}
-				}
-				
-				var new_task_link = document.getElementById("new_task_link");
-				new_task_link.href = "newwork.html";
-				if (n>1)
-					new_task_link.href += "?category="+(n-2);
-				
-		   }
-            
-            /*Bagian menampilkan pembuatan new_category dan new_task*/
-			function new_category()
-			{
-				document.getElementById("black_trans").className = "appear";
-				document.getElementById("new_category_area").className = "appear";
-				document.getElementById("close_button").className = "appear";
-				setTimeout(function()
-				{
-					document.getElementById("frame_new_category").className = "frame_new_category_enter";
-				}, 100);
-			}
-			
-			function close()
-			{
-				document.getElementById("frame_new_category").className = "";
-				setTimeout(function()
-				{
-					document.getElementById("black_trans").className = "";
-					document.getElementById("new_category_area").className = "";
-					document.getElementById("close_button").className = "";
-				}, 400);
-			}
-            
-            /*--- Bagian Validasi Pembuatan Kategori Baru ---*/
-			var new_category_form = document.getElementById("new_category_form");
-			new_category_form.onsubmit = function()
-			{
-				if (new_category_name.checkValidity() && new_category_username.checkValidity() && 
-					check_username(new_category_username.value) && check_category(this.value))
-				{
-					var listcategory = JSON.parse(localStorage.MOA_categoryList);
-					var userlist = JSON.parse(localStorage.MOA_userList);
-					var check = true;
-					var users = new Array();
-					if (new_category_username.value!="")
-					{
-						var names = new_category_username.value.split(";");
-						for (i=0;i<names.length;++i)
-						{
-							if (names[i]==userlist[sessionStorage.MOA_userId].userName)
-								check = false;
-							if (names[i]!='')
-								users[i] = names[i];
-						}
-					}
-					if (check)
-					{
-						users[users.length] = userlist[sessionStorage.MOA_userId].userName;
-					}
-					
-					var category = new Object();
-					category.users = users;
-					category.name = new_category_name.value;
-					listcategory[listcategory.length] = category;
-					
-					localStorage.MOA_categoryList = JSON.stringify(listcategory);
-					
-					append_category(category.name);					
-					close();
-					new_category_form.reset();
-					new_category_name.backgroundImage = "";
-					new_category_username.backgroundImage = "";
-				}
-				else
-				{
-					alert("Ada kesalahan pada data yang dimasukkan");
-				}
-				return false;
-			}
-			
-			var new_category_name = document.getElementById("new_category_name");
-			var new_category_username = document.getElementById("new_category_username");
-			
-			new_category_name.onkeyup = function()
-			{
-				if ((this.checkValidity())&&(check_category(this.value)))
-					this.style.backgroundImage = "url('images/valid.png')";
-				else
-					this.style.backgroundImage = "url('images/warning.png')";
-				check_submit_category();
-			}
+						<article class="task" data-task-id="1" data-category="a">
+							<header>
+								<h1>
+									<label>
+										<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+										<a href="view_tugas_5.html">Tugas 5</a>
+									</label>
+								</h1>
+							</header>
+							<div class="details">
+								<!-- <p class="category">
+									<span class="detail-label">Kategori:</span>
+									<span class="detail-content">Makan</span>
+								</p> -->
+								<p class="deadline">
+									<span class="detail-label">Deadline:</span>
+									<span class="detail-content">
+										19 Februari 2013
+									</span>
+								</p>
+								<p class="tags">
+									<span class="detail-label">Tag:</span>
+									<span class="tag">satu</span>
+									<span class="tag">dua</span>
+									<span class="tag">tiga</span>
+									<span class="tag">empat</span>
+								</p>
+							</div>
+						</article>
+
+
+						<article class="task" data-task-id="1" data-category="a">
+							<header>
+								<h1>
+									<label>
+										<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+										<a href="view_tugas_6.html">Tugas 6</a>
+									</label>
+								</h1>
+							</header>
+							<div class="details">
+								<!-- <p class="category">
+									<span class="detail-label">Kategori:</span>
+									<span class="detail-content">Makan</span>
+								</p> -->
+								<p class="deadline">
+									<span class="detail-label">Deadline:</span>
+									<span class="detail-content">
+										19 Februari 2013
+									</span>
+								</p>
+								<p class="tags">
+									<span class="detail-label">Tag:</span>
+									<span class="tag">satu</span>
+									<span class="tag">dua</span>
+									<span class="tag">tiga</span>
+									<span class="tag">empat</span>
+								</p>
+							</div>
+						</article>
+
+						<article class="task" data-task-id="1" data-category="a">
+							<header>
+								<h1>
+									<label>
+										<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+										<a href="view_tugas_7.html">Tugas 7</a>
+									</label>
+								</h1>
+							</header>
+							<div class="details">
+								<!-- <p class="category">
+									<span class="detail-label">Kategori:</span>
+									<span class="detail-content">Makan</span>
+								</p> -->
+								<p class="deadline">
+									<span class="detail-label">Deadline:</span>
+									<span class="detail-content">
+										19 Februari 2013
+									</span>
+								</p>
+								<p class="tags">
+									<span class="detail-label">Tag:</span>
+									<span class="tag">satu</span>
+									<span class="tag">dua</span>
+									<span class="tag">tiga</span>
+									<span class="tag">empat</span>
+								</p>
+							</div>
+						</article>
+					</section>
+
+					<section class="tasks completed">
+
+						<header>
+							<h3>Completed Tasks</h3>
+						</header>
 						
-			new_category_username.onkeyup = function()
-			{
-				if ((this.checkValidity())&&(check_username(this.value)))
-					this.style.backgroundImage = "url('images/valid.png')";
-				else
-					this.style.backgroundImage = "url('images/warning.png')";
-				check_submit_category();
-			}
-			
-			function check_category(categoryname)
-			{
-				var categorylist = JSON.parse(localStorage.MOA_categoryList);
-				var check = true;
-				var i = 0;
-				while ((check)&&(i<categorylist.length))
-				{
-					if (categoryname==categorylist[i].name)
-						check = false;
-					i++;
-				}
-				return check;
-			}
-			
-			function check_username(username)
-			{
-				if (username!="")
-				{
-					var userlist = JSON.parse(localStorage.MOA_userList);
-					var names = username.split(";");
-					var check1 = true;
-					var i=0;
-					while ((check1)&&(i<names.length))
-					{
-						if (names[i]!='')
-						{
-							var check2 = true;
-							var j=0;
-							while ((check2)&&(j<userlist.length))
-							{
-								if (names[i]==userlist[j].userName)
-									check2 = false;
-								j++;
-							}
-							if (check2)
-								check1 = false;
-						}
-						i++;
-					}
-					return check1;
-				}
-				return true;
-			}
+						<article class="task" data-task-id="1" data-category="a">
+							<header>
+								<h1>
+									<label>
+										<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+										<a href="view_tugas_1.html">Tugas 1</a>
+									</label>
+								</h1>
+							</header>
+							<div class="details">
+								<!-- <p class="category">
+									<span class="detail-label">Kategori:</span>
+									<span class="detail-content">Makan</span>
+								</p> -->
+								<p class="deadline">
+									<span class="detail-label">Deadline:</span>
+									<span class="detail-content">
+										19 Februari 2013
+									</span>
+								</p>
+								<p class="tags">
+									<span class="detail-label">Tag:</span>
+									<span class="tag">satu</span>
+									<span class="tag">dua</span>
+									<span class="tag">tiga</span>
+									<span class="tag">empat</span>
+								</p>
+							</div>
+						</article>
 						
-			function check_submit_category()
-			{
-				if (new_category_name.checkValidity() && new_category_username.checkValidity() && 
-					check_username(new_category_username.value) && check_category(this.value))
-				{
-					document.getElementById("new_category_submit").disabled="";
-				}
-				else
-				{
-					document.getElementById("new_category_submit").disabled="disabled";
-				}
-			}
-		</script>
-		<script>
-			function append_category(category_name)
-			{
-				var categories = document.getElementById("categories");
-				var count = 1;
-				for (j=0;j<categories.childNodes.length;++j)
-					if (categories.childNodes[j].nodeName!="#text")
-						count++;
-				categories.innerHTML += "<li class='dashboard_category_element'><a href='javascript:check("+count+");'>"+category_name+"</a></li>";
-			}
-			window.onload = function()
-			{
-				var categories = document.getElementById("categories");
-				var listcategory = JSON.parse(localStorage.MOA_categoryList);
-				var userlist = JSON.parse(localStorage.MOA_userList);
-				
-				for (i=0;i<listcategory.length;++i)
-				{
-					var j = 0;
-					var check = true;
-					while ((check)&&(j<listcategory[i].users.length))
-					{
-						if (listcategory[i].users[j] == userlist[sessionStorage.MOA_userId].userName)
-							check = false;
-						++j;
-					}
-					if (!check)
-						append_category(listcategory[i].name);
-				}
-				
-				var tasks = document.getElementById("tasks");
-				var listtask = JSON.parse(localStorage.MOA_taskList);
-				for (i=0;i<listtask.length;++i)
-				{
-					var tempstring = "";
-					tempstring += "<li>";
-						tempstring += "<a id='task_link' href='tugas.html?taskId="+i+"'>";
-							tempstring += '<div class="dashboard_tugas_element">';
-								tempstring += '<div class="dashboard_tugas_judul">'+listtask[i].name+'</div>';
-								tempstring += '<div class="dashboard_tugas_tanggal">Deadline: '+listtask[i].deadline+'</div>';
-								tempstring += '<div class="dashboard_tugas_tag_area">';
-									tempstring += "<ul>";										
-										var tags = listtask[i].tag;
-										for (j=0;j<tags.length;++j)
-										{
-											tempstring += "<li>";
-											tempstring += tags[j];
-											tempstring += "</li>";
-										}
-									tempstring += "</ul>";
-								tempstring += "</div>";
-							tempstring += "</div>";	
-						tempstring += "</a>";			
-					tempstring += "</li>";		
-					tasks.innerHTML += tempstring;
-				}
-			}
-		</script>
-	</body>
-</html>
+						<article class="task" data-task-id="1" data-category="a">
+							<header>
+								<h1>
+									<label>
+										<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+										<a href="view_tugas_2.html">Tugas 2</a>
+									</label>
+								</h1>
+							</header>
+							<div class="details">
+								<!-- <p class="category">
+									<span class="detail-label">Kategori:</span>
+									<span class="detail-content">Makan</span>
+								</p> -->
+								<p class="deadline">
+									<span class="detail-label">Deadline:</span>
+									<span class="detail-content">
+										19 Februari 2013
+									</span>
+								</p>
+								<p class="tags">
+									<span class="detail-label">Tag:</span>
+									<span class="tag">satu</span>
+									<span class="tag">dua</span>
+									<span class="tag">tiga</span>
+									<span class="tag">empat</span>
+								</p>
+							</div>
+						</article>
+
+
+						<article class="task" data-task-id="1" data-category="a">
+							<header>
+								<h1>
+									<label>
+										<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+										<a href="view_tugas_3.html">Tugas 3</a>
+									</label>
+								</h1>
+							</header>
+							<div class="details">
+								<!-- <p class="category">
+									<span class="detail-label">Kategori:</span>
+									<span class="detail-content">Makan</span>
+								</p> -->
+								<p class="deadline">
+									<span class="detail-label">Deadline:</span>
+									<span class="detail-content">
+										19 Februari 2013
+									</span>
+								</p>
+								<p class="tags">
+									<span class="detail-label">Tag:</span>
+									<span class="tag">satu</span>
+									<span class="tag">dua</span>
+									<span class="tag">tiga</span>
+									<span class="tag">empat</span>
+								</p>
+							</div>
+						</article>
+
+						<article class="task" data-task-id="1" data-category="a">
+							<header>
+								<h1>
+									<label>
+										<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+										<a href="view_tugas_4.html">Tugas 4</a>
+									</label>
+								</h1>
+							</header>
+							<div class="details">
+								<!-- <p class="category">
+									<span class="detail-label">Kategori:</span>
+									<span class="detail-content">Makan</span>
+								</p> -->
+								<p class="deadline">
+									<span class="detail-label">Deadline:</span>
+									<span class="detail-content">
+										19 Februari 2013
+									</span>
+								</p>
+								<p class="tags">
+									<span class="detail-label">Tag:</span>
+									<span class="tag">satu</span>
+									<span class="tag">dua</span>
+									<span class="tag">tiga</span>
+									<span class="tag">empat</span>
+								</p>
+							</div>
+						</article>
+						
+						<article class="task" data-task-id="1" data-category="a">
+							<header>
+								<h1>
+									<label>
+										<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+										<a href="view_tugas_8.html">Tugas 8</a>
+									</label>
+								</h1>
+							</header>
+							<div class="details">
+								<!-- <p class="category">
+									<span class="detail-label">Kategori:</span>
+									<span class="detail-content">Makan</span>
+								</p> -->
+								<p class="deadline">
+									<span class="detail-label">Deadline:</span>
+									<span class="detail-content">
+										19 Februari 2013
+									</span>
+								</p>
+								<p class="tags">
+									<span class="detail-label">Tag:</span>
+									<span class="tag">satu</span>
+									<span class="tag">dua</span>
+									<span class="tag">tiga</span>
+									<span class="tag">empat</span>
+								</p>
+							</div>
+						</article>
+					</section>
+				</div>
+			
+				<div class="secondary">
+					<section class="categories">
+						<header>
+							<h3>Categories</h3>
+						</header>
+						<ul>
+							<li><a href="#">Kategori A</a></li>
+							<li><a href="#">Kategori B</a></li>
+							<li><a href="#">Kategori C</a></li>
+							<li><a href="#">Kategori D</a></li>
+							<li><a href="#">Kategori E</a></li>
+						</ul>
+					</section>
+				</div>
+
+			</div>
+
+		</div>
+<?php $this->footer() ?>
