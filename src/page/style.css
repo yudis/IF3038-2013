@@ -295,6 +295,16 @@ body {
 	float:right;
 }
 
+#left-profile-newname {
+	width:25%;
+	float:left;
+}
+
+#right-profile-donename {
+	width:75%;
+	float:right;
+}
+
 #left-profile-birthday {
 	width:25%;
 	float:left;
@@ -305,12 +315,32 @@ body {
 	float:right;
 }
 
+#left-profile-newbirthday {
+	width:25%;
+	float:left;
+}
+
+#right-profile-donebirthday {
+	width:75%;
+	float:right;
+}
+
 #left-profile-email {
 	width:25%;
 	float:left;
 }
 
 #right-profile-editemail {
+	width:75%;
+	float:right;
+}
+
+#left-profile-newemail {
+	width:25%;
+	float:left;
+}
+
+#right-profile-doneemail {
 	width:75%;
 	float:right;
 }
@@ -362,6 +392,7 @@ body {
 	font-family:"Trebuchet MS", Helvetica, sans-serif;
 	padding-top:5px;
 	text-align:center;
+	padding-left:50px;
 }
 
 #profile-pic {
@@ -410,7 +441,7 @@ body {
 
 #sort {
 	padding-bottom:20px;
-	text-align:right;
+	text-align:left;
 }
 
 .task-category-body {

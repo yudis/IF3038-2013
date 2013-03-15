@@ -57,14 +57,17 @@
 			<div id="biodata">
 				<div>
 					<div id="left-profile-name"><p>Full Name : <?php echo $user['fullname']; ?></p></div>
+					<div id="left-profile-newname"><p>Full Name : <?php echo $user['fullname']; ?></p></div>
 					<div id="right-profile-editname"><a href="#"><u><p>edit</p></u></a></div>
 				</div>
 				<div>
 					<div id="left-profile-birthday"><p>Birth Date : <?php echo $user['birthday'];?></p></div>
+					<div id="left-profile-newbirthday"><p>Birth Date : <?php echo $user['birthday'];?></p></div>
 					<div id="right-profile-editbirthday"><a href="#"><u><p>edit</p></u></a></div>
 				</div>
 				<div>
 					<div id="left-profile-email"><p>Email : <i><?php echo $user['email'];?></i></p></div>
+					<div id="left-profile-newemail"><p>Email : <i><?php echo $user['email'];?></i></p></div>
 					<div id="right-profile-editemail"><a href="#"><u><p>edit</p></u></a></div>
 				</div>
 			</div>
