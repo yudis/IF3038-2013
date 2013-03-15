@@ -18,8 +18,8 @@
                     mysql_select_db("progin_405_13510057", $con);
 
                     if ($searching == "yes") {
-                        echo "<h2>Hasil Pencarian Task dan Tag</h2>";
-                        echo "<p style='margin-left: 1em;'><b>Anda mencari : </b> " . $find . "</p>";
+                        echo "<div id=\"hasilcari\"><h3>Hasil Pencarian Task dan Tag</h3>";
+						echo "<p style='margin-left: 1em;'><b>Anda mencari : </b> " . $find . "</p></div>";
                         //If they did not enter a search term we give them an error 
                         if ($find == "") {
                             echo "<p>Tolong masukkan data yang ingin anda cari";
@@ -77,22 +77,24 @@
 
                         //Menampilkan hasil query 
                         while ($info = mysql_fetch_array($data_p)) {
+							echo "<div id=\"isi1\">";
                             echo "<p style='margin-left: 1em;'>Tugas : ";
                             echo $info['namatugas'];
-                            echo " ";
+                            echo "<br>";
                             echo "Deadline : ";
                             echo $info['deadline'];
-                            echo " ";
+                            echo "<br>";
                             echo "Tag : ";
                             echo $info['isitag'];
-                            echo " ";
+                            echo "<br>";
                             echo "Status : ";
                             echo $info['status'];
                             echo "</p>";
+							echo "</div>";
                         }
 						}
                         // Menunjukkan halaman pencarian
-                        echo "<p style='margin-left: 5em;'>";
+                        echo "<div id=\"hasilcari2\"><p style='margin-left: 5em;'>";
                         echo " --Page $pagenum of $last-- <p>";
 						echo "<p style='margin-left: 5em;'>";
                         // Jika pagenum bukan 1 maka ditampilkan link untuk ke First yaitu pagenum 1 dan previous
@@ -121,15 +123,9 @@
 						echo "</p>";
                         $anymatches = mysql_num_rows($data);
                     }
-					
-                    if ($anymatches == 0) {
-						echo "<br>";
-                        echo "Maaf data yang anda cari tidak terdaftar<br><br>";
-                    }
-                    echo "<br>";
 					echo "<p style='margin-left: 5em;'>";
                     echo "Hasil pencarian : " . $anymatches;
-					echo "</p>";
+					echo "</p></div>";
                     mysql_close($con);
                 }
                 ?>

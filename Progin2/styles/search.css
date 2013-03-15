@@ -66,6 +66,33 @@
 	overflow:auto;
 }
 
+#hasilcari{
+	height:80px;
+	width:312px;
+	float:left;
+	font:normal 13px "Verdana", Arial, Helvetica, sans-serif;
+	background-color:#E6E6E6;
+}
+
+#hasilcari2{
+	height:100px;
+	width:312px;
+	float:left;
+	font:normal 13px "Verdana", Arial, Helvetica, sans-serif;
+	background-color:#E6E6E6;
+}
+
+#isi1{
+	height:220px;
+	width:310px;
+	float:left;
+	font:normal 13px "Verdana", Arial, Helvetica, sans-serif;
+	border-style:dashed;
+	border-width:1px;
+	background-color:#FFFFE6;
+	overflow:auto;
+}
+
 .category_name a{
 	color:#000;
 	text-decoration:none;

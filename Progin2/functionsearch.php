@@ -19,8 +19,8 @@ if ($field == "username" || $field == "semua") {
 	mysql_select_db("progin_405_13510057", $con);
 
 	if ($searching == "yes") {
-		echo "<h2>Hasil Pencarian Username</h2>";
-		echo "<p style='margin-left: 1em;'><b>Anda mencari : </b> " . $find . "</p>";
+		echo "<div id=\"hasilcari\"><h2>Hasil Pencarian Username</h2>";
+		echo "<p style='margin-left: 1em;'><b>Anda mencari : </b> " . $find . "</p></div>";
 		//If they did not enter a search term we give them an error 
 		if ($find == "") {
 			echo "<p>Tolong masukkan data yang ingin anda cari";
@@ -75,12 +75,13 @@ if ($field == "username" || $field == "semua") {
 		{
 			$data_p = mysql_query("SELECT * FROM user WHERE upper(username) LIKE'%$find%' $max") or die(mysql_error());
 			while ($info = mysql_fetch_array($data_p)) {
+			echo "<div id=\"isi1\">";
 			echo "<p style='margin-left: 1em;'> Username : " . $info['username'] . "</p>";
 			echo "<p style='margin-left: 3em;'> Nama Lengkap : " . $info['fullname'] . "</p>";
-			echo "<p style='margin-left: 3em;'> Avatar : ";
-			echo "<img src=\"images/" . $info['avatar'] . "\" alt=\"\" />";
+			echo "<p style='margin-left: 3em;'> ";
+			echo "<img src=\"" . $info['avatar'] . "\" alt=\"\" / height=\"100\" width=\"100\">";
 			echo "</p>";
-			echo "<br>";
+			echo "</div>";
 			}
 		}
 
@@ -88,7 +89,7 @@ if ($field == "username" || $field == "semua") {
 		
 
 		// Menunjukkan halaman pencarian
-		echo "<p style='margin-left: 5em;'>";
+		echo "<div id=\"hasilcari2\"><p style='margin-left: 5em;'>";
 		echo " --Page $pagenum of $last-- </p>";
 		echo "<p style='margin-left: 5em;'>";
 		// Jika pagenum bukan 1 maka ditampilkan link untuk ke First yaitu pagenum 1 dan previous
@@ -120,15 +121,9 @@ if ($field == "username" || $field == "semua") {
 	}
 
 	//This counts the number or results - and if there wasn't any it gives them a little message explaining that 
-
-	if ($anymatches == 0) {
-		echo "<br>";
-		echo "Maaf data yang anda cari tidak terdaftar<br><br>";
-	}
-	echo "<br>";
 	echo "<p style='margin-left: 5em;'>";
 	echo "Hasil pencarian : " . $anymatches;
-	echo "</p>";
+	echo "</p></div>";
 	mysql_close($con);
 }
 ?>
