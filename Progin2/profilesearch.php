@@ -120,7 +120,7 @@ session_start();
 if(!isset($_SESSION['id']))
 	header("location:index.html");
 ?>
-<body onLoad="makeTgl();makeThn();">
+<body onLoad="makeTgl();makeThn();)">
 	
 	<div id="container">
 		<div id="header">
@@ -163,7 +163,7 @@ if(!isset($_SESSION['id']))
 
 				mysql_select_db("progin_405_13510057", $con);
 				
-				$result = mysql_query("SELECT * FROM user WHERE username='$_SESSION[id]'");
+				$result = mysql_query("SELECT * FROM user WHERE username='$_GET[idsearch]'");
 				while($row = mysql_fetch_array($result)) {
 					echo "<img alt=\"\" src=\"".$row['avatar']."\"/>";
 				}
@@ -171,7 +171,7 @@ if(!isset($_SESSION['id']))
 			</div>
 			<div class="biodata">
 				<?php
-				$result = mysql_query("SELECT * FROM user WHERE username='$_SESSION[id]'");
+				$result = mysql_query("SELECT * FROM user WHERE username='$_GET[idsearch]'");
 				while($row = mysql_fetch_array($result)) {
 					echo "<br>";
 					echo "Username  : ".$row['username']."<br><br>";
@@ -181,7 +181,6 @@ if(!isset($_SESSION['id']))
 					echo "Email	  	: ".$row['email']."<br>";
 				}
 				?>
-				<a href="#editprofile_form"><button type="button" id="editbutton"></button></a>
 			</div>
 		</div>
 		<div id="listarea">
@@ -193,7 +192,7 @@ if(!isset($_SESSION['id']))
 			</div>
         	<div id="undonetask">
 				<?php
-				$result = mysql_query("SELECT * FROM tugas WHERE username='$_SESSION[id]' AND status='undone'");
+				$result = mysql_query("SELECT * FROM tugas WHERE username='$_GET[idsearch]' AND status='undone'");
 				while($row = mysql_fetch_array($result)) {
 					echo "<div class=\"task_block\">";
 					echo 	"<div class=\"task_judul\">";
@@ -217,7 +216,7 @@ if(!isset($_SESSION['id']))
 					echo	"</div>";
 					echo "</div>";
 				}
-				$result = mysql_query("SELECT * FROM tugas JOIN assignee WHERE assignee.username='$_SESSION[id]' AND tugas.idtugas=assignee.idtugas AND status='undone'");
+				$result = mysql_query("SELECT * FROM tugas JOIN assignee WHERE assignee.username='$_GET[idsearch]' AND tugas.idtugas=assignee.idtugas AND status='undone'");
 				while($row = mysql_fetch_array($result)) {
 					echo "<div class=\"task_block\">";
 					echo 	"<div class=\"task_judul\">";
@@ -245,7 +244,7 @@ if(!isset($_SESSION['id']))
 			</div>
 			<div id="donetask">
 				<?php
-				$result = mysql_query("SELECT * FROM tugas WHERE username='$_SESSION[id]' AND status='done'");
+				$result = mysql_query("SELECT * FROM tugas WHERE username='$_GET[idsearch]' AND status='done'");
 				while($row = mysql_fetch_array($result)) {
 					echo "<div class=\"task_block\">";
 					echo 	"<div class=\"task_judul\">";
@@ -269,7 +268,7 @@ if(!isset($_SESSION['id']))
 					echo	"</div>";
 					echo "</div>";
 				}
-				$result = mysql_query("SELECT * FROM tugas JOIN assignee WHERE assignee.username='$_SESSION[id]' AND tugas.idtugas=assignee.idtugas AND status='done'");
+				$result = mysql_query("SELECT * FROM tugas JOIN assignee WHERE assignee.username='$_GET[idsearch]' AND tugas.idtugas=assignee.idtugas AND status='done'");
 				while($row = mysql_fetch_array($result)) {
 					echo "<div class=\"task_block\">";
 					echo 	"<div class=\"task_judul\">";
@@ -297,62 +296,5 @@ if(!isset($_SESSION['id']))
 			</div>
 		</div>
 		
-		<!--Popup edit profile -->
-		<a href="#x" class="overlay" id="editprofile_form"></a>
-		<div class="popup">
-			<form name="editprofile" method="post" onSubmit="return check(document.editprofile.nama_lengkap.value,
-			document.editprofile.password.value,
-			document.editprofile.confirm_password.value,
-			document.editprofile.tanggal.value, document.editprofile.bulan.value, document.editprofile.tahun.value,
-			document.editprofile.avatar.value)" action="editprofile.php" enctype="multipart/form-data">
-				Fullname : <input name="nama_lengkap" id="nama_lengkap" type="text" maxlength="256" onKeyUp="validateFullName(document.editprofile.nama_lengkap.value)"><br>
-				<div id="v_nama">
-				</div>
-				Password : <input name="password" type="password" maxlength="24" onKeyUp="checkPass(document.editprofile.password.value,
-					<?php
-					echo "'".$_SESSION['id']."'";
-					?>
-					,
-					<?php
-					$result = mysql_query("SELECT * FROM user WHERE username='$_SESSION[id]'");
-					while($row = mysql_fetch_array($result)) {
-						echo "'".$row['email']."'";
-					}
-					?>
-				)"> <br>
-				<div id="v_pass">
-				</div>
-				Confirm Password : <input name="confirm_password" type="password" maxlength="24" onKeyUp="checkCPass(document.editprofile.confirm_password.value, document.editprofile.password.value)"><br>
-				<div id="v_cpass">
-				</div>
-				Birthdate : 
-					<select name="tanggal" id="tgl">
-						
-					</select>
-					<select name="bulan">
-						<option value="January">January</option>
-						<option value="February">February</option>
-						<option value="March">March</option>
-						<option value="April">April</option>
-						<option value="May">May</option>
-						<option value="June">June</option>
-						<option value="July">July</option>
-						<option value="August">August</option>
-						<option value="September">September</option>
-						<option value="October">October</option>
-						<option value="November">November</option>
-						<option value="December">December</option>
-					</select>
-					<select name="tahun" id="thn">
-						
-					</select>
-				<br>
-				Avatar : <input type="file" name="avatar"><br>
-				<div id="v_avatar">
-				</div>
-				<input type="submit" name="submit" value="Edit">
-			<a class="close" href="#"></a>
-			</form>
-		</div>
 </body>
 </html>
