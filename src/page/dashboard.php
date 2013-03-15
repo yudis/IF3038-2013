@@ -56,7 +56,7 @@
 						</select>&nbsp;			
 					</div>
 					<!--Category list (static)-->
-                    <?php
+					<?php
 						include("listCategory.php");
 					?>
                         

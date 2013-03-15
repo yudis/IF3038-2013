@@ -91,8 +91,8 @@ function autoCompleteAsignee(){
 
 function setCompleteStatus(){
 	getAjax();
-	var status = document.getElementById("red-text").value;
-	alert("aaaaaaaaa "+document.getElementById("red-text").value);
+	var status = document.getElementById("red-text0").innerHTML;
+	alert("aaaaaaaaa "+document.getElementById("red-text0").innerHTML);
 	if(status!=""){
 		ajaxRequest.open("GET","../php/updatecompletestatus.php?status="+status.value,false);
 	
