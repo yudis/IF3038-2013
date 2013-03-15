@@ -11,15 +11,24 @@
 			</div>
             <div><hr id="border"></div>
 			<!--Body-->
-			<div id="dashboard-body">
-				<div id="profile-pic">
-					<a href="profile.php"><img alt="" id="photo" src="../avatar/<?php echo $_SESSION["userlistapp"]?>.png" width=120 height="150"/>
-   					<img alt="" id="photo" src="../avatar/<?php echo $_SESSION["userlistapp"]?>.jpg" width=120 height="150"/><br />
-					<b><?php echo $_SESSION["userlistapp"]?></b></a>
-				</div>
+			<div id="search-result-body">
+				<?php
+					$mode = $_POST['modesearch'];
+					switch($mode)
+					{
+						case "1":
+							echo "";
+							break;
+						case "2":
+							break;
+						case "3":
+							break;
+						case "4":
+							break;
+					}
+				?>
 				<div id="main-dashboard">
-					<div id="dashboard-title"><b>MY TASK<br /></b><br /></div>
-					<div id="add-category"><a href="#add_task"><button>+ New Category</button></a>&nbsp;</div>
+					<div id="dashboard-title"><b>TASK<br /></b><br /></div>
 					<div id="sort">	
 						Sort by :
 						<select name="Sort by">
@@ -28,16 +37,6 @@
 							<option value="Date">Date</option>
 						</select>&nbsp;			
 					</div>
-					<!--Category list (static)-->
-					<?php
-						include("listCategory.php");
-					?>
-                        
-						<div id="new-category"></div>
-					<!--New category button ==> popup-->
-						<!--Name-->
-						<!--List of priveleged users-->
-					<!--New task button ==> new_task.html (this button only appears if a category is selected)-->
 				</div>
 			</div>
 		</div>
