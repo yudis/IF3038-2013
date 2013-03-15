@@ -97,7 +97,11 @@
     
 }
 
-
+.hasil_ac:hover
+{
+	background-color: #e58100;
+	color: #ffffff;
+}
 /*STYLES FOR CSS POPUP*/
 
 
