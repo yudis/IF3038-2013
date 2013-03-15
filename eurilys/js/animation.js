@@ -6,19 +6,6 @@ function toggle_visibility(id) {
 		e.style.display = 'block';
 }
 
-var loginForm = document.getElementById("login_form");
-function logincheck()  {
-	if ((document.getElementById("login_username").value =="admin") && (document.getElementById("login_password").value =="adminadmin"))
-		window.location.href = "src/Dashboard.html";
-	else
-	{
-		alert("Wrong username or password");
-		document.getElementById("login_username").value = "";
-		document.getElementById("login_password").value = "";
-		return false;
-	}
-}
-
 function add_category() {
 	var t = "<li>";
 	t += "<a href ='#' onclick='catchange(10)' id='newCategoryAdded'>";
@@ -133,7 +120,7 @@ function regCheck() {
 
 function signup() {
 	if (regValid == 1) {
-		window.location.href = "src/Dashboard.html";
+		window.location.href = "src/Dashboard.php";
 	}
 	else {
 		alert("Fill your registration form correctly");
@@ -232,4 +219,24 @@ function showHint(str) {
 	
 	xmlhttp.open("GET","searchAutoComplete.php?q="+str+"&filter="+filter,true);
 	xmlhttp.send();
+}
+
+function searchTask(taskID) {
+	window.location.href = "src/search_result.php";
+	//alert ("taskID = " + taskID);
+	/*
+	<div class="task_view" id="curtask5">
+		<img src="../img/done.png" id="finish_5" onclick="javascript:finishTask(5)" class="task_done_button" alt=""/>
+		<div id="task_name_ltd_5" class="left dynamic_content_left">Task Name</div>
+		<div id="task_name_rtd_5" class="left dynamic_content_right"> <a href="taskdetail_file.php"> Database Sekolah </a> </div>
+		<br><br>
+		<div id="deadline_ltd_5" class="left dynamic_content_left">Deadline</div>
+		<div id="deadline_rtd_5" class="left dynamic_content_right">21/2/2012</div>
+		<br><br>
+		<div id="tag_ltd_5" class="left dynamic_content_left">Tag</div>
+		<div id="tag_rtd_5" class="left dynamic_content_right">HTML 5, CSS 3</div>
+		<br>
+		<div class="task_view_category"> Proyek </div>
+		<br>
+	</div> */
 }

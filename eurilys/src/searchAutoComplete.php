@@ -13,15 +13,34 @@
 	//echo "keyword = ".$q;
 	//echo "filter = ".$filter; 
 	
-	$a = array();
 	unset($a);
-	
-	$id = array();
+	$a = array();
 	unset($id);
+	$id = array();
+	
 	
 	/* Searching */
 	if ($filter == 1) { //Search All
-	
+		$query 	= "SELECT full_name, username FROM user WHERE username LIKE '%$q%' OR email LIKE '%$q%' OR full_name LIKE '%$q%' OR birthdate LIKE '%$q%';";
+		$result	= mysql_query($query);
+		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+			$a[] = $row["full_name"];
+			$id[] = $row["username"];
+		}
+		$query 	= "SELECT cat_id, cat_name FROM category WHERE cat_name LIKE '%$q%';";
+		$result	= mysql_query($query);
+		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+			$a[] = $row["cat_name"];
+			$id[] = $row["cat_id"];
+		}
+		$query 	= "SELECT * FROM ((task LEFT JOIN tag ON task.task_id = tag.task_id) LEFT JOIN comment ON task.task_id = comment.task_id) 
+			WHERE task_name LIKE '%$q%' OR tag_name LIKE '%$q%' OR comment_content LIKE '%$q%'";
+		$result	= mysql_query($query);
+		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+			// buang yang double-double
+			$a[] = $row["task_name"];
+			$id[] = $row["task_id"];
+		}
 	}
 	else
 	if ($filter == 2) { //Search User (username, email, nama lengkap, birthdate)
@@ -43,10 +62,12 @@
 	}
 	else 
 	if ($filter == 4) { //Search Task (task name, tag, comment)
-		$query 	= "SELECT task_id, task_name FROM task WHERE task_name LIKE '%$q%';";
+		$query 	= "
+		SELECT * FROM ((task LEFT JOIN tag ON task.task_id = tag.task_id) LEFT JOIN comment ON task.task_id = comment.task_id) 
+		WHERE task_name LIKE '%$q%' OR tag_name LIKE '%$q%' OR comment_content LIKE '%$q%'";
 		$result	= mysql_query($query);
-		//tag & comment blm
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+			// buang yang double-double
 			$a[] = $row["task_name"];
 			$id[] = $row["task_id"];
 		}
@@ -54,14 +75,15 @@
 	
 	//lookup all hints from array if length of q>0
 	if (strlen($q) > 0) {
-		$hint="";
-		for($i=0; $i<count($a); $i++) {
-			if (strtolower($q)==strtolower(substr($a[$i],0,strlen($q)))) {
-				if ($hint=="") {
-					$hint=$a[$i];
+		$hint = "";
+		if (count($a) > 0) {
+			for($i=0; $i<count($a); $i++) {
+				if ($hint == "") {
+					$hint = "<div style='cursor:pointer;margin-bottom:5px;width:100%;' onclick='javascript:searchTask('".$id[$i]."');'>". $a[$i] ."</div>";
 				}
-				else {
-					$hint=$hint." , ".$a[$i];
+				else { 
+					//$hint = $hint." , ".$a[$i];
+					$hint = $hint. "<br> <div style='cursor:pointer;margin-bottom:5px;width:100%;' onclick='javascript:searchTask('".$id[$i]."');'>". $a[$i] ."</div>"; 
 				}
 			}
 		}
@@ -70,7 +92,7 @@
 	// Set output to "no suggestion" if no hint were found
 	// or to the correct values
 	if ($hint == "") {
-		$response="no suggestion";
+		$response = "no suggestion";
 	}
 	else {
 		$response=$hint;

@@ -13,6 +13,13 @@
 		) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;";
 		mysql_query($sql,$con);
 		
+		//-------------- 
+		$sql_ = "INSERT INTO `attachment` (`att_id`, `att_content`, `att_task_id`) VALUES
+		(1, 'dsadasdsdadsadasds', 1),
+		(2, 'sadasdasdsaddsdas', 1)";
+		mysql_query($sql_,$con);
+		//--------------
+		
 		$sql1 = 
 		"CREATE TABLE IF NOT EXISTS `category` (
 		`cat_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -24,12 +31,26 @@
 		) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;";
 		mysql_query($sql1,$con);
 		
+		//-------------------
+		$sql1_ = "INSERT INTO `category` (`cat_id`, `cat_name`, `cat_creator`) VALUES
+		(1, 'Schoolicious', 'kennyazrina'),
+		(2, 'Household', 'sharonloh')";
+		mysql_query($sql1_,$con);
+		//-------------------
+		
 		$sql2 = 
 		"CREATE TABLE IF NOT EXISTS `cat_asignee` (
 		`cat_id` int(11) NOT NULL,
 		`username` varchar(50) NOT NULL
 		) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 		mysql_query($sql2,$con);
+		//----------------------
+		$sql2_ = "
+		INSERT INTO `cat_asignee` (`cat_id`, `username`) VALUES
+		(1, 'nflubis'),
+		(1, 'sharonloh')";
+		mysql_query($sql2_, $con);
+		//----------------------
 		
 		$sql3 = 
 		"CREATE TABLE IF NOT EXISTS `comment` (
@@ -42,6 +63,14 @@
 		KEY `task_id` (`task_id`)
 		) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;";
 		mysql_query($sql3,$con);
+		//----------------------
+		$sql3_ = "
+		INSERT INTO `comment` (`comment_id`, `comment_timestamp`, `comment_content`, `task_id`, `comment_creator`) VALUES
+		(1, '2013-03-12 04:44:26', 'asdasdasdas', 1, 'sharonloh'),
+		(2, '2013-03-12 04:44:26', 'sndajasndnsajkdans', 1, 'nflubis')";
+		mysql_query($sql3_, $con);
+		//----------------------
+		
 		
 		$sql4 = 
 		"CREATE TABLE IF NOT EXISTS `tag` (
@@ -49,6 +78,12 @@
 		`task_id` int(11) NOT NULL
 		) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 		mysql_query($sql4,$con);
+		//---------------------
+		$sql4_ ="INSERT INTO `tag` (`tag_name`, `task_id`) VALUES
+		('capek', 1),
+		('males', 2);";
+		mysql_query($sql4_, $con);
+		//---------------------
 		
 		$sql5 = 
 		"CREATE TABLE IF NOT EXISTS `task` (
@@ -62,6 +97,12 @@
 		KEY `task_id` (`task_id`)
 		) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;";
 		mysql_query($sql5,$con);
+		//--------------------
+		$sql5_ = "INSERT INTO `task` (`task_id`, `task_name`, `task_status`, `task_deadline`, `cat_name`, `task_creator`) VALUES
+		(1, 'Tubes Progin 2', 0, '2013-03-23', 'Schoolicious', 'kennyazrina'),
+		(2, 'Tubes Progin 3', 0, '2013-04-25', 'Schoolicious', 'nflubis')";
+		mysql_query($sql5_, $con);
+		//--------------------
 		
 		$sql6 = 
 		"CREATE TABLE IF NOT EXISTS `task_asignee` (
@@ -69,6 +110,13 @@
 		`username` varchar(50) NOT NULL
 		) ENGINE=MyISAM DEFAULT CHARSET=latin";
 		mysql_query($sql6,$con);
+		//---------------------
+		$sql6_ ="INSERT INTO `task_asignee` (`task_id`, `username`) VALUES
+		(1, 'nflubis'),
+		(2, 'sharonloh'),
+		(1, 'sharonloh')";
+		mysql_query($sql6_, $con);
+		//---------------------
 		
 		$sql7 = 
 		"CREATE TABLE IF NOT EXISTS `user` (
@@ -81,6 +129,13 @@
 		PRIMARY KEY (`username`)
 		) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 		mysql_query($sql7,$con);
+		//---------------------------
+		$sql7_ = "INSERT INTO `user` (`username`, `password`, `full_name`, `birthdate`, `avatar`, `email`) VALUES
+		('kennyazrina', 'kennyazrina', 'Kania Azrina', '1992-03-13', NULL, 'kaniaazrina@gmail.com'),
+		('nflubis', 'nflubis', 'Nurul Fithria Lubis', '1992-04-17', NULL, 'nflubis@gmail.com'),
+		('sharonloh', 'sharonloh', 'Sharon Loh', '1992-02-10', NULL, 'sharonloh@gmail.com');";
+		mysql_query($sql7_, $con);
+		//---------------------------
 		
 		$sql8 = 
 		"ALTER TABLE `category`
