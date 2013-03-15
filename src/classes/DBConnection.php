@@ -3,24 +3,33 @@
 final class DBConnection {
 	public static $dbh;
 
+	public const host = 'localhost'
+	public const user = 'progin';
+	public const pass = 'progin';
+	public const dbname = 'progin_405_13510033';
+
 	public function openDBconnection() {
-		// Create connection
-		$con=mysqli_connect('localhost', 'progin', 'progin', 'progin_405_13510033');
-		// Check connection
-		if (mysqli_connect_errno($con)) 
-		{
-			echo 'Failed to connect to MySQL:' . mysqli_connect_error();
+		if (!self::$dbh) {
+			// No connection made yet
+
+			// Create connection
+			self::$dbh = mysqli_connect(self::host, self::user, self::pass, self::dbname);
+
+			if (mysqli_connect_errno(self::$dbh)) {
+				// TODO Make this more elegant
+				// Error
+				unset(self::$dbh);
+				echo 'Failed to connect to MySQL:' . mysqli_connect_error();
+				exit; // Connection failure does us no good, just exit
+			}
+		}
+		else {
+			// Connection already made. Do nothing.
 		}
 	}
 	
 	public function closeDBconnection(){
-		// Create connection
-		$con=mysqli_connect('localhost', 'progin', 'progin', 'progin_405_13510033');
-		// Check connection
-		if (mysqli_connect_errno($con)) 
-		{
-			echo 'Failed to connect to MySQL:' . mysqli_connect_error();
-		}
-		mysqli_close($con);
+		if (self::$dbh)
+			mysqli_close(self::$dbh);
 	}
 }
