@@ -196,6 +196,8 @@ function checkTaskAttachment() {
 }
 
 function showHint(str) {
+	document.getElementById('txtHint').style.display = "block";
+	
 	if (str.length==0) { 
 		document.getElementById("txtHint").innerHTML="";
 		return;
@@ -221,22 +223,44 @@ function showHint(str) {
 	xmlhttp.send();
 }
 
-function searchTask(taskID) {
-	window.location.href = "src/search_result.php";
-	//alert ("taskID = " + taskID);
-	/*
-	<div class="task_view" id="curtask5">
-		<img src="../img/done.png" id="finish_5" onclick="javascript:finishTask(5)" class="task_done_button" alt=""/>
-		<div id="task_name_ltd_5" class="left dynamic_content_left">Task Name</div>
-		<div id="task_name_rtd_5" class="left dynamic_content_right"> <a href="taskdetail_file.php"> Database Sekolah </a> </div>
-		<br><br>
-		<div id="deadline_ltd_5" class="left dynamic_content_left">Deadline</div>
-		<div id="deadline_rtd_5" class="left dynamic_content_right">21/2/2012</div>
-		<br><br>
-		<div id="tag_ltd_5" class="left dynamic_content_left">Tag</div>
-		<div id="tag_rtd_5" class="left dynamic_content_right">HTML 5, CSS 3</div>
-		<br>
-		<div class="task_view_category"> Proyek </div>
-		<br>
-	</div> */
+function searchResult(resultID, resultType) {
+	document.getElementById('dynamic_content').innerHTML = "<br><br>";
+	document.getElementById('dynamic_content').innerHTML += "Search result for : " + resultID + "<br><br>";
+	document.getElementById('txtHint').style.display = "none";
+	
+	if (resultType == "user") {
+		searchUser(resultID);
+	}
+	else
+	if (resultType == "category") {
+		searchCategory(resultID);
+	}
+	else
+	if (resultType == "task") {
+		searchTask(resultID);
+	} 
+}
+
+function searchUser(userID) {	
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else {// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
+		}
+	}
+		
+	xmlhttp.open("GET","search_user.php?q="+userID,true);
+	xmlhttp.send();
+} 
+
+function searchCategory (categoryID) {
+}
+
+function searchTask (taskID) {
 }

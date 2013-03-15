@@ -687,6 +687,20 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 	height:200px;
 }
 
+/* Search Result 
+--------------------------------------------------------------------------------- */
+.user_search_result_label {
+	float:left;
+	width:160px;
+	letter-spacing:1px;
+	display:block;
+	font-size:18px;
+	font-weight:bold;
+	text-align:left;
+	font-family:Helvetica;
+}
+
+
 /* MEDIA QUERIES
 ---------------------------------------------------------------------------------- */
 @media screen and (max-width:480px) {
@@ -730,3 +744,5 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 	}
 	
 	
+
+

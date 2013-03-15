@@ -1,0 +1,15 @@
+Nunu : 
+	- Rincian Tugas
+	- Halaman Profil
+	- Login			// Done
+	
+Kania : 
+	- Pembuatan Tugas
+	- Database		// Done
+	- Bonus Media Query
+	- 
+Sharon : 
+	- Register		// Done
+	- Dashboard
+	- Search Result		
+	- Bonus : Search Bar (Filtering & autocomplete menggunakan ajax) // Done 
