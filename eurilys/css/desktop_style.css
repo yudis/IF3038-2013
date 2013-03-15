@@ -699,7 +699,13 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 	text-align:left;
 	font-family:Helvetica;
 }
-
+.cat_search_result_label {
+	float:left;
+	width:170px;
+	display:block;
+	font-weight:bold;
+	text-align:left;
+}
 
 /* MEDIA QUERIES
 ---------------------------------------------------------------------------------- */

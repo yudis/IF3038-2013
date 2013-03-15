@@ -10,6 +10,8 @@
 	/* Set array */
 	unset($a);
 	$a = array();	
+	unset($taskList);
+	$taskList = array();
 	
 	/* Searching user */
 	$query 	= "SELECT * FROM category WHERE cat_id='$q'";
@@ -20,16 +22,32 @@
 		$cat_creator = $row['cat_creator'];
 	}
 	
+	/* Search Corresponding task */
+	$query 	= "SELECT task_name, task_id FROM task WHERE cat_name='$cat_name'";
+	$result	= mysql_query($query);
+	
+	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+		$taskList[] = $row['task_name'];
+	}
+	
 	//Set the search result at response
 	if (strlen($q) > 0) {		
-		$response = "<div class='half_div'> 
-			<div class='user_search_result_label'> Category Name  </div> <div class='left'> ".$cat_name." </div>
+		$response = "<div class='task_view'>
+			<div class='cat_search_result_label'> Category Name  </div> <div class='left'> ".$cat_name." </div>
 			<div class='clear'></div><br>
-			<div class='user_search_result_label'> Creator  </div> <div class='left'> ".$cat_creator." </div>
-			</div>";
-		//$response = $response ."<div class='half_div'>  <div class='clear'></div> <br>";
-		//$response = $response ."<div class='user_search_result_label'> Email </div><div class='left'> ".$email." </div><div class='clear'></div><br>";	
-		//$response = $response . "<div class='user_search_result_label'>  Birthdate  </div> <div class='left'> ".$birthdate." </div><div class='clear'></div></div>";
+			<div class='cat_search_result_label'> Creator  </div> <div class='left'> ".$cat_creator." </div>
+			<div class='clear'></div><br>
+			<div class='cat_search_result_label'> List of Task </div>";
+		
+		if (count($taskList) > 0) {
+			for($i=0; $i<count($taskList); $i++) {
+				if ($i != 0) {
+					$response = $response . "<div class='cat_search_result_label'> &nbsp; </div>";
+				}
+				$response = $response . "<div class='left'>" .$taskList[$i] ."</div><div class='clear'></div><br>";
+			}
+		}
+		$response = $response."</div>";
 	}
 
 	//output the response
