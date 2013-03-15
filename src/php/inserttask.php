@@ -2,14 +2,15 @@
 	require('init_function.php');
 	session_start();
 	$taskid = getNextTaskId();
-	$taskname = $_POST['textTaskNameb'];
+	$taskname = $_POST['textTaskName'];
 	$useractive = $_SESSION['userlistapp'];
 	$createddate = date('Y-m-d H:i:s');
-	$deadlinedate = "9999-12-31 23:59:59";
+	$deadlinedate = $_POST['textDeadline']." ".$_POST['textTimeDeadline'].":00";
+	echo $deadlinedate;
 	$status = "UNCOMPLETE";
 	$categoryid = $_GET['categoryid'];
-	$listAssignee = $_POST['textAssigneeb'];
-	$listTag = $_POST['textTagb'];
+	$listAssignee = $_POST['textAssignee'];
+	$listTag = $_POST['textTag'];
 	
 	echo "Task ID : ".$taskid."<br />";
 	echo "User Active : ".$useractive."<br />";
@@ -42,8 +43,8 @@
 			mysqli_query($con,$query);
 	}
 	
-	if(isset($_FILES["attachment1b"]["size"])){
-		$file = $_FILES['attachment1b'];
+	if(isset($_FILES["attachment1"]["size"])){
+		$file = $_FILES['attachment1'];
 		upload_attachment($file,$useractive);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
@@ -51,8 +52,8 @@
 			mysqli_query($con,$query);
 		}
 	}
-	if(isset($_FILES["attachment2b"]["size"])){
-		$file = $_FILES['attachment2b'];
+	if(isset($_FILES["attachment2"]["size"])){
+		$file = $_FILES['attachment2'];
 		upload_attachment($file,$useractive);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
@@ -60,8 +61,8 @@
 			mysqli_query($con,$query);
 		}
 	}
-	if(isset($_FILES["attachment3b"]["size"])){
-		$file = $_FILES['attachment3b'];
+	if(isset($_FILES["attachment3"]["size"])){
+		$file = $_FILES['attachment3'];
 		upload_attachment($file,$useractive);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
@@ -69,8 +70,8 @@
 			mysqli_query($con,$query);
 		}
 	}
-	if(isset($_FILES["attachment4b"]["size"])){
-		$file = $_FILES['attachment4b'];
+	if(isset($_FILES["attachment4"]["size"])){
+		$file = $_FILES['attachment4'];
 		upload_attachment($file,$useractive);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
@@ -78,8 +79,8 @@
 			mysqli_query($con,$query);
 		}
 	}
-	if(isset($_FILES["attachment5b"]["size"])){
-		$file = $_FILES['attachment5b'];
+	if(isset($_FILES["attachment5"]["size"])){
+		$file = $_FILES['attachment5'];
 		upload_attachment($file,$useractive);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
@@ -87,5 +88,5 @@
 			mysqli_query($con,$query);
 		}
 	}
-	header("Location: ../page/dashboard.php");
+	//header("Location: ../page/dashboard.php");
 ?>

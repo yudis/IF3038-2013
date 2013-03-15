@@ -3,6 +3,22 @@
 	<head>
 		<title>Profile</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
+        <script>
+			function edit_aboutme(){
+				document.getElementById("aboutme_edit").style.display = 'block';
+				var val = document.getElementById("aboutme_show").innerHTML;
+				document.getElementById("aboutme_to_edit").value = val;
+				document.getElementById("aboutme_show").style.display = 'none';
+				document.getElementById("right-main-body").innerHTML = "<div id=\"right-main-body\"><a href=\"#\" onClick=\"just_edit_aboutme()\"><u><p>done</p></u></a></div>";
+			}
+			function just_edit_aboutme(){
+				document.getElementById("aboutme_edit").style.display = 'none';
+				document.getElementById("aboutme_show").style.display = 'block';
+				document.getElementById("right-main-body").innerHTML = "<div id=\"right-main-body\"><a href=\"#\" onClick=\"edit_aboutme()\"><u><p>edit</p></u></a></div>";
+			}
+			
+			
+		</script>
 	</head>
 	<body>
 		<div id="main-body-general">
@@ -29,12 +45,11 @@
 					<p>Joined on : <?php echo $user['join']?></p>
 					<div>
 						<div id="left-main-body"><p>About Me :</p></div>
-						<div id="right-main-body"><a href="#"><u><p>edit</p></u></a></div>
+						<div id="right-main-body"><a href="#" onClick="edit_aboutme()"><u><p>edit</p></u></a></div>
 					</div>
 					<div id="about">
-						<p>
-						<?php echo $user['aboutme']?>
-						</p>
+						<div id="aboutme_show"><?php echo $user['aboutme']?></div>
+       					<div id="aboutme_edit"><input type="text" id="aboutme_to_edit" size=80></div>
 					</div>
 				</div>
 			</div>
@@ -57,12 +72,7 @@
 			<div id="unfinished-task">
 				<div>
 					<div id="left-profile-body"><h3>Unfinished Task</h3></div>
-					<div id="right-profile-body"><p><!--Sort by :
-						<select name="Sort by">
-							<option value="Auto">Auto</option>
-							<option value="Name">Name</option>
-							<option value="Date">Date</option>
-						</select>--></p>
+					<div id="right-profile-body"><p></p>
 						<br>
 						<br>
 						<br>
@@ -91,12 +101,7 @@
 				<div>
 					<div id="left-profile-body"><h3>Finished Task</h3></div>
 					
-					<div id="right-profile-body"><p><!--Sort by :
-						 <select name="Sort by">
-							<option value="Auto">Auto</option>
-							<option value="Name">Name</option>
-							<option value="Date">Date</option>
-						</select>---></p>
+					<div id="right-profile-body"><p></p>
 						<br>
 						<br>
 						<br>

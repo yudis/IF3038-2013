@@ -35,7 +35,7 @@
 					Tag:
 				</div>
 				<div id="add-task-form">
-				<form action="../php/inserttask.php" method="post">
+				<form action="../php/inserttask.php?categoryid=<?php echo $categoryid;?>" method="post">
 					<!--Name-->
 					<div id="spacing">
 					<input type="text" id="taskname" onKeyUp="check_task_name()" name="textTaskName"/>
@@ -52,8 +52,8 @@
 					</div>					
 					<!--Deadline-->
 					<div id="spacing-deadline">
-					<input type="text" class="calendarSelectDate" name="textDateBirthday"/><div id="calendarDiv"></div><br />
-					<input type="text" onKeyUp="check_time()" id="time" name="textTimeBirthday" placeholder="HH:MM"/>
+					<input type="text" class="calendarSelectDate" name="textDeadline"/><div id="calendarDiv"></div><br />
+					<input type="text" onKeyUp="check_time()" id="time" name="textTimeDeadline" placeholder="HH:MM"/>
 					</div>
 					<!--Assignee-->
 					<div id="spacing">
@@ -66,38 +66,6 @@
 					</div>
 					<div id="warning-message"></div>
 					<button id="create">Add Task</button>
-				</form>
-				</div>
-                
-                <!-- BUATAN WHILDA TEST ADD TASK JANGAN DIHAPUS KY ATI2 KLO CONFLICT -->
-				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-				<div>
-					Task name:<br>
-					Attach file:<br><br><br><br><br>
-					Deadline:<br><br>
-					Asignee:<br>
-					Tag:<br>
-				</div>
-				<div>
-				<form enctype="multipart/form-data" method="post" action="../php/inserttask.php?categoryid=<?php echo $categoryid;?>">
-					<!--Name-->
-					<input type="text" id="taskname"name="textTaskNameb"/><br />
-					<!--Attachment
-                    "
-                    -->
-					<input type="file" name="attachment1b"/><br />
-  					<input type="file" name="attachment2b"/><br />
-					<input type="file" name="attachment3b"/><br />
-					<input type="file" name="attachment4b"/><br />
-					<input type="file" name="attachment5b"/><br />                                                            
-					<!--Deadline-->
-					<input type="date" id="date_html5" /><br /><br />
-					<!--Assignee-->
-					<input type="text" id="assignee" name="textAssigneeb"/><br />
-					<!--Tag (multivalue)-->
-					<input type="text" id="tag" name="textTagb"/><br />
-					<br>
-					<input type="submit" value="Submit NOW!!"/>
 				</form>
 				</div>
 			</div>
