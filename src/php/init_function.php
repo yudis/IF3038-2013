@@ -155,4 +155,43 @@
 		$row = mysqli_fetch_array($result);
 		return $row['avatar'];
 	}
+	
+	function SearchAvatar($keytext){
+		$con = getConnection();
+		$query = "SELECT * FROM user WHERE username LIKE '%$keytext%' OR fullname LIKE '%$keytext%'";
+		$result = mysqli_query($con,$query);
+		while($row = mysqli_fetch_array($result)){
+			echo "<br /><img src=\"../avatar/".$row['avatar']."\" width=\"100\" height=\"100\"/>";
+			echo "<br />Username name : <a href=\"profile.php?username=".$row['username']."\">".$row['username']."</a>";
+			echo "<br />Full name : ".$row['fullname'];
+		}	
+	}
+	
+	function SearchCategory($keytext){
+		$con = getConnection();
+		$query = "SELECT * FROM category WHERE categoryname LIKE '%$keytext%' OR username LIKE '%$keytext%'";
+		$result = mysqli_query($con,$query);
+		while($row = mysqli_fetch_array($result)){
+			echo "<br />Category name : ".$row['categoryname'];
+			echo "<br />Createdby name : <a href=\"profile.php?username=".$row['username']."\">".$row['username']."</a>";
+		}
+	}
+	
+	function SearchTask($keytext){
+		$con = getConnection();
+		$query = "select distinct taskid,taskname,deadline,status from (task natural join task_tag) natural join tag where taskname like '%$keytext%' or tagname like '%$keytext%'";
+		$result = mysqli_query($con,$query);
+		while($row = mysqli_fetch_array($result)){
+			echo "<br />Task Name : <a href=\"task_page.php?taskid=".$row['taskid']."\">".$row['taskname']."</a>";
+			echo "<br />Deadline : ".$row['deadline'];
+			echo "<br />Status : ".$row['status'] ."    <a href=\"#\">Change Status </a>";
+			echo "<br />Tag :";
+			$result3 = mysqli_query($con,"SELECT tagid FROM task_tag WHERE taskid = '".$row['taskid']."'");
+			while($row3 = mysqli_fetch_array($result3))
+			{
+				$tagname = getTagname($row3['tagid']);
+				echo "<u>".$tagname."</u> ";
+			}
+		}
+	}
 ?>
