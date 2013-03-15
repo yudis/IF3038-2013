@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 12, 2013 at 05:06 PM
+-- Generation Time: Mar 15, 2013 at 03:39 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -34,6 +34,18 @@ CREATE TABLE IF NOT EXISTS `asigner` (
   KEY `namatugas` (`namatugas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `asigner`
+--
+
+INSERT INTO `asigner` (`username`, `namatugas`, `asignee`) VALUES
+('dummy', 'abcdefg', 0),
+('dummy', 'baru', 0),
+('dummy', 'tes', 0),
+('dummy', '', 0),
+('dummy', '', 0),
+('dummy', 'testestes', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -43,6 +55,9 @@ CREATE TABLE IF NOT EXISTS `asigner` (
 CREATE TABLE IF NOT EXISTS `attachment` (
   `username` varchar(15) NOT NULL,
   `namatugas` varchar(30) NOT NULL,
+  `namafile` varchar(30) NOT NULL,
+  `tipefile` varchar(30) NOT NULL,
+  `size` int(11) NOT NULL,
   `file` longblob NOT NULL,
   KEY `username` (`username`,`namatugas`),
   KEY `namatugas` (`namatugas`)
@@ -105,6 +120,18 @@ CREATE TABLE IF NOT EXISTS `tag` (
   KEY `namatugas` (`namatugas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tag`
+--
+
+INSERT INTO `tag` (`username`, `namatugas`, `tag`) VALUES
+('dummy', 'abcdefg', 'bbbb'),
+('dummy', 'baru', 'baru'),
+('dummy', 'tes', 'tes'),
+('dummy', '', ''),
+('dummy', '', ''),
+('dummy', 'testestes', 'kelompok');
+
 -- --------------------------------------------------------
 
 --
@@ -121,6 +148,18 @@ CREATE TABLE IF NOT EXISTS `tugas` (
   KEY `namatugas` (`namatugas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tugas`
+--
+
+INSERT INTO `tugas` (`username`, `namatugas`, `deadline`, `kategori`, `status`) VALUES
+('dummy', 'abcdefg', '2013-01-01', 'dummy', 0),
+('dummy', 'baru', '2013-02-02', 'dummy', 0),
+('dummy', 'tes', '2013-01-01', 'dummy', 0),
+('dummy', '', '2013-01-01', 'dummy', 0),
+('dummy', '', '2013-01-01', 'dummy', 0),
+('dummy', 'testestes', '2013-09-06', 'dummy', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -134,6 +173,13 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`username`, `password`) VALUES
+('dummy', 'dummy');
+
+--
 -- Constraints for dumped tables
 --
 
@@ -141,15 +187,15 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Constraints for table `asigner`
 --
 ALTER TABLE `asigner`
-  ADD CONSTRAINT `asigner_ibfk_2` FOREIGN KEY (`namatugas`) REFERENCES `tugas` (`namatugas`),
-  ADD CONSTRAINT `asigner_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`);
+  ADD CONSTRAINT `asigner_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`),
+  ADD CONSTRAINT `asigner_ibfk_2` FOREIGN KEY (`namatugas`) REFERENCES `tugas` (`namatugas`);
 
 --
 -- Constraints for table `attachment`
 --
 ALTER TABLE `attachment`
-  ADD CONSTRAINT `attachment_ibfk_2` FOREIGN KEY (`namatugas`) REFERENCES `tugas` (`namatugas`),
-  ADD CONSTRAINT `attachment_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`);
+  ADD CONSTRAINT `attachment_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`),
+  ADD CONSTRAINT `attachment_ibfk_2` FOREIGN KEY (`namatugas`) REFERENCES `tugas` (`namatugas`);
 
 --
 -- Constraints for table `category`
@@ -161,8 +207,8 @@ ALTER TABLE `category`
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`namatugas`) REFERENCES `tugas` (`namatugas`),
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`);
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`),
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`namatugas`) REFERENCES `tugas` (`namatugas`);
 
 --
 -- Constraints for table `profil`
@@ -174,8 +220,8 @@ ALTER TABLE `profil`
 -- Constraints for table `tag`
 --
 ALTER TABLE `tag`
-  ADD CONSTRAINT `tag_ibfk_2` FOREIGN KEY (`namatugas`) REFERENCES `tugas` (`namatugas`),
-  ADD CONSTRAINT `tag_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`);
+  ADD CONSTRAINT `tag_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`),
+  ADD CONSTRAINT `tag_ibfk_2` FOREIGN KEY (`namatugas`) REFERENCES `tugas` (`namatugas`);
 
 --
 -- Constraints for table `tugas`
