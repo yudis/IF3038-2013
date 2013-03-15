@@ -77,12 +77,16 @@ bajuri.prototype = {
 			this.removeClass(cls);
 		else
 			this.addClass(cls);
+
+		return this;
 	},
 
 	addClass: function(cls) {
 		this.nodes.forEach(function(node) {
 			bajuri._addClassToNode(node, cls);
 		});
+
+		return this;
 	},
 
 	removeClass: function(cls) {
@@ -92,6 +96,8 @@ bajuri.prototype = {
 				node.className = node.className.replace(pattern, ' ');
 			}
 		});
+
+		return this;
 	},
 
 	attr: function(a, b) {
@@ -107,14 +113,16 @@ bajuri.prototype = {
 		}
 	},
 
-	hasAttribute: function(a) {
+	hasAttr: function(a) {
 		return this.nodes[0].getAttribute(a) && true;
 	},
 
-	removeAttribute: function(a) {
+	removeAttr: function(a) {
 		this.nodes.forEach(function(node) {
 			node.removeAttribute(a);
 		});
+
+		return this;
 	},
 
 	first: function() {
