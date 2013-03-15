@@ -58,7 +58,7 @@
 				<div>
 					<div id="left-profile-name"><p>Full Name : <?php echo $user['fullname']; ?></p></div>
 					<div id="left-profile-newname"><p>Full Name : <?php echo $user['fullname']; ?></p></div>
-					<div id="right-profile-editname"><a href="#"><u><p>edit</p></u></a></div>
+					<div id="right-profile-editname"><a href="#" ><u><p>edit</p></u></a></div>
 				</div>
 				<div>
 					<div id="left-profile-birthday"><p>Birth Date : <?php echo $user['birthday'];?></p></div>
