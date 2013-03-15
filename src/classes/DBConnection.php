@@ -13,7 +13,7 @@ final class DBConnection {
 			// No connection made yet
 
 			// Create connection
-			self::$dbh = mysqli_connect(self::host, self::user, self::pass, self::dbname);
+			self::$dbh = new mysqli(self::host, self::user, self::pass, self::dbname);
 
 			if (mysqli_connect_errno(self::$dbh)) {
 				// TODO Make this more elegant
@@ -28,8 +28,14 @@ final class DBConnection {
 		}
 	}
 	
-	public function closeDBconnection(){
-		if (self::$dbh)
-			mysqli_close(self::$dbh);
+	public function closeDBconnection() {
+		if (self::$dbh) {
+			self::$dbh->close();
+		}
+	}
+
+	public function DBquery($query, $resultmode = MYSQLI_STORE_RESULT) {
+		self::openDBconnection();
+		return self::$dbh->query($query, $resultMode);
 	}
 }
