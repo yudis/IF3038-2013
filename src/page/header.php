@@ -8,6 +8,7 @@
 	<head>
 		<title>Header</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<script type="text/javascript" src="header.js"></script>
 	</head>
 	<body>
 		<div id="header-logo"><a href="dashboard.php"><img src="../image/logo.png" width="100px" height="60px"/></a></div>
@@ -16,13 +17,14 @@
 		<div id="header-right-side">
 			<div id="header-right-search">
             <form action="search_result.php" method="post">
-            	<select name="modesearch">
-					<option value="1">All</option>
-					<option value="2">User</option>
-					<option value="3">Category</option>
-                    <option value="4">Task</option>
-				</select>
-				<input type="text" name="search_text">
+	            <select name="modesearch" id="modesearch">
+							<option value="1">All</option>
+							<option value="2">User</option>
+							<option value="3">Category</option>
+                            <option value="4">Task</option>
+						</select>    
+				<input type="text" name="search_text" id="search_text" value="" onKeyUp="checkHeaderValidation()" />
+				<div id ="test">VM</div>
                 <input type="submit" value="Search">
             </form>
             </div>
