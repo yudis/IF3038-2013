@@ -115,12 +115,13 @@
 	}
 </script>
 
+<?php
+session_start();
+if(!isset($_SESSION['id']))
+	header("location:index.html");
+?>
 <body onLoad="makeTgl();makeThn();">
-	<?php
-	session_start();
-	if(!isset($_SESSION['id']))
-		header("location:index.html");
-	?>
+	
 	<div id="container">
 		<div id="header">
         	<div class=logo id="logo">
