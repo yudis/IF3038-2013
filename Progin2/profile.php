@@ -97,7 +97,16 @@
 </script>
 
 <script>
-	function check(password, cpassword) {
+	function check(fullname, password, cpassword, tanggal, bulan, tahun, avatar) {
+		if ((fullname.length==0) &&
+		(password.length==0) && 
+		(cpassword.length==0) &&
+		(tanggal == "1") && (bulan == "January") && (tahun == "1955") &&
+		(avatar.length == 0)
+		) {
+			  alert("Tidak ada atribut profile yang diubah!");
+			  return false;
+		}
 		if (password == cpassword) {
 			return true;
 		} else {
@@ -109,6 +118,8 @@
 <body onLoad="makeTgl();makeThn();">
 	<?php
 	session_start();
+	if(!isset($_SESSION['id']))
+		header("location:index.html");
 	?>
 	<div id="container">
 		<div id="header">
@@ -143,9 +154,6 @@
 		<div id="profilearea">
 			<div class="profilephoto">
 				<?php
-				if(!isset($_SESSION['id']))
-					header("location:index.html");
-	
 				$con = mysql_connect("localhost:3306","root","");
 				if (!$con)
 				  {
@@ -208,11 +216,59 @@
 					echo	"</div>";
 					echo "</div>";
 				}
+				$result = mysql_query("SELECT * FROM tugas JOIN assignee WHERE assignee.username='$_SESSION[id]' AND tugas.idtugas=assignee.idtugas AND status='undone'");
+				while($row = mysql_fetch_array($result)) {
+					echo "<div class=\"task_block\">";
+					echo 	"<div class=\"task_judul\">";
+					echo 	$row['namatugas'];
+					echo 	"</div>";
+					echo 	"<div class=\"task_deadline\">";
+					echo	"Deadline: ".date('d F Y',strtotime($row['deadline']));
+					echo	"</div>";
+					echo	"<div class=\"task_tag\">";
+					echo	"Tags: ";
+					$result2 = mysql_query("SELECT * FROM tag WHERE idtugas='$row[idtugas]'");
+					$count = mysql_num_rows($result2);
+					while($row2 = mysql_fetch_array($result2)) {
+						if ($count == 1) {
+							echo $row2['isitag'];
+						} else {
+							echo $row2['isitag'].", ";
+							$count--;
+						}
+					}
+					echo	"</div>";
+					echo "</div>";
+				}
 				?>
 			</div>
 			<div id="donetask">
 				<?php
 				$result = mysql_query("SELECT * FROM tugas WHERE username='$_SESSION[id]' AND status='done'");
+				while($row = mysql_fetch_array($result)) {
+					echo "<div class=\"task_block\">";
+					echo 	"<div class=\"task_judul\">";
+					echo 	$row['namatugas'];
+					echo 	"</div>";
+					echo 	"<div class=\"task_deadline\">";
+					echo	"Deadline: ".date('d F Y',strtotime($row['deadline']));
+					echo	"</div>";
+					echo	"<div class=\"task_tag\">";
+					echo	"Tags: ";
+					$result2 = mysql_query("SELECT * FROM tag WHERE idtugas='$row[idtugas]'");
+					$count = mysql_num_rows($result2);
+					while($row2 = mysql_fetch_array($result2)) {
+						if ($count == 1) {
+							echo $row2['isitag'];
+						} else {
+							echo $row2['isitag'].", ";
+							$count--;
+						}
+					}
+					echo	"</div>";
+					echo "</div>";
+				}
+				$result = mysql_query("SELECT * FROM tugas JOIN assignee WHERE assignee.username='$_SESSION[id]' AND tugas.idtugas=assignee.idtugas AND status='done'");
 				while($row = mysql_fetch_array($result)) {
 					echo "<div class=\"task_block\">";
 					echo 	"<div class=\"task_judul\">";
@@ -243,7 +299,11 @@
 		<!--Popup edit profile -->
 		<a href="#x" class="overlay" id="editprofile_form"></a>
 		<div class="popup">
-			<form name="editprofile" method="post" onSubmit="return check(document.editprofile.password.value, document.editprofile.confirm_password.value)" action="editprofile.php" enctype="multipart/form-data">
+			<form name="editprofile" method="post" onSubmit="return check(document.editprofile.nama_lengkap.value,
+			document.editprofile.password.value,
+			document.editprofile.confirm_password.value,
+			document.editprofile.tanggal.value, document.editprofile.bulan.value, document.editprofile.tahun.value,
+			document.editprofile.avatar.value)" action="editprofile.php" enctype="multipart/form-data">
 				Fullname : <input name="nama_lengkap" id="nama_lengkap" type="text" maxlength="256" onKeyUp="validateFullName(document.editprofile.nama_lengkap.value)"><br>
 				<div id="v_nama">
 				</div>
@@ -266,25 +326,24 @@
 				</div>
 				Birthdate : 
 					<select name="tanggal" id="tgl">
-						<option>--Tanggal--</option>
+						
 					</select>
 					<select name="bulan">
-						<option>--Bulan--</option>
 						<option value="January">January</option>
-							<option value="February">February</option>
-							<option value="March">March</option>
-							<option value="April">April</option>
-							<option value="May">May</option>
-							<option value="June">June</option>
-							<option value="July">July</option>
-							<option value="August">August</option>
-							<option value="September">September</option>
-							<option value="October">October</option>
-							<option value="November">November</option>
-							<option value="December">December</option>
+						<option value="February">February</option>
+						<option value="March">March</option>
+						<option value="April">April</option>
+						<option value="May">May</option>
+						<option value="June">June</option>
+						<option value="July">July</option>
+						<option value="August">August</option>
+						<option value="September">September</option>
+						<option value="October">October</option>
+						<option value="November">November</option>
+						<option value="December">December</option>
 					</select>
 					<select name="tahun" id="thn">
-						<option>--Tahun--</option>
+						
 					</select>
 				<br>
 				Avatar : <input type="file" name="avatar"><br>
