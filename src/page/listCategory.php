@@ -30,7 +30,7 @@
 			while($row2 = mysqli_fetch_array($result2))
   			{
 				$taskid = getTaskId($row2['taskname'],$row['categoryid']);
-				echo "    	<li><a href = \"task_page.php?taskid=$taskid\">".$row2['taskname']."</a><div class=\"task-tag\">submit by : <b><i>".$row2['username']."</i></b>, deadline : ".$row2['deadline'].", status : <b id=\"red-text".$i++."\">".$row2['status']."</b></div>";
+				echo "    	<br><li><a href = \"task_page.php?taskid=$taskid\">".$row2['taskname']."</a><div class=\"task-tag\">submit by : <b><i>".$row2['username']."</i></b>, deadline : ".$row2['deadline'].", status : <b id=\"red-text".$i++."\">".$row2['status']."</b></div>";
 				echo "		<br><div><div id=\"task-tag-delete\">";
 				$con_ = getConnection();
 				

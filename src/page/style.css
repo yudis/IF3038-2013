@@ -86,13 +86,6 @@ body {
 	padding-top:80px;
 }
 
-#header-right-side {
-	float:left;
-	width:250px;
-	padding-left:200px;
-	padding-top:10px;
-}
-
 #task-page-body {
 	height:890px;
 	padding-left:20px;
@@ -228,15 +221,29 @@ body {
 	height:120px;
 }
 
+#header-right-side {
+	float:left;
+	padding-top:10px;
+}
+
 #header-right-user {
+	margin-top:6px;
+	padding-top:25px;
+	padding-left:190px;
+}
+
+#header-right-search {
+	width:300px;
 	padding-top:2px;
+	padding-left:100px;
+	float:left;
 }
 
 #header-right-user ul{
 	margin-bottom:0px;
 	list-style:square;
 	margin-top:4px;
-	padding-left:30px;
+	padding-left:20px;
 }
 
 #dashboard-link {
