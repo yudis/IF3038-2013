@@ -42,6 +42,14 @@
 		return $row['max'] + 1;
 	}
 	
+	function getNextCommentId(){
+		$con = getConnection();
+		$query = "SELECT max(commentid) as max FROM comment"	;
+		$result = mysqli_query($con,$query);
+		$row = mysqli_fetch_array($result);
+		return $row['max'] + 1;
+	}
+	
 	function getNextCategoryId(){
 		$con = getConnection();
 		$query = "SELECT max(categoryid) as max FROM category"	;
@@ -206,4 +214,5 @@
 			return true;	
 		}
 	}
-?>
+	
+	

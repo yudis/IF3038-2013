@@ -38,6 +38,7 @@
 				}
 			}
 		</script>
+		<script type="text/javascript" src="task_page.js"></script>
 	</head>
 	<body onLoad="check_html5()">
 		<div id="main-body-general">
@@ -316,7 +317,8 @@
 					<p><b>Leave a comment</b></p>
 					<form>
 						<textarea id="textarea-comment" rows="8" cols="92" placeholder="Comment about this task..."></textarea>
-						<div><button id="submit-comment" >Submit</button>&nbsp;</div>
+						<div><button id="submit-comment" onClick="addComment(<?php echo $taskid ?>)">Submit</button>&nbsp;</div>
+						<div id = "test2">VM</div>
 					</form>
 				</div>
 			</div>
