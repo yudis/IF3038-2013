@@ -108,7 +108,7 @@ class RestApi
 			// TODO cek validasi comentator sesuai dengan session
 			$comment = new Comment();
 			$comment->data = $params;
-			if (Comment->save())
+			if ($comment->save())
 			{
 				$return = "success";
 			}
@@ -125,6 +125,13 @@ class RestApi
 			if (($params['username'] == "admin") && ($params['password'] == "admin123")) {
 				// TODO add database using user model
 				$_SESSION['user_id'] = 1;
+				$u = new User;
+				$u->fullname = 'Jean Valjean';
+				$u->username = 'admin';
+				$u->email = 'jean.valjean@gmail.com';
+
+				$_SESSION['current_user'] = $u;
+
 				$return["status"] = "success";
 			}
 			else {
