@@ -9,6 +9,53 @@
 			var bulan = "Januari";
 			var tahun = 2013;
 			
+			function editTag(e,uidtugas){
+			var xmlhttp;
+			var value;
+			if (e && e.keyCode == 13) {
+				value = document.getElementById("tag").value;
+				if (window.XMLHttpRequest) {
+				  // code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				}
+				else {
+				  // code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					document.getElementById("tagvalue").innerHTML = value;
+					showHide("tag");
+					showHide("tagvalue");
+					renameButton("tagbutton");
+					}
+				}
+				xmlhttp.open("GET","edittag.php?q="+uidtugas+"&p="+value,true);
+				xmlhttp.send();
+				}
+			}
+			
+			function editDeadline(uidtugas){
+			var xmlhttp;
+			var value;
+			value = document.getElementById("tag").value;
+			if (window.XMLHttpRequest) {
+			  // code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+			}
+			else {
+			  // code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function() {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				document.getElementById("dlvalue").innerHTML = tanggal+"-"+bulan+"-"+tahun;
+				}
+			}
+			xmlhttp.open("GET","editdeadline.php?q="+uidtugas+"&tgl="+tanggal+"&bln="+bulan+"&thn="+tahun,true);
+			xmlhttp.send();
+			}
+	
 			function makeTgl(){
 				for(var i=1; i<=31; i++){
 					var isi=document.createTextNode(i);
@@ -213,7 +260,9 @@
 						</div>
 						<div class="viewtask_edit">
 							<input type=button value="Edit" id="dlbutton" onClick="showHide('dl');showHide('dlvalue');showHide('dlbutton');showHide('savebutton')">
-							<input type=button value="Save" id="savebutton" onClick="showHide('dl');showHide('dlvalue');showHide('dlbutton');showHide('savebutton');getDateValue();setDateValue()">
+							<?php
+							echo "<input type=button value=\"Save\" id=\"savebutton\" onClick=\"showHide('dl');showHide('dlvalue');showHide('dlbutton');showHide('savebutton');getDateValue();editDeadline(".$idtugas.")\">";
+							?>
 						</div>
 					</div>
 					<div class="form_field">
@@ -265,7 +314,9 @@
 							}
 							?>
 							</p>
-							<input type=text name=tag id="tag" onKeyPress="checkEdit(event,'tag','tagvalue','tagbutton')">
+							<?php
+							echo "<input type=text name=tag id=\"tag\" onKeyPress=\"editTag(event,".$idtugas.")\">"
+							?>
 						</div>
 						<div class="viewtask_edit">
 							<input type=button value="Edit" id="tagbutton" onClick="showHide('tag');showHide('tagvalue');renameButton('tagbutton');clearContents('tag')">
