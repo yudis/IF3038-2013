@@ -194,4 +194,16 @@
 			}
 		}
 	}
+	
+	function isAssignee($useractive,$taskid){
+		$con = getConnection();
+		$query = "SELECT count(*) as isexist FROM assignee WHERE username='$useractive' AND taskid=$taskid";
+		$result = mysqli_query($con,$query);
+		$row = mysqli_fetch_array($result);
+		if($row['isexist'] == 0){
+			return false;
+		}else{
+			return true;	
+		}
+	}
 ?>
