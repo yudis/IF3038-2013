@@ -11,7 +11,7 @@
 	
 		public static function tableName()
 		{
-			return "category";
+			return "kategori";
 		}
 		
 		public function checkValidity()

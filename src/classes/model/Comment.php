@@ -1,4 +1,4 @@
-<? php
+<?php
 
 	include_once "SimpleRecord.php";
 	
@@ -30,7 +30,7 @@
 			if ($this->id==null)
 			{
 				// new comment
-				DBConnection::openDBconnection();\
+				DBConnection::openDBconnection();
 				
 				$result = DBConnection::DBquery("INSERT into ".tableName()."");
 				

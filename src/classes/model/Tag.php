@@ -11,7 +11,7 @@
 	
 		public static function tableName()
 		{
-			return "tag";
+			return "ttag";
 		}
 		
 		public function checkValidity()
@@ -30,7 +30,7 @@
 			if ($this->id==null)
 			{
 				// new tag
-				DBConnection::openDBconnection();\
+				DBConnection::openDBconnection();
 				
 				$result = DBConnection::DBquery("INSERT into ".tableName()."");
 				

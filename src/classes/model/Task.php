@@ -43,5 +43,9 @@
 				// existing task
 			}
 		}
+
+		public function getTags() {
+			return Tag::model()->findAll("id_tag IN (SELECT id_tag FROM have_tags WHERE id_task='" . $this->id_task . "')");
+		}
 	}
 ?>

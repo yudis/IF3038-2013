@@ -3,12 +3,12 @@
 	class DBConnection
 	{
 		private static $host = "localhost";
-		//private $username = "progin";
-		//private $password = "progin";
-		//private $dbname = "progin_405_13510033";
-		private static $username = "root";
-		private static $password = "";
-		private static $dbname = "kmb";
+		private static $username = "progin";
+		private static $password = "progin";
+		private static $dbname = "progin_405_13510033";
+		// private static $username = "root";
+		// private static $password = "";
+		// private static $dbname = "kmb";
 		private static $link;
 		
 		public static function openDBconnection() 

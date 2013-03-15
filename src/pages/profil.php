@@ -1,126 +1,250 @@
 <?php
-	$session_time = 30*24*60*60;
-	ini_set('session.gc-maxlifetime', $session_time);
 
-	session_start();
-	if ((!ISSET($_SESSION['base_url'])) || (!ISSET($_SESSION['full_url'])) || (!ISSET($_SESSION['full_path'])))
-	{
-		$folder = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], "/")+1);  
-		$protocol = (ISSET($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http";
-		$_SESSION['base_url'] = $folder;
-		$_SESSION['full_url'] = $protocol . "://" . $_SERVER['HTTP_HOST'] . $folder;
-		$_SESSION['full_path'] = $_SERVER['DOCUMENT_ROOT'].$folder;
-	}
-?>
-<?php include $_SESSION['full_path']."template/is_login.php"; ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="Description" content="" />
-		<link rel="shortcut icon" type="image/x-icon" href="<?php echo $_SESSION['base_url']; ?>images/favicon.ico" />
-		<title>MOA - Profil</title>
-		<link rel="stylesheet" href="<?php echo $_SESSION['base_url']; ?>css/style.css" />
-		<link rel="stylesheet" href="<?php echo $_SESSION['base_url']; ?>css/profil.css" />
-	</head>
-	<body>
-		<?php
-			$menu = array();
-			$menu["Dashboard"] =  array("href" => "dashboard.php");
-			$menu["Profil"] = array("href" => "profil.php", "class" => "active");
-		?>
-		<?php include $_SESSION['full_path']."template/header.php";?>	
-		<section>
-			<div id="content_wrap" class="wrap">
-				<div id="profil_left">
-					<div id="profil_form_wrap">
-						<div id="profil_head">
-							<h1>Admin</h1>
+$this->header() ?>
+		<div class="content">
+			<div class="profile">
+				<header>
+					<h1>John Doe</h1>
+					<ul>
+						<li class="edit-profile-link"><a href="#" id="editProfileButton">Edit Profile</a></li>
+					</ul>
+				</header>
+
+				<section class="profile-details">
+					<figure class="profile-image">
+						<img src="assets/photo.jpg" alt="Profile Photo">
+					</figure>
+					<p class="description">
+						<span class="detail-label">About Me:</span>
+						<span class="detail-value">Lorem Ipsum Dolor Sit Amet</span>
+					</p>
+					<p class="username">
+						<span class="detail-label">Username:</span>
+						<span class="detail-value">hawawawa</span>
+					</p>
+
+					<p class="date-of-birth">
+						<span class="detail-label">Date of Birth:</span>
+						<span class="detail-value">8 Desember 1992</span>
+					</p>
+				</section>
+
+				<section class="tasks current">
+					<header>
+						<h3>Current Tasks</h3>
+					</header>
+
+					<article class="task" data-task-id="5" data-category="a">
+						<header>
+							<h1>
+								<label>
+									<a href="view_tugas_5.html">Tugas 5</a>
+								</label>
+							</h1>
+						</header>
+						<div class="details">
+							<p class="deadline">
+								<span class="detail-label">Deadline:</span>
+								<span class="detail-content">
+									19 Februari 2013
+								</span>
+							</p>
+							<p class="tags">
+								<span class="detail-label">Tag:</span>
+								<span class="tag">satu</span>
+								<span class="tag">dua</span>
+								<span class="tag">tiga</span>
+								<span class="tag">empat</span>
+							</p>
 						</div>
-						<div class="row">
-							<span class="label">Username</span>
-							<span id="profil_username"></span>
+					</article>
+
+					<article class="task" data-task-id="6" data-category="a">
+						<header>
+							<h1>
+								<label>
+									<a href="view_tugas_6.html">Tugas 6</a>
+								</label>
+							</h1>
+						</header>
+						<div class="details">
+							<p class="deadline">
+								<span class="detail-label">Deadline:</span>
+								<span class="detail-content">
+									19 Februari 2013
+								</span>
+							</p>
+							<p class="tags">
+								<span class="detail-label">Tag:</span>
+								<span class="tag">satu</span>
+								<span class="tag">dua</span>
+								<span class="tag">tiga</span>
+								<span class="tag">empat</span>
+							</p>
 						</div>
-						<div class="row">
-							<span class="label">Nama Lengkap</span>
-							<span id="profil_name"></span>
+					</article>
+
+
+					<article class="task" data-task-id="7" data-category="a">
+						<header>
+							<h1>
+								<label>
+									<a href="view_tugas_7.html">Tugas 7</a>
+								</label>
+							</h1>
+						</header>
+						<div class="details">
+							<p class="deadline">
+								<span class="detail-label">Deadline:</span>
+								<span class="detail-content">
+									19 Februari 2013
+								</span>
+							</p>
+							<p class="tags">
+								<span class="detail-label">Tag:</span>
+								<span class="tag">satu</span>
+								<span class="tag">dua</span>
+								<span class="tag">tiga</span>
+								<span class="tag">empat</span>
+							</p>
 						</div>
-						<div class="row">
-							<span class="label">Tanggal Lahir</span>
-							<span id="profil_birth_date"></span>
+					</article>
+
+
+				</section>
+
+				<section class="tasks completed">
+					<header>
+						<h3>Completed Tasks</h3>
+					</header>
+
+					<article class="task" data-task-id="1" data-category="a">
+						<header>
+							<h1>
+								<label>
+									<a href="view_tugas_1.html">Tugas 1</a>
+								</label>
+							</h1>
+						</header>
+						<div class="details">
+							<p class="deadline">
+								<span class="detail-label">Deadline:</span>
+								<span class="detail-content">
+									19 Februari 2013
+								</span>
+							</p>
+							<p class="tags">
+								<span class="detail-label">Tag:</span>
+								<span class="tag">satu</span>
+								<span class="tag">dua</span>
+								<span class="tag">tiga</span>
+								<span class="tag">empat</span>
+							</p>
 						</div>
-						<div class="row">
-							<span class="label">Email</span>
-							<span id="profil_email"></span>
+					</article>
+
+					<article class="task" data-task-id="2" data-category="a">
+						<header>
+							<h1>
+								<label>
+									<a href="view_tugas_2.html">Tugas 2</a>
+								</label>
+							</h1>
+						</header>
+						<div class="details">
+							<p class="deadline">
+								<span class="detail-label">Deadline:</span>
+								<span class="detail-content">
+									19 Februari 2013
+								</span>
+							</p>
+							<p class="tags">
+								<span class="detail-label">Tag:</span>
+								<span class="tag">satu</span>
+								<span class="tag">dua</span>
+								<span class="tag">tiga</span>
+								<span class="tag">empat</span>
+							</p>
 						</div>
-						<div class="row">
-							<span class="label">Avatar</span>
-							<img id="avatar_image" src="images/avatar.jpg" alt="avatar profil" />
+					</article>
+
+					<article class="task" data-task-id="3" data-category="a">
+						<header>
+							<h1>
+								<label>
+									<a href="view_tugas_3.html">Tugas 3</a>
+								</label>
+							</h1>
+						</header>
+						<div class="details">
+							<p class="deadline">
+								<span class="detail-label">Deadline:</span>
+								<span class="detail-content">
+									19 Februari 2013
+								</span>
+							</p>
+							<p class="tags">
+								<span class="detail-label">Tag:</span>
+								<span class="tag">satu</span>
+								<span class="tag">dua</span>
+								<span class="tag">tiga</span>
+								<span class="tag">empat</span>
+							</p>
 						</div>
-						<a href="changepass.php" class="button_link"> Ganti Sandi</a>
-						<a href="profiledit.php" class="button_link"> Edit Profil </a>
-						
-					</div>
-				</div>
-				<div id="profil_right">
-					<div id="task_head">
-						<h1>Tugas</h1>
-					</div>
-					<div id="task_left">
-						<div class="profil_sub_head">
-							<h4>Dalam Proses</h4>
+					</article>
+
+					<article class="task" data-task-id="4" data-category="a">
+						<header>
+							<h1>
+								<label>
+									<a href="view_tugas_4.html">Tugas 4</a>
+								</label>
+							</h1>
+						</header>
+						<div class="details">
+							<p class="deadline">
+								<span class="detail-label">Deadline:</span>
+								<span class="detail-content">
+									19 Februari 2013
+								</span>
+							</p>
+							<p class="tags">
+								<span class="detail-label">Tag:</span>
+								<span class="tag">satu</span>
+								<span class="tag">dua</span>
+								<span class="tag">tiga</span>
+								<span class="tag">empat</span>
+							</p>
 						</div>
-						<ul>
-							<li>
-								<div class="row">
-									<div><a href="#">Pemrograman Internet</a></div>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<div id="task_right">
-						<div class="profil_sub_head">
-							<h4>Selesai</h4>
+					</article>
+
+					<article class="task" data-task-id="8" data-category="a">
+						<header>
+							<h1>
+								<label>
+									<a href="view_tugas_8.html">Tugas 8</a>
+								</label>
+							</h1>
+						</header>
+						<div class="details">
+							<p class="deadline">
+								<span class="detail-label">Deadline:</span>
+								<span class="detail-content">
+									19 Februari 2013
+								</span>
+							</p>
+							<p class="tags">
+								<span class="detail-label">Tag:</span>
+								<span class="tag">satu</span>
+								<span class="tag">dua</span>
+								<span class="tag">tiga</span>
+								<span class="tag">empat</span>
+							</p>
 						</div>
-						<ul>
-							<li>
-								<div class="row">
-									<div><a href="#">Kriptografi</a></div>
-								</div>
-							</li>
-						</ul>
-						<ul>
-							<li>
-								<div class="row">
-									<div><a href="#">Intelegensi Buatan</a></div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
+					</article>
+
+				</section>
 			</div>
-		</section>
-		<?php
-			$breadcrumbs = array();
-			$breadcrumbs["Dashboard"] = array("href" => "dashboard.php");
-			$breadcrumbs["Profil"] = array("href" => "profil.php", "class" => "active");
-		?>
-		<?php include $_SESSION['full_path']."template/footer.php";?>
-		
-		<script type="text/javascript" src="<?php echo $_SESSION['base_url']; ?>js/search.js"></script>
-		<script type="text/javascript" src="<?php echo $_SESSION['base_url']; ?>js/logout.js"></script>
-		<script type="text/javascript">
-			window.onload = function()
-			{
-				var userlist =  JSON.parse(localStorage.MOA_userList);
-				document.getElementById("profil_head").innerHTML = "<h1>"+userlist[sessionStorage.MOA_userId].fullName+"</h1>";
-				document.getElementById("profil_username").innerHTML = userlist[sessionStorage.MOA_userId].userName;
-				document.getElementById("profil_name").innerHTML = userlist[sessionStorage.MOA_userId].fullName;
-				document.getElementById("profil_birth_date").innerHTML = userlist[sessionStorage.MOA_userId].birthDate;
-				document.getElementById("profil_email").innerHTML = userlist[sessionStorage.MOA_userId].emailAddress;
-				document.getElementById("avatar_image").src = userlist[sessionStorage.MOA_userId].Avatar;
-			}
-		</script>
-	</body>
-</html>
+		</div>
 
+<?php $this->footer() ?>

@@ -2,10 +2,8 @@
 
 // Business Logic Here
 
-// Temporary fix until DB is done
-function createDummyTask() {
-	$task = new Task;
-}
+$tasks = Task::model()->findAll();
+$categories = Category::model()->findAll();
 
 // Presentation Logic Here
 
@@ -22,39 +20,40 @@ $this->header()
 				<div class="primary">
 					<section class="tasks current">
 						<header>
-							<h3>Current Tasks</h3>
+							<h3>All Tasks</h3>
 						</header>
 
-						<article class="task" data-task-id="1" data-category="a">
+<?php
+foreach ($tasks as $task):
+	$deadline_datetime = new DateTime($task->deadline); ?>
+
+						<article class="task" data-task-id="<?php echo $id_task ?>" data-category="a">
 							<header>
 								<h1>
 									<label>
 										<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
-										<a href="view_tugas_5.html">Tugas 5</a>
+										<a href="view_tugas_5.html"><?php echo $task->nama_task; ?></a>
 									</label>
 								</h1>
 							</header>
 							<div class="details">
-								<!-- <p class="category">
-									<span class="detail-label">Kategori:</span>
-									<span class="detail-content">Makan</span>
-								</p> -->
 								<p class="deadline">
 									<span class="detail-label">Deadline:</span>
 									<span class="detail-content">
-										19 Februari 2013
+										<?php echo $deadline_datetime->format('j F Y') ?>
 									</span>
 								</p>
 								<p class="tags">
 									<span class="detail-label">Tag:</span>
-									<span class="tag">satu</span>
-									<span class="tag">dua</span>
-									<span class="tag">tiga</span>
-									<span class="tag">empat</span>
+									<?php foreach ($task->getTags() as $tag) {
+										echo '<span class="tag">' . $tag->tag . '</span>';
+									} ?>
 								</p>
 							</div>
 						</article>
 
+<?php endforeach; ?>
+<?php /*
 
 						<article class="task" data-task-id="1" data-category="a">
 							<header>
@@ -273,6 +272,8 @@ $this->header()
 								</p>
 							</div>
 						</article>
+
+*/ ?>
 					</section>
 				</div>
 			
@@ -282,11 +283,10 @@ $this->header()
 							<h3>Categories</h3>
 						</header>
 						<ul>
-							<li><a href="#">Kategori A</a></li>
-							<li><a href="#">Kategori B</a></li>
-							<li><a href="#">Kategori C</a></li>
-							<li><a href="#">Kategori D</a></li>
-							<li><a href="#">Kategori E</a></li>
+							<?php foreach ($categories as $cat): ?>
+							<li><a href="?" data-category-id="<?php echo $cat->id_kategori ?>"><?php echo $cat->nama_kategori ?></a></li>
+							<?php endforeach; ?>
+							<li><a href="#"><?php  ?></a></li>
 						</ul>
 					</section>
 				</div>
