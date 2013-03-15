@@ -89,10 +89,10 @@ function autoCompleteAsignee(){
 	
 }
 
-function setCompleteStatus(){
+function setCompleteStatus(idx){
 	getAjax();
-	var status = document.getElementById("red-text0").innerHTML;
-	alert("aaaaaaaaa "+document.getElementById("red-text0").innerHTML);
+	var status = document.getElementById("red-text"+idx).innerHTML;
+	alert("aaaaaaaaa "+document.getElementById("red-text"+idx).innerHTML);
 	if(status!=""){
 		ajaxRequest.open("GET","../php/updatecompletestatus.php?status="+status.value,false);
 	
