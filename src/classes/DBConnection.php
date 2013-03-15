@@ -3,10 +3,10 @@
 final class DBConnection {
 	public static $dbh;
 
-	public const host = 'localhost'
-	public const user = 'progin';
-	public const pass = 'progin';
-	public const dbname = 'progin_405_13510033';
+	const host = 'localhost'
+	const user = 'progin';
+	const pass = 'progin';
+	const dbname = 'progin_405_13510033';
 
 	public function openDBconnection() {
 		if (!self::$dbh) {
