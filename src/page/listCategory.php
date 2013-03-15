@@ -37,7 +37,11 @@
 				if(strcmp($useractive,$row2['username']) == 0){
 					echo " <a href=\"../php/deletetask.php?taskid=".$row2['taskid']."\" onClick=\"confirmTask()\"><i>Delete Task</i></a>";
 				}
-				echo "      </div><div class=\"task-tag\">Set as <a href=\"javascript:setCompleteStatus($i-1,$taskid)\">Completed Task</a></div></div><br><br>";
+				echo "      </div>";
+				if(isAssignee($useractive,$taskid)){
+					echo "      <div class=\"task-tag\">Set as <a href=\"javascript:setCompleteStatus($i-1,$taskid)\">Change Status</a></div>";
+				}
+				echo "</div><br><br>";
 				echo "		<div id=\"task-tag\">Tag :<br>";
 				$con3 = getConnection();
 				$result3 = mysqli_query($con3,"SELECT tagid FROM task_tag WHERE taskid = '".$taskid."'");
