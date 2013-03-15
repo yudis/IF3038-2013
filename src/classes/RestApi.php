@@ -40,7 +40,7 @@ class RestApi
 		return $ret;
 	}
 	
-	public function retreive_tags($params)
+	public function retrieve_tags($params)
 	{
 		$ret = array();
 		if (isset($params['tags']))
@@ -61,7 +61,7 @@ class RestApi
 		return $ret;
 	}
 	
-	public function retreive_users($params)
+	public function retrieve_users($params)
 	{
 		$ret = array();
 		if (isset($params['users']))
@@ -82,7 +82,7 @@ class RestApi
 		return $ret;
 	}
 	
-	public function retreive_tasks($params)
+	public function retrieve_tasks($params)
 	{
 		$ret = array();
 		if (isset($params['category_id']))
