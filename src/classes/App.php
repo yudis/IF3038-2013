@@ -3,8 +3,6 @@
 // App
 // The engine of the app
 
-require_once 'DBConnection.php';
-
 class App 
 {
 	private $pagesDir = 'pages';
