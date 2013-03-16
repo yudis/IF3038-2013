@@ -8,7 +8,7 @@
 			<div id="add_task_header" class="left top30 dynamic_content_head">
 				Add New Task
 			</div>
-	
+	<form id="addtask_form" method="POST" action="addtaskscript.php">
 			<div id="row1_addtask" class="left top30 dynamic_content_row">
 				<div id="task_name_lat" class="left dynamic_content_left">Task Name</div>
 				<div id="task_name_rat" class="left dynamic_content_right">
@@ -47,8 +47,9 @@
 			</div>
 			
 			<div id="row6_addtask" class="left top10 dynamic_content_row">
-				<input id="add_task_button" type="button" value="Add Task" class="link_blue_rect">
+				<input id="add_task_button" name="add_task_button" type="submit" value="Add Task" class="link_blue_rect">
 			</div>
+            </form>
 		</div>
 	</div>
 </section>
