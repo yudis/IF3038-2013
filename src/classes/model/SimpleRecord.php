@@ -5,6 +5,7 @@
 	include_once "Task.php";
 	include_once "Tag.php";
 	include_once "Comment.php";
+	include_once "Attachment.php";
 	include_once "Connection.php";
 	
 	abstract class SimpleRecord

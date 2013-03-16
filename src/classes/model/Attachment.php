@@ -2,21 +2,18 @@
 	include_once "SimpleRecord.php";
 	
 	/**
-	 * This is the model class for table "comment".
+	 * This is the model class for table "task_attachment".
 	 *
-	 * The followings are the available columns in table 'comment':
-	 * @property integer $id_komentar
-	 * @property string $timestamp
-	 * @property string $komentar
-	 * @property string $id_user
-	 * @property string $id_task
+	 * The followings are the available columns in table 'task_attachment':
+	 * @property integer $id_tag
+	 * @property string $tag_name
 	 */
-	class Comment extends SimpleRecord
+	class Attachment extends SimpleRecord
 	{		
 		/**
 		 * Returns the static model of the specified SimpleRecord class.
 		 * @param string $className active record class name.
-		 * @return Comment the static model class
+		 * @return Attachment the static model class
 		 */
 		public static function model($className=__CLASS__)
 		{
@@ -28,7 +25,7 @@
 		 */
 		public static function tableName()
 		{
-			return "comment";
+			return "task_attachment";
 		}
 		
 		/**
@@ -51,10 +48,10 @@
 		 */
 		public function save()
 		{
-			// check same comment name
+			// check same tag name
 			if ($this->id==null)
 			{
-				// new comment
+				// new tag
 				DBConnection::openDBconnection();
 				
 				$result = DBConnection::DBquery("INSERT into ".tableName()."");
@@ -65,26 +62,8 @@
 			}
 			else
 			{
-				// existing comment
+				// existing tag
 			}
-		}
-		
-		/**
-		 * Get the user who comment
-		 * @return User who comment
-		 */
-		public function getUser()
-		{
-			return User::model()->find("id_user = ".$this->id_user, array("username", "e-mail", "fullname", "avatar", "birthdate"));
-		}
-		
-		/**
-		 * Get the task where the comment exist
-		 * @return Task where the comment exist
-		 */
-		public function getTask()
-		{
-			return Task::model()->find("id_task = ".$this->id_task);
 		}
 	}
 ?>

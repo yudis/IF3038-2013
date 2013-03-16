@@ -18,7 +18,7 @@
 		/**
 		 * Returns the static model of the specified SimpleRecord class.
 		 * @param string $className active record class name.
-		 * @return MateriKuliah the static model class
+		 * @return User the static model class
 		 */
 		public static function model($className=__CLASS__)
 		{
@@ -96,12 +96,21 @@
 		}
 		
 		/**
-		 * Get the task associated with the user
-		 * @return array of Task that is associated
+		 * Get the task created by the user
+		 * @return array of Task that is created by the user
 		 */
-		public function getTasks() 
+		public function getCreatedTasks() 
 		{
 			return Task::model()->findAll("id_task IN (SELECT id_task FROM have_task WHERE id_user='" . $this->id_user . "')");
+		}
+		
+		/**
+		 * Get the task assigned to the user
+		 * @return array of Task that is assigned to the user
+		 */
+		public function getAssignedTasks()
+		{
+			return Task::model()->findAll("id_task IN (SELECT id_task FROM assign WHERE id_user='" . $this->id_user . "')");
 		}
 		
 		/**
@@ -119,7 +128,7 @@
 		 */
 		public function getCreatedCategory() 
 		{
-			return Category::model()->findAll("id_user='" . $this->id_user);
+			return Category::model()->findAll("id_user='" . $this->id_user . "'");
 		}
 	}
 ?>
