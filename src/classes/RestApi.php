@@ -83,8 +83,8 @@ class RestApi
 		{
 			// TODO check if user session is in some category
 			// retrieve based on category
-			$ret = Task::model()->findAll("EXISTS (SELECT * FROM ".Category::tableName()." WHERE category_id = " . 
-							$params['category_id']." AND task_id = task.id)");
+			$ret = Task::model()->findAll("id_kategori = '" . (int) 
+							$params['category_id'] . "'");
 		}
 		else
 		{
@@ -97,6 +97,7 @@ class RestApi
 			$dummy = new StdClass;
 			$dummy->name = $task->nama_task;
 			$dummy->id = $task->id_task;
+			$dummy->done = $task->status;
 			$dl = new DateTime($task->deadline);
 			$dummy->deadline = $dl->format('j F Y');
 

@@ -1,5 +1,9 @@
 Rp(function() {
 
+	if (currentCat === undefined || !currentCat) {
+		Rp('#addTaskLink').hide();
+	}
+
 	createTaskElement = function(task) {
 		// Parse and validate param
 		if (task.tags === undefined)
@@ -59,8 +63,13 @@ Rp(function() {
 	fillTasks = function(tasks) {
 		tasksList = Rp('#tasksList');
 		tasksList.prop('innerHTML', '');
+		completedTasksList = Rp('#completedTasksList');
+		completedTasksList.prop('innerHTML', '');
 		tasks.forEach(function(task) {
-			tasksList.append(createTaskElement(task));
+			if (task.done)
+				completedTasksList.append(createTaskElement(task));
+			else
+				tasksList.append(createTaskElement(task));
 		});
 	}
 
@@ -81,14 +90,23 @@ Rp(function() {
 			Rp('#tasksList').removeClass('loading');
 			fillTasks(tasks);
 		}
-		else {
+		else if (catreq.readyState > 0) {
 			// Still loading
 			Rp('#tasksList').addClass('loading');
 		}
 	}
 
+	var currentCat;
 	loadCategory = function(catid) {
-		catreq.get('api/retrieve_tasks?category_id=' + catid);
+		currentCat = catid;
+		if (catid) {
+			catreq.get('api/retrieve_tasks?category_id=' + catid);
+			Rp('#addTaskLink').show();
+		}
+		else {
+			catreq.get('api/retrieve_tasks');
+			Rp('#addTaskLink').hide();
+		}
 	}
 
 	Rp('#categoryList li a').on('click', function(e) {
@@ -103,12 +121,11 @@ Rp(function() {
 	window.onpopstate = function(e) {
 		console.log(e);
 		if (!e.state)
-			catreq.get('api/retrieve_tasks');
+			loadCategory(0);
 		else {
 			catid = e.state.categoryID;
 			if (catid !== undefined)
 				loadCategory(catid);
 		}
 	}
-
 });
