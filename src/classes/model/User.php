@@ -1,19 +1,42 @@
 <?php
-
 	include_once "SimpleRecord.php";
 	
+	/**
+	 * This is the model class for table "user".
+	 *
+	 * The followings are the available columns in table 'user':
+	 * @property integer $id_user
+	 * @property string $username
+	 * @property string $e-mail
+	 * @property string $fullname
+	 * @property string $avatar
+	 * @property string $birthdate
+	 * @property string $password
+	 */
 	class User extends SimpleRecord
 	{
+		/**
+		 * Returns the static model of the specified SimpleRecord class.
+		 * @param string $className active record class name.
+		 * @return MateriKuliah the static model class
+		 */
 		public static function model($className=__CLASS__)
 		{
 			return parent::model($className);
 		}
 	
+		/**
+		 * @return string the associated database table name
+		 */
 		public static function tableName()
 		{
 			return "user";
 		}
 		
+		/**
+		 * Check the validity of the record
+		 * @return array of errors
+		 */
 		public function checkValidity()
 		{
 			$error = array();
@@ -44,6 +67,10 @@
 			return $error;
 		}
 		
+		/**
+		 * Save the current model, insert if new model, update if exists
+		 * @return boolean whether record is saved or not
+		 */
 		public function save()
 		{
 			// check same username or email
@@ -68,9 +95,31 @@
 			}
 		}
 		
+		/**
+		 * Get the task associated with the user
+		 * @return array of Task that is associated
+		 */
 		public function getTasks() 
 		{
-			return Task::model()->findAll("id_task IN (SELECT id_task FROM have_tasks WHERE username='" . $this->username . "')");
+			return Task::model()->findAll("id_task IN (SELECT id_task FROM have_task WHERE id_user='" . $this->id_user . "')");
+		}
+		
+		/**
+		 * Get the category supervised by the user
+		 * @return array of Category that is supervised by the user
+		 */
+		public function getSupervisedCategory() 
+		{
+			return Category::model()->findAll("id_kategori IN (SELECT id_katego FROM edit_kategori WHERE id_user='" . $this->id_user . "')");
+		}
+		
+		/**
+		 * Get the category created by the user
+		 * @return array of Category that is created by the user
+		 */
+		public function getCreatedCategory() 
+		{
+			return Category::model()->findAll("id_user='" . $this->id_user);
 		}
 	}
 ?>
