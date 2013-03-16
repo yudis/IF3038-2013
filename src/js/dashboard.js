@@ -1,32 +1,5 @@
 Rp(function() {
 
-/*
-<article class="task" data-task-id="<?php echo $id_task ?>" data-category="a">
-	<header>
-		<h1>
-			<label>
-				<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
-				<a href="tugas.php?id=<?php echo $task->id_task ?>"><?php echo $task->nama_task; ?></a>
-			</label>
-		</h1>
-	</header>
-	<div class="details">
-		<p class="deadline">
-			<span class="detail-label">Deadline:</span>
-			<span class="detail-content">
-				<?php echo $deadline_datetime->format('j F Y') ?>
-			</span>
-		</p>
-		<p class="tags">
-			<span class="detail-label">Tag:</span>
-			<?php foreach ($task->getTags() as $tag) {
-				echo '<span class="tag">' . $tag->tag . '</span>';
-			} ?>
-		</p>
-	</div>
-</article>
-*/
-
 	createTaskElement = function(task) {
 		// Parse and validate param
 		if (task.tags === undefined)
@@ -37,7 +10,7 @@ Rp(function() {
 			task.date = '';
 
 		// Main logic
-		article = Rp.factory('article').addClass('task');
+		article = Rp.factory('article').addClass('task').attr('data-task-id', task.id);
 
 		header = Rp.factory('header');
 		h1 = Rp.factory('h1');
@@ -68,6 +41,74 @@ Rp(function() {
 
 		article.append(header).append(detailsDiv);	
 		return article;
+	}
+
+	createCategoryElement = function(cat) {
+		li = Rp.factory('li');
+		a = Rp
+			.factory('a')
+			.attr('href', 'dashboard.php?cat=' + cat.id)
+			.attr('data-category-id', cat.id)
+			.prop('innerHTML', cat.name);
+
+		li.append(a);
+
+		return li;
+	}
+
+	fillTasks = function(tasks) {
+		tasksList = Rp('#tasksList');
+		tasksList.prop('innerHTML', '');
+		tasks.forEach(function(task) {
+			tasksList.append(createTaskElement(task));
+		});
+	}
+
+	fillCategories = function(cats) {
+		catsList = Rp('#categoryList');
+		catsList.prop('innerHTML', '');
+		cats.forEach(function(cat) {
+			catsList.append(createCategoryElement(cat));
+		});
+	}
+
+	catreq = Rp.ajaxRequest();
+	catreq.onreadystatechange = function() {
+		if (catreq.readyState == 4) {
+			// Loaded
+			response = catreq.responseText;
+			tasks = Rp.parseJSON(response);
+			Rp('#tasksList').removeClass('loading');
+			fillTasks(tasks);
+		}
+		else {
+			// Still loading
+			Rp('#tasksList').addClass('loading');
+		}
+	}
+
+	loadCategory = function(catid) {
+		catreq.get('api/retrieve_tasks?category_id=' + catid);
+	}
+
+	Rp('#categoryList li a').on('click', function(e) {
+		e.preventDefault();
+		catid = this.getAttribute('data-category-id');
+		state = {'categoryID': catid};
+		console.log(state);
+		history.pushState(state, this.innerHTML, this.href);
+		loadCategory(catid);
+	});
+
+	window.onpopstate = function(e) {
+		console.log(e);
+		if (!e.state)
+			catreq.get('api/retrieve_tasks');
+		else {
+			catid = e.state.categoryID;
+			if (catid !== undefined)
+				loadCategory(catid);
+		}
 	}
 
 });
