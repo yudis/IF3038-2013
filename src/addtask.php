@@ -18,8 +18,11 @@
 	$tanggal = strtotime($tanggal);
 	$tanggal = date('Y-m-d',$tanggal);
 	
+	$result = false;
+	$result1 = false;
+	$result2 = false;
 	$result3 = false;
-	if ($_FILES['attach']['size'] > 0){
+	if ($_FILES['attach']['size'] > 0 && $namatugas != "" && $asignee != "" && $tag != ""){
 		$filename = $_FILES['attach']['name'];
 		$tempname = $_FILES['attach']['tmp_name'];
 		$filesize = $_FILES['attach']['size'];
@@ -35,48 +38,59 @@
 		}
 		$sql = "INSERT INTO $table2 (username, namatugas, namafile, tipefile, size, file) VALUES ('dummy', '$namatugas', '$filename', '$filetype', '$filesize', '$content')";
 		$result3 = mysql_query($sql, $bd);
-	}
 	
-	$sql = "INSERT INTO $table1 (username, namatugas, deadline, kategori, status) VALUES ('dummy', '$namatugas', '$tanggal', 'dummy', 0)";
-	$result = mysql_query($sql, $bd);
-	
-	$pos = strpos($tag, ',');
-	if ($pos === false){
-		$sql = "INSERT INTO $table4 (username, namatugas, tag) VALUES ('dummy', '$namatugas', '$tag')";
-		$result1 = mysql_query($sql, $bd);
-	} else {
-		$array = explode(',', $tag);
-		foreach($array as $tags){
-			$sql = "INSERT INTO $table4 (username, namatugas, tag) VALUES ('dummy', '$namatugas', '$tags')";
+		$sql = "INSERT INTO $table1 (username, namatugas, deadline, kategori, status) VALUES ('dummy', '$namatugas', '$tanggal', 'dummy', 0)";
+		$result = mysql_query($sql, $bd);
+		
+		$pos = strpos($tag, ',');
+		if ($pos === false){
+			$sql = "INSERT INTO $table4 (username, namatugas, tag) VALUES ('dummy', '$namatugas', '$tag')";
 			$result1 = mysql_query($sql, $bd);
+		} else {
+			$array = explode(',', $tag);
+			foreach($array as $tags){
+				$sql = "INSERT INTO $table4 (username, namatugas, tag) VALUES ('dummy', '$namatugas', '$tags')";
+				$result1 = mysql_query($sql, $bd);
+			}
 		}
-	}
-	
-	$pos = strpos($asignee, ',');
-	if ($pos === false){
-		$sql = "INSERT INTO $table3 (username, namatugas, asignee) VALUES ('dummy', '$namatugas', '$asignee')";
-		$result2 = mysql_query($sql, $bd);
-	} else {
-		$array = explode(',', $asignee);
-		foreach($array as $asign){
-			$sql = "INSERT INTO $table3 (username, namatugas, asignee) VALUES ('dummy', '$namatugas', '$asign')";
+		
+		$pos = strpos($asignee, ',');
+		if ($pos === false){
+			$sql = "INSERT INTO $table3 (username, namatugas, asignee) VALUES ('dummy', '$namatugas', '$asignee')";
 			$result2 = mysql_query($sql, $bd);
+		} else {
+			$array = explode(',', $asignee);
+			foreach($array as $asign){
+				$sql = "INSERT INTO $table3 (username, namatugas, asignee) VALUES ('dummy', '$namatugas', '$asign')";
+				$result2 = mysql_query($sql, $bd);
+			}
 		}
 	}
 	$final = $result && $result1 && $result2 && $result3;
 	if ($final){
 		echo "success";
+		echo "<html>";
+		echo "<head>";
+		echo "<script type='text/javascript'>";
+		echo "function redirect(){";
+		echo "window.location = 'dashboard.html';";
+		echo "}";
+		echo "setTimeout('redirect()',2000);";
+		echo "</script>";
+		echo "</head>";
+		echo "</html>";
 	} else {
 		echo "fail";
+		echo "<html>";
+		echo "<head>";
+		echo "<script type='text/javascript'>";
+		echo "function redirect(){";
+		echo "window.location = 'newtask.php';";
+		echo "}";
+		echo "setTimeout('redirect()',2000);";
+		echo "</script>";
+		echo "</head>";
+		echo "</html>";
 	}
 	mysql_close($bd);
 ?>
-
-<html>
-	<script type="text/javascript">
-		function redirect(){
-			window.location = "dashboard.html";
-		}
-		setTimeout('redirect()',3000);
-	</script>
-</html>
