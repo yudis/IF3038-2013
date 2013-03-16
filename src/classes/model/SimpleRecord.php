@@ -71,18 +71,22 @@
 			}
 				
 			$result = DBConnection::DBquery("SELECT ".$select." FROM ".$this->tableName().$query);
-			$fields = $result->fetch_fields();
-
-			$i = 0;
-			$row = $result->fetch_object();
-
-			foreach ($fields as $val) 
-			{
-				$name = $val->name;
-				$ret->$name = $row->$name;
-			}
+			$count = $result->num_rows;
 			
-			$result->close();
+			if ($count > 0)
+			{
+				$fields = $result->fetch_fields();
+
+				$i = 0;
+				$row = $result->fetch_object();
+
+				foreach ($fields as $val) 
+				{
+					$name = $val->name;
+					$ret->$name = $row->$name;
+				}
+				$result->close();
+			}
 			
 			DBConnection::closeDBconnection();
 						
@@ -113,21 +117,26 @@
 			}
 			
 			$result = DBConnection::DBquery("SELECT ".$select." FROM ".$this->tableName().$query);
-			$fields = $result->fetch_fields();
-
-			$i = 0;
-			while ($row = $result->fetch_object())
-			{
-				$ret[$i] = new self::$class_name();
-				foreach ($fields as $val) 
-				{
-					$name = $val->name;
-					$ret[$i]->$name = $row->$name;
-				}
-				$i++;
-			}
+			$count = $result->num_rows;
 			
-			$result->close();
+			if ($count > 0)
+			{
+				$fields = $result->fetch_fields();
+
+				$i = 0;
+				while ($row = $result->fetch_object())
+				{
+					$ret[$i] = new self::$class_name();
+					foreach ($fields as $val) 
+					{
+						$name = $val->name;
+						$ret[$i]->$name = $row->$name;
+					}
+					$i++;
+				}
+				
+				$result->close();
+			}			
 			
 			DBConnection::closeDBconnection();
 			

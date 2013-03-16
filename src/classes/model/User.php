@@ -67,5 +67,10 @@
 				// existing user
 			}
 		}
+		
+		public function getTasks() 
+		{
+			return Task::model()->findAll("id_task IN (SELECT id_task FROM have_tasks WHERE username='" . $this->username . "')");
+		}
 	}
 ?>

@@ -1,31 +1,10 @@
+var currentCat;
+
 Rp(function() {
 
-/*
-<article class="task" data-task-id="<?php echo $id_task ?>" data-category="a">
-	<header>
-		<h1>
-			<label>
-				<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
-				<a href="tugas.php?id=<?php echo $task->id_task ?>"><?php echo $task->nama_task; ?></a>
-			</label>
-		</h1>
-	</header>
-	<div class="details">
-		<p class="deadline">
-			<span class="detail-label">Deadline:</span>
-			<span class="detail-content">
-				<?php echo $deadline_datetime->format('j F Y') ?>
-			</span>
-		</p>
-		<p class="tags">
-			<span class="detail-label">Tag:</span>
-			<?php foreach ($task->getTags() as $tag) {
-				echo '<span class="tag">' . $tag->tag . '</span>';
-			} ?>
-		</p>
-	</div>
-</article>
-*/
+	if (currentCat === undefined || !currentCat) {
+		Rp('#addTaskLink').hide();
+	}
 
 	createTaskElement = function(task) {
 		// Parse and validate param
@@ -37,7 +16,7 @@ Rp(function() {
 			task.date = '';
 
 		// Main logic
-		article = Rp.factory('article').addClass('task');
+		article = Rp.factory('article').addClass('task').attr('data-task-id', task.id);
 
 		header = Rp.factory('header');
 		h1 = Rp.factory('h1');
@@ -70,4 +49,106 @@ Rp(function() {
 		return article;
 	}
 
+	createCategoryElement = function(cat) {
+		li = Rp.factory('li').prop('id', 'categoryLi' + cat.id);
+		a = Rp
+			.factory('a')
+			.attr('href', 'dashboard.php?cat=' + cat.id)
+			.attr('data-category-id', cat.id)
+			.prop('innerHTML', cat.name);
+
+		li.append(a);
+
+		return li;
+	}
+
+	fillTasks = function(tasks) {
+		tasksList = Rp('#tasksList');
+		tasksList.prop('innerHTML', '');
+		completedTasksList = Rp('#completedTasksList');
+		completedTasksList.prop('innerHTML', '');
+		tasks.forEach(function(task) {
+			if (task.done)
+				completedTasksList.append(createTaskElement(task));
+			else
+				tasksList.append(createTaskElement(task));
+		});
+	}
+
+	fillCategories = function(cats) {
+		catsList = Rp('#categoryList');
+		catsList.prop('innerHTML', '');
+		cats.forEach(function(cat) {
+			catsList.append(createCategoryElement(cat));
+		});
+	}
+
+	catreq = Rp.ajaxRequest();
+	catreq.onreadystatechange = function() {
+		if (catreq.readyState == 4) {
+			// Loaded
+			response = catreq.responseText;
+			tasks = Rp.parseJSON(response);
+			Rp('#dashboardPrimary').removeClass('loading');
+			fillTasks(tasks);
+
+			if (currentCat) {
+				Rp('#addTaskLink').show();
+				Rp('#categoryLi' + currentCat).addClass('active');
+			}
+			else {
+				Rp('#addTaskLink').hide();
+				Rp('#categoryList li.active').removeClass('active');
+			}
+		}
+		else if (catreq.readyState > 0) {
+			// Still loading
+			Rp('#dashboardPrimary').addClass('loading');
+		}
+	}
+
+	loadCategory = function(catid) {
+		currentCat = catid;
+		if (catid) {
+			catreq.get('api/retrieve_tasks?category_id=' + catid);
+		}
+		else {
+			catreq.get('api/retrieve_tasks');
+		}
+	}
+
+	Rp('#categoryList li a').on('click', function(e) {
+		e.preventDefault();
+		catid = this.getAttribute('data-category-id');
+		state = {'categoryID': catid};
+		console.log(state);
+		history.pushState(state, this.innerHTML, this.href);
+		loadCategory(catid);
+	});
+
+	window.onpopstate = function(e) {
+		console.log(e);
+		if (!e.state)
+			loadCategory(0);
+		else {
+			catid = e.state.categoryID;
+			if (catid !== undefined)
+				loadCategory(catid);
+		}
+	}
+
+	showModal = function() {
+		Rp('#modalOverlay').addClass('visible');
+	}
+	hideModal = function() {
+		Rp('#modalOverlay').removeClass('visible');
+	}
+	Rp('.modal-overlay .close').on('click', function() {
+		Rp(this.parentNode.parentNode).removeClass('visible');
+	})
+
+
+	Rp('#addCategoryButton').on('click', function() {
+		showModal();
+	});
 });

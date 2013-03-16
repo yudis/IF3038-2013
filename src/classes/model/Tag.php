@@ -11,7 +11,7 @@
 	
 		public static function tableName()
 		{
-			return "ttag";
+			return "tag";
 		}
 		
 		public function checkValidity()
