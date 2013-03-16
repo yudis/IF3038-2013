@@ -296,6 +296,11 @@ button:active {
 }
 
 /* Dashboard */
+#tasksList.loading {
+	opacity: 0.3;
+	transition: opacity 0.1s;
+}
+
 #searchForm button {
 	display: none;
 }
@@ -329,7 +334,7 @@ button:active {
 .task a {
 	color: #666;
 }
-task .category {
+.task .category {
 	display: none;
 }
 .task p, .task .details div {

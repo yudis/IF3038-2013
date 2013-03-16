@@ -2,7 +2,12 @@
 
 // Business Logic Here
 
-$tasks = Task::model()->findAll();
+$cat = (int) $_GET['cat'];
+
+// if ($cat)
+// 	$tasks = Task::model()->findAll('id_kategori=' . $cat);
+// else
+	$tasks = Task::model()->findAll();
 $categories = Category::model()->findAll();
 
 // Presentation Logic Here
@@ -29,7 +34,7 @@ $this->header();
 foreach ($tasks as $task):
 	$deadline_datetime = new DateTime($task->deadline); ?>
 
-						<article class="task" data-task-id="<?php echo $id_task ?>" data-category="a">
+						<article class="task" data-task-id="<?php echo $task->id_task ?>" data-category-="a">
 							<header>
 								<h1>
 									<label>
@@ -64,9 +69,9 @@ foreach ($tasks as $task):
 						<header>
 							<h3>Categories</h3>
 						</header>
-						<ul>
+						<ul id="categoryList">
 							<?php foreach ($categories as $cat): ?>
-							<li><a href="?cat=<?php echo $cat->id_kategori ?>" data-category-id="<?php echo $cat->id_kategori ?>"><?php echo $cat->nama_kategori ?></a></li>
+							<li><a href="dashboard.php?cat=<?php echo $cat->id_kategori ?>" data-category-id="<?php echo $cat->id_kategori ?>"><?php echo $cat->nama_kategori ?></a></li>
 							<?php endforeach; ?>
 						</ul>
 						<button type="button" id="addCategoryButton" onclick="new_category()">Tambah Kategori</button>
