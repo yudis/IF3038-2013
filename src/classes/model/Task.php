@@ -47,5 +47,10 @@
 		public function getTags() {
 			return Tag::model()->findAll("id_tag IN (SELECT id_tag FROM have_tags WHERE id_task='" . $this->id_task . "')");
 		}
+		
+		public function getCategory()
+		{
+			return Category::model()->find("id_task = ".$this->id_task);
+		}
 	}
 ?>
