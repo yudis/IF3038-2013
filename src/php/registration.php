@@ -8,14 +8,17 @@
 	$join = date('Y-m-d');
 	$con = getConnection();
 	 
+	 // Process File
+	$file = $_FILES['textAvatar'];
+	$filename = $file['name'];
+	$extension = end(explode(".", $filename));
+	$avatarname = $username.".".$extension;
+	upload_avatar($file,$username);
+	
 	// Process Query
-	$query = "INSERT INTO user VALUES ('$username', '$password','$fullname', '$birthday','$email','$join','')";
+	$query = "INSERT INTO user VALUES ('$username', '$password','$fullname', '$birthday','$email','$join','telling yourself in here','$avatarname')";
 	mysqli_query($con,$query);
 	mysqli_close($con);
-	
-	// Process File
-	$file = $_FILES['textAvatar'];
-	upload_avatar($file,$username);
 	
 	// Set Cookies & Session
 	session_start();

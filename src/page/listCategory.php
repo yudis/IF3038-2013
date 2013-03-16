@@ -1,5 +1,4 @@
 <?php 
-	require("../php/init_function.php");
 	$useractive = $_SESSION['userlistapp'];
 	$con = getConnection();
 	$result = mysqli_query($con,"SELECT * FROM category");

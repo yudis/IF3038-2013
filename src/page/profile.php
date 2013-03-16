@@ -77,6 +77,9 @@
 			<div id="header">
 				<?php
 					include("header.php");
+					require("../php/init_function.php");
+					$user_show =  $_GET['username'];
+					$avatar = getAvatar($user_show);
 				?>
 			</div>
 			<div><hr id="border"></div>
@@ -84,13 +87,11 @@
 		<div id="profile-page-body">
 			<div id="profile-header">
 				<div id="left-profile-header">
-					<img alt="" id="photo" src="../avatar/<?php echo $_SESSION["userlistapp"]?>.png" width=235 height="240"/>
-   					<img alt="" id="photo" src="../avatar/<?php echo $_SESSION["userlistapp"]?>.jpg" width=235 height="240"/>
+					<img alt="Photo profile" id="photo" src="../avatar/<?php echo $avatar?>" width=235 height="240"/>
 				</div>
 				<div id="right-profile-header">
 					<h2><?php $username = $_GET['username'];
 							  echo $username;
-							  require('../php/init_function.php');
 						      $user = getUser($username);?></h2>
 					<br>
 					<p>Joined on : <?php echo $user['join']?></p>
@@ -138,7 +139,7 @@
 					<ul>
 					<?php 
 						$con = getConnection();
-						$query = "SELECT taskid FROM assignee WHERE username='".$_SESSION['userlistapp']."'";
+						$query = "SELECT taskid FROM assignee WHERE username='".$user_show."'";
 						$result = mysqli_query($con,$query);
 						while($row = mysqli_fetch_array($result)){
 							$task = getTask($row['taskid']);
@@ -167,7 +168,7 @@
 					<ul>
 						<?php 
 							$con = getConnection();
-							$query = "SELECT taskid FROM assignee WHERE username='".$_SESSION['userlistapp']."'";
+							$query = "SELECT taskid FROM assignee WHERE username='".$user_show."'";
 							$result = mysqli_query($con,$query);
 							while($row = mysqli_fetch_array($result)){
 								$task = getTask($row['taskid']);

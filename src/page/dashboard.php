@@ -12,15 +12,18 @@
 			<div id="header">
 				<?php
 					include("header.php");
+					require("../php/init_function.php");
+					$useractive = $_SESSION['userlistapp'];
+					$avatar = getAvatar($useractive);
 				?>
 			</div>
 			<div><hr id="border"></div>
 			<!--Body-->
 			<div id="dashboard-body">
 				<div id="profile-pic">
-					<a href="profile.php"><img alt="" id="photo" src="../avatar/<?php echo $_SESSION["userlistapp"]?>.png" width=120 height="150"/>
-   					<img alt="" id="photo" src="../avatar/<?php echo $_SESSION["userlistapp"]?>.jpg" width=120 height="150"/><br />
-					<b><?php echo $_SESSION["userlistapp"]?></b></a>
+					<a href="profile.php?username=<?php echo $useractive;?>"><img alt="" id="photo" src="../avatar/<?php echo $avatar;?>" width=120 height="150"/>
+   					<br />
+					<b><?php echo $useractive?></b></a>
 				</div>
 				<div id="main-dashboard">
 					<div id="dashboard-title"><b>MY TASK<br /></b><br /></div>

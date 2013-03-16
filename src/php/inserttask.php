@@ -48,7 +48,7 @@
 		upload_attachment($file,$useractive);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
-			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$useractive-$filename', $taskid)";
+			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$taskid-$filename', $taskid)";
 			mysqli_query($con,$query);
 		}
 	}
@@ -57,7 +57,7 @@
 		upload_attachment($file,$useractive);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
-			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$useractive-$filename', $taskid)";
+			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$taskid-$filename', $taskid)";
 			mysqli_query($con,$query);
 		}
 	}
@@ -66,7 +66,7 @@
 		upload_attachment($file,$useractive);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
-			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$useractive-$filename', $taskid)";
+			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$taskid-$filename', $taskid)";
 			mysqli_query($con,$query);
 		}
 	}
@@ -75,7 +75,7 @@
 		upload_attachment($file,$useractive);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
-			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$useractive-$filename', $taskid)";
+			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$taskid-$filename', $taskid)";
 			mysqli_query($con,$query);
 		}
 	}
@@ -84,9 +84,9 @@
 		upload_attachment($file,$useractive);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
-			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$useractive-$filename', $taskid)";
+			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$taskid-$filename', $taskid)";
 			mysqli_query($con,$query);
 		}
 	}
-	//header("Location: ../page/dashboard.php");
+	header("Location: ../page/dashboard.php");
 ?>
