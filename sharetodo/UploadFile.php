@@ -1,7 +1,6 @@
 <html>
     <head>
-        <script LANGUAGE="Javascript" src="js/script.js"></script>
-        
+        <meta http-equiv="REFRESH" content="0;url=Profil.php"/>
         <?php
             echo "REDIRECTING ...";
             
@@ -9,11 +8,13 @@
             define ('MAX_FILE_SIZE', 1024 * 50);
             
             if (array_key_exists('upload', $_POST)) {
-              // define constant for upload folder
               define('UPLOAD_DIR', 'C:/xampp/htdocs/progin/tubes/server/');
               // replace any spaces in original filename with underscores
               /*$file = str_replace(' ', '_', $_FILES['image']['name']);*/
               $file = "user.png";
+              
+              //echo "test File : ".$file;
+              
               // create an array of permitted MIME types
               $permitted = array('image/gif', 'image/jpeg', 'image/pjpeg',
             'image/png');

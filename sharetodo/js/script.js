@@ -27,6 +27,26 @@ function keProfil() {
 	window.location = 'Profil.php';
 }
 
+function changeKategori(staticId) {
+	
+	var _xmlhttp;
+	if (window.XMLHttpRequest) { //membuat objek XMLHttpRequest
+		_xmlhttp = new XMLHttpRequest();
+	} else {
+		_xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	_xmlhttp.open("GET","changeKategori.php?k=" + staticId);
+	_xmlhttp.send();
+	
+	_xmlhttp.onreadystatechange = function() {
+		if ((_xmlhttp.readyState == 4) && (_xmlhttp.status == 200)) {
+			var sementara = _xmlhttp.responseText;
+			//var sementara = _xmlhttp.responseXML;
+			alert(sementara);
+		}
+	}
+}
 function active_1() {
 	var elmt_1 = document.getElementById("dynamic_1");
 	elmt_1.style.visibility = "visible";
@@ -144,7 +164,7 @@ function showEditForm() {
 function hideEditForm() {
 	document.getElementById("editForm").style.visibility = "hidden";
 }
-function changeFullName(newName) {
+function changeFullName() {
 	document.getElementById("userFullName").innerHTML = "newName";
 }
 

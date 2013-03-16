@@ -84,7 +84,7 @@
             </div>
 	    
 	    <div id=editForm>
-		<form action="UploadFile.php" method="POST" enctype="multipart/form-data" name="uploadImage">
+		<form action="#" method="POST" enctype="multipart/form-data" name="uploadImage">
 		    <div class="bioLeft">
 			<p>new Full Name :</p>
 		    </div>
@@ -95,7 +95,7 @@
 			<p>new Birthdate :</p>
 		    </div>
 		    <div class="bioRight">
-			<input type=text></input>
+			<input type=date></input>
 		    </div>
 		    <div class="bioLeft">
 			<p>new Password :</p>
@@ -121,7 +121,7 @@
 			<p></p>
 		    </div>
 		    <div class="bioRight">
-			<input class="submitBtn" type="submit" value="Submit Form" name='upload' onclick="hideEditForm();"></input>
+			<input class="submitBtn" type="submit" value="Submit Form" name='upload' onclick="hideEditForm(); changeFullName();"></input>
 		    </div>
 		</form>
 	    </div>

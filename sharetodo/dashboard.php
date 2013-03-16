@@ -28,7 +28,8 @@
             	<p>KATEGORI</p>
             </div>
             <div id="kategoriContent">
-            	<div id="static_1" class="kategoriElmt" onclick="active_1()";>
+            	<!--<div id="static_1" class="kategoriElmt" onclick="active_1()";>-->
+            	<div id="static_1" class="kategoriElmt" onclick="changeKategori('static_1');">
                 	<p>Pemrograman Internet</p>
                 </div>
                 <div id="static_2" class="kategoriElmt" onclick="active_2()";>
@@ -141,7 +142,6 @@
             <div id="newTugasForm">
                 <form>
                     <div class="Task">Nama Task</div> <div class="TaskContent">: <input type="text" name="namaTask"/></div>
-                    <div class="Task">Deadline</div> <div class="TaskContent">: <input type="date" /></div>
                     <div class="Task">Tag</div> <div class="TaskContent">: <input type="text" /></div>
                     <div class="Task">Pengguna Terpercaya</div> <div class="TaskContent">: <input type="text"/></div>
 			
