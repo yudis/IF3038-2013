@@ -18,13 +18,13 @@
 
 				<nav>
 					<ul class="main-links">
-						<li class="dashboard-link"><a href="dashboard.html">Dashboard</a></li>
-						<li class="profile-link" id="profileLink"><a href="profile.html" id="userFullName">John Doe</a></li>
-						<li class="profile-link"><a href="index.html">Logout</a></li>
+						<li class="dashboard-link"><a href="dashboard">Dashboard</a></li>
+						<li class="profile-link" id="profileLink"><a href="profile" id="userFullName">John Doe</a></li>
+						<li class="profile-link" id="logoutLink"><a href="logout">Logout</a></li>
 					</ul>
 
 					<div class="search-box">
-						<form action="search.html" method="get" id="searchForm">
+						<form action="search.php" method="get" id="searchForm">
 							<input type="search" name="q" placeholder="Search">
 							<button type="submit">Search</button>
 						</form>

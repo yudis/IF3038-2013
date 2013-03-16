@@ -1,6 +1,6 @@
 <?php
 if ($this->loggedIn) {
-	header('Location: /dashboard');
+	header('Location: dashboard');
 	return;
 }
 

@@ -42,7 +42,7 @@ foreach ($tasks as $task):
 								<p class="deadline">
 									<span class="detail-label">Deadline:</span>
 									<span class="detail-content">
-										<?php echo $deadline_datetime->format('j F Y') ?>
+										<?php echo $deadline_datetime->format('j F Y'); ?>
 									</span>
 								</p>
 								<p class="tags">
