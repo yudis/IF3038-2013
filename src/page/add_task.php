@@ -35,7 +35,7 @@
 					Tag:
 				</div>
 				<div id="add-task-form">
-				<form action="../php/inserttask.php?categoryid=<?php echo $categoryid;?>" method="post">
+				<form enctype="multipart/form-data" method="post" action="../php/inserttask.php?categoryid=<?php echo $categoryid;?>">
 					<!--Name-->
 					<div id="spacing">
 					<input type="text" id="taskname" onKeyUp="check_task_name()" name="textTaskName"/>

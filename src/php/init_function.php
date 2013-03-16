@@ -22,7 +22,7 @@
 	  }
 	}
 	
-	function upload_attachment($file,$username){
+	function upload_attachment($file,$taskid){
 		if ($file["error"] > 0)
 	  {
 		  echo "Error: " . $file["error"] . "<br>";
@@ -30,7 +30,7 @@
 	else
 	  {
 		  $filename = $file["name"];
-		  move_uploaded_file ($file['tmp_name'],"../attachment/$username-$filename");
+		  move_uploaded_file ($file['tmp_name'],"../attachment/$taskid-$filename");
 	  }
 	}
 	

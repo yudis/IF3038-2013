@@ -45,8 +45,9 @@
 	
 	if(isset($_FILES["attachment1"]["size"])){
 		$file = $_FILES['attachment1'];
-		upload_attachment($file,$useractive);
+		upload_attachment($file,$taskid);
 		$filename = $file['name'];
+		echo "$filename";
 		if(strcmp($filename,"") != 0){
 			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$taskid-$filename', $taskid)";
 			mysqli_query($con,$query);
@@ -54,8 +55,9 @@
 	}
 	if(isset($_FILES["attachment2"]["size"])){
 		$file = $_FILES['attachment2'];
-		upload_attachment($file,$useractive);
+		upload_attachment($file,$taskid);
 		$filename = $file['name'];
+				echo "$filename";
 		if(strcmp($filename,"") != 0){
 			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$taskid-$filename', $taskid)";
 			mysqli_query($con,$query);
@@ -63,7 +65,7 @@
 	}
 	if(isset($_FILES["attachment3"]["size"])){
 		$file = $_FILES['attachment3'];
-		upload_attachment($file,$useractive);
+		upload_attachment($file,$taskid);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
 			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$taskid-$filename', $taskid)";
@@ -72,7 +74,7 @@
 	}
 	if(isset($_FILES["attachment4"]["size"])){
 		$file = $_FILES['attachment4'];
-		upload_attachment($file,$useractive);
+		upload_attachment($file,$taskid);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
 			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$taskid-$filename', $taskid)";
@@ -81,7 +83,7 @@
 	}
 	if(isset($_FILES["attachment5"]["size"])){
 		$file = $_FILES['attachment5'];
-		upload_attachment($file,$useractive);
+		upload_attachment($file,$taskid);
 		$filename = $file['name'];
 		if(strcmp($filename,"") != 0){
 			$query = "INSERT INTO `attachment` (`filename`, `taskid`) VALUES ('$taskid-$filename', $taskid)";
