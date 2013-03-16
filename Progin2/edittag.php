@@ -16,5 +16,4 @@ for ($i=0; $i < count($tag); $i++)
 	
 mysql_close($con);
 
-header("location:viewtask.php?q=".$idtugas);
 ?>

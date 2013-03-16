@@ -37,7 +37,6 @@
 			
 			function editDeadline(uidtugas){
 			var xmlhttp;
-			var value;
 			value = document.getElementById("tag").value;
 			if (window.XMLHttpRequest) {
 			  // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -55,7 +54,47 @@
 			xmlhttp.open("GET","editdeadline.php?q="+uidtugas+"&tgl="+tanggal+"&bln="+bulan+"&thn="+tahun,true);
 			xmlhttp.send();
 			}
-	
+			
+			function addAssignee(uidtugas) {
+				var xmlhttp;
+				value = document.getElementById("tag").value;
+				if (window.XMLHttpRequest) {
+				  // code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				}
+				else {
+				  // code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					document.getElementById("asvalue").innerHTML = xmlhttp.responseText;
+					}
+				}
+				xmlhttp.open("GET","addassignee.php?q="+uidtugas+"&p="+document.getElementById("as").value,true);
+				xmlhttp.send();
+			}
+			
+			function hapusAssignee(uidtugas) {
+				var xmlhttp;
+				var selection = document.getElementById("fieldhapus");
+				if (window.XMLHttpRequest) {
+				  // code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				}
+				else {
+				  // code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					document.getElementById("asvalue").innerHTML = xmlhttp.responseText;
+					}
+				}
+				xmlhttp.open("GET","hapusassignee.php?q="+uidtugas+"&p="+selection.options[selection.selectedIndex].text,true);
+				xmlhttp.send();
+			}
+			
 			function makeTgl(){
 				for(var i=1; i<=31; i++){
 					var isi=document.createTextNode(i);
@@ -107,6 +146,12 @@
 				else elem.value = "Edit";
 			}
 			
+			function renameButton2(id){
+				var elem = document.getElementById(id);
+				if (elem.value=="Add") elem.value = "Cancel";
+				else elem.value = "Add";
+			}
+			
 			function clearContents(id) {
 				document.getElementById(id).value = '';
 			}
@@ -148,7 +193,7 @@
 				document.getElementById("comment").appendChild(newpara);
 				commentField.value = '';
 			}
-			
+
 			</script>
 	</head>
 
@@ -215,6 +260,9 @@
 						<div class="viewtask_label">
 							Attachment
 						</div>
+						<?php
+							echo "<form name=viewtask_form method=post action=addattachment.php?q=".$idtugas." enctype=\"multipart/form-data\">";
+						?>
 						<div class="viewtask_field">
 							<?php
 							$attachment = mysql_query("SELECT isiattachment FROM attachment WHERE idtugas='$idtugas'");
@@ -222,6 +270,11 @@
 								echo "<a id=link href=\"".$row['isiattachment']."\" target=\"_blank\">".$row['isiattachment']."</a>";
 							?>
 						</div>
+						<div class="viewtask_edit">
+							<input type="file" name="attachment" id="attachment">
+							<input type=submit value="Add" id="attbutton">
+						</div>
+						</form>
 					</div>
 					<div class="form_field">
 						<div class="viewtask_label">
@@ -282,17 +335,26 @@
 								$count--;
 							}
 							?>
-							</p>
-							<input type=text name=as id="as" onKeyPress="checkEdit(event,'as','asvalue','asbutton')" list="suggest"/>
-							<datalist id="suggest">
-								<option value="Mario Orlando">
-								<option value="Luthfi Chandra">
-								<option value="Rubiano Adityas">
-							</datalist>
-							
+							</p>			
 						</div>
 						<div class="viewtask_edit">
-							<input type=button value="Edit" id="asbutton" onClick="showHide('as');showHide('asvalue');renameButton('asbutton');clearContents('as')">
+							<input type=text name=as id="as" onKeyPress="checkEdit(event,'as','asvalue','asbutton')" list="suggest"/>
+							<datalist id="suggest">
+							</datalist>
+							<?php
+							echo "<input type=button value=\"Add\" id=\"asbutton\" onclick=\"addAssignee(".$idtugas.")\">";
+							?>
+							<select name="fieldhapus">
+							<?php
+							$assignee = mysql_query("SELECT username FROM assignee WHERE idtugas='$idtugas'");
+							while($row = mysql_fetch_array($assignee)){
+								echo "<option value=\"".$row['username']."\">".$row['username']."</option>";
+							}
+							?>
+							 </select>
+							<?php
+							echo "<input type=button value=\"Hapus\" id=\"hapusbutton\" onclick=\"hapusAssignee(".$idtugas.")\">";
+							?>
 						</div>
 						
 					</div>
@@ -303,19 +365,18 @@
 						<div class="viewtask_field">
 							<p id="tagvalue">
 							<?php
+							$isitag = '';
 							$tag = mysql_query("SELECT isitag FROM tag WHERE idtugas='$idtugas'");
 							$count = mysql_num_rows($tag);
 							while($row = mysql_fetch_array($tag)){
 								if ($count > 1)
-									echo $row['isitag'].", ";
+									$isitag .= $row['isitag'].", ";
 								else 
-									echo $row['isitag'];
+									$isitag .= $row['isitag'];
 								$count--;
+							echo $isitag."</p>";
 							}
-							?>
-							</p>
-							<?php
-							echo "<input type=text name=tag id=\"tag\" onKeyPress=\"editTag(event,".$idtugas.")\">"
+							echo "<input type=text name=tag id=\"tag\" onKeyPress=\"editTag(event,".$idtugas.")\">";
 							?>
 						</div>
 						<div class="viewtask_edit">
