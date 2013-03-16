@@ -128,4 +128,19 @@ Rp(function() {
 				loadCategory(catid);
 		}
 	}
+
+	showModal = function() {
+		Rp('#modalOverlay').addClass('visible');
+	}
+	hideModal = function() {
+		Rp('#modalOverlay').removeClass('visible');
+	}
+	Rp('.modal-overlay .close').on('click', function() {
+		Rp(this.parentNode.parentNode).removeClass('visible');
+	})
+
+
+	Rp('#addCategoryButton').on('click', function() {
+		showModal();
+	});
 });

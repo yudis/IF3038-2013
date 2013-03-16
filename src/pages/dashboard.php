@@ -137,4 +137,23 @@ foreach ($done as $task):
 
 		</div>
 		<?php if ($currentCat): ?><script>var currentCat = <?php echo $currentCat->id_kategori ?></script><?php endif; ?>
+		<div class="modal-overlay" id="modalOverlay">
+			<div class="modal-dialog">
+				<a class="close">&times;</a>
+				<header><h3>Tambah Kategori</h3></header>
+				<form id="newCategoryForm">
+					<div class="field">
+						<label for="new_category_name">Nama Kategori</label>
+						<input id="new_category_name" name="new_category_name" type="text" title="Nama kategori harus diisi." required />
+					</div>
+					<div class="field">
+						<label for="new_category_username">Username</label>
+						<input id="new_category_username" name="new_category_username" pattern="^[^;]{5,}(;[^;]{5,})*$" type="text" title="Username harus terdaftar dan dipisahkan tanda titik-koma. Kosongkan jika private." />
+					</div>
+					<div class="buttons">
+						<button type="submit" disabled title="Semua elemen form harus diisi dengan benar dahulu.">Simpan</button>
+					</div>
+				</form>
+			</div>
+		</div>
 <?php $this->footer() ?>
