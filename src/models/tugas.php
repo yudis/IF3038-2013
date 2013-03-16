@@ -47,8 +47,8 @@ class Tugas extends Model
 		$this->_last_mod = $tugas["last_mod"];
 		$this->_pemilik = $tugas["pemilik"];
 		$this->_tag = $tugas["tag"];
-		$this->_kategori = $tugas["kategori"];
 		$this->_id_kategori = $tugas["id_kategori"];
+		$this->_kategori = $tugas["kategori"];
 	}
 	
 	public function toArray()
@@ -62,15 +62,18 @@ class Tugas extends Model
 		$tugas["last_mod"] = $this->_last_mod;
 		$tugas["pemilik"] = $this->_pemilik;
 		$tugas["tag"] = $this->_tag;
-		$tugas["kategori"] = $this->_kategori;
 		$tugas["id_kategori"] = $this->_id_kategori;
+		$tugas["kategori"] = $this->_kategori;
 		
 		return $tugas;
 	}
 	
 	public function getTugas($id_tugas)
     {
-        $sql = "SELECT * FROM tugas WHERE id=? ";
+        $sql = "SELECT t.id AS id, t.nama AS nama, tgl_deadline,  `status` , t.last_mod AS last_mod, pemilik, id_kategori, c.nama AS nama_kategori
+				FROM categories c, tugas t
+				WHERE t.id = ? AND c.id = t.id_kategori;";
+
         $this->_setSql($sql);
 		
         $tugas = $this->getRow(array($id_tugas));
@@ -86,78 +89,40 @@ class Tugas extends Model
 		$this->_status = $tugas["status"];
 		$this->_last_mod = $tugas["last_mod"];
 		$this->_pemilik = $tugas["pemilik"];
-		$this->getKategori ($id_tugas);
-		$this->getTag ($id_tugas);
-		$this->getAttachment($id_tugas);
+		$this->_id_kategori = $tugas["id_kategori"];
+		$this->_kategori = $tugas["nama_kategori"];
+
+		$this->_tag = $this->getTags($id_tugas);
+		$this->_attachment = $this->getAttachments($id_tugas);
+
         return $this->toArray();
     }
 	
-	public function getKategori ($id_tugas)
-	{
-		$sql = "SELECT id_kategori FROM categories WHERE id_tugas=? ";
-        $this->_setSql($sql);
-		
-        $result = $this->getRow(array($id_tugas));
-         
-        if (empty($result))
-        {
-            return false;
-        }
-		$sql = "SELECT nama FROM kategori WHERE id=? ";
-        $this->_setSql($sql);
-		
-        $result2 = $this->getRow(array($result["id_kategori"]));
-         
-        if (empty($result2))
-        {
-            return false;
-        }
-		$this->_id_kategori=$result["id_kategori"];
-		$this->_kategori=$result2["nama"];
-	}
-	
-	public function getTag ($id_tugas)
+	public function getTags($id_tugas)
 	{
 		$sql = "SELECT tag FROM tags WHERE id_tugas=? ";
         $this->_setSql($sql);
 		
         $r = $this->getAll(array($id_tugas));
+        $retval = array();
 		
-		
-        if (empty($r))
-        {
-            return false;
-        }
-		
-		$i=0;
+		$i = 0;
 		while(!empty($r[$i]["tag"]))
 		{
-			$this->_tag[$i] = $r[$i]["tag"];
+			$retval[$i] = $r[$i]["tag"];
 			$i++;
 		}
+
+		return $retval;
 	}
 	
-	public function getAttachment ($id_tugas)
+	public function getAttachments($id_tugas)
 	{
-		$sql = "SELECT attachment FROM attachments WHERE id_tugas=? ";
+		$sql = "SELECT id_attachment, name, filename, type FROM attachments WHERE id_tugas=?";
         $this->_setSql($sql);
-		
-        $r = $this->getAll(array($id_tugas));
-		
-		
-        if (empty($r))
-        {
-            return false;
-        }
-		
-		$i=0;
-		while(!empty($r[$i]["attachment"]))
-		{
-			$this->_tag = $r[$i]["attachment"];
-			$i++;
-		}
+        return $this->getAll(array($id_tugas));
 	}
-	
+
     public function store()
     {
         $sql = "INSERT INTO tugas 

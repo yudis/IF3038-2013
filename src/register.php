@@ -4,6 +4,7 @@ include './utilities/db.php';
 include './utilities/model.php';
 include './models/user.php';
 
+session_set_cookie_params(30 * 24 * 60 * 60); 
 session_start();
 if (isset($_SESSION["user"]))
 {
@@ -12,13 +13,6 @@ if (isset($_SESSION["user"]))
 }
 else
 {
-	// echo ($_POST["uname"]);
-	// echo ($_POST["email"]);
-	// echo ($_POST["pwd"]);
-	// echo ($_POST["name"]);
-	// echo ($_POST["bday"]);
-	// echo ($_FILES["ava"]["name"]);
-
 	if (isset($_POST["uname"]) && isset($_POST["email"]) && isset($_POST["pwd"]) && isset($_POST["name"]) && isset($_POST["bday"]) && isset($_FILES["ava"]))
 	{
 		try

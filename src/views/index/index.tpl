@@ -74,7 +74,7 @@
                                 <p class="regtext">Profile Image:<br /></p><input type="file" id="ava" name="ava" accept="image/*" required="required"  onkeyup="validateAvatar();" onchange="validateAvatar();" />
                             </div>
                             <p>By clicking Sign Up, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use. </p>
-                            <input type="submit" class="button" id="register" onclick="register()" value="Sign Up" disabled="true" />
+                            <input type="submit" class="button" id="register" value="Sign Up" disabled="true" />
                         </form>
                     </div>
                 </div>

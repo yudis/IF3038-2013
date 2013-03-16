@@ -6,6 +6,7 @@
         <title><?php echo $title ?></title>
         <link rel="stylesheet" type="text/css" href="./styles/default.css" />
         <link rel="stylesheet" type="text/css" href="./styles/mediaqueries.css" />
+        <script src="scripts/helper.js" type="application/javascript"></script>
 		<?php echo $headTags ?>
     </head>
     <body>

@@ -4,11 +4,13 @@ require '../utilities/db.php';
 require '../utilities/model.php';
 require '../models/user.php';
 
+session_set_cookie_params(30 * 24 * 60 * 60); 
 session_start();
 if (isset($_SESSION["user"]))
 {
 	// user sudah login, dialihkan ke halaman lain
-	header('Location: ../dashboard.php');
+	//header('Location: ../dashboard.php');	
+	echo "dashboard";
 }
 else
 {
@@ -35,7 +37,8 @@ else
 	}
 	else
 	{
-		// user belum login, dialihkan ke halaman lain
-		header('Location: ../index.php');
+		// user sudah login, dialihkan ke halaman lain
+		//header('Location: ../index.php');
+		echo "index";
 	}	
 }

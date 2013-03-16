@@ -4,6 +4,8 @@ require 'utilities/db.php';
 require 'utilities/model.php';
 require 'utilities/view.php';
 
+
+session_set_cookie_params(7 * 24 * 60 * 60); 
 session_start();
 if (isset($_SESSION["user"]))
 {

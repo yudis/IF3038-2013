@@ -49,11 +49,15 @@ DROP TABLE IF EXISTS `attachments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `attachments` (
+  `id_attachment` int(11) NOT NULL AUTO_INCREMENT,
   `id_tugas` int(11) NOT NULL,
-  `attachment` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_tugas`,`attachment`),
+  `name` varchar(100) NOT NULL,
+  `filename` varchar(100) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  PRIMARY KEY (`id_attachment`),
+  KEY `attachments_ibfk_1` (`id_tugas`),
   CONSTRAINT `attachments_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,6 +66,7 @@ CREATE TABLE `attachments` (
 
 LOCK TABLES `attachments` WRITE;
 /*!40000 ALTER TABLE `attachments` DISABLE KEYS */;
+INSERT INTO `attachments` VALUES (1,1,'Hai.zip','089767979878.zip','file'),(2,1,'lalla.jpg','80756d75476597.jpg','image');
 /*!40000 ALTER TABLE `attachments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,4 +221,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-16 13:38:44
+-- Dump completed on 2013-03-16 14:21:04

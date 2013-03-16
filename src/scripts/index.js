@@ -52,12 +52,23 @@ function validateUName() {
     }
     
     if (isValidUname) {
-        uname.style.border = '2px #5fae53 solid';
+		isValidUname = false;
+		uname.style.border = '';
+		var qry = 'check=username&data=' + encodeURIComponent(uname.value);
+		ajax_get("./ajax/availability.php?" + qry, function(xhr) {
+			var res = JSON.parse(xhr.responseText);
+			isValidUname = (res.status == 200);
+			if (isValidUname) {
+				uname.style.border = '2px #5fae53 solid';
+			} else {
+				uname.style.border = '2px red solid';
+			}
+			changeRegister();
+		});
     } else {
         uname.style.border = '2px red solid';
+		changeRegister();
     }
-    
-    changeRegister();
 }
 
 function validatePassword() {
@@ -136,12 +147,23 @@ function validateEmail() {
     }
     
     if (isValidEmail) {
-        email.style.border = '2px #5fae53 solid';
+		isValidEmail = false;
+		email.style.border = '';
+		var qry = 'check=email&data=' + encodeURIComponent(email.value);
+		ajax_get("./ajax/availability.php?" + qry, function(xhr) {
+			var res = JSON.parse(xhr.responseText);
+			isValidEmail = (res.status == 200);
+			if (isValidEmail) {
+				email.style.border = '2px #5fae53 solid';
+			} else {
+				email.style.border = '2px red solid';
+			}
+			changeRegister();
+		});
     } else {
         email.style.border = '2px red solid';
+		changeRegister();
     }
-    
-    changeRegister();
 }
 
 
@@ -269,7 +291,6 @@ function validateForm()
     var result=str1.test(xAvatar);
     if (result==1)
     {
-        alert("Registration success!");
         return true;
     } else {
         result=str2.test(xAvatar);
@@ -281,10 +302,6 @@ function validateForm()
             return false;
         }
     }
-}
-
-function register() {
-    window.location.replace("dashboard.html");
 }
 
 function loginX() {
