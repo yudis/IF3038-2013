@@ -7,14 +7,15 @@ $categories = Category::model()->findAll();
 
 // Presentation Logic Here
 
-$this->header()
+$this->requireJS('dashboard');
+$this->header();
 ?>
 		<div class="content">
 			<div class="dashboard">	
 				<header>
 					<h1>Dashboard</h1>
 					<ul>
-						<li class="add-task-link"><a href="new_tugas.html">New Task</a></li>
+						<li class="add-task-link"><a href="newwork.php">New Task</a></li>
 					</ul>
 				</header>
 				<div class="primary">
@@ -23,6 +24,7 @@ $this->header()
 							<h3>All Tasks</h3>
 						</header>
 
+						<div id="tasksList">
 <?php
 foreach ($tasks as $task):
 	$deadline_datetime = new DateTime($task->deadline); ?>
@@ -32,7 +34,7 @@ foreach ($tasks as $task):
 								<h1>
 									<label>
 										<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
-										<a href="view_tugas_5.html"><?php echo $task->nama_task; ?></a>
+										<a href="tugas.php?id=<?php echo $task->id_task ?>"><?php echo $task->nama_task; ?></a>
 									</label>
 								</h1>
 							</header>
@@ -53,6 +55,7 @@ foreach ($tasks as $task):
 						</article>
 
 <?php endforeach; ?>
+						</div>
 					</section>
 				</div>
 			
@@ -63,10 +66,10 @@ foreach ($tasks as $task):
 						</header>
 						<ul>
 							<?php foreach ($categories as $cat): ?>
-							<li><a href="?" data-category-id="<?php echo $cat->id_kategori ?>"><?php echo $cat->nama_kategori ?></a></li>
+							<li><a href="?cat=<?php echo $cat->id_kategori ?>" data-category-id="<?php echo $cat->id_kategori ?>"><?php echo $cat->nama_kategori ?></a></li>
 							<?php endforeach; ?>
-							<li><a href="#"><?php  ?></a></li>
 						</ul>
+						<button type="button" id="addCategoryButton" onclick="new_category()">Tambah Kategori</button>
 					</section>
 				</div>
 
