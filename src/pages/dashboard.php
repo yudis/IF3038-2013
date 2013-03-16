@@ -39,7 +39,7 @@ $this->header('Dashboard', 'dashboard');
 						<li class="add-task-link" id="addTaskLink"><a href="newwork.php">New Task</a></li>
 					</ul>
 				</header>
-				<div class="primary">
+				<div class="primary" id="dashboardPrimary">
 					<section class="tasks current">
 						<header>
 							<h3><?php echo $pageTitle ?></h3>
@@ -126,7 +126,7 @@ foreach ($done as $task):
 						</header>
 						<ul id="categoryList">
 							<?php foreach ($categories as $cat): ?>
-							<li><a href="dashboard.php?cat=<?php echo $cat->id_kategori ?>" data-category-id="<?php echo $cat->id_kategori ?>"><?php echo $cat->nama_kategori ?></a></li>
+							<li id="categoryLi<?php echo $cat->id_kategori ?>"<?php if ($currentCat->id_kategori == $cat->id_kategori) echo ' class="active"' ?>><a href="dashboard.php?cat=<?php echo $cat->id_kategori ?>" data-category-id="<?php echo $cat->id_kategori ?>"><?php echo $cat->nama_kategori ?></a></li>
 							<?php endforeach; ?>
 						</ul>
 						<button type="button" id="addCategoryButton" onclick="new_category()">Tambah Kategori</button>

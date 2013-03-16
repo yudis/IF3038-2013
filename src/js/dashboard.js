@@ -1,3 +1,5 @@
+var currentCat;
+
 Rp(function() {
 
 	if (currentCat === undefined || !currentCat) {
@@ -48,7 +50,7 @@ Rp(function() {
 	}
 
 	createCategoryElement = function(cat) {
-		li = Rp.factory('li');
+		li = Rp.factory('li').prop('id', 'categoryLi' + cat.id);
 		a = Rp
 			.factory('a')
 			.attr('href', 'dashboard.php?cat=' + cat.id)
@@ -87,25 +89,31 @@ Rp(function() {
 			// Loaded
 			response = catreq.responseText;
 			tasks = Rp.parseJSON(response);
-			Rp('#tasksList').removeClass('loading');
+			Rp('#dashboardPrimary').removeClass('loading');
 			fillTasks(tasks);
+
+			if (currentCat) {
+				Rp('#addTaskLink').show();
+				Rp('#categoryLi' + currentCat).addClass('active');
+			}
+			else {
+				Rp('#addTaskLink').hide();
+				Rp('#categoryList li.active').removeClass('active');
+			}
 		}
 		else if (catreq.readyState > 0) {
 			// Still loading
-			Rp('#tasksList').addClass('loading');
+			Rp('#dashboardPrimary').addClass('loading');
 		}
 	}
 
-	var currentCat;
 	loadCategory = function(catid) {
 		currentCat = catid;
 		if (catid) {
 			catreq.get('api/retrieve_tasks?category_id=' + catid);
-			Rp('#addTaskLink').show();
 		}
 		else {
 			catreq.get('api/retrieve_tasks');
-			Rp('#addTaskLink').hide();
 		}
 	}
 

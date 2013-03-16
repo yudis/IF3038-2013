@@ -356,9 +356,9 @@ button:active {
 }
 
 /* Dashboard */
-#tasksList.loading {
-	opacity: 0.3;
-	transition: opacity 0.1s;
+#dashboardPrimary.loading {
+	opacity: 0.2;
+	transition: opacity 0.3s;
 }
 
 #searchForm button {
