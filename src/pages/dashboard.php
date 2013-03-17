@@ -9,8 +9,15 @@ $doneQ = 'status=1';
 $narrowQ = '';
 
 if ($cat) {
-	$narrowQ = ' AND id_kategori=' . $cat;
-	$currentCat = Category::model()->find('id_kategori=' . $cat);
+	$currentCat = Category::model()->findAll('id_kategori=' . $cat);
+	if ($currentCat) {
+		$currentCat = $currentCat[0];
+		$narrowQ = ' AND id_kategori=' . $cat;
+	}
+	else {
+		unset($currentCat);
+		unset($cat);
+	}
 }
 
 $tasks = Task::model()->findAll();
