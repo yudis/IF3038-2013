@@ -134,9 +134,10 @@ class RestApi
 		if (($_SERVER['REQUEST_METHOD'] === 'POST') &&
 			(isset($params['username'])) && (isset($params['password']))) {
 			
-			if (($params['username'] == "admin") && ($params['password'] == "admin123")) {
-				// TODO add database using user model
-				$_SESSION['user_id'] = 1;
+			$user = User::model()->find("username='".$params['username']."' AND password='".$params['password']."'");
+			if ($user)
+			{
+				$_SESSION['user_id'] = $user->id_user;
 				$u = new User;
 				$u->fullname = 'Jean Valjean';
 				$u->username = 'admin';
@@ -170,8 +171,8 @@ class RestApi
 		$return = array();
 		if (($_SERVER['REQUEST_METHOD'] === 'POST') && (ISSET($params['username'])) && (ISSET($params['email']))
 			&& (ISSET($params['password'])) && (ISSET($params['confirm_password'])) 
-			&& (ISSET($params['name'])) && (ISSET($params['birth_date']))
-			//&& (ISSET($_POST['avatar']))
+			&& (ISSET($params['fullname'])) && (ISSET($params['birthdate']))
+			&& (ISSET($params['avatar']))
 			)
 		{
 			$return["status"] = "success";
@@ -184,16 +185,14 @@ class RestApi
 			if ($temperror)
 			{
 				$return["status"] = "fail";
-				array_merge($return["error"], $temperror);
+				$return["error"] = array_merge($return["error"], $temperror);
 			}
 			
-			if (!$user->save())
+			if (User::model()->find("username='".$params['username']."' OR email='".$params['email']."'")->data)
 			{
-				// record exist
 				$return["status"] = "fail";
-				$return["error"]["exist"] = "Username/email already exists";
+				$return["error"]["duplicate"] .= "Username/email sudah digunakan.";
 			}
-			return $status;
 		}
 		else
 		{

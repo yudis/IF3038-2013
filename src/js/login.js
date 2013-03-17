@@ -1,23 +1,3 @@
-/*----- Bagian Login ----*/
-/*
-var login_area = document.getElementById("login_area");
-login_area.onmouseover = function()
-{
-	document.getElementById("login_form_wrap").className = "appear";
-	document.getElementById("login_button").className = "login_button_appear";
-	document.getElementById("login_link").className = "login_link_appear";
-	document.getElementById("border_login").className = "appear";
-}
-
-login_area.onmouseout = function()
-{
-	document.getElementById("login_form_wrap").className = "";
-	document.getElementById("login_button").className = "";
-	document.getElementById("login_link").className = "";
-	document.getElementById("border_login").className = "";
-}
-*/
-
 var form_login = document.getElementById("login_form");
 form_login.onsubmit = function(e)
 {
@@ -31,7 +11,7 @@ form_login.onsubmit = function(e)
 		{
 			if (request.status==200 || window.location.href.indexOf("http")==-1)
 			{
-				var result = eval("("+request.responseText+")");
+				var result = JSON.parse(request.responseText);
 				console.log(result);
 				if (result.status == "success")
 				{
@@ -40,19 +20,20 @@ form_login.onsubmit = function(e)
 				else
 				{
 					alert("Username dan password yang dimasukkan salah.");
+					document.getElementById("login_username").value = "";
+					document.getElementById("login_password").value = "";
 				}
 			}
 			else
 			{
 				alert("Mohon maaf, sedang ada kesalahan pada server.");
+				document.getElementById("login_username").value = "";
+				document.getElementById("login_password").value = "";
 			}
 		}
 	}
 	request.open("POST", "api/login", true);
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.send(data);
-	
-	document.getElementById("login_username").value = "";
-	document.getElementById("login_password").value = "";
 	return false;
 }

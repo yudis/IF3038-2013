@@ -62,7 +62,7 @@ $this->header();
 							<h3>Sign Up Now!</h3>
 						</header>
 
-						<form id="register_form" action="#" method="post" class="vertical">
+						<form enctype="multipart/form-data" id="register_form" action="register" method="post" class="vertical">
 							<div class="field">
 								<label for="register_username">Username</label>
 								<input id="register_username" name="username" pattern="^.{5,}$" type="text" title="Username minimal harus terdiri dari 5 karakter dan tidak sama dengan sandi." required data-neq="register_password">
@@ -77,11 +77,11 @@ $this->header();
 							</div>
 							<div class="field">
 								<label for="register_name">Full Name</label>
-								<input id="register_name" name="name" pattern="^.+ .+$" type="text" title="Nama lengkap harus terdiri dari 2 kata dipisah oleh sebuah spasi." required>
+								<input id="register_name" name="fullname" pattern="^.+ .+$" type="text" title="Nama lengkap harus terdiri dari 2 kata dipisah oleh sebuah spasi." required>
 							</div>
 							<div class="field">
 								<label for="birth_date">Date of Birth</label>
-								<input id="birth_date" name="birth_date" type="text" pattern="^[0-3][0-9]/[0-1][0-9]/[1-9][0-9][0-9][0-9]$" title="Tahun harus minimal dari tahun 1955." required/>
+								<input id="birth_date" name="birthdate" type="text" pattern="^[0-3][0-9]/[0-1][0-9]/[1-9][0-9][0-9][0-9]$" title="Tahun harus minimal dari tahun 1955." required/>
 							</div>
 							<div class="field">
 								<label for="register_email">Email</label>

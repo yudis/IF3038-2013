@@ -12,7 +12,7 @@
 	{
 		private static $class_name;
 		private static $models = array();
-		protected $data = array();
+		public $data = array();
 		
 		public static function tableName() {}
 		
