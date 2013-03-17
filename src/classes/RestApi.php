@@ -260,7 +260,7 @@ class RestApi
 			}
 		}
 
-		return array('categoryID' => $category->id_kategori, 'categories' => $this->retrieve_categories());
+		return array('categoryID' => $category->id_kategori, 'categoryName' => $category->nama_kategori, 'categories' => $this->retrieve_categories());
 	}
 }
 

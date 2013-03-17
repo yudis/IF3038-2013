@@ -119,13 +119,19 @@ Rp(function() {
 		}
 	}
 
+	goToCategory = function(catid, catname) {
+		state = {
+			'categoryID' : catid,
+			'categoryName' : catname
+		};
+		history.pushState(state, catname, 'dashboard.php?cat=' + catid);
+		loadCategory(catid);
+	}
+
 	Rp('#categoryList li a').on('click', function(e) {
 		e.preventDefault();
 		catid = this.getAttribute('data-category-id');
-		state = {'categoryID': catid};
-		console.log(state);
-		history.pushState(state, this.innerHTML, this.href);
-		loadCategory(catid);
+		goToCategory(catid, this.innerHTML);
 	});
 
 	window.onpopstate = function(e) {
@@ -175,7 +181,7 @@ Rp(function() {
 					try {
 						response = Rp.parseJSON(req.responseText);
 						fillCategories(response.categories);
-						loadCategory(response.categoryID);
+						goToCategory(response.categoryID, response.categoryName);
 					}
 					catch (e) {
 
