@@ -83,12 +83,29 @@ class RestApi
 		{
 			// TODO check if user session is in some category
 			// retrieve based on category
-			$ret = Task::model()->findAll("id_kategori = '" . (int) 
-							$params['category_id'] . "'");
+
+			$cat = Category::model()->findAll("id_kategori = '" . addslashes($params['category_id']) . "'");
+
+			if ($cat) {
+				// found
+				$success = true;
+
+				$cat = $cat[0];
+				$categoryID = $cat->id_kategori;
+				$categoryName = $cat->nama_kategori;
+
+				$ret = Task::model()->findAll("id_kategori = '" . (int) 
+								$params['category_id'] . "'");
+			}
+			else {
+				// not found
+				$success = false;
+				$ret = array();
+			}
 		}
-		else
-		{
+		else {
 			// retrieve all
+			$success = true;
 			$ret = Task::model()->findAll();
 		}
 
@@ -110,7 +127,7 @@ class RestApi
 			$tasks[] = $dummy;
 		}
 
-		return $tasks;
+		return compact('success', 'tasks', 'categoryID', 'categoryName');
 	}
 
 	public function retrieve_categories() {
@@ -261,6 +278,27 @@ class RestApi
 		}
 
 		return array('categoryID' => $category->id_kategori, 'categoryName' => $category->nama_kategori, 'categories' => $this->retrieve_categories());
+	}
+
+	public function delete_category() {
+		$id_kategori = addslashes($_POST['category_id']);
+		$id_user = addslashes($this->app->currentUserId);
+
+		$delete = DBConnection::DBquery("DELETE FROM kategori WHERE id_kategori=$id_kategori AND id_user=$id_user");
+		$affectedRows = DBConnection::affectedRows();
+
+		if ($affectedRows) {
+			// delete was success
+			$success = true;
+		}
+		else {
+			$success = false;
+		}
+
+		return array(
+			'success' => $success,
+			'categoryID' => $id_kategori
+		);
 	}
 }
 

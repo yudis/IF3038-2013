@@ -45,6 +45,11 @@
 				return self::$link->insert_id;
 		}
 		
+		public static function affectedRows() {
+			if (self::$link)
+				return self::$link->affected_rows;
+		}
+
         public static function closeDBconnection()
 		{
 			if (mysqli_ping(self::$link)) 

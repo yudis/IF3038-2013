@@ -88,19 +88,25 @@ Rp(function() {
 		if (catreq.readyState == 4) {
 			// Loaded
 			response = catreq.responseText;
-			tasks = Rp.parseJSON(response);
+			response = Rp.parseJSON(response);
 			Rp('#dashboardPrimary').removeClass('loading');
-			fillTasks(tasks);
+			if (response.success) {
+				fillTasks(response.tasks);
 
-			Rp('#categoryList li.active').removeClass('active');
-			if (currentCat) {
-				Rp('#addTaskLink').show();
-				li = Rp('#categoryLi' + currentCat);
-				li.addClass('active');
-				Rp('#pageTitle').text(li.text());
+				Rp('#categoryList li.active').removeClass('active');
+				if (response.categoryID) {
+					Rp('#addTaskLink').show();
+					li = Rp('#categoryLi' + response.categoryID);
+					li.addClass('active');
+					Rp('#pageTitle').text(response.categoryName);
+				}
+				else {
+					Rp('#addTaskLink').hide();
+					Rp('#pageTitle').text('All Tasks');
+				}
 			}
 			else {
-				Rp('#addTaskLink').hide();
+				loadCategory(0);
 			}
 		}
 		else if (catreq.readyState > 0) {
@@ -124,7 +130,12 @@ Rp(function() {
 			'categoryID' : catid,
 			'categoryName' : catname
 		};
-		history.pushState(state, catname, 'dashboard.php?cat=' + catid);
+		if (catid != 0) {
+			history.pushState(state, catname, 'dashboard.php?cat=' + catid);
+		}
+		else {
+			history.pushState(state, 'Dashboard', 'dashboard.php');
+		}
 		loadCategory(catid);
 	}
 
@@ -170,7 +181,6 @@ Rp(function() {
 		req = Rp.ajaxRequest('api/add_category');
 		req.onreadystatechange = function() {
 			switch (req.readyState) {
-				case 0:
 				case 1:
 				case 2:
 				case 3:
@@ -192,4 +202,28 @@ Rp(function() {
 		}
 		req.post(serialized);
 	});
+
+	// Delete category
+	deleteCategory = function(catid) {
+		qs = 'category_id=' + catid;
+		del = Rp.ajaxRequest('api/delete_category');
+		del.onreadystatechange = function() {
+			if (del.readyState == 4) {
+				response = Rp.parseJSON(del.responseText);
+				if (response.success) {
+					Rp('#categoryLi' + catid).hide();
+					Rp('#categoryList').removeClass('loading');
+					goToCategory(0, 'Dashboard');
+				}
+				else {
+					// error
+					console.log('Failed to delete category ' + catid);
+				}
+			}
+			else {
+				Rp('#categoryList').addClass('loading');
+			}
+		}
+		del.post(qs);
+	}
 });
