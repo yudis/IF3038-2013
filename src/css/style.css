@@ -559,6 +559,15 @@ p.description .detail-label {
 	#loginLink {
 		display: none;
 	}
+
+	.modal-overlay {
+		background: rgba(0, 0, 0, 0.7);
+	}
+	.modal-dialog {
+		margin: 0;
+		position: static;
+		width: auto;
+	}
 }
 
 /* Tablets in portrait */
