@@ -1,4 +1,5 @@
 var currentCat;
+var canDelete;
 
 Rp(function() {
 
