@@ -139,6 +139,7 @@ class App
 		}
 
 		$this->currentUserId = $_SESSION['user_id'];
+		$this->currentUser = $_SESSION['current_user'];
 		$this->loggedIn = (bool) $_SESSION['user_id'];
 	}
 
@@ -175,6 +176,7 @@ class App
 	{
 		if (!$this->isPartial) {
 			$this->title = $title;
+			$this->currentPage = $currentPage;
 			$this->loadTemplate('header');
 		}
 	}
