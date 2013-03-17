@@ -3,8 +3,11 @@ var currentCat;
 Rp(function() {
 
 	if (currentCat === undefined || !currentCat) {
-		Rp('#deleteCategoryLi').hide();
 		Rp('#addTaskLi').hide();
+	}
+
+	if (canDelete === undefined || !canDelete) {
+		Rp('#deleteCategoryLi').hide();
 	}
 
 	createTaskElement = function(task) {

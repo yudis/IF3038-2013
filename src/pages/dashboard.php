@@ -13,6 +13,7 @@ if ($cat) {
 	if ($currentCat) {
 		$currentCat = $currentCat[0];
 		$narrowQ = ' AND id_kategori=' . $cat;
+		$canDelete = $currentCat->id_user == $this->currentUserId;
 	}
 	else {
 		unset($currentCat);
@@ -145,7 +146,10 @@ foreach ($done as $task):
 			</div>
 
 		</div>
-		<?php if ($currentCat): ?><script>var currentCat = <?php echo $currentCat->id_kategori ?></script><?php endif; ?>
+		<?php if ($currentCat): ?><script>
+			var currentCat = <?php echo $currentCat->id_kategori ?>;
+			var canDelete = <?php echo json_encode($canDelete) ?>;
+		</script><?php endif; ?>
 		<div class="modal-overlay" id="modalOverlay">
 			<div class="modal-dialog">
 				<a class="close">&times;</a>

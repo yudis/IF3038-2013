@@ -414,7 +414,7 @@ bajuri.ajaxRequest = function(url) {
 	}
 
 	handle.get = function(url) {
-		this.open('GET', url);
+		this.open('GET', url, true);
 		this.send();
 	}
 
