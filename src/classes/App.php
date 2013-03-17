@@ -171,7 +171,7 @@ class App
 			$this->javascripts[] = $js;
 	}
 
-	protected function header($title = '') 
+	protected function header($title = '', $currentPage = '') 
 	{
 		if (!$this->isPartial) {
 			$this->title = $title;
