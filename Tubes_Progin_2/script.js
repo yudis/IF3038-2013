@@ -127,7 +127,7 @@ function profileRestore() {
 var clickable = false;
 
 function Redirect(){
-    window.location = "index.html";
+    window.location = "index.php";
 }
 
 function Login(){
@@ -136,7 +136,7 @@ function Login(){
     } else if (document.getElementById("logpassword").value !== "admincool"){
         alert("Wrong password!");
     }else{
-        window.location = "Dashboard.html";
+        window.location = "Dashboard.php";
         localStorage.username = document.getElementById("logusername").value;
         localStorage.name = "Billy The Kid";
         localStorage.date = "1968-09-3";
@@ -189,7 +189,7 @@ function edit(){
 
 function Submit(){
     if (clickable){
-        window.location = "Dashboard.html";
+        window.location = "Dashboard.php";
         localStorage.username = document.getElementById("regusername").value;
         localStorage.name = document.getElementById("regname").value;
         localStorage.date = document.getElementById("regdate").value;
