@@ -51,7 +51,7 @@
 		{
 			$ret = new self::$class_name();
 
-			DBConnection::openDBconnection();
+			// DBConnection::openDBconnection();
 			
 			if ($query != "")
 				$query = " WHERE ".$query;
@@ -88,7 +88,7 @@
 				$result->close();
 			}
 			
-			DBConnection::closeDBconnection();
+			// DBConnection::closeDBconnection();
 						
 			return $ret;
 		}
@@ -97,7 +97,7 @@
 		{
 			$ret = array();
 		
-			DBConnection::openDBconnection();
+			// DBConnection::openDBconnection();
 			
 			if ($query != "")
 				$query = " WHERE ".$query;
@@ -138,7 +138,7 @@
 				$result->close();
 			}			
 			
-			DBConnection::closeDBconnection();
+			// DBConnection::closeDBconnection();
 			
 			return $ret;
 		}

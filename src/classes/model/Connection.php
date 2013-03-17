@@ -13,17 +13,23 @@
 		
 		public static function openDBconnection() 
 		{
+			if (self::$link)
+				return;
+
             // Create connection
             self::$link = new mysqli(self::$host, self::$username, self::$password, self::$dbname);
             // Check connection
             if (mysqli_connect_errno()) 
             {
                 echo 'Failed to connect to MySQL:' . mysqli_connect_error();
+                unset(self::$link);
             }
         }
         
 		public static function DBquery($query)
 		{
+			self::openDBconnection();
+
 			if (mysqli_ping(self::$link))
 			{
 				return self::$link->query($query);
@@ -33,13 +39,19 @@
 				return "A";
 			}
 		}
+
+		public static function insertID() {
+			if (self::$link)
+				return self::$link->insert_id;
+		}
 		
         public static function closeDBconnection()
 		{
 			if (mysqli_ping(self::$link)) 
 			{
-				mysqli_close(self::$link);
-			} else 
+				self::$link->close();
+			}
+			else 
 			{
 				printf ("Error: %s\n", mysqli_error($link));
 			}
