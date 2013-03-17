@@ -15,8 +15,9 @@ Rp(function() {
 			Rp(this).removeClass('invalid');
 
 			inv = Rp('input[pattern].invalid');
-			if (this.value)
+			if (this.value) {
 				Rp('#register_submit').prop('disabled', (inv.length() > 0));
+			}
 		}
 		else {
 			// ga valid
@@ -27,5 +28,5 @@ Rp(function() {
 	};
 
 	Rp('input[pattern]').on('keyup', checkValidity);
-	Rp('#register_submit').prop('disabled', false); // disabled by default
+	Rp('#register_submit').prop('disabled', true); // disabled by default
 });

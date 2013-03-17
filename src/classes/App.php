@@ -24,6 +24,9 @@ class App
 	public $basePath;
 	public $baseUrl;
 
+	public $currentUserId;
+	public $loggedIn;
+
 	// bootstrap
 	public function bootstrap() 
 	{
@@ -134,6 +137,9 @@ class App
 			$_SESSION['full_url'] = $protocol . "://" . $_SERVER['HTTP_HOST'] . $folder;
 			$_SESSION['full_path'] = $_SERVER['DOCUMENT_ROOT'].$folder;
 		}
+
+		$this->currentUserId = $_SESSION['user_id'];
+		$this->currentUser = $_SESSION['current_user'];
 		$this->loggedIn = (bool) $_SESSION['user_id'];
 	}
 
@@ -166,10 +172,11 @@ class App
 			$this->javascripts[] = $js;
 	}
 
-	protected function header($title = '') 
+	protected function header($title = '', $currentPage = '') 
 	{
 		if (!$this->isPartial) {
 			$this->title = $title;
+			$this->currentPage = $currentPage;
 			$this->loadTemplate('header');
 		}
 	}

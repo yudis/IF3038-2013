@@ -12,15 +12,26 @@
 	<body>
 		<div class="site-container">
 			<header class="site-header">
-				<?php if ($this->loggedIn): ?>
 				<h1><a href="dashboard.html"><?php echo $this->appName ?></a></h1>
 				<p><?php echo $this->appTagline ?></p>
 
+				<?php if ($this->loggedIn): ?>
 				<nav>
 					<ul class="main-links">
-						<li class="dashboard-link"><a href="dashboard">Dashboard</a></li>
-						<li class="profile-link" id="profileLink"><a href="profile" id="userFullName">John Doe</a></li>
-						<li class="profile-link" id="logoutLink"><a href="logout">Logout</a></li>
+						<?php
+						$pages = array(
+							'dashboard' => 'Dashboard',
+							'profile' => $this->currentUser->fullname,
+							'logout' => 'Logout'
+						);
+
+						foreach ($pages as $page => $label):
+							$active = ($this->currentPage == $page);
+						?>
+
+						<li class="<?php echo $page ?>-link<?php if ($active) echo ' active' ?>" id="<?php echo $page ?>Li"><a href="<?php echo $page ?>.php" id="<?php echo $page ?>Link"><?php echo $label ?></a></li>
+
+					<?php endforeach; ?>
 					</ul>
 
 					<div class="search-box">

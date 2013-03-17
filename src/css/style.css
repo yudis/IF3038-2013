@@ -151,15 +151,20 @@ textarea {
 	height: auto;
 }
 button {
-	padding: 4px 15px;
+	padding: 3px 6px;
 	border-radius: 2px;
 	border: 1px solid #999;
-	background: #f6f6f6;
+	background: #eee;
 	box-shadow: inset 0 -10px 10px rgba(0, 0, 0, 0.1);
+	transition: background-color .6s;
+}
+button:hover {
+	background: #f8f8f8;
+	transition: background-color .3s;
 }
 button:active {
 	background: #eee;
-	padding: 5px 15px 3px;
+	padding: 4px 6px 2px;
 	box-shadow: inset 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -175,6 +180,70 @@ button:active {
 	margin-bottom: 40px;
 	font-size: 12px;
 	color: #999;
+}
+
+/* Modals */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	background: rgba(0, 0, 0, 0.3);
+	opacity: 0;
+	display: none;
+}
+.modal-overlay.visible {
+	display: block;
+	opacity: 1;
+	transition: opacity 1s, display .1s;
+}
+
+.modal-dialog {
+	width: 500px;
+	height: 300px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -170px 0 0 -270px;
+	padding: 20px;
+	background: white;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.modal-dialog h3 {
+	font-weight: normal;
+	font-size: 16px;
+}
+
+.modal-overlay .modal-dialog {
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+.modal-overlay.visible .modal-dialog {
+	opacity: 1;
+	transition: opacity 0.3s;
+}
+
+.modal-dialog .close {
+	display: block;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	font-size: 24px;
+	cursor: pointer;
+	padding: 0 5px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	vertical-align: middle;
+}
+.modal-dialog .close:hover,
+ .modal-dialog .close:active {
+	text-decoration: none;
+	color: #a00;
+	background: #eee;
 }
 
 /** Header **/
@@ -296,9 +365,9 @@ button:active {
 }
 
 /* Dashboard */
-#tasksList.loading {
-	opacity: 0.3;
-	transition: opacity 0.1s;
+.loading {
+	opacity: 0.2;
+	transition: opacity 0.3s;
 }
 
 #searchForm button {
@@ -494,6 +563,15 @@ p.description .detail-label {
 @media (max-width: 767px) {
 	#loginLink {
 		display: none;
+	}
+
+	.modal-overlay {
+		background: rgba(0, 0, 0, 0.7);
+	}
+	.modal-dialog {
+		margin: 0;
+		position: static;
+		width: auto;
 	}
 }
 

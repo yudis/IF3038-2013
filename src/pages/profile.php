@@ -4,7 +4,7 @@ if (!$this->loggedIn) {
 	return;
 }
 
-$this->header();
+$this->header('Profile', 'profile');
 
 $id = (ISSET($_GET['id'])) ? $_GET['id'] : $_SESSION['user_id'];
 $user = User::model()->find("id = ".$id);

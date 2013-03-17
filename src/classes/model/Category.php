@@ -55,10 +55,20 @@
 				// new category
 				DBConnection::openDBconnection();
 				
-				$result = DBConnection::DBquery("INSERT into ".tableName()."");
-				
-				DBConnection::closeDBconnection();
-								
+				$insert = "INSERT INTO %s (id_kategori, nama_kategori, id_user) VALUES (0, '%s', '%d')";
+				$insert = sprintf($insert, $this->tableName(), addslashes($this->nama_kategori), $this->id_user);
+
+				$success = DBConnection::DBquery($insert);
+
+				if ($success)
+					$this->id_kategori = DBConnection::insertID();
+				else
+					echo 'Fail';
+
+				// $result = DBConnection::DBquery("INSERT into ".tableName()."");
+
+				//DBConnection::closeDBconnection();
+
 				return $result;
 			}
 			else

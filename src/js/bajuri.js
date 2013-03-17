@@ -138,6 +138,8 @@ bajuri.prototype = {
 					node.attachEvent(e, callback);
 			}
 		});
+
+		return this;
 	},
 
 	val: function() {
@@ -242,6 +244,40 @@ bajuri.prototype = {
 		else {
 			return this.nodes[0][prop];
 		}
+	},
+
+	text: function(data) {
+		if (data === undefined) {
+			if (this.nodes[0].innerText)
+				return this.nodes[0].innerText;
+			if (this.nodes[0].textContent)
+				return this.nodes[0].textContent;
+			else
+				return this.nodes[0].innerHTML;
+		}
+		else {
+			if (this.nodes[0].innerText)
+				this.prop('innerText', data);
+			else if (this.nodes[0].textContent)
+				this.prop('textContent', data);
+			else
+				this.prop('innerHTML', data);
+
+			return this;
+		}
+	},
+
+	html: function(data) {
+		if (data === undefined) {
+			return this.nodes[0].innerHTML;
+		}
+		else {
+			return this.prop('innerHTML', data);
+		}
+	},
+
+	empty: function() {
+		return this.html('');
 	},
 
 	serialize: function() {
@@ -354,7 +390,21 @@ bajuri.factory = function(tagName) {
 	return bajuri(document.createElement(tagName));
 }
 
-bajuri.ajaxRequest = function() {
+bajuri.serialize = function(obj) {
+	unjoined = [];
+	for (var prop in obj) {
+		left = encodeURIComponent(prop);
+		right = encodeURIComponent(obj[prop]);
+		leftright = left + '=' + right;
+		unjoined.push(leftright);
+	}
+
+	joined = unjoined.join('&');
+
+	return joined;
+}
+
+bajuri.ajaxRequest = function(url) {
 	var handle;
 	if (window.XMLHttpRequest) {
 		handle = new XMLHttpRequest();
@@ -372,14 +422,24 @@ bajuri.ajaxRequest = function() {
 		}
 	}
 
+	handle.url = url;
+
 	handle.openAndSend = function(method, url) {
 		this.open(method, url);
 		this.send();
 	}
 
 	handle.get = function(url) {
-		this.open('GET', url);
+		this.open('GET', url, true);
 		this.send();
+	}
+
+	handle.post = function(data) {
+		this.open('POST', this.url, true);
+		this.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		if (typeof data === "object")
+			data = bajuri.serialize(data);
+		this.send(data);
 	}
 
 	return handle;

@@ -141,5 +141,14 @@
 		{
 			return Category::model()->findAll("id_user='" . $this->id_user . "'");
 		}
+
+		public function getCategories() {
+			$id = addslashes($this->id_user);
+			return Category::model()->findAll("id_user='$id' OR id_kategori IN (SELECT id_katego FROM edit_kategori WHERE id_user='$id')");
+		}
+
+		public function findByUsername($username) {
+			return $this->find("username='" . addslashes($username) . "'");
+		}
 	}
 ?>

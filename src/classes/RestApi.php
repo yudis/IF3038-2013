@@ -83,12 +83,30 @@ class RestApi
 		{
 			// TODO check if user session is in some category
 			// retrieve based on category
-			$ret = Task::model()->findAll("EXISTS (SELECT * FROM ".Category::tableName()." WHERE category_id = " . 
-							$params['category_id']." AND task_id = task.id)");
+
+			$cat = Category::model()->findAll("id_kategori = '" . addslashes($params['category_id']) . "'");
+
+			if ($cat) {
+				// found
+				$success = true;
+
+				$cat = $cat[0];
+				$categoryID = $cat->id_kategori;
+				$categoryName = $cat->nama_kategori;
+				$canDeleteCategory = $cat->id_user == $this->app->currentUserId;
+
+				$ret = Task::model()->findAll("id_kategori = '" . (int) 
+								$params['category_id'] . "'");
+			}
+			else {
+				// not found
+				$success = false;
+				$ret = array();
+			}
 		}
-		else
-		{
+		else {
 			// retrieve all
+			$success = true;
 			$ret = Task::model()->findAll();
 		}
 
@@ -97,6 +115,7 @@ class RestApi
 			$dummy = new StdClass;
 			$dummy->name = $task->nama_task;
 			$dummy->id = $task->id_task;
+			$dummy->done = (bool) $task->status;
 			$dl = new DateTime($task->deadline);
 			$dummy->deadline = $dl->format('j F Y');
 
@@ -109,7 +128,24 @@ class RestApi
 			$tasks[] = $dummy;
 		}
 
-		return $tasks;
+		return compact('success', 'tasks', 'categoryID', 'categoryName', 'canDeleteCategory');
+	}
+
+	public function retrieve_categories() {
+		// TODO use categories by user
+		$raw = Category::model()->findAll();
+
+		$cats = array();
+		foreach ($raw as $cat) {
+			$dummy = new StdClass;
+			$dummy->name = $cat->nama_kategori;
+			$dummy->id = $cat->id_kategori;
+			$dummy->canDelete = ($cat->id_user == $this->app->currentUserId);
+
+			$cats[] = $dummy;
+		}
+
+		return $cats;
 	}
 	
 	public function comment($params)
@@ -200,6 +236,87 @@ class RestApi
 		}
 
 		return $return;
+	}
+
+	public function add_category() {
+		if (!$_POST)
+			return;
+
+		$nama_kategori = $_POST['nama_kategori'];
+		$id_user = $this->app->currentUserId; // the creator of the category
+
+		$category = Category::model();
+		$category->nama_kategori = $nama_kategori;
+		$category->id_user = $id_user;
+		$category->save();
+
+		$usernames = $_POST['usernames']; // an array of usernames, if using facebook-style
+		$usernames_list = $_POST['usernames_list'];
+		if (!$usernames && $usernames_list) {
+			$usernames = explode(';', $usernames_list);
+		}
+		foreach ($usernames as $k => $v) {
+			$usernames[$k] = trim($v);
+		}
+		if ($usernames) {
+			// Find the IDs of the users
+			$escapedUsernames = array();
+			foreach ($usernames as $k => $v) {
+				$escapedUsernames[] = "'" . addslashes($v) . "'";
+			}
+			$escapedUsernames = implode(',', $escapedUsernames);
+			$escapedUsernames = '(' . $escapedUsernames . ')';
+
+			$q = "username IN $escapedUsernames";
+			$users = User::model()->findAll($q);
+
+			// Insert into relationship table
+			foreach ($users as $user) {
+				$insert = "INSERT INTO edit_kategori (id_user, id_katego) VALUES ({$user->id_user}, {$category->id_kategori})";
+				DBConnection::DBQuery($insert);
+			}
+		}
+
+		return array('categoryID' => $category->id_kategori, 'categoryName' => $category->nama_kategori, 'categories' => $this->retrieve_categories());
+	}
+
+	public function delete_category() {
+		$id_kategori = addslashes($_POST['category_id']);
+		$id_user = addslashes($this->app->currentUserId);
+
+		$delete = DBConnection::DBquery("DELETE FROM kategori WHERE id_kategori=$id_kategori AND id_user=$id_user");
+		$affectedRows = DBConnection::affectedRows();
+
+		if ($affectedRows) {
+			// delete was success
+			$success = true;
+		}
+		else {
+			$success = false;
+		}
+
+		return array(
+			'success' => $success,
+			'categoryID' => $id_kategori
+		);
+	}
+
+	public function mark_task($params) {
+		$start = microtime();
+		$id_task = addslashes($_POST['taskID']);
+		$completed = $_POST['completed'] == 'true' ? 1 : 0;
+
+		// TODO permissions
+
+		$update = "UPDATE task SET status=$completed WHERE id_task='$id_task'";
+
+		$q = DBConnection::DBquery($update);
+		if (DBConnection::affectedRows()) {
+			return array('success' => 'true', 'taskId' => $id_task);
+		}
+		else {
+			return array('success' => 'false');
+		}
 	}
 }
 
