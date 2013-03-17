@@ -62,16 +62,16 @@
 			{
 				foreach($selection as $tempselect)
 				{
-					$select .= $tempselect.",";
+					$select .= $tempselect.", ";
 				}
-				$select[strlen($select)-1] = "";
+				$select = substr($select, 0, -2);
 			}
 			else
 			{
 				$select = "*";
 			}
-				
 			$result = DBConnection::DBquery("SELECT ".$select." FROM ".$this->tableName().$query);
+
 			$count = $result->num_rows;
 			
 			if ($count > 0)
@@ -108,9 +108,9 @@
 			{
 				foreach($selection as $tempselect)
 				{
-					$select .= $tempselect.",";
+					$select .= $tempselect.", ";
 				}
-				$select[strlen($select)-1] = "";
+				$select = substr($select, 0, -2);
 			}
 			else
 			{

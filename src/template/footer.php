@@ -17,11 +17,11 @@
 			?>
 			</footer>
 		</div>
-		<script src="js/bajuri.js"></script>
-		<script src="js/do.js"></script>
+		<script src="js/bajuri.js" type="text/javascript"></script>
+		<script src="js/do.js" type="text/javascript"></script>
 		<?php foreach ($this->javascripts as $js): ?>
 
-		<script src="js/<?php echo $js ?>.js"></script>
+		<script src="js/<?php echo $js ?>.js" type="text/javascript"></script>
 
 		<?php endforeach; ?>
 		<!--

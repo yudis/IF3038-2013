@@ -170,14 +170,14 @@ class RestApi
 		if (($_SERVER['REQUEST_METHOD'] === 'POST') &&
 			(isset($params['username'])) && (isset($params['password']))) {
 			
-			$user = User::model()->find("username='".$params['username']."' AND password='".$params['password']."'");
-			if ($user)
+			$user = User::model()->find("username='".$params['username']."' AND password='".md5($params['password'])."'");
+			if ($user->data)
 			{
 				$_SESSION['user_id'] = $user->id_user;
 				$u = new User;
-				$u->fullname = 'Jean Valjean';
-				$u->username = 'admin';
-				$u->email = 'jean.valjean@gmail.com';
+				$u->fullname = $user->fullname;
+				$u->username = $user->username;
+				$u->email = $user->email;
 
 				$_SESSION['current_user'] = $u;
 

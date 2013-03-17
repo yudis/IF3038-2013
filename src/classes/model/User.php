@@ -91,11 +91,7 @@
 													" VALUES ('".$this->username."','".$this->email."',
 														'".$this->fullname."','".$this->avatar."',
 														'".$this->birthdate."','".md5($this->password)."')");
-														echo "INSERT INTO ".self::tableName().
-													" (username, email, fullname, avatar, birthdate, password)".
-													" VALUES ('".$this->username."','".$this->email."',
-														'".$this->fullname."','".$this->avatar."',
-														'".$this->birthdate."','".md5($this->password)."')";
+
 					DBConnection::closeDBconnection();			
 					return $result;
 				}
