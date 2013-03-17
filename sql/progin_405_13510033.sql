@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2013 at 06:29 PM
+-- Generation Time: Mar 17, 2013 at 08:20 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `task_attachment` (
 CREATE TABLE IF NOT EXISTS `user` (
   `id_user` int(10) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `e-mail` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `fullname` varchar(50) NOT NULL,
   `avatar` varchar(100) NOT NULL,
   `birthdate` date NOT NULL,
@@ -177,8 +177,8 @@ ALTER TABLE `assign`
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`),
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`);
 
 --
 -- Constraints for table `edit_kategori`
