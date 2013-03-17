@@ -197,3 +197,74 @@ function Submit(){
         document.getElementById("foto").src = "img/foto_anonim.png";
     }
 }
+
+function auto_complete(str)
+{
+	document.getElementById("box").value = str;
+	document.getElementById("hasilsearch").innerHTML="";
+	document.getElementById("hasilsearch").style.visibility="none";
+}
+
+function showfilter(){
+	document.getElementById("filter").style.height = "64px";
+}
+
+function hiddenfilter(){
+	document.getElementById("filter").style.height = "0px";
+}
+
+function filter(str)
+{
+	document.getElementById("selectedKategori").value = str;
+	document.getElementById("filter").style.height = "0px";
+}
+
+function showHint(str)
+{
+	if (str.length==0)
+	  { 
+	  document.getElementById("hasilsearch").innerHTML="";
+	  document.getElementById("hasilsearch").style.visibility="hidden";
+	  return;
+	  }
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	  {
+		var string = xmlhttp.responseText.split("<br>");
+		var result = "";
+		var check = true;
+		result = "<ul>";
+		result += "<li class=\"judul\">task</li>"
+		for (var s in string)
+		{
+			if (document.getElementById("box").value.toLowerCase() == string[s].toLowerCase())
+				check = false;
+			result += "<li onclick=\"auto_complete(this.innerHTML);\">"+string[s]+"</li>";
+		}
+						
+		if (check)
+		{
+			result += "</ul>";
+			document.getElementById("hasilsearch").innerHTML=result;
+			document.getElementById("hasilsearch").style.visibility="visible";
+		}
+		else
+		{
+			document.getElementById("hasilsearch").innerHTML="";
+			document.getElementById("hasilsearch").style.visibility="none";
+		}
+		
+	   }
+	  }
+	xmlhttp.open("GET","autosearch.php?q="+str,true);
+	xmlhttp.send();
+}

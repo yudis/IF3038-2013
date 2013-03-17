@@ -1,7 +1,33 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
+<?php 
+	require "config.php";
+	$text = $_POST['Search'];
+	$tipefilter = $_POST['namafilter'];
+	
+	if ( $tipefilter == "all result")
+	{
+		$sql = "SELECT task.name,tag.name as nama_tag FROM (task LEFT OUTER JOIN tasktag ON task.id_task = tasktag.id_task) LEFT OUTER JOIN tag ON task.id_tag = tag.id_tag";
+		$user = mysqli_query($con,$sql);
+		while (($user != null) && ($current_user = mysqli_fetch_array($user)))
+		{
+			$hasiltask[]=$current_user['name'];
+		}
+		
+		for($i=0; $i<count($hasiltask); $i++)
+		{
+			echo $hasiltask[$i]."<br>";
+		}
+	}
+	else if ($tipefilter == "username")
+	{
+	}
+	else if ($tipefilter == "category")
+	{
+	}
+	else if ($tipefilter == "username")
+	{
+	}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,12 +35,12 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
         <script type="text/javascript" src="script.js"></script>
+		
     </head>
     <body>
-        <?php
-			include "header.php";
+		<?php
+        include "header.php";
 		?>
-
             <div id="category">
                 <div class="kategori" onclick="showList();"><a>Fraud</a></div>
                 <div class="kategori" onclick="showList3();"><a>Robbery</a></div>
