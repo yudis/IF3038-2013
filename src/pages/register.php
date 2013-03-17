@@ -7,7 +7,7 @@
 	if ($temperror)
 	{
 		// TODO print error screen
-		$return["error"] = array_merge($return["error"], $temperror);
+		print_r($temperror);
 	}
 	else
 	{

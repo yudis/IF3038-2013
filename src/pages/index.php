@@ -81,7 +81,7 @@ $this->header();
 							</div>
 							<div class="field">
 								<label for="birth_date">Date of Birth</label>
-								<input id="birth_date" name="birthdate" type="text" pattern="^[0-3][0-9]/[0-1][0-9]/[1-9][0-9][0-9][0-9]$" title="Tahun harus minimal dari tahun 1955." required/>
+								<input id="birth_date" name="birthdate" type="text" pattern="^[1-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$" onclick="datePicker.showCalendar(event);" title="Tahun harus minimal dari tahun 1955." required/>
 							</div>
 							<div class="field">
 								<label for="register_email">Email</label>
@@ -101,8 +101,12 @@ $this->header();
 			</div>
 
 		</div>
+		<?php
+			$this->loadTemplate("calendar");
+		?>
 <?php
 $this->requireJS('index');
+$this->requireJS('datepicker');
 $this->requireJS('request');
 $this->requireJS('login');
 $this->requireJS('register');

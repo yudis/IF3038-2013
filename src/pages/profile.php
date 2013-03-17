@@ -22,7 +22,8 @@ $birth_date = new Datetime($user->birthdate);
 					{
 				?>
 						<ul>
-							<li class="edit-profile-link"><a href="#" id="editProfileButton">Edit Profile</a></li>
+							<li class="edit-profile-link"><a href="edit_profile" id="editProfileButton">Edit Profile</a></li>
+							<li class="edit-profile-link"><a href="change_password">Change Password</a></li>
 						</ul>
 				<?php
 					}

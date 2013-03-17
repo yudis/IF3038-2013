@@ -55,7 +55,7 @@
 			{
 				$error["name"] = "Nama lengkap harus terdiri dari 2 kata dipisah oleh spasi.";
 			}
-			if ((!preg_match("#^[0-3][0-9]/[0-1][0-9]/[1-9][0-9][0-9][0-9]$#", $this->data['birthdate'])) && 
+			if ((!preg_match("#^[1-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$#", $this->data['birthdate'])) && 
 				(explode("/", $this->birthdate)[sizeof(explode("/", $this->birthdate))-1]>=1955))
 			{
 				$error["birth_date"] = "Format tanggal lahir yang dimasukkan salah.";
@@ -63,6 +63,10 @@
 			if (!preg_match("/^.+@.+\...+$/", $this->email))
 			{
 				$error["email"] = "Format email yang dimasukkan salah.";
+			}
+			if (!preg_match("/^.+\.(jpe?g|JPE?G)$/",$this->avatar))
+			{
+				$error["avatar"] = "Avatar harus berekstensi jpeg atau jpg.";
 			}
 			return $error;
 		}
@@ -84,21 +88,32 @@
 				}
 				else
 				{
-					DBConnection::openDBconnection();
-					
 					$result = DBConnection::DBquery("INSERT INTO `".self::tableName()."`".
 													" (username, email, fullname, avatar, birthdate, password)".
 													" VALUES ('".$this->username."','".$this->email."',
 														'".$this->fullname."','".$this->avatar."',
 														'".$this->birthdate."','".md5($this->password)."')");
 
-					DBConnection::closeDBconnection();			
 					return $result;
 				}
 			}
 			else
 			{
 				// existing user
+				if (count(User::model()->find("username='".$this->username."' OR email='".$this->email."'"))>1)
+				{
+					// username and email already used
+					return false;
+				}
+				else
+				{
+					$result = DBConnection::DBquery("UPDATE `".self::tableName()."` SET ".
+													" username = '".$this->username."', email = '".$this->email."'".
+													", fullname = '".$this->fullname."', avatar = '".$this->avatar."'".
+													", birthdate = '".$this->birthdate."', password = '".md5($this->password)."'");
+
+					return $result;
+				}
 			}
 		}
 		
