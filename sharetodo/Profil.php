@@ -35,7 +35,57 @@
             </div>
         </div>
         
-        <div id="userData">
+	<?php
+	    //create connection
+	    $con = mysqli_connect("127.0.0.1","root","root","distributedAgenda");
+	    
+	    //check the connection
+	    if (mysqli_connect_errno($con)) {
+		echo "Gagal melakukan koneksi ke MySQL : " . mysqli_connect_error();
+	    }
+	    
+	    $result = mysqli_query($con,"SELECT * FROM user");
+	    while($row = mysqli_fetch_array($result)){
+		//echo $row1['username'] . "<br/>";
+		echo "<div id='userData'>";
+		    echo "<h2 id='biodataTitle'>BIODATA</h2>" . "<hr/>";
+		    echo "<div id='biodataContent'>";
+			echo "<div class='bioLeft'>";
+			    echo "<p>Nama Lengkap :</p>";
+			echo "</div>";
+			echo "<div id='userFullName' class='bioRight'>";
+			    echo "<p>" . $row['fullname'] . "</p>";
+			echo "</div>";
+			echo "<div class='bioLeft'>";
+			    echo "<p>Username :</p>";
+			echo "</div>";
+			echo "<div class='bioRight'>";
+			    echo "<p><em>" . $row['username'] . "</em></p>";
+			echo "</div>";
+			echo "<div class='bioLeft'>";
+			    echo "<p>Tanggal Lahir :</p>";
+			echo "</div>";
+			echo "<div class='bioRight'>";
+			    echo "<p>" . $row['tanggalLahir'] . "</p>";
+			echo "</div>";
+			echo "<div class='bioLeft'>";
+			    echo "<p>Email :</p>";
+			echo "</div>";
+			echo "<div class='bioRight'>";
+			    echo "<p>" . $row['email'] . "</p>";
+			echo "</div>";
+			echo "<div class='bioLeft'>";
+			    echo "<p></p>";
+			echo "</div>";
+			echo "<div class='bioRight'>";
+			    echo "<button id='editProfileBtn' onclick='showEditForm();'>Edit</button>";
+			echo "</div>";
+		    echo "</div>";
+		echo "</div>";
+	    }
+	?>
+	
+        <!--<div id="userData">
             <h2 id="biodataTitle">BIODATA</h2>
             <hr/>
             <div id="biodataContent">
@@ -64,24 +114,12 @@
 		    <p>anon@sesuatu.co.id</p>
 		</div>
 		<div class="bioLeft">
-		    <p>Relationship Status :</p>
-		</div>
-		<div class="bioRight">
-		    <p>Engaged</p>
-		</div>
-		<div class="bioLeft">
-		    <p>Interested In :</p>
-		</div>
-		<div class="bioRight">
-		    <p>brand new ideas</p>
-		</div>
-		<div class="bioLeft">
 		    <p></p>
 		</div>
 		<div class="bioRight">
 		    <button id="editProfileBtn" onclick="showEditForm();">Edit</button>
 		</div>
-            </div>
+            </div>-->
 	    
 	    <div id=editForm>
 		<form action="#" method="POST" enctype="multipart/form-data" name="uploadImage">
