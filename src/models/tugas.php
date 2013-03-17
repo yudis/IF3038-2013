@@ -11,6 +11,7 @@ class Tugas extends Model
     private $_pemilik;
 	private $_tag;
 	private $_kategori;
+	private $_asignee;
 	
 	public function get_id_tugas() { return $this->_id_tugas; } 
 	public function get_taskname() { return $this->_taskname; } 
@@ -20,6 +21,7 @@ class Tugas extends Model
 	public function get_status() { return $this->_status; } 
 	public function get_last_mod() { return $this->_last_mod; } 
 	public function get_pemilik() { return $this->_pemilik; } 
+	public function get_asignee() { return $this->_asignee; } 
 	public function get_kategori() { return $this->_kategori; } 
 	public function get_id_kategori() { return $this->_id_kategori; } 
 	public function get_tag() { return $this->_tag; } 
@@ -36,6 +38,8 @@ class Tugas extends Model
 	public function set_id_kategori($x) { $this->_id_kategori = $x; } 
 	public function set_tag($x) { $this->_tag = $x; } 
 	public function set_tag2($i,$x) { $this->_tag[$i] = $x; } 
+	public function set_asignee($x) { $this->_asignee = $x; } 
+	public function set_asignee2($i,$x) { $this->_asignee[$i] = $x; } 
 	
 	public function fromArray($tugas)
 	{
@@ -47,8 +51,9 @@ class Tugas extends Model
 		$this->_last_mod = $tugas["last_mod"];
 		$this->_pemilik = $tugas["pemilik"];
 		$this->_tag = $tugas["tag"];
-		$this->_id_kategori = $tugas["id_kategori"];
+		$this->_asignee = $tugas["asignee"];
 		$this->_kategori = $tugas["kategori"];
+		$this->_id_kategori = $tugas["id_kategori"];
 	}
 	
 	public function toArray()
@@ -62,8 +67,9 @@ class Tugas extends Model
 		$tugas["last_mod"] = $this->_last_mod;
 		$tugas["pemilik"] = $this->_pemilik;
 		$tugas["tag"] = $this->_tag;
-		$tugas["id_kategori"] = $this->_id_kategori;
+		$tugas["asignee"] = $this->_asignee;
 		$tugas["kategori"] = $this->_kategori;
+		$tugas["id_kategori"] = $this->_id_kategori;
 		
 		return $tugas;
 	}
@@ -91,10 +97,10 @@ class Tugas extends Model
 		$this->_pemilik = $tugas["pemilik"];
 		$this->_id_kategori = $tugas["id_kategori"];
 		$this->_kategori = $tugas["nama_kategori"];
-
 		$this->_tag = $this->getTags($id_tugas);
 		$this->_attachment = $this->getAttachments($id_tugas);
-
+		$this->getAsignee($id_tugas);
+		
         return $this->toArray();
     }
 	
@@ -123,6 +129,42 @@ class Tugas extends Model
         return $this->getAll(array($id_tugas));
 	}
 
+	public function setStats($i,$n)
+    {
+        $sql = "UPDATE tugas SET
+                    status = ?
+					WHERE id= ?;";
+         
+        $data = array(
+			$n,
+			$i
+        );
+         
+        $sth = $this->_db->prepare($sql);
+        return $sth->execute($data);
+    }
+	
+	public function getAsignee($id_tugas)
+	{
+		$sql = "SELECT username FROM assignees WHERE id_tugas=? ";
+        $this->_setSql($sql);
+		
+        $r = $this->getAll(array($id_tugas));
+		
+		
+        if (empty($r))
+        {
+            return false;
+        }
+		
+		$i=1;
+		while(!empty($r[$i]["username"]))
+		{
+			$this->_asignee[$i] = $r[$i]["username"];
+			$i++;
+		}
+	}
+	
     public function store()
     {
         $sql = "INSERT INTO tugas 

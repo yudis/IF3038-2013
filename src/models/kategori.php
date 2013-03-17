@@ -38,7 +38,7 @@ class Kategori extends Model
 	
 	public function getKategori($id_kategori)
     {
-        $sql = "SELECT * FROM kategori WHERE id=? ";
+        $sql = "SELECT * FROM categories WHERE id=? ";
         $this->_setSql($sql);
 		
         $kategori = $this->getRow(array($id_kategori));
@@ -57,7 +57,7 @@ class Kategori extends Model
 	
 	public function getTugas ($id_kategori)
 	{
-		$sql = "SELECT id_tugas FROM categories WHERE id_kategori=? ";
+		$sql = "SELECT id FROM tugas WHERE id_kategori=? ";
         $this->_setSql($sql);
 		
         $result = $this->getAll(array($id_kategori));
@@ -70,18 +70,9 @@ class Kategori extends Model
 		
 		
 		$i=0;
-		while(!empty($result[$i]["id_tugas"]))
+		while(!empty($result[$i]["id"]))
 		{
-			$sql = "SELECT nama FROM tugas WHERE id=? ";
-			$this->_setSql($sql);
-			
-			$result2 = $this->getRow(array($result[$i]["id_tugas"]));
-         
-			if (empty($result2))
-			{
-				return false;
-			}
-			$this->_tugas[$i]=$result2["nama"];
+			$this->_tugas[$i]=$result[$i]["id"];
 			
 			$i++;
 		}
@@ -89,7 +80,7 @@ class Kategori extends Model
 	
 	public function NewKategori($nama)
     {
-        $sql = "INSERT INTO kategori
+        $sql = "INSERT INTO categories
                     (nama)
                 VALUES 
                     (?);";
@@ -104,7 +95,7 @@ class Kategori extends Model
 	
     public function store()
     {
-        $sql = "INSERT INTO kategori
+        $sql = "INSERT INTO categories
                     (id, nama, last_mod)
                 VALUES 
                     (?, ?, ?);";

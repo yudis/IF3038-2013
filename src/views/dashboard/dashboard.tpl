@@ -2,7 +2,7 @@
 <html> 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Todolist</title>
         <link rel="stylesheet" type="text/css" href="styles/default.css" />
         <link rel="stylesheet" type="text/css" href="styles/mediaqueries.css" />
@@ -50,7 +50,7 @@
             <div class="content">
                 <div class="sidebar">
 				<ul id="Kategori" class="nav">     
-						<li><a href=\"#\"  onclick="loadtugas(''); return false;">All</button></a></li>
+						<li><a href="#"  onclick="loadtugas(''); return false;">All</button></a></li>
 						<div id="nama_k"></div>
 					</ul>
                     <ul class="nav">

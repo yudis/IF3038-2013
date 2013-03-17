@@ -1,35 +1,60 @@
-var nKategori = 3;
-var selectedIndex = -1;
-
 function updateAddButtonVisibility() {
     var elmt = document.getElementById('addTask');
-    if (selectedIndex < 0) {
-        elmt.style.display = 'none';
-    } else {
-        elmt.style.display = 'inline-block';
-    }
+    elmt.style.display = 'inline-block';
+}
+
+function NewTask() {
+     window.location = "createtugas.html";
 }
 
 function NewKategori() {
-    var element = document.getElementById('txtNewKategori');
-    
-    var newitemK = '<li><a id="K' + nKategori + '" href="#" onclick="return KategoriSelected(this)">' + element.value + '</a></li>'
-    var currentK = document.getElementById('Kategori');
-    currentK.innerHTML += newitemK;
-    
-    
-    if (selectedIndex < 0) {
-        var newitemC = '<section id="main-K' + nKategori + '"><h2>' + element.value + '</h2></section>'
-        var currentC = document.getElementById('listTugas');
-        currentC.innerHTML += newitemC;
-    } else {
-        var newitemC1 = '<section id="main-K' + nKategori + '" style="display: none;"><h2>' + element.value + '</h2></section>'
-        var currentC1 = document.getElementById('listTugas');
-        currentC1.innerHTML += newitemC1;
-    }
-    
-    nKategori++;
-    return false;
+    var q = document.getElementById('txtNewKategori').value;
+	if(q=="")
+	{
+		return false;
+	}
+	
+    if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("nama_k").innerHTML=xmlhttp.responseText;
+		}
+	  }
+	xmlhttp.open("GET","ajax/createkategori.php?q="+q,true);
+	xmlhttp.send();
+	
+	return false;
+}
+
+function updateStatus(n,str) {
+    if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("stats").innerHTML=xmlhttp.responseText;
+		}
+	  }
+	xmlhttp.open("GET","ajax/updateStatus.php?q="+str+"&n="+n,true);
+	xmlhttp.send();
+	
+	return false;
 }
 
 function NewTask() {
@@ -73,3 +98,25 @@ function KategoriSelected(elmt) {
     return false;
 }
 
+function loadtugas(str)
+{
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("tugasT").innerHTML=xmlhttp.responseText;
+		}
+	  }
+	xmlhttp.open("GET","ajax/tugas.php?q="+str,true);
+	xmlhttp.send();
+	
+	return false;
+}
