@@ -196,15 +196,19 @@ button:active {
 }
 
 .modal-dialog {
-	width: 300px;
+	width: 500px;
 	height: 300px;
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin: -190px 0 0 -190px;
-	padding: 40px;
+	margin: -170px 0 0 -270px;
+	padding: 20px;
 	background: white;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.modal-dialog h3 {
+	font-weight: normal;
+	font-size: 16px;
 }
 
 .modal-overlay .modal-dialog {
@@ -224,9 +228,9 @@ button:active {
 	font-size: 24px;
 	cursor: pointer;
 	padding: 0 5px;
-	width: 1em;
-	height: 1em;
-	line-height: 1em;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
 	text-align: center;
 	vertical-align: middle;
 }

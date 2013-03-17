@@ -28,6 +28,7 @@ else {
 	$pageTitle = 'All Tasks';
 }
 
+$this->requireJS('checker');
 $this->requireJS('dashboard');
 $this->header('Dashboard', 'dashboard');
 ?>
@@ -129,7 +130,7 @@ foreach ($done as $task):
 							<li id="categoryLi<?php echo $cat->id_kategori ?>"<?php if ($currentCat->id_kategori == $cat->id_kategori) echo ' class="active"' ?>><a href="dashboard.php?cat=<?php echo $cat->id_kategori ?>" data-category-id="<?php echo $cat->id_kategori ?>"><?php echo $cat->nama_kategori ?></a></li>
 							<?php endforeach; ?>
 						</ul>
-						<button type="button" id="addCategoryButton" onclick="new_category()">Tambah Kategori</button>
+						<button type="button" id="addCategoryButton">Tambah Kategori</button>
 					</section>
 				</div>
 
@@ -151,7 +152,7 @@ foreach ($done as $task):
 						<input id="new_category_username" name="new_category_username" pattern="^[^;]{5,}(;[^;]{5,})*$" type="text" title="Username harus terdaftar dan dipisahkan tanda titik-koma. Kosongkan jika private." />
 					</div>
 					<div class="buttons">
-						<button type="submit" disabled title="Semua elemen form harus diisi dengan benar dahulu.">Simpan</button>
+						<button type="submit" id="submitButton" title="Semua elemen form harus diisi dengan benar dahulu.">Simpan</button>
 					</div>
 				</form>
 			</div>

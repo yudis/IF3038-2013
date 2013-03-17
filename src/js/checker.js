@@ -23,9 +23,11 @@ Rp(function() {
 			console.log('Invalid: ' + this.id);
 			Rp(this).addClass('invalid');
 			Rp('#register_submit').prop('disabled', true);
+			Rp('#submitButton').prop('disabled', true);
 		}
 	};
 
 	Rp('input[pattern]').on('keyup', checkValidity);
-	Rp('#register_submit').prop('disabled', false); // disabled by default
+	Rp('#register_submit').prop('disabled', true); // disabled by default
+	Rp('#submitButton').prop('disabled', true);
 });

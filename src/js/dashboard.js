@@ -138,13 +138,16 @@ Rp(function() {
 	}
 
 	showModal = function() {
-		Rp('#modalOverlay').addClass('visible');
+		Rp('#modalOverlay').css('display', 'block');
+		window.setTimeout(function() {
+			Rp('#modalOverlay').addClass('visible');
+		}, 100);
 	}
 	hideModal = function() {
 		Rp('#modalOverlay').removeClass('visible');
 	}
 	Rp('.modal-overlay .close').on('click', function() {
-		Rp(this.parentNode.parentNode).removeClass('visible');
+		Rp(this.parentNode.parentNode).removeClass('visible').css('display', 'none');
 	})
 
 
