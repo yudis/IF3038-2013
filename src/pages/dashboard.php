@@ -43,8 +43,9 @@ $this->header('Dashboard', 'dashboard');
 			<div class="dashboard">	
 				<header>
 					<h1>Dashboard</h1>
-					<ul>
-						<li class="add-task-link" id="addTaskLink"><a href="newwork.php">New Task</a></li>
+					<ul id="categoryTasks">
+						<li class="add-task-link" id="deleteCategoryLi"><a href="newwork.php" id="deleteCategoryLink">Delete Category</a></li>
+						<li class="add-task-link" id="addTaskLi"><a href="newwork.php">New Task</a></li>
 					</ul>
 				</header>
 				<div class="primary" id="dashboardPrimary">
@@ -134,7 +135,7 @@ foreach ($done as $task):
 						</header>
 						<ul id="categoryList">
 							<?php foreach ($categories as $cat): ?>
-							<li id="categoryLi<?php echo $cat->id_kategori ?>"<?php if ($currentCat->id_kategori == $cat->id_kategori) echo ' class="active"' ?>><a href="dashboard.php?cat=<?php echo $cat->id_kategori ?>" data-category-id="<?php echo $cat->id_kategori ?>"><?php echo $cat->nama_kategori ?></a></li>
+							<li data-deletable="<?php echo $cat->id_user == $this->currentUserId ? 'true' : 'false' ?>" id="categoryLi<?php echo $cat->id_kategori ?>"<?php if ($currentCat->id_kategori == $cat->id_kategori) echo ' class="active"' ?>><a href="dashboard.php?cat=<?php echo $cat->id_kategori ?>" data-category-id="<?php echo $cat->id_kategori ?>"><?php echo $cat->nama_kategori ?></a></li>
 							<?php endforeach; ?>
 						</ul>
 						<button type="button" id="addCategoryButton">Tambah Kategori</button>

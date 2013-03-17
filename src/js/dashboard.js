@@ -3,7 +3,8 @@ var currentCat;
 Rp(function() {
 
 	if (currentCat === undefined || !currentCat) {
-		Rp('#addTaskLink').hide();
+		Rp('#deleteCategoryLi').hide();
+		Rp('#addTaskLi').hide();
 	}
 
 	createTaskElement = function(task) {
@@ -55,6 +56,7 @@ Rp(function() {
 			.factory('a')
 			.attr('href', 'dashboard.php?cat=' + cat.id)
 			.attr('data-category-id', cat.id)
+			.attr('data-deletable', cat.canDelete ? 'true' : 'false')
 			.prop('innerHTML', cat.name);
 
 		li.append(a);
@@ -95,13 +97,17 @@ Rp(function() {
 
 				Rp('#categoryList li.active').removeClass('active');
 				if (response.categoryID) {
-					Rp('#addTaskLink').show();
+					Rp('#categoryTasks').show();
 					li = Rp('#categoryLi' + response.categoryID);
 					li.addClass('active');
 					Rp('#pageTitle').text(response.categoryName);
+
+					if (response.canDeleteCategory)
+						Rp('#deleteCategoryLi').show()
 				}
 				else {
-					Rp('#addTaskLink').hide();
+					Rp('#deleteCategoryLi').hide();
+					Rp('#addTaskLi').hide();
 					Rp('#pageTitle').text('All Tasks');
 				}
 			}
@@ -226,4 +232,10 @@ Rp(function() {
 		}
 		del.post(qs);
 	}
+
+	Rp('#deleteCategoryLink').on('click', function(e) {
+		e.preventDefault();
+		if (confirm('Yakin hapus kategori ini?'))
+			deleteCategory(currentCat);
+	});
 });

@@ -93,6 +93,7 @@ class RestApi
 				$cat = $cat[0];
 				$categoryID = $cat->id_kategori;
 				$categoryName = $cat->nama_kategori;
+				$canDeleteCategory = $cat->id_user == $this->app->currentUserId;
 
 				$ret = Task::model()->findAll("id_kategori = '" . (int) 
 								$params['category_id'] . "'");
@@ -127,7 +128,7 @@ class RestApi
 			$tasks[] = $dummy;
 		}
 
-		return compact('success', 'tasks', 'categoryID', 'categoryName');
+		return compact('success', 'tasks', 'categoryID', 'categoryName', 'canDeleteCategory');
 	}
 
 	public function retrieve_categories() {

@@ -360,7 +360,7 @@ button:active {
 }
 
 /* Dashboard */
-#dashboardPrimary.loading {
+.loading {
 	opacity: 0.2;
 	transition: opacity 0.3s;
 }
