@@ -50,6 +50,7 @@ $this->header('Dashboard', 'dashboard');
 					</ul>
 				</header>
 				<div class="primary" id="dashboardPrimary">
+					<form action="" method="POST">
 					<section class="tasks current">
 						<header>
 							<h3 id="pageTitle"><?php echo $pageTitle ?></h3>
@@ -60,11 +61,11 @@ $this->header('Dashboard', 'dashboard');
 foreach ($todo as $task):
 	$deadline_datetime = new DateTime($task->deadline); ?>
 
-						<article class="task" data-task-id="<?php echo $task->id_task ?>" data-category-="a">
+						<article class="task" data-task-id="<?php echo $task->id_task ?>">
 							<header>
 								<h1>
 									<label>
-										<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+										<span class="task-checkbox"><input type="checkbox" class="task-checkbox" data-task-id="<?php echo $task->id_task ?>"></span>
 										<a href="tugas.php?id=<?php echo $task->id_task ?>"><?php echo $task->nama_task; ?></a>
 									</label>
 								</h1>
@@ -99,11 +100,11 @@ foreach ($todo as $task):
 foreach ($done as $task):
 	$deadline_datetime = new DateTime($task->deadline); ?>
 
-						<article class="task" data-task-id="<?php echo $task->id_task ?>" data-category-="a">
+						<article class="task" data-task-id="<?php echo $task->id_task ?>">
 							<header>
 								<h1>
 									<label>
-										<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+										<span class="task-checkbox"><input checked type="checkbox" class="task-checkbox" data-task-id="<?php echo $task->id_task ?>"></span>
 										<a href="tugas.php?id=<?php echo $task->id_task ?>"><?php echo $task->nama_task; ?></a>
 									</label>
 								</h1>
@@ -127,6 +128,7 @@ foreach ($done as $task):
 <?php endforeach; ?>
 						</div>
 					</section>
+					</form>
 				</div>
 			
 				<div class="secondary">

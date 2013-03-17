@@ -26,18 +26,23 @@ Rp(function() {
 		h1 = Rp.factory('h1');
 		label = Rp.factory('label');
 		checkboxSpan = Rp.factory('span').addClass('task-checkbox');
-		checkbox = Rp.factory('input').addClass('task-checkbox').prop('type', 'checkbox').prop('checked', task.done);
+		checkbox = Rp.factory('input')
+			.addClass('task-checkbox')
+			.prop('type', 'checkbox')
+			.prop('checked', task.done)
+			.attr('data-task-id', task.id)
+			.on('click', handleTaskCheckbox);
 		space = document.createTextNode(' ');
-		mainLink = Rp.factory('a').prop('href', 'tugas.php?id=' + task.id).prop('innerHTML', task.name);
+		mainLink = Rp.factory('a').prop('href', 'tugas.php?id=' + task.id).text(task.name);
 
 		detailsDiv = Rp.factory('div').addClass('details');
 
 		deadlineP = Rp.factory('p').addClass('deadline');
-		deadlineContentSpan = Rp.factory('span').addClass('detail-content').prop('innerHTML', task.date);
+		deadlineContentSpan = Rp.factory('span').addClass('detail-content').text(task.deadline);
 
 		tagsP = Rp.factory('p').addClass('tags');
 		task.tags.forEach(function(tag) {
-			tagSpan = Rp.factory('span').addClass('tag').prop('innerHTML', tag);
+			tagSpan = Rp.factory('span').addClass('tag').text(tag);
 			tagsP.append(tagSpan);
 		})
 
@@ -60,7 +65,7 @@ Rp(function() {
 			.attr('href', 'dashboard.php?cat=' + cat.id)
 			.attr('data-category-id', cat.id)
 			.attr('data-deletable', cat.canDelete ? 'true' : 'false')
-			.prop('innerHTML', cat.name);
+			.text(cat.name);
 
 		li.append(a);
 
@@ -218,15 +223,16 @@ Rp(function() {
 		del = Rp.ajaxRequest('api/delete_category');
 		del.onreadystatechange = function() {
 			if (del.readyState == 4) {
+				Rp('#categoryList').removeClass('loading');
 				response = Rp.parseJSON(del.responseText);
 				if (response.success) {
 					Rp('#categoryLi' + catid).hide();
-					Rp('#categoryList').removeClass('loading');
 					goToCategory(0, 'Dashboard');
 				}
 				else {
 					// error
 					console.log('Failed to delete category ' + catid);
+					Rp('#categoryList').removeClass('loading');
 				}
 			}
 			else {
@@ -241,4 +247,33 @@ Rp(function() {
 		if (confirm('Yakin hapus kategori ini?'))
 			deleteCategory(currentCat);
 	});
+
+	// Task checkboxes
+
+	handleTaskCheckbox = function() {
+		Rp('.task-checkbox input[data-task-id]').prop('disabled', true);
+		taskID = this.getAttribute('data-task-id');
+		mark = Rp.ajaxRequest('api/mark_task');
+		mark.onreadystatechange = function() {
+			if (mark.readyState == 4) {
+				Rp('#dashboardPrimary').removeClass('loading');
+				response = Rp.parseJSON(mark.responseText);
+				if (response.success) {
+					loadCategory(currentCat);
+				}
+				else {
+					console.log('Failure to update status of task.');
+				}
+			}
+			else {
+				Rp('#dashboardPrimary').addClass('loading');
+			}
+		}
+		mark.post({
+			'taskID': taskID,
+			'completed': this.checked
+		});
+	}
+
+	Rp('.task-checkbox input[data-task-id]').on('change', handleTaskCheckbox);
 });

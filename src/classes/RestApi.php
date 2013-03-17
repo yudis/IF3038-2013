@@ -115,7 +115,7 @@ class RestApi
 			$dummy = new StdClass;
 			$dummy->name = $task->nama_task;
 			$dummy->id = $task->id_task;
-			$dummy->done = $task->status;
+			$dummy->done = (bool) $task->status;
 			$dl = new DateTime($task->deadline);
 			$dummy->deadline = $dl->format('j F Y');
 
@@ -300,6 +300,24 @@ class RestApi
 			'success' => $success,
 			'categoryID' => $id_kategori
 		);
+	}
+
+	public function mark_task($params) {
+		$start = microtime();
+		$id_task = addslashes($_POST['taskID']);
+		$completed = $_POST['completed'] == 'true' ? 1 : 0;
+
+		// TODO permissions
+
+		$update = "UPDATE task SET status=$completed WHERE id_task='$id_task'";
+
+		$q = DBConnection::DBquery($update);
+		if (DBConnection::affectedRows()) {
+			return array('success' => 'true', 'taskId' => $id_task);
+		}
+		else {
+			return array('success' => 'false');
+		}
 	}
 }
 

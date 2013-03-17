@@ -138,6 +138,8 @@ bajuri.prototype = {
 					node.attachEvent(e, callback);
 			}
 		});
+
+		return this;
 	},
 
 	val: function() {
@@ -388,6 +390,20 @@ bajuri.factory = function(tagName) {
 	return bajuri(document.createElement(tagName));
 }
 
+bajuri.serialize = function(obj) {
+	unjoined = [];
+	for (var prop in obj) {
+		left = encodeURIComponent(prop);
+		right = encodeURIComponent(obj[prop]);
+		leftright = left + '=' + right;
+		unjoined.push(leftright);
+	}
+
+	joined = unjoined.join('&');
+
+	return joined;
+}
+
 bajuri.ajaxRequest = function(url) {
 	var handle;
 	if (window.XMLHttpRequest) {
@@ -421,6 +437,8 @@ bajuri.ajaxRequest = function(url) {
 	handle.post = function(data) {
 		this.open('POST', this.url, true);
 		this.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		if (typeof data === "object")
+			data = bajuri.serialize(data);
 		this.send(data);
 	}
 
