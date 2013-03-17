@@ -1,1 +1,0 @@
-Buka file index.html menggunakan internet browser yang ada di komputer anda
