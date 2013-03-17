@@ -5,6 +5,30 @@
 		<script src="js/calendar.js" > </script>
         <link rel="stylesheet" href="css/css.css">
         <script>
+			function validateLogin(form){					/*---------------------------JO---validasi form login--phpnya:login.php----------------- */
+
+				if (window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();				
+				}else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+				
+				xmlhttp.onreadystatechange = function(){
+					if (xmlhttp.readyState==4 && xmlhttp.status==200)	{				
+						if(xmlhttp.responseText==1){
+							window.location="dashboard.html";
+						}else{
+							alert("error password or username");
+						}						
+					}
+
+				}
+					
+				xmlhttp.open("GET","login.php?user="+form.userId.value+"&pwd="+form.password.value,true);
+				xmlhttp.send();
+
+			}												
+		
             function ShowAkhir()
                 {
                      if(document.getElementById("regakhir").style.display == 'none')
@@ -30,7 +54,7 @@
                      }
                 }
 				
-			function check(form)
+			function check(form)											/*-------------------------------udah ngga kepake----------------------------------- */
 				{
 					if(form.userId.value == "admin" && form.password.value == "testing")
 						{
@@ -64,19 +88,29 @@
 					window.location="dashboard.html";
 				}
 			
-			function user_validating()
+			function user_validating()			/*----------------------------JO---validasi buat registrasi user-----registeruser.php---------------------- */
 				{
 					var userid = document.registration.username.value;
 					var userpass = document.registration.password.value;
 					
-					if((userid.length >= "5") && (userid != userpass))
-						{
-							document.getElementById("usericon").src="pict/centang.png";
+						if (window.XMLHttpRequest){
+							xmlhttp = new XMLHttpRequest();				
+						}else{
+							xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
 						}
-							else
-						{
-							document.getElementById("usericon").src="pict/canceled.png";
+						
+						xmlhttp.onreadystatechange = function(){
+							if (xmlhttp.readyState==4 && xmlhttp.status==200)	{				
+								if((userid.length >= "5") && (userid != userpass) && (xmlhttp.responseText==1)){
+										document.getElementById("usericon").src="pict/centang.png";
+								}else{
+										document.getElementById("usericon").src="pict/canceled.png";
+								}				
+							}		
 						}
+							
+						xmlhttp.open("GET","registeruser.php?user="+userid,true);
+						xmlhttp.send();									
 				}
 				
 			function pass_validating()
@@ -131,18 +165,28 @@
 				}
 			
 
-			function email_validating()
+			function email_validating()				/*-----------------------------JO--validasi buat email--registeremail.php--------------------------- */
 				{
 					var emails = document.registration.email.value;
+
+					if (window.XMLHttpRequest){
+						xmlhttp = new XMLHttpRequest();				
+					}else{
+						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+					}
 					
-					if(emails.match(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i))
-						{
-							document.getElementById("emailicon").src="pict/centang.png";
-						}
-							else
-						{
-							document.getElementById("emailicon").src="pict/canceled.png";
-						}
+					xmlhttp.onreadystatechange = function(){
+						if (xmlhttp.readyState==4 && xmlhttp.status==200)	{				
+							if(emails.match(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i) && xmlhttp.responseText==1){
+									document.getElementById("emailicon").src="pict/centang.png";
+							}else{
+									document.getElementById("emailicon").src="pict/canceled.png";
+							}
+						}		
+					}
+						
+					xmlhttp.open("GET","registeremail.php?email="+emails,true);
+					xmlhttp.send();														
 				}
 			
 			function date_validating()
@@ -195,7 +239,7 @@
 					
 					<input class="small" type="password" name="password" placeholder="password" required></li>
 				<li>
-					<input class="xsmall" type="button" onclick="check(this.form)" value="Login">
+					<input class="xsmall" type="button" onClick="validateLogin(this.form)" value="Login">
 				</li>
 			</ul>
 		</form>
@@ -210,7 +254,7 @@
                 <div id="regawal">
                     <div id="were">
                     </div>
-                    <div id="poctreg" onclick="ShowAkhir()" >
+                    <div id="poctreg" onClick="ShowAkhir()" >
                     </div>
                     <div id="textreg" on>
                         try and be awesome 
@@ -220,33 +264,33 @@
                     <div id="formreg">
                     <form name="registration">
                         <label>username</label>
-                        <input name="username" type="text" placeholder="username"  onkeyup="user_validating()" onchange="logingg()" />
+                        <input name="username" type="text" placeholder="username"  onkeyup="user_validating()" onChange="logingg()" />
 						<img src="pict/blank.png" alt="icon2" id="usericon" onchange="isformvalid()" />
                         <label>password</label>
-                        <input name="password" type="password" placeholder="password" onkeyup="pass_validating()" onchange="logingg()" />
+                        <input name="password" type="password" placeholder="password" onKeyUp="pass_validating()" onChange="logingg()" />
                         <img src="pict/blank.png" alt="icon3" id="passicon" />
 						<label>confirm password</label>
-                        <input name="confirmpass" type="password" placeholder="confirm password" onkeyup="conf_validating()" onchange="logingg()"  />
+                        <input name="confirmpass" type="password" placeholder="confirm password" onKeyUp="conf_validating()" onChange="logingg()"  />
 						<img src="pict/blank.png" alt="icon4" id="conficon" />
                         <label>nama lengkap</label>
-                        <input name="namaleng" placeholder="nama lengkap" onkeyup="nama_validating()" onchange="logingg()" />
+                        <input name="namaleng" placeholder="nama lengkap" onKeyUp="nama_validating()" onChange="logingg()" />
 						<img src="pict/blank.png" alt="icon5" id="nameicon" />
                         <label>tanggal lahir</label>
-						<input type="text" name="tanggal" id="date" onmousedown="date_validating()" onchange="logingg()" />
+						<input type="text" name="tanggal" id="date" onMouseDown="date_validating()" onChange="logingg()" />
 						<img src="pict/blank.png" alt="icon8" id="dateicon"  />
 						<script type="text/javascript">
 							calendar.set("date");
 						</script>
                         <label>email</label>
-                        <input name="email" type="email" placeholder="email" onkeyup="email_validating()" onchange="logingg()" />
+                        <input name="email" type="email" placeholder="email" onKeyUp="email_validating()" onChange="logingg()" />
 						<img src="pict/blank.png" alt="icon6" id="emailicon" />
                             <br><br>
                         <label>avatar</label>
-						<input type="file" name="avatar" onchange="avatar_validating();logingg()" />
+						<input type="file" name="avatar" onChange="avatar_validating();logingg()" />
 						<img src="pict/blank.png" alt="icon7" id="avaicon" />
 						<br>
-                        <input class= "submitreg" id="submitb" name="submit" type="button" value="Submit" disabled onclick="masuk()" />
-                        <input class= "submitreg" name="cancel" type="cancel" onclick="ShowAwal()" value="Cancel">
+                        <input class= "submitreg" id="submitb" name="submit" type="button" value="Submit" disabled onClick="masuk()" />
+                        <input class= "submitreg" name="cancel" type="cancel" onClick="ShowAwal()" value="Cancel">
                     </form>
                 </div>
                 </div>
