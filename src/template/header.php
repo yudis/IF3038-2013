@@ -36,6 +36,12 @@
 
 					<div class="search-box">
 						<form action="search.php" method="get" id="searchForm">
+							<select name="type">
+								<option value="all">All</option>
+								<option value="user">Users</option>
+								<option value="category">Categories</option>
+								<option value="task">Tasks</option>
+							</select>
 							<input type="search" name="q" placeholder="Search">
 							<button type="submit">Search</button>
 						</form>
