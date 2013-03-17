@@ -15,19 +15,18 @@ Rp(function() {
 			Rp(this).removeClass('invalid');
 
 			inv = Rp('input[pattern].invalid');
-			if (this.value)
+			if (this.value) {
 				Rp('#register_submit').prop('disabled', (inv.length() > 0));
+			}
 		}
 		else {
 			// ga valid
 			console.log('Invalid: ' + this.id);
 			Rp(this).addClass('invalid');
 			Rp('#register_submit').prop('disabled', true);
-			Rp('#submitButton').prop('disabled', true);
 		}
 	};
 
 	Rp('input[pattern]').on('keyup', checkValidity);
 	Rp('#register_submit').prop('disabled', true); // disabled by default
-	Rp('#submitButton').prop('disabled', true);
 });

@@ -24,6 +24,9 @@ class App
 	public $basePath;
 	public $baseUrl;
 
+	public $currentUserId;
+	public $loggedIn;
+
 	// bootstrap
 	public function bootstrap() 
 	{
@@ -134,6 +137,8 @@ class App
 			$_SESSION['full_url'] = $protocol . "://" . $_SERVER['HTTP_HOST'] . $folder;
 			$_SESSION['full_path'] = $_SERVER['DOCUMENT_ROOT'].$folder;
 		}
+
+		$this->currentUserId = $_SESSION['user_id'];
 		$this->loggedIn = (bool) $_SESSION['user_id'];
 	}
 

@@ -43,7 +43,7 @@ $this->header('Dashboard', 'dashboard');
 				<div class="primary" id="dashboardPrimary">
 					<section class="tasks current">
 						<header>
-							<h3><?php echo $pageTitle ?></h3>
+							<h3 id="pageTitle"><?php echo $pageTitle ?></h3>
 						</header>
 
 						<div id="tasksList">
@@ -144,15 +144,15 @@ foreach ($done as $task):
 				<header><h3>Tambah Kategori</h3></header>
 				<form id="newCategoryForm">
 					<div class="field">
-						<label for="new_category_name">Nama Kategori</label>
-						<input id="new_category_name" name="new_category_name" type="text" title="Nama kategori harus diisi." required />
+						<label for="nama_kategori">Nama Kategori</label>
+						<input id="nama_kategori" name="nama_kategori" type="text" title="Nama kategori harus diisi." required />
 					</div>
 					<div class="field">
-						<label for="new_category_username">Username</label>
-						<input id="new_category_username" name="new_category_username" pattern="^[^;]{5,}(;[^;]{5,})*$" type="text" title="Username harus terdaftar dan dipisahkan tanda titik-koma. Kosongkan jika private." />
+						<label for="usernames_list">Username</label>
+						<input id="usernames_list" name="usernames_list" pattern="^[^;]{5,}(;[^;]{5,})*$" type="text" title="Username harus terdaftar dan dipisahkan tanda titik-koma. Kosongkan jika private." />
 					</div>
 					<div class="buttons">
-						<button type="submit" id="submitButton" title="Semua elemen form harus diisi dengan benar dahulu.">Simpan</button>
+						<button type="submit" title="Semua elemen form harus diisi dengan benar dahulu.">Simpan</button>
 					</div>
 				</form>
 			</div>

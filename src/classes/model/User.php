@@ -72,5 +72,14 @@
 		{
 			return Task::model()->findAll("id_task IN (SELECT id_task FROM have_tasks WHERE username='" . $this->username . "')");
 		}
+
+		public function getCategories() {
+			$id = addslashes($this->id_user);
+			return Category::model()->findAll("id_user='$id' OR id_kategori IN (SELECT id_katego FROM edit_kategori WHERE id_user='$id')");
+		}
+
+		public function findByUsername($username) {
+			return $this->find("username='" . addslashes($username) . "'");
+		}
 	}
 ?>

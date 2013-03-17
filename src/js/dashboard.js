@@ -64,9 +64,9 @@ Rp(function() {
 
 	fillTasks = function(tasks) {
 		tasksList = Rp('#tasksList');
-		tasksList.prop('innerHTML', '');
+		tasksList.empty();
 		completedTasksList = Rp('#completedTasksList');
-		completedTasksList.prop('innerHTML', '');
+		completedTasksList.empty();
 		tasks.forEach(function(task) {
 			if (task.done)
 				completedTasksList.append(createTaskElement(task));
@@ -77,7 +77,7 @@ Rp(function() {
 
 	fillCategories = function(cats) {
 		catsList = Rp('#categoryList');
-		catsList.prop('innerHTML', '');
+		catsList.empty();
 		cats.forEach(function(cat) {
 			catsList.append(createCategoryElement(cat));
 		});
@@ -92,13 +92,15 @@ Rp(function() {
 			Rp('#dashboardPrimary').removeClass('loading');
 			fillTasks(tasks);
 
+			Rp('#categoryList li.active').removeClass('active');
 			if (currentCat) {
 				Rp('#addTaskLink').show();
-				Rp('#categoryLi' + currentCat).addClass('active');
+				li = Rp('#categoryLi' + currentCat);
+				li.addClass('active');
+				Rp('#pageTitle').text(li.text());
 			}
 			else {
 				Rp('#addTaskLink').hide();
-				Rp('#categoryList li.active').removeClass('active');
 			}
 		}
 		else if (catreq.readyState > 0) {
@@ -144,14 +146,44 @@ Rp(function() {
 		}, 100);
 	}
 	hideModal = function() {
-		Rp('#modalOverlay').removeClass('visible');
+		Rp('#modalOverlay').removeClass('visible').css('display', 'none');
 	}
 	Rp('.modal-overlay .close').on('click', function() {
 		Rp(this.parentNode.parentNode).removeClass('visible').css('display', 'none');
 	})
 
-
+	// Adding categories
 	Rp('#addCategoryButton').on('click', function() {
 		showModal();
+	});
+	Rp('#newCategoryForm').on('submit', function(e) {
+		e.preventDefault();
+
+		serialized = Rp(this).serialize();
+
+		req = Rp.ajaxRequest('api/add_category');
+		req.onreadystatechange = function() {
+			switch (req.readyState) {
+				case 0:
+				case 1:
+				case 2:
+				case 3:
+					Rp('#newCategoryForm').addClass('loading');
+					break;
+				case 4:
+					Rp('#newCategoryForm').removeClass('loading');
+					try {
+						response = Rp.parseJSON(req.responseText);
+						fillCategories(response.categories);
+						loadCategory(response.categoryID);
+					}
+					catch (e) {
+
+					}
+					hideModal();
+					break;
+			}
+		}
+		req.post(serialized);
 	});
 });
