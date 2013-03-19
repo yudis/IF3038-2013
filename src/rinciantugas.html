@@ -7,35 +7,36 @@
             function submit_comment(form) {
 				if (window.XMLHttpRequest){
 					xmlhttp = new XMLHttpRequest();				
-				}else{
+				} else {
 					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
 				}
 				
 				xmlhttp.onreadystatechange = function(){
-					if (xmlhttp.readyState==4 && xmlhttp.status==200)	{				
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)	{
 						if (xmlhttp.responseText==1) {
 							//Masukin hasilnya ke dalam div komen
-                            var daftar_komentar = document.getElementById();
-                            alert(daftar_komentar.innerHTML);
+                            var daftar_komentar = document.getElementById("komen");
                             
                             var tambah = '<div id = "daftarkomen">'
                             tambah += "User :<br>";
                             tambah += form.comment.value;
                             tambah += "</div>";
-                            daftar_komentar.innerHTML += tambah;
+                            var n = daftar_komentar.innerHTML.indexOf("<form name");
+                            daftar_komentar.innerHTML = daftar_komentar.innerHTML.substring(0,n-1)
+                                                      + tambah
+                                                      + daftar_komentar.innerHTML.substring(n);
                             alert(daftar_komentar.innerHTML);
 						} else {
 							alert("Gagal memposting komentar");
 						}						
 					}
-
 				}
 				
-                params = "komentar="+form.comment.value+"&user="+"jo"+"&id_tugas="+"";
-				xmlhttp.open("POST","login.php",true);
+                params = "komentar= '"+form.comment.value+"'&user="+"jo"+"&id_tugas="+"1";
+                alert(params);
+				xmlhttp.open("POST","tambah_komentar.php",true);
                 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-                xmlhttp.setRequestHeader("Content-length",params.length);
-				xmlhttp.send(params);                
+				xmlhttp.send(params);
             }
         
             function showEdit(){
@@ -48,7 +49,7 @@
             }
         </script>
     </head>
-    <body onload="taskawal(6);">
+    <body>
         <div class="header">
             <div id="logo">
                 <a hreg="dashboard.html">
@@ -141,7 +142,7 @@
                     <div id="submitkomen">
                         <label>submit comment</label>
                         <textarea name="comment" type="comment" placeholder="comment" class="isikomen"></textarea>
-                        <input class= "submitreg" name="submit" type="submit" onclick="submit_comment(this.form)" value="Submit">
+                        <input class= "submitreg" name="submit" type="button" onclick="submit_comment(this.form)" value="Submit">
                     </div>
                 </form>
             </div>
