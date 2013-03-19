@@ -9,20 +9,22 @@
             <!-- popup form #1 jadi ceritanya awalnya gk keliatan -->
             <a href="#x" class="overlay" id="login_form"></a>
             <div class="popup">
-                <h2>Tambah Kategori Tugas</h2>
-                <!--<h2>Welcome Guest!</h2>
-                <p>Please enter your login and password here</p>-->
-                <div>
-                    <label>Nama Kategori &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </label>
-                    <input type ="text" name="category"></input>
-                </div>
-                <div>
-                    <label for="password">Pengguna Terkait :</label>
-                    <input type ="text" name="relateduser"></input>
-                </div>
-                <input type="button" value="Ok" />
+				<form name="add_category" method="post" action="category.php">
+					<h2>Tambah Kategori Tugas</h2>
+					<!--<h2>Welcome Guest!</h2>
+					<p>Please enter your login and password here</p>-->
+					<div>
+						<label>Nama Kategori &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </label>
+						<input type ="text" name="category_name"></input>
+					</div>
+					<div>
+						<label for="password">Pengguna Terkait :</label>
+						<input type ="text" name="relateduser"></input>
+					</div>
+					<input type="submit" name="btn_addCat" value="Ok" />
+				</form>
 
-                <a class="close" href="#close"></a>
+				<a class="close" href="#close"></a>
             </div>
             <?php                                    
 			$id = $_SESSION['id'];
