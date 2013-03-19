@@ -18,8 +18,8 @@ if (isset($_SESSION["user"]))
 	}
 	else
 	{
-		// user sudah login, dialihkan ke halaman lain
-		header('Location: dashboard.php');
+		$view = new View('views/dashboard/dashboard.tpl');
+		echo $view->output();
 	}
 }
 else

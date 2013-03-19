@@ -3,10 +3,6 @@ function updateAddButtonVisibility() {
     elmt.style.display = 'inline-block';
 }
 
-function NewTask() {
-     window.location = "createtugas.html";
-}
-
 function NewKategori() {
     var q = document.getElementById('txtNewKategori').value;
 	if(q=="")
@@ -58,44 +54,7 @@ function updateStatus(n,str) {
 }
 
 function NewTask() {
-    if (selectedIndex == -1) {
-        alert("Please select the categori first, by click on left sidebar.", "Todolist");
-    } else {
-        window.location = "createtugas.html";
-    }
-}
-
-function RemoveKategoriFilter(elmt) { 
-    selectedIndex = -1;   
-    for (var i=0; i<nKategori; i++) {
-        var current = document.getElementById('main-K' + i);
-        current.style.display = 'block';
-        
-        var kcurrent = document.getElementById('K' + i);
-        kcurrent.style.backgroundColor = '#fff';
-    }
-    
-    elmt.style.backgroundColor = '#e8f3df';
-    updateAddButtonVisibility();
-    return false;
-}
-
-function KategoriSelected(elmt) {
-    selectedIndex = elmt.id.substring(1);
-    document.getElementById('K-All').style.backgroundColor = '#fff';
-    
-    for (var i=0; i<nKategori; i++) {
-        var current = document.getElementById('main-K' + i);
-        current.style.display = 'none';
-        
-        var kcurrent = document.getElementById('K' + i);
-        kcurrent.style.backgroundColor = '#fff';
-    }
-    document.getElementById('main-' + elmt.id).style.display = 'block';
-    
-    elmt.style.backgroundColor = '#e8f3df';
-    updateAddButtonVisibility();
-    return false;
+    window.location = "createtugas.php";
 }
 
 function loadtugas(str)

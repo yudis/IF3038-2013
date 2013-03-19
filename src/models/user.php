@@ -82,6 +82,16 @@ class User extends Model
         return false;
     }
 	
+	public function getUser()
+    {
+		$sql = "SELECT username FROM users";
+		$this->_setSql($sql);
+		
+		$result = $this->getAll();
+		 
+		return $result;
+    }
+	
     public function checkAvailabilityEmail($email)
     {
         $sql = "SELECT * FROM users WHERE email=?";

@@ -2,13 +2,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Todolist: Create Tugas</title>
-        <link rel="stylesheet" type="text/css" href="default.css" />
-        <link rel="stylesheet" type="text/css" href="mediaqueries.css" />
+        <link rel="stylesheet" type="text/css" href="styles/default.css" />
+        <link rel="stylesheet" type="text/css" href="styles/mediaqueries.css" />
         <script src="scripts/formtugas.js" type="application/javascript"></script>
+        <script src="scripts/createtugas.js" type="application/javascript"></script>
+		
     </head>
-    <body>
+    <body onload="showKategori()">
         <div class="page">
             <header class="content">
                 <nav>
@@ -29,12 +31,21 @@
             <div class ="content">
                 <h1>Buat Tugas Baru</h1>
                 <div class="formtugas">
-                    <form onsubmit="return validate (this);" name="formTugas1"  method="post" enctype="multipart/form-data" action="createtugas.php">
+                    <form name="formTugas1"  method="post" enctype="multipart/form-data" action="create.php">
                         <ul class="item">
+							<li id="folil0">
+                                <label id="title0">Kategori:</label>
+                                <div>
+                                    <select id="namakategori" name="namakategori" type="text" maxlength="25" tabindex="1" required
+                                           title="pilih salah satu kategori" >
+									</select>
+                                </div>
+                            </li>
+							
                             <li id="folil1">
                                 <label id="title1">Nama task:</label>
                                 <div>
-                                    <input id="namatask" name="namatask" type="text" maxlength="25" tabindex="1" pattern="[A-Za-z0-9 ]{1,25}"
+                                    <input id="namatask" name="namatask" type="text" maxlength="25" tabindex="1" pattern="[A-Za-z0-9 ]{2,25}" required 
                                            title="Nama task tidak diperbolehkan menggunakan karakter spesial"/>
                                 </div>
                             </li>
@@ -42,25 +53,32 @@
                             <li id="folil2">
                                 <label id="title2">Attachment:</label>
                                 <div>
-                                    <input id="attachment" name="attachment" type="file" tabindex="2" accept="application/pdf,application/msword,image/*"/>
+                                    <input id="attachment" name="attachment" type="file" tabindex="2" accept="application/pdf,application/msword,image/*" multiple />
                                 </div>
                             </li>
 
                             <li id="folil3">
                                 <label id="title3">Deadline:</label>
                                 <div>
-                                    <input id="deadline" name="deadline" type="date" tabindex="3"/>
+                                    <input id="deadline" name="deadline" type="date" tabindex="3" required/>
                                 </div>
                             </li>
 
                             <li id="folil4">
                                 <label id="title4">Assignee:</label>
                                 <div>
-                                    <input id="assignee" name="assignee" type="text" tabindex="4" pattern="[A-Za-z0-9 ]{1,}"  list="user" />
-                                    <datalist id="user">
-                                        <option value="Abraham Krisnanda Santoso">
-                                        <option value="Edward Samuel Pasaribu">
-                                        <option value="Stefanus Thobi Sinaga">
+                                    <input id="assignee1" name="assignee1" onfocus="showAssignee()" type="text" tabindex="4" list="user" />
+                                    <datalist id="user" >
+                                    </datalist>
+                                </div>
+								<div>
+                                    <input id="assignee2" name="assignee2" onfocus="showAssignee()" type="text" tabindex="4"  list="user" />
+                                    <datalist id="user" >
+                                    </datalist>
+                                </div>
+								<div>
+                                    <input id="assignee3" name="assignee3" onfocus="showAssignee()" type="text" tabindex="4"  list="user" />
+                                    <datalist id="user" >
                                     </datalist>
                                 </div>
                             </li>
@@ -68,7 +86,7 @@
                             <li id="folil5">
                                 <label id="title5">Tag:</label>
                                 <div>
-                                    <input id="tag" name="tag" type="text" tabindex="5" pattern="[A-Za-z0-9 ]{1,}"/>
+                                    <input id="tag" name="tag" type="text" tabindex="5" pattern="[A-Za-z0-9, ]{1,}"/>
                                 </div>
                             </li>
 

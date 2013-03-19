@@ -3,6 +3,7 @@
 class Tugas extends Model
 {
     private $_id_tugas;
+    private $_id_kategori;
 	private $_taskname;
 	private $_attachment;
     private $_tgl_deadline;
@@ -168,17 +169,15 @@ class Tugas extends Model
     public function store()
     {
         $sql = "INSERT INTO tugas 
-                    (id, nama, tgl_deadline, status, last_mod, pemilik)
+                    (nama, tgl_deadline, pemilik,id_kategori)
                 VALUES 
-                    (?, ?, ?, ?, ?, ?);";
+                    (?, ?, ?, ?);";
          
         $data = array(
-			$this->_id_tugas,
 			$this->_taskname,
 			$this->_tgl_deadline,
-			$this->_status,
-			$this->_last_mod,
-			$this->_pemilik
+			$this->_pemilik,
+			$this->_id_kategori
         );
          
         $sth = $this->_db->prepare($sql);
