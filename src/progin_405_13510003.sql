@@ -48,6 +48,13 @@ CREATE TABLE IF NOT EXISTS `kategori` (
   KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `username`) VALUES
+(1, 'progin', 'jo');
+
 -- --------------------------------------------------------
 
 --
@@ -121,6 +128,15 @@ CREATE TABLE IF NOT EXISTS `tugas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
+-- Dumping data for table `tugas`
+--
+
+INSERT INTO `tugas` (`id_tugas`, `id_kategori`, `nama_tugas`, `deadline`, `status`, `tag`, `attachment`) VALUES
+(1, 1, 'progin dewa', '2013-03-05 18-0-0', 0, '', '');
+
+-- -------------------------------------------------------
+
+--
 -- Constraints for dumped tables
 --
 
@@ -141,8 +157,8 @@ ALTER TABLE `kategori`
 -- Constraints for table `komentar`
 --
 ALTER TABLE `komentar`
-  ADD CONSTRAINT `komentar_ibfk_1` FOREIGN KEY (`username`) REFERENCES `pengguna` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
-
+  ADD CONSTRAINT `komentar_ibfk_1` FOREIGN KEY (`username`) REFERENCES `pengguna` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `komentar_ibfk_2` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id_tugas`) ON DELETE CASCADE ON UPDATE CASCADE;
 --
 -- Constraints for table `mengerjakan`
 --
