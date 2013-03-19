@@ -1,6 +1,13 @@
+var chosen=0;
+
 function updateAddButtonVisibility() {
     var elmt = document.getElementById('addTask');
     elmt.style.display = 'inline-block';
+}
+
+function setChosen(str)
+{
+	chosen=str
 }
 
 function NewKategori() {
@@ -55,6 +62,23 @@ function updateStatus(n,str) {
 
 function NewTask() {
     window.location = "createtugas.php";
+}
+
+function deleteCategory()
+{
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	
+	xmlhttp.open("GET","ajax/deletecat.php?q="+chosen,true);
+	xmlhttp.send();
+	
+	
 }
 
 function loadtugas(str)

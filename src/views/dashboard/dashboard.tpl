@@ -58,7 +58,7 @@
                     </ul>
                 </div>
                 <div id="listTugas" class="main">
-                    <h1 class="inlineblock">Dashboard</h1> <button id="addTask" onclick="NewTask()">add new task...</button>
+                    <h1 class="inlineblock">Dashboard</h1> <button id="addTask" onclick="NewTask()">add new task...</button> <button id="deleteCat" onclick="deleteCategory()">Delete Category</button>
                     <div id="tugasT" ></div>
                 </div>
             </div>

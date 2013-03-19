@@ -93,6 +93,18 @@ class Kategori extends Model
         return $sth->execute($data);
     }
 	
+	public function deleteKategori($id)
+	{
+		$sql =  "DELETE FROM categories WHERE id=? ";
+		
+		$data = array(
+			$id
+        );
+		
+		$sth = $this->_db->prepare($sql);
+        return $sth->execute($data);
+	}
+	
     public function store()
     {
         $sql = "INSERT INTO categories

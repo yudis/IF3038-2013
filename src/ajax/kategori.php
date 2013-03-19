@@ -9,7 +9,7 @@
 	while (!empty($success[$i]))
 	{
 		$id_kategori=$success[$i]["id"];
-		echo "<li><a href=\"#\" onclick=\"loadtugas('",$id_kategori,"'); return false;\" >";
+		echo "<li><a name='",$id_kategori,"' href=\"#\" onclick=\"loadtugas('",$id_kategori,"');setChosen('",$id_kategori,"'); return false;\" >";
 		echo $success[$i]["nama"];
 		echo "</a></li>";
 		$i++;
