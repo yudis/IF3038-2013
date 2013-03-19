@@ -98,7 +98,7 @@ if ($field == "username" || $field == "semua") {
 		echo " --Page $pagenum of $last-- </p>";
 		echo "<p style='margin-left: 5em;'>";
 		// Jika pagenum bukan 1 maka ditampilkan link untuk ke First yaitu pagenum 1 dan previous
-		if ($pagenum == 1) {
+		if ($pagenum == 1 || $pagenum == 0) {
 			
 		} else {
 			

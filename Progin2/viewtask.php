@@ -1,8 +1,16 @@
 <html>
+
+<?php
+session_start();
+if(!isset($_SESSION['id']))
+	header("location:index.html");
+?>
+
 	<head>
 		<title>View Task</title>
 		<link href="styles/viewtask.css" rel="stylesheet" type="text/css" />
 		<link href="styles/header.css" rel="stylesheet" type="text/css" />
+		
 		<script>
 			var attach = "videos/attachmentsample.ogg";
 			var tanggal = 1;
@@ -180,24 +188,63 @@
 				}
 			}
 			
-			function checkSubmit(e) {
-				if (e && e.keyCode == 13) {
-					displayComment();
+			function showComment(comment, idtask, username){
+				var xmlhttp;
+				if (window.XMLHttpRequest) {
+				  // code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
 				}
+				else {
+				  // code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					document.getElementById("comment").innerHTML=xmlhttp.responseText;
+				  }
+				}
+				xmlhttp.open("GET","listcomment.php?q="+comment+"&r="+idtask+"&s="+username,true);
+				xmlhttp.send();
 			}
 			
-			function displayComment(){
-				var newpara = document.createElement("P")
-				text = document.createTextNode(commentField.value);
-				newpara.appendChild(text)
-				document.getElementById("comment").appendChild(newpara);
-				commentField.value = '';
+			function myFunction(comment, idtask, username, pagenum)
+			{
+			setInterval(function() {
+				var xmlhttp;
+				if (window.XMLHttpRequest) {
+				  // code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				}
+				else {
+				  // code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					document.getElementById("comment").innerHTML=xmlhttp.responseText;
+				  }
+				}
+				xmlhttp.open("GET","listcomment.php?q="+comment+"&r="+idtask+"&s="+username+"&pagenum="+pagenum,true);
+				xmlhttp.send();
+				},500);
 			}
 
 			</script>
 	</head>
 
-	<body onload="makeTgl();makeThn()">
+	<body onload="makeTgl();makeThn();myFunction(document.addcomment.isicomment.value,
+	<?php
+	echo "'".$_GET['q']."'";
+	?>
+	,
+	<?php
+	echo "'".$_SESSION['id']."'";
+	?>
+	,
+	<?php
+	echo "'".$_SESSION['pagenum']."'";
+	?>
+	);">
 		<div id="container">
 			<div id="header">
 				<div class=logo id="logo">
@@ -386,24 +433,41 @@
 				</form>
 			</div>
 			<div id="rightspace">
+				<script type="text/javascript">
+					
+				</script>
 				<div>
 					<div>
 						<fieldset id="fieldset">
 							<legend id="commentLabel">Comment</legend>
-							<p id="comment">Deadlinenya sebentar lagi nih!</p>
+							<div class="comment" id="comment">
+							
+							</div>
 						</fieldset>
 					</div>
 				</div>
+			</div>
+			<div id="rightspace2">
+				<form name="addcomment" method="post">
 				<div>
-					<div>
-						<textarea id="commentField" rows="3" cols="30" onKeyPress="checkSubmit(event)"></textarea>
-					</div>
+					<textarea id="commentField" name="isicomment" rows="3" cols="30" onfocus="this.value='';"></textarea>
 				</div>
 				<div>
-					<div>
-						<input type=button value="Submit Comment" onClick="displayComment()">
-					</div>
+					<input type=button value="Submit Comment" onClick="showComment(document.addcomment.isicomment.value,
+					<?php
+					echo "'".$_GET['q']."'";
+					?>
+					,
+					<?php
+					echo "'".$_SESSION['id']."'";
+					?>
+					,
+					<?php
+					echo "'".$_SESSION['pagenum']."'";
+					?>
+					)">
 				</div>
+				</form>
 			</div>
 		</div>
 	</body>
