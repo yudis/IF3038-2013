@@ -21,28 +21,36 @@ else
 		
 		if ($data)
 		{			
-			$view = new View('views/tugas/default.tpl');
+			$view = new View('views/tugas/tugas.tpl');
 			$view->set('title', 'Todolist | Rincian Tugas');
-			$view->set('headTags', '<script src="./scripts/tugas.js" type="application/javascript"></script><script type="text/javascript" src="./scripts/datetimepicker.js"></script><link rel="stylesheet" type="text/css" href="styles/tugas.css" />');
+			$view->set('headTags', '<script src="./scripts/tugas.js" type="application/javascript"></script><link rel="stylesheet" type="text/css" href="styles/tugas.css" />');
+			$view->set('bodyAttrs', 'onload="onload(' . $_GET["id"] . ');"');
 			
-			echo json_encode($data);
-			// $view->set('namaTugas', $data['nama']);
-			// $view->set('deadline', date($data['tgl_deadline']));
-			// $view->set('tags', $data['tag']);
+			$view->set('id', $data['id']);
+			$view->set('namaTugas', $data['nama']);
+
+			$view->set('status', $data['status'] == 0 ? 'Belum Selesai' : 'Selesai');		
 			
-			// $tagsLen = count($data['tag']);
-			// $tagsEdit = '';
-			// if ($tagsLen > 0)
-			// {
-			// 	$tagsEdit .= $data['tag'][0];
-			// 	for ($i=1; $i < $tagsLen; $i++)
-			// 	{
-			// 		$tagsEdit .= ', ' . $data['tag'][$i];
-			// 	}
-			// }
-			// $view->set('tagsEdit', $tagsEdit);
+			$view->set('attachments', $data['attachment']);
+			$view->set('deadline', date($data['tgl_deadline']));
 			
-			// echo $view->output();
+			$view->set('assignees', $data['assignees']);
+
+			$view->set('tags', $data['tag']);
+			$tagsLen = count($data['tag']);
+			$tagsEdit = '';
+			if ($tagsLen > 0)
+			{
+				$tagsEdit .= $data['tag'][0];
+				for ($i=1; $i < $tagsLen; $i++)
+				{
+					$tagsEdit .= ', ' . $data['tag'][$i];
+				}
+			}
+			$view->set('tagsEdit', $tagsEdit);
+			
+			//echo json_encode($data);
+			echo $view->output();
 		}
 		else
 		{
