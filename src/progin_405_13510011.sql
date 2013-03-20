@@ -19,6 +19,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Database: `progin_405_13510011`
 --
 
+DROP DATABASE IF EXISTS `progin_405_13510011`;
+CREATE DATABASE `progin_405_13510011`;
+USE `progin_405_13510011`;
+
 -- --------------------------------------------------------
 
 --
