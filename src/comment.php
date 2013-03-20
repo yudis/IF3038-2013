@@ -1,9 +1,5 @@
 <?php
-session_start();
-if(!isset( $_SESSION['myusername'])){
-	header("location:index.php?status=3");
-}
-
+include 'session.php';
 include 'database.php';
 
 // Connect to server and select databse.
