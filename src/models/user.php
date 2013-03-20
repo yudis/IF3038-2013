@@ -126,25 +126,6 @@ class User extends Model
         $sth = $this->_db->prepare($sql);
         return $sth->execute($data);
     }
-	
-	    public function Update()
-    {
-        $sql = "UPDATE users 
-                    SET `password`=MD5(?), `full_name`=?, `tgl_lahir`=?, `avatar`=?
-                WHERE 
-                    `username`=?;";		 
-		 
-        $data = array(
-			$this->_password,
-			$this->_full_name,
-			$this->_tgl_lahir,
-			$this->_avatar,
-			$this->_username,			
-        );
-         
-        $sth = $this->_db->prepare($sql);
-        return $sth->execute($data);
-    }	
 }
 
 ?>

@@ -54,7 +54,7 @@
                             <li id="folil2">
                                 <label id="title2">Attachment:</label>
                                 <div>
-                                    <input id="attachment" name="attachment" type="file" tabindex="2" accept="application/pdf,application/msword,image/*" multiple />
+                                    <input id="attachment" name="attachments[]" type="file" tabindex="2" accept="application/pdf,application/msword,image/*" multiple />
                                 </div>
                             </li>
 
@@ -71,10 +71,12 @@
 									<ul id="assigneesList" class="tag"></ul>
 									<br>
                                     <input id="assignee" name="assignee" onfocus="showAssignee()" type="text" tabindex="4" list="user" />
+                                    
                                     <datalist id="user" >
                                     </datalist>
-									<button onclick="return addAssignees();">Add</button>
-                                </div>
+									<button onclick=" addAssignees(); return false;">Add</button>
+									<input id="assigneeI" name="assigneeI" type="text" value="" tabindex="4" hidden/>
+								</div>
 								
                             </li>
 
