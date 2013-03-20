@@ -612,19 +612,23 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 }
 
 
-#newCategoryAdded, #kuliah,#proyek, #tugas, #lomba {
-	display:block;padding:10px;-webkit-transition: opacity 0.7s linear;
-	-webkit-transition: all 0.7s ease-in-out;
-	-moz-transition: all 0.7s ease-in-out;
-	-o-transition: all 0.7s ease-in-out;
+.categoryList, #newCategoryAdded {
+	display:block;padding:10px;
+	-webkit-transition: opacity 0.5s linear;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	color:#007bc1; 
+	cursor:pointer;
 }
 
-#newCategoryAdded:hover, #kuliah:hover,#proyek:hover, #tugas:hover,#lomba:hover {
+.categoryList:hover, #newCategoryAdded:hover {
 	background-color:#007bc1;
-	color:#fff;-webkit-transition: opacity 0.7s linear;
-	-webkit-transition: all 0.7s ease-in-out;
-	-moz-transition: all 0.7s ease-in-out;
-	-o-transition: all 0.7s ease-in-out;
+	color:#fff;
+	-webkit-transition: opacity 0.5s linear;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
 }
 	
 #login_form input{margin-bottom:5px;}

@@ -34,13 +34,13 @@
 		</div>
 	</div>
 	<div id="category_list">
-		<div class="link_blue_rect" id="category_title"><a href="#" onclick="catchange(0)">All Categories </a> </div>
+		<div class="link_blue_rect" id="category_title"><a href="#" onclick="javascript:generateTask('all')"> All Categories </a> </div>
 		<ul id="category_item">
 			<?php 
 				$query 	= "SELECT * FROM category;";
 				$result	= mysql_query($query);
 				while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-					echo "<li> <a href='#' onclick='catchange('".$row['cat_id']."')' id='kuliah'> ".$row['cat_name']." </a> </li>";
+					echo "<li> <span class='categoryList' onclick='javascript:generateTask(\"".$row['cat_name']."\")'> ".$row['cat_name']." </span> </li>";
 				}
 			?>
 		</ul>
