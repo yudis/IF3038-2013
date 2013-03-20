@@ -130,21 +130,6 @@ function Redirect(){
     window.location = "index.html";
 }
 
-function Login(){
-    if (document.getElementById("logusername").value !== "admin"){
-        alert("Wrong username!");
-    } else if (document.getElementById("logpassword").value !== "admincool"){
-        alert("Wrong password!");
-    }else{
-        window.location = "Dashboard.html";
-        localStorage.username = document.getElementById("logusername").value;
-        localStorage.name = "Billy The Kid";
-        localStorage.date = "1968-09-3";
-        localStorage.email = "coolKid@yahoo.com";
-        document.getElementById("foto").src = "img/foto.png";
-    }
-}
-
 function Register(){
     var atPos = document.getElementById("regemail").value.indexOf("@");
     var dotPos = document.getElementById("regemail").value.indexOf(".");
@@ -266,5 +251,26 @@ function showHint(str)
 	   }
 	  }
 	xmlhttp.open("GET","autosearch.php?q="+str,true);
+	xmlhttp.send();
+}
+
+function Login(){
+	alert("Aasa");
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	  {
+		var username = document.getElementById("logusername").value;
+		var password = document.getElementById("logpassword").value;
+	  }
+	xmlhttp.open("GET","authentication.php?usr="+username+"&psw="+password,true);
 	xmlhttp.send();
 }
