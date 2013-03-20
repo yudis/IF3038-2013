@@ -1,4 +1,8 @@
-<?php include 'header.php';?>
+<?php 
+include 'header.php';
+
+$id_cat = $_GET['id'];
+?>
 
 <div id="main">
 	<div id="konten">

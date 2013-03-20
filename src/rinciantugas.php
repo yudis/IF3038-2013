@@ -1,6 +1,8 @@
 <?php
 include 'header.php';
 
+$id_task= $_GET['id'];
+
 // Get task
 $result1=mysqli_query($con,"SELECT * FROM `tasks` WHERE id=$id_task");
 $task = mysqli_fetch_array($result1);
