@@ -16,7 +16,7 @@ $email=$_POST["email"];
 if ($_FILES["avatar"]["error"] > 0) {
 	$avatar="images/niouw.JPG";
 } else {
-	if(move_uploaded_file($_FILES["avatar"]["tmp_name"], "images/".$username.".jpg")) {
+	if(move_uploaded_file($_FILES["avatar"]["tmp_name"], "avatars/".$username.".jpg")) {
 		$avatar="avatars/".$username.".jpg";
 	} else {
 		$avatar="images/niouw.JPG";
