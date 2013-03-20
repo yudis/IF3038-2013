@@ -18,37 +18,53 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `progin_405_13510011`
 --
-DROP DATABASE IF EXISTS `progin_405_13510011`;
-CREATE DATABASE `progin_405_13510011`;
-USE `progin_405_13510011`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `members`
+-- Table structure for table `assignees`
 --
 
-CREATE TABLE IF NOT EXISTS `members` (
+CREATE TABLE IF NOT EXISTS `assignees` (
+  `member` int(11) NOT NULL,
+  `task` int(11) NOT NULL,
+  PRIMARY KEY (`member`,`task`),
+  KEY `task` (`task`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `assignees`
+--
+
+INSERT INTO `assignees` (`member`, `task`) VALUES
+(1, 1),
+(2, 1),
+(2, 2),
+(1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attachments`
+--
+
+CREATE TABLE IF NOT EXISTS `attachments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(256) NOT NULL,
-  `fullname` varchar(50) NOT NULL,
-  `birthdate` date NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `avatar` varchar(50) NOT NULL,
-  `gender` char(1) NOT NULL,
-  `about` text,
+  `path` varchar(256) NOT NULL,
+  `filetype` varchar(5) NOT NULL,
+  `task` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  KEY `task` (`task`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `members`
+-- Dumping data for table `attachments`
 --
 
-INSERT INTO `members` (`id`, `username`, `password`, `fullname`, `birthdate`, `email`, `avatar`, `gender`, `about`) VALUES
-(1, 'enjellan', 'de4ab6e26db462b930510ba83e9f80b7db2bef88', 'Enjella Melissa Nababan', '1991-03-03', 'enjellamelissan@yahoo.com', 'images/enjella.JPG', 'F', ''),
-(2, 'danny', '0c258ac8c40b49eea99ecbd24e31b1d72aa42772', 'Danny Andrianto', '0000-00-00', 'email', 'images/danny.jpg', 'M', 'about');
+INSERT INTO `attachments` (`id`, `path`, `filetype`, `task`) VALUES
+(1, 'uploads/TUBES I.pdf', 'file', 1),
+(2, 'uploads/gajah.png', 'image', 1),
+(3, 'uploads/movie.ogg', 'video', 1);
 
 -- --------------------------------------------------------
 
@@ -68,81 +84,8 @@ CREATE TABLE IF NOT EXISTS `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`) VALUES
-(1, 'Pemrograman Internet'),
-(2, 'Date');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tasks`
---
-
-CREATE TABLE IF NOT EXISTS `tasks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `creator` int(11) NOT NULL,
-  `timestamp` datetime NOT NULL,
-  `deadline` datetime NOT NULL,
-  `category` int(11) NOT NULL,
-  `done` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT FOREIGN KEY (`creator`) REFERENCES `members` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT FOREIGN KEY (`category`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `tasks`
---
-
-INSERT INTO `tasks` (`id`, `name`, `creator`, `timestamp`, `deadline`, `category`, `done`) VALUES
-(1, 'Tubes 1', 1, '2013-02-20 10:50:49', '2013-02-25 22:00:00', 1, 1),
-(2, 'Tubes 2', 2, '2013-03-11 21:20:11', '2013-03-22 22:03:00', 1, 0),
-(3, 'Kencan dengan si "dia"', 1, '2013-02-20 21:21:53', '2013-02-24 20:00:00', 2, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `assignees`
---
-
-CREATE TABLE IF NOT EXISTS `assignees` (
-  `member` int(11) NOT NULL,
-  `task` int(11) NOT NULL,
-  PRIMARY KEY (`member`,`task`),
-  CONSTRAINT FOREIGN KEY (`member`) REFERENCES `members` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT FOREIGN KEY (`task`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `assignees`
---
-
-INSERT INTO `assignees` (`member`, `task`) VALUES
-(2, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `attachments`
---
-
-CREATE TABLE IF NOT EXISTS `attachments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `path` varchar(256) NOT NULL,
-  `filetype` varchar(5) NOT NULL,
-  `task` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT FOREIGN KEY (`task`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `attachments`
---
-
-INSERT INTO `attachments` (`id`, `path`, `filetype`, `task`) VALUES
-(1, 'images/Up.png', 'file', 1),
-(2, 'images/gajah.png', 'image', 1),
-(3, 'images/movie.ogg', 'video', 1);
+(2, 'Date'),
+(1, 'Pemrograman Internet');
 
 -- --------------------------------------------------------
 
@@ -157,8 +100,8 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `timestamp` datetime NOT NULL,
   `comment` text NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT FOREIGN KEY (`member`) REFERENCES `members` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT FOREIGN KEY (`task`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `member` (`member`),
+  KEY `task` (`task`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
@@ -179,8 +122,7 @@ CREATE TABLE IF NOT EXISTS `editors` (
   `member` int(11) NOT NULL,
   `category` int(11) NOT NULL,
   PRIMARY KEY (`member`,`category`),
-  CONSTRAINT FOREIGN KEY (`member`) REFERENCES `members` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT FOREIGN KEY (`category`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `category` (`category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -193,6 +135,35 @@ INSERT INTO `editors` (`member`, `category`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `members`
+--
+
+CREATE TABLE IF NOT EXISTS `members` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(256) NOT NULL,
+  `fullname` varchar(50) NOT NULL,
+  `birthdate` date NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `avatar` varchar(50) NOT NULL,
+  `gender` char(1) NOT NULL,
+  `about` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `members`
+--
+
+INSERT INTO `members` (`id`, `username`, `password`, `fullname`, `birthdate`, `email`, `avatar`, `gender`, `about`) VALUES
+(1, 'enjellan', 'de4ab6e26db462b930510ba83e9f80b7db2bef88', 'Enjella Melissa Nababan', '1991-03-03', 'enjellamelissan@yahoo.com', 'avatars/enjella.JPG', 'F', ''),
+(2, 'danny', '0c258ac8c40b49eea99ecbd24e31b1d72aa42772', 'Danny Andrianto', '1992-09-11', 'danny_andrianto@hotmail.com', 'avatars/danny.jpg', 'M', 'about'),
+(3, 'arya', '4a82ada5286fe66c040d9593e3e5b68939cca0f1', 'Arya Rezavidi', '1994-03-17', 'arya@gmail.com', 'avatars/arya.jpg', 'M', 'aku ganteng yah');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tags`
 --
 
@@ -200,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
   `name` varchar(50) NOT NULL,
   `tagged` int(11) NOT NULL,
   PRIMARY KEY (`name`,`tagged`),
-  CONSTRAINT FOREIGN KEY (`tagged`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `tagged` (`tagged`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -212,3 +183,74 @@ INSERT INTO `tags` (`name`, `tagged`) VALUES
 ('html', 1),
 ('javascript', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tasks`
+--
+
+CREATE TABLE IF NOT EXISTS `tasks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `creator` int(11) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `deadline` datetime NOT NULL,
+  `category` int(11) NOT NULL,
+  `done` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `creator` (`creator`),
+  KEY `category` (`category`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `tasks`
+--
+
+INSERT INTO `tasks` (`id`, `name`, `creator`, `timestamp`, `deadline`, `category`, `done`) VALUES
+(1, 'Tubes 1', 1, '2013-02-20 10:50:49', '2013-02-25 22:00:00', 1, 1),
+(2, 'Tubes 2', 2, '2013-03-11 21:20:11', '2013-03-22 22:03:00', 1, 0),
+(3, 'Kencan dengan si "dia"', 1, '2013-02-20 21:21:53', '2013-02-24 20:00:00', 2, 1);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `assignees`
+--
+ALTER TABLE `assignees`
+  ADD CONSTRAINT `assignees_ibfk_1` FOREIGN KEY (`member`) REFERENCES `members` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `assignees_ibfk_2` FOREIGN KEY (`task`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `attachments`
+--
+ALTER TABLE `attachments`
+  ADD CONSTRAINT `attachments_ibfk_1` FOREIGN KEY (`task`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`member`) REFERENCES `members` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`task`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `editors`
+--
+ALTER TABLE `editors`
+  ADD CONSTRAINT `editors_ibfk_1` FOREIGN KEY (`member`) REFERENCES `members` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `editors_ibfk_2` FOREIGN KEY (`category`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tags`
+--
+ALTER TABLE `tags`
+  ADD CONSTRAINT `tags_ibfk_1` FOREIGN KEY (`tagged`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`creator`) REFERENCES `members` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tasks_ibfk_2` FOREIGN KEY (`category`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
