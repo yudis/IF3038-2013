@@ -46,15 +46,15 @@ if (mysqli_connect_errno()) {
 	</head>
 	<body 
 	<?php
-		if (strcmp($uri,"profil.php") == 0) {
+		if (strcmp($uri,"src/profil.php") == 0) {
 			echo "id='profilbackground'";
-		} else if (strcmp($uri,"dashboard.php") == 0) {
+		} else if (strcmp($uri,"src/dashboard.php") == 0) {
 			$result=mysqli_query($con,"SELECT DISTINCT `category` FROM `tasks`");
 			$cats=mysqli_num_rows($result);
 			echo "id='dashboardbackground' onload='javascript:hidetask(".$cats.")'";
-		} else if (strcmp($uri,"rinciantugas.php") == 0) {
+		} else if (strcmp($uri,"src/rinciantugas.php") == 0) {
 			echo "id='rincianbackground'";
-		} else if (strcmp($uri,"post.php") == 0) {
+		} else if (strcmp($uri,"src/post.php") == 0) {
 			echo "id='postbackground'";
 		}
 	?>
