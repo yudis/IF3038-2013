@@ -17,10 +17,10 @@ and open the template in the editor.
     <body>
 
 <?php
-if(config()){
-	$query = "SELECT*
-		FROM user";
-	$result = mysql_query($query);
+if(connectDB()){
+	$queryProfile = "SELECT* FROM user";
+	$result = mysql_query($queryProfile);
+        if ($result > 0) {        
 ?>        
         
         <header>
@@ -34,6 +34,7 @@ if(config()){
             </form>
         </header>
         <div id="panel"></div>
+
         <div id="donelist">
             Ridho Ramadan<br/>
             Daniel Ginting<br/>
@@ -46,6 +47,15 @@ if(config()){
             Flora Monica <br/>
             Nugroho Satrijandi<br/>
         </div>
+<?php
+            $data = mysql_fetch_array($result);
+            $name= $data['Fullname'];
+            $bday= $data['DateOfBirth'];
+            $ava= $data['Avatar'];
+            $email = $data['Email'];
+        }
+?>
+
         <div id="biodata">
             <img id="foto" src="img/foto_anonim.png">
             <img id="badge" src="img/badge.png">
@@ -56,11 +66,18 @@ if(config()){
                 Email<br>
             </div>
             <div id="bioright">
-                : <script>document.write(localStorage.name);</script><br>
-                : <script>document.write(localStorage.date);</script><br>
-                : <script>document.write(localStorage.email);</script><br>
+                <?php echo $name; ?> <br>
+                <?php echo $bday; ?> <br>
+                <?php echo $email; ?> <br>
             </div>
         </div>
         
     </body>
+
+<?php
+    } else { // jika koneksi database tidak berhasil
+    	die('Database connection error');
+    }
+?>
+    
 </html>
