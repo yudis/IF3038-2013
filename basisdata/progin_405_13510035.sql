@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 11, 2013 at 12:40 PM
+-- Generation Time: Mar 19, 2013 at 08:19 AM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `attachment` (
 
 CREATE TABLE IF NOT EXISTS `category` (
   `category_id` varchar(255) NOT NULL,
-  `category_name` int(255) NOT NULL,
+  `category_name` varchar(255) NOT NULL,
   PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -54,6 +54,9 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Dumping data for table `category`
 --
 
+INSERT INTO `category` (`category_id`, `category_name`) VALUES
+('C-001', 'Home'),
+('C-002', 'Office');
 
 -- --------------------------------------------------------
 
@@ -111,6 +114,9 @@ CREATE TABLE IF NOT EXISTS `tag` (
 -- Dumping data for table `tag`
 --
 
+INSERT INTO `tag` (`tag_id`, `tag_name`) VALUES
+('TG-001', 'kuliah'),
+('TG-002', 'internet');
 
 -- --------------------------------------------------------
 
@@ -123,10 +129,8 @@ CREATE TABLE IF NOT EXISTS `task` (
   `task_name` varchar(255) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `deadline` date NOT NULL,
-  `assignee` varchar(255) NOT NULL,
   `task_category` varchar(255) NOT NULL,
   PRIMARY KEY (`task_id`),
-  KEY `assignee` (`assignee`),
   KEY `task_category` (`task_category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -134,6 +138,9 @@ CREATE TABLE IF NOT EXISTS `task` (
 -- Dumping data for table `task`
 --
 
+INSERT INTO `task` (`task_id`, `task_name`, `status`, `deadline`, `task_category`) VALUES
+('T-001', 'Tugas Progin', 1, '2013-03-23', 'C-002'),
+('T-002', 'Tugas Kripto', 0, '2013-03-23', 'C-002');
 
 -- --------------------------------------------------------
 
@@ -152,6 +159,10 @@ CREATE TABLE IF NOT EXISTS `tasktag` (
 -- Dumping data for table `tasktag`
 --
 
+INSERT INTO `tasktag` (`task_id`, `tag_id`) VALUES
+('T-001', 'TG-001'),
+('T-002', 'TG-001'),
+('T-001', 'TG-002');
 
 -- --------------------------------------------------------
 
@@ -190,6 +201,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
+INSERT INTO `user` (`username`, `password`, `fullname`, `email`, `birthday`) VALUES
+('Adriel', '2703', 'Nikodemus Adriel', '13510089@std.stei.itb.ac.id', '1993-03-27'),
+('Janice', '1301', 'Janice Laksana', '13510035@std.stei.itb.ac.id', '1992-01-13'),
+('Thobi', '1809', 'Stefanus Thobi', '13510029@std.stei.itb.ac.id', '1992-09-18');
 
 --
 -- Constraints for dumped tables
@@ -219,19 +234,18 @@ ALTER TABLE `comment`
 -- Constraints for table `task`
 --
 ALTER TABLE `task`
-  ADD CONSTRAINT `task_ibfk_3` FOREIGN KEY (`assignee`) REFERENCES `user` (`username`) ON DELETE CASCADE,
   ADD CONSTRAINT `task_ibfk_4` FOREIGN KEY (`task_category`) REFERENCES `category` (`category_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `tasktag`
 --
 ALTER TABLE `tasktag`
-  ADD CONSTRAINT `tasktag_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `tasktag_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `task` (`task_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `tasktag_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `task` (`task_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tasktag_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `task_incharge`
 --
 ALTER TABLE `task_incharge`
-  ADD CONSTRAINT `task_incharge_ibfk_2` FOREIGN KEY (`people_incharge_task`) REFERENCES `user` (`username`) ON DELETE CASCADE,
-  ADD CONSTRAINT `task_incharge_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `task` (`task_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `task_incharge_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `task` (`task_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `task_incharge_ibfk_2` FOREIGN KEY (`people_incharge_task`) REFERENCES `user` (`username`) ON DELETE CASCADE;
