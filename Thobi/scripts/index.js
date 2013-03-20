@@ -27,9 +27,9 @@ function back() {
 function changeRegister() {
     var registerBtn = document.getElementById("register");
     if (isValidUname && isValidPassword && isValidRePassword && isValidFullName && isValidEmail && isValidBday && isValidPhoto) {
-        registerBtn.disabled = 'false';
+		registerBtn.disabled = false;
     } else {
-        registerBtn.disabled = 'true';
+        registerBtn.disabled = true;
     }
 }
 
@@ -183,6 +183,8 @@ function validateAvatar() {
     } else {
         xAvatar.style.border = '2px red solid';
     }
+	
+	changeRegister();
 }
 
 function bdayPicker() {
@@ -224,6 +226,12 @@ function validateLogin() {
 
 function loginCheck() {
 	if (isValidLogin == true) {
+		if(typeof(Storage)!=="undefined") {
+			localStorage.session = document.forms["login"]["uname"].value;
+		}
+		else {
+			// Sorry! No web storage support..
+		}
 		return true;
 	} else {
 		alert("Username and password combination doesn't match or couldn't be found");

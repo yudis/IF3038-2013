@@ -16,14 +16,14 @@
                     <div class="logo"><a href="#home"><img alt="Home" src="images/logo.png" /></a></div>
                     <div id="slogan">Share your to do list with everyone!</div>
                     <div id="loginwrapper">
-                        <form name="login"  onsubmit="return loginCheck();" method="post" action="dashboard.html">
+                        <form name="login"  onsubmit="return loginCheck();" method="post" action="loginredirect.php">
                             <div id="login_username">
                                 Username <br>
-                                <input type="text" onChange="validateLogin()" class="textbox" name="uname" value="" />
+                                <input type="text" onchange="validateLogin()" onkeyup="validateLogin()" class="textbox" name="uname" value="" />
                             </div>
                             <div id="login_password">
                                 Password <br>
-                                <input type="password" onChange="validateLogin()" class="textbox" name="pwd" value="" />
+                                <input type="password" onchange="validateLogin()" onkeyup="validateLogin()" class="textbox" name="pwd" value="" />
                             </div>
                             <div id="login_button">
                                 <button><img src="images/loginbutton.png" id="login_submit" alt="login../"></button>
@@ -49,7 +49,7 @@
                     <div id="registerwrapper">
                         <h1>Register Now!</h1>
                         It only takes you a few more steps!
-                        <form name="registration" onsubmit="return registerCheck();" method="post" action="dashboard.html">
+                        <form name="registration" onsubmit="return registerCheck();" enctype="multipart/form-data" method="post" action="adduser.php">
                             <div class="wrapper">
                                 <input type="text" class="regbox" id="uname" name="uname" placeholder="Username.." required="required" onkeyup="validateUName();" onchange="validateUName();" />
                             </div>
@@ -73,7 +73,7 @@
                             </div>
                             <p>By clicking Sign Up, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use. </p>
                             <div id="login_button">
-                                <button><img src="images/loginbutton.png" id="login_submit" alt="login../"></button>
+                                <button id="register" disabled=true><img src="images/loginbutton.png" id="login_submit" alt="login../"></button>
                             </div>
                         </form>
                     </div>

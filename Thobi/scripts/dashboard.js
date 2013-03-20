@@ -1,13 +1,51 @@
 var nKategori = 3;
 var selectedIndex = -1;
 
-function updateAddButtonVisibility() {
-    var elmt = document.getElementById('addTask');
-    if (selectedIndex < 0) {
-        elmt.style.display = 'none';
-    } else {
-        elmt.style.display = 'inline-block';
-    }
+function initialize() {
+	if(typeof(Storage)!=="undefined") {
+		if (localStorage.session) {
+			//updateAddButtonVisibility
+			var elmt = document.getElementById('addTask');
+			if (selectedIndex < 0) {
+				elmt.style.display = 'none';
+			} else {
+				elmt.style.display = 'inline-block';
+			}
+			listKategori();
+		}
+		else {
+			window.location = "index.html";
+		}
+	}
+	else {
+		alert("uwow");
+	}
+}
+
+function signout() {
+	localStorage.clear();
+}
+
+function listKategori() {
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById("sidebar").innerHTML = xmlhttp.responseText;
+		}
+	}
+	
+	xmlhttp.open("GET","listkategori.php?uname="+localStorage.session,true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send();
 }
 
 function NewKategori() {
@@ -51,7 +89,7 @@ function RemoveKategoriFilter(elmt) {
     }
     
     elmt.style.backgroundColor = '#e8f3df';
-    updateAddButtonVisibility();
+    initialize();
     return false;
 }
 
@@ -69,7 +107,7 @@ function KategoriSelected(elmt) {
     document.getElementById('main-' + elmt.id).style.display = 'block';
     
     elmt.style.backgroundColor = '#e8f3df';
-    updateAddButtonVisibility();
+    initialize();
     return false;
 }
 
