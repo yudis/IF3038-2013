@@ -45,7 +45,6 @@ if(!isset($_SESSION['id']))
 			
 			function editDeadline(uidtugas){
 			var xmlhttp;
-			value = document.getElementById("tag").value;
 			if (window.XMLHttpRequest) {
 			  // code for IE7+, Firefox, Chrome, Opera, Safari
 			  xmlhttp=new XMLHttpRequest();
@@ -65,7 +64,6 @@ if(!isset($_SESSION['id']))
 			
 			function addAssignee(uidtugas) {
 				var xmlhttp;
-				value = document.getElementById("tag").value;
 				if (window.XMLHttpRequest) {
 				  // code for IE7+, Firefox, Chrome, Opera, Safari
 				  xmlhttp=new XMLHttpRequest();
@@ -228,7 +226,33 @@ if(!isset($_SESSION['id']))
 				xmlhttp.send();
 				},500);
 			}
-
+			function suggestion(){
+				
+				var suggest = document.getElementById("as").value;
+				var xmlhttp;
+				document.getElementById("opsi").innerHTML="";
+				if (suggest.length==0) { 
+					  document.getElementById("opsi").innerHTML="";
+					  return;
+				}
+				if (window.XMLHttpRequest) {
+				  // code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				}
+				else {
+				  // code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					document.getElementById("opsi").innerHTML=xmlhttp.responseText;
+				  }
+				  
+				}
+				
+				xmlhttp.open("GET","functionsuggest.php?suggest="+suggest,true);
+				xmlhttp.send();
+			}
 			</script>
 	</head>
 
@@ -385,9 +409,8 @@ if(!isset($_SESSION['id']))
 							</p>			
 						</div>
 						<div class="viewtask_edit">
-							<input type=text name=as id="as" onKeyPress="checkEdit(event,'as','asvalue','asbutton')" list="suggest"/>
-							<datalist id="suggest">
-							</datalist>
+							<input type=text name=as id="as" type="text" tabindex="4" list="user" onKeyUp="suggestion()" onKeyPress="checkEdit(event,'as','asvalue','asbutton')" list="suggest"/>
+							<label id="opsi"></label>
 							<?php
 							echo "<input type=button value=\"Add\" id=\"asbutton\" onclick=\"addAssignee(".$idtugas.")\">";
 							?>

@@ -67,6 +67,34 @@
 					}
 				}
 			}
+			
+			function suggestion(){
+				
+				var suggest = document.getElementById("assignee").value;
+				var xmlhttp;
+				document.getElementById("opsi").innerHTML="";
+				if (suggest.length==0) { 
+					  document.getElementById("opsi").innerHTML="";
+					  return;
+				}
+				if (window.XMLHttpRequest) {
+				  // code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				}
+				else {
+				  // code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					document.getElementById("opsi").innerHTML=xmlhttp.responseText;
+				  }
+				  
+				}
+				
+				xmlhttp.open("GET","functionsuggest.php?suggest="+suggest,true);
+				xmlhttp.send();
+			}
 		</script>
 	</head>
 
@@ -163,7 +191,8 @@
 								Assignee
 							</div>
 							<div class="newtask_field">
-								<input type="text" name="assignee" size="35" maxlength="256" onkeyup="checkAssignee(document.newtask_form.assignee.value)" class="inputtext">
+								<input id="assignee" type="text" name="assignee" tabindex="4" size="35" maxlength="256" list="user" onkeyup="checkAssignee(document.newtask_form.assignee.value);suggestion()">
+								<label id="opsi"></label>
 							</div>
 							<div class="newtask_warning" id="v_assignee">
 							</div>
