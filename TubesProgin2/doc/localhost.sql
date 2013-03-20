@@ -16,10 +16,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `progin_405_1351020`
+-- Database: `progin_405_13510020`
 --
-CREATE DATABASE `progin_405_1351020` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `progin_405_1351020`;
+CREATE DATABASE `progin_405_13510020` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `progin_405_13510020`;
 
 -- --------------------------------------------------------
 
