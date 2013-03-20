@@ -82,6 +82,7 @@ class User extends Model
         return false;
     }
 	
+	
 	public function getUser()
     {
 		$sql = "SELECT username FROM users";

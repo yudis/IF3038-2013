@@ -2,17 +2,16 @@
 
 class Tugas extends Model
 {
-    private $_id_tugas;
-    private $_id_kategori;
+	private $_id_tugas;
 	private $_taskname;
 	private $_attachment;
-    private $_tgl_deadline;
-    private $_status;
-    private $_last_mod;
-    private $_pemilik;
+	private $_tgl_deadline;
+	private $_status;
+	private $_last_mod;
+	private $_pemilik;
 	private $_tag;
 	private $_kategori;
-	private $_asignee;
+	private $_assignees;
 	
 	public function get_id_tugas() { return $this->_id_tugas; } 
 	public function get_taskname() { return $this->_taskname; } 
@@ -22,7 +21,6 @@ class Tugas extends Model
 	public function get_status() { return $this->_status; } 
 	public function get_last_mod() { return $this->_last_mod; } 
 	public function get_pemilik() { return $this->_pemilik; } 
-	public function get_asignee() { return $this->_asignee; } 
 	public function get_kategori() { return $this->_kategori; } 
 	public function get_id_kategori() { return $this->_id_kategori; } 
 	public function get_tag() { return $this->_tag; } 
@@ -39,8 +37,6 @@ class Tugas extends Model
 	public function set_id_kategori($x) { $this->_id_kategori = $x; } 
 	public function set_tag($x) { $this->_tag = $x; } 
 	public function set_tag2($i,$x) { $this->_tag[$i] = $x; } 
-	public function set_asignee($x) { $this->_asignee = $x; } 
-	public function set_asignee2($i,$x) { $this->_asignee[$i] = $x; } 
 	
 	public function fromArray($tugas)
 	{
@@ -52,9 +48,8 @@ class Tugas extends Model
 		$this->_last_mod = $tugas["last_mod"];
 		$this->_pemilik = $tugas["pemilik"];
 		$this->_tag = $tugas["tag"];
-		$this->_asignee = $tugas["asignee"];
-		$this->_kategori = $tugas["kategori"];
 		$this->_id_kategori = $tugas["id_kategori"];
+		$this->_kategori = $tugas["kategori"];
 	}
 	
 	public function toArray()
@@ -68,27 +63,27 @@ class Tugas extends Model
 		$tugas["last_mod"] = $this->_last_mod;
 		$tugas["pemilik"] = $this->_pemilik;
 		$tugas["tag"] = $this->_tag;
-		$tugas["asignee"] = $this->_asignee;
-		$tugas["kategori"] = $this->_kategori;
 		$tugas["id_kategori"] = $this->_id_kategori;
+		$tugas["kategori"] = $this->_kategori;
+		$tugas["assignees"] = $this->_assignees;
 		
 		return $tugas;
 	}
 	
 	public function getTugas($id_tugas)
-    {
-        $sql = "SELECT t.id AS id, t.nama AS nama, tgl_deadline,  `status` , t.last_mod AS last_mod, pemilik, id_kategori, c.nama AS nama_kategori
+	{
+		$sql = "SELECT t.id AS id, t.nama AS nama, tgl_deadline,  `status` , t.last_mod AS last_mod, pemilik, id_kategori, c.nama AS nama_kategori
 				FROM categories c, tugas t
 				WHERE t.id = ? AND c.id = t.id_kategori;";
 
-        $this->_setSql($sql);
+		$this->_setSql($sql);
 		
-        $tugas = $this->getRow(array($id_tugas));
-         
-        if (empty($tugas))
-        {
-            return false;
-        }
+		$tugas = $this->getRow(array($id_tugas));
+		 
+		if (empty($tugas))
+		{
+			return false;
+		}
 		
 		$this->_id_tugas = $tugas["id"];
 		$this->_taskname = $tugas["nama"];
@@ -98,20 +93,21 @@ class Tugas extends Model
 		$this->_pemilik = $tugas["pemilik"];
 		$this->_id_kategori = $tugas["id_kategori"];
 		$this->_kategori = $tugas["nama_kategori"];
+
 		$this->_tag = $this->getTags($id_tugas);
 		$this->_attachment = $this->getAttachments($id_tugas);
-		$this->getAsignee($id_tugas);
-		
-        return $this->toArray();
-    }
+		$this->_assignees = $this->getAssignees($id_tugas);
+
+		return $this->toArray();
+	}
 	
 	public function getTags($id_tugas)
 	{
 		$sql = "SELECT tag FROM tags WHERE id_tugas=? ";
-        $this->_setSql($sql);
+		$this->_setSql($sql);
 		
-        $r = $this->getAll(array($id_tugas));
-        $retval = array();
+		$r = $this->getAll(array($id_tugas));
+		$retval = array();
 		
 		$i = 0;
 		while(!empty($r[$i]["tag"]))
@@ -122,13 +118,21 @@ class Tugas extends Model
 
 		return $retval;
 	}
+
+	public function getAssignees($id_tugas)
+	{
+		$sql = "SELECT a.username AS username, u.full_name AS full_name, u.avatar AS avatar FROM assignees a, users u WHERE id_tugas=? AND a.username=u.username";
+		$this->_setSql($sql);
+		return $this->getAll(array($id_tugas));
+	}
 	
 	public function getAttachments($id_tugas)
 	{
 		$sql = "SELECT id_attachment, name, filename, type FROM attachments WHERE id_tugas=?";
-        $this->_setSql($sql);
-        return $this->getAll(array($id_tugas));
+		$this->_setSql($sql);
+		return $this->getAll(array($id_tugas));
 	}
+
 
 	public function setStats($i,$n)
     {
@@ -145,76 +149,22 @@ class Tugas extends Model
         return $sth->execute($data);
     }
 	
-	public function getAsignee($id_tugas)
+	public function store()
 	{
-		$sql = "SELECT username FROM assignees WHERE id_tugas=? ";
-        $this->_setSql($sql);
-		
-        $r = $this->getAll(array($id_tugas));
-		
-		
-        if (empty($r))
-        {
-            return false;
-        }
-		
-		$i=1;
-		while(!empty($r[$i]["username"]))
-		{
-			$this->_asignee[$i] = $r[$i]["username"];
-			$i++;
-		}
-	}
-	
-	public function getAsignee2($id_tugas)
-	{
-		$sql = "SELECT username FROM assignees WHERE id_tugas=? ";
-        $this->_setSql($sql);
-		
-        $r = $this->getAll(array($id_tugas));
-		
-		
-        if (empty($r))
-        {
-            return false;
-        }
-		
-		return $r;
-	}
-	
-	public function getAllTugas()
-	{
-		$sql = "SELECT t.id AS id, t.nama AS nama, tgl_deadline,  `status` , t.last_mod AS last_mod, pemilik, id_kategori, c.nama AS nama_kategori
-				FROM categories c, tugas t WHERE c.id = t.id_kategori;";
-        $this->_setSql($sql);
-		
-        $r = $this->getAll();
-		
-		
-        if (empty($r))
-        {
-            return false;
-        }
-		
-		return $r;
-	}
-	
-    public function store()
-    {
-        $sql = "INSERT INTO tugas 
-                    (nama, tgl_deadline, pemilik,id_kategori)
-                VALUES 
-                    (?, ?, ?, ?);";
-         
-        $data = array(
+		$sql = "INSERT INTO tugas 
+					(id, nama, tgl_deadline, status, pemilik)
+				VALUES 
+					(?, ?, ?, ?, ?);";
+		 
+		$data = array(
+			$this->_id_tugas,
 			$this->_taskname,
 			$this->_tgl_deadline,
-			$this->_pemilik,
-			$this->_id_kategori
-        );
-         
-        $sth = $this->_db->prepare($sql);
-        return $sth->execute($data);
-    }
+			$this->_status,
+			$this->_pemilik
+		);
+		 
+		$sth = $this->_db->prepare($sql);
+		return $sth->execute($data);
+	}
 }
-?>
