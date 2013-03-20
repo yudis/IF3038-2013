@@ -15,23 +15,23 @@ if (mysqli_connect_errno()) {
 		<title>TUGASKU - 
 		<?php
 		$uri = "$_SERVER[REQUEST_URI]";
-		$uri = substr($uri, 9);
+		$uri = substr($uri, strrpos($uri, "/") + 1);
 		$pos = strpos($uri,"?");
 		if ($pos === false) {
 			//do nothing
 		} else {
 			$uri = substr($uri,0,$pos);
 		}
-		if (strcmp($uri,"src/profil.php") == 0) {
+		if (strcmp($uri,"profil.php") == 0) {
 			echo 'PROFIL';
-		} else if (strcmp($uri,"src/dashboard.php") == 0) {
+		} else if (strcmp($uri,"dashboard.php") == 0) {
 			echo 'DASHBOARD';
-		} else if (strcmp($uri,"src/rinciantugas.php") == 0) {
+		} else if (strcmp($uri,"rinciantugas.php") == 0) {
 			$id_task= $_GET['id'];
 			$result = mysqli_query($con,"SELECT * FROM `tasks` WHERE id=$id_task");
 			$task = mysqli_fetch_array($result);
 			echo strtoupper($task['name']);
-		} else if (strcmp($uri,"src/post.php") == 0) {
+		} else if (strcmp($uri,"post.php") == 0) {
 			echo 'ADD TASK';
 		}
 		?>
@@ -42,15 +42,15 @@ if (mysqli_connect_errno()) {
 	</head>
 	<body 
 	<?php
-		if (strcmp($uri,"src/profil.php") == 0) {
+		if (strcmp($uri,"profil.php") == 0) {
 			echo "id='profilbackground'";
-		} else if (strcmp($uri,"src/dashboard.php") == 0) {
+		} else if (strcmp($uri,"dashboard.php") == 0) {
 			$result=mysqli_query($con,"SELECT DISTINCT `category` FROM `tasks`");
 			$cats=mysqli_num_rows($result);
 			echo "id='dashboardbackground' onload='javascript:hidetask(".$cats.")'";
-		} else if (strcmp($uri,"src/rinciantugas.php") == 0) {
+		} else if (strcmp($uri,"rinciantugas.php") == 0) {
 			echo "id='rincianbackground'";
-		} else if (strcmp($uri,"src/post.php") == 0) {
+		} else if (strcmp($uri,"post.php") == 0) {
 			echo "id='postbackground'";
 		}
 	?>
