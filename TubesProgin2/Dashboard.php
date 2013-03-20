@@ -3,6 +3,17 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
+<?php
+
+// Inialize session
+session_start();
+
+// Check, if username session is NOT set then this page will jump to login page
+if (!isset($_SESSION['username'])) {
+header('Location: index.php');
+}
+
+?>
 <html>
     <head>
         <title>BANG!!!-DASHBOARD</title>
@@ -15,7 +26,7 @@ and open the template in the editor.
             <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
             <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
             <div id="profile"><a title="Go to Profile" href="profile.php">My Profile</a></div>
-            <div id="logout"><a title="Log out from here" href="index.php">Log Out</a></div>
+            <div id="logout"><a title="Log out from here" href="logout.php">Log Out</a></div>
             <form id="search">
                 <input type="text" name="Search" id="box">
                 <input type="submit" value="Search">

@@ -25,11 +25,12 @@ function logins() {
     http.onreadystatechange = function(){
         if(http.readyState == 4){ 
             var response = http.responseText;
-            if(response===0){
-                alert("login gagal");
+            //alert(response);
+            if(response==0){
+                alert("username dan password salah");
             }else{
-                alert(response+"login berhasil");
-                //window.location = "Dashboard.php";
+               // alert(response+"login berhasil");
+                window.location = "Dashboard.php";
             }
         }
     };
