@@ -36,10 +36,13 @@
 	<div id="category_list">
 		<div class="link_blue_rect" id="category_title"><a href="#" onclick="catchange(0)">All Categories </a> </div>
 		<ul id="category_item">
-			<li><a href="#" onclick="catchange(1)" id="kuliah">Kuliah</a></li>
-			<li><a href="#" onclick="catchange(2)" id="proyek">Proyek</a></li>
-			<li><a href="#" onclick="catchange(3)" id="tugas">Tugas</a></li>
-			<li><a href="#" onclick="catchange(4)" id="lomba">Lomba</a></li>
+			<?php 
+				$query 	= "SELECT * FROM category;";
+				$result	= mysql_query($query);
+				while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+					echo "<li> <a href='#' onclick='catchange('".$row['cat_id']."')' id='kuliah'> ".$row['cat_name']." </a> </li>";
+				}
+			?>
 		</ul>
 		<div id="add_task_link"> <a href="addtask.php"> + new task </a> </div>
 		<div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
