@@ -68,8 +68,8 @@ and open the template in the editor.
                 Email<br>
             </div>
             <div id="bioright">: <?php echo $current_user['fullname'];?><br>
-                :<?php echo $current_user['birthday'];?><br>
-                :<?php echo $current_user['email'];?><br>
+                : <?php echo $current_user['birthday'];?><br>
+                : <?php echo $current_user['email'];?><br>
             </div>
 			<div id="editProfile">
 				<a onclick="editProfile();">Edit Profile</a>
@@ -83,10 +83,18 @@ and open the template in the editor.
 					Password<br>
 					Confirm Password<br>
 			</div>
+			<?php
+				session_start();
+				if(($_SESSION['IsEdit'])!=true){
+					print '<script type="text/javascript">'; 
+					print 'alert("The email address is already registered")'; 
+					print '</script>';
+				}
+			?>
 			<div id='inputEditProfile'>
-				<form method="post" action="edit.php" enctype="multipart/form-data">
-					<input type="text" name="editname"><br>
-					<input type="date" name="editdob"><br>
+				<form id="editForm" method="post" action="edit.php" enctype="multipart/form-data">
+					<input type="text" name="editname" value="<?php echo $current_user['fullname'];?>"><br>
+					<input type="date" name="editdob" value="<?php echo $current_user['birthday'];?>"><br>
 					<input type="file" name="editavatar"><br>
 					<input type="password" name="editpassword1"><br>
 					<input type="password" name="editpassword2"><br>

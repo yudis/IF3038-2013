@@ -3,7 +3,166 @@
  * and open the template in the editor.
  */
 
+var username = document.getElementById("regusername");
+var fullname = document.getElementById("regname");
+var pass1 = document.getElementById("regpassword1");
+var pass2 = document.getElementById("regpassword2");
+var email = document.getElementById("regemail");
+var file = document.getElementById("regfile");
+var isUsernameExist = false;
 
+	username.onkeyup = function()
+	{
+		var xmlhttp;
+		if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}
+		else
+		{// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+				// alert(xmlhttp.responseText);
+				// document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+				if(xmlhttp.responseText>0){
+					valid1.src = "img/salah.png";
+					isUsernameExist = true;
+				}else{
+					if (username.checkValidity()){
+						valid1.src = "img/benar.png";
+						if (isUsernameExist){
+							valid1.src = "img/salah.png";
+						}else{
+							valid1.src = "img/benar.png";
+						}
+					}
+					else
+					{
+						valid1.src = "img/salah.png";
+					}
+					if (username.value == password.value)
+					{
+						valid1.src = "img/salah.png";
+					}
+					cekvalid();
+					isUsernameExist = false;
+				}
+			}
+		}
+		xmlhttp.open("GET","gethint.php?",true);
+		xmlhttp.send();
+	}
+	
+	fullname.onkeyup = function()
+	{
+		if (fullname.checkValidity()){
+			valid2.src = "img/benar.png";
+		}
+		else
+		{
+			valid2.src = "img/salah.png";
+		}
+		cekvalid();
+	}
+	
+	pass1.onkeyup = function()
+	{
+
+		if (pass1.checkValidity()){
+			valid3.src = "img/benar.png";
+		}
+		else
+		{
+			valid3.src = "img/salah.png";
+		}
+		
+		if (username.value == pass1.value)
+		{
+			valid3.src = "img/salah.png";
+		}
+		else if (pass1.value == email.value)
+			{
+				valid3.src = "img/salah.png";
+			}
+			
+		cekvalid();
+	}
+	
+	pass2.onkeyup = function()
+	{
+		if (pass2.checkValidity() && (pass1.value == pass2.value)){
+			valid4.src = "img/benar.png";
+		}
+		else
+		{
+			valid4.src = "img/salah.png";
+		}
+		
+		cekvalid();
+	}
+	
+	email.onkeyup = function()
+	{
+		
+		if (email.checkValidity()){
+			valid5.src = "img/benar.png";
+		}
+		else
+		{
+			valid5.src = "img/salah.png";
+		}
+		
+		if (pass1.value == email.value)
+			{
+				valid5.src = "img/salah.png";
+			}
+		
+		cekvalid();
+	}
+	
+	function checkImage()
+	{
+		var extensi = file.value.match("^.+\.(jpe?g|JPE?G)$");
+		if(extensi)
+			valid6.src = "img/benar.png";
+		else
+			valid6.src = "img/salah.png";
+		cekvalid();
+	}
+	
+	
+	
+	function cekvalid(){
+		if (username.checkValidity() && (username.value != pass1.value) && (pass1.checkValidity()) && (pass1.value != email.value)
+		&& (pass1.value == pass2.value)  && (fullname.checkValidity()) && (email.checkValidity()) && (file.value.match("^.+\.(jpe?g|JPE?G)$")) )
+		{
+			submit.disabled="";
+		}
+		else
+		{
+			submit.disabled="disabled";
+		}
+	}
+
+	function SlideShow() {
+		if (document.all) {
+		document.images.SlideShow.style.filter="blendTrans(duration=2)";
+		document.images.SlideShow.style.filter="blendTrans(duration=crossFadeDuration)";
+		document.images.SlideShow.filters.blendTrans.Apply();
+		}
+		document.images.SlideShow.src = preLoad[j].src;
+		if (document.all) {
+		document.images.SlideShow.filters.blendTrans.Play();
+		}
+		j = j + 1;
+		if (j > (p - 1)) j = 0;
+		t = setTimeout('SlideShow()', 2000);
+	}
+	
 function showList(){
 document.getElementById("listtugas3").style.visibility="hidden";
 document.getElementById("listtugas2").style.visibility="hidden";
@@ -57,6 +216,7 @@ document.getElementById("edittugas").style.visibility="visible";
 document.getElementById("buattugas").style.visibility="hidden";
 document.getElementById("wanted").style.visibility="visible";
 }
+
 function showBuat(){
 document.getElementById("listtugas3").style.visibility="hidden";
 document.getElementById("listtugas2").style.visibility="hidden";
@@ -66,8 +226,6 @@ document.getElementById("edittugas").style.visibility="hidden";
 document.getElementById("buattugas").style.visibility="visible";
 document.getElementById("wanted").style.visibility="visible";
 }
-
-var valid = false;
 
 function createTask() {
     var regex = /^[a-zA-Z0-9]{5,25}$/;
@@ -197,3 +355,4 @@ function Submit(){
         document.getElementById("foto").src = "img/foto_anonim.png";
     }
 }
+
