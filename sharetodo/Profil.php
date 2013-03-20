@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -12,9 +16,9 @@
 	    
 	    <img id="logo" src="res/logo1.png" alt="to-do list"></img>
             <a id="dashboardLink" href="dashboard.php">dashboard</a>
-            <input id="searchForm" type="text" name="keyword" onkeyup="showHint(this.value)"></input>
+            <input id="searchForm" type="text" name="keyword" onkeyup="showHint(this.value)" placeholder="search"></input>
             <select id="filter" name="filter">
-                <option selected>Select Filter ...</option>
+                <!--<option selected>Select Filter ...</option>-->
                 <option>All</option>
                 <option>Username</option>
                 <option>Judul Kategori</option>
@@ -44,7 +48,14 @@
 		echo "Gagal melakukan koneksi ke MySQL : " . mysqli_connect_error();
 	    }
 	    
-	    $result = mysqli_query($con,"SELECT * FROM user");
+	    $curUser = "smanurung"; //hanya dummy
+	    if (isset($_SESSION["username"])) { //hanya untuk memastikan
+		$curUser = $_SESSION["username"];
+	    } else {
+		header("Location:index.php"); //mengembalikan ke halaman utama untuk user yang belum login
+	    }
+	    
+	    $result = mysqli_query($con,"SELECT * FROM user WHERE (username='".$curUser."')");
 	    while($row = mysqli_fetch_array($result)){
 		//echo $row1['username'] . "<br/>";
 		echo "<div id='userData'>";
@@ -84,7 +95,7 @@
 		echo "</div>";
 	    }
 	?>
-	
+		
         <!--<div id="userData">
             <h2 id="biodataTitle">BIODATA</h2>
             <hr/>
@@ -121,31 +132,32 @@
 		</div>
             </div>-->
 	    
+	    <!--FORM EDIT SECTION-->
 	    <div id=editForm>
-		<form action="#" method="POST" enctype="multipart/form-data" name="uploadImage">
+		<form action="" method="POST" enctype="multipart/form-data" name="uploadImage">
 		    <div class="bioLeft">
 			<p>new Full Name :</p>
 		    </div>
 		    <div class="bioRight">
-			<input type=text></input>
+			<input id="newFullName" type=text></input>
 		    </div>
 		    <div class="bioLeft">
 			<p>new Birthdate :</p>
 		    </div>
 		    <div class="bioRight">
-			<input type=date></input>
+			<input id="newBirthdate" type=date></input>
 		    </div>
 		    <div class="bioLeft">
 			<p>new Password :</p>
 		    </div>
 		    <div class="bioRight">
-			<input type=text></input>
+			<input id="newPassword" type="password"></input>
 		    </div>
 		    <div class="bioLeft">
 			<p>Confirm new Password :</p>
 		    </div>
 		    <div class="bioRight">
-			<input type=text></input>
+			<input id="newPasswordAgain" type="password"></input>
 		    </div>
 		    
 		    <div class="bioLeft">
@@ -153,42 +165,110 @@
 		    </div>
 		    <div class="bioRight">
 			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo MAX_FILE_SIZE; ?>"/>
-			<input type="file" name="image"/>
+			<input id="fileUpload" type="file" name="image"/>
 		    </div>
 		    <div class="bioLeft">
 			<p></p>
 		    </div>
 		    <div class="bioRight">
-			<input class="submitBtn" type="submit" value="Submit Form" name='upload' onclick="hideEditForm(); changeFullName();"></input>
+			<input class="submitBtn" type="button" value="Submit Form" name='upload' onclick="hideEditForm(); updateProfile(newFullName.value, newBirthdate.value, newPassword.value, newPasswordAgain.value, fileUpload.value);"></input>
 		    </div>
 		</form>
 	    </div>
 	    
-            <h2 id="taskTitle">TASKS</h2>
-            <hr/>
-            <div id="taskContent">
-		<div class="bioLeft">
-		    <p>Nama</p>
-		</div>
-		<div class="bioRight">
-		    <p>Deadline</p>
-		</div>
+	    <?php
+		//create connection
+		$con = mysqli_connect("127.0.0.1","root","root","distributedAgenda");
 		
-		<div class="tableElmtLeft">
-		    <p>Tugas Besar II Pemrograman Internet</p>
-		</div>
-		<div class="tableElmtRight">
-		    <p>March, 23 2013</p>
-		</div>
-		<div class="tableElmtLeft">
-		    <p>Tugas Besar I Sistem Terdistribusi</p>
-		</div>
-		<div class="tableElmtRight">
-		    <p>March, 24 2013</p>
-		</div>
-            </div>
+		//check the connection
+		if (mysqli_connect_errno($con)) {
+		    echo "Gagal melakukan koneksi ke MySQL : " . mysqli_connect_error();
+		}
+		
+		$curUser = $_SESSION['username']; //mengambil username yang sedang aktif
+		$sql = "SELECT task.namaTask, deadline FROM usertotask, task WHERE usertotask.username='". $curUser . "' AND usertotask.namaTask = task.namaTask";
+		
+		echo "<h2 id='taskTitle'>TASKS</h2>";
+		echo "<hr/>";
+		$result = mysqli_query($con,$sql);
+		while($row = mysqli_fetch_array($result)){
+		    //echo $row['namaTask'] . " | " . $row['deadline'];
+		    echo "<div id='taskContent'>";
+			echo "<div class='bioLeft'>";
+			    echo "<p>Nama</p>";
+			echo "</div>";
+			echo "<div class='bioRight'>";
+			    echo "<p>Deadline</p>";
+			echo "</div>";
+	    		
+			echo "<div class='tableElmtLeft'>";
+			    echo "<p>".$row['namaTask']."</p>";
+			echo "</div>";
+			echo "<div class='tableElmtRight'>";
+			    echo "<p>".$row['deadline']."</p>";
+			echo "</div>";
+		    echo "</div>";
+		}	    
+	    ?>
+	    
+<!--            <h2 id="taskTitle">TASKS</h2>-->
+<!--            <hr/>-->
+<!--            <div id="taskContent">-->
+<!--		<div class="bioLeft">-->
+<!--		    <p>Nama</p>-->
+<!--		</div>-->
+<!--		<div class="bioRight">-->
+<!--		    <p>Deadline</p>-->
+<!--		</div>-->
+<!--		-->
+<!--		<div class="tableElmtLeft">-->
+<!--		    <p>Tugas Besar II Pemrograman Internet</p>-->
+<!--		</div>-->
+<!--		<div class="tableElmtRight">-->
+<!--		    <p>March, 23 2013</p>-->
+<!--		</div>-->
+<!--		<div class="tableElmtLeft">-->
+<!--		    <p>Tugas Besar I Sistem Terdistribusi</p>-->
+<!--		</div>-->
+<!--		<div class="tableElmtRight">-->
+<!--		    <p>March, 24 2013</p>-->
+<!--		</div>-->
+<!--            </div>-->
             
-            <h2 id="doneTaskTitle">DONE TASKS</h2>
+	    <?php
+		//create connection
+		$con = mysqli_connect("127.0.0.1","root","root","distributedAgenda");
+		
+		//check the connection
+		if (mysqli_connect_errno($con)) {
+		    echo "Gagal melakukan koneksi ke MySQL : " . mysqli_connect_error();
+		}
+		
+		$curUser = $_SESSION['username']; //mengambil username yang sedang aktif
+		//query database sementara
+		$sql = "SELECT task.namaTask, status FROM usertotask, task WHERE usertotask.username='". $curUser . "' AND usertotask.namaTask = task.namaTask";
+		
+		echo "<h2 id='doneTaskTitle'>DONE TASKS</h2><hr/>";
+		    echo "<div class='bioLeft'>";
+			echo "<p>Nama</p>";
+		    echo "</div>";
+		    echo "<div class='bioRight'>";
+			echo "<p>Tag</p>";
+		    echo "</div>";
+		    
+		    $result = mysqli_query($con,$sql);
+		    while($row = mysqli_fetch_array($result)){
+			echo "<div class='tableElmtLeft'>";
+			    echo "<p>".$row['namaTask']."</p>";
+			echo "</div>";
+			echo "<div class='tableElmtRight'>";
+			    echo "<p>".$row['status']." (harusnya tag)"."</p>";
+			echo "</div>";
+		    }
+		echo "</div>";
+	    ?>
+	    
+            <!--<h2 id="doneTaskTitle">DONE TASKS</h2>
             <hr/>
             <div id="doneTask">
 		<div class="bioLeft">
@@ -210,7 +290,7 @@
 		<div class="tableElmtRight">
 		    <p>Data Flow Diagram (DFD) | Value Chain | Enterprise Information System</p>
 		</div>
-            </div>
+            </div>-->
         </div>
     </body>
 </html>
