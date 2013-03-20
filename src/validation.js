@@ -112,14 +112,31 @@ function checkDOB(){
 	}
 }
 
+//======================= LOGIN =======================
 function checkLogin(){
-	if(document.getElementById('usernamelogin').value == 'proginkeren' &&
-		document.getElementById('passwordlogin').value == '12345678'){
-		window.location="dashboard.html";
+	var u = document.getElementById("usernamelogin").value;
+	var p = document.getElementById("passwordlogin").value;
+	
+	if(window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
 	}
 	else{
-		alert('Username/password salah!');
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
+
+	xmlhttp.onreadystatechange = function(){
+		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			if(xmlhttp.responseText == u){
+				alert(':)');
+			}
+			else{
+				alert(':(');
+			}
+		}
+	}
+
+	xmlhttp.open("GET", "login.php?u=" + u + "&p=" + p, true);
+	xmlhttp.send();
 }
 
 function toggleSearch(){

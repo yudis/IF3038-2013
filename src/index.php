@@ -115,7 +115,7 @@
 		</div>
 		<div class="clearall container" id="loginform">
 			<h2>Member Login</h2>
-			<form action="#" method="post">
+			<form>
 			<fieldset>
 				<p>
 					<label>Username <abbr title="Required">*</abbr></label>
@@ -135,7 +135,7 @@
 				</p>				
 			</fieldset>
 			<fieldset>
-			<button id="login" type="submit" onclick="checkLogin(); return false;">Login</button>
+				<button id="login" onclick="checkLogin(); return false;">Login</button>
 			</fieldset>
 			</form>
 		</div>
