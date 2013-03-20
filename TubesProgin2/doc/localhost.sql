@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.3.9
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Mar 20, 2013 at 06:26 
--- Server version: 5.5.8
--- PHP Version: 5.3.5
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
@@ -16,10 +7,11 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `progin_405_1351020`
+-- Database: `progin_405_13510020`
 --
-CREATE DATABASE `progin_405_1351020` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `progin_405_1351020`;
+DROP DATABASE IF EXISTS `progin_405_13510020`;
+CREATE DATABASE `progin_405_13510020` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `progin_405_13510020`;
 
 -- --------------------------------------------------------
 
@@ -27,10 +19,13 @@ USE `progin_405_1351020`;
 -- Table structure for table `assignment`
 --
 
+DROP TABLE IF EXISTS `assignment`;
 CREATE TABLE IF NOT EXISTS `assignment` (
+  `IDAssignment` int(11) NOT NULL AUTO_INCREMENT,
   `Username` varchar(30) NOT NULL,
-  `IDTask` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `IDTask` int(11) NOT NULL,
+  PRIMARY KEY (`IDAssignment`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `assignment`
@@ -43,10 +38,13 @@ CREATE TABLE IF NOT EXISTS `assignment` (
 -- Table structure for table `attachment`
 --
 
+DROP TABLE IF EXISTS `attachment`;
 CREATE TABLE IF NOT EXISTS `attachment` (
+  `IDAttachment` int(11) NOT NULL AUTO_INCREMENT,
   `IDTask` int(11) NOT NULL,
-  `PathFile` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `PathFile` text NOT NULL,
+  PRIMARY KEY (`IDAttachment`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `attachment`
@@ -59,10 +57,13 @@ CREATE TABLE IF NOT EXISTS `attachment` (
 -- Table structure for table `authority`
 --
 
+DROP TABLE IF EXISTS `authority`;
 CREATE TABLE IF NOT EXISTS `authority` (
+  `IDAuthority` int(11) NOT NULL AUTO_INCREMENT,
   `IDCategory` int(11) NOT NULL,
-  `Username` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Username` varchar(30) NOT NULL,
+  PRIMARY KEY (`IDAuthority`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `authority`
@@ -75,11 +76,12 @@ CREATE TABLE IF NOT EXISTS `authority` (
 -- Table structure for table `category`
 --
 
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
-  `IDCategory` int(11) NOT NULL,
+  `IDCategory` int(11) NOT NULL AUTO_INCREMENT,
   `CategoryName` varchar(30) NOT NULL,
   PRIMARY KEY (`IDCategory`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `category`
@@ -92,11 +94,14 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Table structure for table `comment`
 --
 
+DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
+  `IDComment` int(11) NOT NULL AUTO_INCREMENT,
   `IDTask` int(11) NOT NULL,
   `Username` varchar(30) NOT NULL,
-  `Content` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Content` text NOT NULL,
+  PRIMARY KEY (`IDComment`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `comment`
@@ -109,11 +114,12 @@ CREATE TABLE IF NOT EXISTS `comment` (
 -- Table structure for table `tag`
 --
 
+DROP TABLE IF EXISTS `tag`;
 CREATE TABLE IF NOT EXISTS `tag` (
-  `IDTag` int(11) NOT NULL,
+  `IDTag` int(11) NOT NULL AUTO_INCREMENT,
   `TagName` varchar(30) NOT NULL,
   PRIMARY KEY (`IDTag`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 --
 -- Dumping data for table `tag`
@@ -126,14 +132,15 @@ CREATE TABLE IF NOT EXISTS `tag` (
 -- Table structure for table `task`
 --
 
+DROP TABLE IF EXISTS `task`;
 CREATE TABLE IF NOT EXISTS `task` (
-  `IDTask` int(11) NOT NULL,
+  `IDTask` int(11) NOT NULL AUTO_INCREMENT,
   `IDCategory` int(11) NOT NULL,
   `TaskName` varchar(50) NOT NULL,
   `Status` varchar(30) NOT NULL,
   `Deadline` date NOT NULL,
   PRIMARY KEY (`IDTask`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `task`
@@ -146,10 +153,13 @@ CREATE TABLE IF NOT EXISTS `task` (
 -- Table structure for table `tasktag`
 --
 
+DROP TABLE IF EXISTS `tasktag`;
 CREATE TABLE IF NOT EXISTS `tasktag` (
+  `IDTaskTag` int(11) NOT NULL AUTO_INCREMENT,
   `IDTask` int(11) NOT NULL,
-  `IDTag` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `IDTag` int(11) NOT NULL,
+  PRIMARY KEY (`IDTaskTag`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `tasktag`
