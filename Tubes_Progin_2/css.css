@@ -62,10 +62,93 @@ input.liusername{
 #search {
     position: absolute;
     left: 90px;
+	width: 200px;
+}
+
+#search input[type=text]{
+	border-radius:0px;
+	padding-right: 20px;
+	width:120px;
+}
+
+#search label{
+	background-image: url(img/test.png);
+	background-position: -603px -20px;
+	background-color: white;
+	position: absolute;
+	border: 0;
+	cursor:pointer;
+	height: 19px;
+	padding:0;
+	right:56px;
+	top:4px;
+	margin:0;
+	width: 20px;
+}
+
+#filter{
+	height: 0px;
+	width: 80px;
+	margin-left : 125px;
+	background-color: #ffffff;
+	color: black;
+	font-weight: bold;
+	font-size: 14px;
+	z-index: 2000;
+	position: relative;
+	overflow:hidden;
+}
+
+#filter div:hover{
+	background-color: #f2f2f2;
+	cursor:pointer;
+}
+
+#hasilsearch{
+	position: absolute;
+	z-index:1000;
+	top: 24px;
+	left: 0px;
+	width: 142px;
+	border: 1px solid #000000;
+	background-color: white;
+	max-height: 300px;
+	overflow : auto;
+}
+
+#hasilsearch ul{
+	list-style-type: none;
+	padding : 0px;
+	margin : 0px;
+	cursor: pointer;
+	color: #3b5998;
+	font-weight: bold;
+}
+
+#hasilsearch li:hover{
+	background-color: #3b5998;
+	color : white;
+}
+
+.judul{
+	background-color : #f2f2f2;
+	padding: 2px 15px 2px 6px;
+	color: #000000;
+}
+
+#foto_header{
+	position: absolute;
+	left: 900px;
+	top: 5px;
+}
+
+#foto_header img{
+	width: 35px;
+	height: 35px;
 }
 
 #box {
-	width: 120px;
+	width: 140px;
 }
 
 .overlay
@@ -534,4 +617,13 @@ input{
     top: 28%;
     left: 10%;
     width: 150px; 
+}
+
+.taskx{
+	margin-bottom: 10px;
+	height: 60px;
+	padding: 20px 40px;
+	background-image: url('img/label.png');
+	background-repeat: no-repeat;
+	background-size: 300px 95px;
 }

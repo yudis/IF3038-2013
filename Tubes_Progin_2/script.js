@@ -356,3 +356,190 @@ function Submit(){
     }
 }
 
+<<<<<<< HEAD
+=======
+function auto_complete(str)
+{
+	document.getElementById("box").value = str;
+	document.getElementById("hasilsearch").innerHTML="";
+	document.getElementById("hasilsearch").style.visibility="none";
+}
+
+function showfilter(){
+	document.getElementById("filter").style.height = "64px";
+}
+
+function hiddenfilter(){
+	document.getElementById("filter").style.height = "0px";
+}
+
+function filter(str)
+{
+	document.getElementById("selectedKategori").value = str;
+	document.getElementById("filter").style.height = "0px";
+}
+
+function showHint(str)
+{
+	if (str.length==0)
+	  { 
+	  document.getElementById("hasilsearch").innerHTML="";
+	  document.getElementById("hasilsearch").style.visibility="hidden";
+	  return;
+	  }
+	  
+	var tipe = document.getElementById("selectedKategori").value;
+	
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	  {
+		if (tipe == "task"){
+			var string = xmlhttp.responseText.split("<br>");
+			var result = "";
+			var check = true;
+			result = "<ul>";
+			if (string.length > 1)
+			{
+				result += "<li class=\"judul\">task</li>";
+				for (var s=1; s<string.length; s++)
+				{
+					if (document.getElementById("box").value.toLowerCase() == string[s].toLowerCase())
+						check = false;
+					result += "<li onclick=\"auto_complete(this.innerHTML);\">"+string[s]+"</li>";
+				}
+			}
+			if (check)
+			{
+				result += "</ul>";
+				document.getElementById("hasilsearch").innerHTML=result;
+				document.getElementById("hasilsearch").style.visibility="visible";
+			}
+			else
+			{
+				document.getElementById("hasilsearch").innerHTML="";
+				document.getElementById("hasilsearch").style.visibility="none";
+			}
+		} else if (tipe == "username"){
+			var string = xmlhttp.responseText.split("<br>");
+			var result = "";
+			var check = true;
+			result = "<ul>";
+			if (string.length > 1)
+			{
+				result += "<li class=\"judul\">user</li>";
+				for (var s=1; s<string.length; s++)
+				{
+					if (document.getElementById("box").value.toLowerCase() == string[s].toLowerCase())
+						check = false;
+					result += "<li onclick=\"auto_complete(this.innerHTML);\">"+string[s]+"</li>";
+				}
+			}
+			if (check)
+			{
+				result += "</ul>";
+				document.getElementById("hasilsearch").innerHTML=result;
+				document.getElementById("hasilsearch").style.visibility="visible";
+			}
+			else
+			{
+				document.getElementById("hasilsearch").innerHTML="";
+				document.getElementById("hasilsearch").style.visibility="none";
+			}
+		} else if (tipe == "category"){
+			var string = xmlhttp.responseText.split("<br>");
+			var result = "";
+			var check = true;
+			result = "<ul>";
+			if (string.length > 1)
+			{
+				result += "<li class=\"judul\">kategori</li>";
+				for (var s=1; s<string.length; s++)
+				{
+					if (document.getElementById("box").value.toLowerCase() == string[s].toLowerCase())
+					check = false;
+					result += "<li onclick=\"auto_complete(this.innerHTML);\">"+string[s]+"</li>";
+				}
+			}
+			if (check)
+			{
+				result += "</ul>";
+				document.getElementById("hasilsearch").innerHTML=result;
+				document.getElementById("hasilsearch").style.visibility="visible";
+			}
+			else
+			{
+				document.getElementById("hasilsearch").innerHTML="";
+				document.getElementById("hasilsearch").style.visibility="none";
+			}
+		} else if (tipe == "all result"){
+			var string = xmlhttp.responseText.split(",");
+			var result = "";
+			var check = true;
+			result = "<ul>";
+			for (var s in string)
+			{
+				var string2 = string[s].split("<br>");
+				if (string2.length > 1)
+				{
+					result+="<li class=\"judul\">"+string2[0]+"</li>";
+					for(var s2=1; s2<string2.length ; s2++)
+					{
+						if (document.getElementById("box").value.toLowerCase() == string2[s2].toLowerCase())
+							check = false;
+						result += "<li onclick=\"auto_complete(this.innerHTML);\">"+string2[s2]+"</li>";
+					}
+				}
+			}
+			if (check)
+				{
+					result += "</ul>";
+					document.getElementById("hasilsearch").innerHTML=result;
+					document.getElementById("hasilsearch").style.visibility="visible";
+				}
+				else
+				{
+					document.getElementById("hasilsearch").innerHTML="";
+					document.getElementById("hasilsearch").style.visibility="none";
+				}
+		}
+		
+		/*
+		var string = xmlhttp.responseText.split("<br>");
+		var result = "";
+		var check = true;
+		result = "<ul>";
+		//result += "<li class=\"judul\">task</li>"
+		for (var s in string)
+		{
+			if (document.getElementById("box").value.toLowerCase() == string[s].toLowerCase())
+				check = false;
+			result += "<li onclick=\"auto_complete(this.innerHTML);\">"+string[s]+"</li>";
+		}
+						
+		if (check)
+		{
+			result += "</ul>";
+			document.getElementById("hasilsearch").innerHTML=result;
+			document.getElementById("hasilsearch").style.visibility="visible";
+		}
+		else
+		{
+			document.getElementById("hasilsearch").innerHTML="";
+			document.getElementById("hasilsearch").style.visibility="none";
+		}*/
+		
+	   }
+	  }
+	xmlhttp.open("GET","autosearch.php?q="+str+"&tipe="+tipe,true);
+	xmlhttp.send();
+}
+>>>>>>> 059e42ff3f4ebcf971a511a6b98008e6f5cbf502

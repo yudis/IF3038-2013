@@ -2,6 +2,18 @@
 To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
+
+<?php
+	//$username = $_SESSION['username'];
+	$username = "EndyDoank";
+	
+	require "config.php";
+	
+	$sql = "SELECT * FROM user WHERE username = '$username'";
+	$user = mysqli_query($con,$sql);
+	$current_user = mysqli_fetch_array($user);
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,16 +23,9 @@ and open the template in the editor.
         <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
-        <header>
-            <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
-            <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
-            <div id="profile"><a title="Go to Profile" href="profile.php">My Profile</a></div>
-            <div id="logout"><a title="Log out from here" href="index.php">Log Out</a></div>
-            <form id="search">
-                <input type="text" name="Search" id="box">
-                <input type="submit" value="Search">
-            </form>
-        </header>
+        <?php
+			include "header.php";
+		?>
 
             <div id="category">
                 <div class="kategori" onclick="showList();"><a>Fraud</a></div>
@@ -35,35 +40,20 @@ and open the template in the editor.
         </div>
         
         <div id ="listtugas" class="list">
-            <a class="listTugas" onclick="showRinci();"></a> 
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a onclick='showBuat()' class='addTask'></a>
-        </div>
-        <div id ="listtugas2" class="list">
-            <a class="listTugas" onclick="showRinci();"></a> 
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a onclick='showBuat()' class='addTask'></a>
-        </div>
-        <div id ="listtugas3" class="list">
-            <a class="listTugas" onclick="showRinci();"></a> 
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a class="listTugas" onclick="showRinci();"></a>
-            <a onclick="showBuat()" class="addTask"></a>
+			<div class="taskx">
+				<a href="#">JUDUL</a>
+				<span><br>deadline : besok</span>
+				<span><br>tag : tag1,tag2</span>
+				
+			</div>
+			<div class="taskx">
+				<a href="#">JUDUL</a>
+				<span><br>deadline : besok</span>
+				<span><br>tag : tag1,tag2</span>
+			</div>
+			<div class="taskx">
+				<a href="#">add task</a>
+			</div>
         </div>
         
         <div class="tugas" id="rincitugas">
