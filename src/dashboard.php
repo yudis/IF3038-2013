@@ -7,6 +7,7 @@ require 'models/tugas.php';
 require 'models/kategori.php';
 
 session_start();
+$_SESSION["user"]='edwardsp';
 if (isset($_SESSION["user"]))
 {
 	if (isset($_GET["logout"]))

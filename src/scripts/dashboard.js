@@ -1,4 +1,21 @@
 var chosen=0;
+var coordinatorArr="";
+
+function addCoordinator() {
+    var newcoordinator = document.getElementById("userL");
+    var coordinatorList = document.getElementById("userList");
+    
+    if (newcoordinator.value == "") {
+        alert("Nama harus dimasukkan");
+        return false;
+    }
+	coordinatorArr+=newcoordinator.value+",";
+    coordinatorList.innerHTML += "<li>" + newcoordinator.value + "</li> ";
+    newcoordinator.value = "";
+	coordinatorIndex++;
+    
+    return false;
+}
 
 function updateAddButtonVisibility() {
     var elmt = document.getElementById('addTask');
@@ -7,7 +24,7 @@ function updateAddButtonVisibility() {
 
 function setChosen(str)
 {
-	chosen=str
+	chosen=str;
 }
 
 function NewKategori() {
@@ -32,10 +49,31 @@ function NewKategori() {
 		document.getElementById("nama_k").innerHTML=xmlhttp.responseText;
 		}
 	  }
-	xmlhttp.open("GET","ajax/createkategori.php?q="+q,true);
+	xmlhttp.open("GET","ajax/createkategori.php?q="+q+"&Arr="+coordinatorArr,true);
 	xmlhttp.send();
 	
 	return false;
+}
+
+function showCoordinator()
+{
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("user").innerHTML=xmlhttp.responseText;
+		}
+	  }
+	xmlhttp.open("GET","ajax/assigneeList.php",true);
+	xmlhttp.send();
 }
 
 function updateStatus(n,str) {
@@ -66,19 +104,10 @@ function NewTask() {
 
 function deleteCategory()
 {
-	if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp=new XMLHttpRequest();
-	  }
-	else
-	  {// code for IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	
-	xmlhttp.open("GET","ajax/deletecat.php?q="+chosen,true);
-	xmlhttp.send();
-	
-	
+	if(chosen!=0)
+	{
+		window.location = "deleteCat.php?q="+chosen;
+	}
 }
 
 function loadtugas(str)

@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="styles/default.css" />
         <link rel="stylesheet" type="text/css" href="styles/mediaqueries.css" />
         <script src="scripts/formtugas.js" type="application/javascript"></script>
+        <script src="scripts/tugas.js" type="application/javascript"></script>
         <script src="scripts/createtugas.js" type="application/javascript"></script>
 		
     </head>
@@ -67,20 +68,14 @@
                             <li id="folil4">
                                 <label id="title4">Assignee:</label>
                                 <div>
-                                    <input id="assignee1" name="assignee1" onfocus="showAssignee()" type="text" tabindex="4" list="user" />
+									<ul id="assigneesList" class="tag"></ul>
+									<br>
+                                    <input id="assignee" name="assignee" onfocus="showAssignee()" type="text" tabindex="4" list="user" />
                                     <datalist id="user" >
                                     </datalist>
+									<button onclick="return addAssignees();">Add</button>
                                 </div>
-								<div>
-                                    <input id="assignee2" name="assignee2" onfocus="showAssignee()" type="text" tabindex="4"  list="user" />
-                                    <datalist id="user" >
-                                    </datalist>
-                                </div>
-								<div>
-                                    <input id="assignee3" name="assignee3" onfocus="showAssignee()" type="text" tabindex="4"  list="user" />
-                                    <datalist id="user" >
-                                    </datalist>
-                                </div>
+								
                             </li>
 
                             <li id="folil5">

@@ -55,6 +55,21 @@ class Kategori extends Model
         return $this->toArray();
     }
 	
+	public function getAllKategori()
+    {
+        $sql = "SELECT * FROM categories ";
+        $this->_setSql($sql);
+		
+        $result = $this->getAll();
+         
+        if (empty($result))
+        {
+            return false;
+        }
+		
+        return $result;
+    }
+	
 	public function getTugas ($id_kategori)
 	{
 		$sql = "SELECT id FROM tugas WHERE id_kategori=? ";
@@ -78,17 +93,51 @@ class Kategori extends Model
 		}
 	}
 	
-	public function NewKategori($nama)
+	public function NewKategori($nama,$pembuat)
     {
         $sql = "INSERT INTO categories
-                    (nama)
+                    (id,nama)
                 VALUES 
-                    (?);";
+                    (0,?);";
          
         $data = array(
 			$nama
         );
+		
+        $sth = $this->_db->prepare($sql);
+        $sth->execute($data);
+		
+		$this->addNewestCoordinator($pembuat);
+    }
+	
+	public function addNewestCoordinator($pembuat)
+    {
+        $sql2 = "SELECT id FROM categories ORDER BY last_mod DESC LIMIT 1";
+		$this->_setSql($sql2);
+		
+		$result = $this->getRow();
+		
+		
+        if (empty($result))
+        {
+            return false;
+        }
+		
+		$this->addCoordinator($result["id"],$pembuat);
+    }
+	
+	public function addCoordinator($id,$pembuat)
+    {
+        $sql = "INSERT INTO coordinator
+                    (id_kategori,user)
+                VALUES 
+                    (?,?);";
          
+        $data = array(
+			$id,
+			$pembuat
+        );
+		
         $sth = $this->_db->prepare($sql);
         return $sth->execute($data);
     }
@@ -102,7 +151,23 @@ class Kategori extends Model
         );
 		
 		$sth = $this->_db->prepare($sql);
-        return $sth->execute($data);
+        $sth->execute($data);
+	}
+	
+	public function getUser ($id_kategori)
+	{
+		$sql = "SELECT user FROM coordinator WHERE id_kategori=? ";
+        $this->_setSql($sql);
+		
+        $result = $this->getAll(array($id_kategori));
+		
+        if (empty($result))
+        {
+            return false;
+        }
+		
+		
+		return $result;
 	}
 	
     public function store()

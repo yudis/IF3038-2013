@@ -4,17 +4,19 @@
 	require '../utilities/view.php';
 	require '../models/kategori.php';
 	$q=$_GET["q"];
+	$Arr=explode(',', $_GET["Arr"]);
+	session_start();
 	$kategori = new Kategori();
-	$kategori->NewKategori($q);
-	$i=1;
-	$success[$i] = $kategori->getKategori($i);
-	while (!empty($success[$i]))
+	$kategori->NewKategori($q,$_SESSION['user']);
+	$i=0;
+	while(!empty($Arr[$i]))
 	{
-		$id_kategori=$success[$i]["id"];
-		echo "<li><a href=\"#\" onclick=\"loadtugas('",$id_kategori,"'); return false;\" >";
-		echo $success[$i]["nama"];
-		echo "</a></li>";
+		echo $Arr[$i];
+		if($Arr[$i]!=$_SESSION['user'])
+		{
+			$kategori->addNewestCoordinator($Arr[$i]);
+		}
 		$i++;
-		$success[$i] = $kategori->getKategori($i);
 	}
+	header('Location: dashboard.php');
 ?>
