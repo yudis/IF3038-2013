@@ -1,4 +1,9 @@
-<?php include 'header.php';?>
+<?php 
+include 'header.php';
+
+$result=mysqli_query($con,"SELECT DISTINCT `category` FROM `tasks`");
+$cats=mysqli_num_rows($result);
+?>
 			
 <div id="main2">
     <div id ="dashboardcontainer">

@@ -26,16 +26,16 @@ if (mysqli_connect_errno()) {
 		} else {
 			$uri = substr($uri,0,$pos);
 		}
-		if (strcmp($uri,"profil.php") == 0) {
+		if (strcmp($uri,"src/profil.php") == 0) {
 			echo 'HOME';
-		} else if (strcmp($uri,"dashboard.php") == 0) {
+		} else if (strcmp($uri,"src/dashboard.php") == 0) {
 			echo 'DASHBOARD';
-		} else if (strcmp($uri,"rinciantugas.php") == 0) {
+		} else if (strcmp($uri,"src/rinciantugas.php") == 0) {
 			$id_task= $_GET['id'];
 			$result=mysqli_query($con,"SELECT * FROM `tasks` FROM WHERE id=$id_task");
 			$task=mysqli_fetch_array($result);
 			echo strtoupper($task['name']);
-		} else if (strcmp($uri,"post.php") == 0) {
+		} else if (strcmp($uri,"src/post.php") == 0) {
 			echo 'ADD TASK';
 		}
 		?>
