@@ -8,7 +8,7 @@ if (mysqli_connect_errno()) {
 }
 
 // post data 
-$username=$_POST["username"]; 
+$username=$_POST["username"];
 $password=$_POST["password"];
 $fullname=$_POST["nama"];
 $birthdate=$_POST["tgl"];
@@ -29,7 +29,8 @@ if ($_POST["sex"]=="male") {
 }
 $about=$_POST["about"];
 
-mysqli_query($con,"INSERT INTO `members` (username,password,fullname,birthdate,email,avatar,gender,about) VALUES ($username,sha1($password),$fullname,$birthdate,$email,$avatar,$gender,$about)");
+mysqli_query($con,"INSERT INTO `members` (username,password,fullname,birthdate,email,avatar,gender,about) 
+				VALUES ('$username',sha1('$password'),'$fullname','$birthdate','$email','$avatar','$gender','$about')");
 mysqli_close($con);
 
 header("location:index.php?status=4");

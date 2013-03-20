@@ -77,7 +77,7 @@ if (isset($_GET['status'])) {
 							SIGN UP
 						</div>
 						<div class="isi">
-							<form action="register.php" method="post">
+							<form enctype="multipart/form-data" action="register.php" method="post">
 								<div class="register-label btg-mrh" id="btg">*) wajib diisi</div>
 								<div class="clear"></div>
 								<div class="register-label">Username <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="username" id="form-username" onkeyup="validate()" /></div>
