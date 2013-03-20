@@ -16,7 +16,7 @@ if (mysqli_connect_errno()) {
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/php; charset=utf-8" />
-		<title>TUBESPROGIN - 
+		<title>TUGASKU - 
 		<?php
 		$uri = "$_SERVER[REQUEST_URI]";
 		$uri = substr($uri, 9);
@@ -27,13 +27,13 @@ if (mysqli_connect_errno()) {
 			$uri = substr($uri,0,$pos);
 		}
 		if (strcmp($uri,"src/profil.php") == 0) {
-			echo 'HOME';
+			echo 'PROFIL';
 		} else if (strcmp($uri,"src/dashboard.php") == 0) {
 			echo 'DASHBOARD';
 		} else if (strcmp($uri,"src/rinciantugas.php") == 0) {
 			$id_task= $_GET['id'];
-			$result=mysqli_query($con,"SELECT * FROM `tasks` FROM WHERE id=$id_task");
-			$task=mysqli_fetch_array($result);
+			$result = mysqli_query($con,"SELECT * FROM `tasks` WHERE id=$id_task");
+			$task = mysqli_fetch_array($result);
 			echo strtoupper($task['name']);
 		} else if (strcmp($uri,"src/post.php") == 0) {
 			echo 'ADD TASK';
