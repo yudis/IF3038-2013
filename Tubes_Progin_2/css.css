@@ -136,6 +136,17 @@ input.liusername{
 	color: #000000;
 }
 
+#foto_header{
+	position: absolute;
+	left: 900px;
+	top: 5px;
+}
+
+#foto_header img{
+	width: 35px;
+	height: 35px;
+}
+
 #box {
 	width: 140px;
 }

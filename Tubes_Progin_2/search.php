@@ -5,26 +5,61 @@
 	
 	if ( $tipefilter == "all result")
 	{
-		$sql = "SELECT task.name,tag.name as nama_tag FROM (task LEFT OUTER JOIN tasktag ON task.id_task = tasktag.id_task) LEFT OUTER JOIN tag ON task.id_tag = tag.id_tag";
+		$sql = "SELECT DISTINCT task.name FROM (task LEFT OUTER JOIN tasktag ON task.id_task = tasktag.id_task) LEFT OUTER JOIN tag ON tasktag.id_tag = tag.id_tag LEFT OUTER JOIN comment ON task.id_task = comment.id_task WHERE task.name LIKE '%$text%' or tag.name LIKE '%$text%' or comment.content LIKE '$text%'";
+		
 		$user = mysqli_query($con,$sql);
+		$hasiltask = array();
 		while (($user != null) && ($current_user = mysqli_fetch_array($user)))
 		{
 			$hasiltask[]=$current_user['name'];
 		}
 		
-		for($i=0; $i<count($hasiltask); $i++)
+		$sql = "SELECT DISTINCT username FROM user WHERE username LIKE '%$text%' or fullname LIKE '%$text%' or birthday LIKE '%$text%' or email LIKE '%$text%'";
+		$user = mysqli_query($con,$sql);
+		$hasiluser = array();
+		while(($user != null) && ($current_user = mysqli_fetch_array($user)))
 		{
-			echo $hasiltask[$i]."<br>";
+			$hasiluser[] = $current_user['username'];
+		}
+		
+		$sql = "SELECT DISTINCT name FROM category WHERE name LIKE '%$text%'";
+		$user = mysqli_query($con,$sql);
+		$hasilcategory = array();
+		while(($user != null) && ($current_user = mysqli_fetch_array($user)))
+		{
+			$hasilcategory[] = $current_user['name'];
 		}
 	}
 	else if ($tipefilter == "username")
 	{
+		$sql = "SELECT DISTINCT username FROM user WHERE username LIKE '%$text%' or fullname LIKE '%$text%' or birthday LIKE '%$text%' or email LIKE '%$text%'";
+		$user = mysqli_query($con,$sql);
+		$hasiluser = array();
+		while(($user != null) && ($current_user = mysqli_fetch_array($user)))
+		{
+			$hasiluser[] = $current_user['username'];
+		}
 	}
 	else if ($tipefilter == "category")
 	{
+		$sql = "SELECT DISTINCT name FROM category WHERE name LIKE '%$text%'";
+		$user = mysqli_query($con,$sql);
+		$hasilcategory = array();
+		while(($user != null) && ($current_user = mysqli_fetch_array($user)))
+		{
+			$hasilcategory[] = $current_user['name'];
+		}
 	}
-	else if ($tipefilter == "username")
+	else if ($tipefilter == "task")
 	{
+		$sql = "SELECT DISTINCT task.name FROM (task LEFT OUTER JOIN tasktag ON task.id_task = tasktag.id_task) LEFT OUTER JOIN tag ON tasktag.id_tag = tag.id_tag LEFT OUTER JOIN comment ON task.id_task = comment.id_task WHERE task.name LIKE '%$text%' or tag.name LIKE '%$text%' or comment.content LIKE '$text%'";
+		
+		$user = mysqli_query($con,$sql);
+		$hasiltask = array();
+		while (($user != null) && ($current_user = mysqli_fetch_array($user)))
+		{
+			$hasiltask[]=$current_user['name'];
+		}
 	}
 ?>
 
