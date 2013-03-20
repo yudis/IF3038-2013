@@ -13,6 +13,7 @@ and open the template in the editor.
         <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
+        <? echo"wkwkw"; ?>
         <div id="header">
 		<div id="logo">
 			<img src="img\Logo_Small2.png" alt="Logo & Tagline" onclick="Redirect();"></img>
