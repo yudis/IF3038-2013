@@ -11,6 +11,7 @@ and open the template in the editor.
         <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
+        <?php include('config.php') ?>
         <header>
             <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
             <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
