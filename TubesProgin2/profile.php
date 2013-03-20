@@ -3,6 +3,10 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
+<?php
+	require_once('config.php');
+?>
+
 <html>
     <head>
         <title>BANG! - Profile</title>
@@ -11,7 +15,14 @@ and open the template in the editor.
         <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
-        <?php include('config.php') ?>
+
+<?php
+if(config()){
+	$query = "SELECT*
+		FROM user";
+	$result = mysql_query($query);
+?>        
+        
         <header>
             <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
             <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
