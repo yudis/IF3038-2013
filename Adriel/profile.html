@@ -37,7 +37,7 @@
 							<span class="rincianLabel">Full Name:</span>
 							<span id="nameDisplayDiv">Edward Samuel</span>
 							<div id = "nameEditDiv">
-								<input type="text" id="fullname" name="fullname" list="names" />
+								<input type="text" id="fullname" name="fullname" list="names" onkeyup="validateFullName();" />
                                 <datalist id="names">
                                     <option value="Abraham Krisnanda Santoso">
                                     <option value="Edward Samuel Pasaribu">
@@ -48,22 +48,28 @@
 						<div>
 							<span class="rincianLabel">E-mail: </span>
 							<span id="emailDisplayDiv">13510xxx@std.stei.itb.ac.id</span>
-							<div id="emailEditDiv"><input type="text" id="email" name="email" /></div>
+							<div id="emailEditDiv"><input type="text" id="email" name="email" onkeyup="validateEmail();"/></div>
 						</div>
 						<div>
 							<span class="rincianLabel">Born date: </span>
 							<span id="dateDisplayDiv"> 16 Februari 2013, 17:00 WIT</span>
-							<div id="dateEditDiv"><input type="text" id="date" name="date" /></div>
+							<div id="dateEditDiv"><input type="text" id="date" name="date" onkeyup="validateBirthday();"/></div>
 						</div>
 						<div>
 							<span class="rincianLabel">Password: </span>
-							<div id="passwordEditDiv"><input type="password" id="password" name="password" /></div>
+							<span id="passwordDisplayDiv">blablabla</span>
+							<div id="passwordEditDiv"><input type="password" id="password" name="password" onkeyup="validatePassword();"/></div>
+						</div>
+						<div>
+							<span class="rincianLabel">Re-type:</span>
+							<span id="repasswordDisplayDiv">blablabla</span>
+							<div id="repasswordEditDiv"><input type="password" id="repassword" name="repassword" onkeyup="validateRePassword();"/></div>
 						</div>
 						<div id="editProfileButton" class="edit_button_profile"><button type="button" onClick="return editProfil();">Edit</button> </div>
-						<div id="doneProfileButton" class="edit_button_profile"><button type="button" onClick="return doneProfil();">Done</button> </div>
-						<div id="changeProfilePictureButton" class="edit_button_profile"><button type="button" onClick="#">Change Profile Picture</button> </div>
+						<div id="doneProfileButton" class="edit_button_profile"><button type="button" onClick="return doneProfil();" >Done</button> </div>
+						<div id="changeProfilePictureButton" class="edit_button_profile"> Change Profile Picture : <input type="file" id="cpp" name="cpp" accept="image/*" src="element.jpg" onchange="changePP()"/></div>
                     </div>
-                    <div class="profilepict"><img src="images/avatar.png" width="200" height="200" alt="Edo Thobi Bram"/></div>
+                    <div class="profilepict"><img id="pp" src="images/avatar.png" width="200" height="200" alt="Edo Thobi Bram"/></div>
                 </div>
                 <h1> Activity </h1>
                 <h2>Kategori 1</h2>
