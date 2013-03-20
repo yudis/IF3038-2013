@@ -9,8 +9,12 @@ Kania :
 	- Bonus Media Query
 	- 
 Sharon : 
-	- Register		// Done
-	- Dashboard
-	- Search Result		
-	- Bonus : Search Bar (Filtering & autocomplete menggunakan ajax) // Done 
-	- Navigation bar : category nya di ambil dari database
+	- Register									// Done
+	- Dashboard									// Done		- Task blm bisa di view
+	- Search Result									// Done		- Hasil blm bisa di edit langsung
+	- Bonus : Search Bar (Filtering & autocomplete menggunakan ajax) 		// Done 
+	- Navigation bar : category nya di ambil dari database				// Done
+	- Finish Task									// Done		- Change status from '0' to '1'
+													- Belum ada pertanyaan konfirmasi 
+	- Profile Picture								//
+	- Add new category								// 

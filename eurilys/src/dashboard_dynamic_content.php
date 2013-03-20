@@ -11,10 +11,19 @@
 	
 	/* Get the task CATEGORY we're going to generate to the HTML page */
 	$q	= $_GET["q"];
-		
+	$taskdone= $_GET["taskdone"];
+	$taskid = $_GET['taskid'];
+	//echo $taskdone;
+	
+	//Update the task status
+	if ($taskdone != "") {
+		$query 	= "UPDATE task SET task_status='1' WHERE task_id='$taskid';";
+		$result	= mysql_query($query);
+	}
+	
 	/* Searching for Task */
 	if ($q == 'all') {
-		$query 	= "SELECT * FROM task;";
+		$query 	= "SELECT * FROM task WHERE task_status='0';";
 		$result	= mysql_query($query);
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 			
@@ -49,7 +58,7 @@
 	}
 	else {
 		//searching for specific task (per category)
-		$query 	= "SELECT * FROM task where cat_name='$q';";
+		$query 	= "SELECT * FROM task where cat_name='$q' AND task_status='0';";
 		$result	= mysql_query($query);
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 			

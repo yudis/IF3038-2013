@@ -127,38 +127,6 @@ function signup() {
 	}
 }
 
-function finishTask(i) {
-	if (i == 1) {
-		document.getElementById("curtask1").style.opacity = "0";
-		document.getElementById("curtask2").style.top = "20px";
-		document.getElementById("curtask3").style.top = "200px";
-		document.getElementById("curtask4").style.top = "380px";
-		document.getElementById("curtask5").style.top = "560px";
-		}
-		
-		else {if (i == 2) {
-			document.getElementById("curtask2").style.opacity = "0";
-			document.getElementById("curtask3").style.top = "200px";
-			document.getElementById("curtask4").style.top = "380px";
-			document.getElementById("curtask5").style.top = "560px";
-		}
-		else {
-			if (i==3) {
-				document.getElementById("curtask3").style.opacity = "0";
-				document.getElementById("curtask4").style.top = "380px";
-				document.getElementById("curtask5").style.top = "560px";
-			}
-			else if (i == 4) {
-				document.getElementById("curtask4").style.opacity = "0";
-				document.getElementById("curtask5").style.top = "560px";
-			}
-			else if (i == 5){
-				document.getElementById("curtask5").style.opacity = "0";
-			}
-		}
-	}
-}
-
 function checkTaskName() {
 	var taskName = document.getElementById('task_name_input').value;
 	var taskNameValid = 0;
@@ -306,6 +274,23 @@ function generateTask(category) {
 			document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
 		}
 	}	
-	xmlhttp.open("GET","dashboard_dynamic_content.php?q="+category,true);
+	xmlhttp.open("GET","dashboard_dynamic_content.php?q="+category+"&taskdone=&taskid=",true);
+	xmlhttp.send();
+}
+
+function finishTask(i) {
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else {// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
+		}
+	}	
+	xmlhttp.open("GET","dashboard_dynamic_content.php?q=all&taskdone="+i+"&taskid="+i,true);
 	xmlhttp.send();
 }
