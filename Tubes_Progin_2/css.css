@@ -618,3 +618,12 @@ input{
     left: 10%;
     width: 150px; 
 }
+
+.taskx{
+	margin-bottom: 10px;
+	height: 60px;
+	padding: 20px 40px;
+	background-image: url('img/label.png');
+	background-repeat: no-repeat;
+	background-size: 300px 95px;
+}
