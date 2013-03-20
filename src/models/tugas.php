@@ -166,6 +166,39 @@ class Tugas extends Model
 		}
 	}
 	
+	public function getAsignee2($id_tugas)
+	{
+		$sql = "SELECT username FROM assignees WHERE id_tugas=? ";
+        $this->_setSql($sql);
+		
+        $r = $this->getAll(array($id_tugas));
+		
+		
+        if (empty($r))
+        {
+            return false;
+        }
+		
+		return $r;
+	}
+	
+	public function getAllTugas()
+	{
+		$sql = "SELECT t.id AS id, t.nama AS nama, tgl_deadline,  `status` , t.last_mod AS last_mod, pemilik, id_kategori, c.nama AS nama_kategori
+				FROM categories c, tugas t WHERE c.id = t.id_kategori;";
+        $this->_setSql($sql);
+		
+        $r = $this->getAll();
+		
+		
+        if (empty($r))
+        {
+            return false;
+        }
+		
+		return $r;
+	}
+	
     public function store()
     {
         $sql = "INSERT INTO tugas 

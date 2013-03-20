@@ -5,15 +5,13 @@
 	require 'models/kategori.php';
 	$kategori = new Kategori();
 	$i=1;
-	$success[$i] = $kategori->getKategori($i);
+	$success = $kategori->getAllKategori();
 	while (!empty($success[$i]))
 	{
-		$nama=$success[$i]["nama"];
-		echo "<button type=\"button\" onclick=\"loadtugas(this.value)\"  value=\"", $nama ,"\")\">";
+		echo "<button type=\"button\" onclick=\"loadtugas(this.value)\"  value=\"", $success[$i]["id"] ,"\")\">";
 		echo $success[$i]["nama"];
 		echo "</button>";
 		echo "<br>";
 		$i++;
-		$success[$i] = $kategori->getKategori($i);
 	}
 ?>

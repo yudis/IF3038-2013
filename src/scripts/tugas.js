@@ -3,6 +3,8 @@
  */
 var tagsTugas = new Array();
 var assigneesTugas = new Array();
+var assigneeArr = new Array();
+var assigneeIndex=0;
 
 function onload() {
     var name = getQueryParameter('name');
@@ -85,8 +87,10 @@ function addAssignees() {
     }
     
     assigneesTugas.push(newAssignee.value);
+	assigneeArr[assigneeIndex]=newAssignee.value;
     assigneesList.innerHTML += "<li>" + newAssignee.value + "</li> ";
     newAssignee.value = "";
+	assigneeIndex++;
     
     return false;
 }

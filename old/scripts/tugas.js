@@ -84,7 +84,6 @@ function addAssignees() {
         return false;
     }
     
-    assigneesTugas.push(newAssignee.value);
     assigneesList.innerHTML += "<li>" + newAssignee.value + "</li> ";
     newAssignee.value = "";
     
