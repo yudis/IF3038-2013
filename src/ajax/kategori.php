@@ -3,6 +3,7 @@
 	require '../utilities/model.php';
 	require '../utilities/view.php';
 	require '../models/kategori.php';
+	
 	session_start();
 	$kategori = new Kategori();
 	$i=0;

@@ -17,7 +17,7 @@ if (!isset($_SESSION["user"]))
 }
 else
 {
-	if (isset($_GET["id_tugas"]))
+	if (isset($_GET["get"]) && isset($_GET["id_tugas"]))
 	{
 		$idtugas = $_GET["id_tugas"];
 		$startindex = isset($_GET["start"]) ? $_GET["start"] : 0;
@@ -31,6 +31,18 @@ else
 		$return["count"] = $count;
 		$return["total"] = $comments->getCommentsCount($idtugas);
 		$return["comments"] = $comments->getComments($idtugas, $startindex, $count, $_SESSION["user"]["username"]);
+	}
+	else if (isset($_GET["add"]) && isset($_GET["id_tugas"]) &&  isset($_GET["content"]))
+	{
+		$comment = new Komentar();
+
+	    $comment->set_id_tugas($_GET["id_tugas"]);
+	    $comment->set_username($_SESSION["user"]["username"]);
+	    $comment->set_content($_GET["content"]);
+
+	    $comment->store();
+
+		$return["status"] = 200;
 	}
 	else
 	{

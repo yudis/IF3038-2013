@@ -2,6 +2,22 @@
 
 class Komentar extends Model
 {
+    private $_id;
+    private $_id_tugas;
+    private $_username;
+    private $_time;
+    private $_content;
+
+    public function get_id() { return $this->_id; } 
+    public function get_id_tugas() { return $this->_id_tugas; } 
+    public function get_username() { return $this->_username; } 
+    public function get_time() { return $this->_time; } 
+    public function get_content() { return $this->_content; } 
+    public function set_id($x) { $this->_id = $x; } 
+    public function set_id_tugas($x) { $this->_id_tugas = $x; } 
+    public function set_username($x) { $this->_username = $x; } 
+    public function set_time($x) { $this->_time = $x; } 
+    public function set_content($x) { $this->_content = $x; } 
 
     public function getCommentsCount($idtugas)
     {
@@ -30,5 +46,22 @@ class Komentar extends Model
 	    }
 		
         return $comments;
+    }
+
+    public function store()
+    {
+        $sql = "INSERT INTO comments 
+                    (id_tugas, user, content)
+                VALUES 
+                    (?, ?, ?);";
+         
+        $data = array(
+            $this->_id_tugas,
+            $this->_username,
+            $this->_content
+        );
+         
+        $sth = $this->_db->prepare($sql);
+        return $sth->execute($data);
     }
 }

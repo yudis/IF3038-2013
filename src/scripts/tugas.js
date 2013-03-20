@@ -4,32 +4,68 @@
 var tagsTugas = new Array();
 var assigneesTugas = new Array();
 var assigneeArr = new Array();
-var assigneeIndex=0;
+var assigneeIndex = 0;
+var detilTugas;
 
-function onload() {
-    var name = getQueryParameter('name');
-    if (name == null) {
-        name = 'Tugas 1';
+function onload(id_tugas) {
+    ajax_get('./ajax/detiltugas.php?id_tugas=' + id_tugas, function(xhr) {
+        detilTugas = JSON.parse(xhr.responseText);
+        updateContent(true);
+    })
+}
+
+function updateContent(updateAttachment) {
+    if (detilTugas.responseStatus == 200) {
+        var divNamaTugas = document.getElementById("namaTugas");
+        var divStatusTugas = document.getElementById("statusTugas");
+        var divAttachmentTugas = document.getElementById("attachmentTugas");
+        var divDeadlineTugas = document.getElementById("deadlineDisplayDiv");
+        var txtDeadlineTugas = document.getElementById("deadline");
+        var divAssigneesTugas = document.getElementById("assigneesList");
+
+        divNamaTugas.innerHTML = detilTugas.nama;
+        if (detilTugas.status == 0)
+        {
+            divStatusTugas.innerHTML = '<strong>Belum selesai</status>';
+        }
+        else
+        {
+            divStatusTugas.innerHTML = '<strong>Selesai</status>';
+        }
+
+        if (updateAttachment) {
+            divAttachmentTugas.innerHTML = '';
+            detilTugas.attachment.forEach(function(entry) {
+                if (entry.type == "image")
+                {
+                    divAttachmentTugas.innerHTML += '<div><img src="./files/' + entry.filename + '" alt="' + entry.name + '" /></div>';
+                }
+                else if (entry.type == "video")
+                {
+                    divAttachmentTugas.innerHTML += '<div><video width="320" height="240" controls><source src="./files/' + entry.filename + '" /><div><a href="./files/' + entry.filename + '" target="_blank">' + entry.name + '</a></div></video></div>';
+                }
+                else
+                {
+                    divAttachmentTugas.innerHTML += '<div><a href="./files/' + entry.filename + '" target="_blank">' + entry.name + '</a></div>'
+                }
+            });
+        }
+
+        divDeadlineTugas.innerHTML = detilTugas.tgl_deadline;
+        txtDeadlineTugas.value = detilTugas.tgl_deadline;
+
+        divAssigneesTugas.innerHTML = '';
+        detilTugas.assignees.forEach(function(entry) {
+            divAssigneesTugas.innerHTML += '<li><a href="./profile.php?u=' + entry.username + '">'  + entry.full_name +  ' (' + entry.username + ')</a> | <a class="red" href="#" onclick="removeAssignee(' + entry.username + '); return false;">&times;</a></li> ';
+        });
+
+        writeTags();
+
+    } else if (detilTugas.responseStatus == 204) {
+        // do nothing
+    } else {
+        alert(detilTugas.message);
     }
-    document.getElementById('namaTugas').innerHTML = '<b>' + decodeURIComponent(name) + '</b>';
-    
-    var deadline = getQueryParameter('deadline');
-    if (deadline == null) {
-        deadline = '2013-02-22';
-    }
-    document.getElementById('deadlineDisplayDiv').innerHTML = decodeURIComponent(deadline);
-    
-    var tags = getQueryParameter('tags');
-    var temp = tags.split(",");
-    tagsTugas.length = 0;
-    temp.forEach(function(obj) {
-        tagsTugas.push(obj.trim());
-    });
-    writeTags();
-    
-    assigneesTugas.push("Benny Wijaya");
-    assigneesTugas.push("Florentina");
-    writeAssignees();
 }
 
 function addKomentar() {
@@ -46,22 +82,27 @@ function writeTags() {
     tags.value = '';
     
     tagsList.innerHTML = '';
-    for (var i=0; i<tagsTugas.length; i++) {
-        tagsList.innerHTML += "<li>" + tagsTugas[i] + "</li> ";
-        
-        if (i > 0) {
-            tags.value += ', ';
+    if (detilTugas.tag.length > 0)
+    { 
+        tagsList.innerHTML += "<li>" + detilTugas.tag[0] + "</li> ";
+        tags.value += detilTugas.tag[0];
+
+        for (var i=1; i<detilTugas.tag.length; i++) {
+            tagsList.innerHTML += "<li>" + detilTugas.tag[i] + "</li> ";
+            tags.value += ', ' + detilTugas.tag[i];
         }
-        tags.value += tagsTugas[i];
     }
 }
 
 function saveTags() {
     var tags = document.getElementById("tags");
     var temp = tags.value.split(",");
-    tagsTugas.length = 0;
+    detilTugas.tag.length = 0;
     temp.forEach(function(obj) {
-        tagsTugas.push(obj.trim());
+        obj = obj.trim();
+        if (obj != '') {
+            detilTugas.tag.push(obj);
+        }
     });
     writeTags();
     

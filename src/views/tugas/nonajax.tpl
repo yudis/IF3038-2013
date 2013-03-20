@@ -2,18 +2,58 @@
                 <h1>Rincian Tugas</h1>
                 <div class="padding12px">
                     <form action="#">
-                        <div class="rincianLabel">Nama:</div><div class="rincianDetail"><input type="hidden" id="idTugas" name="idTugas" value="<?php echo $id; ?>" /><div id="namaTugas">Loading...</div></div>
-                        <div class="rincianLabel">Status:</div><div class="rincianDetail"><span id="statusTugas">Loading...</span> <button class="button" onclick="return false;">Toggle</button></div>
-                        <div class="rincianLabel">Attachment:</div><div class="rincianDetail" id="attachmentTugas">Loading...</div>
+                        <div class="rincianLabel">Nama:</div><div class="rincianDetail"><input type="hidden" id="idTugas" name="idTugas" value="<?php echo $id; ?>" /><div id="namaTugas"><?php echo $namaTugas ?></div></div>
+                        <div class="rincianLabel">Status:</div><div class="rincianDetail"><strong><?php echo $status; ?></strong> <button class="button" onclick="return false;">Toggle</button></div>
+                        <div class="rincianLabel">Attachment:</div><div class="rincianDetail">
+                        <?php
+                            foreach ($attachments as &$value) 
+                            {
+                                if ($value["type"] == "image")
+                                {
+                        ?>
+                            <div><img src="./files/<?php echo  $value["filename"] ?>" alt="<?php echo $value["name"]; ?>" /></div>
+                        <?php
+                                }
+                                else if ($value["type"] == "video")
+                                {
+                        ?>
+                            <div>
+                                <video width="320" height="240" controls>
+                                    <source src="./files/<?php echo  $value["filename"] ?>" />
+                                    <div><a href="<?php echo "./files/" . $value["filename"]; ?>" target="_blank"><?php echo $value["name"]; ?></a></div>
+                                </video>
+                            </div>
+                        <?php
+                                }
+                                else
+                                {
+                        ?>
+                            <div><a href="<?php echo "./files/" . $value["filename"]; ?>" target="_blank"><?php echo $value["name"]; ?></a></div>
+                        <?php
+                                }
+                            }
+                            unset($value); // break the reference with the last element
+                        ?>
+                        </div>
                         <div class="rincianLabel">Deadline:</div><div class="rincianDetail">
-                            <div id="deadlineDisplayDiv" class="inlineblock">Loading...</div>
+                            <div id="deadlineDisplayDiv" class="inlineblock"><?php echo $deadline; ?></div>
                             <div id="deadlineEditDiv">
                                 <!-- <input type="date" id="deadline" name="deadline" value="2013-02-22" /> -->
-                                <input type="text" id="deadline" name="deadline" placeholder="yyyy-mm-dd" /> <a href="#" onclick="NewCal('deadline', 'YYYYMMDD'); return false;"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
+                                <input type="text" id="deadline" name="deadline" placeholder="yyyy-mm-dd" value="<?php echo $deadline; ?>" /><a href="#" onclick="NewCal('deadline', 'YYYYMMDD'); return false;"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
                             </div>
                         </div>
                         <div class="rincianLabel">Assignees:</div><div class="rincianDetail">
-                            <ul id="assigneesList" class="tag"></ul>
+                            <ul id="assigneesList" class="tag">
+                            <?php
+                                foreach ($assignees as &$value) 
+                                {
+                            ?>
+                                    <li><a href="./profile.php?u=<?php echo  $value["username"] ?>"><?php echo  $value["username"] ?> (<?php echo  $value["full_name"] ?>)</a> | <a class="red" href="#" onclick="removeAssignees('<?php echo  $value["username"] ?>'); return false;">&times;</a></li>
+                            <?php
+                                }
+                                unset($value); // break the reference with the last element
+                            ?>
+                            </ul>
                             <div id="assigneeEditDiv">
                                 <input type="text" id="assignee" name="assignee" list="user" />
                                 <datalist id="user">
@@ -26,10 +66,20 @@
                         </div>
                         <div class="rincianLabel">Tags:</div><div class="rincianDetail">
                             <div id="tagsDisplayDiv">
-                                <ul id="tagsList" class="tag"></ul>
+                                <ul id="tagsList" class="tag">
+									<?php 
+										if ($tags):
+										foreach ($tags as $t): 
+									?>
+										<li><?php echo $t; ?></li>
+									<?php 
+										endforeach;
+										endif; 
+									?>
+                                </ul>
                             </div>
                             <div id="tagsEditDiv">
-                                <input type="text" id="tags" name="tags" />
+                                <input type="text" id="tags" name="tags" value="<?php echo $tagsEdit; ?>" />
                             </div>
                         </div>
                         <br /><br />
