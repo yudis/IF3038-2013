@@ -1,7 +1,7 @@
 <?php
-session_start();
-session_destroy();
-ob_start();
+	session_start();
+	//session_destroy();
+	ob_start();
 
 	/* Configuring Server & Database */
 	$host        =    'localhost';
@@ -26,7 +26,6 @@ ob_start();
 		if (mysql_num_rows($res) > 0) {
 			$_SESSION['username'] = $username;
 			$_SESSION['fullname'] = $name;
-
 			header('location:src/dashboard.php'); //redirect to dashboard
 		} else {
 

@@ -9,6 +9,7 @@
 	$con        =    mysql_connect($host,$user,$password) or die('Server information is not correct.');
 	mysql_select_db($database,$con) or die('Database information is not correct');
 
+	/*
 	if (isset($_SESSION['username'])) {
 		$username = $_SESSION['username']; 
 	}
@@ -19,7 +20,7 @@
 	
 	while ($row = mysql_fetch_row($result)) {
 		echo '<img src="data:image/jpg;base64,'.base64_encode($row[0]).'" alt="photo">';
-	}
+	} */
 
 ?>
 <div id="navbar">

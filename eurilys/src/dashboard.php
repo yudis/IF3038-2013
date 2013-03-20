@@ -1,11 +1,13 @@
 <?php include 'logged_in_header.php'; ?>	
-		
-<!-- Web Content -->
+
 <section>
+	<!-- Navigation Bar -->
 	<?php include 'navigation_bar.php'; ?>
+	
 	<div id="dynamic_content">
-		<br><br>
-		<br><br>
+		<script> generateTask('all');  </script>
+		
+		<!--
 		<div class="task_view" id="curtask1">
 			<img src="../img/done.png" id="finish_1" onclick="javascript:finishTask(1)" class="task_done_button" alt=""/>
 			<div id="task_name_ltd" class="left dynamic_content_left">Task Name</div>
@@ -79,7 +81,7 @@
 			<br>
 			<div class="task_view_category"> Proyek </div>
 			<br>
-		</div>
+		</div> -->
 		<br><br><br><br>				
 	</div>
 </section>

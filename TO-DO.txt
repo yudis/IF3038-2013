@@ -13,3 +13,4 @@ Sharon :
 	- Dashboard
 	- Search Result		
 	- Bonus : Search Bar (Filtering & autocomplete menggunakan ajax) // Done 
+	- Navigation bar : category nya di ambil dari database
