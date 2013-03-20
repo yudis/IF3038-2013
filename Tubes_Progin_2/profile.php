@@ -23,22 +23,9 @@ and open the template in the editor.
 		</script>
     </head>
     <body>
-<<<<<<< HEAD
-        <header>
-            <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
-            <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
-            <div id="profile"><a title="Go to Profile" href="profile.php">My Profile</a></div>
-            <div id="logout"><a title="Log out from here" href="index.php">Log Out</a></div>
-            <form id="search">
-                <input type="text" name="Search" id="box">
-                <input type="submit" value="Search">
-            </form>
-        </header>
-=======
         <?php
 			require "header.php";
 		?>
->>>>>>> 059e42ff3f4ebcf971a511a6b98008e6f5cbf502
         <div id="panel"></div>
         <div id="donelist">
             <?php

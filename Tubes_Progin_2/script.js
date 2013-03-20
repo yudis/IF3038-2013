@@ -356,8 +356,6 @@ function Submit(){
     }
 }
 
-<<<<<<< HEAD
-=======
 function auto_complete(str)
 {
 	document.getElementById("box").value = str;
@@ -542,4 +540,3 @@ function showHint(str)
 	xmlhttp.open("GET","autosearch.php?q="+str+"&tipe="+tipe,true);
 	xmlhttp.send();
 }
->>>>>>> 059e42ff3f4ebcf971a511a6b98008e6f5cbf502
