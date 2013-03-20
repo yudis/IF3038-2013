@@ -3,6 +3,10 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
+<?php
+	require_once('config.php');
+?>
+
 <html>
     <head>
         <title>BANG! - Profile</title>
@@ -11,7 +15,14 @@ and open the template in the editor.
         <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
-        <?php include('config.php') ?>
+
+<?php
+if(connectDB()){
+	$queryProfile = "SELECT* FROM user";
+	$result = mysql_query($queryProfile);
+        if ($result > 0) {        
+?>        
+        
         <header>
             <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
             <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
@@ -23,6 +34,7 @@ and open the template in the editor.
             </form>
         </header>
         <div id="panel"></div>
+
         <div id="donelist">
             Ridho Ramadan<br/>
             Daniel Ginting<br/>
@@ -35,6 +47,15 @@ and open the template in the editor.
             Flora Monica <br/>
             Nugroho Satrijandi<br/>
         </div>
+<?php
+            $data = mysql_fetch_array($result);
+            $name= $data['Fullname'];
+            $bday= $data['DateOfBirth'];
+            $ava= $data['Avatar'];
+            $email = $data['Email'];
+        }
+?>
+
         <div id="biodata">
             <img id="foto" src="img/foto_anonim.png">
             <img id="badge" src="img/badge.png">
@@ -45,11 +66,18 @@ and open the template in the editor.
                 Email<br>
             </div>
             <div id="bioright">
-                : <script>document.write(localStorage.name);</script><br>
-                : <script>document.write(localStorage.date);</script><br>
-                : <script>document.write(localStorage.email);</script><br>
+                <?php echo $name; ?> <br>
+                <?php echo $bday; ?> <br>
+                <?php echo $email; ?> <br>
             </div>
         </div>
         
     </body>
+
+<?php
+    } else { // jika koneksi database tidak berhasil
+    	die('Database connection error');
+    }
+?>
+    
 </html>
