@@ -45,7 +45,7 @@
 				}
 			?>
 		</ul>
-		<div id="add_task_link"> <a id="add_task" href="addtask.php"> + new task </a> </div>
+		<div id="add_task_link"> <a id="add_task" name="" onclick="addCatName();" href="addtask.php"> + new task </a> </div>
 		<div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
 		<div id="category_form">
 			<div id="category_form_inner">

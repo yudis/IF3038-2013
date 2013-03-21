@@ -11,6 +11,9 @@
 
 	$con        =    mysql_connect($host,$user,$password) or die('Server information is not correct.');
 	mysql_select_db($database,$con) or die('Database information is not correct');
+	 
+	
+	
 	
 	/* Add Task Script */
 	$task_name		= mysql_real_escape_string($_POST['task_name_input']);
@@ -20,11 +23,11 @@
 		$username = $_SESSION['username']; 
 	}
 	$tag    		= mysql_real_escape_string($_POST['tag_input']);
-	
+	$cat_name   	= ($_POST['cat_name']);
 	if (isset($_POST['add_task_button'])) { 
 		$query	=    
-		"INSERT INTO task (`task_name`, `task_deadline`,`task_creator`) 
-		VALUES ('$task_name','$task_deadline','$username' )";
+		"INSERT INTO task (`task_name`, `task_deadline`,`task_creator`,`cat_name`) 
+		VALUES ('$task_name','$task_deadline','$username','$cat_name' )";
 		
 		$res	=    mysql_query($query);
 	

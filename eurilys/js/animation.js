@@ -260,9 +260,15 @@ function generateTask(category) {
 	xmlhttp.open("GET","dashboard_dynamic_content.php?q="+category+"&taskdone=&taskid=",true);
 	if (category != "all"){
 	document.getElementById("add_task_link").style.display = "block";
-	document.getElementById("add_task").setAttribute('href',"addtask.php#"+category);
+	document.getElementById("add_task").setAttribute('name',category);
+	
 	}
 	xmlhttp.send();
+	
+}
+
+function addCatName(){
+	document.getElementById("cat_name").setAttribute('value',getElementById("add_task").getAttribute('name'));
 }
 
 function finishTask(i) {

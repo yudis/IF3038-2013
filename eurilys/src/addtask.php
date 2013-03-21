@@ -13,8 +13,10 @@
 				<div id="task_name_lat" class="left dynamic_content_left">Task Name</div>
 				<div id="task_name_rat" class="left dynamic_content_right">
 					<input id="task_name_input" onkeydown="javascript:checkTaskName();" type="text" name="task_name_input" class="left">
+                    
 					<img src="../img/yes.png" id="taskname_validation" class="left signup_form_validation" alt="validation image"/>
 				</div>
+                <input type="hidden" id="cat_name" name="cat_name"onclick="javascript:addCatName();" value="" type="text">
 			</div>
 			
 			<div id="row2_addtask" class="left top10 dynamic_content_row">
