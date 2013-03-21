@@ -1,9 +1,8 @@
 <?php
-
     $con = mysqli_connect("localhost","root","","progin_405_13510003");
     
     if (mysqli_connect_errno($con)) {
-        echo "";
+        echo "Gagal Koneksi";
     } else {
         $id_tugas = $_REQUEST["id_tugas"];
     

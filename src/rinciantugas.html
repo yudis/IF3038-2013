@@ -13,21 +13,33 @@
 				
 				xmlhttp.onreadystatechange = function(){
                     if (xmlhttp.readyState==4 && xmlhttp.status==200)	{
-						if (xmlhttp.responseText==1) {
+                        var s = xmlhttp.responseText;
+                        var n = s.indexOf("\n");
+                        
+						if (n!=-1) {
 							//Masukin hasilnya ke dalam div komen
                             var daftar_komentar = document.getElementById("komen");
                             
+                            var username = s.substring(0,n);
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+                            
+                            var tanggal = s.substring(0,n);
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+
+                            var komentar = unescape(s.substring(0,n));
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");                            
+                            
                             var tambah = '<div id = "daftarkomen">'
-                            tambah += "User :<br>";
-                            tambah += form.comment.value;
+                            tambah += username + " " + tanggal + "<br>";
+                            tambah += komentar;
                             tambah += "</div>";
                             var n = daftar_komentar.innerHTML.indexOf("<form name");
-                            //alert(daftar_komentar.innerHTML.substring(0,n));
-                            //alert(daftar_komentar.innerHTML.substring(n));
                             daftar_komentar.innerHTML = daftar_komentar.innerHTML.substring(0,n)
                                                       + tambah
                                                       + daftar_komentar.innerHTML.substring(n);
-                            //alert(daftar_komentar.innerHTML);
 						} else {
 							alert("Gagal memposting komentar");
 						}						
@@ -52,16 +64,69 @@
                 
                 xmlhttp1.onreadystatechange = function() {
                     if (xmlhttp1.readyState == 4 && xmlhttp1.status == 200) {
-                    
+                        var s = xmlhttp1.responseText;
+                        var n = s.indexOf("\n");
+                        //alert(s);
+                        
+                        if (n != -1) {
+                            //Ambil data-data tugas
+                            var nama_tugas = s.substring(0,n);
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+                            
+                            var tanggal = s.substring(0,n);
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+
+                            var status = unescape(s.substring(0,n));
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+
+                            var tag = unescape(s.substring(0,n));
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n")
+ 
+                            var attachment = unescape(s.substring(0,n));
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+                            
+                            //Tampilkan datanya
+                            document.getElementById("judultugas").innerHTML = nama_tugas;
+                            
+                            var detail = document.getElementById("detail");
+                            
+                            var tambah = '<label>DEADLINE</label>';
+                            tambah += '<a id="deadline">'+tanggal+"</a>";
+                            
+                            tambah += "<label>ASSIGNEE</label>";
+                            tambah += '<a id="assignee">';
+                            while (n != -1) {
+                                tambah += unescape(s.substring(0,n)) + "<br>";
+                                s = s.substring(n+1);
+                                n = s.indexOf("\n");
+                            }
+                            tambah += '</a>';
+                        
+                            tambah += "<label>TAG</label>";
+                            tambah += '<a id="tag">'+tag+'</a>';
+                        
+                            tambah += "<label>ATTACHMENT</label>";
+                            tambah += '<a href ="#" id="attach">Download Here</a>'; 
+                            
+                            detail.innerHTML = tambah;                         
+                        } else {
+                            alert(xmlhttp1.responseText);
+                        }                        
                     }
                 }
                 
                 xmlhttp2.onreadystatechange = function() {
                     if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
-                        alert("OK");
                         var s = xmlhttp2.responseText;
                         var n = s.indexOf("\n");
-                        alert(n);
+                        var daftar_komentar = document.getElementById("komen");
+                        daftar_komentar.inner_HTML = "";
+                        //alert(daftar_komentar.inner_HTML);
                         
                         while (n != -1) {
                             //Ambil satu data komentar
@@ -76,21 +141,35 @@
                             var komentar = unescape(s.substring(0,n));
                             s = s.substring(n+1);
                             n = s.indexOf("\n");
-                            
+ 
                             //Tampilkan datanya
-                            var daftar_komentar = document.getElementById("komen");
-                            
                             var tambah = '<div id = "daftarkomen">'
                             tambah += username + " " + tanggal + "<br>";
                             tambah += komentar;
                             tambah += "</div>";
-                            var i = daftar_komentar.innerHTML.indexOf("<form name");
-                            daftar_komentar.innerHTML = daftar_komentar.innerHTML.substring(0,i)
-                                                      + tambah
-                                                      + daftar_komentar.innerHTML.substring(i);                            
+                            daftar_komentar.innerHTML += tambah+"\n";                         
                         }
                     }
+                    
+                    if (xmlhttp2.readyState == 4) {
+                        daftar_komentar = document.getElementById("komen");
+                        daftar_komentar.innerHTML +='<form name="form_comment">\n';
+                        daftar_komentar.innerHTML +='<div id="submitkomen">\n';
+                        daftar_komentar.innerHTML +='<label>submit comment</label>\n';
+                        daftar_komentar.innerHTML +='<textarea name="comment" type="comment" placeholder="comment" class="isikomen"></textarea>\n';
+                        daftar_komentar.innerHTML +='<input class= "submitreg" name="submit" type="button" onclick="submit_comment(this.form)" value="Submit">\n';
+                        daftar_komentar.innerHTML +='</div>\n';
+                        daftar_komentar.innerHTML +='</form>\n';                    
+                    }
                 }
+                
+                //Untuk mengambil data tugas
+                id_tugas = "-1";
+                if ((c = window.location.search.indexOf("id_tugas=")) != -1) {
+                    id_tugas = window.location.search.substring(c+9);
+                } 
+                xmlhttp1.open("GET","ambil_detail_tugas.php?id_tugas="+id_tugas,true);
+                xmlhttp1.send();
                 
                 //Untuk mengambil daftar komentar awal
                 params = "id_tugas="+"1";
@@ -150,20 +229,10 @@
                 </div>
             </a>
             <div id="rinciantugas">
-                <div id="judultugas">TUBES 1</div>
+                <div id="judultugas"></div>
                 <div id="detail" style="visibility: visible">
                     
-                        <label>DEADLINE</label>
-                        <a id="deadline">11/08/2013</a>
-                        
-                         <label>ASSIGNEE</label>
-                        <a id="assignee">Faiz</a>
-                        
-                         <label>TAG</label>
-                        <a id="tag">KAP</a>
-                        
-                         <label>ATTACHMENT</label>
-                        <a href ="#" id="attach">Download Here</a>
+
                     
                 </div>
                 <div id="detailedit" style="visibility: hidden">
@@ -171,14 +240,14 @@
                         <label>DEADLINE</label>
                         <a id="deadline">11/08/2013</a>
                         
-                         <label>ASSIGNEE</label>
+                        <label>ASSIGNEE</label>
                         <a id="assignee">Faiz</a></br>
                         <input name="assignee" placeholder="assignee">
                         
-                         <label>TAG</label>
+                        <label>TAG</label>
                         <input name="catname" placeholder="tag">
                         
-                         <label>ATTACHMENT</label>
+                        <label>ATTACHMENT</label>
                         <a href ="#" id="attach">Download Here</a>
                         </br>
                         <input class= "submitreg" name="submit" type="submit" value="Submit" onclick="hideEdit()">
@@ -186,13 +255,7 @@
                 </div>
             </div>
             <div id="komen">
-                <form name="form_comment">
-                    <div id="submitkomen">
-                        <label>submit comment</label>
-                        <textarea name="comment" type="comment" placeholder="comment" class="isikomen"></textarea>
-                        <input class= "submitreg" name="submit" type="button" onclick="submit_comment(this.form)" value="Submit">
-                    </div>
-                </form>
+
             </div>
         </div>
         <div class="footer">
