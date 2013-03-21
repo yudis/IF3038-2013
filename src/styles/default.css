@@ -345,6 +345,10 @@ footer.content {
     padding: 12px;
     margin: 12px;
 }
+
+
+
+/* CSS untuk halaman detil tugas - bagian komentar */
 .rincianLabel {
     width: 15%;
     display: inline-block;
@@ -354,6 +358,10 @@ footer.content {
     width: 85%;
     display: inline-block;
     vertical-align: text-top;
+}
+#komentar img {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /* CSS untuk halaman create tugas */
@@ -374,3 +382,19 @@ footer.content {
 .formtugas ul.item li {
     list-style: none;
     padding: 3px;
+}
+
+/* CSS untuk halaman profile */
+
+.rincianLabelProfile {
+    width: 25%;
+	float: left;
+    display: inline-block;
+    vertical-align: text-top;
+}
+
+.rincianDetailProfile {
+    width: 75%;
+    display: inline-block;
+    vertical-align: text-top;
+}}

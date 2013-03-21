@@ -3,7 +3,8 @@
  */
 var tagsTugas = new Array();
 var assigneesTugas = new Array();
-var assigneeArr="";
+var assigneeArr = new Array();
+var assigneeIndex = 0;
 var detilTugas;
 
 function onload(id_tugas) {
@@ -63,7 +64,10 @@ function updateContent(updateAttachment) {
 
         divKomentarTugas.innerHTML = '';
         detilTugas.comments.comments.forEach(function(entry) {
-            divKomentarTugas.innerHTML += '<strong><img src="./images/avatars/' + entry.avatar + '" alt="' + entry.full_name + '" width="32" height="32" /> ' + entry.full_name + ' (<a href="./profile.php?u=' + entry.user + '">' + entry.user + '</a>)</strong> ' + entry.time; 
+            divKomentarTugas.innerHTML += '<strong><img src="./images/avatars/' + entry.avatar + '" alt="' + entry.full_name + '" width="32" height="32" /> ' + entry.full_name + ' (<a href="./profile.php?u=' + entry.user + '">' + entry.user + '</a>)</strong> ' + entry.time;
+            if (entry.priviledge == 1) {
+                divKomentarTugas.innerHTML += ' (<a href="#" onclick="removeComment(' + entry.id + '); return false;">Remove</a>)';
+            }
             divKomentarTugas.innerHTML += '<hr />' + entry.content + '<br /><br />';
         });
     } else if (detilTugas.responseStatus == 204) {
@@ -71,14 +75,6 @@ function updateContent(updateAttachment) {
     } else {
         alert(detilTugas.message);
     }
-}
-
-function addKomentar() {
-    var now = new Date();
-    var komentar_div = document.getElementById("komentar");
-    komentar_div.innerHTML += "<b>WhoAmI</b> - " + now.toString("dd MMMM yyyy hh:mm") + "<hr />" + document.getElementById('txtKomentar').value + "<br /><br />";
-    
-    return false;
 }
 
 function writeTags() {
@@ -131,10 +127,14 @@ function addAssignees() {
         alert("Nama harus dimasukkan");
         return false;
     }
-    document.getElementById("assigneeI").value+=newAssignee.value+",";
+    
+    assigneesTugas.push(newAssignee.value);
+	assigneeArr[assigneeIndex]=newAssignee.value;
     assigneesList.innerHTML += "<li>" + newAssignee.value + "</li> ";
     newAssignee.value = "";
-	return false;
+	assigneeIndex++;
+    
+    return false;
 }
 
 function saveTugas() {
@@ -167,3 +167,27 @@ function editTugas() {
     return false;
 }
 
+function removeComment(id) {
+    ajax_get("./ajax/updateTugas.php?removec&id_komentar=" + id, function(xhr) {
+        var json_obj = JSON.parse(xhr.responseText);
+        if (json_obj.responseStatus != 200) {
+            alert(json_obj.message);
+        } else {
+            // do nothing
+            // alert("Berhasil");
+        }
+    });
+}
+
+function addComment() {
+    var qry = 'addc=1&id_tugas=' + encodeURIComponent(detilTugas.id) + '&content=' + encodeURIComponent(document.getElementById("txtKomentar").value);
+    ajax_post("./ajax/updateTugas.php", qry, function(xhr) {
+        var json_obj = JSON.parse(xhr.responseText);
+        if (json_obj.responseStatus != 200) {
+            alert(json_obj.message);
+        } else {
+            // do nothing
+            alert("Berhasil");
+        }
+    });
+}
