@@ -2,8 +2,279 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+//registration form variabel
+var username = document.getElementById("regusername");
+var fullname = document.getElementById("regname");
+var pass1 = document.getElementById("regpassword1");
+var pass2 = document.getElementById("regpassword2");
+var email = document.getElementById("regemail");
+var file = document.getElementById("regfile");
+var submit = document.getElementById("regbutton");
+var regForm = document.getElementById("regForm");
+var valid1bool;
+var valid2bool;
+var valid3bool;
+var valid4bool;
+var valid5bool;
+var valid6bool;
+var valid7bool;
+//edit form variabel
+var valid1edit = true;
+var valid2edit = true;
+var valid3edit = true;
+var valid4edit = true;
+var valid5edit = true;
+var editname = document.getElementById("editname");
+var editdob = document.getElementById("editdob");
+var editpass1 = document.getElementById("editpassword1");
+var editpass2 = document.getElementById("editpassword2");
+var editfile = document.getElementById("editavatar");
 
+	editname.onkeyup = function()
+	{
+		if (editname.checkValidity()){
+			edit1.src = "img/benar.png";
+			valid1edit=true;
+		}
+		else
+		{
+			edit1.src = "img/salah.png";
+			valid1edit=false;
+		}
+		cekvalid2();
+	}
+	
+	function dateChange2()
+	{
+		edit2.src = "img/benar.png";
+		valid2edit = true;
+		cekvalid2();
+	}
+	
+	function checkImage2()
+	{
+		var extensi = editavatar.value.match("^.+\.(jpe?g|JPE?G)$");
+		if(extensi){
+			edit3.src = "img/benar.png";
+			edit3valid=true;
+		}else{
+			edit3.src = "img/salah.png";
+			edit3valid=false;
+		}
+		cekvalid2();
+	}
+	
+	editpass1.onkeyup = function()
+	{
+		if (editpass1.checkValidity()){
+			edit4.src = "img/benar.png";
+			valid4edit=true;
+		}
+		else
+		{
+			edit4.src = "img/salah.png";
+			valid4edit=false;
+		}
+		cekvalid2();
+	}
+	
+	editpass2.onkeyup = function()
+	{
+		if (editpass2.checkValidity() && (editpass1.value == editpass2.value)){
+			edit5.src = "img/benar.png";
+			valid5edit=true;
+		}
+		else
+		{
+			edit5.src = "img/salah.png";
+			valid5edit=false;
+		}
+		cekvalid2();
+	}
+	
+	function cekvalid2(){
+		if (valid1edit==false || valid2edit==false || valid3edit == false || valid4edit == false || valid5edit == false) 
+		{
+			submit.disabled="disabled";
+		}
+		else
+		{
+			submit.disabled=false;
+		}
+	}
+	
+	
+	username.onkeyup = function()
+	{
+		var xmlhttp;
+		if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}
+		else
+		{// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+				// alert(xmlhttp.responseText);
+				// document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+				if(xmlhttp.responseText>0){
+					valid1.src = "img/salah.png";
+					valid1bool = false;
+				}else{
+					if (username.checkValidity()){
+						valid1.src = "img/benar.png";
+						valid1bool = true;
+					}
+					else
+					{
+						valid1.src = "img/salah.png";
+						valid1bool = false;
+					}
+					if (username.value == pass1.value)
+					{
+						valid1.src = "img/salah.png";
+						valid1bool = false;
+					}
+					cekvalid();
+				}
+			}
+		}
+		xmlhttp.open("GET","getuser.php?",true);
+		xmlhttp.send();
+	}
+	
+	fullname.onkeyup = function()
+	{
+		if (fullname.checkValidity()){
+			valid2.src = "img/benar.png";
+			valid2bool=true;
+		}
+		else
+		{
+			valid2.src = "img/salah.png";
+			valid2bool=false;
+		}
+		cekvalid();
+	}
+	
+	pass1.onkeyup = function()
+	{
 
+		if (pass1.checkValidity()){
+			valid3.src = "img/benar.png";
+			valid3bool=true;
+		}
+		else
+		{
+			valid3.src = "img/salah.png";
+			valid3bool=false;
+		}
+		
+		if (username.value == pass1.value)
+		{
+			valid3bool=false;
+			valid3.src = "img/salah.png";
+		}
+		else if (pass1.value == email.value)
+			{
+				valid3.src = "img/salah.png";
+				valid3bool=false;
+			}
+			
+		cekvalid();
+	}
+	
+	pass2.onkeyup = function()
+	{
+		if (pass2.checkValidity() && (pass1.value == pass2.value)){
+			valid4.src = "img/benar.png";
+			valid4bool=true;
+		}
+		else
+		{
+			valid4.src = "img/salah.png";
+			valid4bool=false;
+		}
+		
+		cekvalid();
+	}
+	
+	email.onkeyup = function()
+	{
+		var xmlhttp;
+		if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}
+		else
+		{// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+				// alert(xmlhttp.responseText);
+				// document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+				if(xmlhttp.responseText>0){
+					valid5.src = "img/salah.png";
+					valid5bool=false;
+				}else{
+					if (email.checkValidity()){
+						valid5.src = "img/benar.png";
+						valid5bool=true;
+					}
+					else
+					{
+						valid5.src = "img/salah.png";
+						valid5bool=false;
+					}
+					if (pass1.value == email.value)
+					{
+						valid5.src = "img/salah.png";
+						valid5bool=false;
+					}
+					cekvalid();
+				}
+			}
+		}
+		xmlhttp.open("GET","getemail.php?",true);
+		xmlhttp.send();
+	}
+	
+	function checkImage()
+	{
+		var extensi = file.value.match("^.+\.(jpe?g|JPE?G)$");
+		if(extensi){
+			valid6.src = "img/benar.png";
+			valid6bool=true;
+		}else{
+			valid6.src = "img/salah.png";
+			valid6bool=false;
+		}
+		cekvalid();
+	}
+	
+	function dateChange(){
+		valid7.src = "img/benar.png";
+		valid7bool = true;
+	}
+	
+	function cekvalid(){
+		if (valid1bool==true && valid2bool==true && valid3bool==true && valid4bool==true && valid5bool==true && valid6bool==true && valid7bool==true) 
+		{
+			submit.disabled=false;
+		}
+		else
+		{
+			submit.disabled="disabled";
+		}
+	}
+	
 function showList(){
 document.getElementById("listtugas3").style.visibility="hidden";
 document.getElementById("listtugas2").style.visibility="hidden";
@@ -57,6 +328,7 @@ document.getElementById("edittugas").style.visibility="visible";
 document.getElementById("buattugas").style.visibility="hidden";
 document.getElementById("wanted").style.visibility="visible";
 }
+
 function showBuat(){
 document.getElementById("listtugas3").style.visibility="hidden";
 document.getElementById("listtugas2").style.visibility="hidden";
@@ -66,8 +338,6 @@ document.getElementById("edittugas").style.visibility="hidden";
 document.getElementById("buattugas").style.visibility="visible";
 document.getElementById("wanted").style.visibility="visible";
 }
-
-var valid = false;
 
 function createTask() {
     var regex = /^[a-zA-Z0-9]{5,25}$/;
@@ -127,39 +397,7 @@ function profileRestore() {
 var clickable = false;
 
 function Redirect(){
-    window.location = "index.html";
-}
-
-function Register(){
-    var atPos = document.getElementById("regemail").value.indexOf("@");
-    var dotPos = document.getElementById("regemail").value.indexOf(".");
-    if ((document.getElementById("regusername").value.length < 5) && (document.getElementById("regusername").value !== "")){
-        alert("Username should be at least 5 characters long.");
-    } else if ((document.getElementById("regpassword1").value.length < 8) && (document.getElementById("regpassword1").value !== "")){
-        alert("Password should be at least 8 characters long.");
-    } else if ((document.getElementById("regusername").value === document.getElementById("regpassword1").value) && (document.getElementById("regusername").value !== "") && (document.getElementById("regpassword1").value !== "")){
-        alert("Username and password cannot be identical.");
-    } else if ((document.getElementById("regpassword1").value !== document.getElementById("regpassword2").value) && (document.getElementById("regpassword2").value !== "")){
-        alert("Confirmed password and password are not the same.");
-    } else if ((document.getElementById("regname").value.indexOf(" ") < 0) && (document.getElementById("regname").value !== "")) {
-        alert("Name should be constructed by two or more words separated by space.");
-    } else if ((document.getElementById("regemail").value !== "") && (atPos < 1)){
-            alert("There should be at least one character before '@' character.");
-    } else if ((document.getElementById("regemail").value !== "") && (dotPos - atPos < 2)){
-            alert("There should be at least one character between '@' and '.' character.");
-    } else if ((document.getElementById("regemail").value !== "")&&(document.getElementById("regemail").value.length - dotPos < 3)){
-            alert("There should be at least two characters after '.' character");
-    } else if ((document.getElementById("regusername").value !== "")&&(document.getElementById("regpassword1").value !== "")&&
-        (document.getElementById("regpassword2").value !== "")&&(document.getElementById("regname").value !== "")&&
-        (document.getElementById("regemail").value !== "")){
-            document.getElementById("regbutton").style.color = "black";
-            document.getElementById("regbutton").style.fontWeight = "bold";
-            clickable = true;
-    } else {
-        document.getElementById("regbutton").style.color = "#777777";
-        document.getElementById("regbutton").style.fontWeight = "normal";
-        clickable = false;
-    }
+    window.location = "index.php";
 }
 
 function edit(){
@@ -174,7 +412,7 @@ function edit(){
 
 function Submit(){
     if (clickable){
-        window.location = "Dashboard.html";
+        window.location = "Dashboard.php";
         localStorage.username = document.getElementById("regusername").value;
         localStorage.name = document.getElementById("regname").value;
         localStorage.date = document.getElementById("regdate").value;

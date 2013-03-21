@@ -506,7 +506,7 @@ input{
 	font-family:Cambria, Georgia, serif;;
 	font-size:15px;
 	font-weight:normal;
-	padding:2px 132px;
+	padding:2px 40px;
 	text-decoration:none;
         text-shadow:1px 1px 0px #ffffff;
 }#regbutton:hover {
@@ -617,4 +617,13 @@ input{
     top: 28%;
     left: 10%;
     width: 150px; 
+}
+
+.taskx{
+	margin-bottom: 10px;
+	height: 60px;
+	padding: 20px 40px;
+	background-image: url('img/label.png');
+	background-repeat: no-repeat;
+	background-size: 300px 95px;
 }
