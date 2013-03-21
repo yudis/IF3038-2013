@@ -259,7 +259,8 @@ var editfile = document.getElementById("editavatar");
 		cekvalid();
 	}
 	
-	function dateChange(){
+	function dateChange()
+	{
 		valid7.src = "img/benar.png";
 		valid7bool = true;
 	}
@@ -344,7 +345,7 @@ function createTask() {
     
     if ((regex.test(document.getElementById("namaTask").value))){
         var k = document.getElementById("listtugas");
-        k.innerHTML = "<a class='listTugas' onclick='showRinci();'><a class='listTugas' onclick='showRinci();'></a> <a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a onclick='showBuat()' class='addTask'></a>";
+        k.innerHTML = "<a class='listTugas' onclick='showRinci();'><a class='listTugas' onclick='showRinci();'></a> <a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a 	class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a class='listTugas' onclick='showRinci();'></a><a onclick='showBuat()' class='addTask'></a>";
         document.getElementById("namaTask").value = 0;
         showList();
     } else {

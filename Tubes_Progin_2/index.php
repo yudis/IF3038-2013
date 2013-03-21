@@ -50,6 +50,6 @@ and open the template in the editor.
             <img src="img\Logo_Big2.png" id="fplogo" alt="BigLogo"></img>
             <img src="img\parchment.jpg" id="fpbackground" alt="Background"></img>
         </div>
-    <script type="text/javascript" src="script.js"></script>
 	</body>
+	<script type="text/javascript" src="script.js"/>
 </html>
