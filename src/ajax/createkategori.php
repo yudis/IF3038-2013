@@ -11,7 +11,6 @@
 	$i=0;
 	while(!empty($Arr[$i]))
 	{
-		echo $Arr[$i];
 		if($Arr[$i]!=$_SESSION['user'])
 		{
 			$kategori->addNewestCoordinator($Arr[$i]);

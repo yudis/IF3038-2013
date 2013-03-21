@@ -1,9 +1,7 @@
 -- MySQL dump 10.13  Distrib 5.5.27, for Win32 (x86)
---
 -- Host: localhost    Database: progin_405_13510015
 -- ------------------------------------------------------
 -- Server version	5.5.27
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -15,7 +13,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
 -- Table structure for table `assignees`
 --
 
@@ -41,6 +38,8 @@ LOCK TABLES `assignees` WRITE;
 INSERT INTO `assignees` VALUES (1,'edogawa'),(2,'edogawa'),(1,'edwardsp'),(3,'edwardsp');
 /*!40000 ALTER TABLE `assignees` ENABLE KEYS */;
 UNLOCK TABLES;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `attachments`
@@ -71,6 +70,8 @@ INSERT INTO `attachments` VALUES (1,1,'Hai.zip','089767979878.zip','file'),(2,1,
 /*!40000 ALTER TABLE `attachments` ENABLE KEYS */;
 UNLOCK TABLES;
 
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `categories`
 --
@@ -83,7 +84,7 @@ CREATE TABLE `categories` (
   `nama` varchar(50) NOT NULL,
   `last_mod` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,6 +96,8 @@ LOCK TABLES `categories` WRITE;
 INSERT INTO `categories` VALUES (1,'Intelegensi buatan','2013-03-07 06:46:36'),(2,'Progin','2013-03-12 10:00:00'),(3,'IMK','2013-03-14 00:26:14'),(4,'SIster','2013-03-14 00:41:42');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `comments`
@@ -114,18 +117,21 @@ CREATE TABLE `comments` (
   KEY `comments_ibfk_2` (`user`),
   CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`),
   CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
 
 --
 -- Dumping data for table `comments`
 --
+-- --------------------------------------------------------
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,1,'edwardsp','2013-03-20 10:53:52','lalalla'),(2,1,'edwardsp','2013-03-20 10:54:12','lalalla'),(3,1,'edwardsp','2013-03-20 15:08:54','zzzzz'),(4,1,'edwardsp','2013-03-20 15:19:52','zzzzz'),(5,1,'edwardsp','2013-03-21 00:33:39','yyyy');
+INSERT INTO `comments` VALUES (1,1,'edwardsp','2013-03-20 10:53:52','lalalla'),(2,1,'edwardsp','2013-03-20 10:54:12','lalalla');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Table structure for table `coordinator`
@@ -139,8 +145,9 @@ CREATE TABLE `coordinator` (
   `user` varchar(32) NOT NULL,
   PRIMARY KEY (`id_kategori`,`user`),
   KEY `user` (`user`),
-  CONSTRAINT `coordinator_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `coordinator_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `coordinator_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `coordinator_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -153,6 +160,8 @@ LOCK TABLES `coordinator` WRITE;
 INSERT INTO `coordinator` VALUES (1,'edogawa'),(2,'edogawa'),(3,'edogawa'),(4,'edogawa'),(1,'edwardsp'),(2,'edwardsp'),(3,'edwardsp');
 /*!40000 ALTER TABLE `coordinator` ENABLE KEYS */;
 UNLOCK TABLES;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tags`
@@ -179,6 +188,8 @@ INSERT INTO `tags` VALUES (1,'ada'),(1,'tes');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `tugas`
 --
@@ -190,7 +201,7 @@ CREATE TABLE `tugas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) NOT NULL,
   `tgl_deadline` date NOT NULL,
-  `status` tinyint(1) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
   `last_mod` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `pemilik` varchar(32) NOT NULL,
   `id_kategori` int(11) NOT NULL,
@@ -211,6 +222,8 @@ LOCK TABLES `tugas` WRITE;
 INSERT INTO `tugas` VALUES (1,'gunBound','2013-03-22',0,'2013-03-12 10:00:00','edwardsp',1),(2,'to do list','2013-03-22',0,'2013-03-12 10:00:00','edogawa',2),(3,'gun','2013-03-26',1,'2013-03-13 10:00:00','edogawa',2);
 /*!40000 ALTER TABLE `tugas` ENABLE KEYS */;
 UNLOCK TABLES;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
@@ -245,9 +258,10 @@ UNLOCK TABLES;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-21  9:33:37
+-- Dump completed on 2013-03-20 20:16:51

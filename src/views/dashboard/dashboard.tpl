@@ -11,7 +11,7 @@
         <script src="scripts/dashboard.js" type="application/javascript"></script>
         <script src="scripts/kategori.js" type="application/javascript"></script>
     </head>
-    <body onload="updateAddButtonVisibility();">
+    <body onload="updateAddButtonVisibility();loadtugas('');">
         <div id="blanket"></div>
         <div id="popUpDiv">
             <h1>Create new category</h1>

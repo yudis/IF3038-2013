@@ -22,9 +22,10 @@
 						echo "Tags: ";
 						echo "<ul class=\"tag\">";
 							$n=0;
-							while(!empty($success[$i]["tag"][$n]))
+							$tags=$tugas->getTags($success[$i]["id"]);
+							while(!empty($tags[$n]))
 							{
-								echo "<li>",$success[$i]["tag"][$n],"</li>";
+								echo "<li>",$tags[$n],"</li>";
 								$n++;
 							}
 						echo "</ul>";
@@ -55,9 +56,10 @@
 								echo "Tags: ";
 								echo "<ul class=\"tag\">";
 									$n=0;
-									while(!empty($success[$i]["tag"][$n]))
+									$tags=$tugas->getTags($success[$i]["id"]);
+									while(!empty($tags[$n]))
 									{
-										echo "<li>",$success[$i]["tag"][$n],"</li>";
+										echo "<li>",$tags[$n],"</li>";
 										$n++;
 									}
 								echo "</ul>";
@@ -97,9 +99,10 @@
 							echo "Tags: ";
 							echo "<ul class=\"tag\">";
 								$n=0;
-								while(!empty($success[$i]["tag"][$n]))
+								$tags=$tugas->getTags($success[$i]["id"]);
+								while(!empty($tags[$n]))
 								{
-									echo "<li>",$success[$i]["tag"][$n],"</li>";
+									echo "<li>",$tags[$n],"</li>";
 									$n++;
 								}
 							echo "</ul>";
@@ -130,9 +133,10 @@
 									echo "Tags: ";
 									echo "<ul class=\"tag\">";
 										$n=0;
-										while(!empty($success[$i]["tag"][$n]))
+										$tags=$tugas->getTags($success[$i]["id"]);
+										while(!empty($tags[$n]))
 										{
-											echo "<li>",$success[$i]["tag"][$n],"</li>";
+											echo "<li>",$tags[$n],"</li>";
 											$n++;
 										}
 									echo "</ul>";

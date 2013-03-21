@@ -3,8 +3,7 @@
  */
 var tagsTugas = new Array();
 var assigneesTugas = new Array();
-var assigneeArr = new Array();
-var assigneeIndex = 0;
+var assigneeArr="";
 var detilTugas;
 
 function onload(id_tugas) {
@@ -132,14 +131,10 @@ function addAssignees() {
         alert("Nama harus dimasukkan");
         return false;
     }
-    
-    assigneesTugas.push(newAssignee.value);
-	assigneeArr[assigneeIndex]=newAssignee.value;
+    document.getElementById("assigneeI").value+=newAssignee.value+",";
     assigneesList.innerHTML += "<li>" + newAssignee.value + "</li> ";
     newAssignee.value = "";
-	assigneeIndex++;
-    
-    return false;
+	return false;
 }
 
 function saveTugas() {
@@ -171,3 +166,4 @@ function editTugas() {
     
     return false;
 }
+

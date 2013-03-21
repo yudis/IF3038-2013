@@ -164,7 +164,63 @@ class Tugas extends Model
 		
 		return $r;
 	}
-
+	
+	public function addAssignee($id_tugas,$username)
+	{
+		$sql="INSERT INTO `assignees`(`id_tugas`, `username`) VALUES (?,?); ";
+		$data = array(
+			$id_tugas,
+			$username
+		);
+		
+		$sth = $this->_db->prepare($sql);
+		$sth->execute($data);	
+	}
+	
+	public function addNewestAssignee($username)
+    {
+        $sql2 = "SELECT id FROM tugas ORDER BY last_mod DESC LIMIT 1";
+		$this->_setSql($sql2);
+		
+		$result = $this->getRow();
+		
+		
+        if (empty($result))
+        {
+            return false;
+        }
+		
+		$this->addAssignee($result["id"],$username);
+    }
+	
+	public function addTag($id_tugas,$tag)
+	{
+		$sql="INSERT INTO `tags`(`id_tugas`, `tag`) VALUES (?,?); ";
+		$data = array(
+			$id_tugas,
+			$tag
+		);
+		
+		$sth = $this->_db->prepare($sql);
+		$sth->execute($data);	
+	}
+	
+	public function addNewestTag($tag)
+    {
+        $sql2 = "SELECT id FROM tugas ORDER BY last_mod DESC LIMIT 1";
+		$this->_setSql($sql2);
+		
+		$result = $this->getRow();
+		
+		
+        if (empty($result))
+        {
+            return false;
+        }
+		
+		$this->addTag($result["id"],$tag);
+    }
+	
 	public function getAllTugas()
 	{
 		$sql = "SELECT t.id AS id, t.nama AS nama, tgl_deadline,  `status` , t.last_mod AS last_mod, pemilik, id_kategori, c.nama AS nama_kategori
@@ -182,6 +238,50 @@ class Tugas extends Model
 		return $r;
 	}
 	
+	public function addAttachments($docId,$id_tugas)
+	{
+		if(isset($_FILES[$docId]))
+		{
+			$errors= array();
+			foreach($_FILES[$docId]['tmp_name'] as $key => $tmp_name )
+			{
+				$file_name = $_FILES[$docId]['name'][$key];
+				$file_size =$_FILES[$docId]['size'][$key];
+				$file_tmp =$_FILES[$docId]['tmp_name'][$key];
+				$file_type=$_FILES[$docId]['type'][$key];	
+				if($file_size > 2097152){
+					$errors[]='File size must be less than 2 MB';
+				}		
+				$sql="INSERT INTO `attachments`(`id_tugas`, `name`, `filename`, `type`) VALUES (?,?,?,?); ";
+				$data = array(
+					$id_tugas,
+					$file_name,
+					$file_tmp,
+					$file_type
+				);
+				
+				$desired_dir="Files";
+				if(empty($errors)==true){
+					if(is_dir($desired_dir)==false){
+						mkdir("$desired_dir", 0700);		// Create directory if it does not exist
+					}
+					if(is_dir("$desired_dir/".$file_name)==false){
+						move_uploaded_file($file_tmp,"$desired_dir/".$file_name);
+					}else{									// rename the file if another one exist
+						$new_dir="$desired_dir/".$file_name.time();
+						 rename($file_tmp,$new_dir) ;				
+					}
+					
+				$sth = $this->_db->prepare($sql);
+				$sth->execute($data);		
+				}else{
+						print_r($errors);
+				}
+			}
+			if(empty($error))
+			{
+				echo "Success";
+
 	public function isUpdated($id_tugas, $last_request)
 	{
 		$sql = "SELECT COUNT(*) AS n FROM `tugas` WHERE `id` = ? AND `last_mod` > FROM_UNIXTIME(?)";
@@ -209,6 +309,31 @@ class Tugas extends Model
 		}
 	}
 	
+	public function addNewestAttachments($docId)
+    {
+        $sql2 = "SELECT id FROM tugas ORDER BY last_mod DESC LIMIT 1";
+		$this->_setSql($sql2);
+		
+		$result = $this->getRow();
+		
+		
+        if (empty($result))
+        {
+            return false;
+        }
+		
+		$this->addAttachments($docId,$result["id"]);
+    }
+	
+    public function store()
+    {
+        $sql = "INSERT INTO tugas 
+                    (nama, tgl_deadline, pemilik,id_kategori)
+                VALUES 
+                    (?, ?, ?, ?);";
+         
+        $data = array(
+
 	public function store()
 	{
 		$sql = "INSERT INTO tugas 
