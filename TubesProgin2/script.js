@@ -300,11 +300,25 @@ function addCategory() {
     document.getElementById('add').style.display = 'block';
 }
 
+function editProfile() {
+   var overlay = document.createElement("div");
+   overlay.setAttribute("id","overlay");
+   overlay.setAttribute("class", "overlay");
+   document.body.appendChild(overlay);
+   document.getElementById('edit').style.display='block';
+}
+
 
 function restore() {
     document.body.removeChild(document.getElementById("overlay"));
     document.getElementById('add').style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
+}
+
+function restoreP() {
+   document.body.removeChild(document.getElementById("overlay"));
+   document.getElementById('edit').style.display='none';
+   document.getElementById('overlay').style.display='none';
 }
 
 var clickable = false;
