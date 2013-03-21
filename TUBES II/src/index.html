@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+<title>So La Si Do</title>
+<link href="css/utama.css" rel="stylesheet" type="text/css" ></link>
+<link href="css/mediaqueries.css" rel="stylesheet" type ="text/css" ></link>
+<link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'></link>
+<link href='http://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'></link>
+
+</head>
+<body>
+	<div class="header">
+	So La Si Do<br/>
+	Beat Your Task!
+	</div>
+	<img alt="" src="images/fitur.png" width="403" height="403" class="fitur"></img>
+	<div class="login">
+	<h4 class="judul">Login</h4>
+	<form name="login">
+        <p>Username: <input type="text" name="ID" id="ID" ></input></p>
+        <p>Password: <input type="password" name="Password" id="userPassword" ></input> </p>
+        <input type="submit" name="submitHome" value="login" onclick="validateFormLogin()"></input> <br/>
+    </form>
+    </div>
+	<div class="register">
+	<h4 class="judul">Register</h4>
+	<form name="registrasi">
+		<p>ID: <input  id="DID" name="DID" type="text"></input></p>
+		<p>Password: <input id="DP" name="DP" type="password"></input></p>
+		<p>Confirm Password: <input  id="DCP" name="DCP" type="password"></input></p>
+		<p>Name: <input  id="DName" name="DName" type="text"></input></p>
+		<p>Tanggal Lahir: <select><option value="01">01</option><option value="02">02</option></select><select><option value="01">01</option><option value="02">02</option></select><select><option value="1956">1956</option><option value="1957">1957</option></select></p>
+		<p>Alamat email: <input  id="DMail" name="DMail" type="text"></input></p>
+		<p>Avatar : <input type="file" id="DAvatar" name="DAvatar"></input></p>
+		<input id="signup" onclick="validateFormRegistrasi()" value="signup" type="button" ></input>
+	</form>
+    </div>
+    <script type="text/javascript" language="javascript" src="js/registration.js"></script>
+</body>   
+
+</html>
+
+
