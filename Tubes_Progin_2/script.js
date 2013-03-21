@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+var t = "0";
 //registration form variabel
 var username = document.getElementById("regusername");
 var fullname = document.getElementById("regname");
@@ -607,6 +608,162 @@ function showHint(str)
 	xmlhttp.send();
 }
 
+function selectedkategori(str){
+	t = str;
+	showTask(t);
+}
+
+function showKategori(){
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+		  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		  {
+			
+			if (xmlhttp.responseText != "")
+			{
+				var result = "";
+				var string = xmlhttp.responseText.split("<br>");
+				for (var s=1; s < string.length; s++)
+				{
+					result += "<div class=\"kategori\" onclick=\"selectedkategori(this.innerHTML);\">"+string[s]+"</div>";
+				}
+				
+				document.getElementById("category").innerHTML=result;
+			}
+			else
+			{
+				document.getElementById("category").innerHTML="";
+			}
+		  }
+	  }
+	xmlhttp.open("GET","allkategori.php",true);
+	xmlhttp.send();
+}
+
+function showTask(str){
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp2=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp2.onreadystatechange=function()
+	  {
+		  if (xmlhttp2.readyState==4 && xmlhttp2.status==200)
+		  {
+			  if (xmlhttp2.responseText != "")
+				{
+					if (str=="0")
+					{
+						var result = "";
+						var string1 = xmlhttp2.responseText.split("<br>");
+						for (var s=1;s<string1.length;s++)
+						{
+							var string2 = string1[s].split(",");
+							result += "<div class=\"task\">";
+							result += "<a href=\"#\">"+string2[0]+"</a>";
+							result += "<span><br>deadline : "+string2[1]+"</span>";
+							
+							if (string2.length > 4)
+							{
+								result += "<span><br>tag : ";
+								for (var i=5; i< string2.length; i++)
+								{
+									result += string2[i]+",";
+								}
+							}
+							
+							if (string2[2] == "0"){
+								result += "<br><input type=\"checkbox\" name=\"done\" value=\"done\"> done";
+							} else if (string2[2] == "1")
+							{
+								result += "<br><input type=\"checkbox\" name=\"done\" value=\"done\" checked> done";
+							}
+							
+							if (string2[4] == "yes"){
+								result += "<button onclick=\"deletetask("+string2[0]+")\">delete</button>";
+							}
+							
+							result += "</div>";
+						}
+						
+						document.getElementById("listtugas").innerHTML=result;
+					}
+					else
+					{
+						var result = "";
+						result += "<div><button onclick=\"deletekategori("+str+")\">delete kategori</button></div>";
+						result += "<div class=\"addtask\"><a href=\"#\">+ task</a></div>";
+						var string1 = xmlhttp2.responseText.split("<br>");
+						for (var s=1;s<string1.length;s++)
+						{
+							var string2 = string1[s].split(",");
+							result += "<div class=\"task\">";
+							result += "<a href=\"#\">"+string2[0]+"</a>";
+							result += "<span><br>deadline : "+string2[1]+"</span>";
+							
+							if (string2.length > 4)
+							{
+								result += "<span><br>tag : ";
+								for (var i=5; i< string2.length; i++)
+								{
+									result += string2[i]+",";
+								}
+							}
+							
+							if (string2[2] == "0"){
+								result += "<br><input type=\"checkbox\" name=\"done\" value=\"done\"> done";
+							} else if (string2[2] == "1")
+							{
+								result += "<br><input type=\"checkbox\" name=\"done\" value=\"done\" checked> done";
+							}
+							
+							if (string2[4] == "yes"){
+								"<button onclick=\"deletetask("+string2[0]+")\">delete</button>"
+							}
+							
+							result += "</div>";
+						}
+
+						document.getElementById("listtugas").innerHTML=result;
+					}
+				}
+			  else{
+				document.getElementById("listtugas").innerHTML="";
+			  }
+		  }
+	  }
+	xmlhttp2.open("GET","showTask.php?q="+str,true);
+	xmlhttp2.send();
+}
+
+function deletekategori(str)
+{
+
+}
+
+function deletetask(str)
+{
+
+}
+
+function update(){
+	showTask(t);
+	showKategori();
+}
+
+setInterval(function(){update();},5000)
+=======
 function Loginaja(){
 	//Variable for authentication
 	var username = document.getElementById("logusername").value;

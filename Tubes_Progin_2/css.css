@@ -177,13 +177,6 @@ input.liusername{
     background-image: url('img/tugasHover.png');
 }
 
-.addTask {
-    width: 160px;
-    height: 191px;
-    float: left;
-    background-image: url('img/addtask.png');
-}
-
 .button {
     height: 20px;
     padding: 10px;
@@ -204,6 +197,7 @@ input.liusername{
     -webkit-border-radius: 10px 10px 10px 10px;
     border-bottom: 15px;
 	opacity: 0.8;
+	cursor: pointer;
 }
 
 .kategori:hover {
@@ -354,7 +348,7 @@ textArea {
     padding: 0px;
     margin-left: 100px;
     overflow: auto;
-    width: 850px;
+    width: 1000px;
     height: 603px;
     visibility: hidden;
 }
@@ -374,6 +368,7 @@ textArea {
     padding-top: 5px;
     position: absolute;
     padding-left: 35px;
+	cursor: pointer;
 }
 
 
@@ -618,11 +613,32 @@ input{
     width: 150px; 
 }
 
-.taskx{
+.task{
 	margin-bottom: 10px;
-	height: 60px;
+	height: 70px;
 	padding: 20px 40px;
 	background-image: url('img/label.png');
 	background-repeat: no-repeat;
-	background-size: 300px 95px;
+	background-size: 350px 110px;
+}
+
+.task button{
+	margin-left:180px;
+}
+
+.addtask{
+	margin-bottom: 10px;
+	height: 30px;
+	padding: 5px 40px 15px;
+	background-image: url('img/label.png');
+	background-repeat: no-repeat;
+	background-size: 350px 50px;
+	font-family: fantasy;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.addtask a{
+	color:black;
+	text-decoration:none;
 }
