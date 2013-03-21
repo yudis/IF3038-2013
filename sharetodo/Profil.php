@@ -205,6 +205,7 @@
 			while ($tag = mysqli_fetch_array($resultTag)){
 			    $tagString .= $tag['tag']." | ";
 			}
+			$tagString = substr($tagString,0,strlen($tagString)-3);
 			
 			//menampilkan task beserta tag nya yang terkait
 			echo "<div class='tableElmtLeft'>";

@@ -27,8 +27,8 @@ function keProfil() {
 	window.location = 'Profil.php';
 }
 
-function showKategori() {
-	//alert("testing");
+function showKategori(kategori) {
+	//alert(kategori);
 	
 	var _xmlhttp;
 	if (window.XMLHttpRequest) { //membuat objek XMLHttpRequest
@@ -37,16 +37,16 @@ function showKategori() {
 		_xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
-	_xmlhttp.open("GET","changeKategori.php?k=testing",true);
+	_xmlhttp.open("GET","changeKategori.php?k=" + kategori,true);
 	_xmlhttp.send();
 	
 	_xmlhttp.onreadystatechange = function() {
 		if ((_xmlhttp.readyState == 4) && (_xmlhttp.status == 200)) {
-			var sementara = _xmlhttp.responseText;
+			var replacement = _xmlhttp.responseText;
 			//var sementara = _xmlhttp.responseXML;
 			//alert(sementara);
-			active_1();
-			document.getElementById("dynamicSpace").innerHTML = sementara;
+			document.getElementById("dynamicSpace").innerHTML = replacement;
+			//document.getElementById("dynamicSpace").innerHTML = "<p>HELLO</p>";
 		}
 	}
 }
@@ -230,14 +230,36 @@ function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain,
 /**************************DASHBOARD**************************/
 
 var isTaskStatusClicked = false;
-function changeTaskStatus(id) {
+function changeTaskStatus(namaTask,id) {
+	//alert(namaTask);
+	$status = "undefined";
 	if (!isTaskStatusClicked) {
 		isTaskStatusClicked = true;
+		$status = "selesai";
 		document.getElementById(id).innerHTML = "<p>selesai</p>";
 	} else {
 		isTaskStatusClicked = false;
+		$status = "belum";
 		document.getElementById(id).innerHTML = "<p>belum selesai</p>";
 	}
+	
+	//melakukan update database mengenai status terbaru
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
+	}
+	
+	xmlhttp.onreadystatechange = function(){
+		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+			$responseUpdate = xmlhttp.responseText;
+			alert($responseUpdate);
+		}
+	}
+	
+	xmlhttp.open("GET","php/CommitStatus.php?stat=" + $status + "&task=" + namaTask,true);
+	xmlhttp.send();
 }
 
 function toHalamanRincianTugas(namaHlm) {
@@ -246,4 +268,27 @@ function toHalamanRincianTugas(namaHlm) {
 
 function toHalamanPembuatanTugas() {
 	alert("pindah ke halaman pembuatan tugas");
+}
+function deleteTask(namaTask) {
+	//meminta username dan creator dari task yang hendak dihapus
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
+	}
+	xmlhttp.onreadystatechange = function(){
+		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+			$response = xmlhttp.responseText;
+			//alert(xmlhttp.responseText);
+			if ($response == "1") {
+				document.getElementById(namaTask+"space").innerHTML = "";
+				alert("Tugas telah berhasil dihapus");
+			} else {
+				alert("Warning. Anda tidak berhak untuk menghapus tugas ini.");
+			}
+		}
+	}
+	xmlhttp.open("GET","php/getDeletionInfo.php?task="+namaTask,true);
+	xmlhttp.send();
 }

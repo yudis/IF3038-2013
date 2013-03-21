@@ -1,6 +1,4 @@
-<?php
-    session_start();
-    
+<?php    
     $newFullName = $_POST["newFullName"];
     $newBirthdate = $_POST["newBirthdate"];
     $newPassword = $_POST["newPassword"];

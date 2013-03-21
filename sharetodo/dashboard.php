@@ -57,25 +57,27 @@
 		}
 		
 		echo "<div id='kategoriContent'>";
-		$result = mysqli_query($con,"SELECT namaKategori FROM kategori");
-		while ($row = mysqli_fetch_array($result)){
-		    $tempKategori = $row['namaKategori'];
-		    //echo $tempKategori;
-		    echo "<div id='static_1' class='kategoriElmt' onclick=showKategori()>";
-			    echo "<p>".$row['namaKategori']."</p>";
-		    echo "</div>";
+		    $result = mysqli_query($con,"SELECT namaKategori FROM kategori");
+		    while ($row = mysqli_fetch_array($result)){
+			$tempKategori = $row['namaKategori'];
+			//echo $tempKategori;
+			echo "<div id=" . $tempKategori . "menu class='kategoriElmt' onclick=\"showKategori('$tempKategori')\">";
+				echo "<p>".$row['namaKategori']."</p>";
+			echo "</div>";
+		    }
 		    echo "<div id='semuaTugas' class='kategoriElmt' onclick=active_semuaTugas();>";
-			    echo "<p>Semua Kategori Tugas</p>";
+			echo "<p>Semua Kategori Tugas</p>";
 		    echo "</div>";
-		}
+		    echo "<div id='addKategori' onclick=\"showPopUp()\";>";
+			    echo "<button name='addKategori'>tambah kategori</button>";
+		    echo "</div>";
 		echo "</div>";
 	    ?>
 	    
-            <div id="kategoriContent">
-            	<!--<div id="static_1" class="kategoriElmt" onclick="active_1()";>-->
-            	<!--<div id="static_1" class="kategoriElmt" onclick="changeKategori('static_1');">
+            <!--<div id="kategoriContent">
+            	<div id="static_1" class="kategoriElmt" onclick="changeKategori('static_1');">
                 	<p>Pemrograman Internet</p>
-                </div>-->
+                </div>
                 <div id="static_2" class="kategoriElmt" onclick="active_2()";>
                 	<p>Sistem Terdistribusi</p>
                 </div>
@@ -90,7 +92,7 @@
                 <div id="addKategori" onclick="showPopUp()";>
                 	<button name="addKategori">tambah kategori</button>
                 </div>
-            </div>
+            </div>-->
         </div>
         
         <div id="dynamicContainer">
@@ -134,10 +136,10 @@
 			    <button class="ubahStatusTask">Hapus Tugas</button>
 			</div>-->
 		    </div>
-		    <button class="addTask" onclick="toHalamanPembuatanTugas();">tambah tugas</button>
-		    <button class="addTask">hapus kategori</button>
+		    <!--<button class="addTask" onclick="toHalamanPembuatanTugas();">tambah tugas</button>
+		    <button class="addTask">hapus kategori</button>-->
 		</div>
-            <div id="dynamic_2" class="dynamicElmt">
+            <!--<div id="dynamic_2" class="dynamicElmt">
             	<div class="rincianTitleDiv">
                 	<h2 class="rincianText">Rincian Tugas</h2>
                     <hr/>
@@ -175,7 +177,7 @@
                     </div>
                     
                 </div>
-            </div>
+            </div>-->
         </div>
         
         <div id="popUp">

@@ -330,7 +330,7 @@ button#editProfileBtn{
 #kategoriContent {
 	/*height:80%;*/
 	margin-top:5%;
-	border: groove;
+	/*border: groove;*/
 }
 
 .kategoriElmt {
@@ -356,28 +356,28 @@ button#editProfileBtn{
 }
 
 #dynamic_1 {
-	background: #CACACA;
+	/*background: #CACACA;*/
 	width:100%;
 	height:100%;
 	z-index:0;
 }
 
 #dynamic_2 {
-	background: #CACACA;
+	/*background: #CACACA;*/
 	width:100%;
 	height:100%;
 	z-index:-1;
 }
 
 #dynamic_3 {
-	background: #CACACA;
+	/*background: #CACACA;*/
 	width:100%;
 	height:100%;
 	z-index:-2;
 }
 
 #dynamic_semuaTugas {
-	background:#CACACA;
+	/*background:#CACACA;*/
 	width:100%;
 	height:120%;
 }
