@@ -247,6 +247,9 @@ ul.tag li a {
     padding: 0 12px;
     margin: 0px;
 }
+.inputbox {
+	height: 22px;
+}
 footer.content {
     clear: both;
     background-color: #5fae53;

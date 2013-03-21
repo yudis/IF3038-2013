@@ -24,6 +24,17 @@ function back() {
     document.slider_picture.src=eval("img"+num+".src")
 }
 
+function initialize() {
+	if(typeof(Storage)!=="undefined") {
+		if (localStorage.session) {
+			window.location = "dashboard.php?uname="+localStorage.session+"&cat=all";
+		}
+	}
+	else {
+		alert("Local storage not supported");
+	}
+}
+
 function changeRegister() {
     var registerBtn = document.getElementById("register");
     if (isValidUname && isValidPassword && isValidRePassword && isValidFullName && isValidEmail && isValidBday && isValidPhoto) {

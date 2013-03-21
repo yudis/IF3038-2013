@@ -1,4 +1,3 @@
-
 	<?php
 		$username=$_GET["uname"];
 		
@@ -11,7 +10,7 @@
 		mysql_select_db("progin_405_13510035", $con);
 			
 		
-		$sql="SELECT DISTINCT category_name, category_id FROM category, task, task_incharge WHERE category.category_id = task.task_category AND task.task_id = task_incharge.task_id AND assignee = '".$username."'";
+		$sql="SELECT category_name, category.category_id FROM category, category_incharge WHERE category.category_id = category_incharge.category_id AND people_incharge = '".$username."'";
 
 		$result = mysql_query($sql);
 		

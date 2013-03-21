@@ -58,5 +58,5 @@
 		echo "Invalid file";
 	}
 	
-	header( 'Location: dashboard.html' ) ;
+	header( "Location: dashboard.php?uname=".$username."&cat=all" ) ;
 ?>
