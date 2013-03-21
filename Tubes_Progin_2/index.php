@@ -9,7 +9,7 @@ and open the template in the editor.
 		<link rel="stylesheet" type="text/css" href="css.css">
         <link href="mediaqueries.css" rel="stylesheet" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width; initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div id="header">
@@ -36,7 +36,7 @@ and open the template in the editor.
             </div>
             <div id="inputregister">
 				<form id="regForm" method="post" action="register.php" enctype="multipart/form-data">
-					<input type="text" id="regusername" name="regusername" pattern="^.{5,}$" required><img id="valid1" src=""><br>
+					<input type="text" id="regusername1" name="regusername" pattern="^.{5,}$" required><img id="valid1" src=""><br>
 					<input type="text" id="regname" name="regname" pattern="^.+ .+$" required><img id="valid2" src=""><br>
 					<input type="date" id="regdate" name="regdate" onchange="dateChange();"><img id="valid7" src=""><br>
 					<input type="password" id="regpassword1" name="regpassword1" pattern="^.{8,}$" required><img id="valid3" src=""><br>
@@ -50,7 +50,7 @@ and open the template in the editor.
             <img src="img\Logo_Big2.png" id="fplogo" alt="BigLogo"></img>
             <img src="img\parchment.jpg" id="fpbackground" alt="Background"></img>
         </div>
-			<script type="text/javascript" src="script.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<script type="text/javascript" src="validationreg.js"></script>
 	</body>
-
 </html>

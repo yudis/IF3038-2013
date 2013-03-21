@@ -6,6 +6,7 @@ and open the template in the editor.
 <?php
 	//$username = $_SESSION['username'];
 	$username = "EndyDoank";
+	
 	require "config.php";
 	
 	$sql = "SELECT * FROM user WHERE username = '$username'";
@@ -36,23 +37,6 @@ and open the template in the editor.
             </div>
         <div id="addCat">
             <a onclick="addCategory();">+ category</a>
-        </div>
-        
-        <div id ="listtugas" class="list">
-			<div class="taskx">
-				<a href="#">JUDUL</a>
-				<span><br>deadline : besok</span>
-				<span><br>tag : tag1,tag2</span>
-				
-			</div>
-			<div class="taskx">
-				<a href="#">JUDUL</a>
-				<span><br>deadline : besok</span>
-				<span><br>tag : tag1,tag2</span>
-			</div>
-			<div class="taskx">
-				<a href="#">add task</a>
-			</div>
         </div>
         
         <div class="tugas" id="rincitugas">
@@ -99,23 +83,5 @@ and open the template in the editor.
 			<div id="wanted">
 			<img src="img/kertas2.png">
 			</div>
-        
-            <div class="tugas" id="buattugas">
-                <br/>
-                Name: <div class="nama"><input type="text" id="namaTask"></div><br/>
-                Attachment: <div class="attachment"><input type="file"></div><br/>
-                Deadline: <div class="deadline"><input type="date"></div><br/>
-                Assignee: <div class="asignee"><input type="text"></div><br/>
-                Tag: <div class="tag"> <input type="text"></div> <br/>
-                <br/>
-                <a onclick="createTask();" class="button">create</a><br/>
-            </div>
-        
-        <div id='add'>
-            Category Name:<br/> <input type='text' id='cate'><br/>
-            User:<br/> <input type='text'><br/>
-            <input type="submit" onclick="addCat();" value="create">
-            <input type="submit" onclick="restore();" value="cancel">
-        </div>
     </body>
 </html>
