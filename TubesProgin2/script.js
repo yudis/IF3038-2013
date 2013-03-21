@@ -388,7 +388,9 @@ function Submit() {
 function multiAutocomp(input, phpscript,text) {
     var idname = "hasil_" + input.id;
     var elmt = document.getElementById(input.id);
+    
     if (elmt.value.length > 0) {
+        
         document.body.setAttribute("onClick", "multiAutocompHandleClick('"+text+"');");
         multiAutocompClear(input);
         var div = document.createElement("div");
@@ -410,6 +412,7 @@ function multiAutocomp(input, phpscript,text) {
                 console.log("Browser doesn't support AJAX");
             }
         }
+        
         xmlHttp.onreadystatechange = function() {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                 var query_result = xmlHttp.responseXML.documentElement.getElementsByTagName("Data");
@@ -448,7 +451,7 @@ function multiAutocomp(input, phpscript,text) {
     }
 }
 
-function multiAutocompClear(text) {
+function multiAutocompClear(input,text) {
     console.log("Cleared");
     var idname = "hasil_" + input.id;
     while (document.getElementById(idname) != null) {
