@@ -20,8 +20,11 @@ if (connectDB()) {
     ('".$username."', '".$fullname."','".$password."', '".$date."', '".$email."', '".$target."');";
     
     $insert = mysql_query($insertQuery);
-
-    header('Location : Dashboard.php');
+    
+    setcookie("UserLogin", $username, time() + 3600*24*30);
+    $_SESSION['username'] = $username;
+    
+    header('Location: Dashboard.php');
 }
 
 ?>
