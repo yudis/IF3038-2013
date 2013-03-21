@@ -28,32 +28,12 @@ and open the template in the editor.
 		?>
 
             <div id="category">
-                <div class="kategori" onclick="showList();"><a>Fraud</a></div>
-                <div class="kategori" onclick="showList3();"><a>Robbery</a></div>
-                <div class="kategori" onclick="showList2();"><a>Gambling</a></div>
-                <div class="kategori" onclick="showList();"><a>Public Drunkenness</a></div>
-                <div class="kategori" onclick="showList3();"><a>Drug Law Violation</a></div>
-                <div class="kategori" onclick="showList2();"><a>Motor Vehicle Theft</a></div>
             </div>
         <div id="addCat">
             <a onclick="addCategory();">+ category</a>
         </div>
         
         <div id ="listtugas" class="list">
-			<div class="taskx">
-				<a href="#">JUDUL</a>
-				<span><br>deadline : besok</span>
-				<span><br>tag : tag1,tag2</span>
-				
-			</div>
-			<div class="taskx">
-				<a href="#">JUDUL</a>
-				<span><br>deadline : besok</span>
-				<span><br>tag : tag1,tag2</span>
-			</div>
-			<div class="taskx">
-				<a href="#">add task</a>
-			</div>
         </div>
         
         <div class="tugas" id="rincitugas">
@@ -118,5 +98,8 @@ and open the template in the editor.
             <input type="submit" onclick="addCat();" value="create">
             <input type="submit" onclick="restore();" value="cancel">
         </div>
+		<script>
+			window.onload=update;
+		</script>
     </body>
 </html>
