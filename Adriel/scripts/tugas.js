@@ -3,8 +3,46 @@
  */
 var tagsTugas = new Array();
 var assigneesTugas = new Array();
+var changeMade = false;
+
+function initialize()
+{
+	if (typeof(Storage) !== 'undefined')
+	{
+		if (localstorage.session)
+		{
+			onload();
+		}
+		else
+		{
+			window.location = "index.html";
+		}
+	}
+}
 
 function onload() {
+    var id = getQueryParameter('id');
+	
+	if (id != null)
+	{
+		document.getElementById('namaTugas').innerHTML = getTaskName(decodeURIComponent(id));
+		if (getStatus(decodeURIComponent(id)) == "1")
+		{
+			document.getElementById('checkstatus').checked = true;
+		}
+		else
+		{
+			document.getElementById('checkstatus').checked = false;
+		}
+		setAttachment(decodeURIComponent(id));
+		document.getElementById('deadlineDisplayDiv').innerHTML = getDeadline(decodeURIComponent(id));
+		document.getElementById('deadline').value = document.getElementById('deadlineDisplayDiv').innerHTML;
+		setAssignee(decodeURIComponent(id));
+		setTags(decodeURIComponent(id));
+	}
+}
+
+/*function onload() {
     var name = getQueryParameter('name');
     if (name == null) {
         name = 'Tugas 1';
@@ -28,6 +66,183 @@ function onload() {
     assigneesTugas.push("Benny Wijaya");
     assigneesTugas.push("Florentina");
     writeAssignees();
+}*/
+
+function getTaskName(id)
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			var taskname = xmlhttp.responseText;
+			return taskname;
+		}
+	}
+	xmlhttp.open("GET","gettaskinfo.php?type=taskname&id="+id,true);
+	xmlhttp.send();
+}
+
+function getStatus(id)
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			var status = xmlhttp.responseText;
+			return status;
+		}
+	}
+	xmlhttp.open("GET","gettaskinfo.php?type=status&id="+id,true);
+	xmlhttp.send();
+}
+
+function getDeadline(id)
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			var deadline = xmlhttp.responseText;
+			return deadline;
+		}
+	}
+	xmlhttp.open("GET","gettaskinfo.php?type=deadline&id="+id,true);
+	xmlhttp.send();
+}
+
+function setAttachment(id)
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			var attachment = xmlhttp.responseText;
+			var arrattach = attachment.split(" ");
+			var links = document.getElementById("links");
+			var imagenvideo = document.getElementById("imagenvideo");
+			for (var i = 0; i < arrattach.length; i++)
+			{
+				var ext = getExtension(arrattach[i]);
+				if (ext == "jpg" || ext == "jpeg" || ext == "png" || ext == "gif" || ext == "bmp")
+				{
+					imagenvideo.innerHTML = imagenvideo.innerHTML + "<img src='" + arrattach[i] + "' alt='image' height='300' width='300'>";
+				}
+				else if (ext == "mp4" || ext == "webm" || ext == "ogg")
+				{
+					imagenvideo.innerHTML = imagenvideo.innerHTML + "<video height='240' width='320' controls> \n <source src='" + arrattach[i] + "' type='video/mp4'> \n Your browser does not support video tag. \n </video>";
+				}
+				else
+				{
+					links.innerHTML = links.innerHTML + "<a href='" + arrattach[i] + "' target='_blank'>" + getFileName(arrattach[i]) + "</a></br>";
+				}
+			}
+		}
+	}
+	xmlhttp.open("GET","gettaskinfo.php?type=attach&id="+id,true);
+	xmlhttp.send();
+}
+
+function setAssignee(id)
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			var assignee = xmlhttp.responseText;
+			var arrayassignee = assignee.split(",");
+			var assignbox = document.getElementById("assignee");
+			for (var i = 0; i < arrayassignee.length; i++)
+			{
+				assignbox.value = arrayassignee[i];
+				addAssignees();
+			}
+		}
+		writeAssignees();
+	}
+	xmlhttp.open("GET","gettaskinfo.php?type=assignee&id="+id,true);
+	xmlhttp.send();
+}
+
+function setTags(id)
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById("tags").value = xmlhttp.responseText;
+			saveTags();
+		}
+	}
+	xmlhttp.open("GET","gettaskinfo.php?type=tag&id="+id,true);
+	xmlhttp.send();
+}
+
+function getExtension(link)
+{
+	var linked = link.split(".");
+	var ext = linked[linked.length-1];
+	return ext;
+}
+
+function getFileName(link)
+{
+	var linked = link.split("\\");
+	var ext = linked[linked.length-1];
+	return ext;
 }
 
 function addKomentar() {
@@ -88,24 +303,71 @@ function addAssignees() {
     assigneesList.innerHTML += "<li>" + newAssignee.value + "</li> ";
     newAssignee.value = "";
     
+	changeMadeTrue();
+	
     return false;
 }
 
+function changeCheckBox()
+{
+	if (document.getElementById("checkstatus").checked == true)
+	{
+		document.getElementById("statustext").innerHTML = "Selesai";
+	}
+	else
+	{
+		document.getElementById("statustext").innerHTML = "Belum Selesai";
+	}
+	changeMadeTrue();
+}
+
+function changeMadeTrue()
+{
+	changeMade = true;
+}
+
 function saveTugas() {
-    document.getElementById("tagsEditDiv").style.display = "none";
-    document.getElementById("assigneeEditDiv").style.display = "none";
-    document.getElementById("deadlineEditDiv").style.display = "none";
-    document.getElementById("doneButton").style.display = "none";
-    document.getElementById("deadlineDisplayDiv").style.display = "block";
-    document.getElementById("tagsDisplayDiv").style.display = "block";
-    document.getElementById("editButton").style.display = "block";
-    
-    var deadlineDisplay = document.getElementById("deadlineDisplayDiv");
-    var deadlineTextBox = document.getElementById("deadline");
-    deadlineDisplay.innerHTML = deadlineTextBox.value;
-    
-    saveTags();
-    
+	if (changeMade == false)
+	{
+		document.getElementById("tagsEditDiv").style.display = "none";
+		document.getElementById("assigneeEditDiv").style.display = "none";
+		document.getElementById("deadlineEditDiv").style.display = "none";
+		document.getElementById("doneButton").style.display = "none";
+		document.getElementById("deadlineDisplayDiv").style.display = "block";
+		document.getElementById("tagsDisplayDiv").style.display = "block";
+		document.getElementById("editButton").style.display = "block";
+		document.getElementById("checkstatus").disabled = true;
+		
+		var deadlineDisplay = document.getElementById("deadlineDisplayDiv");
+		var deadlineTextBox = document.getElementById("deadline");
+		deadlineDisplay.innerHTML = deadlineTextBox.value;
+		
+		saveTags();
+		
+		changeMade = false;
+    }
+	else
+	{
+		//masukkan data ke dalam database
+		
+		document.getElementById("tagsEditDiv").style.display = "none";
+		document.getElementById("assigneeEditDiv").style.display = "none";
+		document.getElementById("deadlineEditDiv").style.display = "none";
+		document.getElementById("doneButton").style.display = "none";
+		document.getElementById("deadlineDisplayDiv").style.display = "block";
+		document.getElementById("tagsDisplayDiv").style.display = "block";
+		document.getElementById("editButton").style.display = "block";
+		document.getElementById("checkstatus").disabled = true;
+		
+		var deadlineDisplay = document.getElementById("deadlineDisplayDiv");
+		var deadlineTextBox = document.getElementById("deadline");
+		deadlineDisplay.innerHTML = deadlineTextBox.value;
+		
+		saveTags();
+		
+		changeMade = false;
+	}
+	
     return false;
 }
 
@@ -117,6 +379,7 @@ function editTugas() {
     document.getElementById("deadlineDisplayDiv").style.display = "none";
     document.getElementById("tagsDisplayDiv").style.display = "none";
     document.getElementById("editButton").style.display = "none";
-    
+    document.getElementById("checkstatus").disabled = false;
+	
     return false;
 }

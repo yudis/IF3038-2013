@@ -10,7 +10,7 @@
         <script src="scripts/tugas.js" type="application/javascript"></script>
         <script src="scripts/helper.js" type="application/javascript"></script>
     </head>
-    <body onload="onload()">
+    <body onload="initialize()">
         <div class="page">
             <header class="content">
                 <nav>
@@ -33,12 +33,12 @@
                 <div class="padding12px">
                     <form action="#">
                         <div class="rincianLabel">Nama:</div><div class="rincianDetail"><div id="namaTugas">Tugas 1</div></div>
-						<div class="rincianLabel">Status:</div><div class="rincianDetail"><input type="checkbox" disabled> Belum Selesai</div>
-                        <div class="rincianLabel">Attachment:</div><div class="rincianDetail"><div class="inlineblock"><a href="./files/test.zip" target="_blank">test.zip</a></div></div>
+						<div class="rincianLabel">Status:</div><div class="rincianDetail"><input id="checkstatus" type="checkbox" onchange="changeCheckBox()" disabled /> <span id="statustext">Belum Selesai</span></div>
+                        <div class="rincianLabel">Attachment:</div><div class="rincianDetail"><div id="links" class="inlineblock"><a href="files/test.zip" target="_blank">test.zip</a></div></div>
                         <div class="rincianLabel">Deadline:</div><div class="rincianDetail">
                             <div id="deadlineDisplayDiv" class="inlineblock">02/22/2013</div>
                             <div id="deadlineEditDiv">
-                                <input type="date" id="deadline" name="deadline" value="2013-02-22" />
+                                <input type="date" id="deadline" name="deadline" value="2013-02-22" onchange="changeMadeTrue()"/>
                             </div>
                         </div>
                         <div class="rincianLabel">Assignee:</div><div class="rincianDetail">
@@ -59,12 +59,19 @@
                                 </ul>
                             </div>
                             <div id="tagsEditDiv">
-                                <input type="text" id="tags" name="tags" value="IF3030" />
+                                <input type="text" id="tags" name="tags" value="IF3030" list="tagtag" onchange="changeMadeTrue()"/>
+								<datalist id="tagtag">
+									<option value="Informatika">
+                                    <option value="Tubes">
+                                    <option value="Tucil">
+								</datalist>
                             </div>
                         </div>
                         <br /><br />
                         <button id="editButton" onclick="return editTugas();">Edit</button><button id="doneButton" onclick="return saveTugas();">Done</button>
-                        <br /><br /><br />
+                        <br />
+						<div id="imagenvideo"></div>
+						<br /><br />
                         <div class="rincianLabel">Komentar:</div><div class="rincianDetail">
                             <div id="komentar"><b>Abraham Krisnanda Santoso</b> - 20 Februari 2013 23:06<hr />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor nunc, posuere sit amet facilisis quis, ullamcorper nec sapien. Donec placerat nisi in dui auctor posuere. Etiam quis urna tortor. Mauris aliquet porta tellus, a tristique arcu congue vel. Ut scelerisque, lacus vel sodales tristique, neque leo facilisis metus, quis posuere dui eros vel sem. Aliquam turpis quam, vehicula quis malesuada vel, tincidunt sit amet nunc. Vivamus orci augue, volutpat sed egestas eget, luctus eget lacus. Curabitur ut quam non dolor pellentesque dapibus. Quisque ut semper ante. Donec lobortis rutrum elit, eget consequat leo ultrices non. Nam mauris magna, fermentum vel pulvinar ac, varius condimentum nulla. Maecenas ac odio non ligula vestibulum congue. Ut nunc risus, vestibulum sit amet consectetur molestie, porttitor nec.<br /><br /><b>Stefanus Thobi Sinaga</b> - 20 Februari 2013 23:06<hr />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor nunc, posuere sit amet facilisis quis, ullamcorper nec sapien. Donec placerat nisi in dui auctor posuere. Etiam quis urna tortor. Mauris aliquet porta tellus, a tristique arcu congue vel. Ut scelerisque, lacus vel sodales tristique, neque leo facilisis metus, quis posuere dui eros vel sem. Aliquam turpis quam, vehicula quis malesuada vel, tincidunt sit amet nunc. Vivamus orci augue, volutpat sed egestas eget, luctus eget lacus. Curabitur ut quam non dolor pellentesque dapibus. Quisque ut semper ante. Donec lobortis rutrum elit, eget consequat leo ultrices non. Nam mauris magna, fermentum vel pulvinar ac, varius condimentum nulla. Maecenas ac odio non ligula vestibulum congue. Ut nunc risus, vestibulum sit amet consectetur molestie, porttitor nec.<br /><br /><b>Edward Samuel Pasaribu</b> - 20 Februari 2013 23:06<hr />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor nunc, posuere sit amet facilisis quis, ullamcorper nec sapien. Donec placerat nisi in dui auctor posuere. Etiam quis urna tortor. Mauris aliquet porta tellus, a tristique arcu congue vel. Ut scelerisque, lacus vel sodales tristique, neque leo facilisis metus, quis posuere dui eros vel sem. Aliquam turpis quam, vehicula quis malesuada vel, tincidunt sit amet nunc. Vivamus orci augue, volutpat sed egestas eget, luctus eget lacus. Curabitur ut quam non dolor pellentesque dapibus. Quisque ut semper ante. Donec lobortis rutrum elit, eget consequat leo ultrices non. Nam mauris magna, fermentum vel pulvinar ac, varius condimentum nulla. Maecenas ac odio non ligula vestibulum congue. Ut nunc risus, vestibulum sit amet consectetur molestie, porttitor nec.<br /><br /></div><textarea id="txtKomentar" rows="4" cols="80" placeholder="Your comment here..."></textarea><br /><button onclick="return addKomentar();">Submit</button>
                         </div>
