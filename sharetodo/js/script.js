@@ -27,7 +27,8 @@ function keProfil() {
 	window.location = 'Profil.php';
 }
 
-function changeKategori(staticId) {
+function showKategori() {
+	//alert("testing");
 	
 	var _xmlhttp;
 	if (window.XMLHttpRequest) { //membuat objek XMLHttpRequest
@@ -36,14 +37,16 @@ function changeKategori(staticId) {
 		_xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
-	_xmlhttp.open("GET","changeKategori.php?k=" + staticId);
+	_xmlhttp.open("GET","changeKategori.php?k=testing",true);
 	_xmlhttp.send();
 	
 	_xmlhttp.onreadystatechange = function() {
 		if ((_xmlhttp.readyState == 4) && (_xmlhttp.status == 200)) {
 			var sementara = _xmlhttp.responseText;
 			//var sementara = _xmlhttp.responseXML;
-			alert(sementara);
+			//alert(sementara);
+			active_1();
+			document.getElementById("dynamicSpace").innerHTML = sementara;
 		}
 	}
 }
@@ -164,8 +167,64 @@ function showEditForm() {
 function hideEditForm() {
 	document.getElementById("editForm").style.visibility = "hidden";
 }
-function changeFullName() {
-	document.getElementById("userFullName").innerHTML = "newName";
+function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain, fileUpload) {
+	//alert(newFullName + " "+ newBirthdate + " " + newPassword + " " + newPasswordAgain + " " + fileUpload);
+	
+	if (newPassword == newPasswordAgain) {
+		//menampilkan notifikasi saat field password tidak diubah
+		if ((newPassword == "") && (newPasswordAgain == "")) {
+			alert("Warning. Field password tidak berubah");
+		}
+		
+		if (newFullName == "") {
+			//alert("Warning. Anda belum mengisi nama");
+			newFullName = "-111";
+		}
+		if (newBirthdate == "") {
+			//alert("Warning. Anda belum isi tanggalLahir");
+			newBirthdate = "-222";
+			//alert(newBirthdate);
+		}
+		
+		var __xmlhttp;
+		if (window.XMLHttpRequest) {
+			__xmlhttp = new XMLHttpRequest();
+		} else {
+			__xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
+		}
+		
+		__xmlhttp.onreadystatechange = function() {
+			//alert("readystatechange" + __xmlhttp.readyState + " " + __xmlhttp.status);
+			if ((__xmlhttp.readyState == 4) && (__xmlhttp.status == 200)) {
+				//ditampung xmlresponsenya
+				//alert(__xmlhttp.responseText);
+				$xmlresponse = __xmlhttp.responseXML; //responsexml tidak bisa langsung diambil, akan mengakibatkan null
+				alert("Profile telah berhasil diperbaharui");
+				//mengolah respon dalam bentuk xml
+				$responseElmt = $xmlresponse.getElementsByTagName("response");
+				
+				$fullname = $responseElmt[0].childNodes[0].childNodes[0].nodeValue;
+				$birthdate = $responseElmt[0].childNodes[1].childNodes[0].nodeValue;
+				//$password = $responseElmt[0].childNodes[2].childNodes[0].nodeValue;
+				//$filename = $responseElmt[0].childNodes[3].childNodes[0].nodeValue
+				//alert($fullname + $birthdate + $password + $filename);
+				
+				document.getElementById("userFullName").innerHTML = "<p>" + $fullname + "</p>";
+				document.getElementById("userBirthdate").innerHTML = "<p>" + $birthdate + "</p>";
+				//setTimeout(function() {
+				//},10000);
+			}
+		}
+		
+		__xmlhttp.open("POST","php/updateProfile.php",true);
+		__xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		//__xmlhttp.setRequestHeader("Content-length", $param.length);
+		//__xmlhttp.setRequestHeader("Connection", "close");
+		
+		__xmlhttp.send("newFullName=" + newFullName + "&newBirthdate=" + newBirthdate + "&newPassword=" + newPassword + "&newFileName=" + fileUpload);
+	} else{
+		alert("Peringatan! kedua password Anda tidak sesuai");
+	}
 }
 
 /**************************DASHBOARD**************************/

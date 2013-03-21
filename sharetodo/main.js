@@ -311,7 +311,7 @@ function checkSignIn(usrnm, psswrd)
 {
     //alert(psswrd);
     var xmlhttp;
-    if(usrnm.length==0 || psswrd.length==0)
+    if(usrnm.length==0 || psswrd.length==0) //panjang username dan psw tidak boleh sama dengan nol
     {
         document.getElementById("error_signin").innerHTML = "Isi username dan password";
         return false;
@@ -319,7 +319,7 @@ function checkSignIn(usrnm, psswrd)
     if(window.XMLHttpRequest)
         xmlhttp = new XMLHttpRequest();
     else
-        xmlhttp = new ActiveXObject("Microsodt.XMLHTTP");
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     
     xmlhttp.onreadystatechange = function()
     {
@@ -331,8 +331,10 @@ function checkSignIn(usrnm, psswrd)
                 return true;
             }
             
-            else
+            else {
+                alert("username dan password Anda tidak valid");
                 return false;
+            }
         }
         
     }

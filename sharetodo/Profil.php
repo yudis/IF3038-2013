@@ -13,7 +13,6 @@
     
     <body>
     	<div id="header">
-	    
 	    <img id="logo" src="res/logo1.png" alt="to-do list"></img>
             <a id="dashboardLink" href="dashboard.php">dashboard</a>
             <input id="searchForm" type="text" name="keyword" onkeyup="showHint(this.value)" placeholder="search"></input>
@@ -35,7 +34,7 @@
         
         <div id="photoSpace">
         	<div id="userPhoto">
-            	<img id="user" src="server/user.png" alt="userPhoto"/>
+            	<img id="user" src="server/<? echo $_SESSION['username'] ?>.png" alt="userPhoto"/>
             </div>
         </div>
         
@@ -76,7 +75,7 @@
 			echo "<div class='bioLeft'>";
 			    echo "<p>Tanggal Lahir :</p>";
 			echo "</div>";
-			echo "<div class='bioRight'>";
+			echo "<div id='userBirthdate' class='bioRight'>";
 			    echo "<p>" . $row['tanggalLahir'] . "</p>";
 			echo "</div>";
 			echo "<div class='bioLeft'>";
@@ -95,46 +94,10 @@
 		echo "</div>";
 	    }
 	?>
-		
-        <!--<div id="userData">
-            <h2 id="biodataTitle">BIODATA</h2>
-            <hr/>
-            <div id="biodataContent">
-		<div class="bioLeft">
-		    <p>Nama Lengkap :</p>
-		</div>
-		<div id="userFullName" class="bioRight">
-		    <p>Anonymous User</p>
-		</div>
-		<div class="bioLeft">
-		    <p>Username :</p>
-		</div>
-		<div class="bioRight">
-		    <p><em>usernamedummy</em></p>
-		</div>
-		<div class="bioLeft">
-		    <p>Tanggal Lahir :</p>
-		</div>
-		<div class="bioRight">
-		    <p>January, 16 1980</p>
-		</div>
-		<div class="bioLeft">
-		    <p>Email :</p>
-		</div>
-		<div class="bioRight">
-		    <p>anon@sesuatu.co.id</p>
-		</div>
-		<div class="bioLeft">
-		    <p></p>
-		</div>
-		<div class="bioRight">
-		    <button id="editProfileBtn" onclick="showEditForm();">Edit</button>
-		</div>
-            </div>-->
 	    
 	    <!--FORM EDIT SECTION-->
 	    <div id=editForm>
-		<form action="" method="POST" enctype="multipart/form-data" name="uploadImage">
+		<form action="UploadFile.php" method="POST" enctype="multipart/form-data" name="uploadImage">
 		    <div class="bioLeft">
 			<p>new Full Name :</p>
 		    </div>
@@ -171,7 +134,7 @@
 			<p></p>
 		    </div>
 		    <div class="bioRight">
-			<input class="submitBtn" type="button" value="Submit Form" name='upload' onclick="hideEditForm(); updateProfile(newFullName.value, newBirthdate.value, newPassword.value, newPasswordAgain.value, fileUpload.value);"></input>
+			<input class="submitBtn" type="submit" value="Submit Form" name='upload' onclick="hideEditForm(); updateProfile(newFullName.value, newBirthdate.value, newPassword.value, newPasswordAgain.value, fileUpload.value);"></input>
 		    </div>
 		</form>
 	    </div>
@@ -210,30 +173,6 @@
 		    echo "</div>";
 		}	    
 	    ?>
-	    
-<!--            <h2 id="taskTitle">TASKS</h2>-->
-<!--            <hr/>-->
-<!--            <div id="taskContent">-->
-<!--		<div class="bioLeft">-->
-<!--		    <p>Nama</p>-->
-<!--		</div>-->
-<!--		<div class="bioRight">-->
-<!--		    <p>Deadline</p>-->
-<!--		</div>-->
-<!--		-->
-<!--		<div class="tableElmtLeft">-->
-<!--		    <p>Tugas Besar II Pemrograman Internet</p>-->
-<!--		</div>-->
-<!--		<div class="tableElmtRight">-->
-<!--		    <p>March, 23 2013</p>-->
-<!--		</div>-->
-<!--		<div class="tableElmtLeft">-->
-<!--		    <p>Tugas Besar I Sistem Terdistribusi</p>-->
-<!--		</div>-->
-<!--		<div class="tableElmtRight">-->
-<!--		    <p>March, 24 2013</p>-->
-<!--		</div>-->
-<!--            </div>-->
             
 	    <?php
 		//create connection
@@ -258,39 +197,25 @@
 		    
 		    $result = mysqli_query($con,$sql);
 		    while($row = mysqli_fetch_array($result)){
+			
+			//mengambil semua tag untuk task tertentu
+			$tagQuery = "SELECT tag FROM tagging WHERE namaTask='".$row['namaTask']."'";
+			$resultTag = mysqli_query($con,$tagQuery);
+			$tagString = "";
+			while ($tag = mysqli_fetch_array($resultTag)){
+			    $tagString .= $tag['tag']." | ";
+			}
+			
+			//menampilkan task beserta tag nya yang terkait
 			echo "<div class='tableElmtLeft'>";
 			    echo "<p>".$row['namaTask']."</p>";
 			echo "</div>";
 			echo "<div class='tableElmtRight'>";
-			    echo "<p>".$row['status']." (harusnya tag)"."</p>";
+			    echo "<p>".$tagString."</p>";
 			echo "</div>";
 		    }
 		echo "</div>";
 	    ?>
-	    
-            <!--<h2 id="doneTaskTitle">DONE TASKS</h2>
-            <hr/>
-            <div id="doneTask">
-		<div class="bioLeft">
-		    <p>Nama</p>
-		</div>
-		<div class="bioRight">
-		    <p>Tag</p>
-		</div>
-		
-		<div class="tableElmtLeft">
-		    <p>Tugas Besar I Intelegensia Buatan</p>
-		</div>
-		<div class="tableElmtRight">
-		    <p>Algoritma | Constraints</p>
-		</div>
-		<div class="tableElmtLeft">
-		    <p>Tugas Besar I Sistem Informasi</p>
-		</div>
-		<div class="tableElmtRight">
-		    <p>Data Flow Diagram (DFD) | Value Chain | Enterprise Information System</p>
-		</div>
-            </div>-->
         </div>
     </body>
 </html>

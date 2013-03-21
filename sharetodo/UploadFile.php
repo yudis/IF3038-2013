@@ -1,7 +1,11 @@
+<?php
+    session_start();
+?>
 <html>
     <head>
         <meta http-equiv="REFRESH" content="0;url=Profil.php"/>
         <?php
+            sleep(0.5);
             echo "REDIRECTING ...";
             
             // define a constant for the maximum upload size
@@ -11,7 +15,9 @@
               define('UPLOAD_DIR', 'C:/xampp/htdocs/progin/tubes/server/');
               // replace any spaces in original filename with underscores
               /*$file = str_replace(' ', '_', $_FILES['image']['name']);*/
-              $file = "user.png";
+              
+              
+              $file = $_SESSION['username'].".png";
               
               //echo "test File : ".$file;
               

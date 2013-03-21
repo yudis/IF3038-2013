@@ -2,7 +2,7 @@
     session_start();    
     //email
     $username[] = "msmaromi";
-    $username[] = "sonnymanurung";
+    $username[] = "smanurung";
     $username[] = "krisnadibyo";
     
     //password
