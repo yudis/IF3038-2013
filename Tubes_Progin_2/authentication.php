@@ -1,5 +1,6 @@
 <?php
 	require "config.php";
+	require "index.php";
 	
 	$usr=$_GET["usr"];
 	$psw=$_GET["psw"];
@@ -15,9 +16,14 @@
 	}
 	
 	
-	/*if($row_cnt > 0){
+	if($row_cnt > 0){
 		session_start();
-	}*/
+		$_SESSION['username'] = $result['username'];
+		$_SESSION['fullname'] = $result['fullname'];
+		$_SESSION['birthday'] = $result['birthday'];
+		$_SESSION['password'] = $result['password'];
+		$_SESSION['email'] = $result['email'];
+	}
 	/* close connection */
 	//$mysqli->close();
 	echo $row_cnt;
