@@ -13,33 +13,33 @@
 
 	if (isset($_SESSION['username'])) {
 		$username = $_SESSION['username']; 
-		echo $username;
+		//echo $username;
 	}
 	
 	/* Add Category Script */	
 	$catName= mysql_real_escape_string($_POST['add_category_name']);
 	$catAsigneeName = $_POST['add_category_asignee_name'];
 	if (isset($_POST['add_category_button'])) { //when login button is pressed
+		
 		$query 	= "INSERT INTO `category`(`cat_name`, `cat_creator`) VALUES ('$catName','$username')";
 		$result	= mysql_query($query);
 		
-		/*
-		$row = mysql_fetch_array($res, MYSQL_NUM);
-		$name = $row[2];
-
-		if (mysql_num_rows($res) > 0) {
-			$_SESSION['username'] = $username;
-			$_SESSION['fullname'] = $name;
-			header('location:src/dashboard.php'); //redirect to dashboard
-		} else {
-
-			echo "Your log in credetial is not valid";
-		} */
-		//echo "berhasil add";
-		header('location:src/dashboard.php');
+		$query1 	= "SELECT cat_id FROM category WHERE cat_name='$catName'";
+		$result1	= mysql_query($query1);
+		while ($row = mysql_fetch_array($result1, MYSQL_ASSOC)) {
+			$categoryID = $row["cat_id"];
+			echo "Cat id = ".$categoryID;
+		}
+		
+		$assigneeArray = explode(',', $catAsigneeName); 		
+		for ($i=0; $i<count($assigneeArray); $i++) {
+			//echo $assigneeArray[$i];
+			$query2 	= "INSERT INTO `cat_asignee`(`cat_id`, `username`) VALUES ('$categoryID','$assigneeArray[$i]')";
+			$result2	= mysql_query($query2);
+		}
+		header('location:dashboard.php');
 	}
 
 
 
 ?>
-
