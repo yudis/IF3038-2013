@@ -123,7 +123,7 @@ if(!isset($_COOKIE['UserLogin'])){
 			</div>
         
             <?php
-                include 'newtask.php';
+                include 'addtask.php';
             ?>  
         
         <div id='add'>
