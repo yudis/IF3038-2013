@@ -401,21 +401,6 @@ function Redirect(){
     window.location = "index.php";
 }
 
-function Login(){
-    if (document.getElementById("logusername").value !== "admin"){
-        alert("Wrong username!");
-    } else if (document.getElementById("logpassword").value !== "admincool"){
-        alert("Wrong password!");
-    }else{
-        window.location = "Dashboard.php";
-        localStorage.username = document.getElementById("logusername").value;
-        localStorage.name = "Billy The Kid";
-        localStorage.date = "1968-09-3";
-        localStorage.email = "coolKid@yahoo.com";
-        document.getElementById("foto").src = "img/foto.png";
-    }
-}
-
 function edit(){
 	if ((document.getElementById("regname").value.indexOf(" ") < 0)) {
         //alert("Name should be constructed by two or more words separated by space.");
@@ -619,5 +604,33 @@ function showHint(str)
 	   }
 	  }
 	xmlhttp.open("GET","autosearch.php?q="+str+"&tipe="+tipe,true);
+	xmlhttp.send();
+}
+
+function Loginaja(){
+	//Variable for authentication
+	var username = document.getElementById("logusername").value;
+	var password = document.getElementById("logpassword").value;
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			if(xmlhttp.responseText==0){
+				alert("Your username and/or password is wrong!");
+			}else{
+				window.location = "Dashboard.php";
+			}
+		}
+	}
+	xmlhttp.open("GET","authentication.php?usr="+username+"&psw="+password,true);
 	xmlhttp.send();
 }

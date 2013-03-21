@@ -9,18 +9,18 @@ and open the template in the editor.
 		<link rel="stylesheet" type="text/css" href="css.css">
         <link href="mediaqueries.css" rel="stylesheet" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width; initial-scale=1.0">
     </head>
     <body>
         <div id="header">
 		<div id="logo">
 			<img src="img\Logo_Small2.png" alt="Logo & Tagline" onclick="Redirect();"></img>
 		</div>
-		<div id="login">
-			Username &nbsp <input type="text" id="logusername"> &nbsp &nbsp 
-        		Password &nbsp <input type="password" id="logpassword"> &nbsp &nbsp 
-				<div class="logbutton" onclick="Login();">Login</div>
-                </div>
+		<form id="login">
+			Username<input type="text" id="logusername" name="logusername">
+        	Password<input type="password" id="logpassword" name="logpassword"> 
+            <input type="button" onClick ="Loginaja();" id="submitbutton" value="Login">
+        </form>
 	</div>
         <div id="frontpage">
             <div id="register">
