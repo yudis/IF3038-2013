@@ -72,7 +72,7 @@ var datePicker =
 				this.calendarDiv.style.top = position.top + elem.offsetHeight + "px";
 				this.calendarDiv.style.left = position.left - (elem.offsetWidth/2) + 50 + "px";
 				this.calendarDiv.style.display = "block";
-				setTimeout(function () {datePicker.calendarDiv.style.width = "212px";}, 150);
+				setTimeout(function () {datePicker.calendarDiv.style.width = "212px";}, 20);
 			} else 
 			{
 				this.calendarDiv.style.display = "none";

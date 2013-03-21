@@ -42,7 +42,7 @@ $birth_date = new Datetime($user->birthdate);
 					</div>
 					<div class="field">
 						<label for="edit_avatar">Avatar</label>
-						<input id="edit_avatar" name="avatar" type="file" title="Avatar yang diupload harus berekstensi jpg atau jpeg." required>
+						<input id="edit_avatar" name="avatar" type="file" title="Avatar yang diupload harus berekstensi jpg atau jpeg.">
 					</div>
 					<br />
 					<div class="field buttons">
@@ -52,5 +52,10 @@ $birth_date = new Datetime($user->birthdate);
 			</section>
 		</div>
 	</div>
+	<?php
+		$this->loadTemplate("calendar");
+	?>
 <?php
+$this->requireJS('datepicker');
+$this->requireJS('checker_profile');
 $this->footer(array());

@@ -8,9 +8,11 @@ $todoQ = 'status=0';
 $doneQ = 'status=1';
 $narrowQ = '';
 
-if ($cat) {
-	$currentCat = Category::model()->findAll('id_kategori=' . $cat);
-	if ($currentCat) {
+if ($cat) 
+{
+	$currentCat = Category::model()->find('id_kategori=' . $cat);
+	if ($currentCat) 
+	{
 		$currentCat = $currentCat[0];
 		$narrowQ = ' AND id_kategori=' . $cat;
 		$canDelete = $currentCat->id_user == $this->currentUserId;

@@ -46,7 +46,10 @@ $birth_date = new Datetime($user->birthdate);
 					<span class="detail-label">Username:</span>
 					<span class="detail-value"><?php echo $user->username; ?></span>
 				</p>
-
+				<p class="email">
+					<span class="detail-label">Email:</span>
+					<span class="detail-value"><?php echo $user->email; ?></span>
+				</p>
 				<p class="date-of-birth">
 					<span class="detail-label">Date of Birth:</span>
 					<span class="detail-value"><?php echo $birth_date->format('j F Y'); ?></span>

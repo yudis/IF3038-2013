@@ -83,10 +83,10 @@ class RestApi
 		{
 			// TODO check if user session is in some category
 			// retrieve based on category
-
 			$cat = Category::model()->findAll("id_kategori = '" . addslashes($params['category_id']) . "'");
 
-			if ($cat) {
+			if ($cat) 
+			{
 				// found
 				$success = true;
 
@@ -111,7 +111,8 @@ class RestApi
 		}
 
 		$tasks = array();
-		foreach ($ret as $task) {
+		foreach ($ret as $task) 
+		{
 			$dummy = new StdClass;
 			$dummy->name = $task->nama_task;
 			$dummy->id = $task->id_task;
@@ -168,9 +169,9 @@ class RestApi
 	{
 		$return = array();
 		if (($_SERVER['REQUEST_METHOD'] === 'POST') &&
-			(isset($params['username'])) && (isset($params['password']))) {
-			
-			$user = User::model()->find("username='".$params['username']."' AND password='".md5($params['password'])."'");
+			(isset($params['username'])) && (isset($params['password']))) 
+		{	
+			$user = User::model()->find("username='".addslashes($params['username'])."' AND password='".md5($params['password'])."'");
 			if ($user->data)
 			{
 				$_SESSION['user_id'] = $user->id_user;
@@ -224,7 +225,7 @@ class RestApi
 				$return["error"] = array_merge($return["error"], $temperror);
 			}
 			
-			if (User::model()->find("username='".$params['username']."' OR email='".$params['email']."'")->data)
+			if (User::model()->find("username='".addslashes($params['username'])."' OR email='".addslashes($params['email'])."'")->data)
 			{
 				$return["status"] = "fail";
 				$return["error"]["duplicate"] .= "Username/email sudah digunakan.";
@@ -238,7 +239,8 @@ class RestApi
 		return $return;
 	}
 
-	public function add_category() {
+	public function add_category() 
+	{
 		if (!$_POST)
 			return;
 

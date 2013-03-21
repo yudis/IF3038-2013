@@ -70,7 +70,7 @@
 			{
 				$select = "*";
 			}
-			$result = DBConnection::DBquery("SELECT ".$select." FROM ".$this->tableName().$query);
+			$result = DBConnection::DBquery("SELECT ".$select." FROM ".$this->tableName().$query." LIMIT 1");
 
 			$count = $result->num_rows;
 			

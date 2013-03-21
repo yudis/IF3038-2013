@@ -30,11 +30,11 @@ $birth_date = new Datetime($user->birthdate);
 					</div>
 					<div class="field">
 						<label for="edit_current_password">Current Password</label>
-						<input id="edit_current_password" name="current_password" pattern="^.{8,}$" type="password" title="Sandi minimal harus terdiri dari 8 karakter dan tidak sama dengan username dan email." required data-neq="register_username">							
+						<input id="edit_current_password" name="current_password" pattern="^.{8,}$" type="password" title="Sandi minimal harus terdiri dari 8 karakter dan tidak sama dengan username dan email.">							
 					</div>
 					<div class="field">
 						<label for="edit_new_password">New Password</label>
-						<input id="edit_new_password" name="new_password" pattern="^.{8,}$" type="password" title="Sandi minimal harus terdiri dari 8 karakter dan tidak sama dengan username dan email." required data-neq="register_username">							
+						<input id="edit_new_password" name="new_password" pattern="^.{8,}$" type="password" title="Sandi minimal harus terdiri dari 8 karakter dan tidak sama dengan username dan email.">	
 					</div>
 					<div class="field">
 						<label for="edit_confirm_password">Confirm Password</label>
@@ -49,4 +49,5 @@ $birth_date = new Datetime($user->birthdate);
 		</div>
 	</div>
 <?php
+$this->requireJS('checker_edit_pass');
 $this->footer(array());

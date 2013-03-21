@@ -7,6 +7,12 @@ var register_confirm_password = document.getElementById("register_confirm_passwo
 var register_email = document.getElementById("register_email");
 var register_avatar = document.getElementById("register_avatar");
 
+// added client side verification
+register_password.onkeyup = function()
+{
+	document.getElementById("register_confirm_password").pattern = this.value;
+}
+
 register_form.onsubmit = function()
 {		
 	if ((register_password.value==register_confirm_password.value) && (register_username.value!=register_password.value) &&
@@ -61,5 +67,5 @@ register_form.onsubmit = function()
 	{
 		alert("Username tidak boleh sama dengan sandi");
 		return false;
-	}
+	}	
 }
