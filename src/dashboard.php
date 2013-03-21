@@ -16,7 +16,7 @@
 					<h1>Dashboard</h1>
 					<ul>
 						<li class="add-task-link"><a href="new_tugas.php">New Task</a></li>
-						<li class="login"><a href="#" id="loginLink">New Category</a></li>
+						<li class="login"><a href="#" id="categoryLink">New Category</a></li>
 					</ul>
 				</header>
 				
@@ -24,17 +24,22 @@
 					<header>
 						<h3>New Category</h3>
 					</header>
-					<form id="newCategoryForm" action="#" method="post" class="vertical">
+					<form id="newCategoryForm" action="new_category.php" method="post" class="vertical">
 						<div class="field">
-							<label>Name</label>
+							<label>Category Name</label>
 							<input size="30" maxlength="50" name="name" id="category_name" type="text">
 						</div>
 						<div class="field">
 							<label>Assignee</label>
-							<input size="30" maxlength="50" name="assignee[]" id="login_password" type="password">
+							<span id="assignee_field">
+								<datalist id="suggestion">
+								</datalist>
+								<input size="30" maxlength="50" name="assignee[]" id="assignee_add" type="text" onkeyup="assignee_autocomplete(this)" list="suggestion">
+							</span>
 						</div>
 						<div class="field">
-							<button type="submit" id="loginButton">Login</button>
+							<button id="more_assignee">Add More Assignee</button><br>
+							<button type="submit" id="categoryButton">Add Category</button>
 						</div>
 					</form>
 				</section>

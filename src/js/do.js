@@ -185,6 +185,28 @@ Rp(function() {
 		xmlhttp.open("GET","core/search.php?q="+q+"&mode="+mode+"&autocomplete=1",true);
 		xmlhttp.send();
 	});
+	
+	assignee_autocomplete = function(field) {
+		q = field.value;
+		xmlhttp=new XMLHttpRequest();
+		xmlhttp.onreadystatechange=function() {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				var parsedJSON = eval('('+xmlhttp.responseText+')');
+				document.getElementById("suggestion").innerHTML = "";
+				for (index=0; index < parsedJSON.length; index++) {
+					document.getElementById("suggestion").innerHTML += '<option value="'+parsedJSON[index].q+'">\n'
+				}
+			}
+		}
+		xmlhttp.open("GET","core/search.php?q="+q+"&mode=5&autocomplete=1",true);
+		xmlhttp.send();
+	};
+
+	Rp('#more_assignee').on('click', function(e) {
+		e.preventDefault();
+
+		document.getElementById('assignee_field').innerHTML += '<input size="30" maxlength="50" name="assignee[]" id="assignee_add" type="text" onkeyup="assignee_autocomplete(this)" list="suggestion">';
+	})
 
 	Rp('#commentForm').on('submit', function(e) {
 		e.preventDefault();
@@ -203,6 +225,14 @@ Rp(function() {
 		Rp('#loginBox').toggleClass('visible');
 
 		Rp('#login_username').nodes[0].focus();
+	})
+
+	Rp('#categoryLink').on('click', function(e) {
+		e.preventDefault();
+
+		Rp('#loginBox').toggleClass('visible');
+
+		Rp('#category_name').nodes[0].focus();
 	})
 
 	Rp('#loginForm').on('submit', function(e) {
@@ -225,18 +255,7 @@ Rp(function() {
 
 	Rp('#newCategoryForm').on('submit', function(e) {
 
-		e.preventDefault();
-		u = Rp('#category_name').val();
-		p = Rp('#login_password').val();
-		xmlhttp=new XMLHttpRequest();
-		xmlhttp.open("GET","core/auth.php?username="+u+"&password="+p,false);
-		xmlhttp.send();
-		var parsedJSON = eval('('+xmlhttp.responseText+')');
-
-		if (parsedJSON.success)
-			window.location.href = 'dashboard.php';
-		else
-			alert('Invalid username/password combination.');
+		this.submit();
 	});
 	
 	Rp('#editTaskLink').on('click', function(e) {
