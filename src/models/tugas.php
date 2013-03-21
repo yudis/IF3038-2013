@@ -14,6 +14,34 @@ class Tugas extends Model
 	private $_kategori;
 	private $_assignees;
 	
+	public function get_id_tugas() { return $this->_id_tugas; } 
+	public function get_taskname() { return $this->_taskname; } 
+	public function get_attachment() { return $this->_attachment; } 
+	public function get_attachment2($i) { return $this->_attachment[$i]; } 
+	public function get_tgl_deadline() { return $this->_tgl_deadline; } 
+	public function get_status() { return $this->_status; } 
+	public function get_last_mod() { return $this->_last_mod; } 
+	public function get_pemilik() { return $this->_pemilik; } 
+	public function get_asignee() { return $this->_asignee; } 
+	public function get_kategori() { return $this->_kategori; } 
+	public function get_id_kategori() { return $this->_id_kategori; } 
+	public function get_tag() { return $this->_tag; } 
+	public function get_tag2($i) { return $this->_tag[$i]; } 
+	public function set_id_tugas($x) { $this->_id_tugas = ($x); } 
+	public function set_taskname($x) { $this->_taskname = $x; } 
+	public function set_attachment($x) { $this->_attachment = $x; } 
+	public function set_attachment2($i,$x) { $this->_attachment[$i] = $x; } 
+	public function set_tgl_deadline($x) { $this->_tgl_deadline = $x; } 
+	public function set_status($x) { $this->_status = $x; } 
+	public function set_last_mod($x) { $this->_last_mod = $x; } 
+	public function set_pemilik($x) { $this->_pemilik = $x; } 
+	public function set_kategori($x) { $this->_kategori = $x; } 
+	public function set_id_kategori($x) { $this->_id_kategori = $x; } 
+	public function set_tag($x) { $this->_tag = $x; } 
+	public function set_tag2($i,$x) { $this->_tag[$i] = $x; } 
+	public function set_asignee($x) { $this->_asignee = $x; } 
+	public function set_asignee2($i,$x) { $this->_asignee[$i] = $x; } 
+	
 	public function fromArray($tugas)
 	{
 		$this->_id_tugas = $tugas["id"];
