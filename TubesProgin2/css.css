@@ -486,6 +486,7 @@ input{
     left: 10%;
     width: 150px; 
 }
+<<<<<<< HEAD
 
 #editP {
     position: fixed;
@@ -518,3 +519,8 @@ input{
   -moz-border-radius: 10px;
   border-radius: 10px;
 }
+=======
+#regbutton{
+    margin: -160px;
+}
+>>>>>>> 092abb67d72d35b8a913cc703dadaf3f2b702471
