@@ -15,7 +15,8 @@
 		$result->close();
 	}
 	if($result>=0){
-		echo "Success yay";
+		// echo "Success yay";
+		header('dashboard.php');
 	}
 	/* close connection */
 	$mysqli->close();

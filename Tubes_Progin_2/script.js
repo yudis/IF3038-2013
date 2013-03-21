@@ -368,8 +368,7 @@ function showHint(str)
 	xmlhttp.send();
 }
 
-function Login(){
-	alert("Aasa");
+function Logindeh(){
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
 	  xmlhttp=new XMLHttpRequest();
@@ -380,11 +379,12 @@ function Login(){
 	  }
 	xmlhttp.onreadystatechange=function()
 	  {
-	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-	  {
-		var username = document.getElementById("logusername").value;
-		var password = document.getElementById("logpassword").value;
+		  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		  {
+			var username = document.getElementById("logusername").value;
+			var password = document.getElementById("logpassword").value;
+		  }
 	  }
-	xmlhttp.open("GET","authentication.php?usr="+username+"&psw="+password,true);
+	xmlhttp.open("GET","index.php?usr="+username+"&psw="+password,true);
 	xmlhttp.send();
 }
