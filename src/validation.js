@@ -55,15 +55,72 @@ function displayResult()
 
 function CheckFiles()
 {
-	var value = document.getElementById('filename').value.split('.');
+	var value = document.getElementById('attachment').value.split('.');
 	var lenghtValue = value.length;
-	if(lenghtValue <= 1) alert("file undefined")
-	else {
+	if(lenghtValue <= 1) 
+	{
+		//alert("file undefined");		
+		return false;
+	}
+	else 
+	{
+		//alert("image: " + value);
 		if(value[lenghtValue-1].toLowerCase() == "jpeg"||
 			value[lenghtValue-1].toLowerCase() == "jpg"||
-			value[lenghtValue-1].toLowerCase() == "bmp") alert("file benar");
-		else alert("file salah");
+			value[lenghtValue-1].toLowerCase() == "bmp") 			
+		{
+			//alert("file benar");
+			return true;
+		}
+		else 
+		{
+			//alert("file salah");
+			return false;
+		}
 	}
+}
+
+// kerjaan mp
+function submitNewTask()
+{
+	var fileOk = CheckFiles();
+	if (!fileOk)
+	{
+		//alert("masuk gagal");
+		return;
+	}
+	
+	// if benar
+	
+	var taskname = $("id", "taskname");
+	var deadline = $("id", "deadline");
+	var assignee = $("id", "assignee");
+	var tags = $("id", "tags");
+	var attachment = $("id", "attachment");
+		
+	if(window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
+	}
+	else{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange = function()
+	{
+		if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
+		{
+			//alert(xmlhttp.responseText);
+			alert("berhasil");
+			document.getElementById('coba').innerHTML = "<p>Mangstab</p>";//xmlhttp.responseText;
+		}
+	}
+	
+	var parameters = "taskname=" + taskname.value + "&deadline=" + deadline.value + "&assignee=" + assignee.value + "&tags=" + tags.value + "&attachment=" + attachment.value;
+	xmlhttp.open("POST", "addtasksubmit.php",true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send(parameters);
+	
+	//header("location:taskdetails.html");	
 }
 
 function playPause()

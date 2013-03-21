@@ -3,7 +3,8 @@
 		<title>Shared To Do List - Add Task</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="shortcut icon" href="favicon.ico">
-		<script type="text/javascript" src="validation.js"></script>
+		<script type="text/javascript" src="validation.js"></script>	
+		<script type="text/javascript" src="mpquery.js"></script>
 	</head>
 	<body>
 		<div id="navigation">
@@ -16,6 +17,8 @@
 		<div id="search">
 			<input type="text" size="50%">
 		</div>
+		<div class="box2" id="coba">
+		</div>
 		<div class="clearall container" id="tasks">
 			<br><br><br>
 			<h2>Add Task</h2>
@@ -25,11 +28,11 @@
 			</div>		
 			<div class="box2">
 				<h3></h3>
-				<form method="link" action="">
+				<form method="POST" action="taskdetails.html" onsubmit="submitNewTask();"><!--addtasksubmit.php"--><!--taskdetails.html"-->
 				<fieldset>
 					<p>
 						<label>Task Name<abbr title="Required">*</abbr></label>
-						<input value=""
+						<input value="" id="taskname"
 						required="required" aria-required="true"
 						pattern="^[A-Za-z0-9_ ]{1,25}$"
 						title="Your task title"
@@ -37,12 +40,12 @@
 					</p>
 					<p>
 						<label>Deadline <abbr title="Required">*</abbr></label>
-						<input type="date"
+						<input type="date" id="deadline"
 						required="required" aria-required="true"/>
 					</p>
 					<p>
 						<label>Assignee <abbr title="Required">*</abbr></label>
-						<input value=""
+						<input value="" id="assignee"
 						required="required" aria-required="true"
 						pattern="^[a-zA-Z0-9_]{5,}$"
 						title="Username responsible for this task"
@@ -50,7 +53,7 @@
 					</p>
 					<p>
 						<label>Tag <abbr title="Required">*</abbr></label>
-						<input value=""
+						<input value="" id="tags"
 						required="required" aria-required="true"
 						pattern="^[A-Za-z0-9_ ,]{1,50}$"
 						title="	Tag for this task"
@@ -58,13 +61,13 @@
 					</p>
 					<p>
 						<label>Attachment<abbr title="Required">*</abbr></label>
-						<input type="file" id="filename" 
+						<input type="file" id="attachment" 
 						required="required" aria-required="true"
 						title="Picture or Video related to this task"/>
 					</p>			
 				</fieldset>
 				<fieldset>
-				<button name="addtask" type="submit" onClick="CheckFiles();">Add Task</button>
+				<button name="addtask" type="submit">Add Task</button>
 				</fieldset>
 				</form>
 			</div>
