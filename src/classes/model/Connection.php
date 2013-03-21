@@ -36,7 +36,7 @@
 			}
 			else
 			{
-				return "A";
+				return "Fail";
 			}
 		}
 

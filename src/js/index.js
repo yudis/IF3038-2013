@@ -96,5 +96,9 @@ Rp(function() {
 	document.getElementById("slide_left").onclick = function() {prev_image()};
 	document.getElementById("slide_right").onclick = function() {next_image()};
 
-
+	window.onload = function() 
+	{
+		datePicker.init(document.getElementById("calendar"), document.getElementById("register_form"));
+		setInterval(function(){next_image();}, 5500);
+	}
 });

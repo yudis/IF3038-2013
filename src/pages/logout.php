@@ -1,4 +1,4 @@
 <?php
-	session_unset();
+	$this->destroySession();
 	Header("Location: index");
 ?>

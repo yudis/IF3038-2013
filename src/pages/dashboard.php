@@ -10,6 +10,7 @@ $narrowQ = '';
 
 if ($cat) {
 	$currentCat = Category::model()->findAll('id_kategori=' . $cat);
+	//$currentCat = Category::model()->find('id_user=' . $this->currentUserId);
 	if ($currentCat) {
 		$currentCat = $currentCat[0];
 		$narrowQ = ' AND id_kategori=' . $cat;
@@ -25,7 +26,7 @@ $tasks = Task::model()->findAll();
 $todo = Task::model()->findAll($todoQ . $narrowQ);
 $done = Task::model()->findAll($doneQ . $narrowQ);
 
-$categories = Category::model()->findAll();
+$categories = Category::model()->findAll('id_user='. $this->currentUserId);
 
 // Presentation Logic Here
 

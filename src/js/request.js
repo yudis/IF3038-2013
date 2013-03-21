@@ -21,6 +21,7 @@ function serialize(form)
 				case 'button':
 				case 'reset':
 				case 'submit':
+				case 'file':
 					q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value));
 					break;
 				case 'checkbox':

@@ -5,13 +5,14 @@
 	include_once "Task.php";
 	include_once "Tag.php";
 	include_once "Comment.php";
+	include_once "Attachment.php";
 	include_once "Connection.php";
 	
 	abstract class SimpleRecord
 	{
 		private static $class_name;
 		private static $models = array();
-		protected $data = array();
+		public $data = array();
 		
 		public static function tableName() {}
 		
@@ -61,16 +62,16 @@
 			{
 				foreach($selection as $tempselect)
 				{
-					$select .= $tempselect.",";
+					$select .= $tempselect.", ";
 				}
-				$select[strlen($select)-1] = "";
+				$select = substr($select, 0, -2);
 			}
 			else
 			{
 				$select = "*";
 			}
-				
 			$result = DBConnection::DBquery("SELECT ".$select." FROM ".$this->tableName().$query);
+
 			$count = $result->num_rows;
 			
 			if ($count > 0)
@@ -107,9 +108,9 @@
 			{
 				foreach($selection as $tempselect)
 				{
-					$select .= $tempselect.",";
+					$select .= $tempselect.", ";
 				}
-				$select[strlen($select)-1] = "";
+				$select = substr($select, 0, -2);
 			}
 			else
 			{

@@ -7,8 +7,8 @@ if (!$this->loggedIn) {
 $this->header('Profile', 'profile');
 
 $id = (ISSET($_GET['id'])) ? $_GET['id'] : $_SESSION['user_id'];
-$user = User::model()->find("id = ".$id);
-$tasks = $user->getTasks();
+$user = User::model()->find("id_user = ".$id, array("username","email","fullname","avatar","birthdate"));
+$tasks = $user->getAssignedTasks();
 
 $birth_date = new Datetime($user->birthdate);
 
@@ -22,7 +22,8 @@ $birth_date = new Datetime($user->birthdate);
 					{
 				?>
 						<ul>
-							<li class="edit-profile-link"><a href="#" id="editProfileButton">Edit Profile</a></li>
+							<li class="edit-profile-link"><a href="edit_profile" id="editProfileButton">Edit Profile</a></li>
+							<li class="edit-profile-link"><a href="change_password">Change Password</a></li>
 						</ul>
 				<?php
 					}
@@ -31,7 +32,7 @@ $birth_date = new Datetime($user->birthdate);
 
 			<section class="profile-details">
 				<figure class="profile-image">
-					<img src="<?php echo $user->avatar; ?>" alt="Profile Photo">
+					<img src="<?php echo "upload/user_profile_pict/".$user->avatar; ?>" alt="Profile Photo">
 				</figure>
 				<?php
 				/*

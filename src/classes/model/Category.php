@@ -1,19 +1,38 @@
 <?php
-
 	include_once "SimpleRecord.php";
 	
+	/**
+	 * This is the model class for table "kategori".
+	 *
+	 * The followings are the available columns in table 'kategori':
+	 * @property integer $id_kategori
+	 * @property string $nama_kategori
+	 * @property integer $id_user
+	 */
 	class Category extends SimpleRecord
 	{		
+		/**
+		 * Returns the static model of the specified SimpleRecord class.
+		 * @param string $className active record class name.
+		 * @return Category the static model class
+		 */
 		public static function model($className=__CLASS__)
 		{
 			return parent::model($className);
 		}
 	
+		/**
+		 * @return string the associated database table name
+		 */
 		public static function tableName()
 		{
 			return "kategori";
 		}
 		
+		/**
+		 * Check the validity of the record
+		 * @return array of errors
+		 */
 		public function checkValidity()
 		{
 			$error = array();
@@ -24,6 +43,10 @@
 			return $error;
 		}
 		
+		/**
+		 * Save the current model, insert if new model, update if exists
+		 * @return boolean whether record is saved or not
+		 */
 		public function save()
 		{
 			// check same category name
@@ -52,6 +75,15 @@
 			{
 				// existing category
 			}
+		}
+		
+		/**
+		 * Get the task associated with the category
+		 * @return array of Task that is associated
+		 */
+		public function getTasks() 
+		{
+			return Task::model()->findAll("id_kategori='" . $this->id_kategori . "'");
 		}
 	}
 ?>
