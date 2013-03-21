@@ -22,21 +22,81 @@
                             tambah += form.comment.value;
                             tambah += "</div>";
                             var n = daftar_komentar.innerHTML.indexOf("<form name");
-                            daftar_komentar.innerHTML = daftar_komentar.innerHTML.substring(0,n-1)
+                            //alert(daftar_komentar.innerHTML.substring(0,n));
+                            //alert(daftar_komentar.innerHTML.substring(n));
+                            daftar_komentar.innerHTML = daftar_komentar.innerHTML.substring(0,n)
                                                       + tambah
                                                       + daftar_komentar.innerHTML.substring(n);
-                            alert(daftar_komentar.innerHTML);
+                            //alert(daftar_komentar.innerHTML);
 						} else {
 							alert("Gagal memposting komentar");
 						}						
 					}
 				}
 				
-                params = "komentar= '"+form.comment.value+"'&user="+"jo"+"&id_tugas="+"1";
-                alert(params);
+                params = "komentar="+escape(form.comment.value)+"&user="+localStorage.userLogin+"&id_tugas="+"1";
+                //alert(params);
 				xmlhttp.open("POST","tambah_komentar.php",true);
                 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 				xmlhttp.send(params);
+            }
+        
+            function take_data() {
+                if (window.XMLHttpRequest) {
+                    xmlhttp1 = new XMLHttpRequest();
+                    xmlhttp2 = new XMLHttpRequest();
+                } else {
+                    xmlhttp1 = new ActiveXObject("Microsoft.XMLHTTP");
+                    xmlhttp2 = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                
+                xmlhttp1.onreadystatechange = function() {
+                    if (xmlhttp1.readyState == 4 && xmlhttp1.status == 200) {
+                    
+                    }
+                }
+                
+                xmlhttp2.onreadystatechange = function() {
+                    if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
+                        alert("OK");
+                        var s = xmlhttp2.responseText;
+                        var n = s.indexOf("\n");
+                        alert(n);
+                        
+                        while (n != -1) {
+                            //Ambil satu data komentar
+                            var username = s.substring(0,n);
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+                            
+                            var tanggal = s.substring(0,n);
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+
+                            var komentar = unescape(s.substring(0,n));
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+                            
+                            //Tampilkan datanya
+                            var daftar_komentar = document.getElementById("komen");
+                            
+                            var tambah = '<div id = "daftarkomen">'
+                            tambah += username + " " + tanggal + "<br>";
+                            tambah += komentar;
+                            tambah += "</div>";
+                            var i = daftar_komentar.innerHTML.indexOf("<form name");
+                            daftar_komentar.innerHTML = daftar_komentar.innerHTML.substring(0,i)
+                                                      + tambah
+                                                      + daftar_komentar.innerHTML.substring(i);                            
+                        }
+                    }
+                }
+                
+                //Untuk mengambil daftar komentar awal
+                params = "id_tugas="+"1";
+                xmlhttp2.open("POST","ambil_komentar.php",true);
+                xmlhttp2.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xmlhttp2.send(params);
             }
         
             function showEdit(){
@@ -49,7 +109,7 @@
             }
         </script>
     </head>
-    <body>
+    <body onload="take_data()">
         <div class="header">
             <div id="logo">
                 <a hreg="dashboard.html">
@@ -126,18 +186,6 @@
                 </div>
             </div>
             <div id="komen">
-                <div id="daftarkomen">
-                   Faiz :<br>
-                   Gimana nih udah kelar belum tubesnya ?
-                </div>
-                <div id="daftarkomen">
-                   Fandi :<br>
-                   Bentar nih gw masih main tenis
-                </div>
-                <div id="daftarkomen">
-                   Faiz :<br>
-                   ah yang bener lah
-                </div>
                 <form name="form_comment">
                     <div id="submitkomen">
                         <label>submit comment</label>
