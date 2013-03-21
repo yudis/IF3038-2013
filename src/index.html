@@ -16,6 +16,7 @@
 				xmlhttp.onreadystatechange = function(){
 					if (xmlhttp.readyState==4 && xmlhttp.status==200)	{				
 						if(xmlhttp.responseText==1){
+							localStorage.userLogin=form.userId.value;		/*----simpan user yg login ke local storage ------*/
 							window.location="dashboard.html";
 						}else{
 							alert("error password or username");
@@ -26,7 +27,6 @@
 					
 				xmlhttp.open("GET","login.php?user="+form.userId.value+"&pwd="+form.password.value,true);
 				xmlhttp.send();
-
 			}												
 		
             function ShowAkhir()
@@ -83,8 +83,18 @@
 							}
 				}
 			
-			function masuk()
-				{
+			function masuk(form)							/*------------masuk ke dashboard & masukin form ke db-php:insertReg.php---------- */
+				{											
+					if (window.XMLHttpRequest){
+						xmlhttp = new XMLHttpRequest();				
+					}else{
+						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+					}									
+						
+					xmlhttp.open("POST","insertReg.php",true);
+					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					xmlhttp.send("user="+form.username.value+"&pwd="+form.password.value+"&nama="+form.namaleng.value+"&tgl="+form.tanggal.value+"&email="+form.email.value+"&avatar="+form.avatar.value);
+					localStorage.userLogin=form.username.value;/*----simpan user yg baru register ke local storage ------*/									
 					window.location="dashboard.html";
 				}
 			
@@ -289,7 +299,7 @@
 						<input type="file" name="avatar" onChange="avatar_validating();logingg()" />
 						<img src="pict/blank.png" alt="icon7" id="avaicon" />
 						<br>
-                        <input class= "submitreg" id="submitb" name="submit" type="button" value="Submit" disabled onClick="masuk()" />
+                        <input class= "submitreg" id="submitb" name="submit" type="button" value="Submit" onClick="masuk(this.form)" />
                         <input class= "submitreg" name="cancel" type="cancel" onClick="ShowAwal()" value="Cancel">
                     </form>
                 </div>

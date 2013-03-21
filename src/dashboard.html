@@ -5,16 +5,25 @@
         <link rel="stylesheet" href="css/dash.css">
         <script type="text/javascript" src="js/popup.js"></script>
         <script>
+
             var itotal=5;
             var ipartin=0;
             var ipartout=0;
             var itulis=0;
             
+			function showUserLogin(){							/*-----------menampilkan user pada local storage-------------- */
+				document.getElementById("wellfaiz").innerHTML="Welcome "+localStorage.userLogin;										
+			}
+			
+			function hapusUserLogin(){							/*-----------menghapus user pada local storage-------------- */
+				localStorage.removeItem(userLogin);
+			}
+			
             function taskawal(itotal){
                 for(var i=0;i<itotal;i++){
                 var para=document.createElement("p");
                 if(i===0){
-                    var node=document.createTextNode("TUBES 1" + " " + (11+(i*4)) + "AGUSTUS2013"  +" KAP");   
+                    var node=document.createTextNode("TUBES 1" + " " + (11+(i*4)) + " AGUSTUS2013"  +" KAP");   
                 }else if(i===1){
                     var node=document.createTextNode("TUBES 2" + " " + ((i*6)-1) + "OKTOBER2013"  +" MSDI");   
                 }else if(i===2){
@@ -76,7 +85,7 @@
             
         </script>
     </head>
-    <body onload="taskawal(6); ">
+    <body onLoad="taskawal(6);showUserLogin() ">			<!------memanggil showUserLogin saat load body-------->
          <div class="header">
 			<div id="logo">
 			    <a hreg="dashboard.html">
@@ -103,36 +112,38 @@
 					    
 				    </div>
 			<div id="wellfaiz">
-			    
+				
 			</div>
-			<div id="logout">
+			<div id="logout" onClick="hapusLoginUser()">		<!---------hapus user login ketika logout ---------->
 			    <a href="index.html">LOGOUT</a>
 			</div>
 		  </div>
+          
+<!----------------------------------------- body ----------------------------------------->                           
         <div class="main">
-            <div id="addcat" onclick="popup('popUpDiv')">
+            <div id="addcat" onClick="popup('popUpDiv')">
             </div>
             <a href="buattask.html">
             <div id="addtask" style="visibility: hidden";>
             </div>
             </a>
             <div id="category">
-                <div id="listcat" onclick="taskawal(6); showTask(); " onmouseover="removeTask(); hideAddTask() ">
+                <div id="listcat" onClick="taskawal(6); showTask(); " onMouseOver="removeTask(); hideAddTask() ">
                     <div id="tulcat">
                     ALL
                     </div>
                 </div>
-                <div id="listcat" onclick="addTask(1); showTask(); " onmouseover="removeTask(); hideAddTask() ">
+                <div id="listcat" onClick="addTask(1); showTask(); " onMouseOver="removeTask(); hideAddTask() ">
                     <div id="tulcat">
                     KAP
                     </div>
                 </div>
-                <div id="listcat" onclick="addTask(3); showTask(); " onmouseover="removeTask(); hideAddTask()">
+                <div id="listcat" onClick="addTask(3); showTask(); " onMouseOver="removeTask(); hideAddTask()">
                     <div id="tulcat">
                     MSDI
                     </div>
                 </div>
-                <div id="listcat" onclick="addTask(2); showTask();" onmouseover="removeTask(); hideAddTask()">
+                <div id="listcat" onClick="addTask(2); showTask();" onMouseOver="removeTask(); hideAddTask()">
                     <div id="tulcat">
                     PROGIN
                     </div>
@@ -151,7 +162,7 @@
             <div id="popUpDiv" style="display: none;">
                 <div id="newcategory">
                     <div id="closecat">
-                        <a href="#" onclick="popup('popUpDiv')" >CLOSE</a>
+                        <a href="#" onClick="popup('popUpDiv')" >CLOSE</a>
                     </div>
                     <div id="cattitle">ADD CATEGORY</div>
                     <div id="elcategory">
@@ -166,6 +177,8 @@
                 </div>
             </div>
         </div>
+        
+<!----------------------------------------- footer ----------------------------------------->                              
         <div class="footer">
             Copyright © Ahmad Faiz - Fandi Pradana - Sigit Aji
         </div>
