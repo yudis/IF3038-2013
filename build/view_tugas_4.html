@@ -1,0 +1,149 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Task Details</title>
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+
+	<body>
+		<div class="site-container">
+			<header class="site-header">
+				<h1><a href="dashboard.html">Do</a></h1>
+				<p>A to-do list for getting things done.</p>
+
+				<nav>
+					<ul class="main-links">
+						<li class="dashboard-link"><a href="dashboard.html">Dashboard</a></li>
+						<li class="profile-link" id="profileLink"><a href="profile.html" id="userFullName">John Doe</a></li>
+						<li class="profile-link"><a href="index.html">Logout</a></li>
+					</ul>
+
+					<div class="search-box">
+						<form action="search.html" method="get" id="searchForm">
+							<input type="search" name="q" placeholder="Search">
+							<button type="submit">Search</button>
+						</form>
+					</div>
+				</nav>
+			</header>
+
+
+		<div class="content">
+			<div class="task-details not-editing">
+				<header>
+					<form method="POST">
+						<h1>
+							<label>
+								<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+								<span class="task-title">Tugas 4</span>
+							</label>
+						</h1>
+					</form>
+
+					<ul>
+						<li><a href="#" id="editTaskLink">Edit Task</a></li>
+					</ul>
+				</header>
+				<div id="current-task">
+					<section class="details">
+						<header>
+							<h3>Details</h3>
+						</header>
+						<p class="description">
+							<span class="detail-label">Description:</span>
+							<span>Lorem ipsum dolor sit amet, task description goes here.</span>
+						</p>
+						<p class="assignee">
+							<span class="detail-label">Assignee:</span>
+							<span class="detail-content">Irfan Kamil</span>
+						</p>
+						<p class="category">
+							<span class="detail-label">Kategori:</span>
+							<span class="detail-content">Makan</span>
+						</p>
+						<p class="tags">
+							<span class="detail-label">Tag:</span>
+							<span class="tag">satu</span>
+							<span class="tag">dua</span>
+							<span class="tag">tiga</span>
+							<span class="tag">empat</span>
+						</p>
+					</section>
+					<section class="attachment">
+						<header>
+							<h3>Attachment</h3>
+						</header>
+						<figure>
+							<img src="assets/photo.jpg" alt="">
+						</figure>
+					</section>
+				</div>
+				<div id="edit-task">
+					<form id="new_tugas" action="#" method="post">
+						<div class="field">
+							<label>Task Name</label>
+							<input size="25" maxlength="25" name="nama" id="nama" type="text">
+						</div>
+						<div class="field">
+							<label>Attachment</label>
+							<input name="attachment" id="attachment" type="file">
+						</div>
+						<div class="field">
+							<label>Deadline</label>
+							<input name="deadline" id="deadline" type="date">
+						</div>
+						<div class="field">
+							<label>Assignee</label>
+							<input name="assignee" id="assignee" type="text">
+						</div>
+						<div class="field">
+							<label>Tag</label>
+							<input name="tag" id="tag" type="text">
+						</div>
+						<div class="buttons">
+							<button type="submit">Save</button>
+						</div>
+					</form>
+				</div>
+				<section class="comments">
+					<header>
+						<h3>2 Comments</h3>
+					</header>
+
+					<div id="commentsList">
+						<article class="comment">
+							<header>
+								<h4>Komentator</h4>
+							</header>
+							<p>Lorem ipsum dolor sit amet.</p>
+						</article>
+
+						<article class="comment">
+							<header>
+								<h4>Komentator</h4>
+							</header>
+							<p>Lorem ipsum dolor sit amet.</p>
+						</article>
+					</div>
+
+					<div class="comment-form">
+						<h3>Add Comment</h3>
+						<form id="commentForm" action="#" method="post">
+							<textarea name="komentar" id="commentBody"></textarea>
+							<button type="submit">Send</button>
+						</form>
+					</div>
+				</section>
+			</div>
+		</div>
+			<footer class="site-footer">
+				Created by Gichie, Kamil, and Alex
+			</footer>
+		</div>
+		<script src="js/bajuri.js"></script>
+		<script src="js/do.js"></script>	
+		<script src="js/checker.js"></script>	
+	</body>
+</html>

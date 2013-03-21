@@ -1,0 +1,135 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Home</title>
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+
+	<body>
+		<div class="site-container">
+			<header class="site-header">
+				<h1><a href="dashboard.html">Do</a></h1>
+				<p>A to-do list for getting things done.</p>
+
+				<nav>
+					<ul class="main-links">
+						<li class="dashboard-link"><a href="dashboard.html">Dashboard</a></li>
+						<li class="profile-link" id="profileLink"><a href="profile.html" id="userFullName">John Doe</a></li>
+						<li class="profile-link"><a href="index.html">Logout</a></li>
+					</ul>
+
+					<div class="search-box">
+						<form action="search.html" method="get" id="searchForm">
+							<input type="search" name="q" placeholder="Search">
+							<button type="submit">Search</button>
+						</form>
+					</div>
+				</nav>
+			</header>
+
+		<div class="content">
+			<div class="index">	
+				<header>
+					<h1>Welcome to DO</h1>
+					<ul>
+						<li class="login"><a href="#" id="loginLink">Login</a></li>
+					</ul>
+				</header>
+				
+				<section class="login-box" id="loginBox">
+					<header>
+						<h3>Login</h3>
+					</header>
+					<form id="loginForm" action="#" method="post" class="vertical">
+						<div class="field">
+							<label>Username</label>
+							<input size="30" maxlength="50" name="username" id="login_username" type="text">
+						</div>
+						<div class="field">
+							<label>Password</label>
+							<input size="30" maxlength="50" name="password" id="login_password" type="password">
+						</div>
+						<div class="field">
+							<button type="submit" id="loginButton">Login</button>
+						</div>
+					</form>
+				</section>
+				
+				<div class="primary">
+					<section class="welcome">
+						<header>
+							<h3>A to-do list for getting things done</h3>
+						</header>
+
+						<div class="intro">
+							<img src="assets/intro.jpg" alt="">
+							<h2>Easy Task Management</h2>
+							<p>DO lets you focus on the things you're supposed to do.</p>
+						</div>
+
+						<div class="features">
+							<h3>Features</h3>
+							<ul>
+								<li>Shared task management</li>
+								<li>Assignees</li>
+								<li>Tags and categories</li>
+							</ul>
+					</section>
+				</div>
+			
+				<div class="secondary">
+					<section class="register">
+						<header>
+							<h3>Sign Up Now!</h3>
+						</header>
+
+						<form id="register" action="#" method="post" class="vertical">
+							<div class="field">
+								<label>Username</label>
+								<input size="30" maxlength="50" name="username" id="username" type="text">
+							</div>
+							<div class="field">
+								<label>Password</label>
+								<input size="30" maxlength="50" name="password" id="password" type="password">
+							</div>
+							<div class="field">
+								<label>Confirm Password</label>
+								<input size="30" maxlength="50" name="password_k" id="password_k" type="password">
+							</div>
+							<div class="field">
+								<label>Nama Lengkap</label>
+								<input size="30" maxlength="50" name="nama_lengkap" id="nama_lengkap" type="text">
+							</div>
+							<div class="field">
+								<label>Tanggal Lahir</label>
+								<input name="tanggal_lahir" id="tanggal_lahir" type="date">
+							</div>
+							<div class="field">
+								<label>Email</label>
+								<input size="30" maxlength="50" name="email" id="email" type="email">
+							</div>
+							<div class="field">
+								<label>Avatar</label>
+								<input name="avatar" id="avatar" type="file" accept="image/jpg">
+							</div>
+							<div class="field buttons">
+								<button type="submit" name="register_dong" id="submitButton">Register</button>
+							</div>
+						</form>
+					</section>
+				</div>
+
+			</div>
+
+		</div>
+			<footer class="site-footer">
+				Created by Gichie, Kamil, and Alex
+			</footer>
+		</div>
+		<script src="js/bajuri.js"></script>
+		<script src="js/do.js"></script>	
+		<script src="js/checker.js"></script>	
+	</body>
+</html>
