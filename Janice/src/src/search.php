@@ -12,7 +12,6 @@
 				  {
 				  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 				  }
-				  
 				if (ISSET($_GET['page'])){
 					// If page is set, lets get it
 					$page =  intval($_GET['page']);
@@ -325,10 +324,11 @@
 					$result = mysqli_query($con,"SELECT * FROM task WHERE task_name LIKE '%$string%' $limit");
 					while($row = mysqli_fetch_array($result))
 					{
-					  echo $outside;
+					  $temp = $row['task_id'];
+					  echo "<div class = 'tugas' id  = '$temp'>";
 					  echo $isi_open;
 					  echo $row['task_name'];
-					  $temp = $row['task_id'];
+					  
 					  echo $isi_close;
 					  echo "<div>";
 					  echo "Deadline : ";
@@ -337,21 +337,23 @@
 					  echo "<div>";
 					  echo "Tag : ";
 					  $subresult = mysqli_query($con,"SELECT tag.tag_name FROM tag,tasktag WHERE tasktag.task_id = '$temp' and tag.tag_id = tasktag.tag_id");
-					  
-						while($subrow = mysqli_fetch_array($subresult))
+				  		while($subrow = mysqli_fetch_array($subresult))
 						{
 							echo $subrow['tag_name'];
 							echo " ";
 						}
-					 
-					  echo "</div>";
-					  echo "<div>";
-					  echo "Status : ";
-					  if ($row['status']=='1'){
-						  echo "sudah selesai";
-					  }else{
-						  echo "belum selesai";
-					  }
+						  $parameter = "'".$temp."'";
+						  $function = "change(".$parameter.")";
+						  echo "</div>";
+						  echo "<div>";
+						  echo "Status : ";
+						  if ($row['status']=='1'){
+							  echo "<input id='checkbox_".$temp."' value = '".$temp."' type='checkbox' checked='checked' onchange=$function>";
+							  echo "sudah selesai";
+						  }else{
+							  echo "<input id='checkbox_".$temp."' value = '".$temp."' type='checkbox' onchange=$function>";
+							  echo "belum selesai";
+						  }
 					  echo "</div>";
 					  echo $isi_close;
 					}
@@ -359,10 +361,12 @@
 					$result = mysqli_query($con,"SELECT task.task_id, task.task_name, task.deadline, task.status, tag.tag_name FROM task, tag, tasktag WHERE tag.tag_name LIKE '%$string%' and task.task_id = tasktag.task_id and tag.tag_id = tasktag.tag_id $limit");
 					while($row = mysqli_fetch_array($result))
 					{
-					  echo $outside;
+					  $temp = $row['task_id'];
+					  echo "<div class = 'tugas' id  = '$temp'>";
 					  echo $isi_open;
 					  echo $row['task_name'];
-					  $temp = $row['task_id'];
+					  $parameter = "'".$temp."'";
+			  		  $function = "change(".$parameter.")";
 					  echo $isi_close;
 					  echo "<div>";
 					  echo "Deadline : ";
@@ -382,8 +386,10 @@
 					  echo "<div>";
 					  echo "Status : ";
 					  if ($row['status']=='1'){
+						  echo "<input id='checkbox_".$temp."' value = '".$temp."' type='checkbox' checked='checked' onchange=$function>";
 						  echo "sudah selesai";
 					  }else{
+						  echo "<input id='checkbox_".$temp."' value = '".$temp."' type='checkbox' onchange=$function>";
 						  echo "belum selesai";
 					  }
 					  echo "</div>";
@@ -429,7 +435,8 @@
 						
 						while($row = mysqli_fetch_array($result))
 						{
-						  echo $outside;
+							$temp = $row['task_id'];
+					  echo "<div class = 'tugas' id  = '$temp'>";
 						  echo $isi_open;
 						  echo $row['task_name'];
 						  echo $isi_close;
@@ -438,16 +445,25 @@
 						  echo $row['deadline'];
 						  echo "</div>";
 						  echo "<div>";
-						  /*echo "Tag : ";
-						  echo $row['tag'];*/
-						 echo "</div>";
-						  echo "<div>";
-						  echo "Status : ";
-						  if ($row['status']=='1'){
-							  echo "sudah selesai";
-						  }else{
-							  echo "belum selesai";
-						  }
+						  echo "Tag : ";
+						  $subresult = mysqli_query($con,"SELECT tag.tag_name FROM tag,tasktag WHERE tasktag.task_id = '$temp' and tag.tag_id = tasktag.tag_id");
+							while($subrow = mysqli_fetch_array($subresult))
+							{
+								echo $subrow['tag_name'];
+								echo " ";
+							}
+							  $parameter = "'".$temp."'";
+							  $function = "change(".$parameter.")";
+							  echo "</div>";
+							  echo "<div>";
+							  echo "Status : ";
+							  if ($row['status']=='1'){
+								  echo "<input id='checkbox_".$temp."' value = '".$temp."' type='checkbox' checked='checked' onchange=$function>";
+								  echo "sudah selesai";
+							  }else{
+								  echo "<input id='checkbox_".$temp."' value = '".$temp."' type='checkbox' onchange=$function>";
+								  echo "belum selesai";
+							  }
 						  echo "</div>";
 						  echo $isi_close;
 						}
@@ -460,10 +476,10 @@
 						$result = mysqli_query($con,"SELECT task.task_id, task.task_name, task.deadline, task.status, tag.tag_name FROM task, tag, tasktag WHERE tag.tag_name LIKE '%$string%' and task.task_id = tasktag.task_id and tag.tag_id = tasktag.tag_id $limit");
 						while($row = mysqli_fetch_array($result))
 						{
-							echo $outside;
+							$temp = $row['task_id'];
+					  echo "<div class = 'tugas' id  = '$temp'>";
 							echo $isi_open;
 							echo $row['task_name'];
-							$temp = $row['task_id'];
 							echo $isi_close;
 							echo "<div>";
 							echo "Deadline : ";
@@ -478,13 +494,16 @@
 								echo $subrow['tag_name'];
 								echo " ";
 							}
-						 
+						 $parameter = "'".$temp."'";
+						  $function = "change(".$parameter.")";
 							echo "</div>";
 							echo "<div>";
 							echo "Status : ";
 							if ($row['status']=='1'){
+							  echo "<input id='checkbox_".$temp."' value = '".$temp."' type='checkbox' checked='checked' onchange=$function>";
 							  echo "sudah selesai";
-							}else{
+							}else{ 
+							  echo "<input id='checkbox_".$temp."' value = '".$temp."' type='checkbox' onchange=$function>";
 							  echo "belum selesai";
 							}
 							echo "</div>";
