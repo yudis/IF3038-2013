@@ -1,9 +1,7 @@
 <?php
 	//$username = $_SESSION['username'];
 	$username = "EndyDoank";
-	
 	require "config.php";
-	
 	$sql = "SELECT * FROM user WHERE username = '$username'";
 	$user = mysqli_query($con,$sql);
 	$current_user = mysqli_fetch_array($user);
