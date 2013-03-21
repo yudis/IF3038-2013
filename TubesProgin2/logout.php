@@ -5,6 +5,7 @@ session_start();
 
 // Delete certain session
 unset($_SESSION['username']);
+setcookie("UserLogin", "");
 // Delete all session variables
 // session_destroy();
 

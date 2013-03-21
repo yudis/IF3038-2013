@@ -12,8 +12,8 @@ and open the template in the editor.
 session_start();
 
 // Check, if username session is NOT set then this page will jump to login page
-if (!isset($_SESSION['username'])) {
-header('Location: index.php');
+if(!isset($_COOKIE['UserLogin'])){
+    header('Location: index.php');
 }
 
 ?>
@@ -28,12 +28,12 @@ header('Location: index.php');
 
 <?php
 if(connectDB()){
-	$queryProfile = "SELECT* FROM user WHERE Username='".$_SESSION['username']."'";
+	$queryProfile = "SELECT* FROM user WHERE Username='".$_COOKIE['UserLogin']."'";
         $result = mysql_query($queryProfile);
         $data = mysql_fetch_array($result);
         
-        $queryTaskDone = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='".$_SESSION['username']."' AND task.Status = 'done' ";   
-        $queryTask = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='".$_SESSION['username']."' AND task.Status = 'undone' ";   
+        $queryTaskDone = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='".$_COOKIE['UserLogin']."' AND task.Status = 'done' ";   
+        $queryTask = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='".$_COOKIE['UserLogin']."' AND task.Status = 'undone' ";   
 ?>        
         
         <header>

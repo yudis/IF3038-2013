@@ -8,7 +8,7 @@ and open the template in the editor.
 session_start();
 
 // Check, if user is already login, then jump to secured page
-if (isset($_SESSION['username'])) {
+if(isset($_COOKIE['UserLogin'])){
     header('Location: Dashboard.php');
 }
 ?>

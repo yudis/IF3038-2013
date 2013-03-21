@@ -385,11 +385,11 @@ function Submit() {
     }
 }
 
-function multiAutocomp(input, phpscript) {
+function multiAutocomp(input, phpscript,text) {
     var idname = "hasil_" + input.id;
     var elmt = document.getElementById(input.id);
     if (elmt.value.length > 0) {
-        document.body.setAttribute("onClick", "multiAutocompHandleClick();");
+        document.body.setAttribute("onClick", "multiAutocompHandleClick('"+text+"');");
         multiAutocompClear(input);
         var div = document.createElement("div");
         div.setAttribute("id", idname);
@@ -397,7 +397,7 @@ function multiAutocomp(input, phpscript) {
         div.style.top = elmt.offsetTop + elmt.offsetHeight;
         div.style.left = elmt.offsetLeft;
         div.style.width = elmt.offsetWidth;
-        var divadd = document.getElementById('buattugas');
+        var divadd = document.getElementById(text);
         //document.body.appendChild(div);
         divadd.appendChild(div);
 
@@ -420,7 +420,7 @@ function multiAutocomp(input, phpscript) {
                     var child_div = document.createElement("div");
                     child_div.setAttribute("id", sug_id);
                     child_div.setAttribute("class", "autocomplete");
-                    child_div.setAttribute("onClick", "multiAutocompGetResult(this);");
+                    child_div.setAttribute("onClick", "multiAutocompGetResult(this,'"+text+"');");
                     child_div.style.width = elmt.offsetWidth;
                     child_div.innerHTML = inner_result_name[0].firstChild.nodeValue;
                     var hidden_input = document.createElement("div");
@@ -443,31 +443,31 @@ function multiAutocomp(input, phpscript) {
         xmlHttp.send(null);
 
     } else {
-        multiAutocompClear(input);
+        multiAutocompClear(input,text);
         document.body.removeAttribute("onClick");
     }
 }
 
-function multiAutocompClear(input) {
+function multiAutocompClear(text) {
     console.log("Cleared");
     var idname = "hasil_" + input.id;
     while (document.getElementById(idname) != null) {
-        var divadd = document.getElementById('buattugas');
+        var divadd = document.getElementById(text);
         divadd.removeChild(document.getElementById(idname));
         //document.body.removeChild(document.getElementById(idname));
     }
 }
 
-function multiAutocompClearAll() {
+function multiAutocompClearAll(text) {
     var elmt = document.getElementsByClassName("autocomplete");
     for (var i = 0; i < elmt.length; i++) {
-        var divadd = document.getElementById('buattugas');
+        var divadd = document.getElementById(text);
         divadd.removeChild(document.getElementById(elmt[i].id));
         //document.body.removeChild(document.getElementById(elmt[i].id));		
     }
 }
 
-function multiAutocompGetResult(input) {
+function multiAutocompGetResult(input,text) {
     var idname = input.id + "h";
     var parentname = idname.substr(6, idname.length - 8);
     var parentdiv = idname.substr(0, idname.length - 2);
@@ -483,15 +483,15 @@ function multiAutocompGetResult(input) {
         }
         elmt.value = result_string + document.getElementById(idname).innerHTML + ";";
     }
-    var divadd = document.getElementById('buattugas');
+    var divadd = document.getElementById(text);
     divadd.removeChild(document.getElementById(parentdiv));
     //document.body.removeChild(document.getElementById(parentdiv));
 }
 
-function multiAutocompHandleClick() {
+function multiAutocompHandleClick(text) {
     var parentdiv = document.getElementsByClassName("autocomplete_container");
     for (var i = 0; i < parentdiv.length; i++) {
-        var divadd = document.getElementById('buattugas');
+        var divadd = document.getElementById(text);
         divadd.removeChild(document.getElementById(parentdiv[i].id));
         //document.body.removeChild(document.getElementById(parentdiv[i].id));
     }
