@@ -1,5 +1,11 @@
 <?php
   
+  /* 
+   * 
+   * - BUAT
+   * - LIHAT
+   * 
+   */
   
 ?>
 
@@ -12,6 +18,7 @@
 	require_once("php_class/createtask.php");  
 	$ct = new CreateTask($_POST, $_FILES);
 	$ct->Create();
+	//$ct->Tes();
 	
   } else
   if ($_GET['tujuan'] == "lihat"){
