@@ -48,6 +48,25 @@ class Komentar extends Model
         return $comments;
     }
 
+    public function getCommentById($id_komentar)
+    {
+        $sql = "SELECT * FROM `comments` WHERE `id`=?";
+        $this->_setSql($sql);
+        
+        $comment = $this->getRow(array($id_komentar));
+        return $comment;        
+    }
+
+    public function delete($id_komentar)
+    {
+        $sql = "DELETE FROM `comments`
+                WHERE `id`=?";
+         
+        $data = array($id_komentar);
+        
+        $sth = $this->_db->prepare($sql);
+        return $sth->execute($data);
+    }
     public function store()
     {
         $sql = "INSERT INTO comments 
