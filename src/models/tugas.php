@@ -301,6 +301,35 @@ class Tugas extends Model
 			}
 		}
 	}
+
+
+	public function isUpdated($id_tugas, $last_request)
+	{
+		$sql = "SELECT COUNT(*) AS n FROM `tugas` WHERE `id` = ? AND `last_mod` > FROM_UNIXTIME(?)";
+		$this->_setSql($sql);		
+		$tugas = $this->getRow(array($id_tugas, $last_request));
+
+		if ($tugas["n"] > 0) 
+		{
+			return false;
+		}
+		else
+		{
+			$sql = "SELECT COUNT(*) AS n FROM `comments` WHERE `id_tugas` = ? AND `time` > FROM_UNIXTIME(?)";
+			$this->_setSql($sql);		
+			$komentar = $this->getRow(array($id_tugas, $last_request));
+
+			if ($komentar["n"] > 0) 
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+
+			}
+		}
+	}
 	
 	public function addNewestAttachments($docId)
     {
