@@ -468,7 +468,7 @@ function update(){
 	showKategori();
 }
 
-// setInterval(function(){update();},5000)
+setInterval(function(){update();},5000)
 function Loginaja(){
 	//Variable for authentication
 	var username = document.getElementById("logusername").value;
