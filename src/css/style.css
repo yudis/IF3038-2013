@@ -321,9 +321,22 @@ button:active {
 	padding-top: 5px;
 	padding-right: 20px;
 }
-.search-box input {
-	height: 24px;
+.search-box select {
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-right: 0;
 	margin: 0;
+}
+.search-box input {
+	padding-top: 0;
+	padding-bottom: 0;
+	margin: 0;
+}
+.search-box button {
+	padding-top: 0;
+	padding-bottom: 0;
+	margin: 0;
+	font-size: 14px;
 }
 
 /** Dashboard **/
@@ -370,9 +383,6 @@ button:active {
 	transition: opacity 0.3s;
 }
 
-#searchForm button {
-	display: none;
-}
 .task {
 	padding: 7px 0 7px 10px;
 	position: relative;
