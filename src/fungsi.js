@@ -20,6 +20,7 @@ var bulan = document.getElementById("bulan");
 var tanggal = document.getElementById("tanggal");
 var daftar = document.getElementById("daftar");
 
+<<<<<<< HEAD
 //callback function AJAX
 var xmlhttp;
 var url;
@@ -97,6 +98,22 @@ xmlhttp.send();
 	}
 	
 	/*daftar.onsubmit = function(){
+=======
+	form.onsubmit = function(){
+		if ((idlogin.value == "admin") && (passlogin.value == "admin1234"))
+		{
+			window.location = "dashboard.html";
+		}
+		else
+		{
+			alert("username atau password Anda salah")
+			window.location = "index.html";
+		}
+		return false;
+	}
+	
+	daftar.onsubmit = function(){
+>>>>>>> 6af84a95ac77327dac775cb3a1cd878b621e474f
 		if (submit.disabled == "")
 		{
 			alert("register berhasil");
@@ -104,7 +121,11 @@ xmlhttp.send();
 		}
 		
 		return false;
+<<<<<<< HEAD
 	}*/
+=======
+	}
+>>>>>>> 6af84a95ac77327dac775cb3a1cd878b621e474f
 
 	username.onkeyup = function()
 	{
