@@ -9,11 +9,12 @@
 	$con        =    mysql_connect($host,$user,$password) or die('Server information is not correct.');
 	mysql_select_db($database,$con) or die('Database information is not correct');
 
-	/*
+	
 	if (isset($_SESSION['username'])) {
 		$username = $_SESSION['username']; 
 	}
 	
+	/*
 	$query	= "SELECT avatar FROM user WHERE username='$username' LIMIT 1";
 	$result	=  mysql_query($query) or die(mysql_error());
 	
@@ -30,14 +31,14 @@
 			Welcome, <br>
 			<a href="profile.php" class="darkBlue"> <?php if (isset($_SESSION['fullname'])) {echo $_SESSION['fullname']; }?> </a>
 			<br><br>
-			<div class="link_tosca" id="edit_profile_button"> Edit Profile </div>
+			<div class="link_tosca" id="edit_profile_button"> <a href="edit_profile.php"> Edit Profile </a></div>
 		</div>
 	</div>
 	<div id="category_list">
 		<div class="link_blue_rect" id="category_title"><a href="#" onclick="javascript:generateTask('all')"> All Categories </a> </div>
 		<ul id="category_item">
 			<?php 
-				$query 	= "SELECT * FROM category;";
+				$query 	= "SELECT * FROM category WHERE cat_creator = '$username'";
 				$result	= mysql_query($query);
 				while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 					echo "<li> <span class='categoryList' onclick='javascript:generateTask(\"".$row['cat_name']."\")'> ".$row['cat_name']." </span> </li>";

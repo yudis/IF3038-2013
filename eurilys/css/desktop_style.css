@@ -49,6 +49,7 @@ textarea {
 	width:35%;
 	margin-left:3px;
 }
+
 #login_username , #login_password {
 	color:gray;
 	float:left;
@@ -67,6 +68,41 @@ input#remember_me {
 label#remember_me {
 	float:left; font-size:12px; width:auto; margin-top:-20px; 
 }
+
+#edit_profile_form {
+	width:60%;
+	margin-top:20px;
+	margin-left:20px;
+}
+#edit_profile_form label {
+	float:left;
+	font-size:16px;
+	font-family:Segoe UI; font-weight:lighter;;
+	color:gray;
+	width:28%;
+}
+
+#edit_profile_submit {
+	float:right;
+	margin-right:5%;
+}
+
+#edit_profile_form input {
+	float:left;
+	height:30px;
+	font-size:20px;
+	width:60%;
+	margin-bottom:10px;
+}
+
+#edit_profile_form input#edit_profile_submit {
+	float:right;
+	height:35px;
+	font-size:20px;
+	width:40%;
+	margin-bottom:10px;
+}
+
 .header_menu a {
 	color:white;
 	text-decoration:none;

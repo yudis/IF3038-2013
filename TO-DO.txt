@@ -1,6 +1,7 @@
 Nunu : 
-	- Rincian Tugas
-	- Halaman Profil
+	- edit Profil 			-belum edit ke database
+							-validasi belum jalan
+	- Halaman Profil 		-task dan foto belum
 	- Login			// Done
 	
 Kania : 
