@@ -1,5 +1,30 @@
 <?php 
 	session_start();
+
+	/* Configuring Server & Database */
+	$host        =    'localhost';
+	$user        =    'root';
+	$password    =    '';
+	$database    =    'progin_405_13510086';
+	$con        =    mysql_connect($host,$user,$password) or die('Server information is not correct.');
+	mysql_select_db($database,$con) or die('Database information is not correct');
+
+	if (isset($_SESSION['username'])) {
+		$username = $_SESSION['username']; 
+	}
+	
+	/*get user details from database*/
+	$query	= "SELECT * FROM user WHERE username='$username' LIMIT 1";
+	$result	=  mysql_query($query) or die(mysql_error());
+
+	/*put details to variable*/
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	$username = $row['username'];
+	$fullname = $row['full_name'];
+	$birthdate = $row['birthdate'];
+	$avatar = $row['avatar'];
+	$email = $row['email'];
+
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +61,8 @@
 			</div>
 			<div class="thin_line"></div>
 		</header>	
+
+
 		
 <!-- Web Content -->
 <section>
@@ -45,13 +72,12 @@
 		<div class="half_div">
 			<div id="upperprof">
 				<img src="../img/avatar1.png" alt="">
-				<div id="namauser">Ruth Nattassha</div>
+				<div id="namauser"><?php echo $fullname; ?></div>
 			</div>
-			<input type="file" id="profile_pic_upload" name="profile_picture"/>
 			<br/><br/>
-			Email : salvaterarug@gmail.com
+			<?php echo $email; ?>
 			<br/>
-			Birthdate : 16-07-1992
+			<?php echo $birthdate; ?>
 
 		</div>
 		<div class="half_div">
