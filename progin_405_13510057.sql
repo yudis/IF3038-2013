@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2013 at 03:30 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Generation Time: Mar 21, 2013 at 03:56 AM
+-- Server version: 5.5.8
+-- PHP Version: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -50,7 +49,8 @@ INSERT INTO `assignee` (`username`, `idtugas`) VALUES
 ('borju', '9'),
 ('sun', '10'),
 ('xelif', '12'),
-('coba3', '13');
+('coba3', '13'),
+('moonray', '1');
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,7 @@ INSERT INTO `assignee` (`username`, `idtugas`) VALUES
 
 CREATE TABLE IF NOT EXISTS `attachment` (
   `idtugas` varchar(10) NOT NULL,
-  `isiattachment` varchar(100) NOT NULL,
+  `isiattachment` varchar(20) NOT NULL,
   KEY `attacment_ibfk_1` (`idtugas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -114,12 +114,7 @@ INSERT INTO `hak` (`username`, `idkategori`) VALUES
 ('edo', '11'),
 ('maria', '12'),
 ('12345', '13'),
-('coba3', '14'),
-('iLol', '3'),
-('moonray', '2'),
-('iLol', '7'),
-('yagami', '1'),
-('iLol', '4');
+('coba3', '14');
 
 -- --------------------------------------------------------
 
@@ -162,7 +157,8 @@ INSERT INTO `kategori` (`idkategori`, `namakategori`) VALUES
 CREATE TABLE IF NOT EXISTS `komentar` (
   `idtugas` varchar(10) NOT NULL,
   `username` varchar(12) NOT NULL,
-  `isikomentar` varchar(500) NOT NULL,
+  `isikomentar` varchar(100) NOT NULL,
+  `waktu` datetime NOT NULL,
   KEY `komentar_ibfk_1` (`username`),
   KEY `komentar_ibfk_2` (`idtugas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -171,19 +167,19 @@ CREATE TABLE IF NOT EXISTS `komentar` (
 -- Dumping data for table `komentar`
 --
 
-INSERT INTO `komentar` (`idtugas`, `username`, `isikomentar`) VALUES
-('1', 'moonray', 'saya sudah kirim '),
-('5', 'raven', 'selesai bung'),
-('12', 'sun', 'yes'),
-('11', 'dragoon20', 'oh'),
-('10', 'yagami', 'a'),
-('9', 'borju', 'iPad'),
-('8', 'coba', 'test'),
-('7', 'raven', 'hmm'),
-('6', 'soba5', 'hahhh'),
-('5', '12345', 'oke'),
-('4', 'moonray', 'nice'),
-('4', 'coba2', 'hore');
+INSERT INTO `komentar` (`idtugas`, `username`, `isikomentar`, `waktu`) VALUES
+('1', 'moonray', 'saya sudah kirim ', '2013-03-15 15:00:01'),
+('5', 'raven', 'selesai bung', '0000-00-00 00:00:00'),
+('12', 'sun', 'yes', '0000-00-00 00:00:00'),
+('11', 'dragoon20', 'oh', '0000-00-00 00:00:00'),
+('10', 'yagami', 'a', '0000-00-00 00:00:00'),
+('9', 'borju', 'iPad', '0000-00-00 00:00:00'),
+('8', 'coba', 'test', '0000-00-00 00:00:00'),
+('7', 'raven', 'hmm', '0000-00-00 00:00:00'),
+('6', 'soba5', 'hahhh', '0000-00-00 00:00:00'),
+('5', '12345', 'oke', '0000-00-00 00:00:00'),
+('4', 'moonray', 'nice', '0000-00-00 00:00:00'),
+('4', 'coba2', 'hore', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -193,7 +189,7 @@ INSERT INTO `komentar` (`idtugas`, `username`, `isikomentar`) VALUES
 
 CREATE TABLE IF NOT EXISTS `tag` (
   `idtugas` varchar(10) NOT NULL,
-  `isitag` varchar(50) NOT NULL,
+  `isitag` varchar(20) NOT NULL,
   KEY `tag_ibfk_1` (`idtugas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -202,10 +198,6 @@ CREATE TABLE IF NOT EXISTS `tag` (
 --
 
 INSERT INTO `tag` (`idtugas`, `isitag`) VALUES
-('1', 'kuliah'),
-('1', 'tubes'),
-('2', 'kuliah'),
-('2', 'uts'),
 ('3', 'Tugas3'),
 ('4', 'Tugas4'),
 ('4', 'Tgs4'),
@@ -213,11 +205,11 @@ INSERT INTO `tag` (`idtugas`, `isitag`) VALUES
 ('6', 'Tgs6'),
 ('7', 'Tgs7'),
 ('8', 'Tugas8'),
-('9', 'Tubes, Kuliah'),
-('10', 'String, Laptop'),
-('11', 'Tucil1, Tubes2'),
 ('12', 'Tucil5'),
-('13', 'Tugas13');
+('13', 'Tugas13'),
+('2', 'sdfdsf'),
+('1', 'kuliah'),
+('1', ' uts');
 
 -- --------------------------------------------------------
 
@@ -228,6 +220,7 @@ INSERT INTO `tag` (`idtugas`, `isitag`) VALUES
 CREATE TABLE IF NOT EXISTS `tugas` (
   `idtugas` varchar(10) NOT NULL,
   `namatugas` varchar(20) NOT NULL,
+  `attachment` varchar(30) NOT NULL,
   `deadline` date NOT NULL,
   `idkategori` varchar(10) NOT NULL,
   `username` varchar(12) NOT NULL,
@@ -241,20 +234,20 @@ CREATE TABLE IF NOT EXISTS `tugas` (
 -- Dumping data for table `tugas`
 --
 
-INSERT INTO `tugas` (`idtugas`, `namatugas`, `deadline`, `idkategori`, `username`, `status`) VALUES
-('1', 'Tubes 2 Progin', '2013-03-23', '1', 'moonray', 'undone'),
-('10', 'Tugas10', '2013-03-13', '3', 'dragoon20', 'Done'),
-('11', 'Tugas11', '2013-03-20', '2', 'coba2', 'Undone'),
-('12', 'Tugas12', '2013-03-18', '1', 'edo', 'Undone'),
-('13', 'Tugas13', '2013-03-16', '2', 'yagami', 'Undone'),
-('2', 'UTS Psiter', '2013-03-14', '2', 'moonray', 'done'),
-('3', 'Tugas3', '2013-03-30', '3', 'xelif', 'Undone'),
-('4', 'Tugas4', '2013-03-22', '4', 'xelif', 'Undone'),
-('5', 'Tugas5', '2013-03-29', '5', 'yagami', 'Done'),
-('6', 'Tugas6', '2013-03-20', '5', 'maria', 'Done'),
-('7', 'Tugas7', '2013-03-09', '7', 'sun', 'Undone'),
-('8', 'Tugas8', '2013-03-26', '7', 'excalibur', 'Done'),
-('9', 'Tugas9', '2013-03-17', '4', 'raven', 'Done');
+INSERT INTO `tugas` (`idtugas`, `namatugas`, `attachment`, `deadline`, `idkategori`, `username`, `status`) VALUES
+('1', 'Tubes 2 Progin', 'upload/tubes2progin.pdf', '2013-03-23', '1', 'moonray', 'undone'),
+('10', 'Tugas10', 'upload/tugas10.pdf', '2013-03-13', '9', 'dragoon20', 'Done'),
+('11', 'Tugas11', 'upload/tugas11.pdf', '2013-03-20', '10', 'coba2', 'Undone'),
+('12', 'Tugas12', 'upload/tugas12.pdf', '2013-03-18', '11', 'edo', 'Undone'),
+('13', 'Tugas13', 'upload/tugas13.pdf', '2013-03-16', '12', 'yagami', 'Undone'),
+('2', 'UTS Psiter', 'upload/utspsiter.pdf', '2013-03-14', '2', 'moonray', 'done'),
+('3', 'Tugas3', 'upload/tugas3.pdf', '2013-03-30', '3', 'xelif', 'Undone'),
+('4', 'Tugas4', 'upload/tugas4.pdf', '2013-03-22', '4', 'xelif', 'Undone'),
+('5', 'Tugas5', 'upload/tugas5.pdf', '2013-03-29', '5', 'yagami', 'Done'),
+('6', 'Tugas6', 'upload/tugas6.pdf', '2013-03-20', '6', 'maria', 'Done'),
+('7', 'Tugas7', 'upload/tugas7.pdf', '2013-03-09', '7', 'sun', 'Undone'),
+('8', 'Tugas8', 'upload/tugas8.pdf', '2013-03-26', '7', 'excalibur', 'Done'),
+('9', 'Tugas9', 'upload/tugas9.pdf', '2013-03-17', '8', 'raven', 'Done');
 
 -- --------------------------------------------------------
 
@@ -287,9 +280,9 @@ INSERT INTO `user` (`username`, `password`, `fullname`, `birthdate`, `phonenumbe
 ('dragoon20', '12345', 'Jordan Fernando', '1990-01-01', '0', 'dragoon@gmail.com', ''),
 ('edo', '12345', 'Edward Samuel', '1990-01-01', '0', '555@gmail.com', ''),
 ('excalibur', '12345', 'Mario Orlando Tank', '1990-01-01', '0', 'excalibur@yahoo.com', ''),
-('iLol', '12345', 'Kevin Winata', '1992-12-25', '081987654321', 'kevin@gmail.com', 'upload/kevin.jpg'),
+('iLol', '87654321', 'Kevin Winata', '1955-01-01', '081987654321', 'kevin@gmail.com', 'upload/282804_700b_v1.jpg'),
 ('maria', '12345', 'Maria Orlanda', '1990-01-01', '0', 'maria@gmail.com', ''),
-('moonray', '12345678', 'Raymond Lukanta', '1992-12-01', '081912345678', 'raymond@gmail.com', 'upload/raymond.jpg'),
+('moonray', '12345678', 'Raymond Lukanta', '1955-01-01', '081912345678', 'raymond@gmail.com', 'upload/287712_700b.jpg'),
 ('raven', 'rage', 'Mario Orlan', '2013-03-16', '0', 'mario@yahoo.com', ''),
 ('soba4', 'soba4', 'Marine Orlan', '2013-03-22', '0', 'marri@yahoo.com', ''),
 ('soba5', 'soba5', 'Marina Orlan', '2013-03-29', '0', 'marina@yahoo.com', ''),
@@ -340,7 +333,3 @@ ALTER TABLE `tag`
 ALTER TABLE `tugas`
   ADD CONSTRAINT `tugas_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`),
   ADD CONSTRAINT `tugas_ibfk_2` FOREIGN KEY (`idkategori`) REFERENCES `kategori` (`idkategori`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
