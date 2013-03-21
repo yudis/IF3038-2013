@@ -468,33 +468,33 @@ function update(){
 	showKategori();
 }
 
-setInterval(function(){update();},5000)
+//setInterval(function(){update();},5000)
 function Loginaja(){
 	//Variable for authentication
 	var username = document.getElementById("logusername").value;
 	var password = document.getElementById("logpassword").value;
-	var xmlhttp;
+	//var xmlhttp3;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
+		xmlhttp3=new XMLHttpRequest();
 	}
 	else
 	{// code for IE6, IE5
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		xmlhttp3=new ActiveXObject("Microsoft.XMLHTTP");
 	}
-	xmlhttp.onreadystatechange=function()
+	xmlhttp3.onreadystatechange=function()
 	{
-		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		if (xmlhttp3.readyState==4 && xmlhttp3.status==200)
 		{
-			if(xmlhttp.responseText==0){
+			if(xmlhttp3.responseText==0){
 				alert("Your username and/or password is wrong!");
 			}else{
 				window.location = "Dashboard.php";
 			}
 		}
 	}
-	xmlhttp.open("GET","authentication.php?usr="+username+"&psw="+password,true);
-	xmlhttp.send();
+	xmlhttp3.open("GET","authentication.php?usr="+username+"&psw="+password,true);
+	xmlhttp3.send();
 }
 
 function restore() {
