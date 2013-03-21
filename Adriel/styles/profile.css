@@ -1,13 +1,14 @@
-#nameEditDiv, #emailEditDiv, #dateEditDiv, #majorEditDiv, #passwordEditDiv, #doneProfileButton, #changeProfilePictureButton{
+#nameEditDiv, #emailEditDiv, #dateEditDiv, #passwordEditDiv, #repasswordEditDiv, #doneProfileButton, #passwordDisplayDiv, #repasswordDisplayDiv, #changeProfilePictureButton{
     display: none;
 }
-#nameDisplayDiv, #emailDisplayDiv, #dateDisplayDiv, #majorDisplayDiv, #editProfileButton{
+#nameDisplayDiv, #emailDisplayDiv, #dateDisplayDiv,  #editProfileButton{
     display: inline;
 }
 #emailDisplayDiv, #nameDisplayDiv, #dateDisplayDiv, #majorDisplayDiv
 {
 	font-weight: bold;
 }
+
 .edit_button_profile
 {
 	position: relative;
