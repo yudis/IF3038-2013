@@ -83,7 +83,7 @@ CREATE TABLE `categories` (
   `nama` varchar(50) NOT NULL,
   `last_mod` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,7 @@ CREATE TABLE `comments` (
   KEY `comments_ibfk_2` (`user`),
   CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`),
   CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +123,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,1,'edwardsp','2013-03-20 10:53:52','lalalla'),(2,1,'edwardsp','2013-03-20 10:54:12','lalalla');
+INSERT INTO `comments` VALUES (1,1,'edwardsp','2013-03-20 10:53:52','lalalla'),(2,1,'edwardsp','2013-03-20 10:54:12','lalalla'),(3,1,'edwardsp','2013-03-20 15:08:54','zzzzz'),(4,1,'edwardsp','2013-03-20 15:19:52','zzzzz'),(5,1,'edwardsp','2013-03-21 00:33:39','yyyy');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,8 +139,8 @@ CREATE TABLE `coordinator` (
   `user` varchar(32) NOT NULL,
   PRIMARY KEY (`id_kategori`,`user`),
   KEY `user` (`user`),
-  CONSTRAINT `coordinator_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `coordinator_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `coordinator_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `coordinator_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -250,4 +250,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-20 20:16:51
+-- Dump completed on 2013-03-21  9:33:37

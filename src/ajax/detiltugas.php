@@ -21,6 +21,7 @@ if ($needUpdate)
 	{
 		/* Get Tugas */
 		$data = $tugas->getTugas($_GET["id_tugas"]);
+		$data["responseTime"] = $_SERVER['REQUEST_TIME'];
 		$data["responseStatus"] = 200;
 
 		/* Get Komentar */

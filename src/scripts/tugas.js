@@ -22,6 +22,7 @@ function updateContent(updateAttachment) {
         var divDeadlineTugas = document.getElementById("deadlineDisplayDiv");
         var txtDeadlineTugas = document.getElementById("deadline");
         var divAssigneesTugas = document.getElementById("assigneesList");
+        var divKomentarTugas = document.getElementById("komentar");
 
         divNamaTugas.innerHTML = detilTugas.nama;
         if (detilTugas.status == 0)
@@ -61,8 +62,13 @@ function updateContent(updateAttachment) {
 
         writeTags();
 
+        divKomentarTugas.innerHTML = '';
+        detilTugas.comments.comments.forEach(function(entry) {
+            divKomentarTugas.innerHTML += '<strong><img src="./images/avatars/' + entry.avatar + '" alt="' + entry.full_name + '" width="32" height="32" /> ' + entry.full_name + ' (<a href="./profile.php?u=' + entry.user + '">' + entry.user + '</a>)</strong> ' + entry.time; 
+            divKomentarTugas.innerHTML += '<hr />' + entry.content + '<br /><br />';
+        });
     } else if (detilTugas.responseStatus == 204) {
-        // do nothing
+        // do nothing, already updated
     } else {
         alert(detilTugas.message);
     }

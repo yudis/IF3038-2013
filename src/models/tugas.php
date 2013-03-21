@@ -184,7 +184,7 @@ class Tugas extends Model
 	
 	public function isUpdated($id_tugas, $last_request)
 	{
-		$sql = "SELECT COUNT(*) AS n FROM `tugas` WHERE `id` = ? AND `last_mod` > ?";
+		$sql = "SELECT COUNT(*) AS n FROM `tugas` WHERE `id` = ? AND `last_mod` > FROM_UNIXTIME(?)";
 		$this->_setSql($sql);		
 		$tugas = $this->getRow(array($id_tugas, $last_request));
 
@@ -194,7 +194,7 @@ class Tugas extends Model
 		}
 		else
 		{
-			$sql = "SELECT COUNT(*) AS n FROM `comments` WHERE `id_tugas` = ? AND `time` > ?";
+			$sql = "SELECT COUNT(*) AS n FROM `comments` WHERE `id_tugas` = ? AND `time` > FROM_UNIXTIME(?)";
 			$this->_setSql($sql);		
 			$komentar = $this->getRow(array($id_tugas, $last_request));
 
