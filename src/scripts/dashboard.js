@@ -1,4 +1,5 @@
 var chosen=0;
+var chosenTask=0;
 var coordinatorArr="";
 
 function addCoordinator() {
@@ -25,6 +26,11 @@ function updateAddButtonVisibility() {
 function setChosen(str)
 {
 	chosen=str;
+}
+
+function setChosenT(str)
+{
+	chosenTask=str;
 }
 
 function NewKategori() {
@@ -107,6 +113,14 @@ function deleteCategory()
 	if(chosen!=0)
 	{
 		window.location = "deleteCat.php?q="+chosen;
+	}
+}
+
+function deleteTask()
+{
+	if(chosenTask!=0)
+	{
+		window.location = "deleteTask.php?q="+chosenTask;
 	}
 }
 
