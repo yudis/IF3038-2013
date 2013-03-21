@@ -17,9 +17,9 @@ and open the template in the editor.
 			<img src="img\Logo_Small2.png" alt="Logo & Tagline" onclick="Redirect();"></img>
 		</div>
 		<form id="login">
-			Username &nbsp <input type="text" id="logusername"> &nbsp &nbsp 
-        	Password &nbsp <input type="password" id="logpassword"> &nbsp &nbsp 
-            <input type="button" onclick="Logindeh();" value="Login">
+			Username<input type="text" id="logusername" name="logusername">
+        	Password<input type="password" id="logpassword" name="logpassword"> 
+            <input type="button" onClick ="Loginaja();" id="submitbutton" value="Login">
         </form>
 	</div>
         <div id="frontpage">

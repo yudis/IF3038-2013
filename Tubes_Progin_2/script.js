@@ -606,23 +606,30 @@ function showHint(str)
 	xmlhttp.send();
 }
 
-function Logindeh(){
+function Loginaja(){
+	//Variable for authentication
+	var username = document.getElementById("logusername").value;
+	var password = document.getElementById("logpassword").value;
+	var xmlhttp;
 	if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp=new XMLHttpRequest();
-	  }
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
 	else
-	  {// code for IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
 	xmlhttp.onreadystatechange=function()
-	  {
-		  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-		  {
-			var username = document.getElementById("logusername").value;
-			var password = document.getElementById("logpassword").value;
-		  }
-	  }
-	xmlhttp.open("GET","index.php?usr="+username+"&psw="+password,true);
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			if(xmlhttp.responseText==0){
+				alert("Your username and/or password is wrong!");
+			}else{
+				window.location = "Dashboard.php";
+			}
+		}
+	}
+	xmlhttp.open("GET","authentication.php?usr="+username+"&psw="+password,true);
 	xmlhttp.send();
 }

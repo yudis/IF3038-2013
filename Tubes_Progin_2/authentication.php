@@ -4,21 +4,21 @@
 	$usr=$_GET["usr"];
 	$psw=$_GET["psw"];
 	
-	if ($result = $con->query("SELECT username, password FROM user WHERE username='$usr' AND password='$psw'")) {
+	$num_row_query = "SELECT * FROM user WHERE username='$usr' AND password='$psw'";
+	
+	if ($result = mysqli_query($con, $num_row_query)) {
 
 		/* determine number of rows result set */
-		$row_cnt = $result->num_rows;
-
-		printf("Result set has %d rows.\n", $row_cnt);
-
+		$row_cnt = mysqli_num_rows($result);
 		/* close result set */
-		$result->close();
+		//$result->close();
 	}
-	if($result>=0){
-		// echo "Success yay";
-		header('dashboard.php');
-	}
-	/* close connection */
-	$mysqli->close();
 	
+	
+	/*if($row_cnt > 0){
+		session_start();
+	}*/
+	/* close connection */
+	//$mysqli->close();
+	echo $row_cnt;
 ?>
