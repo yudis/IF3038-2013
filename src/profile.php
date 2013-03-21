@@ -3,6 +3,15 @@
 	$login_permission = 1;
 	include 'inc/header.php';
 ?>
+
+		<script>
+			window.onload=function(){localStorage.user_id = <?php echo getUserID(); ?>; refreshTask(localStorage.user_id,0);};
+			function refreshTaskRoutine() {
+			  refreshTask(localStorage.user_id,_category_id);
+			}
+			var interval = setInterval(refreshTaskRoutine, 10000);
+		</script>
+		
 		<div class="content">
 			<div class="profile">
 				<header>
@@ -13,7 +22,7 @@
 				</header>
 				<section class="profile-details">
 					<figure class="profile-image">
-						<img src="assets/photo.jpg" alt="Profile Photo">
+						<img src="avatar/<?php echo getUserID(); ?>.jpg" alt="Profile Photo">
 					</figure>
 					<p class="description">
 						<span class="detail-label">About Me:</span>
@@ -39,7 +48,7 @@
 						<span class="detail-value"><?php echo getUserBirthdate(getUserID()); ?></span>
 					</p>
 				</section>
-
+<!--
 				<section class="tasks current">
 					<header>
 						<h3>Current Tasks</h3>
@@ -256,8 +265,21 @@
 
 				</section>
 				
-				</div>
 				
+-->
+
+				<div class="primary2">
+					<section class="tasks current" id="activeTask">
+					
+					</section>
+
+					<section class="tasks completed" id="doneTask">
+
+					</section>
+				</div>
+			
+				
+			
 			</div>
 		</div>
 <?php

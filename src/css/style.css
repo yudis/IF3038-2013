@@ -567,6 +567,9 @@ p.description .detail-label {
 		width: 480px;
 		min-height: 30em;
 	}
+	.primary2 {
+		min-height: 30em;
+	}
 	.secondary {
 		float: left;
 		width: 180px;
