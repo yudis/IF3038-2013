@@ -19,7 +19,7 @@ header('Location: index.php');
         <title>BANG!!!-DASHBOARD</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
-        <script type="text/javascript" src="script.js"></script>
+        <link rel="stylesheet" type="text/css" href="autocomplete.css" media="screen" />
     </head>
     <body>
         <header>
@@ -125,10 +125,10 @@ header('Location: index.php');
             <div class="tugas" id="buattugas">
                 <br/>
                 Name: <div class="nama"><input type="text" id="namaTask"></div><br/>
-                Attachment: <div class="attachment"><input type="file"></div><br/>
-                Deadline: <div class="deadline"><input type="date"></div><br/>
-                Assignee: <div class="asignee"><input type="text"></div><br/>
-                Tag: <div class="tag"> <input type="text"></div> <br/>
+                Attachment: <div class="attachment"><input type="file" id="newAttachmentTask" name="attachfile[]"  multiple></div><br/>
+                Deadline: <div class="deadline"><input id="newDeadlineTask" type="date"></div><br/>
+                Assignee: <div class="asignee"><input id="newAssigneeTask" type="text" onkeyup="multiAutocomp(this,'assignee.php')" onfocusin="multiAutocompClearAll()"></div><br/>
+                Tag: <div class="tag"> <input id="newTagTask"type="text"></div> <br/>
                 <br/>
                 <a onclick="createTask();" class="button">create</a><br/>
             </div>
@@ -139,5 +139,6 @@ header('Location: index.php');
             <input type="submit" onclick="addCat();" value="create">
             <input type="submit" onclick="restore();" value="cancel">
         </div>
-    </body>
+     </body>
+    <script type="text/javascript" src="script.js"></script>
 </html>
