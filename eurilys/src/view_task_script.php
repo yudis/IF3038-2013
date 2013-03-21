@@ -98,11 +98,12 @@
 		"	<div class='left top20 dynamic_content_row'>
 				<div id='addcomment_ltd' class='left dynamic_content_left'> &nbsp; </div>
 				<div id='addcomment_rtd' class='left dynamic_content_right'>
-					<form autocomplete='off'>
+					<form autocomplete='off' method='POST' action='add_comment.php'>
 						<textarea id='comment_textarea' rows='5' cols='50' name='CommentBox'>
 						</textarea> 
 						<br>
-						<input type='submit' value='Add Comment' class='link_red'>
+						<input type='hidden' name='comment_task_id' value='".$taskID."'>
+						<input type='submit' value='Add Comment' name='add_comment_button' class='link_red'>
 						<br><br><br>
 					</form>
 				</div>
