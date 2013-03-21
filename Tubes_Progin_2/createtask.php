@@ -42,7 +42,7 @@ and open the template in the editor.
 		</div>
 		<div class="tugas" id="buattugas"><br/>
 			<form id="createForm" method="post" action="create.php" enctype="multipart/form-data">
-                Name: <div class="nama"><input type="text" id="namaTask"></div><br/>
+                Name: <div class="nama"><input type="text" id="namaTask" name="namaTask"></div><br/>
                 Attachment: <div class="attachment"><input type="file"></div><br/>
                 Deadline: <div class="deadline"><input type="date"></div><br/>
                 Assignee: <div class="asignee"><input type="text"></div><br/>

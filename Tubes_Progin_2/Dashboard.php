@@ -4,8 +4,8 @@ and open the template in the editor.
 -->
 
 <?php
-	//$username = $_SESSION['username'];
-	$username = "EndyDoank";
+	include "login.php";
+	$username = $_SESSION['username'];
 	
 	require "config.php";
 	

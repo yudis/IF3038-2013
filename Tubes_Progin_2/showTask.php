@@ -1,7 +1,6 @@
 <?php
-	//include "cek.php";
-	//$username = $_SESSION['username'];
-	$username ="EndyDoank";
+	include "login.php";
+	$username = $_SESSION['username'];
 	$q=$_GET['q'];
 	require "config.php";
 	$hasil = "";
