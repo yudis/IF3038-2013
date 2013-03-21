@@ -78,27 +78,22 @@ $cats=mysqli_num_rows($result);
 			
 			
 			<!--coba checkbox-->
-			<?PHP
-			$ch1 = 'unchecked';
-			$ch2 = 'unchecked';
+			<?php
+
+  			 if(isset($_POST['BtnSubmit']))
+   			{
+			      echo "Notif : {$_POST['YourChoice']}</br>";
+			      echo "<hr>";
+			   }
 			
-			if (isset($_POST['Submit1'])) {
-
-				if (isset($_POST['ch1'])) {
-				$ch1 = $_POST['ch1'];
-					if ($ch1 = = 'selesai') {
-					$ch1 = 'checked';
-					}
-				}
-
-				if (isset($_POST['ch2'])) {
-				$ch2 = $_POST['ch2'];
-					if ($ch2 = = 'belum selesai') {
-					$ch2 = 'checked';
-					}
-				}
-			}
 			?>
+			
+			<form name="checkbox" method="POST" action="#">
+			      <input name="YourChoice" type="checkbox" value="selesai" <?php if($_POST['YourChoice']=="selesai") echo "checked=checked"; ?> > Selesai
+			      <input name="YourChoice" type="checkbox" value="belum selesai" <?php if($_POST['YourChoice']=="belum selesai") echo "checked=checked"; ?> > Belum selesai
+			      <br/><br/>
+			      <input name="BtnSubmit" type="submit" value="Submit">
+			</form>
             <!--end of pop up-->
             <!--<div class="atas"></div>
 			<div class="tengah"><img src ="images/ProginBig.png" alt="task" />
