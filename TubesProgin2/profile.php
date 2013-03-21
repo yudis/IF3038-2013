@@ -18,9 +18,12 @@ and open the template in the editor.
 
 <?php
 if(connectDB()){
-	$queryProfile = "SELECT* FROM user";
-	$result = mysql_query($queryProfile);
-        if ($result > 0) {        
+	$queryProfile = "SELECT* FROM user WHERE Username='Frilla'";
+        $result = mysql_query($queryProfile);
+        $data = mysql_fetch_array($result);
+        
+        $queryTaskDone = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='Frilla' AND task.Status = 'done' ";   
+        $queryTask = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='Frilla' AND task.Status = 'undone' ";   
 ?>        
         
         <header>
@@ -34,38 +37,49 @@ if(connectDB()){
             </form>
         </header>
         <div id="panel"></div>
-
+        
         <div id="donelist">
-            Ridho Ramadan<br/>
-            Daniel Ginting<br/>
-            Timotius Nugraha<br/>
-            Nicolas Rio<br/>
-            Aditya Agung
+<?php 
+    $resultDone = mysql_query($queryTaskDone);
+
+    while ($dataDone = mysql_fetch_array($resultDone)){
+            $taskDone = $dataDone['TaskName'];
+?>        
+            <?php echo $taskDone; ?> <br/>
+<?php 
+    }
+?>
         </div>
         <div id="todolist">
-            Afif Alhawari<br/>
-            Flora Monica <br/>
-            Nugroho Satrijandi<br/>
-        </div>
 <?php
-            $data = mysql_fetch_array($result);
+    $resultTask = mysql_query($queryTask);
+    
+    while ($dataTask = mysql_fetch_array($resultTask)){
+            $taskUndone = $dataTask['TaskName'];
+?>        
+        
+            <?php echo $taskUndone; ?> <br/>
+<?php
+        }
+            $uname= $data['Username'];
             $name= $data['Fullname'];
             $bday= $data['DateOfBirth'];
             $ava= $data['Avatar'];
             $email = $data['Email'];
-        }
 ?>
-
+            </div>
         <div id="biodata">
             <img id="foto" src="img/foto_anonim.png">
             <img id="badge" src="img/badge.png">
             <div id="biousername"><script>document.write(localStorage.username);</script></div>
             <div id="bioleft">
-                Name<br>
+                User Name<br>
+                Full Name<br>
                 Date of Birth<br>
                 Email<br>
             </div>
             <div id="bioright">
+                <?php echo $uname; ?> <br>
                 <?php echo $name; ?> <br>
                 <?php echo $bday; ?> <br>
                 <?php echo $email; ?> <br>
