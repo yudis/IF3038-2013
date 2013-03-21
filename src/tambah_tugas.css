@@ -1,0 +1,69 @@
+/* 
+    Document   : tambah_tugas
+    Created on : Feb 22, 2013, 7:46:57 PM
+    Author     : Toshiba L645
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+form, button{border:0; margin:0; padding:0;}
+
+.form-tambah-tugas{
+    margin:0 auto;
+    width:400px;
+    padding:14px;
+}
+
+
+#efek{
+    border:solid 2px #b7ddf2;
+    background:#ebf4ab;
+}
+
+#efek label{
+    display:block;
+    font-weight:bold;
+    text-align:right;
+    width:140px;
+    float:left;
+}
+#efek .small{
+    color:#666666;
+    display:block;
+    font-size:11px;
+    font-weight:normal;
+    text-align:right;
+    width:140px;
+}
+#efek input{
+    float:left;
+    font-size:12px;
+    padding:4px 2px;
+    border:solid 1px #aacfe4;
+    width:200px;
+    margin:2px 0 20px 10px;
+}
+
+#efek textarea{
+    float:left;
+    font-size:12px;
+    padding:4px 2px;
+    border:solid 1px #aacfe4;
+    width:200px;
+    margin:2px 0 20px 10px;
+}
+
+#efek button{
+    clear:both;
+    margin-left:150px;
+    width:125px;
+    height:31px;
+    background:#666666;
+    text-align:center;
+    line-height:31px;
+    color:#FFFFFF;
+    font-size:11px;
+    font-weight:bold;
+}
+

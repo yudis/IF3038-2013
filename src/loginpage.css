@@ -1,0 +1,171 @@
+/* 
+    Document   : LoginPage
+    Created on : Feb 19, 2013, 7:09:01 AM
+    Author     : Arief
+    Description:
+        CSS for Login Page
+*/
+
+
+#Front_Logo {
+    	display: block;
+	width: 600px;
+        height: 200px;
+	margin: 0 auto;
+	margin-top: 25px;
+	border : 1px solid #ccc;
+	border-radius : 5px;
+	-mox-border-radius : 5px;
+	-webkit-border-radius : 5px;
+	-o-border-radius : 5px;
+        border-style: dashed;
+	padding: 3px;
+}
+
+#Header {
+    	display: block;
+	width: 1000px;
+        height: 130px;
+	margin: 0 auto;
+	margin-top: 25px;
+	border : 1px solid #ccc;
+	border-radius : 5px;
+	-mox-border-radius : 5px;
+	-webkit-border-radius : 5px;
+	-o-border-radius : 5px;
+        border-style: dashed;
+	padding: 3px;
+        text-align: center;
+}
+
+#Header hr {
+    border : 1px dashed;
+    border-color : #ccc;
+}
+
+#Header a{
+    font-family: monospace;
+    color: white;
+    text-decoration: none;
+}
+
+#Header a:hover{
+    color:antiquewhite;
+    text-decoration: underline overline;
+}
+
+#Header input[type=text],
+#Header input[type="password"]{
+    background-color: grey;
+    border: 1px dashed white;
+    color:white;
+}
+
+#Header input[type=text]:hover,
+#Header input[type="password"]:hover{
+    background-color: #666666;
+    border-color: #ddddff;
+}
+
+#Header input[type=text]:focus,
+#Header input[type="password"]:focus{
+    background-color: #333333;
+    border-color: #ddddff;
+}
+
+#Header input[type=submit],
+#Header input[type=reset]{
+    color: white;
+    font-family: monospace;
+    background-color: #666666;
+    margin-top: 10px;
+    border-color: whitesmoke;
+    border-width: 1px;
+    border-style: dashed;
+    border-radius : 3px;
+}
+
+#Header input[type=submit]:hover,
+#Header input[type=reset]:hover{
+    color: white;
+    font-family: monospace;
+    background-color: #333333;
+    margin-top: 10px;
+    border-color: whitesmoke;
+    border-width: 1px;
+    border-style: dashed;
+    border-radius : 3px;
+}
+
+#Front_Form{
+        text-align: center;
+	display: block;
+	width: 400px;
+	margin: 0 auto;
+	margin-top: 25px;
+	border : 1px solid #ccc;
+	border-radius : 5px;
+	-mox-border-radius : 5px;
+	-webkit-border-radius : 5px;
+	-o-border-radius : 5px;
+        border-style: dashed;
+	padding: 3px;
+}
+
+#Front_Form input[type=text],#Front_Form input[type="password"]{
+        border-color: #ccccff;
+        background-color: grey;
+	border-width: 1px;
+	border-style: dashed;
+	float : left;
+        color: white;
+        padding-left: 5px;
+        width: 190px;
+}
+
+#Front_Form input[type=text]:hover,
+#Front_Form input[type="password"]:hover{
+    background-color: #666666;
+    border-color: #ddddff;
+}
+
+#Front_Form input[type=text]:focus,
+#Front_Form input[type="password"]:focus{
+    background-color: #333333;
+    border-color: #ddddff;
+}
+
+#Front_Form input[type=submit],
+#Front_Form input[type=reset]{
+    color: white;
+    font-family: monospace;
+    background-color: #666666;
+    margin-top: 10px;
+    border-color: whitesmoke;
+    border-width: 1px;
+    border-style: dashed;
+    border-radius : 3px;
+}
+
+#Front_Form input[type=submit]:hover,
+#Front_Form input[type=reset]:hover{
+    color: white;
+    font-family: monospace;
+    background-color: #333333;
+    margin-top: 10px;
+    border-color: whitesmoke;
+    border-width: 1px;
+    border-style: dashed;
+    border-radius : 3px;
+}
+
+body {
+    background-color: grey;
+    font-family: monospace;
+    color: white;
+    text-align: center;
+}
+
+iframe {
+    border:none;
+}
