@@ -484,3 +484,6 @@ input{
     left: 10%;
     width: 150px; 
 }
+#regbutton{
+    margin: -160px;
+}
