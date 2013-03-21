@@ -357,7 +357,7 @@ footer {
 	color:gray;
 }
 #add_category_button {
-	width:40px;
+	width:80px;
 	text-align:center;
 }
 #category_title {
@@ -369,7 +369,7 @@ footer {
 /* TASK DETAIL
 --------------------------------------------------------------------------------------------------------------------- */
 #comment_textarea {
-	width:60%;
+	width:70%;
 	height:100px;
 	resize:none;
 }
@@ -413,6 +413,10 @@ footer {
 	height:100%;
 	width:auto;
 }
+.taskDetail {
+	width:90%; 
+	margin:auto;
+}
 
 /* ADD TASK
 --------------------------------------------------------------------------------------------------------------------- */
@@ -446,6 +450,7 @@ footer {
 .left {float:left;}
 .right {float:right;}
 .top10 {margin-top:10px;}
+.top20 {margin-top:20px;}
 .top45 {margin-top:45px;}
 .top30 {margin-top:30px;}
 .line10 {line-height:50%;}
@@ -512,6 +517,8 @@ margin-left:auto;margin-right:auto; letter-spacing:1px; cursor:pointer; margin-r
 .link_red:hover{background-color:#FAAA98;text-decoration:none;}
 
 .darkBlue {color:#007bc1;}
+.darkBlueItalic {color:#007bc1; font-style:italic;} 
+.darkBlueLink {color:#007bc1; cursor:pointer;}
 /* DYNAMIC CONTENT 
 ------------------------------------------------------------------------------------------------- */
 #dynamic_content {

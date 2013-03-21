@@ -43,7 +43,7 @@
 			<div class='task_view' id='".$row['task_id']."'>
 				<img src='../img/done.png' id='finish_".$row['task_id']."' onclick='javascript:finishTask(".$row['task_id'].")' class='task_done_button' alt=''/>
 				<div id='task_name_ltd' class='left dynamic_content_left'>Task Name</div>
-				<div id='task_name_rtd' class='left dynamic_content_right'> <a href='taskdetail_img.php'> ".$row['task_name']." </a> </div>
+				<div id='task_name_rtd' class='left dynamic_content_right darkBlueLink' onclick='javascript:viewTask(".$row['task_id'].")'> ".$row['task_name']." </div>
 				<br><br>
 				<div id='deadline_ltd' class='left dynamic_content_left'>Deadline</div>
 				<div id='deadline_rtd' class='left dynamic_content_right'> ".$row['task_deadline']." </div>
@@ -78,7 +78,7 @@
 			<div class='task_view' id='".$row['task_id']."'>
 				<img src='../img/done.png' id='finish_".$row['task_id']."' onclick='javascript:finishTask(".$row['task_id'].")' class='task_done_button' alt=''/>
 				<div id='task_name_ltd' class='left dynamic_content_left'>Task Name</div>
-				<div id='task_name_rtd' class='left dynamic_content_right'> <a href='taskdetail_img.php'> ".$row['task_name']." </a> </div>
+				<div id='task_name_rtd' class='left dynamic_content_right darkBlueLink' onclick='javascript:viewTask(".$row['task_id'].")'> ".$row['task_name']." </div>
 				<br><br>
 				<div id='deadline_ltd' class='left dynamic_content_left'>Deadline</div>
 				<div id='deadline_rtd' class='left dynamic_content_right'> ".$row['task_deadline']." </div>
@@ -88,7 +88,8 @@
 				<br>
 				<div class='task_view_category'> ".$row['cat_name']." </div>
 				<br>
-			</div>";
+			</div>
+			";
 		}
 	}
 

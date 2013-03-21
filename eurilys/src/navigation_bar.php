@@ -48,13 +48,15 @@
 		<div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
 		<div id="category_form">
 			<div id="category_form_inner">
-				Category name : <br>
-				<input type="text" id="add_category_name" value="">
-				<br><br>
-				Assignee(s) : <br>
-				<input type="text" id="add_category_asignee_name" value="">
-				<br><br>
-				<div id="add_category_button" class="link_red" onclick="add_category()"> Add </div>
+				<form method="POST" action="add_category_script.php">
+					Category name : <br>
+					<input type="text" name="add_category_name" id="add_category_name" value="">
+					<br><br>
+					Assignee(s) : <br>
+					<input type="text" name="add_category_asignee_name" id="add_category_asignee_name" value="">
+					<br><br>
+					<button type="submit" id="add_category_button" name="add_category_button" class="link_red"> Add </div>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -294,3 +294,20 @@ function finishTask(i) {
 	xmlhttp.open("GET","dashboard_dynamic_content.php?q=all&taskdone="+i+"&taskid="+i,true);
 	xmlhttp.send();
 }
+
+function viewTask(i) {
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else {// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
+		}
+	}	
+	xmlhttp.open("GET","view_task_script.php?q="+i,true);
+	xmlhttp.send();
+}

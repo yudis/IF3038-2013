@@ -10,8 +10,6 @@
 	/* Get the parameter from URL */
 	$q	= $_GET["q"];
 	$filter = $_GET["filter"];
-	//echo "keyword = ".$q;
-	//echo "filter = ".$filter; 
 	
 	unset($a);
 	$a = array();
