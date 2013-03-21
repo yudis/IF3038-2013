@@ -38,11 +38,30 @@
 		public function checkValidity()
 		{
 			$error = array();
-			if (!preg_match("/^.{5,}$/", $this->data['username']))
+			/* if (!preg_match("/^.{5,}$/", $this->data['username']))
 			{
 				$error["username"] = "Username harus minimal 5 karakter.";
+			} */ 
+			$array_of_tags = $this->data['tag'];
+			$tags = explode(",", $array_of_tags);
+			if ($tags)
+			{
+				foreach($tags as $temp_tag)
+				{
+					$tag .= $temp_tag."
+				}
 			}
-			return $error;
+			print_r ($tag_name);
+			$user = User::model()->find("username='".$this->data['assignee']."'");
+			if ($user->data)
+			{
+				$error['assignee'] = "asik";
+			}
+			else 
+			{
+				$error['assignee'] = "User yang di-assign tidak ada di dalam basis data";
+			}
+			print_r ($error);
 		}
 		
 		/**

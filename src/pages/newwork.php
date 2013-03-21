@@ -1,16 +1,18 @@
 <?php
 
-$this->header(); 
+$this->header();
+$id = (ISSET($_GET['id'])) ? $_GET['id'] : $_SESSION['user_id'];
+//$task = Task::model()->find("id_user = ".$id, array("nama_task","deadline","status"));
 ?>
 		<div class="content">
 			<div class="add-task">
 				<header>
 					<h1>Add Task</h1>
 				</header>
-				<form id="new_tugas" action="#" method="post">
+				<form id="new_tugas" action="newtask" method="post">
 					<div class="field">
 						<label>Task Name</label>
-						<input size="25" maxlength="25" name="nama" id="nama" type="text">
+						<input size="50" maxlength="50" name="nama_task" id="nama" type="text">
 					</div>
 					<div class="field">
 						<label>Attachment</label>
@@ -18,16 +20,11 @@ $this->header();
 					</div>
 					<div class="field">
 						<label>Deadline</label>
-						<input name="deadline" id="deadline" type="date">
+						<input name="deadline" id="deadline"  type="text" pattern="^[1-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$" onclick="datePicker.showCalendar(event);" title="Tahun harus minimal dari tahun 1955." required/>
 					</div>
 					<div class="field">
 						<label>Assignee</label>
-						<input name="assignee" id="assignee" type="text" list="friends">
-						<datalist id="friends">
-							<option value="Irfan Kamil">
-							<option value="Tubagus Andhika Nugraha">
-							<option value="Sonny Fitra Arfian">
-						</datalist>
+						<input name="assignee" id="assignee" type="text">
 					</div>
 					<div class="field">
 						<label>Tag</label>
