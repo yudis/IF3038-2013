@@ -8,7 +8,6 @@ and open the template in the editor.
         <title>BANG! - Profile</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
-        <script type="text/javascript" src="script.js"></script>
 		<script>
 			<?php
 				require "config.php";
@@ -78,23 +77,24 @@ and open the template in the editor.
 			</div>
 			<?php
 				session_start();
-				if(($_SESSION['IsEdit'])!=true){
+				if($_SESSION['IsEdit']==true){
 					print '<script type="text/javascript">'; 
-					print 'alert("The email address is already registered")'; 
+					print 'alert("No profile update")'; 
 					print '</script>';
 				}
 			?>
 			<div id='inputEditProfile'>
 				<form id="editForm" method="post" action="edit.php" enctype="multipart/form-data">
-					<input type="text" name="editname" value="<?php echo $current_user['fullname'];?>"><br>
-					<input type="date" name="editdob" value="<?php echo $current_user['birthday'];?>"><br>
-					<input type="file" name="editavatar"><br>
-					<input type="password" name="editpassword1"><br>
-					<input type="password" name="editpassword2"><br>
-					<input type="submit" value="edit">
+					<input type="text" name="editname" id="editname" value="<?php echo $current_user['fullname'];?>" pattern="^.+ .+$" required><img id="edit1" src=""><br>
+					<input type="date" name="editdob" id="editdob" value="<?php echo $current_user['birthday'];?>" onchange="dateChange2();"><img id="edit2" src=""><br>
+					<input type="file" name="editavatar" id="editavatar" onchange="checkImage2();"><img id="edit3" src=""><br>
+					<input type="password" name="editpassword1" id="editpassword1" pattern="^.{8,}$" required><img id="edit4" src=""><br>
+					<input type="password" name="editpassword2" id="editpassword2" pattern="^.{8,}$" required><img id="edit5" src=""><br>
+					<input type="submit" id="editbutton" value="edit">
 					<input type="button" onclick="profileRestore();" value="cancel">
 				</form>
 			</div>
 		</div>
+	<script type="text/javascript" src="script.js"></script>
     </body>
 </html>
