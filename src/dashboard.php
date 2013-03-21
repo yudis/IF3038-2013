@@ -75,6 +75,30 @@ $cats=mysqli_num_rows($result);
 				echo "<br /></div>";
 			}
 			?>
+			
+			
+			<!--coba checkbox-->
+			<?PHP
+			$ch1 = 'unchecked';
+			$ch2 = 'unchecked';
+			
+			if (isset($_POST['Submit1'])) {
+
+				if (isset($_POST['ch1'])) {
+				$ch1 = $_POST['ch1'];
+					if ($ch1 = = 'selesai') {
+					$ch1 = 'checked';
+					}
+				}
+
+				if (isset($_POST['ch2'])) {
+				$ch2 = $_POST['ch2'];
+					if ($ch2 = = 'belum selesai') {
+					$ch2 = 'checked';
+					}
+				}
+			}
+			?>
             <!--end of pop up-->
             <!--<div class="atas"></div>
 			<div class="tengah"><img src ="images/ProginBig.png" alt="task" />
