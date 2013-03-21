@@ -79,7 +79,8 @@ Rp(function() {
 		validateRegistration();
 	});
 	function validateRegistration(){
-		if (_email && _username && _password && _password2 && _name){
+		filename = document.getElementById('avatar').value;
+		if (_email && _username && _password && _password2 && _name && Rp('#tanggal_lahir').val() != "" && filename.substring(filename.lastIndexOf('.')+1) == "jpg"){
 			//valid
 			Rp('#submitButton').removeAttribute('disabled');
 		}else{
