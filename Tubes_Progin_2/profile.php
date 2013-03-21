@@ -95,6 +95,7 @@ and open the template in the editor.
 				</form>
 			</div>
 		</div>
+	<script type="text/javascript" src="validationedit.js"></script>
 	<script type="text/javascript" src="script.js"></script>
     </body>
 </html>
