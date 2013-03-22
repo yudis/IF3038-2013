@@ -390,10 +390,10 @@ function showTask(str){
 							}
 							
 							if (string2[2] == "0"){
-								result += "<br><input type=\"checkbox\" name=\"done\" value=\"done\"> done";
+								result += "<br><input type=\"checkbox\" name=\"done\" value=\"done\" onclick=\"cektugasdone("+string2[3]+");\"> done";
 							} else if (string2[2] == "1")
 							{
-								result += "<br><input type=\"checkbox\" name=\"done\" value=\"done\" checked> done";
+								result += "<br><input type=\"checkbox\" name=\"done\" value=\"done\" checked onclick=\"cektugasdone("+string2[3]+");\"> done";
 							}
 							
 							if (string2[4] == "yes"){
@@ -428,14 +428,14 @@ function showTask(str){
 							}
 							
 							if (string2[2] == "0"){
-								result += "<br><input type=\"checkbox\" name=\"done\" value=\"done\"> done";
+								result += "<br><input type=\"checkbox\" name=\"done\" value=\"1\" onclick=\"cektugasdone("+string2[3]+");\"> done";
 							} else if (string2[2] == "1")
 							{
-								result += "<br><input type=\"checkbox\" name=\"done\" value=\"done\" checked> done";
+								result += "<br><input type=\"checkbox\" name=\"done\" value=\"0\" checked onclick=\"cektugasdone("+string2[3]+");\"> done";
 							}
 							
 							if (string2[4] == "yes"){
-								"<button onclick=\"deletetask("+string2[0]+")\">delete</button>"
+								result += "<button onclick=\"deletetask("+string2[3]+")\">delete</button>"
 							}
 							
 							result += "</div>";
@@ -461,6 +461,33 @@ function deletekategori(str)
 function deletetask(str)
 {
 
+}
+
+function cektugasdone(str){
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp9=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp9=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp9.onreadystatechange=function()
+	  {
+		  if (xmlhttp9.readyState==4 && xmlhttp9.status==200)
+		  {
+			if (xmlhttp9.responseText != "")
+			{
+				alert(xmlhttp9.responseText);
+			}
+			else
+			{
+				alert("update error");
+			}
+		  }
+	  }
+	xmlhttp9.open("GET","checkTask.php?q="+str,true);
+	xmlhttp9.send();
 }
 
 function update(){
