@@ -46,7 +46,9 @@ header('Location: index.php');
         </div>
         
         <div id ="listtugas" class="list">
-            <a class="listTugas" onclick="showRinci();"></a> 
+            <a class="listTugas" onclick="showRinci();"><img src="img/tugas.png"/><br/>
+            NAMA TUGAS<br/>
+            DEADLINE<br/></a> 
             <a class="listTugas" onclick="showRinci();"></a>
             <a class="listTugas" onclick="showRinci();"></a>
             <a class="listTugas" onclick="showRinci();"></a>

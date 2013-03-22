@@ -32,6 +32,12 @@ if(connectDB()){
         $result = mysql_query($queryProfile);
         $data = mysql_fetch_array($result);
         
+        $uname= $data['Username'];
+        $name= $data['Fullname'];
+        $bday= $data['DateOfBirth'];
+        $ava= $data['Avatar'];
+        $email = $data['Email'];
+        
         $queryTaskDone = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='".$_SESSION['username']."' AND task.Status = 'done' ";   
         $queryTask = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='".$_SESSION['username']."' AND task.Status = 'undone' ";   
 ?>        
@@ -39,13 +45,22 @@ if(connectDB()){
         <header>
             <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
             <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
-            <div id="profile"><a title="Go to Profile" href="profile.php">My Profile</a></div>
+            
+            <div id="profile"><a title="Go to Profile" href="profile.php"><?php echo $uname ?></a></div>
             <div id="logout"><a title="Log out from here" href="logout.php">Log Out</a></div>
             <form id="search">
                 <input type="text" name="Search" id="box">
+                <select>
+                    <option> All </option>   
+                    <option> Category </option>
+                    <option> Task </option>
+                    <option> Username </option>
+                </select>
                 <input type="submit" value="Search">
             </form>
+            <img id="smallava" src="<?php echo $ava?>" />
         </header>
+        
         <div id="panel">
             <div id="editP" onclick="editProfile();">
                 edit profile
@@ -75,11 +90,6 @@ if(connectDB()){
             <?php echo $taskUndone; ?> <br/>
 <?php
         }
-            $uname= $data['Username'];
-            $name= $data['Fullname'];
-            $bday= $data['DateOfBirth'];
-            $ava= $data['Avatar'];
-            $email = $data['Email'];
 ?>
             </div>
         <div id="biodata">
@@ -99,13 +109,16 @@ if(connectDB()){
         </div>
         
         <div id='edit'>
-                edit profile <br/>
+                <p class="title">edit profile</p>
+                Full Name: <br/>
+                <input type="text" id="regname" onchange="Register();"><br>
+                Birthday: <br/>
+                <input type="date" id="regdate"><br>
                 &nbsp; <br/>
-                Full Name: <input type="text" id="regname" onchange="Register();"><br>
-                Birthday: <input type="date" id="regdate"><br>
-                &nbsp; <br/>
-                New Password: <input type="password" id="regpassword1" onchange="Register();"><br>
-                Confirm Password: <input type="password" id="regpassword2" onchange="Register();"><br>
+                New Password:<br/> 
+                <input type="password" id="regpassword1" onchange="Register();"><br>
+                Confirm Password:<br/> 
+                <input type="password" id="regpassword2" onchange="Register();"><br>
                 &nbsp;<br/>
                 Upload New Avatar: <input type="file" id="regfile"><br>
                 &nbsp; &nbsp; <br/>

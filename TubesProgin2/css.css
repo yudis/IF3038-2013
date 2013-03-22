@@ -22,6 +22,7 @@ header {
     height: 35px;
     position: absolute;
     background-color: #000000;
+    box-shadow: 0px 5px 30px #000000;
 }
 
 header a {
@@ -72,8 +73,8 @@ input.liusername{
 .overlay
 {
    background-color: #000;
-   opacity: .7;
-   filter: alpha(opacity=70);
+   opacity: 0.8;
+   filter: alpha(opacity=80);
    position: absolute; top: 0; left: 0;
    width: 100%; height: 100%;
    z-index: 10;
@@ -92,7 +93,7 @@ input.liusername{
     width: 170px;
     height: 205px;
     float: left;
-    background-image: url('img/tugasHover.png');
+    cursor: pointer;
 }
 
 .addTask {
@@ -121,11 +122,12 @@ input.liusername{
     background-color: black;
     -webkit-border-radius: 10px 10px 10px 10px;
     border-bottom: 15px;
-	opacity: 0.8;
+    opacity: 0.8;
 }
 
 .kategori:hover {
     opacity: 1;
+    cursor: pointer;
 }
 
 
@@ -258,6 +260,7 @@ textArea {
     padding-top: 5px;
     position: absolute;
     padding-left: 35px;
+    cursor: pointer;
 }
 
 
@@ -486,7 +489,6 @@ input{
     left: 10%;
     width: 150px; 
 }
-<<<<<<< HEAD
 
 #editP {
     position: fixed;
@@ -513,14 +515,63 @@ input{
   font-weight: bold;
   background-color: #261d12;
   padding: 30px;
+  padding-top: 10px;
   width: 300px;
-  height: 400px;
+  height: 450px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
 }
-=======
+
+#smallava {
+    height: 25px;
+    position: absolute;
+    left: 900px;
+}
+
 #regbutton{
     margin: -160px;
 }
->>>>>>> 092abb67d72d35b8a913cc703dadaf3f2b702471
+
+/* ----------------------SEARCH CSS------------------------ */
+strong {
+    font-size: 16pt;
+}
+
+.title {
+    font-size: 24pt;
+}
+
+#results {
+    position: absolute;
+    left: 350px;
+    color: white;
+    top: 150px;
+}
+
+#rCategory {
+    background-color: black;
+    opacity: 0.8;
+    padding: 20px;
+    margin-bottom: 5px;
+    width: 650px;
+    border-radius: 10px;
+}
+#rTask{
+    background-color: black;
+    opacity: 0.8;
+    padding: 20px;
+    margin-bottom: 5px;
+    width: 650px;
+    border-radius: 10px;
+}
+#rUser{
+    background-color: black;
+    opacity: 0.8;
+    padding: 20px;
+    margin-bottom: 5px;
+    width: 650px;
+    border-radius: 10px;
+}
+
+/* ----------------------END OF SEARCH CSS----------------------- */
