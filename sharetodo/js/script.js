@@ -46,7 +46,24 @@ function showKategori(kategori) {
 			//var sementara = _xmlhttp.responseXML;
 			//alert(sementara);
 			document.getElementById("dynamicSpace").innerHTML = replacement;
-			//document.getElementById("dynamicSpace").innerHTML = "<p>HELLO</p>";
+		}
+	}
+}
+function showAllKategori() {
+	var _xmlhttp;
+	if (window.XMLHttpRequest) { //membuat objek XMLHttpRequest
+		_xmlhttp = new XMLHttpRequest();
+	} else {
+		_xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	_xmlhttp.open("GET","php/showAllKategori.php",true);
+	_xmlhttp.send();
+	
+	_xmlhttp.onreadystatechange = function() {
+		if ((_xmlhttp.readyState == 4) && (_xmlhttp.status == 200)) {
+			var replacement = _xmlhttp.responseText;
+			document.getElementById("dynamicSpace").innerHTML = replacement;
 		}
 	}
 }
@@ -315,4 +332,25 @@ function addKategori(katName,userList) {
 	}
 	xmlhttp.open("GET","php/insertKategori.php?kat="+katName+"&userList="+userList,true);
 	xmlhttp.send();
+}
+function deleteKategori(namaKategori) {
+	//alert("siakek" + namaKategori);
+	
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
+	}
+	xmlhttp.onreadystatechange = function(){
+		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+			$response = xmlhttp.responseText;
+			alert($response);
+		}
+	}
+	xmlhttp.open("GET","php/deleteKategori.php?kat="+namaKategori,true);
+	xmlhttp.send();
+	//cek apakah user yang sedang aktif berhak untuk menghapus kategori
+	
+	//hapus semua table terkait : tabel kategori, editKategori, task
 }
