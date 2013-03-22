@@ -18,9 +18,9 @@
 			{
 				$tag[] .= $data2['name'];
 			}
-			$hasil .= "<br>".$data['name'].",".$data['deadline'].",".$data['status'].",".$data['Pemilik'];
+			$hasil .= "<br>".$data['name'].",".$data['deadline'].",".$data['status'].",".$data['id_task'];
 			
-			if ($username == $data['Pemilik'])
+			if ($username == $data['pemilik'])
 			{
 				$hasil .= ",yes";
 			}
@@ -36,7 +36,7 @@
 		}
 	} else
 	{
-		$sql = "SELECT task.id_task as id_task,task.name as name,task.deadline as deadline,task.status as status,task.Pemilik as pemilik FROM assignee INNER JOIN task ON assignee.id_task = task.id_task WHERE username='$username' AND task.id_cat in (SELECT id_cat FROM category WHERE name='$q')";
+		$sql = "SELECT task.id_task as id_task,task.name as name,task.deadline as deadline,task.status as status,task.pemilik as pemilik FROM assignee INNER JOIN task ON assignee.id_task = task.id_task WHERE username='$username' AND task.id_cat in (SELECT id_cat FROM category WHERE name='$q')";
 		$user = mysqli_query($con,$sql);
 		while(($user != null) && ($data = mysqli_fetch_array($user)))
 		{
@@ -48,7 +48,7 @@
 			{
 				$tag[] .= $data2['name'];
 			}
-			$hasil .= "<br>".$data['name'].",".$data['deadline'].",".$data['status'].",".$data['pemilik'];
+			$hasil .= "<br>".$data['name'].",".$data['deadline'].",".$data['status'].",".$data['id_task'];
 			
 			if ($username == $data['pemilik'])
 			{

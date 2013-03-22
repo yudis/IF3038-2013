@@ -36,7 +36,7 @@ and open the template in the editor.
         <div id ="listtugas" class="list">
         </div>
         
-        <div class="tugas" id="rincitugas">
+        <!--div class="tugas" id="rincitugas">
                 Name: Nama Tugas <br/>
                 Attachment: 
                     <div class="attachment">
@@ -90,7 +90,7 @@ and open the template in the editor.
                 Tag: <div class="tag"> <input type="text"></div> <br/>
                 <br/>
                 <a onclick="createTask();" class="button">create</a><br/>
-            </div>
+            </div-->
         
         <div id='add'>
             Category Name:<br/> <input type='text' id='cate'><br/>
@@ -100,6 +100,7 @@ and open the template in the editor.
         </div>
 		<script>
 			window.onload=update;
+			setInterval(function(){update();},5000)
 		</script>
     </body>
 </html>
