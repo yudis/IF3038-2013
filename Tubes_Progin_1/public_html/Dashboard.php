@@ -77,10 +77,10 @@ and open the template in the editor.
                 echo "Done</div>";
                 echo "</div>";
 
-                $queryOwner = "SELECT maker_username FROM task WHERE id_task='" . $row['taskID'] . "';";
+                $queryOwner = "SELECT creator FROM task WHERE id_task='" . $row['taskID'] . "';";
                 $resultOwner = ProginDB::getInstance()->query($queryOwner);
                 while ($rowOwner = mysqli_fetch_array($resultOwner)) {
-                    if ($_SESSION['username'] === $rowOwner['maker_username']) {
+                    if ($_SESSION['username'] === $rowOwner['creator']) {
                         echo "<div class='removeTask'><input type='submit' id='removeTaskBtn" . $row['taskID'] . "; onclick='removeTask('" . $row['taskID'] . "');' value='Remove Task'/></div>";
                     }
                 }
