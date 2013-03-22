@@ -12,7 +12,7 @@
 			die('Could not connect: ' . mysql_error());
 		}
 
-		mysql_select_db("progin_405_13510029", $con);
+		mysql_select_db("progin_405_13510035", $con);
 
 		$sql="SELECT * FROM usertable WHERE username='".$uname."' OR email='".$email."'";
 

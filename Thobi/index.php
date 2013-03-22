@@ -9,7 +9,7 @@
         <script type="text/javascript" src="scripts/index.js"></script>
         <script type="text/javascript" src="scripts/datetimepicker.js"></script>
     </head> 
-    <body>
+    <body onload="initialize()">
         <div class="page">
             <header class="content">
                 <nav>

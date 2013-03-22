@@ -33,7 +33,7 @@
 	> people_incharge_task (=username)
 	
 7. attachment
-	> attachment_id (key)
+	> attachment_id (key) -> A-001,A-002,dst
 	> task_id (=task_id)
 	> link
 	
