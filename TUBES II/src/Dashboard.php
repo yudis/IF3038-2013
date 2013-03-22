@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <html>
 <head>
     <title>Dashboard | So La Si Do</title>
@@ -12,16 +14,26 @@
     <script type="text/javascript" language="javascript" src="js/dashboard.js"></script>
 	
 <div class="header">
-	<a href="dashboard.html"><img align="left" src="images/logo.png" width="150" height="50" />
-	<h6>Dashboard</a> | <a href="profile.html">Profile</a> | <a href="index.html">Logout</a>
-	
-   | Search: <input type="search">
-  <input type="submit" value="GO">
+    <a href="dashboard.html"><img align="left" src="images/logo.png" width="150" height="50" />
+	<h6>Dashboard</h6></a> <p>|</p> <a href="profile.html">Profile</a> <p>|</p> <a href="index.html">Logout</a>
+        <form id="searchform" action ="javascript:searchByFilter()">
+   | Search:<input type="search" name="searchquery"> 
+   Filter: <select name="filtertype">
+        <option value="All" selected>All</option>
+        <option value="Username">Username</option>
+        <option value="Category">Category</option>
+        <option value="Task">Task</option>
+   </select>
+   
+   <input type="submit" value="GO" >
+        </form>
 	</div>
     <center>
 		<img src="images/newcat.png" name="addCategory" vspace="20" id="addCategory" onClick="showCatPrompt()"></button>
 	</center>
 	
+<div id="contentdashboard">
+    
 	<div class="kategori">
 	<center><h2 class="judul">Daftar Tugas</h2>
 	<table>
@@ -56,6 +68,10 @@
    </td>
    
    </tr></table>  
+            
+</div>
+       
+   </div>
    
  
 	

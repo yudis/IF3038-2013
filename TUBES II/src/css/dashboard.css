@@ -16,6 +16,26 @@ a:active {color:#000;}  /* selected link */
 	font-size: 28px;
 	margin-top: 12px;
 }
+.header form {
+    float:left;
+    margin:2px;
+}
+.header a {
+    float:left;
+    margin:2px;
+}
+.header h6 {
+    float:left;
+    margin:2px;
+}
+.header img {
+    float:left;
+    margin:2px;
+}
+.header p {
+    float:left;
+    margin:2px;
+}
 .footer {
 	height: 70px;
 	width: 60%;

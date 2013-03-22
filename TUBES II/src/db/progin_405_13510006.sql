@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2013 at 12:08 PM
+-- Generation Time: Mar 22, 2013 at 02:46 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -47,13 +47,14 @@ CREATE TABLE IF NOT EXISTS `attachment` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hubkomentar`
+-- Table structure for table `category`
 --
 
-CREATE TABLE IF NOT EXISTS `hubkomentar` (
+CREATE TABLE IF NOT EXISTS `category` (
+  `Category` varchar(255) NOT NULL,
   `IDTask` varchar(255) NOT NULL,
-  `IDKomentar` varchar(255) NOT NULL,
-  PRIMARY KEY (`IDTask`,`IDKomentar`)
+  `IDCreator` varchar(255) NOT NULL,
+  PRIMARY KEY (`Category`,`IDTask`,`IDCreator`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -64,6 +65,8 @@ CREATE TABLE IF NOT EXISTS `hubkomentar` (
 
 CREATE TABLE IF NOT EXISTS `komentar` (
   `ID` varchar(255) NOT NULL,
+  `IDTask` varchar(255) NOT NULL,
+  `IDUser` varchar(255) NOT NULL,
   `Waktu` datetime NOT NULL,
   `Isi` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
@@ -77,12 +80,20 @@ CREATE TABLE IF NOT EXISTS `komentar` (
 
 CREATE TABLE IF NOT EXISTS `profil` (
   `Username` varchar(255) NOT NULL,
+  `Password` varchar(32) NOT NULL,
   `FullName` varchar(80) NOT NULL,
   `Avatar` varchar(256) NOT NULL,
   `TanggalLahir` date NOT NULL,
   `Email` varchar(90) NOT NULL,
   PRIMARY KEY (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `profil`
+--
+
+INSERT INTO `profil` (`Username`, `Password`, `FullName`, `Avatar`, `TanggalLahir`, `Email`) VALUES
+('fadhil', 'fadhil', 'Fadhil M', 'asaassa', '2013-03-11', 'fmuhtadin@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -104,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
 
 CREATE TABLE IF NOT EXISTS `task` (
   `ID` varchar(255) NOT NULL,
+  `IDCreator` varchar(255) NOT NULL,
   `Nama` varchar(100) NOT NULL,
   `Status` int(1) NOT NULL,
   `Deadline` datetime NOT NULL,
