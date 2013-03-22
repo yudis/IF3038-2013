@@ -5,6 +5,7 @@
 	$username = $post['username'];
 	$user_id = $post['user_id']
 	$hasil = queryn('UPDATE user SET username = :username WHERE user_id = :user_id',array('username'=>$username,'user_id'=>$user_id));
+	echo $username;
 ?>
 
 <!-- Ini bener gak? cara manggilnya gimana? -->

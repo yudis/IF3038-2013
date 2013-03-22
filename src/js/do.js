@@ -115,6 +115,56 @@ Rp(function() {
 
 		return article;
 	};
+	
+	genTask1 = function(task) {
+		article = document.createElement('article');
+		article.className = 'task';
+		header = document.createElement('header');
+		h1 = document.createElement('h1');
+		label = document.createElement('label');
+		span = document.createElement('span');
+		title = document.createElement('a');
+		title.appendChild(document.createTextNode(task.name));
+		title.setAttribute('href','view_tugas.php?task_id='+task.task_id);
+		label.appendChild(span);
+		label.appendChild(title);
+		h1.appendChild(label);
+		header.appendChild(h1);
+		
+		details = document.createElement('div');
+		details.className = 'details';
+		p = document.createElement('p');
+		p.className = 'deadline';
+		detail_label = document.createElement('span');
+		detail_label.className = 'detail-label';
+		detail_label.appendChild(document.createTextNode('Deadline:'));
+		detail_content = document.createElement('span');
+		detail_content.className = 'detail-content';
+		detail_content.appendChild(document.createTextNode(task.deadline));
+		p.appendChild(detail_label);
+		p.appendChild(detail_content);
+		
+		tags = document.createElement('p');
+		tags.className = 'tags';
+		detail_label = document.createElement('span');
+		detail_label.className = 'detail-label';
+		detail_label.appendChild(document.createTextNode('Tag:'));
+		tags.appendChild(detail_label);
+		for(i = 0; i < task.tags.length; i++) {
+			tag = document.createElement('span');
+			tag.className = 'tag';
+			tag.appendChild(document.createTextNode(task.tags[i].name));
+			tags.appendChild(tag);
+		}
+		
+		details.appendChild(p);
+		details.appendChild(tags);
+		
+		article.appendChild(header);
+		article.appendChild(details);
+
+		return article;
+	};
 
 	genCategory = function(category) {
 		article = document.createElement('article');
@@ -369,6 +419,40 @@ function refreshTask(user_id,category_id){
 		document.getElementById('activeTask').innerHTML += 'No task available!';
 	if (done == 0)
 		document.getElementById('doneTask').innerHTML += 'No task available!';
+}
+
+function refreshTask1(user_id,category_id){
+	_category_id = category_id;
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET","core/getTask.php?user_id="+user_id+"&category_id="+category_id,false);
+	xmlhttp.send();
+	var parsedJSON = eval('('+xmlhttp.responseText+')');
+	header = document.createElement('header');
+	h3 = document.createElement('h3');
+	h3.appendChild(document.createTextNode('Current Task'));
+	header.appendChild(h3);
+	document.getElementById('activeTask1').innerHTML = header.outerHTML;
+	header = document.createElement('header');
+	h3 = document.createElement('h3');
+	h3.appendChild(document.createTextNode('Completed Task'));
+	header.appendChild(h3);
+	document.getElementById('doneTask1').innerHTML = header.outerHTML;
+	var done =false;
+	var active = false;
+	for (index=0; index < parsedJSON.length; index++) {
+		task = genTask1(parsedJSON[index]);
+		if (parsedJSON[index].done == 0) {
+			document.getElementById('activeTask1').innerHTML += task.outerHTML;
+			active = true;
+		} else {
+			document.getElementById('doneTask1').innerHTML += task.outerHTML;
+			done = true;
+		}
+	}
+	if (active == 0)
+		document.getElementById('activeTask1').innerHTML += 'No task available!';
+	if (done == 0)
+		document.getElementById('doneTask1').innerHTML += 'No task available!';
 }
 
 function refreshCategory(user_id){
