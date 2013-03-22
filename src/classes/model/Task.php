@@ -42,13 +42,31 @@
 			{
 				$error["username"] = "Username harus minimal 5 karakter.";
 			} */ 
+			
+			$kategori = Category::model()->find("nama_kategori='".$
 			$array_of_tags = $this->data['tag'];
 			$tags = explode(",", $array_of_tags);
 			if ($tags)
 			{
 				foreach($tags as $temp_tag)
 				{
-					$tag .= $temp_tag."
+					$tag = Tag::model()->find("tag_name='".$temp_tag."'");
+					// if tag exists, insert to table have_tags
+					if ($tag->data) 
+					{
+						print_r ($tag);
+						/*mysql_query("INSERT INTO `task` (`id_task`, `deadline`, `id_kategori`) VALUES ('".$this->data['nama_task']."', '".$this->data['deadline']."', '".5'");*/
+
+						mysql_query("INSERT INTO `have_tags` (`id_task` ,`id_tag`) VALUES ('".$tag->data['id_tag']."'", '11'));
+					}
+					// if tag doesn't exist, insert into table tags & have_tags
+					else 
+					{
+						// insert into table tags
+						$tag->data['tag_name'] = $temp_tag;
+						$tag->save();
+						// insert into table have tags
+					}
 				}
 			}
 			print_r ($tag_name);
