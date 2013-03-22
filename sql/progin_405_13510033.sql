@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Mar 17, 2013 at 09:03 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Host: 127.0.0.1
+-- Generation Time: Mar 22, 2013 at 07:44 AM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.7
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -58,10 +58,17 @@ CREATE TABLE IF NOT EXISTS `comment` (
 
 CREATE TABLE IF NOT EXISTS `edit_kategori` (
   `id_user` int(11) NOT NULL,
-  `id_katego` int(11) NOT NULL,
-  PRIMARY KEY (`id_user`,`id_katego`),
-  KEY `id_katego` (`id_katego`)
+  `id_kategori` int(11) NOT NULL,
+  PRIMARY KEY (`id_user`,`id_kategori`),
+  KEY `id_katego` (`id_kategori`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `edit_kategori`
+--
+
+INSERT INTO `edit_kategori` (`id_user`, `id_kategori`) VALUES
+(3, 5);
 
 -- --------------------------------------------------------
 
@@ -75,6 +82,14 @@ CREATE TABLE IF NOT EXISTS `have_tags` (
   PRIMARY KEY (`id_task`,`id_tag`),
   KEY `id_tag` (`id_tag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `have_tags`
+--
+
+INSERT INTO `have_tags` (`id_task`, `id_tag`) VALUES
+(1, 1),
+(1, 11);
 
 -- --------------------------------------------------------
 
@@ -101,7 +116,16 @@ CREATE TABLE IF NOT EXISTS `kategori` (
   `id_user` int(10) NOT NULL,
   PRIMARY KEY (`id_kategori`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `id_user`) VALUES
+(1, 'IF 2034', 2),
+(2, 'IF', 2),
+(5, 'tesgaya', 3);
 
 -- --------------------------------------------------------
 
@@ -114,7 +138,20 @@ CREATE TABLE IF NOT EXISTS `tag` (
   `tag_name` varchar(50) NOT NULL,
   PRIMARY KEY (`id_tag`),
   UNIQUE KEY `tag_name` (`tag_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `tag`
+--
+
+INSERT INTO `tag` (`id_tag`, `tag_name`) VALUES
+(3, 'adf'),
+(1, 'basdat'),
+(4, 'fd'),
+(5, 'intelegensia buatan'),
+(12, 'lol'),
+(11, 'progiiin'),
+(2, 'rpl');
 
 -- --------------------------------------------------------
 
@@ -125,12 +162,22 @@ CREATE TABLE IF NOT EXISTS `tag` (
 CREATE TABLE IF NOT EXISTS `task` (
   `id_task` int(10) NOT NULL AUTO_INCREMENT,
   `nama_task` varchar(50) NOT NULL,
-  `status` tinyint(1) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
   `deadline` date NOT NULL,
   `id_kategori` int(10) NOT NULL,
   PRIMARY KEY (`id_task`),
   KEY `id_kategori` (`id_kategori`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `task`
+--
+
+INSERT INTO `task` (`id_task`, `nama_task`, `status`, `deadline`, `id_kategori`) VALUES
+(1, 'Tugas 2', 1, '2013-03-14', 5),
+(3, 'Tugas 3', 0, '2013-03-15', 5),
+(4, 'Tugas 3', 0, '2013-03-14', 5),
+(5, 'Tugas 4', 0, '2013-03-14', 5);
 
 -- --------------------------------------------------------
 
@@ -160,7 +207,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id_user`, `username`, `email`, `fullname`, `avatar`, `birthdate`, `password`) VALUES
+(2, 'asdfghjkl', 'adsf@yahoo.com', 'asdf ghjkl', '51BF9CCEC6439E231D13043486B6C50A.jpg', '2013-03-15', '25d55ad283aa400af464c76d713c07ad'),
+(3, 'abrahamks', 'abrahamkrisnanda@outlook.com', 'abraham krisnanda', '4897178F18808820BA169AC2DFC3568A.JPG', '2013-03-15', '1441f19754335ca4638bfdf1aea00c6d');
 
 --
 -- Constraints for dumped tables
@@ -170,8 +225,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Constraints for table `assign`
 --
 ALTER TABLE `assign`
-  ADD CONSTRAINT `assign_ibfk_2` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`),
-  ADD CONSTRAINT `assign_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `assign_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
+  ADD CONSTRAINT `assign_ibfk_2` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`);
 
 --
 -- Constraints for table `comment`
@@ -184,22 +239,22 @@ ALTER TABLE `comment`
 -- Constraints for table `edit_kategori`
 --
 ALTER TABLE `edit_kategori`
-  ADD CONSTRAINT `edit_kategori_ibfk_2` FOREIGN KEY (`id_katego`) REFERENCES `kategori` (`id_kategori`),
+  ADD CONSTRAINT `edit_kategori_ibfk_2` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`),
   ADD CONSTRAINT `edit_kategori_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
 -- Constraints for table `have_tags`
 --
 ALTER TABLE `have_tags`
-  ADD CONSTRAINT `have_tags_ibfk_2` FOREIGN KEY (`id_tag`) REFERENCES `tag` (`id_tag`),
-  ADD CONSTRAINT `have_tags_ibfk_1` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`);
+  ADD CONSTRAINT `have_tags_ibfk_1` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`),
+  ADD CONSTRAINT `have_tags_ibfk_2` FOREIGN KEY (`id_tag`) REFERENCES `tag` (`id_tag`);
 
 --
 -- Constraints for table `have_task`
 --
 ALTER TABLE `have_task`
-  ADD CONSTRAINT `have_task_ibfk_4` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`),
-  ADD CONSTRAINT `have_task_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `have_task_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
+  ADD CONSTRAINT `have_task_ibfk_4` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`);
 
 --
 -- Constraints for table `kategori`
