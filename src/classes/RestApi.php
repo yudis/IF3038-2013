@@ -107,7 +107,11 @@ class RestApi
 		else {
 			// retrieve all
 			$success = true;
-			$ret = Task::model()->findAll();
+			$id = $this->app->currentUserId;
+			$ret = Task::model()->findAll("id_kategori IN ( SELECT id_kategori FROM ".Category::tableName()." WHERE id_user='$id' ".
+											"OR id_kategori IN (SELECT id_kategori FROM edit_kategori WHERE id_user='$id') ".
+											"OR id_kategori IN (SELECT id_kategori FROM ". Task::tableName() ." AS t LEFT OUTER JOIN assign AS a ".
+											"ON t.id_task=a.id_task WHERE t.id_user = '". $id ."' OR a.id_user = '". $id ."' ))");
 		}
 
 		$tasks = array();
@@ -288,10 +292,8 @@ class RestApi
 		$id_kategori = addslashes($_POST['category_id']);
 		$success = false;
 
-		if (Category::model()->find("id_kategori=".$id_kategori)->getDeletable())
+		if (Category::model()->find("id_kategori=".$id_kategori)->getDeletable($this->app->currentUserId))
 		{
-			$id_user = addslashes($this->app->currentUserId);
-
 			if (Category::model()->delete("id_kategori=".$id_kategori))
 			{
 				// delete was success

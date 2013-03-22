@@ -15,11 +15,6 @@
 	// create confirm password
 	$user->confirm_password = $user->password;
 	
-	if (ISSET($_FILES['avatar']))
-	{
-		// replace current avatar
-		move_uploaded_file($_FILES["avatar"]["tmp_name"],$_SESSION['full_path']."upload/user_profile_pict/" . $user->avatar);
-	}
 	$temperror = $user->checkValidity();
 	
 	if ($temperror)
@@ -31,6 +26,11 @@
 	{
 		if ($user->save())
 		{
+			if (ISSET($_FILES['avatar']))
+			{
+				// replace current avatar
+				move_uploaded_file($_FILES["avatar"]["tmp_name"],$_SESSION['full_path']."upload/user_profile_pict/" . $user->avatar);
+			}
 			Header("Location: index");
 			// entah move ke index atau langsung login atau pesan sukses
 		}

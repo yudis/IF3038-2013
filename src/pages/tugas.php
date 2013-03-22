@@ -32,7 +32,7 @@
 						<h1>
 							<label>
 								<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
-								<span class="task-title"><?php echo $task->nama_task ?></span>
+								<span class="task-title"><?php echo $task->nama_task; ?></span>
 							</label>
 						</h1>
 					</form>
@@ -53,6 +53,10 @@
 							<span>Lorem ipsum dolor sit amet, task description goes here.</span>
 						</p>
 						*/ ?>
+						<p class="deadline">
+							<span class="detail-label">Description:</span>
+							<span class="detail-content"><?php echo (new DateTime($task->deadline))->format('j F Y'); ?></span>
+						</p>
 						<p class="assignee">
 							<span class="detail-label">Assignee:</span>
 							<span class="detail-content">
@@ -98,26 +102,57 @@
 					</section>
 				</div>
 				<div id="edit-task">
-					<form id="new_tugas" action="#" method="post">
+					<form id="new_tugas" action="edit_tugas" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="id_task" value="<?php echo $task->idl ?>">
 						<div class="field">
 							<label>Task Name</label>
-							<input size="25" maxlength="25" name="nama" id="nama" type="text">
+							<input size="25" maxlength="25" name="nama_task" id="nama" type="text" value="<?php echo $task->nama_task; ?>">
 						</div>
 						<div class="field">
 							<label>Attachment</label>
 							<input name="attachment[]" id="attachment" type="file" multiple="">
 						</div>
+						<?php
+							$i = 1;
+							foreach ($attachments as $attachment)
+							{
+								echo '<div class="field">';
+								echo '<span class="detail-label">Attachment '.$i.':</span>';
+								echo '<span class="detail-content">';
+								echo $attachment->attachment;
+								echo '</span>';
+								echo '</div>';
+								$i++;
+							}
+						?>
 						<div class="field">
 							<label>Deadline</label>
-							<input name="deadline" id="deadline" type="text">
+							<input name="deadline" id="deadline" type="text" value="<?php echo (new DateTime($task->deadline))->format('j F Y'); ?>">
 						</div>
 						<div class="field">
 							<label>Assignee</label>
-							<input name="assignee" id="assignee" type="text">
+							<input name="assignee" id="assignee" type="text"
+							value="<?php 
+									$string = "";
+									foreach ($users as $user)
+									{
+										$string .= $user->username.","; 
+									}
+									$string = substr($string, 0, -1);
+									echo $string;
+								?>">
 						</div>
 						<div class="field">
 							<label>Tag</label>
-							<input name="tag" id="tag" type="text">
+							<input name="tag" id="tag" type="text" value="<?php 
+									$string = "";
+									foreach ($tags as $tag)
+									{
+										$string .= $tag->tag_name.",";
+									}
+									$string = substr($string, 0, -1);
+									echo $string;
+								?>">
 						</div>
 						<div class="buttons">
 							<button type="submit">Save Changes</button>

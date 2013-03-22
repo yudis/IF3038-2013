@@ -43,7 +43,7 @@
 				$error["username"] = "Username harus minimal 5 karakter.";
 			} */ 
 			
-			$kategori = Category::model()->find("nama_kategori='".$
+			//$kategori = Category::model()->find("nama_kategori='".$
 			$array_of_tags = $this->data['tag'];
 			$tags = explode(",", $array_of_tags);
 			if ($tags)
@@ -57,7 +57,7 @@
 						print_r ($tag);
 						/*mysql_query("INSERT INTO `task` (`id_task`, `deadline`, `id_kategori`) VALUES ('".$this->data['nama_task']."', '".$this->data['deadline']."', '".5'");*/
 
-						mysql_query("INSERT INTO `have_tags` (`id_task` ,`id_tag`) VALUES ('".$tag->data['id_tag']."'", '11'));
+						mysql_query("INSERT INTO `have_tags` (`id_task` ,`id_tag`) VALUES ('".$tag->data['id_tag']."'", '11');
 					}
 					// if tag doesn't exist, insert into table tags & have_tags
 					else 
@@ -80,6 +80,33 @@
 				$error['assignee'] = "User yang di-assign tidak ada di dalam basis data";
 			}
 			print_r ($error);
+			
+			/*$i = 0;
+			$tags = array();
+			$temptags = explode(",", $task->assignee);
+			foreach ($temptags as $tag)
+			{
+				if (Tag::model()->find("tag_name=".$tag))
+				{
+					$tags[] = new Tag();
+					$tags[$i]->tag_name = $tag;
+				}
+			}
+			$task->tags = $tags;
+			
+			$i = 0;
+			$tags = array();
+			$temptags = explode(",", $task->tag);
+			foreach ($temptags as $tag)
+			{
+				if (Tag::model()->find("tag_name=".$tag))
+				{
+					$tags[] = new Tag();
+					$tags[$i]->tag_name = $tag;
+				}
+			}
+			$task->tags = $tags;
+			*/
 		}
 		
 		/**
@@ -131,7 +158,7 @@
 		public function getAttachment()
 		{
 			//TODO implement Attachment model
-			return Attachment::model()->find("id_task = ".$this->id_task);
+			return Attachment::model()->findAll("id_task = ".$this->id_task);
 		}
 		
 		/**
@@ -150,6 +177,26 @@
 		public function getComment()
 		{
 			return Comment::model()->findAll("id_task = '".$this->id_task."' ORDER BY timestamp");
+		}
+		
+		/**
+		 * Check if task editable or not
+		 * @return boolean
+		 */
+		public function getEditable($id_user)
+		{
+			$id_user = addslashes($id_user);
+			return (User::model()->find("id_user IN (SELECT id_user FROM assign WHERE id_task='" . $this->id_task . "' AND id_user ='"+id_user+"')")) ? true : false ;
+		}
+		
+		/**
+		 * Check if task deletable or not
+		 * @return boolean
+		 */
+		public function getDeletable($id_user)
+		{
+			$id_user = addslashes($id_user);
+			return ($this->id_user == $id_user) ? true : false ;
 		}
 	}
 ?>
