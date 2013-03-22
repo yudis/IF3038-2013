@@ -45,6 +45,9 @@ if(!isset($_SESSION['id']))
 			
 			function editDeadline(uidtugas){
 			var xmlhttp;
+			var tgl=document.getElementById("tgl");
+			var bln=document.getElementById("bln");
+			var thn=document.getElementById("thn");
 			if (window.XMLHttpRequest) {
 			  // code for IE7+, Firefox, Chrome, Opera, Safari
 			  xmlhttp=new XMLHttpRequest();
@@ -55,15 +58,16 @@ if(!isset($_SESSION['id']))
 			}
 			xmlhttp.onreadystatechange=function() {
 			  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-				document.getElementById("dlvalue").innerHTML = tanggal+"-"+bulan+"-"+tahun;
+				document.getElementById("dlvalue").innerHTML = tgl.options[tgl.selectedIndex].text+"-"+bln.options[bln.selectedIndex].text+"-"+thn.options[thn.selectedIndex].text;
 				}
 			}
-			xmlhttp.open("GET","editdeadline.php?q="+uidtugas+"&tgl="+tanggal+"&bln="+bulan+"&thn="+tahun,true);
+			xmlhttp.open("GET","editdeadline.php?q="+uidtugas+"&tgl="+tgl.options[tgl.selectedIndex].text+"&bln="+bln.options[bln.selectedIndex].text+"&thn="+thn.options[thn.selectedIndex].text,true);
 			xmlhttp.send();
 			}
 			
-			function addAssignee(uidtugas) {
+			function addAssignee(uidtugas,username) {
 				var xmlhttp;
+				var assignee = document.getElementById("as").value;
 				if (window.XMLHttpRequest) {
 				  // code for IE7+, Firefox, Chrome, Opera, Safari
 				  xmlhttp=new XMLHttpRequest();
@@ -75,9 +79,10 @@ if(!isset($_SESSION['id']))
 				xmlhttp.onreadystatechange=function() {
 				  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 					document.getElementById("asvalue").innerHTML = xmlhttp.responseText;
+					document.getElementById("daftarassignee").innerHTML = "<option value=shit>Shit</option>";
 					}
 				}
-				xmlhttp.open("GET","addassignee.php?q="+uidtugas+"&p="+document.getElementById("as").value,true);
+				xmlhttp.open("GET","addassignee.php?q="+uidtugas+"&p="+assignee,true);
 				xmlhttp.send();
 			}
 			
@@ -94,7 +99,7 @@ if(!isset($_SESSION['id']))
 				}
 				xmlhttp.onreadystatechange=function() {
 				  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-					document.getElementById("asvalue").innerHTML = xmlhttp.responseText;
+					document.getElementById("asvalue").innerHTML=xmlhttp.responseText;
 					}
 				}
 				xmlhttp.open("GET","hapusassignee.php?q="+uidtugas+"&p="+selection.options[selection.selectedIndex].text,true);
@@ -341,10 +346,6 @@ if(!isset($_SESSION['id']))
 								echo "<a id=link href=\"".$row['isiattachment']."\" target=\"_blank\">".$row['isiattachment']."</a>";
 							?>
 						</div>
-						<div class="viewtask_edit">
-							<input type="file" name="attachment" id="attachment">
-							<input type=submit value="Add" id="attbutton">
-						</div>
 						</form>
 					</div>
 					<div class="form_field">
@@ -362,30 +363,30 @@ if(!isset($_SESSION['id']))
 								</p>
 							</div>
 							<div id="dl">
-								<select name="tanggal" id="tgl">
+								<select name="tgl" id="tgl">
 								</select>
-								<select name="bulan" id="bln">
-									<option value="Januari">Januari</option>
-									<option value="Februari">Februari</option>
-									<option value="Maret">Maret</option>
+								<select name="bln" id="bln">
+									<option value="January">January</option>
+									<option value="February">February</option>
+									<option value="March">March</option>
 									<option value="April">April</option>
-									<option value="Mei">Mei</option>
-									<option value="Juni">Juni</option>
-									<option value="Juli">Juli</option>
-									<option value="Agustus">Agustus</option>
+									<option value="May">May</option>
+									<option value="June">June</option>
+									<option value="July">July</option>
+									<option value="August">August</option>
 									<option value="September">September</option>
-									<option value="Oktober">Oktober</option>
+									<option value="October">October</option>
 									<option value="November">November</option>
-									<option value="Desember">Desember</option>
+									<option value="December">December</option>
 								</select>
-								<select name="tahun" id="thn">
+								<select name="thn" id="thn">
 								</select>
 							</div>
 						</div>
 						<div class="viewtask_edit">
 							<input type=button value="Edit" id="dlbutton" onClick="showHide('dl');showHide('dlvalue');showHide('dlbutton');showHide('savebutton')">
 							<?php
-							echo "<input type=button value=\"Save\" id=\"savebutton\" onClick=\"showHide('dl');showHide('dlvalue');showHide('dlbutton');showHide('savebutton');getDateValue();editDeadline(".$idtugas.")\">";
+							echo "<input type=button value=\"Save\" id=\"savebutton\" onClick=\"editDeadline('".$idtugas."');showHide('dl');showHide('dlvalue');showHide('dlbutton');showHide('savebutton');getDateValue();setDateValue()\">";
 							?>
 						</div>
 					</div>
@@ -414,13 +415,15 @@ if(!isset($_SESSION['id']))
 							<?php
 							echo "<input type=button value=\"Add\" id=\"asbutton\" onclick=\"addAssignee(".$idtugas.")\">";
 							?>
-							<select name="fieldhapus">
+							<select id="fieldhapus" name="fieldhapus">
+							<div id="daftarassignee">
 							<?php
 							$assignee = mysql_query("SELECT username FROM assignee WHERE idtugas='$idtugas'");
 							while($row = mysql_fetch_array($assignee)){
 								echo "<option value=\"".$row['username']."\">".$row['username']."</option>";
 							}
 							?>
+							</div>
 							 </select>
 							<?php
 							echo "<input type=button value=\"Hapus\" id=\"hapusbutton\" onclick=\"hapusAssignee(".$idtugas.")\">";
