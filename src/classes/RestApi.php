@@ -123,7 +123,7 @@ class RestApi
 			$tags = $task->getTags();
 			$dummy->tags = array();
 			foreach ($tags as $tag) {
-				$dummy->tags[] = $tag->tag;
+				$dummy->tags[] = $tag->tag_name;
 			}
 
 			$tasks[] = $dummy;
