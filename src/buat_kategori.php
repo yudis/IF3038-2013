@@ -14,8 +14,8 @@
 		if(strlen($list_assignee[$i]) > 0)
 		{
 			echo $list_assignee[$i].".<br/>";
-			$query2 = "INSERT INTO asignee_has_kategori (accounts_idaccounts, kategori_idkategori) VALUES((SELECT idaccounts FROM accounts WHERE username = '".$list_assignee[$i]."'),(SELECT idkategori from kategori where nama = '".$_POST["catname"]."' and pembuat = ".$_POST["pembuat"]."))";
-			$result = mysql_query($query2, $sql);
+			$query3 = "INSERT INTO asignee_has_kategori (accounts_idaccounts, kategori_idkategori) VALUES((SELECT idaccounts FROM accounts WHERE username = '".$list_assignee[$i]."'),(SELECT idkategori from kategori where nama = '".$_POST["catname"]."' and pembuat = ".$_POST["pembuat"]."))";
+			$result = mysql_query($query3, $sql);
 		}
 	}
 	mysql_close($sql);
