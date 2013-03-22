@@ -3,97 +3,54 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<?php
-require_once('config.php');
-session_start();
-?>
 <html>
     <head>
         <title>BANG!!!-DASHBOARD</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
         <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="ajax.js"></script>
     </head>
     <body>
 
-        <?php
-        if (connectDB()) {
-            ?>  
 
-            <header>
-                <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
-                <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
-                <div id="profile"><a title="Go to Profile" href="profile.php">My Profile</a></div>
-                <div id="logout"><a title="Log out from here" href="index.php">Log Out</a></div>
-                <form id="search">
-                    <input type="text" name="Search" id="box">
-                    <input type="submit" value="Search">
-                </form>
-            </header>
+        <header>
+            <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
+            <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
+            <div id="profile"><a title="Go to Profile" href="profile.php">My Profile</a></div>
+            <div id="logout"><a title="Log out from here" href="index.php">Log Out</a></div>
+            <form id="search">
+                <input type="text" name="Search" id="box">
+                <input type="submit" value="Search">
+            </form>
+        </header>
 
-            <div id="category">
-                <input type="hidden" name="hidden" id="hidden" value="">
-                <?php
-                $category = "SELECT category.IDCategory,category.CategoryName FROM assignment,task,category WHERE assignment.Username=\"admin\" AND assignment.IDTask=task.IDTask AND task.IDCategory=category.IDCategory
-UNION DISTINCT
-SELECT category.IDCategory,category.CategoryName FROM authority,category WHERE authority.Username=\"admin\" AND authority.IDCategory=category.IDCategory
-ORDER BY CategoryName";
-                $result = mysql_query($category);
-                if ($result > 0) {
-                    while ($data = mysql_fetch_array($result)) {
-                        ?>
-                        <div class="kategori" onclick="showList(
-                                <?php
-                                echo($data['CategoryName']);
-                                ?>  
-                                );"><a>
+        <div id="category">
 
-                                <?php
-                                echo($data['CategoryName']);
-                                ?>
-                            </a></div>
-                        <?php
-                    }
-                }
-                ?>
-            </div> 
-        
-            <div id ="listtugas" class="list">
-                <?php
+        </div> 
 
-                $task = "SELECT * FROM task WHERE IDCategory=1";
-                $result = mysql_query($task);
-                
-                if ($result > 0) {  
-                    while ($data = mysql_fetch_array($result)) {
-                        ?>
-                        <a class="listTugas" onclick="showRinci();"></a> 
-                        <?php
-                    }
-                }
-                ?>
-                <a onclick='showBuat()' class='addTask'></a>
-                
-            </div>
+        <div id ="listtugas" class="list">
 
-            <div id="addCat">
-                <a onclick="addCategory();">+ category</a>
-            </div>
+        </div>
 
-            <div class="tugas" id="rincitugas">
-                Name: Nama Tugas <br/>
-                Attachment: 
-                <div class="attachment">
-                    <a href="img/file.zip">file.zip</a><br/>
-                    <a href="img/badge.png">picture.png</a><br/>
-                </div><br/>
-                Deadline: 17-12-2014<br/>
-                Assignee: <a href="" class="asignee">Timo</a>, <a href="" class="asignee">Stefan</a>, <a href="" class="asignee">Frilla</a><br/>
-                Tag: <a href="" class="tag">dangerous</a>, <a href="" class="tag">novice</a> <br/>
-                <br/>Comment:<br/>
-                <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
-                <form>
-                    <textArea></textarea>
+        <div id="addCat">
+            <a onclick="addCategory();">+ category</a>
+        </div>
+
+        <div class="tugas" id="rincitugas">
+            Name: Nama Tugas <br/>
+            Attachment: 
+            <div class="attachment">
+                <a href="img/file.zip">file.zip</a><br/>
+                <a href="img/badge.png">picture.png</a><br/>
+            </div><br/>
+            Deadline: 17-12-2014<br/>
+            Assignee: <a href="" class="asignee">Timo</a>, <a href="" class="asignee">Stefan</a>, <a href="" class="asignee">Frilla</a><br/>
+            Tag: <a href="" class="tag">dangerous</a>, <a href="" class="tag">novice</a> <br/>
+            <br/>Comment:<br/>
+            <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
+            <form>
+                <textArea></textarea>
                                                 <input type="button" name="submit" value="submit">
                                             </form>
                                             <br/><br/>
@@ -143,12 +100,6 @@ ORDER BY CategoryName";
                                         <input type="submit" onclick="addCat();" value="create">
                                         <input type="submit" onclick="restore();" value="cancel">
                                     </div>
-                                </body>
-                                
-        <?php
-    } else { // jika koneksi database tidak berhasil
-        die('Database connection error');
-    }
-    ?>
+                                </body>  
             
 </html>

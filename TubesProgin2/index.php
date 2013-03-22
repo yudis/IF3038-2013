@@ -3,6 +3,15 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
+<?php
+// Inialize session
+session_start();
+
+// Check, if user is already login, then jump to secured page
+if (isset($_SESSION['username'])) {
+    header('Location: Dashboard.php');
+}
+?>
 <html>
     <head>
         <title>BANG! Where Bounty Hunters Meet</title>
@@ -11,21 +20,23 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width; initial-scale=1.0">
         <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="ajax.js"></script>
     </head>
     <body>
         <div id="header">
-		<div id="logo">
-			<img src="img\Logo_Small2.png" alt="Logo & Tagline" onclick="Redirect();"></img>
-		</div>
-		<div id="login">
-
-			Username &nbsp <input type="text" id="logusername"> &nbsp &nbsp 
-        		Password &nbsp <input type="password" id="logpassword"> &nbsp &nbsp 
-                        <div class="logbutton" onclick="Login();">Login</div>
-                </div>
-	</div>
+            <div id="logo">
+                <img src="img\Logo_Small2.png" alt="Logo & Tagline" onclick="Redirect();"></img>
+            </div>
+            <div id="login">
+                Username &nbsp <input type="text" id="logusername"> &nbsp &nbsp 
+                Password &nbsp <input type="password" id="logpassword"> &nbsp &nbsp 
+                <div class="logbutton" onclick="logins();">Login</div>
+            </div>
+        </div>
         <div id="frontpage">
             <div id="register">
+
+<?php include ('config.php'); ?>
                 <b>Sign yourself up now!</b><br>
                 Username<br>
                 Name<br>

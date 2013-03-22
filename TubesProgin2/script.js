@@ -3,16 +3,6 @@
  * and open the template in the editor.
  */
 
-
-function showList(a){
-document.getElementById("listtugas").style.visibility="visible";
-document.getElementById("rincitugas").style.visibility="hidden";
-document.getElementById("edittugas").style.visibility="hidden";
-document.getElementById("buattugas").style.visibility="hidden";
-document.getElementById("wanted").style.visibility="hidden";
-self.focus;
-}
-
 function showRinci(){
 document.getElementById("listtugas").style.visibility="hidden";
 document.getElementById("rincitugas").style.visibility="visible";
