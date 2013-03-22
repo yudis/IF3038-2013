@@ -3,12 +3,11 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html>
-    <head>
+<html>    <head>
         <title>BANG!!!-DASHBOARD</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
-        <script type="text/javascript" src="script.js"></script>
+        <link rel="stylesheet" type="text/css" href="autocomplete.css" media="screen" />
         <script type="text/javascript" src="ajax.js"></script>
     </head>
     <body>
@@ -102,4 +101,5 @@ and open the template in the editor.
                                     </div>
                                 </body>  
             
+    </body>
 </html>
