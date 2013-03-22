@@ -28,7 +28,7 @@
                 $result = mysqli_query($con,$query);
                 
                 if ($result != false) {
-                     while ($row = mysqli_fetch_row($result)) {
+                    while ($row = mysqli_fetch_row($result)) {
                         echo $row[0],"\n";
                     }
                 } else {
@@ -37,7 +37,7 @@
                 
                 mysqli_free_result($result);
             } else {
-                echo "Tidak ada tugas id_tugas tersebut";
+                echo "Tidak ada tugas dengan id_tugas tersebut";
                 mysqli_stmt_close($stmt);                
             }
 

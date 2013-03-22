@@ -36,19 +36,22 @@
                             tambah += username + " " + tanggal + "<br>";
                             tambah += komentar;
                             tambah += "</div>";
-                            var n = daftar_komentar.innerHTML.indexOf("<form name");
-                            daftar_komentar.innerHTML = daftar_komentar.innerHTML.substring(0,n)
-                                                      + tambah
+                            var n = daftar_komentar.innerHTML.indexOf("<form name=\"form_comment\">");
+                            daftar_komentar.innerHTML = daftar_komentar.innerHTML.substring(0,n) + tambah
                                                       + daftar_komentar.innerHTML.substring(n);
 						} else {
 							alert("Gagal memposting komentar");
 						}						
 					}
 				}
-				
-                params = "komentar="+escape(form.comment.value)+"&user="+localStorage.userLogin+"&id_tugas="+"1";
-                //alert(params);
-				xmlhttp.open("POST","tambah_komentar.php",true);
+
+                id_tugas = "-1";
+                if ((c = window.location.search.indexOf("id_tugas=")) != -1) {
+                    id_tugas = window.location.search.substring(c+9);
+                } 
+
+                params = "komentar="+escape(form.comment.value)+"&user="+localStorage.userLogin+"&id_tugas="+id_tugas;
+				xmlhttp.open("POST","tambah_komentar.php",true);                
                 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 				xmlhttp.send(params);
             }
@@ -78,7 +81,7 @@
                             s = s.substring(n+1);
                             n = s.indexOf("\n");
 
-                            var status = unescape(s.substring(0,n));
+                            var status = s.substring(0,n);
                             s = s.substring(n+1);
                             n = s.indexOf("\n");
 
@@ -95,25 +98,50 @@
                             
                             var detail = document.getElementById("detail");
                             
-                            var tambah = '<label>DEADLINE</label>';
+                            var tambah2 = '<form>'
+                            var tambah = "<label>STATUS TUGAS</label>";
+                            if (status == 1) tambah += '<a id="status">DONE</a>';
+                            else tambah += '<a id="status">IN THE PROCESS</a>';
+                            
+                            tambah2 += '<label>STATUS TUGAS</label>';
+                            if (status == 1) tambah2 += '<input type="checkbox" name="status" value="done" checked>';
+                            else tambah2 += '<input type="checkbox" name="status" value="done">';
+                            
+                            tambah += '<label>DEADLINE</label>';
                             tambah += '<a id="deadline">'+tanggal+"</a>";
                             
+                            tambah2 += '<label>DEADLINE</label>';
+                            tambah2 += '<a id="deadline">'+tanggal+"</a>";
+                            
+                            var orang = "";
                             tambah += "<label>ASSIGNEE</label>";
                             tambah += '<a id="assignee">';
                             while (n != -1) {
                                 tambah += unescape(s.substring(0,n)) + "<br>";
+                                orang += unescape(s.substring(0,n))+"/";
                                 s = s.substring(n+1);
                                 n = s.indexOf("\n");
                             }
                             tambah += '</a>';
-                        
+
+                            tambah2 += '<input type="textarea" name="assignee" placeholder="assignee" value="'+orang+'">';
+                            
                             tambah += "<label>TAG</label>";
                             tambah += '<a id="tag">'+tag+'</a>';
-                        
+
+                            tambah2 += "<label>TAG</label>";
+                            tambah2 += '<input type="textarea" name="catname" placeholder="tag" value="'+tag+'">';
+                            
                             tambah += "<label>ATTACHMENT</label>";
                             tambah += '<a href ="#" id="attach">Download Here</a>'; 
                             
-                            detail.innerHTML = tambah;                         
+                            tambah2 += "<label>ATTACHMENT</label>";
+                            tambah2 += '<a href ="#" id="attach">Download Here</a>'; 
+                            tambah2 += '</br><input class= "submitreg" name="submit" type="button" value="Submit"';
+                            tambah2 += 'onclick="hideEdit(),submit_edit(this.form)"></form>'; 
+                            
+                            detail.innerHTML = tambah;
+                            document.getElementById("detailedit").innerHTML=tambah2;
                         } else {
                             alert(xmlhttp1.responseText);
                         }                        
@@ -124,9 +152,9 @@
                     if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
                         var s = xmlhttp2.responseText;
                         var n = s.indexOf("\n");
-                        var daftar_komentar = document.getElementById("komen");
-                        daftar_komentar.inner_HTML = "";
-                        //alert(daftar_komentar.inner_HTML);
+                        daftar_komentar = document.getElementById("komen");
+                        daftar_komentar.innerHTML = "";
+                        //alert(daftar_komentar.innerHTML);
                         
                         while (n != -1) {
                             //Ambil satu data komentar
@@ -153,13 +181,13 @@
                     
                     if (xmlhttp2.readyState == 4) {
                         daftar_komentar = document.getElementById("komen");
-                        daftar_komentar.innerHTML +='<form name="form_comment">\n';
-                        daftar_komentar.innerHTML +='<div id="submitkomen">\n';
-                        daftar_komentar.innerHTML +='<label>submit comment</label>\n';
-                        daftar_komentar.innerHTML +='<textarea name="comment" type="comment" placeholder="comment" class="isikomen"></textarea>\n';
-                        daftar_komentar.innerHTML +='<input class= "submitreg" name="submit" type="button" onclick="submit_comment(this.form)" value="Submit">\n';
-                        daftar_komentar.innerHTML +='</div>\n';
-                        daftar_komentar.innerHTML +='</form>\n';                    
+                        daftar_komentar.innerHTML += '<form name="form_comment">\n'
+                                                   + '<div id="submitkomen">\n'
+                                                   + '<label>submit comment</label>\n'
+                                                   + '<textarea name="comment" type="comment" placeholder="comment" class="isikomen"></textarea>\n'
+                                                   + '<input class= "submitreg" name="submit" type="button" onclick="submit_comment(this.form)" value="Submit">\n'
+                                                   + '</div>\n'
+                                                   + '</form>\n';                    
                     }
                 }
                 
@@ -185,6 +213,29 @@
             function hideEdit(){
                 document.getElementById("detailedit").style.visibility="hidden";
                 document.getElementById("detail").style.visibility="visible";
+            }
+            
+            function submit_edit(form) {
+				if (window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();				
+				} else {
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+				
+				xmlhttp.onreadystatechange = function(){
+                    if (xmlhttp.readyState==4)	{
+                        //alert(xmlhttp.responseText);
+                        take_data();
+					}
+				}
+				
+                params = "assignee="+escape(form.assignee.value)+"&tag="+escape(form.catname.value)+"&id_tugas="+id_tugas+"&status=";
+                if (form.status.checked) params += "1";
+                else params += "0";
+                //alert(params);
+				xmlhttp.open("POST","edit_detail_tugas.php",true);
+                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				xmlhttp.send(params);                
             }
         </script>
     </head>
@@ -231,27 +282,10 @@
             <div id="rinciantugas">
                 <div id="judultugas"></div>
                 <div id="detail" style="visibility: visible">
-                    
-
-                    
+                                        
                 </div>
                 <div id="detailedit" style="visibility: hidden">
-                    <form >
-                        <label>DEADLINE</label>
-                        <a id="deadline">11/08/2013</a>
-                        
-                        <label>ASSIGNEE</label>
-                        <a id="assignee">Faiz</a></br>
-                        <input name="assignee" placeholder="assignee">
-                        
-                        <label>TAG</label>
-                        <input name="catname" placeholder="tag">
-                        
-                        <label>ATTACHMENT</label>
-                        <a href ="#" id="attach">Download Here</a>
-                        </br>
-                        <input class= "submitreg" name="submit" type="submit" value="Submit" onclick="hideEdit()">
-                    </form>
+        
                 </div>
             </div>
             <div id="komen">
@@ -259,7 +293,7 @@
             </div>
         </div>
         <div class="footer">
-            Copyright © Ahmad Faiz - Fandi Pradana - Sigit Aji
+            Copyright © Christianto Handojo - Johannes Ridho - Ahmad Faiz - Fandi Pradana - Sigit Aji
         </div>
         
     </body>
