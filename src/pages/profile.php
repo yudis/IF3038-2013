@@ -11,7 +11,7 @@
 
 	$birth_date = new Datetime($user->birthdate);
 
-	$this->header('Profile', $id? '' : 'profile');
+	$this->header('Profile', $_GET['id'] && $_GET['id'] != $_SESSION['user_id'] ? '' : 'profile');
 ?>	
 	<div class="content">
 		<div class="profile">
