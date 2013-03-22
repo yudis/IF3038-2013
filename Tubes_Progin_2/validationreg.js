@@ -36,7 +36,6 @@ var valid7bool;
 					valid1.src = "img/salah.png";
 					valid1bool = false;
 				}else{
-					console.log("Masuk sini");
 					if (username.checkValidity()){
 						valid1.src = "img/benar.png";
 						valid1bool = true;
@@ -187,3 +186,54 @@ var valid7bool;
 			submit.disabled="disabled";
 		}
 	}
+	
+function showAssignee(str)
+{
+	if (str.length==0)
+	{ 
+		document.getElementById("hasilsearch").innerHTML="";
+		document.getElementById("hasilsearch").style.visibility="hidden";
+		return;
+	}
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	  {
+			var string = xmlhttp.responseText.split("<br>");
+			var result = "";
+			var check = true;
+			result = "<ul>";
+			if (string.length > 1)
+			{
+				result += "<li class=\"judul\">user</li>";
+				for (var s=1; s<string.length; s++)
+				{
+					if (document.getElementById("box").value.toLowerCase() == string[s].toLowerCase())
+						check = false;
+					result += "<li onclick=\"auto_complete(this.innerHTML);\">"+string[s]+"</li>";
+				}
+			}
+			if (check)
+			{
+				result += "</ul>";
+				document.getElementById("hasilsearch").innerHTML=result;
+				document.getElementById("hasilsearch").style.visibility="visible";
+			}
+			else
+			{
+				document.getElementById("hasilsearch").innerHTML="";
+				document.getElementById("hasilsearch").style.visibility="none";
+			}
+		}
+	  }
+	xmlhttp.open("GET","autosearch.php?q="+str+"&tipe="+tipe,true);
+	xmlhttp.send();
+}

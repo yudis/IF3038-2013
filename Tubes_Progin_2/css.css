@@ -130,6 +130,32 @@ input.liusername{
 	color : white;
 }
 
+#hasilsearchassignee{
+	position: absolute;
+	z-index:1000;
+	top: 370px;
+	left: 55px;
+	width: 347px;
+	border: 1px solid #000000;
+	background-color: white;
+	max-height: 300px;
+	overflow : auto;
+}
+
+#hasilsearchassignee ul{
+	list-style-type: none;
+	padding : 0px;
+	margin : 0px;
+	cursor: pointer;
+	color: #3b5998;
+	font-weight: bold;
+}
+
+#hasilsearchassignee li:hover{
+	background-color: #3b5998;
+	color : white;
+}
+
 .judul{
 	background-color : #f2f2f2;
 	padding: 2px 15px 2px 6px;
@@ -252,6 +278,10 @@ input.liusername{
     background-image: url('img/kertas.png');
     width: 350px;
     height: 443px;
+}
+
+#Assignee {
+	width: 100%;
 }
 
 #nama {
