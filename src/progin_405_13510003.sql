@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 14, 2013 at 04:12 PM
+-- Generation Time: Mar 22, 2013 at 04:25 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -46,14 +46,19 @@ CREATE TABLE IF NOT EXISTS `kategori` (
   PRIMARY KEY (`id_kategori`),
   UNIQUE KEY `id_kategori` (`id_kategori`),
   KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `kategori`
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `username`) VALUES
-(1, 'progin', 'jo');
+(1, 'progin', 'jo'),
+(2, 'sister', 'jo'),
+(3, 'kripto', 'jo'),
+(4, 'IMK', 'jo'),
+(5, 'KAP', 'jo'),
+(6, 'studium_generale', 'jo');
 
 -- --------------------------------------------------------
 
@@ -66,7 +71,8 @@ CREATE TABLE IF NOT EXISTS `komentar` (
   `id_tugas` int(255) NOT NULL,
   `waktu` datetime NOT NULL,
   `isi` varchar(10000) NOT NULL,
-  KEY `username` (`username`)
+  KEY `username` (`username`),
+  KEY `komentar_ibfk_2` (`id_tugas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -105,7 +111,8 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
 
 INSERT INTO `pengguna` (`username`, `password`, `nama_lengkap`, `tanggal_lahir`, `email`, `avatar`) VALUES
 ('asdasdasd', 'asdasdasd', 'asdas asdasd', '2013-03-05', 'sad@asdas.com', 'asdasdads'),
-('jo', 'jo', 'jo jo', '2013-03-05', 'sad@asdas.com', 'asdasdads'),
+('jo', 'jo', 'jo jo', '2013-03-05', 'sad@asdas.com', 'http://localhost/tubes2/pict/cancel.png'),
+('progin', 'progin', 'progin progin', '2013-03-01', 'progin@aa.aa', 'http://localhost/tubes2/pict/avatar.jpg'),
 ('tes', 'tes', 'tes tes', '2013-03-04', 'asdadasa', 'dasdada');
 
 -- --------------------------------------------------------
@@ -125,16 +132,20 @@ CREATE TABLE IF NOT EXISTS `tugas` (
   PRIMARY KEY (`id_tugas`),
   UNIQUE KEY `ID` (`id_tugas`),
   KEY `id_kategori` (`id_kategori`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `tugas`
 --
 
 INSERT INTO `tugas` (`id_tugas`, `id_kategori`, `nama_tugas`, `deadline`, `status`, `tag`, `attachment`) VALUES
-(1, 1, 'progin dewa', '2013-03-05 18-0-0', 0, '', '');
-
--- -------------------------------------------------------
+(1, 1, 'progin dewa', '2013-03-05 18:00:00', 0, '', ''),
+(2, 1, 'tubes1', '2013-03-23 00:00:00', 0, 'html', '-'),
+(3, 1, 'tubes2', '2013-03-23 00:00:00', 0, 'php', '-'),
+(4, 3, 'tubes1', '2013-03-23 00:00:00', 0, 'steganografi', '-'),
+(5, 2, 'tubes1', '2013-03-23 00:00:00', 0, 'gunbound', '-'),
+(6, 4, 'tubes1', '2013-03-29 00:00:00', 0, 'nggajelas', '-'),
+(7, 5, 'tubes1', '2013-03-29 00:00:00', 0, 'nggajelas', '-');
 
 --
 -- Constraints for dumped tables
@@ -159,6 +170,7 @@ ALTER TABLE `kategori`
 ALTER TABLE `komentar`
   ADD CONSTRAINT `komentar_ibfk_1` FOREIGN KEY (`username`) REFERENCES `pengguna` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `komentar_ibfk_2` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id_tugas`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 --
 -- Constraints for table `mengerjakan`
 --
