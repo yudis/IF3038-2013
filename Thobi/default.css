@@ -30,14 +30,32 @@ nav {
     display: block;
     background-color: #5fae53;
 }
-nav .logo {
-    width: 190px;
+nav ul .logo {
+    width: 133px;
+	height: 56px;
     display: inline-block;
-    padding: 20px 10px 5px 40px;
+    padding-left: 15px;
+	padding-right: 30px;
+	margin-top: -20px;
+	margin-bottom: -40px;
+	margin-right: -5px;
+	padding-top: 30px;
+	padding-bottom: -60px;
+	border-right: 1px solid #336c2b;
 }
-nav .logo img {
-    margin-bottom: -10px;
+nav ul .logo img {
+    margin-bottom: -6px;
 }
+#profil {
+	margin-top: -20px;
+	padding-bottom: -30px;
+	width: 190px;
+}
+#profil a img{
+	margin-bottom: -40px;
+	padding-left: 105px;
+}
+
 nav ul {
     padding-top: 0px;
     padding-bottom: 0px;
@@ -176,6 +194,13 @@ button, .button {
 button:active, button:hover, .button:active, .button:hover {
     color: #499b3d;
     cursor: pointer;
+}
+
+#editStatus {
+	margin-bottom: -5px;
+	padding-top: 0px;
+	width: 60px;
+	height: 20px;
 }
 
 .tugas {

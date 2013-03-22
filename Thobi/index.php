@@ -66,7 +66,7 @@
                                 <input type="email" class="regbox" id="email" name="email" placeholder="Your Email.." required="required" onkeyup="validateEmail();" onchange="validateEmail();" />
                             </div>
                             <div class="wrapper">
-                                <input type="text" class="regbox" id="bday" name="bday" required="required" placeholder="Birthday (dd-mm-yyyy)" onkeyup="validateBday();" onchange="validateBday();" /><a href="#" onclick="return bdayPicker();"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
+                                <input type="text" class="regbox" id="bday" name="bday" required="required" placeholder="Birthday (dd-mm-yyyy)" onkeyup="validateBday();" onchange="validateBday();" onclick="return validateBday();"/><a href="#" onclick="return bdayPicker();"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
                             </div>
                             <div class="wrapper">
                                 <p class="regtext">Profile Image:<br /></p><input type="file" id="ava" name="ava" accept="image/*" required="required"  onkeyup="validateAvatar();" onchange="validateAvatar();" />

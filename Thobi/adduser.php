@@ -15,7 +15,7 @@
 		mysql_select_db("progin_405_13510035", $con);
 		
 	
-	$sql="INSERT INTO usertable VALUES ('".$username."', '".$password."', '".$fullname."','".$email."', '".$birthday."', '".$_FILES["ava"]["name"]."')";
+	$sql="INSERT INTO user VALUES ('".$username."', '".$password."', '".$fullname."','".$email."', '".$birthday."', '".$_FILES["ava"]["name"]."')";
 
 	mysql_query($sql);
 	
@@ -26,7 +26,7 @@
 	if ((($_FILES["ava"]["type"] == "image/gif")
 	|| ($_FILES["ava"]["type"] == "image/jpeg")
 	|| ($_FILES["ava"]["type"] == "image/png")
-	|| ($_FILES["ava"]["type"] == "image/pjpeg"))
+	|| ($_FILES["ava"]["type"] == "image/jpg"))
 	&& ($_FILES["ava"]["size"] < 2000000)
 	&& in_array($extension, $allowedExts))
 	{
@@ -41,16 +41,10 @@
 			echo "Size: " . ($_FILES["ava"]["size"] / 1024) . " kB<br>";
 			echo "Temp file: " . $_FILES["ava"]["tmp_name"] . "<br>";
 
-			if (file_exists("upload/" . $_FILES["ava"]["name"]))
-			{
-				echo $_FILES["ava"]["name"] . " already exists. ";
-			}
-			else
-			{
-				move_uploaded_file($_FILES["ava"]["tmp_name"],
-				"avatar/" . $_FILES["ava"]["name"]);
-				echo "Stored in: " . "upload/" . $_FILES["ava"]["name"];
-			}
+			if ($_FILES["ava"]["type"] == "image/jpg")
+				move_uploaded_file($_FILES["ava"]["tmp_name"], "avatar/".$username.".jpg");
+			else if ($_FILES["ava"]["type"] == "image/jpeg")
+				move_uploaded_file($_FILES["ava"]["tmp_name"], "avatar/".$username.".jpg");
 		}
 	}
 	else

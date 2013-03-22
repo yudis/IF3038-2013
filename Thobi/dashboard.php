@@ -34,20 +34,7 @@
         </div>
         <div class="page">
             <header class="content">
-                <nav>
-                    <div class="logo"><a href="dashboard.html"><img alt="Home" src="images/logo.png" /></a></div>
-                    <ul>
-                        <li><div><a href="redirect.php?l=dashboard">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="index.php" onclick="signout()">Logout</a></div></li>
-                    </ul>
-                    <div class="search">
-                        <div id="searchwrapper">
-                            <form action="#">
-                                <input type="text" class="searchbox" name="q" value="" placeholder="Enter task name here.." />
-                                <input type="image" src="images/search.png" name="sumbit" class="searchbox_submit" alt="search..."/>
-                            </form>
-                        </div>
-                    </div>
-                </nav>
+                <?php include 'header.php' ?>
             </header>
             <div class="content">
 				<div id="leftcolumn">
@@ -79,14 +66,19 @@
 								echo ("<section id='main-K".$iterator."'>
 										<h2>".$row["category_name"]."</h2>");
 
-								$sql="SELECT * FROM task, category WHERE task.assignee = '".$username."' AND task_category = '".$row["category_id"]."' AND task.task_category = category.category_id";
+								$sql="SELECT * FROM task, category, task_incharge WHERE task_incharge.people_incharge_task = '".$username."' AND task_category = '".$row["category_id"]."' AND task.task_category = category.category_id AND task.task_id = task_incharge.task_id";
 
 								$result2 = mysql_query($sql);
 
 								while ($row2 = mysql_fetch_array($result2)) {
+									if ($row2["status"] == "0")
+										$status = "Belum selesai.";
+									else
+										$status = "Sudah selesai.";
+									
 									echo ("<div class='tugas'><div><a href='tugas.html?id=".$row2["task_id"]."'>".$row2["task_name"]."</a></div>
 											<div>Deadline: <strong>".$row2["deadline"]."</strong></div>
-											<div>
+											<div>Status: <strong>".$status."</strong></div><div>Ubah Status: <button id='editStatus' onclick='EditStatus(1,\"".$row2["task_id"]."\")'>Selesai</button> <button id='editStatus' onclick='EditStatus(0,\"".$row2["task_id"]."\")'>Belum</button></div><br/><div>
 												Tags:
 												<ul class='tag'>");
 
@@ -118,14 +110,18 @@
 								echo ("<section id='main-K".$iterator."'>
 										<h2>".$row["category_name"]."</h2>");
 
-								$sql="SELECT * FROM task, category WHERE task.assignee = '".$username."' AND task_category = '".$row["category_id"]."' AND task.task_category = category.category_id";
+								$sql="SELECT * FROM task, category, task_incharge WHERE task_incharge.people_incharge_task = '".$username."' AND task_category = '".$row["category_id"]."' AND task.task_category = category.category_id AND task.task_id = task_incharge.task_id";
 
 								$result2 = mysql_query($sql);
 
 								while ($row2 = mysql_fetch_array($result2)) {
-									echo ("<div class='tugas'><div><a href='tugas.html?id=".$row2["task_id"]."'>".$row2["task_name"]."</a></div>
-											<div>Deadline: <strong>".$row2["deadline"]."</strong></div>
-											<div>
+									if ($row2["status"] == "0")
+										$status = "Belum selesai.";
+									else
+										$status = "Sudah selesai.";
+										
+										echo ("<div class='tugas'><div><a href='tugas.html?id=".$row2["task_id"]."'>".$row2["task_name"]."</a></div>
+											<div>Deadline: <strong>".$row2["deadline"]."</strong></div><div>Status: <strong>".$status."</strong></div><div>Ubah Status: <button id='editStatus' onclick='EditStatus(1,\"".$row2["task_id"]."\")'>Selesai</button> <button id='editStatus' onclick='EditStatus(0,\"".$row2["task_id"]."\")'>Belum</button></div><br/><div>
 												Tags:
 												<ul class='tag'>");
 
