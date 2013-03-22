@@ -209,7 +209,6 @@ function showList() {
     document.getElementById("edittugas").style.visibility = "hidden";
     document.getElementById("buattugas").style.visibility = "hidden";
     document.getElementById("wanted").style.visibility = "hidden";
-
 }
 
 function showList2() {
@@ -385,13 +384,13 @@ function Submit() {
     }
 }
 
-function multiAutocomp(input, phpscript,text) {
+function multiAutocomp(input, phpscript, text) {
     var idname = "hasil_" + input.id;
     var elmt = document.getElementById(input.id);
-    
+
     if (elmt.value.length > 0) {
-        
-        document.body.setAttribute("onClick", "multiAutocompHandleClick('"+text+"');");
+
+        document.body.setAttribute("onClick", "multiAutocompHandleClick('" + text + "');");
         multiAutocompClear(input);
         var div = document.createElement("div");
         div.setAttribute("id", idname);
@@ -412,7 +411,7 @@ function multiAutocomp(input, phpscript,text) {
                 console.log("Browser doesn't support AJAX");
             }
         }
-        
+
         xmlHttp.onreadystatechange = function() {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                 var query_result = xmlHttp.responseXML.documentElement.getElementsByTagName("Data");
@@ -423,7 +422,7 @@ function multiAutocomp(input, phpscript,text) {
                     var child_div = document.createElement("div");
                     child_div.setAttribute("id", sug_id);
                     child_div.setAttribute("class", "autocomplete");
-                    child_div.setAttribute("onClick", "multiAutocompGetResult(this,'"+text+"');");
+                    child_div.setAttribute("onClick", "multiAutocompGetResult(this,'" + text + "');");
                     child_div.style.width = elmt.offsetWidth;
                     child_div.innerHTML = inner_result_name[0].firstChild.nodeValue;
                     var hidden_input = document.createElement("div");
@@ -446,12 +445,12 @@ function multiAutocomp(input, phpscript,text) {
         xmlHttp.send(null);
 
     } else {
-        multiAutocompClear(input,text);
+        multiAutocompClear(input, text);
         document.body.removeAttribute("onClick");
     }
 }
 
-function multiAutocompClear(input,text) {
+function multiAutocompClear(input, text) {
     console.log("Cleared");
     var idname = "hasil_" + input.id;
     while (document.getElementById(idname) != null) {
@@ -470,7 +469,7 @@ function multiAutocompClearAll(text) {
     }
 }
 
-function multiAutocompGetResult(input,text) {
+function multiAutocompGetResult(input, text) {
     var idname = input.id + "h";
     var parentname = idname.substr(6, idname.length - 8);
     var parentdiv = idname.substr(0, idname.length - 2);
