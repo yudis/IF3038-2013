@@ -14,13 +14,15 @@
 	{
 		$sql="SELECT task_name FROM task WHERE task_id = '".$id."'";
 		$result = mysqli_query($sql);
-		echo $result;
+		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+		echo $row['task_name'];
 	}
 	else if ($type == "status")
 	{
 		$sql="SELECT status FROM task WHERE task_id = '".$id."'";
 		$result = mysqli_query($sql);
-		echo $result;
+		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+		echo $row['status'];
 	}
 	else if ($type == "attach")
 	{
@@ -37,7 +39,8 @@
 	{
 		$sql="SELECT deadline FROM task WHERE task_id = '".$id."'";
 		$result = mysqli_query($sql);
-		echo $result;
+		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+		echo $row['deadline'];
 	}
 	else if ($type == "assignee")
 	{

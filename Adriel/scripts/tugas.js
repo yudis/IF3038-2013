@@ -274,6 +274,38 @@ function getFileName(link)
 }
 
 function addKomentar() {
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	var now = new Date();
+	var username = localstorage.session;
+	var id_komentar = "COM-" + username + now.toUTCString;
+	var date = "" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+	var comment = document.getElementById('txtKomentar').value;
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		}
+	}
+	xmlhttp.open("GET","addcomment.php?user="++"&id="+id_komentar+"&user="+username+"&date="+date+"&tugas="+IDTugas+"&comment="+comment,true);
+	xmlhttp.send();
+
+    //var komentar_div = document.getElementById("komentar");
+	
+    //komentar_div.innerHTML += "<b>" + username + "</b> - " + now.toUTCString() + "<hr />" + document.getElementById('txtKomentar').value + "<br /><br />";
+    
+    return false;
+}
+/*
+function addKomentar() {
     var now = new Date();
     var komentar_div = document.getElementById("komentar");
 	var username = localstorage.session;
@@ -282,7 +314,7 @@ function addKomentar() {
     komentar_div.innerHTML += "<b>" + username + "</b> - " + now.toUTCString() + "<hr />" + document.getElementById('txtKomentar').value + "<br /><br />";
     
     return false;
-}
+}*/
 
 function writeTags() {
     var tagsList = document.getElementById("tagsList");

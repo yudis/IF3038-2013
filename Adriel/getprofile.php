@@ -28,8 +28,8 @@
 	}
 	
 	$result = mysqli_query($sql);
-	
-	echo $result;
+	$row = mysqli_fetch_array($result, MYSQLI_NUM);
+	echo $row[0];
 	
 	mysqli_close($con);
 ?>
