@@ -150,7 +150,7 @@ function checkTaskName() {
 }
 
 function checkTaskAttachment() {
-	var attachmentName = document.getElementById('attachment_upload').value;
+	var attachmentName = document.getElementById('attachment_file').value;
 	var dot = ".";
 	if (attachmentName.indexOf(dot) != -1) {
 		//valid

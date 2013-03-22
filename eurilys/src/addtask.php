@@ -8,7 +8,7 @@
 			<div id="add_task_header" class="left top30 dynamic_content_head">
 				Add New Task
 			</div>
-	<form id="addtask_form" method="POST" action="addtaskscript.php">
+	<form id="addtask_form" enctype="multipart/form-data" method="POST" action="addtaskscript.php" >
 			<div id="row1_addtask" class="left top30 dynamic_content_row">
 				<div id="task_name_lat" class="left dynamic_content_left">Task Name</div>
 				<div id="task_name_rat" class="left dynamic_content_right">
@@ -23,7 +23,7 @@
 			<div id="row2_addtask" class="left top10 dynamic_content_row">
 				<div id="attachment_lat" class="left dynamic_content_left">Attachment</div>
 				<div id="attachment_rat" class="left dynamic_content_right">
-					<input id="attachment_upload" type="file" onchange="javascript:checkTaskAttachment();" name="attachment_file" class="left">
+					<input id="attachment_file" type="file" name="attachment_file" onchange="javascript:checkTaskAttachment();"  class="left">
 					<img src="../img/yes.png" id="task_attachment_validation" class="left signup_form_validation" alt="validation image"/>
 				</div>
 			</div>
