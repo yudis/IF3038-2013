@@ -143,12 +143,16 @@
 			
 			return $ret;
 		}
+
+		public function findAllLimit($query = "", $selection = array(), $limitStart = 0, $limitEnd = 100) {
+			return $this->findAll($query . " LIMIT " . intval($limitStart) . "," . intval($limitEnd));
+		}
 		
 		public function delete($query)
 		{
 			if ($query != "")
 				$query = " WHERE ".$query;
-							
+
 			$result = DBConnection::DBquery("DELETE FROM ".$this->tableName().$query);
 
 			return DBConnection::affectedRows();
