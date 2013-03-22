@@ -49,16 +49,21 @@
 		public function save()
 		{
 			// check same tag name
-			if ($this->id==null)
+			if ($this->id_tag==null)
 			{
 				// new tag
-				DBConnection::openDBconnection();
-				
-				$result = DBConnection::DBquery("INSERT into ".tableName()."");
-				
-				DBConnection::closeDBconnection();
-								
-				return $result;
+				if (Tag::model()->find("tag_name=`".$this->tag_name."`")->data)
+				{
+					// tag_name already used
+					return false;
+				}
+				else 
+				{
+					DBConnection::openDBconnection();
+					$result = DBConnection::DBquery("INSERT INTO `".self::tableName()."` (`tag_name`) VALUES ('".$this->tag_name."')");
+					DBConnection::closeDBconnection();
+					return $result;
+				}
 			}
 			else
 			{
