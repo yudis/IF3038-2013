@@ -159,6 +159,18 @@ input.liusername{
     width: 350px;
     height: 443px;
 }
+.tugass{
+    font-size: 12pt;
+    top: 75px;
+    background-color:transparent;
+    border:0px;
+    left: 700px;
+    padding: 50px;
+    margin-left: 100px;
+    background-image: url('img/kertas.png');
+    width: 350px;
+    height: 443px;
+}
 
 #nama {
     font-size: 14pt;

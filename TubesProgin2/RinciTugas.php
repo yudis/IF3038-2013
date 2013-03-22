@@ -37,6 +37,19 @@
             </form>
             <br/><br/>
             <a onclick="showEdit();" class="button">edit</a><br/>
-    </div>
+        </div>
+        <div class="tugas" id ="edittugas">
+            <form>
+                Name: Nama Task<br/>
+                Attachment: <div class="attachment"><input id="upload" type="file"></div><br/>
+                Deadline: <input type="date"><br/>
+                Assignee: <div class="assignee"><input type="text" list="assignee"></div><br/>
+                Tag: <div class="tag"> <input type="text"></div> <br/>
+                Comment: <br/>
+                <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
+            </form> <br/>
+            <a onclick="showRinci()" class="button">save</a><br/>
+        </div>
     </body>
+    <script type="text/javascript" src="script.js"></script>
  </html>

@@ -30,8 +30,6 @@ and open the template in the editor.
             <a onclick="addCategory();">+ category</a>
         </div>
 
-
-
         <datalist id="assignee">
             <option value="Frilla" />
             <option value="Stefan" />
@@ -40,23 +38,9 @@ and open the template in the editor.
             <option value="Hasby" />
         </datalist>
 
-        <div class="tugas" id ="edittugas">
-            <form>
-                Name: Nama Task<br/>
-                Attachment: <div class="attachment"><input id="upload" type="file"></div><br/>
-                Deadline: <input type="date"><br/>
-                Assignee: <div class="assignee"><input type="text" list="assignee"></div><br/>
-                Tag: <div class="tag"> <input type="text"></div> <br/>
-                Comment: <br/>
-                <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
-            </form> <br/>
-            <a onclick="showRinci()" class="button">save</a><br/>
-        </div>
-
         <div id="wanted">
             <img src="img/kertas2.png">
         </div>
-
 
         <div id='add'>
             Category Name:<br/> <input type='text' id='cate'><br/>

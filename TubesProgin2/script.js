@@ -207,7 +207,7 @@ function showList() {
     document.getElementById("listtugas").style.visibility = "visible";
     document.getElementById("rincitugas").style.visibility = "hidden";
     document.getElementById("edittugas").style.visibility = "hidden";
-    document.getElementById("buattugas").style.visibility = "hidden";
+    //document.getElementById("buattugas").style.visibility = "hidden";
     document.getElementById("wanted").style.visibility = "hidden";
 }
 
