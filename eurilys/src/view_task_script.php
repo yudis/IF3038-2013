@@ -31,12 +31,15 @@
 		$commentContent = array();
 		unset($commentCreator);
 		$commentCreator = array();
+		unset($commentTime);
+		$commentTime = array();
 		
-		$comment_query = "SELECT comment_content, comment_creator from comment WHERE task_id='$taskID'";
+		$comment_query = "SELECT comment_content, comment_creator, comment_timestamp from comment WHERE task_id='$taskID'";
 		$comment_result = mysql_query($comment_query);
 		while ($comment_row = mysql_fetch_array($comment_result, MYSQL_ASSOC)) {
 			$commentContent[] = $comment_row['comment_content'];
 			$commentCreator[] = $comment_row['comment_creator'];
+			$commentTime[]    = $comment_row['comment_timestamp'];
 		}
 		
 		//Generate response
@@ -91,7 +94,7 @@
 				<div id='tag_ltd' class='left dynamic_content_left'>Tag</div>
 				<div id='tag_rtd' class='left dynamic_content_right'>".$tagResponse."</div>
 			</div>
-			<div class='left top20 dynamic_content_row'>
+			<div class='left top45 dynamic_content_row'>
 					<div id='comment_ltd' class='left dynamic_content_left'> Comment </div>
 					<div id='comment_rtd' class='left dynamic_content_right'> </div>
 			</div>
@@ -99,10 +102,14 @@
 		
 		if (count($commentContent) > 0) {
 			for($i=0; $i<count($commentContent); $i++) {
+				$date = strtotime( $commentTime[$i] );
+				$date= date('H:m d/m', $date );
+
 				$response = $response.
 				"
 				<div class='left top20 dynamic_content_row'>
-					<div id='comment_ltd' class='left dynamic_content_left darkBlueItalic'> ".$commentCreator[$i]." </div>
+					<div id='comment_ltd' class='left dynamic_content_left darkBlueItalic'> ".$commentCreator[$i]."<br>".$date."
+					</div>
 					<div id='comment_rtd' class='left dynamic_content_right'>".$commentContent[$i]."</div>
 				</div>";
 			}
