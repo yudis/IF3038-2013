@@ -16,8 +16,9 @@
                     
 					<img src="../img/yes.png" id="taskname_validation" class="left signup_form_validation" alt="validation image"/>
 				</div>
-                <input type="hidden" id="cat_name" name="cat_name"onclick="javascript:addCatName();" value="" type="text">
+               
 			</div>
+             
 			
 			<div id="row2_addtask" class="left top10 dynamic_content_row">
 				<div id="attachment_lat" class="left dynamic_content_left">Attachment</div>
@@ -47,9 +48,12 @@
 					<input id="tag_input" type="text" name="tag_input" >
 				</div>
 			</div>
+            
+					<input id="cat_name" type="hidden" name="cat_name"  value="" >
+			
 			
 			<div id="row6_addtask" class="left top10 dynamic_content_row">
-				<input id="add_task_button" name="add_task_button" type="submit" value="Add Task" class="link_blue_rect">
+				<input id="add_task_button" name="add_task_button" type="submit" onclick="javascript:addCatName();" value="Add Task" class="link_blue_rect">
 			</div>
             </form>
 		</div>

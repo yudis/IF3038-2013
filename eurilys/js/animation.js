@@ -260,15 +260,24 @@ function generateTask(category) {
 	xmlhttp.open("GET","dashboard_dynamic_content.php?q="+category+"&taskdone=&taskid=",true);
 	if (category != "all"){
 	document.getElementById("add_task_link").style.display = "block";
-	document.getElementById("add_task").setAttribute('name',category);
+	document.getElementById("add_task").setAttribute('href',"addtask.php?cat_name="+category);
 	
 	}
 	xmlhttp.send();
 	
 }
 
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
 function addCatName(){
-	document.getElementById("cat_name").setAttribute('value',getElementById("add_task").getAttribute('name'));
+	var first = getUrlVars()["cat_name"];
+	document.getElementById("cat_name").setAttribute('value',first);
 }
 
 function finishTask(i) {
