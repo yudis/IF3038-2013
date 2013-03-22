@@ -8,6 +8,7 @@
 	$kategori = new Kategori();
 	$i=0;
 	$success= $kategori->getAllKategori();
+	
 	while (!empty($success[$i]))
 	{
 		$n=0;

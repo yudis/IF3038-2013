@@ -7,23 +7,12 @@ require 'models/tugas.php';
 require 'models/kategori.php';
 
 session_start();
-if (isset($_SESSION["user"]))
-{
-	if (isset($_GET["logout"]))
-	{		
-		$_SESSION = array();
-		session_destroy();
-		
-		header('Location: index.php');
-	}
-	else
-	{
-		$view = new View('views/dashboard/dashboard.tpl');
-		echo $view->output();
-	}
-}
-else
+if (isset($_SESSION["user"]["username"]))
 {
 	$view = new View('views/dashboard/dashboard.tpl');
 	echo $view->output();
+}
+else
+{
+	header('Location: index.php');
 }
