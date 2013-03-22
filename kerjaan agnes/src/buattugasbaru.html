@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+						"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<link id="style" rel="stylesheet" type="text/css" href="style.css"></link>
+	
+	<title>Shared Task</title>
+	
+</head>
+<body>
+	<div class="header">
+		
+				<div id="logo">
+				<img src="images/ToDo.png" alt="logo" width="100" height="30"/>
+				</div>
+		
+
+		<ul id="header">
+			
+			<li ><a href="konten4.html">Profil</a></li>
+			<li ><a href="konten4.html">Home</a></li>
+		</ul>
+		
+	</div>
+
+	<div class="content">
+			<div >
+			<label for="namatugasbaru">Nama Tugas :</label>
+			<input type="text" id="namatugasbaru" value=""/>
+			
+		</div>
+		<div >
+			<label for="attachment">Attachment:</label>
+			<input type="text" id="attachment" value=""/>
+		</div>
+		<div>
+			<label for="deadline">Deadline:</label>
+			<input type="date" id="deadline" value=""/>
+		</div>
+		<div>
+			<label for="asignee">Asignee:</label>
+			<input type="text" id="asignee" value=""/>
+		</div>
+		<div >
+			<label for="tag">Tag:</label>
+			<input type="text" id="tag" value=""/>
+		</div>
+		
+		<div class="Save">
+			<input type="button" value="OK" onClick="addRincianTugas()"></input>
+		</div>
+			
+	</div>
+	
+		
+	
+	<script language="javascript">
+		function addRincianTugas(){
+			var nama_tugas = document.getElementById('namatugasbaru').value;
+			var attachment_tugas =document.getElementById('attachment').value;
+			var deadline_tugas = document.getElementById('deadline').value;
+			var asignee_tugas =document.getElementById('asignee').value;
+			var tag_tugas = document.getElementById('tag').value;
+			if(namatugas_validation(nama_tugas)){
+				if(attachmenttugas_validation(attachment_tugas)){
+				}
+			}
+			
+		}
+		function namatugas_validation(nama_tugas){
+			var namatugas_len = nama_tugas.length;
+			var letters =/^[A-Za-z]+$/;
+			if(namatugas_len<=25&&nama_tugas.match(letters) ){
+				return true;
+			}else{
+				alert('harus alfabet dan angka');
+				nama_tugas.focus();
+				return false;
+			}
+			
+		}
+		function attachmenttugas_validation(attachment_tugas){
+			var validfileex =[".jpg",".mp4",".png",".txt",".pdf"];
+			var ext = attachment_tugas.substring(attachment_tugas.lastIndexOf('.')+1);
+			if(ext=="jpg"||ext=="mp4"||ext==".png"||ext=".txt"||ext==".pdf"){
+				return true;
+			}else{
+				alert('salah upload file');
+				return false;
+			}
+		}
+	</script>
+	<div class="footer">
+	</div>
+	<a href="#" class="overlay" id="add_task"></a>
+	<div class="popup">
+	
+	</div>
+</body>
+</html>
