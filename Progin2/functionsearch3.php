@@ -47,7 +47,7 @@
                         }
 
                         //Now we search for our search term, in the field the user specified 
-                        $data = mysql_query("SELECT * FROM tag,tugas WHERE upper(isitag) LIKE'%$find%' AND tag.idtugas = tugas.idtugas");
+                        $data = mysql_query("SELECT * FROM tag,tugas WHERE ((upper(isitag) LIKE'%$find%') OR (upper(namatugas) LIKE'%$find%')) AND tag.idtugas = tugas.idtugas");
 
                         $rows = mysql_num_rows($data);
 
@@ -74,7 +74,7 @@
 						}
 						else
 						{
-                        $data_p = mysql_query("SELECT * FROM tag,tugas WHERE upper(isitag) LIKE'%$find%' AND tag.idtugas = tugas.idtugas $max") or die(mysql_error());
+                        $data_p = mysql_query("SELECT * FROM tag,tugas WHERE ((upper(isitag) LIKE'%$find%') OR (upper(namatugas) LIKE'%$find%')) AND tag.idtugas = tugas.idtugas $max") or die(mysql_error());
 
                         //Menampilkan hasil query 
                         while ($info = mysql_fetch_array($data_p)) {
