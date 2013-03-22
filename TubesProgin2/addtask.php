@@ -27,7 +27,7 @@ include 'header.php';
                     Name: <div class="nama"><input type="text" id="namaTask" name="namaTask" required></div><br/>
                     Attachment: <div class="attachment"><input type="file" id="newAttachmentTask" name="attachfile[]"  multiple required></div><br/>
                     Deadline: <div class="deadline"><input id="newDeadlineTask" name="newDeadlineTask" type="date" required></div><br/>
-                    Assignee: <div class="asignee"><input id="newAssigneeTask" name="newAssigneeTask" type="text" onkeyup="multiAutocomp(this, 'assignee.php', 'buattugas')" onfocusin="multiAutocompClearAll()" required></div><br/>
+                    Assignee: <div class="asignee"><input id="newAssigneeTask" name="newAssigneeTask" type="text" onkeyup="multiAutocomp(this, 'assignee.php', 'buattugas');" onfocusin="multiAutocompClearAll()" required></div><br/>
                     Tag: <div class="tag"> <input id="newTagTask" name="newTagTask" type="text" required></div> <br/>
                     <input id="newCategoryID" name="newCategoryID" type="text" hidden="true" value="<?php echo$categoryID?>">
                     <input id="newUserID" name="newUserID" type="text" hidden="true" value="<?php echo $userID ?>">

@@ -32,9 +32,13 @@ if (connectDB()) {
 
     $num_assignee = count($assigneelist);
     for ($x = 0; $x < $num_assignee - 1; $x++) {
-        $addAssigneeQuery = "INSERT INTO assignment (`IDAssignment`, `Username`, `IDTask`) 
+        $CheckAssigneeQuery = "SELECT * FROM assignment WHERE Username='" . $assigneelist[$x] . "' AND IDTask='" . $idTask . "';";
+        $CheckAssignee = mysql_query($CheckAssigneeQuery);
+        if (mysql_num_rows($CheckAssignee) == 0) {
+            $addAssigneeQuery = "INSERT INTO assignment (`IDAssignment`, `Username`, `IDTask`) 
             VALUES (NULL, '" . $assigneelist[$x] . "', '" . $idTask . "');";
-        $addAssignee = mysql_query($addAssigneeQuery);
+            $addAssignee = mysql_query($addAssigneeQuery);
+        }
     }
 
     $taglist = explode(",", $tag);

@@ -233,25 +233,10 @@ function showList3() {
     self.focus();
 }
 
-function showRinci() {
-    document.getElementById("listtugas3").style.visibility = "hidden";
-    document.getElementById("listtugas2").style.visibility = "hidden";
-    document.getElementById("listtugas").style.visibility = "hidden";
-    document.getElementById("rincitugas").style.visibility = "visible";
-    document.getElementById("edittugas").style.visibility = "hidden";
-    document.getElementById("buattugas").style.visibility = "hidden";
-    document.getElementById("wanted").style.visibility = "visible";
-    self.focus();
-}
-
 function showEdit() {
-    document.getElementById("listtugas3").style.visibility = "hidden";
-    document.getElementById("listtugas2").style.visibility = "hidden";
-    document.getElementById("listtugas").style.visibility = "hidden";
     document.getElementById("rincitugas").style.visibility = "hidden";
     document.getElementById("edittugas").style.visibility = "visible";
-    document.getElementById("buattugas").style.visibility = "hidden";
-    document.getElementById("wanted").style.visibility = "visible";
+    self.focus();
 }
 function showBuat() {
     document.getElementById("listtugas3").style.visibility = "hidden";
@@ -372,7 +357,6 @@ function Submit() {
 function multiAutocomp(input, phpscript, text) {
     var idname = "hasil_" + input.id;
     var elmt = document.getElementById(input.id);
-
     if (elmt.value.length > 0) {
 
         document.body.setAttribute("onClick", "multiAutocompHandleClick('" + text + "');");
@@ -396,7 +380,6 @@ function multiAutocomp(input, phpscript, text) {
                 console.log("Browser doesn't support AJAX");
             }
         }
-
         xmlHttp.onreadystatechange = function() {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                 var query_result = xmlHttp.responseXML.documentElement.getElementsByTagName("Data");
@@ -484,9 +467,9 @@ function multiAutocompHandleClick(text) {
     }
 }
 
-function addComment(user,IDTask) {
+function addComment(user, IDTask) {
     var comment = document.getElementById('addCommentText').value;
-    if(comment!=""){
+    if (comment != "") {
         var xmlhttp;
         if (window.XMLHttpRequest)
         {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -501,11 +484,135 @@ function addComment(user,IDTask) {
             if (xmlhttp.readyState == 4)
             {
                 var response = xmlhttp.responseText;
-                comment="";
-                document.getElementById("isikomentar").innerHTML+=response;
+                comment = "www";
+                //document.getElementById("isikomentar").innerHTML+=response;
             }
         }
-        xmlhttp.open('get', 'addcomment.php?comment=' + encodeURI(comment) + '&user=' + encodeURI(user)+'&task='+encodeURI(IDTask));
+        xmlhttp.open('get', 'addcomment.php?comment=' + encodeURI(comment) + '&user=' + encodeURI(user) + '&task=' + encodeURI(IDTask));
         xmlhttp.send(null);
     }
+}
+
+function loadcomment() {
+    var IDTask = document.getElementById("HiddenIDTask").value;
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+            var response = xmlhttp.responseText;
+            document.getElementById("komentaryey").innerHTML = response;
+        }
+    }
+    xmlhttp.open('get', 'generatecomment.php?IDTask=' + encodeURI(IDTask));
+    xmlhttp.send(null);
+
+    setTimeout('loadcomment()', 500);
+
+}
+
+function removeComment(IDComment) {
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+        }
+    }
+    xmlhttp.open('get', 'deletecomment.php?IDComment=' + encodeURI(IDComment));
+    xmlhttp.send(null);
+}
+
+function editTask(IDTask) {
+    var deadline = document.getElementById("editdeadline").value;
+    var assignee = document.getElementById("addnewassignee").value;
+    var tag = document.getElementById(id = "edittag").value;
+
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+            var response = xmlhttp.responseText;
+            window.location = "RinciTugas.php?IDTask=" + IDTask;
+        }
+    }
+    xmlhttp.open('get', 'edittask.php?deadline=' + encodeURI(deadline) + "&IDTask=" + encodeURI(IDTask) + "&assignee=" + encodeURI(assignee) + "&tag=" + encodeURI(tag));
+    xmlhttp.send(null);
+}
+
+function deleteassignee(IDAssignment,IDTask) {
+    var deadline = document.getElementById("editdeadline").value;
+    var assignee = document.getElementById("addnewassignee").value;
+    var tag = document.getElementById(id = "edittag").value;
+
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+            var response = xmlhttp.responseText;
+            document.getElementById("ListEditAssignee").innerHTML = response;
+        }
+    }
+    xmlhttp.open('get', 'deleteassignment.php?IDAssignment=' + encodeURI(IDAssignment)+'&IDTask='+encodeURI(IDTask));
+    xmlhttp.send(null);
+}
+
+function deletetag(IDTag,IDTask) {
+    var deadline = document.getElementById("editdeadline").value;
+    var assignee = document.getElementById("addnewassignee").value;
+    var tag = document.getElementById(id = "edittag").value;
+
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+            var response = xmlhttp.responseText;
+            document.getElementById("ListEditTag").innerHTML = response;
+        }
+    }
+    xmlhttp.open('get', 'deletetag.php?IDTag=' + encodeURI(IDTag)+'&IDTask='+encodeURI(IDTask));
+    xmlhttp.send(null);
 }
