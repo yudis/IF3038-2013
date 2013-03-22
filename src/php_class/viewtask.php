@@ -6,6 +6,7 @@
 	public $task;
 	public $attach;
 	public $tag;
+	public $assignee;
 	
 	/*
 	 * - tugas UDAH
@@ -32,6 +33,17 @@
 		$this->attach->append($temp);
 	  }
 	  
+	  // AMBIL assignee
+	  $sql = "SELECT * FROM accounts_has_tugas AS b, accounts AS a
+			  WHERE b.tugas_idtugas='".$x."'
+			  AND b.accounts_idaccounts = a.idaccounts";
+	  $hasil = mysql_query($sql);
+	  $temp = "";
+	  $this->assignee = new ArrayObject();
+	  while ($temp = mysql_fetch_array($hasil)) {
+		$this->assignee->append($temp);
+	  }
+	  
 	}
 	
 	public function getTask() {
@@ -42,6 +54,9 @@
 	  return $this->attach;
 	}
 	
+	public function getAssignee() {
+	  return $this->assignee;
+	}
   }
   
   

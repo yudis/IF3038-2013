@@ -15,7 +15,7 @@
 	public function CreateTask ($x, $y) {
 	  $this->POS = $x;
 	  $this->FILE = $y;
-	  $this->allowedExts = array("jpg", "jpeg", "gif", "png");
+	  $this->allowedExts = array("jpg", "jpeg", "gif", "png", "avi", "mp4", "flv", "3gp", "wmv");
 	  $this->namafile = "";
 	  $this->folder = "attachment/";
 	  $this->path = "";

@@ -15,21 +15,24 @@
 			
 				   
         </script>
+		<?php
+			/* 
+			 * 
+			 * link ke profile
+			 * attachment
+			 * 
+			 * 
+			 * 
+			 * 
+			 */	
+		?>
     </head>
     <body onload="taskawal(6);">
 		
 		<!--header (dashboard)-->
 		<?php require_once("header.php"); ?>
 		
-        <div><?php
-					
-					//foreach ($_COOKIE["lt_tugas"] as $key => $value) {
-					//	echo "<div>Key: $key; Value: ".json_encode($value)."<br>\n";
-					//}
-					
-					
-					
-					?>
+        <div>
 		</div>
         
         <div class="main">
@@ -47,19 +50,41 @@
                         <a id="deadline"><?php echo $_COOKIE["lt_tugas"]["deadline"];?></a>
                         
                         <label>ASSIGNEE</label>
-                        <a id="assignee">Faiz</a>
+						<?php
+							foreach ($_COOKIE["lt_assignee"] as $x) {
+						?>
+                        <a href ="#">
+							<?php echo $x["username"];?>
+						</a><br>
+						<?php
+							}
+						?>
                         
                         <label>TAG</label>
                         <a id="tag">KAP</a>
                         
                         <label>ATTACHMENT</label>
 						<?php
+							$extgambar = array("jpg", "jpeg", "gif", "png");
+							$extvideo = array("avi", "mp4", "flv", "3gp", "wmv");
 							foreach ($_COOKIE["lt_attachment"] as $x) {
-						?>
-                        <a href ="#" id="attach">
-							<img src="<?php echo $x["path"].$x["nama"];?>" width="200"/>
-						</a>
-						<?php
+								$extension = end(explode(".", $x["nama"]));
+								if (in_array($extension, $extgambar)) {
+									echo '
+										<a href ="#" id="">
+											<img src="'.$x["path"].$x["nama"].'" width="200"/>
+										</a>
+									';
+								} else
+								if (in_array($extension, $extvideo)) {
+									echo '
+										<a href ="#" id="">
+											<video width="320" height="240" controls>
+												<source src="'.$x["path"].$x["nama"].'">
+											</video> 
+										</a>
+									';
+								}
 							}
 						?>
                     

@@ -29,9 +29,12 @@
 	
 	$_COOKIE["lt_tugas"] = $vt->getTask();
 	$_COOKIE["lt_attachment"] = $vt->getAttachment();
+	$_COOKIE["lt_assignee"] = $vt->getAssignee();
 	
-	//
-	//foreach ($task as $key => $value) {
+	
+	//echo json_encode($vt->getAssignee());
+	//$aaa = $vt->getAssignee();
+	//foreach ($aaa as $key => $value) {
 	//  echo "Key: $key; Value: ".json_encode($value)."<br />\n";
 	//}
 	
