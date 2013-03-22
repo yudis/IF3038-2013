@@ -468,7 +468,7 @@ function update(){
 	showKategori();
 }
 
-setInterval(function(){update();},5000)
+//setInterval(function(){update();},5000)
 
 function Loginaja(){
 	//Variable for authentication
@@ -517,4 +517,12 @@ function profileRestore() {
    document.body.removeChild(document.getElementById("overlay"));
    document.getElementById('edit').style.display='none';
    // document.getElementById('overlay').style.display='none';
+}
+
+function UpdateDB(){
+	var done = document.getElementsByName('status_done').value;
+	var notdone = document.getElementsByName('status_notdone').value;
+	if(done.checked = true){
+		
+	}
 }
