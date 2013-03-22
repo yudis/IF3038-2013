@@ -30,11 +30,19 @@
 	$_COOKIE["lt_tugas"] = $vt->getTask();
 	$_COOKIE["lt_attachment"] = $vt->getAttachment();
 	$_COOKIE["lt_assignee"] = $vt->getAssignee();
+	$_COOKIE["lt_tag"] = $vt->getTag();
+	$_COOKIE["lt_komen"] = $vt->getKomen();
+	$_COOKIE["lt_komentator"] = $vt->getKomentator();
 	
+	//echo var_dump($vt->getTag());
 	
 	//echo json_encode($vt->getAssignee());
-	//$aaa = $vt->getAssignee();
+	//$aaa = $vt->getKomentator();
+	//$bbb = $vt->getKomen();
 	//foreach ($aaa as $key => $value) {
+	//  echo "Key: $key; Value: ".json_encode($value)."<br />\n";
+	//}
+	//foreach ($bbb as $key => $value) {
 	//  echo "Key: $key; Value: ".json_encode($value)."<br />\n";
 	//}
 	

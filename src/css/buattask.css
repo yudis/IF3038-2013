@@ -56,15 +56,15 @@
 }
 #formtask{
     padding-top: 30px;
+    padding-bottom: 30px;
     width: 485px;
-    height: 575px;
     background-color: #ececec;
     border-radius:20px;
     -moz-border-radius:20px;
     -webkit-border-radius:20px;
     box-shadow: 1px 1px 5px 0px #e1e1e1;
     margin-left: 300px;
-    margin-top: -165px;
+    
 }
 #rinciantugas{
     padding-top: 30px;
@@ -76,12 +76,16 @@
 }
 
 .daftarkomen{
-    width: 100%;
+    width: 100%-10px;
     color: #333333;
     padding-top: 20px;
     padding-bottom: 20px;
+    padding-left: 10px;
     margin-bottom: 10px;
     font-family: Calibri;
+    border-radius: 0px;
+   -moz-border-radius:0px;
+    -webkit-border-radius:0px;
 }
 
 textarea{
@@ -111,8 +115,8 @@ textarea{
 }
 .attachment {
     width: 390px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
 #divattachment {
     width: 390px;
@@ -126,7 +130,7 @@ textarea{
     vertical-align: top;
 }
 #kolom2 {
-    width: 340px;
+    width: 365px;
 }
 #kolom3 {
     width: 400px;
@@ -137,7 +141,7 @@ textarea{
     width: 960px;
 }
 .tombol {
-    width: 150px;
+    width: 125px;
     height: 68px;
     margin-bottom: 10px;
 }
@@ -158,4 +162,56 @@ textarea{
     box-shadow: 0px 2px 2px 1px #000; */
     -webkit-box-shadow: 1px 1px 5px 0px #aaa;
     box-shadow: 0px 1px 5px 0px #aaa; 
+}
+
+.btag {
+   /* -webkit-box-shadow:  0 0 5px rgba(0,0,0,0.5);
+    -moz-box-shadow:  0 0 5px rgba(0,0,0,0.5);
+    box-shadow:  0 0 5px rgba(0,0,0,0.5);*/
+    border-radius:10px;
+    text-align: center;
+    font-size: 20px;
+    background-color: #e58100;
+    padding: 3px 10px 3px 10px;
+}
+
+.btag:hover {
+    background-color: #361a2c;
+    color: #e58100;
+    
+}
+
+.komenkolom {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: top;
+}
+.komennama {
+    text-decoration: none;
+    color: #000;
+    font-size: large;
+    margin-bottom: 100px;
+}
+.komenkomen {
+    width: 250px;
+}
+.komenwaktu {
+    margin-top: 20px;
+    text-decoration: none;
+    font-style: italic;
+    color: #666;
+}
+.komenava {
+    width: 50px;
+}
+.komenava:hover {
+    -webkit-box-shadow:  0px 0px 5px 2px #e58100;
+    -moz-box-shadow:   0px 0px 5px 2px #e58100;
+    box-shadow:  0px 0px 5px 2px #e58100;
+}
+.komennama:hover {
+    color: #e58100;
+}
+a:visited {
+    color: #000;
 }

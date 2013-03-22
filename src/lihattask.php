@@ -49,7 +49,9 @@
 						
 							<label>DEADLINE</label>
 							<a id="deadline"><?php echo $_COOKIE["lt_tugas"]["deadline"];?></a>
-							
+							<br>
+							<br>
+								
 							<label>ASSIGNEE</label>
 							<?php
 								foreach ($_COOKIE["lt_assignee"] as $x) {
@@ -60,10 +62,17 @@
 							<?php
 								}
 							?>
+							<br>
 							
 							<label>TAG</label>
-							<a id="tag">KAP</a>
-							
+							<?php
+								foreach ($_COOKIE["lt_tag"] as $x) {
+							?>
+							<button class="btag" value=""><?php echo $x["nama"];?></button>
+							<?php
+								}
+							?>
+							<br>
 							
 						
 					</div>
@@ -87,29 +96,39 @@
 					</div>-->
 				</div>
 				<div id="komen">
-                <div class="daftarkomen kotakwarna">
-                   Faiz :<br>
-                   Gimana nih udah kelar belum tubesnya ?
-                </div>
-                <div class="daftarkomen kotakwarna">
-                   Fandi :<br>
-                   Bentar nih gw masih main tenis
-                </div>
-                <div class="daftarkomen kotakwarna">
-                   Faiz :<br>
-                   ah yang bener lah
-                </div>
-                <form>
-                    <div id="submitkomen">
-                        <label>submit comment</label>
-                        <textarea name="comment" type="comment" placeholder="comment" class="isikomen"></textarea>
-						<br>
-                        <input class= "submitreg" name="submit" type="submit" onclick="http://google.com" value="Submit">
-                    </div>
-                </form>
-            </div>
-			
-			
+					<?php
+						$count = 0;
+						foreach ($_COOKIE["lt_komen"] as $x) {
+							$datetime = strtotime($x['CREATED']);
+							$mysqldate = date("H:i - d F", $datetime);
+					?>
+					<div class="kotakwarna daftarkomen ">
+						<div>
+							<div class="komenkolom">
+								<a href=""><img class="komenava" src="<?php echo ($_COOKIE["lt_komentator"][$count]['avatar']) ?>"/></a>
+							</div>
+							<div class="komenkolom komenkomen">
+								<a href="#" class="komennama"><?php echo ($_COOKIE["lt_komentator"][$count]['username'])."<BR>"; ?></a>
+								<p><?php echo $x['isi']; ?></p>
+							</div>
+						</div>
+						<div class="komenwaktu">
+							<a><?php echo $mysqldate; ?></a>
+						</div>
+					</div>
+					<?php
+							$count++;
+						}
+					?>
+					<form>
+						<div id="submitkomen">
+							<label>submit comment</label>
+							<textarea name="comment" type="comment" placeholder="comment" class="isikomen"></textarea>
+							<br>
+							<input class= "submitreg" name="submit" type="submit" onclick="http://google.com" value="Submit">
+						</div>
+					</form>
+				</div>
 			</div>
 			<div id="kolom3" class="kolom kotakwarna">
 				<div id="divattachment">
