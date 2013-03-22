@@ -42,6 +42,12 @@ $id_cat= $_GET['cat'];
                     
 					<div class="register-label">Deadline</div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="deadline" id="form-tgl" onkeyup="validate()" /></div><div id="caldad"><div id="calendar"></div><a href="javascript:showcal(2,2012);void(0);"><img src="images/cal.gif" alt="Calendar" /></a></div>
                     
+                   
+					<div class="clear" id="error-tgl"></div>
+                    
+                    <div class="register-label"></div><div class="register-td">: </div><div class="register-input"> <div><input type="time" name="time" /></div></div><div id="caldad"><div id="calendar"></div></div>
+                    
+                   
 					<div class="clear" id="error-tgl"></div>
                     
 					<div class="register-label">Asignee</div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="asignee" id="asignee"/></div>
