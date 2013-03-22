@@ -11,7 +11,7 @@
 
 	$birth_date = new Datetime($user->birthdate);
 
-	$this->header('Profile', 'profile');
+	$this->header('Profile', $id? '' : 'profile');
 ?>	
 	<div class="content">
 		<div class="profile">
