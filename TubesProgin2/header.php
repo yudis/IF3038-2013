@@ -20,7 +20,7 @@ if (!isset($_COOKIE['UserLogin'])) {
 
 <?php
 if (connectDB()) {
-    $queryProfile = "SELECT* FROM user WHERE Username='" . $_SESSION['username'] . "'";
+    $queryProfile = "SELECT* FROM user WHERE Username='" . $_COOKIE['UserLogin'] . "'";
     $result = mysql_query($queryProfile);
     $data = mysql_fetch_array($result);
 
@@ -36,7 +36,7 @@ if (connectDB()) {
     <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
     <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
 
-    <div id="profile"><a title="Go to Profile" href="profile.php"><?php echo $uname ?></a></div>
+    <div id="profile"><a title="Go to Profile" href="profile.php?user='<?php echo ($_COOKIE['UserLogin']) ?>'"><?php echo $uname ?></a></div>
     <div id="logout"><a title="Log out from here" href="logout.php">Log Out</a></div>
     <form id="search">
         <input type="text" name="Search" id="box">

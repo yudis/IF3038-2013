@@ -19,7 +19,6 @@ and open the template in the editor.
         </header>
 
         <div id="category">
-
         </div> 
 
         <div id ="listtugas" class="list">
@@ -28,18 +27,6 @@ and open the template in the editor.
 
         <div id="addCat">
             <a onclick="addCategory();">+ category</a>
-        </div>
-
-        <datalist id="assignee">
-            <option value="Frilla" />
-            <option value="Stefan" />
-            <option value="Timo" />
-            <option value="Yosef" />
-            <option value="Hasby" />
-        </datalist>
-
-        <div id="wanted">
-            <img src="img/kertas2.png">
         </div>
 
         <div id='add'>

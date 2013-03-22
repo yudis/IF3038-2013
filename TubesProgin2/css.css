@@ -22,6 +22,7 @@ header {
     height: 35px;
     position: absolute;
     background-color: #000000;
+    box-shadow: 0px 5px 30px #000000;
 }
 
 header a {
@@ -92,7 +93,7 @@ input.liusername{
     width: 170px;
     height: 205px;
     float: left;
-    background-image: url('img/tugasHover.png');
+    cursor: pointer;
 }
 
 .addTask {
@@ -121,11 +122,12 @@ input.liusername{
     background-color: black;
     -webkit-border-radius: 10px 10px 10px 10px;
     border-bottom: 15px;
-	opacity: 0.8;
+    opacity: 0.8;
 }
 
 .kategori:hover {
     opacity: 1;
+    cursor: pointer;
 }
 
 
@@ -142,6 +144,10 @@ input.liusername{
     overflow: auto;
     color: white;
     font-size: 16pt;
+}
+
+.kategory a, a:visited{
+    color:white;
 }
 
 .tugas {
@@ -164,12 +170,13 @@ input.liusername{
     top: 75px;
     background-color:transparent;
     border:0px;
+    overflow: hidden;
     left: 700px;
     padding: 50px;
     margin-left: 100px;
     background-image: url('img/kertas.png');
     width: 350px;
-    height: 443px;
+    height: 430px;
 }
 
 #nama {
@@ -249,7 +256,7 @@ textArea {
     left: 250px;
     padding: 0px;
     margin-left: 100px;
-    overflow: auto;
+    overflow: hidden;
     width: 850px;
     height: 603px;
     visibility: hidden;
@@ -270,6 +277,7 @@ textArea {
     padding-top: 5px;
     position: absolute;
     padding-left: 35px;
+    cursor: pointer;
 }
 
 
