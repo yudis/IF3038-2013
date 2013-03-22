@@ -1,4 +1,10 @@
 <?php
+	session_start();
+	ob_start();
+	if (isset($_SESSION['username'])) {
+		$username = $_SESSION['username']; 
+	}
+	
 	/* Configuring Server & Database */
 	$host        =    'localhost';
 	$user        =    'root';
@@ -11,6 +17,13 @@
 	
 	/* Get the task id we're going to generate to the HTML page */
 	$q	= $_GET["q"];
+	$deleteComment = $_GET["delComment"];
+	
+	if ($deleteComment != "") {
+		//delete comment
+		$query = "DELETE FROM `comment` WHERE comment_id='$deleteComment'";
+		mysql_query($query);
+	}
 	
 	/* Searching for Task */
 	$query 	= "SELECT * FROM task WHERE task_id='$q';";
@@ -29,14 +42,17 @@
 		//Get 'comment'		
 		unset($commentContent);
 		$commentContent = array();
+		unset($commentID);
+		$commentID = array();
 		unset($commentCreator);
 		$commentCreator = array();
 		unset($commentTime);
 		$commentTime = array();
 		
-		$comment_query = "SELECT comment_content, comment_creator, comment_timestamp from comment WHERE task_id='$taskID'";
+		$comment_query = "SELECT comment_id, comment_content, comment_creator, comment_timestamp from comment WHERE task_id='$taskID'";
 		$comment_result = mysql_query($comment_query);
 		while ($comment_row = mysql_fetch_array($comment_result, MYSQL_ASSOC)) {
+			$commentID[] = $comment_row['comment_id'];
 			$commentContent[] = $comment_row['comment_content'];
 			$commentCreator[] = $comment_row['comment_creator'];
 			$commentTime[]    = $comment_row['comment_timestamp'];
@@ -131,8 +147,11 @@
 					".$commentCreator[$i].
 					"<br>".$date."
 					</div>
-					<div id='comment_rtd' class='left dynamic_content_right'>".$commentContent[$i]."</div>
-				</div>";
+					<div id='comment_rtd' class='left dynamic_content_right'>".$commentContent[$i]."</div>";
+				if ($commentCreator[$i] == $username) {
+					$response = $response."<img src='../img/done.png' onclick='javascript:deleteComment(\"$q\",\"$commentID[$i]\")' class='cursorPointer' alt=''>";
+				}
+				$response = $response."</div>";
 			}
 		}	
 		$response = $response.

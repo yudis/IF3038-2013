@@ -1,7 +1,10 @@
 <?php
 	session_start();
 	ob_start();
-
+	if (isset($_SESSION['username'])) {
+		$username = $_SESSION['username']; 
+	}
+	
 	/* Configuring Server & Database */
 	$host        =    'localhost';
 	$user        =    'root';
@@ -10,10 +13,6 @@
 
 	$con        =    mysql_connect($host,$user,$password) or die('Server information is not correct.');
 	mysql_select_db($database,$con) or die('Database information is not correct');
-
-	if (isset($_SESSION['username'])) {
-		$username = $_SESSION['username']; 
-	}
 	
 	$categoryID = $_POST['delete_category_id'];
 	$categoryName = $_POST['delete_category_name'];

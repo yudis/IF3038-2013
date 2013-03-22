@@ -335,7 +335,7 @@ function viewTask(i) {
 			document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
 		}
 	}	
-	xmlhttp.open("GET","view_task_script.php?q="+i,true);
+	xmlhttp.open("GET","view_task_script.php?q="+i+"&delComment=",true);
 	xmlhttp.send();
 }
 
@@ -356,6 +356,27 @@ function deleteCategory(catID) {
 			}
 		}	
 		xmlhttp.open("GET","delete_category.php?q=all&taskdone=1&taskid="+i,true);
+		xmlhttp.send();
+	}
+}
+
+function deleteComment(i, commentID) {
+	var deleteConfirm = confirm("Are you sure you want to delete this comment?");
+	if (deleteConfirm == true)
+	{
+		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}
+		else {// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		xmlhttp.onreadystatechange=function() {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
+			}
+		}	
+		xmlhttp.open("GET","view_task_script.php?q="+i+"&delComment="+commentID,true);
 		xmlhttp.send();
 	}
 }
