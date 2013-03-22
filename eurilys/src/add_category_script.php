@@ -37,6 +37,8 @@
 			$query2 	= "INSERT INTO `cat_asignee`(`cat_id`, `username`) VALUES ('$categoryID','$assigneeArray[$i]')";
 			$result2	= mysql_query($query2);
 		}
+		
+		
 		header('location:dashboard.php');
 	}
 
