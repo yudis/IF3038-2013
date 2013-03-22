@@ -98,6 +98,37 @@
 			}
 		</script>
 		<script>
+			function changeStatus(idtugas){
+				var find = document.search.find.value;
+				var searching = document.search.searching.value;
+				var field = document.search.field.value;
+				var xmlhttp;
+				document.getElementById("task3").innerHTML="";
+				if (find.length==0) { 
+					  document.getElementById("task3").innerHTML="";
+					  return;
+				}
+				if (window.XMLHttpRequest) {
+				  // code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				}
+				else {
+				  // code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					document.getElementById("task3").innerHTML=xmlhttp.responseText;
+				  }
+				  
+				}
+				
+				xmlhttp.open("GET","changestatussearch2.php?find="+find+"&searching="+searching+"&field="+field+"&q="+idtugas,true);
+				
+				xmlhttp.send();
+			}
+		</script>
+		<script>
 			function searchWords(){
 					searchWord1();
 					searchWord2();
@@ -232,43 +263,7 @@
 
             <div id="category">
                 <div id="category_head">
-                    Kategori
-                </div>
-
-                <div class="category_block" id="k1" onclick="showK1()">
-                    <div class="category_pic">
-                        <img src="images/Book-icon.png" alt=""/>
-                    </div>
-                    <div class="category_name">
-                        Kuliah
-                    </div>
-                </div>
-
-                <div class="category_block" id="k2" onclick="showK2()">
-                    <div class="category_pic">
-                        <img src="images/Book-icon.png" alt=""/>
-                    </div>
-                    <div class="category_name">
-                        Eksperimen
-                    </div>
-                </div>
-
-                <div class="category_block" id="k3" onclick="showK3()">
-                    <div class="category_pic">
-                        <img src="images/menguasai-dunia.png" alt=""/>
-                    </div>
-                    <div class="category_name">
-                        Menguasai Dunia
-                    </div>
-                </div>
-
-                <div class="category_block" id="tambah_kategori" onclick="location.href='#category_form'">
-                    <div class="category_pic">
-                        <img src="images/tambah.png" alt=""/>
-                    </div>
-                    <div class="category_name">
-                        Tambah kategori...
-                    </div>
+                    Hasil Search
                 </div>
             </div>
             <div id="task1">
