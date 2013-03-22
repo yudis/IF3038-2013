@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 3.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 22, 2013 at 07:44 AM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Host: localhost
+-- Generation Time: Mar 22, 2013 at 09:38 AM
+-- Server version: 5.5.25a
+-- PHP Version: 5.4.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -94,19 +94,6 @@ INSERT INTO `have_tags` (`id_task`, `id_tag`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `have_task`
---
-
-CREATE TABLE IF NOT EXISTS `have_task` (
-  `id_user` int(10) NOT NULL,
-  `id_task` int(10) NOT NULL,
-  PRIMARY KEY (`id_user`,`id_task`),
-  KEY `id_task` (`id_task`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `kategori`
 --
 
@@ -165,19 +152,21 @@ CREATE TABLE IF NOT EXISTS `task` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `deadline` date NOT NULL,
   `id_kategori` int(10) NOT NULL,
+  `id_user` int(10) NOT NULL,
   PRIMARY KEY (`id_task`),
-  KEY `id_kategori` (`id_kategori`)
+  KEY `id_kategori` (`id_kategori`),
+  KEY `id_user` (`id_user`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `task`
 --
 
-INSERT INTO `task` (`id_task`, `nama_task`, `status`, `deadline`, `id_kategori`) VALUES
-(1, 'Tugas 2', 1, '2013-03-14', 5),
-(3, 'Tugas 3', 0, '2013-03-15', 5),
-(4, 'Tugas 3', 0, '2013-03-14', 5),
-(5, 'Tugas 4', 0, '2013-03-14', 5);
+INSERT INTO `task` (`id_task`, `nama_task`, `status`, `deadline`, `id_kategori`, `id_user`) VALUES
+(1, 'Tugas 2', 1, '2013-03-14', 5, 2),
+(3, 'Tugas 3', 0, '2013-03-15', 5, 2),
+(4, 'Tugas 3', 0, '2013-03-14', 5, 2),
+(5, 'Tugas 4', 0, '2013-03-14', 5, 2);
 
 -- --------------------------------------------------------
 
@@ -250,13 +239,6 @@ ALTER TABLE `have_tags`
   ADD CONSTRAINT `have_tags_ibfk_2` FOREIGN KEY (`id_tag`) REFERENCES `tag` (`id_tag`);
 
 --
--- Constraints for table `have_task`
---
-ALTER TABLE `have_task`
-  ADD CONSTRAINT `have_task_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
-  ADD CONSTRAINT `have_task_ibfk_4` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`);
-
---
 -- Constraints for table `kategori`
 --
 ALTER TABLE `kategori`
@@ -266,7 +248,8 @@ ALTER TABLE `kategori`
 -- Constraints for table `task`
 --
 ALTER TABLE `task`
-  ADD CONSTRAINT `task_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`);
+  ADD CONSTRAINT `task_ibfk_3` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `task_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
 -- Constraints for table `task_attachment`

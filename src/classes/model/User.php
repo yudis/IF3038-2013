@@ -81,7 +81,7 @@
 			if ($this->id_user==null)
 			{
 				// new user
-				if (User::model()->find("username='".$this->username."' OR email='".$this->email."'")->data)
+				if (User::model()->find("username='".addslashes($this->username)."' OR email='".addslashes($this->email)."'")->data)
 				{
 					// username and email already used
 					return false;
@@ -90,9 +90,9 @@
 				{
 					$result = DBConnection::DBquery("INSERT INTO `".self::tableName()."`".
 													" (username, email, fullname, avatar, birthdate, password)".
-													" VALUES ('".$this->username."','".$this->email."',
-														'".$this->fullname."','".$this->avatar."',
-														'".$this->birthdate."','".md5($this->password)."')");
+													" VALUES ('".addslashes($this->username)."','".addslashes($this->email)."',
+														'".addslashes($this->fullname)."','".$this->avatar."',
+														'".addslashes($this->birthdate)."','".md5($this->password)."')");
 
 					return $result;
 				}
@@ -108,9 +108,9 @@
 				else
 				{
 					$result = DBConnection::DBquery("UPDATE `".self::tableName()."` SET ".
-													" username = '".$this->username."', email = '".$this->email."'".
-													", fullname = '".$this->fullname."', avatar = '".$this->avatar."'".
-													", birthdate = '".$this->birthdate."', password = '".md5($this->password)."'");
+													" username = '".addslashes($this->username)."', email = '".addslashes($this->email)."'".
+													", fullname = '".addslashes($this->fullname)."', avatar = '".$this->avatar."'".
+													", birthdate = '".addslashes($this->birthdate)."', password = '".md5($this->password)."'");
 
 					return $result;
 				}
@@ -134,31 +134,21 @@
 		{
 			return Task::model()->findAll("id_task IN (SELECT id_task FROM assign WHERE id_user='" . $this->id_user . "')");
 		}
-		
+				
 		/**
-		 * Get the category supervised by the user
-		 * @return array of Category that is supervised by the user
+		 * Get the category either created or supervised by the user
+		 * @return array of Category that is either created or supervised by the user
 		 */
-		public function getSupervisedCategory() 
+		public function getCategories() 
 		{
-			return Category::model()->findAll("id_kategori IN (SELECT id_katego FROM edit_kategori WHERE id_user='" . $this->id_user . "')");
-		}
-		
-		/**
-		 * Get the category created by the user
-		 * @return array of Category that is created by the user
-		 */
-		public function getCreatedCategory() 
-		{
-			return Category::model()->findAll("id_user='" . $this->id_user . "'");
-		}
-
-		public function getCategories() {
 			$id = addslashes($this->id_user);
-			return Category::model()->findAll("id_user='$id' OR id_kategori IN (SELECT id_katego FROM edit_kategori WHERE id_user='$id')");
+			return Category::model()->findAll("id_user='$id' OR id_kategori IN (SELECT id_kategori FROM edit_kategori WHERE id_user='$id') ".
+											"OR id_kategori IN (SELECT id_kategori FROM ". Task::tableName() ." AS t LEFT OUTER JOIN assign AS a ".
+											"ON t.id_task=a.id_task WHERE t.id_user = '". $id ."' OR a.id_user = '". $id ."' )");
 		}
-
-		public function findByUsername($username) {
+		
+		public function findByUsername($username) 
+		{
 			return $this->find("username='" . addslashes($username) . "'");
 		}
 	}

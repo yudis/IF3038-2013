@@ -133,5 +133,14 @@
 			//TODO implement Attachment model
 			return Attachment::model()->find("id_task = ".$this->id_task);
 		}
+		
+		/**
+		 * Get the assignee in the task
+		 * @return array of User that is asignee of task
+		 */
+		public function getAssignee()
+		{
+			return User::model()->findAll("id_user IN (SELECT id_user FROM assign WHERE id_task = '" . $this->id_task . "')", array("id_user", "username"));
+		}
 	}
 ?>

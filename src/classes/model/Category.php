@@ -53,8 +53,6 @@
 			if ($this->id==null)
 			{
 				// new category
-				DBConnection::openDBconnection();
-				
 				$insert = "INSERT INTO %s (id_kategori, nama_kategori, id_user) VALUES (0, '%s', '%d')";
 				$insert = sprintf($insert, $this->tableName(), addslashes($this->nama_kategori), $this->id_user);
 
@@ -65,15 +63,22 @@
 				else
 					return false;
 
-				// $result = DBConnection::DBquery("INSERT into ".tableName()."");
-
-				//DBConnection::closeDBconnection();
-
 				return $result;
 			}
 			else
 			{
 				// existing category
+				$insert = "UPDATE %s SET (id_kategori, nama_kategori, id_user) VALUES (0, '%s', '%d')";
+				$insert = sprintf($insert, $this->tableName(), addslashes($this->nama_kategori), $this->id_user);
+
+				$success = DBConnection::DBquery($insert);
+
+				if ($success)
+					$this->id_kategori = DBConnection::insertID();
+				else
+					echo 'Fail';
+
+				return $result;
 			}
 		}
 		
@@ -84,6 +89,26 @@
 		public function getTasks() 
 		{
 			return Task::model()->findAll("id_kategori='" . $this->id_kategori . "'");
+		}
+		
+		/**
+		 * Get if category is editable or not
+		 * @return boolean
+		 */
+		public function getEditable($id_user) 
+		{
+			$id_user = addslashes($id_user);
+			return (User::model()->find("id_user IN (SELECT id_user FROM edit_kategori WHERE id_kategori='" . $this->id_kategori . "' AND id_user ='"+id_user+"')")) ? true : false ;
+		}
+		
+		/**
+		 * Check if category deletable or not
+		 * @return boolean
+		 */
+		public function getDeletable($id_user)
+		{
+			$id_user = addslashes($id_user);
+			return ($this->id_user == $id_user) ? true : false ;
 		}
 	}
 ?>

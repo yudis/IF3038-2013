@@ -48,6 +48,8 @@ section h3 {
 }
 .content > div > header > ul li {
 	display: inline-block;
+	float:left;
+	margin: 0 6px;
 }
 .content > div > header > ul li a {
 	color: #999;
@@ -176,7 +178,7 @@ button:active {
 .site-footer {
 	clear: both;
 	background: #fff;
-	padding: 20px;
+	padding: 10px;
 	margin-bottom: 40px;
 	font-size: 12px;
 	color: #999;
@@ -473,7 +475,7 @@ button:active {
 }
 .detail-label {
 	color: #666;
-	min-width: 5em;
+	min-width: 7em;
 	display: inline-block;
 }
 p.description .detail-label {
@@ -803,7 +805,6 @@ p.description .detail-label {
     top: 0px;
     display: none;
 	padding: 4px;
-	width: 0px;
 	overflow: hidden;
 	background-color: #ffffff;
 	border: 1px solid #444444;

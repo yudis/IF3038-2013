@@ -10,6 +10,7 @@ var datePicker =
 	today : null,
 	thisYear : null,
 	thisMonth : null,
+	choosing: false,
 	
 	/*******************
 	  INITIALIZATIONS
@@ -21,6 +22,10 @@ var datePicker =
 		this.destinationForm = destinationForm;
 		this.initDate();
 		this.populateTable(thisMonth, thisYear);
+		document.getElementById("birth_date").onblur = function()
+		{
+			datePicker.blur();
+		}
 	},
 	// create dynamic list of year choices
 	initDate : function() 
@@ -72,7 +77,6 @@ var datePicker =
 				this.calendarDiv.style.top = position.top + elem.offsetHeight + "px";
 				this.calendarDiv.style.left = position.left - (elem.offsetWidth/2) + 50 + "px";
 				this.calendarDiv.style.display = "block";
-				setTimeout(function () {datePicker.calendarDiv.style.width = "212px";}, 150);
 			} else 
 			{
 				this.calendarDiv.style.display = "none";
@@ -154,23 +158,28 @@ var datePicker =
 	********************/
 	chooseDate : function(date, month, year) 
 	{
+		choosing = true;
 		var tempdate = (date<10) ? "0":"";
 		var temp = ((month+1)<10) ? "0":"";
 		var result = year + "-" + temp + (month+1) + "-" + tempdate + date;
 		this.destinationForm.birth_date.value = result;
 		this.blur();
 		
-		/*if ((birth_date.checkValidity()) && (check_date(birth_date.value)))
-			birth_date.style.backgroundImage = "url('"+base_url+"images/valid.png')";
+		if ((birth_date.checkValidity()) && (check_date(birth_date.value)))
+			birth_date.className = "";
 		else
-			birth_date.style.backgroundImage = "url('"+base_url+"images/warning.png')";*/
-		//check_submit();
+			birth_date.className = "invalid";
+		check_submit();
+		choosing = false;
 	},
 	
 	blur: function()
 	{
-		setTimeout(function () {datePicker.calendarDiv.style.width = "0px";}, 250);
-		setTimeout(function () {datePicker.calendarDiv.style.display = "none";}, 400);
+		setTimeout(function()
+		{
+			while(this.choosing);
+			datePicker.calendarDiv.style.display = "none";
+		},100);
 	},
 	
 	prevMonth: function()

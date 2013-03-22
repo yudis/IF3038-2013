@@ -1,10 +1,11 @@
 <?php
-if ($this->loggedIn) {
-	header('Location: dashboard');
-	return;
-}
+	if ($this->loggedIn) 
+	{
+		header('Location: dashboard');
+		return;
+	}
 
-$this->header();
+	$this->header();
 ?>
 		<div class="content">
 			<div class="index">	
@@ -50,8 +51,10 @@ $this->header();
 								</div>
 								<div class="clear"></div>
 							</div>
-							<h2>Easy Task Management</h2>
-							<p>DO lets you focus on the things you're supposed to do.</p>
+							<?php
+								//<h2>Easy Task Management</h2>
+								//<p>DO lets you focus on the things you're supposed to do.</p>
+							?>
 						</div>
 					</section>
 				</div>
@@ -102,7 +105,7 @@ $this->header();
 
 		</div>
 		<?php
-			$this->loadTemplate("calendar");
+			$this->calendar();
 		?>
 <?php
 $this->requireJS('index');
@@ -110,5 +113,5 @@ $this->requireJS('datepicker');
 $this->requireJS('request');
 $this->requireJS('login');
 $this->requireJS('register');
-$this->requireJS('checker');
+//$this->requireJS('checker');
 $this->footer(array());

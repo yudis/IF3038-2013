@@ -1,6 +1,3 @@
-username = 'admin';
-password = 'admin';
-
 Rp(function() {
 	genComment = function(author, body) {
 		article = document.createElement('article');

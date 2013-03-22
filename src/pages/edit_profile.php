@@ -1,16 +1,16 @@
 <?php
-if (!$this->loggedIn) {
-	header('Location: index');
-	return;
-}
+	if (!$this->loggedIn) 
+	{
+		header('Location: index');
+		return;
+	}
 
-$this->header('Profile', 'profile');
+	$id = $_SESSION['user_id'];
+	$user = User::model()->find("id_user = ".$id, array("username","email","fullname","avatar","birthdate"));
 
-$id = $_SESSION['user_id'];
-$user = User::model()->find("id_user = ".$id, array("username","email","fullname","avatar","birthdate"));
+	$birth_date = new Datetime($user->birthdate);
 
-$birth_date = new Datetime($user->birthdate);
-
+	$this->header('Profile', 'profile');
 ?>	
 	<div class="content">
 		<div class="profile">
@@ -42,7 +42,7 @@ $birth_date = new Datetime($user->birthdate);
 					</div>
 					<div class="field">
 						<label for="edit_avatar">Avatar</label>
-						<input id="edit_avatar" name="avatar" type="file" title="Avatar yang diupload harus berekstensi jpg atau jpeg." required>
+						<input id="edit_avatar" name="avatar" type="file" title="Avatar yang diupload harus berekstensi jpg atau jpeg.">
 					</div>
 					<br />
 					<div class="field buttons">
@@ -52,5 +52,10 @@ $birth_date = new Datetime($user->birthdate);
 			</section>
 		</div>
 	</div>
+	<?php
+		$this->loadTemplate("calendar");
+	?>
 <?php
+$this->requireJS('datepicker');
+$this->requireJS('checker_profile');
 $this->footer(array());

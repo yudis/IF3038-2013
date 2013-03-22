@@ -1,7 +1,8 @@
 var currentCat;
 var canDelete;
 
-Rp(function() {
+Rp(function() 
+{
 
 	if (currentCat === undefined || !currentCat) {
 		Rp('#addTaskLi').hide();
@@ -11,7 +12,8 @@ Rp(function() {
 		Rp('#deleteCategoryLi').hide();
 	}
 
-	createTaskElement = function(task) {
+	createTaskElement = function(task) 
+	{
 		// Parse and validate param
 		if (task.tags === undefined)
 			task.tags = [];
@@ -105,19 +107,36 @@ Rp(function() {
 				fillTasks(response.tasks);
 
 				Rp('#categoryList li.active').removeClass('active');
-				if (response.categoryID) {
+				if (response.categoryID) 
+				{
 					Rp('#categoryTasks').show();
 					li = Rp('#categoryLi' + response.categoryID);
 					li.addClass('active');
 					Rp('#pageTitle').text(response.categoryName);
 
 					if (response.canDeleteCategory)
-						Rp('#deleteCategoryLi').show()
+					{
+						document.getElementById('addTaskLi').style.display = "block";
+						document.getElementById('deleteCategoryLi').style.display = "block";
+					}
+					else if (response.canEditCategory)
+					{
+						document.getElementById('addTaskLi').style.display = "block";
+						document.getElementById('deleteCategoryLi').style.display = "none";
+					}
+					else
+					{
+						document.getElementById('addTaskLi').style.display = "none";
+						document.getElementById('deleteCategoryLi').style.display = "none";
+					}
 				}
-				else {
-					Rp('#deleteCategoryLi').hide();
-					Rp('#addTaskLi').hide();
+				else 
+				{
+					document.getElementById('addTaskLi').style.display = "none";
+					document.getElementById('deleteCategoryLi').style.display = "none";
 					Rp('#pageTitle').text('All Tasks');
+					li = Rp('#categoryLi0');
+					li.addClass('active');
 				}
 			}
 			else {
@@ -130,9 +149,10 @@ Rp(function() {
 		}
 	}
 
-	loadCategory = function(catid) {
+	loadCategory = function(catid) 
+	{
 		currentCat = catid;
-		if (catid) {
+		if (catid!=0) {
 			catreq.get('api/retrieve_tasks?category_id=' + catid);
 		}
 		else {

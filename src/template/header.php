@@ -12,7 +12,7 @@
 	<body>
 		<div class="site-container">
 			<header class="site-header">
-				<h1><a href="dashboard.html"><?php echo $this->appName ?></a></h1>
+				<h1><a href="dashboard"><?php echo $this->appName ?></a></h1>
 				<p><?php echo $this->appTagline ?></p>
 
 				<?php if ($this->loggedIn): ?>
@@ -35,7 +35,7 @@
 					</ul>
 
 					<div class="search-box">
-						<form action="search.php" method="get" id="searchForm">
+						<form action="search" method="get" id="searchForm">
 							<select name="type">
 								<option value="all">All</option>
 								<option value="user">Users</option>

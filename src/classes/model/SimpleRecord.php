@@ -70,7 +70,7 @@
 			{
 				$select = "*";
 			}
-			$result = DBConnection::DBquery("SELECT ".$select." FROM ".$this->tableName().$query);
+			$result = DBConnection::DBquery("SELECT ".$select." FROM ".$this->tableName().$query." LIMIT 1");
 
 			$count = $result->num_rows;
 			
@@ -142,6 +142,16 @@
 			// DBConnection::closeDBconnection();
 			
 			return $ret;
+		}
+		
+		public function delete($query)
+		{
+			if ($query != "")
+				$query = " WHERE ".$query;
+							
+			$result = DBConnection::DBquery("DELETE FROM ".$this->tableName().$query);
+
+			return DBConnection::affectedRows();
 		}
 	}
 

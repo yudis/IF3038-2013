@@ -1,17 +1,17 @@
 <?php
-if (!$this->loggedIn) {
-	header('Location: index');
-	return;
-}
+	if (!$this->loggedIn) 
+	{
+		header('Location: index');
+		return;
+	}
 
-$this->header('Profile', 'profile');
+	$id = (ISSET($_GET['id'])) ? $_GET['id'] : $_SESSION['user_id'];
+	$user = User::model()->find("id_user = ".$id, array("username","email","fullname","avatar","birthdate"));
+	$tasks = $user->getAssignedTasks();
 
-$id = (ISSET($_GET['id'])) ? $_GET['id'] : $_SESSION['user_id'];
-$user = User::model()->find("id_user = ".$id, array("username","email","fullname","avatar","birthdate"));
-$tasks = $user->getAssignedTasks();
+	$birth_date = new Datetime($user->birthdate);
 
-$birth_date = new Datetime($user->birthdate);
-
+	$this->header('Profile', 'profile');
 ?>	
 	<div class="content">
 		<div class="profile">
@@ -46,7 +46,10 @@ $birth_date = new Datetime($user->birthdate);
 					<span class="detail-label">Username:</span>
 					<span class="detail-value"><?php echo $user->username; ?></span>
 				</p>
-
+				<p class="email">
+					<span class="detail-label">Email:</span>
+					<span class="detail-value"><?php echo $user->email; ?></span>
+				</p>
 				<p class="date-of-birth">
 					<span class="detail-label">Date of Birth:</span>
 					<span class="detail-value"><?php echo $birth_date->format('j F Y'); ?></span>

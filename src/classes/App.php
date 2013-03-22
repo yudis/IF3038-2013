@@ -101,8 +101,10 @@ class App
 			header('Content-type: application/json');
 			echo json_encode($output);
 		}
-		else {
-			while ($fragments[0] == '' && count($fragments) > 1) {
+		else 
+		{
+			while ($fragments[0] == '' && count($fragments) > 1) 
+			{
 				array_shift($fragments);
 			}
 			if ($fragments[0] == 'partial') 
@@ -116,7 +118,8 @@ class App
 				$page = $fragments[0] ? $fragments[0] : $this->defaultPage;
 			}
 
-			if (preg_match('/^(.*)\.php$/i', $page, $matches)) {
+			if (preg_match('/^(.*)\.php$/i', $page, $matches)) 
+			{
 				$page = $matches[1];
 			}
 
@@ -124,7 +127,8 @@ class App
 		}
 	}
 
-	public function startSession() {
+	public function startSession() 
+	{
 		$session_time = 30*24*60*60;
 		ini_set('session.gc-maxlifetime', $session_time);
 
@@ -160,7 +164,8 @@ class App
 	}
 
 	// Load the template specified in $tpl
-	protected function loadTemplate($tpl) {
+	protected function loadTemplate($tpl) 
+	{
 		include $this->templateDir . '/' . $tpl . '.php';
 	}
 
