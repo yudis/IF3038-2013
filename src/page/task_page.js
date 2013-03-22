@@ -89,3 +89,75 @@ function myFunction(e)
 		document.getElementById("new-comment").innerHTML=x;
 	}
 }
+
+function getAjax() //a function to get AJAX from browser
+{
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e) 
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Can't get AJAX, browser error");
+				return false;
+			}
+		}
+	}
+}
+
+function autoCompleteAsignee() {
+	getAjax();
+
+	var asignee = document.getElementById("task-assignee").value;
+	var suggestion = "";
+	var suggestionarray;
+	
+	var index = asignee.length;
+	
+	if(asignee!="")
+	{
+		if (asignee.charAt(index - 1) == ',')
+		{
+			konkat = asignee.substr(0,index);
+		}
+		
+		ajaxRequest.open("GET","../php/autocompleteasignee.php?asignee="+document.getElementById("task-assignee").value,false);
+
+		ajaxRequest.onreadystatechange = function()
+		{
+			suggestion =  ajaxRequest.responseText;
+			suggestion = suggestion.substr(0,suggestion.length-1);
+			suggestionarray = suggestion.split("|");
+			//alert(suggestionarray);
+			
+			var x;
+			x="<datalist id=\"assignee-task\">";
+			for (var i = 0; i < suggestionarray.length; i++) {
+				x += "<option value=\""+konkat+suggestionarray[i]+"\">";
+			}
+			x += "</datalist>";
+			document.getElementById("shared-with").innerHTML=x;
+		}
+		
+		ajaxRequest.send();
+	}
+	else
+	{
+		konkat = "";
+	}
+	
+	//ajaxRequest.open("GET","php/checkavailid.php?idinput="+document.getElementById("username").value,false);
+	
+}

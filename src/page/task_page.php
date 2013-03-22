@@ -4,6 +4,8 @@
 		<title>TASK</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script type="text/javascript" src="task_page.js"></script>
+		<script src="calendar.js"></script>
+		<link href="calendar.css" rel="stylesheet">
 	</head>
 	<body onLoad="check_html5()">
 		<div id="main-body-general">
@@ -26,20 +28,26 @@
 						<h1><?php echo $task['taskname']?></h1>
 						Submit by <b><i><?php echo $task['username']?></i></b> at. <?php echo $task['createddate']?>
 					</div>
+					<br>
 					<div id="deadline_done">
 						<div id="left-main-body">Deadline : <?php echo $task['deadline']?></div>
 						<div id="right-main-body"><a href="#" onCLick="edit_deadline()"><u>edit</u></a></div>
-					</div><br/>
+					</div>
 					<div id="deadline_edit">
-						<div id="left-main-body"><div id="label">Deadline : </div><input type="date" id="date_html5" />
+						<div id="left-main-body"><div id="label">Deadline : </div>
 						<div id="date_html">
-							<input type="text" name="calender" value="untuk calender">
+							<input type="text" class="calendarSelectDate" name="textDeadline"/><div id="calendarDiv"></div><br />
 						</div>              
 						</div>
 						<div id="right-main-body"><a href="#" onCLick="finish_deadline()"><u>done</u></a></div>
 					</div>
-                    <div>Status : <?php echo $task['status']?> <input name="changeStatus" type="button" value="Change Status"></div>
+					<br><br>
+                    <div>
+						<div id="left-main-body">Status : <?php echo $task['status']?></div> 
+						<div id="right-main-body"><input name="changeStatus" type="button" value="Change Status"></div>
+					</div>
 				</div>
+				<br>
 				<div id="attachment">
 					<div id="image-attachment">
 						<div>
@@ -105,12 +113,8 @@
 						<div id="right-main-body"><a href="#2" onClick="edit_assignee()"><u>edit</u></a></div>
 					</div></div>
 					<div id="assignee_edit" name="2">
-						<div id="left-main-body">Shared with : <input type="text" list="assignee"/>
-						<datalist id="assignee">
-							<option value="dhanui">
-							<option value="darara">
-							<option value="kevinkw">
-						</datalist>
+						<div id="left-main-body">Shared with : <input id="task-assignee" type="text" name="textAssignee" list="assignee-task" onKeyUp="autoCompleteAsignee()" placeholder="tag1,tag2,tag3"/>
+						<div id="shared-with"></div>
 						</div>
 						<div id="right-main-body"><a href="#1" onClick="finish_assignee()"><u>done</u></a></div>
 					</div>
@@ -158,6 +162,9 @@
 								echo " 			<b id=\"komentator\">".$row['username']."</b>";
 								echo " 			<br>";
 								echo " 			<b id=\"post-date\">Post at ".$row['createdate']."</b>";
+								echo " 		</div>";
+								echo " 		<div id=\"delete-comment\">";
+								echo " 			<a href=\"#\"><i>Delete Comment</i></a>";
 								echo " 		</div>";
 								echo " 	</div>";
 								echo " 	<div id=\"comment-box\">";

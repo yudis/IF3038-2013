@@ -87,12 +87,13 @@
 		<div id="profile-page-body">
 			<div id="profile-header">
 				<div id="left-profile-header">
-					<img alt="Photo profile" id="photo" src="../avatar/<?php echo $avatar?>" width=235 height="240"/>
+					<img alt="Photo profile" id="photo" src="../avatar/<?php echo $avatar?>" width="235" height="270"/>
 				</div>
 				<div id="right-profile-header">
 					<h2><?php $username = $_GET['username'];
 							  echo $username;
 						      $user = getUser($username);?></h2>
+					<a href="#">Upload New Avatar</a>
 					<br>
 					<p>Joined on : <?php echo $user['join']?></p>
 					<div>
@@ -112,18 +113,20 @@
 					<div id="left-profile-newname"><p>Full Name : <input type="text" id="newname"></p></div>
 					<div id="right-profile-editname"><a href="#" onclick="edit_fullname()"><u><p>edit</p></u></a></div>
 				</div>
+				<br><br><br>
 				<div>
 					<div id="left-profile-birthday"><p>Birth Date : <?php echo $user['birthday'];?></p></div>
 					<div id="left-profile-newbirthday"><p>Birth Date : <input type="text" id="newbirthday"></p></div>
 					<div id="right-profile-editbirthday"><a href="#" onClick="edit_birthday()"><u><p>edit</p></u></a></div>
 				</div>
+				<br><br><br>
 				<div>
 					<div id="left-profile-email"><p>Email : <i><?php echo $user['email'];?></i></p></div>
 					<div id="left-profile-newemail"><p>Email : <input type="text" id="newemail"></i></p></div>
 					<div id="right-profile-editemail"><a href="#" onClick="edit_email()"><u><p>edit</p></u></a></div>
 				</div>
 			</div>
-			
+			<br><br><br>
 			<div id="unfinished-task">
 				<div>
 					<div id="left-profile-unfinished"><h3>Unfinished Task</h3></div>
