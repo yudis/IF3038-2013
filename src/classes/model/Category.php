@@ -61,7 +61,7 @@
 				if ($success)
 					$this->id_kategori = DBConnection::insertID();
 				else
-					echo 'Fail';
+					return false;
 
 				return $result;
 			}

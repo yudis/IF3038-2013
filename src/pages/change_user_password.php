@@ -1,4 +1,10 @@
 <?php
+	if (!$this->loggedIn) 
+	{
+		header('Location: index');
+		return;
+	}
+
 	$user = User::model()->find("id_user = ".$_SESSION['user_id']);
 
 	// check old password

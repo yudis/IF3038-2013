@@ -1,17 +1,17 @@
 <?php
-if (!$this->loggedIn) {
-	header('Location: index');
-	return;
-}
+	if (!$this->loggedIn) 
+	{
+		header('Location: index');
+		return;
+	}
 
-$this->header('Profile', 'profile');
+	$id = (ISSET($_GET['id'])) ? $_GET['id'] : $_SESSION['user_id'];
+	$user = User::model()->find("id_user = ".$id, array("username","email","fullname","avatar","birthdate"));
+	$tasks = $user->getAssignedTasks();
 
-$id = (ISSET($_GET['id'])) ? $_GET['id'] : $_SESSION['user_id'];
-$user = User::model()->find("id_user = ".$id, array("username","email","fullname","avatar","birthdate"));
-$tasks = $user->getAssignedTasks();
+	$birth_date = new Datetime($user->birthdate);
 
-$birth_date = new Datetime($user->birthdate);
-
+	$this->header('Profile', 'profile');
 ?>	
 	<div class="content">
 		<div class="profile">

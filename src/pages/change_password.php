@@ -1,16 +1,16 @@
 <?php
-if (!$this->loggedIn) {
-	header('Location: index');
-	return;
-}
+	if (!$this->loggedIn) 
+	{
+		header('Location: index');
+		return;
+	}
 
-$this->header('Profile', 'profile');
+	$id = $_SESSION['user_id'];
+	$user = User::model()->find("id_user = ".$id, array("username","email","fullname","avatar","birthdate"));
 
-$id = $_SESSION['user_id'];
-$user = User::model()->find("id_user = ".$id, array("username","email","fullname","avatar","birthdate"));
+	$birth_date = new Datetime($user->birthdate);
 
-$birth_date = new Datetime($user->birthdate);
-
+	$this->header('Profile', 'profile');
 ?>	
 	<div class="content">
 		<div class="profile">

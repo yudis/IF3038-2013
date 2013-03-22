@@ -286,7 +286,9 @@ class RestApi
 		$id_kategori = addslashes($_POST['category_id']);
 		$id_user = addslashes($this->app->currentUserId);
 
-		$delete = DBConnection::DBquery("DELETE FROM kategori WHERE id_kategori=$id_kategori AND id_user=$id_user");
+		//$delete = DBConnection::DBquery("DELETE FROM kategori WHERE id_kategori=$id_kategori AND id_user=$id_user");
+		$delete = DBConnection::DBquery("DELETE FROM edit_kategori WHERE id_kategori =$id_kategori");
+		$delete = DBConnection::DBquery("DELETE FROM kategori WHERE id_kategori=$id_kategori");
 		$affectedRows = DBConnection::affectedRows();
 
 		if ($affectedRows) {
