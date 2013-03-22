@@ -1,0 +1,20 @@
+<?php
+	$id = $_GET["id"];
+	$user = $_GET["user"];
+	$date = $_GET["date"];
+	$tugas = $_GET["tugas"];
+	$comment = $_GET["comment"];
+	
+	$con = mysqli_connect('localhost', 'progin', 'progin');
+	if (!$con)
+	{
+		die('Could not connect: ' . mysqli_error());
+	}
+	
+	mysqli_select_db("progin_405_13510035", $con);
+	
+	$sql = "INSERT INTO comment (comment_id, commented_task, writer, writing_time, comment) VALUES ('".$id."', '".$tugas."', '".$user."', '".$date."', '".$comment."')";
+	$result = mysqli_query($sql);
+	
+	mysqli_close($con);	
+?>

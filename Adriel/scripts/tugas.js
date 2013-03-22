@@ -42,6 +42,7 @@ function onload() {
 		setAssignee(decodeURIComponent(id));
 		setTags(decodeURIComponent(id));
 		generateComments(id);
+		setCommentCount();
 	}
 }
 
@@ -93,6 +94,28 @@ function generateComments(id)
 		}
 	}
 	xmlhttp.open("GET","getcomments.php?id="+id,true);
+	xmlhttp.send();
+}
+
+function setCommentCount()
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById("commentlabel") += (" (sebanyak " + xmlhttp.responseText + " komentar)");
+		}
+	}
+	xmlhttp.open("GET","getcommentinfo.php?id="+IDTugas+"&type=1",true);
 	xmlhttp.send();
 }
 
