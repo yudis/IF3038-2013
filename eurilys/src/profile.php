@@ -30,12 +30,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
+        <link href='../css/mobile.css' rel='stylesheet' type='text/css'>
 		<link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
+        <link href='../css/wide.css' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
 		<script type="text/javascript" src="../js/edit_task.js"> </script> 
 		<script type="text/javascript" src="../js/animation.js"> </script> 
 		<script type="text/javascript" src="../js/catselector.js"> </script> 
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >		
+        <meta name="viewport" content="width=device-width; initial-scale=1.0">
 		<title> Eurilys </title>
 	</head>
 	
