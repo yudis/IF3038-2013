@@ -12,11 +12,20 @@
             var itulis=0;
             
 			function showUserLogin(){							/*-----------menampilkan user pada local storage-------------- */
-				document.getElementById("wellfaiz").innerHTML="Welcome "+localStorage.userLogin;										
+				var waktuLogin = Math.round(localStorage.tglLogin/(1000*60*60*24)); 
+				var waktuSkrg = Math.round(new Date().getTime()/(1000*60*60*24));
+				var selisihHari = waktuSkrg-waktuLogin;	 	//new Date().getTime() akan menampilkan selisih waktu milisecond antara midnight 1 januari 1970 dengan saat method dipanggil 
+//				alert(selisihHari);				
+				
+				if(selisihHari<30){							
+					document.getElementById("wellfaiz").innerHTML="Welcome "+localStorage.userLogin;										
+				}else{										//jika sudah 30 hari, user harus login lagi
+					window.location="index.html";	
+				}
 			}
 			
-			function hapusUserLogin(){							/*-----------menghapus user pada local storage-------------- */
-				localStorage.removeItem(userLogin);
+			function hapusUserLogin(){							/*-----------menghapus user dan waktu pada local storage-------*/
+				localStorage.clear();
 			}
 			
             function taskawal(itotal){
@@ -43,8 +52,7 @@
                 ipartout = itotal;
                 }
             }
-            function addTask(ipartin){
-                
+            function addTask(ipartin){                
                 for(var i=0;i<ipartin;i++){
                 var para=document.createElement("p");
                 if(ipartin === 1){
@@ -114,7 +122,7 @@
 			<div id="wellfaiz">
 				
 			</div>
-			<div id="logout" onClick="hapusLoginUser()">		<!---------hapus user login ketika logout ---------->
+			<div id="logout" onClick="hapusUserLogin()">		<!---------hapus user login dan waktunya ketika logout ---------->
 			    <a href="index.html">LOGOUT</a>
 			</div>
 		  </div>

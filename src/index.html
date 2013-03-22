@@ -5,6 +5,14 @@
 		<script src="js/calendar.js" > </script>
         <link rel="stylesheet" href="css/css.css">
         <script>
+			
+			function isLogin(){	/*---------------------------JO---cek apakah sudah login----------------- */
+				if (localStorage.userLogin!= null)	{
+					window.location="dashboard.html";		
+				}
+			}
+		
+		
 			function validateLogin(form){					/*---------------------------JO---validasi form login--phpnya:login.php----------------- */
 
 				if (window.XMLHttpRequest){
@@ -17,6 +25,7 @@
 					if (xmlhttp.readyState==4 && xmlhttp.status==200)	{				
 						if(xmlhttp.responseText==1){
 							localStorage.userLogin=form.userId.value;		/*----simpan user yg login ke local storage ------*/
+							localStorage.tglLogin= new Date().getTime();	/*----simpan waktu login ke local storage ------*/
 							window.location="dashboard.html";
 						}else{
 							alert("error password or username");
@@ -232,7 +241,7 @@
 			
         </script>
     </head>
-    <body>
+    <body onLoad="isLogin()">		<!-----------------------panggil isLogin------------------------->
         <div class="header">
             <div id="logo">
                 <img src="pict/logo.png">

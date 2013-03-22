@@ -5,7 +5,9 @@
         <link rel="stylesheet" href="css/dash.css">
         <script type="text/javascript" src="js/popup.js"></script>
         <script>
-            function tampilSearch(x){
+            function tampilSearch(){
+
+			    var xyz = document.getElementById("cari").value;
 				if (window.XMLHttpRequest){
 					xmlhttp = new XMLHttpRequest();				
 				}else{
@@ -14,20 +16,18 @@
 				
 				xmlhttp.onreadystatechange = function(){
 					if (xmlhttp.readyState==4 && xmlhttp.status==200)	{				
-
+						document.getElementById("divTugas").innerHTML=xmlhttp.responseText;
 					}
-
 				}
 					
-				xmlhttp.open("GET","search.php?tugas="+document.getElementById(x).value,true);
+				xmlhttp.open("GET","search.php?tugas="+xyz,true);
 				xmlhttp.send();
-
 			}
         </script>
         
 <!----------------------------------------------------------header-------------------------------------------------------------->                  
     </head>
-    <body onLoad="taskawal(6); ">
+    <body >
          <div class="header">
 			<div id="logo">
 			    <a hreg="dashboard.html">
@@ -45,10 +45,10 @@
 			</div>
 			<div id="search">
 					    <section class="searchform cf">
-						    <input class="searchbox" type="search" name="search" placeholder="Search.." required>
+						    <input id="cari" class="searchbox" type="search" name="search" placeholder="Search.." required>
 						    
 					    </section>
-					    <section class="searchbuttonbox cf">
+					    <section class="searchbuttonbox cf" onClick="tampilSearch()" >	<!------------- panggil tampilSearch --->
 						    <img class="searchbutton"src="pict/search button.jpg">
 					    </section>
 					    
