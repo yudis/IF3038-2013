@@ -377,7 +377,7 @@ function showTask(str){
 						{
 							var string2 = string1[s].split(",");
 							result += "<div class=\"task\">";
-							result += "<a href=\"#\">"+string2[0]+"</a>";
+							result += "<a href=\"rincitask.php?id="+string2[3]+"\">"+string2[0]+"</a>";
 							result += "<span><br>deadline : "+string2[1]+"</span>";
 							
 							if (string2.length > 4)
@@ -397,7 +397,7 @@ function showTask(str){
 							}
 							
 							if (string2[4] == "yes"){
-								result += "<button onclick=\"deletetask("+string2[0]+")\">delete</button>";
+								result += "<button onclick=\"deletetask("+string2[3]+")\">delete</button>";
 							}
 							
 							result += "</div>";
@@ -408,14 +408,16 @@ function showTask(str){
 					else
 					{
 						var result = "";
-						result += "<div><button onclick=\"deletekategori("+str+")\">delete kategori</button></div>";
-						result += "<div class=\"addtask\"><a href=\"#\">+ task</a></div>";
 						var string1 = xmlhttp2.responseText.split("<br>");
+						if (string1[0] == "creator"){
+							result += "<div><button onclick=\"deletekategori();\">delete kategori</button></div>";
+						}
+						result += "<div class=\"addtask\"><a href=\"createtask.php?namakategori="+str+"\">+ task</a></div>";
 						for (var s=1;s<string1.length;s++)
 						{
 							var string2 = string1[s].split(",");
 							result += "<div class=\"task\">";
-							result += "<a href=\"#\">"+string2[0]+"</a>";
+							result += "<a href=\"rincitask.php?id="+string2[3]+"\">"+string2[0]+"</a>";
 							result += "<span><br>deadline : "+string2[1]+"</span>";
 							
 							if (string2.length > 4)
@@ -453,14 +455,63 @@ function showTask(str){
 	xmlhttp2.send();
 }
 
-function deletekategori(str)
+function deletekategori()
 {
-
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp4=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp4=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp4.onreadystatechange=function()
+	  {
+		  if (xmlhttp4.readyState==4 && xmlhttp4.status==200)
+		  {
+			if (xmlhttp4.responseText == t)
+			{
+				alert("delete "+xmlhttp4.responseText);
+				selectedkategori(0);
+				showTask(t);
+			}
+			else
+			{
+				alert("delete kategori failed");
+			}
+		  }
+	  }
+	xmlhttp4.open("GET","hapusKategori.php?q="+t,true);
+	xmlhttp4.send();
 }
 
 function deletetask(str)
 {
-
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp5=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp5=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp5.onreadystatechange=function()
+	  {
+		  if (xmlhttp5.readyState==4 && xmlhttp5.status==200)
+		  {
+			if (xmlhttp5.responseText == "deleted")
+			{
+				alert(xmlhttp5.responseText);
+				showTask(t);
+			}
+			else
+			{
+				alert("delete failed");
+			}
+		  }
+	  }
+	xmlhttp5.open("GET","hapusTask.php?q="+str,true);
+	xmlhttp5.send();
 }
 
 function cektugasdone(str){
