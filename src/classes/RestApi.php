@@ -76,6 +76,12 @@ class RestApi
 		return $ret;
 	}
 	
+	/*** ----- START OF TASK MODULE -----***/
+	
+	/**
+	 * Retrieve list of tasks for dashboard
+	 * @return array of tasks
+	 */
 	public function retrieve_tasks($params)
 	{
 		$ret = array();
@@ -136,23 +142,140 @@ class RestApi
 		return compact('success', 'tasks', 'categoryID', 'categoryName', 'canDeleteCategory', 'canEditCategory');
 	}
 
-	public function retrieve_categories() {
+	public function mark_task($params) 
+	{
+		$start = microtime();
+		$id_task = addslashes($_POST['taskID']);
+		$completed = $_POST['completed'] == 'true' ? 1 : 0;
+
+		// TODO permissions
+
+		$update = "UPDATE task SET status=$completed WHERE id_task='$id_task'";
+
+		$q = DBConnection::DBquery($update);
+		if (DBConnection::affectedRows()) {
+			return array('success' => 'true', 'taskId' => $id_task);
+		}
+		else {
+			return array('success' => 'false');
+		}
+	}
+	
+	/*** ----- END OF TASK MODULE -----***/
+	
+	/*** ----- START OF CATEGORY MODULE -----***/
+
+	/**
+	 * Retrieve list of category
+	 * @return array of categories
+	 */
+	public function retrieve_categories() 
+	{
 		// TODO use categories by user
-		$raw = Category::model()->findAll();
-
 		$cats = array();
-		foreach ($raw as $cat) {
-			$dummy = new StdClass;
-			$dummy->name = $cat->nama_kategori;
-			$dummy->id = $cat->id_kategori;
-			$dummy->canDelete = ($cat->id_user == $this->app->currentUserId);
+		if ($this->app->loggedIn)
+		{
+			$raw = Category::model()->findAll();
 
-			$cats[] = $dummy;
+			foreach ($raw as $cat) {
+				$dummy = new StdClass;
+				$dummy->name = $cat->nama_kategori;
+				$dummy->id = $cat->id_kategori;
+				$dummy->canDelete = ($cat->id_user == $this->app->currentUserId);
+
+				$cats[] = $dummy;
+			}
 		}
 
 		return $cats;
 	}
 	
+	/**
+	 * Add a new category
+	 * @return array of new category data
+	 */
+	public function add_category() 
+	{
+		if ($this->app->loggedIn)
+		{
+			if (!$_POST)
+				return;
+
+			$nama_kategori = $_POST['nama_kategori'];
+			$id_user = $this->app->currentUserId; // the creator of the category
+
+			$category = Category::model();
+			$category->nama_kategori = $nama_kategori;
+			$category->id_user = $id_user;
+			$category->save();
+
+			$usernames = $_POST['usernames']; // an array of usernames, if using facebook-style
+			$usernames_list = $_POST['usernames_list'];
+			if (!$usernames && $usernames_list) {
+				$usernames = explode(';', $usernames_list);
+			}
+			foreach ($usernames as $k => $v) {
+				$usernames[$k] = trim($v);
+			}
+			if ($usernames) {
+				// Find the IDs of the users
+				$escapedUsernames = array();
+				foreach ($usernames as $k => $v) {
+					$escapedUsernames[] = "'" . addslashes($v) . "'";
+				}
+				$escapedUsernames = implode(',', $escapedUsernames);
+				$escapedUsernames = '(' . $escapedUsernames . ')';
+
+				$q = "username IN $escapedUsernames";
+				$users = User::model()->findAll($q);
+
+				// Insert into relationship table
+				foreach ($users as $user) {
+					$insert = "INSERT INTO edit_kategori (id_user, id_katego) VALUES ({$user->id_user}, {$category->id_kategori})";
+					DBConnection::DBQuery($insert);
+				}
+			}
+
+			return array('categoryID' => $category->id_kategori, 'categoryName' => $category->nama_kategori, 'categories' => $this->retrieve_categories());
+		}
+		return array();
+	}
+
+	/**
+	 * Delete a category
+	 * @return string contains whether success or fail
+	 */
+	public function delete_category() 
+	{
+		$id_kategori = addslashes($_POST['category_id']);
+		$success = false;
+
+		if ((Category::model()->find("id_kategori=".$id_kategori)->getDeletable($this->app->currentUserId))&& ($this->app->loggedIn))
+		{
+			if (Category::model()->delete("id_kategori=".$id_kategori))
+			{
+				// delete was success
+				$success = true;
+			}
+			else {
+				$success = false;
+			}
+		}
+
+		return array(
+			'success' => $success,
+			'categoryID' => $id_kategori
+		);
+	}
+
+	/*** ----- END OF CATEGORY MODULE -----***/
+	
+	/*** ----- START OF COMMENT MODULE -----***/
+	
+	/**
+	 * Get the previous comment from before timestamp
+	 * @return array of comments before timestamp
+	 */
 	public function get_previous_comments($params)
 	{
 		$return = array();
@@ -163,6 +286,10 @@ class RestApi
 		return $return;
 	}
 	
+	/**
+	 * Retrieve comment after timestamp
+	 * @return array of comments after timestamp
+	 */
 	public function retrieve_comments($params)
 	{
 		$return = array();
@@ -173,6 +300,10 @@ class RestApi
 		return $return;
 	}
 	
+	/**
+	 * Post a new comment
+	 * @return string contains whether success or fail
+	 */
 	public function comment($params)
 	{
 		$return = "fail";
@@ -189,6 +320,10 @@ class RestApi
 		return $return;
 	}
 	
+	/**
+	 * Remove a comment
+	 * @return string contains whether success or fail
+	 */
 	public function remove_comment ($params)
 	{
 		$return = "fail";
@@ -202,6 +337,29 @@ class RestApi
 		return $return;
 	}
 	
+	/*** ----- END OF COMMENT MODULE -----***/
+	
+	/*** ----- START OF USER MODULE -----***/
+	
+	/**
+	 * Get list of users search by username
+	 * @return array of users with likability
+	 */
+	public function get_username($params) 
+	{
+		$return = array();
+		if ((isset($params['username'])) && ($this->app->loggedIn)) 
+		{	
+			$return = User::model()->findAll("username LIKE '%".addslashes($params['username'])."%' LIMIT 10", array("id_user", "username"));
+		}
+
+		return $return;
+	}
+	
+	/**
+	 * Login using username and password through Rest API
+	 * @return string contains whether success or fail
+	 */
 	public function login($params) 
 	{
 		$return = array();
@@ -234,6 +392,11 @@ class RestApi
 		return $return;
 	}
 
+	/**
+	 * Login using username and password through Rest API
+	 * @return string contains whether success or fail
+	 * @deprecated
+	 */
 	public function logout($params) 
 	{
 		$full_url = $_SESSION['full_url'];
@@ -241,6 +404,10 @@ class RestApi
 		header("Location:".$full_url."index.php");
 	}
 
+	/**
+	 * Check register parameter through Rest API
+	 * @return array of status and possible errors
+	 */
 	public function register_check($params) 
 	{
 		$return = array();
@@ -277,89 +444,7 @@ class RestApi
 		return $return;
 	}
 
-	public function add_category() 
-	{
-		if (!$_POST)
-			return;
-
-		$nama_kategori = $_POST['nama_kategori'];
-		$id_user = $this->app->currentUserId; // the creator of the category
-
-		$category = Category::model();
-		$category->nama_kategori = $nama_kategori;
-		$category->id_user = $id_user;
-		$category->save();
-
-		$usernames = $_POST['usernames']; // an array of usernames, if using facebook-style
-		$usernames_list = $_POST['usernames_list'];
-		if (!$usernames && $usernames_list) {
-			$usernames = explode(';', $usernames_list);
-		}
-		foreach ($usernames as $k => $v) {
-			$usernames[$k] = trim($v);
-		}
-		if ($usernames) {
-			// Find the IDs of the users
-			$escapedUsernames = array();
-			foreach ($usernames as $k => $v) {
-				$escapedUsernames[] = "'" . addslashes($v) . "'";
-			}
-			$escapedUsernames = implode(',', $escapedUsernames);
-			$escapedUsernames = '(' . $escapedUsernames . ')';
-
-			$q = "username IN $escapedUsernames";
-			$users = User::model()->findAll($q);
-
-			// Insert into relationship table
-			foreach ($users as $user) {
-				$insert = "INSERT INTO edit_kategori (id_user, id_katego) VALUES ({$user->id_user}, {$category->id_kategori})";
-				DBConnection::DBQuery($insert);
-			}
-		}
-
-		return array('categoryID' => $category->id_kategori, 'categoryName' => $category->nama_kategori, 'categories' => $this->retrieve_categories());
-	}
-
-	public function delete_category() 
-	{
-		$id_kategori = addslashes($_POST['category_id']);
-		$success = false;
-
-		if (Category::model()->find("id_kategori=".$id_kategori)->getDeletable($this->app->currentUserId))
-		{
-			if (Category::model()->delete("id_kategori=".$id_kategori))
-			{
-				// delete was success
-				$success = true;
-			}
-			else {
-				$success = false;
-			}
-		}
-
-		return array(
-			'success' => $success,
-			'categoryID' => $id_kategori
-		);
-	}
-
-	public function mark_task($params) {
-		$start = microtime();
-		$id_task = addslashes($_POST['taskID']);
-		$completed = $_POST['completed'] == 'true' ? 1 : 0;
-
-		// TODO permissions
-
-		$update = "UPDATE task SET status=$completed WHERE id_task='$id_task'";
-
-		$q = DBConnection::DBquery($update);
-		if (DBConnection::affectedRows()) {
-			return array('success' => 'true', 'taskId' => $id_task);
-		}
-		else {
-			return array('success' => 'false');
-		}
-	}
+	/*** ----- END OF USER MODULE -----***/	
 }
 
 ?>

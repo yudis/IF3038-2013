@@ -127,7 +127,7 @@
 						?>
 						<div class="field">
 							<label>Deadline</label>
-							<input name="deadline" id="deadline" type="text" value="<?php echo (new DateTime($task->deadline))->format('j F Y'); ?>">
+							<input name="deadline" id="deadline" type="text" value="<?php echo (new DateTime($task->deadline))->format('Y-m-j'); ?>">
 						</div>
 						<div class="field">
 							<label>Assignee</label>
@@ -176,8 +176,11 @@
 	
 					<div id="commentsList">
 						<?php
-							$firsttimestamp = $comments[0]->timestamp;
-							$lasttimestamp = "";
+							if ($total_comment>0)
+								$firsttimestamp = $comments[0]->timestamp;
+							else
+								$firsttimestamp = (new DateTime())->format("Y-m-d G:i:s");
+							$lasttimestamp = (new DateTime())->format("Y-m-d G:i:s");;
 							foreach ($comments as $comment)
 							{
 								$user = $comment->getUser();

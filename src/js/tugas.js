@@ -211,3 +211,30 @@ function more_comment()
 	}
 	req.get('api/get_previous_comments?id_task=' + id_task+"&timestamp="+first_timestamp);
 }
+
+var asignee = document.getElementById("assignee");
+asignee.onkeyup = function()
+{
+	var value = asignee.value;
+	var last_elmt = value.split(",")[value.split(",").length-1];
+	var req = Rp.ajaxRequest();
+	req.onreadystatechange = function() {
+		switch (req.readyState) {
+			case 1:
+			case 2:
+			case 3:
+				Rp('#assignee').addClass('loading');
+				break;
+			case 4:
+				Rp('#assignee').removeClass('loading');
+				try {
+					response = Rp.parseJSON(req.responseText);
+				}
+				catch (e) {
+
+				}
+				break;
+		}
+	}
+	req.get('api/get_username?username=' + last_elmt);
+}
