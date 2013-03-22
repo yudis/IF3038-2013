@@ -39,8 +39,27 @@
 		public function checkValidity()
 		{
 			$error = array();
-			
-			//$kategori = Category::model()->find("nama_kategori='".$
+			// check if user existed
+			$i = 0;
+			$assignees = array();
+			$tempuser = explode (",", $this->data['assignee']);
+			foreach ($tempuser as $user)
+			{
+				if (User::model()->find("username=".$user))
+				{
+					//check if users existed
+					$assignees[] = new User();
+					$assignees[$i]->username = $user;
+					$i++;
+				}
+				else 
+				{
+					//check if users doesn't exist
+					return false;
+				}
+			}
+			$this->assignee = $assignees
+			/*
 			$array_of_tags = $this->data['tag'];
 			$tags = explode(",", $array_of_tags);
 			if ($tags)
@@ -52,7 +71,7 @@
 					if ($tag->data) 
 					{
 						print_r ($tag);
-						/*mysql_query("INSERT INTO `task` (`id_task`, `deadline`, `id_kategori`) VALUES ('".$this->data['nama_task']."', '".$this->data['deadline']."', '".5'");*/
+						/*mysql_query("INSERT INTO `task` (`id_task`, `deadline`, `id_kategori`) VALUES ('".$this->data['nama_task']."', '".$this->data['deadline']."', '".5'");
 
 						mysql_query("INSERT INTO `have_tags` (`id_task` ,`id_tag`) VALUES ('".$tag->data['id_tag']."'", '11');
 					}
@@ -66,28 +85,19 @@
 					}
 				}
 			}
+			*/
 			print_r ($tag_name);
-			$user = User::model()->find("username='".$this->data['assignee']."'");
-			if ($user->data)
-			{
 			
-			}
-			else 
-			{
-				$error['assignee'] = "User yang di-assign tidak ada di dalam basis data";
-			}
-			print_r ($error);
 			
 			/*$i = 0;
 			$tags = array();
-			$temptags = explode(",", $task->assignee);
+			$temptags = explode(",", $task->tag);
+			$temptags : css
+			$temptags : html
 			foreach ($temptags as $tag)
 			{
-				if (Tag::model()->find("tag_name=".$tag))
-				{
-					$tags[] = new Tag();
-					$tags[$i]->tag_name = $tag;
-				}
+				$tags[] = new Tag();
+				$tags[$i]->tag_name = $tag;
 			}
 			$task->tags = $tags;
 			
@@ -120,32 +130,6 @@
 				DBConnection::openDBconnection();
 				$result = DBConnection::DBquery("INSERT INTO `task` (`nama_task`, `deadline`, `id_kategori`, `id_user`) VALUES ('".$this->data['nama_task']."', '".$this->data['deadline']."', '".$this->id_kategori."', '".$user_id."')");
 				DBConnection::closeDBconnection();
-
-				/* $array_of_tags = $this->data['tag'];
-				$tags = explode(",", $array_of_tags);
-				
-				if ($tags)
-				{
-					foreach($tags as $temp_tag)
-					{
-
-						$tag = Tag::model()->find("tag_name='".$temp_tag."'");
-						print_r ($tag->data);
-						if ($tag->data) 
-						{
-									
-						}
-						// if tag doesn't exist, insert into table tags & have_tags
-						else 
-						{
-							// insert into table tags
-							$tag->data['tag_name'] = $temp_tag;
-							$tag->save();
-							// insert into table have tags
-						}
-					}
-				} */
-				
 			}
 			else
 			{
