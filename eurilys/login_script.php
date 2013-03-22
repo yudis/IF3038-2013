@@ -15,7 +15,7 @@
 	/* Login Script */
 	$username = mysql_real_escape_string($_POST['username']);
 	$password = mysql_real_escape_string($_POST['password']);
-
+	
 	if (isset($_POST['login_submit'])) { //when login button is pressed
 
 		$query = "SELECT * FROM user WHERE username= '$username' AND password='$password'";
@@ -28,10 +28,8 @@
 			$_SESSION['fullname'] = $name;
 			header('location:src/dashboard.php'); //redirect to dashboard
 		} else {
-
-			echo "Your log in credetial is not valid";
+			header('location:index.php');
 		}
-
 	}
 
 
