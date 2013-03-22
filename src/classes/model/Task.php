@@ -124,5 +124,14 @@
 		{
 			return User::model()->findAll("id_user IN (SELECT id_user FROM assign WHERE id_task = '" . $this->id_task . "')", array("id_user", "username"));
 		}
+		
+		/**
+		 * Get the comment in the task
+		 * @return array of Comment of the task
+		 */
+		public function getComment()
+		{
+			return Comment::model()->findAll("id_task = '".$this->id_task."' ORDER BY timestamp");
+		}
 	}
 ?>

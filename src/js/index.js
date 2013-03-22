@@ -98,7 +98,7 @@ Rp(function() {
 
 	window.onload = function() 
 	{
-		datePicker.init(document.getElementById("calendar"), document.getElementById("register_form"));
+		datePicker.init(document.getElementById("calendar"), document.getElementById("register_form"), "birth_date");
 		setInterval(function(){next_image();}, 5500);
 	}
 });

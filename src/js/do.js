@@ -57,7 +57,7 @@ Rp(function() {
 			Rp('#current-task').show();
 		}
 		else {
-			Rp('#editTaskLink').nodes[0].innerHTML = 'Save';
+			Rp('#editTaskLink').nodes[0].innerHTML = 'Cancel';
 			Rp('#editTaskLink').addClass('editing');
 			Rp('#current-task').hide();
 			Rp('#edit-task').nodes[0].style.display = 'block';

@@ -16,13 +16,13 @@ var datePicker =
 	  INITIALIZATIONS
 	********************/
 	// init dispatcher
-	init: function(calendarDiv, destinationForm) 
+	init: function(calendarDiv, destinationForm, date_id) 
 	{
 		this.calendarDiv = calendarDiv;
 		this.destinationForm = destinationForm;
 		this.initDate();
 		this.populateTable(thisMonth, thisYear);
-		document.getElementById("birth_date").onblur = function()
+		document.getElementById(date_id).onblur = function()
 		{
 			datePicker.blur();
 		}
@@ -165,11 +165,11 @@ var datePicker =
 		this.destinationForm.birth_date.value = result;
 		this.blur();
 		
-		if ((birth_date.checkValidity()) && (check_date(birth_date.value)))
+		/*if ((birth_date.checkValidity()) && (check_date(birth_date.value)))
 			birth_date.className = "";
 		else
 			birth_date.className = "invalid";
-		check_submit();
+		check_submit();*/
 		choosing = false;
 	},
 	

@@ -13,6 +13,9 @@
 			// redirect to error page
 		}
 		$users = $task->getAssignee();
+		$tags = $task->getTags();
+		$attachments = $task->getAttachment();
+		$comments = $task->getComment();
 	}
 	else
 	{
@@ -70,19 +73,28 @@
 						</p>
 						<p class="tags">
 							<span class="detail-label">Tag:</span>
-							<span class="tag">satu</span>
-							<span class="tag">dua</span>
-							<span class="tag">tiga</span>
-							<span class="tag">empat</span>
+							<?php
+								foreach ($tags as $tag)
+								{
+									echo '<span class="tag">';
+									echo $tag->tag_name;
+									echo '</span>';
+								}
+							?>
 						</p>
 					</section>
 					<section class="attachment">
 						<header>
 							<h3>Attachment</h3>
 						</header>
-						<figure>
-							<img src="assets/photo.jpg" alt="">
-						</figure>
+						<?php
+							foreach ($attachments as $attachment)
+							{
+								echo "<figure>";
+								echo $attachment->attachment;
+								echo "</figure>";
+							}
+						?>
 					</section>
 				</div>
 				<div id="edit-task">
@@ -93,11 +105,11 @@
 						</div>
 						<div class="field">
 							<label>Attachment</label>
-							<input name="attachment" id="attachment" type="file">
+							<input name="attachment[]" id="attachment" type="file" multiple="">
 						</div>
 						<div class="field">
 							<label>Deadline</label>
-							<input name="deadline" id="deadline" type="date">
+							<input name="deadline" id="deadline" type="text">
 						</div>
 						<div class="field">
 							<label>Assignee</label>
@@ -108,29 +120,30 @@
 							<input name="tag" id="tag" type="text">
 						</div>
 						<div class="buttons">
-							<button type="submit">Save</button>
+							<button type="submit">Save Changes</button>
 						</div>
 					</form>
 				</div>
 				<section class="comments">
 					<header>
-						<h3>2 Comments</h3>
+						<h3><?php echo count($comments); ?> Comment<?php echo (count($comments)>1)? "s" : ""; ?></h3>
 					</header>
 
 					<div id="commentsList">
-						<article class="comment">
-							<header>
-								<h4>Komentator</h4>
-							</header>
-							<p>Lorem ipsum dolor sit amet.</p>
-						</article>
-
-						<article class="comment">
-							<header>
-								<h4>Komentator</h4>
-							</header>
-							<p>Lorem ipsum dolor sit amet.</p>
-						</article>
+						<?php
+							foreach ($comments as $comment)
+							{
+								$user = $comment->getUser();
+								echo '<article class="comment">';
+									echo '<header>';
+										echo '<h4>'.$user->username.'</h4>';
+									echo '</header>';
+									echo '<p>';
+										echo $comment->komentar;
+									echo '</p>';
+								echo '</article>';
+							}
+						?>
 					</div>
 
 					<div class="comment-form">
@@ -143,4 +156,11 @@
 				</section>
 			</div>
 		</div>
-<?php $this->footer() ?>
+		<?php
+			$this->calendar();
+		?>
+<?php
+	$this->requireJS('datepicker');
+	$this->requireJS('tugas');
+	$this->footer();
+?>

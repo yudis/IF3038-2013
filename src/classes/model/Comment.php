@@ -75,7 +75,7 @@
 		 */
 		public function getUser()
 		{
-			return User::model()->find("id_user = ".$this->id_user, array("username", "e-mail", "fullname", "avatar", "birthdate"));
+			return User::model()->find("id_user = ".$this->id_user, array("id_user", "username", "fullname", "avatar"));
 		}
 		
 		/**
