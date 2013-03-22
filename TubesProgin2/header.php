@@ -40,7 +40,7 @@ if (connectDB()) {
     <div id="logout"><a title="Log out from here" href="logout.php">Log Out</a></div>
     <form id="search" method="post" action="search.php">
         <input type="text" name="searchquery" id="searchquery">
-        <select id="type" name="type">
+        <select id="tipe" name="tipe">
             <option value="All"> All </option>   
             <option value="Category"> Category </option>
             <option value="Task"> Task </option>

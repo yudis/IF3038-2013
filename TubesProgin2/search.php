@@ -27,7 +27,7 @@ header('Location: index.php');
     <?php
     include 'header.php';
     $search = $_POST['searchquery'];
-    $type =  $_REQUEST['type'];
+    $type =  $_POST['tipe'];
     
     if(connectDB()){
             
@@ -82,33 +82,44 @@ header('Location: index.php');
                     }  
                     echo '</div>';
                 }
-                echo $type;
             ?>
-            <div id="rTask">
-                <strong>Task</strong><br/>
-                ----------------------------------------------------------------------------------------------------<br/>
-                <?php 
+            <?php
+                if (($type = 'All') or ($type = 'Task')) {
+                    echo '<div id="rTask">
+                    <strong>Task</strong><br/>
+                    ----------------------------------------------------------------------------------------------------<br/>';
                     while ($resTask = mysql_fetch_array($rTask)) {
-                        $resultTask = $resTask['TaskName'];
-                ?>
-                            <a href="RinciTugas.php?IDTask=<?php echo $resTask['IDTask'] ?>"><?php echo $resultTask ?></a> <br/>             <br/>            
-                <?php
-                    }    
-                ?>
-            </div>
+                            if ($resTask != NULL) {
+                            $resultTask = $resTask['TaskName'];
+                            echo $resultTaskk;
+                            echo '<br/>';            
+                            } else {    
+                                echo 'NONE';
+                            }
+                    }  
+                    echo '</div>';
+                }
+            ?>
             
-            <div id="rUser">
-                <strong>Username</strong><br/>
-                ----------------------------------------------------------------------------------------------------<br/>
-<?php 
-    while ($resUser = mysql_fetch_array($rUser)) {
-        $resultUser = $resUser['Username'];
-?>
-            <a href="profile.php?user=<?php echo $uname ?>"><?php echo $uname ?></a> <br/>            
-<?php
-    }
-    ?>
-            </div>
+            <?php
+                if (($type = 'All') or ($type = 'Username')) {
+                    echo '<div id="rUser">
+                    <strong>User</strong><br/>
+                    ----------------------------------------------------------------------------------------------------<br/>';
+                    while ($resUser = mysql_fetch_array($rUser)) {
+                            if ($resUser != NULL) {
+                            $resultUser = $resUser['Username'];
+                            ?>
+                    <a title="Go to Profile" href="profile.php?user=<?php echo $resultUser ?>"><?php echo $resultUser ?></a>
+            <?php
+                            echo '<br/>';            
+                            } else {    
+                                echo 'NONE';
+                            }
+                    }  
+                    echo '</div>';
+                }
+            ?>
         </div>
         
     </body>
