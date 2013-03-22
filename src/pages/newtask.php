@@ -2,7 +2,8 @@
 	$task = new Task();
 	$task->data = $_POST;
 	$task->id_user = $this->currentUserId;
-	$temperror = $task->save();
+	$task->checkValidity();
+	//$task->save();
 	$selection = array("asdf","ghjkl");/* 
 	$select = "";
 		if ($selection)

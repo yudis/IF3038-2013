@@ -49,6 +49,7 @@ Rp(function()
 		task.tags.forEach(function(tag) {
 			tagSpan = Rp.factory('span').addClass('tag').text(tag);
 			tagsP.append(tagSpan);
+			tagsP.html(tagsP.html() + ' ');
 		})
 
 		checkboxSpan.append(checkbox);

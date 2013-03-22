@@ -58,5 +58,9 @@ Rp(function() {
 		}
 	});
 
+	Rp('.user-listing').on('click', function() {
+		location.href = 'profile.php?id=' + this.getAttribute('data-user-id');
+	})
+
 	Rp('#submitButton').attr('disabled', 'disabled');
 });
