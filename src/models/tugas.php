@@ -251,6 +251,7 @@ class Tugas extends Model
 				$file_name = $_FILES[$docId]['name'][$key];
 				$file_size =$_FILES[$docId]['size'][$key];
 				$file_tmp =$_FILES[$docId]['tmp_name'][$key];
+				$filename = uniqid()+"."+$_FILES[$docId]['type'][$key];
 				$file_type=$_FILES[$docId]['type'][$key];	
 				if($file_size > 2097152){
 					$errors[]='File size must be less than 2 MB';
@@ -259,7 +260,7 @@ class Tugas extends Model
 				$data = array(
 					$id_tugas,
 					$file_name,
-					$file_tmp,
+					$filename,
 					$file_type
 				);
 				
@@ -269,9 +270,9 @@ class Tugas extends Model
 						mkdir("$desired_dir", 0700);		// Create directory if it does not exist
 					}
 					if(is_dir("$desired_dir/".$file_name)==false){
-						move_uploaded_file($file_tmp,"$desired_dir/".$file_name);
+						move_uploaded_file($file_tmp,"$desired_dir/".$filename);
 					}else{									// rename the file if another one exist
-						$new_dir="$desired_dir/".$file_name.time();
+						$new_dir="$desired_dir/".$filename.time();
 						 rename($file_tmp,$new_dir) ;				
 					}
 					

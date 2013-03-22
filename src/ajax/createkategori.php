@@ -7,11 +7,11 @@
 	$Arr=explode(',', $_GET["Arr"]);
 	session_start();
 	$kategori = new Kategori();
-	$kategori->NewKategori($q,$_SESSION['user']);
+	$kategori->NewKategori($q,$_SESSION['user']["username"]);
 	$i=0;
 	while(!empty($Arr[$i]))
 	{
-		if($Arr[$i]!=$_SESSION['user'])
+		if($Arr[$i]!=$_SESSION['user']["username"])
 		{
 			$kategori->addNewestCoordinator($Arr[$i]);
 		}

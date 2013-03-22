@@ -8,7 +8,7 @@
 	$kategori = new Kategori();
 	$i=0;
 	$success= $kategori->getAllKategori();
-	
+	$success2= $kategori->getAssigneeCat($_SESSION["user"]["username"]);
 	while (!empty($success[$i]))
 	{
 		$n=0;
@@ -29,5 +29,14 @@
 			}
 		}
 		$i++;
+	}
+	$x=0;
+	while (!empty($success2[$x]))
+	{
+		$id_kategori=$success2[$x]["id"];
+		echo "<li><a name='",$id_kategori,"' href=\"\" onclick=\"loadtugas('",$id_kategori,"');setChosen('",$id_kategori,"'); return false;\" >";
+		echo $success2[$x]["nama_kategori"];
+		echo "</a></li>";
+		$x++;
 	}
 ?>
