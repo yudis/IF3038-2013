@@ -14,13 +14,24 @@
             $h3="";
             $h4="";
             mysqli_stmt_bind_result($stmt,$h1,$h2,$h3,$h4);
-                      
+            
+            $array;
+            
             while (mysqli_stmt_fetch($stmt)) {
-                echo $h1,"\n",$h3,"\n",$h4,"\n";
+                $array[] = array($h1,$h3,$h4);
             }
             
             mysqli_stmt_close($stmt);
-        }        
+            
+            foreach ($array as $row) {
+                $result = mysqli_query($con,"SELECT avatar FROM pengguna WHERE (username = '$h1')");
+                $avatar = mysqli_fetch_row($result);
+                echo $row[0],"\n",$row[1],"\n",$row[2],"\n",$avatar[0],"\n";
+                mysqli_free_result($result);
+            }
+        } else {
+            echo "Gagal mengambil komentar";
+        }
         mysqli_close($con);
     }
 ?>
