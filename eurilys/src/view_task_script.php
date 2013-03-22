@@ -126,7 +126,10 @@
 				$response = $response.
 				"
 				<div class='left top20 dynamic_content_row'>
-					<div id='comment_ltd' class='left dynamic_content_left darkBlueItalic userprofile_link' onclick='javascript:searchUser(\"$commentCreator[$i]\")'> ".$commentCreator[$i]."<br>".$date."
+					<div id='comment_ltd' class='left dynamic_content_left darkBlueItalic userprofile_link' onclick='javascript:searchUser(\"$commentCreator[$i]\")'> 
+					<img src='../img/avatar1.png' width='55'/> <br>
+					".$commentCreator[$i].
+					"<br>".$date."
 					</div>
 					<div id='comment_rtd' class='left dynamic_content_right'>".$commentContent[$i]."</div>
 				</div>";
