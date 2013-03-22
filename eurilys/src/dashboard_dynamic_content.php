@@ -83,7 +83,7 @@
 	}
 	else {
 		//search category id where category creator = username
-		$catQuery = "SELECT cat_id, task.cat_name FROM (task JOIN category ON ( task.cat_name =  '$q' ) AND (cat_creator =  '$username'))";
+		$catQuery = "SELECT cat_id, cat_name FROM category WHERE cat_name = '$q' AND cat_creator =  '$username'";
 		$catResult = mysql_query($catQuery);
 		
 		$catID = "";
