@@ -42,6 +42,15 @@
 			$commentTime[]    = $comment_row['comment_timestamp'];
 		}
 		
+		//Get 'task assignee'
+		$ass_query = "SELECT username from task_asignee WHERE task_id='$taskID'";
+		$ass_result = mysql_query($ass_query);
+		unset($assResponse);
+		$assResponse = array();
+		while ($ass_row = mysql_fetch_array($ass_result, MYSQL_ASSOC)) { 
+			$assResponse[] = $ass_row['username'];
+		}
+		
 		//Generate response
 		$response = $response. 
 		"
@@ -87,7 +96,16 @@
 			
 			<div class='left top20 dynamic_content_row'>
 				<div id='assignee_ltd' class='left dynamic_content_left'>Assignee</div>
-				<div id='assignee_rtd' class='left dynamic_content_right'> ??? Belum ada DB utk task assignee </div>
+				<div id='assignee_rtd' class='left dynamic_content_right'>";
+				
+			if (count($assResponse) > 0) {
+				for($i=0; $i<count($assResponse); $i++) {
+					$response = $response.
+					"<span class='userprofile_link darkBlueItalic' onclick='javascript:searchUser(\"$assResponse[$i]\")'> $assResponse[$i] </span> , ";
+				}
+			}	
+				
+			$response = $response."</div>
 			</div>
 		
 			<div class='left top20 dynamic_content_row'>
@@ -108,7 +126,7 @@
 				$response = $response.
 				"
 				<div class='left top20 dynamic_content_row'>
-					<div id='comment_ltd' class='left dynamic_content_left darkBlueItalic'> ".$commentCreator[$i]."<br>".$date."
+					<div id='comment_ltd' class='left dynamic_content_left darkBlueItalic userprofile_link' onclick='javascript:searchUser(\"$commentCreator[$i]\")'> ".$commentCreator[$i]."<br>".$date."
 					</div>
 					<div id='comment_rtd' class='left dynamic_content_right'>".$commentContent[$i]."</div>
 				</div>";

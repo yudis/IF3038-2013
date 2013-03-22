@@ -561,6 +561,8 @@ margin-left:auto;margin-right:auto; letter-spacing:1px; cursor:pointer; margin-r
 .darkBlue {color:#007bc1;}
 .darkBlueItalic {color:#007bc1; font-style:italic; font-size:13px;} 
 .darkBlueLink {color:#007bc1; cursor:pointer;}
+.userprofile_link {cursor:pointer;}
+.userprofile_link:hover {color:#0092dd;}
 /* DYNAMIC CONTENT 
 ------------------------------------------------------------------------------------------------- */
 #dynamic_content {
