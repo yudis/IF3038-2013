@@ -12,10 +12,13 @@ foreach ($_POST as $k => $v) {
 	${$k} = $v;
 }
 
+$timestamp = date("Y-m-d h:i:s");
+echo $timestamp."<br>";
 echo "id saya adalah : ".$_SESSION['id']."<br>";
 echo "judul 		: ".$judul."<br>"; 
 echo "id category 	: ".$id."<br>";
 echo "deadline		: ".$deadline."<br>";
+echo "jam deadline : ".$time."<br>";
 echo "asignee		: ".$asignee."<br>";
 echo "tag			: ".$tag."<br>";
 $file_name = $_FILES['xxx']['name']; 
@@ -39,13 +42,15 @@ mysqli_query($con, "INSERT INTO tasks (
 				creator,
 				deadline,
 				category,
+				timestamp,
 				done
 				)
 				VALUES (
 					'$judul',
 					'$creator',
-					'$deadline',
+					'$deadline $time',
 					'$id',
+					'$timestamp',
 					'0'
 				)");
 
@@ -54,6 +59,8 @@ $GetTaskId = mysqli_query($con, $TaskId);
 $result = mysqli_fetch_array($GetTaskId);
 $idTask = $result['id'];
 echo "<br><br>id task : ".$idTask."<br>";
+
+
 
 $member = array();
 $member = explode(",", $asignee);
@@ -103,5 +110,13 @@ while($i<=$j)
 				)");
 	$i++;
   }
+
+mysqli_query($con, "INSERT INTO attachments (path,filetype,task) VALUES ('$direktori','$file','$idTask')");
+
+echo "<br>".$direktori;
+echo "<br>".$file;
+echo "<br>".$idTask;
+
+
 
 ?>
