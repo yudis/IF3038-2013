@@ -213,7 +213,7 @@ div.tableElmtRight p {
 }
 
 #taskContent {
-    background: #ccffcc;
+	background: #ccffcc;
 	/*border:dotted;*/
 	width:40%;
 	margin-left:35%;
@@ -436,13 +436,12 @@ button#editProfileBtn{
 	position:fixed;
 	top:25%;
 	left:30%;
-	z-index:2;
 	height:40%;
 	width:40%;
 	background:#FF0;
 	border-radius:5px;
 	border: solid 4px #5F5F5F;
-	visibility:hidden;
+	/*visibility:hidden;*/
 }
 
 #newTugasTitle {
@@ -465,13 +464,14 @@ button#editProfileBtn{
 }
 
 .Task {
+	clear: both;
 	float:left;
 	margin-top:1%;
 }
 
 .TaskContent {
 	margin-left:27%;
-	/*background:#933;*/
+	margin-top: 1%;
 }
 
 #submitNewKategori {
@@ -485,6 +485,10 @@ button#editProfileBtn{
 	height: 20px;
 	font-family: monospace;
 	border: solid 1px #789;
+	float: left;
+	margin-top: 10%;
+	margin-left: -20%;
+	margin-right: 25%;
 }
 
 #submitNewKategori > button:hover {

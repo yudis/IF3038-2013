@@ -292,3 +292,27 @@ function deleteTask(namaTask) {
 	xmlhttp.open("GET","php/getDeletionInfo.php?task="+namaTask,true);
 	xmlhttp.send();
 }
+function closeKategoriForm(id) {
+	document.getElementById(id).style.visibility = "hidden";
+}
+function addKategori(katName,userList) {
+	//alert(katName + " " + userList);
+	
+	//memeriksa apakah semua user yang dimasukkan valid / ada di dalam database
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
+	}
+	xmlhttp.onreadystatechange = function(){
+		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+			$response = xmlhttp.responseText;
+			alert($response);
+			
+			//menampilkan penambahan kolom kategori secara langsung
+		}
+	}
+	xmlhttp.open("GET","php/insertKategori.php?kat="+katName+"&userList="+userList,true);
+	xmlhttp.send();
+}

@@ -186,15 +186,15 @@
             </div>
             
             <div id="newTugasForm">
-                <form>
-                    <div class="Task">Nama Task</div> <div class="TaskContent">: <input type="text" name="namaTask"/></div>
-                    <div class="Task">Tag</div> <div class="TaskContent">: <input type="text" /></div>
-                    <div class="Task">Pengguna Terpercaya</div> <div class="TaskContent">: <input type="text"/></div>
+                    <div class="Task">Nama Kategori</div> <div class="TaskContent">: <input id="kategoriName" type="text" name="namaTask"/></div>
+                    <div class="Task">Pengguna Terpercaya</div> <div class="TaskContent">: <input id="userList" type="text"/></div>
 			
-                    <div id="submitNewKategori" onclick="closeKategoriForm()";>
+		    <div id="submitNewKategori" onclick="closeKategoriForm('popUp');">
+                    	<button>cancel</button>
+                    </div>
+                    <div id="submitNewKategori" onclick="closeKategoriForm('popUp');addKategori(kategoriName.value,userList.value);">
                     	<button>submit</button>
                     </div>
-                </form>
             </div>
         </div>
     </body>
