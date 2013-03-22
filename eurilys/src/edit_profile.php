@@ -32,11 +32,11 @@
 	
 	<div id="dynamic_content">
 		<div id="edit_profil_container">
-			<h3>  Edit Profile </h3>
+			<h1>  Edit Profile </h1>
 			<form id="edit_profile_form" method="POST" action="submit_edit_profile.php">
 				<!-- <label> Username </label> <?php echo $username;?> -->
 				
-				<h3>Change Password</h3>
+				<h2>Change Password</h2>
 				<label> New Password </label> 	
 				<input type="password" name="password" onkeypress="javascript:regCheck();" id="edit_password" title="Password should be at least 8 characters long" >
 				<img src="img/no.png" id="password_validation" class="signup_form_validation" alt="validation image">
@@ -46,7 +46,7 @@
 				<img src="img/no.png" id="confirm_validation" class="signup_form_validation" alt="validation image">
 				<div class="clear"></div>
 				
-				<h3>Change Details</h3>
+				<h2>Change Details</h2>
 				<label> Full Name </label> 
 				<input type="text" name="fullname" id="fullname" onkeypress="javascript:regCheck();" value="<?php echo $fullname; ?>" title="Your name should be at least consists first name and last name">
 				<img src="img/yes.png" id="name_validation" class="signup_form_validation" alt="validation image">
