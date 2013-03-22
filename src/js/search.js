@@ -55,7 +55,7 @@ Rp(function() {
 					loadPartial('category');
 				}
 				else {
-					loadPartial(currentTotal);
+					loadPartial(currentType);
 				}
 			}
 		}
