@@ -8,9 +8,10 @@
         $orang = $_REQUEST["assignee"];
         $beres = $_REQUEST["status"];
         $tag = $_REQUEST["tag"];
+        $tanggal = date_create_from_format("Y-m-d H:i:s",$_REQUEST["deadline"])->format('Y-m-d H:i:s');
     
-        if ($stmt = mysqli_prepare($con, "UPDATE tugas SET status=?,tag = ? WHERE (id_tugas = ?)")) {
-            mysqli_stmt_bind_param($stmt,"dsd",$beres,$tag,$id_tugas);
+        if ($stmt = mysqli_prepare($con, "UPDATE tugas SET deadline=?,status=?,tag = ? WHERE (id_tugas = ?)")) {
+            mysqli_stmt_bind_param($stmt,"sdsd",$tanggal,$beres,$tag,$id_tugas);
             mysqli_stmt_execute($stmt);
             
             if (mysqli_stmt_affected_rows($stmt)) {

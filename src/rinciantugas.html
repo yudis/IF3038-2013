@@ -103,15 +103,46 @@
                             if (status == 1) tambah += '<a id="status">DONE</a>';
                             else tambah += '<a id="status">IN THE PROCESS</a>';
                             
-                            tambah2 += '<label>STATUS TUGAS</label>';
+                            tambah2 += '<label>STATUS TUGAS';
                             if (status == 1) tambah2 += '<input type="checkbox" name="status" value="done" checked>';
                             else tambah2 += '<input type="checkbox" name="status" value="done">';
+                            tambah2 += '</label>';
                             
                             tambah += '<label>DEADLINE</label>';
                             tambah += '<a id="deadline">'+tanggal+"</a>";
                             
                             tambah2 += '<label>DEADLINE</label>';
-                            tambah2 += '<a id="deadline">'+tanggal+"</a>";
+                            tambah2 += '<input type="textarea" name="year" id="yearbox" value="'+tanggal.substring(0,4)+'">-';
+                            tambah2 += '<select name="month">';
+                            for (var i=1;i<=12;++i) {
+                                if (i == tanggal.substring(5,7)) tambah2 += "<option selected>"+i+"</option>";
+                                else tambah2 += "<option>"+i+"</option>";
+                            }
+                            tambah2 += '</select>-';
+
+                            tambah2 += '<select name="day">     ';
+                            for (var i=1;i<=31;++i) {
+                                if (i == tanggal.substring(8,10)) tambah2 += "<option selected>"+i+"</option>";
+                                else tambah2 += "<option>"+i+"</option>";
+                            }
+                            tambah2 += '</select> Jam: ';
+                            
+                            tambah2 += '<select name="hour">';
+                            for (var i=0;i<=23;++i) {
+                                if (i == tanggal.substring(11,13)) tambah2 += "<option selected>"+i+"</option>";
+                                else tambah2 += "<option>"+i+"</option>";
+                            }
+                            tambah2 += '</select>-';
+
+                            tambah2 += '<select name="minute">';
+                            for (var i=0;i<=59;++i) {
+                                var sem = "";
+                                if (i < 10) sem = "0";
+                                sem += i;
+                                if (sem == tanggal.substring(14,16)) tambah2 += "<option selected>"+sem+"</option>";
+                                else tambah2 += "<option>"+sem+"</option>";
+                            }
+                            tambah2 += '</select>';                            
                             
                             var orang = "";
                             tambah += "<label>ASSIGNEE</label>";
@@ -123,8 +154,13 @@
                                 n = s.indexOf("\n");
                             }
                             tambah += '</a>';
-
-                            tambah2 += '<input type="textarea" name="assignee" placeholder="assignee" value="'+orang+'">';
+                            
+                            tambah2 += "<label>ASSIGNEE</label>";
+                            tambah2 += '<input type="textarea" name="assignee" placeholder="assignee"';
+                            tambah2 += ' title="Akhiri nama user dengan tanda /, jangan dipisah spasi"';
+                            tambah2 += ' onkeyup=auto_complete(this.value.substring(this.value.lastIndexOf("/")+1)) value="'+orang+'">';
+                            
+                            tambah2 += '<label id="autobox"></label>';
                             
                             tambah += "<label>TAG</label>";
                             tambah += '<a id="tag">'+tag+'</a>';
@@ -175,7 +211,7 @@
                             tambah += username + " " + tanggal + "<br>";
                             tambah += komentar;
                             tambah += "</div>";
-                            daftar_komentar.innerHTML += tambah+"\n";                         
+                            daftar_komentar.innerHTML += tambah+"\n";
                         }
                     }
                     
@@ -206,9 +242,46 @@
                 xmlhttp2.send(params);
             }
         
+            function auto_complete(text) {
+                if (text == "") {
+                    document.getElementById("autobox").innerHTML = "";                    
+                } else {
+                    if (window.XMLHttpRequest){
+                        xmlhttp = new XMLHttpRequest();				
+                    } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+                    }
+                    
+                    xmlhttp.onreadystatechange = function(){
+                        if (xmlhttp.readyState==4 && xmlhttp.status == 200)	{
+                            //alert(xmlhttp.responseText);
+                            var s = xmlhttp.responseText;
+                            var n = s.indexOf("\n");
+                            document.getElementById("autobox").innerHTML = "";
+                            
+                            while (n != -1) {
+                                //Ambil satu data komentar
+                                var username = s.substring(0,n);
+                                s = s.substring(n+1);
+                                n = s.indexOf("\n");
+     
+                                //Tampilkan datanya
+                                var tambah = username+"<br>";
+                                document.getElementById("autobox").innerHTML += tambah+"\n";
+                            }
+                        }
+                    }
+                    
+                    params = "assignee="+escape(text);
+                    //alert(params);
+                    xmlhttp.open("POST","auto_complete_user.php",true);
+                    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    xmlhttp.send(params);
+                }
+            }
+        
             function showEdit(){
-                document.getElementById("detailedit").style.visibility="visible";
-                document.getElementById("detail").style.visibility="hidden";
+                document.getElementById("detail").innerHTML=document.getElementById("detailedit").innerHTML;
             }
             function hideEdit(){
                 document.getElementById("detailedit").style.visibility="hidden";
@@ -232,10 +305,13 @@
                 params = "assignee="+escape(form.assignee.value)+"&tag="+escape(form.catname.value)+"&id_tugas="+id_tugas+"&status=";
                 if (form.status.checked) params += "1";
                 else params += "0";
+                params += "&deadline=";
+                params += escape(form.year.value+"-"+form.month.value+"-"+form.day.value+" "+form.hour.value+":"+form.minute.value+":00");
+                
                 //alert(params);
 				xmlhttp.open("POST","edit_detail_tugas.php",true);
                 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				xmlhttp.send(params);                
+				xmlhttp.send(params);
             }
         </script>
     </head>
@@ -282,7 +358,7 @@
             <div id="rinciantugas">
                 <div id="judultugas"></div>
                 <div id="detail" style="visibility: visible">
-                                        
+                       
                 </div>
                 <div id="detailedit" style="visibility: hidden">
         

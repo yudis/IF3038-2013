@@ -127,9 +127,9 @@ input{
 	margin-top:3px;
 	font-size:0.8em;
 	color:#3a3a3a;
-        border-radius:5px;
-        -moz-border-radius:5px;
-        -webkit-border-radius:5px;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
 }
 
 #textreg{
@@ -143,7 +143,7 @@ input{
 }
 
 .small{
-        width:160px;
+    width:160px;
 	height:30px;
 	background:#f9f9f9;
 	border:1px solid #dedede;
@@ -151,13 +151,13 @@ input{
 	margin-top:3px;
 	font-size:0.9em;
 	color:#3a3a3a;
-        border-radius:10px;
-        -moz-border-radius:10px;
-        -webkit-border-radius:10px;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
 }
 
 .xsmall{
-         width:50px;
+    width:50px;
 	height:30px;
 	background:#f9f9f9;
 	border:1px solid #dedede;
@@ -165,31 +165,30 @@ input{
 	margin-top:3px;
 	font-size:0.9em;
 	color:#3a3a3a;
-        border-radius:10px;
-        -moz-border-radius:10px;
-        -webkit-border-radius:10px;
-        
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
 }
 
 .submitreg{
-        position: relative;
-        width : 100px;
-        height: 30px;
-        padding: 5px 15px;
-        margin : 10px auto 0 auto;
-        text-align: center;
+    position: relative;
+    width : 100px; 
+    height: 30px;
+    padding: 5px 15px;
+    margin : 10px auto 0 auto;
+    text-align: center;
 	border-radius: 3px;
-        background: #64c8ef; /* Old browsers */
+    background: #64c8ef; /* Old browsers */
 	background: -moz-linear-gradient(top,  #64c8ef 0%, #00a2e2 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#64c8ef), color-stop(100%,#00a2e2)); /* Chrome,Safari4+ */
 	background: -webkit-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* Chrome10+,Safari5.1+ */
 	background: -o-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #64c8ef 0%,#00a2e2 100%); /* W3C */
-        color: #ffffff;
-        border-radius:10px;
-        -moz-border-radius:10px;
-        -webkit-border-radius:10px;
+    color: #ffffff;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
 }
 
 /*FORM CSS*/
@@ -198,14 +197,13 @@ html {
 	font-size: 10pt;
 }
 label {
-        margin-left: 1px;
-        font-style: Calibri;
-        font-size: 14pt;
+    margin-left: 1px;
+    font-style: Calibri;
+    font-size: 14pt;
 	display: block;
 	color: #e58100;
-        margin-top: 5px;
+    margin-top: 5px;
 }
-
 
 .cf:before,
 .cf:after {
@@ -240,14 +238,14 @@ label {
 	padding: 5px;
 	margin-right: 10px;
 	border: 1px solid ;
-        border-color: #fc8e00;
+    border-color: #fc8e00;
 	border-radius: 3px;
 	box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 
 				0px 1px 0px 0px rgba(250, 250, 250, 0.5) ;
 }
 .loginform input[type=submit] {
 	border: 1px solid ;
-        border-color: #e58100;
+    border-color: #e58100;
 	background: #64c8ef; /* Old browsers */
 	background: -moz-linear-gradient(top,  #64c8ef 0%, #00a2e2 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#64c8ef), color-stop(100%,#00a2e2)); /* Chrome,Safari4+ */
