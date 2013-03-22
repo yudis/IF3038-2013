@@ -44,7 +44,7 @@ if (connectDB()) {
             <option value="All"> All </option>   
             <option value="Category"> Category </option>
             <option value="Task"> Task </option>
-            <option value="User"> Username </option>
+            <option value="Username"> Username </option>
         </select>
         <input type="submit" value="Search">
     </form>

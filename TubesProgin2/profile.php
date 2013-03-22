@@ -33,9 +33,13 @@ and open the template in the editor.
 ?>                  
 
             <div id="panel">
-                <div id="editP" onclick="editProfile();">
-                    edit profile
-                </div>
+                <?php
+                if ($uname === $_COOKIE['UserLogin']) {
+                    echo '<div id="editP" onclick="editProfile();">';
+                    echo 'edit profile';
+                    echo '</div>';
+                }
+                ?>
             </div>
 
             <div id="donelist">
@@ -87,18 +91,16 @@ and open the template in the editor.
         <div id='edit'>
                 <p class="title">edit profile</p>
                
-                Full Name: <input type="text" id="regname" onchange="Register();"><br>
-                Birthday: <input type="date" id="regdate"><br>
-                &nbsp; <br/>
-                New Password:<br/> 
-                <input type="password" id="regpassword1" onchange="Register();"><br>
-                Confirm Password:<br/> 
-                <input type="password" id="regpassword2" onchange="Register();"><br>
-                &nbsp;<br/>
-                Upload New Avatar: <input type="file" id="regfile"><br>
-                &nbsp; &nbsp; <br/>
-                <input type="submit" onclick="" value="save changes">
-                <input type="submit" onclick="restoreP();" value="cancel">
+                <form id="regForm" method="post" action="register.php" enctype="multipart/form-data">
+                    Full name: <input type="text" id="regname" name="regname" pattern="^.+ .+$" required><img id="valid2" src=""><br>
+                    Birthdate: <input type="date" id="regdate" name="regdate" onchange="dateChange();"><img id="valid7" src=""><br>
+                    New Password:<br/><input type="password" id="regpassword1" name="regpassword1" pattern="^.{8,}$" required><img id="valid3" src=""><br>
+                    Confirm new password:<br/><input type="password" id="regpassword2" name="regpassword2" pattern="^.{8,}$" required><img id="valid4" src=""><br>
+                    Upload new avatar: <br/><input type="file" id="regfile" name="regfile" onchange="checkImage();"><img id="valid6" src=""><br>
+                    <input type="submit" onclick="restoreP();" value="save changes">
+                    <input type='submit' onclick="restoreP();" value="cancel">
+                </form>
+
             </div>
 
         </body>
