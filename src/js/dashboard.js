@@ -6,10 +6,12 @@ Rp(function()
 
 	if (currentCat === undefined || !currentCat) {
 		Rp('#addTaskLi').hide();
+		currentCat = 0;
 	}
 
 	if (canDelete === undefined || !canDelete) {
 		Rp('#deleteCategoryLi').hide();
+		canDelete = false;
 	}
 
 	createTaskElement = function(task) 
@@ -62,6 +64,8 @@ Rp(function()
 	}
 
 	createCategoryElement = function(cat) {
+		if (cat.id == undefined)
+			cat.id = 0;
 		li = Rp.factory('li').prop('id', 'categoryLi' + cat.id);
 		a = Rp
 			.factory('a')

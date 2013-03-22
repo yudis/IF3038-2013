@@ -86,7 +86,7 @@ foreach ($todo as $task):
 								<p class="tags">
 									<span class="detail-label">Tag:</span>
 									<?php foreach ($task->getTags() as $tag) {
-										echo '<span class="tag">' . $tag->tag . '</span>';
+										echo '<span class="tag">' . $tag->tag_name . '</span> ';
 									} ?>
 								</p>
 							</div>
@@ -125,7 +125,7 @@ foreach ($done as $task):
 								<p class="tags">
 									<span class="detail-label">Tag:</span>
 									<?php foreach ($task->getTags() as $tag) {
-										echo '<span class="tag">' . $tag->tag . '</span>';
+										echo '<span class="tag">' . $tag->tag_name . '</span> ';
 									} ?>
 								</p>
 							</div>
