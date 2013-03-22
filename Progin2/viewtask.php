@@ -331,6 +331,16 @@ if(!isset($_SESSION['id']))
 						</div>
 					</div>
 					<div class="form_attachment">
+					<?php
+					$attachment = mysql_query("SELECT isiattachment FROM attachment WHERE idtugas='$idtugas'");
+					$row = mysql_fetch_array($attachment);
+					$ext = pathinfo($row['isiattachment'], PATHINFO_EXTENSION);
+					if ($ext == "jpg" || $ext == "jpeg" || $ext == "bmp")
+						echo "<img id=image src=\"".$row['isiattachment']."\" width=320 alt=\"\"/>";
+					else if ($ext == "ogg" || $ext == "webm" || $ext == "3gp")
+						echo "<video id=video width=320 src=\"".$row['isiattachment']."\"  controls onError=\"this.style.display = 'none';\">";
+					?>
+							</video>
 					</div>
 					<div class="form_field">
 						<div class="viewtask_label">

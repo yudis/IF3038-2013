@@ -56,7 +56,7 @@
 					var filename = attachment.substring(startIndex);
 					if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0)
 						filename = filename.substring(1);
-					if(filename == "docx"|| filename == "jpeg" || filename == "bmp" || filename == "gif" || filename == "pdf" || filename == "doc" 
+					if(filename == "docx"|| filename == "jpeg" || filename == "bmp" || filename == "jpg" || filename == "pdf" || filename == "doc" 
 						|| filename == "docx" || filename == "xls" || filename == "xlsx" || filename == "ppt" || filename == "pptx" || filename == "mp4"
 						|| filename == "ogg"|| filename == "webm"|| filename == "3gp"){         
 						document.getElementById('v_attachment').innerHTML='<img src="images/Check.png" title="Benar"/img>'; 
