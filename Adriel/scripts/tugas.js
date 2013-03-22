@@ -41,6 +41,7 @@ function onload() {
 		document.getElementById('deadline').value = document.getElementById('deadlineDisplayDiv').innerHTML;
 		setAssignee(decodeURIComponent(id));
 		setTags(decodeURIComponent(id));
+		generateComments(id);
 	}
 }
 
@@ -69,6 +70,31 @@ function onload() {
     assigneesTugas.push("Florentina");
     writeAssignees();
 }*/
+
+function generateComments(id)
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	var username = localstorage.session;
+	
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById("commentspace") = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","getcomments.php?id="+id,true);
+	xmlhttp.send();
+}
 
 function getTaskName(id)
 {
@@ -250,7 +276,10 @@ function getFileName(link)
 function addKomentar() {
     var now = new Date();
     var komentar_div = document.getElementById("komentar");
-    komentar_div.innerHTML += "<b>WhoAmI</b> - " + now.toString("dd MMMM yyyy hh:mm") + "<hr />" + document.getElementById('txtKomentar').value + "<br /><br />";
+	var username = localstorage.session;
+	var id_komentar = "COM-" + username + now.toUTCString;
+	
+    komentar_div.innerHTML += "<b>" + username + "</b> - " + now.toUTCString() + "<hr />" + document.getElementById('txtKomentar').value + "<br /><br />";
     
     return false;
 }
