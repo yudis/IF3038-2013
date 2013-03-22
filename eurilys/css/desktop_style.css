@@ -696,7 +696,8 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 	margin:auto;
 	margin-top:20px;
 }
-.task_done_button {float:right;cursor:pointer;}
+.task_done_button {float:right;cursor:pointer;font-size:12px;}
+.task_done_button:hover {color:#211C18;};
 
 /* SCROLL BAR
 ---------------------------------------------------------------------------------- */

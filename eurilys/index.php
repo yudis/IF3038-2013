@@ -23,7 +23,7 @@
 			<form id="login_form" method="POST" action="login_script.php">
 				<label> Username </label> <input type="text" id="login_username" name="username"/>
 				<br/><label> Password </label> <input type="password" id="login_password" name="password"/> 
-				<input type="submit" name="login_submit" onclick="javascript:checklogin()" class="link_red top10 bold" id="login_submit" value="LOG IN">
+				<input type="submit" name="login_submit" class="link_red top10 bold" id="login_submit" value="LOG IN">
 			</form>
 		</div>
 		

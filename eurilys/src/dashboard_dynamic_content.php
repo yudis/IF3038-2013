@@ -1,4 +1,7 @@
 <?php
+	session_start();
+	ob_start();
+	
 	/* Configuring Server & Database */
 	$host        =    'localhost';
 	$user        =    'root';
@@ -8,6 +11,10 @@
 	mysql_select_db($database,$con) or die('Database information is not correct');
 	
 	$response = "";
+	
+	if (isset($_SESSION['username'])) {
+		$username = $_SESSION['username']; 
+	}
 	
 	/* Get the task CATEGORY we're going to generate to the HTML page */
 	$q	= $_GET["q"];
@@ -23,7 +30,7 @@
 	
 	/* Searching for Task */
 	if ($q == 'all') {
-		$query 	= "SELECT * FROM task WHERE task_status='0';";
+		$query 	= "SELECT * FROM task;";
 		$result	= mysql_query($query);
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 			
@@ -40,8 +47,24 @@
 			$response = $response. 
 			"
 			<br>
-			<div class='task_view' id='".$row['task_id']."'>
-				<img src='../img/done.png' id='finish_".$row['task_id']."' onclick='javascript:finishTask(".$row['task_id'].")' class='task_done_button' alt=''/>
+			<div class='task_view' id='".$row['task_id']."'>";
+			
+			if ($row['task_creator'] == $username) {
+				$response = $response. 
+				"<div id='delete_".$row['task_id']."' onclick='javascript:deleteTask(".$row['task_id'].")' class='task_done_button'> Delete </div>
+				<div class='task_done_button'>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</div>"; 
+			}
+			
+			if ($row['task_status'] == 0) {
+				$response = $response. 			
+				"<div id='finish_".$row['task_id']."' onclick='javascript:finishTask(".$row['task_id'].")' class='task_done_button'> Mark as Finished </div>";
+			}
+			else {
+				$response = $response."<img src='../img/yes.png' class='task_done_button' alt=''/>";
+			}
+			
+			$response = $response. 			
+				"
 				<div id='task_name_ltd' class='left dynamic_content_left'>Task Name</div>
 				<div id='task_name_rtd' class='left dynamic_content_right darkBlueLink' onclick='javascript:viewTask(".$row['task_id'].")'> ".$row['task_name']." </div>
 				<br><br>
@@ -58,7 +81,7 @@
 	}
 	else {
 		//searching for specific task (per category)
-		$query 	= "SELECT * FROM task where cat_name='$q' AND task_status='0';";
+		$query 	= "SELECT * FROM task where cat_name='$q';";
 		$result	= mysql_query($query);
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 			
@@ -75,8 +98,24 @@
 			$response = $response. 
 			"
 			<br>
-			<div class='task_view' id='".$row['task_id']."'>
-				<img src='../img/done.png' id='finish_".$row['task_id']."' onclick='javascript:finishTask(".$row['task_id'].")' class='task_done_button' alt=''/>
+			<div class='task_view' id='".$row['task_id']."'>";
+			
+			if ($row['task_creator'] == $username) {
+				$response = $response. 
+				"<div id='delete_".$row['task_id']."' onclick='javascript:deleteTask(".$row['task_id'].")' class='task_done_button'> Delete </div>
+				<div class='task_done_button'>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</div>"; 
+			}
+			
+			if ($row['task_status'] == 0) {
+				$response = $response. 			
+				"<div id='finish_".$row['task_id']."' onclick='javascript:finishTask(".$row['task_id'].")' class='task_done_button'> Mark as Finished </div>";
+			}
+			else {
+				$response = $response."<img src='../img/yes.png' class='task_done_button' alt=''/>";
+			}
+			
+			$response = $response. 			
+				"
 				<div id='task_name_ltd' class='left dynamic_content_left'>Task Name</div>
 				<div id='task_name_rtd' class='left dynamic_content_right darkBlueLink' onclick='javascript:viewTask(".$row['task_id'].")'> ".$row['task_name']." </div>
 				<br><br>
