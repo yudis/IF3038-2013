@@ -9,7 +9,8 @@
 	 * @property string $nama_task
 	 * @property string $status
 	 * @property string $deadline
-	 * @property string $id_kategori
+	 * @property integer $id_kategori
+	 * @property integer $id_user
 	 */
 	class Task extends SimpleRecord
 	{		
@@ -38,42 +39,11 @@
 		public function checkValidity()
 		{
 			$error = array();
-			/* if (!preg_match("/^.{5,}$/", $this->data['username']))
-			{
-				$error["username"] = "Username harus minimal 5 karakter.";
-			} */ 
 			
-			$kategori = Category::model()->find("nama_kategori='".$
-			$array_of_tags = $this->data['tag'];
-			$tags = explode(",", $array_of_tags);
-			if ($tags)
-			{
-				foreach($tags as $temp_tag)
-				{
-					$tag = Tag::model()->find("tag_name='".$temp_tag."'");
-					// if tag exists, insert to table have_tags
-					if ($tag->data) 
-					{
-						print_r ($tag);
-						/*mysql_query("INSERT INTO `task` (`id_task`, `deadline`, `id_kategori`) VALUES ('".$this->data['nama_task']."', '".$this->data['deadline']."', '".5'");*/
-
-						mysql_query("INSERT INTO `have_tags` (`id_task` ,`id_tag`) VALUES ('".$tag->data['id_tag']."'", '11'));
-					}
-					// if tag doesn't exist, insert into table tags & have_tags
-					else 
-					{
-						// insert into table tags
-						$tag->data['tag_name'] = $temp_tag;
-						$tag->save();
-						// insert into table have tags
-					}
-				}
-			}
-			print_r ($tag_name);
 			$user = User::model()->find("username='".$this->data['assignee']."'");
 			if ($user->data)
 			{
-				$error['assignee'] = "asik";
+			
 			}
 			else 
 			{
@@ -92,13 +62,36 @@
 			if ($this->id==null)
 			{
 				// new task
+				$user_id = $_SESSION['user_id'];
 				DBConnection::openDBconnection();
-				
-				$result = DBConnection::DBquery("INSERT into ".tableName()."");
-				
+				$result = DBConnection::DBquery("INSERT INTO `task` (`nama_task`, `deadline`, `id_kategori`, `id_user`) VALUES ('".$this->data['nama_task']."', '".$this->data['deadline']."', '".$this->id_kategori."', '".$user_id."')");
 				DBConnection::closeDBconnection();
-								
-				return $result;
+
+				/* $array_of_tags = $this->data['tag'];
+				$tags = explode(",", $array_of_tags);
+				
+				if ($tags)
+				{
+					foreach($tags as $temp_tag)
+					{
+
+						$tag = Tag::model()->find("tag_name='".$temp_tag."'");
+						print_r ($tag->data);
+						if ($tag->data) 
+						{
+									
+						}
+						// if tag doesn't exist, insert into table tags & have_tags
+						else 
+						{
+							// insert into table tags
+							$tag->data['tag_name'] = $temp_tag;
+							$tag->save();
+							// insert into table have tags
+						}
+					}
+				} */
+				
 			}
 			else
 			{

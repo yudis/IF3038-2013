@@ -117,6 +117,7 @@ Rp(function()
 					if (response.canDeleteCategory)
 					{
 						document.getElementById('addTaskLi').style.display = "block";
+						document.getElementById('addTaskCat').href='newwork.php?cat='+response.categoryID;
 						document.getElementById('deleteCategoryLi').style.display = "block";
 					}
 					else if (response.canEditCategory)
