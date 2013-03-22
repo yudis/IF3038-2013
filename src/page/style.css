@@ -227,13 +227,13 @@ body {
 }
 
 #header-right-user {
-	margin-top:6px;
-	padding-top:25px;
+	margin-top:8px;
+	padding-top:10px;
 	padding-left:190px;
 }
 
 #header-right-search {
-	width:300px;
+	width:320px;
 	padding-top:2px;
 	padding-left:100px;
 	float:left;
