@@ -35,6 +35,7 @@
 		public function checkValidity()
 		{
 			$error = array();
+			// check jpeg dll
 			if (!preg_match("/^.{5,}$/", $this->data['username']))
 			{
 				$error["username"] = "Username harus minimal 5 karakter.";

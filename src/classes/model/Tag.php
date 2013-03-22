@@ -35,10 +35,6 @@
 		public function checkValidity()
 		{
 			$error = array();
-			if (!preg_match("/^.{5,}$/", $this->data['username']))
-			{
-				$error["username"] = "Username harus minimal 5 karakter.";
-			}
 			return $error;
 		}
 		
@@ -59,9 +55,7 @@
 				}
 				else 
 				{
-					DBConnection::openDBconnection();
 					$result = DBConnection::DBquery("INSERT INTO `".self::tableName()."` (`tag_name`) VALUES ('".$this->tag_name."')");
-					DBConnection::closeDBconnection();
 					return $result;
 				}
 			}

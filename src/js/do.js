@@ -16,14 +16,6 @@ Rp(function() {
 		return article;
 	};
 
-	Rp('#commentForm').on('submit', function(e) {
-		e.preventDefault();
-		author = Rp('#userFullName').text();
-		body = Rp('#commentBody').val();
-		comment = genComment(author, body);
-		Rp('#commentsList').append(comment);
-	});
-
 	Rp('#loginLink').on('click', function(e) {
 		e.preventDefault();
 

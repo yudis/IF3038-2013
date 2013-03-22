@@ -196,8 +196,20 @@
 		 */
 		public function getComment()
 		{
-			return Comment::model()->findAll("id_task = '".$this->id_task."' ORDER BY timestamp");
+			return array_reverse(Comment::model()->findAll("id_task = '".$this->id_task."' ORDER BY timestamp DESC LIMIT 10"));
 		}
+		
+		/**
+		 * Get total comment in the task
+		 * @return int Total Comment in the task
+		 */
+		public function getTotalComment()
+		{
+			// TODO Optimized
+			$comments = Comment::model()->findAll("id_task = '".$this->id_task."'");
+			return count($comments);
+		}
+		
 		
 		/**
 		 * Check if task editable or not

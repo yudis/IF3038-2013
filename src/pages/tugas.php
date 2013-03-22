@@ -103,7 +103,7 @@
 				</div>
 				<div id="edit-task">
 					<form id="new_tugas" action="edit_tugas" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="id_task" value="<?php echo $task->idl ?>">
+						<input id="id_task" type="hidden" name="id_task" value="<?php echo $task->id_task; ?>">
 						<div class="field">
 							<label>Task Name</label>
 							<input size="25" maxlength="25" name="nama_task" id="nama" type="text" value="<?php echo $task->nama_task; ?>">
@@ -161,22 +161,46 @@
 				</div>
 				<section class="comments">
 					<header>
-						<h3><?php echo count($comments); ?> Comment<?php echo (count($comments)>1)? "s" : ""; ?></h3>
+						<h3 id="total_comment"><?php $total_comment = $task->getTotalComment(); echo $total_comment; ?> Comment<?php echo ($total_comment>1)? "s" : ""; ?></h3>
+						<?php
+							if ($total_comment>10)
+							{
+						?>
+							<a id="more_link" href="javascript:more_comment()">Previous Comment<?php echo ($total_comment-10>1)? "s" : ""; ?></a>
+						<?php
+							}
+						?>
+						<span id="show_status" class="right">Showing <?php echo min(10,$total_comment);?> of <?php echo $total_comment; ?></span>
+						<div class="clear"></div>
 					</header>
-
+	
 					<div id="commentsList">
 						<?php
+							$firsttimestamp = $comments[0]->timestamp;
+							$lasttimestamp = "";
 							foreach ($comments as $comment)
 							{
 								$user = $comment->getUser();
-								echo '<article class="comment">';
+								echo '<article id="comment_'.$comment->id_komentar.'" class="comment">';
+									echo '<a href="profile?id='.$user->id_user.'">';
+										echo '<img src="'."upload/user_profile_pict/".$user->avatar.'" alt="'.$user->fullname.'" class="icon_pict" >';
+									echo '</a>';
+									echo '<div class="right">';
+										echo (new DateTime($comment->timestamp))->format('h:i – D/M');
+										if ($user->id_user==$this->currentUserId)
+											echo ' <a href="javascript:delete_comment('.$comment->id_komentar.')">DELETE</a>';
+									echo '</div>';
 									echo '<header>';
-										echo '<h4>'.$user->username.'</h4>';
+										echo '<a href="profile?id='.$user->id_user.'">';
+											echo '<h4>'.$user->username.'</h4>';
+										echo '</a>';
 									echo '</header>';
 									echo '<p>';
 										echo $comment->komentar;
 									echo '</p>';
+									echo '<div class="clear"></div>';
 								echo '</article>';
+								$lasttimestamp = $comment->timestamp;
 							}
 						?>
 					</div>
@@ -184,6 +208,7 @@
 					<div class="comment-form">
 						<h3>Add Comment</h3>
 						<form id="commentForm" action="#" method="post">
+							<input type="hidden" name="id_task" value="<?php echo $task->id_task; ?>">
 							<textarea name="komentar" id="commentBody"></textarea>
 							<button type="submit">Send</button>
 						</form>
@@ -194,6 +219,13 @@
 		<?php
 			$this->calendar();
 		?>
+		<script type="text/javascript">
+			var first_timestamp = "<?php echo $firsttimestamp; ?>";
+			var timestamp = "<?php echo $lasttimestamp; ?>";
+			var total_comment = <?php echo $total_comment; ?>;
+			var id_user = <?php echo $this->currentUserId; ?>;
+			var current_total_comment = <?php echo min(10,$total_comment);?>;
+		</script>
 <?php
 	$this->requireJS('datepicker');
 	$this->requireJS('tugas');

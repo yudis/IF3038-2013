@@ -153,15 +153,48 @@ class RestApi
 		return $cats;
 	}
 	
+	public function get_previous_comments($params)
+	{
+		$return = array();
+		if ((isset($params['id_task'])) && (isset($params['timestamp'])) && ($this->app->loggedIn))
+		{
+			$return = Comment::getOlder($params['id_task'], $params['timestamp']);
+		}
+		return $return;
+	}
+	
+	public function retrieve_comments($params)
+	{
+		$return = array();
+		if ((isset($params['id_task'])) && (isset($params['timestamp'])) && ($this->app->loggedIn))
+		{
+			$return = Comment::getLatest($params['id_task'], $params['timestamp']);
+		}
+		return $return;
+	}
+	
 	public function comment($params)
 	{
 		$return = "fail";
-		if (($_SERVER['REQUEST_METHOD'] === 'POST') && (isset($params['comment'])) && (isset($params['commentator'])))
+		if (($_SERVER['REQUEST_METHOD'] === 'POST') && (isset($params['komentar'])) && ($this->app->loggedIn))
 		{
-			// TODO cek validasi comentator sesuai dengan session
 			$comment = new Comment();
 			$comment->data = $params;
+			$comment->id_user = $this->app->currentUserId;
 			if ($comment->save())
+			{
+				$return = "success";
+			}
+		}
+		return $return;
+	}
+	
+	public function remove_comment ($params)
+	{
+		$return = "fail";
+		if (($_SERVER['REQUEST_METHOD'] === 'POST') && (isset($params['id'])) && ($this->app->loggedIn))
+		{
+			if (Comment::model()->delete("id_komentar = ".addslashes($params['id'])." AND id_user = ".addslashes($this->app->currentUserId))==1)
 			{
 				$return = "success";
 			}
