@@ -415,6 +415,37 @@ body {
 	text-align:left;
 }
 
+#user-result {
+	width:400px;
+	height:150px;
+}
+
+#user-result-image {
+	width:120px;
+	float:left;
+	height:150px;
+}
+
+#user-result-name {
+	float:left;
+	height:150px;
+}
+
+#border-search {
+	color:black;
+	margin-top:0px;
+	margin-bottom:0px;
+	border-width:2px;
+	width:400px;
+	float:left;
+}
+
+#category-title {
+	font-size:22px;
+	text-align:left;
+	float:left;
+}
+
 .category-title {
 	font-size:24px;
 	text-align:left;

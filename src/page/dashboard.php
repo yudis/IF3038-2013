@@ -21,7 +21,7 @@
 			<!--Body-->
 			<div id="dashboard-body">
 				<div id="profile-pic">
-					<a href="profile.php?username=<?php echo $useractive;?>"><img alt="" id="photo" src="../avatar/<?php echo $avatar;?>" width=120 height="150"/>
+					<a href="profile.php?username=<?php echo $useractive;?>"><img alt="" id="photo" src="../avatar/<?php echo $avatar;?>" width="120" height="150"/>
    					<br />
 					<b><?php echo $useractive?></b></a>
 				</div>
