@@ -74,9 +74,10 @@ if ($field == "username" || $field == "semua") {
 		else
 		{
 			$data_p = mysql_query("SELECT * FROM user WHERE upper(username) LIKE'%$find%' $max") or die(mysql_error());
+			session_start();
 			while ($info = mysql_fetch_array($data_p)) {
 			echo "<div id=\"isi1\">";
-			session_start();
+			
 			if($_SESSION['id'] == $info['username']) {
 				echo "<p style='margin-left: 1em;'> Username : <a href=\"profile.php\">". $info['username'] ."</a></p>";
 			} else {

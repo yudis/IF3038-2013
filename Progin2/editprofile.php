@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['id']))
-  header("location:index.html");
+  header("location:index.php");
 
 $con = mysql_connect("localhost:3306","root","");
 if (!$con)

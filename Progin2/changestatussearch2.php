@@ -16,7 +16,8 @@
                     }
 
                     mysql_select_db("progin_405_13510057", $con);
-
+					session_start();
+					
 					$idtugas = $_GET["q"];
 					$result = mysql_query("SELECT status FROM tugas WHERE idtugas = '$idtugas'");
 					$row = mysql_fetch_array($result);
@@ -98,12 +99,18 @@
                             echo "Tag : ";
                             echo $info['isitag'];
                             echo "<br>";
-							if ($info['status'] == "done")
-								$status = "checked";
-							else 
-								$status = '';
-							echo "<div>Status : <input type=checkbox name=\"status\" value=\"done\" ".$status."/ onchange=\"changeStatus(".$info['idtugas'].")\"></div>";
-                            echo "</p>";
+							$temp0 = mysql_query("SELECT username FROM assignee WHERE idtugas = '$info[idtugas]' AND username = '$_SESSION[id]'");
+							$row0 = mysql_fetch_array($temp0);
+							$temp1 = mysql_query("SELECT username FROM hak WHERE idkategori = '$info[idkategori]' AND username = '$_SESSION[id]'");
+							$row1 = mysql_fetch_array($temp1);
+							if ($info['username'] == $_SESSION['id'] || $row0['username'] == $_SESSION['id'] || $row1['username'] == $_SESSION['id']){
+								if ($info['status'] == "done")
+									$status = "checked";
+								else 
+									$status = '';
+								echo "<div>Status : <input type=checkbox name=\"status\" value=\"done\" ".$status."/ onchange=\"changeStatus(".$info['idtugas'].")\"></div>";
+                            }
+							echo "</p>";
 							echo "</div>";
                         }
 						}

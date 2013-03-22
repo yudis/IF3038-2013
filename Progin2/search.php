@@ -2,7 +2,11 @@
 
 <html>
     <head>
-
+		<?php
+		session_start();
+		if(!isset($_SESSION['id']))
+			header("location:index.php");
+		?>
         <title>Dashboard</title>
         <link href="styles/header.css" rel="stylesheet" type="text/css" />
         <link href="styles/search.css" rel="stylesheet" type="text/css" />
@@ -181,7 +185,6 @@
         </script>
     </head>
 		
-
 		<body onLoad = "searchWords();">
 
         <div id="container">
@@ -251,14 +254,28 @@
                     </form>
                 </div>
                 <div class="menu" id="logout">
-                    <a href="index.html">Logout</a>
-                </div>
-                <div class="menu" id="profile">
-                    <a href="profile.php">Profile</a>
+                    <a href="index.php">Logout</a>
                 </div>
                 <div class="menu" id="home">
-                    <a href="dashboard.php">Home</a>
-                </div>
+				<a href="dashboard.php">Home</a>
+			</div>
+			<div class="menu" id="profile">
+				<a href="profile.php">
+				<img alt="" height=25 width=25 src="<?php
+					$con = mysql_connect("localhost:3306","root","");
+					if (!$con)
+					  {
+					  die('Could not connect: ' . mysql_error());
+					  }
+
+					mysql_select_db("progin_405_13510057", $con);
+				
+					$result = mysql_query("SELECT * FROM user WHERE username='$_SESSION[id]'");
+					while($row = mysql_fetch_array($result)) 
+						echo $row['avatar'];
+				?>">
+				Profile</a>
+			</div>
             </div>
 
             <div id="category">

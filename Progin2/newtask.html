@@ -92,13 +92,27 @@
 				 </form>
 			</div>
 			<div class="menu" id="logout" action="logout.php">
-				<a href="index.html">Logout</a>
-			</div>
-			<div class="menu" id="profile">
-				<a href="profile.php">Profile</a>
+				<a href="index.php">Logout</a>
 			</div>
 			<div class="menu" id="home">
-				<a href="dashboard.html">Home</a>
+				<a href="dashboard.php">Home</a>
+			</div>
+			<div class="menu" id="profile">
+				<a href="profile.php">
+				<img alt="" height=25 width=25 src="<?php
+					$con = mysql_connect("localhost:3306","root","");
+					if (!$con)
+					  {
+					  die('Could not connect: ' . mysql_error());
+					  }
+
+					mysql_select_db("progin_405_13510057", $con);
+				
+					$result = mysql_query("SELECT * FROM user WHERE username='$_SESSION[id]'");
+					while($row = mysql_fetch_array($result)) 
+						echo $row['avatar'];
+				?>">
+				Profile</a>
 			</div>
         </div>
 			<div id="leftspace">

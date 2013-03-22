@@ -20,7 +20,11 @@ mysql_query("INSERT INTO user (username, password, fullname, birthdate, phonenum
 
 move_uploaded_file($_FILES["avatar"]["tmp_name"], "upload/" . $_FILES["avatar"]["name"]);
 
-header("location:index.html");
+session_start();
+// store session data
+$_SESSION['id'] = $username;
+$_SESSION['pagenum'] = 1;
+header("location:dashboard.php");
 
 mysql_close($con);
 ?>

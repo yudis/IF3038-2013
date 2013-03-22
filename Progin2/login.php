@@ -25,8 +25,7 @@ if($count >= 1){
 	header("location:dashboard.php");
 }
 else {
-	header("location:index.html");
-	echo "Wrong Username or Password";
+	header("location:index.php?q=0");
 }
 
 mysql_close($con);

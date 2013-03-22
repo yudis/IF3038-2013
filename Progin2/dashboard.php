@@ -84,13 +84,31 @@ else echo "<body onLoad=\"showTaskDefault()\">";
 				 </form>
 			</div>
 			<div class="menu" id="logout" action="logout.php">
-				<a href="index.html">Logout</a>
-			</div>
-			<div class="menu" id="profile">
-				<a href="profile.php">Profile</a>
+				<a href="index.php">Logout</a>
 			</div>
 			<div class="menu" id="home">
 				<a href="dashboard.php">Home</a>
+			</div>
+			<div class="menu" id="profile">
+				<a href="profile.php">
+				<img alt="" height=25 width=25 src="<?php
+					session_start();
+					if(!isset($_SESSION['id']))
+						header("location:index.php");
+				
+					$con = mysql_connect("localhost:3306","root","");
+					if (!$con)
+					  {
+					  die('Could not connect: ' . mysql_error());
+					  }
+
+					mysql_select_db("progin_405_13510057", $con);
+				
+					$result = mysql_query("SELECT * FROM user WHERE username='$_SESSION[id]'");
+					while($row = mysql_fetch_array($result)) 
+						echo $row['avatar'];
+				?>">
+				Profile</a>
 			</div>
         </div>
 		
@@ -111,7 +129,7 @@ else echo "<body onLoad=\"showTaskDefault()\">";
 				  }
 				mysql_select_db("progin_405_13510057", $con);
 				// Fill up array with names
-				session_start();			  
+			  
 				$result = mysql_query("SELECT namakategori,hak.idkategori FROM kategori JOIN hak 
 									WHERE kategori.idkategori = hak.idkategori AND hak.username = '$_SESSION[id]'");
 				while($row = mysql_fetch_array($result))

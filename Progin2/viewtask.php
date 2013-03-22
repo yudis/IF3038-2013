@@ -3,7 +3,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['id']))
-	header("location:index.html");
+	header("location:index.php");
 ?>
 
 	<head>
@@ -295,14 +295,28 @@ if(!isset($_SESSION['id']))
 				 </form>
 			</div>
 				<div class="menu" id="logout" action="logout.php">
-					<a href="index.html">Logout</a>
-				</div>
-				<div class="menu" id="profile">
-					<a href="profile.php">Profile</a>
+					<a href="index.php">Logout</a>
 				</div>
 				<div class="menu" id="home">
-					<a href="dashboard.php">Home</a>
-				</div>
+				<a href="dashboard.php">Home</a>
+			</div>
+			<div class="menu" id="profile">
+				<a href="profile.php">
+				<img alt="" height=25 width=25 src="<?php
+					$con = mysql_connect("localhost:3306","root","");
+					if (!$con)
+					  {
+					  die('Could not connect: ' . mysql_error());
+					  }
+
+					mysql_select_db("progin_405_13510057", $con);
+				
+					$result = mysql_query("SELECT * FROM user WHERE username='$_SESSION[id]'");
+					while($row = mysql_fetch_array($result)) 
+						echo $row['avatar'];
+				?>">
+				Profile</a>
+			</div>
 			</div>
 			<div id="leftspace">
 				
@@ -411,9 +425,9 @@ if(!isset($_SESSION['id']))
 							$count = mysql_num_rows($assignee);
 							while($row = mysql_fetch_array($assignee)){
 								if ($count > 1)
-									echo $row['username'].", ";
+									echo "<a href=\"profilesearch.php?idsearch=".$row['username']."\">".$row['username']."</a>".", ";
 								else 
-									echo $row['username'];
+									echo "<a href=\"profilesearch.php?idsearch=".$row['username']."\">".$row['username']."</a>";
 								$count--;
 							}
 							?>
@@ -466,7 +480,30 @@ if(!isset($_SESSION['id']))
 							<input type=button value="Edit" id="tagbutton" onClick="showHide('tag');showHide('tagvalue');renameButton('tagbutton');clearContents('tag')">
 						</div>
 					</div>
+					<div class="form_field">
+						<div class="viewtask_label">
+							Status
+						</div>
+						<div class="viewtask_field">
+						<?php
+						$result = mysql_query("SELECT status FROM tugas WHERE idtugas = '$idtugas'");
+						$row = mysql_fetch_array($result);
+						if ($row['status'] == "done") {
+							$status = "checked";
+							echo "Done ";
+						}
+						else {
+							$status = '';
+							echo "Undone ";
+						}
+						echo "<input type=checkbox name=\"status\" value=\"done\" ".$status."/ onchange=\"location.href='changestatusview.php?q=".$idtugas."'\">";
+						?>
+						</div>
+					</div>
 				</form>
+				<?php
+				echo "<button onclick=\"location.href='deletetask.php?q=".$idtugas."'\">Hapus Task...</button>";
+				?>
 			</div>
 			<div id="rightspace">
 				<script type="text/javascript">
