@@ -76,8 +76,6 @@ else
   }
 xmlhttp.onreadystatechange=function()
   {
-  console.log(xmlhttp.readyState);
-  console.log(xmlhttp.status);
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
     document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
