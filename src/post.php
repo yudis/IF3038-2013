@@ -3,7 +3,6 @@ include 'header.php';
 
 
 $id_cat= $_GET['cat'];
-
 ?>
 
 
