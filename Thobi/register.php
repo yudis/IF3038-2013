@@ -14,7 +14,7 @@
 
 		mysql_select_db("progin_405_13510035", $con);
 
-		$sql="SELECT * FROM usertable WHERE username='".$uname."' OR email='".$email."'";
+		$sql="SELECT * FROM user WHERE username='".$uname."' OR email='".$email."'";
 
 		$result = mysql_query($sql);
 		

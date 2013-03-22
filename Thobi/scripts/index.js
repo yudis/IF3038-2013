@@ -284,6 +284,12 @@ function validateRegister() {
 
 function registerCheck() {
     if (isValidRegist == true) {
+		if(typeof(Storage)!=="undefined") {
+			localStorage.session = document.forms["registration"]["uname"].value;
+		}
+		else {
+			// Sorry! No web storage support..
+		}
 		return true;
 	} else {
 		alert("Username or Email has been used by another user before");

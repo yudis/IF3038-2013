@@ -5,6 +5,7 @@ function initialize() {
 		if (localStorage.session) {
 			listKategori();
 			loadUser();
+			loadThumbnail();
 		}
 		else {
 			window.location = "index.php";
@@ -15,8 +16,36 @@ function initialize() {
 	}
 }
 
+function EditStatus(bool,taskid) {
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp2=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp2.onreadystatechange=function()
+	{
+		if (xmlhttp2.readyState==4 && xmlhttp2.status==200)
+		{
+			window.location = "dashboard.php?uname="+localStorage.session+"&cat=all";
+		}
+	}
+	
+	xmlhttp2.open("GET","editstatustugas.php?t="+taskid+"&s="+bool,true);
+	xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp2.send();
+}
+
 function signout() {
 	localStorage.clear();
+}
+
+function loadThumbnail() {
+	var innerhtml = "<a href='profile.html'><img src='avatar/"+localStorage.session+".jpg' alt='Profile page' width='50' height='50'><br/>Hi, "+localStorage.session+"!</a>";
+	
+	document.getElementById("profil").innerHTML = innerhtml;
 }
 
 function loadUser() {
