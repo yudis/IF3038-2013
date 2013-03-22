@@ -56,9 +56,9 @@ username.onkeyup = function()
             }
         }
     };
-    
+
     var usersend = encodeURI(username.value);
-    xmlhttp.open('get','checkuser.php?username='+usersend);
+    xmlhttp.open('get', 'checkuser.php?username=' + usersend);
     xmlhttp.send(null);
 };
 
@@ -164,9 +164,9 @@ email.onkeyup = function()
             }
         }
     };
-    
+
     var emailsend = encodeURI(email.value);
-    xmlhttp.open('get','checkemail.php?email='+emailsend);
+    xmlhttp.open('get', 'checkemail.php?email=' + emailsend);
     xmlhttp.send(null);
 }
 
@@ -209,7 +209,6 @@ function showList() {
     document.getElementById("edittugas").style.visibility = "hidden";
     document.getElementById("buattugas").style.visibility = "hidden";
     document.getElementById("wanted").style.visibility = "hidden";
-
 }
 
 function showList2() {
@@ -301,11 +300,11 @@ function addCategory() {
 }
 
 function editProfile() {
-   var overlay = document.createElement("div");
-   overlay.setAttribute("id","overlay");
-   overlay.setAttribute("class", "overlay");
-   document.body.appendChild(overlay);
-   document.getElementById('edit').style.display='block';
+    var overlay = document.createElement("div");
+    overlay.setAttribute("id", "overlay");
+    overlay.setAttribute("class", "overlay");
+    document.body.appendChild(overlay);
+    document.getElementById('edit').style.display = 'block';
 }
 
 
@@ -316,9 +315,9 @@ function restore() {
 }
 
 function restoreP() {
-   document.body.removeChild(document.getElementById("overlay"));
-   document.getElementById('edit').style.display='none';
-   document.getElementById('overlay').style.display='none';
+    document.body.removeChild(document.getElementById("overlay"));
+    document.getElementById('edit').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
 }
 
 var clickable = false;
@@ -382,5 +381,120 @@ function Submit() {
         localStorage.date = document.getElementById("regdate").value;
         localStorage.email = document.getElementById("regemail").value;
         document.getElementById("foto").src = "img/foto_anonim.png";
+    }
+}
+
+function multiAutocomp(input, phpscript, text) {
+    var idname = "hasil_" + input.id;
+    var elmt = document.getElementById(input.id);
+
+    if (elmt.value.length > 0) {
+
+        document.body.setAttribute("onClick", "multiAutocompHandleClick('" + text + "');");
+        multiAutocompClear(input);
+        var div = document.createElement("div");
+        div.setAttribute("id", idname);
+        div.setAttribute("class", "autocomplete_container");
+        div.style.top = elmt.offsetTop + elmt.offsetHeight;
+        div.style.left = elmt.offsetLeft;
+        div.style.width = elmt.offsetWidth;
+        var divadd = document.getElementById(text);
+        //document.body.appendChild(div);
+        divadd.appendChild(div);
+
+        try {
+            var xmlHttp = new XMLHttpRequest();
+        } catch (e) {
+            try {
+                var xmlHttp = new ActiveXObject(Msxml2.XMLHTTP);
+            } catch (e) {
+                console.log("Browser doesn't support AJAX");
+            }
+        }
+
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                var query_result = xmlHttp.responseXML.documentElement.getElementsByTagName("Data");
+                for (i = 0; i < query_result.length; i++) {
+                    var inner_result_id = query_result[i].getElementsByTagName("ID");
+                    var inner_result_name = query_result[i].getElementsByTagName("String");
+                    var sug_id = idname + i;
+                    var child_div = document.createElement("div");
+                    child_div.setAttribute("id", sug_id);
+                    child_div.setAttribute("class", "autocomplete");
+                    child_div.setAttribute("onClick", "multiAutocompGetResult(this,'" + text + "');");
+                    child_div.style.width = elmt.offsetWidth;
+                    child_div.innerHTML = inner_result_name[0].firstChild.nodeValue;
+                    var hidden_input = document.createElement("div");
+                    hidden_input.style.display = "none";
+                    hidden_input.setAttribute("id", sug_id + "h");
+                    hidden_input.innerHTML = inner_result_id[0].firstChild.nodeValue;
+                    child_div.appendChild(hidden_input);
+                    var parent_div = document.getElementById(idname);
+                    parent_div.appendChild(child_div);
+                }
+            }
+        }
+        var q = document.getElementById(input.id).value;
+        if (q.length < 1) {
+            xmlHttp.open("GET", phpscript + "?q=" + q, true);
+        } else {
+            q = q.split(";");
+            xmlHttp.open("GET", phpscript + "?q=" + q[q.length - 1], true);
+        }
+        xmlHttp.send(null);
+
+    } else {
+        multiAutocompClear(input, text);
+        document.body.removeAttribute("onClick");
+    }
+}
+
+function multiAutocompClear(input, text) {
+    console.log("Cleared");
+    var idname = "hasil_" + input.id;
+    while (document.getElementById(idname) != null) {
+        var divadd = document.getElementById(text);
+        divadd.removeChild(document.getElementById(idname));
+        //document.body.removeChild(document.getElementById(idname));
+    }
+}
+
+function multiAutocompClearAll(text) {
+    var elmt = document.getElementsByClassName("autocomplete");
+    for (var i = 0; i < elmt.length; i++) {
+        var divadd = document.getElementById(text);
+        divadd.removeChild(document.getElementById(elmt[i].id));
+        //document.body.removeChild(document.getElementById(elmt[i].id));		
+    }
+}
+
+function multiAutocompGetResult(input, text) {
+    var idname = input.id + "h";
+    var parentname = idname.substr(6, idname.length - 8);
+    var parentdiv = idname.substr(0, idname.length - 2);
+    var elmt = document.getElementById(parentname);
+    if (elmt.value.indexOf(";") == -1) {
+        elmt.value = document.getElementById(idname).innerHTML + ";";
+    } else {
+        var temp_string = elmt.value;
+        temp_string = temp_string.split(";");
+        var result_string = "";
+        for (var i = 0; i < temp_string.length - 1; i++) {
+            result_string += temp_string[i] + ";";
+        }
+        elmt.value = result_string + document.getElementById(idname).innerHTML + ";";
+    }
+    var divadd = document.getElementById(text);
+    divadd.removeChild(document.getElementById(parentdiv));
+    //document.body.removeChild(document.getElementById(parentdiv));
+}
+
+function multiAutocompHandleClick(text) {
+    var parentdiv = document.getElementsByClassName("autocomplete_container");
+    for (var i = 0; i < parentdiv.length; i++) {
+        var divadd = document.getElementById(text);
+        divadd.removeChild(document.getElementById(parentdiv[i].id));
+        //document.body.removeChild(document.getElementById(parentdiv[i].id));
     }
 }
