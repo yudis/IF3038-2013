@@ -165,18 +165,31 @@ input.liusername{
     width: 350px;
     height: 443px;
 }
-.tugass{
+.commentinfo{
+    height:box;
+    font-size: 10pt;
+    text-align: right;
+}
+.remove{
+    
+}
+.tugasyeah{
     font-size: 12pt;
     top: 75px;
     background-color:transparent;
     border:0px;
-    overflow: hidden;
+    overflow: auto;
     left: 700px;
     padding: 50px;
     margin-left: 100px;
     background-image: url('img/kertas.png');
+    background-repeat: round;
     width: 350px;
-    height: 430px;
+    height: 440px;
+    background-size: 100%; 
+}
+.tugasyeah::-webkit-scrollbar { 
+    display: none; 
 }
 
 #nama {

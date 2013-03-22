@@ -6,6 +6,8 @@
 ?>
 <?php
 include 'header.php';
+    $categoryID = $_GET['categoryID'];
+    $userID = $_GET['userID'];
 ?>
 <html>
     <head>
@@ -22,12 +24,13 @@ include 'header.php';
             <div class="tugass" id="buattugas">
                 <form id="addTaskForm" method="post" action="addTaskDB.php" enctype="multipart/form-data">
                     <br/>
-                    Name: <div class="nama"><input type="text" id="namaTask" name="namaTask"></div><br/>
-                    Attachment: <div class="attachment"><input type="file" id="newAttachmentTask" name="attachfile[]"  multiple></div><br/>
-                    Deadline: <div class="deadline"><input id="newDeadlineTask" name="newDeadlineTask" type="date"></div><br/>
-                    Assignee: <div class="asignee"><input id="newAssigneeTask" name="newAssigneeTask" type="text" onkeyup="multiAutocomp(this, 'assignee.php', 'buattugas')" onfocusin="multiAutocompClearAll()"></div><br/>
-                    Tag: <div class="tag"> <input id="newTagTask" name="newTagTask" type="text"></div> <br/>
-
+                    Name: <div class="nama"><input type="text" id="namaTask" name="namaTask" required></div><br/>
+                    Attachment: <div class="attachment"><input type="file" id="newAttachmentTask" name="attachfile[]"  multiple required></div><br/>
+                    Deadline: <div class="deadline"><input id="newDeadlineTask" name="newDeadlineTask" type="date" required></div><br/>
+                    Assignee: <div class="asignee"><input id="newAssigneeTask" name="newAssigneeTask" type="text" onkeyup="multiAutocomp(this, 'assignee.php', 'buattugas')" onfocusin="multiAutocompClearAll()" required></div><br/>
+                    Tag: <div class="tag"> <input id="newTagTask" name="newTagTask" type="text" required></div> <br/>
+                    <input id="newCategoryID" name="newCategoryID" type="text" hidden="true" value="<?php echo$categoryID?>">
+                    <input id="newUserID" name="newUserID" type="text" hidden="true" value="<?php echo $userID ?>">
                     <input type="submit" id="regbuttosn" name="submit" value="create">
                     <br/>
                     <!-- <a type="submit" onclick="createTask();" class="button">create</a><br/> !-->

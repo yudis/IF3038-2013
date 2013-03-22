@@ -498,3 +498,29 @@ function multiAutocompHandleClick(text) {
         //document.body.removeChild(document.getElementById(parentdiv[i].id));
     }
 }
+
+function addComment(user,IDTask) {
+    var comment = document.getElementById('addCommentText').value;
+    if(comment!=""){
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function()
+        {
+            if (xmlhttp.readyState == 4)
+            {
+                var response = xmlhttp.responseText;
+                comment="";
+                document.getElementById("isikomentar").innerHTML+=response;
+            }
+        }
+        xmlhttp.open('get', 'addcomment.php?comment=' + encodeURI(comment) + '&user=' + encodeURI(user)+'&task='+encodeURI(IDTask));
+        xmlhttp.send(null);
+    }
+}
