@@ -296,7 +296,28 @@ function finishTask(i) {
 				document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
 			}
 		}	
-		xmlhttp.open("GET","dashboard_dynamic_content.php?q=all&taskdone="+i+"&taskid="+i,true);
+		xmlhttp.open("GET","dashboard_dynamic_content.php?q=all&taskdone=0&taskid="+i,true);
+		xmlhttp.send();
+	}
+}
+
+function deleteTask(i) {
+	var deleteTaskConfirm = confirm("Are you sure you want to delete this task?");
+	if (deleteTaskConfirm == true)
+	{
+		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}
+		else {// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		xmlhttp.onreadystatechange=function() {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
+			}
+		}	
+		xmlhttp.open("GET","dashboard_dynamic_content.php?q=all&taskdone=1&taskid="+i,true);
 		xmlhttp.send();
 	}
 }

@@ -18,13 +18,15 @@
 	
 	/* Get the task CATEGORY we're going to generate to the HTML page */
 	$q	= $_GET["q"];
-	$taskdone= $_GET["taskdone"];
+	$taskdone= $_GET["taskdone"]; //0 = finishTask(), 1 = deleteTask()
 	$taskid = $_GET['taskid'];
-	//echo $taskdone;
 	
-	//Update the task status
-	if ($taskdone != "") {
+	if ($taskdone == 0) { //finishTask()
 		$query 	= "UPDATE task SET task_status='1' WHERE task_id='$taskid';";
+		$result	= mysql_query($query);
+	}
+	if ($taskdone == 1) { //deleteTask();
+		$query 	= "DELETE FROM `task` WHERE task_id='$taskid';";
 		$result	= mysql_query($query);
 	}
 	

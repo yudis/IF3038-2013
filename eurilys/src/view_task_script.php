@@ -57,6 +57,19 @@
 			</div>
 			
 			<div class='left top20 dynamic_content_row'>
+				<div id='task_name_ltd' class='left dynamic_content_left'> Status </div>";
+			
+			if ($row['task_status'] == 0) {
+				$status = 'Not finished yet';
+			}
+			else	$status = 'Finished';
+			
+			$response = $response. 
+			"
+				<div id='task_name_rtd' class='left dynamic_content_right'>".$status."</div>
+			</div>
+			
+			<div class='left top20 dynamic_content_row'>
 				<div id='attachment_ltd' class='left dynamic_content_left'>Attachment</div>
 				<div id='attachment_rtd' class='left dynamic_content_right'>
 					<!-- <img id='taskdetail_img' src='../img/taskdetail_img.jpg' alt='Rikka-chan'> -->
