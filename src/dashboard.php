@@ -35,6 +35,7 @@ $cats=mysqli_num_rows($result);
 			$id = $_SESSION['id'];
 			$result1=mysqli_query($con,"SELECT * FROM `categories` ORDER BY id");
 			while ($cat=mysqli_fetch_array($result1)) {
+				$found = false;
 				$cat_id=$cat['id'];
 				$result2=mysqli_query($con,"SELECT * FROM `tasks` WHERE category=$cat_id");
 				while ($task=mysqli_fetch_array($result2)) {
@@ -52,7 +53,18 @@ $cats=mysqli_num_rows($result);
             <div onclick="javascript:showtask(<?php echo $cat['id'];?>,<?php echo $cats;?>);"><a href="#"><?php echo $cat['name'];?></a></div>
             <a href ="post.php?id=<?php echo $cat['id'];?>"><input id ="newtask" type="button" name="Tugas Baru" value="New Task"/></a>
             <?php
+            			$found = true;
             			break;
+        			}
+        		}
+        		if ($found == false) {
+        			$result3 = mysqli_query($con, "SELECT * FROM editors WHERE member=$id AND category=$cat_id");
+        			$count = mysqli_num_rows($result3);
+        			if ($count == 1) {
+        	?>
+        	<div onclick="javascript:showtask(<?php echo $cat['id'];?>,<?php echo $cats;?>);"><a href="#"><?php echo $cat['name'];?></a></div>
+            <a href ="post.php?id=<?php echo $cat['id'];?>"><input id ="newtask" type="button" name="Tugas Baru" value="New Task"/></a>
+            <?php
         			}
         		}
 			}
@@ -69,6 +81,25 @@ $cats=mysqli_num_rows($result);
 					if (mysqli_num_rows($result4) == 1) {
 			?>
 			<a href="rinciantugas.php?id=<?php echo $task['id'];?>"><?php echo $task['name']?></a><br />
+			Deadline: <strong><?php echo $task['deadline'];?></strong><br />
+			<?php
+			$res = mysqli_query($con,"SELECT * FROM tags WHERE tagged=$task_id");
+			$count_tag = 0;
+			while ($tagged = mysqli_fetch_array($res)) {
+				$tag[$count_tag] = $tagged['name'];
+				$count_tag++;
+			}
+			?>
+			Tag: <strong>
+			<?php
+			for ($i = 0; $i < $count_tag; $i++) {
+				echo $tag[$i];
+				if ($i < $count_tag - 1) echo ",";
+			}
+			?>
+			</strong>
+			<br />
+			Status : <strong><?php if ($task['done'] == 1) echo 'Selesai'; else echo 'Belum selesai';?></strong><br />
 			<?php
 					}
 				}
@@ -80,25 +111,22 @@ $cats=mysqli_num_rows($result);
 			<!--coba checkbox-->
 			<?php
 
-  			 if(isset($_POST['BtnSubmit']))
-   			{
-			      echo "Notif : {$_POST['YourChoice']}</br>";
-			      echo "<hr>";
-			   }
+  			 // if(isset($_POST['BtnSubmit']))
+   			// {
+			   //    echo "Notif : {$_POST['YourChoice']}</br>";
+			   //    echo "<hr>";
+			   // }
 			
 			?>
 			
-			<form name="checkbox" method="POST" action="#">
+			<!--<form name="checkbox" method="POST" action="#">
 			      <input name="YourChoice" type="checkbox" value="selesai" <?php if($_POST['YourChoice']=="selesai") echo "checked=checked"; ?> > Selesai
 			      <input name="YourChoice" type="checkbox" value="belum selesai" <?php if($_POST['YourChoice']=="belum selesai") echo "checked=checked"; ?> > Belum selesai
 			      <br/><br/>
 			      <input name="BtnSubmit" type="submit" value="Submit">
-			</form>
+			</form>-->
             <!--end of pop up-->
-            <!--<div class="atas"></div>
-			<div class="tengah"><img src ="images/ProginBig.png" alt="task" />
-			<img src ="images/DateBig.png" alt="tasklv" /></div>
-			<div class="bawah"></div>-->
+            
 		</div>
 	</div>
 	
