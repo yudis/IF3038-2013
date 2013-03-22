@@ -20,10 +20,14 @@ else
 		$data = $tugas->getTugas($_GET["id"]);
 		
 		if ($data)
-		{			
+		{
 			$view = new View('views/tugas/tugas.tpl');
 			$view->set('title', 'Todolist | Rincian Tugas');
-			$view->set('headTags', '<script src="./scripts/tugas.js" type="application/javascript"></script><link rel="stylesheet" type="text/css" href="styles/tugas.css" />');
+			$view->set('headTags', '<link rel="stylesheet" type="text/css" href="styles/tugas.css" />
+					<link rel="stylesheet" type="text/css" href="./styles/autosuggest.css" />
+					<script src="./scripts/tugas.js" type="application/javascript"></script>
+			        <script type="text/javascript" src="./scripts/autosuggest2.js"></script>
+					<script type="text/javascript" src="./scripts/assigneesSuggestion.js"></script>');
 			$view->set('bodyAttrs', 'onload="onload(' . $_GET["id"] . ');"');
 			
 			$view->set('id', $data['id']);

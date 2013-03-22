@@ -110,11 +110,10 @@ class Tugas extends Model
 		$this->_setSql($sql);
 		return $this->getAll(array($id_tugas));
 	}
-	public function setStats($i,$n)
+
+	public function setStats($i, $n)
     {
-        $sql = "UPDATE tugas SET
-                    status = ?
-					WHERE id= ?;";
+        $sql = "UPDATE `tugas` SET `status` = ? WHERE `id` = ?;";
          
         $data = array(
 			$n,
@@ -124,6 +123,7 @@ class Tugas extends Model
         $sth = $this->_db->prepare($sql);
         return $sth->execute($data);
     }
+
 	public function getAsignee2($id_tugas)
 	{
 		$sql = "SELECT username FROM assignees WHERE id_tugas=? ";
@@ -316,6 +316,16 @@ class Tugas extends Model
 		$sth = $this->_db->prepare($sql);
 		return $sth->execute($data);
 	}
+
+	public function removeAssignee($id_tugas, $username)
+	{
+		$sql = 'DELETE FROM `assignees` WHERE `id_tugas` = ? AND `username` = ?;';
+		
+		$data = array($id_tugas, $username);
+		
+		$sth = $this->_db->prepare($sql);
+		return $sth->execute($data);
+	}
 	
     public function store()
     {
@@ -334,5 +344,37 @@ class Tugas extends Model
         $sth = $this->_db->prepare($sql);
         return $sth->execute($data);
     }
+    
+	public function updateTimestamp($id_tugas)
+	{
+		$sql = "UPDATE `tugas` SET `last_mod` = CURRENT_TIMESTAMP WHERE `tugas`.`id` = ?";
+		 
+		$data = array($id_tugas);
+		 
+		$sth = $this->_db->prepare($sql);
+		return $sth->execute($data);
+	}
+
+
+	public function getSuggestionAssignees($id_tugas, $start, $limit)
+	{
+		$sql = "SELECT `username`, CONCAT(`username`, ' - ', `full_name`) AS `display` FROM `users` 
+				WHERE `username` NOT IN (SELECT `username` FROM assignees WHERE `id_tugas`=?)
+				AND `username` LIKE ?
+				LIMIT 0, $limit";
+		$this->_setSql($sql);
+		return $this->getAll(array($id_tugas, $start));
+
+		/*
+		$sql = "SELECT `username`, CONCAT(`username`, ' - ', `full_name`) AS `display` FROM `users` 
+				WHERE `username` NOT IN (SELECT `username` FROM assignees WHERE `id_tugas`=?
+					UNION
+					SELECT `pemilik` AS `username` FROM `tugas` WHERE `id`=?)
+				AND `username` LIKE CONCAT(?, '%')
+				LIMIT 0, $limit";
+		$this->_setSql($sql);
+		return $this->getAll(array($id_tugas, $id_tugas, $start));
+		*/
+	}
 }
 ?>

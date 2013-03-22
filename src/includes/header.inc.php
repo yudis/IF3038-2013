@@ -9,7 +9,8 @@
         <script src="./scripts/json2.js" type="application/javascript"></script>
         <script src="./scripts/helper.js" type="application/javascript"></script>
         <script src="./scripts/ajaxhelper.js" type="application/javascript"></script>
-        <script src="./scripts/datetimepicker.js" type="application/javascript"></script>
+        <script src="./scripts/nicEdit.js" type="application/javascript"></script>
+        <script src="./scripts/datetimepicker_css.js" type="application/javascript"></script>
 		<?php if (isset($headTags)) echo $headTags; ?>
     </head>
     <body <?php if (isset($bodyAttrs)) echo $bodyAttrs; ?>>
@@ -30,7 +31,7 @@
                                     <option>Title</option>
                                     <option>Task</option>
                                 </select>
-                                <button class="search"><img src="images/find.png" alt="Search"/></button>
+                                <button class="search"><img src="images/search.png" alt="Search" /></button>
                             </form>
                         </div>
                     </div>

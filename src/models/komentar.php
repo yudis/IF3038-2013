@@ -67,6 +67,7 @@ class Komentar extends Model
         $sth = $this->_db->prepare($sql);
         return $sth->execute($data);
     }
+    
     public function store()
     {
         $sql = "INSERT INTO comments 

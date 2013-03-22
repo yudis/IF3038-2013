@@ -8,6 +8,8 @@
 
 body {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
 }
 
 img {
@@ -49,11 +51,6 @@ nav.headerbar .headeritem {
     border-left: 1px solid #78c368;
 }
 */
-
-
-
-
-
 
 nav {
     clear: both;
@@ -109,20 +106,24 @@ nav ul li a:link, nav ul li a:visited {
 }
 #searchwrapper form {
     padding-top : 6px;
+    padding-left: 6px;
 }
 #searchwrapper input.searchbox {
     display: inline-block; 
     border: 0px;
     background-color:transparent;
     width: 150px;
-    padding-left: 6px;
-    padding-right: 6px;
+    margin-left: 3px;
+    padding: 3px 6px;
+}
+#searchwrapper input.searchbox:active {
+    border: 0px;    
 }
 #searchwrapper select.type {
     display: inline-block; 
     border: 0px;
     background-color:transparent;
-    width: 91px;
+    width: 85px;
     vertical-align: middle;
 }
 .searchbox_submit {
@@ -132,10 +133,12 @@ nav ul li a:link, nav ul li a:visited {
 }
 button.search {
     display: inline-block;
+    vertical-align: middle;
     padding: 0;
     border: none;
     background: transparent;
 }
+
 .welcomebar {
     background-color: #e8f3df;
     padding: 12px 24px;
@@ -152,9 +155,6 @@ button.search {
 .welcomebar a:hover, .welcomebar a:active {
     color: #499b3d;
 }
-
-
-
 
 .sidebar {
     width: 180px;
@@ -288,13 +288,6 @@ ul.tag li a.red {
     display: none;
     overflow-x: scroll;
 }
-.rightalign {
-    text-align: right;
-}
-.padding12px {
-    padding: 0 12px;
-    margin: 0px;
-}
 footer.content {
     clear: both;
     background-color: #5fae53;
@@ -307,12 +300,26 @@ footer.content {
     top: 15px;
 }
 
+
+.rightalign {
+    text-align: right;
+}
+.padding12px {
+    padding: 0 12px;
+    margin: 0px;
+}
+.hidden {
+    visibility: hidden;
+}
+
+/* CSS untuk halaman profile */
 .profile {
     background-color: #e8f3df;
     border: #5fae53 dashed 2px;
     padding: 12px;
     margin: 12px;
 }
+
 .profiledetail {
     position: absolute;
     top:165px;
@@ -326,6 +333,7 @@ footer.content {
     font-weight: bold;
     text-decoration: none;
 }
+
 .profilepict {
     position: relative;
     width: 200px;
@@ -339,7 +347,7 @@ footer.content {
     top: 75px;
 }
 
-.page .content .formtugas {
+.formtugas {
     background-color: #e8f3df;
     border: #5fae53 dashed 2px;
     padding: 12px;
@@ -348,7 +356,7 @@ footer.content {
 
 
 
-/* CSS untuk halaman detil tugas - bagian komentar */
+/* CSS untuk halaman detil tugas */
 .rincianLabel {
     width: 15%;
     display: inline-block;
@@ -362,6 +370,31 @@ footer.content {
 #komentar img {
     display: inline-block;
     vertical-align: middle;
+}
+#txtKomentar {
+    width: 100%;
+}
+#komentar .item {
+    border: 3px #e8f3df solid;
+    margin: 12px 3px;
+}
+#komentar .item .title {
+    background-color: #e8f3df;
+    padding: 12px 12px 8px 12px;
+}
+#komentar .item .comment {
+    padding: 8px 12px;
+}
+#komentar a {
+    color: #5fae53;
+    font-weight: bold;
+    text-decoration: none;
+}
+#komentar a:hover, #komentar a:active {
+    color: #499b3d;
+}
+#komentar .red {
+    color: #ff0000;
 }
 
 /* CSS untuk halaman create tugas */

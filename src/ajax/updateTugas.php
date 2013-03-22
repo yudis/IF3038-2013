@@ -40,6 +40,30 @@ if (isset($_GET["removec"]) && isset($_GET["id_komentar"])) {
 	$tugas->updateTimestamp($_POST["id_tugas"]);
 
 	$data["responseStatus"] = 200;
+} else if (isset($_GET["chstatus"]) && isset($_GET["id_tugas"]) && isset($_GET["status"])) {
+	$tugas = new Tugas();
+	$tugas->setStats($_GET["id_tugas"], $_GET["status"]);
+
+	$data["responseStatus"] = 200;
+} else if (isset($_GET["removea"]) && isset($_GET["id_tugas"]) && isset($_GET["username"])) {
+	$tugas = new Tugas();
+	$tugas->removeAssignee($_GET["id_tugas"], $_GET["username"]);
+
+	if ($_GET["username"] == $_SESSION["user"]["username"])
+	{
+		$data["killself"] = 1;
+	}
+	else
+	{		
+		$data["killself"] = 0;
+	}
+	
+	$data["responseStatus"] = 200;
+} else if (isset($_GET["suggesta"]) && isset($_GET["id_tugas"]) && isset($_GET["start"])) {
+	$tugas = new Tugas();
+	$data = Array();
+	$data["responseStatus"] = 200;
+	$data["suggestedAssignees"] = $tugas->getSuggestionAssignees($_GET["id_tugas"], $_GET["start"] . '%', 10);
 } else {
 	$data["responseStatus"] = 400;
 	$data["message"] = "Bad request";

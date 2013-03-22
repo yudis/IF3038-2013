@@ -1,25 +1,20 @@
 <?php include './includes/header.inc.php' ?>
                 <h1>Rincian Tugas</h1>
                 <div class="padding12px">
-                    <div class="rincianLabel">Nama:</div><div class="rincianDetail"><input type="hidden" id="idTugas" name="idTugas" value="<?php echo $id; ?>" /><div id="namaTugas">Loading...</div></div>
-                    <div class="rincianLabel">Status:</div><div class="rincianDetail"><span id="statusTugas">Loading...</span> <button class="button" onclick="return false;">Toggle</button></div>
-                    <div class="rincianLabel">Attachment:</div><div class="rincianDetail" id="attachmentTugas">Loading...</div>
+                    <h2>Detail</h2>
+                    <div class="rincianLabel">Nama:</div><div class="rincianDetail"><span id="namaTugas">Loading...</span></div>
+                    <div class="rincianLabel">Status:</div><div class="rincianDetail"><input type="checkbox" id="cbStatus" onclick="toggleStatus();"/> <span id="statusTugas">Loading...</span></div>
                     <div class="rincianLabel">Deadline:</div><div class="rincianDetail">
                         <div id="deadlineDisplayDiv" class="inlineblock">Loading...</div>
                         <div id="deadlineEditDiv">
                             <!-- <input type="date" id="deadline" name="deadline" value="2013-02-22" /> -->
-                            <input type="text" id="deadline" name="deadline" placeholder="yyyy-mm-dd" /> <a href="#" onclick="NewCal('deadline', 'YYYYMMDD'); return false;"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
+                            <input type="text" id="deadline" name="deadline" placeholder="yyyy-mm-dd" /> <a href="#" onclick="NewCssCal('deadline', 'yyyyMMdd'); return false;"><img src="./images/cal/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
                         </div>
                     </div>
                     <div class="rincianLabel">Assignees:</div><div class="rincianDetail">
                         <ul id="assigneesList" class="tag"></ul>
                         <div id="assigneeEditDiv">
-                            <input type="text" id="assignee" name="assignee" list="user" />
-                            <datalist id="user">
-                                <option value="Abraham Krisnanda Santoso">
-                                <option value="Edward Samuel Pasaribu">
-                                <option value="Stefanus Thobi Sinaga">
-                            </datalist>
+                            <input type="text" id="assignee" name="assignee" list="user" autocomplete="off" />
                             <button onclick="return addAssignees();">Add</button>
                         </div>
                     </div>
@@ -33,10 +28,17 @@
                     </div>
                     <br /><br />
                     <button id="editButton" onclick="return editTugas();">Edit</button><button id="doneButton" onclick="return saveTugas();">Done</button>
-                    <br /><br /><br />
-                    <div class="rincianLabel">Komentar:</div><div class="rincianDetail">
+                    <br />
+                    <h2>Attachment</h2>
+                    <div id="attachmentTugas">Loading...</div>
+                    <br />
+                    <h2>Komentar</h2>
+                    <div>
                         <div id="komentar"></div>
-                        <textarea id="txtKomentar" rows="4" cols="80" placeholder="Your comment here..."></textarea><br /><button onclick="addComment(); return false;">Submit</button>
+                        <br />
+                        <div id="komentarControl" class="padding12px">Seen/Total: <strong id="komentarStatistic">Loading...</strong> | Page: <select id="komentarPage" onchange="changeKomentarPage(this);"></select></div>
+                        <br />
+                        <textarea id="txtKomentar" placeholder="Your comment here..." rows="8"></textarea><br /><button onclick="addComment(); return false;">Submit</button>
                     </div>
                 </div>
                 <br />

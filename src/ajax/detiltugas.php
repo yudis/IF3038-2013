@@ -21,13 +21,13 @@ if ($needUpdate)
 	{
 		/* Get Tugas */
 		$data = $tugas->getTugas($_GET["id_tugas"]);
-		$data["responseTime"] = $_SERVER['REQUEST_TIME'];
 		$data["responseStatus"] = 200;
+		$data["responseTime"] = $_SERVER['REQUEST_TIME'];
 
 		/* Get Komentar */
 		$idtugas = $_GET["id_tugas"];
-		$startindex = isset($_GET["start"]) ? $_GET["start"] : 0;
-		$count = isset($_GET["count"]) ? $_GET["count"] : 10;
+		$startindex = isset($_GET["startc"]) ? $_GET["startc"] : 0;
+		$count = isset($_GET["countc"]) ? $_GET["countc"] : 10;
 
 		$comments = new Komentar();
 		$datakomentar = Array();
@@ -42,6 +42,7 @@ if ($needUpdate)
 	{
 		$data = Array();
 		$data["responseStatus"] = 400 ;
+		$data["responseTime"] = $_SERVER['REQUEST_TIME'];
 		$data["message"] = "Bad Request";
 	}
 }
@@ -49,7 +50,9 @@ else
 {
 	$data = Array();
 	$data["responseStatus"] = 204;
+	$data["responseTime"] = $_SERVER['REQUEST_TIME'];
 	$data["message"] = "No content";
 }
 
+header("Content-type: application/json");
 echo json_encode($data);
