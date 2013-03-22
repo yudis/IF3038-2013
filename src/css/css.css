@@ -391,35 +391,6 @@ label {
 	box-shadow: 0 1px 1px rgba(0, 0, 0, .3) inset;
 }
 
-#opsisearch{
-	width: 100px;
-	height: 30px;
-	margin-left: 495px;
-	margin-top: 5px;
-	position: absolute;
-}
-
-#hasil_ac_search{
-	width: 200px;
-	position: absolute;
-	background-color: white;
-	box-shadow: 3px 3px 5px #888888;
-}
-
-.hasil_suggest{
-	color: black;
-}
-
-.hasil_suggest:hover{
-	background-color: #e58100;
-}
-
-#hasil_ac_search p{
-	color: black;
-	line-height: 0px;
-	font-size: 10px;
-}
-
 A:link {text-decoration: none; }
 A:visited {text-decoration: none; color: #ffffff;}
 A:active {text-decoration: none; color: #ffffff;}
