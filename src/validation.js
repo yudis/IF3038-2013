@@ -111,7 +111,7 @@ function submitNewTask()
 		{
 			//alert(xmlhttp.responseText);
 			alert("berhasil");
-			document.getElementById('coba').innerHTML = "<p>Mangstab</p>";//xmlhttp.responseText;
+			//document.getElementById('coba').innerHTML = "<p>Mangstab</p>";//xmlhttp.responseText;
 		}
 	}
 	
@@ -184,7 +184,8 @@ function checkLogin(){
 	xmlhttp.onreadystatechange = function(){
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
 			if(xmlhttp.responseText == u){
-				alert(':)');
+				//alert(':)');
+				window.location = "loadprofile.php";
 			}
 			else{
 				alert(':(');

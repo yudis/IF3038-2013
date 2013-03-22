@@ -9,10 +9,10 @@
 	<body>
 		<div id="navigation">
 			<img src="images/logo.gif">
-			<a href="dashboard.html">DASHBOARD</a>
-			<a href="profile.html">PROFILE</a>
+			<a href="dashboard.php">DASHBOARD</a>
+			<a href="profile.php">PROFILE</a>
 			<a href="#" onclick="toggleSearch()">SEARCH</a>
-			<a href="index.html">LOGOUT</a>			
+			<a href="index.php">LOGOUT</a>			
 		</div>
 		<div id="search">
 			<input type="text" size="50%">
@@ -28,7 +28,7 @@
 			</div>		
 			<div class="box2">
 				<h3></h3>
-				<form method="POST" action="taskdetails.html" onsubmit="submitNewTask();"><!--addtasksubmit.php"--><!--taskdetails.html"-->
+				<form method="POST" action="taskdetails.php" onsubmit="submitNewTask();"><!--addtasksubmit.php"--><!--taskdetails.php"-->
 				<fieldset>
 					<p>
 						<label>Task Name<abbr title="Required">*</abbr></label>

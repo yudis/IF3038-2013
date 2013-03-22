@@ -1,3 +1,17 @@
+<?
+	session_start();
+	include "loadprofile.php";
+	$email = isset($_SESSION['email']) ? : "";
+	$fullname = isset($_SESSION['fullname']) ? : "";
+	$dob = isset($_SESSION['dob']) ? : "";
+	$photo = isset($_SESSION['photo']) ? : "";
+	
+		echo "<h4>: " .$username. "</h4>";
+		echo "<h4>: " .$fullname. "</h4>";
+		echo "<h4>: " .$dob. "</h4>";
+		echo "<h4>: " .$email. "</h4>";
+?>
+
 <html>
 	<head>
 		<title>Shared To Do List - Profile</title>
@@ -9,10 +23,10 @@
 	<body>
 		<div id="navigation">
 			<img src="images/logo.gif">
-			<a href="dashboard.html">DASHBOARD</a>
+			<a href="dashboard.php">DASHBOARD</a>
 			<a href="">PROFILE</a>
 			<a href="#" onclick="toggleSearch()">SEARCH</a>
-			<a href="index.html">LOGOUT</a>			
+			<a href="index.php">LOGOUT</a>			
 		</div>
 		<div id="search">
 			<input type="text" size="50%">
@@ -31,10 +45,10 @@
 					<h4>Email</h4>
 				</div>
 				<div class="profile">
-					<h4>: kinalkinal</h4>
-					<h4>: Devi Kinal Putri</h4>
-					<h4>: 02 Januari 1996</h4>
-					<h4>: kinalkinal@yahoo.com</h4>
+					<h4>: kinalkinal <?=$username;?></h4>
+					<h4>: Devi Kinal Putri <?=$fullname;?></h4>
+					<h4>: 02 Januari 1996 <?=$dob;?></h4>
+					<h4>: kinalkinal@yahoo.com <?=$email;?></h4>
 				</div>
 				<div class="box">
 					<button name="editprofile" type="submit">Edit Profile</button>
