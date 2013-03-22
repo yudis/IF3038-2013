@@ -11,7 +11,7 @@
         <script src="scripts/createtugas.js" type="application/javascript"></script>
 		
     </head>
-    <body onload="showKategori()">
+    <body>
         <div class="page">
             <header class="content">
                 <nav>
@@ -72,7 +72,7 @@
                                     
                                     <datalist id="user">
                                     </datalist>
-									<button onclick="addAssignees(); return false">Add</button>
+									<button type="button" onclick="addAssignees(); return false">Add</button>
 									<input id="assigneeI" name="assigneeI" type="text" value="" tabindex="4" hidden />
 								</div>
 								

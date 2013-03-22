@@ -29,7 +29,6 @@ function addAssignees() {
     }
     
     document.getElementById("assigneeI").value+=newAssignee.value+",";
-	assigneeList.innerHTML+= "<li>"+newAssignee.value+"</li>";
+	assigneesList.innerHTML+= "<li>"+newAssignee.value+"</li>";
 	newAssignee.value="";
-    
 }

@@ -16,12 +16,12 @@ if (isset($_SESSION["user"]))
 	}
 	else
 	{
-		$view = new View('views/dashboard/createtugas.tpl');
+		$view = new View('views/create/createtugas.tpl');
 		echo $view->output();
 	}
 }
 else
 {
-	$view = new View('views/dashboard/createtugas.tpl');
+	$view = new View('views/create/createtugas.tpl');
 	echo $view->output();
 }
