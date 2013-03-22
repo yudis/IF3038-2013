@@ -326,21 +326,6 @@ function Redirect() {
     window.location = "index.php";
 }
 
-function Login() {
-    if (document.getElementById("logusername").value !== "admin") {
-        alert("Wrong username!");
-    } else if (document.getElementById("logpassword").value !== "admincool") {
-        alert("Wrong password!");
-    } else {
-        window.location = "Dashboard.php";
-        localStorage.username = document.getElementById("logusername").value;
-        localStorage.name = "Billy The Kid";
-        localStorage.date = "1968-09-3";
-        localStorage.email = "coolKid@yahoo.com";
-        document.getElementById("foto").src = "img/foto.png";
-    }
-}
-
 function Register() {
     var atPos = document.getElementById("regemail").value.indexOf("@");
     var dotPos = document.getElementById("regemail").value.indexOf(".");

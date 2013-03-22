@@ -25,41 +25,40 @@ header('Location: index.php');
     
     <body>        
     <?php
+    include 'header.php';
+    $search = $_POST['searchquery'];
+    $type =  $_POST['tipe'];
+    
     if(connectDB()){
-            $search = "frilla";
+            
             $queryProfile = "SELECT* FROM user WHERE Username='".$_SESSION['username']."'";
             $result = mysql_query($queryProfile);
             $data = mysql_fetch_array($result);
-
             $uname= $data['Username'];
             $ava= $data['Avatar'];
 
-            $queryTask = "SELECT * FROM task WHERE TaskName ='".$search."'";
-            $queryCat = "SELECT * FROM category WHERE CategoryName ='".$search."'";
-            $queryUser = "SELECT * FROM user WHERE Username ='".$search."'";
-            $rTask = mysql_query($queryTask);
-            $rCat = mysql_query($queryCat);
-            $rUser = mysql_query($queryUser);
+            if ($type === 'All') {
+                $queryTask = "SELECT * FROM task WHERE TaskName LIKE '%" . $search . "%'";
+                $queryCat = "SELECT * FROM category WHERE CategoryName LIKE '%" . $search . "%'";
+                $queryUser = "SELECT * FROM user WHERE Username LIKE '%" . $search . "%'";
+                $rTask = mysql_query($queryTask);
+                $rCat = mysql_query($queryCat);
+                $rUser = mysql_query($queryUser);
+            } 
+            else if ($type === 'Task') {
+                $queryTask = "SELECT * FROM task WHERE TaskName LIKE '%" . $search . "%'";
+                $rTask = mysql_query($queryTask);
+            }
+            else if ($type === 'Category') {
+                $queryCat = "SELECT * FROM category WHERE CategoryName LIKE '%" . $search . "%'";
+                $rCat = mysql_query($queryCat);
+            }
+            else if ($type === 'Username') {
+                $queryUser = "SELECT * FROM user WHERE Username LIKE '%" . $search . "%'";
+                $rUser = mysql_query($queryUser);
+            }
     ?>        
         
-        <header>
-            <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
-            <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
-            
-            <div id="profile"><a title="Go to Profile" href="profile.php"><?php echo $uname ?></a></div>
-            <div id="logout"><a title="Log out from here" href="logout.php">Log Out</a></div>
-            <form id="search">
-                <input type="text" name="Search" id="box">
-                <select>
-                    <option> All </option>   
-                    <option> Category </option>
-                    <option> Task </option>
-                    <option> Username </option>
-                </select>
-                <input type="submit" value="Search">
-            </form>
-            <img id="smallava" src="<?php echo $ava?>" />
-        </header>
         
         <div id="panel">
             search result for: <br/>
@@ -67,42 +66,60 @@ header('Location: index.php');
         </div>
         
         <div id="results">
-            <div id="rCategory">
-                <strong>Category</strong><br/>
-                ----------------------------------------------------------------------------------------------------<br/>
-<?php 
-    while ($resCat = mysql_fetch_array($rCat)) {
-        $resultCat = $resCat['CategoryName'];
-?>
-            <?php echo $resultCat; ?> <br/>            
-<?php
-    }    
-?>  
-            </div>
-            <div id="rTask">
-                <strong>Task</strong><br/>
-                ----------------------------------------------------------------------------------------------------<br/>
-<?php 
-    while ($resTask = mysql_fetch_array($rTask)) {
-        $resultTask = $resTask['TaskName'];
-?>
-            <?php echo $resultTask; ?> <br/>            
-<?php
-    }    
-?>
-        </div>
-            <div id="rUser">
-                <strong>Username</strong><br/>
-                ----------------------------------------------------------------------------------------------------<br/>
-<?php 
-    while ($resUser = mysql_fetch_array($rUser)) {
-        $resultUser = $resUser['Username'];
-?>
-            <?php echo $resultUser; ?> <br/>            
-<?php
-    }
-    ?>
-            </div>
+            <?php
+                if (($type === 'All') or ($type === 'Category')) {
+                    echo '<div id="rCategory">
+                    <strong>Category</strong><br/>
+                    ----------------------------------------------------------------------------------------------------<br/>';
+                    if (mysql_num_rows($rCat) > 0) {
+                        while ($resCat = mysql_fetch_array($rCat)) {
+                            $resultCat = $resCat['CategoryName'];
+                            echo $resultCat;
+                            echo '<br/>';            
+                        }
+                    } else {    
+                                echo 'No result';
+                            }
+                    echo '</div>';
+                }
+            ?>
+            <?php
+                if (($type === 'All') or ($type === 'Task')) {
+                    echo '<div id="rTask">
+                    <strong>Task</strong><br/>
+                    ----------------------------------------------------------------------------------------------------<br/>';
+                    if (mysql_num_rows($rTask) > 0) {
+                        while ($resTask = mysql_fetch_array($rTask)) {        
+                                $resultTask = $resTask['TaskName'];
+                                echo $resultTask;
+                                echo '<br/>';    
+                        }  
+                    } else {    
+                                echo 'No result';
+                            }
+                    echo '</div>';
+                }
+            ?>
+            
+            <?php
+                if (($type === 'All') or ($type === 'Username')) {
+                    echo '<div id="rUser">
+                    <strong>User</strong><br/>
+                    ----------------------------------------------------------------------------------------------------<br/>';
+                    if (mysql_num_rows($rUser) > 0) {
+                        while ($resUser = mysql_fetch_array($rUser)) {
+                            $resultUser = $resUser['Username'];
+                            ?>
+                    <a title="Go to Profile" href="profile.php?user=<?php echo $resultUser ?>"><?php echo $resultUser ?></a>
+            <?php
+                            echo '<br/>';            
+                        }  
+                      } else {    
+                                echo 'No result';
+                            }
+                    echo '</div>';
+                }
+            ?>
         </div>
         
     </body>
