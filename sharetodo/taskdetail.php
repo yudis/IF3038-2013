@@ -31,18 +31,42 @@
         
         <div id="spasi">
         </div>
-        
-        <div id="taskdetailcontainer">
-			<p>Nama Task</p>
-			<p>Status Task</p>
-			<p>Attachment</p>
-			<p>Deadline</p>
-			<p>Assignee</p>
-			<p>Komentar</p>
-			<p>Tags</p>
-		
-        </div>
-        
+    <?php
+		//create connection
+	    $con = mysqli_connect("localhost","root","","distributedAgenda");
+	    
+	    //check the connection
+	    if (mysqli_connect_errno($con)) {
+		echo "Gagal melakukan koneksi ke MySQL : " . mysqli_connect_error();
+	    }
+		$sql = "SELECT task.namaTask, task.status, attachment FROM attach, task.deadline, assigneeName FROM tasktoassignee, komentator FROM komentar, avatar FROM user, timestamp FROM komentar, isikomentar FROM komentar, task WHERE usertotask.username='". $curUser . "' AND usertotask.namaTask = task.namaTask";
+		$activeuser = mysqli_query($con,"SELECT * FROM task WHERE (namaTask='"Praktikum Kimia Dasar"')");
+        echo "<div id='taskdetailcontainer'>";
+			echo"<p>Nama Tugas</p>";
+			echo"<p>Status Tugas</p>";
+			echo"<div id ='statustask'>";
+				echo"<p>Status Task</p>";
+			echo"</div>";
+			echo"<div id = 'buttonstatus'>";
+				echo"<button class='ChangeTaskStatus'>Change</button>";
+			echo"</div>";
+			echo"<div id = 'attachmentbox'>";
+				echo"<p>Attachment</p>";
+			echo"</div>";
+			echo"<p>Deadline</p>";
+			echo"<p>Assignee</p>";
+			echo"<p>Komentar</p>";
+			echo"<div id = 'commentbox'>";		
+				echo"<p>Jumlah Komentar</p>";
+				echo"<!-- avatar komentator -->";
+				echo"<!-- waktu komentar -->";
+				echo"<!-- isi komentar -->";
+				echo"<!-- tombol delete komentar -->";
+				echo"<!-- input text komentar -->";
+			echo"</div>";
+			echo"<p>Tags</p>";	
+        echo"</div>";
+     ?>   
 	<?php
 	    //create connection
 	    $con = mysqli_connect("localhost","root","","distributedAgenda");
