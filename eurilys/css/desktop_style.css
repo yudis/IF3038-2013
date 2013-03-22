@@ -69,15 +69,18 @@ label#remember_me {
 	float:left; font-size:12px; width:auto; margin-top:-20px; 
 }
 
+#edit_profil_container {width:90%; margin:auto; display:block;}
+#edit_profil_container h3 {color:#007bc1;}
 #edit_profile_form {
-	width:60%;
+	width:70%;
 	margin-top:20px;
 	margin-left:20px;
 }
 #edit_profile_form label {
 	float:left;
 	font-size:16px;
-	font-family:Segoe UI; font-weight:lighter;;
+	font-family:Segoe UI; 
+	font-weight:lighter;
 	color:gray;
 	width:28%;
 }
@@ -89,8 +92,8 @@ label#remember_me {
 
 #edit_profile_form input {
 	float:left;
-	height:30px;
-	font-size:20px;
+	height:28px;
+	font-size:17px;
 	width:60%;
 	margin-bottom:10px;
 }
@@ -309,11 +312,13 @@ footer {
 	float:left;
 }
 #profile_info {
-	margin-left:20px;
+	margin-left:120px;
 	float:left;
 	color:gray;
 	font-size:14px;
 	color:gray;	
+	width:120px;
+	position:absolute;
 }
 #profile_pic_upload {
 	clear:both;
@@ -677,7 +682,7 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 	
 #login_form input{margin-bottom:5px;}
 #edit_profile_button {letter-spacing:0px;padding-left:8px; padding-right:8px;}
-
+#edit_profile_button a {color:#fff; text-decoration:none;}
 .ul_none {list-style:none; margin:auto; width:200px; margin-top:5px;}
 .ul_none li {text-align:left;}
 .red {color:#ff5544; font-weight:bold;}
