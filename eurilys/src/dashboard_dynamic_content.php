@@ -83,15 +83,17 @@
 	}
 	else {
 		//search category id where category creator = username
-		$catQuery = "SELECT cat_id, task.cat_name FROM (task JOIN category ON ( task.cat_name =  'Schoolicious' ) AND (cat_creator =  'kennyazrina'))";
+		$catQuery = "SELECT cat_id, task.cat_name FROM (task JOIN category ON ( task.cat_name =  '$q' ) AND (cat_creator =  '$username'))";
 		$catResult = mysql_query($catQuery);
+		
+		$catID = "";
+		$catName = "";
+		
 		while ($catRow = mysql_fetch_array($catResult, MYSQL_ASSOC)) {
 			$catID = $catRow['cat_id'];
 			$catName = $catRow['cat_name'];
-		}		
+		}
 		if ($catName == $q) {
-			//echo "cat id = ".$catID;
-			
 			echo"
 			<form method='POST' action='delete_category.php'>
 				<input type='hidden' name='delete_category_id' value='$catID'/>
