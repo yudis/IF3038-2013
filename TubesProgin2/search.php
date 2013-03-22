@@ -25,41 +25,40 @@ header('Location: index.php');
     
     <body>        
     <?php
+    include 'header.php';
+    $search = $_POST['searchquery'];
+    $type =  $_REQUEST['type'];
+    
     if(connectDB()){
-            $search = "frilla";
+            
             $queryProfile = "SELECT* FROM user WHERE Username='".$_SESSION['username']."'";
             $result = mysql_query($queryProfile);
             $data = mysql_fetch_array($result);
-
             $uname= $data['Username'];
             $ava= $data['Avatar'];
 
-            $queryTask = "SELECT * FROM task WHERE TaskName ='".$search."'";
-            $queryCat = "SELECT * FROM category WHERE CategoryName ='".$search."'";
-            $queryUser = "SELECT * FROM user WHERE Username ='".$search."'";
-            $rTask = mysql_query($queryTask);
-            $rCat = mysql_query($queryCat);
-            $rUser = mysql_query($queryUser);
+            if ($type = 'All') {
+                $queryTask = "SELECT * FROM task WHERE TaskName ='".$search."'";
+                $queryCat = "SELECT * FROM category WHERE CategoryName ='".$search."'";
+                $queryUser = "SELECT * FROM user WHERE Username ='".$search."'";
+                $rTask = mysql_query($queryTask);
+                $rCat = mysql_query($queryCat);
+                $rUser = mysql_query($queryUser);
+            } 
+            else if ($type= 'Task') {
+                $queryTask = "SELECT * FROM task WHERE TaskName ='".$search."'";
+                $rTask = mysql_query($queryTask);
+            }
+            else if ($type = 'Category') {
+                $queryCat = "SELECT * FROM category WHERE CategoryName ='".$search."'";
+                $rCat = mysql_query($queryCat);
+            }
+            else if ($type = 'User') {
+                $queryUser = "SELECT * FROM user WHERE Username ='".$search."'";
+                $rUser = mysql_query($queryUser);
+            }
     ?>        
         
-        <header>
-            <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
-            <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
-            
-            <div id="profile"><a title="Go to Profile" href="profile.php"><?php echo $uname ?></a></div>
-            <div id="logout"><a title="Log out from here" href="logout.php">Log Out</a></div>
-            <form id="search">
-                <input type="text" name="Search" id="box">
-                <select>
-                    <option> All </option>   
-                    <option> Category </option>
-                    <option> Task </option>
-                    <option> Username </option>
-                </select>
-                <input type="submit" value="Search">
-            </form>
-            <img id="smallava" src="<?php echo $ava?>" />
-        </header>
         
         <div id="panel">
             search result for: <br/>
@@ -67,30 +66,37 @@ header('Location: index.php');
         </div>
         
         <div id="results">
-            <div id="rCategory">
-                <strong>Category</strong><br/>
-                ----------------------------------------------------------------------------------------------------<br/>
-<?php 
-    while ($resCat = mysql_fetch_array($rCat)) {
-        $resultCat = $resCat['CategoryName'];
-?>
-            <?php echo $resultCat; ?> <br/>            
-<?php
-    }    
-?>  
-            </div>
+            <?php
+                if (($type = 'All') or ($type = 'Category')) {
+                    echo '<div id="rCategory">
+                    <strong>Category</strong><br/>
+                    ----------------------------------------------------------------------------------------------------<br/>';
+                    while ($resCat = mysql_fetch_array($rCat)) {
+                            if ($resCat != NULL) {
+                            $resultCat = $resCat['CategoryName'];
+                            echo $resultCat;
+                            echo '<br/>';            
+                            } else {    
+                                echo 'NONE';
+                            }
+                    }  
+                    echo '</div>';
+                }
+                echo $type;
+            ?>
             <div id="rTask">
                 <strong>Task</strong><br/>
                 ----------------------------------------------------------------------------------------------------<br/>
-<?php 
-    while ($resTask = mysql_fetch_array($rTask)) {
-        $resultTask = $resTask['TaskName'];
-?>
-            <?php echo $resultTask; ?> <br/>            
-<?php
-    }    
-?>
-        </div>
+                <?php 
+                    while ($resTask = mysql_fetch_array($rTask)) {
+                        $resultTask = $resTask['TaskName'];
+                ?>
+                            <a href="RinciTugas.php?IDTask=<?php echo $resTask['IDTask'] ?>"><?php echo $resultTask ?></a> <br/>             <br/>            
+                <?php
+                    }    
+                ?>
+            </div>
+            
             <div id="rUser">
                 <strong>Username</strong><br/>
                 ----------------------------------------------------------------------------------------------------<br/>
@@ -98,7 +104,7 @@ header('Location: index.php');
     while ($resUser = mysql_fetch_array($rUser)) {
         $resultUser = $resUser['Username'];
 ?>
-            <?php echo $resultUser; ?> <br/>            
+            <a href="profile.php?user=<?php echo $uname ?>"><?php echo $uname ?></a> <br/>            
 <?php
     }
     ?>

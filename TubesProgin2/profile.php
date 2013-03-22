@@ -13,42 +13,24 @@ and open the template in the editor.
     <body>
         <?php
         include 'header.php';
+        
+        $usrname = $_GET['user'];
         ?>
         <?php
         if (connectDB()) {
-            $queryProfile = "SELECT* FROM user WHERE Username='" . $_COOKIE['UserLogin'] . "'";
+            $queryProfile = "SELECT* FROM user WHERE Username='".$usrname."'";
             $result = mysql_query($queryProfile);
             $data = mysql_fetch_array($result);
             
-            $queryTaskDone = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='" . $_COOKIE['UserLogin'] . "' AND task.Status = 'done' ";
-            $queryTask = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='" . $_COOKIE['UserLogin'] . "' AND task.Status = 'undone' ";        
+            $queryTaskDone = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='".$usrname."' AND task.Status = 'done' ";
+            $queryTask = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='" .$usrname. "' AND task.Status = 'undone' ";        
         $uname= $data['Username'];
         $name= $data['Fullname'];
         $bday= $data['DateOfBirth'];
         $ava= $data['Avatar'];
         $email = $data['Email'];
         
-?>        
-        
-        <header>
-            <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
-            <div id="dashboard"><a title="Go to Dashboard" href="dashboard.php">Dashboard</a></div>
-            
-            <div id="profile"><a title="Go to Profile" href="profile.php"><?php echo $uname ?></a></div>
-            <div id="logout"><a title="Log out from here" href="logout.php">Log Out</a></div>
-            <form id="search">
-                <input type="text" name="Search" id="box">
-                <select>
-                    <option> All </option>   
-                    <option> Category </option>
-                    <option> Task </option>
-                    <option> Username </option>
-                </select>
-                <input type="submit" value="Search">
-            </form>
-            <img id="smallava" src="<?php echo $ava?>" />
-        </header>
-                    
+?>                  
 
             <div id="panel">
                 <div id="editP" onclick="editProfile();">
