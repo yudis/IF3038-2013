@@ -67,17 +67,17 @@ input.liusername{
 }
 
 #box {
-	width: 120px;
+    width: 120px;
 }
 
 .overlay
 {
-   background-color: #000;
-   opacity: 0.8;
-   filter: alpha(opacity=80);
-   position: absolute; top: 0; left: 0;
-   width: 100%; height: 100%;
-   z-index: 10;
+    background-color: #000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 10;
 }
 
 
@@ -163,7 +163,7 @@ input.liusername{
     overflow: hidden;
     background-image: url('img/kertas.png');
     width: 350px;
-    height: 443px;
+    height: 440px;
 }
 .commentinfo{
     height:box;
@@ -171,7 +171,7 @@ input.liusername{
     text-align: right;
 }
 .remove{
-    
+
 }
 .tugasyeah{
     font-size: 12pt;
@@ -183,15 +183,29 @@ input.liusername{
     padding: 50px;
     margin-left: 100px;
     background-image: url('img/kertas.png');
-    background-repeat: round;
     width: 350px;
     height: 440px;
-    background-size: 100%; 
+}
+.tugasyeahh{
+    font-size: 12pt;
+    top: 75px;
+    background-color:transparent;
+    border:0px;
+    overflow: auto;
+    left: 700px;
+    padding: 50px;
+    margin-left: 100px;
+    margin-top: -540px;
+    background-image: url('img/kertas.png');
+    width: 350px;
+    height: 440px;
 }
 .tugasyeah::-webkit-scrollbar { 
     display: none; 
 }
-
+#edittugas{
+    visibility: hidden;
+}
 #nama {
     font-size: 14pt;
     font-style: italic;
@@ -235,28 +249,28 @@ textArea {
 
 #overlay {
     background-color: #000;
-   opacity: .7;
-   filter: alpha(opacity=70);
-   position: fixed; top: 0; left: 0;
-   width: 100%; height: 100%;
-   z-index: 10;
+    opacity: .7;
+    filter: alpha(opacity=70);
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 10;
 }
 
 #add {
-  position: absolute;
-  z-index: 1000;
-  left: 380px;
-  top: 200px;
-  display: none;
-  color: white;
-  font-weight: bold;
-  background-color: #261d12;
-  padding: 70px;
-  width: 300px;
-  height: 100px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
+    position: absolute;
+    z-index: 1000;
+    left: 380px;
+    top: 200px;
+    display: none;
+    color: white;
+    font-weight: bold;
+    background-color: #261d12;
+    padding: 70px;
+    width: 300px;
+    height: 100px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 
 .list{
@@ -349,9 +363,9 @@ textArea {
 }
 
 input{
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 #feature{
     position:fixed;
@@ -360,63 +374,63 @@ input{
 }
 
 .logbutton {
-	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
-	background-color:#ededed;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #dcdcdc;
-	display:inline-block;
-	color:black;
-        font-weight:bold;
-	font-family:Cambria, Georgia, serif;;
-	font-size:15px;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:1px 1px 0px #ffffff;
+    -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+    background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+    background-color:#ededed;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    color:black;
+    font-weight:bold;
+    font-family:Cambria, Georgia, serif;;
+    font-size:15px;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:1px 1px 0px #ffffff;
 }.logbutton:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
-	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
-	background-color:#dfdfdf;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+    background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+    background-color:#dfdfdf;
 }.logbutton:active {
-	position:relative;
-	top:1px;
+    position:relative;
+    top:1px;
 }
 
 #regbutton {
-	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
-	background-color:#ededed;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #dcdcdc;
-	display:inline-block;
-	color:#777777;
-	font-family:Cambria, Georgia, serif;;
-	font-size:15px;
-	font-weight:normal;
-	padding:2px 132px;
-	text-decoration:none;
-        text-shadow:1px 1px 0px #ffffff;
+    -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+    background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+    background-color:#ededed;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    color:#777777;
+    font-family:Cambria, Georgia, serif;;
+    font-size:15px;
+    font-weight:normal;
+    padding:2px 132px;
+    text-decoration:none;
+    text-shadow:1px 1px 0px #ffffff;
 }#regbutton:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
-	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
-	background-color:#dfdfdf;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+    background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+    background-color:#dfdfdf;
 }#regbutton:active {
-	position:relative;
-	top:1px;
+    position:relative;
+    top:1px;
 }
 #regdate{
     min: "1955-12-31";
@@ -536,21 +550,21 @@ input{
 }
 
 #edit {
-  position: absolute;
-  z-index: 1000;
-  left: 420px;
-  top: 120px;
-  display: none;
-  color: white;
-  font-weight: bold;
-  background-color: #261d12;
-  padding: 30px;
-  padding-top: 10px;
-  width: 300px;
-  height: 450px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
+    position: absolute;
+    z-index: 1000;
+    left: 420px;
+    top: 120px;
+    display: none;
+    color: white;
+    font-weight: bold;
+    background-color: #261d12;
+    padding: 30px;
+    padding-top: 10px;
+    width: 300px;
+    height: 450px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 
 #smallava {

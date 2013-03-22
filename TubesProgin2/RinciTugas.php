@@ -6,115 +6,125 @@ require_once('config.php');
         <title>BANG!!!-DASHBOARD</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="autocomplete.css" media="screen" />
     </head>
-    <body>
+    <body onload="loadcomment()">
         <?php
         include 'header.php';
 
         $IDTask = $_GET['IDTask'];
 
+        if (connectDB()) {
+            $TaskQuery = "SELECT * FROM task WHERE IDTask=" . $IDTask . ";";
+            $TaskResult = mysql_query($TaskQuery);
+            $result = mysql_fetch_array($TaskResult);
 
-        $TaskQuery = "SELECT * FROM task WHERE IDTask=" . $IDTask . ";";
-        $TaskResult = mysql_query($TaskQuery);
-        $result = mysql_fetch_array($TaskResult);
+            $TaskName = $result[2];
+            $deadline = $result[4];
+            $Status = $result[3];
 
-        $TaskName = $result[2];
-        $deadline = $result[4];
+            $AttachmentQueryText = "SELECT * FROM attachment WHERE IDTask=" . $IDTask . ";";
+            $AttachmentQuery = mysql_query($AttachmentQueryText);
 
-        $AttachmentQueryText = "SELECT * FROM attachment WHERE IDTask=" . $IDTask . ";";
-        $AttachmentQuery = mysql_query($AttachmentQueryText);
+            $AssigneeQueryText = "SELECT * FROM assignment WHERE IDTask=" . $IDTask . ";";
+            $AssigneeQuery = mysql_query($AssigneeQueryText);
 
-        $AssigneeQueryText = "SELECT * FROM assignment WHERE IDTask=" . $IDTask . ";";
-        $AssigneeQuery = mysql_query($AssigneeQueryText);
+            $TagQueryText = "SELECT * FROM tasktag,tag WHERE IDTask=" . $IDTask . " AND tasktag.IDTag=tag.IDTag";
+            $TagQuery = mysql_query($TagQueryText);
 
-        $TagQueryText = "SELECT * FROM tasktag,tag WHERE IDTask=" . $IDTask . " AND tasktag.IDTag=tag.IDTag";
-        $TagQuery = mysql_query($TagQueryText);
-
-        $CommentQueryText = "SELECT * FROM comment WHERE IDTask=" . $IDTask . ";";
-        $CommentQuery = mysql_query($CommentQueryText);
-        ?>
-        <div id="category">      
-            <div class = "kategori"><a title="Go to Dashboard" href="dashboard.php">Back to Dashboard</a></div>
-        </div>
-        <div id ="listtugas" class="list">
-            <div class="tugasyeah" id="rincitugas">
-                Name: <?php echo$TaskName ?> <br/>
-                Attachment: 
-                <div class="attachment" >
-                    <?php
-                    $x = 1;
-                    while ($result = mysql_fetch_array($AttachmentQuery)) {
-                        $resultcheck = explode(".", $result[2]);
-                        $arraysize = count($resultcheck);
-                        echo('attachment ' . $x . ' :<br/>');
-                        $x++;
-                        if ($resultcheck[$arraysize - 1] == "jpg" || $resultcheck[$arraysize - 1] == "png" || $resultcheck[$arraysize - 1] == "jpeg") {
-                            echo'<a href="' . $result[2] . '"><img width = "150px" height = "150px" src="' . $result[2] . '"></a><br/>';
-                        } else if ($resultcheck[$arraysize - 1] == "ogg") {
-                            echo "<video width=\"320\" height=\"240\" controls autoplay><source src=" . $result[2] . " type=\"video/" . $resultcheck[$arraysize - 1] . "\"></video><br>";
-                        } else {
-                            echo'<a href="' . $result[2] . '">' . $result[2] . '</a><br/>';
+            $CommentQueryText = "SELECT * FROM comment WHERE IDTask=" . $IDTask . ";";
+            $CommentQuery = mysql_query($CommentQueryText);
+            ?>
+            <div id="category">      
+                <div class = "kategori"><a title="Go to Dashboard" href="dashboard.php">Back to Dashboard</a></div>
+                <div>
+                    <input value="<?php echo$IDTask; ?>" hidden="true" id="HiddenIDTask">
+                </div>
+            </div>
+            <div id ="listtugas" class="list">
+                <div class="tugasyeah" id="rincitugas">
+                    Name: <?php echo$TaskName; ?> <br/>
+                    Status : <?php echo$Status; ?><br/>
+                    Attachment: 
+                    <div class="attachment" >
+                        <?php
+                        $x = 1;
+                        while ($result = mysql_fetch_array($AttachmentQuery)) {
+                            $resultcheck = explode(".", $result[2]);
+                            $arraysize = count($resultcheck);
+                            echo('attachment ' . $x . ' :<br/>');
+                            $x++;
+                            if ($resultcheck[$arraysize - 1] == "jpg" || $resultcheck[$arraysize - 1] == "png" || $resultcheck[$arraysize - 1] == "jpeg") {
+                                echo'<a href="' . $result[2] . '"><img width = "150px" height = "150px" src="' . $result[2] . '"></a><br/>';
+                            } else if ($resultcheck[$arraysize - 1] == "ogg") {
+                                echo "<video width=\"320\" height=\"240\" controls autoplay><source src=" . $result[2] . " type=\"video/" . $resultcheck[$arraysize - 1] . "\"></video><br>";
+                            } else {
+                                echo'<a href="' . $result[2] . '">' . $result[2] . '</a><br/>';
+                            }
+                            echo '<br/>';
                         }
-                        echo '<br/>';
+                        ?>
+                    </div><br/>
+                    Deadline: <?php echo$deadline ?><br/>
+
+                    Assignee: 
+                    <?php
+                    while ($result = mysql_fetch_array($AssigneeQuery)) {
+                        if ($result[1] != $_COOKIE['UserLogin']) {
+                            echo'<a href="profile.php?user=' . $result[1] . '" class="asignee">' . $result[1] . '</a>, ';
+                        }
                     }
                     ?>
-                </div><br/>
-                Deadline: <?php echo$deadline ?><br/>
-
-                Assignee: 
-                <?php
-                $check = false;
-                while ($result = mysql_fetch_array($AssigneeQuery)) {
-                    echo'<a href="profile.php?user=' . $result[1] . '" class="asignee">' . $result[1] . '</a>, ';
-                }
-                ?>
-                <br/>
-                Tag: 
-                <?php
-                $check = false;
-                while ($result = mysql_fetch_array($TagQuery)) {
-                    echo'<a href="" class="tag">' . $result[4] . '</a>, ';
-                }
-                ?>
-                <br/>
-                <br/>Comment (<?php  echo mysql_num_rows($CommentQuery)?>) :<br/>
-                <div class="komentar" id="isikomentar">
-                    <hr>
+                    <br/>
+                    Tag: 
                     <?php
-                        while ($result = mysql_fetch_array($CommentQuery)){
-                            echo '<div class="commentyeah">';
-                            echo'<div class="commentcontent">'.$result[3].'</div>';
-                            $getCommentUserQuery = "SELECT * FROM user WHERE username='".$result[2]."';";
-                            $getCommentUser = mysql_query($getCommentUserQuery);
-                            $usercommentresult= mysql_fetch_array($getCommentUser);
-                            echo ('<div class="commentinfo"> <img width=30px height=30px src="'.$usercommentresult[5].'" /> <a href="profile.php?user=' . $result[2] . '">'.$result[2].'</a> at '.$result[4].'');
-                            if($result[2]==$_COOKIE['UserLogin']){
-                                echo'<br/><input type="button" class="remove" onclick="removeComment('.$result[0].')" value="remove">';
-                            }
-                            echo'</div></div><hr>';
-                        }
+                    while ($result = mysql_fetch_array($TagQuery)) {
+                        echo'<a href="" class="tag">' . $result[4] . '</a>, ';
+                    }
                     ?>
-                </div><br/>
-                <form>
-                    <textarea id="addCommentText"></textarea>
-                    <input type="button" name="submit" onclick="addComment('<?php echo $_COOKIE['UserLogin']; ?>','<?php echo $IDTask; ?>')" value="submit">
-                </form>
-            <br/><br/>
-            <a onclick="showEdit();" class="button">edit</a><br/>
+                    <br/>
+                    <div id="komentaryey"></div>
+                    <form>
+                        AddComment <br/>
+                        <input type="text" id="addCommentText"  >
+                        <input type="button" name="submit" onclick="addComment('<?php echo $_COOKIE['UserLogin']; ?>', '<?php echo $IDTask; ?>')" value="submit">
+                    </form>
+                    <br/><br/>
+                    <a onclick="showEdit();" class="button">edit</a><br/>
+                </div>
+                <div class="tugasyeahh" id ="edittugas">
+                    EDIT TASK<br/><br/>
+                    <form>
+                        Deadline: <input type="date" id="editdeadline"><br/>
+                        Assignee: <div class="assignee">
+                            <div id="ListEditAssignee">
+                                <?php
+                                $AssigneeQuery = mysql_query($AssigneeQueryText);
+                                while ($result = mysql_fetch_array($AssigneeQuery)) {
+                                    if ($result[1] != $_COOKIE['UserLogin']) {
+                                        echo'<a href="profile.php?user=' . $result[1] . '" class="asignee">' . $result[1] . '</a>  <img src="img/salah.png" alt="" onclick="deleteassignee(' . $result[0] . ',' . $IDTask . ')" /><br/> ';
+                                    }
+                                }
+                                echo'<br/>';
+                                ?>
+                            </div>
+                            <input type="text" id="addnewassignee" list="assignee" onkeyup="multiAutocomp(this, 'assignee.php', 'edittugas')"></div><br/>
+                        Tag: 
+                        <div id="ListEditTag">
+                            <?php
+                            $TagQuery = mysql_query($TagQueryText);
+                            while ($result = mysql_fetch_array($TagQuery)) {
+                                echo'<a href="" class="asignee">' . $result[4] . '</a> <img src="img/salah.png" alt="" onclick="deletetag(' . $result[0] . ',' . $IDTask . ')" /><br/> ';
+                            }
+                            echo'<br/>';
+                            ?>
+                        </div>
+                        <div class="tag"> <input id="edittag" type="text"></div> <br/>
+                    </form> <br/>
+                    <a onclick="editTask('<?php echo$IDTask; ?>')" class="button">OK</a><br/>
+                </div>
             </div>
-        <div class="tugass" id ="edittugas">
-            <form>
-                Name: Nama Task<br/>
-                Attachment: <div class="attachment"><input id="upload" type="file"></div><br/>
-                Deadline: <input type="date"><br/>
-                Assignee: <div class="assignee"><input type="text" list="assignee"></div><br/>
-                Tag: <div class="tag"> <input type="text"></div> <br/>
-                Comment: <br/>
-                <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
-            </form> <br/>
-            <a onclick="showRinci()" class="button">save</a><br/>
-        </div>
-        </div>
-    </body>
-    <script type="text/javascript" src="script.js"></script>
- </html>
+        </body>
+        <script type="text/javascript" src="script.js"></script>
+    <?php } ?>
+</html>
