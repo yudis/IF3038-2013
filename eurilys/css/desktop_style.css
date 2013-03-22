@@ -313,7 +313,7 @@ footer {
 	float:left;
 	color:gray;
 	font-size:14px;
-	color:gray;
+	color:gray;	
 }
 #profile_pic_upload {
 	clear:both;
@@ -489,6 +489,7 @@ footer {
 .top20 {margin-top:20px;}
 .top45 {margin-top:45px;}
 .top30 {margin-top:30px;}
+.width100 {width:130px;}
 .line10 {line-height:50%;}
 a {text-decoration:none;}
 #logout {color:#fff;}

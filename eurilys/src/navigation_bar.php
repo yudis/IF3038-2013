@@ -26,7 +26,7 @@
 ?>
 <div id="navbar">
 	<div id="short_profile">
-		<img id="profile_picture" src="../img/avatar1.png" alt="">
+		<a href="profile.php"> <img id="profile_picture" src="../img/avatar1.png" alt=""> </a>
 		<div id="profile_info">
 			Welcome, <br>
 			<a href="profile.php" class="darkBlue"> <?php if (isset($_SESSION['fullname'])) {echo $_SESSION['fullname']; }?> </a>
@@ -42,6 +42,19 @@
 				$result	= mysql_query($query);
 				while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 					echo "<li> <span class='categoryList' onclick='javascript:generateTask(\"".$row['cat_name']."\")'> ".$row['cat_name']." </span> </li>";
+					
+				}
+				
+				$query2 	= "SELECT cat_id FROM cat_asignee WHERE username = '$username'";
+				$result2	= mysql_query($query2);
+				while ($row2 = mysql_fetch_array($result2, MYSQL_ASSOC)) {
+					$categoryID = $row2['cat_id'];
+					
+					$query1 	= "SELECT * FROM category WHERE cat_id = '$categoryID'";
+					$result1	= mysql_query($query1);
+					while ($row1 = mysql_fetch_array($result1, MYSQL_ASSOC)) {
+						echo "<li> <span class='categoryList' onclick='javascript:generateTask(\"".$row1['cat_name']."\")'> ".$row1['cat_name']." </span> </li>";
+					}
 				}
 			?>
 		</ul>

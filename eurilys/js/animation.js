@@ -338,3 +338,24 @@ function viewTask(i) {
 	xmlhttp.open("GET","view_task_script.php?q="+i,true);
 	xmlhttp.send();
 }
+
+function deleteCategory(catID) {
+	var deleteCategoryConfirm = confirm("Are you sure you want to delete this CATEGORY and all the TASKS related?");
+	if (deleteCategoryConfirm == true)
+	{
+		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}
+		else {// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		xmlhttp.onreadystatechange=function() {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
+			}
+		}	
+		xmlhttp.open("GET","delete_category.php?q=all&taskdone=1&taskid="+i,true);
+		xmlhttp.send();
+	}
+}

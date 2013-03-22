@@ -82,6 +82,24 @@
 		}
 	}
 	else {
+		//search category id where category creator = username
+		$catQuery = "SELECT cat_id, task.cat_name FROM (task JOIN category ON ( task.cat_name =  'Schoolicious' ) AND (cat_creator =  'kennyazrina'))";
+		$catResult = mysql_query($catQuery);
+		while ($catRow = mysql_fetch_array($catResult, MYSQL_ASSOC)) {
+			$catID = $catRow['cat_id'];
+			$catName = $catRow['cat_name'];
+		}		
+		if ($catName == $q) {
+			//echo "cat id = ".$catID;
+			
+			echo"
+			<form method='POST' action='delete_category.php'>
+				<input type='hidden' name='delete_category_id' value='$catID'/>
+				<input type='hidden' name='delete_category_name' value='$catName'/>
+				<input type='submit' id='delete_category_button' name='delete_category_button' class='link_red top20' value='Delete Category'/> 
+			</form>";
+		}
+		
 		//searching for specific task (per category)
 		$query 	= "SELECT * FROM task where cat_name='$q';";
 		$result	= mysql_query($query);
