@@ -1,6 +1,7 @@
 /*
  * 
  */
+var IDTugas;
 var tagsTugas = new Array();
 var assigneesTugas = new Array();
 var changeMade = false;
@@ -22,6 +23,7 @@ function initialize()
 
 function onload() {
     var id = getQueryParameter('id');
+	IDTugas = decodeURIComponent(getQueryParameter('id'));
 	
 	if (id != null)
 	{
@@ -326,6 +328,48 @@ function changeMadeTrue()
 	changeMade = true;
 }
 
+function saveToDatabase()
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	var stringStatus;
+	if (document.getElementById("tags").checked == true)
+	{
+		stringStatus = "1";
+	}
+	else
+	{
+		stringStatus = "0";
+	}
+	var stringDate = document.getElementById("deadline").value;
+	var stringAssignee = "";
+	for (var i = 0; i < assigneesTugas.length; i++)
+	{
+		stringAssignee += assigneeTugas[i];
+		if (i+1 < assigneeTugas.length)
+		{
+			stringAssignee += ",";
+		}
+	}
+	var stringTags = document.getElementById("tags").value;
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		}
+	}
+	xmlhttp.open("GET","settaskinfo.php?id="+id+"&status="+stringStatus+"&deadline="+stringDate+"&assignee="+stringAssignee+"&tags="+stringTags,true);
+	xmlhttp.send();
+}
+
 function saveTugas() {
 	if (changeMade == false)
 	{
@@ -349,6 +393,7 @@ function saveTugas() {
 	else
 	{
 		//masukkan data ke dalam database
+		saveToDatabase();
 		
 		document.getElementById("tagsEditDiv").style.display = "none";
 		document.getElementById("assigneeEditDiv").style.display = "none";
