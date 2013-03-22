@@ -17,6 +17,7 @@ $all = $type == 'all';
 
 // Presentation logic here
 
+$this->requireJS('search');
 $this->header('Search', 'search');
 ?>
 <div class="content">
@@ -24,52 +25,58 @@ $this->header('Search', 'search');
 	<header>
 		<h1>Search</h1>
 	</header>
-	<?php if ($type == 'tasks' || $all):
+	<div class="search-results<?php if ($all) echo ' all' ?>">
+	<?php if ($type == 'task' || $all):
 
-$tasks = Task::model()->findAll("nama_task LIKE '$terms'");
+$tasks = Task::model()->findAllLimit("nama_task LIKE '$terms'", array(), 0, 10);
 ?>
 <div class="result-set">
 	<section class="tasks">
+		<header>
+			<h3>Tasks</h3>
+		</header>
 		<!-- Tasks -->
-		<?php
-foreach ($tasks as $task):
-	$deadline_datetime = new DateTime($task->deadline); ?>
-
-		<article class="task" data-task-id="<?php echo $task->id_task ?>">
-			<header>
-				<h1>
-					<label>
-						<span class="task-checkbox"><input type="checkbox" class="task-checkbox" data-task-id="<?php echo $task->id_task ?>"></span>
-						<a href="tugas.php?id=<?php echo $task->id_task ?>"><?php echo $task->nama_task; ?></a>
-					</label>
-				</h1>
-			</header>
-			<div class="details">
-				<p class="deadline">
-					<span class="detail-label">Deadline:</span>
-					<span class="detail-content">
-						<?php echo $deadline_datetime->format('j F Y') ?>
-					</span>
-			</p>
-				<p class="tags">
-					<span class="detail-label">Tag:</span>
-					<?php foreach ($task->getTags() as $tag) {
-						echo '<span class="tag">' . $tag->tag . '</span>';
-					} ?>
-				</p>
-			</div>
-		</article>
-
-<?php endforeach; ?>
+		<div id="taskList">
+			<?php foreach ($tasks as $task) { require dirname(__FILE__) . "/../template/task.php"; } ?>
+		</div>
 	</section>
 </div>
-	<?php elseif ($type == 'categories' || $all):
-		$categories = Category::model()->findAll("nama_kategori LIKE '$terms'");
+	<?php endif; if ($type == 'user' || $all):
+		$users = User::model()->findAllLimit("username LIKE '$terms' OR fullname LIKE '$terms'", array(), 0, 10);
 	?>
-	<?php elseif ($type == 'users' || $all):
-		$users = User::model()->findAll("username LIKE '$terms' OR fullname LIKE '$terms'");
+
+	<div class="result-set">
+		<section class="users">
+			<header>
+				<h3>Users</h3>
+			</header>
+			<div id="userList">
+				<?php foreach ($users as $user) { require dirname(__FILE__) . "/../template/user.php"; } ?>
+			</div>
+		</section>
+	</div>
+<?php endif; if ($type == 'category' || $all):
+		$categories = Category::model()->findAllLimit("nama_kategori LIKE '$terms'", array(), 0, 10);
 	?>
-<?php endif; ?>
+	<div class="result-set">
+		<section class="categories">
+			<header>
+				<h3>Categories</h3>
+			</header>
+			<ul id="categoryList">
+			<?php foreach ($categories as $cat): ?>
+				<li id="categoryLi<?php echo $cat->id_kategori ?>"><a href="dashboard.php?cat=<?php echo $cat->id_kategori ?>" data-category-id="<?php echo $cat->id_kategori ?>"><?php echo $cat->nama_kategori ?></a></li>
+
+			<?php endforeach; ?>
+			</ul>
+		</section>
+	</div>
+	<?php endif; ?>
 </div>
 </div>
+<script>
+var isAll = <?php echo $all ? 'true' : 'false'; ?>;
+var q = "<?php echo $q ?>";
+var currentType = "<?php echo $type ?>";
+</script>
 <?php $this->footer() ?>
