@@ -22,15 +22,24 @@
 	$avatar		= $_POST['signup_avatar_upload'];
 	
 	if (isset($_POST['signup_submit'])) { //when button signup_submit is pressed
-		$query	=    
-		"INSERT INTO user (`username`, `password`, `full_name`, `birthdate`, `avatar`, `email`) 
-		VALUES ('$username','$password', '$name', '$birthdate', '$avatar', '$email')";
+		$query1 = "SELECT * from user WHEN username='$username' OR email='$email'";
+		$result1 = mysql_query($query1);
 		
-		$res	=    mysql_query($query);
-		
-		$_SESSION['username'] = $username;
-		$_SESSION['fullname'] = $name;
-		
-		header('location:src/dashboard.php'); //Redirect To Success Page
+		if (mysql_num_rows($result1) > 0) {
+			//username & email sudah ada
+			header('location:src/index.php');
+		}
+		else {
+			$query	=    
+			"INSERT INTO user (`username`, `password`, `full_name`, `birthdate`, `avatar`, `email`) 
+			VALUES ('$username','$password', '$name', '$birthdate', '$avatar', '$email')";
+			
+			$res	=    mysql_query($query);
+			
+			$_SESSION['username'] = $username;
+			$_SESSION['fullname'] = $name;
+			
+			header('location:src/dashboard.php'); //Redirect To Success Page
+		}
 	}
 ?>
