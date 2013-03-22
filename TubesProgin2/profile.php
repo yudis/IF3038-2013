@@ -19,22 +19,15 @@ and open the template in the editor.
             $queryProfile = "SELECT* FROM user WHERE Username='" . $_COOKIE['UserLogin'] . "'";
             $result = mysql_query($queryProfile);
             $data = mysql_fetch_array($result);
-
-<<<<<<< HEAD
-<?php
-if(connectDB()){
-	$queryProfile = "SELECT* FROM user WHERE Username='".$_SESSION['username']."'";
-        $result = mysql_query($queryProfile);
-        $data = mysql_fetch_array($result);
-        
+            
+            $queryTaskDone = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='" . $_COOKIE['UserLogin'] . "' AND task.Status = 'done' ";
+            $queryTask = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='" . $_COOKIE['UserLogin'] . "' AND task.Status = 'undone' ";        
         $uname= $data['Username'];
         $name= $data['Fullname'];
         $bday= $data['DateOfBirth'];
         $ava= $data['Avatar'];
         $email = $data['Email'];
         
-        $queryTaskDone = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='".$_SESSION['username']."' AND task.Status = 'done' ";   
-        $queryTask = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='".$_SESSION['username']."' AND task.Status = 'undone' ";   
 ?>        
         
         <header>
@@ -55,44 +48,14 @@ if(connectDB()){
             </form>
             <img id="smallava" src="<?php echo $ava?>" />
         </header>
-        
-        <div id="panel">
-            <div id="editP" onclick="editProfile();">
-                edit profile
-=======
-            $queryTaskDone = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='" . $_COOKIE['UserLogin'] . "' AND task.Status = 'done' ";
-            $queryTask = "SELECT TaskName FROM assignment, task WHERE task.IDTask = assignment.IDTask AND assignment.Username='" . $_COOKIE['UserLogin'] . "' AND task.Status = 'undone' ";
-            ?>        
+                    
 
             <div id="panel">
                 <div id="editP" onclick="editProfile();">
                     edit profile
                 </div>
->>>>>>> a9daf28b44d42e718ee14f38bdbd005b216d01d7
             </div>
 
-<<<<<<< HEAD
-    while ($dataDone = mysql_fetch_array($resultDone)){
-            $taskDone = $dataDone['TaskName'];
-?>        
-            <?php echo $taskDone; ?> <br/>
-<?php 
-    }
-?>
-        </div>
-        <div id="todolist">
-<?php
-    $resultTask = mysql_query($queryTask);
-    
-    while ($dataTask = mysql_fetch_array($resultTask)){
-            $taskUndone = $dataTask['TaskName'];
-?>        
-        
-            <?php echo $taskUndone; ?> <br/>
-<?php
-        }
-?>
-=======
             <div id="donelist">
                 <?php
                 $resultDone = mysql_query($queryTaskDone);
@@ -104,7 +67,6 @@ if(connectDB()){
                     <?php
                 }
                 ?>
->>>>>>> a9daf28b44d42e718ee14f38bdbd005b216d01d7
             </div>
             <div id="todolist">
                 <?php
@@ -139,23 +101,12 @@ if(connectDB()){
                     <?php echo $email; ?> <br>
                 </div>
             </div>
-<<<<<<< HEAD
-        </div>
         
         <div id='edit'>
                 <p class="title">edit profile</p>
-                Full Name: <br/>
-                <input type="text" id="regname" onchange="Register();"><br>
-                Birthday: <br/>
-                <input type="date" id="regdate"><br>
-=======
-
-            <div id='edit'>
-                edit profile <br/>
-                &nbsp; <br/>
+               
                 Full Name: <input type="text" id="regname" onchange="Register();"><br>
                 Birthday: <input type="date" id="regdate"><br>
->>>>>>> a9daf28b44d42e718ee14f38bdbd005b216d01d7
                 &nbsp; <br/>
                 New Password:<br/> 
                 <input type="password" id="regpassword1" onchange="Register();"><br>
