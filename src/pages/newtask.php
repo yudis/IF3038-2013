@@ -1,7 +1,8 @@
 <?php
 	$task = new Task();
 	$task->data = $_POST;
-	//$temperror = $task->checkValidity();
+	$task->id_user = $this->currentUserId;
+	$temperror = $task->save();
 	$selection = array("asdf","ghjkl");/* 
 	$select = "";
 		if ($selection)
@@ -23,7 +24,6 @@
 	// get id after insert mysq
 	// save tag beserta id nya, kalau udah ada ga di save lagi
 	// save assignee beserta id nya
-	print_r ($task->data);
-	$task->checkValidity();
+	//$task->checkValidity();
 	exit;
 ?>

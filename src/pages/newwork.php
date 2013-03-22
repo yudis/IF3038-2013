@@ -1,7 +1,7 @@
 <?php
 
 $this->header();
-$id = (ISSET($_GET['id'])) ? $_GET['id'] : $_SESSION['user_id'];
+$id = $_GET['cat'];
 //$task = Task::model()->find("id_user = ".$id, array("nama_task","deadline","status"));
 ?>
 		<div class="content">
@@ -10,6 +10,7 @@ $id = (ISSET($_GET['id'])) ? $_GET['id'] : $_SESSION['user_id'];
 					<h1>Add Task</h1>
 				</header>
 				<form id="new_tugas" action="newtask" method="post">
+					<input name="id_kategori" type="hidden" value="<?php echo $id; ?>">
 					<div class="field">
 						<label>Task Name</label>
 						<input size="50" maxlength="50" name="nama_task" id="nama" type="text">
