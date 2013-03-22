@@ -19,7 +19,7 @@ function showHint(str) {
                 document.getElementById("textHint").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","gethint.php?key=" + str, true);
+        xmlhttp.open("GET","php/gethint.php?key=" + str, true);
         xmlhttp.send();
 }
 
@@ -37,7 +37,7 @@ function showKategori(kategori) {
 		_xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
-	_xmlhttp.open("GET","changeKategori.php?k=" + kategori,true);
+	_xmlhttp.open("GET","php/changeKategori.php?k=" + kategori,true);
 	_xmlhttp.send();
 	
 	_xmlhttp.onreadystatechange = function() {
@@ -222,9 +222,6 @@ function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain,
 				
 				$fullname = $responseElmt[0].childNodes[0].childNodes[0].nodeValue;
 				$birthdate = $responseElmt[0].childNodes[1].childNodes[0].nodeValue;
-				//$password = $responseElmt[0].childNodes[2].childNodes[0].nodeValue;
-				//$filename = $responseElmt[0].childNodes[3].childNodes[0].nodeValue
-				//alert($fullname + $birthdate + $password + $filename);
 				
 				document.getElementById("userFullName").innerHTML = "<p>" + $fullname + "</p>";
 				document.getElementById("userBirthdate").innerHTML = "<p>" + $birthdate + "</p>";

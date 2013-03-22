@@ -46,7 +46,7 @@
         $retValEdit = true;
         for ($i=0;$i<count($user);$i++){
             $sqlEdit = "INSERT INTO editKategori VALUES ('".$user[$i]."','".$namaKategori."')";
-            $retValEdit .= mysqli_query($con,$sqlEdit);
+            $retValEdit = (mysqli_query($con,$sqlEdit) && $retValEdit);
         }
         
         if ($retValEdit && $retVal) {

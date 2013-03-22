@@ -63,6 +63,6 @@
             echo "</div>";
         }
         echo "<button class='addTask' onclick=\"toHalamanPembuatanTugas();\">tambah tugas</button>";
-	echo "<button class='addTask'>hapus kategori</button>";
+	echo "<button class='addTask' onclick=\"deleteKategori('$kategori');\">hapus kategori</button>";
     }
 ?>

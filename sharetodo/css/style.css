@@ -441,7 +441,7 @@ button#editProfileBtn{
 	background:#FF0;
 	border-radius:5px;
 	border: solid 4px #5F5F5F;
-	/*visibility:hidden;*/
+	visibility:hidden;
 }
 
 #newTugasTitle {
@@ -544,4 +544,8 @@ button.addTask {
 button.addTask:hover{
 	background: #FFF;
 	cursor: pointer;
+}
+div#photoUploader{
+	margin-top: 10%;
+	border: solid 3px #890;
 }

@@ -1,4 +1,6 @@
-<?php    
+<?php
+    session_start();
+    
     $newFullName = $_POST["newFullName"];
     $newBirthdate = $_POST["newBirthdate"];
     $newPassword = $_POST["newPassword"];
@@ -25,7 +27,7 @@
     }
     
     //update database
-    $sql = "UPDATE user SET fullname='$newFullName', tanggalLahir='$newBirthdate',password='$newPassword',avatar='$newFileName' WHERE username='$curUser'";
+    $sql = "UPDATE user SET fullname='$newFullName', tanggalLahir='$newBirthdate',password='$newPassword' WHERE username='$curUser'";
     mysqli_query($con,$sql);
     
     //$response = $newFullName." ".$newBirthdate." ".$newPassword." ".$newFileName;
