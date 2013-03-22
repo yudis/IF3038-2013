@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+						"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<link id="style" rel="stylesheet" type="text/css" href="style.css"></link>
+	
+	<title>Shared Task</title>
+	
+</head>
+<body>
+	<div class="header">
+		
+				<div id="logo">
+				<img src="images/ToDo.png" alt="logo" width="100" height="30"/>
+				</div>
+		
+
+		<ul id="header">
+			
+			<li ><a href="konten4.html">Profil</a></li>
+			<li ><a href="konten4.html">Home</a></li>
+		</ul>
+		
+	</div>
+
+	<div class="content">
+		<div id="leftside">
+			<div id="newkategoritombol">
+				<a id="font" href="#join_form" >New Category</a>
+			</div>
+			<div id="listkategori">
+				<ul id="listkategory" class="ullistkategori">
+					<li class="lilistkategori" >PROGIN</li>
+				</ul>
+			</div>
+		</div>
+		<div id="mainarea">
+			<table class="namatask">
+			<tr>
+				<th>Nama Task</th>
+				<th>Deadline</th>
+				<th>Tag Multivalue</th>
+			</tr>
+			<tr>
+				<td>Tubes Progin I</td>
+				<td>23 Februari 2013</td>
+				<td>html,css</td>
+			</tr>
+			<tr class="alt">
+				<td>Tubes IMK Flash</td>
+				<td>23 Februari 2013</td>
+				<td>ngeselin</td>
+			</tr>
+			</table>
+		</div>
+		
+	
+	</div>
+	<script language="javascript">
+		function addElement(){
+			var element = document.getElementById('namakategori').value;
+			if(element==""){
+				document.getElementById('listkategori').style.display="block";
+				document.getElementById('listkategori').innerHTML= "Error! Insert a description for the element";
+			}	else{
+				var container = document.getElementById('listkategory');
+				var new_element = document.createElement('li');
+				new_element.className="lilistkategori";
+				new_element.innerHTML = element;
+				container.insertBefore(new_element,container.firstChild);
+			
+			}
+		}
+	</script>
+	<div class="footer">
+	</div>
+	<a href="#" class="overlay" id="join_form"></a>
+	<div class="popup">
+		<p>Please enter the specification for new category</p>
+		<div >
+			<label for="namakategori">Nama Kategori :</label>
+			<input type="text" id="namakategori" value=""/>
+		</div>
+		<div>
+			<label for="peserta">Anggota :    </label>
+			<input type="text" id="peserta" value=""/>
+		</div>
+		<div class="tombol">
+			<div id="buttonOK" >
+				<input class="btok" type="button" value="OK" onClick="addElement()"></input>
+			</div>
+			<div id="close">
+				<a  href="#close"  >CLOSE</a>
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>
