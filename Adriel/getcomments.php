@@ -10,7 +10,7 @@
 	
 	mysqli_select_db("progin_405_13510035", $con);
 	
-	$sql = "SELECT * FROM comment WHERE commented_task = '".$id."'";
+	$sql = "SELECT * FROM comment WHERE commented_task = '".$id."' ORDER BY writing_time";
 	$result = mysqli_query($sql);
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
@@ -18,6 +18,7 @@
 		echo $row['writer'];
 		echo "</b> - ";
 		echo $row['writing_time'];
+		echo " <button onclick='deletekomentar(\"".$row['comment_id']."\")'>Delete Comment</button>";
 		echo "<hr/>";
 		echo $row['comment'];
 		echo "<br /><br />";
