@@ -58,7 +58,7 @@
 					return false;
 				}
 			}
-			$this->assignee = $assignees
+			$this->assignee = $assignees;
 			/*
 			$array_of_tags = $this->data['tag'];
 			$tags = explode(",", $array_of_tags);
