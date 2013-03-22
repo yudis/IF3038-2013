@@ -27,8 +27,8 @@ CREATE TABLE `assignees` (
   `username` varchar(25) NOT NULL,
   PRIMARY KEY (`id_tugas`,`username`),
   KEY `asignee_ibfk_2` (`username`),
-  CONSTRAINT `assignees_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`),
-  CONSTRAINT `assignees_ibfk_2` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
+  CONSTRAINT `assignees_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`)  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `assignees_ibfk_2` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -57,7 +57,7 @@ CREATE TABLE `attachments` (
   `type` varchar(10) NOT NULL,
   PRIMARY KEY (`id_attachment`),
   KEY `attachments_ibfk_1` (`id_tugas`),
-  CONSTRAINT `attachments_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`)
+  CONSTRAINT `attachments_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -112,8 +112,8 @@ CREATE TABLE `comments` (
   PRIMARY KEY (`id`),
   KEY `comments_ibfk_1` (`id_tugas`),
   KEY `comments_ibfk_2` (`user`),
-  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`),
-  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`username`)
+  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -165,7 +165,7 @@ CREATE TABLE `tags` (
   `id_tugas` int(11) NOT NULL AUTO_INCREMENT,
   `tag` varchar(30) NOT NULL,
   PRIMARY KEY (`id_tugas`,`tag`),
-  CONSTRAINT `tags_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`)
+  CONSTRAINT `tags_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -197,8 +197,8 @@ CREATE TABLE `tugas` (
   PRIMARY KEY (`id`),
   KEY `tugas_ibfk_1` (`pemilik`),
   KEY `tugas_ibfk_2` (`id_kategori`),
-  CONSTRAINT `tugas_ibfk_1` FOREIGN KEY (`pemilik`) REFERENCES `users` (`username`),
-  CONSTRAINT `tugas_ibfk_2` FOREIGN KEY (`id_kategori`) REFERENCES `categories` (`id`)
+  CONSTRAINT `tugas_ibfk_1` FOREIGN KEY (`pemilik`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tugas_ibfk_2` FOREIGN KEY (`id_kategori`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

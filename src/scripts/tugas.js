@@ -1,7 +1,3 @@
-var tagsTugas = new Array();
-var assigneesTugas = new Array();
-var assigneeArr = new Array();
-var assigneeIndex = 0;
 var detilTugas;
 var id;
 var asTextbox;
@@ -50,12 +46,12 @@ function updateContent(updateAttachment) {
         if (detilTugas.status == 0)
         {
             cbStatusTugas.checked = false;
-            divStatusTugas.innerHTML = '<strong>Belum selesai</status>';
+            divStatusTugas.innerHTML = 'Belum selesai';
         }
         else
         {
             cbStatusTugas.checked = true;
-            divStatusTugas.innerHTML = '<strong>Selesai</status>';
+            divStatusTugas.innerHTML = 'Selesai';
         }
 
         if (updateAttachment) {
@@ -154,7 +150,7 @@ function writeAssignees() {
     }
 }
 
-function addAssignees() {
+function addAssignee() {
     var newAssignee = document.getElementById("assignee");
     var assigneesList = document.getElementById("assigneesList");
     
@@ -163,11 +159,18 @@ function addAssignees() {
         return false;
     }
     
-    assigneesTugas.push(newAssignee.value);
-	assigneeArr[assigneeIndex]=newAssignee.value;
-    assigneesList.innerHTML += "<li>" + newAssignee.value + "</li> ";
-    newAssignee.value = "";
-	assigneeIndex++;
+    var url = "./ajax/updateTugas.php?adda&id_tugas=" + detilTugas.id + "&username=" + newAssignee.value;
+    ajax_get(url, function(xhr) {
+        var json_obj = JSON.parse(xhr.responseText);
+        if (json_obj.responseStatus != 200) {
+            alert(json_obj.message);
+        } else {
+            // do nothing
+            // alert("Berhasil");
+            newAssignee.value = '';
+            requestUpdate(detilTugas.id, -1, false, detilTugas.comments.startindex, detilTugas.comments.count, true);
+        }
+    });
     
     return false;
 }

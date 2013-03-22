@@ -168,9 +168,9 @@ class Tugas extends Model
 		return $r;
 	}
 	
-	public function addAssignee($id_tugas,$username)
+	public function addAssignee($id_tugas, $username)
 	{
-		$sql="INSERT INTO `assignees`(`id_tugas`, `username`) VALUES (?,?); ";
+		$sql="INSERT INTO `assignees`(`id_tugas`, `username`) VALUES (?, ?);";
 		$data = array(
 			$id_tugas,
 			$username
@@ -405,4 +405,3 @@ class Tugas extends Model
 		*/
 	}
 }
-?>

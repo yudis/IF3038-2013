@@ -19,8 +19,11 @@ function addCoordinator() {
 }
 
 function updateAddButtonVisibility() {
-    var elmt = document.getElementById('addTask');
-    elmt.style.display = 'inline-block';
+	if(chosen!=0)
+	{
+		var elmt = document.getElementById('addTask');
+		elmt.style.display = 'inline-block';
+	}
 }
 
 function setChosen(str)
@@ -105,7 +108,10 @@ function updateStatus(n,str) {
 }
 
 function NewTask() {
-    window.location = "createtugas.php";
+    if(chosen!=0)
+	{
+		window.location = "createtugas.php?id_kat="+chosen;
+	}
 }
 
 function deleteCategory()

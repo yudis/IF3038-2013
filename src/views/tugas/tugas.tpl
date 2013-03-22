@@ -15,7 +15,7 @@
                         <ul id="assigneesList" class="tag"></ul>
                         <div id="assigneeEditDiv">
                             <input type="text" id="assignee" name="assignee" list="user" autocomplete="off" />
-                            <button onclick="return addAssignees();">Add</button>
+                            <button onclick="return addAssignee();">Add</button>
                         </div>
                     </div>
                     <div class="rincianLabel">Tags:</div><div class="rincianDetail">

@@ -12,11 +12,11 @@
 		$success = $tugas->getAllTugas();
 		while (!empty($success[$i]))
 		{
-			if($success[$i]["pemilik"]==$_SESSION['user'])
+			if($success[$i]["pemilik"]==$_SESSION['user']["username"])
 			{
 				echo "<h2>",$success[$i]["nama_kategori"],"</h2>";
 				echo "<div class=\"tugas\">";
-					echo "<div><a href=\"tugas.html?name=Tugas%20Besar%201%3A%20Algoritma%20Genetik&amp;deadline=2013-02-22&amp;tags=AI%2C%20Genetics%2C%20Algorithm\">",$success[$i]["nama"],"</a></div>";
+					echo "<div><a href=\"tugas.php?id=",$success[$i]["id"],"\">",$success[$i]["nama"],"</a></div>";
 					echo "<div>Deadline: <strong>",$success[$i]["tgl_deadline"],"</strong></div>";
 					echo "<div>";
 						echo "Tags: ";
@@ -47,11 +47,11 @@
 				$r= $tugas->getAsignee2($success[$i]["id"]);
 				while(!empty($r[$x]["username"]))
 				{
-					if($r[$x]["username"]==$_SESSION['user'] && $success[$i]["pemilik"] !=$r[$x]["username"])
+					if($r[$x]["username"]==$_SESSION['user']["username"] && $success[$i]["pemilik"] !=$r[$x]["username"])
 					{
 						echo "<h2>",$success[$i]["nama_kategori"],"</h2>";
 						echo "<div class=\"tugas\">";
-							echo "<div><a href=\"tugas.html?name=Tugas%20Besar%201%3A%20Algoritma%20Genetik&amp;deadline=2013-02-22&amp;tags=AI%2C%20Genetics%2C%20Algorithm\">",$success[$i]["nama"],"</a></div>";
+							echo "<div><a href=\"tugas.php?id=",$success[$i]["id"],"\">",$success[$i]["nama"],"</a></div>";
 							echo "<div>Deadline: <strong>",$success[$i]["tgl_deadline"],"</strong></div>";
 							echo "<div>";
 								echo "Tags: ";
@@ -90,11 +90,11 @@
 		{
 			if($success[$i]["id_kategori"]==$q)
 			{
-				if($success[$i]["pemilik"]==$_SESSION['user'])
+				if($success[$i]["pemilik"]==$_SESSION['user']["username"])
 				{
 					echo "<h2>",$success[$i]["nama_kategori"],"</h2>";
 					echo "<div class=\"tugas\">";
-						echo "<div><a href=\"tugas.html?name=Tugas%20Besar%201%3A%20Algoritma%20Genetik&amp;deadline=2013-02-22&amp;tags=AI%2C%20Genetics%2C%20Algorithm\">",$success[$i]["nama"],"</a></div>";
+						echo "<div><a href=\"tugas.php?id=",$success[$i]["id"],"\">",$success[$i]["nama"],"</a></div>";
 						echo "<div>Deadline: <strong>",$success[$i]["tgl_deadline"],"</strong></div>";
 						echo "<div>";
 							echo "Tags: ";
@@ -125,11 +125,11 @@
 					$r= $tugas->getAsignee2($success[$i]["id"]);
 					while(!empty($r[$x]["username"]))
 					{
-						if($r[$x]["username"]==$_SESSION['user'] && $success[$i]["pemilik"] !=$r[$x]["username"])
+						if($r[$x]["username"]==$_SESSION['user']["username"] && $success[$i]["pemilik"] !=$r[$x]["username"])
 						{
 							echo "<h2>",$success[$i]["nama_kategori"],"</h2>";
 							echo "<div class=\"tugas\">";
-								echo "<div><a href=\"tugas.html?name=Tugas%20Besar%201%3A%20Algoritma%20Genetik&amp;deadline=2013-02-22&amp;tags=AI%2C%20Genetics%2C%20Algorithm\">",$success[$i]["nama"],"</a></div>";
+								echo "<div><a href=\"tugas.php?id=",$success[$i]["id"],"\">",$success[$i]["nama"],"</a></div>";
 								echo "<div>Deadline: <strong>",$success[$i]["tgl_deadline"],"</strong></div>";
 								echo "<div>";
 									echo "Tags: ";

@@ -35,11 +35,9 @@
                     <form name="formTugas1"  method="post" enctype="multipart/form-data" action="create.php">
                         <ul class="item">
 							<li id="folil0">
-                                <label id="title0">Kategori:</label>
                                 <div>
-                                    <select id="namakategori" name="namakategori" type="text" maxlength="25" tabindex="1" required
-                                           title="pilih salah satu kategori" >
-									</select>
+                                    <input id="namakategori" name="namakategori" type="text" maxlength="25" tabindex="1" required
+                                           title="pilih salah satu kategori" value="<?php echo $_GET["id_kat"]?>" hidden>
                                 </div>
                             </li>
 							
@@ -72,10 +70,10 @@
 									<br>
                                     <input id="assignee" name="assignee" onfocus="showAssignee()" type="text" tabindex="4" list="user" />
                                     
-                                    <datalist id="user" >
+                                    <datalist id="user">
                                     </datalist>
-									<button onclick=" addAssignees(); return false;">Add</button>
-									<input id="assigneeI" name="assigneeI" type="text" value="" tabindex="4" hidden/>
+									<button onclick="addAssignees(); return false">Add</button>
+									<input id="assigneeI" name="assigneeI" type="text" value="" tabindex="4" hidden />
 								</div>
 								
                             </li>

@@ -72,8 +72,6 @@ AutoSuggestControl.prototype.createDropDown = function () {
     this.layer.className = "suggestions";
     this.layer.style.visibility = "hidden";
     this.layer.style.width = this.textbox.offsetWidth;
-
-    alert(this.textbox.offsetWidth);
     
     //when the user clicks on the a suggestion, get the text (innerHTML)
     //and place it into a textbox
