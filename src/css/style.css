@@ -48,6 +48,8 @@ section h3 {
 }
 .content > div > header > ul li {
 	display: inline-block;
+	float:left;
+	margin: 0 6px;
 }
 .content > div > header > ul li a {
 	color: #999;

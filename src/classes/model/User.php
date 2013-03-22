@@ -134,25 +134,7 @@
 		{
 			return Task::model()->findAll("id_task IN (SELECT id_task FROM assign WHERE id_user='" . $this->id_user . "')");
 		}
-		
-		/**
-		 * Get the category supervised by the user
-		 * @return array of Category that is supervised by the user
-		 */
-		public function getSupervisedCategory() 
-		{
-			return Category::model()->findAll("id_kategori IN (SELECT id_katego FROM edit_kategori WHERE id_user='" . $this->id_user . "')");
-		}
-		
-		/**
-		 * Get the category created by the user
-		 * @return array of Category that is created by the user
-		 */
-		public function getCreatedCategory() 
-		{
-			return Category::model()->findAll("id_user='" . $this->id_user . "'");
-		}
-		
+				
 		/**
 		 * Get the category either created or supervised by the user
 		 * @return array of Category that is either created or supervised by the user
@@ -160,9 +142,11 @@
 		public function getCategories() 
 		{
 			$id = addslashes($this->id_user);
-			return Category::model()->findAll("id_user='$id' OR id_kategori IN (SELECT id_katego FROM edit_kategori WHERE id_user='$id')");
+			return Category::model()->findAll("id_user='$id' OR id_kategori IN (SELECT id_kategori FROM edit_kategori WHERE id_user='$id') ".
+											"OR id_kategori IN (SELECT id_kategori FROM ". Task::tableName() ." AS t LEFT OUTER JOIN assign AS a ".
+											"ON t.id_task=a.id_task WHERE t.id_user = '". $id ."' OR a.id_user = '". $id ."' )");
 		}
-
+		
 		public function findByUsername($username) 
 		{
 			return $this->find("username='" . addslashes($username) . "'");

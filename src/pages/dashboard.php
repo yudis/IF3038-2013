@@ -1,46 +1,50 @@
 <?php
-
-// Business Logic Here
-
-$cat = (int) $_GET['cat'];
-
-$todoQ = 'status=0';
-$doneQ = 'status=1';
-$narrowQ = '';
-
-if ($cat) 
-{
-	$currentCat = Category::model()->find('id_kategori=' . $cat);
-	if ($currentCat) 
+	if (!$this->loggedIn) 
 	{
-		$currentCat = $currentCat[0];
-		$narrowQ = ' AND id_kategori=' . $cat;
-		$canDelete = $currentCat->id_user == $this->currentUserId;
+		header('Location: index');
+		return;
+	}
+
+	// Business Logic Here
+
+	$cat = (int) $_GET['cat'];
+
+	$todoQ = 'status=0';
+	$doneQ = 'status=1';
+	$narrowQ = '';
+
+	if ($cat) {
+		$currentCat = Category::model()->findAll('id_kategori=' . $cat);
+		//$currentCat = Category::model()->find('id_user=' . $this->currentUserId);
+		if ($currentCat) {
+			$currentCat = $currentCat[0];
+			$narrowQ = ' AND id_kategori=' . $cat;
+			$canDelete = $currentCat->id_user == $this->currentUserId;
+		}
+		else {
+			unset($currentCat);
+			unset($cat);
+		}
+	}
+
+	$tasks = Task::model()->findAll();
+	$todo = Task::model()->findAll($todoQ . $narrowQ);
+	$done = Task::model()->findAll($doneQ . $narrowQ);
+
+	$categories = $this->currentUser->getCategories();
+
+	// Presentation Logic Here
+
+	if ($cat) {
+		$pageTitle = $currentCat->nama_kategori;
 	}
 	else {
-		unset($currentCat);
-		unset($cat);
+		$pageTitle = 'All Tasks';
 	}
-}
 
-$tasks = Task::model()->findAll();
-$todo = Task::model()->findAll($todoQ . $narrowQ);
-$done = Task::model()->findAll($doneQ . $narrowQ);
-
-$categories = Category::model()->findAll();
-
-// Presentation Logic Here
-
-if ($cat) {
-	$pageTitle = $currentCat->nama_kategori;
-}
-else {
-	$pageTitle = 'All Tasks';
-}
-
-$this->requireJS('checker');
-$this->requireJS('dashboard');
-$this->header('Dashboard', 'dashboard');
+	$this->requireJS('checker');
+	$this->requireJS('dashboard');
+	$this->header('Dashboard', 'dashboard');
 ?>
 		<div class="content">
 			<div class="dashboard">	
@@ -139,6 +143,7 @@ foreach ($done as $task):
 							<h3>Categories</h3>
 						</header>
 						<ul id="categoryList">
+							<li id="categoryLi0" <?php if ($currentCat->id_kategori == 0) echo ' class="active"';?>><a href="dashboard.php" data-category-id="<?php echo 0; ?>">All Tasks</a></li>
 							<?php foreach ($categories as $cat): ?>
 							<li data-deletable="<?php echo $cat->id_user == $this->currentUserId ? 'true' : 'false' ?>" id="categoryLi<?php echo $cat->id_kategori ?>"<?php if ($currentCat->id_kategori == $cat->id_kategori) echo ' class="active"' ?>><a href="dashboard.php?cat=<?php echo $cat->id_kategori ?>" data-category-id="<?php echo $cat->id_kategori ?>"><?php echo $cat->nama_kategori ?></a></li>
 							<?php endforeach; ?>

@@ -83,20 +83,20 @@ class RestApi
 		{
 			// TODO check if user session is in some category
 			// retrieve based on category
-			$cat = Category::model()->findAll("id_kategori = '" . addslashes($params['category_id']) . "'");
+			$cat = Category::model()->find("id_kategori = '" . addslashes($params['category_id']) . "'");
 
 			if ($cat) 
 			{
 				// found
 				$success = true;
 
-				$cat = $cat[0];
 				$categoryID = $cat->id_kategori;
 				$categoryName = $cat->nama_kategori;
 				$canDeleteCategory = $cat->id_user == $this->app->currentUserId;
+				$canEditCategory = $cat->getEditable($this->app->currentUserId);
 
-				$ret = Task::model()->findAll("id_kategori = '" . (int) 
-								$params['category_id'] . "'");
+				$ret = Task::model()->findAll("id_kategori = '" . (int) $params['category_id'] . "'");
+				//$canAddTask = Category::model()->find("id_kategori = '". $cat->id_kategori."' AND "$this->app->currentUserId;
 			}
 			else {
 				// not found
@@ -129,7 +129,7 @@ class RestApi
 			$tasks[] = $dummy;
 		}
 
-		return compact('success', 'tasks', 'categoryID', 'categoryName', 'canDeleteCategory');
+		return compact('success', 'tasks', 'categoryID', 'categoryName', 'canDeleteCategory', 'canEditCategory');
 	}
 
 	public function retrieve_categories() {
@@ -176,6 +176,7 @@ class RestApi
 			{
 				$_SESSION['user_id'] = $user->id_user;
 				$u = new User;
+				$u->id_user = $user->id_user;
 				$u->fullname = $user->fullname;
 				$u->username = $user->username;
 				$u->email = $user->email;
@@ -282,21 +283,23 @@ class RestApi
 		return array('categoryID' => $category->id_kategori, 'categoryName' => $category->nama_kategori, 'categories' => $this->retrieve_categories());
 	}
 
-	public function delete_category() {
+	public function delete_category() 
+	{
 		$id_kategori = addslashes($_POST['category_id']);
-		$id_user = addslashes($this->app->currentUserId);
+		$success = false;
 
-		//$delete = DBConnection::DBquery("DELETE FROM kategori WHERE id_kategori=$id_kategori AND id_user=$id_user");
-		$delete = DBConnection::DBquery("DELETE FROM edit_kategori WHERE id_kategori =$id_kategori");
-		$delete = DBConnection::DBquery("DELETE FROM kategori WHERE id_kategori=$id_kategori");
-		$affectedRows = DBConnection::affectedRows();
+		if (Category::model()->find("id_kategori=".$id_kategori)->getDeletable())
+		{
+			$id_user = addslashes($this->app->currentUserId);
 
-		if ($affectedRows) {
-			// delete was success
-			$success = true;
-		}
-		else {
-			$success = false;
+			if (Category::model()->delete("id_kategori=".$id_kategori))
+			{
+				// delete was success
+				$success = true;
+			}
+			else {
+				$success = false;
+			}
 		}
 
 		return array(

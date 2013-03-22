@@ -90,5 +90,25 @@
 		{
 			return Task::model()->findAll("id_kategori='" . $this->id_kategori . "'");
 		}
+		
+		/**
+		 * Get if category is editable or not
+		 * @return boolean
+		 */
+		public function getEditable($id_user) 
+		{
+			$id_user = addslashes($id_user);
+			return (User::model()->find("id_user IN (SELECT id_user FROM edit_kategori WHERE id_kategori='" . $this->id_kategori . "' AND id_user ='"+id_user+"')")) ? true : false ;
+		}
+		
+		/**
+		 * Check if category deletable or not
+		 * @return boolean
+		 */
+		public function getDeletable($id_user)
+		{
+			$id_user = addslashes($id_user);
+			return ($this->id_user == $id_user) ? true : false ;
+		}
 	}
 ?>

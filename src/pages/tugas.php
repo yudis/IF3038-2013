@@ -1,6 +1,26 @@
 <?php
-
-$this->header() ?>
+	if (!$this->loggedIn) 
+	{
+		header('Location: index');
+		return;
+	}
+	
+	if (ISSET($_GET['id']))
+	{
+		$task = Task::model()->find("id_task = ".addslashes($_GET['id']));
+		if (!$task)
+		{
+			// redirect to error page
+		}
+		$users = $task->getAssignee();
+	}
+	else
+	{
+		// redirect to error page
+	}
+	
+	$this->header('Dashboard', 'dashboard');
+?>
 
 		<div class="content">
 			<div class="task-details not-editing">
@@ -9,7 +29,7 @@ $this->header() ?>
 						<h1>
 							<label>
 								<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
-								<span class="task-title">Tugas 1</span>
+								<span class="task-title"><?php echo $task->nama_task ?></span>
 							</label>
 						</h1>
 					</form>
@@ -23,17 +43,30 @@ $this->header() ?>
 						<header>
 							<h3>Details</h3>
 						</header>
+						<?php
+						/*
 						<p class="description">
 							<span class="detail-label">Description:</span>
 							<span>Lorem ipsum dolor sit amet, task description goes here.</span>
 						</p>
+						*/ ?>
 						<p class="assignee">
 							<span class="detail-label">Assignee:</span>
-							<span class="detail-content">Irfan Kamil</span>
+							<span class="detail-content">
+								<?php 
+									$string = "";
+									foreach ($users as $user)
+									{
+										$string .= "<a href='profile?id=".$user->id_user."'>".$user->username."</a>,"; 
+									}
+									$string = substr($string, 0, -1);
+									echo $string;
+								?>
+							</span>
 						</p>
 						<p class="category">
 							<span class="detail-label">Kategori:</span>
-							<span class="detail-content">Makan</span>
+							<span class="detail-content"><?php echo $task->getCategory()->nama_kategori; ?></span>
 						</p>
 						<p class="tags">
 							<span class="detail-label">Tag:</span>
