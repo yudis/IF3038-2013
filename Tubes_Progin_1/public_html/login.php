@@ -2,11 +2,11 @@
     require_once("db.php");
     $logonSuccess = false;
 
-    if(isset($_GET['u']) && isset($_GET['p'])){
-        $logonSuccess = (ProginDB::getInstance()->verify_user_credentials($_GET['u'], $_GET['p']));
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        $logonSuccess = (ProginDB::getInstance()->verify_user_credentials($_POST['logusername'], $_POST['logpassword']));
         if ($logonSuccess == true) {
             session_start();
-            $_SESSION['username'] = $_GET['u'];
+            $_SESSION['username'] = $_POST['logusername'];
             header('Location: dashboard.php');
         } else {
             header('Location: index.php');
