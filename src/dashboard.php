@@ -10,7 +10,15 @@
 		
 		while($row = mysql_fetch_array($result))
 		{
-			echo '<div class="tulcat" id ="id'.$row["idkategori"].'" onClick="showTasks('.$row["idkategori"].')"><a href="#"><div class="tombol_hapus">X</div></a>'.$row["nama"].'</div></a>';
+			echo '<div class="tulcat" id ="id'.$row["idkategori"].'" onClick="showTasks('.$user_id.', '.$row["idkategori"].')">';
+			$query_check_pembuat = "SELECT * FROM kategori, accounts WHERE pembuat = ".$user_id." AND idkategori = ".$row["idkategori"];
+			$result_check_pembuat = mysql_query($query_check_pembuat, $sql);
+			if(mysql_num_rows($result_check_pembuat) >0 )
+			{
+				echo '<a href="delete_kategori.php?idkategori='.$row["idkategori"].'"><div class="tombol_hapus">X</div></a>';
+			}
+			echo $row["nama"];
+			echo '</div>';
 		}
 		
 		mysql_close($sql);
@@ -103,7 +111,7 @@
 		<!--AJAX UNTUK MENAMPILKAN TASKS-->
 		<script>
 			var prev_selected = 0;
-			function showTasks(str)
+			function showTasks(uid, str)
 			{
 				document.getElementById("task").innerHTML="";
 
@@ -140,7 +148,7 @@
 						prev_selected = str;
 					}
 				}
-				xmlhttp.open("GET", "show_list_task.php?id_kategori="+str, true);
+				xmlhttp.open("GET", "show_list_task.php?idaccounts="+uid+"&id_kategori="+str, true);
 				xmlhttp.send();
 			}
 		</script>
@@ -196,40 +204,48 @@
 				}
 			}
 		</script>
+	
+		<!--AJAX UNTUK UBAH STATUS TUGAS-->
+		<script>
+			function ubahStatus(idstat)
+			{
+				var str = document.getElementById(idstat).innerHTML;
+				document.getElementById(idstat).innerHTML="";
+				if(window.XMLHttpRequest)
+				{
+					// untuk IE7, Firefox, Chrome, Opera, Safari
+					xmlhttp = new XMLHttpRequest();
+				}
+				else
+				{
+					//untuk IE jadul
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				
+				xmlhttp.onreadystatechange = function()
+				{
+					if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					{
+						document.getElementById(idstat).innerHTML=xmlhttp.responseText;
+						alert("status telah tugas diubah");
+					}
+				}
+				
+				if(str == "Sudah Selesai")
+				{
+					xmlhttp.open("GET", "ubah_status_task.php?idtugas="+idstat.substring(4)+"&status=0", true);
+					document.getElementById(idstat).className="tombol_tugas_off";
+				}else
+				{
+					xmlhttp.open("GET", "ubah_status_task.php?idtugas="+idstat.substring(4)+"&status=1", true);
+					document.getElementById(idstat).className="tombol_tugas_on";
+				}
+				xmlhttp.send();
+			}
+		</script>
 	</head>
     <body>
-         <div class="header">
-			<div id="logo">
-			    <a href="dashboard.php">
-			    <img src="pict/logo.png">
-			    </a>
-			</div>
-			<div id="border">
-			    
-			</div>
-			<div id="dashboard">
-			    <a href="dashboard.php">DASHBOARD</a>
-			</div>
-			<div id="profile">
-			    <a href="profile.html">PROFILE</a>
-			</div>
-			<div id="search">
-					    <section class="searchform cf">
-						    <input class="searchbox" type="search" name="search" placeholder="Search.." required>
-						    
-					    </section>
-					    <section class="searchbuttonbox cf">
-						    <img class="searchbutton"src="pict/search button.jpg">
-					    </section>
-					    
-				    </div>
-			<div id="wellfaiz">
-			    
-			</div>
-			<div id="logout">
-			    <a href="index.html">LOGOUT</a>
-			</div>
-		  </div>
+        <?php require_once("header.php"); ?>
         <div class="main">
 			<div id="menu_kiri">
 				<a href="#">
@@ -281,9 +297,6 @@
                 </div>
             </div>
         </div>
-        <div class="footer">
-            Copyright © Ahmad Faiz - Fandi Pradana - Sigit Aji
-        </div>
-        
+        <?php require_once("footer.php") ?>        
     </body>
 </html>
