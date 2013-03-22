@@ -1,0 +1,6 @@
+tugas besar 2 ada di dalam folder tubesprogin2
+
+folder:
+	kerjaanagnes
+	src
+digunakan hanya di tugas besar 1 saja.

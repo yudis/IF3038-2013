@@ -1,0 +1,5 @@
+Untuk kelompok tugas besar 2 yang memiliki
+nim 13510060, 13510094, 13510096
+
+silakan switch branch ke Tubes2-13510060.
+commit ke branch ini agar tidak conflict dengan kelompok lain yang menggunakan repository ini.
