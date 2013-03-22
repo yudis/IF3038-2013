@@ -72,7 +72,7 @@ class Kategori extends Model
 	
 	public function getAssigneeCat($username)
 	{
-		$sql = "SELECT t.id AS id, t.nama AS nama, tgl_deadline,  `status` , t.last_mod AS last_mod, pemilik, id_kategori, c.nama AS nama_kategori FROM categories c, tugas t, assignees s WHERE t.id NOT IN (SELECT id_kategori FROM coordinator WHERE user='edogawa') AND username='edogawa' AND t.id=s.id_tugas AND t.id_kategori=c.id";
+		$sql = "SELECT t.id AS id, t.nama AS nama, tgl_deadline,  `status` , t.last_mod AS last_mod, pemilik, id_kategori,username, c.nama AS nama_kategori FROM categories c, tugas t, assignees s WHERE id_kategori NOT IN (SELECT id_kategori FROM coordinator WHERE user=? ) AND username=? AND t.id=s.id_tugas AND t.id_kategori=c.id";
         $this->_setSql($sql);
 		
         $result = $this->getAll(array($username,$username));
