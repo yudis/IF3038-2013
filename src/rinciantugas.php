@@ -255,6 +255,9 @@ while ($commented = mysqli_fetch_array($result7)) {
 						echo '<div class="komen-nama">'.$current2['fullname'].'</div>';
 						echo '<div class="komen-tgl">'.$current1['timestamp'].'</div>';
 						echo '<div class="komen-isi">'.$current1['comment'].'</div>';
+						if ($_SESSION['id'] == $current2['id']) {
+							echo '<input type="button" name="delete" value="Delete" onclick="delete_comment('.$id_task.",".$current1['id'].')"/>';
+						}
 						echo '<div class="line-konten"></div>';
 					}
 					?>

@@ -269,3 +269,23 @@ function change_status(id,prev,task) {
 	post = post.concat("stat=",finish,"&task=",task);
 	xmlhttp.send(post);
 }
+
+function delete_comment(task,id) {
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			document.getElementById("lkomen").innerHTML = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("POST","deletecomment.php",true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	var post = "";
+	post = post.concat("id=",id,"&task=",task);
+	xmlhttp.send(post);
+	document.getElementById("komentar").value = "";
+}

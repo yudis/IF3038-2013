@@ -8,14 +8,11 @@ if (mysqli_connect_errno()) {
 	echo "Failed to connect to MySQL: ".mysqli_connect_error();
 }
 
-$member = $_POST['id'];
+$id = $_POST['id'];
 $task = $_POST['task'];
-date_default_timezone_set('Asia/Jakarta');
-$timestamp = date('Y-m-d H:i:s', time());
-$komentar = $_POST['komentar'];
 
-mysqli_query($con, "INSERT INTO `comments` (member,task,timestamp,comment) 
-				VALUES ($member, $task, '$timestamp', '$komentar')");
+mysqli_query($con, "DELETE FROM comments 
+				WHERE id=$id");
 
 $result7=mysqli_query($con,"SELECT * FROM `comments` WHERE task=$task ORDER BY timestamp DESC");
 $count_comment = 0;
@@ -40,6 +37,4 @@ for ($i = 0; $i < $count_comment; $i++) {
 }
 
 mysqli_close($con);
-// header("location:rinciantugas.php?id=".$task);
-
 ?>
