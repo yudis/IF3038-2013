@@ -4,6 +4,7 @@ var regex_username;
 var regex_password;
 var regex_nama;
 var regex_tanggal;
+var regex_nama_tugas;
 
 function kalender()
 {
@@ -16,10 +17,10 @@ function kalender()
                    });
 };
 
-window.onload = function(){
+function kalender_deadline() {
     new JsDatePick({
                    useMode:2,
-                   target:"inputDeadline",
+                   target:"input_deadline",
                    dateFormat:"%Y-%m-%d",
                    earsRange:[1954,2020],
                    cellColorScheme:"aqua"
@@ -33,6 +34,7 @@ function loadRegex()
     regex_password = /^.{8,}$/;
     regex_nama = /^\w{2,} \w{2,}$/;
     regex_tanggal = /^\d{4}-\d{2}-\d{2}$/;
+    regex_nama_tugas = /^[A-Za-z0-9 ]{1,25}$/;
 }
 
 function validate_email()
@@ -79,7 +81,7 @@ function validate_email_exist(str)
             return false;
     }
     
-    xmlhttp.open("GET", "register.php?p="+str, true);
+    xmlhttp.open("GET", "php/register_validation.php?p="+str, true);
     xmlhttp.send();
 }
 
@@ -128,7 +130,7 @@ function validate_username_exist(str)
             return false;
     }
     
-    xmlhttp.open("GET", "register.php?q="+str, true);
+    xmlhttp.open("GET", "php/register_validation.php?q="+str, true);
     xmlhttp.send();
 }
 
@@ -166,7 +168,7 @@ function confirm_password()
 {
     var password = document.getElementById("psswrd_signup");
     var password_confirm = document.getElementById("cnfrm_psswrd_signup");
-    
+//    alert(confirm_password);
     if(password_confirm.value == "")
     {
         document.getElementById("error_confirm_password").innerHTML = "Harus diisi";
@@ -311,7 +313,7 @@ function checkSignIn(usrnm, psswrd)
 {
     //alert(psswrd);
     var xmlhttp;
-    if(usrnm.length==0 || psswrd.length==0) //panjang username dan psw tidak boleh sama dengan nol
+    if(usrnm.length==0 || psswrd.length==0)
     {
         document.getElementById("error_signin").innerHTML = "Isi username dan password";
         return false;
@@ -319,7 +321,7 @@ function checkSignIn(usrnm, psswrd)
     if(window.XMLHttpRequest)
         xmlhttp = new XMLHttpRequest();
     else
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttp = new ActiveXObject("Microsodt.XMLHTTP");
     
     xmlhttp.onreadystatechange = function()
     {
@@ -331,15 +333,13 @@ function checkSignIn(usrnm, psswrd)
                 return true;
             }
             
-            else {
-                alert("username dan password Anda tidak valid");
+            else
                 return false;
-            }
         }
         
     }
     
-    xmlhttp.open("GET", "login.php?u="+usrnm+"&p="+psswrd, true);
+    xmlhttp.open("GET", "php/login.php?u="+usrnm+"&p="+psswrd, true);
     xmlhttp.send();
 }
 
@@ -359,5 +359,69 @@ function enterButton(doc) {
 //    alert("enter");
     if(window.event.keyCode==13)
         doc.click();
+}
+
+function validate_nama_tugas() {
+    var input = document.getElementById("nama_tugas");
+    if(input.value == "")
+    {
+        document.getElementById("error_nama_tugas").innerHTML = "Harus diisi";
+        return false;
+    }
+    if(input.value.match(regex_nama_tugas))
+    {
+        
+        document.getElementById("error_nama_tugas").innerHTML = "";
+        return true;
+    }
+    else
+    {
+        document.getElementById("error_nama_tugas").innerHTML = "Hanya alphanumeric dan maksimal 25 karakter";
+        return false;
+    }
+}
+
+function validate_attachment() {    
+    var valid = false;
+    var validExtension = [".jpg", ".jpeg", ".png", ".doc", ".docx", ".txt", ".rtf", ".pdf", ".ppt", ".pptx", ".xls", ".xlsx", ".mp4", ".avi", ".mov", ".3gp", ".flv"];
+    var arrInputs = document.getElementById("attachment").files;
+    for(var i=0; i<arrInputs.length; i++) {
+        var fileName = arrInputs[i].name;
+        for(var j=0; j<validExtension.length; j++) {
+            var curExtension = validExtension[j];
+            if(fileName.substr(fileName.length-curExtension.length, curExtension.length) == curExtension) {                                
+                valid = true;
+                break;
+            }
+        }
+        
+        if(valid == false) {
+            document.getElementById("error_attachment").innerHTML = "Ekstensi tidak valid";
+            return false;
+        }
+    }
+    document.getElementById("error_attachment").innerHTML = "";
+    return true;
+}
+
+function userhint(str) {
+    var xmlhttp;
+    if (str.length == 0) {
+        document.getElementById("error_assignee").innerHTML = "";
+        return;
+    }
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); //ie5 dan ie6
+    }
+    
+    xmlhttp.onreadystatechange = function() {
+        if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)){
+            document.getElementById("error_assignee").innerHTML = xmlhttp.responseText;
+        }
+    }
+    xmlhttp.open("GET","php/userhint.php?key=" + str, true);
+    xmlhttp.send();
 }
 

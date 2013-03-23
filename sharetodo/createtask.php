@@ -4,10 +4,10 @@
 		$kategori = $_GET['kategori'];
 	?>
 	<head>
-		<link href="main.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" media="all" href="jsDatePick_ltr.min.css" />
-		<script type="text/javascript" src="jsDatePick.min.1.3.js"></script>
-        <script type="text/javascript" src="main.js"></script>        
+		<link href="css/main.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/jsDatePick_ltr.min.css" />
+		<script type="text/javascript" src="js/jsDatePick.min.1.3.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>        
 	</head>
 	<body onload="kalender_deadline(); loadRegex()">
 	<h1>Tugas Baru</h1>
@@ -21,7 +21,8 @@
                 <strong id="error_attachment" class="error_warning"></strong>
             </div>
             <div>
-                <input class="input_field" type="text" name="assignee" placeholder="Nama Penanggungjawab">&nbsp;
+                <input type="hidden">
+                <input class="input_field" type="text" name="assignee" placeholder="Nama Penanggungjawab" onkeyup="userhint(this.value)">&nbsp;
                 <strong id="error_assignee" class="error_warning"></strong>
             </div>
             <div>

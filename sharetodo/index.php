@@ -8,10 +8,10 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<link href="main.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" media="all" href="jsDatePick_ltr.min.css" />
-		<script type="text/javascript" src="jsDatePick.min.1.3.js"></script>
-        <script type="text/javascript" src="main.js"></script>
+		<link href="css/main.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/jsDatePick_ltr.min.css" />
+		<script type="text/javascript" src="js/jsDatePick.min.1.3.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
 	</head>
 	<body onload="kalender(); loadRegex();">
         <div id="signin">
