@@ -91,15 +91,15 @@ and open the template in the editor.
         <div id='edit'>
                 <p class="title">edit profile</p>
                
-                <form id="regForm" method="post" action="register.php" enctype="multipart/form-data">
-                    Full name: <input type="text" id="regname" name="regname" pattern="^.+ .+$" required><img id="valid2" src=""><br>
-                    Birthdate: <input type="date" id="regdate" name="regdate" onchange="dateChange();"><img id="valid7" src=""><br>
-                    New Password:<br/><input type="password" id="regpassword1" name="regpassword1" pattern="^.{8,}$" required><img id="valid3" src=""><br>
-                    Confirm new password:<br/><input type="password" id="regpassword2" name="regpassword2" pattern="^.{8,}$" required><img id="valid4" src=""><br>
-                    Upload new avatar: <br/><input type="file" id="regfile" name="regfile" onchange="checkImage();"><img id="valid6" src=""><br>
-                    <input type="submit" onclick="restoreP();" value="save changes">
-                    <input type='submit' onclick="restoreP();" value="cancel">
+                <form id="regForm" method="post" action="editprofile.php" enctype="multipart/form-data">
+                    Full name: <input type="text" id="regname" name="regname" pattern="^.+ .+$" ><img id="valid2" src=""><br/>
+                    Birthdate: <input type="date" id="regdate" name="regdate" onchange="dateChange();"><img id="valid7" src=""><br/>
+                    New Password:<br/><input type="password" id="regpassword1" name="regpassword1" pattern="^.{8,}$"><img id="valid3" src=""><br>
+                    Confirm new password:<br/><input type="password" id="regpassword2" name="regpassword2" pattern="^.{8,}$"><img id="valid4" src=""><br>
+                    Upload new avatar: <br/><input type="file" id="regfile" name="regfile" onchange="checkImage();"><img id="valid6" src=""><br/><br/>
+                    <input type="submit" id ="savechanges" value="savechanges"> <br/>
                 </form>
+                <input type='submit' onclick="restoreP();" value="cancel">
 
             </div>
 

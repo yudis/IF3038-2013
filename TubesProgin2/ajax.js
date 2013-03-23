@@ -71,11 +71,8 @@ function showTask(a) {
         if (task.readyState == 4)
         {
             var response = task.responseText;
-            if (task.responseText != "")
-            {
-                document.getElementById("listtugas").innerHTML = "";
-                document.getElementById("listtugas").innerHTML = response;
-            }
+            document.getElementById("listtugas").innerHTML = "";
+            document.getElementById("listtugas").innerHTML = response;
         }
 
     };
@@ -124,6 +121,14 @@ function update() {
     {
         showTask();
     }
+}
+
+function showRinciTugas(idtask){
+    window.location="RinciTugas.php?IDTask="+idtask;
+}
+
+function showBuatTugas(cat,user){
+    window.location="addtask.php?categoryID="+cat+"&userID="+user;
 }
 
 setInterval(update(), 5000);

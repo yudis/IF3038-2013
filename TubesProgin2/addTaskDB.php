@@ -22,7 +22,11 @@ if (connectDB()) {
 
     $idTaskQuery = "SELECT * from task";
     $idTaskList = mysql_query($idTaskQuery);
-    $idTask = mysql_num_rows($idTaskList);
+    if ($idTaskList > 0) {
+            while ($data = mysql_fetch_array($idTaskList)) {
+                $idTask=$data['IDTask'];
+            }
+     }
 
     $assigneelist = explode(";", $assignee);
 

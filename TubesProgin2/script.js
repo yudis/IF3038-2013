@@ -11,6 +11,7 @@ var email = document.getElementById("regemail");
 var file = document.getElementById("regfile");
 var submit = document.getElementById("regbutton");
 var regForm = document.getElementById("regForm");
+var cat = document.getElementById("newcat");
 var valid1bool;
 var valid2bool;
 var valid3bool;
@@ -18,6 +19,7 @@ var valid4bool;
 var valid5bool;
 var valid6bool;
 var valid7bool;
+var newcatbool;
 
 username.onkeyup = function()
 {
@@ -200,39 +202,6 @@ function cekvalid() {
     }
 }
 
-
-function showList() {
-    document.getElementById("listtugas3").style.visibility = "hidden";
-    document.getElementById("listtugas2").style.visibility = "hidden";
-    document.getElementById("listtugas").style.visibility = "visible";
-    document.getElementById("rincitugas").style.visibility = "hidden";
-    document.getElementById("edittugas").style.visibility = "hidden";
-    //document.getElementById("buattugas").style.visibility = "hidden";
-    document.getElementById("wanted").style.visibility = "hidden";
-}
-
-function showList2() {
-    document.getElementById("listtugas").style.visibility = "hidden";
-    document.getElementById("listtugas2").style.visibility = "visible";
-    document.getElementById("listtugas3").style.visibility = "hidden";
-    document.getElementById("rincitugas").style.visibility = "hidden";
-    document.getElementById("edittugas").style.visibility = "hidden";
-    document.getElementById("buattugas").style.visibility = "hidden";
-    document.getElementById("wanted").style.visibility = "hidden";
-    self.focus;
-}
-
-function showList3() {
-    document.getElementById("listtugas").style.visibility = "hidden";
-    document.getElementById("listtugas2").style.visibility = "hidden";
-    document.getElementById("listtugas3").style.visibility = "visible";
-    document.getElementById("rincitugas").style.visibility = "hidden";
-    document.getElementById("edittugas").style.visibility = "hidden";
-    document.getElementById("buattugas").style.visibility = "hidden";
-    document.getElementById("wanted").style.visibility = "hidden";
-    self.focus();
-}
-
 function showEdit() {
     document.getElementById("rincitugas").style.visibility = "hidden";
     document.getElementById("edittugas").style.visibility = "visible";
@@ -263,17 +232,6 @@ function createTask() {
     }
 }
 
-function addCat() {
-    var k = document.getElementById("category");
-    var l = document.getElementById("cate").value;
-    if (l !== "") {
-        k.innerHTML += "<div class='kategori' onclick='showList2();'>" + l + "</div>";
-        restore();
-        showList();
-    } else {
-        alert("Input category name");
-    }
-}
 
 function addCategory() {
     var overlay = document.createElement("div");
