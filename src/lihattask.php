@@ -3,26 +3,27 @@
         <title> Next | Task Detail </title>
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/buattask.css">
+        <link rel="stylesheet" href="css/calendar.css">
+		<script src="js/calendar.js" > </script>
+		<script src="js/lihattask.js" > </script>
         <script>
             function showEdit(){
-                document.getElementById("detailedit").style.visibility="visible";
-                document.getElementById("detail").style.visibility="hidden";
+                document.getElementById("detailedit").style.display="block";
+                document.getElementById("detail").style.display="none";
             }
             function hideEdit(){
-                document.getElementById("detailedit").style.visibility="hidden";
-                document.getElementById("detail").style.visibility="visible";
+                document.getElementById("detailedit").style.display="none";
+                document.getElementById("detail").style.display="block";
             }
 			
 				   
         </script>
+		<script src="js/buattask.js"></script>
 		<?php
 			/* 
 			 * 
 			 * link ke profile
-			 * attachment
-			 * 
-			 * 
-			 * 
+			 * komen, siapa yang komen
 			 * 
 			 */	
 		?>
@@ -46,60 +47,74 @@
 				<div id="rinciantugas" class="kotakwarna">
 					<div id="judultugas"><?php echo $_COOKIE["lt_tugas"]["nama"];?></div>
 					<div id="detail">
-							<label>DEADLINE</label>
-							<a id="deadline">
-							<?php
-								$datetime = strtotime($_COOKIE["lt_tugas"]["deadline"]);
-								$mysqldate = date("d F Y", $datetime);
-								echo $mysqldate;
-							;?>
-							</a>
-							<br>
-							<br>
-								
-							<label>ASSIGNEE</label>
-							<?php
-								foreach ($_COOKIE["lt_assignee"] as $x) {
-							?>
+						<label>DEADLINE</label>
+						<a id="deadline">
+						<?php
+							$datetime = strtotime($_COOKIE["lt_tugas"]["deadline"]);
+							$mysqldate = date("d F Y", $datetime);
+							echo $mysqldate;
+						;?>
+						</a>
+						<br>
+						<br>
+						<label>ASSIGNEE</label>
+						<div id="asgdivwrapper">
+						<?php
+							foreach ($_COOKIE["lt_assignee"] as $x) {
+						?>
 							<a href ="#">
 								<div class="asgdiv">
 									<img class="asgava asgdivelemt" src="<?php echo ($x['avatar']) ?>"/>
 									<a href ="#" class="asgdivelemt"><?php echo $x["username"];?></a>
 								</div>
 							</a>
-							<?php
-								}
-							?>
+						<?php
+							}
+						?>
 							<br>
-							
-							<label>TAG</label>
-							<?php
-								foreach ($_COOKIE["lt_tag"] as $x) {
-							?>
-							<button class="btag" value=""><?php echo $x["nama"];?></button>
-							<?php
-								}
-							?>
-							<br>
+						</div>
+						<label>TAG</label>
+						<?php
+							foreach ($_COOKIE["lt_tag"] as $x) {
+						?>
+						<button class="btag" value=""><?php echo $x["nama"];?></button>
+						<?php
+							}
+						?>
+						<br>
 					</div>
-					<!--<div id="detailedit" style="display: none">
+					<div id="detailedit">
 						<form >
 							<label>DEADLINE</label>
-							<a id="deadline">11/08/2013</a>
+							<input type="text" name="deadline" id="iddeadline" value="<?php echo $_COOKIE["lt_tugas"]["deadline"];?>"/>
+							<script type="text/javascript">
+								calendar.set("iddeadline");
+							</script>
 							
 							<label>ASSIGNEE</label>
-							<a id="assignee">Faiz</a></br>
-							<input name="assignee" placeholder="assignee">
+							<input id="idasignee" autocomplete="off" name="namasign" placeholder="nama lengkap" onkeyup="showResult(this.value, 'hasil_autocomplete')"  value="<?php
+								foreach ($_COOKIE["lt_assignee"] as $x) {
+									echo $x["username"];
+									echo ", ";
+								}
+							?>">
+							<div id="hasil_autocomplete"></div>						  
 							
 							<label>TAG</label>
-							<input name="catname" placeholder="tag">
-							
-							<label>ATTACHMENT</label>
-							<a href ="#" id="attach">Download Here</a>
+							<input id="idtag" autocomplete="off" value="<?php
+								foreach ($_COOKIE["lt_tag"] as $x) {
+									echo $x["nama"];
+									echo ", ";
+								}
+							?>">
 							</br>
-							<input class= "submitreg" name="submit" type="submit" value="Submit" onclick="hideEdit()">
+							<input class='submitreg'
+								   name='edit'
+								   type='button'
+								   value='EDIT'
+								   onclick='updatetugas("<?php echo $_COOKIE["lt_tugas"]["idtugas"];?>"); hideEdit();'>
 						</form>
-					</div>-->
+					</div>
 				</div>
 				<div id="komen">
 					<?php
@@ -126,15 +141,15 @@
 							$count++;
 						}
 					?>
-					<form>
-						<div id="submitkomen">
-							<label>submit comment</label>
-							<textarea name="comment" type="comment" placeholder="comment" class="isikomen"></textarea>
-							<br>
-							<input class= "submitreg" name="submit" type="submit" onclick="http://google.com" value="Submit">
-						</div>
-					</form>
 				</div>
+				<form>
+					<div id="submitkomen">
+						<label>submit comment</label>
+						<textarea id="takomen" type="comment" placeholder="comment" class="isikomen"></textarea>
+						<br>
+						<input class= "submitreg" name="submit" type="button" onclick="tambahkomen('<?php echo $_COOKIE["lt_tugas"]["idtugas"];?>',1); clearta();" value="Submit">
+					</div>
+				</form>
 			</div>
 			<div id="kolom3" class="kolom kotakwarna">
 				<div id="divattachment">

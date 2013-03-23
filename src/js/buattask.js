@@ -46,10 +46,10 @@ function tag_validating() {
 }
 
 <!--AJAX AUTOCOMPLETE ASSIGNEE-->
-function showResult(str) {
+function showResult(str, div) {
 	if(str.length==0) {
-		document.getElementById("hasil_autocomplete").innerHTML="";
-		document.getElementById("hasil_autocomplete").style.border="0px";
+		document.getElementById(div).innerHTML="";
+		document.getElementById(div).style.border="0px";
 		return;
 	}
 	var str_arr = str.split(", ");
@@ -63,9 +63,9 @@ function showResult(str) {
 	}
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			document.getElementById("hasil_autocomplete").innerHTML=xmlhttp.responseText;
-			document.getElementById("hasil_autocomplete").style.border="1px solid #A5ACB2";
-			document.getElementById("hasil_autocomplete").style.width="250px";
+			document.getElementById(div).innerHTML=xmlhttp.responseText;
+			document.getElementById(div).style.border="1px solid #A5ACB2";
+			document.getElementById(div).style.width="250px";
 		}
 	}
 	xmlhttp.open("GET", "autocomplete_assignee.php?q="+str_arr[str_arr.length -1], true);

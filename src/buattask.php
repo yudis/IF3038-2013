@@ -43,7 +43,7 @@
 							  calendar.set("datedead");
 						  </script>
 					    <label>assignee</label>
-						  <input id="idasignee" autocomplete="off" name="namasign" placeholder="nama lengkap" onkeyup="showResult(this.value); asi_validating();" >
+						  <input id="idasignee" autocomplete="off" name="namasign" placeholder="nama lengkap" onkeyup="showResult(this.value, 'hasil_autocomplete'); asi_validating();" >
 						  <img src="pict/blank.png" alt="icon4" id="asicon" />
 						  <div id="hasil_autocomplete"></div>						  
                         <label>tag</label>

@@ -108,10 +108,11 @@ textarea{
 }
 
 #detailedit{
-    margin-left: 100px;
-    margin-top: -220px;
+    margin-left: 50px;
+    margin-top: 30px;
     font-family: Calibri;
     font-size: 20px;
+    display: none;
 }
 .attachment {
     width: 390px;
@@ -226,7 +227,6 @@ a:visited {
 .asgdiv:hover {
     background-color: #e58100;
 }
-
 
 
 /* hover */
