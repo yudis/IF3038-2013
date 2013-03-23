@@ -101,9 +101,18 @@ $cats=mysqli_num_rows($result);
 			<br />
 			Status : <strong><?php if ($task['done'] == 1) echo 'Selesai'; else echo 'Belum selesai';?></strong><br />
 			<?php
+						if ($task['creator'] == $id) {
+			?>
+			<form action="deletetask.php" method="post">
+				<input type="hidden" name="deltask" value="<?php echo $task_id?>" />
+				<input type="submit" name="submit" value="Delete" />
+			</form>
+			<?php
+						}
 					}
+					echo "<br />";
 				}
-				echo "<br /></div>";
+				echo "</div>";
 			}
 			?>
 			
