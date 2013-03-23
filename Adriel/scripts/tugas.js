@@ -318,7 +318,7 @@ function addKomentar() {
 		{
 		}
 	}
-	xmlhttp.open("GET","addcomment.php?user="++"&id="+id_komentar+"&user="+username+"&date="+date+"&tugas="+IDTugas+"&comment="+comment,true);
+	xmlhttp.open("GET","addcomment.php?id="+id_komentar+"&user="+username+"&date="+date+"&tugas="+IDTugas+"&comment="+comment,true);
 	xmlhttp.send();
 
     //var komentar_div = document.getElementById("komentar");
@@ -327,6 +327,30 @@ function addKomentar() {
     
     return false;
 }
+
+function deletekomentar(comment_id)
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		}
+	}
+	xmlhttp.open("GET","deletecomment.php?id="+comment_id,true);
+	xmlhttp.send();
+	
+	return false;
+}
+
 /*
 function addKomentar() {
     var now = new Date();

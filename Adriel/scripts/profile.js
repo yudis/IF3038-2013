@@ -21,6 +21,30 @@ function initialize()
 	}
 }
 
+function loadActivities()
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	username = localstorage.session;
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById("activitylist").innerHTML = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","getactivity.php?user="+username,true);
+	xmlhttp.send();
+}
+
 function showFullName(str)
 {
 	if (window.XMLHttpRequest)
@@ -439,5 +463,26 @@ function doneProfil()
 
 function changePP()
 {
-	document.getElementById("pp").src = document.getElementById("cpp").value;
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	var ppsource = document.getElementById("cpp").value;
+	var ppdest = "avatar/" + localstorage.session + ".jpg";
+	
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById("pp").src = xmlhttp.responseText;
+		}
+	}
+	
+	xmlhttp.open("GET","changeprofilepicture.php?source="+ppsource+"&dest="+ppdest,true);
+	xmlhttp.send();
 }
