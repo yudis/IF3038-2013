@@ -1,5 +1,54 @@
 Rp(function() 
 {
+	function retrieve_detail_task()
+	{
+		var month = ["January","February","March","April","May","June",
+					"July","August","September","October","November","December"];
+		var req = Rp.ajaxRequest();
+		req.onreadystatechange = function() {
+			switch (req.readyState) {
+				case 1:
+				case 2:
+				case 3:
+					// Rp('#commentForm').addClass('loading');
+					break;
+				case 4:
+					// Rp('#commentForm').removeClass('loading');
+					try {
+						response = Rp.parseJSON(req.responseText);
+						document.getElementById("task-title").innerHTML = response.nama_task;
+						date = new Date(response.deadline.substr(0,4),(parseInt(response.deadline.substr(5,2)))-1,parseInt(response.deadline.substr(8,2)));
+						document.getElementById("detail-deadline").innerHTML = date.getDate()+" "+month[date.getMonth()]+" "+date.getFullYear();
+						var string = "";
+						for (var i in response.asignee)
+						{
+							string += "<a href='profile?id="+response.asignee[i].id_user+"'>"+response.asignee[i].username+"</a>,";
+						}
+						string = string.substr(0,string.length-1);
+						document.getElementById("detail-asignee").innerHTML = string;
+						var tags = document.getElementsByClassName('tag');
+						for (var i=0; i<tags.length; i++) 
+						{
+							tags[i].parentNode.removeChild(tags[i]);
+						}
+						var tagparent = document.getElementById("detail-tag");
+						for (var i in response.tag)
+						{
+							var tag = document.createElement("span");
+							tag.className = "tag"
+							tag.innerHTML = response.tag[i];
+							tagparent.appendChild(tag);
+						}
+					}
+					catch (e) {
+
+					}
+					break;
+			}
+		}
+		req.get('api/get_task?id_task=' + id_task);
+	}
+	
 	function buildcomment(comment)
 	{
 		var commentList = document.getElementById("commentsList");
@@ -8,7 +57,7 @@ Rp(function()
 				string += '<img src="upload/user_profile_pict/'+comment.avatar+'" alt="'+comment.fullname+'" class="icon_pict" >';
 			string += '</a>';
 			string += '<div class="right">';
-				date = new Date(comment.timestamp.substr(0,4),comment.timestamp.substr(5,2),comment.timestamp.substr(8,2),
+				date = new Date(comment.timestamp.substr(0,4),(parseInt(comment.timestamp.substr(5,2)))-1,comment.timestamp.substr(8,2),
 								comment.timestamp.substr(11,2),comment.timestamp.substr(14,2),comment.timestamp.substr(17,2));
 				var temphour = (date.getHours()>=10)? "" : "0";
 				var tempmin = (date.getMinutes()>=10)? "" : "0";
@@ -99,6 +148,7 @@ Rp(function()
 	window.onload = function()
 	{
 		setInterval(function(){retrievecomment();},7000);
+		setInterval(function(){retrieve_detail_task();},10000);
 		// override onload function
 		datePicker.init(document.getElementById("calendar"), document.getElementById("new_tugas"), "deadline");
 	}
@@ -147,7 +197,7 @@ function prepend_comment(comment)
 			string += '<img src="upload/user_profile_pict/'+comment.avatar+'" alt="'+comment.fullname+'" class="icon_pict" >';
 		string += '</a>';
 		string += '<div class="right">';
-			date = new Date(comment.timestamp.substr(0,4),comment.timestamp.substr(5,2),comment.timestamp.substr(8,2),
+			date = new Date(comment.timestamp.substr(0,4),(parseInt(comment.timestamp.substr(5,2)))-1,comment.timestamp.substr(8,2),
 								comment.timestamp.substr(11,2),comment.timestamp.substr(14,2),comment.timestamp.substr(17,2));
 			var temphour = (date.getHours()>=10)? "" : "0";
 			var tempmin = (date.getMinutes()>=10)? "" : "0";

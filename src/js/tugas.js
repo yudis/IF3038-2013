@@ -1,4 +1,4 @@
-var Day = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+var Day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 var Mon = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Des"];
 
 Rp(function() 

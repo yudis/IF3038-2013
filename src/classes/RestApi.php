@@ -194,6 +194,38 @@ class RestApi
 		return compact('success', 'tasks', 'categoryID', 'categoryName', 'canDeleteCategory', 'canEditCategory');
 	}
 
+	public function get_task($params)
+	{
+		$id_task = addslashes($_GET['id_task']);
+		$task = array();
+
+		if ($this->app->loggedIn)
+		{
+			$task = Task::model()->find("id_task=".$_GET['id_task'], array("id_task","nama_task","status","deadline"));
+
+			$users = $task->getAssignee();
+			$temp = array();
+			$i = 0;
+			foreach ($users as $user)
+			{
+				$temp[]['username'] = $user->username;
+				$temp[$i]['id_user'] = $user->id_user;
+				$i++;
+			}
+			$task->asignee = $temp;
+			
+			$tags = $task->getTags();
+			$temp = array();
+			foreach ($tags as $tag)
+			{
+				$temp[] = $tag->tag_name;
+			}
+			$task->tag = $temp;
+		}
+
+		return $task->data;
+	}
+
 	public function mark_task($params) 
 	{
 		$start = microtime();

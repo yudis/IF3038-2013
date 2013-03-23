@@ -31,7 +31,7 @@
 					<form method="POST">
 						<h1>
 							<label><span class="task-checkbox"><input type="checkbox" class="task-checkbox" data-task-id="<?php echo $task->id_task ?>"></span>
-								<span class="task-title"><?php echo $task->nama_task; ?></span>
+								<span id="task-title" class="task-title"><?php echo $task->nama_task; ?></span>
 							</label>
 						</h1>
 					</form>
@@ -60,12 +60,12 @@
 						</p>
 						*/ ?>
 						<p class="deadline">
-							<span class="detail-label">Description:</span>
-							<span class="detail-content"><?php echo (new DateTime($task->deadline))->format('j F Y'); ?></span>
+							<span class="detail-label">Deadline:</span>
+							<span id="detail-deadline" class="detail-content"><?php echo (new DateTime($task->deadline))->format('j F Y'); ?></span>
 						</p>
 						<p class="assignee">
 							<span class="detail-label">Assignee:</span>
-							<span class="detail-content">
+							<span id="detail-asignee" class="detail-content">
 								<?php 
 									$string = "";
 									foreach ($users as $user)
@@ -81,7 +81,7 @@
 							<span class="detail-label">Kategori:</span>
 							<span class="detail-content"><?php echo $task->getCategory()->nama_kategori; ?></span>
 						</p>
-						<p class="tags">
+						<p id="detail-tag" class="tags">
 							<span class="detail-label">Tag:</span>
 							<?php
 								foreach ($tags as $tag)
@@ -201,7 +201,7 @@
 										echo '<img src="'."upload/user_profile_pict/".$user->avatar.'" alt="'.$user->fullname.'" class="icon_pict" >';
 									echo '</a>';
 									echo '<div class="right">';
-										echo (new DateTime($comment->timestamp))->format('h:i – D/M');
+										echo (new DateTime($comment->timestamp))->format('H:i – D/M');
 										if ($user->id_user==$this->currentUserId)
 											echo ' <a href="javascript:delete_comment('.$comment->id_komentar.')">DELETE</a>';
 									echo '</div>';
