@@ -160,8 +160,9 @@
 		{
 			if ($query != "")
 				$query = " WHERE ".$query;
+				
 			$result = DBConnection::DBquery("DELETE FROM ".$this->tableName().$query);
-
+						
 			return DBConnection::affectedRows();
 		}
 	}
