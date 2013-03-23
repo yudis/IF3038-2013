@@ -30,8 +30,7 @@
 				<header>
 					<form method="POST">
 						<h1>
-							<label>
-								<span class="task-checkbox"><input type="checkbox" class="task-checkbox"></span>
+							<label><span class="task-checkbox"><input type="checkbox" class="task-checkbox" data-task-id="<?php echo $task->id_task ?>"></span>
 								<span class="task-title"><?php echo $task->nama_task; ?></span>
 							</label>
 						</h1>

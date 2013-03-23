@@ -206,10 +206,10 @@ class RestApi
 
 		$q = DBConnection::DBquery($update);
 		if (DBConnection::affectedRows()) {
-			return array('success' => 'true', 'taskId' => $id_task);
+			return array('success' => true, 'taskId' => $id_task, 'done' => $completed);
 		}
 		else {
-			return array('success' => 'false');
+			return array('success' => false, $update);
 		}
 	}
 	
