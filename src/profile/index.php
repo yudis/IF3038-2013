@@ -1,44 +1,27 @@
 <html>
 	<head>
 		<title>Shared To Do List - Profile</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" href="profilestyle.css">
+		<link rel="stylesheet" type="text/css" href="../style.css">
 		<link rel="shortcut icon" href="favicon.ico">		
-		<script type="text/javascript" src="validation.js"></script>
+		<script type="text/javascript" src="../mpquery.js"></script>
+		<script type="text/javascript" src="../validation.js"></script>
+		<script type="text/javascript" src="profilecontroller.js"></script>
 	</head>
-	<body>
+	<body onload="loadProfile();">
 		<div id="navigation">
-			<img src="images/logo.gif">
-			<a href="dashboard.html">DASHBOARD</a>
+			<img />
+			<a href="../dashboard.php">DASHBOARD</a>
 			<a href="">PROFILE</a>
 			<a href="#" onclick="toggleSearch()">SEARCH</a>
-			<a href="index.html">LOGOUT</a>			
+			<a href="../" onclick="logout();">LOGOUT</a>			
 		</div>
 		<div id="search">
 			<input type="text" size="50%">
 		</div>
 		</div>
 		<div class="clearall container topcontainer" id="profile container">
-			<div class="clearall container">
-				<h2>Profile</h2>
-				<div class="box">
-					<img src= "images/Kinaru.jpg" width="200" height="200"></h3>
-				</div>
-				<div class="profile">
-					<h4>User Name</h4>
-					<h4>Nama Lengkap</h4>
-					<h4>Tanggal Lahir</h4>
-					<h4>Email</h4>
-				</div>
-				<div class="profile">
-					<h4>: kinalkinal</h4>
-					<h4>: Devi Kinal Putri</h4>
-					<h4>: 02 Januari 1996</h4>
-					<h4>: kinalkinal@yahoo.com</h4>
-				</div>
-				<div class="box">
-					<button name="editprofile" type="submit">Edit Profile</button>
-				</div>
+			<div class="clearall container" id="initprofile">
+				
 			</div>
 			<div class="clearall container">
 				<div class="box">

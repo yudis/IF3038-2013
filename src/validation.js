@@ -80,49 +80,6 @@ function CheckFiles()
 	}
 }
 
-// kerjaan mp
-function submitNewTask()
-{
-	var fileOk = CheckFiles();
-	if (!fileOk)
-	{
-		//alert("masuk gagal");
-		return;
-	}
-	
-	// if benar
-	
-	var taskname = $("id", "taskname");
-	var deadline = $("id", "deadline");
-	var assignee = $("id", "assignee");
-	var tags = $("id", "tags");
-	var attachment = $("id", "attachment");
-		
-	if(window.XMLHttpRequest){
-		xmlhttp = new XMLHttpRequest();
-	}
-	else{
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	
-	xmlhttp.onreadystatechange = function()
-	{
-		if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
-		{
-			//alert(xmlhttp.responseText);
-			alert("berhasil");
-			document.getElementById('coba').innerHTML = "<p>Mangstab</p>";//xmlhttp.responseText;
-		}
-	}
-	
-	var parameters = "taskname=" + taskname.value + "&deadline=" + deadline.value + "&assignee=" + assignee.value + "&tags=" + tags.value + "&attachment=" + attachment.value;
-	xmlhttp.open("POST", "addtasksubmit.php",true);
-	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send(parameters);
-	
-	//header("location:taskdetails.html");	
-}
-
 function playPause()
 { 
 	var myVideo=document.getElementById("video1"); 
@@ -132,6 +89,7 @@ function playPause()
 		myVideo.pause(); 
 } 
 
+// ======================= REGISTER =======================
 function checkUsername(){
 	if(document.getElementById('username').value == document.getElementById('password').value){
 		document.getElementById('register').setAttribute('disabled', 'true');
@@ -184,7 +142,8 @@ function checkLogin(){
 	xmlhttp.onreadystatechange = function(){
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
 			if(xmlhttp.responseText == u){
-				alert(':)');
+				//alert(':)');
+				window.location = "dashboard.php";
 			}
 			else{
 				alert(':(');
@@ -193,6 +152,25 @@ function checkLogin(){
 	}
 
 	xmlhttp.open("GET", "login.php?u=" + u + "&p=" + p, true);
+	xmlhttp.send();
+}
+
+function logout()
+{
+	if(window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
+	}
+	else{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xmlhttp.onreadystatechange = function(){
+		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			window.location = "index.php";
+		}
+	}
+
+	xmlhttp.open("GET", "logout.php", true);
 	xmlhttp.send();
 }
 
@@ -311,5 +289,5 @@ function handleFileSelect(evt) {
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
 
 function popupcat(){
-	window.open( "addcat.html" )
+	window.open( "addcat/" )
 }

@@ -9,9 +9,9 @@
 		<div id="navigation">
 			<img src="images/logo.gif">
 			<a href="">DASHBOARD</a>
-			<a href="profile.html">PROFILE</a>
+			<a href="profile/">PROFILE</a>
 			<a href="#" onclick="toggleSearch()">SEARCH</a>
-			<a href="index.html">LOGOUT</a>			
+			<a href="index.php" onclick="logout()";>LOGOUT</a>			
 		</div>
 		<div id="search">
 			<input type="text" size="50%">
