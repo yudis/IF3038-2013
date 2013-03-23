@@ -39,8 +39,10 @@ and open the template in the editor.
         <div id='add'>
 			<form id="addcat" action="addkategori.php" method="post">
             Category Name:<br/> <input type='text' id='cate' name="cate"><br/>
-            User:<br/> <input type='text' name="join"><br/>
-            <input type="submit" value="create">
+            User:<br/> <input type='text' name="join" onkeyup="suggestion(this.value);" list="join"><br/>
+			<datalist id="join">
+			</datalist>
+			<input type="submit" value="create">
             <input type="button" onclick="restore();" value="cancel">
 			</form>
 		</div>
