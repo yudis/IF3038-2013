@@ -315,12 +315,12 @@ Rp(function() {
 		xmlhttp.send();
 		var parsedJSON = eval('('+xmlhttp.responseText+')');
 
-		if (parsedJSON.success) {
-			alert('Berhasil diubah')
+/*		if (parsedJSON.success) {
+			alert('Berhasil diubah');
 			window.location.href = 'profile.php';
 		}
 		else
-			alert('Invalid username/password combination.');
+			alert('Tidak ada yang diubah');*/
 	});
 
 	Rp('#newCategoryForm').on('submit', function(e) {
