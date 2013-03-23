@@ -366,6 +366,7 @@ Rp(function()
 
 	// Assignee
 	var asignee = document.getElementById("usernames_list");
+	asignee.setAttribute('autocomplete', 'off');
 	asignee.onkeyup = function()
 	{
 		var value = asignee.value;
@@ -406,7 +407,7 @@ Rp(function()
 		req.get('api/get_username?username=' + value);
 	}
 
-	function choose_assignee(username)
+	choose_assignee = function(username)
 	{
 		var elm = document.getElementById("auto_comp_assignee");
 		var value = asignee.value;

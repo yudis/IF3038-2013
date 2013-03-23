@@ -39,6 +39,7 @@ Rp(function()
 });
 
 var asignee = document.getElementById("assignee");
+asignee.setAttribute('autocomplete', 'off');
 asignee.onkeyup = function()
 {
 	var value = asignee.value;
