@@ -93,7 +93,7 @@
 						for($i=0; $i<count($assResponse); $i++) {
 							$assResponse[$i];
 							echo "
-							<img src='../img/done.png' class='cursorPointer' width='8' onclick='javascript:edittaskDeleteAss(\"$taskID, $assResponse[$i]\");'/> &nbsp;&nbsp;&nbsp;
+							<img src='../img/done.png' class='cursorPointer' width='8' onclick='javascript:edittaskDeleteAss(\"$taskID\", \"$assResponse[$i]\");'/> &nbsp;&nbsp;&nbsp;
 							<span class='userprofile_link darkBlueItalic' onclick='javascript:searchUser(\"$assResponse[$i]\")'> $assResponse[$i] </span> 
 							<br>";
 						}
@@ -142,8 +142,8 @@
 						<textarea id='comment_textarea' rows='5' cols='50' name='CommentBox'>
 						</textarea> 
 						<br>
-						<input type='hidden' id='hidden_task_id' name='comment_task_id' value='".$taskID."'>
-						<input type='submit' value='Add Comment' name='add_comment_button' class='link_red'>
+						<input type='hidden' id='hidden_task_id' name='comment_task_id' value='".$taskID."'/>
+						<input type='submit' value='Add Comment' name='add_comment_button' class='link_red'/>
 						<br><br><br>
 					</form>
 				</div>

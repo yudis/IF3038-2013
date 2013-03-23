@@ -30,7 +30,25 @@ function save_edit_task() {
 }
 
 function edittaskDeleteAss(taskID,assID) {
-	
+	var deleteConfirm = confirm("Are you sure you want to delete " + assID + " as an assignee?");
+	if (deleteConfirm == true)
+	{
+		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}
+		else {// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}		
+		
+		xmlhttp.onreadystatechange=function() {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				//document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
+				var response = xmlhttp.responseText;
+			}
+		} 
+		xmlhttp.open("GET","edit_task_delete_assignee.php?taskID="+taskID+"&assID="+assID,true);
+		xmlhttp.send();
+	}
 }
 
 function addMoreAssignee(id) {
