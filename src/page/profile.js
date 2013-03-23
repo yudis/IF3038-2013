@@ -162,5 +162,6 @@ function hidden_update_box(){
 	document.getElementById("left-profile-newname").style.display = 'none';
 	document.getElementById("left-profile-newbirthday").style.display = 'none';
 	document.getElementById("uploader").style.display = 'none';
+	document.getElementById("password_form").style.display = 'none';
 }
 
