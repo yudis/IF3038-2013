@@ -19,7 +19,7 @@ function logincheck()  {
 	}
 }
 
-function add_category() {
+/*function add_category() {
         
 	var t = "<li>";
 	t += "<a href ='#' onclick='catchange(10)' id='newCategoryAdded'>";
@@ -27,7 +27,7 @@ function add_category() {
 	t += "</a>";
 	t += "</li>";
 	document.getElementById("category_item").innerHTML += t;
-}
+}*/
 
 var regValid = 0;
 function regCheck() {

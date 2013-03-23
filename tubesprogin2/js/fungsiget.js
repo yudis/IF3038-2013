@@ -3,7 +3,10 @@
  * and open the template in the editor.
  */
 
-
+function get_alltask(){
+    
+    
+}
 function get_taskkategorijs(kategori){
     var xmlhttp;
     if(window.XMLHttpRequest)
@@ -28,8 +31,14 @@ function get_taskkategorijs(kategori){
                        var container = document.getElementById('dynamic_content');
                        container.innerHTML = '';
                        container.innerHTML = container.innerHTML+'<ul>'+'<li><div id="add_task_link"><a href="../src/addtask.php" >+new task</a></div></li>';
-                       
+                       var status="";
                         for(var i= 0 ; i<2 ; i++){
+                            if((result[i]['task_status'])==0){
+                                status = "Not Finisih";
+                            }else{
+                                
+                                 status = "Finish";
+                            }
                            container.innerHTML = container.innerHTML +
                            
                             '<li>'+
@@ -38,19 +47,27 @@ function get_taskkategorijs(kategori){
                             
                             '<img src="../img/done.png" id="finish_1" onclick="finishTask('+i+')" class="task_done_button" alt="" />'+
                             '<div id="task_name_ltd" class="left dynamic_content_left">Task Name</div>'+
-                            '<div id="task_name_rtd" class="left dynamic_content_right"> <a href="taskdetail_img.html">'+result[i]['task_name']+'</a> </div>'+
-                            '<br><br>'+
+                            '<div id="task_name_rtd" class="left dynamic_content_right"> <a href="#" onclick="tampil_edit_task('+'<?php echo $eachtask['+'task_name'+']?>'+')">'+result[i]['task_name']+'</a> </div>'+
+                            '<br>'+
                             '<div id="deadline_ltd" class="left dynamic_content_left">Deadline</div>'+
                             '<div id="deadline_rtd" class="left dynamic_content_right">'+result[i]['task_deadline']+'</div>'+
-                            '<br><br>'+
+                            '<br>'+
                             '<div id="tag_ltd" class="left dynamic_content_left">Tag</div>'+
                             '<div id="tag_rtd" class="left dynamic_content_right"> '+result[i]['task_tag_multivalue']+'</div>'+
                             '<br>'+
+                            '<div id="tag_ltd" class="left dynamic_content_left">Status</div>'+
+                            '<div id="tag_rtd" class="left dynamic_content_right"'+status+'</div>'+
+                            '<br>'+
+                            '<div id="tag_ltd" class="left dynamic_content_left">Checkbox</div>'+
+                            '<div id="tag_rtd" class="left dynamic_content_right"><input type="checkbox" name="checkboxtask"> '+result[i]['checkbox']+'</div>'+
+                            '<br>'+
                             '<div class="task_view_category">'+result[i]['cat_task_name'] +'</div>'+
 			    '<br>'+
-                            '</div>'+
+                           
+                            
                             '</li>'
                             ;  
+                            //onclick="check_value('+'<?php echo $eachtask['+'task_name'+']?>'+','+'<?php echo $eachtask['+'cat_task_name'+']?>'+')"
                         }
                         container.innerHTML = container.innerHTML+'</ul>';
                        

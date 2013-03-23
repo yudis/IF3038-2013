@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php include '../php/fungsiget.php'?>
+<?php include '../php/getnewtaskdetail.php'?>
 	<?php
       $kategori = get_allkategoriphp();
       print_r($kategori);

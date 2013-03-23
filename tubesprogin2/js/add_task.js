@@ -4,6 +4,7 @@
  */
 function newtaskdetail(idlast){
      var xmlhttp;
+    
     if(window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
@@ -21,10 +22,10 @@ function newtaskdetail(idlast){
                  // $('#dynamic_content-of-div').empty();
                    var response = xmlhttp.responseText;
                     if (response !==""){
-                          alert(response);
-                          var result = eval('('+xmlhttp.responseText+')');
-                          
-                         
+                        alert("taskdetail"+response);
+                        var result = eval('('+xmlhttp.responseText+')');
+                      
+                         alert(result);
                             
                       window.location.href= "../src/taskdetail_file.php?ct="+result[0]['cat_task_name']+"&tm="+result[0]['task_name']+"&ts="+result[0]['task_status']+"&td="+result[0]['task_deadline']+"&ttm="+result[0]['task_tag_multivalue']+"&c="+result[0]['checkbox'];               
                     }else{
@@ -73,7 +74,7 @@ function add_task(){
                          
                          var result = eval('('+xmlhttp.responseText+')');
                          alert (result['last_idx']);
-                        newtaskdetail(result.lastidx);    
+                        newtaskdetail(result['last_idx']);    
                        // window.location.href= "../src/getnewtaskdetail.php?id="+result.last_idx;               
                     }else{
                             
@@ -92,3 +93,4 @@ function add_task(){
   //alert("fungsi kepanggil abis send");
    
 }
+
