@@ -7,7 +7,7 @@ Nunu :
 Kania : 
 	- Pembuatan Tugas	// Half		- Udah bisa multiple files (3)
 					     - Belom bisa naro attachment ke server
-					     - Belom bias ngeredirect ke view task + session ilang :S
+					     - Belom bias ngeredirect ke view task
 	- Database		// Done
 	- Bonus Media Query	// Done 	-Ganti warna header (3 biji)
 	- 
