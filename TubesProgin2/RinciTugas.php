@@ -8,7 +8,7 @@ require_once('config.php');
         <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="autocomplete.css" media="screen" />
     </head>
-    <body onload="loadcomment()">
+    <body onload="loadcomment();loadpagevar()">
         <?php
         include 'header.php';
 
@@ -44,7 +44,16 @@ require_once('config.php');
             <div id ="listtugas" class="list">
                 <div class="tugasyeah" id="rincitugas">
                     Name: <?php echo$TaskName; ?> <br/>
-                    Status : <?php echo$Status; ?><br/>
+                    Status : 
+                    <div id="checkstatus">
+                        <?php
+                            if($Status==="done"){
+                                echo' DONE <input type="checkbox" id="checkboxstatus" checked onclick="changestatus('. $IDTask .')" >';
+                            }else{
+                                echo'DONE <input type="checkbox" id="checkboxstatus" onclick="changestatus('. $IDTask .')" >';
+                            }
+                        ?>
+                    </div>
                     Attachment: 
                     <div class="attachment" >
                         <?php

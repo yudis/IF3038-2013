@@ -470,7 +470,7 @@ function loadcomment() {
             document.getElementById("komentaryey").innerHTML = response;
         }
     }
-    xmlhttp.open('get', 'generatecomment.php?IDTask=' + encodeURI(IDTask));
+    xmlhttp.open('get', 'generatecomment.php?IDTask=' + encodeURI(IDTask+"&page="+page));
     xmlhttp.send(null);
 
     setTimeout('loadcomment()', 500);
@@ -523,7 +523,7 @@ function editTask(IDTask) {
     xmlhttp.send(null);
 }
 
-function deleteassignee(IDAssignment,IDTask) {
+function deleteassignee(IDAssignment, IDTask) {
     var deadline = document.getElementById("editdeadline").value;
     var assignee = document.getElementById("addnewassignee").value;
     var tag = document.getElementById(id = "edittag").value;
@@ -545,11 +545,11 @@ function deleteassignee(IDAssignment,IDTask) {
             document.getElementById("ListEditAssignee").innerHTML = response;
         }
     }
-    xmlhttp.open('get', 'deleteassignment.php?IDAssignment=' + encodeURI(IDAssignment)+'&IDTask='+encodeURI(IDTask));
+    xmlhttp.open('get', 'deleteassignment.php?IDAssignment=' + encodeURI(IDAssignment) + '&IDTask=' + encodeURI(IDTask));
     xmlhttp.send(null);
 }
 
-function deletetag(IDTag,IDTask) {
+function deletetag(IDTag, IDTask) {
     var deadline = document.getElementById("editdeadline").value;
     var assignee = document.getElementById("addnewassignee").value;
     var tag = document.getElementById(id = "edittag").value;
@@ -571,6 +571,42 @@ function deletetag(IDTag,IDTask) {
             document.getElementById("ListEditTag").innerHTML = response;
         }
     }
-    xmlhttp.open('get', 'deletetag.php?IDTag=' + encodeURI(IDTag)+'&IDTask='+encodeURI(IDTask));
+    xmlhttp.open('get', 'deletetag.php?IDTag=' + encodeURI(IDTag) + '&IDTask=' + encodeURI(IDTask));
     xmlhttp.send(null);
+}
+
+function changestatus(IDTask) {
+    var status = document.getElementById("checkboxstatus").checked;
+    
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+            var response = xmlhttp.responseText;
+            document.getElementById("checkstatus").innerHTML = response;
+        }
+    }
+    xmlhttp.open('get', 'updatestatus.php?IDTask=' + encodeURI(IDTask)+"&status="+encodeURI(status));
+    xmlhttp.send(null);
+    setTimeout('changestatus('+IDTask+')', 500);
+
+}
+
+var page;
+
+function loadpagevar(){
+    page=1;
+}
+
+function setPage(_page){
+    page=_page;
 }
