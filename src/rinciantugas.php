@@ -252,7 +252,7 @@ while ($commented = mysqli_fetch_array($result7)) {
 					}
 					?>
 				</div>
-				<form action="comment.php" method="post">
+				
 					<div id="komen-tulis"><strong>Tulis Komentar</strong></div>
 					<!--
 					<div class="clear"></div>
@@ -263,10 +263,11 @@ while ($commented = mysqli_fetch_array($result7)) {
 					<div class="komen-label">Komentar <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><textarea name="komentar" rows="3" cols="50" id="form-komen"></textarea></div>
 					<div class="clear"></div>
 					-->
-					<input type="hidden" name="task" value="<?php echo $id_task;?>">
-					<textarea name="komentar" rows="3" cols="60" id="form-komen"></textarea>
-					<div class="komen-submit"><input type="submit" name="submit" value="Submit" /></div>
-				</form>
+					<input type="hidden" id="id" name="id" value="<?php echo $_SESSION['id'];?>">
+					<input type="hidden" id="task" name="task" value="<?php echo $id_task;?>">
+					<textarea id="komentar" name="komentar" rows="3" cols="60" id="form-komen"></textarea>
+					<div class="komen-submit"><input type="button" name="submit" value="Submit" onclick="comment();"/></div>
+				
 			</div>
 		</div>
 		<div class="bawah">

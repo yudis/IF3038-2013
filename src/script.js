@@ -216,3 +216,26 @@ function done_task() {
 	document.getElementById("done").style.display="block";
 	document.getElementById("edit").style.display="none";
 }
+
+function comment() {
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			document.getElementById("lkomen").innerHTML = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("POST","comment.php",true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	var id = document.getElementById("id").value;
+	var task = document.getElementById("task").value;
+	var komentar = document.getElementById("komentar").value;
+	var post = "";
+	post = post.concat("id=",id,"&task=",task,"&komentar=",komentar);
+	xmlhttp.send(post);
+	document.getElementById("komentar").value = "";
+}
