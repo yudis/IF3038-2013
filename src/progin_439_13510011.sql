@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2013 at 03:05 PM
+-- Generation Time: Mar 23, 2013 at 03:58 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -42,7 +42,12 @@ INSERT INTO `assignees` (`member`, `task`, `finished`) VALUES
 (1, 6, 0),
 (2, 1, 0),
 (2, 6, 1),
-(3, 6, 0);
+(2, 7, 0),
+(2, 14, 0),
+(2, 15, 0),
+(2, 16, 0),
+(3, 6, 0),
+(3, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -57,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `attachments` (
   `task` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `task` (`task`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `attachments`
@@ -68,7 +73,12 @@ INSERT INTO `attachments` (`id`, `path`, `filetype`, `task`) VALUES
 (2, 'uploads/gajah.png', 'image', 1),
 (3, 'uploads/movie.ogg', 'video', 1),
 (4, 'uploads/Tugas_Kelompok_-_Persiapan_Ujicoba_-Task_List_and_Questionnaire.docx', 'file', 5),
-(5, 'uploads/Tubes II.pdf', 'file', 6);
+(5, 'uploads/Tubes II.pdf', 'file', 6),
+(6, 'uploads/FMIPA - Himastron.jpg', 'image', 7),
+(7, 'uploads/FMIPA - Himastron.jpg', 'image', 7),
+(13, 'uploads/b.jpg', 'image', 14),
+(14, 'uploads/SIM C belakang.jpg', 'image', 15),
+(15, 'uploads/Format Surat Ijin.pdf', 'file', 16);
 
 -- --------------------------------------------------------
 
@@ -252,7 +262,12 @@ INSERT INTO `tags` (`name`, `tagged`) VALUES
 ('imk', 5),
 ('lol', 5),
 ('ajax', 6),
-('php', 6);
+('php', 6),
+(' dua', 7),
+('satu', 7),
+('oke', 14),
+('ko', 15),
+('', 16);
 
 -- --------------------------------------------------------
 
@@ -270,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   PRIMARY KEY (`id`),
   KEY `creator` (`creator`),
   KEY `category` (`category`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `tasks`
@@ -280,7 +295,14 @@ INSERT INTO `tasks` (`id`, `name`, `creator`, `timestamp`, `deadline`, `category
 (1, 'Tubes 1', 1, '2013-02-20 10:50:49', '2013-02-25 22:00:00', 1),
 (3, 'Kencan dengan si "dia"', 1, '2013-02-20 21:21:53', '2013-02-24 20:00:00', 2),
 (5, 'Tugasgakjelaslah', 2, '2013-03-23 10:30:33', '2012-03-03 12:59:00', 5),
-(6, 'Tubes2', 2, '2013-03-23 10:33:01', '2013-03-23 23:00:00', 1);
+(6, 'Tubes2', 2, '2013-03-23 10:33:01', '2013-03-23 23:00:00', 1),
+(7, 'asdsad', 1, '2013-03-23 03:29:37', '2012-03-03 00:00:00', 1),
+(8, 'asdsad', 1, '2013-03-23 03:30:00', '2012-03-03 00:00:00', 1),
+(10, 'coba bikin', 1, '2013-03-23 03:32:09', '2012-03-03 00:00:00', 1),
+(11, 'coba bikin', 1, '2013-03-23 03:34:04', '2012-03-03 00:00:00', 1),
+(14, 'coba ah', 2, '2013-03-23 03:50:46', '2013-12-23 12:00:00', 8),
+(15, 'coba lagi ah', 2, '2013-03-23 03:51:43', '2012-03-03 00:39:00', 11),
+(16, 'asdsadsad', 2, '2013-03-23 03:53:01', '2012-03-03 00:00:00', 10);
 
 --
 -- Constraints for dumped tables

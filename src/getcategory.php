@@ -38,10 +38,15 @@ while ($task=mysqli_fetch_array($result)) {
 			if ($i < $count_tag - 1) echo ",";
 		}
 		echo "</strong><br />";
+		echo "<div id='".$task_id."'>";
 		echo "Status: <strong>";
 		if ($assignee['finished'] == 1) echo 'Selesai';
 		else echo 'Belum selesai';
 		echo "</strong><br />";
+		echo "<input name='YourChoice' type='checkbox' value='selesai' ";
+		if ($assignee['finished'] == 1) echo "checked ";
+		echo "onclick=change_status("."'".$task_id."'".",".$assignee['finished'].",".$task_id.")> Selesai";
+		echo "</div>";
 		if ($task['creator'] == $user_id) {
 			echo "<form action='deletetask.php' method='post'>";
 			echo "<input type='hidden' name='deltask' value='".$task_id."' />";
