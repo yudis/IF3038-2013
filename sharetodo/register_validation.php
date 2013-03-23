@@ -1,14 +1,21 @@
 <?php
-
-    //username
-    $username[] = "msmaromi";
-    $username[] = "sonnymanurung";
-    $username[] = "krisnadibyo";
+    $con = mysqli_connect("localhost", "root", "", "sharetodo");
+    $query = mysqli_query($con, "SELECT username, email FROM user");
     
-    //email
-    $email[] = "romi@gmail.com";
-    $email[] = "sonny@gmail.com";
-    $email[] = "krisna@gmail.com";
+    while($row = mysqli_fetch_assoc($query)) {
+        $username[] = $row["username"];
+        $email[] = $row["email"];
+    }
+//    //username
+//    $username[] = "msmaromi";
+//    $username[] = "sonnymanurung";
+//    $username[] = "krisnadibyo";
+//    
+//    
+//    //email
+//    $email[] = "romi@gmail.com";
+//    $email[] = "sonny@gmail.com";
+//    $email[] = "krisna@gmail.com";
     
     $q = $_GET["q"];
     $p = $_GET["p"];

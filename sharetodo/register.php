@@ -1,6 +1,6 @@
 <?php
     session_start();
-    
+        
     $username = $_POST["username"];
     $email = $_POST["email"];
     $password = $_POST["password"];
@@ -21,12 +21,13 @@
         && $_FILES["avatar"]["size"] > 0
         && $_FILES["avatar"]["size"] <= MAX_FILE_SIZE) {
         $file = $username . ".png";
-        move_uploaded_file($_FILES['avatar']['tmp_name'], "server/" . $file);                    
+        move_uploaded_file($_FILES["avatar"]["tmp_name"], "server/" . $file);                   
     }
     
     $con = mysqli_connect("localhost", "root", "", "sharetodo");
     mysqli_query($con, "INSERT INTO user (username, email, password, fullname, tanggalLahir, avatar) VALUES ('$username', '$email', '$password', '$full_name', '$birth_date', '$file')");
     
     $_SESSION["username"] = $username;
+    $_SESSION["loggedin"] = "yes";
     header("Location:dashboard.php");
 ?>

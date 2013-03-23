@@ -383,7 +383,7 @@ function validate_nama_tugas() {
 
 function validate_attachment() {    
     var valid = false;
-    var validExtension = [".jpg", ".jpeg", ".png", ".doc", ".docx", ".txt", ".rtf", ".pdf", ".ppt", ".pptx", ".mp4", ".avi", ".mov", ".3gp", ".flv"];
+    var validExtension = [".jpg", ".jpeg", ".png", ".doc", ".docx", ".txt", ".rtf", ".pdf", ".ppt", ".pptx", ".xls", ".xlsx", ".mp4", ".avi", ".mov", ".3gp", ".flv"];
     var arrInputs = document.getElementById("attachment").files;
     for(var i=0; i<arrInputs.length; i++) {
         var fileName = arrInputs[i].name;

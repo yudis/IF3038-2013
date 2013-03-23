@@ -1,14 +1,21 @@
 <?php
-    session_start();    
-    //email
-    $username[] = "msmaromi";
-    $username[] = "smanurung";
-    $username[] = "krisnadibyo";
+    session_start();
+    $con = mysqli_connect("localhost", "root", "", "sharetodo");
+    $query = mysqli_query($con, "SELECT username, password FROM user");
     
-    //password
-    $password[] = "debbeh";
-    $password[] = "hottest";
-    $password[] = "barca";
+    while($row = mysqli_fetch_assoc($query)) {
+        $username[] = $row["username"];
+        $password[] = $row["password"];
+    }
+//    //email
+//    $username[] = "msmaromi";
+//    $username[] = "sonnymanurung";
+//    $username[] = "krisnadibyo";
+//    
+//    //password
+//    $password[] = "debbeh";
+//    $password[] = "hottest";
+//    $password[] = "barca";
     
     $usrnm = $_GET["u"];
     $psswrd = $_GET["p"];        
@@ -18,7 +25,6 @@
         if($usrnm==$username[$i] && $psswrd==$password[$i]) {
             $response = "";
             $_SESSION["username"] = $username[$i];
-            $_SESSION["password"] = $password[$i];
             $_SESSION["loggedin"] = "yes";
             break;
         }

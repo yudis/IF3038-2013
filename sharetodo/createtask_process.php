@@ -16,6 +16,12 @@
         $i++;
     }
     
-    
+    $tag_input = $_POST["tag"];
+    $tags = explode(",", $tag_input);
+    $j = 0;
+    foreach($tags as $tag) {
+        mysqli_query($con, "INSERT INTO tagging (namaTask, tag) VALUES ('$task_name', '$tag')");
+        $j++;
+    }
     
 ?>

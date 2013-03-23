@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION["loggedin"])) { //jika variabel session telah diisi sebelumnya
+    if(isset($_SESSION["loggedin"])) {
         header("Location:dashboard.php");
     }
 ?>
@@ -30,41 +30,45 @@
             <strong id="error_signin" class="error_warning"></strong>
         </div>
         <br><br>
-        <form onkeydown="enterButton(this.signup_button)">
+        <form action="register.php" method="post" enctype="multipart/form-data">
             <div>
-                <input id="email_signup" class="input_field" type="text" placeholder="Email" onkeydown="validate_email_exist(this.value); validate_email()">
+                <input id="email_signup" name="email" class="input_field" type="text" placeholder="Email" onkeydown="validate_email_exist(this.value); validate_email()">
                 &nbsp;
                 <strong id="error_email" class="error_warning"></strong>
                 <strong id="error_email_exist" class="error_warning"></strong>
             </div>
             <div>
-                <input id="usrnm_signup" class="input_field" type="text" placeholder="Username" onkeydown="validate_username_exist(this.value); validate_username()">
+                <input id="usrnm_signup" name="username" class="input_field" type="text" placeholder="Username" onkeydown="validate_username_exist(this.value); validate_username()">
                 &nbsp;
                 <strong id="error_username" class="error_warning"></strong>
                 <strong id="error_username_exist" class="error_warning"></strong>
             </div>
             <div>
-                <input id="psswrd_signup" class="input_field" type="password" placeholder="Password" onkeydown="validate_password()">
+                <input id="psswrd_signup" name="password" class="input_field" type="password" placeholder="Password" onkeydown="validate_password()">
                 &nbsp;
                 <strong id="error_password" class="error_warning"></strong>
             </div>
             <div>
-                <input id="cnfrm_psswrd_signup" class="input_field" type="password" placeholder="Confirm password" onkedown="confirm_password()">
+                <input id="cnfrm_psswrd_signup" class="input_field" type="password" placeholder="Confirm password" onkeydown="confirm_password()">
                 &nbsp;
                 <strong id="error_confirm_password" class="error_warning"></strong>
             </div>
             <div>
-                <input id="nama_signup" class="input_field" type="text" placeholder="Nama lengkap" onkedown="validate_nama()">
+                <input id="nama_signup" name="full_name" class="input_field" type="text" placeholder="Nama lengkap" onkeydown="validate_nama()">
                 &nbsp;
                 <strong id="error_nama" class="error_warning"></strong>
             </div>
             <div>
-                <input id="tgl_lahir" class="input_field" type="text" placeholder="Tanggal lahir" onchange="validate_tanggal_lahir()">
+                <input id="fileUpload" name="avatar" class="input_field" type="file">
+                &nbsp;
+                <strong id="error_upload_avatar" class="error_warning"></strong>
+            </div>
+            <div>
+                <input id="tgl_lahir" name="birth_date" class="input_field" type="text" placeholder="Tanggal lahir" onchange="validate_tanggal_lahir()">
                 &nbsp;
                 <strong id="error_tanggal_lahir" class="error_warning"></strong>
-            </div>
-            
-                <input id="signup_button" class="input_button" type="button" value="Sign up" onmousedown="disable_signup_button()" onmousekeyup="window.location='dashboard.html'">
+            </div>        
+                <input id="signup_button" class="input_button" type="submit" value="Sign up" onclick="window.location='dashboard.php'">
         </form>
         
     </body>
