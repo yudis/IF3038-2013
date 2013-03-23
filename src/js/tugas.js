@@ -139,3 +139,29 @@ function choose_tag(temptag)
 	tag.value = value;
 	elm.style.display = "none";
 }
+
+// checkbox
+
+handleTaskCheckbox = function(e) {
+	Rp('.task-checkbox input[data-task-id]').prop('disabled', true);
+	taskID = this.getAttribute('data-task-id');
+	checked = this.checked;
+	mark = Rp.ajaxRequest('api/mark_task')
+	.complete(function() {
+		Rp('.task-checkbox input[data-task-id]').prop('disabled', false);
+		response = this.responseJSON();
+		console.log(response.success);
+		if (response.success) {
+			Rp('.task-checkbox input[data-task-id]').prop('checked', response.done);
+		}
+		else {
+			console.log('Failure to update status of task.');
+		}
+	})
+	.post({
+		'taskID': taskID,
+		'completed': checked
+	});
+}
+
+Rp('.task-checkbox input[data-task-id]').on('change', handleTaskCheckbox);

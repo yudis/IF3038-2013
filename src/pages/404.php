@@ -6,7 +6,7 @@
 			<header>
 				<h1>Error</h1>
 			</header>
-			404
+			<p><?php echo $message ? $message : 'Something awkward happened.' ?></p>
 		</div>
 	</div>
 <?php

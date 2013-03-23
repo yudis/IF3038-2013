@@ -180,6 +180,8 @@ class RestApi
 			$dl = new DateTime($task->deadline);
 			$dummy->deadline = $dl->format('j F Y');
 
+			$dummy->deletable = $task->getDeletable($this->app->currentUserId);
+
 			$tags = $task->getTags();
 			$dummy->tags = array();
 			foreach ($tags as $tag) {
@@ -204,10 +206,10 @@ class RestApi
 
 		$q = DBConnection::DBquery($update);
 		if (DBConnection::affectedRows()) {
-			return array('success' => 'true', 'taskId' => $id_task);
+			return array('success' => true, 'taskId' => $id_task, 'done' => $completed);
 		}
 		else {
-			return array('success' => 'false');
+			return array('success' => false, $update);
 		}
 	}
 	

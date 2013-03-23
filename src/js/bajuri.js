@@ -204,7 +204,7 @@ bajuri.prototype = {
 	show: function() {
 		this.each(function() {
 			if (this.style.display === 'none')
-				this.style.display = Rp(this).data('formerDisplayValue') ? Rp(this).data('formerDisplayValue') : 'block';
+				this.style.display = (Rp(this).data('formerDisplayValue') !== 'none') ? Rp(this).data('formerDisplayValue') : 'block';
 		});
 
 		return this;
@@ -358,6 +358,76 @@ bajuri.prototype = {
 			}
 		}
 		return q.join("&");
+	},
+
+	autocomplete: function() {
+		if (this.data('autocomplete'))
+			return this.data('autocomplete');
+
+		this.nodes = this.nodes.slice(0,1);
+		var list;
+
+		// Add the list
+		this.each(function() {
+			ul = bajuri.factory('ul');
+			ul.addClass('suggestions');
+
+			ttop = this.offsetTop + this.offsetHeight + 1;
+			left = this.offsetLeft;
+			width = this.offsetWidth - 2;
+
+			ul.css('width', width + 'px');
+			ul.css('top', ttop + 'px');
+			ul.css('left', left + 'px');
+
+			bajuri(this.parentNode).append(ul);
+
+			list = ul;
+		});
+
+		list.boundInput = this.nodes[0];
+
+		list.hide();
+
+		var goBack = false;
+
+		list.fill = function(content) {
+			this.empty();
+			var bi = this.boundInput;
+			var ul = this;
+
+			if (content) content.forEach(function(v) {
+				li = Rp.factory('li');
+				li.attr('data-raw', v);
+				v = v.replace(bi.value, '<b>' + bi.value + '</b>');
+				li.html(v);
+				li.data('boundInput', bi);
+
+				li.on('mousedown', function() {
+					stop = true;
+					console.log('Om');
+					bi.value = this.getAttribute('data-raw');
+					ul.hide();
+					goBack = true;
+					window.setTimeout(function() { bi.focus() }, 50);
+				});
+
+				ul.append(li);
+			});
+
+			this.show();
+		}
+
+		var blt;
+		this.on('blur', function() {
+			list.hide();
+			if (goBack)
+				this.focus();
+		})
+
+		this.data('autocomplete', list);
+
+		return list;
 	}
 }
 

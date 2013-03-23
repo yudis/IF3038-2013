@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2013 at 05:09 AM
+-- Generation Time: Mar 23, 2013 at 10:07 AM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -33,6 +33,14 @@ CREATE TABLE IF NOT EXISTS `assign` (
   KEY `id_task` (`id_task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `assign`
+--
+
+INSERT INTO `assign` (`id_user`, `id_task`) VALUES
+(3, 23),
+(4, 23);
+
 -- --------------------------------------------------------
 
 --
@@ -48,7 +56,14 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id_komentar`),
   KEY `id_user` (`id_user`),
   KEY `id_task` (`id_task`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=70 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`id_komentar`, `timestamp`, `komentar`, `id_user`, `id_task`) VALUES
+(12, '2013-03-23 07:16:35', 'asdadas', 4, 4);
 
 -- --------------------------------------------------------
 
@@ -89,7 +104,8 @@ CREATE TABLE IF NOT EXISTS `have_tags` (
 
 INSERT INTO `have_tags` (`id_task`, `id_tag`) VALUES
 (1, 1),
-(1, 11);
+(1, 11),
+(23, 14);
 
 -- --------------------------------------------------------
 
@@ -158,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `task` (
   PRIMARY KEY (`id_task`),
   KEY `id_kategori` (`id_kategori`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- Dumping data for table `task`
@@ -168,7 +184,8 @@ INSERT INTO `task` (`id_task`, `nama_task`, `status`, `deadline`, `id_kategori`,
 (1, 'Tugas 2', 1, '2013-03-14', 5, 2),
 (4, 'Tugas 3', 0, '2013-03-14', 5, 2),
 (5, 'Tugas 4', 0, '2013-03-14', 5, 2),
-(6, 'Tugas 3', 0, '2013-03-15', 5, 4);
+(6, 'Tugas 3', 0, '2013-03-15', 5, 4),
+(23, 'Adriel', 0, '2013-03-12', 5, 4);
 
 -- --------------------------------------------------------
 
@@ -179,8 +196,17 @@ INSERT INTO `task` (`id_task`, `nama_task`, `status`, `deadline`, `id_kategori`,
 CREATE TABLE IF NOT EXISTS `task_attachment` (
   `id_task` int(10) NOT NULL,
   `attachment` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_task`)
+  PRIMARY KEY (`id_task`,`attachment`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `task_attachment`
+--
+
+INSERT INTO `task_attachment` (`id_task`, `attachment`) VALUES
+(23, '44307754B1998304F4F9CEE5CBA28F83.jpg'),
+(23, '777F6A6DB8642120B61F837A01AA31CD.jpg'),
+(23, 'CC21A3C4189467513750FFF8B70411A5.jpg');
 
 -- --------------------------------------------------------
 
@@ -217,8 +243,8 @@ INSERT INTO `user` (`id_user`, `username`, `email`, `fullname`, `avatar`, `birth
 -- Constraints for table `assign`
 --
 ALTER TABLE `assign`
-  ADD CONSTRAINT `assign_ibfk_3` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `assign_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `assign_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
+  ADD CONSTRAINT `assign_ibfk_3` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `comment`
@@ -258,7 +284,7 @@ ALTER TABLE `task`
 -- Constraints for table `task_attachment`
 --
 ALTER TABLE `task_attachment`
-  ADD CONSTRAINT `task_attachment_ibfk_1` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`);
+  ADD CONSTRAINT `task_attachment_ibfk_2` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

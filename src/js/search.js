@@ -92,6 +92,23 @@ Rp(function() {
 	}
 
 	Rp('.task-checkbox input[data-task-id]').on('change', handleTaskCheckbox);
+
+
+	delreq = Rp.ajax('api/delete_task')
+	.complete(function() {
+		r = this.responseJSON();
+		Rp('article[data-task-id=' + r.task_id + ']').removeClass('loading').hide();
+		loadCategory(currentCat);
+	});
+
+	deleteTask = function(e) {
+		e.preventDefault();
+		id = this.getAttribute('data-task-id');
+		Rp('#task' + id).addClass('loading');
+		delreq.post('task_id=' + parseInt(id));
+	}
+
+	Rp('p.delete a').on('click', deleteTask);
 });
 
 /*----- Bagian Search ----*/
