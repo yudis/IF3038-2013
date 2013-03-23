@@ -19,7 +19,11 @@
 	$name		= mysql_real_escape_string($_POST['signup_long_name']);
 	$email    	= $_POST['signup_email'];
 	$birthdate    	= $_POST['signup_birth_date'];
-	$avatar		= $_POST['signup_avatar_upload'];
+	//$avatar		= $_FILE['signup_avatar_upload'];
+	if(is_uploaded_file($_FILES['avatar']['tmp_name'])) {
+		$target = "../img/".$username.$_FILES["avatar"]["name"];
+		move_uploaded_file($_FILES["avatar"]["tmp_name"],$target);
+	}
 	
 	if (isset($_POST['signup_submit'])) { //when button signup_submit is pressed
 		$query1 = "SELECT * from user WHEN username='$username' OR email='$email'";
@@ -32,7 +36,7 @@
 		else {
 			$query	=    
 			"INSERT INTO user (`username`, `password`, `full_name`, `birthdate`, `avatar`, `email`) 
-			VALUES ('$username','$password', '$name', '$birthdate', '$avatar', '$email')";
+			VALUES ('$username','$password', '$name', '$birthdate', '$target', '$email')";
 			
 			$res	=    mysql_query($query);
 			
