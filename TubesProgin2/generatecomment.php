@@ -11,15 +11,10 @@ if (connectDB()) {
     $numrows = mysql_num_rows($CommentQuery);
 
     $page = $_GET['page'];
-    if ($page == 1) {
-        echo"yeaeaea";
-    }
-
     $pagecount = (int) (($numrows / 10));
     if ($numrows % 10 > 0) {
         $pagecount+=1;
     }
-    echo $pagecount;
 
     echo'<br/>Comment (' . $numrows . ') :<br/>';
     echo'<div class="komentar" id="isikomentar">';
