@@ -200,6 +200,26 @@ function showtask(cat, num) {
 		else document.getElementById(i.toString()).style.display="none";
 	}
 }
+
+function gettask(user, cat) {
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			document.getElementById("rincian").innerHTML = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("POST","getcategory.php",true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	var post = "";
+	post = post.concat("id=",user,"&cat=",cat);
+	xmlhttp.send(post);
+}
+
 function hidetask(num) {
 	var i;
 	for (i = 1; i <= num; i++) {
