@@ -15,6 +15,7 @@ $userf = 'nama_user';
 $type = $_GET['type'];
 $all = $type == 'all';
 
+$id = $this->currentUserId;
 $baseTaskQ = "id_kategori IN ( SELECT id_kategori FROM ".Category::tableName()." WHERE id_user='$id' ".
 			 "OR id_kategori IN (SELECT id_kategori FROM edit_kategori WHERE id_user='$id') ".
 			 "OR id_kategori IN (SELECT id_kategori FROM ". Task::tableName() ." AS t LEFT OUTER JOIN assign AS a ".
