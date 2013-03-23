@@ -5,7 +5,7 @@
     //$kategori = "Pemrograman Internet"; //harusnya dipassing dari parameter function nanti
     
     //create connection
-    $con = mysqli_connect("127.0.0.1","root","root","distributedAgenda");
+    $con = mysqli_connect("127.0.0.1","progin","progin","progin_405_13510027");
 
     //check the connection
     if (mysqli_connect_errno($con)) {
@@ -62,7 +62,7 @@
                 echo "</div>";
             echo "</div>";
         }
-        echo "<button class='addTask' onclick=\"toHalamanPembuatanTugas();\">tambah tugas</button>";
+        echo "<button class='addTask' onclick=\"toHalamanPembuatanTugas('$kategori');\">tambah tugas</button>";
 	echo "<button class='addTask' onclick=\"deleteKategori('$kategori');\">hapus kategori</button>";
     }
 ?>

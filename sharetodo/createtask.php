@@ -1,5 +1,8 @@
 <!DOCTYPE HTML>
 <html>
+	<?php
+		$kategori = $_GET['kategori'];
+	?>
 	<head>
 		<link href="css/main.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" media="all" href="css/jsDatePick_ltr.min.css" />
@@ -30,7 +33,8 @@
                 <input id="input_deadline" name="deadline" class="input_field" type="text" name="deadline" placeholder="Deadline">&nbsp;
                 <strong id="error_input_deadline" class="error_warning"></strong>
             </div>
-			<input class="input_button" type="submit" name="simpan" value="Simpan" onclick="validate()"><br>
+		<input type="hidden" name="kategori" value=<? echo $kategori; ?>>
+		<input class="input_button" type="submit" name="simpan" value="Simpan" onclick="validate()"><br>
 		</form>
     </body>
 </html>
