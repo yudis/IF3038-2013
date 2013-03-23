@@ -39,13 +39,13 @@
 								echo "<div id=\"change_password\"><a href=\"#\" onClick=\"edit_password('$user_show')\">Change Password</a></div>";
 								echo "<div id=\"password_form\">";
 								echo "<div id=\"newpassword\">";
-								echo "<div id=\"left-profile-body\">New Password</div><div id=\"right-profile-body\"> : <input type=\"text\" name=\"newPass\" id=\"newpasstext\"></div>";
+								echo "<div id=\"left-profile-body\">New Password</div><div id=\"right-profile-body\"> : <input type=\"text\" name=\"newPass\" id=\"newpasstext\" onKeyUp=\"check_password('$user_show')\"></div>";
 								echo "</div>";
-								echo "<br><br><br>";
+								echo "<div id=\"warning-message\"></div>";
+								echo "<br>";
 								echo "</div>";
 							}
 						?>
-						<br />
 					<p>Joined on : <?php echo $user['join']?></p>
 					<div>
 						<div id="left-main-body"><p>About Me :</p></div>

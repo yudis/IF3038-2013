@@ -1,4 +1,21 @@
 var ajaxRequest;
+var chkpassword = false;
+
+function check_password(userid) {
+	if (document.getElementById("newpasstext").value.length > 7) {
+		if (document.getElementById("newpasstext").value != userid) {
+			chkpassword = true;
+			document.getElementById("warning-message").innerHTML="";
+		}
+		else {
+			chkpassword = false;
+			document.getElementById("warning-message").innerHTML="Password same as username !";
+		}
+	} else {
+		chkpassword = false;
+		document.getElementById("warning-message").innerHTML="Password less than 8 characters !";
+	}
+}
 
 function getAjax() //a function to get AJAX from browser
 {
@@ -140,18 +157,20 @@ function edit_password(userid) {
 }
 
 function just_edit_password(userid) {
-	getAjax();
-	var newpass = document.getElementById("newpasstext").value;
+	if (chkpassword) {
+		getAjax();
+		var newpass = document.getElementById("newpasstext").value;
 
-	ajaxRequest.open("GET","../php/changepassword.php?newpass="+newpass+"&userid="+userid,false);
-	
-	alert("Password Changed");
-	
-	ajaxRequest.send();
+		ajaxRequest.open("GET","../php/changepassword.php?newpass="+newpass+"&userid="+userid,false);
+		
+		alert("Password Changed");
+		
+		ajaxRequest.send();
 
-	document.getElementById("password_form").style.display = 'none';
-	document.getElementById("change_password").style.display = 'block';
-	document.getElementById("change_password").innerHTML = "<a href=\"#\" onClick=\"edit_password('"+userid+"')\">Change Password</a>";
+		document.getElementById("password_form").style.display = 'none';
+		document.getElementById("change_password").style.display = 'block';
+		document.getElementById("change_password").innerHTML = "<a href=\"#\" onClick=\"edit_password('"+userid+"')\">Change Password</a>";
+	}
 }
 
 function edit_avatar(userid){
