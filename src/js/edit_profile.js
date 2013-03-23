@@ -4,5 +4,6 @@ Rp(function() {
 		var now = Rp('#edit_form').serialize();
 		if (original == now)
 			alert('Tidak ada perubahan.');
+		this.submit();
 	})
 })
