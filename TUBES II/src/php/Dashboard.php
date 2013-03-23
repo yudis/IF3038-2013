@@ -1,9 +1,80 @@
 <html>
 <head>
 <script>
+var getkat="";
+
+function hapuskategori(){
+if(getkat == ""){
+	alert("Pilih kategori terlebih dahulu !!!");
+}else {
+	var conf = confirm("Anda yakin menghapus kategori ini ?\nSeluruh task akan dihapus");
+	//alert(getkat);
+	if(conf == true){
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+		  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+			alert(xmlhttp.responseText);
+			location.reload();
+			}
+		  }
+	xmlhttp.open("GET","hapuskategori.php?hkategori=" + getkat ,true);
+	xmlhttp.send();
+	}else{
+		alert("check");
+	}
+}
+}
+
+function addkategori(){
+var inputkategori = prompt("Masukkan nama kategori","");
+
+	if(inputkategori=="") {
+	alert("kolom harus diisi !");
+	}else {
+		callkategori(inputkategori);
+	}
+}
+
+function callkategori(ckt){
+if (ckt=="")
+  {
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    alert(xmlhttp.responseText);
+	location.reload();
+    }
+  }
+xmlhttp.open("GET","addkategori.php?tkategori=" + ckt ,true);
+xmlhttp.send();
+
+}
+
 function taketask(ktg)
 {
 //alert ("in");
+getkat=ktg;
+
 if (ktg=="")
   {
   document.getElementById("div1").innerHTML="";
@@ -71,9 +142,8 @@ xmlhttp.send();
 		?>
 		</select>
 		</form>
-		<input type="submit" value="Tambah Kategori"></input>
-		<input type="submit" value="Hapus Kategori"></input>
-		<input type="submit" value="Tambah Task"></input>
+		<button onclick="addkategori()">Tambah Kategori</input>
+		<button onclick="hapuskategori()">Hapus Kategori</input>
 	</center>
 	<div class="kategori">
 	<center><h2 class="judul">Daftar Tugas</h2>
