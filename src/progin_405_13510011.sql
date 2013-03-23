@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2013 at 07:08 AM
+-- Generation Time: Mar 23, 2013 at 03:05 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -18,9 +18,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `progin_405_13510011`
 --
-DROP DATABASE IF EXISTS `progin_405_13510011`;
-CREATE DATABASE `progin_405_13510011`;
-USE `progin_405_13510011`;
 
 -- --------------------------------------------------------
 
@@ -42,10 +39,10 @@ CREATE TABLE IF NOT EXISTS `assignees` (
 
 INSERT INTO `assignees` (`member`, `task`, `finished`) VALUES
 (1, 1, 1),
-(1, 3, 0),
-(2, 1, 1),
-(2, 2, 0),
-(3, 1, 1);
+(1, 6, 0),
+(2, 1, 0),
+(2, 6, 1),
+(3, 6, 0);
 
 -- --------------------------------------------------------
 
@@ -60,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `attachments` (
   `task` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `task` (`task`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `attachments`
@@ -69,7 +66,9 @@ CREATE TABLE IF NOT EXISTS `attachments` (
 INSERT INTO `attachments` (`id`, `path`, `filetype`, `task`) VALUES
 (1, 'uploads/TUBES I.pdf', 'file', 1),
 (2, 'uploads/gajah.png', 'image', 1),
-(3, 'uploads/movie.ogg', 'video', 1);
+(3, 'uploads/movie.ogg', 'video', 1),
+(4, 'uploads/Tugas_Kelompok_-_Persiapan_Ujicoba_-Task_List_and_Questionnaire.docx', 'file', 5),
+(5, 'uploads/Tubes II.pdf', 'file', 6);
 
 -- --------------------------------------------------------
 
@@ -83,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `creator` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `categories`
@@ -94,7 +93,18 @@ INSERT INTO `categories` (`id`, `name`, `creator`) VALUES
 (2, 'Date', 1),
 (3, 'Makan Siang', 2),
 (5, 'IMK', 3),
-(7, 'Jalan jalan', 2);
+(7, 'Jalan jalan', 2),
+(8, 'dummy1', 2),
+(9, 'dummy2', 2),
+(10, 'dummy3', 2),
+(11, 'dummy4', 2),
+(12, 'dummy5', 2),
+(13, 'dummy6', 2),
+(14, 'dummy7', 2),
+(15, 'dummy8', 2),
+(16, 'dummy9', 2),
+(17, 'dummy10', 2),
+(18, 'dummy11', 2);
 
 -- --------------------------------------------------------
 
@@ -111,17 +121,21 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`id`),
   KEY `member` (`member`),
   KEY `task` (`task`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`id`, `member`, `task`, `timestamp`, `comment`) VALUES
-(1, 2, 1, '2013-03-12 13:56:30', 'Does it work?'),
 (2, 1, 1, '2013-03-12 13:56:47', 'Yes, it does'),
 (3, 2, 1, '2013-03-20 12:44:25', 'up'),
-(4, 1, 1, '2013-03-20 12:48:24', 'down');
+(4, 1, 1, '2013-03-20 12:48:24', 'down'),
+(5, 2, 1, '2013-03-23 14:37:19', 'coba ajax'),
+(6, 1, 1, '2013-03-23 14:39:04', 'berhasil'),
+(13, 2, 1, '2013-03-23 18:09:55', 'lolwut'),
+(15, 2, 6, '2013-03-23 18:46:36', '5 jam lagi deadline'),
+(16, 1, 1, '2013-03-23 20:50:51', 'a');
 
 -- --------------------------------------------------------
 
@@ -148,7 +162,40 @@ INSERT INTO `editors` (`member`, `category`) VALUES
 (2, 5),
 (3, 5),
 (1, 7),
-(2, 7);
+(2, 7),
+(1, 8),
+(2, 8),
+(3, 8),
+(1, 9),
+(2, 9),
+(3, 9),
+(1, 10),
+(2, 10),
+(3, 10),
+(1, 11),
+(2, 11),
+(3, 11),
+(1, 12),
+(2, 12),
+(3, 12),
+(1, 13),
+(2, 13),
+(3, 13),
+(1, 14),
+(2, 14),
+(3, 14),
+(1, 15),
+(2, 15),
+(3, 15),
+(1, 16),
+(2, 16),
+(3, 16),
+(1, 17),
+(2, 17),
+(3, 17),
+(1, 18),
+(2, 18),
+(3, 18);
 
 -- --------------------------------------------------------
 
@@ -201,7 +248,11 @@ INSERT INTO `tags` (`name`, `tagged`) VALUES
 ('css', 1),
 ('html', 1),
 ('javascript', 1),
-('php', 1);
+('', 3),
+('imk', 5),
+('lol', 5),
+('ajax', 6),
+('php', 6);
 
 -- --------------------------------------------------------
 
@@ -219,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   PRIMARY KEY (`id`),
   KEY `creator` (`creator`),
   KEY `category` (`category`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `tasks`
@@ -227,8 +278,9 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 
 INSERT INTO `tasks` (`id`, `name`, `creator`, `timestamp`, `deadline`, `category`) VALUES
 (1, 'Tubes 1', 1, '2013-02-20 10:50:49', '2013-02-25 22:00:00', 1),
-(2, 'Tubes 2', 2, '2013-03-11 21:20:11', '2013-03-22 22:03:00', 1),
-(3, 'Kencan dengan si "dia"', 1, '2013-02-20 21:21:53', '2013-02-24 20:00:00', 2);
+(3, 'Kencan dengan si "dia"', 1, '2013-02-20 21:21:53', '2013-02-24 20:00:00', 2),
+(5, 'Tugasgakjelaslah', 2, '2013-03-23 10:30:33', '2012-03-03 12:59:00', 5),
+(6, 'Tubes2', 2, '2013-03-23 10:33:01', '2013-03-23 23:00:00', 1);
 
 --
 -- Constraints for dumped tables
