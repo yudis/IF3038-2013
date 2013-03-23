@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.7deb7
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 12, 2013 at 02:11 PM
--- Server version: 5.1.66
--- PHP Version: 5.3.3-7+squeeze15
+-- Generation Time: Mar 23, 2013 at 05:56 AM
+-- Server version: 5.5.8
+-- PHP Version: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `assignees` (
 INSERT INTO `assignees` (`member`, `task`) VALUES
 (1, 1),
 (2, 1),
+(3, 1),
 (2, 2),
 (1, 3);
 
@@ -79,17 +80,21 @@ INSERT INTO `attachments` (`id`, `path`, `filetype`, `task`) VALUES
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `creator` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`) VALUES
-(2, 'Date'),
-(1, 'Pemrograman Internet');
+INSERT INTO `categories` (`id`, `name`, `creator`) VALUES
+(1, 'Pemrograman Internet', 1),
+(2, 'Date', 1),
+(3, 'Makan Siang', 2),
+(5, 'IMK', 3),
+(7, 'Jalan jalan', 2);
 
 -- --------------------------------------------------------
 
@@ -106,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`id`),
   KEY `member` (`member`),
   KEY `task` (`task`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `comments`
@@ -114,7 +119,9 @@ CREATE TABLE IF NOT EXISTS `comments` (
 
 INSERT INTO `comments` (`id`, `member`, `task`, `timestamp`, `comment`) VALUES
 (1, 2, 1, '2013-03-12 13:56:30', 'Does it work?'),
-(2, 1, 1, '2013-03-12 13:56:47', 'Yes, it does');
+(2, 1, 1, '2013-03-12 13:56:47', 'Yes, it does'),
+(3, 2, 1, '2013-03-20 12:44:25', 'up'),
+(4, 1, 1, '2013-03-20 12:48:24', 'down');
 
 -- --------------------------------------------------------
 
@@ -134,7 +141,14 @@ CREATE TABLE IF NOT EXISTS `editors` (
 --
 
 INSERT INTO `editors` (`member`, `category`) VALUES
-(1, 1);
+(1, 1),
+(2, 1),
+(2, 3),
+(1, 5),
+(2, 5),
+(3, 5),
+(1, 7),
+(2, 7);
 
 -- --------------------------------------------------------
 
@@ -154,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   `about` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `members`
@@ -163,7 +177,8 @@ CREATE TABLE IF NOT EXISTS `members` (
 INSERT INTO `members` (`id`, `username`, `password`, `fullname`, `birthdate`, `email`, `avatar`, `gender`, `about`) VALUES
 (1, 'enjellan', 'de4ab6e26db462b930510ba83e9f80b7db2bef88', 'Enjella Melissa Nababan', '1991-03-03', 'enjellamelissan@yahoo.com', 'avatars/enjella.JPG', 'F', ''),
 (2, 'danny', '0c258ac8c40b49eea99ecbd24e31b1d72aa42772', 'Danny Andrianto', '1992-09-11', 'danny_andrianto@hotmail.com', 'avatars/danny.jpg', 'M', 'about'),
-(3, 'arya', '4a82ada5286fe66c040d9593e3e5b68939cca0f1', 'Arya Rezavidi', '1994-03-17', 'arya@gmail.com', 'avatars/arya.jpg', 'M', 'aku ganteng yah');
+(3, 'arya', '4a82ada5286fe66c040d9593e3e5b68939cca0f1', 'Arya Rezavidi', '1994-03-17', 'arya@gmail.com', 'avatars/arya.jpg', 'M', 'aku ganteng yah'),
+(4, 'dummy', '9827b4c03497c80a8a217d1d6646c9b0f88bb2bb', 'Dummy Ajah', '2012-03-04', 'dum@dum.dum', 'avatars/dummy.jpg', 'M', 'lolwut');
 
 -- --------------------------------------------------------
 
@@ -185,7 +200,8 @@ CREATE TABLE IF NOT EXISTS `tags` (
 INSERT INTO `tags` (`name`, `tagged`) VALUES
 ('css', 1),
 ('html', 1),
-('javascript', 1);
+('javascript', 1),
+('php', 1);
 
 -- --------------------------------------------------------
 
@@ -204,7 +220,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   PRIMARY KEY (`id`),
   KEY `creator` (`creator`),
   KEY `category` (`category`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `tasks`
