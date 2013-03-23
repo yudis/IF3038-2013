@@ -15,6 +15,11 @@ $userf = 'nama_user';
 $type = $_GET['type'];
 $all = $type == 'all';
 
+$baseTaskQ = "id_kategori IN ( SELECT id_kategori FROM ".Category::tableName()." WHERE id_user='$id' ".
+			 "OR id_kategori IN (SELECT id_kategori FROM edit_kategori WHERE id_user='$id') ".
+			 "OR id_kategori IN (SELECT id_kategori FROM ". Task::tableName() ." AS t LEFT OUTER JOIN assign AS a ".
+			 "ON t.id_task=a.id_task WHERE t.id_user = '". $id ."' OR a.id_user = '". $id ."' ))";
+
 // Presentation logic here
 
 $this->requireJS('search');
@@ -28,7 +33,7 @@ $this->header('Search', 'search');
 	<div class="search-results<?php if ($all) echo ' all' ?>">
 	<?php if ($type == 'task' || $all):
 
-$tasks = Task::model()->findAllLimit("nama_task LIKE '$terms'", array(), 0, 10);
+$tasks = Task::model()->findAllLimit("$baseTaskQ AND nama_task LIKE '$terms'", array(), 0, 10);
 ?>
 <div class="result-set">
 	<section class="tasks">
@@ -43,7 +48,7 @@ $tasks = Task::model()->findAllLimit("nama_task LIKE '$terms'", array(), 0, 10);
 	</section>
 </div>
 	<?php endif; if ($type == 'user' || $all):
-		$users = User::model()->findAllLimit("username LIKE '$terms' OR fullname LIKE '$terms'", array(), 0, 10);
+		$users = User::model()->findAllLimit("username LIKE '$terms' OR fullname LIKE '$terms' OR email LIKE '$terms' OR birthdate LIKE '$terms'", array(), 0, 10);
 	?>
 
 	<div class="result-set">

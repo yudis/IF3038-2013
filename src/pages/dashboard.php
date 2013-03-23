@@ -9,8 +9,13 @@
 
 	$cat = (int) $_GET['cat'];
 
-	$todoQ = 'status=0';
-	$doneQ = 'status=1';
+	$id = $this->currentUserId;
+	$baseQ = "id_kategori IN ( SELECT id_kategori FROM ".Category::tableName()." WHERE id_user='$id' ".
+			 "OR id_kategori IN (SELECT id_kategori FROM edit_kategori WHERE id_user='$id') ".
+			 "OR id_kategori IN (SELECT id_kategori FROM ". Task::tableName() ." AS t LEFT OUTER JOIN assign AS a ".
+			 "ON t.id_task=a.id_task WHERE t.id_user = '". $id ."' OR a.id_user = '". $id ."' ))";
+	$todoQ = $baseQ . ' AND status=0';
+	$doneQ = $baseQ . ' AND status=1';
 	$narrowQ = '';
 
 	if ($cat) {

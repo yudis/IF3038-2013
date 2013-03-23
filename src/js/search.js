@@ -29,6 +29,7 @@ Rp(function() {
 			if (req.readyState == 4) {
 				if (req.responseText) {
 					pageCount[typ]++;
+					Rp('#' + type + 'List > p').css('display', 'none');
 					list.innerHTML += req.responseText;
 				}
 				list.className = '';
@@ -61,6 +62,36 @@ Rp(function() {
 		}
 		lastScroll = window.scrollY;
 	}
+
+		// Task checkboxes
+
+	handleTaskCheckbox = function(e) {
+		Rp('.task-checkbox input[data-task-id]').prop('disabled', true);
+		taskID = this.getAttribute('data-task-id');
+		mark = Rp.ajaxRequest('api/mark_task');
+		mark.onreadystatechange = function() {
+			if (mark.readyState == 4) {
+				Rp('#taskList').removeClass('loading');
+				Rp('.task-checkbox input[data-task-id]').prop('disabled', false);
+				response = Rp.parseJSON(mark.responseText);
+				if (response.success) {
+					e.target.parentNode.parentNode.parentNode.parentNode.parentNode.style.display = 'none';
+				}
+				else {
+					console.log('Failure to update status of task.');
+				}
+			}
+			else {
+				Rp('#taskList').addClass('loading');
+			}
+		}
+		mark.post({
+			'taskID': taskID,
+			'completed': this.checked
+		});
+	}
+
+	Rp('.task-checkbox input[data-task-id]').on('change', handleTaskCheckbox);
 });
 
 /*----- Bagian Search ----*/
