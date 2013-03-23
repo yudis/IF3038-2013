@@ -363,4 +363,56 @@ Rp(function()
 	}
 
 	var ref = window.setInterval(refreshTasks, 5000);
+
+	// Assignee
+	var asignee = document.getElementById("usernames_list");
+	asignee.onkeyup = function()
+	{
+		var value = asignee.value;
+		var req = Rp.ajaxRequest();
+		req.onreadystatechange = function() {
+			switch (req.readyState) {
+				case 1:
+				case 2:
+				case 3:
+					Rp('#assignee').addClass('loading');
+					break;
+				case 4:
+					Rp('#assignee').removeClass('loading');
+					try {
+						response = Rp.parseJSON(req.responseText);
+						var elm = document.getElementById("auto_comp_assignee");
+						var inflate = document.getElementById("auto_comp_inflate_assignee");
+						inflate.innerHTML = "";
+						var temp = 0;
+						for (var i in response)
+						{
+							temp++;
+							var newLi = document.createElement("li");
+							newLi.innerHTML = "<a href='javascript:choose_assignee(\""+response[i].data.username+"\")'>"+
+												response[i].data.username+"</a>";
+							inflate.insertBefore(newLi, inflate.firstChild);
+						}
+						
+						if (temp!=0)
+							elm.style.display = "block";
+					}
+					catch (e) {
+
+					}
+					break;
+			}
+		}
+		req.get('api/get_username?username=' + value);
+	}
+
+	function choose_assignee(username)
+	{
+		var elm = document.getElementById("auto_comp_assignee");
+		var value = asignee.value;
+		value = value.substr(0, value.lastIndexOf(",")+1);
+		value += username;
+		asignee.value = value;
+		elm.style.display = "none";
+	}
 });

@@ -119,6 +119,9 @@ foreach ($done as $task) { include dirname(__FILE__) . '/../template/task.php'; 
 						<button type="submit" title="Semua elemen form harus diisi dengan benar dahulu.">Simpan</button>
 					</div>
 				</form>
+				<div id="auto_comp_assignee">
+					<ul id="auto_comp_inflate_assignee"></ul>
+				</div>
 			</div>
 		</div>
 <?php $this->footer() ?>
