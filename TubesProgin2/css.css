@@ -1,13 +1,14 @@
 /* 
     Document   : css
     Created on : Feb 18, 2013, 5:32:48 PM
-    Author     : frilla, timo, stefan
+    Author     : frilla, afif, martha
     Description:
         Purpose of the stylesheet follows.
 */
 
 body {
     background-image: url('img/dashboard_bg.jpg');
+    background-attachment: fixed;
     font-family: cambria;
     width: 100%;
     overflow: auto;
@@ -62,6 +63,7 @@ input.liusername{
     position: absolute;
     left: 950px;
 }
+
 #dashboard {
     position: absolute;
     left: 1070px;
@@ -89,22 +91,32 @@ input.liusername{
     z-index: 10;
 }
 
+#listtugas {
+    visibility: visible;
+    width: 900px;
+    height: auto;
+}
 
 .listTugas {
-    width: 160px;
-    height: 191px;
+    width: 140px;
+    height: 175px;
+    padding: 10px;
+    color: black;
     float: left;
-    background-image: url('img/kertas.png');
+    background-image: url('img/kertaskecil.png');
     background-repeat: no-repeat;
     font-size:13px;
+    margin: 10px;
 }
 
 .listTugas:hover {
-    width: 170px;
-    height: 205px;
-    float: left;
+    width: 150px;
+    height: 185px;
+    background-image: url('img/kertaskecilhover.png');
     cursor: pointer;
     font-size:14px;
+    margin: 5px;
+    padding: 10px;
 }
 
 .addTask {
@@ -300,10 +312,6 @@ textArea {
     visibility: hidden;
 }
 
-#listtugas {
-    visibility: visible;
-}
-
 #addCat {
     font-size: 20pt;
     color: white;
@@ -313,7 +321,7 @@ textArea {
     left: 0px;
     height: 50px;
     padding-top: 5px;
-    position: absolute;
+    position: fixed;
     padding-left: 35px;
     cursor: pointer;
 }
@@ -647,4 +655,12 @@ strong {
 .searchUser {
     position: relative;
 }
-/* ----------------------END OF SEARCH CSS----------------------- */
+/* -----------------------END OF SEARCH CSS----------------------- */
+
+/*----------------------CSS YANG BARU------------- */
+#buattugas {
+    background-image: url('img/kertas.png');
+    padding: 40px;
+    height: 463px;
+    width: 370px;
+}

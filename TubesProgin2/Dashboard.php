@@ -67,15 +67,15 @@ and open the template in the editor.
                             <?php
                                 echo($data['Deadline'] );
                             ?>
-                            <br><b>Tag : </b><br>
+                            <br><b>Tag : </b>
                             <?php
                             $tag = "SELECT tag.* FROM tag,tasktag WHERE tag.IDTag=tasktag.IDTag AND tasktag.IDTask=\"" . $data['IDTask'] . "\"";
                             $results = mysql_query($tag);
                             if ($results > 0) {
                                 while ($datas = mysql_fetch_array($results)) {
                                     echo($datas['TagName']);
+                                    echo ', ';
                                     ?>
-                                    <br>
                                     <?php
                                 }
                             }

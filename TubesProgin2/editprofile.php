@@ -12,9 +12,9 @@ if (connectDB()) {
     $password2 = md5($_POST['regpassword2']);
     $date = $_POST['regdate'];
     
-    $target = "img/".$username.$_FILES["regfile"]["name"];
+    $target = "img/".$_COOKIE['UserLogin'].$_FILES["regfile"]["name"];
     
-    if ($target != NULL) {
+    if ($_FILES["regfile"]["name"] != NULL) {
         move_uploaded_file($_FILES["regfile"]["tmp_name"],$target);
         $insertQuery= "UPDATE user SET Avatar='".$target."' WHERE Username = '".$_COOKIE['UserLogin']."'";
         $insert = mysql_query($insertQuery);
@@ -25,7 +25,7 @@ if (connectDB()) {
         $insert = mysql_query($insertQuery);
     }
     
-    if ($password != NULL) {
+    if ($_POST['regpassword1'] != NULL) {
         if ($password === $password2 ) {
             $insertQuery= "UPDATE user SET Password='".$password."' WHERE Username = '".$_COOKIE['UserLogin']."'";
             $insert = mysql_query($insertQuery);
