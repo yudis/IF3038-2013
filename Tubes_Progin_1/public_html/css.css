@@ -1,13 +1,5 @@
-/* 
-    Document   : css
-    Created on : Feb 18, 2013, 5:32:48 PM
-    Author     : frilla, timo, stefan
-    Description:
-        Purpose of the stylesheet follows.
-*/
-
 body {
-    background-image: url('img/Dashboard_bg.jpg');
+    /*background-image: url('img/Dashboard_bg.jpg');*/
     font-family: cambria;
     width: 100%;
     overflow: hidden;
@@ -47,49 +39,27 @@ input.liusername{
     width: 20%;
 }
 
-#profile {
-    position: absolute;
-    left: 950px;
-}
-#dashboard {
-    position: absolute;
-    left: 1070px;
-}
-#logout {
-    position: absolute;
-    left: 1200px;
-}
-#search {
-    position: absolute;
-    left: 90px;
-}
 
 #box {
 	width: 120px;
 }
 
-.overlay
-{
-   background-color: #000;
-   opacity: .7;
-   filter: alpha(opacity=70);
-   position: absolute; top: 0; left: 0;
-   width: 100%; height: 100%;
-   z-index: 10;
-}
-
-
 .listTugas {
     width: 170px;
-    height: 205px;
+    height: 160px;
     float: left;
     background-image: url('img/tugas.png');
+    background-size: cover;
+    margin-top:20px;
+    margin-left:20px;
+    padding-top: 80px;
+    padding-left: 30px;
     background-repeat: no-repeat
 }
 
 .listTugas:hover {
     width: 170px;
-    height: 205px;
+    height: 160px;
     float: left;
     background-image: url('img/tugasHover.png');
 }
@@ -137,7 +107,6 @@ input.liusername{
     width: 250px;
     height: 100%;
     position: absolute;
-    background-image: url('img/bg.jpg');
     overflow: auto;
     color: white;
     font-size: 16pt;
@@ -200,10 +169,9 @@ textArea {
     visibility: hidden;
 }
 
-#overlay {
-    background-color: #000;
+.overlay {
+   background-color: #000;
    opacity: .7;
-   filter: alpha(opacity=70);
    position: fixed; top: 0; left: 0;
    width: 100%; height: 100%;
    z-index: 10;
@@ -226,7 +194,7 @@ textArea {
   border-radius: 10px;
 }
 
-.list{
+/*.list{
     font-size: 12pt;
     top: 75px;
     position:absolute;
@@ -240,10 +208,16 @@ textArea {
     width: 850px;
     height: 603px;
     visibility: hidden;
-}
+}*/
 
-#listtugas {
+#listwall {
+    position: fixed;
+    top: 80px;
+    left: 330px;
     visibility: visible;
+    overflow:auto;
+    width: 920px;
+    height: 600px;
 }
 
 #addCat {
@@ -261,128 +235,100 @@ textArea {
 
 
 /*
- * index related
+ * INDEX
  */
-#header {
+input{
+    font-family: Cambria;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+input[type=submit]{
+    font-weight: bold;
+    padding: 3px 20px;
+}
+#homepage-bg {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+}
+#homepage-header {
     width: 100%;
     left: 0;
     top: 0;
     margin: 0;
-    height: 80px;
+    height: 10%;
     position: fixed;
     background-color: #000000;
     box-shadow: 0px 5px 30px #000000;
+    z-index: 5;
 }
-#logo {
+#text-logo {
     position: fixed;
-    left: 40px;
-    top: 10px;
+    left: 10px;
+    top: 6px;
 }
-#logo-big{
+
+#login{
+    position: fixed;
+    top: 20px;
+    margin-left: 50%;
+    color:white;
+    font-family: Cambria;
+}
+#login input[type=text]{
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#login input[type=password]{
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#pic-logo {
     position: fixed;
     left: 20px;
     top: 100px;
     width: 50%;
-    heigth: 50%;
-}
-#login{
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    color:white;
-    font-family: Cambria, Georgia, serif;
+    height: 50%;
 }
 #register {
     position:fixed;
-    top: 30%;
+    top: 28%;
     left: 60%;
-    line-height: 200%;
+    line-height: 180%;
     font-family: Cambria, Georgia, serif;
 }
-#register b {
-    font-size: 20pt;
-    padding-bottom: 20%;
-}
-#inputregister {
+#register input{
     position: fixed;
-    top: 35.5%;
-    left: 73%;
-    line-height: 200%;
+    left: 72%;
 }
-
-#regfile{
-    font-family: Cambria, Georgia, serif;
+#register input[type=submit]{
+    position: fixed;
+    left: 70%;
 }
-
-input{
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+#register small{
+    color: red;
+    display: none;
 }
-#feature{
-    position:fixed;
-    top: 30%;
-    left: 20%;
+#register normal{
+    position: relative;
 }
-
-.logbutton {
-	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
-	background-color:#ededed;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #dcdcdc;
-	display:inline-block;
-	color:black;
-        font-weight:bold;
-	font-family:Cambria, Georgia, serif;;
-	font-size:15px;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:1px 1px 0px #ffffff;
-}.logbutton:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
-	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
-	background-color:#dfdfdf;
-}.logbutton:active {
-	position:relative;
-	top:1px;
+#register input[type=submit]{
+    color:#777777;
 }
-
-#regbutton {
-	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
-	background-color:#ededed;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #dcdcdc;
-	display:inline-block;
-	color:#777777;
-	font-family:Cambria, Georgia, serif;;
-	font-size:15px;
-	font-weight:normal;
-	padding:2px 132px;
-	text-decoration:none;
-        text-shadow:1px 1px 0px #ffffff;
-}#regbutton:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
-	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
-	background-color:#dfdfdf;
-}#regbutton:active {
-	position:relative;
-	top:1px;
+#register img{
+    position: fixed;
+    top: 10%;
+    left: 57%;
+    height: 90%;
+    width: 35%;
+    z-index: -5;
 }
 #regdate{
     min: "1955-12-31";
@@ -411,9 +357,57 @@ input{
     z-index: -3000;
 }
 
-/*
- * profile related
- */
+/*DASHBOARD*/
+#dashboard-header{
+    width: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+    height: 68px;
+    position: fixed;
+    background-color: #000000;
+    box-shadow: 0px 5px 30px #000000;
+    z-index: 0;
+}
+#dashboard-header a{
+    padding: 24.5px 10px;
+    color:white;
+    font-family: Cambria;
+    font-weight: bold;
+    text-decoration: none;
+}
+#dashboard-header a:hover{
+    background-color: #333333;
+}
+#profile:hover + #avatarsmall{
+    background-color: #333333;
+}
+#avatarsmall{
+    position: absolute;
+    left: 1005px;
+    padding: 14px 6px;
+    width: 40px;
+    height: 40px;
+}
+#profile {
+    position: absolute;
+    left: 925px;
+    text-align: right;
+}
+#dashboard {
+    position: absolute;
+    left: 1070px;
+}
+#logout {
+    position: absolute;
+    left: 1180px;
+}
+#search {
+    position: absolute;
+    left: 90px;
+}
+
+/*PROFILE*/
 #donelist{
     position: fixed;
     left: 65%;
@@ -438,49 +432,103 @@ input{
     background-image: url('img/todolist.png');
 }
 #panel {
-    top: 45px;
+    /*top: 68px;
     left: 0;
-    padding-top: 100px;
-    padding-left: 35px;
+    padding-top: 0px;
+    padding-left: 0px;
     height: 560px;
     width: 250px;
     position: absolute;
-    background-image: url('img/bg.jpg');
     overflow: hidden;
     color: white;
-    font-size: 16pt;
-    box-shadow: 0px 5px 30px #000000;
-    z-index: -10;
+    font-size: 16pt;*/
 }
-#bioleft{
-    position: fixed;
-    left: 1%;
-    top: 55%;
-    color: white;
-    font-size: 10pt;
+#panelbg{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 290px;
+    height: 100%;
+    z-index: -5;
 }
-#bioright{
-    position: fixed;
-    left: 8%;
-    top: 55%;
-    color: white;
-    font-size: 10pt;
-}
-#biousername{
-    font-weight: bold;
-    font-size: 30pt;
-    position: fixed;
-    top: 48%;
-    color: white;
-}
-#profpic{
-    position: fixed;
-    top: 8%;
-    width:250px;
+#avatarbig{
+    position: absolute;
+    top: 100px;
+    left: 45px;
+    width: 200px;
+    height: 200px;
 }
 #badge{
     position: fixed;
-    top: 28%;
-    left: 10%;
-    width: 150px; 
+    top: 220px;
+    left: 150px;
+    width: 125px; 
+}
+#biousername{
+    position: fixed;
+    font-weight: bold;
+    font-size: 30pt;
+    top: 350px;
+    color: white;
+}
+#biodata{
+    position: fixed;
+    top: 410px;
+    color: white;
+    font-size: 12pt;
+    line-height: 180%;
+}
+#biodata b{
+    position: fixed;
+    left: 80px;
+}
+#biodata input{
+    position: fixed;
+    left: 90px;
+}
+#bioform{
+    position: fixed;
+    top: 200px;
+    left: 400px;
+    color: white;
+    font-size: 12pt;
+    line-height: 180%;
+    display: none;
+    z-index: 15;
+}
+#popoutbg{
+    top: 200px;
+    left: 400px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    position: fixed;
+    background-color: black;
+    width: 350px;
+    height: 250px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+#popoutovl{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity:0.7;
+    filter:alpha(opacity=70); /* For IE8 and earlier */
+}
+#bioform input{
+    position: relative;
+    float: right;
+}
+#bioform input[type=submit]{
+    position: relative;
+    left: -110px;
+}
+#bioform small{
+    display: none;
+    color: red;
 }

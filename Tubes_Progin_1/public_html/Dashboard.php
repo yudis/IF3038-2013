@@ -1,6 +1,6 @@
 <?php
-require_once("db.php");
-session_start();
+    require_once("db.php");
+    session_start();                   
 ?>
 <!--
 To change this template, choose Tools | Templates
@@ -15,23 +15,26 @@ and open the template in the editor.
         <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
-
+        
         <div id="dashboard-header">
             <img id="text-logo" src="img/logo_small.png" alt="logo" href="dashboard.html" title="Home"/>
             <a title="Go to Dashboard" href="dashboard.php" id="dashboard">Dashboard</a>
             <a title="Go to Profile" href="profile.php" id="profile"><?php echo ($_SESSION['username']); ?></a>
             <img src="
-            <?php
-            $result1 = ProginDB::getInstance()->query("SELECT * FROM user WHERE username = '" . $_SESSION['username'] . "'");
-            $row = mysqli_fetch_array($result1, MYSQLI_ASSOC);
-            echo $row['avatar'];
-            ?>" id="avatarsmall"
-                 />
+                <?php 
+                    $result = ProginDB::getInstance()->query("SELECT * FROM user WHERE username = '".$_SESSION['username']."'");
+                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    echo $row['avatar'];
+                ?>" id="avatarsmall"
+            />
             <a title="Log out from here" href="logout.php" id="logout">Logout</a>
             <form id="search">
                 <input type="text" name="Search" id="box">
                 <input type="submit" value="Search">
             </form>
+        </div>
+        <div id="panel">
+            <img src="img/bg.jpg" id="panelbg"/>
         </div>
         <div id="category">
             <?php
@@ -47,24 +50,25 @@ and open the template in the editor.
             <a onclick="addCategory();">+ category</a>
         </div>
 
-        <div id="listtugas"class="list">
+        <div id="listwall" class="list">
             <?php
             $query = "SELECT task.id_task AS taskID, task.name AS taskName, deadline, status FROM utrelation JOIN task WHERE username = '" . $_SESSION['username'] . "' AND utrelation.id_task = task.id_task;";
             $result = ProginDB::getInstance()->query($query);
 
+            $display_id = 0;
             while ($row = mysqli_fetch_array($result)) {
                 echo "<div class='listTugas' id='task" . $row['taskID'] . "'>";
-                echo "<a id='task" . $row['taskID'] . "' onclick='showRinci('" . $row['taskID'] . "');'>" . $row['taskName'] . "</a>";
+                echo "<a id='task" . $row['taskID'] . "' onclick='showRinci('" . $row['taskID'] . "');'><b>" . $row['taskName'] . "</b></a>";
                 echo "<div>" . $row['deadline'] . "</div>";
 
                 $queryTag = "SELECT tag.name AS tagName FROM utrelation JOIN tag JOIN ttrelation WHERE username='" . $_SESSION['username'] . "' AND tag.id_tag = ttrelation.id_tag AND utrelation.id_task = ttrelation.id_task AND utrelation.id_task='" . $row['taskID'] . "';";
                 $resultTag = ProginDB::getInstance()->query($queryTag);
 
-                echo "<div>";
+                echo "<div style='font-size:10pt;'>Tag: <i>";
                 while ($rowTag = mysqli_fetch_array($resultTag)) {
                     echo $rowTag['tagName'] . ", ";
                 }
-                echo "</div>";
+                echo "</i></div>";
 
                 echo "<div id='statusTask" . $row['taskID'] . "'>";
                 echo "<div>" . $row['status'] . "</div>";
@@ -79,13 +83,13 @@ and open the template in the editor.
 
                 $queryOwner = "SELECT creator FROM task WHERE id_task='" . $row['taskID'] . "';";
                 $resultOwner = ProginDB::getInstance()->query($queryOwner);
-                while ($rowOwner = mysqli_fetch_array($resultOwner)) {
+                while ($rowOwner = mysqli_fetch_array($resultOwner, MYSQLI_ASSOC)) {
                     if ($_SESSION['username'] === $rowOwner['creator']) {
                         echo "<div class='removeTask'><input type='submit' id='removeTaskBtn" . $row['taskID'] . "; onclick='removeTask('" . $row['taskID'] . "');' value='Remove Task'/></div>";
                     }
                 }
-
                 echo "</div>";
+                $display_id++;
             }
             ?>
         </div>

@@ -68,6 +68,35 @@
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
             return $row['avatar'];
         }
+        public function verify_user_exists_by_username($username){
+            $username = $this->real_escape_string($username);
+            $result = $this->query("SELECT * FROM user WHERE username = '".$username."'");
+            return $result->num_rows;
+        }
+        public function verify_user_exists_by_email($email){
+            $email = $this->real_escape_string($email);
+            $result = $this->query("SELECT * FROM user WHERE email = '".$email."'");
+            return $result->num_rows;
+        }
+        public function edit_profile($username, $fullname, $avatar, $dob, $password){
+            $fullname = $this->real_escape_string($fullname);
+            $dob = $this->real_escape_string($dob);
+            $avatar = $this->real_escape_string($avatar);
+            $password = $this->real_escape_string($password);
+            $this->query("UPDATE user SET fullname='".$fullname."', avatar='avatar/".$avatar."', dob='".$dob."', password='".md5($password)."' WHERE username = '".$username."'");
+        }
+        public function donelist_display($user){
+            $result = $this->query("SELECT category.`name`, task.`name` FROM user JOIN utrelation JOIN task JOIN category WHERE user.username='".$user."' AND task.status='T' AND utrelation.username= user.username AND utrelation.id_task=task.id_task AND category.id_category=task.id_category ORDER BY task.id_category");
+            while ($row = mysqli_fetch_array($result, MYSQLI_NUM)){
+                echo ("<b>".$row[0]." : </b>".$row[1]."</br>");
+            }
+        }
+        public function todolist_display($user){
+            $result = $this->query("SELECT category.`name`, task.`name` FROM user JOIN utrelation JOIN task JOIN category WHERE user.username='".$user."' AND task.status='F' AND utrelation.username= user.username AND utrelation.id_task=task.id_task AND category.id_category=task.id_category ORDER BY task.id_category");
+            while ($row = mysqli_fetch_array($result, MYSQLI_NUM)){
+                echo ("<b>".$row[0]." : </b>".$row[1]."</br>");
+            }
+        }
         /*function insert_tuple($nameID, $unitID, $priceID){
             $this->query("INSERT INTO has (Name, Unit, Price) 
                             VALUES ('" . $nameID . "', '" . $unitID . "', '" 
