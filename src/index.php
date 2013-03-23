@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset( $_SESSION['myusername'])){
-	header("location:profil.php");
+	header("location:dashboard.php");
 }
 if (isset($_GET['status'])) {
 	$status = $_GET['status'];
@@ -58,9 +58,6 @@ if (isset($_GET['status'])) {
                                                			<input type="submit" value="login" name="submit"/>
                                                 </form>
                                        </div>
-                                        <div class ="searchoption">
-                                            <input class="searchbox" type="text" value="Input search" onfocus="searchFocus(this)" onblur="searchBox(this)" />
-                                        </div>
                                         <div>
 				</div>
 				
