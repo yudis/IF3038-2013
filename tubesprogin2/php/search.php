@@ -29,7 +29,6 @@
                    <!-- alert(taskid);-->
                 </script>
                 <script type="text/javascript" src="../js/edit_task.js"></script>
-				<script type="text/javascript" src="../js/search.js"></script>
              
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 		<title> Eurilys </title>
@@ -42,9 +41,7 @@
 				<div class="left">
 					<a href="dashboard.html"> <img src="../img/logo.png" alt=""> </a>
 				</div>
-				<form id="searchform" action="javascript:search()" method="post">
-				<input id="search_box" type="text" placeholder="search..."> <input id="search_type" type="text" placeholder="username/category/task"><br/>   <input type="submit" name="Submit" value="Search"/>
-				</form>
+				<input id="search_box" name="search_box" type="text" placeholder="search...">
 				<div class="header_menu"> 
 					<div class="header_menu_button current_header_menu"> <a href="dashboard.html"> DASHBOARD </a>   </div>
 					<div class="header_menu_button">  <a href="profile.html"> PROFILE </a> </div>
@@ -89,44 +86,125 @@
 				</div>
 			</div>
 			<div id="dynamic_content">
-                            <ul>
-                                <?php foreach($task as $eachtask){?>
-                                    <li>
-                                    <br><br>
-                            
-                            <img src="../img/done.png" id="finish_1" onclick="finishTask('+i+')" class="task_done_button" alt="" />
-                            <div id="task_name_ltd" class="left dynamic_content_left">Task Name</div>
-                            <div id="task_name_rtd" class="left dynamic_content_right"> <a href="#" onclick="tampil_edit_task('<?php echo $eachtask['task_name']?>')"><?php echo $eachtask['task_name']?></a> </div>
-                            <br>
-                            <div id="deadline_ltd" class="left dynamic_content_left">Deadline</div>
-                            <div id="deadline_rtd" class="left dynamic_content_right"><?php echo $eachtask['task_deadline']?></div>
-                            <br>
-                            <div id="tag_ltd" class="left dynamic_content_left">Tag</div>
-                            <div id="tag_rtd" class="left dynamic_content_right"><?php echo $eachtask['task_tag_multivalue']?></div>
-                            <br>
-                            <div id="tag_ltd" class="left dynamic_content_left">Status</div>
-                            <div id="tag_rtd" class="left dynamic_content_right"><?php
-                             if( $eachtask['task_status']==0){
-                                 echo 'Not Finish';
-                             }else
-                             {
-                                 echo 'Finish';
-                             }
-                            
-                            ?></div>
-                            <br>
-                            <div id="tag_ltd" class="left dynamic_content_left">Checkbox</div>
-                            <div id="tag_rtd" class="left dynamic_content_right"><input type="checkbox" onclick="check_value('<?php echo $eachtask['task_name']?>','<?php echo $eachtask['cat_task_name']?>')" name="checkboxtask"><?php echo $eachtask['checkbox']?></div>
-                            <br>
-                            <div class="task_view_category"><?php echo $eachtask['cat_task_name']?></div>
-			    <br>
-                          
-                            </li>
-                                
-                                <?php } ?>
-                                
-                                
-                            </ul>
+				<?php
+				
+				$input = $_GET['searchterm'];
+				$searchtype = $_GET['searchtype'];
+
+				//pesan error kalau input tidak ada
+				if ($input == ""){			
+					echo "<p><h3>Silahkan masukkan kata pencarian</h3>";
+					exit;
+					}
+				$dbhost="localhost";
+				$dbname="progin_405_13510060";
+				$dbusername="progin";
+				$dbpassword="progin";
+				$dbcon=mysql_connect($dbhost,$dbusername,$dbpassword);
+				$connection_string=mysql_select_db($dbname);
+
+				mysql_connect($dbhost,$dbusername,$dbpassword);
+				mysql_select_db($dbname,$dbcon);
+
+				
+				$input = strip_tags( $input );
+				$input = mysql_real_escape_string( $input );
+				$input = trim( $input );
+				
+				if ($searchtype == "username"){
+					//search username
+					$sql = "SELECT * FROM pengguna WHERE username LIKE '%$input%'";
+					$data = mysql_query($sql, $dbcon) or die(mysql_error());
+					while ($result = mysql_fetch_array($data)) {
+					
+						$username = $result['username'];
+						$full_name = $result['full_name'];
+						$avatar = $result['avatar'];
+						
+						echo "<br><b>$username</b>";	
+						echo "";
+						echo "<u>$full_name</u><br>";
+						echo "<img src=$info/><br>";
+					}
+				}
+				else if ($searchtype == "category"){
+					//search category name
+					$sql = "SELECT * FROM task WHERE cat_task_name LIKE '%$input%'";
+					$data = mysql_query($sql, $dbcon) or die(mysql_error());
+					while ($result = mysql_fetch_array($data)) {
+						$taskname = $result['task_name'];
+						$deadline = $result['task_deadline'];
+						$tasktag = $result['task_tag_multivalue'];
+						$taskstatus = $result['task_status'];
+						echo "<br><b>$taskname</b>";	
+						echo "";
+						echo "<u>Deadline: $deadline</u><br>";
+						echo "<img src=$info/><br>";
+					}
+				}
+				
+			else if ($searchtype == "task"){
+						//search task
+						$sql = "SELECT * FROM task WHERE task_name LIKE '%$input%' OR task_tag_multivalue '%$input%'";
+						$data = mysql_query($sql, $dbcon) or die(mysql_error());
+						while ($result = mysql_fetch_array($data)) {
+							$taskname = $result['task_name'];
+							$deadline = $result['task_deadline'];
+							$tasktag = $result['task_tag_multivalue'];
+							$taskstatus = $result['task_status'];
+							echo "<br><b>$taskname</b>";	
+							echo "";
+							echo "<u>Deadline: $deadline</u><br>";
+							echo "<img src=$info/><br>";
+						}
+					}
+					else {
+						//menampilkan semua
+						echo "Task dalam kategori $input:";
+						$sql = "SELECT * FROM task WHERE cat_task_name LIKE '%$input%'";
+						$data = mysql_query($sql, $dbcon) or die(mysql_error());
+						while ($result = mysql_fetch_array($data)) {
+							$taskname = $result['task_name'];
+							$deadline = $result['task_deadline'];
+							$tasktag = $result['task_tag_multivalue'];
+							$taskstatus = $result['task_status'];
+							echo "<br><b>$taskname</b>";	
+							echo "";
+							echo "<u>Deadline: $deadline</u><br>";
+							echo "<img src=$info/><br>";
+						}
+						echo "Task dengan nama/tag $input:";
+						$sql = "SELECT * FROM task WHERE task_name LIKE '%$input%' OR task_tag_multivalue '%$input%'";
+						$data = mysql_query($sql, $dbcon) or die(mysql_error());
+						while ($result = mysql_fetch_array($data)) {
+							$taskname = $result['task_name'];
+							$deadline = $result['task_deadline'];
+							$tasktag = $result['task_tag_multivalue'];
+							$taskstatus = $result['task_status'];
+							echo "<br><b>$taskname</b>";	
+							echo "";
+							echo "<u>Deadline: $deadline</u><br>";
+							echo "<img src=$info/><br>";
+							}
+						echo "Pengguna dengan username $input:";
+						$sql = "SELECT * FROM pengguna WHERE username LIKE '%$input%'";
+						$data = mysql_query($sql, $dbcon) or die(mysql_error());
+						while ($result = mysql_fetch_array($data)) {
+						
+							$username = $result['username'];
+							$full_name = $result['full_name'];
+							$avatar = $result['avatar'];
+							
+							echo "<br><b>$username</b>";	
+							echo "";
+							echo "<u>$full_name</u><br>";
+							echo "<img src=$info/><br>";
+						}
+					}
+				}
+
+			?>
+
 			</div>
 		</section>
 		
@@ -172,3 +250,5 @@
 
 <!-- ini nanti jadiin footer -->
 </html>
+
+

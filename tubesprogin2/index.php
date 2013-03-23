@@ -101,7 +101,7 @@ header( 'src/dashboard.php' );
 						<input type="file" onchange="javascript:regCheck();" name="avatar_upload" id="avatar_upload"> 
 						<img src="img/yes.png" id="avatar_validation" class="signup_form_validation" alt="validation image">
 						
-						<div id="signup_button_submit" onclick="javascript:register();" class="right link_tosca top10 bold" title="Semua elemen form harus diisi dengan benar dahulu."> SIGN UP </div>
+						<div id="signup_button_submit" onclick="javascript:registerakun();" class="right link_tosca top10 bold" title="Semua elemen form harus diisi dengan benar dahulu."> SIGN UP </div>
 					</form>
 				</div>
 			</div>
