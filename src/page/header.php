@@ -24,9 +24,9 @@
 								<option value="3">Category</option>
 								<option value="4">Task</option>
 							</select>    
-					<input type="text" name="search_text" id="search_text" value="" onKeyUp="checkHeaderValidation()" />
-					<div id="test">buat ngetes nih</div> 
-					<input type="submit" value="Search">
+					<input type="text" name="search_text" id="search_text" list="searching-auto" value="" onKeyUp="checkHeaderValidation()" />
+					<input type="submit" value="Search"/>
+					<div id="list-search"></div> 
 				</form>
             </div>
 			<div id="header-right-user">

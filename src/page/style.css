@@ -410,6 +410,11 @@ body {
 	display:block;
 }
 
+#list-search {
+	padding:0px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+}
+
 #about {
 	width:50%;
 	text-align:justify;

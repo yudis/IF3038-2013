@@ -42,7 +42,13 @@ function checkHeaderValidation(){
 			suggestion = suggestion.substr(0,suggestion.length-1);
 			suggestionarray = suggestion.split("|");
 			
-			document.getElementById("test").innerHTML =  suggestion;
+			var x;
+			x="<datalist id=\"searching-auto\">";
+			for (var i = 0; i < suggestionarray.length; i++) {
+				x += "<option value=\""+suggestionarray[i]+"\">";
+			}
+			x += "</datalist>";
+			document.getElementById("list-search").innerHTML=x;
 		}
 		
 		ajaxRequest.send();
