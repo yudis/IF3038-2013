@@ -183,8 +183,8 @@
 					<p><b>Leave a comment</b></p>
 					<form>
 						<textarea id="textarea-comment" rows="8" cols="92" placeholder="Comment about this task..."></textarea>
-						<div><button id="submit-comment" onClick="addComment(<?php echo $taskid ?>)">Submit</button>&nbsp;</div>
 					</form>
+					<div><button id="submit-comment" onClick="addComment(<?php echo $taskid ?>)">Submit</button>&nbsp;</div>
 				</div>
 			</div>
 			
