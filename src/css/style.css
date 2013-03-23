@@ -710,10 +710,14 @@ p.description .detail-label {
 	/** Main Page **/
 	#loginBox {
 		display: none;
+		margin-top:10px;
+		margin-right: 5px;
 		opacity: 0;
 	}
 	#loginBox.visible {
 		display: block;
+		margin-top:10px;
+		margin-right: 5px;
 		opacity: 1;
 	}
 	#loginBox h3 {
