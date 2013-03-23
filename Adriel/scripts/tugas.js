@@ -415,7 +415,6 @@ function addAssignees() {
     var assigneesList = document.getElementById("assigneesList");
     
     if (newAssignee.value == "") {
-        alert("Nama harus dimasukkan");
         return false;
     }
     
@@ -512,7 +511,7 @@ function saveTugas() {
 	else
 	{
 		//masukkan data ke dalam database
-		saveToDatabase();
+		//saveToDatabase();
 		
 		document.getElementById("tagsEditDiv").style.display = "none";
 		document.getElementById("assigneeEditDiv").style.display = "none";
