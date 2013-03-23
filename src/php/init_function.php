@@ -34,6 +34,16 @@
 	  }
 	}
 	
+	function stream_copy($src, $dest)
+    {
+        $fsrc = fopen($src,'r');
+        $fdest = fopen($dest,'w+');
+        $len = stream_copy_to_stream($fsrc,$fdest);
+        fclose($fsrc);
+        fclose($fdest);
+        return $len;
+    } 
+	
 	function getNextTaskId(){
 		$con = getConnection();
 		$query = "SELECT max(taskid) as max FROM task"	;
