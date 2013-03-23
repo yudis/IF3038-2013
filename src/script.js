@@ -289,3 +289,31 @@ function delete_comment(task,id) {
 	xmlhttp.send(post);
 	document.getElementById("komentar").value = "";
 }
+
+function search_more(filter, string, start) {
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			if (filter == "User") {
+				result1 = document.getElementById("result1").innerHTML;
+				document.getElementById("result1").innerHTML = result1.concat(xmlhttp.responseText);
+			} else if (filter == "Category") {
+				result2 = document.getElementById("result2").innerHTML;
+				document.getElementById("result2").innerHTML = result2.concat(xmlhttp.responseText);
+			} else if (filter == "Content") {
+				result3 = document.getElementById("result3").innerHTML;
+				document.getElementById("result3").innerHTML = result3.concat(xmlhttp.responseText);
+			}
+		}
+	}
+	xmlhttp.open("POST","searchresult.php",true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	var post = "";
+	post = post.concat("filter=",filter,"&string=",string,"&start=",start);
+	xmlhttp.send(post);
+}

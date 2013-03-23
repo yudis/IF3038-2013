@@ -19,15 +19,17 @@
 			if ($count == 0) {
 				echo "<div id='message'>No results found</div>";
 			} else {
+				echo '<div id="result1">';
 				while ($row=mysqli_fetch_array($qres)) {
 		?>
 			<div class='judul'>
 				<img class='search-img' align='middle' src='<?php echo $row['avatar']?>' alt='avatar' height='150'/>
 				<a href="profile.php?id=<?php echo $row['id']?>"><?php echo $row['username']?></a>
-				
 			</div>
 		<?php
 				}
+				echo '<input type="button" value="More" onclick="search_more('."'User'".",'".$q."'".',10);this.style.display=\'none\'">';
+				echo '</div>';
 			}
 		}
 		?>
@@ -41,6 +43,7 @@
 			if ($count == 0) {
 				echo "<div id='message'>No ResultsFound</div>";
 			} else {
+				echo '<div id="result2">';
 				while ($row = mysqli_fetch_array($qres)) {
 		?>
 			<div class='judul'>
@@ -50,15 +53,19 @@
 				<?php
 				$cat_id = $row['id'];
 				$tasks = mysqli_query($con, "SELECT * FROM `tasks` WHERE category=$cat_id");
-				echo "<ol>";
-				while ($task = mysqli_fetch_array($tasks)) {
-					echo "<li><a href='rinciantugas.php?id=".$task['id']."'>".$task['name']."</a></li>";
+				if (mysqli_num_rows($tasks) > 0) {
+					echo "<ol>";
+					while ($task = mysqli_fetch_array($tasks)) {
+						echo "<li><a href='rinciantugas.php?id=".$task['id']."'>".$task['name']."</a></li>";
+					}
+					echo "</ol>";
 				}
-				echo "</ol>";
 				?>
 			</div>
 		<?php
 				}
+				echo '<input type="button" value="More" onclick="search_more('."'Category'".",'".$q."'".',10);this.style.display=\'none\'">';
+				echo '</div>';
 			}
 		}
 		?>
@@ -73,6 +80,7 @@
 			if ($count == 0) {
 				echo "<div id='message'>No results found</div>";
 			} else {
+				echo '<div id="result2">';
 				while ($row=mysqli_fetch_array($qres)) {
 		?>
 			<div class='judul'>
@@ -96,6 +104,8 @@
 			</div>
 		<?php
 				}
+				echo '<input type="button" value="More" onclick="search_more('."'Content'".",'".$q."'".',10);this.style.display=\'none\'">';
+				echo '</div>';
 			}
 			mysqli_query($con, "DROP VIEW task_tags");
 		}
