@@ -26,7 +26,14 @@
 				<div id="task-page-title">
 					<div>
 						<h1><?php echo $task['taskname']?></h1>
-						<i><div id="delete-task"><a href="#">Delete This Task</a><br><br></div></i>
+						<i><div id="delete-task">
+                        <?php 
+						$creator = $task['username'];
+						if($creator == $_SESSION['userlistapp']){
+							echo " <a href=\"../php/deletetask.php?taskid=".$taskid."\" onClick=\"confirmTask()\"><i>Delete This Task</i></a>";
+						}
+						?>
+                        <br><br></div></i>
 						Submit by <b><i><?php echo $task['username']?></i></b> at. <?php echo $task['createddate']?>
 					</div>
 					<br>
