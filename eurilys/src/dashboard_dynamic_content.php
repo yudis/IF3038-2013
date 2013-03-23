@@ -32,7 +32,7 @@
 	
 	/* Searching for Task */
 	if ($q == 'all') {
-		$query 	= "SELECT * FROM task;";
+		$query 	= "SELECT * FROM (`task` natural join `task_asignee`) where (task_creator ='$username') OR (username='$username') ";
 		$result	= mysql_query($query);
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 			
