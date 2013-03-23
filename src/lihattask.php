@@ -45,10 +45,15 @@
 			<div id="kolom2" class="kolom">
 				<div id="rinciantugas" class="kotakwarna">
 					<div id="judultugas"><?php echo $_COOKIE["lt_tugas"]["nama"];?></div>
-					<div id="detail" style="visibility: visible">
-						
+					<div id="detail">
 							<label>DEADLINE</label>
-							<a id="deadline"><?php echo $_COOKIE["lt_tugas"]["deadline"];?></a>
+							<a id="deadline">
+							<?php
+								$datetime = strtotime($_COOKIE["lt_tugas"]["deadline"]);
+								$mysqldate = date("d F Y", $datetime);
+								echo $mysqldate;
+							;?>
+							</a>
 							<br>
 							<br>
 								
@@ -57,8 +62,11 @@
 								foreach ($_COOKIE["lt_assignee"] as $x) {
 							?>
 							<a href ="#">
-								<?php echo $x["username"];?>
-							</a><br>
+								<div class="asgdiv">
+									<img class="asgava asgdivelemt" src="<?php echo ($x['avatar']) ?>"/>
+									<a href ="#" class="asgdivelemt"><?php echo $x["username"];?></a>
+								</div>
+							</a>
 							<?php
 								}
 							?>
@@ -73,8 +81,6 @@
 								}
 							?>
 							<br>
-							
-						
 					</div>
 					<!--<div id="detailedit" style="display: none">
 						<form >
@@ -105,7 +111,7 @@
 					<div class="kotakwarna daftarkomen ">
 						<div>
 							<div class="komenkolom">
-								<a href=""><img class="komenava" src="<?php echo ($_COOKIE["lt_komentator"][$count]['avatar']) ?>"/></a>
+								<a href=""><img class="komenava ava" src="<?php echo ($_COOKIE["lt_komentator"][$count]['avatar']) ?>"/></a>
 							</div>
 							<div class="komenkolom komenkomen">
 								<a href="#" class="komennama"><?php echo ($_COOKIE["lt_komentator"][$count]['username'])."<BR>"; ?></a>

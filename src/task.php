@@ -19,6 +19,7 @@
 	$ct = new CreateTask($_POST, $_FILES);
 	$ct->Create();
 	//$ct->Tes();
+	echo "<a href='http://localhost/progin/task.php?tujuan=lihat&id=".$ct->getId()."'>klik disini</a>";
 	
   } else
   if ($_GET['tujuan'] == "lihat"){
