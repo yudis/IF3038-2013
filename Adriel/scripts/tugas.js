@@ -23,21 +23,14 @@ function initialize()
 
 function onload() {
     var id = getQueryParameter('id');
-	IDTugas = decodeURIComponent(getQueryParameter('id'));
+	IDTugas = decodeURIComponent(id);
 	
 	if (id != null)
 	{
-		document.getElementById('namaTugas').innerHTML = getTaskName(decodeURIComponent(id));
-		if (getStatus(decodeURIComponent(id)) == "1")
-		{
-			document.getElementById('checkstatus').checked = true;
-		}
-		else
-		{
-			document.getElementById('checkstatus').checked = false;
-		}
+		getTaskName(decodeURIComponent(id));
+		getStatus(decodeURIComponent(id))
 		setAttachment(decodeURIComponent(id));
-		document.getElementById('deadlineDisplayDiv').innerHTML = getDeadline(decodeURIComponent(id));
+		getDeadline(decodeURIComponent(id));
 		document.getElementById('deadline').value = document.getElementById('deadlineDisplayDiv').innerHTML;
 		setAssignee(decodeURIComponent(id));
 		setTags(decodeURIComponent(id));
@@ -74,6 +67,7 @@ function onload() {
 
 function generateComments(id)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -90,15 +84,16 @@ function generateComments(id)
 	{
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
-			document.getElementById("commentspace") = xmlhttp.responseText;
+			document.getElementById("komentar").innerHTML = xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("GET","getcomments.php?id="+id,true);
+	xmlhttp.open("GET","getcomments.php?id="+id+"&user="+username,true);
 	xmlhttp.send();
 }
 
 function setCommentCount()
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -112,7 +107,7 @@ function setCommentCount()
 	{
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
-			document.getElementById("commentlabel") += (" (sebanyak " + xmlhttp.responseText + " komentar)");
+			document.getElementById("commentlabel").innerHTML += " (sebanyak " + xmlhttp.responseText + " komentar)";
 		}
 	}
 	xmlhttp.open("GET","getcommentinfo.php?id="+IDTugas+"&type=1",true);
@@ -121,6 +116,7 @@ function setCommentCount()
 
 function getTaskName(id)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -135,7 +131,7 @@ function getTaskName(id)
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
 			var taskname = xmlhttp.responseText;
-			return taskname;
+			document.getElementById('namaTugas').innerHTML = taskname;
 		}
 	}
 	xmlhttp.open("GET","gettaskinfo.php?type=taskname&id="+id,true);
@@ -144,6 +140,7 @@ function getTaskName(id)
 
 function getStatus(id)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -158,7 +155,14 @@ function getStatus(id)
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
 			var status = xmlhttp.responseText;
-			return status;
+			if (status == "1")
+			{
+				document.getElementById('checkstatus').checked = true;
+			}
+			else
+			{
+				document.getElementById('checkstatus').checked = false;
+			}
 		}
 	}
 	xmlhttp.open("GET","gettaskinfo.php?type=status&id="+id,true);
@@ -167,6 +171,7 @@ function getStatus(id)
 
 function getDeadline(id)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -181,7 +186,7 @@ function getDeadline(id)
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
 			var deadline = xmlhttp.responseText;
-			return deadline;
+			document.getElementById('deadlineDisplayDiv').innerHTML = deadline;
 		}
 	}
 	xmlhttp.open("GET","gettaskinfo.php?type=deadline&id="+id,true);
@@ -190,6 +195,7 @@ function getDeadline(id)
 
 function setAttachment(id)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -231,6 +237,7 @@ function setAttachment(id)
 
 function setAssignee(id)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -261,6 +268,7 @@ function setAssignee(id)
 
 function setTags(id)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -297,6 +305,7 @@ function getFileName(link)
 }
 
 function addKomentar() {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -330,6 +339,7 @@ function addKomentar() {
 
 function deletekomentar(comment_id)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -438,6 +448,7 @@ function changeMadeTrue()
 
 function saveToDatabase()
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();

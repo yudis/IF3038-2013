@@ -12,10 +12,10 @@
 	
 	if ($type == 1)
 	{
-		$sql = "SELECT COUNT comment_id FROM comment WHERE commented_task = '".$type."'";
+		$sql = "SELECT comment_id FROM comment WHERE commented_task = '".$id."'";
 		$result = mysqli_query($con, $sql);
-		$row = mysqli_fetch_array($result, MYSQLI_NUM);
-		echo $row[0];
+		$row = mysqli_num_rows($result);
+		echo $row;
 	}
 	
 	mysqli_close($con);

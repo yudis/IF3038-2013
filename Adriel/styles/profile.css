@@ -9,6 +9,11 @@
 	font-weight: bold;
 }
 
+#cppname
+{
+	display: none;
+}
+
 .rincianLabel2
 {
 	width: 20%;

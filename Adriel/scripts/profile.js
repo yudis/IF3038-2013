@@ -13,6 +13,9 @@ function initialize()
 			showDate(localStorage.session);
 			showPassword(localStorage.session);
 			showRePassword(localStorage.session);
+			
+			document.getElementById("cppname").value = localStorage.session;
+			document.getElementById("pp").src = "avatar/" + localStorage.session + ".jpg";
 		}
 		else
 		{
@@ -484,7 +487,6 @@ function changePP()
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
-	var ppsource = document.getElementById("cpp").value;
 	var ppdest = "avatar/" + localStorage.session + ".jpg";
 	
 	xmlhttp.onreadystatechange=function()
@@ -495,6 +497,6 @@ function changePP()
 		}
 	}
 	
-	xmlhttp.open("GET","changeprofilepicture.php?source="+ppsource+"&dest="+ppdest,true);
+	xmlhttp.open("GET","changeprofilepicture.php?dest="+ppdest,true);
 	xmlhttp.send();
 }

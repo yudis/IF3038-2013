@@ -14,9 +14,9 @@
         <div class="page">
             <header class="content">
                 <nav>
-                    <div class="logo"><a href="dashboard.html"><img alt="Home" src="images/logo.png" /></a></div>
+                    <div class="logo"><a href="dashboard.php"><img alt="Home" src="images/logo.png" /></a></div>
                     <ul>
-                        <li><div><a href="dashboard.html">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="index.html">Logout</a></div></li>
+                        <li><div><a href="dashboard.php">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="index.html">Logout</a></div></li>
                     </ul>
                     <div class="search">
                         <div id="searchwrapper">
@@ -67,9 +67,15 @@
 						</div>
 						<div id="editProfileButton" class="edit_button_profile"><button type="button" onClick="return editProfil();">Edit</button> </div>
 						<div id="doneProfileButton" class="edit_button_profile"><button type="button" onClick="return doneProfil();" >Done</button> </div>
-						<div id="changeProfilePictureButton" class="edit_button_profile"> Change Profile Picture : <input type="file" id="cpp" name="cpp" accept="image/*" src="element.jpg" onchange="changePP()"/></div>
+						<div id="changeProfilePictureButton" class="edit_button_profile"> Change PP : 
+							<form action="changeprofilepicture.php" method="GET" enctype="multipart/form-data">
+								<input type="file" id="cpp" name="cpp" accept="image/*"/>
+								<input type="text" id="cppname" name="cppname"/>
+								<input type="submit"/>
+							</form>
+						</div>
                     </div>
-                    <div class="profilepict"><img id="pp" src="images/avatar.png" width="200" height="200" alt="Edo Thobi Bram"/></div>
+                    <div class="profilepict"><img id="pp" width="200" height="200" alt="Edo Thobi Bram"/></div>
                 </div>
                 <h1> Activity </h1>
 				<div id="activitylist">

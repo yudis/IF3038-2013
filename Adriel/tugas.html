@@ -14,9 +14,9 @@
         <div class="page">
             <header class="content">
                 <nav>
-                    <div class="logo"><a href="dashboard.html"><img alt="Home" src="images/logo.png" /></a></div>
+                    <div class="logo"><a href="dashboard.php"><img alt="Home" src="images/logo.png" /></a></div>
                     <ul>
-                        <li><div><a href="dashboard.html">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="index.html">Logout</a></div></li>
+                        <li><div><a href="dashboard.php">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="index.html">Logout</a></div></li>
                     </ul>
                     <div class="search">
                         <div id="searchwrapper">
@@ -32,11 +32,11 @@
                 <h1>Rincian Tugas</h1>
                 <div class="padding12px">
                     <form action="#">
-                        <div class="rincianLabel">Nama:</div><div class="rincianDetail"><div id="namaTugas">Tugas 1</div></div>
+                        <div class="rincianLabel">Nama:</div><div class="rincianDetail"><div id="namaTugas"></div></div>
 						<div class="rincianLabel">Status:</div><div class="rincianDetail"><input id="checkstatus" type="checkbox" onchange="changeCheckBox()" disabled /> <span id="statustext">Belum Selesai</span></div>
                         <div class="rincianLabel">Attachment:</div><div class="rincianDetail"><div id="links" class="inlineblock"><a href="files/test.zip" target="_blank">test.zip</a></div></div>
                         <div class="rincianLabel">Deadline:</div><div class="rincianDetail">
-                            <div id="deadlineDisplayDiv" class="inlineblock">02/22/2013</div>
+                            <div id="deadlineDisplayDiv" class="inlineblock"></div>
                             <div id="deadlineEditDiv">
                                 <input type="date" id="deadline" name="deadline" value="2013-02-22" onchange="changeMadeTrue()"/>
                             </div>
@@ -77,9 +77,9 @@
 						<div class="rincianDetail">
                             <div id="commentspace">
 								<div id="komentar">
-									<img id="pp" src="images/a.png" width="50" height="50" alt="Image not found"/><b>Abraham Krisnanda Santoso</b> - 20 Februari 2013 23:06 <button id="">Delete Comment</button><hr />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor nunc, posuere sit amet facilisis quis, ullamcorper nec sapien.<br /><br />
+									<!--<img id="pp" src="images/a.png" width="50" height="50" alt="Image not found"/><b>Abraham Krisnanda Santoso</b> - 20 Februari 2013 23:06 <button id="">Delete Comment</button><hr />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor nunc, posuere sit amet facilisis quis, ullamcorper nec sapien.<br /><br />
 									<img id="pp" src="images/a.png" width="50" height="50" alt="Image not found"/><b>Stefanus Thobi Sinaga</b> - 20 Februari 2013 23:06 <button id="">Delete Comment</button><hr />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tortor nunc, posuere sit amet facilisis quis, ullamcorper nec sapien. <br /><br />
-								</div>
+							-->	</div>
 								<textarea id="txtKomentar" rows="4" cols="80" placeholder="Your comment here..."></textarea><br />
 							</div>
 							<button onclick="return addKomentar();">Submit</button>
