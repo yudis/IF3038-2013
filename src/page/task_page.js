@@ -43,6 +43,17 @@ function addComment(taskid){
 	}
 }
 
+function deleteComment(commentid,taskid){
+	getAjax();
+	ajaxRequest.open("GET","../php/deleteComment.php?commentid="+commentid+"&taskid="+taskid,false);
+	ajaxRequest.onreadystatechange = function()
+	{
+		document.getElementById("user-comment").innerHTML =  ajaxRequest.responseText;
+	}
+	
+	ajaxRequest.send();
+}
+
 function edit_deadline() {
 	document.getElementById("deadline_edit").style.display = 'block';
 	document.getElementById("deadline_done").style.display = 'none';
