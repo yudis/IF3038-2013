@@ -134,15 +134,24 @@ function just_edit_email(userid){
 	document.getElementById("right-profile-editemail").innerHTML = "<a href=\"#\" onclick=\"edit_email('"+userid+"')\"><u><p>edit</p></u></a>";
 }
 
-function edit_password() {
+function edit_password(userid) {
 	document.getElementById("password_form").style.display = 'block';
-	document.getElementById("change_password").innerHTML = "<a href=\"#\" onClick=\"just_edit_password()\">Save Password</a>";
+	document.getElementById("change_password").innerHTML = "<a href=\"#\" onClick=\"just_edit_password('"+userid+"')\">Save Password</a>";
 }
 
-function just_edit_password() {
+function just_edit_password(userid) {
+	getAjax();
+	var newpass = document.getElementById("newpasstext").value;
+
+	ajaxRequest.open("GET","../php/changepassword.php?newpass="+newpass+"&userid="+userid,false);
+	
+	alert("Password Changed");
+	
+	ajaxRequest.send();
+
 	document.getElementById("password_form").style.display = 'none';
 	document.getElementById("change_password").style.display = 'block';
-	document.getElementById("change_password").innerHTML = "<a href=\"#\" onClick=\"edit_password()\">Change Password</a>";
+	document.getElementById("change_password").innerHTML = "<a href=\"#\" onClick=\"edit_password('"+userid+"')\">Change Password</a>";
 }
 
 function edit_avatar(){

@@ -36,21 +36,16 @@
 								echo "<div id=\"uploader\">";
 								echo "<input type=\"file\" name=\"changeAvatar\">";
 								echo "</div>";
-								echo "<div id=\"change_password\"><a href=\"#\" onClick=\"edit_password()\">Change Password</a></div>";
+								echo "<div id=\"change_password\"><a href=\"#\" onClick=\"edit_password('$user_show')\">Change Password</a></div>";
 								echo "<div id=\"password_form\">";
-								echo "<div id=\"oldpassword\">";
-								echo "<div id=\"left-profile-body\">Old Password</div><div id=\"right-profile-body\"> : <input type=\"text\" name=\"oldPass\"></div>";
-								echo "</div>";
 								echo "<div id=\"newpassword\">";
-								echo "<div id=\"left-profile-body\">New Password</div><div id=\"right-profile-body\"> : <input type=\"text\" name=\"newPass\"></div>";
-								echo "</div>";
-								echo "<div id=\"confirmpassword\">";
-								echo "<div id=\"left-profile-body\">Confirm Password</div><div id=\"right-profile-body\"> : <input type=\"text\" name=\"confirmPass\"></div>";
+								echo "<div id=\"left-profile-body\">New Password</div><div id=\"right-profile-body\"> : <input type=\"text\" name=\"newPass\" id=\"newpasstext\"></div>";
 								echo "</div>";
 								echo "<br><br><br>";
 								echo "</div>";
 							}
 						?>
+						<br />
 					<p>Joined on : <?php echo $user['join']?></p>
 					<div>
 						<div id="left-main-body"><p>About Me :</p></div>
