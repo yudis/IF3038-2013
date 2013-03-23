@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php include '../php/datapengguna.php?t='+"ruth",true?>
+<?php
+$datauser = datapengguna();
+?>
 <html>
 	
 	<head>
@@ -32,9 +36,9 @@
 		<section>
 			<div id="navbar">
 				<div id="short_profile">
-					<img id="profile_picture" src="../img/avatar1.png" alt="">
+					<img id="profile_picture" src="../file/<?php echo $datauser['avatar']?>" alt="">
 					<div id="profile_info">
-						Ruth Natasha 
+						<?php echo $datauser['full_name']?>
 						<br><br>
 						<div class="link_tosca" id="edit_profile_button"> Edit Profile </div>
 					</div> 
@@ -64,14 +68,16 @@
 			<div id="dynamic_content">
 				<div class="half_div">
 					<div id="upperprof">
-						<img src="../img/avatar1.png" alt="">
-						<div id="namauser">Ruth Nattassha</div>
+						<img src="../file/<?php echo $datauser['avatar']?>" alt="">
+						<div id="namauser"><?php echo $datauser['full_name']?></div>
 					</div>
-					<input type="file" id="profile_pic_upload" name="profile_picture"/>
-					<br/><br/>
-					Email : salvaterarug@gmail.com
+					
 					<br/>
-					Birthdate : 16-07-1992
+                                       Username :<?php echo $datauser['username']?>
+                                        <br>
+					Email : <?php echo $datauser['email']?>
+					<br>
+					Birthdate : <?php echo $datauser['birthdate']?>
 
 				</div>
 				<div class="half_div">

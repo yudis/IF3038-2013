@@ -24,10 +24,15 @@
 		<script type="text/javascript" src="../js/catselector.js"> </script> 	
                 <script type="text/javascript" src="../js/add_task.js"></script>
                 <script type="text/javascript" src="../js/fungsiget.js">
+                
+                
                     
                    <!-- var taskid = "<?php echo $last_idx; ?>";-->
                    <!-- alert(taskid);-->
                 </script>
+                  <script type="text/javascript" src="../js/allkategori.js"></script>
+                 <script type="text/javascript" src="../js/hapus.js"></script> 
+                
                 <script type="text/javascript" src="../js/edit_task.js"></script>
              
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
@@ -44,7 +49,7 @@
 				<input id="search_box" type="text" placeholder="search...">
 				<div class="header_menu"> 
 					<div class="header_menu_button current_header_menu"> <a href="dashboard.html"> DASHBOARD </a>   </div>
-					<div class="header_menu_button">  <a href="profile.html"> PROFILE </a> </div>
+					<div class="header_menu_button">  <a href="../src/profile.php"> PROFILE </a> </div>
 					<div class="header_menu_button"> <a id="logout" href="../index.html"> LOGOUT </a> </div>
 				</div>
 				
@@ -72,7 +77,9 @@
                                                     foreach($kategori as $eachkategori){
                                                 ?>
                                                       
-                                                        <li><a href="#" onclick="get_taskkategorijs('<?php echo $eachkategori['cat_name']?>')" > <?php echo $eachkategori['cat_name']?></a></li>
+                                                        <li><a href="#" onclick="get_taskkategorijs('<?php echo $eachkategori['cat_name']?>')" > <?php echo $eachkategori['cat_name']?></a>
+                                                            <img src="../img/no.png" id="del_cat" onclick="deletecat('<?php echo $eachkategori['cat_name']?>')" class="task_done_button" alt="" />
+                                                        </li>
                                                       
                                                       
                                                         

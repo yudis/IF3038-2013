@@ -31,23 +31,27 @@ function get_taskkategorijs(kategori){
                        var container = document.getElementById('dynamic_content');
                        container.innerHTML = '';
                        container.innerHTML = container.innerHTML+'<ul>'+'<li><div id="add_task_link"><a href="../src/addtask.php" >+new task</a></div></li>';
-                       var status="";
-                        for(var i= 0 ; i<2 ; i++){
-                            if((result[i]['task_status'])==0){
-                                status = "Not Finisih";
+                       
+                        var length = result.length;
+                        for(var i= 0 ; i<length ; i++){
+                            var status;
+                            if(result[i]['task_status']==0){
+                             //   alert("not finisih");
+                                status = 'Not Finish';
                             }else{
-                                
-                                 status = "Finish";
+                               // alert("Firnish");
+                                status = 'Finish';
                             }
+                            var task_name = result[i]['task_name'];
                            container.innerHTML = container.innerHTML +
                            
                             '<li>'+
                             
                             '<br><br>'+
-                            
                             '<img src="../img/done.png" id="finish_1" onclick="finishTask('+i+')" class="task_done_button" alt="" />'+
                             '<div id="task_name_ltd" class="left dynamic_content_left">Task Name</div>'+
-                            '<div id="task_name_rtd" class="left dynamic_content_right"> <a href="#" onclick="tampil_edit_task('+'<?php echo $eachtask['+'task_name'+']?>'+')">'+result[i]['task_name']+'</a> </div>'+
+                            '<div id="task_name_rtd" class="left dynamic_content_right"> <a href="#" onclick="tampil_edit_task('+result[i]['task_name']+')">'+result[i]['task_name']+'</a> </div>'+
+                            
                             '<br>'+
                             '<div id="deadline_ltd" class="left dynamic_content_left">Deadline</div>'+
                             '<div id="deadline_rtd" class="left dynamic_content_right">'+result[i]['task_deadline']+'</div>'+
@@ -56,7 +60,8 @@ function get_taskkategorijs(kategori){
                             '<div id="tag_rtd" class="left dynamic_content_right"> '+result[i]['task_tag_multivalue']+'</div>'+
                             '<br>'+
                             '<div id="tag_ltd" class="left dynamic_content_left">Status</div>'+
-                            '<div id="tag_rtd" class="left dynamic_content_right"'+status+'</div>'+
+                            '<div id="tag_rtd" class="left dynamic_content_right">'+status+'</div>'+
+                            '<br>'+
                             '<br>'+
                             '<div id="tag_ltd" class="left dynamic_content_left">Checkbox</div>'+
                             '<div id="tag_rtd" class="left dynamic_content_right"><input type="checkbox" name="checkboxtask"> '+result[i]['checkbox']+'</div>'+
@@ -65,8 +70,7 @@ function get_taskkategorijs(kategori){
 			    '<br>'+
                            
                             
-                            '</li>'
-                            ;  
+                            '</li>';  
                             //onclick="check_value('+'<?php echo $eachtask['+'task_name'+']?>'+','+'<?php echo $eachtask['+'cat_task_name'+']?>'+')"
                         }
                         container.innerHTML = container.innerHTML+'</ul>';
