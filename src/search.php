@@ -24,7 +24,7 @@
 			<div class='line-konten'></div>
 			<div class='judul'>
 				<p class='alignleft'><a href="profile.php?id=<?php echo $row['id']?>"><?php echo $row['username']?></a></p>
-				<p class='alignright'><img class='search-img' align='middle' src='<?php echo $row['avatar']?>' alt='avatar' /></p>
+				<p class='alignright'><img class='search-img' align='middle' src='<?php echo $row['avatar']?>' alt='avatar' width='150'/></p>
 				<div style='clear: both;'></div>
 			</div>
 		<?php
@@ -63,7 +63,7 @@
 
 		if (strcmp($o,"All") == 0 || (strcmp($o,"Content") == 0)) {
 			mysqli_query($con, "CREATE VIEW task_tags AS SELECT tasks.*, tags.name as tag FROM tasks, tags WHERE tasks.id = tags.tagged");
-			$qres = mysqli_query($con, "SELECT DISTINCT id, name, creator, timestamp, deadline, category, done FROM task_tags WHERE name LIKE '%$q%' LIMIT 0, 10");
+			$qres = mysqli_query($con, "SELECT DISTINCT id, name, creator, timestamp, deadline, category FROM task_tags WHERE name LIKE '%$q%' LIMIT 0, 10");
 			$count = mysqli_num_rows($qres);
 			echo "<span id='searchtype'>[Content]</span><br />";
 			if ($count == 0) {
