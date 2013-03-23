@@ -192,7 +192,6 @@
 								echo " 		</div>";
 								echo " 		<div id=\"delete-comment\">";
 									if($row['username'] == $_SESSION['userlistapp']){
-									//onClick="deleteComment('$row['commentid']','$taskid')"
 										echo " 			<a href=\"#\" onClick=\"deleteComment(".$row['commentid'].",$taskid)\"><i>Delete Comment</i></a>";
 									}
 								echo " 		</div>";

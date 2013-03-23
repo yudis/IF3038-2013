@@ -1,5 +1,5 @@
 <?php 
-	error_reporting(0);
+
 	session_start();
 	if (!isset($_SESSION["userlistapp"]))
 		header("Location: ../index.php");
@@ -28,19 +28,33 @@
 					</div>
 					<div id="searching-header">
 						<select name="modesearch" id="modesearch" onChange="filter()">
-							<option value="1">All</option>
-							<option value="2">User</option>
-							<option value="3">Category</option>
-							<option value="4">Task</option>
-						</select>    
-						<input type="text" name="search_text" id="search_text" list="searching-auto" value="" onKeyUp="checkHeaderValidation()" />
-						<input type="submit" value="Search"/>
-						<div id="list-search"></div>
+								<option value="1">All</option>
+								<option value="2">User</option>
+								<option value="3">Category</option>
+								<option value="4">Task</option>
+							</select>    
+					<input type="text" name="search_text" id="search_text" list="searching-auto" value="" onKeyUp="checkHeaderValidation()" />
+					<input type="submit" value="Search"/>
+					<div id="list-search"></div> 
 					</div>
 				</form>
             </div>
 			<div id="header-right-user">
-				<div id="header-photo"><a href="#"><img id="photo" src="../avatar/meckyr.jpg" width="60" height="60"/></a></div>
+            	<?php // Create connection
+					$con=mysqli_connect("localhost","root","","progin_405_13511601");
+					// Check connection
+					if (mysqli_connect_errno($con))
+					{
+						echo "Failed to connect to MySQL: " . mysqli_connect_error();
+					}
+					$username = $_SESSION['userlistapp'];
+					$query = "SELECT * FROM user WHERE username='$username'";
+					$result = mysqli_query($con,$query);
+					$row = mysqli_fetch_array($result);
+				?>
+				<div id="header-photo"><a href="profile.php?username=<?php echo $row['username']?>"><img id="photo" src="../avatar/<?php 
+					echo $row['avatar'];
+				?>" width="60" height="60"/></a></div>
 				<div id="header-profile">
 					You logged as, <b><?php echo $_SESSION["userlistapp"]?></b>
 					<ul>

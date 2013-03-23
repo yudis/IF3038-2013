@@ -30,6 +30,11 @@ while($row = mysqli_fetch_array($result)){
 	echo " 			<br>";
 	echo " 			<b id=\"post-date\">Post at ".$row['createdate']."</b>";
 	echo " 		</div>";
+	echo " 		<div id=\"delete-comment\">";
+		if($row['username'] == $_SESSION['userlistapp']){
+			echo " 			<a href=\"#\" onClick=\"deleteComment(".$row['commentid'].",$taskid)\"><i>Delete Comment</i></a>";
+		}
+	echo " 		</div>";
 	echo " 	</div>";
 	echo " 	<div id=\"comment-box\">";
 	echo " 		<p>";
