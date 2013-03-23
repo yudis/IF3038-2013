@@ -503,6 +503,43 @@ class RestApi
 	}
 
 	/*** ----- END OF USER MODULE -----***/	
+
+	/*** ----- START OF SEARCH MODULE -----***/
+	public function search_suggestions($params = array()) {
+		$type = $params['type'];
+		$q = $params['q'];
+
+		$all = $type == 'all';
+
+		$suggestions = array();
+
+		if ($type == 'task' || $all) {
+			$tasks = $this->app->currentUser->getTasksLike($q);
+			foreach ($tasks as $task) {
+				if (!in_array($task->nama_task, $suggestions)) {
+					$suggestions[] = $task->nama_task;
+				}
+			}
+		}
+		if ($type == 'category' || $all) {
+			$cats = $this->app->currentUser->getCategoriesLike($q);
+			foreach ($cats as $cat) {
+				if (!in_array($cat->nama_kategori, $suggestions)) {
+					$suggestions[] = $cat->nama_kategori;
+				}
+			}
+		}
+		if ($type == 'user' || $all) {
+			$users = User::model()->findAllLike($q);
+			foreach ($users as $u) {
+				if (!in_array($u->username, $suggestions)) {
+					$suggestions[] = $u->username;
+				}
+			}
+		}
+
+		return $suggestions;
+	}
 }
 
 ?>
