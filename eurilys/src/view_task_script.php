@@ -127,11 +127,11 @@
 					<a id='taskfile'  href='uploads/".$attachmentResponse[$i]."' target='_blank' >".$attachmentResponse[$i]."</a><br>";
 					} else if (($extension == 'jpg') || ($extension == 'jpeg') || ($extension == 'gif') || (($extension == 'png'))) {
 					$response = $response."
-					<img id='taskimg' width='100px' height='100px' src='uploads/".$attachmentResponse[$i]."'><br>";
+					<img id='taskimg' width='200px' height='200px' src='uploads/".$attachmentResponse[$i]."'><br>";
 					} else if (($extension == 'mp4') || ($extension == 'flv')){
 					$response = $response."
 					<video id='taskvid' width='320px' height='240px' controls>
-					<source src='uploads/".$attachmentResponse[$i]."' type='video/flv'>";
+					<source src='uploads/".$attachmentResponse[$i]."' type='video/flv'></video><br>";
 					} else {
 					$response = $response."
 					<a id='taskfile'  href='uploads/".$attachmentResponse[$i]."' target='_blank' >".$attachmentResponse[$i]."</a><br>";
@@ -140,7 +140,7 @@
 			}
 			
 			$response = $response."
-				</div>
+				
 			</div>
 			
 			<div class='left top20 dynamic_content_row'>
