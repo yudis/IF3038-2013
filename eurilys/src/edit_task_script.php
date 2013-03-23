@@ -23,26 +23,31 @@
 		//insert assignee array
 		$assigneeArray = explode(',', $task_assignee); 		
 		for ($i=0; $i<count($assigneeArray); $i++) {
-			$query2 	= "INSERT INTO `task_asignee` (`task_id`, `username`) VALUES ('$taskID','$assigneeArray[$i]')";
+			$query2 	= "INSERT INTO `task_asignee` (`task_id`, `username`) VALUES ('$task_id','$assigneeArray[$i]')";
 			$result2	= mysql_query($query2);
 		}
 		
-		/* -> belum
-		$tagArray = explode(',', $task_tag); 		
+		
+		$tagArray = explode(',', $task_tag); 
+		unset($tags);
+		$tags = array();
 		for ($i=0; $i<count($tagArray); $i++) {
-			$query4 = "SELECT * FROM tag WHERE task_id='$taskID'";
+			$query4 = "SELECT tag_name FROM tag WHERE task_id='$task_id'";
 			$result = mysql_query($query4);
 			while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-				if ($
-				$taskID = $row["task_id"];
-				//echo "Task id = ".$taskID;
+				$tags[] = $row['tag_name'];
+				if (in_array($row['tag_name'], $tagArray)) {
+				}
+				else {					
+					$tagname = $row['tag_name'];
+					$query5 = "DELETE FROM tag WHERE tag_name='$tagname' AND task_id='$task_id'";
+				}
 			}
-			if (mysql_num_rows($result) > 0) {
-				
+			if (in_array($tagArray[$i], $tags)) {
+				$query6 	= "INSERT INTO `tag` (`tag_name`, `task_id`) VALUES ('$tagArray[$i]','$task_id')";
+				$result6	= mysql_query($query6);
 			}
-			$query3  = "INSERT INTO `tag` (`tag_name`, `task_id`) VALUES ('$tagArray[$i]','$taskID')";
-			$result3 = mysql_query($query3);
-		} */
+		}
 	}
 	
 	header('location:dashboard.php');

@@ -85,10 +85,8 @@
 				".$row['task_name']."
 			</div>
 			
-			<input id='edit_task_button' class='left top30 link_blue_rect' onclick='edit_task()' type='button' value='Edit Task'>
-			
-			<input id='save_button_td' class='left top30 link_blue_rect' onclick='save_edit_task()' type='button' value='Save'>
-						
+			<input id='edit_task_button' class='left top30 link_blue_rect' onclick='edit_task(\"$taskID\")' type='button' value='Edit Task'>
+									
 			<div class='left top30 dynamic_content_row'>
 				<div id='task_name_ltd' class='left dynamic_content_left'> Task Name </div>
 				<div id='task_name_rtd' class='left dynamic_content_right'>".$row['task_name']."</div>
@@ -106,9 +104,6 @@
 			"
 				<div id='task_status_rtd' class='left dynamic_content_right'>".$status."</div>
 			</div>
-			
-			
-			
 			
 			<div class='left top20 dynamic_content_row'>
 				<div id='attachment_ltd' class='left dynamic_content_left'>Attachment</div>

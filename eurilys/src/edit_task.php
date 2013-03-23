@@ -64,7 +64,7 @@
 			</div>
 				
 			<form method="POST" action="edit_task_script.php">
-				<input id="save_edit_task" class='left top30 link_blue_rect' type='submit' name='edit_task_submit' value='Save'>
+				<input type='submit' id="save_edit_task" name='edit_task_submit' class='left top30 link_blue_rect' value='Save'>
 				
 				<input type="hidden" name="edit_task_id" value="<?php echo $taskID;?>"/>
 				<div class='left top30 dynamic_content_row'>
