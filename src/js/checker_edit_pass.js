@@ -1,38 +1,40 @@
-Rp(function() {
-	checkValidity = function() {
-		pattern = new RegExp(this.getAttribute('pattern'), 'i');
-		match = this.value.match(pattern);
-
-		diff = true;
-		if (neqe = this.getAttribute('data-neq')) {
-			ne = Rp('#' + neqe);
-			if (ne.val() == this.value)
-				diff = false;
-		}
-
-		if ((match && diff) || !this.value) {
-			// bener
-			Rp(this).removeClass('invalid');
-
-			inv = Rp('input[pattern].invalid');
-			if (this.value) {
-				Rp('#edit_submit').prop('disabled', (inv.length() > 0));
-			}
-		}
-		else {
-			// ga valid
-			console.log('Invalid: ' + this.id);
-			Rp(this).addClass('invalid');
-			Rp('#edit_submit').prop('disabled', true);
-		}
-	};
-
-	Rp('input[pattern]').on('keyup', checkValidity);
-	Rp('#edit_submit').prop('disabled', true); // disabled by default
+Rp(function() 
+{
 	
-	var edit_new_password = document.getElementById("edit_new_password");
-	edit_new_password.onkeyup = function()
+	var profil_password = document.getElementById("edit_new_password");
+	var profil_confirm_password = document.getElementById("edit_confirm_password");
+	
+	profil_password.onkeyup = function()
 	{
-		document.getElementById("edit_confirm_password").pattern = this.value;
+		if (this.checkValidity())
+		{
+			this.className = "";
+			document.getElementById("edit_confirm_password").pattern = this.value;
+		}
+		else
+			this.className = "invalid";
+		check_submit();
+	}
+	
+	profil_confirm_password.onkeyup = function()
+	{
+		if (this.checkValidity() && profil_password.checkValidity())
+			this.className = "";
+		else		
+			this.className = "invalid";
+		check_submit();
+	}
+	
+	function check_submit()
+	{
+		if ((profil_password.checkValidity()) && 
+			(profil_confirm_password.checkValidity()))
+		{
+			document.getElementById("edit_pass_submit").disabled="";
+		}
+		else
+		{
+			document.getElementById("edit_pass_submit").disabled="disabled";
+		}
 	}
 });

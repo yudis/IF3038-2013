@@ -7,7 +7,8 @@
 	if ($temperror)
 	{
 		// TODO print error screen
-		print_r($temperror);
+		$message = 'Registration failed. <a href="index.php">Try again</a>.';
+		include '404.php';
 	}
 	else
 	{
@@ -20,13 +21,15 @@
 		{
 			move_uploaded_file($_FILES["avatar"]["tmp_name"],$_SESSION['full_path']."upload/user_profile_pict/" . $new_filename);
 			
-			Header("Location: index");
+			$_SESSION['user_id'] = DBConnection::insertId();
+			header("Location: dashboard.php");
 			// entah move ke index atau langsung login atau pesan sukses
 		}
 		else
 		{
 			// TODO print error screen
-			echo "fail";
+			$message = 'Registration failed. <a href="index.php">Try again</a>.';
+			include '404.php';
 		}
 	}
 ?>

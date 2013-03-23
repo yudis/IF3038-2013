@@ -1,5 +1,6 @@
 var currentCat;
 var canDelete;
+var taskCache;
 
 Rp(function() 
 {
@@ -117,6 +118,7 @@ Rp(function()
 		if (catreq.readyState == 4) {
 			// Loaded
 			response = catreq.responseText;
+			taskCache = response;
 			response = Rp.parseJSON(response);
 			Rp('#dashboardPrimary').removeClass('loading');
 			if (response.success) {
@@ -331,4 +333,87 @@ Rp(function()
 	}
 
 	Rp('p.delete a').on('click', deleteTask);
+
+	// Regular refresh
+	var ref;
+	intreq = Rp.ajax()
+		.complete(function() {
+			// Loaded
+			response = catreq.responseText;
+			if (response != taskCache) {
+				console.log('New tasks found.');
+				taskCache = response;
+				response = this.responseJSON();
+				if (response.success)
+					fillTasks(response.tasks);
+			}
+		});
+
+	refreshTasks = function() {
+		console.log('Checking for new tasks...');
+		catid = currentCat;
+		if (catreq.readyState)
+			return;
+		if (catid!=0) {
+			intreq.get('api/retrieve_tasks?category_id=' + catid);
+		}
+		else {
+			intreq.get('api/retrieve_tasks');
+		}
+	}
+
+	var ref = window.setInterval(refreshTasks, 5000);
+
+	// Assignee
+	var asignee = document.getElementById("usernames_list");
+	asignee.setAttribute('autocomplete', 'off');
+	asignee.onkeyup = function()
+	{
+		var value = asignee.value;
+		var req = Rp.ajaxRequest();
+		req.onreadystatechange = function() {
+			switch (req.readyState) {
+				case 1:
+				case 2:
+				case 3:
+					Rp('#assignee').addClass('loading');
+					break;
+				case 4:
+					Rp('#assignee').removeClass('loading');
+					try {
+						response = Rp.parseJSON(req.responseText);
+						var elm = document.getElementById("auto_comp_assignee");
+						var inflate = document.getElementById("auto_comp_inflate_assignee");
+						inflate.innerHTML = "";
+						var temp = 0;
+						for (var i in response)
+						{
+							temp++;
+							var newLi = document.createElement("li");
+							newLi.innerHTML = "<a href='javascript:choose_assignee(\""+response[i].data.username+"\")'>"+
+												response[i].data.username+"</a>";
+							inflate.insertBefore(newLi, inflate.firstChild);
+						}
+						
+						if (temp!=0)
+							elm.style.display = "block";
+					}
+					catch (e) {
+
+					}
+					break;
+			}
+		}
+		req.get('api/get_username?username=' + value);
+	}
+
+	choose_assignee = function(username)
+	{
+		var elm = document.getElementById("auto_comp_assignee");
+		var value = asignee.value;
+		value = value.substr(0, value.lastIndexOf(",")+1);
+		value += username;
+		asignee.value = value;
+		elm.style.display = "none";
+	}
 });
