@@ -20,9 +20,9 @@ and open the template in the editor.
 				$sql = "SELECT * FROM user WHERE username = '$username'";
 				$user = mysqli_query($con,$sql);
 				$current_user = mysqli_fetch_array($user);
-				$sql_notdone_list = "SELECT task.name FROM task, assignee WHERE status='0' and username='$username' and assignee.id_task = task.id_task;";
+				$sql_notdone_list = "SELECT task.name,task.id_task FROM task, assignee WHERE status='0' and username='$username' and assignee.id_task = task.id_task;";
 				$not_done_list = mysqli_query($con,$sql_notdone_list);
-				$sql_done_list = "SELECT task.name FROM task, assignee WHERE status='1' and username='$username' and assignee.id_task = task.id_task;";
+				$sql_done_list = "SELECT task.name,task.id_task FROM task, assignee WHERE status='1' and username='$username' and assignee.id_task = task.id_task;";
 				$done_list = mysqli_query($con,$sql_done_list);
 			?>
 		</script>
@@ -36,7 +36,7 @@ and open the template in the editor.
             <?php
 				$done_list = mysqli_query($con,$sql_done_list);
 				while($done_row = mysqli_fetch_array($done_list)){
-					echo $done_row['name'];
+					echo "<a href=\"rincitask.php?id=".$done_row['id_task']."\">".$done_row['name']."</a>";
 					echo "<br />";
 				}
 			?>
@@ -45,7 +45,7 @@ and open the template in the editor.
             <?php
 				$not_done_list = mysqli_query($con,$sql_notdone_list);
 				while($not_done_row = mysqli_fetch_array($not_done_list)){
-					echo $not_done_row['name'];
+					echo "<a href=\"rincitask.php?id=".$not_done_row['id_task']."\">".$not_done_row['name']."</a>";
 					echo "<br />";
 				}
 			?>

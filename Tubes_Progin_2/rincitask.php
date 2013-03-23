@@ -60,15 +60,16 @@ and open the template in the editor.
 				<b>Submit Your Comment: </b> <br/>
                 <form id="submit_comment">
                     <textArea id="comment"></textarea>
-                    <input type="button" name="submit" value="Submit" onClick="storeComment();">
+                    <input type="button" name="submit" value="Submit" onClick="storeComment(<?php echo $id;?>);">
                 </form>
 				
                 <br/><br/>
-                <a onclick="showEdit();" class="button">edit</a><br/>
+                <a href="edittask.php?id=<?php echo $id;?>" class="button">edit</a><br/>
             </div>
 			<script>
-				window.onload=generate_page();
-				setInterval(function(){generate_page();},5000)
+				var id = <?php echo $id;?>;
+				window.onload=generate_page(id);
+				setInterval(function(){generate_page(id);},5000)
 			</script>
     </body>
 </html>

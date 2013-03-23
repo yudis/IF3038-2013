@@ -5,7 +5,8 @@ and open the template in the editor.
 
 <?php
 	//dummy here
-	$id_task = 1;
+	$id_task = $_GET['id'];
+	include "login.php";
 	require "config.php";
 	$task_sql = "SELECT * FROM task WHERE id_task = '$id_task'";
 	$task = mysqli_query($con,$task_sql);
@@ -40,16 +41,7 @@ and open the template in the editor.
 			include "header.php";
 		?>
 		<div id="category">
-			<div class="kategori" onclick="showList();"><a>Fraud</a></div>
-			<div class="kategori" onclick="showList3();"><a>Robbery</a></div>
-			<div class="kategori" onclick="showList2();"><a>Gambling</a></div>
-			<div class="kategori" onclick="showList();"><a>Public Drunkenness</a></div>
-			<div class="kategori" onclick="showList3();"><a>Drug Law Violation</a></div>
-			<div class="kategori" onclick="showList2();"><a>Motor Vehicle Theft</a></div>
 		</div>
-        <div id="addCat">
-            <a onclick="addCategory();">+ category</a>
-        </div>
 		<div id="wanted">
 			<img src="img/kertas2.png">
 		</div>
@@ -76,9 +68,8 @@ and open the template in the editor.
 				<input type="submit" id="editbut" name="submit" value="Edit Task">
 				<!--Back to Detail Task-->
 				<input type="button" id="cancelEditTask" name="cancelEditTask" value="Cancel" onclick="">
-				
 				<div id="deletebutton">
-					<input type="button" id="deleteTask" name="deleteTask" value="Delete This Task" onclick="deleteTask("<?php echo $cur_task['id_task'];?>");">
+					<input type="button" id="deleteTas" name="deleteTas" value="Delete This Task" onclick="deleteTask(<?php echo $cur_task['id_task'];?>);">
 				</div>
 				
 			</form>

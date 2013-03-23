@@ -563,7 +563,7 @@ function profileRestore() {
    // document.getElementById('overlay').style.display='none';
 }
 
-function showStatus(){
+function showStatus(id){
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
 	  xmlhttp2=new XMLHttpRequest();
@@ -586,11 +586,11 @@ function showStatus(){
 				document.getElementById("status_detail").innerHTML=result;
 			}
 		}
-	xmlhttp2.open("GET","showStatus.php",true);
+	xmlhttp2.open("GET","showStatus.php?q="+id,true);
 	xmlhttp2.send();
 }
 
-function showAssignee(){
+function showAssignee(id){
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
 	  xmlhttp3=new XMLHttpRequest();
@@ -608,17 +608,17 @@ function showAssignee(){
 				
 				for (var s=0; s<string1.length; s++){
 					result += "<div class=\"assignee\">";
-					result += "<a href=\"#\">"+string1[s]+"</a>";
+					result += "<a href=\"userprofile.php?usr="+string1[s]+"\">"+string1[s]+"</a>";
 					result += "</div>";
 				}
 				document.getElementById("assignee").innerHTML=result;
 			}
 		}
-	xmlhttp3.open("GET","showAssignee.php",true);
+	xmlhttp3.open("GET","showAssignee.php?q="+id,true);
 	xmlhttp3.send();
 }
 
-function showTags(){
+function showTags(id){
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
 	  xmlhttp4=new XMLHttpRequest();
@@ -636,11 +636,11 @@ function showTags(){
 				document.getElementById("tag").innerHTML=result;
 			}
 		}
-	xmlhttp4.open("GET","showTags.php",true);
+	xmlhttp4.open("GET","showTags.php?q="+id,true);
 	xmlhttp4.send();
 }
 
-function showAttachment(){
+function showAttachment(id){
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
 	  xmlhttp5=new XMLHttpRequest();
@@ -677,11 +677,11 @@ function showAttachment(){
 				document.getElementById("attachment").innerHTML=result;
 			}
 		}
-	xmlhttp5.open("GET","showAttachment.php",true);
+	xmlhttp5.open("GET","showAttachment.php?q="+id,true);
 	xmlhttp5.send();
 }
 
-function showComment(){
+function showComment(id){
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
 	  xmlhttp7=new XMLHttpRequest();
@@ -712,7 +712,7 @@ function showComment(){
 				document.getElementById("list_comment").innerHTML=result;
 			}
 		}
-	xmlhttp7.open("GET","showComment.php",true);
+	xmlhttp7.open("GET","showComment.php?q="+id,true);
 	xmlhttp7.send();
 }
 
@@ -744,9 +744,15 @@ function deleteComment(str){
 	xmlhttp8.send();
 }
 
-function generate_page(){showStatus(); showAttachment(); showAssignee(); showTags(); showComment();}
+function generate_page(id){
+	showStatus(id);
+	showAttachment(id); 
+	showAssignee(id); 
+	showTags(id); 
+	showComment(id);
+}
 
-function storeComment(){
+function storeComment(id){
 	var comment = document.getElementById("comment").value;
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -767,33 +773,35 @@ function storeComment(){
 				}
 			}
 		}
-	xmlhttp6.open("GET","storeComment.php?q="+comment,true);
+	xmlhttp6.open("GET","storeComment.php?q="+comment+"&id="+id,true);
 	xmlhttp6.send();
 }
 
-function deleteTask(str){
+function deleteTask(str)
+{
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp10=new XMLHttpRequest();
+	  xmlhttp=new XMLHttpRequest();
 	  }
 	else
 	  {// code for IE6, IE5
-	  xmlhttp10=new ActiveXObject("Microsoft.XMLHTTP");
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	  }
-	xmlhttp10.onreadystatechange=function()
+	xmlhttp.onreadystatechange=function()
 	  {
-		  if (xmlhttp10.readyState==4 && xmlhttp10.status==200)
+		  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		  {
-			if (xmlhttp10.responseText == "deleted")
+			if (xmlhttp.responseText == "deleted")
 			{
-				alert("Delete task success");
+				alert(xmlhttp.responseText);
+				window.location = "Dashboard.php";
 			}
 			else
 			{
-				alert("You can't delete task you don't own");
+				alert("delete failed");
 			}
 		  }
 	  }
-	xmlhttp10.open("GET","deleteTask.php?q="+str,true);
-	xmlhttp10.send();
+	xmlhttp.open("GET","hapusTask.php?q="+str,true);
+	xmlhttp.send();
 }
