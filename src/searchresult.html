@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <title> Next | Search Result </title>
+        <link rel="stylesheet" href="css/css.css">
+        <link rel="stylesheet" href="css/dash.css">
+        <script type="text/javascript" src="js/popup.js"></script>
+        <script>
+            function tampilSearch(){
+
+			    var xyz = document.getElementById("cari").value;
+				var xyz2 = document.getElementById("searchFilter").value;
+				if (window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();				
+				}else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+
+				xmlhttp.onreadystatechange = function(){
+					if (xmlhttp.readyState==4 && xmlhttp.status==200)	{				
+						document.getElementById("divTugas").innerHTML=xmlhttp.responseText;
+					}
+				}
+					
+				xmlhttp.open("GET","search.php?tugas="+xyz+"&filter="+xyz2,true);
+				xmlhttp.send();
+			}
+        </script>
+        
+<!----------------------------------------------------------header-------------------------------------------------------------->                  
+    </head>
+    <body >
+         <div class="header">
+			<div id="logo">
+			    <a hreg="dashboard.html">
+			    <img src="pict/logo.png">
+			    </a>
+			</div>
+			<div id="border">
+			    
+			</div>
+			<div id="dashboard">
+			    <a href="dashboard.html">DASHBOARD</a>
+			</div>
+			<div id="profile">
+			    <a href="profile.html">PROFILE</a>
+			</div>
+			<div id="search">
+					    <section class="searchform cf">
+						    <input id="cari" class="searchbox" type="search" name="search" placeholder="Search.." required>
+						    
+					    </section>
+
+                            <select name="searchFilterForm" class="dropdownJo" id="searchFilter"> 	<!-------dropdown filter-->
+                            <option value="semua">Semua</option>
+                            <option value="username">Username</option>
+                            <option value="email">Email</option>
+                            <option value="namalengkap">Nama Lengkap</option>
+                            <option value="birthdate">Birthdate</option>
+                            <option value="kategori">Kategori</option>
+                            <option value="tugas">Tugas</option>
+                            <option value="tag">Tag</option>                            
+                            <option value="komentar">Komentar</option>                            
+                            </select>
+
+
+					    <section class="searchbuttonbox cf" onClick="tampilSearch()" >	<!------------- panggil tampilSearch --->
+						    <img class="searchbutton"src="pict/search button.jpg">
+					    </section>
+					    
+				    </div>
+			<div id="wellfaiz">
+			    
+			</div>
+			<div id="logout">
+			    <a href="index.html">LOGOUT</a>
+			</div>
+		  </div>
+          
+<!----------------------------------------- body ----------------------------------------->                 
+        <div class="main">
+		       
+       		<div id="divTugas">
+            
+            
+       
+            
+            </div> <!-- end divTugas-->
+       
+        </div> <!-- end div main-->
+       
+       
+       
+<!----------------------------------------- footer ----------------------------------------->                      
+        <div class="footer">
+            Copyright © Ahmad Faiz - Fandi Pradana - Sigit Aji
+        </div>
+        
+    </body>
+</html>

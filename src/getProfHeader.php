@@ -1,0 +1,23 @@
+<?php
+
+	$user=$_GET["user"];
+
+	
+	$con = mysqli_connect("localhost","root","","progin_405_13510003");
+	
+	if(mysqli_connect_errno($con)){
+		echo "error connect getProfHeader";	
+	}	
+	
+	$query = "SELECT nama_tugas,status from tugas natural join mengerjakan WHERE username='$user'";
+	$result = mysqli_query($con,$query);
+	
+	while( $row = mysqli_fetch_array($result)){
+		echo "<div id=\"listProfilBox\">";
+		if($row['status']==0){
+			echo "<div>".$row['nama_tugas']."</div>";
+		}
+		echo "</div>";
+	}
+mysqli_close($con);	
+?>
