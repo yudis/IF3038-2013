@@ -69,13 +69,13 @@ xmlhttp.send();
 		var e = document.getElementById('email').value;
 		var i = document.getElementById('copassword').value;
 		var j = document.getElementById('namalengkap').value;
-		var k = document.getElementById('inputfile').value;
+		//var k = document.getElementById('inputfile').value;
 		var y  = document.getElementById('tahun').value;
 		var m = document.getElementById('bulan').value;
 		var d = document.getElementById('tanggal').value;
 		
 		loadXMLDoc("register.php?username="+x+"&email="+e+"&copassword="+i+"&namalengkap="
-						   +j+"&inputfile="+k+"&tahun="+y+"&bulan="+m+"&tanggal="+d
+						   +j+"&tahun="+y+"&bulan="+m+"&tanggal="+d
 		,function()
 		{
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
@@ -91,6 +91,7 @@ xmlhttp.send();
 				else if (xmlhttp.responseText == 2)
 				{
 					document.getElementById('regresponse').innerHTML = 'WELCOME';
+					window.location = "createSession.php?t="+x;
 				}
 			}
 		});

@@ -1,4 +1,5 @@
 <?php 
+	session_start(); 
 	
 	$mysql_hostname = "localhost";
 	$mysql_user = "root";
@@ -12,6 +13,7 @@
 	}
 	mysql_select_db($mysql_database) or die("Opps some thing went wrong");	
 	
+	$id = $_GET['username'];
 	$x = $_GET['edname'];
 	$i = $_GET['edmail'];
 	$j = $_GET['edpass'];
@@ -25,7 +27,7 @@
 	$etanggal = strtotime($etanggal);
 	$etanggal = date('Y-m-d',$etanggal);
 	
-	$getRegUser_sql = 'SELECT * FROM profil WHERE username="'.$x.'"';
+	$getRegUser_sql = 'SELECT * FROM profil WHERE username="'.$id.'"';
 	$getRegUser = mysql_query($getRegUser_sql);
 	$getRegUser_result = mysql_fetch_assoc($getRegUser);
 	$getRegUser_RecordCount = mysql_num_rows($getRegUser);
@@ -34,6 +36,11 @@
 	$getEmail = mysql_query($getEmail_sql);
 	$getEmail_result = mysql_fetch_assoc($getEmail);
 	$getEmail_RecordCount = mysql_num_rows($getEmail);
+
+	$update1 = 'UPDATE profil SET namalengkap="'.$x.'"WHERE username="'.$_SESSION['username'].'"';
+	$update2 = 'UPDATE profil SET email="'.$i.'"WHERE username="'.$_SESSION['username'].'"';
+	$update3 = 'UPDATE profil SET tanggal="'.$etanggal.'"WHERE username="'.$_SESSION['username'].'"';
+	$update4 = 'UPDATE user SET password="'.$k.'"WHERE username="'.$_SESSION['username'].'"';	
 	
 	if ($getEmail_RecordCount == 1)
 	{
@@ -41,9 +48,15 @@
 	}
 	else
 	{	
-		
+		mysql_query($update1);
+		mysql_query($update2);
+		mysql_query($update3);	
+		mysql_query($update4);
 		echo '2';
 	}	
 	
-	mysql_close();
+	mysql_close($db);
+	
+	session_destroy();
+	//header("Location:editSession.php?");
 ?>

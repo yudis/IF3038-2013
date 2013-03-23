@@ -1,8 +1,5 @@
 <?php 
 		session_start(); 
-		if (!isset($_SESSION['username'])) {
-            header("Location:index.php") ;
-        }
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,7 +38,10 @@
 	<section>
 		<div id="content2" class="wrap">
 			<div id="foto_profil">
-				<img id="foto" src="img/fotoprofil.jpg">
+				<?php
+					echo '<img id = "foto" src="'.$_SESSION['image'].'">';
+				?>
+				<!--<img id="foto" src="img/fotoprofil.jpg">-->
 				<div id="user_info">user info</div>
 				<div id="biodata1" class="user">
 					<div>Username</div>
@@ -53,7 +53,7 @@
 				<div id="biodata2" class="user">
 					<?php 
 					    $a = $_SESSION['username'];
-						echo "<div>: ";
+						echo '<div id="pusername">: ';
 						echo $a;
 						echo "</div>";
 					?>
@@ -77,14 +77,14 @@
 					?>
 					<div></div>
 				</div>
-				<div id="biodata3">
-					<?php 
-					    $a = $_SESSION['username'];
-						echo "<div>: ";
-						echo $a;
-						echo "</div>";
-					?>
+				<div id="biodata3">					
 					<form id="isi" class="editbio" action="javascript:edituser();">
+						<?php 
+							$a = $_SESSION['username'];
+							echo '<div id="epusername">: ';
+							echo $a;
+							echo "</div>";
+						?>
 						<div>
 							<input id = "edname" type="text" name="edname" placeholder="Nama Lengkap" pattern="^.+ .+$" required>
 						</div>
@@ -154,16 +154,16 @@
 						</div>
 						<p>
 							<label for = "edpass">Edit Password</label>
-							<input id = "edpass" type="text" name="edpass" placeholder="Edit Password" pattern="^.{8,}$" required>
+							<input id = "edpass" type="password" name="edpass" placeholder="Edit Password" pattern="^.{8,}$" required>
 						</p>
 						<p>
 							<label for = "edcpass">Confirm Password</label>
-							<input id = "edcpass" type="text" name="edcpass" placeholder="Confirm Password" pattern="^.{8,}$" required>
+							<input id = "edcpass" type="password" name="edcpass" placeholder="Confirm Password" pattern="^.{8,}$" required>
 						</p>	
 						<p id = "donepedit">
 							<input type="submit" id="done_pedit" name="done_pedit" value="Done Edit">
 						</p>		
-						<p id="editresponse"> here! </p>
+						<p id="editresponse"></p>
 					</form>
 				</div>
 				<div id="pedit">

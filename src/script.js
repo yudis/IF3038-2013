@@ -68,6 +68,7 @@ function edituser()
 {
 	document.getElementById("editresponse").innerHTML = "LOADING";
 	
+	var id = document.getElementById('epusername').value;
 	var x = document.getElementById("edname").value;
 	var i = document.getElementById("edmail").value;
 	var j =  document.getElementById("edpass").value;
@@ -77,19 +78,32 @@ function edituser()
 	var m = document.getElementById('bulan').value;
 	var d = document.getElementById('tanggal').value;
 	
-	loadXMLDoc("euser.php?edname="+x+"&edmail="+i+"&edpass="+j+"&edcpass="+k+
-					   "&tahun="+y+"&bulan="+m+"&tanggal="+d
-	
-	,function()
+	if (j==k)
 	{
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+		document.getElementById("editresponse").innerHTML = "confirm password tidak sama";
+	}
+	else
+	{
+		loadXMLDoc("euser.php?edname="+x+"&edmail="+i+"&edpass="+j+"&edcpass="+k+
+						   "&tahun="+y+"&bulan="+m+"&tanggal="+d+"&username="+id
+		
+		,function()
 		{
-			if (xmlhttp.responseText == 1)
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
 			{
-				document.getElementById("editresponse").innerHTML = "email sudah terpakai";
-			}
-			else if (xmlhttp.responseText == 2)
-			{
+				if (xmlhttp.responseText == 1)
+				{
+					document.getElementById("editresponse").innerHTML = "email sudah terpakai";
+				}
+				else if (xmlhttp.responseText == 2)
+				{
+					document.getElementById("editresponse").innerHTML = "data sudah diubah";
+					document.getElementById("biodata3").style.display = "none";
+					document.getElementById("biodata2").style.display = "block";
+					document.getElementById("donepedit").style.display = "none";
+					document.getElementById("pedit").style.display = "block";
+					window.location = "index.php";
+				}
 			}
 		}
 	});

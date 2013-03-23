@@ -50,14 +50,14 @@
 		VALUES
 		('$regusername', '$regpassword')";
 			
-		$reg2 = "INSERT INTO profil (username, namalengkap, tanggallahir, email, avatar)
+		$reg2 = "INSERT INTO profil (username, namalengkap, tanggallahir, email)
 		VALUES
-		('$regusername', '$regnama', '$tanggal', '$regemail', '$regimage')";
+		('$regusername', '$regnama', '$tanggal', '$regemail')";
 		
 		mysql_query($reg1);
 		mysql_query($reg2);
 		echo '2';
 	}
 	
-	mysql_close();
+	mysql_close($db);
 ?>

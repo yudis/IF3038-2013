@@ -21,7 +21,8 @@
 	$_SESSION['mail'] = $getUserData_result['email'];
 	$_SESSION['name'] = $getUserData_result['namalengkap'];
 	$_SESSION['tanggal'] = $getUserData_result['tanggallahir'];
+	$_SESSION['image'] = $getUserData_result['avatar'];
 	
-	mysql_close();
+	mysql_close($db);
 	
 	header("Location:profil.php");?>
