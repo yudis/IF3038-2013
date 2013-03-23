@@ -5,17 +5,13 @@
 ?>
 
 		<script>
-			window.onload=function(){localStorage.user_id = <?php echo getUserID(); ?>; refreshTask1(localStorage.user_id,0);};
-			function refreshTaskRoutine() {
-			  refreshTask1(localStorage.user_id,_category_id);
-			}
-			var interval = setInterval(refreshTaskRoutine, 10000);
+			window.onload=function(){localStorage.user_id = <?php echo $_GET['user_id']; ?>; refreshTask1(localStorage.user_id,0);};
 		</script>
 		
 		<div class="content">
 			<div class="profile">
 				<header>
-					<h1><?php echo getUserName(getUserID()); ?></h1>
+					<h1><?php echo getUserName($_GET['user_id']); ?></h1>
 					<ul>
 						<li><a href="#" id="editProfileLink">Edit Profile</a></li>
 					</ul>
@@ -25,7 +21,7 @@
 				
 				<section class="profile-details">
 					<figure class="profile-image">
-						<img src="avatar/<?php echo getUserID(); ?>.jpg" alt="Profile Photo">
+						<img src="avatar/<?php echo $_GET['user_id']; ?>.jpg" alt="Profile Photo">
 					</figure>
 					<p class="description">
 						<span class="detail-label">About Me:</span>
@@ -33,22 +29,22 @@
 					</p>
 					<p class="username">
 						<span class="detail-label">Username:</span>
-						<span class="detail-value"><?php echo getUserUsername(getUserID()); ?></span>
+						<span class="detail-value"><?php echo getUserUsername($_GET['user_id']); ?></span>
 					</p>
 					
 					<p class="name">
 						<span class="detail-label">Full Name:</span>
-						<span class="detail-value"><?php echo getUserFullname(getUserID()); ?></span>
+						<span class="detail-value"><?php echo getUserFullname($_GET['user_id']); ?></span>
 					</p>
 					
 					<p class="email">
 						<span class="detail-label">Email:</span>
-						<span class="detail-value"><?php echo getUserEmail(getUserID()); ?></span>
+						<span class="detail-value"><?php echo getUserEmail($_GET['user_id']); ?></span>
 					</p>
 
 					<p class="date-of-birth">
 						<span class="detail-label">Date of Birth:</span>
-						<span class="detail-value"><?php echo getUserBirthdate(getUserID()); ?></span>
+						<span class="detail-value"><?php echo getUserBirthdate($_GET['user_id']); ?></span>
 					</p>
 				</section>
 				</div>
