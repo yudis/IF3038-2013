@@ -1,6 +1,6 @@
 <?php
 	require_once("../connectDB.php");
-	
+	echo "keren";
 	$type = $_POST['type'];
 	$value = $_POST['value'];
 	
