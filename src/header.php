@@ -26,7 +26,7 @@
 				document.getElementById("hasil_ac_search").innerHTML=xmlhttp.responseText;
 			}
 		}
-		xmlhttp.open("GET", "search.php?jenis="+jenis+"&q="+str+"&show=0", true);
+		xmlhttp.open("GET", "search.php?jenis="+jenis+"&q="+str+"&show=0&more=10", true);
 		xmlhttp.send();
 	}
 </script>
@@ -60,6 +60,7 @@
 	<section class="searchform cf">
 		<input class="searchbox" type="search" name="q" placeholder="Search.." autocomplete="off" required onKeyUp="autocomplete_search(document.getElementById('opsisearch').value, this.value)">
 		<div id="hasil_ac_search"></div>
+		<input type="hidden" name="more" value="10">
 	</section>
 	<section class="searchbuttonbox cf">
 		<button type="submit" id="tombol_search">

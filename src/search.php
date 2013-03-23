@@ -126,8 +126,42 @@
 	
 	require_once("connectdb.php");
 	
-	
-	if($_GET["show"] == 1)
+	if($_GET["show"] == 1 && $_GET["more"] > 10)
+	{
+		if($_GET["jenis"] == "username")
+		{
+			echo '<div id="kolom_username">';
+			hasil_username($_GET["q"], $_GET["more"]-9, $_GET["more"]);
+			echo '</div>';
+		}
+		else if($_GET["jenis"] == "kategori")
+		{
+			echo '<div id="kolom_kategori">';
+			hasil_kategori($_GET["q"], $_GET["more"]-9, $_GET["more"]);
+			echo '</div>';
+		}
+		else if($_GET["jenis"] == "task")
+		{
+			echo '<div id="kolom_task">';
+			hasil_task($_GET["q"], $_GET["more"]-9, $_GET["more"]);
+			echo '</div>';
+		}
+		else if($_GET["jenis"] == "semua")
+		{
+			echo '<div id="kolom_kategori">';
+			hasil_kategori($_GET["q"], $_GET["more"]-9, $_GET["more"]);
+			echo '</div>';
+			
+			echo '<div id="kolom_task">';
+			hasil_task($_GET["q"], $_GET["more"]-9, $_GET["more"]);
+			echo '</div>';
+			
+			echo '<div id="kolom_username">';
+			hasil_username($_GET["q"], $_GET["more"]-9, $_GET["more"]);
+			echo '</div>';
+		}
+	}	
+	else if($_GET["show"] == 1 && $_GET["more"] == 10)
 	{
 		if($_GET["jenis"] == "username")
 		{
