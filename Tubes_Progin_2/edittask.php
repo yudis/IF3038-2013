@@ -10,6 +10,7 @@ and open the template in the editor.
 	$task_sql = "SELECT * FROM task WHERE id_task = '$id_task'";
 	$task = mysqli_query($con,$task_sql);
 	$cur_task = mysqli_fetch_array($task);
+	$cur_user = "ArieDoank";
 	
 	$assignee_sql = "SELECT username FROM assignee WHERE id_task = '$id_task'";
 	$assignee_result = mysqli_query($con,$assignee_sql);
@@ -73,7 +74,13 @@ and open the template in the editor.
                 <br/>
 				<div id="hasilsearchtag"></div>
 				<input type="submit" id="editbut" name="submit" value="Edit Task">
+				<!--Back to Detail Task-->
 				<input type="button" id="cancelEditTask" name="cancelEditTask" value="Cancel" onclick="">
+				
+				<div id="deletebutton">
+					<input type="button" id="deleteTask" name="deleteTask" value="Delete This Task" onclick="deleteTask("<?php echo $cur_task['id_task'];?>");">
+				</div>
+				
 			</form>
 		</div>
 		<script type="text/javascript" src="script.js"></script>
