@@ -206,3 +206,17 @@ input[type=checkbox] {
     margin-top: -60px;
     display: block;
 }
+
+#paginasi_komentar{
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}
+#halaman_komentar{
+    width: 40px;
+    background-color: white;
+}
+#max_komentar{
+    width: 40px;
+    background-color: #C8C8C8;
+}
