@@ -154,7 +154,7 @@
 					<ul>
 						<?php 
 							$con = getConnection();
-							$query = "SELECT taskid FROM assignee WHERE username='".$user_show."'";
+							$query = "SELECT distinct taskid FROM assignee WHERE username='".$user_show."'";
 							$result = mysqli_query($con,$query);
 							while($row = mysqli_fetch_array($result)){
 								$task = getTask($row['taskid']);

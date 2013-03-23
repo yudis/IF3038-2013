@@ -7,6 +7,7 @@
 			<div id="header">
 				<?php
 					include("header.php");
+					require("../php/init_function.php");
 				?>
 			</div>
             <div><hr id="border"></div>
@@ -14,70 +15,76 @@
 			<div id="search-result-body">
 				<?php
 					$mode = $_POST['modesearch'];
+					$text = $_POST['search_text'];
 					switch($mode)
 					{
 						case "1":
-							echo "<div id=\"main-dashboard\">
-				
-									<div id=\"dashboard-title\"><i><b>USER<br /></b></i></div><br>
-									<div><hr id=\"border-search\"></div><br>
-									
-									<div id=\"user-result\">
+							echo "<div id=\"main-dashboard\"><div id=\"dashboard-title\"><i><b>USER<br /></b></i></div><br><div><hr id=\"border-search\"></div><br>";
+							$con = getConnection();
+							$query = "SELECT * FROM user WHERE username LIKE '%$text%'";
+							$result = mysqli_query($con,$query);
+							while($row = mysqli_fetch_array($result)){
+									echo "<div id=\"user-result\">
 										<div id=\"user-result-image\">
-											<a href=\"#\"><img alt=\"\" id=\"photo\" src=\"../avatar/meckyr.jpg\" width=\"100\" height=\"120\"/></a>
+											<a href=\"profile.php?username=".$row['username']."\"><img alt=\"Avatar\" id=\"photo\" src=\"../avatar/".$row['avatar']."\" width=\"100\" height=\"120\"/></a>
 										</div>
 										<div id=\"user-result-name\">
-											<div id=\"dashboard-title\"><a href=\"#\"><b>meckyr</b></a></div><br>
-											Full Name : Muhammad Ecky Rabani<br>
-											Joined On : 0000-00-00
+											<div id=\"dashboard-title\"><a href=\"profile.php?username=".$row['username']."\"><b>".$row['username']."</b></a></div><br>
+											Full Name : ".$row['fullname']."<br>
+											Joined On : ".$row['join']."
 										</div>
-									</div>
+									</div>";
+							}
 									
-									<div><hr id=\"border-search\"></div><br>
+							echo "<div><hr id=\"border-search\"></div><br>
 									<div id=\"dashboard-title\"><i><b>CATEGORY<br /></b></i></div><br>
-									<div><hr id=\"border-search\"></div><br>
-									
-									<div class=\"task-category-body\">
+									<div><hr id=\"border-search\"></div><br>";
+							
+							$query = "SELECT * FROM category WHERE categoryname LIKE '%$text%'";
+							$result = mysqli_query($con,$query);
+							while($row = mysqli_fetch_array($result)){
+									echo "<div class=\"task-category-body\">
 										<br>
 										<div>
-											<div id=\"category-title\"><b>Kategori 1</b></div>
+											<div id=\"category-title\"><b>".$row['categoryname']."</b></div>
 										</div>
-										<div class=\"kosong\">Created by : <i>meckyr</i>, at 2013-03-12 09:45:53</div>
-										<ul>
-											<li><a href = \"#\">Task 1</a></li>
-											<li><a href = \"#\">Task 2</a></li>
-											<li><a href = \"#\">Task 3</a></li>
-										</ul>
-									</div>
-									<div class=\"task-category-body\">
-										<br>
-										<div>
-											<div id=\"category-title\"><b>Kategori 2</b></div>
-										</div>
-										<div class=\"kosong\">Created by : <i>meckyr</i>, at 2013-03-12 09:45:53</div>
-										<ul>
-											<li><a href = \"#\">Task 1</a></li>
-											<li><a href = \"#\">Task 2</a></li>
-										</ul>
-									</div>
+										<div class=\"kosong\">Created by : <i>".$row['username']."</i>, at ".$row['createddate']."</div>
+										<ul>";
+									$query2 = "SELECT * FROM task WHERE categoryid=".$row['categoryid'];
+									$result2 = mysqli_query($con,$query2);
+										while($row2 = mysqli_fetch_array($result2)){
+											echo "<li><a href = \"task_page.php?taskid=".$row2['taskid']."\">".$row2['taskname']."</a></li>";
+										}
+									echo "	</ul>
+										</div>";								
+							}
 									
-									<div><hr id=\"border-search\"></div><br>
+							echo "  <div><hr id=\"border-search\"></div><br>
 									<div id=\"dashboard-title\"><i><b>TASK<br /></b></i></div><br>
-									<div><hr id=\"border-search\"></div><br>
+									<div><hr id=\"border-search\"></div><br>";
 									
-									<div id=\"task-result\">
+							$query3 = "SELECT * FROM task WHERE taskname LIKE '%$text%'";
+							$result3 = mysqli_query($con,$query3);
+							while($row3 = mysqli_fetch_array($result3)){		
+								echo "	<div id=\"task-result\">
 										<ul>
-											<li><a href = \"#\">Taskname 1</a><div class=\"task-tag\">submit by : <b><i>meckyr</i></b>, deadline : 2013-03-12 22:50:17, status : <b id=\"red-text\">UNCOMPLETE</b></div>
+											<li><a href = \"task_page.php?taskid=".$row3['taskid']."\">".$row3['taskname']."</a><div class=\"task-tag\">submit by : <b><i>".$row3['username']."</i></b>, deadline : ".$row3['deadline'].", status : <b id=\"red-text\">".$row3['status']."</b></div>
 											<br><div>
-											<div class=\"task-tag\">Set as <a href=\"#\">Completed Task</a></div></div><br><br>
+											<div class=\"task-tag\">Set as <a href=\"#\">Change Status</a></div></div><br><br>
 											<div id=\"task-tag\">
-												Tag :<br>
-												<u>informatika</u>
-											</div>
+												Tag :<br>";
+											$query4 = "SELECT * FROM task_tag WHERE taskid=".$row3['taskid'];
+											$result4 = mysqli_query($con,$query4);
+											while($row4 = mysqli_fetch_array($result4)){
+												$tagname = getTagname($row4['tagid']);
+												echo "<u>$tagname</u> ";
+											}
+								echo "				</div>
 											</li><br><br>
 										</ul>
-									</div>
-								</div>";	
+									</div>";
+							}
+							echo "</div>";	
 							break;
 						case "2":
 							echo "<div class=\"task-category-body\">
@@ -91,32 +98,25 @@
 											<option value=\"Name\">Name</option>
 											<option value=\"Date\">Date</option>
 										</select>&nbsp;			
-									</div>
+									</div>";
 									
-									<div id=\"user-result\">
+									$con = getConnection();
+							$query = "SELECT * FROM user WHERE username LIKE '%$text%'";
+							$result = mysqli_query($con,$query);
+							while($row = mysqli_fetch_array($result)){
+									echo "<div id=\"user-result\">
 										<div id=\"user-result-image\">
-											<a href=\"#\"><img alt=\"\" id=\"photo\" src=\"../avatar/meckyr.jpg\" width=\"100\" height=\"120\"/></a>
+											<a href=\"profile.php?username=".$row['username']."\"><img alt=\"Avatar\" id=\"photo\" src=\"../avatar/".$row['avatar']."\" width=\"100\" height=\"120\"/></a>
 										</div>
 										<div id=\"user-result-name\">
-											<div id=\"dashboard-title\"><a href=\"#\"><b>meckyr</b></a></div><br>
-											Full Name : Muhammad Ecky Rabani<br>
-											Joined On : 0000-00-00
+											<div id=\"dashboard-title\"><a href=\"profile.php?username=".$row['username']."\"><b>".$row['username']."</b></a></div><br>
+											Full Name : ".$row['fullname']."<br>
+											Joined On : ".$row['join']."
 										</div>
-									</div>
+									</div>";
+							}
 									
-									<div id=\"user-result\">
-										<div id=\"user-result-image\">
-											<a href=\"#\"><img alt=\"\" id=\"photo\" src=\"../avatar/meckyr.jpg\" width=\"100\" height=\"120\"/></a>
-										</div>
-										<div id=\"user-result-name\">
-											<div id=\"dashboard-title\"><a href=\"#\"><b>meckyr</b></a></div><br>
-											Full Name : Muhammad Ecky Rabani<br>
-											Joined On : 0000-00-00
-										</div>
-										<br>
-									</div>
-									
-								</div>";
+								echo "</div>";
 							break;
 						case "3":
 							echo "<div class=\"task-category-body\">
@@ -130,44 +130,28 @@
 											<option value=\"Name\">Name</option>
 											<option value=\"Date\">Date</option>
 										</select>&nbsp;			
-									</div>
+									</div>";
 									
-									<div class=\"task-category-body\">
+							$query = "SELECT * FROM category WHERE categoryname LIKE '%$text%'";
+							$result = mysqli_query(getConnection(),$query);
+							while($row = mysqli_fetch_array($result)){
+									echo "<div class=\"task-category-body\">
 										<br>
 										<div>
-											<div id=\"category-title\"><b>Kategori 1</b></div>
+											<div id=\"category-title\"><b>".$row['categoryname']."</b></div>
 										</div>
-										<div class=\"kosong\">Created by : <i>meckyr</i>, at 2013-03-12 09:45:53</div>
-										<ul>
-											<li><a href = \"#\">Task 1</a></li>
-											<li><a href = \"#\">Task 2</a></li>
-											<li><a href = \"#\">Task 3</a></li>
-										</ul>
-									</div>
+										<div class=\"kosong\">Created by : <i>".$row['username']."</i>, at ".$row['createddate']."</div>
+										<ul>";
+									$query2 = "SELECT * FROM task WHERE categoryid=".$row['categoryid'];
+									$result2 = mysqli_query(getConnection(),$query2);
+										while($row2 = mysqli_fetch_array($result2)){
+											echo "<li><a href = \"task_page.php?taskid=".$row2['taskid']."\">".$row2['taskname']."</a></li>";
+										}
+									echo "	</ul>
+										</div>";								
+							}
 									
-									<div class=\"task-category-body\">
-										<br>
-										<div>
-											<div id=\"category-title\"><b>Kategori 2</b></div>
-										</div>
-										<div class=\"kosong\">Created by : <i>meckyr</i>, at 2013-03-12 09:45:53</div>
-										<ul>
-											<li><a href = \"#\">Task 1</a></li>
-											<li><a href = \"#\">Task 2</a></li>
-										</ul>
-									</div>
-									
-									<div class=\"task-category-body\">
-										<br>
-										<div>
-											<div id=\"category-title\"><b>Kategori 3</b></div>
-										</div>
-										<div class=\"kosong\">Created by : <i>meckyr</i>, at 2013-03-12 09:45:53</div>
-										<ul>
-										</ul>
-									</div>
-									
-								</div>";
+							echo "</div>";
 							break;
 						case "4":
 							echo "<div id=\"main-dashboard\">
@@ -179,34 +163,31 @@
 											<option value=\"Name\">Name</option>
 											<option value=\"Date\">Date</option>
 										</select>&nbsp;			
-									</div>
+									</div>";
 									
-									<div id=\"task-result\">
+							$query3 = "SELECT * FROM task WHERE taskname LIKE '%$text%'";
+							$result3 = mysqli_query(getConnection(),$query3);
+							while($row3 = mysqli_fetch_array($result3)){		
+								echo "	<div id=\"task-result\">
 										<ul>
-											<li><a href = \"#\">Taskname 1</a><div class=\"task-tag\">submit by : <b><i>meckyr</i></b>, deadline : 2013-03-12 22:50:17, status : <b id=\"red-text\">UNCOMPLETE</b></div>
+											<li><a href = \"task_page.php?taskid=".$row3['taskid']."\">".$row3['taskname']."</a><div class=\"task-tag\">submit by : <b><i>".$row3['username']."</i></b>, deadline : ".$row3['deadline'].", status : <b id=\"red-text\">".$row3['status']."</b></div>
 											<br><div>
-											<div class=\"task-tag\">Set as <a href=\"#\">Completed Task</a></div></div><br><br>
+											<div class=\"task-tag\">Set as <a href=\"#\">Change Status</a></div></div><br><br>
 											<div id=\"task-tag\">
-												Tag :<br>
-												<u>informatika</u>
-											</div>
+												Tag :<br>";
+											$query4 = "SELECT * FROM task_tag WHERE taskid=".$row3['taskid'];
+											$result4 = mysqli_query(getConnection(),$query4);
+											while($row4 = mysqli_fetch_array($result4)){
+												$tagname = getTagname($row4['tagid']);
+												echo "<u>$tagname</u> ";
+											}
+								echo "				</div>
 											</li><br><br>
 										</ul>
-									</div>
+									</div>";
+							}	
 									
-									<div id=\"task-result\">
-										<ul>
-											<li><a href = \"#\">Taskname 2</a><div class=\"task-tag\">submit by : <b><i>meckyr</i></b>, deadline : 2013-03-12 22:50:17, status : <b id=\"red-text\">UNCOMPLETE</b></div>
-											<br><div>
-											<div class=\"task-tag\">Set as <a href=\"#\">Completed Task</a></div></div><br><br>
-											<div id=\"task-tag\">
-												Tag :<br>
-												<u>informatika</u>
-											</div>
-											</li><br>
-										</ul>
-									</div>
-								</div>";
+							echo "</div>";
 							break;
 					}
 				?>
