@@ -45,7 +45,7 @@
 	  <a href="dashboard.php">DASHBOARD</a>
   </div>
   <div id="profile">
-	  <a href="profile.html">PROFILE</a>
+	  <a href="profile.php">PROFILE</a>
   </div>
   <div id="search">
 	<form name="cari" method="get" action="search_result.php">
@@ -70,7 +70,7 @@
 	</form>
   </div>  
   <div id="wellfaiz">
-	  
+	Welcome <?echo $_SESSION['username'] ?>
   </div>
   <div id="logout">
 	  <a href="logout.php" onClick="localStorage.clear()">LOGOUT</a>
