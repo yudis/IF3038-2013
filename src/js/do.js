@@ -342,8 +342,6 @@ Rp(function() {
 			Rp('#editTaskLink').addClass('editing');
 			Rp('#current-task').hide();
 			Rp('#edit-task').nodes[0].style.display = 'block';
-
-
 		}
 	});
 	
@@ -392,6 +390,16 @@ function deleteTask(task_id){
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xmlhttp.send("task_id="+task_id);
 	refreshTask(localStorage.user_id,_category_id);
+}
+
+function deleteCategory(category_id){
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","core/deleteCategory.php",false);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send("category_id="+category_id);
+	refreshTask(localStorage.user_id,0);
+	refreshCategory(localStorage.user_id);
+	document.getElementById('taskLink').setAttribute('style','display:none;');
 }
 
 function refreshComment(task_id,page){
@@ -506,12 +514,24 @@ function refreshCategory(user_id){
 		link = document.createElement('a');
 		link.appendChild(document.createTextNode(parsedJSON[index].name));
 		link.setAttribute('href', '#');
-		link.setAttribute('onclick', 'refreshTask('+localStorage.user_id+','+parsedJSON[index].category_id+')');
+		link.setAttribute('onclick', 'selectCategory('+localStorage.user_id+','+parsedJSON[index].category_id+');');
 		list.appendChild(link);
+		if (parsedJSON[index].user_id == localStorage.user_id) {
+			del = document.createElement('span');
+			del.setAttribute('onclick', 'deleteCategory('+parsedJSON[index].category_id+')');
+			del.appendChild(document.createTextNode('(x delete '+parsedJSON[index].name+')'));
+			list.appendChild(del);
+		}
 		document.getElementById('categoryList').innerHTML += list.outerHTML;
 	}
 	if (parsedJSON.length == 0)
 		document.getElementById('categoryList').innerHTML += 'No Category Available!';
+}
+
+function selectCategory(user_id,category_id) {
+	document.getElementById('taskLink').setAttribute('style','display:block;');
+	document.getElementById('taskLink').setAttribute('href','new_tugas.php?category_id='+category_id);
+	refreshTask(user_id,category_id);
 }
 
 function getSearchResult(q,mode,page){

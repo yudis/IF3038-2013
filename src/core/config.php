@@ -66,6 +66,79 @@ function queryAll($statement,$cond) {
 	return $stmt->fetchAll();
 }
 
+function addAssignee($name,$task_id,$category_id) {
+	$user_id = query('select user_id from user where name = :name',array('name' => $name));
+	if ($user_id) {
+		queryn('INSERT into assign (task_id,category_id,user_id) values (:task_id,:category_id,:user_id)',array(
+		'task_id' => $task_id,
+		'category_id' => $category_id,
+		'user_id' => $user_id['user_id']
+		));
+	}
+}
+
+function findAssignee($name,$task_id,$category_id) {
+	$user_id = query('select user_id from user where name = :name',array('name' => $name));
+	if ($user_id) {
+		$assign = ($task_id)?(query('select * from assign where task_id = :task_id and user_id = :user_id',array(
+		'task_id' => $task_id,
+		'user_id' => $user_id['user_id']
+		))):(query('select * from assign where category_id = :category_id and user_id = :user_id',array(
+		'category_id' => $category_id,
+		'user_id' => $user_id['user_id']
+		)));
+		return $assign['id'];
+	} else
+		return false;
+}
+
+function delAssignee($name,$task_id,$category_id) {
+	$id = findAssignee($name,$task_id,$category_id);
+	if ($id)
+		queryn('delete from assign where id = :id',array(
+		'id' => $id
+		));
+}
+
+function delTask($task_id) {
+	queryn('DELETE from tags where task_id = :task_id',array(
+		'task_id' => $task_id
+		));
+	queryn('DELETE from comment where task_id = :task_id',array(
+		'task_id' => $task_id
+		));
+	queryn('DELETE from assign where task_id = :task_id',array(
+		'task_id' => $task_id
+		));
+	$attachments = queryAll('select * from attachment where task_id = :task_id',array(
+		'task_id' => $task_id
+		));
+	foreach ($attachments as $attachment) {
+		unlink('../attachment/'.$attachment['filename']);
+	}
+	queryn('DELETE from attachment where task_id = :task_id',array(
+		'task_id' => $task_id
+		));
+	queryn('DELETE from task where task_id = :task_id',array(
+		'task_id' => $task_id
+		));
+}
+
+function delCategory($category_id) {
+	$tasks = queryAll('select task_id from task where category_id = :category_id',array(
+		'category_id' => $category_id
+		));
+	foreach ($tasks as $task) {
+		delTask($task['task_id']);
+	}
+	queryn('DELETE from assign where category_id = :category_id',array(
+		'category_id' => $category_id
+		));
+	queryn('DELETE from category where category_id = :category_id',array(
+		'category_id' => $category_id
+		));
+}
+
 class Db
 {
 	private static $db;

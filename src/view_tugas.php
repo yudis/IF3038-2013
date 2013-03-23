@@ -67,14 +67,14 @@
 							if ($attachments) : ?>
 								<?php foreach($attachments as $attachment):?>
 								<?php if ($attachment['type'] == 'file'): ?>
-									Download <a href="upload/<?php echo $attachment['filename']; ?>"><?php echo $attachment['filename']; ?></a>
+									Download <a href="attachment/<?php echo $attachment['filename']; ?>"><?php echo $attachment['filename']; ?></a>
 								<?php else: ?>
 									<figure>
 									<?php if ($attachment['type'] == 'image'): ?>
-										<img src="upload/<?php echo $attachment['filename']; ?>" alt="<?php echo $attachment['filename']; ?>">
+										<img src="attachment/<?php echo $attachment['filename']; ?>" alt="<?php echo $attachment['filename']; ?>">
 									<?php else : ?>
 										<video width="320" height="240" controls>
-											<source src="upload/<?php echo $attachment['filename']; ?>">
+											<source src="attachment/<?php echo $attachment['filename']; ?>">
 											Your browser does not support the video tag.
 										</video>
 									<?php endif; ?>

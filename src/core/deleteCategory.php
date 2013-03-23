@@ -2,6 +2,6 @@
 	require_once 'config.php';
 	$post = $_POST;
 	var_dump($post);
-	$task_id = $post['task_id'];
-	delTask($task_id);
+	$category_id = $post['category_id'];
+	delCategory($category_id);
 ?>
