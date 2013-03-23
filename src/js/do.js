@@ -326,6 +326,26 @@ Rp(function() {
 
 		}
 	});
+	
+	Rp('#editProfileLink').on('click', function(e) {
+		e.preventDefault();
+
+		if (Rp('#editProfileLink').hasClass('editing')) {
+			Rp('#editProfileLink').nodes[0].innerHTML = 'Edit Profile';
+			Rp('#editProfileLink').removeClass('editing');
+			Rp('#edit-profile').hide();
+			Rp('#current-profile').show();
+		}
+		else {
+			Rp('#editProfileLink').nodes[0].innerHTML = 'Save';
+			Rp('#editProfileLink').addClass('editing');
+			Rp('#current-profile').hide();
+			Rp('#edit-profile').nodes[0].style.display = 'block';
+
+
+		}
+	});
+	
 });
 
 function negateTask(task_id){
