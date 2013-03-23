@@ -8,7 +8,7 @@
 		<script type="text/javascript" src="../validation.js"></script>
 		<script type="text/javascript" src="profilecontroller.js"></script>
 	</head>
-	<body onload="loadProfile();">
+	<body>
 		<div id="navigation">
 			<img />
 			<a href="../dashboard.php">DASHBOARD</a>
@@ -23,7 +23,10 @@
 		<div class="clearall container topcontainer" id="profile container">
 			<div class="clearall container" id="initprofile">
 				<h2>Profile</h2>
-				<h4>Now Loading...</h4>
+				<?php 
+					include('loadprofile.php'); 
+				?>
+				<!--h4>Now Loading...</h4-->
 			</div>
 			<div class="clearall container">
 				<div class="box">

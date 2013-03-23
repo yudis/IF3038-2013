@@ -10,7 +10,7 @@
 		<div id="navigation">
 			<img src="images/logo.gif">
 			<a href="dashboard.php">DASHBOARD</a>
-			<a href="profile.php">PROFILE</a>
+			<a href="../profile/index.php?u=<?=$_SESSION['username']?>">PROFILE</a>
 			<a href="#" onclick="toggleSearch()">SEARCH</a>
 			<a href="index.php">LOGOUT</a>			
 		</div>
