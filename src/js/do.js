@@ -355,9 +355,10 @@ Rp(function() {
 			Rp('#editProfileLink').removeClass('editingprofile');
 			Rp('#edit-profile').hide();
 			Rp('#current-profile').show();
+			alert("Nothing Change!");
 		}
 		else {
-			Rp('#editProfileLink').nodes[0].innerHTML = 'Save';
+			Rp('#editProfileLink').nodes[0].innerHTML = 'Done';
 			Rp('#editProfileLink').addClass('editingprofile');
 			Rp('#current-profile').hide();
 			Rp('#edit-profile').nodes[0].style.display = 'block';

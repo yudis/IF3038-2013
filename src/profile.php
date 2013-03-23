@@ -57,7 +57,7 @@
 							<label>Full Name</label>
 							<input size="30" maxlength="50" name="name" id="name" type="text">
 							<div class="buttons">
-								<button onclick="updateProfile('name',<?php echo $_GET['user_id']; ?>);">Save Name</button>
+								<button id="namebutton" onclick="updateProfile('name',<?php echo $_GET['user_id']; ?>);">Save Name</button>
 							</div><br>&nbsp;
 						</div>
 						<div class="field">
@@ -80,7 +80,7 @@
 							<input size="30" maxlength="50" name="password_k" id="password_k" type="password">
 						</div>
 						<div class="buttons">
-							<button onclick="updateProfile('password',<?php echo $_GET['user_id']; ?>);">Save Password</button>
+							<button type="submit" name="ganti_pass" id="submitPass" onclick="updateProfile('password',<?php echo $_GET['user_id']; ?>);">Save Password</button>
 						</div>
 					<?php if ($user['user_id'] == getUserId()) :?>
 							<br>
