@@ -193,14 +193,6 @@ function validatePostTask()
 }
 
 //Danny Andrianto
-function showtask(cat, num) {
-	var i;
-	for (i = 1; i <= num; i++) {
-		if (i==cat) document.getElementById(i.toString()).style.display="block";
-		else document.getElementById(i.toString()).style.display="none";
-	}
-}
-
 function gettask(user, cat) {
 	var xmlhttp;
 	if (window.XMLHttpRequest) {
@@ -218,13 +210,6 @@ function gettask(user, cat) {
 	var post = "";
 	post = post.concat("id=",user,"&cat=",cat);
 	xmlhttp.send(post);
-}
-
-function hidetask(num) {
-	var i;
-	for (i = 1; i <= num; i++) {
-		document.getElementById(i.toString()).style.display="none";
-	}
 }
 
 function edit_task() {
@@ -258,4 +243,29 @@ function comment() {
 	post = post.concat("id=",id,"&task=",task,"&komentar=",komentar);
 	xmlhttp.send(post);
 	document.getElementById("komentar").value = "";
+}
+
+function change_status(id,prev,task) {
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			document.getElementById(id).innerHTML = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("POST","changestat.php",true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	var finish;
+	if (prev == 0) {
+		finish = 1;
+	} else if (prev == 1) {
+		finish = 0;
+	}
+	var post = "";
+	post = post.concat("stat=",finish,"&task=",task);
+	xmlhttp.send(post);
 }

@@ -42,16 +42,14 @@ mysqli_query($con, "INSERT INTO tasks (
 				creator,
 				deadline,
 				category,
-				timestamp,
-				done
+				timestamp
 				)
 				VALUES (
 					'$judul',
 					'$creator',
 					'$deadline $time',
 					'$id',
-					'$timestamp',
-					'0'
+					'$timestamp'
 				)");
 
 $TaskId = "SELECT id FROM tasks WHERE name='{$judul}'";
@@ -80,11 +78,13 @@ while($i<=$j)
 	
 	mysqli_query($con, "INSERT INTO assignees (
 				member,
-				task
+				task,
+				finished
 				)
 				VALUES (
 					'$idMember',
-					'$idTask'
+					'$idTask',
+					0
 				)");
 	
  	$i++;
@@ -117,6 +117,6 @@ echo "<br>".$direktori;
 echo "<br>".$file;
 echo "<br>".$idTask;
 
-
+header("location:dashboard.php");
 
 ?>

@@ -52,7 +52,7 @@ $id = $_SESSION['id'];
             <a href ="post.php"><input id ="newtask" type="button" name="Tugas Baru" value="newtask" disabled="true"/></a>
             <img onmouseover="javascript:getDashboardFocus('task2');" src ="images/dateschedule.png" id="task2" alt="task2" style="cursor:pointer" />
             <a href ="post.php"><input id ="newtask" type="button" name="Tugas Baru" value="newtask" disabled="true"/></a>-->
-            <div onclick="javascript:gettask(<?php echo $_SESSION['id'];?>,<?php echo $cat['id'];?>);"><a href="#"><?php echo $cat['name'];?></a></div>
+            <br /><div onclick="javascript:gettask(<?php echo $_SESSION['id'];?>,<?php echo $cat['id'];?>);"><a href="#"><?php echo $cat['name'];?></a></div>
             <?php
 			            $result3 = mysqli_query($con, "SELECT * FROM editors WHERE member=$id AND category=$cat_id");
 			        	$count = mysqli_num_rows($result3);
@@ -68,6 +68,8 @@ $id = $_SESSION['id'];
             	<input type="submit" value="Delete Category" />
             </form>
             <?php
+            				} else {
+            					echo "<br />";
             				}
         				}
             			$found = true;
@@ -79,7 +81,7 @@ $id = $_SESSION['id'];
         			$count = mysqli_num_rows($result3);
         			if ($count == 1) {
         	?>
-        	<div onclick="javascript:gettask(<?php echo $_SESSION['id'];?>,<?php echo $cat['id'];?>);"><a href="#"><?php echo $cat['name'];?></a></div>
+        	<br /><div onclick="javascript:gettask(<?php echo $_SESSION['id'];?>,<?php echo $cat['id'];?>);"><a href="#"><?php echo $cat['name'];?></a></div>
             <a href ="post.php?id=<?php echo $cat['id'];?>"><input id ="newtask" type="button" name="Tugas Baru" value="New Task"/></a><br />
             <?php
             			if ($cat['creator'] == $id) 
@@ -90,17 +92,19 @@ $id = $_SESSION['id'];
             	<input type="submit" value="Delete Category" />
             </form>
             <?php
+            			} else {
+            				echo "<br />";
             			}
         			}
         		}
-        		echo "<br />";
 			}
             ?>
         </div>
         <div id="rincian">
 			<?php
-			for ($idc=1; $idc<=$cats; $idc++) {
-				echo "<div id='".$idc."'>";
+			$getcat = mysqli_query($con, "SELECT * FROM categories");
+			while ($temp = mysqli_fetch_array($getcat)) {
+				$idc = $temp['id'];
 				$result3=mysqli_query($con,"SELECT * FROM `tasks` WHERE category='$idc'");
 				while ($task=mysqli_fetch_array($result3)) {
 					$task_id = $task['id'];
@@ -108,7 +112,7 @@ $id = $_SESSION['id'];
 					if (mysqli_num_rows($result4) == 1) {
 						$assignee=mysqli_fetch_array($result4);
 			?>
-			<a href="rinciantugas.php?id=<?php echo $task['id'];?>"><?php echo $task['name']?></a><br />
+			<br /><a href="rinciantugas.php?id=<?php echo $task['id'];?>"><?php echo $task['name']?></a><br />
 			Deadline: <strong><?php echo $task['deadline'];?></strong><br />
 			<?php
 						$res = mysqli_query($con,"SELECT * FROM tags WHERE tagged=$task_id");
@@ -127,7 +131,10 @@ $id = $_SESSION['id'];
 			?>
 			</strong>
 			<br />
-			Status : <strong><?php if ($assignee['finished'] == 1) echo 'Selesai'; else echo 'Belum selesai';?></strong><br />
+			<div id="<?php echo $task_id;?>">
+				Status : <strong><?php if ($assignee['finished'] == 1) echo 'Selesai'; else echo 'Belum selesai';?></strong><br />
+				<input name="YourChoice" type="checkbox" value="selesai" <?php if($assignee['finished']==1) echo "checked"; ?> onclick="change_status('<?php echo $task_id;?>',<?php echo $assignee['finished'];?>,<?php echo $task_id;?>)"> Selesai
+			</div>
 			<?php
 						if ($task['creator'] == $id) {
 			?>
@@ -138,9 +145,7 @@ $id = $_SESSION['id'];
 			<?php
 						}
 					}
-					echo "<br />";
 				}
-				echo "</div>";
 			}
 			?>
 			

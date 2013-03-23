@@ -2,7 +2,7 @@
 include 'header.php';
 
 
-$id_cat= $_GET['cat'];
+$id_cat= $_GET['id'];
 ?>
 
 
