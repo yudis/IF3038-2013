@@ -2,6 +2,11 @@
 
 /**************************HEADER**************************/
 
+function toSearchResult(keyword,filter) {
+	//alert(keyword + " " + filter);
+	window.location = "searching.php?keyword=" + keyword + "&filter=" + filter;
+}
+
 function showHint(str) {
         var xmlhttp;
         if (str.length == 0) {

@@ -27,7 +27,7 @@
             echo $user_row["username"]; echo "<br>";
             echo $user_row["email"]; echo "<br>";
             echo $user_row["fullname"]; echo "<br>";
-            echo $user_row["tanggilLahir"]; echo "<br>";
+            echo $user_row["tanggalLahir"]; echo "<br>";
         }
         echo "<br><br>";
     }            

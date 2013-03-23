@@ -12,22 +12,24 @@
     </head>
     
     <body>
+	<form action="searching.php" method="get">
     	<div id="header">
 	    <img id="logo" src="res/logo1.png" alt="to-do list"></img>
             <a id="dashboardLink" href="dashboard.php">dashboard</a>
             <input id="searchForm" type="text" name="keyword" onkeyup="showHint(this.value)" placeholder="search"></input>
             <select id="filter" name="filter">
                 <!--<option selected>Select Filter ...</option>-->
-                <option>All</option>
-                <option>Username</option>
-                <option>Judul Kategori</option>
-                <option>Task</option>
+                <option>all</option>
+                <option>user</option>
+                <option>category</option>
+                <option>task</option>
             </select>
-            <input id="submitForm" type="submit" name="search" value="search">
-		<a href="#"><img id="profile" src="res/profileLogo.png" onclick="keProfil()";/></a>
-		<a id="logout" href="logout.php">Log Out</a>
+            <input id="submitForm" type="submit" name="search" value="search" onclick="toSearchResult(searchForm.value,filter.value)">
+	    <a href="#"><img id="profile" src="res/profileLogo.png" onclick="keProfil()";/></a>
+	    <a id="logout" href="logout.php">Log Out</a>
 	    <div class="suggest">Suggestion : <span id="textHint"></span></div>
         </div>
+	</form>
         
         <div id="spasi">
         </div>
