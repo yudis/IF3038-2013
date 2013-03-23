@@ -32,6 +32,10 @@ function editProfileCheck() {
 	}
 	document.getElementById("confirm_validation").style.display = "block";
 	
+	if ((password == confirm) && (password.lenght == 0)) {
+		regValid = 1; 
+	}
+	
 	//check name
 	if (name.indexOf(' ') >= 0) {
 		document.getElementById("name_validation").src = "../img/yes.png";
