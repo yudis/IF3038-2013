@@ -12,12 +12,14 @@ and open the template in the editor.
 			<?php
 				require "config.php";
 				//dummy here
-				$sql = "SELECT * FROM user WHERE username = 'EndyDoank'";
+				session_start();
+				$username = $_SESSION['username'];
+				$sql = "SELECT * FROM user WHERE username = '$username'";
 				$user = mysqli_query($con,$sql);
 				$current_user = mysqli_fetch_array($user);
-				$sql_notdone_list = "SELECT task.name FROM task, assignee WHERE status='0' and username='EndyDoank' and assignee.id_task = task.id_task;";
+				$sql_notdone_list = "SELECT task.name FROM task, assignee WHERE status='0' and username='$username' and assignee.id_task = task.id_task;";
 				$not_done_list = mysqli_query($con,$sql_notdone_list);
-				$sql_done_list = "SELECT task.name FROM task, assignee WHERE status='1' and username='EndyDoank' and assignee.id_task = task.id_task;";
+				$sql_done_list = "SELECT task.name FROM task, assignee WHERE status='1' and username='$username' and assignee.id_task = task.id_task;";
 				$done_list = mysqli_query($con,$sql_done_list);
 			?>
 		</script>
@@ -77,7 +79,6 @@ and open the template in the editor.
 					Confirm Password<br>
 			</div>
 			<?php
-				session_start();
 				if($_SESSION['IsEdit']==true){
 					print '<script type="text/javascript">'; 
 					print 'alert("No profile update")'; 

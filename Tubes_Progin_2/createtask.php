@@ -4,9 +4,9 @@ and open the template in the editor.
 -->
 
 <?php
-	//$username = $_SESSION['username'];
+	session_start();
+	$username = $_SESSION['username'];
 	//dummy here
-	$username = "EndyDoank";
 	
 	require "config.php";
 	
@@ -27,16 +27,8 @@ and open the template in the editor.
 			include "header.php";
 		?>
 		<div id="category">
-			<div class="kategori" onclick="showList();"><a>Fraud</a></div>
-			<div class="kategori" onclick="showList3();"><a>Robbery</a></div>
-			<div class="kategori" onclick="showList2();"><a>Gambling</a></div>
-			<div class="kategori" onclick="showList();"><a>Public Drunkenness</a></div>
-			<div class="kategori" onclick="showList3();"><a>Drug Law Violation</a></div>
-			<div class="kategori" onclick="showList2();"><a>Motor Vehicle Theft</a></div>
+			<!--category here-->
 		</div>
-        <div id="addCat">
-            <a onclick="addCategory();">+ category</a>
-        </div>
 		<div id="wanted">
 			<img src="img/kertas2.png">
 		</div>

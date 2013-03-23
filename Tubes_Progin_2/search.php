@@ -91,7 +91,8 @@
 									result += "<div class=\"task\">";
 									result += "<a href=\"#\">"+string22[0]+"</a>";
 									result += "<span><br>fullname : "+string22[1]+"</span>";
-									result += "<span><br>path : "+string22[2]+"</span>";
+									result += "<span><br>Avatar :</span>";
+									result += "<span><img src=\""+string22[2]+"\" width=40px; height=40px;></span>";
 									result += "</div>";
 								}
 							}
@@ -164,7 +165,8 @@
 							result += "<div class=\"task\">";
 							result += "<a href=\"#\">"+string2[0]+"</a>";
 							result += "<span><br>fullname : "+string2[1]+"</span>";
-							result += "<span><br>path : "+string2[2]+"</span>";
+							result += "<span><br>Avatar :</span>";
+							result += "<span><img src=\""+string2[2]+"\" width=40px; height=40px;></span>";
 							result += "</div>";
 						}
 						
