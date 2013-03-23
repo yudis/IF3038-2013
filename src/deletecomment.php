@@ -23,6 +23,7 @@ while ($commented = mysqli_fetch_array($result7)) {
 	$commenter[$count_comment] = mysqli_fetch_array($result8);
 	$count_comment++;
 }
+if ($count_comment > 10) $count_comment = 10;
 for ($i = 0; $i < $count_comment; $i++) {
 	$current1=$comment[$i];
 	$current2=$commenter[$i];
@@ -35,6 +36,7 @@ for ($i = 0; $i < $count_comment; $i++) {
 	}
 	echo '<div class="line-konten"></div>';
 }
+echo '<input type="button" value="More" onclick="comment_more('.$task['id'].',10);this.style.display=\'none\'">';
 
 mysqli_close($con);
 ?>

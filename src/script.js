@@ -317,3 +317,23 @@ function search_more(filter, string, start) {
 	post = post.concat("filter=",filter,"&string=",string,"&start=",start);
 	xmlhttp.send(post);
 }
+
+function comment_more(task, start) {
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			komen = document.getElementById("lkomen").innerHTML;
+			document.getElementById("lkomen").innerHTML = komen.concat(xmlhttp.responseText);
+		}
+	}
+	xmlhttp.open("POST","morecomment.php",true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	var post = "";
+	post = post.concat("task=",task,"&start=",start);
+	xmlhttp.send(post);
+}

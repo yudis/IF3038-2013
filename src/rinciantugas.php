@@ -201,16 +201,6 @@ $assignee = mysqli_fetch_array($res);
 					<input type="hidden" name="id" value="<?php echo $id_task;?>" />
                 	<div class="count"><input type="submit" name="submit" value="Submit"/></div>
 				</form>
-
-				<!--<div class="likedislike">
-					<ul class="ldbuttons">
-						<li class="like" id="blike"><a href="javascript:like();void(0);"></a></li>
-						<li class="dislike" id="bdislike"><a href="javascript:dislike();void(0);"></a></li>
-					</ul>
-				</div>
-				<div class="count">
-					<strong><span id="jmllike"></span></strong> likes
-				</div>-->
                 
 			</div><br /><br /><br />
 			<form action="deletetask.php" method="post">
@@ -258,6 +248,7 @@ $assignee = mysqli_fetch_array($res);
 				<div class="line-konten"></div>
 				<div id="lkomen">
 					<?php
+					if ($count_comment > 10) $count_comment = 10;
 					for ($i = 0; $i < $count_comment; $i++) {
 						$current1=$comment[$i];
 						$current2=$commenter[$i];
@@ -270,6 +261,7 @@ $assignee = mysqli_fetch_array($res);
 						}
 						echo '<div class="line-konten"></div>';
 					}
+					echo '<input type="button" value="More" onclick="comment_more('.$task['id'].',10);this.style.display=\'none\'">';
 					?>
 				</div>
 				
