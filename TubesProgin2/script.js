@@ -11,6 +11,7 @@ var email = document.getElementById("regemail");
 var file = document.getElementById("regfile");
 var submit = document.getElementById("regbutton");
 var regForm = document.getElementById("regForm");
+var cat = document.getElementById("newcat");
 var valid1bool;
 var valid2bool;
 var valid3bool;
@@ -18,6 +19,7 @@ var valid4bool;
 var valid5bool;
 var valid6bool;
 var valid7bool;
+var newcatbool;
 
 username.onkeyup = function()
 {
@@ -200,58 +202,10 @@ function cekvalid() {
     }
 }
 
-
-function showList() {
-    document.getElementById("listtugas3").style.visibility = "hidden";
-    document.getElementById("listtugas2").style.visibility = "hidden";
-    document.getElementById("listtugas").style.visibility = "visible";
-    document.getElementById("rincitugas").style.visibility = "hidden";
-    document.getElementById("edittugas").style.visibility = "hidden";
-    //document.getElementById("buattugas").style.visibility = "hidden";
-    document.getElementById("wanted").style.visibility = "hidden";
-}
-
-function showList2() {
-    document.getElementById("listtugas").style.visibility = "hidden";
-    document.getElementById("listtugas2").style.visibility = "visible";
-    document.getElementById("listtugas3").style.visibility = "hidden";
-    document.getElementById("rincitugas").style.visibility = "hidden";
-    document.getElementById("edittugas").style.visibility = "hidden";
-    document.getElementById("buattugas").style.visibility = "hidden";
-    document.getElementById("wanted").style.visibility = "hidden";
-    self.focus;
-}
-
-function showList3() {
-    document.getElementById("listtugas").style.visibility = "hidden";
-    document.getElementById("listtugas2").style.visibility = "hidden";
-    document.getElementById("listtugas3").style.visibility = "visible";
-    document.getElementById("rincitugas").style.visibility = "hidden";
-    document.getElementById("edittugas").style.visibility = "hidden";
-    document.getElementById("buattugas").style.visibility = "hidden";
-    document.getElementById("wanted").style.visibility = "hidden";
-    self.focus();
-}
-
-function showRinci() {
-    document.getElementById("listtugas3").style.visibility = "hidden";
-    document.getElementById("listtugas2").style.visibility = "hidden";
-    document.getElementById("listtugas").style.visibility = "hidden";
-    document.getElementById("rincitugas").style.visibility = "visible";
-    document.getElementById("edittugas").style.visibility = "hidden";
-    document.getElementById("buattugas").style.visibility = "hidden";
-    document.getElementById("wanted").style.visibility = "visible";
-    self.focus();
-}
-
 function showEdit() {
-    document.getElementById("listtugas3").style.visibility = "hidden";
-    document.getElementById("listtugas2").style.visibility = "hidden";
-    document.getElementById("listtugas").style.visibility = "hidden";
     document.getElementById("rincitugas").style.visibility = "hidden";
     document.getElementById("edittugas").style.visibility = "visible";
-    document.getElementById("buattugas").style.visibility = "hidden";
-    document.getElementById("wanted").style.visibility = "visible";
+    self.focus();
 }
 function showBuat() {
     document.getElementById("listtugas3").style.visibility = "hidden";
@@ -278,17 +232,6 @@ function createTask() {
     }
 }
 
-function addCat() {
-    var k = document.getElementById("category");
-    var l = document.getElementById("cate").value;
-    if (l !== "") {
-        k.innerHTML += "<div class='kategori' onclick='showList2();'>" + l + "</div>";
-        restore();
-        showList();
-    } else {
-        alert("Input category name");
-    }
-}
 
 function addCategory() {
     var overlay = document.createElement("div");
@@ -372,7 +315,6 @@ function Submit() {
 function multiAutocomp(input, phpscript, text) {
     var idname = "hasil_" + input.id;
     var elmt = document.getElementById(input.id);
-
     if (elmt.value.length > 0) {
 
         document.body.setAttribute("onClick", "multiAutocompHandleClick('" + text + "');");
@@ -396,7 +338,6 @@ function multiAutocomp(input, phpscript, text) {
                 console.log("Browser doesn't support AJAX");
             }
         }
-
         xmlHttp.onreadystatechange = function() {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                 var query_result = xmlHttp.responseXML.documentElement.getElementsByTagName("Data");
@@ -482,4 +423,190 @@ function multiAutocompHandleClick(text) {
         divadd.removeChild(document.getElementById(parentdiv[i].id));
         //document.body.removeChild(document.getElementById(parentdiv[i].id));
     }
+}
+
+function addComment(user, IDTask) {
+    var comment = document.getElementById('addCommentText').value;
+    if (comment != "") {
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function()
+        {
+            if (xmlhttp.readyState == 4)
+            {
+                var response = xmlhttp.responseText;
+                comment = "www";
+                //document.getElementById("isikomentar").innerHTML+=response;
+            }
+        }
+        xmlhttp.open('get', 'addcomment.php?comment=' + encodeURI(comment) + '&user=' + encodeURI(user) + '&task=' + encodeURI(IDTask));
+        xmlhttp.send(null);
+    }
+}
+
+function loadcomment() {
+    var IDTask = document.getElementById("HiddenIDTask").value;
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+            var response = xmlhttp.responseText;
+            document.getElementById("komentaryey").innerHTML = response;
+        }
+    }
+    xmlhttp.open('get', 'generatecomment.php?IDTask=' + encodeURI(IDTask+"&page="+page));
+    xmlhttp.send(null);
+
+    setTimeout('loadcomment()', 500);
+
+}
+
+function removeComment(IDComment) {
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+        }
+    }
+    xmlhttp.open('get', 'deletecomment.php?IDComment=' + encodeURI(IDComment));
+    xmlhttp.send(null);
+}
+
+function editTask(IDTask) {
+    var deadline = document.getElementById("editdeadline").value;
+    var assignee = document.getElementById("addnewassignee").value;
+    var tag = document.getElementById(id = "edittag").value;
+
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+            var response = xmlhttp.responseText;
+            window.location = "RinciTugas.php?IDTask=" + IDTask;
+        }
+    }
+    xmlhttp.open('get', 'edittask.php?deadline=' + encodeURI(deadline) + "&IDTask=" + encodeURI(IDTask) + "&assignee=" + encodeURI(assignee) + "&tag=" + encodeURI(tag));
+    xmlhttp.send(null);
+}
+
+function deleteassignee(IDAssignment, IDTask) {
+    var deadline = document.getElementById("editdeadline").value;
+    var assignee = document.getElementById("addnewassignee").value;
+    var tag = document.getElementById(id = "edittag").value;
+
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+            var response = xmlhttp.responseText;
+            document.getElementById("ListEditAssignee").innerHTML = response;
+        }
+    }
+    xmlhttp.open('get', 'deleteassignment.php?IDAssignment=' + encodeURI(IDAssignment) + '&IDTask=' + encodeURI(IDTask));
+    xmlhttp.send(null);
+}
+
+function deletetag(IDTag, IDTask) {
+    var deadline = document.getElementById("editdeadline").value;
+    var assignee = document.getElementById("addnewassignee").value;
+    var tag = document.getElementById(id = "edittag").value;
+
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+            var response = xmlhttp.responseText;
+            document.getElementById("ListEditTag").innerHTML = response;
+        }
+    }
+    xmlhttp.open('get', 'deletetag.php?IDTag=' + encodeURI(IDTag) + '&IDTask=' + encodeURI(IDTask));
+    xmlhttp.send(null);
+}
+
+function changestatus(IDTask) {
+    var status = document.getElementById("checkboxstatus").checked;
+    
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+            var response = xmlhttp.responseText;
+            document.getElementById("checkstatus").innerHTML = response;
+        }
+    }
+    xmlhttp.open('get', 'updatestatus.php?IDTask=' + encodeURI(IDTask)+"&status="+encodeURI(status));
+    xmlhttp.send(null);
+    setTimeout('changestatus('+IDTask+')', 500);
+
+}
+
+var page;
+
+function loadpagevar(){
+    page=1;
+}
+
+function setPage(_page){
+    page=_page;
 }

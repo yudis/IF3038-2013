@@ -19,24 +19,117 @@ and open the template in the editor.
         </header>
 
         <div id="category">
-        </div> 
+            <?php
+            if (connectDB()) {
+                $category = "SELECT category.IDCategory,category.CategoryName FROM assignment,task,category WHERE assignment.Username=\"" . $_COOKIE['UserLogin'] . "\" AND assignment.IDTask=task.IDTask AND task.IDCategory=category.IDCategory
+        UNION DISTINCT
+        SELECT category.IDCategory,category.CategoryName FROM authority,category WHERE authority.Username=\"" . $_COOKIE['UserLogin'] . "\" AND authority.IDCategory=category.IDCategory
+        UNION DISTINCT
+        SELECT IDCategory,CategoryName FROM category WHERE Creator=\"" . $_COOKIE['UserLogin'] . "\" 
+        ORDER BY CategoryName";
+                $result = mysql_query($category);
+                if ($result > 0) {
+                    while ($data = mysql_fetch_array($result)) {
+                        ?>
+                        <div class="kategori" onclick="showList(
+                        <?php
+                        echo($data['IDCategory']);
+                        ?>
+                                );"><a>
 
-        <div id ="listtugas" class="list">
+                                <?php
+                                echo($data['CategoryName']);
+                                ?>                                
+                            </a></div>
+                        <?php
+                    }
+                }
+                ?>
+            </div> 
 
-        </div>
+            <div id ="listtugas" class="list">
 
-        <div id="addCat">
-            <a onclick="addCategory();">+ category</a>
-        </div>
+                <?php
+                $alltask = "SELECT DISTINCT task.* FROM assignment,task,category,authority WHERE assignment.Username=\"" . $_COOKIE['UserLogin'] . "\" AND assignment.IDTask=task.IDTask AND task.IDCategory=category.IDCategory OR authority.Username=\"" . $_COOKIE['UserLogin'] . "\"";
+                $result = mysql_query($alltask);
+                $output = "";
+                $i = 0;
+                if ($result > 0) {
+                    while ($data = mysql_fetch_array($result)) {
+                        ?>
 
-        <div id='add'>
-            Category Name:<br/> <input type='text' id='cate'><br/>
-            User:<br/> <input type='text'><br/>
-            <input type="submit" onclick="addCat();" value="create">
-            <input type="submit" onclick="restore();" value="cancel">
-        </div>
-    </body>  
+                        <a class="listTugas" onclick="showRinciTugas(<?php echo($data['IDTask']); ?>);">
+                            <br><b>TaskName : </b><br>
+                            <?php
+                                echo($data['TaskName']);
+                            ?>
+                            <br><b>Deadline : </b><br>
+                            <?php
+                                echo($data['Deadline'] );
+                            ?>
+                            <br><b>Tag : </b><br>
+                            <?php
+                            $tag = "SELECT tag.* FROM tag,tasktag WHERE tag.IDTag=tasktag.IDTag AND tasktag.IDTask=\"" . $data['IDTask'] . "\"";
+                            $results = mysql_query($tag);
+                            if ($results > 0) {
+                                while ($datas = mysql_fetch_array($results)) {
+                                    echo($datas['TagName']);
+                                    ?>
+                                    <br>
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <br><b>Status : </b><br><input type="checkbox" id="taskstat
+                            <?php
+                                echo($i);
+                            ?> "
+                            <?php
+                            if ($data['Status'] == "done")
+                            {?>
+                            checked="checked"
+                            <?php }
+                            ?>
+                            onclick="changeStatus(this,<?php echo($data['IDTask']);?>,<?php echo($i);?>);">
+                            <span id="checkedvalue<?php echo($i);?>">
+                            <?php
+                               echo($data['Status']);
+                            ?>
+                            </span></a>
+                            <?php
+                                $i++;
+                        }
+                    }
+                    ?>  
 
-</body>
-<script type="text/javascript" src="script.js"></script>
-</html>
+                    </div>
+
+                    <div id="addCat">
+                        <a onclick="addCategory();">+ category</a>
+                    </div>
+
+                    <div id='add'>
+                        
+                        <form id="addCatForm" method="post" action="addCat.php" enctype="multipart/form-data">
+                        <br/>
+                        Category Name:<br/>
+                        <input type="text" id="newcat" name="newcat" required ><br>
+                        User:<br/>
+                        <input id="newcatuser" name="newcatuser" type="text" onkeyup="multiAutocomp(this, 'catuser.php', 'add');" onfocusin="multiAutocompClearAll()" required>
+                        <br>
+                        <input type="submit" id="newcatbutton" name="submit" value="create">
+                        <input type="submit" onclick="restore();" value="cancel">
+                        
+                        <br/>
+                        </form>
+                    </div>
+                    </body>  
+
+                    </body>
+                    <script type="text/javascript" src="script.js"></script>
+                    <?php
+                } else { // jika koneksi database tidak berhasil
+                    die('Database connection error');
+                }
+                ?>
+                </html>
