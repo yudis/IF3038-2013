@@ -48,6 +48,10 @@
 			$attachmentResponse[] = $attachment_row['att_content'];
 		}
 		
+	
+		
+		
+		
 		//Get 'comment'		
 		unset($commentContent);
 		$commentContent = array();
@@ -75,6 +79,7 @@
 		while ($ass_row = mysql_fetch_array($ass_result, MYSQL_ASSOC)) { 
 			$assResponse[] = $ass_row['username'];
 		}
+		
 		
 		//Generate response
 		$response = $response. 
@@ -107,12 +112,34 @@
 			</div>
 			
 			
+			
+			
 			<div class='left top20 dynamic_content_row'>
 				<div id='attachment_ltd' class='left dynamic_content_left'>Attachment</div>
-				<div id='attachment_rtd' class='left dynamic_content_right'>
-					<a id='taskdetail_img' width='100px' height='100px' href='uploads/".$attachmentResponse[0]."' target='_blank' >$attachmentResponse[0]</a>
-					<a id='taskdetail_img' width='100px' height='100px' href='uploads/".$attachmentResponse[1]."' target='_blank' >$attachmentResponse[1]</a>
-					<a id='taskdetail_img' width='100px' height='100px' href='uploads/".$attachmentResponse[2]."' target='_blank' >$attachmentResponse[2]</a>
+				<div id='attachment_rtd' class='left dynamic_content_right'>";
+			
+			if (count($attachmentResponse) > 0) {
+				for($i=0; $i<count($attachmentResponse); $i++) {
+					$extensyen = explode(".", $attachmentResponse[$i]);
+					$extension = end($extensyen);
+					if (($extension=='zip') || ($extension == 'pdf') || ($extension == 'rar')){
+					$response = $response."
+					<a id='taskfile'  href='uploads/".$attachmentResponse[$i]."' target='_blank' >".$attachmentResponse[$i]."</a><br>";
+					} else if (($extension == 'jpg') || ($extension == 'jpeg') || ($extension == 'gif') || (($extension == 'png'))) {
+					$response = $response."
+					<img id='taskimg' width='100px' height='100px' src='uploads/".$attachmentResponse[$i]."'><br>";
+					} else if (($extension == 'mp4') || ($extension == 'flv')){
+					$response = $response."
+					<video id='taskvid' width='320px' height='240px' controls>
+					<source src='uploads/".$attachmentResponse[$i]."' type='video/flv'>";
+					} else {
+					$response = $response."
+					<a id='taskfile'  href='uploads/".$attachmentResponse[$i]."' target='_blank' >".$attachmentResponse[$i]."</a><br>";
+					}
+				}
+			}
+			
+			$response = $response."
 				</div>
 			</div>
 			
