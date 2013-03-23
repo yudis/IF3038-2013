@@ -3,84 +3,7 @@
 	<head>
 		<title>Profile</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
-        <script>
-			function edit_aboutme(){
-				document.getElementById("aboutme_edit").style.display = 'block';
-				var val = document.getElementById("aboutme_show").innerHTML;
-				document.getElementById("aboutme_to_edit").value = val;
-				document.getElementById("aboutme_show").style.display = 'none';
-				document.getElementById("right-main-body").innerHTML = "<div id=\"right-main-body\"><a href=\"#\" onClick=\"just_edit_aboutme()\"><u><p>done</p></u></a></div>";
-			}
-			function just_edit_aboutme(){
-				document.getElementById("aboutme_edit").style.display = 'none';
-				document.getElementById("aboutme_show").style.display = 'block';
-				document.getElementById("right-main-body").innerHTML = "<div id=\"right-main-body\"><a href=\"#\" onClick=\"edit_aboutme()\"><u><p>edit</p></u></a></div>";
-			}
-			
-			function edit_fullname(){
-				document.getElementById("left-profile-newname").style.display = 'block';
-				var val = document.getElementById("left-profile-name").innerHTML;
-				var l = val.length;
-				val = val.substring(15, l - 4);
-				document.getElementById("newname").value = val;
-				document.getElementById("left-profile-name").style.display = 'none';
-				document.getElementById("right-profile-editname").innerHTML = "<a href=\"#\" onclick=\"just_edit_fullname()\"><u><p>done</p></u></a>";
-			}
-			function just_edit_fullname(){
-				document.getElementById("left-profile-newname").style.display = 'none';
-				document.getElementById("left-profile-name").style.display = 'block';
-				document.getElementById("right-profile-editname").innerHTML = "<a href=\"#\" onclick=\"edit_fullname()\"><u><p>edit</p></u></a>";
-			}
-			
-			function edit_birthday(){
-				document.getElementById("left-profile-newbirthday").style.display = 'block';
-				var val = document.getElementById("left-profile-birthday").innerHTML;
-				var l = val.length;
-				val = val.substring(16, l - 4);
-				document.getElementById("newbirthday").value = val;
-				document.getElementById("left-profile-birthday").style.display = 'none';
-				document.getElementById("right-profile-editbirthday").innerHTML = "<a href=\"#\" onclick=\"just_edit_birthday()\"><u><p>done</p></u></a>";
-			}
-			function just_edit_birthday(){
-				document.getElementById("left-profile-newbirthday").style.display = 'none';
-				document.getElementById("left-profile-birthday").style.display = 'block';
-				document.getElementById("right-profile-editbirthday").innerHTML = "<a href=\"#\" onclick=\"edit_birthday()\"><u><p>edit</p></u></a>";
-			}
-			
-			
-			function edit_email(){
-				document.getElementById("left-profile-newemail").style.display = 'block';
-				var val = document.getElementById("left-profile-email").innerHTML;
-				var l = val.length;
-				val = val.substring(14, l - 8);
-				document.getElementById("newemail").value = val;
-				document.getElementById("left-profile-email").style.display = 'none';
-				document.getElementById("right-profile-editemail").innerHTML = "<a href=\"#\" onclick=\"just_edit_email()\"><u><p>done</p></u></a>";
-			}
-			function just_edit_email(){
-				document.getElementById("left-profile-newemail").style.display = 'none';
-				document.getElementById("left-profile-email").style.display = 'block';
-				document.getElementById("right-profile-editemail").innerHTML = "<a href=\"#\" onclick=\"edit_email()\"><u><p>edit</p></u></a>";
-			}
-			
-			function edit_avatar(){
-				document.getElementById("uploader").style.display = 'block';
-				document.getElementById("upload_button").innerHTML = "<a href=\"#\" onClick=\"just_edit_avatar()\">Save</a>";
-			}
-			function just_edit_avatar(){
-				document.getElementById("uploader").style.display = 'none';
-				document.getElementById("upload_button").style.display = 'block';
-				document.getElementById("upload_button").innerHTML = "<a href=\"#\" onClick=\"edit_avatar()\">Upload New Avatar</a>";
-			}
-			
-			function hidden_update_box(){
-				document.getElementById("aboutme_edit").style.display = 'none';
-				document.getElementById("left-profile-newemail").style.display = 'none';
-				document.getElementById("left-profile-newname").style.display = 'none';
-				document.getElementById("left-profile-newbirthday").style.display = 'none';
-				document.getElementById("uploader").style.display = 'none';
-			}
-		</script>
+		<script type="text/javascript" src="profile.js"></script>
 	</head>
 	<body onLoad="hidden_update_box()">
 		<div id="main-body-general">
@@ -131,7 +54,7 @@
 						<div id="right-main-body">
                         	<?php 
                         		if($username == $_SESSION['userlistapp'] ){
-									echo "<a href=\"#\" onClick=\"edit_aboutme()\"><u><p>edit</p></u></a>";
+									echo "<a href=\"#\" onClick=\"edit_aboutme('$user_show')\"><u><p>edit</p></u></a>";
 								}else{
 									echo "<br />";	
 								}
@@ -153,7 +76,7 @@
 					<div id="right-profile-editname">
                     	<?php 
                         		if($username == $_SESSION['userlistapp'] ){
-									echo "<a href=\"#\" onclick=\"edit_fullname()\"><u><p>edit</p></u></a>";
+									echo "<a href=\"#\" onclick=\"edit_fullname('$user_show')\"><u><p>edit</p></u></a>";
 								}
 						?>
                     </div>
@@ -165,7 +88,7 @@
 					<div id="right-profile-editbirthday">
                     	<?php 
                         		if($username == $_SESSION['userlistapp'] ){
-									echo "<a href=\"#\" onClick=\"edit_birthday()\"><u><p>edit</p></u></a>";
+									echo "<a href=\"#\" onClick=\"edit_birthday('$user_show')\"><u><p>edit</p></u></a>";
 								}
 						?>
                     </div>
@@ -177,7 +100,7 @@
 					<div id="right-profile-editemail">
                     	<?php 
                         		if($username == $_SESSION['userlistapp'] ){
-									echo "<a href=\"#\" onClick=\"edit_email()\"><u><p>edit</p></u></a>";
+									echo "<a href=\"#\" onClick=\"edit_email('$user_show')\"><u><p>edit</p></u></a>";
 								}
 						?>
                     </div>

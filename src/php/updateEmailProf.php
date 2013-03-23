@@ -2,13 +2,12 @@
 require('init_function.php');
 
 $con = getConnection();
-
-$aboutme = $_GET['aboutme'];
+$email = $_GET['email'];
 $userid = $_GET['userid'];
 
-$query = "UPDATE user SET aboutme = '$aboutme' WHERE username='$userid'";
+$query = "UPDATE user SET email = '$email' WHERE username='$userid'";
 mysqli_query($con,$query);
 
-echo $aboutme;
+echo $email;
 
 ?>

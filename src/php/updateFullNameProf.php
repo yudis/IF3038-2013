@@ -3,12 +3,13 @@ require('init_function.php');
 
 $con = getConnection();
 
-$aboutme = $_GET['aboutme'];
+$newname = $_GET['name'];
 $userid = $_GET['userid'];
 
-$query = "UPDATE user SET aboutme = '$aboutme' WHERE username='$userid'";
+
+$query = "UPDATE user SET fullname = '$newname' WHERE username='$userid'";
 mysqli_query($con,$query);
 
-echo $aboutme;
+echo $newname;
 
 ?>
