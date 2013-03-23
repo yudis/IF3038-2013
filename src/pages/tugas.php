@@ -222,6 +222,11 @@
 
 					<div class="comment-form">
 						<h3>Add Comment</h3>
+						<?php
+							echo '<a href="profile">';
+								echo '<img src="'."upload/user_profile_pict/".$this->currentUser->avatar.'" alt="'.$this->currentUser->fullname.'" class="icon_pict" >';
+							echo '</a>';
+						?>
 						<form id="commentForm" action="#" method="post">
 							<input type="hidden" name="id_task" value="<?php echo $task->id_task; ?>">
 							<textarea name="komentar" id="commentBody"></textarea>

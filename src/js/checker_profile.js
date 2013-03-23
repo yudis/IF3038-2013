@@ -1,5 +1,5 @@
 Rp(function() {
-	checkValidity = function() {
+	/*checkValidity = function() {
 		pattern = new RegExp(this.getAttribute('pattern'), 'i');
 		match = this.value.match(pattern);
 
@@ -29,9 +29,9 @@ Rp(function() {
 
 	Rp('input[pattern]').on('keyup', checkValidity);
 	Rp('#edit_submit').prop('disabled', true); // disabled by default
-	
+	*/
 	window.onload = function() 
 	{
-		datePicker.init(document.getElementById("calendar"), document.getElementById("edit_form"));
+		datePicker.init(document.getElementById("calendar"), document.getElementById("edit_form"), "birth_date");
 	}
 });

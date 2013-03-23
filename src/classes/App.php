@@ -144,7 +144,7 @@ class App
 		}
 
 		$this->currentUserId = $_SESSION['user_id'];
-		$this->currentUser = User::model()->find('id_user=' . $this->currentUserId);
+		$this->currentUser = User::model()->find('id_user=' . $this->currentUserId, array("id_user","username","avatar","birthdate","fullname"));
 		$this->loggedIn = (bool) $_SESSION['user_id'];
 	}
 

@@ -87,9 +87,10 @@
 								<p class="tags">
 									<span class="detail-label">Tag:</span>
 									<?php 
-										foreach ($task->getTags() as $tag) 
+										$tags = $task->getTags();
+										foreach ($tags as $tag) 
 										{
-											echo '<span class="tag">' . $tag->tag . '</span>';
+											echo '<span class="tag">' . $tag->tag_name . '</span>';
 										} 
 									?>
 								</p>
@@ -97,7 +98,7 @@
 						</article>
 				<?php
 						}
-					endforeach; 
+					endforeach;
 					
 					if ($check)
 					{
@@ -137,9 +138,10 @@
 								<p class="tags">
 									<span class="detail-label">Tag:</span>
 									<?php 
-										foreach ($task->getTags() as $tag) 
+										$tags = $task->getTags();
+										foreach ($tags as $tag) 
 										{
-											echo '<span class="tag">' . $tag->tag . '</span>';
+											echo '<span class="tag">' . $tag->tag_name . '</span>';
 										} 
 									?>
 								</p>

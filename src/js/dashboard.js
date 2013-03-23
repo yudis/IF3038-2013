@@ -133,13 +133,13 @@ Rp(function()
 					if (response.canDeleteCategory)
 					{
 						Rp('#addTaskLi').css('display', 'block');
-						Rp('#addTaskCat').prop('href', 'newwork.php?cat='+response.categoryID);
+						Rp('#addTaskCat').prop('href', 'new_work?cat='+response.categoryID);
 						Rp('#deleteCategoryLi').css('display', 'none');
 					}
 					else if (response.canEditCategory)
 					{
 						Rp('#addTaskLi').css('display', 'block');
-						Rp('#addTaskCat').prop('href', 'newwork.php?cat='+response.categoryID);
+						Rp('#addTaskCat').prop('href', 'new_work?cat='+response.categoryID);
 						Rp('#deleteCategoryLi').css('display', 'none');
 					}
 					else
@@ -184,10 +184,10 @@ Rp(function()
 			'categoryName' : catname
 		};
 		if (catid != 0) {
-			history.pushState(state, catname, 'dashboard.php?cat=' + catid);
+			history.pushState(state, catname, 'dashboard?cat=' + catid);
 		}
 		else {
-			history.pushState(state, 'Dashboard', 'dashboard.php');
+			history.pushState(state, 'Dashboard', 'dashboard');
 		}
 		loadCategory(catid);
 	}

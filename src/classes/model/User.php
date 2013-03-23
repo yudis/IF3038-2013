@@ -110,7 +110,8 @@
 					$result = DBConnection::DBquery("UPDATE `".self::tableName()."` SET ".
 													" username = '".addslashes($this->username)."', email = '".addslashes($this->email)."'".
 													", fullname = '".addslashes($this->fullname)."', avatar = '".$this->avatar."'".
-													", birthdate = '".addslashes($this->birthdate)."', password = '".md5($this->password)."'");
+													", birthdate = '".addslashes($this->birthdate)."', password = '".md5($this->password)."'".
+													" WHERE id_user='".addslashes($this->id_user)."'");
 
 					return $result;
 				}
