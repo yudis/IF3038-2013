@@ -177,10 +177,10 @@
 				<div>
 					<div id="left-profile-unfinished"><h3>Unfinished Task</h3></div>
 					<div id="right-profile-body"><p></p>
-						<br>
-						<br>
-						<br>
-						<br>
+						<br />
+						<br />
+						<br />
+						<br />
 					</div>	
 				</div>
 				

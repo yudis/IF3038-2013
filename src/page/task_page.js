@@ -55,7 +55,18 @@ function edit_assignee() {
 	document.getElementById("assignee_edit").style.display = 'block';
 	document.getElementById("assignee_done").style.display = 'none';
 }
-function finish_assignee() {
+function finish_assignee(taskid) {
+	getAjax();
+	var tag = document.getElementById("task-assignee").value;
+	if(tag!=""){
+		ajaxRequest.open("GET","../php/updateSharedWithDB.php?tag="+tag+"&taskid="+taskid,false);
+
+		ajaxRequest.onreadystatechange = function()
+		{
+			document.getElementById("left-main-body2").innerHTML = ajaxRequest.responseText;
+		}
+		ajaxRequest.send();
+	}
 	document.getElementById("assignee_edit").style.display = 'none';
 	document.getElementById("assignee_done").style.display = 'block';
 }
@@ -63,7 +74,18 @@ function edit_tag() {
 	document.getElementById("tag_edit").style.display = 'block';
 	document.getElementById("tag_done").style.display = 'none';
 }
-function finish_tag() {
+function finish_tag(taskid) {
+	getAjax();
+	var tag = document.getElementById("tag-edit").value;
+	if(tag!=""){
+		ajaxRequest.open("GET","../php/updateTagDB.php?tag="+tag+"&taskid="+taskid,false);
+
+		ajaxRequest.onreadystatechange = function()
+		{
+			document.getElementById("left-main-body3").innerHTML = ajaxRequest.responseText;
+		}
+		ajaxRequest.send();
+	}
 	document.getElementById("tag_edit").style.display = 'none';
 	document.getElementById("tag_done").style.display = 'block';
 }
@@ -87,33 +109,6 @@ function myFunction(e)
 			"/></div><div id=right-comment-body><b id=komentator>meckyr</b><br><b id=post-date"+
 			">Post at 4.30 AM, February 4th, 2013</b></div></div><div id=comment-box><p>"+name+"</p></div></div>";
 		document.getElementById("new-comment").innerHTML=x;
-	}
-}
-
-function getAjax() //a function to get AJAX from browser
-{
-	try
-	{
-		ajaxRequest = new XMLHttpRequest();
-	}
-	catch (e)
-	{
-		try
-		{
-			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
-		}
-		catch (e) 
-		{
-			try
-			{
-				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			catch (e)
-			{
-				alert("Can't get AJAX, browser error");
-				return false;
-			}
-		}
 	}
 }
 
@@ -159,5 +154,5 @@ function autoCompleteAsignee() {
 	}
 	
 	//ajaxRequest.open("GET","php/checkavailid.php?idinput="+document.getElementById("username").value,false);
-	
 }
+

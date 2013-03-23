@@ -100,7 +100,7 @@
 				</div>
 				<div>
 					<div id="task-nomargin" name="1"><div id="assignee_done">
-						<div id="left-main-body">Shared with : <i>
+						<div id="left-main-body2">Shared with : <i>
                         	<?php 
 								$con = getConnection();
 								$query = "SELECT username FROM assignee WHERE taskid = $taskid";
@@ -116,12 +116,13 @@
 						<div id="left-main-body">Shared with : <input id="task-assignee" type="text" name="textAssignee" list="assignee-task" onKeyUp="autoCompleteAsignee()" placeholder="tag1,tag2,tag3"/>
 						<div id="shared-with"></div>
 						</div>
-						<div id="right-main-body"><a href="#1" onClick="finish_assignee()"><u>done</u></a></div>
+						<div id="right-main-body"><a href="#1" onClick="finish_assignee(<?php echo $taskid ?>)"><u>done</u></a></div>
+						<br />
 					</div>
 					<br>
 					<br>
 					<div id="task-nomargin" name="3"><div id="tag_done">
-						<div id="left-main-body">Tag : <i>
+						<div id="left-main-body3">Tag : <i>
                         <?php 
 								$con3 = getConnection();
 								$result3 = mysqli_query($con3,"SELECT tagid FROM task_tag WHERE taskid = '".$taskid."'");
@@ -135,8 +136,8 @@
 						<div id="right-main-body"><a href="#3" onClick="edit_tag()"><u>edit</u></a></div>
 					</div></div>
 					<div id="tag_edit" name="4">
-						<div id="left-main-body">Tag : <input type="text" /></div>
-						<div id="right-main-body"><a href="#4" onClick="finish_tag()"><u>done</u></a></div>
+						<div id="left-main-body">Tag : <input id="tag-edit" type="text" /></div>
+						<div id="right-main-body"><a href="#4" onClick="finish_tag(<?php echo $taskid ?>)"><u>done</u></a></div>
 					</div>
 				</div>
 			</div>
