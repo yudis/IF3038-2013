@@ -4,11 +4,13 @@ and open the template in the editor.
 -->
 
 <?php
+	require "config.php";
+	include "login.php";
 	session_start();
 	$username = $_SESSION['username'];
 	//dummy here
+	$category = $_GET["namakategori"];
 	
-	require "config.php";
 	
 	$sql = "SELECT * FROM user WHERE username = '$username'";
 	$user = mysqli_query($con,$sql);
@@ -33,7 +35,7 @@ and open the template in the editor.
 			<img src="img/kertas2.png">
 		</div>
 		<div class="tugas" id="buattugas"><br/>
-			<form id="createForm" method="post" action="create.php" enctype="multipart/form-data">
+			<form id="createForm" method="post" action="create.php?cat=<?php echo $category;?>" enctype="multipart/form-data">
                 Name: <div class="nama"><input type="text" id="namaTask" name="namaTask" pattern="^[a-zA-Z0-9]{5,25}$" required><img id="validtask1" src=""></div><br/>
                 Attachment: 
 				<div class="attachment">

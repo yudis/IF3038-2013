@@ -1,15 +1,16 @@
 <?php
 	require "config.php";
+	include "login.php";
 	// require "createtask.php";
 	//dummy here
-	$catname = "Hacking";
+	$catname = $_GET["cat"];
 	//cari id_kategori dari nama kategori
 	$search_cat_sql = "SELECT id_cat FROM category where name='$catname'";
 	$search_result = mysqli_query($con,$search_cat_sql);
 	$cat = mysqli_fetch_array($search_result);
 	$id_cat = $cat['id_cat'];
 	//dummy here
-	$username = "ArieDoank";
+	$username = $_SESSION['username'];
 	$taskname = $_POST['namaTask'];
 	$deadline = $_POST['deadline'];
 	$assignee = $_POST['Assignee'];
@@ -76,5 +77,5 @@
 	}
 	$sqlcreator = "INSERT INTO taskcreator(`id_task`, `username`) VALUES ('$id_task','$username')";
 	mysqli_query($con,$sqlcreator);
-	header('Location: rincitask.php');
+	header("Location: rincitask.php?id=".$id_task);
 ?>

@@ -2,6 +2,12 @@
 To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
+<?php
+	include "login.php";
+	$username = $_SESSION['username'];
+	require "config.php";
+	$id = $_GET["id"];
+?>
 
 <!DOCTYPE html>
 <html>
@@ -11,9 +17,6 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
         <script type="text/javascript" src="script.js"></script>
 		<script>
-			<?php
-				require "config.php";
-			?>
 		</script>
     </head>
     <body>
@@ -29,7 +32,7 @@ and open the template in the editor.
 		<div class="tugas" id="rincitugas">
                 Task Name:
 				<?php 
-					$sql_task = "SELECT * FROM task WHERE pemilik = 'EndyDoank'";
+					$sql_task = "SELECT * FROM task WHERE id_task='$id'";
 					$task = mysqli_query($con,$sql_task);
 					$current_task = mysqli_fetch_array($task);
 					echo $current_task['name'];
