@@ -17,7 +17,7 @@ if (isset($_SESSION["user"]["username"]))
 							<script src="scripts/popup.js" type="application/javascript"></script>
 							<script src="scripts/dashboard.js" type="application/javascript"></script>
 							<script src="scripts/kategori.js" type="application/javascript"></script>');
-	$view->set('bodyAttrs','<body onload="updateAddButtonVisibility();loadtugas(\'\');">
+	$view->set('bodyAttrs','<body onload="updateAddButtonVisibility();updateDelButtonVisibility();loadtugas(\'\');">
         <div id="blanket"></div>
         <div id="popUpDiv">
             <h1>Create new category</h1>

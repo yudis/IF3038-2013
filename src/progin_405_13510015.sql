@@ -27,8 +27,8 @@ CREATE TABLE `assignees` (
   `username` varchar(25) NOT NULL,
   PRIMARY KEY (`id_tugas`,`username`),
   KEY `asignee_ibfk_2` (`username`),
-  CONSTRAINT `assignees_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`)  ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `assignees_ibfk_2` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `assignees_ibfk_4` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `assignees_ibfk_3` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,7 +38,7 @@ CREATE TABLE `assignees` (
 
 LOCK TABLES `assignees` WRITE;
 /*!40000 ALTER TABLE `assignees` DISABLE KEYS */;
-INSERT INTO `assignees` VALUES (1,'edwardsp'),(3,'edwardsp'),(1,'felix');
+INSERT INTO `assignees` VALUES (3,'edwardsp'),(1,'felix');
 /*!40000 ALTER TABLE `assignees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,8 +57,8 @@ CREATE TABLE `attachments` (
   `type` varchar(10) NOT NULL,
   PRIMARY KEY (`id_attachment`),
   KEY `attachments_ibfk_1` (`id_tugas`),
-  CONSTRAINT `attachments_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  CONSTRAINT `attachments_ibfk_2` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `attachments` (
 
 LOCK TABLES `attachments` WRITE;
 /*!40000 ALTER TABLE `attachments` DISABLE KEYS */;
-INSERT INTO `attachments` VALUES (1,1,'Hai.zip','089767979878.zip','file'),(2,1,'lalla.jpg','80756d75476597.jpg','image');
+INSERT INTO `attachments` VALUES (1,1,'Hai.zip','089767979878.zip','file'),(2,1,'lalla.jpg','80756d75476597.jpg','image'),(6,1,'Movie.ogg','45134523452345.ogg','video');
 /*!40000 ALTER TABLE `attachments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,9 +112,9 @@ CREATE TABLE `comments` (
   PRIMARY KEY (`id`),
   KEY `comments_ibfk_1` (`id_tugas`),
   KEY `comments_ibfk_2` (`user`),
-  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+  CONSTRAINT `comments_ibfk_4` FOREIGN KEY (`user`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +123,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (39,1,'felix','2013-03-21 17:54:44','Loh');
+INSERT INTO `comments` VALUES (46,1,'edwardsp','2013-03-22 13:54:06','dfasdfsd'),(47,1,'edwardsp','2013-03-22 13:54:11','fgsdfgdfgsdfgdfg'),(48,1,'edwardsp','2013-03-22 13:54:16','dfgsdfgdsfg'),(49,3,'edwardsp','2013-03-22 17:17:24','jjjjjj'),(50,1,'edwardsp','2013-03-22 17:27:00','kok bisa?'),(51,1,'edwardsp','2013-03-22 17:27:09','tidaaaakkkk'),(52,1,'edwardsp','2013-03-22 17:27:21','progin'),(53,1,'felix','2013-03-22 17:28:36','kok'),(54,1,'felix','2013-03-22 17:30:12','kok'),(55,1,'felix','2013-03-22 17:35:16','felix'),(56,1,'felix','2013-03-22 17:39:00','lok');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,8 +165,8 @@ CREATE TABLE `tags` (
   `id_tugas` int(11) NOT NULL AUTO_INCREMENT,
   `tag` varchar(30) NOT NULL,
   PRIMARY KEY (`id_tugas`,`tag`),
-  CONSTRAINT `tags_ibfk_1` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  CONSTRAINT `tags_ibfk_2` FOREIGN KEY (`id_tugas`) REFERENCES `tugas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +175,7 @@ CREATE TABLE `tags` (
 
 LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
-INSERT INTO `tags` VALUES (1,'ada'),(1,'tes');
+INSERT INTO `tags` VALUES (1,'Artificial'),(1,'Intelligent'),(2,'AI');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,9 +197,9 @@ CREATE TABLE `tugas` (
   PRIMARY KEY (`id`),
   KEY `tugas_ibfk_1` (`pemilik`),
   KEY `tugas_ibfk_2` (`id_kategori`),
-  CONSTRAINT `tugas_ibfk_1` FOREIGN KEY (`pemilik`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `tugas_ibfk_2` FOREIGN KEY (`id_kategori`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  CONSTRAINT `tugas_ibfk_4` FOREIGN KEY (`id_kategori`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tugas_ibfk_3` FOREIGN KEY (`pemilik`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +208,7 @@ CREATE TABLE `tugas` (
 
 LOCK TABLES `tugas` WRITE;
 /*!40000 ALTER TABLE `tugas` DISABLE KEYS */;
-INSERT INTO `tugas` VALUES (1,'gunBound','2013-03-22',0,'2013-03-21 17:55:51','edwardsp',1),(2,'to do list','2013-03-22',0,'2013-03-12 10:00:00','edogawa',2),(3,'gun','2013-03-26',1,'2013-03-13 10:00:00','edogawa',2);
+INSERT INTO `tugas` VALUES (1,'gunBound','2017-03-27',0,'2013-03-23 05:20:50','edwardsp',1),(2,'Tugas APa ya','2013-03-03',0,'2013-03-23 02:23:27','edwardsp',1),(3,'gun','2013-03-26',1,'2013-03-22 17:18:03','edogawa',2);
 /*!40000 ALTER TABLE `tugas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,4 +250,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-22  8:06:12
+-- Dump completed on 2013-03-23 12:40:00

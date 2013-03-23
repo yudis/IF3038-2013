@@ -24,11 +24,31 @@ function updateAddButtonVisibility() {
 		var elmt = document.getElementById('addTask');
 		elmt.style.display = 'inline-block';
 	}
+	else if(chosen==0)
+	{
+		var elmt = document.getElementById('addTask');
+		elmt.style.display = 'none';
+	}
+}
+
+function updateDelButtonVisibility() {
+	if(chosen!=0)
+	{
+		var elmt = document.getElementById('deleteCat');
+		elmt.style.display = 'inline-block';
+	}
+	else if(chosen==0)
+	{
+		var elmt = document.getElementById('deleteCat');
+		elmt.style.display = 'none';
+	}
 }
 
 function setChosen(str)
 {
 	chosen=str;
+	updateAddButtonVisibility();
+	updateDelButtonVisibility();
 }
 
 function setChosenT(str)

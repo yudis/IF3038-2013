@@ -41,7 +41,6 @@
         padding : 21px 0px 21px 0px;
         background-color: #5fae53;
         width: 524px;
-        float:none;
     }
     
     #searchwrapper {
@@ -49,15 +48,33 @@
         margin-left: 12px;
         margin-right: 12px;
     }
-    
     #searchwrapper input.searchbox {
-        width: 435px;
+        width: 350px;
     }
-    
+    #searchwrapper select.type {
+        display: inline-block; 
+        border: 0px;
+        background-color:transparent;
+        width: 85px;
+        vertical-align: middle;
+    }
     .searchbox_submit {
-        left:465px;
+        display: inline-block; 
+        border: 0px;
+        background-color:transparent;
     }
-    
+    button.btnsearch {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0;
+        border: none;
+        background: transparent;
+    }
+    .welcomebar {
+        background-color: #e8f3df;
+        padding: 90px 24px 12px 24px;
+    }
+
     .sidebar {
         width: 524px;
     }
@@ -95,9 +112,9 @@
     }
     
     #loginwrapper form #login_username, #loginwrapper form #login_password {
-	display: inline-block;
-	color: #FFFFFF;
-	font-size: 70%;
+    	display: inline-block;
+    	color: #FFFFFF;
+    	font-size: 70%;
         padding-bottom: 7px;
     }
     
@@ -106,9 +123,9 @@
     }
     
     #rightcolumn {
-	display: inline-block;
-	width: 524px;
-	margin: 0px auto;
+    	display: inline-block;
+    	width: 524px;
+    	margin: 0px auto;
     }
     
     #registerwrapper {
@@ -123,7 +140,7 @@
 }
 
 @media screen and (max-width:320px) {
-        .page {
+    .page {
         min-width: 240px;
     }
     
@@ -146,6 +163,7 @@
         width: 240px;
         display: inline-block;
         padding: 20px 0px 10px;
+        text-align: center;
     }
     
     nav ul li a:link, nav ul li a:visited {
@@ -179,6 +197,11 @@
         width: 240px;
     }
     
+    .welcomebar {
+        background-color: #e8f3df;
+        padding: 12px 24px 12px 24px;
+    }
+
     .main {
         width: 240px;
     }
@@ -239,5 +262,13 @@
     
     #slider img {
         width: 524px;
+    }
+    .rincianLabel {
+        display: block;
+        vertical-align: text-top;
+    }
+    .rincianDetail {
+        display: block;
+        vertical-align: text-top;
     }
 }

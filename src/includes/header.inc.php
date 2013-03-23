@@ -13,7 +13,7 @@
         <script src="./scripts/datetimepicker_css.js" type="application/javascript"></script>
 		<?php if (isset($headTags)) echo $headTags; ?>
     </head>
-    <body <?php if (isset($bodyAttrs)) echo $bodyAttrs; ?>>
+    <body <?php if (isset($bodyAttrs)) echo $bodyAttrs; ?>
         <div class="page">
             <header class="content">
                 <nav>
@@ -31,7 +31,7 @@
                                     <option>Title</option>
                                     <option>Task</option>
                                 </select>
-                                <button class="search"><img src="images/search.png" alt="Search" /></button>
+                                <button class="btnsearch"><img src="images/search.png" alt="Search" /></button>
                             </form>
                         </div>
                     </div>

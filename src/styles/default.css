@@ -131,7 +131,7 @@ nav ul li a:link, nav ul li a:visited {
     border: 0px;
     background-color:transparent;
 }
-button.search {
+button.btnsearch {
     display: inline-block;
     vertical-align: middle;
     padding: 0;
@@ -292,12 +292,11 @@ footer.content {
     clear: both;
     background-color: #5fae53;
     width: 960px;
-    height: 40px;
     text-align: center;
     color: #FFFFFF;
     font-size: 70%;
     padding-top: 30px;
-    top: 15px;
+    padding-bottom: 15px;
 }
 
 
@@ -358,6 +357,8 @@ footer.content {
 
 /* CSS untuk halaman detil tugas */
 .rincianLabel {
+    font-style:italic;
+      font-weight: bold;
     width: 15%;
     display: inline-block;
     vertical-align: text-top;
