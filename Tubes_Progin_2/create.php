@@ -1,13 +1,14 @@
 <?php
 	require "config.php";
 	// require "createtask.php";
+	//dummy here
 	$catname = "Hacking";
 	//cari id_kategori dari nama kategori
 	$search_cat_sql = "SELECT id_cat FROM category where name='$catname'";
 	$search_result = mysqli_query($con,$search_cat_sql);
 	$cat = mysqli_fetch_array($search_result);
 	$id_cat = $cat['id_cat'];
-	
+	//dummy here
 	$username = "ArieDoank";
 	$taskname = $_POST['namaTask'];
 	$deadline = $_POST['deadline'];
@@ -25,8 +26,11 @@
 	$arraylength1 = count($array_assignee);
 	for($i=0;$i<$arraylength1-1;$i++)
 		{
-			$sqlassignee = "INSERT INTO assignee(`username`, `id_task`) VALUES ('$array_assignee[$i]','$id_task')";
+			$sqlassignee = "REPLACE INTO assignee SET username='$array_assignee[$i]', id_task='$id_task'";
 			mysqli_query($con,$sqlassignee);
+			//insert ke kategori
+			$sqljoincat = "REPLACE INTO joincategory SET username='$array_assignee[$i]', id_cat='$id_cat'";
+			mysqli_query($con,$sqljoincat);
 		}
 	$sqlassignee = "INSERT INTO assignee(`username`, `id_task`) VALUES ('$username','$id_task')";
 	mysqli_query($con,$sqlassignee);
@@ -52,47 +56,23 @@
 			$sqltasktag = "INSERT INTO tasktag(`id_task`, `id_tag`) VALUES ('$id_task','$id_tag')";
 			mysqli_query($con,$sqltasktag);
 		}
-	if(!empty($_FILES['taskatt']["name"][0])){
-		move_uploaded_file($_FILES['taskatt']["tmp_name"][0],"att/".$idtask."att1".$_FILES['taskatt']["name"][0]);
-		$target = "att/".$idtask."att1".$_FILES['taskatt']["name"][0];
-		$sqlatt = "INSERT INTO `attachment`(`path`) VALUES ('$target')";
-		mysqli_query($con,$sqlatt);
-		//cari id_att
-		$search_att_sql = "SELECT id_att FROM attachment where path='$target'";
-		$search_att_result = mysqli_query($con,$search_att_sql);
-		$searchatt = mysqli_fetch_array($search_att_result);
-		$id_att = $searchatt['id_attachment'];
-		//insert taskattachment
-		$sqltaskatt = "INSERT INTO taskattachment(`id_task`, `id_attachment`) VALUES ('$id_task','$id_att')";
-		mysqli_query($con,$sqltaskatt);
-	}
-	if(!empty($_FILES['taskatt']["name"][1])){
-		move_uploaded_file($_FILES['taskatt']["tmp_name"][1],"att/".$idtask."att2".$_FILES['taskatt']["name"][1]);
-		$target = "att/".$idtask."att1".$_FILES['taskatt']["name"][0];
-		$sqlatt = "INSERT INTO attachment(`path`) VALUES ('$target')";
-		mysqli_query($con,$sqlatt);
-		//cari id_att
-		$search_att_sql = "SELECT id_att FROM 'attachment' where path='$target'";
-		$search_att_result = mysqli_query($con,$search_att_sql);
-		$searchatt = mysqli_fetch_array($search_att_result);
-		$id_att = $searchatt['id_attachment'];
-		//insert taskattachment
-		$sqltaskatt = "INSERT INTO taskattachment(`id_task`, `id_attachment`) VALUES ('$id_task','$id_att')";
-		mysqli_query($con,$sqltaskatt);
-	}
-	if(!empty($_FILES['taskatt']["name"][2])){
-		move_uploaded_file($_FILES['taskatt']["tmp_name"][2],"att/".$idtask."att3".$_FILES['taskatt']["name"][2]);
-		$target = "att/".$idtask."att1".$_FILES['taskatt']["name"][0];
-		$sqlatt = "INSERT INTO attachment(`path`) VALUES ('$target')";
-		mysqli_query($con,$sqlatt);
-		//cari id_att
-		$search_att_sql = "SELECT id_attachment FROM 'attachment' where path='$target'";
-		$search_att_result = mysqli_query($con,$search_att_sql);
-		$searchatt = mysqli_fetch_array($search_att_result);
-		$id_att = $searchatt['id_attachment'];
-		//insert taskattachment
-		$sqltaskatt = "INSERT INTO taskattachment(`id_task`, `id_attachment`) VALUES ('$id_task','$id_att')";
-		mysqli_query($con,$sqltaskatt);
+	if(!empty($_FILES['taskatt']["name"])){
+		$taskatt = $_FILES['taskatt']["name"];
+		$countatt = count($taskatt);
+		for($k=0;$k<$countatt;$k++){
+			move_uploaded_file($_FILES['taskatt']["tmp_name"][$k],"att/".$idtask."att".$k.$_FILES['taskatt']["name"][$k]);
+			$target = "att/".$idtask."att".$k.$_FILES['taskatt']["name"][$k];
+			$sqlatt = "INSERT INTO `attachment`(`path`) VALUES ('$target')";
+			mysqli_query($con,$sqlatt);
+			//cari id_att
+			$search_att_sql = "SELECT id_attachment FROM attachment where path='$target'";
+			$search_att_result = mysqli_query($con,$search_att_sql);
+			$searchatt = mysqli_fetch_array($search_att_result);
+			$id_att = $searchatt['id_attachment'];
+			//insert taskattachment
+			$sqltaskatt = "INSERT INTO taskattachment(`id_task`, `id_attachment`) VALUES ('$id_task','$id_att')";
+			mysqli_query($con,$sqltaskatt);
+		}
 	}
 	$sqlcreator = "INSERT INTO taskcreator(`id_task`, `username`) VALUES ('$id_task','$username')";
 	mysqli_query($con,$sqlcreator);

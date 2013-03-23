@@ -11,6 +11,7 @@ and open the template in the editor.
 		<script>
 			<?php
 				require "config.php";
+				//dummy here
 				$sql = "SELECT * FROM user WHERE username = 'EndyDoank'";
 				$user = mysqli_query($con,$sql);
 				$current_user = mysqli_fetch_array($user);

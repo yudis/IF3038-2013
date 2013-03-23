@@ -133,7 +133,7 @@ input.liusername{
 #hasilsearchassignee{
 	position: absolute;
 	z-index:1000;
-	top: 370px;
+	top: 324px;
 	left: 55px;
 	width: 347px;
 	border: 1px solid #000000;
@@ -152,6 +152,58 @@ input.liusername{
 }
 
 #hasilsearchassignee li:hover{
+	background-color: #3b5998;
+	color : white;
+}
+
+#hasilsearchassigneeedit{
+	position: absolute;
+	z-index:1000;
+	top: 235px;
+	left: 55px;
+	width: 347px;
+	border: 1px solid #000000;
+	background-color: white;
+	max-height: 300px;
+	overflow : auto;
+}
+
+#hasilsearchassigneeedit ul{
+	list-style-type: none;
+	padding : 0px;
+	margin : 0px;
+	cursor: pointer;
+	color: #3b5998;
+	font-weight: bold;
+}
+
+#hasilsearchassigneeedit li:hover{
+	background-color: #3b5998;
+	color : white;
+}
+
+#hasilsearchtag{
+	position: absolute;
+	z-index:1000;
+	top: 298px;
+	left: 55px;
+	width: 152px;
+	border: 1px solid #000000;
+	background-color: white;
+	max-height: 300px;
+	overflow : auto;
+}
+
+#hasilsearchtag ul{
+	list-style-type: none;
+	padding : 0px;
+	margin : 0px;
+	cursor: pointer;
+	color: #3b5998;
+	font-weight: bold;
+}
+
+#hasilsearchtag li:hover{
 	background-color: #3b5998;
 	color : white;
 }

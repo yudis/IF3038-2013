@@ -3,17 +3,6 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<?php
-	//$username = $_SESSION['username'];
-	$username = "EndyDoank";
-	
-	require "config.php";
-	
-	$sql = "SELECT * FROM user WHERE username = '$username'";
-	$user = mysqli_query($con,$sql);
-	$current_user = mysqli_fetch_array($user);
-?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,6 +10,14 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
         <script type="text/javascript" src="script.js"></script>
+		<script>
+			<?php
+				require "config.php";
+				
+				//$user = mysqli_query($con,$sql);
+				//$current_user = mysqli_fetch_array($user);
+			?>
+		</script>
     </head>
     <body>
         <?php
@@ -41,16 +38,31 @@ and open the template in the editor.
 			<img src="img/kertas2.png">
 		</div>
 		<div class="tugas" id="rincitugas">
-                Name: Nama Tugas <br/>
+                Task Name:
+				<?php 
+					$sql_task = "SELECT * FROM task WHERE pemilik = 'EndyDoank'";
+					$task = mysqli_query($con,$sql_task);
+					$current_task = mysqli_fetch_array($task);
+					echo $current_task['name'];
+					echo "<br />";
+				?> 
+				Task Status: 
+				<div id="status_detail"></div>
+				
                 Attachment: 
-                    <div class="attachment">
-                        <a href="img/file.zip">file.zip</a><br/>
-                        <a href="img/badge.png">picture.png</a><br/>
-                    </div><br/>
-                Deadline: 17-12-2014<br/>
-                Assignee: <a href="" class="asignee">Timo</a>, <a href="" class="asignee">Stefan</a>, <a href="" class="asignee">Frilla</a><br/>
-                Tag: <a href="" class="tag">dangerous</a>, <a href="" class="tag">novice</a> <br/>
-                <br/>Comment:<br/>
+                <div id="attachment"></div>
+				
+                Deadline: 
+				<?php
+					echo $current_task['deadline'];
+				?>
+				<br/>
+                Assignee:
+				<div id="assignee"></div>
+				
+                Tag: <div id="tag"></div>
+				
+                Comment:<br/>
                 <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
                 <form>
                     <textArea></textarea>
@@ -59,5 +71,8 @@ and open the template in the editor.
                 <br/><br/>
                 <a onclick="showEdit();" class="button">edit</a><br/>
             </div>
+			<script> 
+				window.onload=update2;
+			</script>
     </body>
 </html>

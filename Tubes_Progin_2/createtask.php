@@ -5,6 +5,7 @@ and open the template in the editor.
 
 <?php
 	//$username = $_SESSION['username'];
+	//dummy here
 	$username = "EndyDoank";
 	
 	require "config.php";
@@ -44,9 +45,7 @@ and open the template in the editor.
                 Name: <div class="nama"><input type="text" id="namaTask" name="namaTask" pattern="^[a-zA-Z0-9]{5,25}$" required><img id="validtask1" src=""></div><br/>
                 Attachment: 
 				<div class="attachment">
-					<input name="taskatt[]" type="file"><br>
-					<input name="taskatt[]" type="file"><br>
-					<input name="taskatt[]" type="file"><br>
+					<input name="taskatt[]" type="file" multiple>
 				</div><br/>
                 Deadline: <div class="deadline"><input type="date" name="deadline" onchange="changeDeadline();" required><img id="validtask3" src=""></div><br/>
                 Assignee: 
@@ -56,7 +55,7 @@ and open the template in the editor.
 				<div id="hasilsearchassignee"></div>
                 Tag: <div class="tag"> <input type="text" id="tag" name="tag"></div> <br/>
                 <br/>
-				<input type="submit" id="regbutton" name="submit" value="Create Task">
+				<input type="submit" id="createbut" name="submit" value="Create Task">
 			</form>
 		</div>
 		<script type="text/javascript" src="script.js"></script>

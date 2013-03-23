@@ -1,6 +1,9 @@
 //registration form variabel
 var taskName = document.getElementById("namaTask");
 var valid1;
+var valid3;
+var valid6;
+var submitcreate = document.getElementById("createbut");
 	
 	taskName.onkeyup = function()
 	{
@@ -21,15 +24,12 @@ var valid1;
 		valid3=true;
 	}
 	
-	function checkAttachment()
+	function cekvalidcreate()
 	{
-		var extensi = file.value.match("^.+\.(jpe?g|JPE?G)$");
-		if(extensi){
-			valid6.src = "img/benar.png";
-			valid6bool=true;
+		if(valid1==true && valid3==true){
+			submitcreate.disabled=false;
 		}else{
-			valid6.src = "img/salah.png";
-			valid6bool=false;
+			submitcreate.disabled="disabled";
 		}
 	}
 	
