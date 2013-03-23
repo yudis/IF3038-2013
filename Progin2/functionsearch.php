@@ -16,7 +16,7 @@ if ($field == "username" || $field == "semua") {
 		die('Could not connect: ' . mysql_error());
 	}
 
-	mysql_select_db("progin_405_13510057", $con);
+	mysql_select_db("progin_439_13510057", $con);
 
 	if ($searching == "yes") {
 		echo "<div id=\"hasilcari\"><h2>Hasil Pencarian Username</h2>";

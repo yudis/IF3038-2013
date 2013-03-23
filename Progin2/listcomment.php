@@ -6,7 +6,7 @@ if (!$con)
   die('Could not connect: ' . mysql_error());
   }
 
-mysql_select_db("progin_405_13510057", $con);
+mysql_select_db("progin_439_13510057", $con);
 
 // ================== Insert ke database ===================
 if (!empty($_GET['q']))

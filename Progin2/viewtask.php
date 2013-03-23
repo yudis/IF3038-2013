@@ -309,7 +309,7 @@ if(!isset($_SESSION['id']))
 					  die('Could not connect: ' . mysql_error());
 					  }
 
-					mysql_select_db("progin_405_13510057", $con);
+					mysql_select_db("progin_439_13510057", $con);
 				
 					$result = mysql_query("SELECT * FROM user WHERE username='$_SESSION[id]'");
 					while($row = mysql_fetch_array($result)) 
@@ -335,7 +335,7 @@ if(!isset($_SESSION['id']))
 							  die('Could not connect: ' . mysql_error());
 							  }
 
-							mysql_select_db("progin_405_13510057", $con);
+							mysql_select_db("progin_439_13510057", $con);
 							$idtugas = $_GET["q"];
 							
 							$tugas = mysql_query("SELECT * FROM tugas WHERE idtugas='$idtugas'");
