@@ -204,7 +204,7 @@ bajuri.prototype = {
 	show: function() {
 		this.each(function() {
 			if (this.style.display === 'none')
-				this.style.display = Rp(this).data('formerDisplayValue') ? Rp(this).data('formerDisplayValue') : 'block';
+				this.style.display = (Rp(this).data('formerDisplayValue') !== 'none') ? Rp(this).data('formerDisplayValue') : 'block';
 		});
 
 		return this;
@@ -389,37 +389,40 @@ bajuri.prototype = {
 
 		list.hide();
 
+		var goBack = false;
+
 		list.fill = function(content) {
 			this.empty();
 			var bi = this.boundInput;
 			var ul = this;
-			content.forEach(function(v) {
+
+			if (content) content.forEach(function(v) {
 				li = Rp.factory('li');
 				li.attr('data-raw', v);
 				v = v.replace(bi.value, '<b>' + bi.value + '</b>');
 				li.html(v);
+				li.data('boundInput', bi);
 
-				fillBi = function() {
+				li.on('mousedown', function() {
+					stop = true;
+					console.log('Om');
 					bi.value = this.getAttribute('data-raw');
 					ul.hide();
-				}
-
-				li.on('click', fillBi);
-				li.on('keyup', function(e) {
-					if (e.keyCode == 13) {
-						e.preventDefault();
-						fillBi.call(this);
-					}
-				})
+					goBack = true;
+					window.setTimeout(function() { bi.focus() }, 50);
+				});
 
 				ul.append(li);
 			});
 
-			ul.show();
+			this.show();
 		}
 
+		var blt;
 		this.on('blur', function() {
 			list.hide();
+			if (goBack)
+				this.focus();
 		})
 
 		this.data('autocomplete', list);
