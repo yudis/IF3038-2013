@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 21, 2013 at 03:56 AM
--- Server version: 5.5.8
--- PHP Version: 5.3.5
+-- Generation Time: Mar 23, 2013 at 07:34 AM
+-- Server version: 5.5.16
+-- PHP Version: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -60,7 +61,7 @@ INSERT INTO `assignee` (`username`, `idtugas`) VALUES
 
 CREATE TABLE IF NOT EXISTS `attachment` (
   `idtugas` varchar(10) NOT NULL,
-  `isiattachment` varchar(20) NOT NULL,
+  `isiattachment` varchar(100) NOT NULL,
   KEY `attacment_ibfk_1` (`idtugas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -157,7 +158,7 @@ INSERT INTO `kategori` (`idkategori`, `namakategori`) VALUES
 CREATE TABLE IF NOT EXISTS `komentar` (
   `idtugas` varchar(10) NOT NULL,
   `username` varchar(12) NOT NULL,
-  `isikomentar` varchar(100) NOT NULL,
+  `isikomentar` varchar(200) NOT NULL,
   `waktu` datetime NOT NULL,
   KEY `komentar_ibfk_1` (`username`),
   KEY `komentar_ibfk_2` (`idtugas`)
@@ -200,7 +201,6 @@ CREATE TABLE IF NOT EXISTS `tag` (
 INSERT INTO `tag` (`idtugas`, `isitag`) VALUES
 ('3', 'Tugas3'),
 ('4', 'Tugas4'),
-('4', 'Tgs4'),
 ('5', 'Tgs5'),
 ('6', 'Tgs6'),
 ('7', 'Tgs7'),
@@ -208,8 +208,7 @@ INSERT INTO `tag` (`idtugas`, `isitag`) VALUES
 ('12', 'Tucil5'),
 ('13', 'Tugas13'),
 ('2', 'sdfdsf'),
-('1', 'kuliah'),
-('1', ' uts');
+('1', 'kuliah');
 
 -- --------------------------------------------------------
 
@@ -220,7 +219,6 @@ INSERT INTO `tag` (`idtugas`, `isitag`) VALUES
 CREATE TABLE IF NOT EXISTS `tugas` (
   `idtugas` varchar(10) NOT NULL,
   `namatugas` varchar(20) NOT NULL,
-  `attachment` varchar(30) NOT NULL,
   `deadline` date NOT NULL,
   `idkategori` varchar(10) NOT NULL,
   `username` varchar(12) NOT NULL,
@@ -234,20 +232,20 @@ CREATE TABLE IF NOT EXISTS `tugas` (
 -- Dumping data for table `tugas`
 --
 
-INSERT INTO `tugas` (`idtugas`, `namatugas`, `attachment`, `deadline`, `idkategori`, `username`, `status`) VALUES
-('1', 'Tubes 2 Progin', 'upload/tubes2progin.pdf', '2013-03-23', '1', 'moonray', 'undone'),
-('10', 'Tugas10', 'upload/tugas10.pdf', '2013-03-13', '9', 'dragoon20', 'Done'),
-('11', 'Tugas11', 'upload/tugas11.pdf', '2013-03-20', '10', 'coba2', 'Undone'),
-('12', 'Tugas12', 'upload/tugas12.pdf', '2013-03-18', '11', 'edo', 'Undone'),
-('13', 'Tugas13', 'upload/tugas13.pdf', '2013-03-16', '12', 'yagami', 'Undone'),
-('2', 'UTS Psiter', 'upload/utspsiter.pdf', '2013-03-14', '2', 'moonray', 'done'),
-('3', 'Tugas3', 'upload/tugas3.pdf', '2013-03-30', '3', 'xelif', 'Undone'),
-('4', 'Tugas4', 'upload/tugas4.pdf', '2013-03-22', '4', 'xelif', 'Undone'),
-('5', 'Tugas5', 'upload/tugas5.pdf', '2013-03-29', '5', 'yagami', 'Done'),
-('6', 'Tugas6', 'upload/tugas6.pdf', '2013-03-20', '6', 'maria', 'Done'),
-('7', 'Tugas7', 'upload/tugas7.pdf', '2013-03-09', '7', 'sun', 'Undone'),
-('8', 'Tugas8', 'upload/tugas8.pdf', '2013-03-26', '7', 'excalibur', 'Done'),
-('9', 'Tugas9', 'upload/tugas9.pdf', '2013-03-17', '8', 'raven', 'Done');
+INSERT INTO `tugas` (`idtugas`, `namatugas`, `deadline`, `idkategori`, `username`, `status`) VALUES
+('1', 'Tubes 2 Progin', '2013-03-23', '1', 'moonray', 'undone'),
+('10', 'Tugas10', '2013-03-13', '9', 'dragoon20', 'Done'),
+('11', 'Tugas11', '2013-03-20', '10', 'coba2', 'Undone'),
+('12', 'Tugas12', '2013-03-18', '11', 'edo', 'Undone'),
+('13', 'Tugas13', '2013-03-16', '12', 'yagami', 'Undone'),
+('2', 'UTS Psiter', '2013-03-14', '2', 'moonray', 'done'),
+('3', 'Tugas3', '2013-03-30', '3', 'xelif', 'Undone'),
+('4', 'Tugas4', '2013-03-22', '4', 'xelif', 'Undone'),
+('5', 'Tugas5', '2013-03-29', '5', 'yagami', 'Done'),
+('6', 'Tugas6', '2013-03-20', '6', 'maria', 'Done'),
+('7', 'Tugas7', '2013-03-09', '7', 'sun', 'Undone'),
+('8', 'Tugas8', '2013-03-26', '7', 'excalibur', 'Done'),
+('9', 'Tugas9', '2013-03-17', '8', 'raven', 'Done');
 
 -- --------------------------------------------------------
 
@@ -262,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `birthdate` date NOT NULL,
   `phonenumber` varchar(12) NOT NULL,
   `email` varchar(20) NOT NULL,
-  `avatar` varchar(50) NOT NULL,
+  `avatar` varchar(100) NOT NULL,
   PRIMARY KEY (`username`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -333,3 +331,7 @@ ALTER TABLE `tag`
 ALTER TABLE `tugas`
   ADD CONSTRAINT `tugas_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`),
   ADD CONSTRAINT `tugas_ibfk_2` FOREIGN KEY (`idkategori`) REFERENCES `kategori` (`idkategori`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
