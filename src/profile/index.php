@@ -3,6 +3,7 @@
 		<title>Shared To Do List - Profile</title>
 		<link rel="stylesheet" type="text/css" href="../style.css">
 		<link rel="shortcut icon" href="favicon.ico">		
+		<script type="text/javascript" src="../ajax.js"></script>
 		<script type="text/javascript" src="../mpquery.js"></script>
 		<script type="text/javascript" src="../validation.js"></script>
 		<script type="text/javascript" src="profilecontroller.js"></script>
@@ -21,7 +22,8 @@
 		</div>
 		<div class="clearall container topcontainer" id="profile container">
 			<div class="clearall container" id="initprofile">
-				
+				<h2>Profile</h2>
+				<h4>Now Loading...</h4>
 			</div>
 			<div class="clearall container">
 				<div class="box">
