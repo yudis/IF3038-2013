@@ -31,11 +31,13 @@ function checkHeaderValidation(){
 	getAjax();
 	var content = document.getElementById("search_text").value;
 	var elmt = document.getElementById("modesearch").value;
+	var filterelmt = document.getElementById("filtering").value;
+	
 	var suggestion;
 	var suggestionarray;
 	
 	if(content!=""){
-		ajaxRequest.open("GET","../php/headervalidation.php?content="+content+"&idx="+elmt,false);
+		ajaxRequest.open("GET","../php/headervalidation.php?content="+content+"&idx="+elmt+"&filter="+filterelmt,false);
 		ajaxRequest.onreadystatechange = function()
 		{
 			suggestion = ajaxRequest.responseText;
