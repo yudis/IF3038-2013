@@ -509,6 +509,9 @@ class RestApi
 		$type = $params['type'];
 		$q = $params['q'];
 
+		if (!$q)
+			return array();
+
 		$all = $type == 'all';
 
 		$suggestions = array();

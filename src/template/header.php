@@ -42,7 +42,7 @@
 					?>
 					<div class="search-box">
 						<form action="search" method="get" id="searchForm">
-							<select name="type">
+							<select name="type" id="searchType">
 								<?php
 								foreach (array(
 									'all' => 'All',
@@ -55,7 +55,7 @@
 								}
 								?>
 							</select>
-							<input type="search" name="q" placeholder="Search" value="<?php echo $q ?>">
+							<input type="search" name="q" placeholder="Search" value="<?php echo $q ?>" id="searchQuery">
 							<button type="submit">Search</button>
 						</form>
 					</div>
