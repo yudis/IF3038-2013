@@ -22,7 +22,7 @@
 	
 	while($row = mysql_fetch_array($result)){ ?>
 		<div class="row" id="<?php echo $row['taskname'] . $row['category']; ?>">
-			<div class="cell"><?php echo $row['taskname']; ?></div>
+			<a href="<?php echo 'taskdetails.php?taskname=\'' . $row['taskname'] . '\'' . '&category=\'' . $row['category'] . '\'' ; ?>"><div class="cell"><?php echo $row['taskname']; ?></div></a>
 			<div class="cell centered"><?php echo $row['deadline']; ?></div>
 			<div class="cell centered"><?php echo $row['tags']; ?></div>
 			<div class="cell centered" id="status<?php echo $row['taskname'] . $row['category']; ?>"><?php echo $row['status'] == 1 ? 'Selesai' : 'Belum Selesai'; ?></div>

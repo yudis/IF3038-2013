@@ -112,6 +112,56 @@ function checkDOB(){
 	}
 }
 
+//======================= DELETE SELECTED COMMENT
+function deleteComment(element){
+	var id = element.id;
+	var classname = element.className;
+	var parentid = document.getElementById(classname);
+	
+	if(window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
+	}
+	else{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xmlhttp.onreadystatechange = function(){
+		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			alert('Comment berhasil di delete');
+			parentid.parentNode.removeChild(parentid);			
+		}
+	}
+
+	xmlhttp.open("GET", id, true);
+	xmlhttp.send();
+}
+
+//======================= LOAD TASKS DETAILS
+function loadTaskDetails(){
+	var taskname = document.getElementsByName("taskname");
+	var tasknameid = taskname[0].getAttribute("id")
+	var category = document.getElementsByName("category");
+	var categoryid = category[0].getAttribute("id");
+	var object = JSON.parse(localStorage.getItem("key"));    
+	var username = object.username;
+	
+	if(window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
+	}
+	else{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xmlhttp.onreadystatechange = function(){
+		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			document.getElementById("details").innerHTML = xmlhttp.responseText;
+		}
+	}
+
+	xmlhttp.open("GET", "loadtaskdetails.php?taskname=" + tasknameid + "&category=" + categoryid + "&username=" + username, true);
+	xmlhttp.send();
+}
+
 //======================= SHOW TASKS FOR SELECTED CATEGORY
 function search(){
 	var term = document.getElementById("searchterm").value;
@@ -221,6 +271,23 @@ function checkLogged(){
 		if(login == null){
 			window.location = "index.php";
 		}
+		else{
+			if(window.XMLHttpRequest){
+				xmlhttp = new XMLHttpRequest();
+			}
+			else{
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+
+			xmlhttp.onreadystatechange = function(){
+				if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+					document.getElementById("navsearch").innerHTML = xmlhttp.responseText;
+				}
+			}
+
+			xmlhttp.open("GET", "loadloggedin.php", true);
+			xmlhttp.send();
+		}
 	}
 }
 
@@ -297,62 +364,6 @@ function getStyle(oElm, strCssRule){
 
 function redirDetails(){
 	window.location="taskdetails.html";
-}
-
-function toggleSelectProgin(){
-	if(getStyle(document.getElementById('proginrow'), 'background-color') != '#94DBFF'){
-		var a = document.getElementById('proginrow').getAttribute('class').split(' ');
-		a.splice(1,1,'selected');
-		var s = a.join(' ');		
-		document.getElementById('proginrow').setAttribute('class', s);
-
-		var a = document.getElementById('kriptorow').getAttribute('class').split(' ');
-		a.splice(1,1,'even');
-		var s = a.join(' ');
-		document.getElementById('kriptorow').setAttribute('class', s);
-		
-		document.getElementById('plustask').style.display = 'inline';
-		document.getElementById('progin').style.display = 'table-row';
-		document.getElementById('kripto').style.display = 'none';
-	}
-	else{
-		var a = document.getElementById('proginrow').getAttribute('class').split(' ');
-		a.pop();
-		var s = a.join(' ');
-		document.getElementById('proginrow').setAttribute('class', s);
-
-		document.getElementById('plustask').style.display = 'none';
-		document.getElementById('progin').style.display = 'table-row';
-		document.getElementById('kripto').style.display = 'table-row';
-	}
-}
-
-function toggleSelectKripto(){
-	if(getStyle(document.getElementById('kriptorow'), 'background-color') != '#94DBFF'){
-		var a = document.getElementById('kriptorow').getAttribute('class').split(' ');
-		a.splice(1,1,'selected');
-		var s = a.join(' ');		
-		document.getElementById('kriptorow').setAttribute('class', s);
-		
-		var a = document.getElementById('proginrow').getAttribute('class').split(' ');
-		a.pop();
-		var s = a.join(' ');
-		document.getElementById('proginrow').setAttribute('class', s);
-		
-		document.getElementById('plustask').style.display = 'inline';
-		document.getElementById('kripto').style.display = 'table-row';
-		document.getElementById('progin').style.display = 'none';
-	}
-	else{
-		var a = document.getElementById('kriptorow').getAttribute('class').split(' ');
-		a.splice(1,1,'even');
-		var s = a.join(' ');
-		document.getElementById('kriptorow').setAttribute('class', s);
-		
-		document.getElementById('plustask').style.display = 'none';
-		document.getElementById('progin').style.display = 'table-row';
-		document.getElementById('kripto').style.display = 'table-row';
-	}
 }
 
 function redirAdd(){
