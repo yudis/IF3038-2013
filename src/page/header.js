@@ -31,16 +31,16 @@ function checkHeaderValidation(){
 	getAjax();
 	var content = document.getElementById("search_text").value;
 	var elmt = document.getElementById("modesearch").value;
-	var filterelmt = document.getElementById("filtering").value;
-	
+	var filter = document.getElementById("filtering").value;
 	var suggestion;
 	var suggestionarray;
 	
 	if(content!=""){
-		ajaxRequest.open("GET","../php/headervalidation.php?content="+content+"&idx="+elmt+"&filter="+filterelmt,false);
+		ajaxRequest.open("GET","../php/headervalidation.php?content="+content+"&idx="+elmt+"&filter="+filter,false);
 		ajaxRequest.onreadystatechange = function()
 		{
 			suggestion = ajaxRequest.responseText;
+			document.getElementById("syalala").innerHTML=suggestion;
 			suggestion = suggestion.substr(0,suggestion.length-1);
 			suggestionarray = suggestion.split("|");
 			
