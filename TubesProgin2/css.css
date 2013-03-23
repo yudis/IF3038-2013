@@ -617,5 +617,8 @@ strong {
     width: 650px;
     border-radius: 10px;
 }
+.commentselected{
+    color: blue;
+}
 
 /* ----------------------END OF SEARCH CSS----------------------- */
