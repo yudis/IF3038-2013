@@ -102,6 +102,33 @@ class RestApi
 	/*** ----- START OF TASK MODULE -----***/
 	
 	/**
+	 * Delete a task
+	 * @return string contains whether success or fail
+	 */
+	public function delete_task() 
+	{
+		$id_task = addslashes($_POST['task_id']);
+		$success = false;
+
+		if ((Task::model()->find("id_task=".$id_task)->getDeletable($this->app->currentUserId))&& ($this->app->loggedIn))
+		{
+			if (Task::model()->delete("id_task=".$id_task)==1)
+			{
+				// delete was success
+				$success = true;
+			}
+			else {
+				$success = false;
+			}
+		}
+
+		return array(
+			'success' => $success,
+			'taskID' => $id_task
+		);
+	}
+	
+	/**
 	 * Retrieve list of tasks for dashboard
 	 * @return array of tasks
 	 */
@@ -275,7 +302,7 @@ class RestApi
 
 		if ((Category::model()->find("id_kategori=".$id_kategori)->getDeletable($this->app->currentUserId))&& ($this->app->loggedIn))
 		{
-			if (Category::model()->delete("id_kategori=".$id_kategori))
+			if (Category::model()->delete("id_kategori=".$id_kategori)==1)
 			{
 				// delete was success
 				$success = true;
