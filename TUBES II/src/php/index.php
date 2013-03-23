@@ -91,7 +91,7 @@ xmlhttp.send();
 function checkLogin(response)
 {
  if (response == "Accepted") {
-   window.location='dashboard.php';
+   window.location='Dashboard.php';
  }
 }
 </script>

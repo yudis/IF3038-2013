@@ -1,0 +1,128 @@
+<?php session_start(); 
+include 'php/ChromePhp.php';
+ChromePhp::log('rincian.php');
+
+$iduser = $_SESSION['login'];
+ChromePhp::log($iduser);
+$idtask = $_POST['idtask'];
+ChromePhp::log($idtask);
+
+$con = mysqli_connect(localhost,"progin","progin","progin") or die ('Cannot connect to database : ' . mysql_error());
+    ChromePhp::log("userid: ".$userid);
+    
+$result = mysqli_query($con, "SELECT * FROM task WHERE ID='".$idtask."'");
+$row = mysqli_fetch_array($result);
+$resultassignee = mysqli_query($con, "SELECT * FROM task INNER JOIN assignee ON task.ID=assignee.IDTask");
+
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Rincian Tugas | DTD</title>
+<link href="css/rincian.css" rel="stylesheet" type="text/css" />
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/mediaqueries.css" rel="stylesheet" type ="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" language="javascript" src="js/pagination.js"></script>
+    
+	
+</head>
+    <body>
+    <script type="text/javascript" language="javascript" src="js/rincian.js"></script>
+    <script type="text/javascript" language="javascript" src="js/search.js"></script>
+    
+    
+		<div class="header">
+    <a href="dashboard.html"><img align="left" src="images/logo.png" width="150" height="50" />
+	<h6>Dashboard</h6></a> <p>|</p> <a href="profile.html">Profile</a> <p>|</p> <a href="index.html">Logout</a>
+        <form id="searchform"  onsubmit="return searchByFilter()" >
+   | Search:<input type="search" id="searchquery" name="searchquery" /> 
+   Filter: <select id="filtertype" name="filtertype">
+        <option value="All" selected>All</option>
+        <option value="Username">Username</option>
+        <option value="Category">Category</option>
+        <option value="Task">Task</option>
+   </select>
+   
+   <input type="submit" value="GO" />
+        </form>
+	</div>
+	<div id ="contentdashboard" class="container"><br>
+			<div class="rincian">
+				<form name="rincian">
+				<h1 class="judul">Rincian Tugas</h1>
+                                <?php
+                                echo "Nama Task : <input  type='text' readonly='true' id='namatask' value='".$row['Nama']."' border='0' /> <br>";
+                                ?>
+				Attachment : <br> 
+				<video width="320" height="240" controls="controls">
+  				<source src="assets/mov_bbb.ogg" type="video/ogg">
+				Your browser does not support the video tag.
+				</video>
+				<br>
+                                <?php
+                                echo "Deadline : <input  type='text' readonly='true' id='deadline' value='".$row['Deadline']."' border='0' /><br>";
+                                ?>
+				<?php 
+                                echo "Assignee : <p id='assignee' value='' border='0' >";
+                                while ($rowassignee = mysqli_fetch_array($resultassignee)) {
+                                    echo " ".$rowassignee['IDUser']." ";
+                                }
+                                echo "</p>";
+                                ?>
+				
+				Tag : <input  type="text" readonly="true" id="tag" value="akademik, capek" border="0" /> <br>
+				<img src="images/edit.png" width="150" id="edit-button" value="EDIT" onClick="edit()" />
+				<img src="images/save.png" width="150" id="save-button" value="SAVE" onClick="save()" /><br><br>
+				
+			</div>
+
+			<div class="comment">
+				<h1 class="judul">Komentar</h1>
+				<textarea id="comment" rows="4" cols="45"> </textarea> <br> <input type="button" value="SUBMIT" /> <br><br>
+                                                <div id="commentpage">
+                                <?php
+                                $resultcomment = mysqli_query($con, "SELECT * FROM komentar INNER JOIN task ON task.ID=komentar.IDTask");
+                                ChromePhp::log($con);
+                                ChromePhp::log($resultcomment);
+                                while ($rowcomment = mysqli_fetch_array($resultcomment)) {
+                                    echo " ".$rowcomment['IDUser']." ".$rowcomment['Waktu']." ".$rowcomment['Isi']." <br>";
+                                }
+                                ?>
+				<img class="avatar" src="images/ava1.jpg"> Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! 
+				<hr>
+				<img class="avatar" src="images/ava2.jpg"> Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya!<br>
+				
+				<center>
+					Prev | 1 | 2 | Next
+				</center>
+                                        
+                                        </div>
+			</div>
+		</div>
+<script>
+function edit(){
+	document.getElementById("tag").readOnly=false;
+	document.getElementById("deadline").readOnly=false;
+	document.getElementById("assignee").readOnly=false;
+}
+function save()
+{
+	document.getElementById("tag").readOnly=true;
+	document.getElementById("deadline").readOnly=true;
+	document.getElementById("assignee").readOnly=true;
+}
+</script>
+<script type="text/javascript" language="javascript" src="js/autocomplete.js"></script>
+<script type="text/javascript" src="js/datepickr.min.js"></script>
+<script type="text/javascript">			
+			new datepickr('datepick2', {
+				'dateFormat': 'm/d/y'
+			});
+</script>
+<script type="text/javascript" language="javascript" src="js/pagination.js"></script>
+</body>
+</html>
