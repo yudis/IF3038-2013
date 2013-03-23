@@ -30,7 +30,7 @@ $resultassignee = mysqli_query($con, "SELECT * FROM task INNER JOIN assignee ON 
     
 	
 </head>
-    <body>
+    <body onload="loadComment(1,'<?php  echo $idtask; ?>')">
     <script type="text/javascript" language="javascript" src="js/rincian.js"></script>
     <script type="text/javascript" language="javascript" src="js/search.js"></script>
     

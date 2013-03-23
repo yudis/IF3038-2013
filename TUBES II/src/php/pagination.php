@@ -18,13 +18,15 @@ ChromePhp::log($idtask);
 	   If you have a WHERE clause in your query, make sure you mirror it here.
 	*/
 	$query = "SELECT COUNT(*) as num FROM komentar INNER JOIN task ON task.ID=komentar.IDTask WHERE task.ID='".$idtask."'";
-	$total_pages = mysqli_fetch_array(mysqli_query($query));
-	$total_pages = $total_pages['num'];
+        $total_pages_res = mysqli_query($con, $query);
+	$total_pages_row = mysqli_fetch_array($total_pages_res);
+	$total_pages = $total_pages_row['num'];
 	ChromePhp::log($total_pages);
 	/* Setup vars for query. */
 	$targetpage = "php/pagination.php"; 	//your file name  (the name of this file)
 	$limit = 10; 								//how many items to show per page
 	$page = $_GET['page'];
+        ChromePhp::log($page);
 	if($page) 
 		$start = ($page - 1) * $limit; 			//first item to display on this page
 	else
@@ -32,7 +34,7 @@ ChromePhp::log($idtask);
 	
 	/* Get data. */
 	$sql = "SELECT * FROM komentar INNER JOIN task ON task.ID=komentar.IDTask LIMIT $start, $limit";
-	$result = mysqli_query($sql);
+	$result = mysqli_query($con, $sql);
 	
 	/* Setup page vars for display. */
 	if ($page == 0) $page = 1;					//if no page var is given, default to 1.
@@ -49,9 +51,10 @@ ChromePhp::log($idtask);
 	if($lastpage > 1)
 	{	
 		$pagination .= "<div class=\"pagination\">";
+                ChromePhp::log($pagination);
 		//previous button
 		if ($page > 1) 
-			$pagination.= "<a href=\"$targetpage?page=$prev\">? previous</a>";
+			$pagination.= "<a href='#' onclick=\"loadComment($prev,'".$idtask."')\">? previous</a>";
 		else
 			$pagination.= "<span class=\"disabled\">? previous</span>";	
 		
@@ -63,7 +66,7 @@ ChromePhp::log($idtask);
 				if ($counter == $page)
 					$pagination.= "<span class=\"current\">$counter</span>";
 				else
-					$pagination.= "<a href=\"$targetpage?page=$counter\">$counter</a>";					
+					$pagination.= "<a href='#' onclick=\"loadComment($counter,'".$idtask."')\">$counter</a>";					
 			}
 		}
 		elseif($lastpage > 5 + ($adjacents * 2))	//enough pages to hide some
@@ -76,63 +79,62 @@ ChromePhp::log($idtask);
 					if ($counter == $page)
 						$pagination.= "<span class=\"current\">$counter</span>";
 					else
-						$pagination.= "<a href=\"$targetpage?page=$counter\">$counter</a>";					
+						$pagination.= "<a href='#' onclick=\"loadComment($counter,'".$idtask."')\">$counter</a>";					
 				}
 				$pagination.= "...";
-				$pagination.= "<a href=\"$targetpage?page=$lpm1\">$lpm1</a>";
-				$pagination.= "<a href=\"$targetpage?page=$lastpage\">$lastpage</a>";		
+				$pagination.= "<a href='#' onclick=\"loadComment($lpm1,'".$idtask."')\">$lpm1</a>";
+				$pagination.= "<a href='#' onclick=\"loadComment($lastpage,'".$idtask."')\">$lastpage</a>";		
 			}
 			//in middle; hide some front and some back
 			elseif($lastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2))
 			{
-				$pagination.= "<a href=\"$targetpage?page=1\">1</a>";
-				$pagination.= "<a href=\"$targetpage?page=2\">2</a>";
+				$pagination.= "<a href='#' onclick=\"loadComment(1,'".$idtask."')\">1</a>";
+				$pagination.= "<a href='#' onclick=\"loadComment(2,'".$idtask."')\">2</a>";
 				$pagination.= "...";
 				for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++)
 				{
 					if ($counter == $page)
 						$pagination.= "<span class=\"current\">$counter</span>";
 					else
-						$pagination.= "<a href=\"$targetpage?page=$counter\">$counter</a>";					
+						$pagination.= "<a href='#' onclick=\"loadComment($counter,'".$idtask."')\">$counter</a>";					
 				}
 				$pagination.= "...";
-				$pagination.= "<a href=\"$targetpage?page=$lpm1\">$lpm1</a>";
-				$pagination.= "<a href=\"$targetpage?page=$lastpage\">$lastpage</a>";		
+				$pagination.= "<a href='#' onclick=\"loadComment($lpm1,'".$idtask."')\">$lpm1</a>";
+				$pagination.= "<a href='#' onclick=\"loadComment($lastpage,'".$idtask."')\">$lastpage</a>";		
 			}
 			//close to end; only hide early pages
 			else
 			{
-				$pagination.= "<a href=\"$targetpage?page=1\">1</a>";
-				$pagination.= "<a href=\"$targetpage?page=2\">2</a>";
+				$pagination.= "<a href='#' onclick=\"loadComment(1,'".$idtask."')\">1</a>";
+				$pagination.= "<a href='#' onclick=\"loadComment(2,'".$idtask."')\">2</a>";
 				$pagination.= "...";
 				for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++)
 				{
 					if ($counter == $page)
 						$pagination.= "<span class=\"current\">$counter</span>";
 					else
-						$pagination.= "<a href=\"$targetpage?page=$counter\">$counter</a>";					
+						$pagination.= "<a href='#' onclick=\"loadComment($counter,'".$idtask."')\">$counter</a>";					
 				}
 			}
 		}
 		
 		//next button
 		if ($page < $counter - 1) 
-			$pagination.= "<a href=\"$targetpage?page=$next\">next ?</a>";
+			$pagination.= "<a href='#' onclick=\"loadComment($next,'".$idtask."')\">next ?</a>";
 		else
 			$pagination.= "<span class=\"disabled\">next ?</span>";
 		$pagination.= "</div>\n";		
 	}
         
         
-        while($row = mysql_fetch_array($result))
+        while($row = mysqli_fetch_assoc($result))
         {
 
-        $pagination.=" ".$row['IDUser']." ".$row['Waktu']." ".$row['Isi']." <br>";
+        $pagination.="-- ".$row['IDUser']." ".$row['Waktu']." ".$row['Isi']." <br>";
 
         }
-        
+        ChromePhp::log($pagination);
         echo $pagination;
 	?>
 
-<?=$pagination?>
 	
