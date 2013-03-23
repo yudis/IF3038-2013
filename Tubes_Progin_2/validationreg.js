@@ -36,7 +36,6 @@ var valid7bool;
 					valid1.src = "img/salah.png";
 					valid1bool = false;
 				}else{
-					console.log("Masuk sini");
 					if (username.checkValidity()){
 						valid1.src = "img/benar.png";
 						valid1bool = true;

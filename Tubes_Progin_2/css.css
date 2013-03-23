@@ -130,6 +130,84 @@ input.liusername{
 	color : white;
 }
 
+#hasilsearchassignee{
+	position: absolute;
+	z-index:1000;
+	top: 324px;
+	left: 55px;
+	width: 347px;
+	border: 1px solid #000000;
+	background-color: white;
+	max-height: 300px;
+	overflow : auto;
+}
+
+#hasilsearchassignee ul{
+	list-style-type: none;
+	padding : 0px;
+	margin : 0px;
+	cursor: pointer;
+	color: #3b5998;
+	font-weight: bold;
+}
+
+#hasilsearchassignee li:hover{
+	background-color: #3b5998;
+	color : white;
+}
+
+#hasilsearchassigneeedit{
+	position: absolute;
+	z-index:1000;
+	top: 235px;
+	left: 55px;
+	width: 347px;
+	border: 1px solid #000000;
+	background-color: white;
+	max-height: 300px;
+	overflow : auto;
+}
+
+#hasilsearchassigneeedit ul{
+	list-style-type: none;
+	padding : 0px;
+	margin : 0px;
+	cursor: pointer;
+	color: #3b5998;
+	font-weight: bold;
+}
+
+#hasilsearchassigneeedit li:hover{
+	background-color: #3b5998;
+	color : white;
+}
+
+#hasilsearchtag{
+	position: absolute;
+	z-index:1000;
+	top: 298px;
+	left: 55px;
+	width: 152px;
+	border: 1px solid #000000;
+	background-color: white;
+	max-height: 300px;
+	overflow : auto;
+}
+
+#hasilsearchtag ul{
+	list-style-type: none;
+	padding : 0px;
+	margin : 0px;
+	cursor: pointer;
+	color: #3b5998;
+	font-weight: bold;
+}
+
+#hasilsearchtag li:hover{
+	background-color: #3b5998;
+	color : white;
+}
+
 .judul{
 	background-color : #f2f2f2;
 	padding: 2px 15px 2px 6px;
@@ -252,6 +330,10 @@ input.liusername{
     background-image: url('img/kertas.png');
     width: 350px;
     height: 443px;
+}
+
+#Assignee {
+	width: 100%;
 }
 
 #nama {
@@ -627,6 +709,17 @@ input{
 	margin-left:180px;
 }
 
+.task a{
+	color:black;
+	text-decoration: none;
+}
+
+.task img{
+	width:50px;
+	height:50px;
+	margin-right:10px;
+}
+
 .addtask{
 	margin-bottom: 10px;
 	height: 30px;
@@ -642,4 +735,27 @@ input{
 .addtask a{
 	color:black;
 	text-decoration:none;
+}
+
+.judulhasil{
+	margin-bottom: 10px;
+	height: 30px;
+	padding: 5px 40px 15px;
+	background-image: url('img/label.png');
+	background-repeat: no-repeat;
+	background-size: 350px 50px;
+	font-family: fantasy;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.judulhasil2{
+	margin-bottom: 10px;
+	height: 30px;
+	padding: 5px 40px 15px;
+	background-image: url('img/label.png');
+	background-repeat: no-repeat;
+	background-size: 350px 50px;
+	font-family: arial;
+	font-size: 25px;
 }

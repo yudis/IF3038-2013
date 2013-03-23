@@ -4,14 +4,28 @@ and open the template in the editor.
 -->
 
 <?php
-	//$username = $_SESSION['username'];
-	$username = "EndyDoank";
-	
+	//dummy here
+	$id_task = 1;
 	require "config.php";
+	$task_sql = "SELECT * FROM task WHERE id_task = '$id_task'";
+	$task = mysqli_query($con,$task_sql);
+	$cur_task = mysqli_fetch_array($task);
+	$cur_user = "ArieDoank";
 	
-	$sql = "SELECT * FROM user WHERE username = '$username'";
-	$user = mysqli_query($con,$sql);
-	$current_user = mysqli_fetch_array($user);
+	$assignee_sql = "SELECT username FROM assignee WHERE id_task = '$id_task'";
+	$assignee_result = mysqli_query($con,$assignee_sql);
+	$curassignee="";
+	while($assignee = mysqli_fetch_array($assignee_result)){
+		$curassignee.=$assignee['username'].",";
+	}
+	
+	$curtag="";
+	$tag_sql = "SELECT tag.name FROM tasktag,tag WHERE tasktag.id_task = '$id_task' and tag.id_tag = tasktag.id_tag";
+	$tag_result = mysqli_query($con,$tag_sql);
+	while($tag = mysqli_fetch_array($tag_result)){
+		$curtag.=$tag['name'].",";
+	}
+	$curtag = substr($curtag,0,-1);
 ?>
 
 <!DOCTYPE html>
@@ -20,68 +34,56 @@ and open the template in the editor.
         <title>BANG!!!-DASHBOARD</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
-        <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
         <?php
 			include "header.php";
 		?>
-
-            <div id="category">
-                <div class="kategori" onclick="showList();"><a>Fraud</a></div>
-                <div class="kategori" onclick="showList3();"><a>Robbery</a></div>
-                <div class="kategori" onclick="showList2();"><a>Gambling</a></div>
-                <div class="kategori" onclick="showList();"><a>Public Drunkenness</a></div>
-                <div class="kategori" onclick="showList3();"><a>Drug Law Violation</a></div>
-                <div class="kategori" onclick="showList2();"><a>Motor Vehicle Theft</a></div>
-            </div>
+		<div id="category">
+			<div class="kategori" onclick="showList();"><a>Fraud</a></div>
+			<div class="kategori" onclick="showList3();"><a>Robbery</a></div>
+			<div class="kategori" onclick="showList2();"><a>Gambling</a></div>
+			<div class="kategori" onclick="showList();"><a>Public Drunkenness</a></div>
+			<div class="kategori" onclick="showList3();"><a>Drug Law Violation</a></div>
+			<div class="kategori" onclick="showList2();"><a>Motor Vehicle Theft</a></div>
+		</div>
         <div id="addCat">
             <a onclick="addCategory();">+ category</a>
         </div>
-        
-        <div class="tugas" id="rincitugas">
-                Name: Nama Tugas <br/>
-                Attachment: 
-                    <div class="attachment">
-                        <a href="img/file.zip">file.zip</a><br/>
-                        <a href="img/badge.png">picture.png</a><br/>
-                    </div><br/>
-                Deadline: 17-12-2014<br/>
-                Assignee: <a href="" class="asignee">Timo</a>, <a href="" class="asignee">Stefan</a>, <a href="" class="asignee">Frilla</a><br/>
-                Tag: <a href="" class="tag">dangerous</a>, <a href="" class="tag">novice</a> <br/>
-                <br/>Comment:<br/>
-                <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
-                <form>
-                    <textArea></textarea>
-                    <input type="button" name="submit" value="submit">
-                </form>
-                <br/><br/>
-                <a onclick="showEdit();" class="button">edit</a><br/>
-            </div>
-            
-            <datalist id="assignee">
-                <option value="Frilla" />
-                <option value="Stefan" />
-                <option value="Timo" />
-                <option value="Yosef" />
-                <option value="Hasby" />
-            </datalist>
-        
-            <div class="tugas" id ="edittugas">
-                <form>
-                    Name: Nama Task<br/>
-                    Attachment: <div class="attachment"><input id="upload" type="file"></div><br/>
-                    Deadline: <input type="date"><br/>
-                    Assignee: <div class="assignee"><input type="text" list="assignee"></div><br/>
-                    Tag: <div class="tag"> <input type="text"></div> <br/>
-                    Comment: <br/>
-                <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
-                </form> <br/>
-                <a onclick="showRinci()" class="button">save</a><br/>
-            </div>
-        
-			<div id="wanted">
+		<div id="wanted">
 			<img src="img/kertas2.png">
-			</div>
+		</div>
+		<div class="tugas" id="edittask"><br/>
+			<form id="editTaskForm" method="post" action="ubahtask.php?idtask=<?php echo $id_task;?>" enctype="multipart/form-data">
+                Task Name: 
+				<div class="nama">
+					<?php echo $cur_task['name'];?>
+				</div><br/>
+                Deadline:
+				<div class="deadline">
+					<input type="date" name="deadline" value="<?php echo $cur_task['deadline'];?>" onchange="changeDeadline();" required><img id="validtask3" src="">
+				</div><br/>
+                Assignee: 
+				<div class="asignee">
+					<input type="text" value="<?php echo $curassignee;?>" autocomplete="off" name="Assignee" id="Assignee" onkeyup="showAssignee(this.value);">
+				</div><br/>
+				<div id="hasilsearchassigneeedit"></div>
+                Tag: 
+				<div class="tag">
+					<input type="text" value="<?php echo $curtag;?>" id="tag" name="tag" autocomplete="off" onkeyup="showTag(this.value);"></div> <br/>
+                <br/>
+				<div id="hasilsearchtag"></div>
+				<input type="submit" id="editbut" name="submit" value="Edit Task">
+				<!--Back to Detail Task-->
+				<input type="button" id="cancelEditTask" name="cancelEditTask" value="Cancel" onclick="">
+				
+				<div id="deletebutton">
+					<input type="button" id="deleteTask" name="deleteTask" value="Delete This Task" onclick="deleteTask("<?php echo $cur_task['id_task'];?>");">
+				</div>
+				
+			</form>
+		</div>
+		<script type="text/javascript" src="script.js"></script>
+		<script type="text/javascript" src="validationedittask.js"></script>
     </body>
 </html>
