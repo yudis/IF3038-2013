@@ -337,8 +337,13 @@ ul.suggestions li:hover b {
 	display: inline-block;
 	margin-right: 10px;
 }
+.site-container > header nav > ul li img {
+	display: inline-block;
+	float: left;
+	max-height: 28px;
+}
 .site-container > header nav > ul li a {
-	display: block;
+	display: inline-block;
 	padding: 5px 10px;
 	color: #666;
 }
