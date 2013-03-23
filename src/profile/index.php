@@ -6,23 +6,22 @@
 	$dob = isset($_SESSION['dob']) ? : "";
 	$photo = isset($_SESSION['photo']) ? : "";
 	
-		echo "<h4>: " .$username. "</h4>";
-		echo "<h4>: " .$fullname. "</h4>";
-		echo "<h4>: " .$dob. "</h4>";
-		echo "<h4>: " .$email. "</h4>";
+		//echo "<h4>: " .$username. "</h4>";
+		//echo "<h4>: " .$fullname. "</h4>";
+		//echo "<h4>: " .$dob. "</h4>";
+		//echo "<h4>: " .$email. "</h4>";
 ?>
 
 <html>
 	<head>
 		<title>Shared To Do List - Profile</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" href="profilestyle.css">
 		<link rel="shortcut icon" href="favicon.ico">		
 		<script type="text/javascript" src="validation.js"></script>
 	</head>
 	<body>
 		<div id="navigation">
-			<img src="images/logo.gif">
+			<img />
 			<a href="dashboard.php">DASHBOARD</a>
 			<a href="">PROFILE</a>
 			<a href="#" onclick="toggleSearch()">SEARCH</a>

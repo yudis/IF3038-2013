@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<div id="navigation">
-			<img src="images/logo.gif">
+			<img />
 			<a>HOME</a>
 			<a href="#features">FEATURES</a>
 			<a href="#registerform">REGISTER</a>
