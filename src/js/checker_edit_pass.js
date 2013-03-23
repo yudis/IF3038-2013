@@ -30,11 +30,11 @@ Rp(function()
 		if ((profil_password.checkValidity()) && 
 			(profil_confirm_password.checkValidity()))
 		{
-			document.getElementById("edit_submit").disabled="";
+			document.getElementById("edit_pass_submit").disabled="";
 		}
 		else
 		{
-			document.getElementById("edit_submit").disabled="disabled";
+			document.getElementById("edit_pass_submit").disabled="disabled";
 		}
 	}
 });

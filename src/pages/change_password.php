@@ -42,7 +42,7 @@
 					</div>
 					<br />
 					<div class="field buttons">
-						<button type="submit" id="edit_submit">Save Changes</button>
+						<button type="submit" id="edit_pass_submit">Save Changes</button>
 					</div>
 				</form>
 			</section>

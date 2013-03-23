@@ -11,4 +11,5 @@
 	</div>
 <?php
 	$this->footer();
+	exit;
 ?>

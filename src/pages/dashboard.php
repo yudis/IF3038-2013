@@ -114,6 +114,9 @@ foreach ($done as $task) { include dirname(__FILE__) . '/../template/task.php'; 
 					<div class="field">
 						<label for="usernames_list">Username</label>
 						<input id="usernames_list" name="usernames_list" pattern="^[^;]{5,}(;[^;]{5,})*$" type="text" title="Username harus terdaftar dan dipisahkan tanda titik-koma. Kosongkan jika private." />
+						<div id="auto_comp_assignee">
+							<ul id="auto_comp_inflate_assignee"></ul>
+						</div>
 					</div>
 					<div class="buttons">
 						<button type="submit" title="Semua elemen form harus diisi dengan benar dahulu.">Simpan</button>
