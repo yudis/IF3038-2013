@@ -13,7 +13,7 @@
 		
 		public static function openDBconnection() 
 		{
-			if (self::$link)
+			if (mysqli_ping(self::$link))
 				return;
 
             // Create connection
@@ -40,13 +40,15 @@
 			}
 		}
 
-		public static function insertID() {
-			if (self::$link)
+		public static function insertID() 
+		{
+			if (mysqli_ping(self::$link))
 				return self::$link->insert_id;
 		}
 		
-		public static function affectedRows() {
-			if (self::$link)
+		public static function affectedRows() 
+		{
+			if (mysqli_ping(self::$link))
 				return self::$link->affected_rows;
 		}
 

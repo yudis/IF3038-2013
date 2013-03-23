@@ -49,22 +49,16 @@
 		 */
 		public function save()
 		{
-			// check same tag name
-			if ($this->id==null)
+			if (Attachment::model()->find("id_task='".$this->id_task."' AND attachment='".$this->attachment."'")->data)
 			{
-				// new tag
-				DBConnection::openDBconnection();
-				
-				$result = DBConnection::DBquery("INSERT into ".tableName()."");
-				
-				DBConnection::closeDBconnection();
-								
-				return $result;
+				return false;
 			}
 			else
 			{
-				// existing tag
+				$result = DBConnection::DBquery("INSERT INTO ".self::tableName().
+						" (id_task,attachment) VALUES ('".$this->id_task."','".$this->attachment."')");
 			}
+			return $result;
 		}
 	}
 ?>

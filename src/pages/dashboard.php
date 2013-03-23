@@ -52,7 +52,7 @@
 					<h1>Dashboard</h1>
 					<ul id="categoryTasks">
 						<li class="add-task-link" id="deleteCategoryLi"><a href="newwork.php" id="deleteCategoryLink">Delete Category</a></li>
-						<li class="add-task-link" id="addTaskLi"><a id="addTaskCat" href="newwork.php">New Task</a></li>
+						<li class="add-task-link" id="addTaskLi"><a id="addTaskCat" href="new_work">New Task</a></li>
 					</ul>
 				</header>
 				<div class="primary" id="dashboardPrimary">

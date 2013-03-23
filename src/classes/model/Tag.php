@@ -48,14 +48,17 @@
 			if ($this->id_tag==null)
 			{
 				// new tag
-				if (Tag::model()->find("tag_name=`".$this->tag_name."`")->data)
+				$temp = Tag::model()->find("tag_name=`".$this->tag_name."`");
+				if ($temp->data)
 				{
 					// tag_name already used
+					$this->id_tag = $temp->id_tag;
 					return false;
 				}
 				else 
 				{
 					$result = DBConnection::DBquery("INSERT INTO `".self::tableName()."` (`tag_name`) VALUES ('".$this->tag_name."')");
+					$this->id_tag = DBConnection::insertID();
 					return $result;
 				}
 			}

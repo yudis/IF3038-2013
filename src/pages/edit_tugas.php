@@ -1,4 +1,10 @@
 <?php
+	if (!$this->loggedIn) 
+	{
+		header('Location: index');
+		return;
+	}
+
 	$task = Task::model()->find("id_task = ".$_POST['id_task']);
 	
 	if ($task->getEditable($this->app->currentUserId))
@@ -16,11 +22,15 @@
 		{
 			foreach($_FILES['attachment']['name'] as $name)
 			{
-				$temp = explode(".",$name);
-				$extension = end($temp);
-				$attachments[] = new Attachment();
-				$attachments[$i]->attachment = strtoupper(md5(uniqid(rand(), true))).".".$extension;
-				$attachments[$i]->temp_name = $_FILES['attachment']['tmp_name'];
+				if ($name!=null)
+				{
+					$temp = explode(".",$name);
+					$extension = end($temp);
+					$attachments[] = new Attachment();
+					$attachments[$i]->attachment = strtoupper(md5(uniqid(rand(), true))).".".$extension;
+					$attachments[$i]->temp_name = $_FILES['attachment']['tmp_name'][$i];
+					$i++;
+				}
 			}
 		}
 		$task->attachments = $attachments;
@@ -35,22 +45,16 @@
 		{
 			if ($task->save())
 			{
-				foreach ($tags as $tag)
-				{
-					$tag->save();
-				}
-				foreach($attachments as $attachment)
-				{
-					if ($attachment->save())
-					{
-						move_uploaded_file($attachment->temp_name, $_SESSION['full_path']."upload/attachments/" . $attachment->attachment);
-					}
-				}
+				Header("Location: tugas?id=".$task->id_task);
 			}
 			else
 			{
 				echo "fail";
 			}
 		}
+	}
+	else
+	{
+		// render error page
 	}
 ?>

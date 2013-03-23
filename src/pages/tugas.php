@@ -42,7 +42,10 @@
 							if ($task->getDeletable($this->currentUserId))
 								echo '<li><a href="#" id="removeTaskLink">Remove Task</a></li>';
 						?>
-						<li><a href="#" id="editTaskLink">Edit Task</a></li>
+						<?php
+							if ($task->getEditable($this->currentUserId))
+								echo '<li><a href="#" id="editTaskLink">Edit Task</a></li>';
+						?>
 					</ul>
 				</header>
 				<div id="current-task">
@@ -107,10 +110,10 @@
 				</div>
 				<div id="edit-task">
 					<form id="new_tugas" action="edit_tugas" method="post" enctype="multipart/form-data">
-						<input id="id_task" type="hidden" name="id_task" value="<?php echo $task->id_task; ?>">
+						<input type="hidden" name="id_task" value="<?php echo $task->id_task; ?>" >
 						<div class="field">
 							<label>Task Name</label>
-							<input size="25" maxlength="25" name="nama_task" id="nama" type="text" value="<?php echo $task->nama_task; ?>">
+							<input size="25" maxlength="25" name="nama_task" id="nama" pattern="^[a-zA-Z0-9 ]{1,25}$" type="text" value="<?php echo $task->nama_task; ?>">
 						</div>
 						<div class="field">
 							<label>Attachment</label>
@@ -135,7 +138,7 @@
 						</div>
 						<div class="field">
 							<label>Assignee</label>
-							<input size="25" name="assignee" id="assignee" type="text"  autocomplete="off" 
+							<input size="25" name="assignee" id="assignee" type="text"  autocomplete="off" pattern="^[^;]{5,}(;[^;]{5,})*$" 
 							value="<?php 
 									$string = "";
 									foreach ($users as $user)
@@ -233,6 +236,7 @@
 			$this->calendar();
 		?>
 		<script type="text/javascript">
+			var id_task = <?php echo $task->id_task; ?>;
 			var first_timestamp = "<?php echo $firsttimestamp; ?>";
 			var timestamp = "<?php echo $lasttimestamp; ?>";
 			var total_comment = <?php echo $total_comment; ?>;
@@ -242,5 +246,6 @@
 <?php
 	$this->requireJS('datepicker');
 	$this->requireJS('tugas');
+	$this->requireJS('comment');
 	$this->footer();
 ?>

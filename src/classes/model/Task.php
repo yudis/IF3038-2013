@@ -39,81 +39,33 @@
 		public function checkValidity()
 		{
 			$error = array();
-			// check if user existed
+			
+			if (!preg_match("/^[a-zA-Z0-9 ]{1,25}$/", $this->nama_task))
+			{
+				$error["nama_task"] = "Nama task maksimal 25 karakter alfanumerik.";
+			}
+			
 			$i = 0;
 			$assignees = array();
-			$tempuser = explode (",", $this->data['assignee']);
+			$tempuser = explode (",", $this->assignee);
 			foreach ($tempuser as $user)
 			{
-				if (User::model()->find("username=".$user))
+				$tempouser = User::model()->find("username='".$user."'", array("id_user"));
+				if ($tempouser->data)
 				{
-					//check if users existed
 					$assignees[] = new User();
+					$assignees[$i]->id_user = $tempouser->id_user;
 					$assignees[$i]->username = $user;
 					$i++;
 				}
 				else 
 				{
-					//check if users doesn't exist
-					return false;
+					$error['assignee'][] = "Assignee ".$user." is not valid";
 				}
 			}
 			$this->assignee = $assignees;
-			/*
-			$array_of_tags = $this->data['tag'];
-			$tags = explode(",", $array_of_tags);
-			if ($tags)
-			{
-				foreach($tags as $temp_tag)
-				{
-					$tag = Tag::model()->find("tag_name='".$temp_tag."'");
-					// if tag exists, insert to table have_tags
-					if ($tag->data) 
-					{
-						print_r ($tag);
-						/*mysql_query("INSERT INTO `task` (`id_task`, `deadline`, `id_kategori`) VALUES ('".$this->data['nama_task']."', '".$this->data['deadline']."', '".5'");
-
-						mysql_query("INSERT INTO `have_tags` (`id_task` ,`id_tag`) VALUES ('".$tag->data['id_tag']."'", '11');
-					}
-					// if tag doesn't exist, insert into table tags & have_tags
-					else 
-					{
-						// insert into table tags
-						$tag->data['tag_name'] = $temp_tag;
-						$tag->save();
-						// insert into table have tags
-					}
-				}
-			}
-			*/
-			print_r ($tag_name);
 			
-			
-			/*$i = 0;
-			$tags = array();
-			$temptags = explode(",", $task->tag);
-			$temptags : css
-			$temptags : html
-			foreach ($temptags as $tag)
-			{
-				$tags[] = new Tag();
-				$tags[$i]->tag_name = $tag;
-			}
-			$task->tags = $tags;
-			
-			$i = 0;
-			$tags = array();
-			$temptags = explode(",", $task->tag);
-			foreach ($temptags as $tag)
-			{
-				if (Tag::model()->find("tag_name=".$tag))
-				{
-					$tags[] = new Tag();
-					$tags[$i]->tag_name = $tag;
-				}
-			}
-			$task->tags = $tags;
-			*/
+			$this->tag = explode(",", $this->tag);
 		}
 		
 		/**
@@ -123,17 +75,94 @@
 		public function save()
 		{
 			// check same task name
-			if ($this->id==null)
+			if ($this->id_task==null)
 			{
-				// new task
-				$user_id = $_SESSION['user_id'];
-				DBConnection::openDBconnection();
-				$result = DBConnection::DBquery("INSERT INTO `task` (`nama_task`, `deadline`, `id_kategori`, `id_user`) VALUES ('".$this->data['nama_task']."', '".$this->data['deadline']."', '".$this->id_kategori."', '".$user_id."')");
-				DBConnection::closeDBconnection();
+				$user_id = addslashes($_SESSION['user_id']);
+				$result = DBConnection::DBquery("INSERT INTO `".self::tableName()."` (`nama_task`, `deadline`, `id_kategori`, `id_user`)".
+						" VALUES ('".addslashes($this->nama_task)."', '".addslashes($this->deadline)."', '".addslashes($this->id_kategori)."', '".
+						$user_id."')");
+				
+				$this->id_task = DBConnection::insertID();
+				
+				if ($result)
+				{
+					foreach ($this->assignee as $assignee)
+					{
+						DBConnection::DBquery("INSERT INTO `assign` (`id_user`, `id_task`)".
+							" VALUES ('".$assignee->id_user."', '".$this->id_task."')");
+					}
+					foreach ($this->tag as $tag)
+					{
+						$temptag = Tag::model()->find("tag_name = ".$tag);
+						if (!$temptag)
+						{
+							$temptag->tag_name = $tag;
+							$temptag->save();
+						}
+						
+						DBConnection::DBquery("INSERT INTO `have_tags` (`id_task`, `id_tag`)".
+							" VALUES ('".$this->id_task."', '".$temptag->id_tag."')");
+					}
+					
+					foreach ($this->attachments as $attachment)
+					{
+						$attachment->id_task = $this->id_task;
+						print_r($attachment);
+						echo "<br>";
+						if ($attachment->save())
+						{
+							move_uploaded_file($attachment->temp_name, $_SESSION['full_path']."upload/attachments/" . $attachment->attachment);
+						}
+					}
+				}
+				
+				return $result;
 			}
 			else
 			{
 				// existing task
+				$user_id = addslashes($_SESSION['user_id']);
+				$result = DBConnection::DBquery("UPDATE `".self::tableName()."` SET `nama_task`='".addslashes($this->nama_task).
+						"', `deadline`='".addslashes($this->deadline)."' , `id_kategori`='".addslashes($this->id_kategori)."', `id_user`='".
+						$user_id."' WHERE id_task = '".$this->id_task."'");
+				
+				if ($result)
+				{
+					DBConnection::DBquery("DELETE FROM `assign` WHERE `id_task`='".$this->id_task."'");
+					foreach ($this->assignee as $assignee)
+					{
+						DBConnection::DBquery("INSERT INTO `assign` (`id_user`, `id_task`)".
+							" VALUES ('".$assignee->id_user."', '".$this->id_task."')");
+					}
+					
+					DBConnection::DBquery("DELETE FROM `have_tags` WHERE `id_task`='".$this->id_task."'");
+					foreach ($this->tag as $tag)
+					{
+						$temptag = Tag::model()->find("tag_name = '".$tag."'");
+						if (!$temptag)
+						{
+							$temptag->tag_name = $tag;
+							$temptag->save();
+							echo "A";
+						}
+						
+						DBConnection::DBquery("INSERT INTO `have_tags` (`id_task`, `id_tag`)".
+							" VALUES ('".$this->id_task."', '".$temptag->id_tag."')");
+					}
+					
+					foreach ($this->attachments as $attachment)
+					{
+						$attachment->id_task = $this->id_task;
+						print_r($attachment);
+						echo "<br>";
+						if ($attachment->save())
+						{
+							move_uploaded_file($attachment->temp_name, $_SESSION['full_path']."upload/attachments/" . $attachment->attachment);
+						}
+					}
+				}
+				
+				return $result;
 			}
 		}
 
@@ -157,7 +186,7 @@
 		
 		/**
 		 * Get the attachments in the task
-		 * @return array of Attachment in the task
+		 * @return array \of Attachment in the task
 		 */
 		public function getAttachment()
 		{
