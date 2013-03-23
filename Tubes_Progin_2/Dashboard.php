@@ -20,7 +20,7 @@ and open the template in the editor.
         <title>BANG!!!-DASHBOARD</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
-        <script type="text/javascript" src="script.js"></script>
+        
     </head>
     <body>
         <?php
@@ -98,6 +98,7 @@ and open the template in the editor.
             <input type="submit" onclick="addCat();" value="create">
             <input type="submit" onclick="restore();" value="cancel">
         </div>
+		<script type="text/javascript" src="script.js"></script>
 		<script>
 			window.onload=update;
 			setInterval(function(){update();},5000)

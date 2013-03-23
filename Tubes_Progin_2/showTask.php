@@ -36,6 +36,17 @@
 		}
 	} else
 	{
+		$sql3 = "SELECT username FROM categorycreator WHERE id_cat in (SELECT id_cat FROM category WHERE name='$q')";
+		$user3 = mysqli_query($con,$sql3);
+		$data3 = mysqli_fetch_array($user3);
+		
+		if ($data3['username'] == $username){
+			$pembuatkategori = "creator";
+		}
+		else $pembuatkategori = "noncreator";
+			
+		$hasil .= $pembuatkategori;
+	
 		$sql = "SELECT task.id_task as id_task,task.name as name,task.deadline as deadline,task.status as status,task.pemilik as pemilik FROM assignee INNER JOIN task ON assignee.id_task = task.id_task WHERE username='$username' AND task.id_cat in (SELECT id_cat FROM category WHERE name='$q')";
 		$user = mysqli_query($con,$sql);
 		while(($user != null) && ($data = mysqli_fetch_array($user)))
@@ -48,6 +59,7 @@
 			{
 				$tag[] .= $data2['name'];
 			}
+			
 			$hasil .= "<br>".$data['name'].",".$data['deadline'].",".$data['status'].",".$data['id_task'];
 			
 			if ($username == $data['pemilik'])

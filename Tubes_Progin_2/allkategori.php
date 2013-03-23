@@ -4,7 +4,7 @@
 	
 	require "config.php";
 	
-	$sql = "SELECT name FROM category WHERE id_cat in (SELECT id_cat FROM joincategory WHERE username='$username')";
+	$sql = "SELECT name FROM category WHERE id_cat in (SELECT id_cat FROM joincategory WHERE username='$username') UNION SELECT name FROM category WHERE id_cat in (SELECT id_cat FROM categorycreator WHERE username='$username')";
 	$user = mysqli_query($con,$sql);
 	$hasil = "";
 	while(($user != null) && ($data = mysqli_fetch_array($user)))
