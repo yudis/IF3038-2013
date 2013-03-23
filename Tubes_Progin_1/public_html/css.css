@@ -1,8 +1,10 @@
 body {
-    /*background-image: url('img/Dashboard_bg.jpg');*/
+    background-image: url('img/Dashboard_bg.jpg');
     font-family: cambria;
     width: 100%;
     overflow: hidden;
+    background-size: auto;
+    background-repeat: no-repeat;
 }
 
 header {
@@ -54,7 +56,7 @@ input.liusername{
     margin-left:20px;
     padding-top: 80px;
     padding-left: 30px;
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
 }
 
 .listTugas:hover {
@@ -113,19 +115,19 @@ input.liusername{
 }
 
 .tugas {
-    font-size: 12pt;
-    top: 75px;
+    font-size: 10pt;
     position:absolute;
-    background-color:transparent;
     border:0px;
     visibility: hidden;
-    left: 700px;
-    padding: 50px;
-    margin-left: 100px;
+    top:0px;
+    left: 500px;
+    padding: 80px 50px 100px;
     overflow: hidden;
-    background-image: url('img/kertas.png');
-    width: 350px;
-    height: 443px;
+    width: 480px;
+    height: 100%;
+    z-index:-1;
+    background-image: url('img/kertastugas.jpg'); 
+    background-size: cover;
 }
 
 #nama {
@@ -230,10 +232,8 @@ textArea {
     height: 50px;
     padding-top: 5px;
     position: absolute;
-    padding-left: 35px;
+    padding-left: 50px;
 }
-
-
 /*
  * INDEX
  */
@@ -531,4 +531,16 @@ input[type=submit]{
 #bioform small{
     display: none;
     color: red;
+}
+#search{
+    color: white;
+    position:absolute;
+    top:10px;
+    left:150px;
+}
+
+#buattugas{
+    font-size: 15pt;
+    padding-left: 150px;
+    width: 300px;
 }

@@ -14,7 +14,7 @@
         // db connection config vars
         private $user = "progin";
         private $pass = "progin";
-        private $dbName = "progin";
+        private $dbName = "progin_405_13510056";
         private $dbHost = "localhost";
         
         //This method must be static, and must return an instance of the object if the object

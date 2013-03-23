@@ -3,14 +3,11 @@
 require_once("db.php");
 session_start();
 
-$q = $_GET["q"];
-$_SESSION['category'] = $q;
-
-$query = "SELECT task.id_task AS taskID, task.name AS taskName, deadline, status FROM utrelation JOIN task WHERE username = '" . $_SESSION['username'] . "' AND utrelation.id_task = task.id_task AND id_category = '" . $q . "';";
+$query = "SELECT task.id_task AS taskID, task.name AS taskName, deadline, status FROM utrelation JOIN task WHERE username = '" . $_SESSION['username'] . "' AND utrelation.id_task = task.id_task;";
 $result = ProginDB::getInstance()->query($query);
 
 while ($row = mysqli_fetch_array($result)) {
-    echo "<div class='listTugas'>";
+    echo "<div class='listTugas' id='task" . $row['taskID'] . "'>";
     echo "<a id='task" . $row['taskID'] . "' onclick='showRinci(" . $row['taskID'] . ");'><b>" . $row['taskName'] . "</b></a>";
     echo "<div>" . $row['deadline'] . "</div>";
 
@@ -42,13 +39,5 @@ while ($row = mysqli_fetch_array($result)) {
         }
     }
     echo "</div>";
-}
-
-$queryAu = "SELECT authorized_user FROM caurelation WHERE id_category='" . $q . "';";
-$resultAu = ProginDB::getInstance()->query($queryAu);
-while ($rowAu = mysqli_fetch_array($resultAu)) {
-    if ($_SESSION['username'] === $rowAu['authorized_user']) {
-        echo "<a onclick='showBuat();' class='addTask'></a>";
-    }
 }
 ?>

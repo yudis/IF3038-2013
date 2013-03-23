@@ -17,23 +17,16 @@ and open the template in the editor.
         <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
-        <div id="dashboard-header">
-            <img id="text-logo" src="img/logo_small.png" alt="logo" href="dashboard.html" title="Home"/>
-            <a title="Go to Dashboard" href="dashboard.php" id="dashboard">Dashboard</a>
-            <a title="Go to Profile" href="profile.php" id="profile"><?php echo ($_SESSION['username']); ?></a>
-            <img src="
-                <?php 
-                    $result = ProginDB::getInstance()->query("SELECT * FROM user WHERE username = '".$_SESSION['username']."'");
-                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                    echo $row['avatar'];
-                ?>" id="avatarsmall"
-            />
-            <a title="Log out from here" href="logout.php" id="logout">Logout</a>
-            <form id="search">
-                <input type="text" name="Search" id="box">
-                <input type="submit" value="Search">
-            </form>
-        </div>
+		<?php
+			include_once("header.php");
+			if(isset($_GET['userprofile'])){
+				$userprofile = $_GET['userprofile'];
+				$result = ProginDB::getInstance()->query("SELECT * FROM user WHERE username = '".$userprofile."'");
+				$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+			}else{
+				$userprofile = $_SESSION['username'];
+			}
+		?>
         <div id="panel">
             <img src="img/bg.jpg" id="panelbg"/>
             <img src="
@@ -42,12 +35,16 @@ and open the template in the editor.
                 ?>" id="avatarbig"
             />
             <img id="badge" src="img/badge.png">
-            <div id="biousername"><?php echo ($_SESSION['username']); ?></div>
+            <div id="biousername"><?php echo ($userprofile); ?></div>
             <div id="biodata">
                 Name<b><?php echo ": ".$row['fullname'];?></b></br>
                 Birth<b><?php echo ": ".$row['dob'];?></b></br>
                 Email<b><?php echo ": ".$row['email'];?></b></br></br>
-                <input type="button" value="Edit Profile" onclick="showForm();"/>
+                <?php
+                	if($userprofile==$_SESSION['username']){
+                		echo "<input type='button' value='Edit Profile' onclick='showForm();'/>";
+                	}
+                ?>
             </div>
             <form id="bioform" name="bioform" method="POST" action="editprofile.php" enctype="multipart/form-data">
                 <div id="popoutovl"></div>
@@ -67,12 +64,12 @@ and open the template in the editor.
         <div id="wall">
             <div id="donelist">
                 <?php 
-                    ProginDB::getInstance()->donelist_display($_SESSION['username']);
+                    ProginDB::getInstance()->donelist_display($userprofile);
                 ?>
             </div>
             <div id="todolist">
                 <?php 
-                    ProginDB::getInstance()->todolist_display($_SESSION['username']);
+                    ProginDB::getInstance()->todolist_display($userprofile);
                 ?>
             </div>
         </div>

@@ -7,7 +7,7 @@
 	$xml = new SimpleXMLElement("<xml/>");
 
 	$con = mysql_connect("localhost","progin","progin");
-	mysql_select_db("progin",$con);
+	mysql_select_db("progin_405_13510056",$con);
 	$sq1 = "SELECT username,fullname FROM user WHERE username LIKE '%".$q."%' OR fullname LIKE '%".$q."%'";
 	$re1 = mysql_query($sq1);
 	print mysql_error($con);

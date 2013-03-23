@@ -7,9 +7,10 @@ function multiAutocomp(input, phpscript) {
 		var div = document.createElement("div");
 		div.setAttribute("id", idname);
 		div.setAttribute("class", "autocomplete_container");
-		div.style.top = elmt.offsetTop + elmt.offsetHeight;
-		div.style.left = elmt.offsetLeft;
-		div.style.width = elmt.offsetWidth;
+		var boundary = elmt.getBoundingClientRect();
+		div.style.top = boundary.bottom + "px";
+		div.style.left = boundary.left + "px";
+		div.style.width = (boundary.right - boundary.left) + "px";
 		document.body.appendChild(div);
 
 		try {
@@ -48,7 +49,7 @@ function multiAutocomp(input, phpscript) {
 		if(q.length<1){
 			xmlHttp.open("GET", phpscript + "?q=" + q, true);
 		}else{
-			q = q.split(";");
+			q = q.split(",");
 			xmlHttp.open("GET", phpscript + "?q=" + q[q.length-1], true);			
 		}
 		xmlHttp.send(null);
@@ -79,16 +80,16 @@ function multiAutocompGetResult(input) {
 	var parentname = idname.substr(6, idname.length - 8);
 	var parentdiv = idname.substr(0, idname.length - 2);
 	var elmt = document.getElementById(parentname);
-	if(elmt.value.indexOf(";")==-1){
-		elmt.value = document.getElementById(idname).innerHTML + ";";
+	if(elmt.value.indexOf(",")==-1){
+		elmt.value = document.getElementById(idname).innerHTML + ",";
 	}else{
 		var temp_string = elmt.value;
-		temp_string = temp_string.split(";");
+		temp_string = temp_string.split(",");
 		var result_string = "";
 		for(var i=0;i<temp_string.length - 1;i++){
-			result_string += temp_string[i] + ";";			
+			result_string += temp_string[i] + ",";			
 		}
-		elmt.value = result_string + document.getElementById(idname).innerHTML + ";";
+		elmt.value = result_string + document.getElementById(idname).innerHTML + ",";
 	}
 	document.body.removeChild(document.getElementById(parentdiv));
 }

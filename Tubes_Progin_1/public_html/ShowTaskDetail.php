@@ -9,8 +9,21 @@ $query = "SELECT task.id_task AS taskID, task.name AS taskName, deadline, status
 $result = ProginDB::getInstance()->query($query);
 
 while ($row = mysqli_fetch_array($result)) {
-    echo "Nama task: " . $row['taskName'] . "<br/>";
+    echo "<big><b>" . $row['taskName'] . "</b></big><br/>";
     echo "Attachment:";
+    
+    $pieces = explode('/', $row['deadline']);
+    echo "Deadline: " . $pieces[0].'/'.$pieces[1].'/'.$pieces[2].' -- '.$pieces[3].':'.$pieces[4]."<br/>";
+
+    echo "Assignee: ";
+    $queryAssignee = "SELECT username FROM utrelation WHERE id_task='" . $row['taskID'] . "'";
+    $resultAssignee = ProginDB::getInstance()->query($queryAssignee);
+    while ($rowAssignee = mysqli_fetch_array($resultAssignee)) {
+        echo "<a href='profile.php?userprofile=".$rowAssignee['username']."' class='assignee'>" . $rowAssignee['username'] . "</a>";
+        echo ", ";
+    }
+    echo "<br/>";
+    
     echo "<div class='attachment'>";
 
     $queryAttach = "SELECT path FROM tarelation JOIN attachment WHERE id_task='" . $code . "' AND tarelation.id_attachment = attachment.id_attachment;";
@@ -32,24 +45,37 @@ while ($row = mysqli_fetch_array($result)) {
         echo "<br/><br/>";
     }
     echo "</div>";
+    
+    echo "Komentar: <br/>";
 
-    echo "Deadline: " . $row['deadline'] . "<br/>";
 
-    echo "Assignee: ";
-    $queryAssignee = "SELECT username FROM utrelation WHERE id_task='" . $row['taskID'] . "'";
-    $resultAssignee = ProginDB::getInstance()->query($queryAssignee);
-    while ($rowAssignee = mysqli_fetch_array($resultAssignee)) {
-        echo "<a href='#' class='assignee'>" . $rowAssignee['username'] . "</a>";
-        echo ", ";
+
+    //=================dari sini test comment nya Timo=================
+    echo "<div id='comment_nonform' style='width:480px;height:200px;background-color:white;overflow:auto;'>";
+    $resultComments = ProginDB::getInstance()->query("SELECT * FROM comment WHERE id_task=".$row['taskID']);
+    while ($rowComments = mysqli_fetch_array($resultComments)) {
+        echo "<div id='comment".$rowComments['id_comment']."'>";
+        $resultAvatarSpec = ProginDB::getInstance()->query("SELECT * FROM user WHERE username = '".$rowComments['username']."'");
+        $rowAvatarSpec = mysqli_fetch_array($resultAvatarSpec, MYSQLI_ASSOC);
+        echo "<img src='".$rowAvatarSpec['avatar']."' style='width:30px; height:30px; padding: 5px;'/>";
+        $pieces = explode("/", $rowComments['timestamp']);
+        echo "<div style='color:black;'>".$rowComments['username'].", ".$pieces[3].":".$pieces[4]." -- ".$pieces[2]."/".$pieces[1]."</div>";
+        echo "<div style='color:black;font-size:8pt;text-align:justify;'>".$rowComments['content']."</div>";
+        if ($_SESSION['username']===$rowComments['username']){
+            echo "<a href='javascript:deleteComment(".$rowComments['id_comment'].");' style='color:black;font-size:10pt;'>Delete</a>";
+        }
+        echo"</br>";
+        echo"</div>";
     }
-    echo "<br/>";
+    echo "</div></br>";
 
-    echo "<br/>Komentar: <br/>";
-
-
-
-    echo "<textarea id='addCommentaryTask" . $row['taskID'] . "'></textarea><br/>";
-    echo "<button onclick='submitNewCommentary('" . $_SESSION['username'] . "', '" . $row['taskID'] . "');'>Submit commentary</button><br/>";
+    echo "<div id='comment_form'\>";
+    echo "<textarea id='ccontent'></textarea></br>
+        <input type='button' value='Submit' onclick=postComment(".$code.");>";
+    echo"</div>";
+    //=========================sampai sini==================================
+    //echo "<textarea id='addCommentaryTask" . $row['taskID'] . "'></textarea><br/>";
+    //echo "<button onclick='submitNewCommentary('" . $_SESSION['username'] . "', '" . $row['taskID'] . "');'>Submit commentary</button><br/>";
 
     echo "<br/>Tag: ";
     $queryTag = "SELECT tag.name AS tagName FROM utrelation JOIN tag JOIN ttrelation WHERE username='" . $_SESSION['username'] . "' AND tag.id_tag = ttrelation.id_tag AND utrelation.id_task = ttrelation.id_task AND utrelation.id_task='" . $row['taskID'] . "';";
@@ -68,24 +94,4 @@ while ($row = mysqli_fetch_array($result)) {
         }
     }
 }
-
-
-//Nama task: Nama Tugas <br/>
-//Attachment:
-//<div class = "attachment">
-//file.zip<br/>
-//picture.jpg<br/>
-//video.mp4<br/>
-//</div><br/>
-//Deadline: 17-12-2014<br/>
-//Assignee: <a href = "" class = "asignee">Timo</a>, <a href = "" class = "asignee">Stefan</a>, <a href = "" class = "asignee">Frilla</a><br/>
-//Tag: <a href = "" class = "tag">dangerous</a>, <a href = "" class = "tag">novice</a> <br/>
-//<br/>Komentar:<br/>
-//<div class = "komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
-//<form>
-//<textArea></textarea>
-//<input type = "button" name = "submit" value = "submit">
-//</form>
-//<br/><br/>
-//<a onclick = "showEdit();" class = "button">edit</a><br/>-->
 ?>

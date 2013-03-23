@@ -7,9 +7,10 @@ function autocomp(input, phpscript) {
 		var div = document.createElement("div");
 		div.setAttribute("id", idname);
 		div.setAttribute("class", "autocomplete_container");
-		div.style.top = elmt.offsetTop + elmt.offsetHeight;
-		div.style.left = elmt.offsetLeft;
-		div.style.width = elmt.offsetWidth;
+		var boundary = elmt.getBoundingClientRect();
+		div.style.top = boundary.bottom + "px";
+		div.style.left = boundary.left + "px";
+		div.style.width = (boundary.right - boundary.left) + "px";
 		document.body.appendChild(div);
 
 		try {
