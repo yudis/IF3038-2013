@@ -45,10 +45,10 @@ Rp(function()
 				case 1:
 				case 2:
 				case 3:
-					Rp('#commentForm').addClass('loading');
+					// Rp('#commentForm').addClass('loading');
 					break;
 				case 4:
-					Rp('#commentForm').removeClass('loading');
+					// Rp('#commentForm').removeClass('loading');
 					try {
 						response = Rp.parseJSON(req.responseText);
 						for (var i in response)
@@ -68,7 +68,7 @@ Rp(function()
 	}
 	
 	var delete_task = document.getElementById("removeTaskLink");
-	delete_task.onclick = function()
+	if (delete_task != undefined) delete_task.onclick = function()
 	{
 		var serialized = "task_id="+id_task;
 		var req = Rp.ajaxRequest('api/delete_task');
@@ -208,10 +208,10 @@ function more_comment()
 			case 1:
 			case 2:
 			case 3:
-				Rp('#commentForm').addClass('loading');
+				Rp('#commentList').addClass('loading');
 				break;
 			case 4:
-				Rp('#commentForm').removeClass('loading');
+				Rp('#commentList').removeClass('loading');
 				try {
 					response = Rp.parseJSON(req.responseText);
 					for (var i in response)
