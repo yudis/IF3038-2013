@@ -54,7 +54,7 @@
 				<input type="text" name="fullname" id="fullname" onkeypress="javascript:editProfileCheck();" value="<?php echo $fullname; ?>" title="Your name should be at least consists first name and last name">
 				<img src="../img/yes.png" id="name_validation" class="signup_form_validation" alt="validation image">
 				<br><label> Birthdate </label> <input type="date" id="birthdate" name="birthdate" value=<?php echo $birthdate;?>>  
-				<br><label> Avatar </label> <input type="file" id="avatar" name="avatar">
+				<br><label> Avatar </label> <input type="file" id="avatar" name="avatar" onchange="javascript:editProfileCheck();">
 				
 				<input type="submit" name="edit_profile_submit" class="link_red top10 bold" id="edit_profile_submit" value="SAVE" disabled="disabled">
 				

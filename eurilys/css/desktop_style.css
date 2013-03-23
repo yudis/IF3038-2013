@@ -686,6 +686,9 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 	font-size:17px;margin:auto;
 }
 
+.tasklist_container {
+	overflow-y:scroll;
+}
 
 .categoryList, #newCategoryAdded {
 	display:block;padding:10px;

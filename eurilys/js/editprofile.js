@@ -1,4 +1,4 @@
-var regValid = 0;
+var regValid = 1;
 function editProfileCheck() {
 	var username = document.getElementById("edit_username").value;
 	var email = document.getElementById("edit_email").value;
@@ -32,8 +32,10 @@ function editProfileCheck() {
 	}
 	document.getElementById("confirm_validation").style.display = "block";
 	
-	if ((password == confirm) && (password.lenght == 0)) {
+	if ((password == confirm) && (password.length == 0)) {
 		regValid = 1; 
+		document.getElementById("password_validation").src = "../img/yes.png";
+		document.getElementById("confirm_validation").src = "../img/yes.png";
 	}
 	
 	//check name

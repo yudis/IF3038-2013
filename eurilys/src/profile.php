@@ -26,7 +26,7 @@
 	$email = $row['email'];
 
 	/*get user's task*/
-	$querytask = "SELECT *
+	$querytask = "SELECT DISTINCT *
 	FROM task_asignee RIGHT JOIN task 
 	ON task.task_id=task_asignee.task_id 
 	WHERE username='$username' OR task_creator='$username'";
@@ -82,7 +82,7 @@
 	<div id="dynamic_content">
 		<div class="half_div">
 			<div id="upperprof">
-				<img id="mainpp" src="<?php echo $avatar; ?>" alt="" />
+				<img id="mainpp" width="225" src="<?php echo $avatar; ?>" alt=""/>
 				<div id="namauser"><?php echo $fullname; ?></div>
 			</div>
 			<br/><br/>
@@ -94,6 +94,7 @@
 		<div class="half_div">
 			<div class="half_tall">
 				<div class="headsdeh">Current Tasks</div>
+				<div class="tasklist_container">
 					<?php
 					$rowtask2 = array(); 
 					while ($rowtask = mysql_fetch_array($resulttask, MYSQL_ASSOC)) {
@@ -106,6 +107,7 @@
 						}
 					}
 					?>
+				</div>
 			</div>
 			<div class="half_tall">
 				<div class="headsdeh">Finished Tasks</div>
