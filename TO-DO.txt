@@ -26,4 +26,4 @@ Sharon :
 													- Belum bisa add comment
 	- Profile Picture								//
 	- Add new category								// Half. Kalau creator sudah ada di db, ga bisa (foreign key blablabla). Tanya kenny 
-											   Duplicate entry 'sharonloh' for key 'cat_creator'
+											   		Duplicate entry 'sharonloh' for key 'cat_creator'

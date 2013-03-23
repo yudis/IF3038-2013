@@ -170,7 +170,7 @@
 				$date = strtotime( $commentTime[$i] );
 				$date= date('H:m d/m', $date );
 				
-				$avatar_query	= "SELECT avatar FROM user WHERE username='$username' LIMIT 1";
+				$avatar_query	= "SELECT avatar FROM user WHERE username='$commentCreator[$i]'";
 				$avatar_result	=  mysql_query($avatar_query) or die(mysql_error());
 
 				$row = mysql_fetch_array($avatar_result, MYSQL_ASSOC);
