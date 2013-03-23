@@ -26,6 +26,7 @@
 				<div id="task-page-title">
 					<div>
 						<h1><?php echo $task['taskname']?></h1>
+						<i><div id="delete-task"><a href="#">Delete This Task</a><br><br></div></i>
 						Submit by <b><i><?php echo $task['username']?></i></b> at. <?php echo $task['createddate']?>
 					</div>
 					<br>
@@ -60,7 +61,7 @@
                         </div>
 					</div>
 				</div>
-				<br><br>
+				<br><br><br><br>
 				<div id="attachment">
 					<div id="image-attachment">
 						<div>

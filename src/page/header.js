@@ -40,7 +40,6 @@ function checkHeaderValidation(){
 		ajaxRequest.onreadystatechange = function()
 		{
 			suggestion = ajaxRequest.responseText;
-			document.getElementById("syalala").innerHTML=suggestion;
 			suggestion = suggestion.substr(0,suggestion.length-1);
 			suggestionarray = suggestion.split("|");
 			

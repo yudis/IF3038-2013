@@ -286,6 +286,12 @@ body {
 	float:left;
 }
 
+#delete-task {
+	font-size:14px;
+	padding:0px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+}
+
 #header-right-user ul{
 	margin-bottom:0px;
 	list-style:square;
