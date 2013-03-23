@@ -16,7 +16,7 @@
 			$tag = array();
 			while(($user2 != null) && ($data2 = mysqli_fetch_array($user2)))
 			{
-				$tag[] .= $data2['name'];
+				$tag[] = $data2['name'];
 			}
 			$hasil .= "<br>".$data['name'].",".$data['deadline'].",".$data['status'].",".$data['id_task'];
 			
@@ -89,5 +89,4 @@
 
 	//output the response
 	echo $response;
-	exit;
 ?>
