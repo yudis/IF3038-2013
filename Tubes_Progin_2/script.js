@@ -718,30 +718,70 @@ function showAttachment(){
 function showComment(){
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp4=new XMLHttpRequest();
+	  xmlhttp7=new XMLHttpRequest();
 	  }
 	else
 	  {// code for IE6, IE5
-	  xmlhttp4=new ActiveXObject("Microsoft.XMLHTTP");
+	  xmlhttp7=new ActiveXObject("Microsoft.XMLHTTP");
 	  }
-	xmlhttp4.onreadystatechange=function()
+	xmlhttp7.onreadystatechange=function()
 		{
-			if (xmlhttp4.readyState==4 && xmlhttp4.status==200)
+			if (xmlhttp7.readyState==4 && xmlhttp7.status==200)
 			{
 				var result = "";
-				result += xmlhttp4.responseText;
-				document.getElementById("comment").innerHTML=result;
+				var string1 = xmlhttp7.responseText.split("<br>");
+				result += "Total comments = "+(string1.length-1)+"<br\>";
+				
+				for (var s = 1; s < string1.length; s++){
+					var string2 = string1[s].split(",");
+					
+					result += s+". <img src=\""+string2[0]+"\" height=15% width=15%><br\>";
+					result += "Time: "+string2[1]+"<br\>";
+					result += string2[2]+"<br\>";
+					
+					if(string2[3] == string2[4]){
+						result += "<input type =\"button\" id=\"delTask\" value=\"Delete\" onclick=\"deleteComment("+string2[5]+");\"><br\>";
+					}
+				}
+				document.getElementById("list_comment").innerHTML=result;
 			}
 		}
-	xmlhttp4.open("GET","showComment.php",true);
-	xmlhttp4.send();
+	xmlhttp7.open("GET","showComment.php",true);
+	xmlhttp7.send();
+}
+
+function deleteComment(str){
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp8=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp8=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp8.onreadystatechange=function()
+	  {
+		  if (xmlhttp8.readyState==4 && xmlhttp8.status==200)
+		  {
+			if (xmlhttp8.responseText == "deleted")
+			{
+				alert("Delete success");
+				showComment();
+			}
+			else
+			{
+				alert("Delete failed");
+			}
+		  }
+	  }
+	xmlhttp8.open("GET","hapusComment.php?q="+str,true);
+	xmlhttp8.send();
 }
 
 function generate_page(){showStatus(); showAttachment(); showAssignee(); showTags(); showComment();}
 
 function storeComment(){
 	var comment = document.getElementById("comment").value;
-	alert(comment);
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
 	  xmlhttp6=new XMLHttpRequest();

@@ -4,7 +4,7 @@
 	$q = $_GET['q'];
 	$tanggal = getdate();
 	$current_date = "";
-	$current_date .= $tanggal['hours']." : ".$tanggal['minutes']." - ".$tanggal['mday']."/".$tanggal['mon'];
+	$current_date .= ($tanggal['hours']-6)." : ".$tanggal['minutes']." - ".$tanggal['mday']."/".$tanggal['mon'];
 	
 	require "config.php";
 	$result = "";

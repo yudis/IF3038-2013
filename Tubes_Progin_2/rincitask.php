@@ -62,9 +62,10 @@ and open the template in the editor.
 				
                 Tag: <div id="tag"></div>
 				
-                Comment:<br/>
+                Comments:<br/>
                 <div id="list_comment"></div>
 				
+				<b>Submit Your Comment: </b> <br/>
                 <form id="submit_comment">
                     <textArea id="comment"></textarea>
                     <input type="button" name="submit" value="Submit" onClick="storeComment();">
@@ -75,6 +76,7 @@ and open the template in the editor.
             </div>
 			<script>
 				window.onload=generate_page();
+				setInterval(function(){generate_page();},5000)
 			</script>
     </body>
 </html>
