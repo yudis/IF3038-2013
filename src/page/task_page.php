@@ -42,11 +42,11 @@
 					<div id="deadline_edit">
 						<div id="left-main-body"><div id="label">Deadline : </div>
 							<div id="date_html">
-								<input type="text" class="calendarSelectDate" name="textDeadlineDate" placeholder="YYYY-MM-DD"/><div id="calendarDiv"></div><br />
-								<input type="text" name="textDeadlineTime" placeholder="HH:MM"/>
+								<input id="datedeadlineinput" type="text" class="calendarSelectDate" name="textDeadlineDate" placeholder="YYYY-MM-DD"/><div id="calendarDiv"></div><br />
+								<input id="timedeadlineinput" type="text" name="textDeadlineTime" placeholder="HH:MM"/>
 							</div>              
 						</div>
-						<div id="right-main-body"><a href="#" onCLick="finish_deadline()"><u>done</u></a></div>
+						<div id="right-main-body"><a href="#" onCLick="finish_deadline(<?php echo $taskid ?>)"><u>done</u></a></div>
 					</div>
 					<br><br><br>
                     <div>

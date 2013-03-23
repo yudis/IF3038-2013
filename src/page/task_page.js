@@ -58,7 +58,19 @@ function edit_deadline() {
 	document.getElementById("deadline_edit").style.display = 'block';
 	document.getElementById("deadline_done").style.display = 'none';
 }
-function finish_deadline() {
+function finish_deadline(taskid) {
+	getAjax();
+
+	var deadlinetime = document.getElementById("datedeadlineinput").value + " " + document.getElementById("timedeadlineinput").value;
+	ajaxRequest.open("GET","../php/changedeadline.php?deadlinetime="+deadlinetime,false);
+
+	ajaxRequest.onreadystatechange = function()
+	{
+		//alert(ajaxRequest.responseText);
+	}
+	ajaxRequest.send();
+	
+	
 	document.getElementById("deadline_edit").style.display = 'none';
 	document.getElementById("deadline_done").style.display = 'block';
 }
@@ -182,3 +194,4 @@ function setCompleteStatus(taskid){
 		ajaxRequest.send();
 	}
 }
+
