@@ -39,212 +39,38 @@
 	    if (mysqli_connect_errno($con)) {
 		echo "Gagal melakukan koneksi ke MySQL : " . mysqli_connect_error();
 	    }
-		$sql = "SELECT task.namaTask, task.status, attachment FROM attach, task.deadline, assigneeName FROM tasktoassignee, komentator FROM komentar, avatar FROM user, timestamp FROM komentar, isikomentar FROM komentar, task WHERE usertotask.username='". $curUser . "' AND usertotask.namaTask = task.namaTask";
-		$activeuser = mysqli_query($con,"SELECT * FROM task WHERE (namaTask='"Praktikum Kimia Dasar"')");
+		
+		$curUser = $_SESSION['username'];
+		
+		$sql = "SELECT * FROM task t JOIN attach att ON att.namaTask = t.namaTask JOIN usertotask utt ON utt.username = t.creatorTaskName JOIN tasktoasignee tta ON tta.asigneeName = t.creatorTaskName JOIN tagging tgg ON tgg.namaTask = t.namaTask JOIN komentar kmn ON kmn.namaTask = t.namaTask JOIN user ON user.username = kmn.komentator";	   
+		$result = mysqli_query($con,$sql) or die(mysqli_error($con));
+		while($row = mysqli_fetch_array($result)){
         echo "<div id='taskdetailcontainer'>";
-			echo"<p>Nama Tugas</p>";
+			echo"<p>".$row['namaTask']."</p>";
 			echo"<p>Status Tugas</p>";
 			echo"<div id ='statustask'>";
-				echo"<p>Status Task</p>";
+				echo"<p>".$row['namaTask']."</p>";
 			echo"</div>";
 			echo"<div id = 'buttonstatus'>";
 				echo"<button class='ChangeTaskStatus'>Change</button>";
 			echo"</div>";
 			echo"<div id = 'attachmentbox'>";
-				echo"<p>Attachment</p>";
+				echo"<p>".$row['attachment']."</p>";
 			echo"</div>";
-			echo"<p>Deadline</p>";
-			echo"<p>Assignee</p>";
+			echo"<p>".$row['deadline']."</p>";
+			echo"<p>".$row['asigneeName']."</p>";
 			echo"<p>Komentar</p>";
 			echo"<div id = 'commentbox'>";		
 				echo"<p>Jumlah Komentar</p>";
-				echo"<!-- avatar komentator -->";
-				echo"<!-- waktu komentar -->";
-				echo"<!-- isi komentar -->";
-				echo"<!-- tombol delete komentar -->";
+				echo"<p>".$row['avatar']."</p>";
+				echo"<p>".$row['timestamp']."</p>";
+				echo"<p>".$row['isikomentar']."</p>";
+				echo"<button class='DeleteComment'>Delete</button>";
 				echo"<!-- input text komentar -->";
 			echo"</div>";
-			echo"<p>Tags</p>";	
+			echo"<p>".$row['tag']."</p>";	
         echo"</div>";
+		}
      ?>   
-	<?php
-	    //create connection
-	    $con = mysqli_connect("localhost","root","","distributedAgenda");
-	    
-	    //check the connection
-	    if (mysqli_connect_errno($con)) {
-		echo "Gagal melakukan koneksi ke MySQL : " . mysqli_connect_error();
-	    }
-	    
-	    $curUser = "smanurung"; //hanya dummy
-	    if (isset($_SESSION["username"])) { //hanya untuk memastikan
-		$curUser = $_SESSION["username"];
-	    } else {
-		header("Location:index.php"); //mengembalikan ke halaman utama untuk user yang belum login
-	    }
-	    
-	    $result = mysqli_query($con,"SELECT * FROM user WHERE (username='".$curUser."')");
-	    while($row = mysqli_fetch_array($result)){
-		//echo $row1['username'] . "<br/>";
-		echo "<div id='userData'>";
-		    echo "<h2 id='biodataTitle'>BIODATA</h2>" . "<hr/>";
-		    echo "<div id='biodataContent'>";
-			echo "<div class='bioLeft'>";
-			    echo "<p>Nama Lengkap :</p>";
-			echo "</div>";
-			echo "<div id='userFullName' class='bioRight'>";
-			    echo "<p>" . $row['fullname'] . "</p>";
-			echo "</div>";
-			echo "<div class='bioLeft'>";
-			    echo "<p>Username :</p>";
-			echo "</div>";
-			echo "<div class='bioRight'>";
-			    echo "<p><em>" . $row['username'] . "</em></p>";
-			echo "</div>";
-			echo "<div class='bioLeft'>";
-			    echo "<p>Tanggal Lahir :</p>";
-			echo "</div>";
-			echo "<div id='userBirthdate' class='bioRight'>";
-			    echo "<p>" . $row['tanggalLahir'] . "</p>";
-			echo "</div>";
-			echo "<div class='bioLeft'>";
-			    echo "<p>Email :</p>";
-			echo "</div>";
-			echo "<div class='bioRight'>";
-			    echo "<p>" . $row['email'] . "</p>";
-			echo "</div>";
-			echo "<div class='bioLeft'>";
-			    echo "<p></p>";
-			echo "</div>";
-			echo "<div class='bioRight'>";
-			    echo "<button id='editProfileBtn' onclick='showEditForm();'>Edit</button>";
-			echo "</div>";
-		    echo "</div>";
-		echo "</div>";
-	    }
-	?>
-	    
-	    <!--FORM EDIT SECTION-->
-	    <div id=editForm>
-		<form action="UploadFile.php" method="POST" enctype="multipart/form-data" name="uploadImage">
-		    <div class="bioLeft">
-			<p>new Full Name :</p>
-		    </div>
-		    <div class="bioRight">
-			<input id="newFullName" type=text></input>
-		    </div>
-		    <div class="bioLeft">
-			<p>new Birthdate :</p>
-		    </div>
-		    <div class="bioRight">
-			<input id="newBirthdate" type=date></input>
-		    </div>
-		    <div class="bioLeft">
-			<p>new Password :</p>
-		    </div>
-		    <div class="bioRight">
-			<input id="newPassword" type="password"></input>
-		    </div>
-		    <div class="bioLeft">
-			<p>Confirm new Password :</p>
-		    </div>
-		    <div class="bioRight">
-			<input id="newPasswordAgain" type="password"></input>
-		    </div>
-		    
-		    <div class="bioLeft">
-			<p>Upload new avatar :</p>
-		    </div>
-		    <div class="bioRight">
-			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo MAX_FILE_SIZE; ?>"/>
-			<input id="fileUpload" type="file" name="image"/>
-		    </div>
-		    <div class="bioLeft">
-			<p></p>
-		    </div>
-		    <div class="bioRight">
-			<input class="submitBtn" type="submit" value="Submit Form" name='upload' onclick="hideEditForm(); updateProfile(newFullName.value, newBirthdate.value, newPassword.value, newPasswordAgain.value, fileUpload.value);"></input>
-		    </div>
-		</form>
-	    </div>
-	    
-	    <?php
-		//create connection
-		$con = mysqli_connect("localhost","root","","distributedAgenda");
-		
-		//check the connection
-		if (mysqli_connect_errno($con)) {
-		    echo "Gagal melakukan koneksi ke MySQL : " . mysqli_connect_error();
-		}
-		
-		$curUser = $_SESSION['username']; //mengambil username yang sedang aktif
-		$sql = "SELECT task.namaTask, deadline FROM usertotask, task WHERE usertotask.username='". $curUser . "' AND usertotask.namaTask = task.namaTask";
-		
-		echo "<h2 id='taskTitle'>TASKS</h2>";
-		echo "<hr/>";
-		$result = mysqli_query($con,$sql);
-		while($row = mysqli_fetch_array($result)){
-		    //echo $row['namaTask'] . " | " . $row['deadline'];
-		    echo "<div id='taskContent'>";
-			echo "<div class='bioLeft'>";
-			    echo "<p>Nama</p>";
-			echo "</div>";
-			echo "<div class='bioRight'>";
-			    echo "<p>Deadline</p>";
-			echo "</div>";
-	    		
-			echo "<div class='tableElmtLeft'>";
-			    echo "<p>".$row['namaTask']."</p>";
-			echo "</div>";
-			echo "<div class='tableElmtRight'>";
-			    echo "<p>".$row['deadline']."</p>";
-			echo "</div>";
-		    echo "</div>";
-		}	    
-	    ?>
-            
-	    <?php
-		//create connection
-		$con = mysqli_connect("127.0.0.1","root","","distributedAgenda");
-		
-		//check the connection
-		if (mysqli_connect_errno($con)) {
-		    echo "Gagal melakukan koneksi ke MySQL : " . mysqli_connect_error();
-		}
-		
-		$curUser = $_SESSION['username']; //mengambil username yang sedang aktif
-		//query database sementara
-		$sql = "SELECT task.namaTask, status FROM usertotask, task WHERE usertotask.username='". $curUser . "' AND usertotask.namaTask = task.namaTask";
-		
-		echo "<h2 id='doneTaskTitle'>DONE TASKS</h2><hr/>";
-		    echo "<div class='bioLeft'>";
-			echo "<p>Nama</p>";
-		    echo "</div>";
-		    echo "<div class='bioRight'>";
-			echo "<p>Tag</p>";
-		    echo "</div>";
-		    
-		    $result = mysqli_query($con,$sql);
-		    while($row = mysqli_fetch_array($result)){
-			
-			//mengambil semua tag untuk task tertentu
-			$tagQuery = "SELECT tag FROM tagging WHERE namaTask='".$row['namaTask']."'";
-			$resultTag = mysqli_query($con,$tagQuery);
-			$tagString = "";
-			while ($tag = mysqli_fetch_array($resultTag)){
-			    $tagString .= $tag['tag']." | ";
-			}
-			
-			//menampilkan task beserta tag nya yang terkait
-			echo "<div class='tableElmtLeft'>";
-			    echo "<p>".$row['namaTask']."</p>";
-			echo "</div>";
-			echo "<div class='tableElmtRight'>";
-			    echo "<p>".$tagString."</p>";
-			echo "</div>";
-		    }
-		echo "</div>";
-	    ?>
-        </div>
     </body>
 </html>
