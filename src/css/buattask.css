@@ -75,8 +75,8 @@
 }
 
 #formtask2{
-    margin-left: 83px;
-    margin-top: 20px;
+    margin-left: 70px;
+    margin-top: 10px;
 }
 
 #judulform{
@@ -89,14 +89,14 @@
 #formtask{
     padding-top: 30px;
     width: 485px;
-    height: 575px;
+    height: 725px;
     background-color: #ececec;
     border-radius:20px;
     -moz-border-radius:20px;
     -webkit-border-radius:20px;
     box-shadow: 1px 1px 5px 0px #e1e1e1;
     margin-left: 300px;
-    margin-top: -165px;
+    margin-top: -175px;
 }
 #rinciantugas{
     padding-top: 30px;
@@ -248,6 +248,8 @@ input[type=checkbox] {
     height: 140px;
     width: 300px;
     overflow-y: scroll;
+    background-color: white;
+    border: solid 1px;
 }
 
 #file {
@@ -285,4 +287,8 @@ input[type=checkbox] {
     border-radius:10px;
     -moz-border-radius:10px;
     -webkit-border-radius:10px;
+}
+
+#namaicon {
+
 }

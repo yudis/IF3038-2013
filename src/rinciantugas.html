@@ -72,7 +72,7 @@
                     alert("Ekstensi file tidak didukung web");
                     place.value = "";
                 }
-                alert(place.value);
+                //alert(place.value);
             }
         
             function take_data() {
@@ -138,8 +138,8 @@
                             tambah += '<a id="deadline">'+tanggal+"</a>";
                             
                             tambah2 += '<label>DEADLINE</label>';
-                            tambah2 += '<input type="textarea" name="year" id="yearbox" value="'+tanggal.substring(0,4)+'">-';
-                            tambah2 += '<select name="month">';
+                            tambah2 += '<input type="textarea" name="year" id="yearbox" value="'+tanggal.substring(0,4)+'" onchange="dead_validating()">-';
+                            tambah2 += '<select name="month" onchange="dead_validating()">';
                             for (var i=1;i<=12;++i) {
                                 if (i == tanggal.substring(5,7)) tambah2 += "<option selected>"+i+"</option>";
                                 else tambah2 += "<option>"+i+"</option>";
@@ -186,7 +186,7 @@
                             tambah2 += ' title="Akhiri nama user dengan tanda /, jangan dipisah spasi"';
                             tambah2 += ' onkeyup=auto_complete(this.value.substring(this.value.lastIndexOf("/")+1)) value="'+orang+'">';
                             
-                            tambah2 += '<input id="autobox" disabled></label>';
+                            tambah2 += '<input id="autobox" disabled></input>';
                             
                             tambah += "<label>TAG</label>";
                             tambah += '<div id="tag">'+tag+'</div>';
