@@ -83,7 +83,7 @@
         <script src="scripts/search.js" type="application/javascript"></script>
         <script type="text/javascript">
         <?php
-			if ((ISSET($_GET['s']))&&(ISSET($_GET['m']))&&(ISSET($_GET['page'])))
+		 	if ((ISSET($_GET['s']))&&(ISSET($_GET['m']))&&(ISSET($_GET['page'])))
 			{
 				echo "Searchbypage('".$_GET['s']."','".$_GET['m']."','".$_GET['page']."');";
 			}else if ((ISSET($_GET['s']))&&(ISSET($_GET['m'])))

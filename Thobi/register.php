@@ -6,13 +6,13 @@
 		$uname=$_GET["uname"];
 		$email=$_GET["email"];
 
-		$con = mysql_connect('localhost', 'root', 'rootadmin');
+		$con = mysql_connect('localhost', 'progin', 'progin');
 		if (!$con)
 		{
 			die('Could not connect: ' . mysql_error());
 		}
 
-		mysql_select_db("progin_405_13510035", $con);
+		mysql_select_db("progin_405_13510029", $con);
 
 		$sql="SELECT * FROM user WHERE username='".$uname."' OR email='".$email."'";
 

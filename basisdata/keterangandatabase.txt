@@ -7,18 +7,18 @@
 	//avatar ditentuin aja link nya misalnya dibentuk avatar/username
 	
 2. tabel category
-	> category_id (key) -> isi C-001, C-002, dst
+	> category_id (key) -> isi 1,2, dst
 	> category_name
 	
 3. tabel task
-	> task_id (key) -> isi T-001, T-002, dst
+	> task_id (key) -> isi  1,2, dst
 	> task_name
 	> status -> boolean //0=false; 1=true
 	> deadline -> tipe date - format YYYY-MM-DD
 	> task_category (=category_id)
 	
 4. comment
-	> comment_id (key) -> isi CM-001, CM-002, dst
+	> comment_id (key) -> isi 1,2 dst
 	> commented_task (=task_id)
 	> writer (=username)
 	> writing_time -> tipe datetime
@@ -33,15 +33,19 @@
 	> people_incharge_task (=username)
 	
 7. attachment
-	> attachment_id (key) -> A-001,A-002,dst
+	> attachment_id (key) -> 1,2, dst
 	> task_id (=task_id)
 	> link
 	
 8. tag
-	> tag_id (key) -> TG-001, TG-002, dst
+	> tag_id (key) -> 1,2, dst
 	> tag_name
 	
 9. tasktag
 	> task_id (=task_id)
 	> tag_id (=tag_id)
+
+10. task_creator
+	> task_id (=task_id)
+	> creator (=username)
 	

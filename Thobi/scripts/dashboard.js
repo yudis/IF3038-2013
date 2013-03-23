@@ -48,6 +48,30 @@ function loadThumbnail() {
 	document.getElementById("profil").innerHTML = innerhtml;
 }
 
+function deleteTask(taskid) {
+	if (confirm('Are you sure you want to delete this task?')) {
+		if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp2=new XMLHttpRequest();
+		}
+		else
+		{// code for IE6, IE5
+			xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp2.onreadystatechange=function()
+		{
+			if (xmlhttp2.readyState==4 && xmlhttp2.status==200)
+			{
+				window.location = "dashboard.php?uname="+localStorage.session+"&cat=all";
+			}
+		}
+		
+		xmlhttp2.open("GET","deletetugas.php?t="+taskid,true);
+		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp2.send();
+	}
+}
+
 function loadUser() {
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -127,7 +151,7 @@ function NewKategori() {
 function NewTask() {
     if(typeof(Storage)!=="undefined") {
 		if (localStorage.kategori) {
-			window.location = "createtugas.html?cat="+localStorage.kategori;
+			window.location = "createtugas.php?uname="+localStorage.session+"&cat="+localStorage.kategori;
 		}
 		else {
 			alert("Please select the categori first, by click on left sidebar.", "Todolist");

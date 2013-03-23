@@ -55,7 +55,12 @@ nav ul .logo img {
 	margin-bottom: -40px;
 	padding-left: 105px;
 }
-
+#hapustugas {
+	float: right;
+	padding-top: 0px;
+	width: 25px;
+	height: 25px;
+}
 nav ul {
     padding-top: 0px;
     padding-bottom: 0px;
@@ -84,16 +89,18 @@ nav ul li a:link, nav ul li a:visited {
     display: inline-block;
     float: right;
     padding-top: 21px;
-    padding-right: 25px;
+    /*padding-right: 130px;*/
+	padding-right:8px;
     border: 0px;
 }
 #searchwrapper {
-    width:300px;
+	width:310px;
     height:40px;
-    background-color: white;
-    padding:0px;
-    margin:0px;
+	padding:0px;
+    margin-right:10px;
     position:relative; 
+	text-align:left;
+	background-color:white;
 }
 #searchwrapper form { 
     display: inline; 
@@ -103,9 +110,10 @@ nav ul li a:link, nav ul li a:visited {
     border:0px;
     background-color:transparent;
     position:absolute;
+	margin-left:5px;
     top:4px;
-    left:9px;
-    width:250px;
+    left:5px;
+    width:220px;
     height:32px;
 }
 #searchwrapper input.searchbox:active {
@@ -116,10 +124,36 @@ nav ul li a:link, nav ul li a:visited {
     background-color:transparent;
     position:absolute;
     top:4px;
-    left:265px;
+    left:230px;
     width:32px;
     height:32px;
 }
+.searchbox_image{
+	width:32px;
+	height:32px;
+}
+
+.filter_submit {
+    border:0px;
+    position:absolute;
+	left:260px;
+    width:40px;
+    height:35px;
+	background-color:transparent;
+	margin-top:-3px;
+}
+
+#f_menu{
+	width:310px;
+	padding-top:10px;
+	list-style:none;
+	float:none;
+	background-color:white;
+	font-size:10px;
+	position:absolute;
+	display:none;
+}
+
 #leftcolumn {
 	width: 180px;
 	height: 400px;
@@ -127,6 +161,67 @@ nav ul li a:link, nav ul li a:visited {
     margin: 0;
     padding: 0;
 }
+
+
+#verticalline{
+	width : 2px;
+	height: 60px;
+	float:left;
+	background-color:rgba(153,153,153,1);
+	margin-top:2px;
+}
+
+#menuleft{
+	width:155px;
+	float:left;
+}
+
+#menuright{
+	width:150px;
+	float:right;
+}
+
+#subfilter{
+	margin-left:20px;
+	margin-bottom:3px;
+}
+
+#mainfilter{
+	text-align:left;
+	width:115px;
+	float:left;
+	margin-left:5px;
+	margin-bottom:5px;
+}
+
+#submenusidebar{
+	padding-left:40px;
+}
+
+#menusidebar{
+	padding-left:20px;
+}
+#search_textfield {
+	height:50px;
+	margin-bottom: 10px;
+	font-size: 180%;
+}
+#searchtextfield{
+	display: inline-block;
+}
+#navigation {
+	margin-top:10px;
+}
+
+button .navigation:link, button .navigation:visited {
+    display: inline-block;
+    width: 60px;
+    color:#FFFFFF;
+    text-align: center;
+    text-decoration: none;
+    font: Arial;
+}
+
 .sidebar {
     width: 180px;
     float: left;
@@ -160,6 +255,10 @@ nav ul li a:link, nav ul li a:visited {
 }
 .sidebar ul.nav li a:hover {
     background-color: #fff;
+}
+#FilterKategori {
+	padding-top: 10px;
+	padding-left: 10px;
 }
 .main {
     width: 780px;

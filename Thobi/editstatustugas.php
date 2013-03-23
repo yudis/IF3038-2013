@@ -2,13 +2,13 @@
 		$taskid=$_GET["t"];
 		$status=$_GET["s"];
 		
-		$con = mysql_connect('localhost', 'root', 'rootadmin');
+		$con = mysql_connect('localhost', 'progin', 'progin');
 		if (!$con)
 		{
 			die('Could not connect: ' . mysql_error());
 		}
 		
-		mysql_select_db("progin_405_13510035", $con);
+		mysql_select_db("progin_405_13510029", $con);
 		
 		$sql="UPDATE task SET status='".$status."' WHERE task_id = '".$taskid."'";
 

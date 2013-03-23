@@ -1,13 +1,13 @@
 	<?php
 		$username=$_GET["uname"];
 		
-		$con = mysql_connect('localhost', 'root', 'rootadmin');
+		$con = mysql_connect('localhost', 'progin', 'progin');
 		if (!$con)
 		{
 			die('Could not connect: ' . mysql_error());
 		}
 		
-		mysql_select_db("progin_405_13510035", $con);
+		mysql_select_db("progin_405_13510029", $con);
 			
 		
 		$sql="SELECT category_name, category.category_id FROM category, category_incharge WHERE category.category_id = category_incharge.category_id AND people_incharge = '".$username."'";
