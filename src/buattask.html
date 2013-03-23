@@ -170,6 +170,7 @@
                         id_kategori = window.location.search.substring(c+12);
                     }     
                     
+                    //alert(id_kategori);
                     params = "assignee="+escape(form.assignee.value)+"&tag="+escape(form.catname.value)+"&nama="+form.task_name.value;
                     params += "&id_kategori="+id_kategori+"&deadline=";
                     params += escape(form.year.value+"-"+form.month.value+"-"+form.day.value+" "+form.hour.value+":"+form.minute.value+":00");

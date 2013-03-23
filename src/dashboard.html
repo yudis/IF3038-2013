@@ -21,6 +21,7 @@
             
             function showAddTask(){<!--SIGIT-->
                 document.getElementById("addtask").style.visibility="visible";
+                document.getElementById("addtask").disabled = false;
             }
             
             function hideAddTask(){
@@ -109,10 +110,11 @@
 						document.getElementById("category2").innerHTML=xmlhttp.responseText;					
 					}
 				}
-								
+                
 				xmlhttp.open("GET","catTask.php?id="+n,true);
 				xmlhttp.send();
-				//alert(xmlhttp.responseText);
+				document.getElementById("kirim").action = "buattask.html?id_kategori="+n;
+                //alert(xmlhttp.responseText);
 				//alert(xmlhttp.status);
 			}
 			
@@ -156,34 +158,10 @@
         <div class="main">
             <div id="addcat" onclick="popup('popUpDiv')">
             </div>
-            <a href="buattask.html">
-            <div id="addtask" style="visibility: hidden;">
-            </div>
+            <form id="kirim" action="buattask.html" method="POST">
+                <input type="Submit" name= "submit" id="addtask" style="visibility: hidden;" value="" disabled>
             </a>
             <div id="category"> <!-- Sigit-->
-                <!--
-				<div class="listcat" onclick="removeTask();taskawal(6); showTask(); " onmouseover=" hideAddTask() ">
-                    <div class="tulcat">
-                    ALL
-                    </div>
-                </div>
-				
-				
-                <div class="listcat">
-                    <div class="tulcat" onclick="removeTask();addTask(1); showTask(); " onmouseover=" hideAddTask()">
-                    ABC
-                    </div>
-                </div>
-                <div class="listcat" onclick="removeTask();addTask(3); showTask(); " onmouseover=" hideAddTask()">
-                    <div class="tulcat">
-                    MSDI
-                    </div>
-                </div>
-                <div class="listcat" onclick="removeTask();addTask(2); showTask();" onmouseover="S hideAddTask()">
-                    <div class="tulcat">
-                    PROGIN
-                    </div>
-                </div>-->
 			</div><!--akhir-->
 			<div id="category2"></div><!-- Sigit-->
             <div id="task">
@@ -213,10 +191,5 @@
                 </div>
             </div>
         </div>
-        <!--
-		<div class="footer">
-            Copyright © Ahmad Faiz - Fandi Pradana - Sigit Aji
-        </div>
-        -->
     </body>
 </html>
