@@ -74,18 +74,20 @@ $resulttag = mysqli_query($con, "SELECT * FROM tags INNER JOIN task ON task.ID=t
                                 while ($rowassignee = mysqli_fetch_array($resultassignee)) {
                                     $listassignee.=$rowassignee['IDUser'].",";
                                 }
-                                echo "Assignee : <input type='text' id='assignee' value='".$listassignee."' border='0' />";
+                                $listassignee1 = substr($listassignee, 0, strlen($listassignee)-1);
+                                echo "Assignee : <input type='text' id='listassignee' value='".$listassignee1."' border='0' />";
                                 
                                 $listag = "";
                                 while ($rowtag = mysqli_fetch_array($resulttag)) {
                                     $listag.=$rowtag['Tag'].",";
                                 }
+                                $listag1 = substr($listag, 0, strlen($listag)-1);
                                 
                                 ?>
 				
-				<?Php echo "Tag : <input  type='text' id='tag' value='".$listag."' border='0' /> <br> "?>
+				<?Php echo "Tag : <input  type='text' id='listtag' value='".$listag1."' border='0' /> <br> "?>
 				<img src="images/edit.png" width="150" id="edit-button" value="EDIT" onClick="edit()" />
-				<img src="images/save.png" width="150" id="save-button" value="SAVE" onClick="save()" /><br><br>
+				<img src="images/save.png" width="150" id="save-button" value="SAVE" onClick="saveTaskDetails()" /><br><br>
 				
 			</div>
 

@@ -16,17 +16,35 @@ header('Content-type: text/html');
     
     switch ($filtertype) {
         case "All":
-            $result1 = mysqli_query($con, "SELECT * FROM profil WHERE Username='".$searchquery."'");
-            $result2 = mysqli_query($con, "SELECT * FROM category INNER JOIN task INNER JOIN assignee 
+            if ($searchquery != "")
+                $resultA = mysqli_query($con, "SELECT * FROM profil WHERE Username='".$searchquery."'");
+            else
+                $resultA = mysqli_query($con, "SELECT * FROM profil");
+            if ($searchquery != "") {
+                $resultB = mysqli_query($con, "SELECT * FROM category INNER JOIN task INNER JOIN assignee 
                 ON category.IDTask=task.ID AND task.ID=assignee.IDTask
-                WHERE category.Category='".$searchquery."' AND assignee.IDUser='".$userid."'");
-            $result3 = mysqli_query($con, "SELECT * FROM task LEFT JOIN tags INNER JOIN assignee 
+                WHERE category.Category='".$searchquery."' AND assignee.IDUser='".$userid."' OR task.IDCreator='".$userid."'");
+            }
+            else {
+                $resultB = mysqli_query($con, "SELECT * FROM category INNER JOIN task INNER JOIN assignee 
+                ON category.IDTask=task.ID AND task.ID=assignee.IDTask
+                WHERE assignee.IDUser='".$userid."' OR task.IDCreator='".$userid."'");
+            }
+            if ($searchquery != "") {
+                $resultC = mysqli_query($con, "SELECT * FROM task LEFT JOIN tags INNER JOIN assignee 
                 ON task.ID=tags.IDTask AND task.ID=assignee.IDTask
-                WHERE (task.Nama='".$searchquery."' OR tags.Tag='".$searchquery."') AND assignee.IDUser='".$userid."'");
+                WHERE (task.Nama='".$searchquery."' OR tags.Tag='".$searchquery."') AND 
+                    (assignee.IDUser='".$userid."' OR task.IDCreator='".$userid."')");
+            }
+            else {
+                $resultC = mysqli_query($con, "SELECT * FROM task LEFT JOIN tags INNER JOIN assignee 
+                ON task.ID=tags.IDTask AND task.ID=assignee.IDTask
+                WHERE (assignee.IDUser='".$userid."' OR task.IDCreator='".$userid."')");
+            }
             
             echo "<p>Users found</p>";
-            echo "<table>";
-            while($row = mysqli_fetch_array($result1))
+            echo "<table class='usersearchtable'>";
+            while($row = mysqli_fetch_array($resultA))
             {
                 echo "<tr>
                         <td>".$row['Username']."</td>
@@ -38,8 +56,16 @@ header('Content-type: text/html');
             echo "</table>";
             
             echo "<p>Tasks found</p>";
-            echo "<table>";
-            while($row = mysqli_fetch_array($result2))
+            echo "<table class='categorysearchtable'>";
+            echo "<tr>
+                <td>Nama Task</td>
+                <td>Deadline</td>
+                <td>Status</td>
+                <td>Tags</td>
+                <td> Check if done </td>
+                </tr>
+                ";
+            while($row = mysqli_fetch_array($resultB))
             {
                 $result2 = mysqli_query($con, "SELECT Tag FROM tags WHERE IDTask='".$row['IDTask']."'");
                 $tags = "";
@@ -47,20 +73,36 @@ header('Content-type: text/html');
                     $tags = $tags.$row2['Tag'];
                 }
                 echo "<tr>
-                        <td>".$row['Nama']."</td>
-                        <td>".$row['Deadline']."</td>
-                        <td>".$row['Status']."</td>
-                        <td>".$tags."</td>";
-                        if ($row['Status'] == 1) 
-                            echo "<input type='checkbox' checked />";
+                        <td>
+                        <form name='hiddenidtask' id='hiddenidtask' action='rincian.php' method='post'>
+                            <input type='hidden' name='idtask' value='".$row['ID']."' />
+                        </form>
+                        <a href=\"javascript:document.forms['hiddenidtask'].submit()\"  >".$row['Nama']."</a>
+                        </td>
+                        <td>".$row['Deadline']."</td>";
+                        if ($row['Status'] == 1)
+                            echo "<td> finished </td>";
                         else
-                            echo "<input type='checkbox' />";
+                            echo "<td> not finished </td>";
+                        echo "<td>".$tags."</td>";
+                        if ($row['Status'] == 1) 
+                            echo "<td><input type='checkbox' checked /></td>";
+                        else
+                            echo "<td><input type='checkbox' /></td>";
                 echo "</tr>";
             }
             echo "</table>";
             
-            echo "<table>";
-            while($row = mysqli_fetch_array($result3))
+            echo "<table class='tasksearchtable'>";
+            echo "<tr>
+                <td>Nama Task</td>
+                <td>Deadline</td>
+                <td>Status</td>
+                <td>Tags</td>
+                <td> Check if done </td>
+                </tr>
+                ";
+            while($row = mysqli_fetch_array($resultC))
             {
                 $result2 = mysqli_query($con, "SELECT Tag FROM tags WHERE IDTask='".$row['IDTask']."'");
                 $tags = "";
@@ -68,7 +110,12 @@ header('Content-type: text/html');
                     $tags = $tags.$row2['Tag'];
                 }
                 echo "<tr>
-                        <td>".$row['Nama']."</td>
+                        <td>
+                        <form name='hiddenidtask2' id='hiddenidtask2' action='rincian.php' method='post'>
+                            <input type='hidden' name='idtask' value='".$row['ID']."' />
+                        </form>
+                        <a href='javascript:document.getElementById('hiddenidtask2').submit();' >".$row['Nama']."</a>
+                        </td>
                         <td>".$row['Deadline']."</td>
                         <td>".$row['Status']."</td>
                         <td>".$tags."</td>";

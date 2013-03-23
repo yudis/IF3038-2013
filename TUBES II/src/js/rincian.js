@@ -42,3 +42,26 @@ loadXMLDocGet('php/db.php'+param,function() {
 return false;
 }
 
+function saveTaskDetails() {
+    var param = "?idtask=" + document.getElementById("idtask").value +
+                    "&tabletype=" + "taskdetails"  +
+                    "&namatask=" + document.getElementById("namatask").value +
+                    //"&attachment=" + document.getElementById("attachment").value +
+                    "&deadline=" + document.getElementById("deadline").value +
+                    "&listassignee=" + document.getElementById("listassignee").value +
+                    "&listtag=" + document.getElementById("listtag").value;
+alert(param);
+loadXMLDocGet('php/db.php'+param,function() { 
+    console.log(xmlhttp.readyState);
+    console.log(xmlhttp.status);
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+        alert("db get");
+        console.log("response get");
+        console.log(xmlhttp.responseText);
+        }
+
+});
+return false;
+}
+

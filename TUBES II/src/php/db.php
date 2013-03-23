@@ -36,10 +36,73 @@ switch ($tabletype) {
         break;
     case "taskdetails" :
         $namatask = $_GET['namatask'];
-        $attachment = $_GET['attachment'];
+        //$attachment = $_GET['attachment'];
         $deadline = $_GET['deadline'];
         $listassignee = $_GET['listassignee'];
         $listtag = $_GET['listtag'];
+        
+        $assignees = explode(",", $listassignee);
+        $tags = explode(",", $listtag);
+        
+        $query = "UPDATE task SET NAMA='".$namatask."', Deadline='".$deadline."' WHERE ID='".$idtask."'";
+        
+        if (mysqli_query($con, $query))
+        {
+            echo "Record task updated";
+        }
+        else 
+        {
+            echo "Error updating record task: " . mysql_error();
+        }
+        
+        $query = "DELETE FROM tags WHERE IDTask='".$idtask."'";
+        if (mysqli_query($con, $query))
+        {
+            echo "Record tags deleted";
+        }
+        else 
+        {
+            echo "Error deleting record tags: " . mysql_error();
+        }
+        
+        $i = 0;
+        while ($i < count($tags)) {
+            $query = "INSERT INTO tags VALUES ('".$idtask."','".$tags[$i]."')";
+            if (mysqli_query($con, $query))
+            {
+                echo "Record tags updated";
+            }
+            else 
+            {
+                echo "Error updating record tags: " . mysql_error();
+            }
+            $i++;
+        }
+        
+        $query = "DELETE FROM assignee WHERE IDTask='".$idtask."'";
+        if (mysqli_query($con, $query))
+        {
+            echo "Record assignee deleted";
+        }
+        else 
+        {
+            echo "Error deleting record assignee: " . mysql_error();
+        }
+        
+        $i = 0;
+        while ($i < count($assignees)) {
+            $query = "INSERT INTO assignee VALUES ('".$idtask."','".$assignees[$i]."')";
+            if (mysqli_query($con, $query))
+            {
+                echo "Record assignee updated";
+            }
+            else 
+            {
+                echo "Error updating record assignee: " . mysql_error();
+            }
+            $i++;
+        }
+        
         
         break;
     }
