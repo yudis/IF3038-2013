@@ -1,1 +1,0 @@
-<?	session_start();	require_once "loadprofile.php";	if (isset($_SESSION['fullname']))	{		$fullname = $_SESSION['fullname']		echo $fullname;	}?>
