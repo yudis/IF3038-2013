@@ -25,6 +25,14 @@
 	$avatar = $row['avatar'];
 	$email = $row['email'];
 
+	/*get user's task*/
+	$querytask = "SELECT *
+	FROM task_asignee RIGHT JOIN task 
+	ON task.task_id=task_asignee.task_id 
+	WHERE username='$username' OR task_creator='$username'";
+
+	$resulttask = mysql_query($querytask);
+	
 ?>
 
 <!DOCTYPE html>
@@ -86,18 +94,27 @@
 		<div class="half_div">
 			<div class="half_tall">
 				<div class="headsdeh">Current Tasks:</div>
-				<ul class="ul_none">
-					<li>Tubes Progin 1</li>
-					<li>Catatan Progin </li>
-				</ul>
+					<?php 
+					while ($rowtask = mysql_fetch_array($resulttask, MYSQL_ASSOC)) {
+						$taskname=$rowtask['task_name'];
+						$taskstatus=$rowtask['task_status'];
+						if ($taskstatus==0) {
+							echo "$taskname </br>";
+						}
+					}
+					?>
 			</div>
 			<div class="half_tall">
 				<div class="headsdeh">Finished Tasks:</div>
-				<ul class="ul_none">
-					<li>Tugas Individu IMK</li>
-					<li>Tugas Keamanan Informasi </li>
-					<li>Tugas Besar AI </li>
-				</ul>
+					<?php 
+					while ($rowtask = mysql_fetch_array($resulttask, MYSQL_ASSOC)) {
+						$taskname=$rowtask['task_name'];
+						$taskstatus=$rowtask['task_status'];
+						if ($taskstatus==1) {
+							echo "$taskname </br>";
+						}
+					}
+					?>
 			</div>
 		</div>
 		
