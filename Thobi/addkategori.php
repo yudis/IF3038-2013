@@ -5,13 +5,13 @@
 	
 	$userArray = explode("~",$list);
 	
-	$con = mysql_connect('localhost', 'root', 'rootadmin');
+	$con = mysql_connect('localhost', 'progin', 'progin');
 	if (!$con)
 	{
 		die('Could not connect: ' . mysql_error());
 	}
 	
-	mysql_select_db("progin_405_13510035", $con);	
+	mysql_select_db("progin_405_13510029", $con);	
 	
 	$sql="SELECT category_id FROM category";
 	$result = mysql_query($sql);

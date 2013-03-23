@@ -9,6 +9,18 @@
         <script src="scripts/helper.js" type="application/javascript"></script>
         <script src="scripts/popup.js" type="application/javascript"></script>
         <script src="scripts/dashboard.js" type="application/javascript"></script>
+		<script src="scripts/search.js" type="application/javascript"></script>
+        <script type="text/javascript">
+        <?php
+			if ((ISSET($_GET['s']))&&(ISSET($_GET['m']))&&(ISSET($_GET['page'])))
+			{
+				echo "Searchbypage('".$_GET['s']."','".$_GET['m']."','".$_GET['page']."');";
+			}else if ((ISSET($_GET['s']))&&(ISSET($_GET['m'])))
+			{
+				echo "Search('".$_GET['s']."','".$_GET['m']."');";
+			}
+		?>
+		</script>
     </head>
     <body onload="initialize();">
         <div id="blanket"></div>
@@ -19,7 +31,7 @@
                 <input id="txtNewKategori" class="inputbox" type="text" placeholder="eg: IF40XX" />
 				<br />
 				<label for="assignee">Assignee</label>:<br />
-				<input id="assignee" name="assignee" class="inputbox" type="text" placeholder="Type username here.." pattern="[A-Za-z0-9 ]{1,}"  list="user" />&nbsp<button onclick="addAssignee()">Add User</button>
+				<input id="assignee" name="assignee" class="inputbox" type="text" placeholder="Type username here.." pattern="[A-Za-z0-9 ]{1,}"  list="listuser" />&nbsp<button onclick="addAssignee()">Add User</button>
 				<div id="datalistuser">
 				</div>
 			</div>
@@ -45,13 +57,13 @@
 						$username=$_GET["uname"];
 						$kategori=$_GET["cat"];
 
-						$con = mysql_connect('localhost', 'root', 'rootadmin');
+						$con = mysql_connect('localhost', 'progin', 'progin');
 						if (!$con)
 						{
 							die('Could not connect: ' . mysql_error());
 						}
 
-						mysql_select_db("progin_405_13510035", $con);
+						mysql_select_db("progin_405_13510029", $con);
 
 						if ($kategori == "all") {
 							$iterator = 0;
@@ -66,7 +78,7 @@
 								echo ("<section id='main-K".$iterator."'>
 										<h2>".$row["category_name"]."</h2>");
 
-								$sql="SELECT * FROM task, category, task_incharge WHERE task_incharge.people_incharge_task = '".$username."' AND task_category = '".$row["category_id"]."' AND task.task_category = category.category_id AND task.task_id = task_incharge.task_id";
+								$sql="SELECT * FROM task, category, task_incharge, task_creator WHERE task_incharge.people_incharge_task = '".$username."' AND task_category = '".$row["category_id"]."' AND task.task_category = category.category_id AND task.task_id = task_incharge.task_id AND task.task_id = task_creator.task_id";
 
 								$result2 = mysql_query($sql);
 
@@ -76,7 +88,12 @@
 									else
 										$status = "Sudah selesai.";
 									
-									echo ("<div class='tugas'><div><a href='tugas.html?id=".$row2["task_id"]."'>".$row2["task_name"]."</a></div>
+									echo ("<div class='tugas'>");
+									
+									if ($row2["creator"] == $username)
+										echo("<button id='hapustugas' onclick='deleteTask(\"".$row2["task_id"]."\")'>x</button>");
+									
+									echo("<div><a href='tugas.html?id=".$row2["task_id"]."'>".$row2["task_name"]."</a></div>
 											<div>Deadline: <strong>".$row2["deadline"]."</strong></div>
 											<div>Status: <strong>".$status."</strong></div><div>Ubah Status: <button id='editStatus' onclick='EditStatus(1,\"".$row2["task_id"]."\")'>Selesai</button> <button id='editStatus' onclick='EditStatus(0,\"".$row2["task_id"]."\")'>Belum</button></div><br/><div>
 												Tags:
@@ -110,7 +127,7 @@
 								echo ("<section id='main-K".$iterator."'>
 										<h2>".$row["category_name"]."</h2>");
 
-								$sql="SELECT * FROM task, category, task_incharge WHERE task_incharge.people_incharge_task = '".$username."' AND task_category = '".$row["category_id"]."' AND task.task_category = category.category_id AND task.task_id = task_incharge.task_id";
+								$sql="SELECT * FROM task, category, task_incharge, task_creator WHERE task_incharge.people_incharge_task = '".$username."' AND task_category = '".$row["category_id"]."' AND task.task_category = category.category_id AND task.task_id = task_incharge.task_id AND task.task_id = task_creator.task_id";
 
 								$result2 = mysql_query($sql);
 
@@ -120,7 +137,12 @@
 									else
 										$status = "Sudah selesai.";
 										
-										echo ("<div class='tugas'><div><a href='tugas.html?id=".$row2["task_id"]."'>".$row2["task_name"]."</a></div>
+										echo ("<div class='tugas'>");
+									
+									if ($row2["creator"] == $username)
+										echo("<button id='hapustugas' onclick='deleteTask(\"".$row2["task_id"]."\")'>x</button>");
+									
+									echo("<div><a href='tugas.html?id=".$row2["task_id"]."'>".$row2["task_name"]."</a></div>
 											<div>Deadline: <strong>".$row2["deadline"]."</strong></div><div>Status: <strong>".$status."</strong></div><div>Ubah Status: <button id='editStatus' onclick='EditStatus(1,\"".$row2["task_id"]."\")'>Selesai</button> <button id='editStatus' onclick='EditStatus(0,\"".$row2["task_id"]."\")'>Belum</button></div><br/><div>
 												Tags:
 												<ul class='tag'>");
