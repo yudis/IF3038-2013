@@ -153,11 +153,9 @@
 							<input id="edmail" type="text" name="edmail" placeholder="Edit Email" pattern="^.+@.+\...+$" required>
 						</div>
 						<p>
-							<label for = "edpass">Edit Password</label>
 							<input id = "edpass" type="password" name="edpass" placeholder="Edit Password" pattern="^.{8,}$" required>
 						</p>
 						<p>
-							<label for = "edcpass">Confirm Password</label>
 							<input id = "edcpass" type="password" name="edcpass" placeholder="Confirm Password" pattern="^.{8,}$" required>
 						</p>	
 						<p id = "donepedit">

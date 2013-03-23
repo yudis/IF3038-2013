@@ -78,7 +78,7 @@ function edituser()
 	var m = document.getElementById('bulan').value;
 	var d = document.getElementById('tanggal').value;
 	
-	if (j==k)
+	if (j!=k)
 	{
 		document.getElementById("editresponse").innerHTML = "confirm password tidak sama";
 	}
@@ -105,8 +105,8 @@ function edituser()
 					window.location = "index.php";
 				}
 			}
-		}
-	});
+		});
+	}
 }
 
 		
