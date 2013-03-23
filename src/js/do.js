@@ -62,5 +62,28 @@ Rp(function() {
 		location.href = 'profile.php?id=' + this.getAttribute('data-user-id');
 	})
 
-	Rp('#submitButton').attr('disabled', 'disabled');
+	// Rp('#submitButton').attr('disabled', 'disabled');
+
+	var req;
+	doSearchAutocomplete = function() {
+		q = encodeURIComponent(Rp.id('searchQuery').value);
+		t = encodeURIComponent(Rp.id('searchType').value);
+		req = Rp.ajax('api/search_suggestions?type=' + t + '&q=' + q)
+		.complete(function() {
+			console.log(this.responseJSON());
+		})
+		.get();
+	}
+	var searchTimeout;
+
+	Rp('#searchQuery')
+	.attr('autocomplete', 'off')
+	.on('keyup', function() {
+		window.clearTimeout(searchTimeout);
+		if (req != undefined)
+			req.abort();
+
+		if (this.value)
+			searchTimeout = window.setTimeout(doSearchAutocomplete, 300);
+	})
 });

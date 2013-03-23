@@ -386,7 +386,7 @@ bajuri.serialize = function(obj) {
 	return joined;
 }
 
-bajuri.ajaxRequest = function(url) {
+bajuri.ajax = function(url) {
 	var handle;
 	if (window.XMLHttpRequest) {
 		handle = new XMLHttpRequest();
@@ -406,14 +406,50 @@ bajuri.ajaxRequest = function(url) {
 
 	handle.url = url;
 
+	this.oninit = function() {};
+	this.onload = function() {};
+
+	handle.onreadystatechange = function() {
+		if (this.readyState == 0) {
+			this.oninit.call(this);
+		}
+		else if (this.readyState == 4) {
+			this.onload.call(this);
+		}
+	}
+
+	handle.init = function(cb) {
+		this.oninit = cb;
+
+		return this;
+	}
+
+	handle.complete = function(cb) {
+		this.onload = cb;
+
+		return this;
+	}
+
+	handle.handler = function(cb) {
+		this.onreadystatechange = cb.bind(this);
+
+		return this;
+	}
+
 	handle.openAndSend = function(method, url) {
 		this.open(method, url);
 		this.send();
+
+		return this;
 	}
 
 	handle.get = function(url) {
+		if (url == undefined)
+			url = this.url;
 		this.open('GET', url, true);
 		this.send();
+
+		return this;
 	}
 
 	handle.post = function(data) {
@@ -422,10 +458,18 @@ bajuri.ajaxRequest = function(url) {
 		if (typeof data === "object")
 			data = bajuri.serialize(data);
 		this.send(data);
+
+		return this;
+	}
+
+	handle.responseJSON = function() {
+		return this.responseText ? bajuri.parseJSON(this.responseText) : null;
 	}
 
 	return handle;
 }
+
+bajuri.ajaxRequest = bajuri.ajax;
 
 bajuri.parseJSON = function(o) {
 	if (window.JSON) {
@@ -434,6 +478,10 @@ bajuri.parseJSON = function(o) {
 	else {
 		return eval('(' + o + ')');
 	}
+}
+
+bajuri.id = function(id) {
+	return document.getElementById(id);
 }
 
 bajuri.fn.init.prototype = bajuri.fn;
