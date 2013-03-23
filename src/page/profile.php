@@ -65,7 +65,7 @@
 			
 			function edit_avatar(){
 				document.getElementById("uploader").style.display = 'block';
-				document.getElementById("upload_button").innerHTML = "><a href=\"#\" onClick=\"just_edit_avatar()\">Save</a>";
+				document.getElementById("upload_button").innerHTML = "<a href=\"#\" onClick=\"just_edit_avatar()\">Save</a>";
 			}
 			function just_edit_avatar(){
 				document.getElementById("uploader").style.display = 'none';
@@ -98,7 +98,7 @@
 		<div id="profile-page-body">
 			<div id="profile-header">
 				<div id="left-profile-header">
-					<img alt="Photo profile" id="photo" src="../avatar/<?php echo $avatar?>" width="235" height="270"/>
+					<img alt="Photo profile" id="photo" src="../avatar/<?php echo $avatar?>" width="240" height="325"/>
 				</div>
 				<div id="right-profile-header">
 					<h2><?php $username = $_GET['username'];
@@ -111,10 +111,17 @@
 								echo "<div id=\"uploader\">";
 								echo "<input type=\"file\" name=\"changeAvatar\">";
 								echo "</div>";
+								echo "<div id=\"change_password\"><a href=\"#\">Change Password</a></div>";
+								echo "<div id=\"newpassword\">";
+								echo "<div id=\"left-profile-body\">New Password</div><div id=\"right-profile-body\"> : <input type=\"text\" name=\"newPass\"></div>";
+								echo "</div>";
+								echo "<div id=\"confirmpassword\">";
+								echo "<div id=\"left-profile-body\">Confirm Password</div><div id=\"right-profile-body\"> : <input type=\"text\" name=\"confirmPass\"></div>";
+								echo "</div>";
 							}
 						?>
 							
-					<br>
+					<br><br>
 					<p>Joined on : <?php echo $user['join']?></p>
 					<div>
 						<div id="left-main-body"><p>About Me :</p></div>
@@ -134,6 +141,7 @@
 					</div>
 				</div>
 			</div>
+			<br><br>
 			<div><hr id="border"></div>
 			<div id="biodata">
 				<div>

@@ -254,7 +254,17 @@ body {
 #header-right-user {
 	margin-top:8px;
 	padding-top:10px;
-	padding-left:190px;
+	padding-left:120px;
+}
+
+#header-photo {
+	padding-top:5px;
+	float:left;
+}
+
+#header-profile {
+	float:left;
+	padding-left:12px;
 }
 
 #header-right-search {
@@ -288,6 +298,10 @@ body {
 	padding: 10px 10px 10px 10px;
 	box-shadow: 2px 2px 5px #888888;
 	background-color:#DEB887;
+}
+
+#photo {
+	box-shadow: 2px 2px 5px #888888;
 }
 
 #register-form {
