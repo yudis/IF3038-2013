@@ -183,6 +183,16 @@ body {
 	float:left;
 }
 
+#left-main-body4 {
+	width:450px;
+	float:left;
+}
+
+#taskstatus{
+	width:500px;
+	float:left;
+}
+
 #right-main-body {
 	width:100px;
 	float:left;

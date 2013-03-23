@@ -43,8 +43,8 @@
 					</div>
 					<br><br>
                     <div>
-						<div id="left-main-body">Status : <?php echo $task['status']?></div> 
-						<div id="right-main-body"><input name="changeStatus" type="button" value="Change Status"></div>
+						<div id="left-main-body4">Status : <?php echo $task['status']?></div> 
+						<div id="right-main-body"><input name="changeStatus" type="button" value="Change Status" onClick="setCompleteStatus(<?php echo $taskid ?>)"></div>
 					</div>
 				</div>
 				<br>
