@@ -4,7 +4,7 @@
 	include 'inc/header.php';
 ?>
 		<script>
-			window.onload=function(){localStorage.user_id = <?php echo getUserID(); ?>; refreshTask(localStorage.user_id,0); refreshCategory(localStorage.user_id);};
+			window.onload=function(){localStorage.user_id = <?php echo getUserID(); ?>; refreshTask(localStorage.user_id,0); refreshCategory(localStorage.user_id); document.getElementById('taskLink').setAttribute('style','display:none;');};
 			function refreshTaskRoutine() {
 			  refreshTask(localStorage.user_id,_category_id); refreshCategory(localStorage.user_id);
 			}
@@ -15,7 +15,7 @@
 				<header>
 					<h1>Dashboard</h1>
 					<ul>
-						<li class="add-task-link"><a href="new_tugas.php">New Task</a></li>
+						<li class="add-task-link"><a id="taskLink" href="new_tugas.php">New Task</a></li>
 						<li class="login"><a href="#" id="categoryLink">New Category</a></li>
 					</ul>
 				</header>
