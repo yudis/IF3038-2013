@@ -32,9 +32,9 @@
 						
                         <?php
 							if($username == $_SESSION['userlistapp']){
-								echo "<div id=\"upload_button\"><a href=\"#\" onClick=\"edit_avatar()\">Upload New Avatar</a></div>";
+								echo "<div id=\"upload_button\"><a href=\"#\" onClick=\"edit_avatar('$user_show')\">Upload New Avatar</a></div>";
 								echo "<div id=\"uploader\">";
-								echo "<input type=\"file\" name=\"changeAvatar\">";
+								echo "<input type=\"file\" name=\"changeAvatar\" id=\"inputfileid\">";
 								echo "</div>";
 								echo "<div id=\"change_password\"><a href=\"#\" onClick=\"edit_password('$user_show')\">Change Password</a></div>";
 								echo "<div id=\"password_form\">";

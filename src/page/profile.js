@@ -154,15 +154,28 @@ function just_edit_password(userid) {
 	document.getElementById("change_password").innerHTML = "<a href=\"#\" onClick=\"edit_password('"+userid+"')\">Change Password</a>";
 }
 
-function edit_avatar(){
+function edit_avatar(userid){
 	document.getElementById("uploader").style.display = 'block';
-	document.getElementById("upload_button").innerHTML = "<a href=\"#\" onClick=\"just_edit_avatar()\">Save Avatar</a>";
+	document.getElementById("upload_button").innerHTML = "<a href=\"#\" onClick=\"just_edit_avatar('"+userid+"')\">Save Avatar</a>";
 }
 
-function just_edit_avatar(){
+function just_edit_avatar(userid){
+	getAjax();
+
+	var newava = document.getElementById("inputfileid").value;
+
+	ajaxRequest.open("GET","../php/getavatar.php?newava="+newava+"&userid="+userid,false);
+	//ajaxRequest.onreadystatechange = function()
+	//{
+	//	alert(ajaxRequest.responseText);
+	//}
+	alert("Avatar Saved");
+	
+	ajaxRequest.send();	
+
 	document.getElementById("uploader").style.display = 'none';
 	document.getElementById("upload_button").style.display = 'block';
-	document.getElementById("upload_button").innerHTML = "<a href=\"#\" onClick=\"edit_avatar()\">Upload New Avatar</a>";
+	document.getElementById("upload_button").innerHTML = "<a href=\"#\" onClick=\"edit_avatar('"+userid+"')\">Upload New Avatar</a>";
 }
 
 function hidden_update_box(){
