@@ -90,19 +90,19 @@
 					<form id="new_tugas" action="#" method="post">
 						<div class="field">
 							<label>Task Name</label>
-							<input size="25" maxlength="25" name="nama" id="nama" type="text">
+							<input size="30" maxlength="25" name="nama" id="nama" type="text">
 						</div>
 						<div class="field">
 							<label>Deadline</label>
-							<input size="25" name="deadline" id="deadline" type="date">
+							<input size="30" name="deadline" id="deadline" type="date">
 						</div>
 						<div class="field">
 							<label>Assignee</label>
-							<input size="25" name="assignee" id="assignee" type="text">
+							<input size="30" name="assignee" id="assignee" type="text">
 						</div>
 						<div class="field">
 							<label>Tag</label>
-							<input size="25" name="tag" id="tag" type="text">
+							<input size="30" name="tag" id="tag" type="text">
 						</div>
 						<div class="buttons">
 							<button type="submit">Save</button>
