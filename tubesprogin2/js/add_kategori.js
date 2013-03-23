@@ -8,8 +8,11 @@ function add_category(kategori,arrofassignee){
 
 }
 
-function set_assignee(kategori,nama){
+function set_assignee(element){
     var xmlhttp;
+   var asignee_name = element.options[element.selectedIndex].text;
+    alert("nama user"+asignee_name);
+   var category =document.getElementById("add_category_name").value;
     if(window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
@@ -28,7 +31,7 @@ function set_assignee(kategori,nama){
                    var response = xmlhttp.responseText;
                     if (response !==""){
                           alert(response);
-                       var result = eval('('+xmlhttp.responseText+')');
+                      // var result = eval('('+xmlhttp.responseText+')');
                        
                        
                          
@@ -46,7 +49,7 @@ function set_assignee(kategori,nama){
             //alert('ga jalan woy ajaxnya'+xmlhttp.readyState+xmlhttp.status);
         }
       }
-     xmlhttp.open("GET","../php/setauthorized.php?t="+kategori+"&na="+nama,true);
+     xmlhttp.open("GET","../php/setauthorized.php?t="+category+"&na="+asignee_name,true);
      xmlhttp.send();
     
 }

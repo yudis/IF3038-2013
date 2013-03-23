@@ -8,7 +8,7 @@ $tag = $_GET["tag"];
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-$con=mysqli_connect("localhost","progin","progin","progin");
+$con=mysqli_connect("localhost","progin","progin","progin_405_13510060");
 if (mysqli_connect_errno($con))
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();

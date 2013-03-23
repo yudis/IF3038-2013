@@ -149,8 +149,8 @@
                             <div id="arr_of_asignee">
                                 
                             </div>
-                            <select id="add_category_asignee_name" name="customers" onchange="set_assignee(<?php ?>,this.value)">
-                                  <option value="">Select assignee:</option>
+                            <select id="add_category_asignee_name" name="customers" onchange="set_assignee(this)">
+                                  <option id="asignee_name" value="">Select assignee:</option>
                                 <?php foreach($asignee as $eachasignee){?>
                                     <option value=""><?php echo $eachasignee['asignee_name']?></option>
                                 <?php } ?>

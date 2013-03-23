@@ -6,21 +6,21 @@
  */
  $kategori = $_GET["t"];
  $namaasign =$_GET["na"];
- $con=mysqli_connect("localhost","progin","progin","progin");
+ $con=mysqli_connect("localhost","progin","progin","progin_405_13510060");
  if (mysqli_connect_errno($con))
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
  // ec $sql = "SELEho "udah ampe sini";  
   
-  $sql = "INSERT INTO authorized (cat_name,user_name) VALUES ($kategori,$namaasign)";
-  $sql2 = "SELECT * FROM authorized WHERE (cat_name='$kategori',user_name='$cat_name')";
+  $sql = "INSERT INTO authorized (cat_name,user_name) VALUES ('$kategori','$namaasign')";
+  //$sql2 = "SELECT * FROM authorized WHERE (cat_name='$kategori',user_name='$cat_name')";
   //echo $sql;
   if (!mysqli_query($con,$sql))
   {
   die('Error: ' . mysqli_error());
   }
-   if (!mysqli_query($con,$sql2))
+ /*  if (!mysqli_query($con,$sql2))
   {
   die('Error: ' . mysqli_error());
   }
@@ -41,5 +41,5 @@
   }
   //print_r($res[0]['ID_TASK']);
   //echo"</body></html>";
-  echo json_encode($res);
+  echo json_encode($res);*/
 ?>

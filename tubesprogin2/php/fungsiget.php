@@ -9,7 +9,7 @@
 //get_task();
 
 function get_allkategoriphp(){
-    $con=mysqli_connect("localhost","progin","progin","progin");
+    $con=mysqli_connect("localhost","progin","progin","progin_405_13510060");
     if (mysqli_connect_errno($con))
         {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
