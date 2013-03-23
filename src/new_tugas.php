@@ -11,7 +11,7 @@
 				<form id="new_tugas" action="new_task.php" method="post" enctype="multipart/form-data">
 					<div class="field">
 						<label>Task Name</label>
-						<input size="30" maxlength="25" name="nama" id="nama" type="text">
+						<input size="30" maxlength="25" name="name" id="name" type="text">
 					</div>
 					<div class="field">
 						<label>Attachment</label>
@@ -34,6 +34,7 @@
 					<div class="field">
 						<label>Tag</label>
 						<input size = "30" name="tag" id="tag" type="text">
+						<input type="hidden" value="<?php echo $_GET['category_id'];?>" name="category_id" />
 					</div>
 					<div class="buttons">
 						<button type="submit">Save</button>

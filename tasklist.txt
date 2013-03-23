@@ -107,23 +107,23 @@ v			bisa sama creator atau assignee
 v		realtime edit pake ajax
 			
 HALAMAN PEMBUATAN TUGAS
-	nama tugas
+v	nama tugas
 		huruf dan angka
-		maksimal 25 karakter
-	attachment
-		image
-		video
-		file
-		multi attachment
-	deadline
-		datepicker
-	assignee
-		penambahan dan autocomplete per ketikan keyboard
-		menghapus assignee
-	tag
-		lebih dari satu
-		dipisah dengan koma
-	setelah submit, diredirect ke halaman rincian tugas
+v		maksimal 25 karakter
+v	attachment
+v		image
+v		video
+v		file
+v		multi attachment
+v	deadline
+v		datepicker
+v	assignee
+v		penambahan dan autocomplete per ketikan keyboard
+v		menghapus assignee
+v	tag
+v		lebih dari satu
+v		dipisah dengan koma
+v	setelah submit, diredirect ke halaman rincian tugas
 	
 HALAMAN PROFIL
 	attribut

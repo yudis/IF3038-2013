@@ -77,6 +77,15 @@ function addAssignee($name,$task_id,$category_id) {
 	}
 }
 
+function addTag($task_id,$name) {
+	$tag = query('select * from tag where name = :name',array('name' => $name));
+	if (!$tag)
+		$tag['tag_id'] = querynid('insert into tag (name) values (:name)',array('name' => $name));
+	$exist = query('select * from tags where tag_id = :tag_id and task_id = :task_id',array('tag_id' => $tag['tag_id'], 'task_id' => $task_id));
+	if (!$exist)
+		queryn('insert into tags (tag_id,task_id) values (:tag_id,:task_id)',array('tag_id' => $tag['tag_id'], 'task_id' => $task_id));
+}
+
 function findAssignee($name,$task_id,$category_id) {
 	$user_id = query('select user_id from user where name = :name',array('name' => $name));
 	if ($user_id) {

@@ -13,14 +13,7 @@
 		addAssignee($value,$task_id,null);
 		break;
 	case 'addtag':
-		$tag = query('select * from tag where name = :name',array('name' => $value));
-		if (!$tag)
-			$tag['tag_id'] = querynid('insert into tag (name) values (:name)',array('name' => $value));
-		var_dump($tag);
-		$exist = query('select * from tags where tag_id = :tag_id',array('tag_id' => $tag['tag_id']));
-		var_dump($exist);
-		if (!$exist)
-			queryn('insert into tags (tag_id,task_id) values (:tag_id,:task_id)',array('tag_id' => $tag['tag_id'], 'task_id' => $task_id));
+		addTag($task_id,$value);
 		break;
 	case 'delassignee':
 		queryn('delete from assign where id = :id',array('id' => $value));
