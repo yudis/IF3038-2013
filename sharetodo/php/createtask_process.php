@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    
     $task_name = $_POST["task_name"];
     $deadline = $_POST["deadline"];
     $category = $_POST["kategori"];
@@ -22,5 +24,13 @@
         $j++;
     }
     
-    header("Location:taskdetail.php");
+    //update database usertoassignee
+    $assigneeList = $_POST['assignee'];
+    $assignee = explode(",",$assigneeList);
+    
+    for ($i=0; $i<count($assignee); $i++) {
+        mysqli_query($con,"INSERT INTO tasktoasignee VALUES ('$task_name','$assignee[$i]')");
+    }
+    
+    header("Location:../dashboard.php");
 ?>

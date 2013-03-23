@@ -1,5 +1,4 @@
 <?php
-
     $con = mysqli_connect("localhost", "progin", "progin", "progin_405_13510027");
     $filter = $_GET["filter"];
     $keyword = $_GET["keyword"];
@@ -42,5 +41,5 @@
     }
     
 //    }        
-    
+
 ?>

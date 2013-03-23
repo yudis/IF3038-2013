@@ -11,7 +11,7 @@
 	</head>
 	<body onload="kalender_deadline(); loadRegex()">
 	<h1>Tugas Baru</h1>
-		<form action="createtask_process.php" method="post" enctype="multipart/form-data">
+		<form action="php/createtask_process.php" method="post" enctype="multipart/form-data">
             <div>
                 <input id="nama_tugas" class="input_field" type="text" name="task_name" placeholder="Nama Tugas" onkeyup="validate_nama_tugas()">&nbsp;
                 <strong id="error_nama_tugas" class="error_warning"></strong>

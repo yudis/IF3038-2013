@@ -73,26 +73,6 @@
 		    echo "</div>";
 		echo "</div>";
 	    ?>
-	    
-            <!--<div id="kategoriContent">
-            	<div id="static_1" class="kategoriElmt" onclick="changeKategori('static_1');">
-                	<p>Pemrograman Internet</p>
-                </div>
-                <div id="static_2" class="kategoriElmt" onclick="active_2()";>
-                	<p>Sistem Terdistribusi</p>
-                </div>
-                <div id="static_3" class="kategoriElmt" onclick="active_3()";>
-                	<p>Branding</p>
-                </div>
-                
-                <div id="semuaTugas" class="kategoriElmt" onclick="active_semuaTugas()";>
-                	<p>Semua Kategori Tugas</p>
-                </div>
-                
-                <div id="addKategori" onclick="showPopUp()";>
-                	<button name="addKategori">tambah kategori</button>
-                </div>
-            </div>-->
         </div>
         
         <div id="dynamicContainer">
@@ -112,7 +92,7 @@
 				while ($row = mysqli_fetch_array($result)){
 				    $nama = $row['namaTask'];
 				    echo "<div id={$nama}space>";
-					echo "<div id='taskTitle1' class='taskElmtLeft' onclick=toHalamanRincianTugas('taskTitle1');>";
+					echo "<div id='taskTitle1' class='taskElmtLeft' onclick=\"toHalamanRincianTugas('$nama')\";>";
 					    echo "<p></strong>".$nama."</strong></p>";
 					echo "</div>";
 					echo "<div class='taskElmtRight'>";
@@ -120,7 +100,7 @@
 					echo "<div class='taskElmtLeft'>";
 					    echo "<p>Deadline :</p>";
 					echo "</div>";
-					echo "/<div class='taskElmtRight'>";
+					echo "<div class='taskElmtRight'>";
 					    echo "<p>".$row['deadline']."</p>";
 					echo "</div>";
 					echo "<div class='taskElmtLeft'>";
@@ -162,48 +142,7 @@
 			    }
 			?>
 		    </div>
-		    <!--<button class="addTask" onclick="toHalamanPembuatanTugas();">tambah tugas</button>
-		    <button class="addTask">hapus kategori</button>-->
 		</div>
-            <!--<div id="dynamic_2" class="dynamicElmt">
-            	<div class="rincianTitleDiv">
-                	<h2 class="rincianText">Rincian Tugas</h2>
-                    <hr/>
-                    
-                    <div class="dyn_elmt">
-                    </div>
-		    <button class="addTask" onclick="toHalamanPembuatanTugas();">tambah tugas</button>
-		    <button class="addTask">hapus kategori</button>
-                </div>
-            </div>
-            <div id="dynamic_3" class="dynamicElmt">
-            	<div class="rincianTitleDiv">
-                	<h2 class="rincianText">Rincian Tugas</h2>
-                    <hr/>
-                    
-                    <div class="dyn_elmt">
-                    </div>
-		    <button class="addTask" onclick="toHalamanPembuatanTugas();">tambah tugas</button>
-		    <button class="addTask">hapus kategori</button>
-                </div>
-            </div>
-            
-            <div id="dynamic_semuaTugas" class="dynamicElmt">
-            	<div class="rincianTitleDivSemua">
-                	<h2 class="rincianText">Semua Tugas</h2>
-                    <hr/>
-                    
-                    <div class="dyn_elmt">
-                    </div>
-                    
-                    <div class="dyn_elmt">
-                    </div>
-                    
-                    <div class="dyn_elmt">
-                    </div>
-                    
-                </div>
-            </div>-->
         </div>
         
         <div id="popUp">
