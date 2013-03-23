@@ -48,10 +48,6 @@
 			$attachmentResponse[] = $attachment_row['att_content'];
 		}
 		
-	
-		
-		
-		
 		//Get 'comment'		
 		unset($commentContent);
 		$commentContent = array();
@@ -178,12 +174,18 @@
 			for($i=0; $i<count($commentContent); $i++) {
 				$date = strtotime( $commentTime[$i] );
 				$date= date('H:m d/m', $date );
+				
+				$avatar_query	= "SELECT avatar FROM user WHERE username='$username' LIMIT 1";
+				$avatar_result	=  mysql_query($avatar_query) or die(mysql_error());
 
+				$row = mysql_fetch_array($avatar_result, MYSQL_ASSOC);
+				$avatar = $row['avatar'];
+				
 				$response = $response.
 				"
 				<div class='left top20 dynamic_content_row'>
 					<div id='comment_ltd' class='left dynamic_content_left darkBlueItalic userprofile_link' onclick='javascript:searchUser(\"$commentCreator[$i]\")'> 
-					<img src='../img/avatar1.png' width='55'/> <br>
+					<img src='$avatar' width='55'/> <br>
 					".$commentCreator[$i].
 					"<br>".$date."
 					</div>
