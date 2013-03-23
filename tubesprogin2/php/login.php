@@ -20,7 +20,11 @@ $getUser = mysql_query($getUser_sql);
 $getUser_result = mysql_fetch_assoc($getUser);
 $getUser_RecordCount = mysql_num_rows($getUser);
 
-if($getUser_RecordCount < 1){ echo '0';} else { echo $getUser_result['username'];}
+if($getUser_RecordCount < 1){ echo '0';} 
+else { echo $getUser_result['username'];
+		session_start();
+		$_SESSION['uname']='username';
+		$_SESSION['loggedin']=1;}
 }
 
 ?>
