@@ -45,8 +45,8 @@ if ($rml["Email"] == $email){
 }
 }
 
+$sql="INSERT INTO profil (Username,Password,FullName,TanggalLahir,Email) WHERE `Username`=\`\` VALUES ('$username','$password','$name','$year--$month-$date','$email')";
 if ($dcheck=="false") {
-$sql="INSERT INTO profil (Username,Password,FullName,Avatar,TanggalLahir,Email) VALUES ('$username','$password','$name','$avatar','".$date."','$email')";
 
 $add=mysql_query($sql);
 $_SESSION['login'] = $username;

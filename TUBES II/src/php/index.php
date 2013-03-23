@@ -12,7 +12,7 @@ var name = document.getElementById("DName").value;
 var tgl = document.getElementById("Day").value;
 var bln = document.getElementById("DMonth").value;
 var thn = document.getElementById("DYear").value;
-var ava = document.getElementById("DAvatar").value;
+var ava = document.getElementById("file").value;
 
 alert(ava);
 
@@ -45,7 +45,7 @@ xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+	alert(xmlhttp.responseText);
 	checkLogin(xmlhttp.responseText);
     }
   }
@@ -76,11 +76,11 @@ else
   {// code for IE6, IE5
   xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   }
-xmlhttp.onreadystatechange=function()
+	xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+	alert(xmlhttp.responseText);
 	checkLogin(xmlhttp.responseText);
     }
   }
@@ -120,22 +120,21 @@ function checkLogin(response)
     </div>
 	<div class="register">
 	<h4 class="judul">Register</h4>
+		<form action="upload_file.php" method="post" enctype="multipart/form-data">
+		<label for="file">Avatar :</label> 
+		<input type="file" id="file" name="file"></input>
+		<input id="signup" value="upload" type="submit" ></input>
+		</form>
 	<form action="javascript:registertake()" name="registrasi">
 		<p>Username: <input  id="DID" name="DID" type="text"></input></p>
 		<p>Password: <input id="DP" name="DP" type="password"></input></p>
 		<p>Confirm Password: <input  id="DCP" name="DCP" type="password"></input></p>
 		<p>Name: <input  id="DName" name="DName" type="text"></input></p>
-		<p>Tanggal Lahir: <select id="Day" ><option value="01">01</option><option value="02">02</option></select><select id="DMonth"><option value="01">01</option><option value="02">02</option></select><select id="DYear"><option value="1956">1956</option><option value="1957">1957</option></select></p>
+		<p>Tanggal Lahir: <select id="Day" ><option value="01">01</option><option value="02">02</option></select><select id="DMonth"><option value="01">01</option><option value="02">02</option></select><select id="DYear"><option value="1992">1992</option><option value="1993">1993</option></select></p>
 		<p>Alamat email: <input  id="DMail" name="DMail" type="text"></input></p>
-		<form action="upload.php" method="post" enctype="multipart/form-data">
-		<label for="file">Avatar :</label> 
-		<input type="file" id="file" name="file"></input>
-		<input id="signup" value="upload" type="submit" ></input>
-		</form>
 		<input id="signup" value="signup" type="submit" ></input>
 	</form>
     </div>
-	<div id="txtHint"><b>Person info will be listed here.</b></div>
 </body>   
 
 </html>

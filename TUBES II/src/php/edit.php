@@ -21,48 +21,15 @@
 <div class="data">
 <center>
 <h1>Profile</h1>
-<?php
-
-	$q = $_SESSION['login'];
-
-	$con = mysql_connect('localhost', 'progin', 'progin');
-	if (!$con)
-	  {
-	  die('Could not connect: ' . mysql_error());
-	  }
-
-	mysql_select_db("progin", $con);
-	
-$acpict="SELECT Avatar FROM profil WHERE Username = '".$q."'";
-$draw = mysql_query($acpict);
-while($rww = mysql_fetch_array($draw))
-  {
-  echo "<img src=\"upload/".$rww['Avatar'];
-  echo "\" width=\"200\" height=\"150\" hspace=\"15\" vspace=\"15\" />";
-  }
-
-
-$sql="SELECT * FROM profil WHERE Username = '".$q."'";
-$result = mysql_query($sql);
-
-while($row = mysql_fetch_array($result))
-  {
-  echo "<p>User :".$row['Username']; 
-	echo "</p>";
-		echo "<p>Nama Lengkap :".$row['FullName'];
-			echo "</p>";
-				echo "<p>Tanggal Lahir :".$row['TanggalLahir'];
-					echo "</p>";
-						echo "<p>E-mail :".$row['Email'];
-							echo "</p>";
-  }
-
-mysql_close($con);
-?>
-  
-  <form method="link" action="edit.php">
-	<input type="submit" Value="edit" name="image" onclick="" ></input>
-  </form>
+<form action="javascript:registertake()" name="registrasi">
+		<p>Username: <input  id="DID" name="DID" type="text"></input></p>
+		<p>Password: <input id="DP" name="DP" type="password"></input></p>
+		<p>Confirm Password: <input  id="DCP" name="DCP" type="password"></input></p>
+		<p>Name: <input  id="DName" name="DName" type="text"></input></p>
+		<p>Tanggal Lahir: <select id="Day" ><option value="01">01</option><option value="02">02</option></select><select id="DMonth"><option value="01">01</option><option value="02">02</option></select><select id="DYear"><option value="1992">1992</option><option value="1993">1993</option></select></p>
+		<p>Alamat email: <input  id="DMail" name="DMail" type="text"></input></p>
+		<input id="signup" value="save" type="submit" ></input>
+	</form>
 </center>  
 </div>
 <div class="assignment">
