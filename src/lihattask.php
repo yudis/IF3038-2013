@@ -1,4 +1,15 @@
-<html>
+
+		<?php
+			
+			/* 
+			 * 
+			 * link ke profile
+			 * komen, siapa yang komen
+			 * 
+			 */	
+		?>
+		
+		<html>
     <head>
         <title> Next | Task Detail </title>
         <link rel="stylesheet" href="css/css.css">
@@ -19,14 +30,6 @@
 				   
         </script>
 		<script src="js/buattask.js"></script>
-		<?php
-			/* 
-			 * 
-			 * link ke profile
-			 * komen, siapa yang komen
-			 * 
-			 */	
-		?>
     </head>
     <body onload="">
 		
@@ -38,7 +41,7 @@
 			<div id="kolom1" class="kolom">
 				<div class="tombol kotakwarna" id="edit" onclick="showEdit()">
 				</div>
-				<a href="dashboard.html">
+				<a href="dashboard.php">
 					<div class="tombol kotakwarna" id="back">
 					</div>
 				</a>
@@ -147,7 +150,7 @@
 						<label>submit comment</label>
 						<textarea id="takomen" type="comment" placeholder="comment" class="isikomen"></textarea>
 						<br>
-						<input class= "submitreg" name="submit" type="button" onclick="tambahkomen('<?php echo $_COOKIE["lt_tugas"]["idtugas"];?>',1); clearta();" value="Submit">
+						<input class= "submitreg" name="submit" type="button" onclick="tambahkomen('<?php echo $_COOKIE["lt_tugas"]["idtugas"];?>','<?php echo $_SESSION['userID'];?>'); clearta();" value="Submit">
 					</div>
 				</form>
 			</div>

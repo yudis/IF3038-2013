@@ -44,7 +44,7 @@
 					var eicon = document.getElementById("emailicon").src;
 					var aicon = document.getElementById("avaicon").src;
 					var dicon = document.getElementById("dateicon").src;
-					var lokasi = "http://localhost/Progin/pict/centang.png";
+					var lokasi = "http://localhost/progin/pict/centang.png";
 					
 					if ((uicon == lokasi) && (picon == lokasi) && (cicon == lokasi) && (nicon == lokasi) && (eicon == lokasi) && (aicon == lokasi) && (dicon == lokasi))
 							{

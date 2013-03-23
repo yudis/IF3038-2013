@@ -32,7 +32,7 @@
 	  
 	  // TAMBAH Tugas
 	  $sql = "INSERT INTO tugas (nama, deadline, status_selesai, kategori_idkategori)
-			  VALUES ('".$this->POS['username']."', '".$this->POS['deadline']."', 'false', '1')";
+			  VALUES ('".$this->POS['username']."', '".$this->POS['deadline']."', 'false', '".$this->POS['idkategori']."')";
 	  $result = mysql_query($sql);
 	  if (!$result) {
 		die('Error1: ' . mysql_error());

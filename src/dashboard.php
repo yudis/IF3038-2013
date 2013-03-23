@@ -6,6 +6,7 @@
 	{
 		//header("location: dashboard.php");
 		$user_id = get_uid($_SESSION['username']);
+		$_SESSION['userID'] = $user_id;
 	}
 	else
 	{	
@@ -31,7 +32,7 @@
 	function printCategories($user_id)
 	{
 		require_once("connectdb.php");
-		$query = "SELECT nama, idkategori FROM kategori, asignee_has_kategori WHERE idkategori = kategori_idkategori AND accounts_idaccounts = ".$user_id;
+		$query = "SELECT nama, idkategori FROM kategori, assignee_has_kategori WHERE idkategori = kategori_idkategori AND accounts_idaccounts = ".$user_id;
 		//mysql_query($query);
 		$result = mysql_query($query);
 		

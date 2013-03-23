@@ -50,6 +50,7 @@
 						  <input name="tag" placeholder="tag" onkeyup="tag_validating()" />
 						  <img src="pict/blank.png" alt="icon5" id="tagicon" />
                         <br><br>
+						<input type="hidden" name="idkategori" value="<?php echo $_GET['idkategori'];?>">
                         <input class= "submitreg" name="submit" type="submit" value="Submit">
                     </form>
                 </div>

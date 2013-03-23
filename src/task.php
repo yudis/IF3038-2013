@@ -8,10 +8,8 @@
    */
   
 ?>
-
-
 <?php
-
+  session_start();
   if ($_GET['tujuan'] == "buat"){
 	
 	require_once("connectdb.php");
