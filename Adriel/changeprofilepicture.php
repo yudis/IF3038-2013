@@ -8,7 +8,7 @@
 		die('Could not connect: ' . mysqli_error());
 	}
 	
-	mysqli_select_db("progin_405_13510035", $con);
+	mysqli_select_db($con, "progin_405_13510035");
 	
 	if (!copy($source, $dest)) {
 		echo $dest;
@@ -18,7 +18,7 @@
 		echo "#";
 	}
 	
-	$result = mysqli_query($sql);
+	$result = mysqli_query($con, $sql);
 	
 	mysqli_close($con);
 ?>

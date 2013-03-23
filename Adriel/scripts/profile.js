@@ -6,24 +6,24 @@ function initialize()
 	{
 		if (localStorage.session)
 		{
-			localStorage.clear();
-			/*document.getElementById("linkusername").innerHTML = localstorage.session;
+			document.getElementById("linkusername").innerHTML = localStorage.session;
 			document.getElementById("linkusername").href = "profile.html";
-			showFullName(localstorage.session);
-			showEmail(localstorage.session);
-			showDate(localstorage.session);
-			showPassword(localstorage.session);
-			showRePassword(localstorage.session);*/
+			showFullName(localStorage.session);
+			showEmail(localStorage.session);
+			showDate(localStorage.session);
+			showPassword(localStorage.session);
+			showRePassword(localStorage.session);
 		}
 		else
 		{
-			window.location = "index.html";
+			window.location = "index.php";
 		}
 	}
 }
 
 function loadActivities()
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -33,7 +33,7 @@ function loadActivities()
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
-	username = localstorage.session;
+	username = localStorage.session;
 	
 	xmlhttp.onreadystatechange=function()
 	{
@@ -48,6 +48,7 @@ function loadActivities()
 
 function showFullName(str)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -65,12 +66,13 @@ function showFullName(str)
 			document.getElementById("fullname").value = document.getElementById("nameDisplayDiv").innerHTML;
 		}
 	}
-	xmlhttp.open("GET","getprofile.php?type=fullname&q="+str,true);
+	xmlhttp.open("GET","getprofilename.php?q="+str,true);
 	xmlhttp.send();
 }
 
 function showEmail(str)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -88,12 +90,13 @@ function showEmail(str)
 			document.getElementById("email").value = document.getElementById("emailDisplayDiv").innerHTML;
 		}
 	}
-	xmlhttp.open("GET","getprofile.php?type=email&q="+str,true);
+	xmlhttp.open("GET","getprofileemail.php?q="+str,true);
 	xmlhttp.send();
 }
 
 function showDate(str)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -111,12 +114,13 @@ function showDate(str)
 			document.getElementById("date").value = document.getElementById("dateDisplayDiv").innerHTML;
 		}
 	}
-	xmlhttp.open("GET","getprofile.php?type=date&q="+str,true);
+	xmlhttp.open("GET","getprofilebirthday.php?q="+str,true);
 	xmlhttp.send();
 }
 
 function showPassword(str)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -130,16 +134,17 @@ function showPassword(str)
 	{
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
-			document.getElementById("passwordDisplayDiv").value=xmlhttp.responseText;
+			document.getElementById("passwordDisplayDiv").innerHTML=xmlhttp.responseText;
 			document.getElementById("password").value = document.getElementById("passwordDisplayDiv").innerHTML;
 		}
 	}
-	xmlhttp.open("GET","getprofile.php?type=password&q="+str,true);
+	xmlhttp.open("GET","getprofilepassword.php?q="+str,true);
 	xmlhttp.send();
 }
 
 function showRePassword(str)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -153,16 +158,17 @@ function showRePassword(str)
 	{
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
-			document.getElementById("repasswordDisplayDiv").value=xmlhttp.responseText;
+			document.getElementById("repasswordDisplayDiv").innerHTML=xmlhttp.responseText;
 			document.getElementById("repassword").value = document.getElementById("repasswordDisplayDiv").innerHTML;
 		}
 	}
-	xmlhttp.open("GET","getprofile.php?type=password&q="+str,true);
+	xmlhttp.open("GET","getprofilepassword.php?q="+str,true);
 	xmlhttp.send();
 }
 
 function getPassword(str)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -186,6 +192,7 @@ function getPassword(str)
 
 function updateFullName(str, val)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -201,6 +208,7 @@ function updateFullName(str, val)
 
 function updateEmail(str, val)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -216,6 +224,7 @@ function updateEmail(str, val)
 
 function updateDate(str, val)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -231,6 +240,7 @@ function updateDate(str, val)
 
 function updatePassword(str, val)
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -364,9 +374,9 @@ function checkChange()
 		{
 			if (document.getElementById("dateDisplayDiv").innerHTML == document.getElementById("date").value)
 			{
-				if (document.getElementById("password").value == getPassword(localstorage.session))
+				if (document.getElementById("password").value == getPassword(localStorage.session))
 				{
-					if (document.getElementById("repassword").value == getPassword(localstorage.session))
+					if (document.getElementById("repassword").value == getPassword(localStorage.session))
 					{
 						
 					}
@@ -435,10 +445,10 @@ function doneProfil()
 		document.getElementById("dateDisplayDiv").innerHTML = document.getElementById("date").value;
 		document.getElementById("passwordDisplayDiv").innerHTML = document.getElementById("password").value;
 		document.getElementById("repasswordDisplayDiv").innerHTML = document.getElementById("repassword").value;
-		updateFullName(localstorage.session, document.getElementById("fullname").value);
-		updateEmail(localstorage.session, document.getElementById("email").value);
-		updateDate(localstorage.session, document.getElementById("date").value);
-		updatePassword(localstorage.session, document.getElementById("password").value);
+		updateFullName(localStorage.session, document.getElementById("fullname").value);
+		updateEmail(localStorage.session, document.getElementById("email").value);
+		updateDate(localStorage.session, document.getElementById("date").value);
+		updatePassword(localStorage.session, document.getElementById("password").value);
 		
 		doneediting = true;
 	}
@@ -464,6 +474,7 @@ function doneProfil()
 
 function changePP()
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp=new XMLHttpRequest();
@@ -474,7 +485,7 @@ function changePP()
 	}
 	
 	var ppsource = document.getElementById("cpp").value;
-	var ppdest = "avatar/" + localstorage.session + ".jpg";
+	var ppdest = "avatar/" + localStorage.session + ".jpg";
 	
 	xmlhttp.onreadystatechange=function()
 	{

@@ -8,7 +8,7 @@
 		die('Could not connect: ' . mysqli_error());
 	}
 	
-	mysqli_select_db("progin_405_13510035", $con);
+	mysqli_select_db($con, "progin_405_13510035");
 	
 	if ($type == "fullname")
 	{
@@ -27,7 +27,7 @@
 		$sql="SELECT password FROM user WHERE username = '".$q."'";
 	}
 	
-	$result = mysqli_query($sql);
+	$result = mysqli_query($con, $sql);
 	$row = mysqli_fetch_array($result, MYSQLI_NUM);
 	echo $row[0];
 	

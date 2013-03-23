@@ -8,10 +8,10 @@
 		die('Could not connect: ' . mysqli_error());
 	}
 	
-	mysqli_select_db("progin_405_13510035", $con);
+	mysqli_select_db($con, "progin_405_13510035");
 	
 	$sql = "SELECT * FROM comment WHERE commented_task = '".$id."' ORDER BY writing_time";
-	$result = mysqli_query($sql);
+	$result = mysqli_query($con, $sql);
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		echo "<img src='avatar/".$user.".jpg' width='50' height='50' alt='Image not found'/>";

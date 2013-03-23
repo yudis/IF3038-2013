@@ -10,13 +10,13 @@ function initialize()
 {
 	if (typeof(Storage) !== 'undefined')
 	{
-		if (localstorage.session)
+		if (localStorage.session)
 		{
 			onload();
 		}
 		else
 		{
-			window.location = "index.html";
+			window.location = "index.php";
 		}
 	}
 }
@@ -83,7 +83,7 @@ function generateComments(id)
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
-	var username = localstorage.session;
+	var username = localStorage.session;
 	
 	
 	xmlhttp.onreadystatechange=function()
@@ -307,7 +307,7 @@ function addKomentar() {
 	}
 	
 	var now = new Date();
-	var username = localstorage.session;
+	var username = localStorage.session;
 	var id_komentar = "COM-" + username + now.toUTCString;
 	var date = "" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 	var comment = document.getElementById('txtKomentar').value;
@@ -355,7 +355,7 @@ function deletekomentar(comment_id)
 function addKomentar() {
     var now = new Date();
     var komentar_div = document.getElementById("komentar");
-	var username = localstorage.session;
+	var username = localStorage.session;
 	var id_komentar = "COM-" + username + now.toUTCString;
 	
     komentar_div.innerHTML += "<b>" + username + "</b> - " + now.toUTCString() + "<hr />" + document.getElementById('txtKomentar').value + "<br /><br />";
