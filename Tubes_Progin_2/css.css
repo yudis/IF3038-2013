@@ -247,7 +247,7 @@ input.liusername{
     left: 680px;
     padding: 50px;
     margin-left: 100px;
-    overflow: hidden;
+    overflow-y: auto;
 	visibility: visible;
     background-image: url('img/kertas.png');
     width: 350px;

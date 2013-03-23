@@ -47,40 +47,34 @@ and open the template in the editor.
 					echo "<br />";
 				?> 
 				Task Status: 
-				<form id="status"> 
-					<?php 
-						if ($current_task['status'] == 0){ ?>
-							<input type="radio" name="status_done" value="Done" onClick="UpdateDB();"> Done
-							<input type="radio" name="status_notdone" value="NotDone" checked> Not Done <br/>
-					<?php
-						}else{ ?>
-							<input type="radio" name="status" value="Done" checked> Done
-							<input type="radio" name="status" value="NotDone"> Not Done <br/>
-					<?php
-						}
-					?>
-				</form>
+				<div id="status_detail"></div>
 				
                 Attachment: 
-                    <div class="attachment">
-                        <a href="img/file.zip">file.zip</a><br/>
-                        <a href="img/badge.png">picture.png</a><br/>
-                    </div><br/>
+                <div id="attachment"></div>
+				
                 Deadline: 
 				<?php
 					echo $current_task['deadline'];
 				?>
 				<br/>
-                Assignee: <a href="" class="asignee">Timo</a>, <a href="" class="asignee">Stefan</a>, <a href="" class="asignee">Frilla</a><br/>
-                Tag: <a href="" class="tag">dangerous</a>, <a href="" class="tag">novice</a> <br/>
-                <br/>Comment:<br/>
+                Assignee:
+				<div id="assignee"></div>
+				
+                Tag: <div id="tag"></div>
+				
+                Comment:<br/>
                 <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
-                <form>
-                    <textArea></textarea>
-                    <input type="button" name="submit" value="submit">
+				
+                <form id="submit_comment">
+                    <textArea id="comment"></textarea>
+                    <input type="button" name="submit" value="submit" onClick="storeComment();">
                 </form>
+				
                 <br/><br/>
                 <a onclick="showEdit();" class="button">edit</a><br/>
             </div>
+			<script> 
+				window.onload=update2;
+			</script>
     </body>
 </html>

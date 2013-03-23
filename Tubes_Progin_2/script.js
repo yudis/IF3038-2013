@@ -546,10 +546,148 @@ function profileRestore() {
    // document.getElementById('overlay').style.display='none';
 }
 
-function UpdateDB(){
-	var done = document.getElementsByName('status_done').value;
-	var notdone = document.getElementsByName('status_notdone').value;
-	if(done.checked = true){
-		
-	}
+function showStatus(){
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp2=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp2.onreadystatechange=function()
+		{
+			if (xmlhttp2.readyState==4 && xmlhttp2.status==200)
+			{
+				var result = "";
+				var string1 = xmlhttp2.responseText.split(",");
+				if(string1[1] == "0"){
+					result += "<input type=\"checkbox\" name=\"Done\" value=\"0\" onclick=\"cektugasdone("+string1[0]+");\"> Done";
+				}else{
+					result += "<input type=\"checkbox\" name=\"Done\" value=\"1\" checked onclick=\"cektugasdone("+string1[0]+");\"> Done";
+				}
+				document.getElementById("status_detail").innerHTML=result;
+			}
+		}
+	xmlhttp2.open("GET","showStatus.php",true);
+	xmlhttp2.send();
 }
+
+function showAssignee(){
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp3=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp3=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp3.onreadystatechange=function()
+		{
+			if (xmlhttp3.readyState==4 && xmlhttp3.status==200)
+			{
+				var result = "";
+				var string1 = xmlhttp3.responseText.split(",");
+				
+				for (var s=0; s<string1.length; s++){
+					result += "<div class=\"assignee\">";
+					result += "<a href=\"#\">"+string1[s]+"</a>";
+					result += "</div>";
+				}
+				document.getElementById("assignee").innerHTML=result;
+			}
+		}
+	xmlhttp3.open("GET","showAssignee.php",true);
+	xmlhttp3.send();
+}
+
+function showTags(){
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp4=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp4=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp4.onreadystatechange=function()
+		{
+			if (xmlhttp4.readyState==4 && xmlhttp4.status==200)
+			{
+				var result = "";
+				result += xmlhttp4.responseText;
+				document.getElementById("tag").innerHTML=result;
+			}
+		}
+	xmlhttp4.open("GET","showTags.php",true);
+	xmlhttp4.send();
+}
+
+function showAttachment(){
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp5=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp5=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp5.onreadystatechange=function()
+		{
+			if (xmlhttp5.readyState==4 && xmlhttp5.status==200)
+			{
+				var result = "";
+				var string1 = xmlhttp5.responseText.split(",");
+				
+				for(var s=0; s<string1.length; s++){
+					var string2 = string1[s].split(".");
+					if (string2[1] == "jpg" || string2[1] == "jpeg"){
+						result += "<img src=\""+string1[s]+"\"  alt=\"This is picture\" width=\"30%\"  height=\"30%\"></img>";
+					}else if (string2[1] == "mp4" || string2[1] == "ogg" || string2[1] == "webm" || string2[1] == "swf"){
+						result += "<video width=\"50%\" height=\"50%\" controls>";
+						result += "<source src=\""+string1[s]+"\" type=\"video/mp4\">";
+						result += "<source src=\""+string1[s]+"\" type=\"video/ogg\">";
+						result += "<source src=\""+string1[s]+"\" type=\"video/webm\">";
+						result += "<object data=\""+string1[s]+"\" width=\"50%\" height=\"50%\" controls>";
+						result += "<embed src=\""+string1[s]+"\" width=\"50%\" height=\"50%\" controls>";
+						result += "</object>";
+					}else{
+						result += "<a href=\""+string1[s]+"\" target=\"_blank\">"+string1[s]+"</a>";
+					}
+					result += "</br>";
+				}
+				
+				document.getElementById("attachment").innerHTML=result;
+			}
+		}
+	xmlhttp5.open("GET","showAttachment.php",true);
+	xmlhttp5.send();
+}
+
+function update2(){showStatus(); showAttachment(); showAssignee(); showTags();}
+
+/*function storeComment(){
+alert("ASA");
+	var comment = document.getElementById("comment").value;
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp6=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp6=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp6.onreadystatechange=function()
+		{
+			if (xmlhttp6.readyState==4 && xmlhttp6.status==200)
+			{
+				if(xmlhttp6.responseText = ""){
+					alert("Komentar berhasil disimpan");
+				}else{
+					alert("Komentar gagal disimpan");
+				}
+			}
+		}
+	xmlhttp6.open("GET","storeComment.php?q="+comment,true);
+	xmlhttp6.send();
+}*/

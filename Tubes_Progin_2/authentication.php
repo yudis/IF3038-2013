@@ -20,13 +20,12 @@
 		$_SESSION['password'] = $result['password'];
 		$_SESSION['email'] = $result['email'];
 		//SET COOKIES, EXPIRED 30 DAYS
-		/*
 		$expire=time()+60*60*24*30;
 		setcookie("username", $result['username'], $expire);
 		setcookie("fullname", $result['fullname'], $expire);
 		setcookie("birthday", $result['birthday'], $expire);
 		setcookie("password", $result['password'], $expire);
-		setcookie("email", $result['email'], $expire);*/
+		setcookie("email", $result['email'], $expire);
 	}
 	/* close connection */
 	//$mysqli->close();
