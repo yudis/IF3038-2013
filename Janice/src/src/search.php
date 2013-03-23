@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="default.css" />
        <?PHP
 				// Create connection
-				$con=mysqli_connect("localhost","progin","progin","progin_405_13510035");
+				$con=mysqli_connect("localhost","progin","progin","progin_405_13510029");
 				$string = $_GET["s"];  
 				$outside = $_GET["oo"]; 
 				$isi_open = $_GET["o"];

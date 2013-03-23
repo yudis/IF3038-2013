@@ -7,7 +7,7 @@
 
 <body>
 	<?php
-		$con=mysqli_connect("localhost","progin","progin","progin_405_13510035");
+		$con=mysqli_connect("localhost","progin","progin","progin_405_13510029");
 		$taskid = $_GET['idcheckbox'];
 		$value = $_GET['checked'];
 		if ($value == 'true'){
