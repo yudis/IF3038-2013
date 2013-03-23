@@ -139,12 +139,68 @@
 		 * Get the category either created or supervised by the user
 		 * @return array of Category that is either created or supervised by the user
 		 */
-		public function getCategories() 
+		public function getCategories($narrowQ = '1') 
 		{
 			$id = addslashes($this->id_user);
-			return Category::model()->findAll("id_user='$id' OR id_kategori IN (SELECT id_kategori FROM edit_kategori WHERE id_user='$id') ".
-											"OR id_kategori IN (SELECT id_kategori FROM ". Task::tableName() ." AS t LEFT OUTER JOIN assign AS a ".
-											"ON t.id_task=a.id_task WHERE t.id_user = '". $id ."' OR a.id_user = '". $id ."' )");
+			return Category::model()->findAll(
+				"(id_user='$id' OR id_kategori IN (SELECT id_kategori FROM edit_kategori WHERE id_user='$id') ".
+				"OR id_kategori IN (SELECT id_kategori FROM ". Task::tableName() ." AS t LEFT OUTER JOIN assign AS a ".
+				"ON t.id_task=a.id_task WHERE t.id_user = '". $id ."' OR a.id_user = '". $id ."' )) AND $narrowQ");
+		}
+
+		/**
+		 * Get all tasks visible to the user
+		 * @return array of Task that is visible to the user
+		 */
+		public function getTasks($narrowQ = '1') {
+			$id = addslashes($this->id_user);
+			return Task::model()->findAll(
+				"(id_kategori IN ( SELECT id_kategori FROM ".Category::tableName()." WHERE id_user='$id' ".
+				"OR id_kategori IN (SELECT id_kategori FROM edit_kategori WHERE id_user='$id') ".
+				"OR id_kategori IN (SELECT id_kategori FROM ". Task::tableName() ." AS t LEFT OUTER JOIN assign AS a ".
+				"ON t.id_task=a.id_task WHERE t.id_user = '". $id ."' OR a.id_user = '". $id ."' ))) AND $narrowQ");
+		}
+
+		public function getTasksLike($q, $start = 0, $limit = 10) {
+			$q = addslashes($q);
+			$terms = str_replace(' ', '%', $q);
+			$terms = "%$terms%";
+			$terms = addslashes($terms);
+
+			$start = intval($start);
+			$limit = intval($limit);
+
+			$sql = "nama_task LIKE '$terms'";
+
+			return $this->getTasks($sql);
+		}
+
+		public function getCategoriesLike($q, $start = 0, $limit = 10) {
+			$q = addslashes($q);
+			$terms = str_replace(' ', '%', $q);
+			$terms = "%$terms%";
+			$terms = addslashes($terms);
+
+			$start = intval($start);
+			$limit = intval($limit);
+
+			$sql = "nama_kategori LIKE '$terms'";
+
+			return $this->getCategories($sql);
+		}
+
+		public function findAllLike($q, $start = 0, $limit = 10) {
+			$q = addslashes($q);
+			$terms = str_replace(' ', '%', $q);
+			$terms = "%$terms%";
+			$terms = addslashes($terms);
+
+			$start = intval($start);
+			$limit = intval($limit);
+
+			$sql = "username LIKE '$terms' OR fullname LIKE '$terms' OR email LIKE '$terms' OR birthdate LIKE '$terms' LIMIT $start,$limit";
+
+			return $this->findAll($sql);
 		}
 		
 		public function findByUsername($username) 
