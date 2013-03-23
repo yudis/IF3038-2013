@@ -12,7 +12,10 @@ $con = mysqli_connect(localhost,"progin","progin","progin") or die ('Cannot conn
     
 $result = mysqli_query($con, "SELECT * FROM task WHERE ID='".$idtask."'");
 $row = mysqli_fetch_array($result);
-$resultassignee = mysqli_query($con, "SELECT * FROM task INNER JOIN assignee ON task.ID=assignee.IDTask");
+$resultassignee = mysqli_query($con, "SELECT * FROM task INNER JOIN assignee ON task.ID=assignee.IDTask WHERE task.ID='".$idtask."'");
+
+$resulttag = mysqli_query($con, "SELECT * FROM tags INNER JOIN task ON task.ID=tags.IDTask WHERE task.ID='".$idtask."'");
+
 
 ?>
 
@@ -55,7 +58,7 @@ $resultassignee = mysqli_query($con, "SELECT * FROM task INNER JOIN assignee ON 
 				<form name="rincian">
 				<h1 class="judul">Rincian Tugas</h1>
                                 <?php
-                                echo "Nama Task : <input  type='text' readonly='true' id='namatask' value='".$row['Nama']."' border='0' /> <br>";
+                                echo "Nama Task : <input type='text' id='namatask' value='".$row['Nama']."' border='0' /> <br>";
                                 ?>
 				Attachment : <br> 
 				<video width="320" height="240" controls="controls">
@@ -64,17 +67,23 @@ $resultassignee = mysqli_query($con, "SELECT * FROM task INNER JOIN assignee ON 
 				</video>
 				<br>
                                 <?php
-                                echo "Deadline : <input  type='text' readonly='true' id='deadline' value='".$row['Deadline']."' border='0' /><br>";
+                                echo "Deadline : <input  type='text' id='deadline' value='".$row['Deadline']."' border='0' /><br>";
                                 ?>
 				<?php 
-                                echo "Assignee : <p id='assignee' value='' border='0' >";
+                                $listassignee = "";
                                 while ($rowassignee = mysqli_fetch_array($resultassignee)) {
-                                    echo " ".$rowassignee['IDUser']." ";
+                                    $listassignee.=$rowassignee['IDUser'].",";
                                 }
-                                echo "</p>";
+                                echo "Assignee : <input type='text' id='assignee' value='".$listassignee."' border='0' />";
+                                
+                                $listag = "";
+                                while ($rowtag = mysqli_fetch_array($resulttag)) {
+                                    $listag.=$rowtag['Tag'].",";
+                                }
+                                
                                 ?>
 				
-				Tag : <input  type="text" readonly="true" id="tag" value="akademik, capek" border="0" /> <br>
+				<?Php echo "Tag : <input  type='text' id='tag' value='".$listag."' border='0' /> <br> "?>
 				<img src="images/edit.png" width="150" id="edit-button" value="EDIT" onClick="edit()" />
 				<img src="images/save.png" width="150" id="save-button" value="SAVE" onClick="save()" /><br><br>
 				
@@ -82,7 +91,13 @@ $resultassignee = mysqli_query($con, "SELECT * FROM task INNER JOIN assignee ON 
 
 			<div class="comment">
 				<h1 class="judul">Komentar</h1>
-				<textarea id="comment" rows="4" cols="45"> </textarea> <br> <input type="button" value="SUBMIT" /> <br><br>
+                                <textarea name="commentarea" id="commentarea" rows="4" cols="45"></textarea> <br> 
+                                <form id="formkomentar"  > 
+				
+                                    <input type="hidden" name="idtask" id="idtask" value="<?php echo $idtask; ?>" />
+                                    <input type="button" onclick="saveComment()" value="SUBMIT" /> 
+                                    <br><br>
+                                </form>
                                                 <div id="commentpage">
                                 <?php
                                 $resultcomment = mysqli_query($con, "SELECT * FROM komentar INNER JOIN task ON task.ID=komentar.IDTask");
@@ -92,13 +107,7 @@ $resultassignee = mysqli_query($con, "SELECT * FROM task INNER JOIN assignee ON 
                                     echo " ".$rowcomment['IDUser']." ".$rowcomment['Waktu']." ".$rowcomment['Isi']." <br>";
                                 }
                                 ?>
-				<img class="avatar" src="images/ava1.jpg"> Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! 
-				<hr>
-				<img class="avatar" src="images/ava2.jpg"> Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya! Beuh mantap gan tubesnya!<br>
 				
-				<center>
-					Prev | 1 | 2 | Next
-				</center>
                                         
                                         </div>
 			</div>

@@ -127,7 +127,7 @@ ChromePhp::log($idtask);
 	}
         
         
-        while($row = mysqli_fetch_assoc($result))
+        while($row = mysqli_fetch_array($result))
         {
 
         $pagination.="-- ".$row['IDUser']." ".$row['Waktu']." ".$row['Isi']." <br>";
