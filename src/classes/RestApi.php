@@ -253,19 +253,20 @@ class RestApi
 	 * Retrieve list of category
 	 * @return array of categories
 	 */
-	public function retrieve_categories() 
+	public function retrieve_categories($params) 
 	{
 		// TODO use categories by user
 		$cats = array();
 		if ($this->app->loggedIn)
 		{
-			$raw = $this->app->getCategories();
+			$raw = $this->app->currentUser->getCategories();
 
 			foreach ($raw as $cat) {
 				$dummy = new StdClass;
 				$dummy->name = $cat->nama_kategori;
 				$dummy->id = $cat->id_kategori;
-				$dummy->canDelete = ($cat->id_user == $this->app->currentUserId);
+				$dummy->canDeleteCategory = $cat->getDeletable($this->app->currentUserId);
+				$dummy->canEditCategory = $cat->getEditable($this->app->currentUserId);
 
 				$cats[] = $dummy;
 			}

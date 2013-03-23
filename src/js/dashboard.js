@@ -84,7 +84,7 @@ Rp(function()
 			.factory('a')
 			.attr('href', 'dashboard.php?cat=' + cat.id)
 			.attr('data-category-id', cat.id)
-			.attr('data-deletable', cat.canDelete ? 'true' : 'false')
+			.attr('data-deletable', cat.canDeleteCategory ? 'true' : 'false')
 			.text(cat.name);
 
 		li.append(a);
@@ -136,7 +136,7 @@ Rp(function()
 					{
 						Rp('#addTaskLi').css('display', 'block');
 						Rp('#addTaskCat').prop('href', 'new_work?cat='+response.categoryID);
-						Rp('#deleteCategoryLi').css('display', 'none');
+						Rp('#deleteCategoryLi').css('display', 'block');
 					}
 					else if (response.canEditCategory)
 					{
@@ -152,8 +152,8 @@ Rp(function()
 				}
 				else 
 				{
-					Rp('#addTaskLi').hide();
-					Rp('#deleteCategoryLi').hide();
+					Rp('#addTaskLi').css('display', 'none');
+					Rp('#deleteCategoryLi').css('display', 'none');
 					Rp('#pageTitle').text('All Tasks');
 					li = Rp('#categoryLi0');
 					li.addClass('active');
