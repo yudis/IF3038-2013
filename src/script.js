@@ -118,3 +118,24 @@ function pdisplaybutton(pbut){
 	pActiveButton = pbut;
 	document.getElementById(pbut).style.display = "block";
 }
+
+var idActiveTask;
+var ActiveButton;
+function display(id,button){
+	if (idActiveTask == null) {
+		idActiveTask = "edited";
+	}
+	document.getElementById(idActiveTask).style.display = "none";
+	idActiveTask = id;
+	document.getElementById(id).style.display = "block";
+	displaybutton(button);
+}
+			
+function displaybutton(but){
+	if (ActiveButton == null){
+		ActiveButton = "tombol_edit";
+	}
+	document.getElementById(ActiveButton).style.display = "none";
+	ActiveButton = but;
+	document.getElementById(but).style.display = "block";
+}

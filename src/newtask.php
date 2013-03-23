@@ -1,8 +1,3 @@
-<?php
-	include('config.php');
-	
-?>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,7 +10,7 @@
 			<div id="header">
 				<div id="topbar">
 					<div id="topbar_logo">
-						<a href="dashboard.html"><img id="logo" src="img/logo.png"></a>
+						<a href="dashboard.php"><img id="logo" src="img/logo.png"></a>
 					</div>
 					<div id="topbar_logo2">
 						<img id="logo2" src="img/namalogo.png">
@@ -24,9 +19,9 @@
 					<div id="topbar_dashboard">
 						<nav>
 							<ul>
-								<li> <a class="active" href="Dashboard.html"> Dashboard </a> </li>
-								<li> <a href="profil.html">Profil</a> </li>
-								<li> <a href="index.html">Logout</a> </li>
+								<li> <a class="active" href="dashboard.php"> Dashboard </a> </li>
+								<li> <a href="profil.php">Profil</a> </li>
+								<li> <a href="index.php">Logout</a> </li>
 							</ul>
 						</nav>
 					</div>
@@ -44,7 +39,7 @@
 						<paa>Nama</paa><br>
 						<paa>Attachment</paa><br>
 						<paa>Deadline</paa><br>
-						<paa>Asignee</paa><br>
+						<paa>Assignee</paa><br>
 						<paa>Tag</paa><br>
 					</div>
 					<div id="input">

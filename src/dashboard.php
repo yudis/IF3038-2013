@@ -1,6 +1,7 @@
 <?php
 	session_start();
-	$_SESSION['username'] ="dummy";
+	include('config.php');
+	$username = $_SESSION['username'];
 	if(!isset($_SESSION['username'])) {
 		header("Location:index.php");
 	}
@@ -129,7 +130,7 @@ function setToUndone(namaTugas){
 		<div id="header">
 			<div id="topbar">
 				<div id="topbar_logo">
-					<a href="dashboard.html"><img id="logo" src="img/logo.png"></a>
+					<a href="dashboard.php"><img id="logo" src="img/logo.png"></a>
 				</div>
 				<div id="topbar_logo2">
 					<img id="logo2" src="img/namalogo.png">
@@ -139,8 +140,8 @@ function setToUndone(namaTugas){
 					<nav>
 						<ul>
 							<li> <a class="active" href="#"> Dashboard </a> </li>
-							<li> <a href="profil.html">Profil</a> </li>
-							<li> <a href="logout.php">Logout</a> </li>
+							<li> <a href="profil.php">Profil</a> </li>
+							<li> <a href="index.php">Logout</a> </li>
 						</ul>
 					</nav>
 				</div>
@@ -155,7 +156,7 @@ function setToUndone(namaTugas){
 				</div>
 								
 				<div id="avatar">
-					<a href="profil.html">
+					<a href="profil.php">
 					<img id="ava" src="img/fotoprofil.jpg">
 					Username</a>
 				</div>
@@ -164,8 +165,8 @@ function setToUndone(namaTugas){
 	</header>
 
 	<?php
-		mysql_connect("localhost","root","") or die ("Cannot connect to MySQL");
-		mysql_select_db("progin") or die ("Cannot connect to progin database");
+		// mysql_connect("localhost","root","") or die ("Cannot connect to MySQL");
+		// mysql_select_db("progin") or die ("Cannot connect to progin database");
 		
 		function cekAssigner($user,$taskname){
 			$name = mysql_query("SELECT username FROM asigner WHERE namatugas='$taskname'");
@@ -202,7 +203,7 @@ function setToUndone(namaTugas){
 						</div>
 						<div id='taskdesc'>
 							<div id='". $row['namatugas'] . "'>
-							<a href='rinciantugas.html'>" . $row['namatugas'] . "</a> 
+							<a href='rinciantugas.php?username=" .$username. "&namatugas=" .$row['namatugas']. "'>" . $row['namatugas'] . "</a> 
 							<p> Deadline : " . $row['deadline'] ."</p>
 							<p> Tag : " ; showTag($row['namatugas']) ; echo "</p>
 							<p> Status : "; if ($row['status']==0) {echo "not done";} else {echo "done";} ;
@@ -226,7 +227,7 @@ function setToUndone(namaTugas){
 			</div>
 			
 			<div id="newcat">
-				<a href="newtask2.html" onclick="return popitup('newcat.html')"> <img id="newtaskbutton" src="img/plus.png" alt="plusbutton" width="32" height="32" ></img>  </a>
+				<a href="newtask.php" onclick="return popitup('newcat.php')"> <img id="newtaskbutton" src="img/plus.png" alt="plusbutton" width="32" height="32" ></img>  </a>
 				<p id="newtasktext">NEW CATEGORY</p>
 			</div>
 		</div>
