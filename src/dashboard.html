@@ -5,95 +5,122 @@
         <link rel="stylesheet" href="css/dash.css">
         <script type="text/javascript" src="js/popup.js"></script>
         <script>
-
             var itotal=5;
             var ipartin=0;
             var ipartout=0;
             var itulis=0;
-            
-			function showUserLogin(){							/*-----------menampilkan user pada local storage-------------- */
-				var waktuLogin = Math.round(localStorage.tglLogin/(1000*60*60*24)); 
-				var waktuSkrg = Math.round(new Date().getTime()/(1000*60*60*24));
-				var selisihHari = waktuSkrg-waktuLogin;	 	//new Date().getTime() akan menampilkan selisih waktu milisecond antara midnight 1 januari 1970 dengan saat method dipanggil 
-//				alert(selisihHari);				
-				
-				if(selisihHari<30){							
-					document.getElementById("wellfaiz").innerHTML="Welcome "+localStorage.userLogin;										
-				}else{										//jika sudah 30 hari, user harus login lagi
-					window.location="index.html";	
-				}
-			}
-			
-			function hapusUserLogin(){							/*-----------menghapus user dan waktu pada local storage-------*/
-				localStorage.clear();
-			}
-			
-            function taskawal(itotal){
-                for(var i=0;i<itotal;i++){
-                var para=document.createElement("p");
-                if(i===0){
-                    var node=document.createTextNode("TUBES 1" + " " + (11+(i*4)) + " AGUSTUS2013"  +" KAP");   
-                }else if(i===1){
-                    var node=document.createTextNode("TUBES 2" + " " + ((i*6)-1) + "OKTOBER2013"  +" MSDI");   
-                }else if(i===2){
-                    var node=document.createTextNode("TUBES 3" + " " + ((i*6)-1) + "OKTOBER2013"  +" MSDI");   
-                }else if(i===3){
-                    var node=document.createTextNode("TUBES 4" + " " + ((i*6)-1) + "OKTOBER2013"  +" MSDI");   
-                }else if(i===4){
-                    var node=document.createTextNode("TUBES 5" + " " + ((i*4)-4) + "APRIL2013"  +" PROGIN" );   
-                }else if(i===5){
-                    var node=document.createTextNode("TUBES 6" + " " + ((i*4)-4) + "APRIL2013"  +" PROGIN" );   
-                }
-                para.appendChild(node);
-                para.id="listtask";
-                
-                var element=document.getElementById("div1");
-                element.appendChild(para);
-                ipartout = itotal;
-                }
-            }
-            function addTask(ipartin){                
-                for(var i=0;i<ipartin;i++){
-                var para=document.createElement("p");
-                if(ipartin === 1){
-                    var node=document.createTextNode("TUBES " + (i+1) + " " + (11+(i*4)) + "AGUSTUS2013"  +" KAP");
-                } else if(ipartin === 2){
-                    var node=document.createTextNode("TUBES " + (i+5) + " " + (12+(i*4)) + "APRIL2013"  +" PROGIN" );
-                } else if(ipartin === 3){    
-                    var node=document.createTextNode("TUBES " + (i+2) + " " + (5+(i*6)) + "OKTOBER2013"  +" MSDI");
-                }
-                
-                para.appendChild(node);
-                para.id="listtask";
-                
-                var element=document.getElementById("div1");
-                element.appendChild(para);
-                }
-                
-                ipartout=ipartin;
-                itulis=ipartin;
-            }
-            
-            function removeTask(){
-                for(var i=0;i<ipartout;i++){
-                var parent=document.getElementById("div1");
+
+            function removeTask(a){
+                for(var i=0;i<n;i++){
+                var parent=document.getElementById("category2");
                 var child=document.getElementById("listtask");
                 parent.removeChild(child);
                 }
             }
             
             
-            function showTask(){
+            function showAddTask(){<!--SIGIT-->
                 document.getElementById("addtask").style.visibility="visible";
             }
             
             function hideAddTask(){
                 document.getElementById("addtask").style.visibility="hidden";
             }
+			
+			function ubahStatus(nomor) {
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();				
+				}else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+				
+				xmlhttp.onreadystatechange = function(){
+					//alert(xmlhttp.readyState+" "+xmlhttp.status);
+					
+					if (xmlhttp.readyState==4 && xmlhttp.status==200){				
+						//alert(xmlhttp.responseText);
+						//document.getElementById("category").innerHTML=xmlhttp.responseText;
+					}
+				}
+								
+				xmlhttp.open("GET","ubahstatus.php?id_tugas="+nomor,true);
+				xmlhttp.send();				
+			}
             
+			function getCat(){<!--SIGIT-->
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();				
+				}else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+				
+				xmlhttp.onreadystatechange = function(){
+					//alert(xmlhttp.readyState+" "+xmlhttp.status);
+					
+					if (xmlhttp.readyState==4 && xmlhttp.status==200){				
+						//alert(xmlhttp.responseText);
+						document.getElementById("category").innerHTML=xmlhttp.responseText;					
+					}
+				}
+								
+				xmlhttp.open("GET","getCat.php",true);
+				xmlhttp.send();
+				//alert(xmlhttp.responseText);
+				//alert(xmlhttp.status);
+			}
+			
+			function getTask(){<!--SIGIT-->
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();				
+				}else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+				
+				xmlhttp.onreadystatechange = function(){
+					//alert(xmlhttp.readyState+" "+xmlhttp.status);
+					
+					if (xmlhttp.readyState==4 && xmlhttp.status==200){				
+						//alert(xmlhttp.responseText);
+						document.getElementById("category2").innerHTML=xmlhttp.responseText;					
+					}
+				}
+					
+				xmlhttp.open("GET","getTask.php",true);
+				xmlhttp.send();
+				//alert(xmlhttp.responseText);
+				//alert(xmlhttp.status);
+			}
+			function catTask(n){<!--SIGIT-->
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();				
+				}else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+				
+				xmlhttp.onreadystatechange = function(){
+					//alert(xmlhttp.readyState+" "+xmlhttp.status);
+					
+					if (xmlhttp.readyState==4 && xmlhttp.status==200){				
+						//alert(xmlhttp.responseText);
+						document.getElementById("category2").innerHTML=xmlhttp.responseText;					
+					}
+				}
+								
+				xmlhttp.open("GET","catTask.php?id="+n,true);
+				xmlhttp.send();
+				//alert(xmlhttp.responseText);
+				//alert(xmlhttp.status);
+			}
+			
         </script>
     </head>
-    <body onLoad="taskawal(6);showUserLogin() ">			<!------memanggil showUserLogin saat load body-------->
+	
+<!------------------------------------------------------------------------->	
+    <body onload="getTask();getCat();">
          <div class="header">
 			<div id="logo">
 			    <a hreg="dashboard.html">
@@ -120,44 +147,45 @@
 					    
 				    </div>
 			<div id="wellfaiz">
-				
+			    
 			</div>
-			<div id="logout" onClick="hapusUserLogin()">		<!---------hapus user login dan waktunya ketika logout ---------->
+			<div id="logout">
 			    <a href="index.html">LOGOUT</a>
 			</div>
-		  </div>
-          
-<!----------------------------------------- body ----------------------------------------->                           
+		</div>
         <div class="main">
-            <div id="addcat" onClick="popup('popUpDiv')">
+            <div id="addcat" onclick="popup('popUpDiv')">
             </div>
             <a href="buattask.html">
-            <div id="addtask" style="visibility: hidden";>
+            <div id="addtask" style="visibility: hidden;">
             </div>
             </a>
-            <div id="category">
-                <div id="listcat" onClick="taskawal(6); showTask(); " onMouseOver="removeTask(); hideAddTask() ">
-                    <div id="tulcat">
+            <div id="category"> <!-- Sigit-->
+                <!--
+				<div class="listcat" onclick="removeTask();taskawal(6); showTask(); " onmouseover=" hideAddTask() ">
+                    <div class="tulcat">
                     ALL
                     </div>
                 </div>
-                <div id="listcat" onClick="addTask(1); showTask(); " onMouseOver="removeTask(); hideAddTask() ">
-                    <div id="tulcat">
-                    KAP
+				
+				
+                <div class="listcat">
+                    <div class="tulcat" onclick="removeTask();addTask(1); showTask(); " onmouseover=" hideAddTask()">
+                    ABC
                     </div>
                 </div>
-                <div id="listcat" onClick="addTask(3); showTask(); " onMouseOver="removeTask(); hideAddTask()">
-                    <div id="tulcat">
+                <div class="listcat" onclick="removeTask();addTask(3); showTask(); " onmouseover=" hideAddTask()">
+                    <div class="tulcat">
                     MSDI
                     </div>
                 </div>
-                <div id="listcat" onClick="addTask(2); showTask();" onMouseOver="removeTask(); hideAddTask()">
-                    <div id="tulcat">
+                <div class="listcat" onclick="removeTask();addTask(2); showTask();" onmouseover="S hideAddTask()">
+                    <div class="tulcat">
                     PROGIN
                     </div>
-                </div>
-            </div>
-            
+                </div>-->
+			</div><!--akhir-->
+			<div id="category2"></div><!-- Sigit-->
             <div id="task">
                 <a href="rinciantugas.html">
                 <div id="div1">
@@ -170,7 +198,7 @@
             <div id="popUpDiv" style="display: none;">
                 <div id="newcategory">
                     <div id="closecat">
-                        <a href="#" onClick="popup('popUpDiv')" >CLOSE</a>
+                        <a href="#" onclick="popup('popUpDiv')" >CLOSE</a>
                     </div>
                     <div id="cattitle">ADD CATEGORY</div>
                     <div id="elcategory">
@@ -185,11 +213,10 @@
                 </div>
             </div>
         </div>
-        
-<!----------------------------------------- footer ----------------------------------------->                              
-        <div class="footer">
+        <!--
+		<div class="footer">
             Copyright © Ahmad Faiz - Fandi Pradana - Sigit Aji
         </div>
-        
+        -->
     </body>
 </html>
