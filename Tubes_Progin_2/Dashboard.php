@@ -37,11 +37,13 @@ and open the template in the editor.
         </div>
         
         <div id='add'>
-            Category Name:<br/> <input type='text' id='cate'><br/>
-            User:<br/> <input type='text'><br/>
-            <input type="submit" onclick="addCat();" value="create">
-            <input type="submit" onclick="restore();" value="cancel">
-        </div>
+			<form id="addcat" action="addkategori.php" method="post">
+            Category Name:<br/> <input type='text' id='cate' name="cate"><br/>
+            User:<br/> <input type='text' name="join"><br/>
+            <input type="submit" value="create">
+            <input type="button" onclick="restore();" value="cancel">
+			</form>
+		</div>
 		<script type="text/javascript" src="script.js"></script>
 		<script>		
 			window.onload=update;
