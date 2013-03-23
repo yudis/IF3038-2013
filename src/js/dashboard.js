@@ -121,26 +121,26 @@ Rp(function()
 
 					if (response.canDeleteCategory)
 					{
-						document.getElementById('addTaskLi').style.display = "block";
-						document.getElementById('addTaskCat').href='newwork.php?cat='+response.categoryID;
-						document.getElementById('deleteCategoryLi').style.display = "block";
+						Rp('#addTaskLi').css('display', 'block');
+						Rp('#addTaskCat').prop('href', 'newwork.php?cat='+response.categoryID);
+						Rp('#deleteCategoryLi').css('display', 'none');
 					}
 					else if (response.canEditCategory)
 					{
-						document.getElementById('addTaskLi').style.display = "block";
-						document.getElementById('addTaskCat').href='newwork.php?cat='+response.categoryID;
-						document.getElementById('deleteCategoryLi').style.display = "none";
+						Rp('#addTaskLi').css('display', 'block');
+						Rp('#addTaskCat').prop('href', 'newwork.php?cat='+response.categoryID);
+						Rp('#deleteCategoryLi').css('display', 'none');
 					}
 					else
 					{
-						document.getElementById('addTaskLi').style.display = "none";
-						document.getElementById('deleteCategoryLi').style.display = "none";
+						Rp('#addTaskLi').css('display', 'none');
+						Rp('#deleteCategoryLi').css('display', 'none');
 					}
 				}
 				else 
 				{
-					document.getElementById('addTaskLi').style.display = "none";
-					document.getElementById('deleteCategoryLi').style.display = "none";
+					Rp('#addTaskLi').hide();
+					Rp('#deleteCategoryLi').hide();
 					Rp('#pageTitle').text('All Tasks');
 					li = Rp('#categoryLi0');
 					li.addClass('active');
@@ -304,4 +304,16 @@ Rp(function()
 	}
 
 	Rp('.task-checkbox input[data-task-id]').on('change', handleTaskCheckbox);
+
+	delreq = Rp.ajax('api/delete_task')
+	.complete(function() {
+		r = this.responseJSON();
+		Rp('article[data-task-id=' + r.task_id + ']').removeClass('loading').hide();
+		loadCategory(currentCat);
+	});
+
+	deleteTask = function(id) {
+		Rp('article[data-task-id=' + id + ']').addClass('loading');
+		delreq.post('task_id=' + parseInt(id));
+	}
 });
