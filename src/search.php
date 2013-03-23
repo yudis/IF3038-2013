@@ -21,16 +21,18 @@
 			} else {
 				while ($row=mysqli_fetch_array($qres)) {
 		?>
-			<div class='line-konten'></div>
 			<div class='judul'>
-				<p class='alignleft'><a href="profile.php?id=<?php echo $row['id']?>"><?php echo $row['username']?></a></p>
-				<p class='alignright'><img class='search-img' align='middle' src='<?php echo $row['avatar']?>' alt='avatar' width='150'/></p>
-				<div style='clear: both;'></div>
+				<img class='search-img' align='middle' src='<?php echo $row['avatar']?>' alt='avatar' height='150'/>
+				<a href="profile.php?id=<?php echo $row['id']?>"><?php echo $row['username']?></a>
+				
 			</div>
 		<?php
 				}
 			}
 		}
+		?>
+		<div class='line-konten'></div>
+		<?php
 
 		if ((strcmp($o,"All") == 0) || (strcmp($o,"Category") == 0)) {
 			$qres = mysqli_query($con, "SELECT * FROM categories WHERE name LIKE '%$q%' LIMIT 0, 10");
@@ -41,7 +43,6 @@
 			} else {
 				while ($row = mysqli_fetch_array($qres)) {
 		?>
-			<div class='line-konten'></div>
 			<div class='judul'>
 				<?php echo $row['name'];?>
 			</div>
@@ -60,6 +61,9 @@
 				}
 			}
 		}
+		?>
+		<div class='line-konten'></div>
+		<?php
 
 		if (strcmp($o,"All") == 0 || (strcmp($o,"Content") == 0)) {
 			mysqli_query($con, "CREATE VIEW task_tags AS SELECT tasks.*, tags.name as tag FROM tasks, tags WHERE tasks.id = tags.tagged");
@@ -71,7 +75,6 @@
 			} else {
 				while ($row=mysqli_fetch_array($qres)) {
 		?>
-			<div class='line-konten'></div>
 			<div class='judul'>
 				<a href="rinciantugas.php?id=<?php echo $row['id'];?>"><?php echo $row['name']?></a>
 			</div>
