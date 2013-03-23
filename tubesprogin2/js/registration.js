@@ -1,4 +1,4 @@
-function register() {
+function registerakun() {
 
 var uname = encodeURI(document.getElementById('reg_username').value);
 var passw = encodeURI(document.getElementById('reg_password').value);
