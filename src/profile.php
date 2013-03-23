@@ -12,9 +12,11 @@
 			<div class="profile">
 				<header>
 					<h1><?php echo getUserName($_GET['user_id']); ?></h1>
-					<ul>
-						<li><a href="#" id="editProfileLink">Edit Profile</a></li>
-					</ul>
+					<?php if ($_GET['user_id'] == getUserId()): ?>
+						<ul>
+							<li><a href="#" id="editProfileLink">Edit Profile</a></li>
+						</ul>
+					<?php endif; ?>
 				</header>
 				
 				<div id="current-profile">
