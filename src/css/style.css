@@ -538,10 +538,17 @@ p.description .detail-label {
 	display: none;
 }
 .task-details section.attachment {
-	float: right;
 	width: 440px;
 	padding-left: 20px;
 }
+
+.atchmt {
+	float: center;
+	max-width: 450px;
+	padding: 20;
+	position: relative;
+}
+
 .task-details section.attachment figure {
 	margin: 0;
 	padding: 0;
@@ -730,6 +737,8 @@ p.description .detail-label {
 		right: 10px;
 		font-size: 16px;
 	}
+	
+	
 
 	/** Search **/
 	.search-results.all .result-set {

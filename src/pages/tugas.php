@@ -98,13 +98,30 @@
 							<h3>Attachment</h3>
 						</header>
 						<?php
+							$i = 1;
 							foreach ($attachments as $attachment)
 							{
-								echo "<figure>";
-								echo $attachment->attachment;
-								echo "</figure>";
+								?>
+								<?php
+									$atch = explode(".", $attachment->attachment);
+									if (strtoupper($atch[count($atch)-1]) == "MP4") {
+									?>
+										<video class="atchmt" controls>
+										<source src="upload/attachments/<?php echo $attachment->attachment ?>" type="video/mp4">
+									<?php
+									}
+									else if ((strtoupper($atch[count($atch)-1]) == "JPG") or (strtoupper($atch[count($atch)-1]) == "PNG") or (strtoupper($atch[count($atch)-1]) == "GIF")){								
+								?>
+								<img class="atchmt" src="upload/attachments/<?php echo $attachment->attachment ?>" alt="Task Attachment">
+							<?php
+									}
+									else {
+										$file = "<a href=upload/attachments/".$attachment->attachment.">Download attachment-".$i." here</a>,";
+										echo $file;
+									}
+								$i++;
 							}
-						?>
+							?>
 					</section>
 				</div>
 				<div id="edit-task">
