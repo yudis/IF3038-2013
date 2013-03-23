@@ -83,3 +83,32 @@ var submitedit = document.getElementById("editbutton");
 			submitedit.disabled=false;
 		}
 	}
+	
+	function Editaja(){
+		//Variable for authentication
+		var username = document.getElementById("editname").value;
+		var birthday = document.getElementById("editdob").value;
+		var password = document.getElementById("logpassword").value;
+		//var xmlhttp3;
+		if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp3=new XMLHttpRequest();
+		}
+		else
+		{// code for IE6, IE5
+			xmlhttp3=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp3.onreadystatechange=function()
+		{
+			if (xmlhttp3.readyState==4 && xmlhttp3.status==200)
+			{
+				if(xmlhttp3.responseText==0){
+					alert("Your username and/or password is wrong!");
+				}else{
+					window.location = "Dashboard.php";
+				}
+			}
+		}
+		xmlhttp3.open("GET","authentication.php?usr="+username+"&psw="+password,true);
+		xmlhttp3.send();
+	}

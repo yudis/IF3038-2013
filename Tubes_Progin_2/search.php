@@ -89,9 +89,10 @@
 								{
 									var string22 = string1[s].split(",");
 									result += "<div class=\"task\">";
-									result += "<img src=\""+string22[2]+"\" alt=\"propic\">"
-									result += "<a href=\"userprofile.php?id="+string22[0]+"\">"+string22[0]+"</a>";
+									result += "<a href=\"#\">"+string22[0]+"</a>";
 									result += "<span><br>fullname : "+string22[1]+"</span>";
+									result += "<span><br>Avatar :</span>";
+									result += "<span><img src=\""+string22[2]+"\" width=40px; height=40px;></span>";
 									result += "</div>";
 								}
 							}
@@ -162,9 +163,10 @@
 						{
 							var string2 = string[s].split(",");
 							result += "<div class=\"task\">";
-							result += "<img src=\""+string2[2]+"\" alt=\"propic\">"
-							result += "<a href=\"userprofile.php?id="+string2[0]+"\">"+string2[0]+"</a>";
+							result += "<a href=\"#\">"+string2[0]+"</a>";
 							result += "<span><br>fullname : "+string2[1]+"</span>";
+							result += "<span><br>Avatar :</span>";
+							result += "<span><img src=\""+string2[2]+"\" width=40px; height=40px;></span>";
 							result += "</div>";
 						}
 						

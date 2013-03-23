@@ -32,7 +32,7 @@ var valid7bool;
 			{
 				// alert(xmlhttp.responseText);
 				// document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-				if(xmlhttp.responseText>0){			
+				if(xmlhttp.responseText>0){
 					valid1.src = "img/salah.png";
 					valid1bool = false;
 				}else{
@@ -54,7 +54,7 @@ var valid7bool;
 				}
 			}
 		}
-		xmlhttp.open("GET","getuser.php?",true);
+		xmlhttp.open("GET","getuser.php?q="+username.value,true);
 		xmlhttp.send();
 	}
 	

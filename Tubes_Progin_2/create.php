@@ -60,7 +60,7 @@
 		$taskatt = $_FILES['taskatt']["name"];
 		$countatt = count($taskatt);
 		for($k=0;$k<$countatt;$k++){
-			move_uploaded_file($_FILES['taskatt']["tmp_name"][$k],"att/".$idtask."att".$k.$_FILES['taskatt']["name"][$k]);
+			move_uploaded_file($_FILES['taskatt']["tmp_name"][$k],"/att/".$idtask."att".$k.$_FILES['taskatt']["name"][$k]);
 			$target = "att/".$idtask."att".$k.$_FILES['taskatt']["name"][$k];
 			$sqlatt = "INSERT INTO `attachment`(`path`) VALUES ('$target')";
 			mysqli_query($con,$sqlatt);
@@ -76,5 +76,5 @@
 	}
 	$sqlcreator = "INSERT INTO taskcreator(`id_task`, `username`) VALUES ('$id_task','$username')";
 	mysqli_query($con,$sqlcreator);
-	header('Location: createtask.php');
+	header('Location: rincitask.php');
 ?>

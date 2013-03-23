@@ -19,6 +19,7 @@
 		$_SESSION['birthday'] = $result['birthday'];
 		$_SESSION['password'] = $result['password'];
 		$_SESSION['email'] = $result['email'];
+		$_SESSION['IsEdit'] = false;
 		//SET COOKIES, EXPIRED 30 DAYS
 		$expire=time()+60*60*24*30;
 		setcookie("username", $result['username'], $expire);
