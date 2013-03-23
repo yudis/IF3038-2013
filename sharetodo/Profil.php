@@ -35,6 +35,14 @@
         <div id="photoSpace">
         	<div id="userPhoto">
             	<img id="user" src="server/<? echo $_SESSION['username'] ?>.png" alt="userPhoto"/>
+		<div id="photoUploader">
+		    <label><em>Upload new Avatar : </em></label>
+		    <form method="post" action="php/UploadFile.php" enctype="multipart/form-data" name="uploadImage">
+			<input id="fileUpload" type="file" name="image"></input>
+			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo MAX_FILE_SIZE; ?>"/>
+			<input type="submit" value="Upload new Avatar"/>
+		    </form>
+		</div>
             </div>
         </div>
         
@@ -97,44 +105,36 @@
 	    
 	    <!--FORM EDIT SECTION-->
 	    <div id=editForm>
-		<form action="UploadFile.php" method="POST" enctype="multipart/form-data" name="uploadImage">
+		<form method="POST" enctype="multipart/form-data" name="uploadImage">
 		    <div class="bioLeft">
 			<p>new Full Name :</p>
 		    </div>
 		    <div class="bioRight">
-			<input id="newFullName" type=text></input>
+			<input id="newFullName" type=text name="newFullName"></input>
 		    </div>
 		    <div class="bioLeft">
 			<p>new Birthdate :</p>
 		    </div>
 		    <div class="bioRight">
-			<input id="newBirthdate" type=date></input>
+			<input id="newBirthdate" type=date name="newBirthdate"></input>
 		    </div>
 		    <div class="bioLeft">
 			<p>new Password :</p>
 		    </div>
 		    <div class="bioRight">
-			<input id="newPassword" type="password"></input>
+			<input id="newPassword" type="password" name="newPassword"></input>
 		    </div>
 		    <div class="bioLeft">
 			<p>Confirm new Password :</p>
 		    </div>
 		    <div class="bioRight">
-			<input id="newPasswordAgain" type="password"></input>
-		    </div>
-		    
-		    <div class="bioLeft">
-			<p>Upload new avatar :</p>
-		    </div>
-		    <div class="bioRight">
-			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo MAX_FILE_SIZE; ?>"/>
-			<input id="fileUpload" type="file" name="image"/>
+			<input id="newPasswordAgain" type="password" name="newPasswordAgain"></input>
 		    </div>
 		    <div class="bioLeft">
 			<p></p>
 		    </div>
 		    <div class="bioRight">
-			<input class="submitBtn" type="submit" value="Submit Form" name='upload' onclick="hideEditForm(); updateProfile(newFullName.value, newBirthdate.value, newPassword.value, newPasswordAgain.value, fileUpload.value);"></input>
+			<input class="submitBtn" type="button" value="Submit Form" name='upload' onclick="hideEditForm(); updateProfile(newFullName.value, newBirthdate.value, newPassword.value, newPasswordAgain.value, fileUpload.value);"></input>
 		    </div>
 		</form>
 	    </div>
@@ -205,6 +205,7 @@
 			while ($tag = mysqli_fetch_array($resultTag)){
 			    $tagString .= $tag['tag']." | ";
 			}
+			$tagString = substr($tagString,0,strlen($tagString)-3);
 			
 			//menampilkan task beserta tag nya yang terkait
 			echo "<div class='tableElmtLeft'>";

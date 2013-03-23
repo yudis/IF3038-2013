@@ -19,7 +19,7 @@ function showHint(str) {
                 document.getElementById("textHint").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","gethint.php?key=" + str, true);
+        xmlhttp.open("GET","php/gethint.php?key=" + str, true);
         xmlhttp.send();
 }
 
@@ -27,8 +27,8 @@ function keProfil() {
 	window.location = 'Profil.php';
 }
 
-function showKategori() {
-	//alert("testing");
+function showKategori(kategori) {
+	//alert(kategori);
 	
 	var _xmlhttp;
 	if (window.XMLHttpRequest) { //membuat objek XMLHttpRequest
@@ -37,16 +37,33 @@ function showKategori() {
 		_xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
-	_xmlhttp.open("GET","changeKategori.php?k=testing",true);
+	_xmlhttp.open("GET","php/changeKategori.php?k=" + kategori,true);
 	_xmlhttp.send();
 	
 	_xmlhttp.onreadystatechange = function() {
 		if ((_xmlhttp.readyState == 4) && (_xmlhttp.status == 200)) {
-			var sementara = _xmlhttp.responseText;
+			var replacement = _xmlhttp.responseText;
 			//var sementara = _xmlhttp.responseXML;
 			//alert(sementara);
-			active_1();
-			document.getElementById("dynamicSpace").innerHTML = sementara;
+			document.getElementById("dynamicSpace").innerHTML = replacement;
+		}
+	}
+}
+function showAllKategori() {
+	var _xmlhttp;
+	if (window.XMLHttpRequest) { //membuat objek XMLHttpRequest
+		_xmlhttp = new XMLHttpRequest();
+	} else {
+		_xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	_xmlhttp.open("GET","php/showAllKategori.php",true);
+	_xmlhttp.send();
+	
+	_xmlhttp.onreadystatechange = function() {
+		if ((_xmlhttp.readyState == 4) && (_xmlhttp.status == 200)) {
+			var replacement = _xmlhttp.responseText;
+			document.getElementById("dynamicSpace").innerHTML = replacement;
 		}
 	}
 }
@@ -205,9 +222,6 @@ function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain,
 				
 				$fullname = $responseElmt[0].childNodes[0].childNodes[0].nodeValue;
 				$birthdate = $responseElmt[0].childNodes[1].childNodes[0].nodeValue;
-				//$password = $responseElmt[0].childNodes[2].childNodes[0].nodeValue;
-				//$filename = $responseElmt[0].childNodes[3].childNodes[0].nodeValue
-				//alert($fullname + $birthdate + $password + $filename);
 				
 				document.getElementById("userFullName").innerHTML = "<p>" + $fullname + "</p>";
 				document.getElementById("userBirthdate").innerHTML = "<p>" + $birthdate + "</p>";
@@ -230,14 +244,36 @@ function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain,
 /**************************DASHBOARD**************************/
 
 var isTaskStatusClicked = false;
-function changeTaskStatus(id) {
+function changeTaskStatus(namaTask,id) {
+	//alert(namaTask);
+	$status = "undefined";
 	if (!isTaskStatusClicked) {
 		isTaskStatusClicked = true;
+		$status = "selesai";
 		document.getElementById(id).innerHTML = "<p>selesai</p>";
 	} else {
 		isTaskStatusClicked = false;
+		$status = "belum";
 		document.getElementById(id).innerHTML = "<p>belum selesai</p>";
 	}
+	
+	//melakukan update database mengenai status terbaru
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
+	}
+	
+	xmlhttp.onreadystatechange = function(){
+		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+			$responseUpdate = xmlhttp.responseText;
+			alert($responseUpdate);
+		}
+	}
+	
+	xmlhttp.open("GET","php/CommitStatus.php?stat=" + $status + "&task=" + namaTask,true);
+	xmlhttp.send();
 }
 
 function toHalamanRincianTugas(namaHlm) {
@@ -246,4 +282,72 @@ function toHalamanRincianTugas(namaHlm) {
 
 function toHalamanPembuatanTugas() {
 	alert("pindah ke halaman pembuatan tugas");
+}
+function deleteTask(namaTask) {
+	//meminta username dan creator dari task yang hendak dihapus
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
+	}
+	xmlhttp.onreadystatechange = function(){
+		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+			$response = xmlhttp.responseText;
+			//alert(xmlhttp.responseText);
+			if ($response == "1") {
+				document.getElementById(namaTask+"space").innerHTML = "";
+				alert("Tugas telah berhasil dihapus");
+			} else {
+				alert("Warning. Anda tidak berhak untuk menghapus tugas ini.");
+			}
+		}
+	}
+	xmlhttp.open("GET","php/getDeletionInfo.php?task="+namaTask,true);
+	xmlhttp.send();
+}
+function closeKategoriForm(id) {
+	document.getElementById(id).style.visibility = "hidden";
+}
+function addKategori(katName,userList) {
+	//alert(katName + " " + userList);
+	
+	//memeriksa apakah semua user yang dimasukkan valid / ada di dalam database
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
+	}
+	xmlhttp.onreadystatechange = function(){
+		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+			$response = xmlhttp.responseText;
+			alert($response);
+			
+			//menampilkan penambahan kolom kategori secara langsung
+		}
+	}
+	xmlhttp.open("GET","php/insertKategori.php?kat="+katName+"&userList="+userList,true);
+	xmlhttp.send();
+}
+function deleteKategori(namaKategori) {
+	//alert("siakek" + namaKategori);
+	
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
+	}
+	xmlhttp.onreadystatechange = function(){
+		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+			$response = xmlhttp.responseText;
+			alert($response);
+		}
+	}
+	xmlhttp.open("GET","php/deleteKategori.php?kat="+namaKategori,true);
+	xmlhttp.send();
+	//cek apakah user yang sedang aktif berhak untuk menghapus kategori
+	
+	//hapus semua table terkait : tabel kategori, editKategori, task
 }

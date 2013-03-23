@@ -57,25 +57,27 @@
 		}
 		
 		echo "<div id='kategoriContent'>";
-		$result = mysqli_query($con,"SELECT namaKategori FROM kategori");
-		while ($row = mysqli_fetch_array($result)){
-		    $tempKategori = $row['namaKategori'];
-		    //echo $tempKategori;
-		    echo "<div id='static_1' class='kategoriElmt' onclick=showKategori()>";
-			    echo "<p>".$row['namaKategori']."</p>";
+		    $result = mysqli_query($con,"SELECT namaKategori FROM kategori");
+		    while ($row = mysqli_fetch_array($result)){
+			$tempKategori = $row['namaKategori'];
+			//echo $tempKategori;
+			echo "<div id=" . $tempKategori . "menu class='kategoriElmt' onclick=\"showKategori('$tempKategori')\">";
+				echo "<p>".$row['namaKategori']."</p>";
+			echo "</div>";
+		    }
+		    echo "<div id='semuaTugas' class='kategoriElmt' onclick=\"showAllKategori()\";>";
+			echo "<p>Semua Kategori Tugas</p>";
 		    echo "</div>";
-		    echo "<div id='semuaTugas' class='kategoriElmt' onclick=active_semuaTugas();>";
-			    echo "<p>Semua Kategori Tugas</p>";
+		    echo "<div id='addKategori' onclick=\"showPopUp()\";>";
+			    echo "<button name='addKategori'>tambah kategori</button>";
 		    echo "</div>";
-		}
 		echo "</div>";
 	    ?>
 	    
-            <div id="kategoriContent">
-            	<!--<div id="static_1" class="kategoriElmt" onclick="active_1()";>-->
-            	<!--<div id="static_1" class="kategoriElmt" onclick="changeKategori('static_1');">
+            <!--<div id="kategoriContent">
+            	<div id="static_1" class="kategoriElmt" onclick="changeKategori('static_1');">
                 	<p>Pemrograman Internet</p>
-                </div>-->
+                </div>
                 <div id="static_2" class="kategoriElmt" onclick="active_2()";>
                 	<p>Sistem Terdistribusi</p>
                 </div>
@@ -90,7 +92,7 @@
                 <div id="addKategori" onclick="showPopUp()";>
                 	<button name="addKategori">tambah kategori</button>
                 </div>
-            </div>
+            </div>-->
         </div>
         
         <div id="dynamicContainer">
@@ -100,44 +102,70 @@
 			<hr/>
 		    </div>
 		    <div id="dynamicSpace" class="dyn_elmt">
-			<!--<div id="taskTitle1" class="taskElmtLeft" onclick="toHalamanRincianTugas('taskTitle1');">
-			    <p><strong>Tugas Besar I</strong></p>
-			</div>
-			<div class="taskElmtRight">
-			</div>
-			<div class="taskElmtLeft">
-			    <p>Deadline :</p>
-			</div>
-			<div class="taskElmtRight">
-			    <p>2013/03/23</p>
-			</div>
-			<div class="taskElmtLeft">
-			    <p>Tag :</p>
-			</div>
-			<div class="taskElmtRight">
-			    <p>HTML5 | CSS3 | PHP | MySQL</p>
-			</div>
-			<div class="taskElmtLeft">
-			    <p>Status :</p>
-			</div>
-			<div class="taskElmtRight" id=taskStatus1>
-			    <p>belum selesai</p>
-			</div>
-			<div class="taskElmtLeft">
-			</div>
-			<div class="taskElmtRight">
-			    <button class="ubahStatusTask" onclick="changeTaskStatus('taskStatus1');">Ubah Status</button>
-			</div>
-			<div class="taskElmtLeft">
-			</div>
-			<div class="taskElmtRight">
-			    <button class="ubahStatusTask">Hapus Tugas</button>
-			</div>-->
+			<?php
+			    $con = mysqli_connect("127.0.0.1","root","root","distributedAgenda");
+			    //check the connection
+			    if (mysqli_connect_errno($con)) {
+				echo "Gagal melakukan koneksi ke MySQL : " . mysqli_connect_error();
+			    }else {
+				$result = mysqli_query($con,"SELECT * FROM task");
+				while ($row = mysqli_fetch_array($result)){
+				    $nama = $row['namaTask'];
+				    echo "<div id={$nama}space>";
+					echo "<div id='taskTitle1' class='taskElmtLeft' onclick=toHalamanRincianTugas('taskTitle1');>";
+					    echo "<p></strong>".$nama."</strong></p>";
+					echo "</div>";
+					echo "<div class='taskElmtRight'>";
+					echo "</div>";
+					echo "<div class='taskElmtLeft'>";
+					    echo "<p>Deadline :</p>";
+					echo "</div>";
+					echo "/<div class='taskElmtRight'>";
+					    echo "<p>".$row['deadline']."</p>";
+					echo "</div>";
+					echo "<div class='taskElmtLeft'>";
+					    echo "<p>Tag :</p>";
+					    echo "</div>";
+					    echo "<div class='taskElmtRight'>";
+					    
+					    //mengambil semua tag untuk task tertentu
+					    $tagQuery = "SELECT tag FROM tagging WHERE namaTask='".$row['namaTask']."'";
+					    $resultTag = mysqli_query($con,$tagQuery);
+					    $tagString = "";
+					    while ($tag = mysqli_fetch_array($resultTag)){
+						$tagString .= $tag['tag']." | ";
+					    }
+					    $refined = substr($tagString,0,strlen($tagString)-3);
+					    echo "<p>".$refined."</p>";
+					echo "</div>";
+					echo "<div class='taskElmtLeft'>";
+					    echo "<p>Status :</p>";
+					echo "</div>";
+					$idStatus = $nama."status";
+					echo "<div class='taskElmtRight' id='".$idStatus."'>";
+					    echo "<p>".$row['status']."</p>";
+					echo "</div>";
+					echo "<div class='taskElmtLeft'>";
+					echo "</div>";
+					echo "<div class='taskElmtRight'>";
+					    $nama = $row['namaTask'];
+					    //$nama = "apake sih";
+					    echo "<button class='ubahStatusTask' onclick=\"changeTaskStatus('$nama','$idStatus')\";>Ubah Status</button>";
+					echo "</div>";
+					echo "<div class='taskElmtLeft'>";
+					echo "</div>";
+					echo "<div class='taskElmtRight'>";
+					    echo "<button class='ubahStatusTask' onclick=\"deleteTask('$nama')\";>Hapus Tugas</button>";
+					echo "</div>";
+				    echo "</div>";
+				}
+			    }
+			?>
 		    </div>
-		    <button class="addTask" onclick="toHalamanPembuatanTugas();">tambah tugas</button>
-		    <button class="addTask">hapus kategori</button>
+		    <!--<button class="addTask" onclick="toHalamanPembuatanTugas();">tambah tugas</button>
+		    <button class="addTask">hapus kategori</button>-->
 		</div>
-            <div id="dynamic_2" class="dynamicElmt">
+            <!--<div id="dynamic_2" class="dynamicElmt">
             	<div class="rincianTitleDiv">
                 	<h2 class="rincianText">Rincian Tugas</h2>
                     <hr/>
@@ -175,7 +203,7 @@
                     </div>
                     
                 </div>
-            </div>
+            </div>-->
         </div>
         
         <div id="popUp">
@@ -184,15 +212,15 @@
             </div>
             
             <div id="newTugasForm">
-                <form>
-                    <div class="Task">Nama Task</div> <div class="TaskContent">: <input type="text" name="namaTask"/></div>
-                    <div class="Task">Tag</div> <div class="TaskContent">: <input type="text" /></div>
-                    <div class="Task">Pengguna Terpercaya</div> <div class="TaskContent">: <input type="text"/></div>
+                    <div class="Task">Nama Kategori</div> <div class="TaskContent">: <input id="kategoriName" type="text" name="namaTask"/></div>
+                    <div class="Task">Pengguna Terpercaya</div> <div class="TaskContent">: <input id="userList" type="text"/></div>
 			
-                    <div id="submitNewKategori" onclick="closeKategoriForm()";>
+		    <div id="submitNewKategori" onclick="closeKategoriForm('popUp');">
+                    	<button>cancel</button>
+                    </div>
+                    <div id="submitNewKategori" onclick="closeKategoriForm('popUp');addKategori(kategoriName.value,userList.value);">
                     	<button>submit</button>
                     </div>
-                </form>
             </div>
         </div>
     </body>

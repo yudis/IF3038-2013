@@ -213,7 +213,7 @@ div.tableElmtRight p {
 }
 
 #taskContent {
-    background: #ccffcc;
+	background: #ccffcc;
 	/*border:dotted;*/
 	width:40%;
 	margin-left:35%;
@@ -330,7 +330,7 @@ button#editProfileBtn{
 #kategoriContent {
 	/*height:80%;*/
 	margin-top:5%;
-	border: groove;
+	/*border: groove;*/
 }
 
 .kategoriElmt {
@@ -356,28 +356,28 @@ button#editProfileBtn{
 }
 
 #dynamic_1 {
-	background: #CACACA;
+	/*background: #CACACA;*/
 	width:100%;
 	height:100%;
 	z-index:0;
 }
 
 #dynamic_2 {
-	background: #CACACA;
+	/*background: #CACACA;*/
 	width:100%;
 	height:100%;
 	z-index:-1;
 }
 
 #dynamic_3 {
-	background: #CACACA;
+	/*background: #CACACA;*/
 	width:100%;
 	height:100%;
 	z-index:-2;
 }
 
 #dynamic_semuaTugas {
-	background:#CACACA;
+	/*background:#CACACA;*/
 	width:100%;
 	height:120%;
 }
@@ -436,7 +436,6 @@ button#editProfileBtn{
 	position:fixed;
 	top:25%;
 	left:30%;
-	z-index:2;
 	height:40%;
 	width:40%;
 	background:#FF0;
@@ -465,13 +464,14 @@ button#editProfileBtn{
 }
 
 .Task {
+	clear: both;
 	float:left;
 	margin-top:1%;
 }
 
 .TaskContent {
 	margin-left:27%;
-	/*background:#933;*/
+	margin-top: 1%;
 }
 
 #submitNewKategori {
@@ -485,6 +485,10 @@ button#editProfileBtn{
 	height: 20px;
 	font-family: monospace;
 	border: solid 1px #789;
+	float: left;
+	margin-top: 10%;
+	margin-left: -20%;
+	margin-right: 25%;
 }
 
 #submitNewKategori > button:hover {
@@ -540,4 +544,8 @@ button.addTask {
 button.addTask:hover{
 	background: #FFF;
 	cursor: pointer;
+}
+div#photoUploader{
+	margin-top: 10%;
+	border: solid 3px #890;
 }

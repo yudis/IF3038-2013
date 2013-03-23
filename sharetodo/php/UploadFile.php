@@ -3,26 +3,18 @@
 ?>
 <html>
     <head>
-        <meta http-equiv="REFRESH" content="0;url=Profil.php"/>
+        <meta http-equiv="REFRESH" content="0;url=../Profil.php"/>
         <?php
-            sleep(0.5);
-            echo "REDIRECTING ...";
+            echo "REDIRECTING ...\n";
             
             // define a constant for the maximum upload size
-            define ('MAX_FILE_SIZE', 1024 * 50);
+            define ('MAX_FILE_SIZE', 1024 * 10000000); //batas maksimum 50kB
             
-            if (array_key_exists('upload', $_POST)) {
               define('UPLOAD_DIR', 'C:/xampp/htdocs/progin/tubes/server/');
-              // replace any spaces in original filename with underscores
-              /*$file = str_replace(' ', '_', $_FILES['image']['name']);*/
-              
-              
-              $file = $_SESSION['username'].".png";
-              
-              //echo "test File : ".$file;
+              $file = $_SESSION['username'].".png"; //apakah file dengan ekstensi lain bisa di-convert ke tipe ini?
               
               // create an array of permitted MIME types
-              $permitted = array('image/gif', 'image/jpeg', 'image/pjpeg',
+              $permitted = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/jpg',
             'image/png');
               
               // upload if file is OK
@@ -31,20 +23,18 @@
                   && $_FILES['image']['size'] <= MAX_FILE_SIZE) {
                 switch($_FILES['image']['error']) {
                   case 0:
-                    // check if a file of the same name has been uploaded
-                    /*if (!file_exists(UPLOAD_DIR . $file)) {*/
+                        echo "Upload: " . $_FILES["image"]["name"] . "<br>";
+                        echo "Type: " . $_FILES["image"]["type"] . "<br>";
+                        echo "Size: " . ($_FILES["image"]["size"] / 1024) . " kB<br>";
+                        echo "Temp file: " . $_FILES["image"]["tmp_name"] . "<br>";
+                        
                       // move the file to the upload folder and rename it
-                      $success =
-            move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_DIR .
-            $file);
-                    /*} else {
-                      $result = 'A file of the same name already exists.';
-                    }
+                      $success = move_uploaded_file($_FILES['image']['tmp_name'], UPLOAD_DIR . $file);
                     if ($success) {
                       $result = "$file uploaded successfully.";
                     } else {
                       $result = "Error uploading $file. Please try again.";
-                    }*/
+                    }
                     break;
                   case 3:
                   case 6:
@@ -58,6 +48,16 @@
               } else {
                 $result = "$file is either too big or not an image.";
               }
+              
+            //create connection
+            $con = mysqli_connect("127.0.0.1","root","root","distributedAgenda");
+        
+            //check the connection
+            if (mysqli_connect_errno($con)) {
+                echo "Gagal melakukan koneksi ke MySQL : " . mysqli_connect_error();
+            }else {
+                $curUser = $_SESSION['username'];
+                $result = mysqli_query($con,"UPDATE user SET avatar='$file' WHERE username='$curUser'");
             }
         ?>
     </head>
