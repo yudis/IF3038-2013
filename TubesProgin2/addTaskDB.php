@@ -77,6 +77,6 @@ if (connectDB()) {
             $insertAttachment = mysql_query($insertAttachmentQuery);
         }
     }
-    header('Location: Dashboard.php');
+    header('Location: RinciTugas.php?IDTask='.$idTask);
 }
 ?>

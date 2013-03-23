@@ -610,3 +610,51 @@ function loadpagevar(){
 function setPage(_page){
     page=_page;
 }
+
+function deleteTaskYey(IDTask){
+    var status = document.getElementById("checkboxstatus").checked;
+    
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+            var response = xmlhttp.responseText;
+            window.location="Dashboard.php";
+        }
+    }
+    xmlhttp.open('get', 'deletetask.php?IDTask=' + encodeURI(IDTask));
+    xmlhttp.send(null);
+
+}
+function deleteTaskYeys(IDTask){
+    
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4)
+        {
+            var response = xmlhttp.responseText;
+            window.location="Dashboard.php";
+        }
+    }
+    xmlhttp.open('get', 'deletetask.php?IDTask=' + encodeURI(IDTask));
+    xmlhttp.send(null);
+
+}

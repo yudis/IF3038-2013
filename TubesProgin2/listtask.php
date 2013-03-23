@@ -28,9 +28,13 @@ if (connectDB()) {
         $i=0;
         if ($result > 0) {
             while ($data = mysql_fetch_array($result)) {
-                $output = $output . "<a class=\"listTugas\" onclick=\"showRinciTugas(".$data['IDTask'].");\">
-                    
-                    <br><b>TaskName : </b><br>".$data['TaskName']."
+                
+                $output = $output . "<a class=\"listTugas\">";
+                if ($data['Creator'] == $_COOKIE['UserLogin']) {
+                $output=$output."<img class=\"deltask\" src=\"img/delete.png\" onclick=\"deleteTaskYeys(".$data['IDTask'].");\">";
+                    }
+                    $output=$output."
+                    <br><b>TaskName : </b><br><div class=\"showRin\" onclick=\" showRinciTugas(".$data['IDTask']."\">".$data['TaskName']."</div>
                     <br><b>Deadline : </b><br>".$data['Deadline']."
                     <br><b>Tag : </b><br>";
                         $tag = "SELECT tag.* FROM tag,tasktag WHERE tag.IDTag=tasktag.IDTag AND tasktag.IDTask=\"" . $data['IDTask'] . "\"";

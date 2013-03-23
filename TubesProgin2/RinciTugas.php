@@ -8,33 +8,34 @@ require_once('config.php');
         <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="autocomplete.css" media="screen" />
     </head>
-    <body onload="loadcomment();loadpagevar()">
-        <?php
-        include 'header.php';
+    <body onload="loadcomment();
+            loadpagevar()">
+              <?php
+              include 'header.php';
 
-        $IDTask = $_GET['IDTask'];
+              $IDTask = $_GET['IDTask'];
 
-        if (connectDB()) {
-            $TaskQuery = "SELECT * FROM task WHERE IDTask=" . $IDTask . ";";
-            $TaskResult = mysql_query($TaskQuery);
-            $result = mysql_fetch_array($TaskResult);
+              if (connectDB()) {
+                  $TaskQuery = "SELECT * FROM task WHERE IDTask=" . $IDTask . ";";
+                  $TaskResult = mysql_query($TaskQuery);
+                  $result = mysql_fetch_array($TaskResult);
 
-            $TaskName = $result[2];
-            $deadline = $result[4];
-            $Status = $result[3];
+                  $TaskName = $result[2];
+                  $deadline = $result[4];
+                  $Status = $result[3];
 
-            $AttachmentQueryText = "SELECT * FROM attachment WHERE IDTask=" . $IDTask . ";";
-            $AttachmentQuery = mysql_query($AttachmentQueryText);
+                  $AttachmentQueryText = "SELECT * FROM attachment WHERE IDTask=" . $IDTask . ";";
+                  $AttachmentQuery = mysql_query($AttachmentQueryText);
 
-            $AssigneeQueryText = "SELECT * FROM assignment WHERE IDTask=" . $IDTask . ";";
-            $AssigneeQuery = mysql_query($AssigneeQueryText);
+                  $AssigneeQueryText = "SELECT * FROM assignment WHERE IDTask=" . $IDTask . ";";
+                  $AssigneeQuery = mysql_query($AssigneeQueryText);
 
-            $TagQueryText = "SELECT * FROM tasktag,tag WHERE IDTask=" . $IDTask . " AND tasktag.IDTag=tag.IDTag";
-            $TagQuery = mysql_query($TagQueryText);
+                  $TagQueryText = "SELECT * FROM tasktag,tag WHERE IDTask=" . $IDTask . " AND tasktag.IDTag=tag.IDTag";
+                  $TagQuery = mysql_query($TagQueryText);
 
-            $CommentQueryText = "SELECT * FROM comment WHERE IDTask=" . $IDTask . ";";
-            $CommentQuery = mysql_query($CommentQueryText);
-            ?>
+                  $CommentQueryText = "SELECT * FROM comment WHERE IDTask=" . $IDTask . ";";
+                  $CommentQuery = mysql_query($CommentQueryText);
+                  ?>
             <div id="category">      
                 <div class = "kategori"><a title="Go to Dashboard" href="dashboard.php">Back to Dashboard</a></div>
                 <div>
@@ -47,11 +48,11 @@ require_once('config.php');
                     Status : 
                     <div id="checkstatus">
                         <?php
-                            if($Status==="done"){
-                                echo' DONE <input type="checkbox" id="checkboxstatus" checked onclick="changestatus('. $IDTask .')" >';
-                            }else{
-                                echo'DONE <input type="checkbox" id="checkboxstatus" onclick="changestatus('. $IDTask .')" >';
-                            }
+                        if ($Status === "done") {
+                            echo' DONE <input type="checkbox" id="checkboxstatus" checked onclick="changestatus(' . $IDTask . ')" >';
+                        } else {
+                            echo'DONE <input type="checkbox" id="checkboxstatus" onclick="changestatus(' . $IDTask . ')" >';
+                        }
                         ?>
                     </div>
                     Attachment: 
@@ -130,7 +131,15 @@ require_once('config.php');
                         </div>
                         <div class="tag"> <input id="edittag" type="text"></div> <br/>
                     </form> <br/>
-                    <a onclick="editTask('<?php echo$IDTask; ?>')" class="button">OK</a><br/>
+                    <a onclick="editTask('<?php echo$IDTask; ?>')" class="button">OK</a><br/><br/><br/>
+                    <?php
+                    $QueryNewText = "SELECT * FROM task WHERE IDTask=" . $IDTask . ";";
+                    $QueryNew = mysql_query($QueryNewText);
+                    $resulta = mysql_fetch_array($QueryNew);
+                    if ($resulta['Creator'] == $_COOKIE['UserLogin']) {
+                        ?>
+                        <a onclick="deleteTaskYey('<?php echo$IDTask; ?>')" class="button">DELETE TASK</a>
+                    <?php } ?>
                 </div>
             </div>
         </body>

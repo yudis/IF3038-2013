@@ -13,6 +13,8 @@ if (connectDB()) {
     $DeleteTagQuery = "DELETE FROM tasktag WHERE IDTaskTag='" . $IDTag . "';";
     $DeleteTag = mysql_query($DeleteTagQuery);
 
+    
+    
     $TagQueryText = "SELECT * FROM tasktag,tag WHERE IDTask=" . $IDTask . " AND tasktag.IDTag=tag.IDTag";
     $TagQuery = mysql_query($TagQueryText);
     while ($result = mysql_fetch_array($TagQuery)) {

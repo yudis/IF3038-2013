@@ -63,8 +63,15 @@ and open the template in the editor.
                         ?>
 
                         <a class="listTugas" >
+                            <?php
+                            if ($data['Creator'] == $_COOKIE['UserLogin']) {
+                                ?>
+                                <img class="deltask" src="img/delete.png" onclick="deleteTaskYeys(<?php echo($data['IDTask']); ?>);">
+                                <?php
+                            }
+                            ?>
                             <br><b>TaskName : </b><br>
-                            <div class="showRin"onclick=" showRinciTugas(<?php echo($data['IDTask']); ?>);">
+                            <div class="showRin" onclick=" showRinciTugas(<?php echo($data['IDTask']); ?>);">
                                 <?php
                                 echo($data['TaskName']);
                                 ?>
@@ -132,7 +139,7 @@ and open the template in the editor.
 
     </body>
     <script type="text/javascript" src="script.js"></script>
-        <script type="text/javascript" src="ajax.js"></script>
+    <script type="text/javascript" src="ajax.js"></script>
     <?php
 } else { // jika koneksi database tidak berhasil
     die('Database connection error');
