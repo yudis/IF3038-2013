@@ -329,7 +329,7 @@ footer.content {
 
 .profiledetail {
     position: absolute;
-    top:225px;
+    top:215px;
     width:500px;
     display: inline-block;
 }
@@ -428,6 +428,7 @@ footer.content {
     list-style: none;
     padding: 3px;
 /* CSS untuk halaman profile */
+}
 
 .rincianLabelProfile {
     width: 25%;

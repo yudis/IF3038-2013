@@ -7,11 +7,15 @@ require '../utilities/db.php';
 
 
 session_start();
+	if (isset($_POST["fname"]){
+		$_SESSION["user"]["full_name"] = $_POST["fname"];
+	}
+	if (isset($_POST["Bday"]){
+		$_SESSION["user"]["tgl_lahir"] = $_POST["Bday"];
+	}	
 
-	$_SESSION["user"]["full_name"] = $_POST["fname"];
-	$_SESSION["user"]["tgl_lahir"] = $_POST["Bday"];
 	
-	if ($_POST["pwd_confirm"] != "")
+	if ((isset($_POST["pwd_confirm"])) || (($_POST["pwd_confirm"]) != ""))
 	{
 		$_SESSION["user"]["password"] = $_POST["pwd_confirm"];
 	}

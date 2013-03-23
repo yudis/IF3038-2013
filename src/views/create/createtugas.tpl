@@ -28,7 +28,7 @@
                             <li id="folil3">
                                 <label id="title3">Deadline:</label>
                                 <div>
-                                    <input id="deadline" name="deadline" type="date" tabindex="3" required/>
+								    <input type="text" class="regbox" id="deadline" name="deadline" required="required" /><a href="#" onclick="NewCssCal('deadline', 'yyyyMMdd', 'dropdown', false, 24, false); return false;"><img src="./images/cal/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
                                 </div>
                             </li>
 

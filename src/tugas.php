@@ -23,6 +23,7 @@ else
 		
 		if ($data)
 		{
+			//die(json_encode($data));
 			if ($data["priviledge"] == true)
 			{
 				$view = new View('views/tugas/tugas.tpl');
@@ -31,6 +32,7 @@ else
 			{
 				$view = new View('views/tugas/tugas2.tpl');
 			}
+			
 			$view->set('title', 'Todolist | Rincian Tugas');
 			$view->set('headTags', '<link rel="stylesheet" type="text/css" href="styles/tugas.css" />
 					<link rel="stylesheet" type="text/css" href="./styles/autosuggest.css" />

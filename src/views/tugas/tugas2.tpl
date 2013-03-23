@@ -3,7 +3,7 @@
                 <div class="padding12px">
                     <h2>Detail</h2>
                     <div class="rincianLabel">Nama:</div><div class="rincianDetail"><span id="namaTugas">Loading...</span></div>
-                    <div class="rincianLabel">Status:</div><div class="rincianDetail"><input type="checkbox" id="cbStatus" onclick="toggleStatus();"/> <span id="statusTugas">Loading...</span></div>
+                    <div class="rincianLabel">Status:</div><div class="rincianDetail"><input type="checkbox" id="cbStatus" onclick="toggleStatus();" disable="disabled" /> <span id="statusTugas">Loading...</span></div>
                     <div class="rincianLabel">Deadline:</div><div class="rincianDetail">
                         <div id="deadlineDisplayDiv" class="inlineblock">Loading...</div>
                         <div id="deadlineEditDiv">

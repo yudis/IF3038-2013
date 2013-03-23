@@ -261,8 +261,19 @@ class Tugas extends Model
 				$file_name = $_FILES[$docId]['name'][$key];
 				$file_size =$_FILES[$docId]['size'][$key];
 				$file_tmp =$_FILES[$docId]['tmp_name'][$key];
-				$filename = uniqid()+"."+$_FILES[$docId]['type'][$key];
-				$file_type=$_FILES[$docId]['type'][$key];	
+				$temp = explode('.', $_FILES[$docId]['name'][$key]);
+				$extension=strtolower($temp[count($temp)-1]);
+				if($extension=="jpeg" ||$extension=="jpg")
+				{
+					$file_type = "image";	
+				}else if ($extension=="ogg" ||$extension=="webm" ||$extension=="mp4")
+				{
+					$file_type = "video";
+				}else
+				{
+					$file_type = "file";
+				}
+				$filename = uniqid(md5(rand()), true);
 				if($file_size > 2097152){
 					$errors[]='File size must be less than 2 MB';
 				}		
@@ -274,7 +285,7 @@ class Tugas extends Model
 					$file_type
 				);
 				
-				$desired_dir="Files";
+				$desired_dir="files";
 				if(empty($errors)==true){
 					if(is_dir($desired_dir)==false){
 						mkdir("$desired_dir", 0700);		// Create directory if it does not exist
@@ -364,8 +375,16 @@ class Tugas extends Model
 		
 		$sth = $this->_db->prepare($sql);
 		return $sth->execute($data);
-	}					(id, nama, tgl_deadline, status, pemilik, id_kategori)
-					(?, ?, ?, ?, ?, ?);";
+	}
+    
+    public function store()
+    {
+        $sql = "INSERT INTO tugas 
+                    (nama, tgl_deadline, pemilik,id_kategori)
+                VALUES 
+                    (?, ?, ?, ?);";
+         
+        $data = array(
 			$this->_taskname,
 			$this->_tgl_deadline,
 			$this->_pemilik,
@@ -442,7 +461,7 @@ class Tugas extends Model
 
 	public function isPriviledge($id_tugas, $username)
 	{
-		$sql = 'SELECT COUNT(*) AS `n` FROM `tugas` t, `assignees` a WHERE t.`id` = ? AND t.`id` = a.`id_tugas` AND (t.`pemilik` = ? OR a.`username` = ?)';
+		$sql = 'SELECT COUNT(*) AS `n` FROM `tugas` t LEFT JOIN `assignees` a ON t.`id` = a.`id_tugas` WHERE t.`id` = ? AND (t.`pemilik` = ? OR a.`username` = ?)';
 		$this->_setSql($sql);
 		$priv = $this->getRow(array($id_tugas, $username, $username));
 		if ($priv["n"] > 0) 

@@ -3,7 +3,7 @@
                 <div class="profile">
 					<form name="updateprof" method="post" enctype="multipart/form-data" action="./updateUser.php" >
 						<div class="profiledetail" id="profileContent">
-							  <div><div class="rincianLabelProfile" > Name </div>
+							  <div><div class="rincianLabelProfile"> Name </div>
 								<div id="usernameDisplayDiv" ><?php echo $username;?></div><input type="hidden" id="uname" name="uname" value="<?php echo $username?>" />
 								<div id="nameDisplayDiv" name="fullname"><strong id="Fullnama"><?php echo $fullname?></strong> <a href="#">@<?php echo $username?></a></div>
 								<div id="nameEditDiv"><input type="text" id="fname" name="fname" value="<?php echo $fullname?>" onkeyup="validateFullName();" onchange="validateFullName();"/></div>
@@ -16,8 +16,8 @@
 							  <div><div class="rincianLabelProfile">Born date </div>					  
 									<div class="rincianDetailProfile" id="birthDisplayDiv" class="inlineblock" ><strong id="birthDay"><?php echo $tgl_lahir?></strong></div>
 									<div class="rincianDetailProfile" id="birthEditDiv" >
+										<input type="text" id="Bday" name="Bday" value="<?php echo $tgl_lahir ?>" required="required" placeholder="Birthday (yyyy-mm-dd)" onkeyup="validateBday();" onchange="validateBday();" /><a href="#" onclick="NewCssCal('Bday', 'yyyyMMdd', 'dropdown', false, 24, false, 'past'); return false;"><img src="./images/cal/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
 									
-										<input type="text" class="regbox" id="Bday" name="Bday" value="<?php echo $tgl_lahir ?>"required="required" placeholder="Birthday (yyyy-mm-dd)" onkeyup="validateBday();" onchange="validateBday();" /><a href="#" onclick="NewCal('Bday', 'YYYYMMDD');return false;"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
 									</div>
 							  </div>
 							  
@@ -27,8 +27,7 @@
 							  </div>   
 							  
 							  <div>
-								<div class="rincianLabelProfile" > Last Login </div> 
-								<div> <strong>Sabtu, 16 Februari 2013, 17:01 WIT</strong> </div>
+		
 							  </div> 
 							  <div><div class="rincianLabelProfile" id="oldpassEditLabel"> Old Password </div>
 								<div id="oldpassEditDetail"><input id="oldpass" type="password" value="" onkeyup="validateOldPassword();" onchange="validateOldPassword();"/></div>
