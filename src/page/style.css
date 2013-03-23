@@ -268,9 +268,21 @@ body {
 }
 
 #header-right-search {
-	width:320px;
+	width:420px;
 	padding-top:2px;
+	padding-left:10px;
+	float:left;
+}
+
+#user-filtering {
+	display:none;
+	width:25%;
+	float:left;
+}
+
+#searching-header {
 	padding-left:100px;
+	width:75%;
 	float:left;
 }
 

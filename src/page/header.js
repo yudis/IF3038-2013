@@ -54,3 +54,20 @@ function checkHeaderValidation(){
 		ajaxRequest.send();
 	}
 }
+
+function filter() {
+	var x = document.getElementById("modesearch").value;
+	if (x == 2) {
+		document.getElementById("user-filtering").style.display = 'block';
+		document.getElementById("searching-header").style.paddingLeft = '0px';
+	}
+	else {
+		document.getElementById("user-filtering").style.display = 'none';
+		document.getElementById("searching-header").style.paddingLeft = '100px';
+	}
+}
+
+function initialize() {
+	document.getElementById("user-filtering").style.display = 'none';
+	document.getElementById("searching-header").style.paddingLeft = '100px';
+}

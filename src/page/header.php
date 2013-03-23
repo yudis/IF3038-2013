@@ -11,26 +11,36 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script type="text/javascript" src="header.js"></script>
 	</head>
-	<body>
+	<body onLoad="initialize()">
 		<div id="header-logo"><a href="dashboard.php"><img src="../image/logo.png" width="100px" height="60px"/></a></div>
 		<div id="header-title"><a href="dashboard.php"><img src="../image/title.png" width="250px" height="80px"/></a></div>
 		<div id="header-link"><a href="dashboard.php"><b>Go To Dashboard</b></a></div>
 		<div id="header-right-side">
 			<div id="header-right-search">
 				<form action="search_result.php" method="post">
-					<select name="modesearch" id="modesearch">
-								<option value="1">All</option>
-								<option value="2">User</option>
-								<option value="3">Category</option>
-								<option value="4">Task</option>
-							</select>    
-					<input type="text" name="search_text" id="search_text" list="searching-auto" value="" onKeyUp="checkHeaderValidation()" />
-					<input type="submit" value="Search"/>
-					<div id="list-search"></div> 
+					<div id="user-filtering">
+						<select name="filtering" id="filtering">
+							<option value="1">None</option>
+							<option value="2">Email</option>
+							<option value="3">Full Name</option>
+							<option value="4">Birthdate</option>
+						</select>  
+					</div>
+					<div id="searching-header">
+						<select name="modesearch" id="modesearch" onChange="filter()">
+							<option value="1">All</option>
+							<option value="2">User</option>
+							<option value="3">Category</option>
+							<option value="4">Task</option>
+						</select>    
+						<input type="text" name="search_text" id="search_text" list="searching-auto" value="" onKeyUp="checkHeaderValidation()" />
+						<input type="submit" value="Search"/>
+						<div id="list-search"></div>
+					</div>
 				</form>
             </div>
 			<div id="header-right-user">
-				<div id="header-photo"><img id="photo" src="../avatar/meckyr.jpg" width="60" height="60"/></div>
+				<div id="header-photo"><a href="#"><img id="photo" src="../avatar/meckyr.jpg" width="60" height="60"/></a></div>
 				<div id="header-profile">
 					You logged as, <b><?php echo $_SESSION["userlistapp"]?></b>
 					<ul>

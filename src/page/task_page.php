@@ -40,13 +40,14 @@
 					</div>
 					<div id="deadline_edit">
 						<div id="left-main-body"><div id="label">Deadline : </div>
-						<div id="date_html">
-							<input type="text" class="calendarSelectDate" name="textDeadline"/><div id="calendarDiv"></div><br />
-						</div>              
+							<div id="date_html">
+								<input type="text" class="calendarSelectDate" name="textDeadlineDate" placeholder="YYYY-MM-DD"/><div id="calendarDiv"></div><br />
+								<input type="text" name="textDeadlineTime" placeholder="HH:MM"/>
+							</div>              
 						</div>
 						<div id="right-main-body"><a href="#" onCLick="finish_deadline()"><u>done</u></a></div>
 					</div>
-					<br><br>
+					<br><br><br>
                     <div>
 						<div id="left-main-body4">Status : <?php echo $task['status']?></div> 
 						<div id="right-main-body">
@@ -59,7 +60,7 @@
                         </div>
 					</div>
 				</div>
-				<br>
+				<br><br>
 				<div id="attachment">
 					<div id="image-attachment">
 						<div>
@@ -136,7 +137,6 @@
 						<div id="shared-with"></div>
 						</div>
 						<div id="right-main-body"><a href="#1" onClick="finish_assignee(<?php echo $taskid ?>)"><u>done</u></a></div>
-						<br />
 					</div>
 					<br>
 					<br>
@@ -162,7 +162,7 @@
                         </div>
 					</div></div>
 					<div id="tag_edit" name="4">
-						<div id="left-main-body">Tag : <input id="tag-edit" type="text" /></div>
+						<div id="left-main-body">Tag : <input id="tag-edit" type="text" placeholder="tag1,tag2,tag3"/></div>
 						<div id="right-main-body"><a href="#4" onClick="finish_tag(<?php echo $taskid ?>)"><u>done</u></a></div>
 					</div>
 				</div>
