@@ -33,7 +33,7 @@
         </div>
     <?php
 		//create connection
-	    $con = mysqli_connect("localhost","root","","distributedAgenda");
+	    $con = mysqli_connect("127.0.0.1","progin","progin","progin_405_13510027");
 	    
 	    //check the connection
 	    if (mysqli_connect_errno($con)) {

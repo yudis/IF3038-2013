@@ -280,8 +280,9 @@ function toHalamanRincianTugas(namaHlm) {
 	alert("pindah ke halaman " + namaHlm);
 }
 
-function toHalamanPembuatanTugas() {
-	alert("pindah ke halaman pembuatan tugas");
+function toHalamanPembuatanTugas(kat) {
+	window.location = "createtask.php?kategori=" + kat;
+	//alert("pindah ke halaman pembuatan tugas");
 }
 function deleteTask(namaTask) {
 	//meminta username dan creator dari task yang hendak dihapus

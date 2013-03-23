@@ -24,7 +24,7 @@
         move_uploaded_file($_FILES["avatar"]["tmp_name"], "server/" . $file);                   
     }
     
-    $con = mysqli_connect("localhost", "root", "", "sharetodo");
+    $con = mysqli_connect("127.0.0.1","progin","progin","progin_405_13510027");
     mysqli_query($con, "INSERT INTO user (username, email, password, fullname, tanggalLahir, avatar) VALUES ('$username', '$email', '$password', '$full_name', '$birth_date', '$file')");
     
     $_SESSION["username"] = $username;

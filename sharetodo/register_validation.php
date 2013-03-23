@@ -1,5 +1,5 @@
 <?php
-    $con = mysqli_connect("localhost", "root", "", "sharetodo");
+    $con = mysqli_connect("127.0.0.1","progin","progin","progin_405_13510027");
     $query = mysqli_query($con, "SELECT username, email FROM user");
     
     while($row = mysqli_fetch_assoc($query)) {

@@ -1,6 +1,6 @@
 <?php
 
-$con = mysql_connect("localhost","root","");
+$con = mysqli_connect("127.0.0.1","progin","progin","progin_405_13510027");
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());

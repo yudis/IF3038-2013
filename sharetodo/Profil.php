@@ -24,8 +24,8 @@
                 <option>Task</option>
             </select>
             <input id="submitForm" type="submit" name="search" value="search">
-			<a href="#"><img id="profile" src="res/profileLogo.png" onclick="keProfil()";/></a>
-            <a id="logout" href="#">Log Out</a>
+		<a href="#"><img id="profile" src="res/profileLogo.png" onclick="keProfil()";/></a>
+		<a id="logout" href="logout.php">Log Out</a>
 	    <div class="suggest">Suggestion : <span id="textHint"></span></div>
         </div>
         
@@ -48,7 +48,7 @@
         
 	<?php
 	    //create connection
-	    $con = mysqli_connect("127.0.0.1","root","root","distributedAgenda");
+	    $con = mysqli_connect("127.0.0.1","progin","progin","progin_405_13510027");
 	    
 	    //check the connection
 	    if (mysqli_connect_errno($con)) {
@@ -141,7 +141,7 @@
 	    
 	    <?php
 		//create connection
-		$con = mysqli_connect("127.0.0.1","root","root","distributedAgenda");
+		$con = mysqli_connect("127.0.0.1","progin","progin","progin_405_13510027");
 		
 		//check the connection
 		if (mysqli_connect_errno($con)) {
@@ -176,7 +176,7 @@
             
 	    <?php
 		//create connection
-		$con = mysqli_connect("127.0.0.1","root","root","distributedAgenda");
+		$con = mysqli_connect("127.0.0.1","progin","progin","progin_405_13510027");
 		
 		//check the connection
 		if (mysqli_connect_errno($con)) {

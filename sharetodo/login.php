@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $con = mysqli_connect("localhost", "root", "", "sharetodo");
+    $con = mysqli_connect("localhost", "progin", "progin", "progin_405_13510027");
     $query = mysqli_query($con, "SELECT username, password FROM user");
     
     while($row = mysqli_fetch_assoc($query)) {
