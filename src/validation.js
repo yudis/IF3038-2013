@@ -111,6 +111,15 @@ function checkDOB(){
 		document.getElementById('register').removeAttribute('disabled');
 	}
 }
+
+//======================= SHOW TASKS FOR SELECTED CATEGORY
+function search(){
+	var term = document.getElementById("searchterm").value;
+	var type = document.getElementById("searchtype").value;
+	
+	window.location = "searchresult.php?term=" + term + "&type=" + type;
+}
+
 //======================= SHOW TASKS FOR SELECTED CATEGORY
 function showTasks(element){
 	var id = element.id;

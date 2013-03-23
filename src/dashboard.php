@@ -15,11 +15,18 @@
 			<a href="index.html">LOGOUT</a>			
 		</div>
 		<div id="search">
-			<input type="text" size="50%">
+			<input id="searchterm" type="text" size="50%" />
+			<select id="searchtype">
+				<option value="semua" selected>Semua</option>
+				<option value="username">Username saja</option>
+				<option value="category">Category saja</option>
+				<option value="task">Task saja</option>
+			</select>
+			<button id="searchbutton" onclick="search()">Search</button>
 		</div>
 		</div>
 		<div class="clearall container">
-			<h2>Category&nbsp;&nbsp;<img onclick="popupcat()" src="images/plus.png"id="pluscat"></h2>			
+			<h2>Category&nbsp;&nbsp;<img onclick="popupcat()" src="images/plus.png" id="pluscat"></h2>			
 			<?php include('loadcategory.php'); ?>
 		</div>
 		<div class="clearall container">

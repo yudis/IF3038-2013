@@ -8,7 +8,7 @@
 					<div class="cell th centered">Hapus Status</div>
 				</div>			
 <?php
-	require 'connectDB.php';	
+	require 'connectDB.php';
 	$category = (isset($_GET['category'])) ? $_GET['category'] : "";
 	
 	if($category == ""){
