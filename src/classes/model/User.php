@@ -132,7 +132,7 @@
 		 */
 		public function getAssignedTasks()
 		{
-			return Task::model()->findAll("id_task IN (SELECT id_task FROM assign WHERE id_user='" . $this->id_user . "')");
+			return Task::model()->findAll("id_task IN (SELECT id_task FROM assign WHERE id_user='" . addslashes($this->id_user) . "') OR id_user='".addslashes($this->id_user)."'");
 		}
 				
 		/**

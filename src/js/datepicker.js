@@ -10,6 +10,7 @@ var datePicker =
 	today : null,
 	thisYear : null,
 	thisMonth : null,
+	date_id: null,
 	choosing: false,
 	
 	/*******************
@@ -22,9 +23,10 @@ var datePicker =
 		this.destinationForm = destinationForm;
 		this.initDate();
 		this.populateTable(thisMonth, thisYear);
-		document.getElementById(date_id).onblur = function()
+		this.date_id = date_id;
+		document.getElementById(date_id).onclick = function(event)
 		{
-			datePicker.blur();
+			datePicker.showCalendar(event);
 		}
 	},
 	// create dynamic list of year choices
@@ -162,7 +164,7 @@ var datePicker =
 		var tempdate = (date<10) ? "0":"";
 		var temp = ((month+1)<10) ? "0":"";
 		var result = year + "-" + temp + (month+1) + "-" + tempdate + date;
-		this.destinationForm.birth_date.value = result;
+		document.getElementById(this.date_id).value = result;
 		this.blur();
 		
 		/*if ((birth_date.checkValidity()) && (check_date(birth_date.value)))

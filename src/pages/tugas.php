@@ -114,7 +114,7 @@
 						</div>
 						<div class="field">
 							<label>Attachment</label>
-							<input name="attachment[]" id="attachment" type="file" multiple="">
+							<input size="25" name="attachment[]" id="attachment" type="file" multiple="">
 						</div>
 						<?php
 							$i = 1;
@@ -131,11 +131,11 @@
 						?>
 						<div class="field">
 							<label>Deadline</label>
-							<input name="deadline" id="deadline" type="text" value="<?php echo (new DateTime($task->deadline))->format('Y-m-j'); ?>">
+							<input size="25" name="deadline" id="deadline" type="text" value="<?php echo (new DateTime($task->deadline))->format('Y-m-j'); ?>">
 						</div>
 						<div class="field">
 							<label>Assignee</label>
-							<input name="assignee" id="assignee" type="text"  autocomplete="off" 
+							<input size="25" name="assignee" id="assignee" type="text"  autocomplete="off" 
 							value="<?php 
 									$string = "";
 									foreach ($users as $user)
@@ -151,7 +151,7 @@
 						</div>
 						<div class="field">
 							<label>Tag</label>
-							<input name="tag" id="tag" type="text" autocomplete="off" value="<?php 
+							<input size="25" name="tag" id="tag" type="text" autocomplete="off" value="<?php 
 									$string = "";
 									foreach ($tags as $tag)
 									{

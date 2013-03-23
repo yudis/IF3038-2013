@@ -13,7 +13,8 @@ Rp(function()
 				string += '<img src="upload/user_profile_pict/'+comment.avatar+'" alt="'+comment.fullname+'" class="icon_pict" >';
 			string += '</a>';
 			string += '<div class="right">';
-				date = new Date(comment.timestamp);
+				date = new Date(comment.timestamp.substr(0,4),comment.timestamp.substr(5,2),comment.timestamp.substr(8,2),
+								comment.timestamp.substr(11,2),comment.timestamp.substr(14,2),comment.timestamp.substr(17,2));
 				var temphour = (date.getHours()>=10)? "" : "0";
 				var tempmin = (date.getMinutes()>=10)? "" : "0";
 				string += temphour + date.getHours()+":"+tempmin+date.getMinutes()+" – "+Day[date.getDay()]+"/"+Mon[date.getMonth()];
@@ -179,7 +180,8 @@ function prepend_comment(comment)
 			string += '<img src="upload/user_profile_pict/'+comment.avatar+'" alt="'+comment.fullname+'" class="icon_pict" >';
 		string += '</a>';
 		string += '<div class="right">';
-			date = new Date(comment.timestamp);
+			date = new Date(comment.timestamp.substr(0,4),comment.timestamp.substr(5,2),comment.timestamp.substr(8,2),
+								comment.timestamp.substr(11,2),comment.timestamp.substr(14,2),comment.timestamp.substr(17,2));
 			var temphour = (date.getHours()>=10)? "" : "0";
 			var tempmin = (date.getMinutes()>=10)? "" : "0";
 			var tempstring = temphour + date.getHours()+":"+tempmin+date.getMinutes()+" – "+Day[date.getDay()]+"/"+Mon[date.getMonth()];

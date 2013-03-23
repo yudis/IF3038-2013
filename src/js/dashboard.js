@@ -38,7 +38,7 @@ Rp(function()
 			.attr('data-task-id', task.id)
 			.on('click', handleTaskCheckbox);
 		space = document.createTextNode(' ');
-		mainLink = Rp.factory('a').prop('href', 'tugas.php?id=' + task.id).text(task.name);
+		mainLink = Rp.factory('a').prop('href', 'tugas?id=' + task.id).text(task.name);
 
 		detailsDiv = Rp.factory('div').addClass('details');
 

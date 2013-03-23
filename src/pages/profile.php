@@ -6,9 +6,9 @@
 	}
 
 	$id = (ISSET($_GET['id'])) ? $_GET['id'] : $_SESSION['user_id'];
-	$user = User::model()->find("id_user = ".$id, array("username","email","fullname","avatar","birthdate"));
+	$user = User::model()->find("id_user = ".$id, array("id_user","username","email","fullname","avatar","birthdate"));
 	$tasks = $user->getAssignedTasks();
-
+	
 	$birth_date = new Datetime($user->birthdate);
 
 	$this->header('Profile', $_GET['id'] && $_GET['id'] != $_SESSION['user_id'] ? '' : 'profile');
@@ -73,7 +73,7 @@
 							<header>
 								<h1>
 									<label>
-										<a href="view_tugas_5.html"><?php echo $task->nama_task; ?></a>
+										<a href="<?php echo "tugas?id=".$task->id_task; ?>"><?php echo $task->nama_task; ?></a>
 									</label>
 								</h1>
 							</header>
@@ -123,7 +123,7 @@
 							<header>
 								<h1>
 									<label>
-										<a href="view_tugas_5.html"><?php echo $task->nama_task; ?></a>
+										<a href="<?php echo "tugas?id=".$task->id_task; ?>"><?php echo $task->nama_task; ?></a>
 									</label>
 								</h1>
 							</header>

@@ -10,7 +10,6 @@
 		<div class="content">
 			<div class="index">	
 				<header>
-					<h1>Welcome to DO</h1>
 					<ul>
 						<li class="login"><a href="#" id="loginLink">Login</a></li>
 					</ul>
@@ -84,7 +83,7 @@
 							</div>
 							<div class="field">
 								<label for="birth_date">Date of Birth</label>
-								<input id="birth_date" name="birthdate" type="text" pattern="^[1-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$" onclick="datePicker.showCalendar(event);" title="Tahun harus minimal dari tahun 1955." required/>
+								<input id="birth_date" name="birthdate" type="text" pattern="^[1-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$" title="Tahun harus minimal dari tahun 1955." required/>
 							</div>
 							<div class="field">
 								<label for="register_email">Email</label>

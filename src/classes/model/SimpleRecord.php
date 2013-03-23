@@ -8,6 +8,14 @@
 	include_once "Attachment.php";
 	include_once "Connection.php";
 	
+	/**
+	 * This class is to be extended by models.
+	 *
+	 * The followings are the available columns in table 'user':
+	 * @property string $class_name
+	 * @property array $models
+	 * @property array $data
+	 */
 	abstract class SimpleRecord
 	{
 		private static $class_name;

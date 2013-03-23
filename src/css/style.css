@@ -1,8 +1,12 @@
 /* @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,200); */
+@font-face {font-family:Oxygen; font-weight:900; src: url('Oxygen-Bold.ttf'); }
+@font-face {font-family:Oxygen; font-weight:300; src: url('Oxygen-Light.ttf');}
+@font-face {font-family:Oxygen; font-weight:400; src: url('Oxygen-Regular.ttf');}
 
 body {
 	margin: 0;
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: 'Oxygen';
+	/*font-family: 'Source Sans Pro', sans-serif;*/
 	font-size: 14px;
 	line-height: 1.35;
 	background: #f6f6f6;
@@ -112,6 +116,7 @@ input[type="time"],
 input[type="week"],
 input[type="number"],
 input[type="email"],
+input[type="file"],
 input[type="url"],
 input[type="search"],
 input[type="tel"],
@@ -138,6 +143,7 @@ input[type="time"]:focus,
 input[type="week"]:focus,
 input[type="number"]:focus,
 input[type="email"]:focus,
+input[type="file"]:focus,
 input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
@@ -469,7 +475,7 @@ button:active {
 }
 .task-details #edit-task {
 	display: none;
-	width: 400px;
+	width: 500px;
 	padding-left: 20px;
 	float: left;
 }
@@ -1047,4 +1053,23 @@ a.date_button:hover
 	text-decoration: none;
 	color: #111111;
 	display: block;
+}
+
+#commentsList
+{
+	transition-property: height;
+	transition-duration: 1s;
+	transition-timing-function: linear;
+	-moz-transition-property: height;
+	-moz-transition-duration: 1s;
+	-moz-transition-timing-function: linear;
+	-ms-transition-property: height;
+	-ms-transition-duration: 1s;
+	-ms-transition-timing-function: linear;
+	-webkit-transition-property: height;
+	-webkit-transition-duration: 1s;
+	-webkit-transition-timing-function: linear;
+	-o-transition-property: height;
+	-o-transition-duration: 1s;
+	-o-transition-timing-function: linear;
 }

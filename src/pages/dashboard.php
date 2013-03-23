@@ -111,7 +111,7 @@ foreach ($done as $task):
 								<h1>
 									<label>
 										<span class="task-checkbox"><input checked type="checkbox" class="task-checkbox" data-task-id="<?php echo $task->id_task ?>"></span>
-										<a href="tugas.php?id=<?php echo $task->id_task ?>"><?php echo $task->nama_task; ?></a>
+										<a href="tugas?id=<?php echo $task->id_task ?>"><?php echo $task->nama_task; ?></a>
 									</label>
 								</h1>
 							</header>
