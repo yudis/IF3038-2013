@@ -13,6 +13,11 @@
 	</head>
 	
 	<body>
+	
+		
+			<script src="js/ajaxlogin.js" language="javascript"></script>
+
+				
 		<!-- Web Header -->
 		<header>
 			<div id="header_container"> 
@@ -41,13 +46,17 @@
 				</div>
 			</div>
 			<div id="index_right">
+	
+			
+			
+			
 				<div id="login_form_container">
-					<form id="login_form">
-						<label> Username </label> <input type="text" id="login_username" name="username"/>
-						<br/><label> Password </label> <input type="password" id="login_password" name="password"/> 
-						<div id="login_button_submit" class="right link_red top10" onclick="javascript:logincheck();"> Login </div>
-						<input type="checkbox" id="remember_me_check" name="remember_me_checkbox"/> <label id="remember_me"> Remember me </label>
-					</form>
+					<form id="login_form" action="javascript:login()" method="post">
+						<label> Username </label><input name="unameLogin" type="text" id="unameLogin" value=""/>
+						<br/><label> Password </label> <input name="passwLogin" type="password" id="passwLogin" value=""/>
+						<center><input type="submit" name="Submit" value="Login"/></center>
+					</form><br/>
+					<div id="login_response"></div>
 				</div>
 				
 				<div class="signup_label">
