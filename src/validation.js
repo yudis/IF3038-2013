@@ -127,6 +127,24 @@ function checkDOB(){
 	}
 }
 
+//======================= CHECK IF LOGGED IN ===========
+function checkLogged(){
+	var object = JSON.parse(localStorage.getItem("key"));    
+	
+	if(object == null){
+		window.location = "index.php";
+	}
+	else{
+		// dateString = object.timestamp;
+		// now = new Date().getTime().toString();
+		login = object.username;
+		
+		if(login == null){
+			window.location = "index.php";
+		}
+	}
+}
+
 //======================= LOGIN =======================
 function checkLogin(){
 	var u = document.getElementById("usernamelogin").value;
@@ -142,11 +160,12 @@ function checkLogin(){
 	xmlhttp.onreadystatechange = function(){
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
 			if(xmlhttp.responseText == u){
-				//alert(':)');
+				var object = {username: u, timestamp: new Date().getTime()}
+				localStorage.setItem("key", JSON.stringify(object));
 				window.location = "dashboard.php";
 			}
 			else{
-				alert(':(');
+				alert('Username/password error!');
 			}
 		}
 	}
