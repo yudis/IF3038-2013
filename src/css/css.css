@@ -391,38 +391,298 @@ label {
 	box-shadow: 0 1px 1px rgba(0, 0, 0, .3) inset;
 }
 
-#opsisearch{
-	width: 100px;
-	height: 30px;
-	margin-left: 495px;
-	margin-top: 5px;
+.alert {
 	position: absolute;
+	left:850px;
+	font-size: 20px;
+	font-family: Calibri;
+	color: red;
 }
 
-#hasil_ac_search{
-	width: 200px;
-	position: absolute;
-	background-color: white;
-	box-shadow: 3px 3px 5px #888888;
+/*=========================PROFILE=============*/
+.profheader{
+    width: 374px;
+    height: 570px;
+    background-image: url("../pict/bgprof.png");
+    margin-left: 100px;
+    margin-top: 100px;
 }
 
-.hasil_suggest{
-	color: black;
+#avatarnya{
+      padding-top: 100px;
+      padding-left: 80px;
 }
 
-.hasil_suggest:hover{
-	background-color: #e58100;
+#avatarnya img{
+	margin-left:-20px;
+	height:200px;
+	width:250px;
 }
 
-#hasil_ac_search p{
-	color: black;
-	line-height: 0px;
-	font-size: 10px;
+#namalengkap{
+	margin-top: 10px;
+	font-family: Calibri;
+	font-size: 20px;
+	text-align: center;
 }
 
-#tombol_search{
-	border: 0; background: transparent;
+#tanggallahir{
+	margin-top: 2px;
+	font-family: Calibri;
+	font-size: 20px;
+	text-align: center;
 }
+
+#email{
+	margin-top: 2px;
+	font-family: Calibri;
+	font-size: 20px;
+	text-align: center;
+}
+
+#editprof{
+    margin-top: 30px;
+    margin-left: 115px;
+    padding-top: 10px;
+    width: 140px;
+    height: 50px;
+    background-color: #e58100;
+    color: #ffffff;
+    font-family: Calibri;
+    font-size: 30px;
+    text-align: center;
+    border-radius:10px;
+        -moz-border-radius:10px;
+        -webkit-border-radius:10px;
+	font-weight: 800;
+}
+
+#editprof:hover{
+    color: #ffffff;
+    background-color: #000000;
+}
+
+#parat{
+	height : 20px;
+}
+/*=======================================================*/
+.profil1Form {
+    margin-top: -530px;
+	margin-left: 580px;
+}
+.profil1Form ul {
+	list-style-type:none;
+	padding: 0;
+	margin: 0;
+	margin-top:-6px;
+}
+.profil1Form li {
+	margin-top:6px;
+}
+.profil2Form {
+    margin-top: -432px;
+	margin-left: 845px;
+}
+
+
+.profil2Form ul {
+	list-style-type:none;
+	padding: 0;
+	margin: 0;
+	margin-top:-6px;
+}
+.profil2Form li {
+	margin-top:6px;
+}
+.listProfilbox{
+	text-align: center;
+	width:240px;
+	height:65px;
+	background:#c74f51;
+	/*border:2px solid #d1d1d1;*/
+	padding:0px;
+	font-family:Calibri;
+	font-size:20px;
+	color:#ffffff;
+        border-radius:15px 15px 15px 15px;
+        -moz-border-radius:15px 15px 15px 15px;
+        -webkit-border-radius:15px 15px 15px 15px;     
+}
+
+.listProfilbox2{
+	text-align: center;
+	width:240px;
+	height:65px;
+	background:#000000;
+	/*border:2px solid #d1d1d1;*/
+	padding:0px;
+	font-family:Calibri;
+	font-size:20px;
+	color:#ffffff;
+        border-radius:15px 15px 15px 15px;
+        -moz-border-radius:15px 15px 15px 15px;
+        -webkit-border-radius:15px 15px 15px 15px;     
+}
+
+/*======================Dashboard================*/
+#addcat{
+    background-color: #ececec;
+    width: 139px;
+    height: 68px;
+    border-radius:20px;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    box-shadow: 1px 1px 5px 0px #e1e1e1;
+    margin-left: 118px;
+    margin-top: 64px;
+    background-image: url("../pict/pluscat.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#addtask{
+    background-color: #ececec;
+    width: 139px;
+    height: 68px;
+    border-radius:20px;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    box-shadow: 1px 1px 5px 0px #e1e1e1;
+    background-image: url("../pict/tulisantask.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 20px;
+    margin-left: 120px;
+}
+
+#category{
+    width: 242px;
+    height: auto;
+    margin-left: 282px;
+    margin-top: -155px;
+}
+
+#addtask:hover{
+    background-color: #361a2c;
+}
+
+#addcat:hover{
+    background-color: #361a2c;
+}
+
+#listcat{
+    width: 240px;
+    height: 65px;
+    background-color: #e58100;
+    border-radius:20px;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+#tulcat{
+    padding-top: 10px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 800;
+    font-family: Calibri;
+}
+
+#listcat:hover{
+    background-color: #fecc8c;
+}
+
+#listcat.activecat{
+    background-color: #fecc8c;
+}
+#task{
+    width: 242px;
+    height: auto;
+    margin-left: 550px;
+    margin-top: -310px;
+}
+
+#listtask{
+    width: 240px;
+    height: 65px;
+    background-color: #c74f51;
+    border-radius:20px;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    margin-bottom: -10px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 20px;
+    font-family: Calibri;
+}
+
+#listtask:hover{
+    background-color: #e29394;
+    
+}
+
+
+/*STYLES FOR CSS POPUP*/
+
+
+#blanket {
+   background-color:#111;
+   opacity: 0.65;
+   *background:none;
+   position:absolute;
+   z-index: 9001;
+   top:0px;
+   left:0px;
+   width:100%;
+}
+
+#popUpDiv {
+	position:absolute;
+	margin-top: -200px;
+	background-color: #ececec;
+	width:400px;
+	height:440px;
+	border:5px solid #e0e0e0;
+	z-index: 9002;
+	border-radius:20px;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+}	
+
+#popUpDiv a {position:relative; top:20px; left:20px}
+
+#editprofile{
+    margin-left: 40px;
+    margin-top: 30px;
+}
+
+#edittitle{
+    color: #e97f2c;
+    font-family: Calibri;
+    font-weight: 800;
+    font-size: 30px;
+    margin-top: -5px;
+}
+#closeedit{
+    color: #e97f2c;
+    float: right;
+    margin-right: 50px;
+    font-family: Calibri;
+    font-size: 20px;
+    margin-top: -15px;
+}
+
+#closeedit:hover{
+    color: #ffffff;
+}
+
+A:link {text-decoration: none}
+A:visited {text-decoration: none}
+A:active {text-decoration: none}
+A:hover {text-decoration: none}
 A:link {text-decoration: none; }
 A:visited {text-decoration: none; color: #ffffff;}
 A:active {text-decoration: none; color: #ffffff;}
