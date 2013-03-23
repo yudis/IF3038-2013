@@ -425,7 +425,7 @@ footer {
 }
 
 #save_button_td {
-	display:none;
+	display:block;
 	border-style:solid;
 	border-color:#007bc1;
 	margin-left:5%;
@@ -435,11 +435,22 @@ footer {
 	padding-top:5px; 
 	padding-bottom:5px;
 }
+#save_edit_task {
+	display:block;
+	border-style:solid;
+	border-color:#007bc1;
+	margin-left:5%;
+	width:100px;
+	text-align:center;
+	font-size: 15px;
+	padding-top:5px; 
+	padding-bottom:5px;
+}
 #task_attachment:hover {
 	color:#ff5544;
 }
 
-#save_button_td:hover {
+#save_button_td:hover , #save_edit_task:hover{
 	border-color:#0092dd;
 }
 
