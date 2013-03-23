@@ -24,7 +24,7 @@ header {
 	}
 
 textarea {
-	font-family:Segoe UI; font-weight:lighter;;
+	font-family:Segoe UI; font-weight:lighter;
 }
 
 #header_container {
@@ -686,10 +686,6 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 	font-size:17px;margin:auto;
 }
 
-.tasklist_container {
-	overflow-y:scroll;
-}
-
 .categoryList, #newCategoryAdded {
 	display:block;padding:10px;
 	-webkit-transition: opacity 0.5s linear;
@@ -759,7 +755,7 @@ text-transform:uppercase;margin-top:-50px;z-index: 99;position:relative;
 	margin-top:10%;
 }
 .half_tall {
-	height:200px;
+	height:250px;
 }
 
 /* Search Result 

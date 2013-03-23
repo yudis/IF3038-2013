@@ -94,30 +94,29 @@
 		<div class="half_div">
 			<div class="half_tall">
 				<div class="headsdeh">Current Tasks</div>
-				<div class="tasklist_container">
 					<?php
 					$rowtask2 = array(); 
 					while ($rowtask = mysql_fetch_array($resulttask, MYSQL_ASSOC)) {
 						$rowtask2[] = $rowtask;
-						$taskname=$rowtask['task_name'];
 						$taskstatus=$rowtask['task_status'];
-						$taskID=$rowtask['task_id'];
-						if ($taskstatus==0) {
-							echo "<div onclick='javascript:viewTask(\"$taskID\")'>$taskname</div></br>";
+						
+						if ($taskstatus == 0) {
+							$taskname=$rowtask['task_name'];
+							$taskID=$rowtask['task_id'];
+							echo "<div class='cursorPointer darkBlueLink' onclick='javascript:viewTask(\"$taskID\")'>$taskname</div> ";
 						}
 					}
 					?>
-				</div>
 			</div>
 			<div class="half_tall">
 				<div class="headsdeh">Finished Tasks</div>
 					<?php 
 					foreach($rowtask2 as $rowtask){
-  						$taskname=$rowtask['task_name'];
 						$taskstatus=$rowtask['task_status'];
-						$taskID=$rowtask['task_id'];
 						if ($taskstatus==1){
-							echo "<div onclick='javascript:viewTask(\"$taskID\")'>$taskname</div></br>";
+							$taskID=$rowtask['task_id'];
+							$taskname=$rowtask['task_name'];
+							echo "<div class='cursorPointer darkBlueLink' onclick='javascript:viewTask(\"$taskID\")'>$taskname</div></br>";
 						}
 					}
 					?>
