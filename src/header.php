@@ -48,6 +48,7 @@
 	  <a href="profile.html">PROFILE</a>
   </div>
   <div id="search">
+	<form name="cari" method="get" action="search_result.php">
 	<section id="searchdropdown">
 		<select name="opsisearch" id="opsisearch">
 			<option value="semua">Semua</option>
@@ -61,13 +62,16 @@
 		<div id="hasil_ac_search"></div>
 	</section>
 	<section class="searchbuttonbox cf">
-		<img class="searchbutton"src="pict/search button.jpg">
-	</section>	  
+		<button type="submit" id="tombol_search">
+			<img class="searchbutton"src="pict/search button.jpg">
+		</button>
+	</section>	
+	</form>
   </div>  
   <div id="wellfaiz">
 	  
   </div>
   <div id="logout">
-	  <a href="index.html">LOGOUT</a>
+	  <a href="logout.php" onClick="localStorage.clear()">LOGOUT</a>
   </div>
 </div>
