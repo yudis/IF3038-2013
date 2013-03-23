@@ -62,11 +62,11 @@ function finish_deadline(taskid) {
 	getAjax();
 
 	var deadlinetime = document.getElementById("datedeadlineinput").value + " " + document.getElementById("timedeadlineinput").value;
-	ajaxRequest.open("GET","../php/changedeadline.php?deadlinetime="+deadlinetime,false);
+	ajaxRequest.open("GET","../php/changedeadline.php?deadlinetime="+deadlinetime+"&taskid="+taskid,false);
 
 	ajaxRequest.onreadystatechange = function()
 	{
-		//alert(ajaxRequest.responseText);
+		document.getElementById("left-main-body").innerHTML =  ajaxRequest.responseText;
 	}
 	ajaxRequest.send();
 	
