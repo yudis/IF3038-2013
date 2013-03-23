@@ -11,45 +11,60 @@
 	$con        =    mysql_connect($host,$user,$password) or die('Server information is not correct.');
 	mysql_select_db($database,$con) or die('Database information is not correct');
 	
+function upload($file_id, $folder="", $types="") {
+    if(!$_FILES[$file_id]['name']) return array('','No file specified');
+
+    $file_title = $_FILES[$file_id]['name'];
+	
+	//Get file extension
+	$ext_arr = explode("\.",basename($file_title));
+	$ext = pathinfo($_FILES[$file_id]['name'], PATHINFO_EXTENSION);
+	
+    //Not really uniqe - but for all practical reasons, it is
+    $uniqer = substr(md5(uniqid(rand(),1)),0,5);
+    $file_name = $uniqer . '_' . $file_title;//Get Unique Name
+
+    $all_types = explode(",",strtolower($types));
+    if($types) {
+        if(in_array($ext,$all_types));
+        else {
+            $result = "'".$_FILES[$file_id]['name']."' is not a valid file."; //Show error if any.
+            return array('',$result);
+        }
+    }
+
+    //Where the file must be uploaded to
+    if($folder) $folder .= '/';//Add a '/' at the end of the folder
+    $uploadfile = $folder . $file_name;
+
+    $result = '';
+    //Move the file from the stored location to the new location
+    if (!move_uploaded_file($_FILES[$file_id]['tmp_name'], $uploadfile)) {
+        $result = "Cannot upload the file '".$_FILES[$file_id]['name']."'"; //Show error if any.
+        if(!file_exists($folder)) {
+            $result .= " : Folder don't exist.";
+        } elseif(!is_writable($folder)) {
+            $result .= " : Folder not writable.";
+        } elseif(!is_writable($uploadfile)) {
+            $result .= " : File not writable.";
+        }
+        $file_name = '';
+        
+    } else {
+        if(!$_FILES[$file_id]['size']) { //Check if the file is made
+            @unlink($uploadfile);//Delete the Empty file
+            $file_name = '';
+            $result = "Empty file found - please use a valid file."; //Show the error message
+			echo "hoho";
+        } else {
+            chmod($uploadfile,0777);//Make it universally writable.
+        }
+    }
+
+    return array($file_name,$result);
+}
 	
 	
-$allowedExts = array("gif", "jpeg", "jpg", "png");
-$extension = end(explode(".", $_FILES["attachment_file"]["name"]));
-if ((($_FILES["attachment_file"]["type"] == "image/gif")
-|| ($_FILES["attachment_file"]["type"] == "image/jpeg")
-|| ($_FILES["attachment_file"]["type"] == "image/jpg")
-|| ($_FILES["attachment_file"]["type"] == "image/png"))
-&& ($_FILES["attachment_file"]["size"] < 20000)
-&& in_array($extension, $allowedExts))
-  {
-  if ($_FILES["attachment_file"]["error"] > 0)
-    {
-    echo "Return Code: " . $_FILES["attachment_file"]["error"] . "<br>";
-    }
-  else
-    {
-    echo "Upload: " . $_FILES["attachment_file"]["name"] . "<br>";
-    echo "Type: " . $_FILES["attachment_file"]["type"] . "<br>";
-    echo "Size: " . ($_FILES["attachment_file"]["size"] / 1024) . " kB<br>";
-    echo "Temp file: " . $_FILES["attachment_file"]["tmp_name"] . "<br>";
-
-    if (file_exists("uploads/" . $_FILES["attachment_file"]["name"]))
-      {
-      echo $_FILES["attachment_file"]["name"] . " already exists. ";
-      }
-    else
-      {
-      move_uploaded_file($_FILES["attachment_file"]["tmp_name"],
-      "uploads/" . $_FILES["attachment_file"]["name"]);
-      echo "Stored in: " . "uploads/" . $_FILES["attachment_file"]["name"];
-      }
-    }
-  }
-else
-  {
-  echo "Invalid file";
-  }
-
 	
 	/* Add Task Script */
 	$task_name		= mysql_real_escape_string($_POST['task_name_input']);
@@ -94,8 +109,22 @@ else
 		$result5 = mysql_query($query5);
 		$query6 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment3','$taskID')";
 		$result6 = mysql_query($query6);
+		
+		if($_FILES['attachment_file1']['name']) {
+	list($file,$error) = upload('attachment_file1','uploads/',',jpg,jpeg,gif,png,flv,pdf');
+	if($error) print $error;
+		}
+	if($_FILES['attachment_file2']['name']) {
+	list($file,$error) = upload('attachment_file2','uploads/',',jpg,jpeg,gif,png,flv,pdf');
+	if($error) print $error;
+	}
+	
+	if($_FILES['attachment_file3']['name']) {
+	list($file,$error) = upload('attachment_file3','uploads/',',jpg,jpeg,gif,png,flv,pdf');
+	if($error) print $error;
+}
 
-		//echo "<script> viewTask(\"$taskID\"); </script>";
+
 		header('location:dashboard.php'); //Redirect To Success Page
 	}
 ?>
