@@ -393,7 +393,12 @@ function updateProfile(mode,user_id){
 		value = Rp('#tanggal_lahir').val();
 	}
 	if (mode == "password") {
+		if (Rp('#password').val() != Rp('#password_k').val()) {
+			alert('password tidak sama!');
+			return;
+		}
 		value = Rp('#password').val();
+		
 	}
 	xmlhttp=new XMLHttpRequest();
 	xmlhttp.open("POST","core/updateProfile.php",false);

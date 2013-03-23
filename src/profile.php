@@ -63,6 +63,9 @@
 						<div class="field">
 							<label>New Avatar</label>
 							<input name="avatar" id="avatar" type="file" accept="image/jpeg">
+							<div class="buttons">
+								<button id="avatarbutton" onclick="updateProfile('avatar',<?php echo $_GET['user_id']; ?>);">Save Avatar</button>
+							</div><br>&nbsp;
 						</div>
 						<div class="field">
 							<label>Tanggal Lahir Baru</label>
