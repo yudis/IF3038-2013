@@ -18,6 +18,8 @@ if(isset($_SESSION['uname'])){
 		<link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
 		<script type="text/javascript" src="../js/animation.js"> </script> 
+                <script type="text/javascript" src="../js/edituser.js"> </script> 
+                <script type="text/javascript" src="../js/editprofile.js"> </script> 
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 		<title> Eurilys </title>
 	</head>
@@ -41,7 +43,7 @@ $datauser = datapengguna($username);
 					<div id="profile_info">
 						<?php echo $eachdata['fullname']?>
 						<br><br>
-						<div class="link_tosca" id="edit_profile_button"> Edit Profile </div>
+						<div class="link_tosca" id="edit_profile_button" onclick="edit_profile(<?php echo $eachdata['username']?>)"> Edit Profile </div>
 					</div> 
 				</div>
 				<div id="category_list">

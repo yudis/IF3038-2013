@@ -1,16 +1,15 @@
 <?php
 
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
- $tasknamelama = $_GET["tmd"];
- $tasknamebaru = $_GET["tn"];
- $attachment = $_GET["at"];
- $deadline = $_GET["d"];
- $asign = $_GET["as"];
- $tag = $_GET["tg"];
+ $usernamelama = $_GET["umd"];
+ $usernamebaru = $_GET["un"];
+ $avatar = $_GET["av"];
+ $password = $_GET["p"];
+ $fullname = $_GET["f"];
+ $email = $_GET["e"];
  $con=mysqli_connect("localhost","progin","progin","progin_405_13510060");
  if (mysqli_connect_errno($con))
   {
@@ -18,10 +17,11 @@
   }
  // ec $sql = "SELEho "udah ampe sini";  
   
-  $sql ="UPDATE task SET task_name='$tasknamebaru',task_deadline='$deadline',task_tag_multivalue='$tg',assignee_name='$asign',file='$at' WHERE task_name='$tasknamelama'";
+  $sql ="UPDATE pengguna SET username='$usernamebaru',avatar='$avatar',password='$password',fullname='$fullname',email='$email' WHERE username='$usernamelama'";
   //echo $sql;
   if (!mysqli_query($con,$sql))
   {
   die('Error: ' . mysqli_error());
   }
+  
 ?>
