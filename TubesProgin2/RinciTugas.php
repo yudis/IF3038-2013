@@ -68,7 +68,7 @@ require_once('config.php');
                             } else if ($resultcheck[$arraysize - 1] == "ogg") {
                                 echo "<video width=\"320\" height=\"240\" controls autoplay><source src=" . $result[2] . " type=\"video/" . $resultcheck[$arraysize - 1] . "\"></video><br>";
                             } else {
-                                echo'<a href="' . $result[2] . '">' . $result[2] . '</a><br/>';
+                                echo'<a href="' . $result[2] . '" target="_blank">' . $result[2] . '</a><br/>';
                             }
                             echo '<br/>';
                         }
