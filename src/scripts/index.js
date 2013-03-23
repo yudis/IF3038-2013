@@ -211,11 +211,6 @@ function validateAvatar() {
     changeRegister();
 }
 
-function bdayPicker() {
-    NewCal('bday', 'YYYYMMDD');
-    return false;
-}
-
 function validateLogin() 
 {
 	var xUsername=document.forms["login"]["uname"].value;

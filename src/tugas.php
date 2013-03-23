@@ -17,13 +17,26 @@ else
 	if (isset($_GET["id"]))
 	{
 		$tugas = new Tugas();
-		$data = $tugas->getTugas($_GET["id"]);
+		$data = $tugas->getTugas($_GET["id"], $_SESSION["user"]["username"]);
+
+		//die(json_encode($data));
 		
 		if ($data)
-		{			
-			$view = new View('views/tugas/tugas.tpl');
+		{
+			if ($data["priviledge"] == true)
+			{
+				$view = new View('views/tugas/tugas.tpl');
+			}
+			else
+			{
+				$view = new View('views/tugas/tugas2.tpl');
+			}
 			$view->set('title', 'Todolist | Rincian Tugas');
-			$view->set('headTags', '<script src="./scripts/tugas.js" type="application/javascript"></script><link rel="stylesheet" type="text/css" href="styles/tugas.css" />');
+			$view->set('headTags', '<link rel="stylesheet" type="text/css" href="styles/tugas.css" />
+					<link rel="stylesheet" type="text/css" href="./styles/autosuggest.css" />
+					<script src="./scripts/tugas.js" type="application/javascript"></script>
+			        <script type="text/javascript" src="./scripts/autosuggest2.js"></script>
+					<script type="text/javascript" src="./scripts/assigneesSuggestion.js"></script>');
 			$view->set('bodyAttrs', 'onload="onload(' . $_GET["id"] . ');"');
 			
 			$view->set('id', $data['id']);

@@ -1,4 +1,5 @@
 var chosen=0;
+var chosenTask=0;
 var coordinatorArr="";
 
 function addCoordinator() {
@@ -18,13 +19,41 @@ function addCoordinator() {
 }
 
 function updateAddButtonVisibility() {
-    var elmt = document.getElementById('addTask');
-    elmt.style.display = 'inline-block';
+	if(chosen!=0)
+	{
+		var elmt = document.getElementById('addTask');
+		elmt.style.display = 'inline-block';
+	}
+	else if(chosen==0)
+	{
+		var elmt = document.getElementById('addTask');
+		elmt.style.display = 'none';
+	}
+}
+
+function updateDelButtonVisibility() {
+	if(chosen!=0)
+	{
+		var elmt = document.getElementById('deleteCat');
+		elmt.style.display = 'inline-block';
+	}
+	else if(chosen==0)
+	{
+		var elmt = document.getElementById('deleteCat');
+		elmt.style.display = 'none';
+	}
 }
 
 function setChosen(str)
 {
 	chosen=str;
+	updateAddButtonVisibility();
+	updateDelButtonVisibility();
+}
+
+function setChosenT(str)
+{
+	chosenTask=str;
 }
 
 function NewKategori() {
@@ -99,7 +128,10 @@ function updateStatus(n,str) {
 }
 
 function NewTask() {
-    window.location = "createtugas.php";
+    if(chosen!=0)
+	{
+		window.location = "createtugas.php?id_kat="+chosen;
+	}
 }
 
 function deleteCategory()
@@ -107,6 +139,14 @@ function deleteCategory()
 	if(chosen!=0)
 	{
 		window.location = "deleteCat.php?q="+chosen;
+	}
+}
+
+function deleteTask()
+{
+	if(chosenTask!=0)
+	{
+		window.location = "deleteTask.php?q="+chosenTask;
 	}
 }
 

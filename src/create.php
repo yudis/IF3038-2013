@@ -10,7 +10,7 @@
 	
 	$tugas->set_taskname($_POST["namatask"]);
 	$tugas->set_tgl_deadline($_POST["deadline"]);
-	$tugas->set_pemilik($_SESSION['user']);
+	$tugas->set_pemilik($_SESSION['user']["username"]);
 	$tugas->set_id_kategori($_POST["namakategori"]);
 	$tugas->store();
 	$assigneeArr=explode(',', $_POST["assigneeI"]);
@@ -18,7 +18,7 @@
 	$i=0;
 	while($assigneeArr[$i]!="")
 	{
-		if($assigneeArr[$i]!=$_SESSION['user'])
+		if($assigneeArr[$i]!=$_SESSION['user']["username"])
 		{
 			echo $assigneeArr[$i],"+",$i;
 			$tugas->addNewestAssignee($assigneeArr[$i]);
@@ -30,7 +30,7 @@
 	$i=0;
 	while(!empty($tags[$i]))
 	{
-		if($tags[$i]!=$_SESSION['user'])
+		if($tags[$i]!=$_SESSION['user']["username"])
 		{
 			echo $tags[$i],"+",$i;
 			$tugas->addNewestTag($tags[$i]);

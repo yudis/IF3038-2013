@@ -23,15 +23,18 @@ else
 			$user->set_password($_POST["pwd"]);
 			$user->set_full_name($_POST["name"]);
 			$user->set_tgl_lahir(strtotime($_POST["bday"]));
-			$user->set_avatar($_FILES["ava"]["name"]);
+
+			$avatarfile = $_POST["uname"] . "." . pathinfo($_FILES['ava']['name'], PATHINFO_EXTENSION);	
+			$user->set_avatar($avatarfile);
 
 			$user->store();
 			
-			$avatarfile = $_POST["uname"] . "." . pathinfo($_FILES['ava']['name'], PATHINFO_EXTENSION);	
 			if (!copy($_FILES["ava"]["tmp_name"], "./images/avatars/" . $avatarfile))
 			{		
 				die("Failed to upload avatar picture.");
 			}
+
+			$_SESSION["user"] = $user->toArray();			
 			
 			header('Location: ./dashboard.php');	
 		}

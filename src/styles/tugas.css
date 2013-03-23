@@ -1,6 +1,11 @@
-#tagsEditDiv, #assigneeEditDiv, #deadlineEditDiv, #doneButton {
+#tagsEditDiv {
+	visibility: hidden;
+}
+#assigneeEditDiv, #deadlineEditDiv, #doneButton {
     display: none;
 }
-#deadlineDisplayDiv, #tagsDisplayDiv, #editButton {
-    display: block;
+#deadlineDisplayDiv, #tagsDisplayDiv {
+}
+#editButton {
+    display: inline-block;	
 }

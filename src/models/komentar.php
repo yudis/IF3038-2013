@@ -38,7 +38,7 @@ class Komentar extends Model
 	    }
 	    else
 	    {
-	    	$sql = "SELECT c.`id` AS `id`, c.`user` AS `user`, u.`full_name` AS `full_name`,  u.`avatar` AS `avatar`,  IF(c.`user` = ?, 1, 0) AS `priviledge`, c.`time` AS `time`, c.`content` AS `content`
+	    	$sql = "SELECT c.`id` AS `id`, c.`user` AS `user`, u.`full_name` AS `full_name`,  u.`avatar` AS `avatar`,  IF(c.`user` = ?, 1, 0) AS `priviledge`, DATE_FORMAT(c.`time`,'%H:%i %e/%c') AS `time`, c.`content` AS `content`
 	    	        FROM `comments` c, `users` u
 	    	        WHERE `id_tugas`=? AND c.`user`=u.`username` ORDER BY c.`time` DESC LIMIT $startindex, $count";
 	    	$this->_setSql($sql);
@@ -48,6 +48,26 @@ class Komentar extends Model
         return $comments;
     }
 
+    public function getCommentById($id_komentar)
+    {
+        $sql = "SELECT * FROM `comments` WHERE `id`=?";
+        $this->_setSql($sql);
+        
+        $comment = $this->getRow(array($id_komentar));
+        return $comment;        
+    }
+
+    public function delete($id_komentar)
+    {
+        $sql = "DELETE FROM `comments`
+                WHERE `id`=?";
+         
+        $data = array($id_komentar);
+        
+        $sth = $this->_db->prepare($sql);
+        return $sth->execute($data);
+    }
+    
     public function store()
     {
         $sql = "INSERT INTO comments 
