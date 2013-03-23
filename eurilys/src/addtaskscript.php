@@ -55,7 +55,9 @@ else
 	/* Add Task Script */
 	$task_name		= mysql_real_escape_string($_POST['task_name_input']);
 	$taskAsigneeName   	= mysql_real_escape_string($_POST['assignee_input']);
-	$attachment = $_FILES['attachment_file']['name'];
+	$attachment1 = $_FILES['attachment_file1']['name'];
+	$attachment2 = $_FILES['attachment_file2']['name'];
+	$attachment3 = $_FILES['attachment_file3']['name'];
 	$task_deadline  = $_POST['deadline_input'];
 		if (isset($_SESSION['username'])) {
 		$username = $_SESSION['username']; 
@@ -89,11 +91,13 @@ else
 		}
 		
 	
-			$query4 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment','$taskID')";
+			$query4 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment1','$taskID')";
 			$result4 = mysql_query($query4);
+			$query5 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment2','$taskID')";
+			$result5 = mysql_query($query5);
+			$query6 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment3','$taskID')";
+			$result6 = mysql_query($query6);
 			
-			
-
 
 		
 		header('location:addtask.php'); //Redirect To Success Page

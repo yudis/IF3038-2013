@@ -23,11 +23,28 @@
 			<div id="row2_addtask" class="left top10 dynamic_content_row">
 				<div id="attachment_lat" class="left dynamic_content_left">Attachment</div>
 				<div id="attachment_rat" class="left dynamic_content_right">
-					<input id="attachment_file" type="file" name="attachment_file" onchange="javascript:checkTaskAttachment();"  class="left">
+					<input id="attachment_file1" type="file" name="attachment_file1" onchange="javascript:checkTaskAttachment();"  class="left">
 					<img src="../img/yes.png" id="task_attachment_validation" class="left signup_form_validation" alt="validation image"/>
 				</div>
 			</div>
 			
+            <div id="row2_addtask" class="left top10 dynamic_content_row">
+				<div id="attachment_lat" class="left dynamic_content_left">Add more attachment</div>
+				<div id="attachment_rat" class="left dynamic_content_right">
+					<input id="attachment_file2" type="file" name="attachment_file2" onchange="javascript:checkTaskAttachment();"  class="left">
+					<img src="../img/yes.png" id="task_attachment_validation" class="left signup_form_validation" alt="validation image"/>
+				</div>
+			</div>
+            
+            <div id="row2_addtask" class="left top10 dynamic_content_row">
+				<div id="attachment_lat" class="left dynamic_content_left">Add more attachment</div>
+				<div id="attachment_rat" class="left dynamic_content_right">
+					<input id="attachment_file3" type="file" name="attachment_file3" onchange="javascript:checkTaskAttachment();"  class="left">
+					<img src="../img/yes.png" id="task_attachment_validation" class="left signup_form_validation" alt="validation image"/>
+				</div>
+			</div>
+            
+            
 			<div id="row3_addtask" class="left top10 dynamic_content_row">
 				<div id="deadline_lat" class="left dynamic_content_left">Deadline</div>
 				<div id="deadline_rat" class="left dynamic_content_right">
