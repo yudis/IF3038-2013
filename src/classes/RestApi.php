@@ -55,6 +55,29 @@ class RestApi
 		return $ret;
 	}
 	
+	/**
+	 * Get list of users search by username
+	 * @return array of users with likability
+	 */
+	public function get_tag($params) 
+	{
+		$return = array();
+		if ((isset($params['tag'])) && ($this->app->loggedIn)) 
+		{	
+			$tags = explode(",", $params['tag']);
+			$not_query = array();
+			for ($i=0;$i<count($tags)-1;++$i)
+			{
+				$not_query [] = " tag_name <> '".addslashes($tags[$i])."' ";
+			}
+			$tag = $tags[count($tags)-1];
+			$string = ($not_query) ? " AND ".implode("AND",$not_query) : "";
+			$return = Tag::model()->findAll(" tag_name LIKE '".addslashes($tag)."%' ".$string." LIMIT 10");
+		}
+
+		return $return;
+	}
+	
 	public function retrieve_users($params)
 	{
 		$ret = array();
@@ -350,7 +373,15 @@ class RestApi
 		$return = array();
 		if ((isset($params['username'])) && ($this->app->loggedIn)) 
 		{	
-			$return = User::model()->findAll("username LIKE '%".addslashes($params['username'])."%' LIMIT 10", array("id_user", "username"));
+			$users = explode(",", $params['username']);
+			$not_query = array();
+			for ($i=0;$i<count($users)-1;++$i)
+			{
+				$not_query [] = " username <> '".addslashes($users[$i])."' ";
+			}
+			$user = $users[count($users)-1];
+			$string = ($not_query) ? " AND ".implode("AND",$not_query) : "";
+			$return = User::model()->findAll(" username LIKE '".addslashes($user)."%' ".$string." LIMIT 10", array("id_user", "username"));
 		}
 
 		return $return;

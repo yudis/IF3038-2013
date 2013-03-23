@@ -131,7 +131,7 @@
 						</div>
 						<div class="field">
 							<label>Assignee</label>
-							<input name="assignee" id="assignee" type="text"
+							<input name="assignee" id="assignee" type="text"  autocomplete="off" 
 							value="<?php 
 									$string = "";
 									foreach ($users as $user)
@@ -141,10 +141,13 @@
 									$string = substr($string, 0, -1);
 									echo $string;
 								?>">
+							<div id="auto_comp_assignee">
+								<ul id="auto_comp_inflate_assignee"></ul>
+							</div>
 						</div>
 						<div class="field">
 							<label>Tag</label>
-							<input name="tag" id="tag" type="text" value="<?php 
+							<input name="tag" id="tag" type="text" autocomplete="off" value="<?php 
 									$string = "";
 									foreach ($tags as $tag)
 									{
@@ -153,6 +156,9 @@
 									$string = substr($string, 0, -1);
 									echo $string;
 								?>">
+							<div id="auto_comp_tag">
+								<ul id="auto_comp_inflate_tag"></ul>
+							</div>
 						</div>
 						<div class="buttons">
 							<button type="submit">Save Changes</button>

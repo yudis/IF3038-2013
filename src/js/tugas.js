@@ -216,7 +216,6 @@ var asignee = document.getElementById("assignee");
 asignee.onkeyup = function()
 {
 	var value = asignee.value;
-	var last_elmt = value.split(",")[value.split(",").length-1];
 	var req = Rp.ajaxRequest();
 	req.onreadystatechange = function() {
 		switch (req.readyState) {
@@ -229,6 +228,21 @@ asignee.onkeyup = function()
 				Rp('#assignee').removeClass('loading');
 				try {
 					response = Rp.parseJSON(req.responseText);
+					var elm = document.getElementById("auto_comp_assignee");
+					var inflate = document.getElementById("auto_comp_inflate_assignee");
+					inflate.innerHTML = "";
+					var temp = 0;
+					for (var i in response)
+					{
+						temp++;
+						var newLi = document.createElement("li");
+						newLi.innerHTML = "<a href='javascript:choose_assignee(\""+response[i].data.username+"\")'>"+
+											response[i].data.username+"</a>";
+						inflate.insertBefore(newLi, inflate.firstChild);
+					}
+					
+					if (temp!=0)
+						elm.style.display = "block";
 				}
 				catch (e) {
 
@@ -236,5 +250,66 @@ asignee.onkeyup = function()
 				break;
 		}
 	}
-	req.get('api/get_username?username=' + last_elmt);
+	req.get('api/get_username?username=' + value);
+}
+
+function choose_assignee(username)
+{
+	var elm = document.getElementById("auto_comp_assignee");
+	var value = asignee.value;
+	value = value.substr(0, value.lastIndexOf(",")+1);
+	value += username;
+	asignee.value = value;
+	elm.style.display = "none";
+}
+
+var tag = document.getElementById("tag");
+tag.onkeyup = function()
+{
+	var value = tag.value;
+	var req = Rp.ajaxRequest();
+	req.onreadystatechange = function() {
+		switch (req.readyState) {
+			case 1:
+			case 2:
+			case 3:
+				Rp('#tag').addClass('loading');
+				break;
+			case 4:
+				Rp('#tag').removeClass('loading');
+				try {
+					response = Rp.parseJSON(req.responseText);
+					var elm = document.getElementById("auto_comp_tag");
+					var inflate = document.getElementById("auto_comp_inflate_tag");
+					inflate.innerHTML = "";
+					var temp = 0;
+					for (var i in response)
+					{
+						temp ++;
+						var newLi = document.createElement("li");
+						newLi.innerHTML = "<a href='javascript:choose_tag(\""+response[i].data.tag_name+"\")'>"+
+											response[i].data.tag_name+"</a>";
+						inflate.insertBefore(newLi, inflate.firstChild);
+					}
+					
+					if (temp!=0)
+						elm.style.display = "block";
+				}
+				catch (e) {
+
+				}
+				break;
+		}
+	}
+	req.get('api/get_tag?tag=' + value);
+}
+
+function choose_tag(temptag)
+{
+	var elm = document.getElementById("auto_comp_tag");
+	var value = tag.value;
+	value = value.substr(0, value.lastIndexOf(",")+1);
+	value += temptag;
+	tag.value = value;
+	elm.style.display = "none";
 }

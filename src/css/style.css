@@ -1013,3 +1013,38 @@ a.date_button:hover
 {
 	color: #5588AA;
 }
+
+#auto_comp_assignee, #auto_comp_tag
+{
+	display: none;
+	z-index: 100;
+	position: absolute;
+	background-color: white;
+	border: 1px solid black;
+	margin-left: 123px;
+	width: 165px;
+	margin-top: -6px;
+}
+
+#auto_comp_assignee ul, #auto_comp_tag ul
+{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#auto_comp_assignee ul li, #auto_comp_tag ul li
+{
+	margin: 0;
+	padding: 5px 5px;
+}
+#auto_comp_assignee ul li:hover, #auto_comp_tag ul li:hover
+{
+	background-color: #EEEEEE;
+}
+
+#auto_comp_assignee ul li a, #auto_comp_tag ul li a
+{
+	text-decoration: none;
+	color: #111111;
+	display: block;
+}
