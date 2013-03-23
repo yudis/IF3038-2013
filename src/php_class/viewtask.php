@@ -14,7 +14,7 @@
 	 * - tugas UDAH
 	 * - att UDAH
 	 * - tag UDAH
-	 * - komentar
+	 * - komentar UDAH 1/2
 	 *
 	 * EDIT
 	 *
