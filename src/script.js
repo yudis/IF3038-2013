@@ -206,3 +206,13 @@ function hidetask(num) {
 		document.getElementById(i.toString()).style.display="none";
 	}
 }
+
+function edit_task() {
+	document.getElementById("done").style.display="none";
+	document.getElementById("edit").style.display="block";
+}
+
+function done_task() {
+	document.getElementById("done").style.display="block";
+	document.getElementById("edit").style.display="none";
+}

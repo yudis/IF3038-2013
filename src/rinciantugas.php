@@ -66,34 +66,133 @@ while ($commented = mysqli_fetch_array($result7)) {
 					Posted by <strong><span class="by"><?php echo $creator['username'];?></span></strong> on <strong><?php echo $task['timestamp'];?></strong>
 				</div>
 				
-				<div class="byon">
-					Deadline : <strong><?php echo $task['deadline'];?></strong>
-				</div>
-				
-				<div class="byon">
-					Assignee : <strong>
+				<div id="done">
+					<br />
+					<div class="byon">
+						Deadline : <strong><?php echo $task['deadline'];?></strong>
+					</div>
+					<br />
+					<div class="byon">
+						Assignee : <strong>
+						<?php
+						for ($i = 0; $i < $count_assignee; $i++) {
+							$current=$assignee[$i];
+							echo $current['username'];
+							if ($i < $count_assignee - 1) echo ", ";
+						}
+						?>
+						</strong>
+					</div>
+					<br />
+	                <div class="byon">
+						Tag : <strong>
+						<?php
+						for ($i = 0; $i < $count_tag; $i++) {
+							echo $tag[$i];
+							if ($i < $count_tag - 1) echo ",";
+						}
+						?>
+						</strong>
+					</div>
+					<br />
 					<?php
-					for ($i = 0; $i < $count_assignee; $i++) {
-						$current=$assignee[$i];
-						echo $current['username'];
-						if ($i < $count_assignee - 1) echo ", ";
+					if ($task['creator'] == $_SESSION['id']) {
+					?>
+					<div class="count"><input type="button" name="edit" onclick="edit_task()" value="Edit"/></div>
+					<?php
 					}
 					?>
-					</strong>
 				</div>
-				
-                                            <div class="byon">
-					Tag : <strong>
-					<?php
-					for ($i = 0; $i < $count_tag; $i++) {
-						echo $tag[$i];
-						if ($i < $count_tag - 1) echo ",";
-					}
-					?>
-					</strong>
-				</div>
-                                        
-				<div class="likedislike">
+				<form id="edit" action="edittask.php" method="post">
+					<script type="text/javascript" src="mainpage.js"></script>
+					<div class="byon">
+						<?php
+						$partdead = array();
+						$partdead = explode(" ", $task['deadline']);
+						?>
+						<div id="left">
+							Deadline : <input type="text" name="inputdeadline" id="form-tgl" value="<?php echo $partdead[0];?>"/>
+						</div>
+						<div id="caldad">
+							<div id="calendar"></div>
+							<a href="javascript:showcal(3,2013);void(0);"><img src="images/cal.gif" alt="Calendar" /></a>
+						</div>
+						Jam: 
+						<?php
+						$parthour = array();
+						$parthour = explode(":", $partdead[1]);
+						?>
+						<select name="hour">
+							<?php
+							for ($i = 0; $i < 24; $i++) {
+								echo "<option value='".$i."'";
+								if ($i == $parthour[0]) {
+									echo " selected";
+								}
+								echo ">".$i."</option>";
+							}
+							?>
+						</select>
+						<select name="minute">
+							<?php
+							for ($i = 0; $i < 60; $i++) {
+								echo "<option value='".$i."'";
+								if ($i == $parthour[1]) {
+									echo " selected";
+								}
+								echo ">".$i."</option>";
+							} 
+							?>
+						</select>
+						<select name="second">
+							<?php
+							for ($i = 0; $i < 60; $i++) {
+								echo "<option value='".$i."'";
+								if ($i == $parthour[2]) {
+									echo " selected";
+								}
+								echo ">".$i."</option>";
+							} 
+							?>
+						</select>
+					</div>
+					<br />
+					<div class="byon">
+						Assignee : <input type="text" name="inputassignee"
+						<?php
+						echo " value='";
+						for ($i = 0; $i < $count_assignee; $i++) {
+							$current=$assignee[$i];
+							echo $current['username'];
+							if ($i < $count_assignee - 1) echo ", ";
+						}
+						echo "' ";
+						?>
+						list="user"/>
+						<datalist id ="user" />
+						<option value = "enjella" />
+						<option value = "kevin" />
+						<option value = "vincentius" />
+						</datalist>
+					</div>
+					
+	                <div class="byon">
+						Tag : <input type="text" name="inputtag"
+						<?php
+						echo " value='";
+						for ($i = 0; $i < $count_tag; $i++) {
+							echo $tag[$i];
+							if ($i < $count_tag - 1) echo ",";
+						}
+						echo "' ";
+						?>
+						autocomplete="on"/>
+					</div>
+					<input type="hidden" name="id" value="<?php echo $id_task;?>" />
+                	<div class="count"><input type="submit" name="submit" value="Submit"/></div>
+				</form>
+
+				<!--<div class="likedislike">
 					<ul class="ldbuttons">
 						<li class="like" id="blike"><a href="javascript:like();void(0);"></a></li>
 						<li class="dislike" id="bdislike"><a href="javascript:dislike();void(0);"></a></li>
@@ -101,11 +200,14 @@ while ($commented = mysqli_fetch_array($result7)) {
 				</div>
 				<div class="count">
 					<strong><span id="jmllike"></span></strong> likes
-				</div>
+				</div>-->
                 
-                <div class="count"><input type="button" name="edit" onclick="editTask()" value="Edit"/></div>
-                
-			</div><br><br><br><div class="videomode" align="center"> <br> Attachment :
+			</div><br /><br /><br />
+			<form action="deletetask.php" method="post">
+				<input type="hidden" name="deltask" value="<?php echo $id_task?>" />
+				<input type="submit" name="submit" value="Delete" />
+			</form>
+			<div class="videomode" align="center"> <br> Attachment :
 				<?php
 				for ($i = 0; $i < $count_attachment; $i++) {
 					$current = $attachment[$i];
@@ -150,8 +252,9 @@ while ($commented = mysqli_fetch_array($result7)) {
 					}
 					?>
 				</div>
-				<form action="" method="get">
+				<form action="comment.php" method="post">
 					<div id="komen-tulis"><strong>Tulis Komentar</strong></div>
+					<!--
 					<div class="clear"></div>
 					<div class="komen-label btg-mrh" id="komen-btg">*) wajib diisi</div>
 					<div class="clear"></div>
@@ -159,7 +262,10 @@ while ($commented = mysqli_fetch_array($result7)) {
 					<div class="clear error" id="error-username"></div>
 					<div class="komen-label">Komentar <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><textarea name="komentar" rows="3" cols="50" id="form-komen"></textarea></div>
 					<div class="clear"></div>
-					<div class="komen-submit"><input type="button" name="submit" value="Submit" /></div>
+					-->
+					<input type="hidden" name="task" value="<?php echo $id_task;?>">
+					<textarea name="komentar" rows="3" cols="60" id="form-komen"></textarea>
+					<div class="komen-submit"><input type="submit" name="submit" value="Submit" /></div>
 				</form>
 			</div>
 		</div>

@@ -488,9 +488,12 @@ a img {
 
 /*buatan martin nih*/
 
+.searchoption {
+	float:right;
+	text-align:right;
+}
 
 .searchoption input{
-    float : right;
     color : #888;
 }
 
@@ -954,6 +957,10 @@ a img {
 #postbg{
     background-image:url('images/post.jpg');
     background-size: 100%;
+}
+
+#left {
+	float:left;
 }
 
 /**/
