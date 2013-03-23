@@ -2,16 +2,19 @@
 
 session_start();
 $kode=$_SESSION['login'];
-$tag = $_POST['tag'];
-$assignee = $_POST['assignee'];
+$task= $_GET['task'];
+//$namatask= $_POST['namatask'];
+//$tag = $_POST['tag'];
+//$assignee = $_POST['assignee'];
+//echo "oke";
 
-$assignees = (explode(",",$assignee));
-$tags = (explode(",",$tag));
+//$assignees = (explode(",",$assignee));
+//$tags = (explode(",",$tag));
 
-$con = mysqli_connect ('localhost', 'progin', 'progin');
-if (mysqli_connect_errno($con))
+$con = mysql_connect ('localhost', 'progin', 'progin');
+if (!$con)
   {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  echo "Failed to connect to MySQL: " . mysql_error();
   }
   
 mysql_select_db("progin", $con);
@@ -19,31 +22,32 @@ mysql_select_db("progin", $con);
 
 $id = mysql_query("SELECT IDTask FROM assignee WHERE asignee.IDUser='".$kode."'");
 $data = mysql_query("SELECT * FROM task WHERE ID='".$id."'");
-$numtaskquery = mysqli_fetch_array(mysqli_query("SELECT COUNT(*) as num FROM task"));
+$numtaskquery = mysql_fetch_array(mysql_query("SELECT COUNT(*) as num FROM task"));
 $lastnumtask = $numtaskquery['num'];
 $newnumtask = $lastnumtask+1;
 
-if ($newnumtask<10) then
-	$idToInsert= "U00".$newnumtask;
-else if if ($newnumtask<100) then
-	$idToInsert= "U0".$newnumtask;
+$idToInsert='';
+if ($newnumtask<10)
+	$idToInsert= "U00" . $newnumtask;
+if ($newnumtask<100)
+	$idToInsert= "U0" . $newnumtask;
 else 
-	$idToInsert= "U".$newnumtask;
+	$idToInsert= "U" . $newnumtask;
 	
-$sql=mysqli_query("INSERT INTO task (ID,IDCreator,Nama, Status, Deadline)
-		VALUES ('".$idToinsert."','".$kode."','".$_POST[namatask]."','0','".$_POST[deadline]."')");
+/*$sql=mysql_query("INSERT INTO task (ID,IDCreator,Nama, Status, Deadline)
+		VALUES ('".$idToinsert."','".$kode."','".$namatask."','0','".$_POST[deadline]."')");
 
-//$sql2=mysqli_query("INSERT INTO assignee (IDTask, IDUser) 
-	//	VALUES ("$idToInsert","$kode")");
+$sql2=mysql_query("INSERT INTO assignee (IDTask, IDUser) 
+		// VALUES ('".$idToInsert."','".$kode."')");
   
 //$id="SELECT ID FROM task WHERE ID= ";
 
 foreach ($assignees as $ass){
-	$data2 = mysqli_query("INSERT INTO assignee (IDTask,IDUser) VALUES ("$idToInsert","$ass")");
+	$data2 = mysql_query("INSERT INTO assignee (IDTask,IDUser) VALUES ('".$idToInsert."','".$ass."')");
 }
 
 foreach ($tags as $t){
-	$data2 = mysqli_query("INSERT INTO tags(IDTask, Tag) VALUES("$idToInsert","$t")");
+	$data2 = mysql_query("INSERT INTO tags(IDTask, Tag) VALUES('".$idToInsert."','".$t."')");
 }
  
 /*foreach ($_FILES["attachment"]["error"] as $key => $error) {
@@ -64,14 +68,10 @@ foreach ($tags as $t){
 			}
 			
 			$data = mysql_query("INSERT INTO attachment VALUES('$kodeuser','$i','$j','$alamatfile')");	
-	}	
-}*/
+	}*/	
+
  
-mysqli_close($con);
+mysql_close($con);
 
 ?>
 
-<SCRIPT LANGUAGE="JavaScript">
-			window.alert ("Tugas berhasil ditambahkan");
-			setTimeout("location.href = 'home.php?link=halamanprofil&username=<?php echo $username; ?>';",1);
-</SCRIPT> 
