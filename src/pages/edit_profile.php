@@ -11,6 +11,7 @@
 	$birth_date = new Datetime($user->birthdate);
 
 	$this->requireJS('edit_profile');
+	$this->requireJS('checker_edit_pass');
 	$this->header('Profile', 'profile');
 ?>	
 	<div class="content">
@@ -70,7 +71,7 @@
 					</div>
 					<br />
 					<div class="field buttons">
-						<button type="submit" id="edit_submit">Save Changes</button>
+						<button type="submit" id="edit_pass_submit">Save Changes</button>
 					</div>
 				</form>
 			</section>
