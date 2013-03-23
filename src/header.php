@@ -26,7 +26,7 @@
 				document.getElementById("hasil_ac_search").innerHTML=xmlhttp.responseText;
 			}
 		}
-		xmlhttp.open("GET", "search.php?jenis="+jenis+"&q="+str, true);
+		xmlhttp.open("GET", "search.php?jenis="+jenis+"&q="+str+"&show=0&more=10", true);
 		xmlhttp.send();
 	}
 </script>
@@ -34,7 +34,7 @@
 
 <div class="header">
   <div id="logo">
-	  <a hreg="dashboard.html">
+	  <a hreg="dashboard.php">
 	  <img src="pict/logo.png">
 	  </a>
   </div>
@@ -42,14 +42,15 @@
 	  
   </div>
   <div id="dashboard">
-	  <a href="dashboard.html">DASHBOARD</a>
+	  <a href="dashboard.php">DASHBOARD</a>
   </div>
   <div id="profile">
 	  <a href="profile.html">PROFILE</a>
   </div>
   <div id="search">
+	<form name="cari" method="get" action="search_result.php">
 	<section id="searchdropdown">
-		<select name="opsisearch" id="opsisearch">
+		<select name="jenis" id="opsisearch">
 			<option value="semua">Semua</option>
 			<option value="username">Username</option>
 			<option value="kategori">Kategori</option>
@@ -57,17 +58,21 @@
 		</select>
 	</section>
 	<section class="searchform cf">
-		<input class="searchbox" type="search" name="search" placeholder="Search.." autocomplete="off" required onKeyUp="autocomplete_search(document.getElementById('opsisearch').value, this.value)">
+		<input class="searchbox" type="search" name="q" placeholder="Search.." autocomplete="off" required onKeyUp="autocomplete_search(document.getElementById('opsisearch').value, this.value)">
 		<div id="hasil_ac_search"></div>
+		<input type="hidden" name="more" value="10">
 	</section>
 	<section class="searchbuttonbox cf">
-		<img class="searchbutton"src="pict/search button.jpg">
-	</section>	  
+		<button type="submit" id="tombol_search">
+			<img class="searchbutton"src="pict/search button.jpg">
+		</button>
+	</section>	
+	</form>
   </div>  
   <div id="wellfaiz">
 	  
   </div>
   <div id="logout">
-	  <a href="index.html">LOGOUT</a>
+	  <a href="logout.php" onClick="localStorage.clear()">LOGOUT</a>
   </div>
 </div>

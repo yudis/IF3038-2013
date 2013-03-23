@@ -11,6 +11,8 @@
 	public $POS;
 	public $FILE;
 	
+	public $idtugas;
+	
 	// Constructor
 	public function CreateTask ($x, $y) {
 	  $this->POS = $x;
@@ -76,7 +78,8 @@
 	  // TAMBAH Assignee
 	  $this->TambahAssignee("".$idtugas);
 	  
-	  
+	  // AMBIL idtugas
+	  $this->idtugas = $idtugas;
 	}
 	
 	private function TambahAssignee ($idtgs) {
@@ -118,18 +121,13 @@
 		}
 	  }
 	}
+	public function getId() {
+	  return $this->idtugas;
+	}
 	public function Tes() {
 	  $this->TambahTag("54");
 	}
 	
-  /* 
-   * - Tugas UDAH
-   * - Assignee UDAH
-   * - Attachment UDAH
-   * - Tag UDAH
-   * - Kategori
-   * 
-   */
   
 	
   }
