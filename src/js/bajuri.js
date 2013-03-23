@@ -82,19 +82,27 @@ bajuri.prototype = {
 	},
 
 	addClass: function(cls) {
-		this.nodes.forEach(function(node) {
-			bajuri._addClassToNode(node, cls);
+		cls = cls.toLowerCase();
+		this.each(function() {
+			classes = this.className.toLowerCase().split(/\s+/);
+			if (classes.indexOf(cls) === -1) {
+				classes.push(cls);
+			}
+			this.className = classes.join(' ');
 		});
 
 		return this;
 	},
 
 	removeClass: function(cls) {
-		this.nodes.forEach(function(node) {
-			pattern = new RegExp(cls +' | ' + cls + '|^' + cls + '$');
-			while (node.className.match(pattern)) {
-				node.className = node.className.replace(pattern, ' ');
+		cls = cls.toLowerCase();
+		this.each(function() {
+			classes = this.className.toLowerCase().split(/\s+/);
+			while (classes.indexOf(cls) !== -1) {
+				idx = classes.indexOf(cls);
+				classes.splice(idx, 1);
 			}
+			this.className = classes.join(' ');
 		});
 
 		return this;
@@ -102,8 +110,8 @@ bajuri.prototype = {
 
 	attr: function(a, b) {
 		if (b !== undefined) {
-			this.nodes.forEach(function(node) {
-				node.setAttribute(a, b);
+			this.each(function() {
+				this.setAttribute(a, b);
 			});
 
 			return this;
@@ -358,32 +366,6 @@ bajuri.cache = {};
 // Split classes from an element's class attribute, case-insensitively
 bajuri._parseClasses = function(className) {
 	return className.toLowerCase().split(/\s+/);
-};
-
-bajuri._addClassToNode = function(node, className) {
-	// case insensitivity
-	// className = className.toLowerCase();
-
-	// found = node.className.toLowerCase().match(new RegExp('(?:^|\\s)' + className + '(?:\\s|$)'));
-
-	// console.log(found);
-
-	// if (!found)
-		node.className += ' ' + className;
-};
-
-bajuri._nodeHasClass = function(node, className) {
-	// case insensitivity
-	className = className.toLowerCase();
-
-	// split classes
-	classes = this._parseClasses(classes);
-	found = false;
-	for (cls in classes) {
-		if (cls === className.toLowerCase()) {
-			return true;
-		}
-	}
 };
 
 bajuri.factory = function(tagName) {
