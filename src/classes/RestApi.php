@@ -225,7 +225,7 @@ class RestApi
 		$cats = array();
 		if ($this->app->loggedIn)
 		{
-			$raw = Category::model()->findAll();
+			$raw = $this->app->getCategories();
 
 			foreach ($raw as $cat) {
 				$dummy = new StdClass;
