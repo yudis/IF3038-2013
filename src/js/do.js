@@ -324,26 +324,6 @@ Rp(function() {
 		else
 			alert('Invalid username/password combination.');
 	});
-	
-	Rp('#new_profile').on('submit', function(e) {
-
-		e.preventDefault();
-		n = Rp('#name').val();
-		t = Rp('#tanggal_lahir').val();
-		p = Rp('#password').val();
-		pk = Rp('#password_k').val();
-		xmlhttp=new XMLHttpRequest();
-		xmlhttp.open("POST","core/updateProfile.php",false);
-		xmlhttp.send();
-		var parsedJSON = eval('('+xmlhttp.responseText+')');
-
-/*		if (parsedJSON.success) {
-			alert('Berhasil diubah');
-			window.location.href = 'profile.php';
-		}
-		else
-			alert('Tidak ada yang diubah');*/
-	});
 
 	Rp('#newCategoryForm').on('submit', function(e) {
 
@@ -375,9 +355,10 @@ Rp(function() {
 			Rp('#editProfileLink').removeClass('editingprofile');
 			Rp('#edit-profile').hide();
 			Rp('#current-profile').show();
+			alert("Nothing Change!");
 		}
 		else {
-			Rp('#editProfileLink').nodes[0].innerHTML = '';
+			Rp('#editProfileLink').nodes[0].innerHTML = 'Done';
 			Rp('#editProfileLink').addClass('editingprofile');
 			Rp('#current-profile').hide();
 			Rp('#edit-profile').nodes[0].style.display = 'block';
@@ -402,6 +383,22 @@ function updateTask(mode,task_id){
 	xmlhttp.open("POST","core/updateTask.php",false);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xmlhttp.send("task_id="+task_id+"&mode="+mode+"&value="+value);
+}
+
+function updateProfile(mode,user_id){
+	if (mode == "name") {
+		value = Rp('#name').val();
+	}
+	if (mode == "tanggal_lahir") {
+		value = Rp('#tanggal_lahir').val();
+	}
+	if (mode == "password") {
+		value = Rp('#password').val();
+	}
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","core/updateProfile.php",false);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send("user_id="+user_id+"&mode="+mode+"&value="+value);
 }
 
 function removeElement(mode,field,task_id,id){
