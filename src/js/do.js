@@ -65,12 +65,13 @@ Rp(function() {
 	// Rp('#submitButton').attr('disabled', 'disabled');
 
 	var req;
+
 	doSearchAutocomplete = function() {
 		q = encodeURIComponent(Rp.id('searchQuery').value);
 		t = encodeURIComponent(Rp.id('searchType').value);
 		req = Rp.ajax('api/search_suggestions?type=' + t + '&q=' + q)
 		.complete(function() {
-			console.log(this.responseJSON());
+			Rp('#searchQuery').autocomplete().fill(this.responseJSON());
 		})
 		.get();
 	}

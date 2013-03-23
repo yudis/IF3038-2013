@@ -176,6 +176,35 @@ button:active {
 	box-shadow: inset 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Autocomplete */
+ul.suggestions {
+	position: absolute;
+	background: white;
+	font-size: 14px;
+	border-radius: 2px;
+	border: 1px solid #ccc;
+	padding: 3px 0;
+	margin: 0;
+	z-index: 4;
+}
+ul.suggestions li {
+	list-style: none;
+	padding: 4px 6px;
+	cursor: pointer;
+	color: #666;
+}
+ul.suggestions li b {
+	font-weight: 600;
+	color: #000;
+}
+ul.suggestions li:hover {
+	background: Highlight;
+	color: HighlightText;
+}
+ul.suggestions li:hover b {
+	color: HighlightText;
+}
+
 /** Base Layout **/
 .site-container {
 	margin-left: auto;
@@ -297,28 +326,28 @@ button:active {
 	margin: 15px 0 0;
 	position: relative;
 }
-.site-container > header nav ul {
+.site-container > header nav > ul {
 	display: block;
 	margin: 0;
 	padding: 5px 0 0 10px;
 	float: left;
 	font-size: 14px;
 }
-.site-container > header nav ul li {
+.site-container > header nav > ul li {
 	display: inline-block;
 	margin-right: 10px;
 }
-.site-container > header nav ul li a {
+.site-container > header nav > ul li a {
 	display: block;
 	padding: 5px 10px;
 	color: #666;
 }
-.site-container > header nav ul li a:hover {
+.site-container > header nav > ul li a:hover {
 	background: rgba(255, 255, 255, 0.3);
 	text-decoration: none;
 	color: #333;
 }
-.site-container > header nav ul li.active a {
+.site-container > header nav > ul li.active a {
 	background: white;
 	color: #444;
 }
@@ -335,7 +364,8 @@ button:active {
 	padding-right: 0;
 	margin: 0;
 }
-.search-box input {
+.search-box input,
+.search-box .suggestions li {
 	padding-top: 0;
 	padding-bottom: 0;
 	margin: 0;
@@ -576,10 +606,6 @@ p.description .detail-label {
 }
 
 /* Search page */
-.search-results.all .result-set {
-	width: 33%;
-	float: left;
-}
 .user-listing {
 	float: left;
 	width: 100%;
@@ -610,6 +636,8 @@ p.description .detail-label {
 .user-listing:hover .username {
 	text-decoration: underline;
 }
+
+
 
 /** Responsive design **/
 
@@ -681,6 +709,12 @@ p.description .detail-label {
 		top: 7px;
 		right: 10px;
 		font-size: 16px;
+	}
+
+	/** Search **/
+	.search-results.all .result-set {
+		width: 33%;
+		float: left;
 	}
 }
 
