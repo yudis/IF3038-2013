@@ -70,7 +70,8 @@ for ($i = 0; $i < $count_assignee; $i++) {
 	// Check user id
 	$check = mysqli_query($con, "SELECT * 
 							FROM assignees 
-							WHERE member=$id_user");
+							WHERE member=$id_user 
+							AND task=$id_task");
 	$exist = mysqli_num_rows($check);
 	if ($exist == 0) {
 		mysqli_query($con, "INSERT INTO assignees
