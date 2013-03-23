@@ -124,7 +124,7 @@
 		`password` varchar(20) NOT NULL,
 		`full_name` varchar(100) NOT NULL,
 		`birthdate` date NOT NULL,
-		`avatar` blob,
+		`avatar` varchar(100),
 		`email` varchar(50) NOT NULL,
 		PRIMARY KEY (`username`)
 		) ENGINE=InnoDB DEFAULT CHARSET=latin1";
