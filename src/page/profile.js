@@ -134,10 +134,22 @@ function just_edit_email(userid){
 	document.getElementById("right-profile-editemail").innerHTML = "<a href=\"#\" onclick=\"edit_email('"+userid+"')\"><u><p>edit</p></u></a>";
 }
 
+function edit_password() {
+	document.getElementById("password_form").style.display = 'block';
+	document.getElementById("change_password").innerHTML = "<a href=\"#\" onClick=\"just_edit_password()\">Save Password</a>";
+}
+
+function just_edit_password() {
+	document.getElementById("password_form").style.display = 'none';
+	document.getElementById("change_password").style.display = 'block';
+	document.getElementById("change_password").innerHTML = "<a href=\"#\" onClick=\"edit_password()\">Change Password</a>";
+}
+
 function edit_avatar(){
 	document.getElementById("uploader").style.display = 'block';
-	document.getElementById("upload_button").innerHTML = "><a href=\"#\" onClick=\"just_edit_avatar()\">Save</a>";
+	document.getElementById("upload_button").innerHTML = "<a href=\"#\" onClick=\"just_edit_avatar()\">Save Avatar</a>";
 }
+
 function just_edit_avatar(){
 	document.getElementById("uploader").style.display = 'none';
 	document.getElementById("upload_button").style.display = 'block';

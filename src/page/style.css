@@ -406,6 +406,10 @@ body {
 	padding-top:5px;
 }
 
+#password_form {
+	display:block;
+}
+
 #about {
 	width:50%;
 	text-align:justify;
