@@ -63,11 +63,22 @@
 				document.getElementById("right-profile-editemail").innerHTML = "<a href=\"#\" onclick=\"edit_email()\"><u><p>edit</p></u></a>";
 			}
 			
+			function edit_avatar(){
+				document.getElementById("uploader").style.display = 'block';
+				document.getElementById("upload_button").innerHTML = "><a href=\"#\" onClick=\"just_edit_avatar()\">Save</a>";
+			}
+			function just_edit_avatar(){
+				document.getElementById("uploader").style.display = 'none';
+				document.getElementById("upload_button").style.display = 'block';
+				document.getElementById("upload_button").innerHTML = "<a href=\"#\" onClick=\"edit_avatar()\">Upload New Avatar</a>";
+			}
+			
 			function hidden_update_box(){
 				document.getElementById("aboutme_edit").style.display = 'none';
 				document.getElementById("left-profile-newemail").style.display = 'none';
 				document.getElementById("left-profile-newname").style.display = 'none';
 				document.getElementById("left-profile-newbirthday").style.display = 'none';
+				document.getElementById("uploader").style.display = 'none';
 			}
 		</script>
 	</head>
@@ -93,12 +104,29 @@
 					<h2><?php $username = $_GET['username'];
 							  echo $username;
 						      $user = getUser($username);?></h2>
-					<a href="#">Upload New Avatar</a>
+						
+                        <?php
+							if($username == $_SESSION['userlistapp']){
+								echo "<div id=\"upload_button\"><a href=\"#\" onClick=\"edit_avatar()\">Upload New Avatar</a></div>";
+								echo "<div id=\"uploader\">";
+								echo "<input type=\"file\" name=\"changeAvatar\">";
+								echo "</div>";
+							}
+						?>
+							
 					<br>
 					<p>Joined on : <?php echo $user['join']?></p>
 					<div>
 						<div id="left-main-body"><p>About Me :</p></div>
-						<div id="right-main-body"><a href="#" onClick="edit_aboutme()"><u><p>edit</p></u></a></div>
+						<div id="right-main-body">
+                        	<?php 
+                        		if($username == $_SESSION['userlistapp'] ){
+									echo "<a href=\"#\" onClick=\"edit_aboutme()\"><u><p>edit</p></u></a>";
+								}else{
+									echo "<br />";	
+								}
+							?>
+                        </div>
 					</div>
 					<div id="about">
 						<div id="aboutme_show"><?php echo $user['aboutme']?></div>
@@ -111,19 +139,37 @@
 				<div>
 					<div id="left-profile-name"><p>Full Name : <?php echo $user['fullname']; ?></p></div>
 					<div id="left-profile-newname"><p>Full Name : <input type="text" id="newname"></p></div>
-					<div id="right-profile-editname"><a href="#" onclick="edit_fullname()"><u><p>edit</p></u></a></div>
+					<div id="right-profile-editname">
+                    	<?php 
+                        		if($username == $_SESSION['userlistapp'] ){
+									echo "<a href=\"#\" onclick=\"edit_fullname()\"><u><p>edit</p></u></a>";
+								}
+						?>
+                    </div>
 				</div>
 				<br><br><br>
 				<div>
 					<div id="left-profile-birthday"><p>Birth Date : <?php echo $user['birthday'];?></p></div>
 					<div id="left-profile-newbirthday"><p>Birth Date : <input type="text" id="newbirthday"></p></div>
-					<div id="right-profile-editbirthday"><a href="#" onClick="edit_birthday()"><u><p>edit</p></u></a></div>
+					<div id="right-profile-editbirthday">
+                    	<?php 
+                        		if($username == $_SESSION['userlistapp'] ){
+									echo "<a href=\"#\" onClick=\"edit_birthday()\"><u><p>edit</p></u></a>";
+								}
+						?>
+                    </div>
 				</div>
 				<br><br><br>
 				<div>
 					<div id="left-profile-email"><p>Email : <i><?php echo $user['email'];?></i></p></div>
 					<div id="left-profile-newemail"><p>Email : <input type="text" id="newemail"></i></p></div>
-					<div id="right-profile-editemail"><a href="#" onClick="edit_email()"><u><p>edit</p></u></a></div>
+					<div id="right-profile-editemail">
+                    	<?php 
+                        		if($username == $_SESSION['userlistapp'] ){
+									echo "<a href=\"#\" onClick=\"edit_email()\"><u><p>edit</p></u></a>";
+								}
+						?>
+                    </div>
 				</div>
 			</div>
 			<br><br><br>
@@ -142,12 +188,12 @@
 					<ul>
 					<?php 
 						$con = getConnection();
-						$query = "SELECT taskid FROM assignee WHERE username='".$user_show."'";
+						$query = "SELECT distinct taskid FROM assignee WHERE username='".$user_show."'";
 						$result = mysqli_query($con,$query);
 						while($row = mysqli_fetch_array($result)){
 							$task = getTask($row['taskid']);
 							if(strcmp($task['status'],"UNCOMPLETE") == 0){
-								echo "<li><a href = \"task_page.php?taskid=".$task['taskid']."\">".$task['taskname']."</a></li>";		
+								echo "<li><a href=\"task_page.php?taskid=".$row['taskid']."\">".$task['taskname']."</a></li>";		
 							}
 						}
 					?>
