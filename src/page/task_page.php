@@ -31,7 +31,12 @@
 					<br>
 					<div id="deadline_done">
 						<div id="left-main-body">Deadline : <?php echo $task['deadline']?></div>
-						<div id="right-main-body"><a href="#" onCLick="edit_deadline()"><u>edit</u></a></div>
+                        <?php 
+							$creator = $task['username'];
+							if($creator == $_SESSION['userlistapp']){
+								echo "<div id=\"right-main-body\"><a href=\"#\" onCLick=\"edit_deadline()\"><u>edit</u></a></div>";
+							}
+						?>
 					</div>
 					<div id="deadline_edit">
 						<div id="left-main-body"><div id="label">Deadline : </div>
@@ -44,7 +49,14 @@
 					<br><br>
                     <div>
 						<div id="left-main-body4">Status : <?php echo $task['status']?></div> 
-						<div id="right-main-body"><input name="changeStatus" type="button" value="Change Status" onClick="setCompleteStatus(<?php echo $taskid ?>)"></div>
+						<div id="right-main-body">
+                         <?php 
+							$creator = $task['username'];
+							if($creator == $_SESSION['userlistapp']){
+								echo "<input name=\"changeStatus\" type=\"button\" value=\"Change Status\" onClick=\"setCompleteStatus($taskid)\">";
+							}
+						?>                   
+                        </div>
 					</div>
 				</div>
 				<br>
@@ -110,7 +122,14 @@
 								}
 							?>
                         </i></div>
-						<div id="right-main-body"><a href="#2" onClick="edit_assignee()"><u>edit</u></a></div>
+						<div id="right-main-body">
+							<?php 
+                                $creator = $task['username'];
+                                if($creator == $_SESSION['userlistapp']){
+		                        	echo "<a href=\"#2\" onClick=\"edit_assignee()\"><u>edit</u></a>";
+                                }
+                            ?>
+                        </div>
 					</div></div>
 					<div id="assignee_edit" name="2">
 						<div id="left-main-body">Shared with : <input id="task-assignee" type="text" name="textAssignee" list="assignee-task" onKeyUp="autoCompleteAsignee()" placeholder="tag1,tag2,tag3"/>
@@ -133,7 +152,14 @@
 								}
 							?>
                         </i></div>
-						<div id="right-main-body"><a href="#3" onClick="edit_tag()"><u>edit</u></a></div>
+						<div id="right-main-body">
+                        <?php 
+							$creator = $task['username'];
+							if($creator == $_SESSION['userlistapp']){
+		                        echo "<a href=\"#3\" onClick=\"edit_tag()\"><u>edit</u></a>";
+							}
+						?>
+                        </div>
 					</div></div>
 					<div id="tag_edit" name="4">
 						<div id="left-main-body">Tag : <input id="tag-edit" type="text" /></div>
@@ -165,7 +191,9 @@
 								echo " 			<b id=\"post-date\">Post at ".$row['createdate']."</b>";
 								echo " 		</div>";
 								echo " 		<div id=\"delete-comment\">";
-								echo " 			<a href=\"#\"><i>Delete Comment</i></a>";
+									if($row['username'] == $_SESSION['userlistapp']){
+										echo " 			<a href=\"#\"><i>Delete Comment</i></a>";
+									}
 								echo " 		</div>";
 								echo " 	</div>";
 								echo " 	<div id=\"comment-box\">";
