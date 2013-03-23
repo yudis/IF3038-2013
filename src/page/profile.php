@@ -112,6 +112,9 @@
 								echo "<input type=\"file\" name=\"changeAvatar\">";
 								echo "</div>";
 								echo "<div id=\"change_password\"><a href=\"#\">Change Password</a></div>";
+								echo "<div id=\"oldpassword\">";
+								echo "<div id=\"left-profile-body\">Old Password</div><div id=\"right-profile-body\"> : <input type=\"text\" name=\"oldPass\"></div>";
+								echo "</div>";
 								echo "<div id=\"newpassword\">";
 								echo "<div id=\"left-profile-body\">New Password</div><div id=\"right-profile-body\"> : <input type=\"text\" name=\"newPass\"></div>";
 								echo "</div>";
@@ -121,7 +124,7 @@
 							}
 						?>
 							
-					<br><br>
+					<br><br><br>
 					<p>Joined on : <?php echo $user['join']?></p>
 					<div>
 						<div id="left-main-body"><p>About Me :</p></div>
