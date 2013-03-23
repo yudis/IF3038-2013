@@ -1,4 +1,4 @@
-  function ShowAkhir()
+			function ShowAkhir()
                 {
                      if(document.getElementById("regakhir").style.display == 'none')
                     {
@@ -44,7 +44,7 @@
 					var eicon = document.getElementById("emailicon").src;
 					var aicon = document.getElementById("avaicon").src;
 					var dicon = document.getElementById("dateicon").src;
-					var lokasi = "file:///C:/xampp/htdocs/Progin/pict/centang.png";
+					var lokasi = "http://localhost/Progin/pict/centang.png";
 					
 					if ((uicon == lokasi) && (picon == lokasi) && (cicon == lokasi) && (nicon == lokasi) && (eicon == lokasi) && (aicon == lokasi) && (dicon == lokasi))
 							{
@@ -61,6 +61,7 @@
 				{
 					var userid = document.registration.username.value;
 					var userpass = document.registration.password.value;
+					var email=document.getElementById("email");
 					
 					if((userid.length >= "5") && (userid != userpass))
 						{
@@ -70,6 +71,34 @@
 						{
 							document.getElementById("usericon").src="pict/canceled.png";
 						}
+							
+						var xmlhttp;
+						if (window.XMLHttpRequest)
+							{
+								xmlhttp=new XMLHttpRequest();
+							}
+								else
+							{
+								xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+							}
+						
+						xmlhttp.onreadystatechange = function()
+							{
+								if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+									{
+										if (xmlhttp.responseText.search("true") != -1)
+											{
+												logingg();
+											}
+												else
+											{
+												alert("Username telah dipakai ");
+												document.getElementById("usericon").src="pict/canceled.png";
+											}
+									}
+							}
+						xmlhttp.open("GET","validasiRegist.php?username="+userid+"&email="+email,true);
+						xmlhttp.send();
 				}
 				
 			function pass_validating()
@@ -86,6 +115,7 @@
 									document.getElementById("conficon").src="pict/canceled.png";
 								}
 							document.getElementById("passicon").src="pict/centang.png";
+							logingg();
 						}
 							else
 						{
@@ -93,7 +123,8 @@
 						}
 						
 				}
-				
+
+			
 			function conf_validating()
 				{
 					var userpass = document.registration.password.value;
@@ -102,6 +133,7 @@
 					if(confpass == userpass)
 						{
 							document.getElementById("conficon").src="pict/centang.png";
+							logingg();
 						}
 							else
 						{
@@ -116,6 +148,7 @@
 					if(name.match(/([a-zA-Z])+([ \t\r\n\v\f])+([a-zA-Z])/))
 						{
 							document.getElementById("nameicon").src="pict/centang.png";
+							logingg();
 						}
 							else
 						{
@@ -136,11 +169,40 @@
 						{
 							document.getElementById("emailicon").src="pict/canceled.png";
 						}
+					
+					var xmlhttp;
+						if (window.XMLHttpRequest)
+							{
+								xmlhttp=new XMLHttpRequest();
+							}
+								else
+							{
+								xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+							}
+						
+						xmlhttp.onreadystatechange = function()
+							{
+								if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+									{
+										if (xmlhttp.responseText.search("true") != -1)
+											{
+												logingg();
+											}
+												else
+											{
+												alert("Email telah dipakai ");
+												document.getElementById("emailicon").src="pict/canceled.png";
+											}
+									}
+							}
+						xmlhttp.open("GET","validasiRegist.php?username=''&email="+emails,true);
+						xmlhttp.send();
 				}
 			
 			function date_validating()
 				{
 					document.getElementById("dateicon").src="pict/centang.png";
+					logingg();
 				}
 			
 			function avatar_validating()
@@ -150,6 +212,7 @@
 					if((ekstensi.lastIndexOf(".jpg") != -1) || (ekstensi.lastIndexOf(".jpeg") != -1) )
 						{
 							document.getElementById("avaicon").src="pict/centang.png";
+							logingg();
 						}
 							else
 						{
@@ -239,7 +302,14 @@
 										{
 											if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
 												{
-													window.location =("dashboard.php");
+													if (xmlhttp.responseText = "true")
+													{
+														window.location =("dashboard.php");
+													}
+														else
+													{
+														alert("Error detected !");
+													}
 												}
 										}
 									xmlhttp.open("GET","getLocal.php?local="+localStorage.getItem('username'),true);
@@ -247,7 +317,6 @@
 								}
 									else
 								{
-									generateDate();
 									alert("Belum Login");
 								}
 						}
@@ -257,3 +326,107 @@
 						}
 				}
 				
+			function pass_validatingprof()
+				{
+					var userid = document.registration.username.value;
+					var userpass = document.registration.password.value;
+					var usermail = document.registration.email.value;
+					var confpass = document.registration.confirmpass.value;
+					
+					if((userpass != userid) && (userpass.length >= "8") && (userpass != usermail))
+						{
+							if(userpass != confpass)
+								{
+									document.getElementById("conficon").src="pict/canceled.png";
+								}
+							document.getElementById("passicon").src="pict/centang.png";
+						}
+							else
+						{
+							document.getElementById("passicon").src="pict/canceled.png";
+						}
+					loginggprof();
+						
+				}
+
+			
+			function conf_validatingprof()
+				{
+					var userpass = document.registration.password.value;
+					var confpass = document.registration.confirmpass.value;
+					
+					if(confpass == userpass)
+						{
+							document.getElementById("conficon").src="pict/centang.png";
+						}
+							else
+						{
+							document.getElementById("conficon").src="pict/canceled.png";
+						}
+					loginggprof();
+				}
+			
+			function nama_validatingprof()
+				{
+					var name = document.registration.namaleng.value;
+					
+					if(name.match(/([a-zA-Z])+([ \t\r\n\v\f])+([a-zA-Z])/))
+						{
+							document.getElementById("nameicon").src="pict/centang.png";
+						}
+							else
+						{
+							document.getElementById("nameicon").src="pict/canceled.png";
+						}
+					loginggprof();
+				}
+				
+			function date_validatingprof()
+				{
+					var date = document.registration.tanggal.value;
+					
+					if(date.match(/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/))
+						{
+							document.getElementById("dateicon").src="pict/centang.png";
+							
+						}
+							else
+						{
+							document.getElementById("dateicon").src="pict/canceled.png";
+						}
+					loginggprof();
+				}
+			
+			function avatar_validatingprof()
+				{
+					var ekstensi = document.registration.avatar.value;
+					
+					if((ekstensi.lastIndexOf(".jpg") != -1) || (ekstensi.lastIndexOf(".jpeg") != -1) )
+						{
+							document.getElementById("avaicon").src="pict/centang.png";
+						}
+							else
+						{
+							document.getElementById("avaicon").src="pict/canceled.png";
+						}
+					loginggprof();
+				}
+				
+			function loginggprof()
+				{	
+					var picon = document.getElementById("passicon").src;
+					var cicon = document.getElementById("conficon").src;
+					var nicon = document.getElementById("nameicon").src;
+					var aicon = document.getElementById("avaicon").src;
+					var dicon = document.getElementById("dateicon").src;
+					var lokasi = "http://localhost/Progin/pict/canceled.png";
+					
+					if ((picon == lokasi) || (cicon == lokasi) || (nicon == lokasi) || (aicon == lokasi) || (dicon == lokasi))
+							{
+								document.getElementById("submitedit").disabled = true;
+							}
+								else
+							{
+								document.getElementById("submitedit").disabled = false;
+							}
+				}
