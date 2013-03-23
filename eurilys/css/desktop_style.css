@@ -454,7 +454,7 @@ footer {
 	padding-top:5px; 
 	padding-bottom:5px;
 }
-
+.edit_task_input {width:100%;}
 #edit_task_button:hover {
 	border-color:#0092dd;
 }

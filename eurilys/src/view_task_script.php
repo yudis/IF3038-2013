@@ -85,7 +85,7 @@
 			</div>
 			
 			<div class='left top20 dynamic_content_row'>
-				<div id='task_name_ltd' class='left dynamic_content_left'> Status </div>";
+				<div id='task_status_ltd' class='left dynamic_content_left'> Status </div>";
 			
 			if ($row['task_status'] == 0) {
 				$status = 'Not finished yet';
@@ -94,7 +94,7 @@
 			
 			$response = $response. 
 			"
-				<div id='task_name_rtd' class='left dynamic_content_right'>".$status."</div>
+				<div id='task_status_rtd' class='left dynamic_content_right'>".$status."</div>
 			</div>
 			
 			<div class='left top20 dynamic_content_row'>
@@ -113,9 +113,11 @@
 			<div class='left top20 dynamic_content_row'>
 				<div id='assignee_ltd' class='left dynamic_content_left'>Assignee</div>
 				<div id='assignee_rtd' class='left dynamic_content_right'>";
-				
+			
+			$assName = "";
 			if (count($assResponse) > 0) {
 				for($i=0; $i<count($assResponse); $i++) {
+					$assName = $assName.$assResponse[$i]." , ";
 					$response = $response.
 					"<span class='userprofile_link darkBlueItalic' onclick='javascript:searchUser(\"$assResponse[$i]\")'> $assResponse[$i] </span> , ";
 				}
@@ -123,7 +125,7 @@
 				
 			$response = $response."</div>
 			</div>
-		
+			<input type='hidden' id='hidden_ass_name' value='$assName'/>
 			<div class='left top20 dynamic_content_row'>
 				<div id='tag_ltd' class='left dynamic_content_left'>Tag</div>
 				<div id='tag_rtd' class='left dynamic_content_right'>".$tagResponse."</div>
@@ -162,7 +164,7 @@
 						<textarea id='comment_textarea' rows='5' cols='50' name='CommentBox'>
 						</textarea> 
 						<br>
-						<input type='hidden' name='comment_task_id' value='".$taskID."'>
+						<input type='hidden' id='hidden_task_id' name='comment_task_id' value='".$taskID."'>
 						<input type='submit' value='Add Comment' name='add_comment_button' class='link_red'>
 						<br><br><br>
 					</form>
