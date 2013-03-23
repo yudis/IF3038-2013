@@ -8,14 +8,16 @@
 				<header>
 					<h1>Add Task</h1>
 				</header>
-				<form id="new_tugas" action="#" method="post">
+				<form id="new_tugas" action="new_task.php" method="post" enctype="multipart/form-data">
 					<div class="field">
 						<label>Task Name</label>
 						<input size="30" maxlength="25" name="nama" id="nama" type="text">
 					</div>
 					<div class="field">
 						<label>Attachment</label>
-						<input size = "30" name="attachment" id="attachment" type="file" accept="image/*,video/*">
+						<span id="attachment_field">
+							<input size = "30" name="attachment[]" id="attachment" type="file" accept="image/*,video/*">
+						</span>
 					</div>
 					<div class="field">
 						<label>Deadline</label>
@@ -23,14 +25,11 @@
 					</div>
 					<div class="field">
 						<label>Assignee</label>
-						<input size = "30" name="assignee[]" id="assignee" type="text" list="friends"><br>
-						<label></label>
-						<input size = "30" name="assignee[]" id="assignee" type="text" list="friends"><br>
-						<datalist id="friends">
-							<option value="Irfan Kamil">
-							<option value="Tubagus Andhika Nugraha">
-							<option value="Sonny Fitra Arfian">
-						</datalist>
+						<span id="assignee_field">
+							<datalist id="suggestion">
+							</datalist>
+							<input size="30" maxlength="50" name="assignee[]" id="assignee_add" type="text" onkeyup="assignee_autocomplete(this)" list="suggestion">
+						</span>
 					</div>
 					<div class="field">
 						<label>Tag</label>
@@ -38,6 +37,8 @@
 					</div>
 					<div class="buttons">
 						<button type="submit">Save</button>
+						<button id="more_assignee">Add Assignee</button><br>
+						<button id="more_attachment">Add Attachment</button><br>
 					</div>
 				</form>
 			</div>

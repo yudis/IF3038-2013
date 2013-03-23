@@ -274,6 +274,12 @@ Rp(function() {
 		document.getElementById('assignee_field').innerHTML += '<input size="30" maxlength="50" name="assignee[]" id="assignee_add" type="text" onkeyup="assignee_autocomplete(this)" list="suggestion">';
 	})
 
+	Rp('#more_attachment').on('click', function(e) {
+		e.preventDefault();
+
+		document.getElementById('attachment_field').innerHTML += '<input size="30" maxlength="50" name="attachment[]" id="attachment" type="file" accept="image/*,video/*">';
+	})
+
 	Rp('#commentForm').on('submit', function(e) {
 		e.preventDefault();
 		body = Rp('#commentBody').val();
