@@ -39,6 +39,15 @@
 			$tagResponse = $tagResponse.$tag_row['tag_name']." , ";
 		}
 		
+		//Get 'attachment'
+		$attachment_query = "SELECT * from attachment WHERE att_task_id='$taskID'";
+		$attachment_result = mysql_query($attachment_query);
+		unset($attachmentResponse);
+		$attachmentResponse = array();
+		while ($attachment_row = mysql_fetch_array($attachment_result, MYSQL_ASSOC)) { 
+			$attachmentResponse[] = $attachment_row['att_content'];
+		}
+		
 		//Get 'comment'		
 		unset($commentContent);
 		$commentContent = array();
@@ -75,7 +84,7 @@
 				".$row['task_name']."
 			</div>
 			
-			<input id='edit_task_button' class='left top30 link_blue_rect' onclick='edit_task(\"$taskID\")' type='button' value='Edit Task'>
+			<input id='edit_task_button' class='left top30 link_blue_rect' onclick='edit_task()' type='button' value='Edit Task'>
 			
 			<input id='save_button_td' class='left top30 link_blue_rect' onclick='save_edit_task()' type='button' value='Save'>
 						
@@ -97,11 +106,13 @@
 				<div id='task_status_rtd' class='left dynamic_content_right'>".$status."</div>
 			</div>
 			
+			
 			<div class='left top20 dynamic_content_row'>
 				<div id='attachment_ltd' class='left dynamic_content_left'>Attachment</div>
 				<div id='attachment_rtd' class='left dynamic_content_right'>
-					<!-- <img id='taskdetail_img' src='../img/taskdetail_img.jpg' alt='Rikka-chan'> -->
-					??? Belum ada attachment
+					<a id='taskdetail_img' width='100px' height='100px' href='uploads/".$attachmentResponse[0]."' target='_blank' >$attachmentResponse[0]</a>
+					<a id='taskdetail_img' width='100px' height='100px' href='uploads/".$attachmentResponse[1]."' target='_blank' >$attachmentResponse[1]</a>
+					<a id='taskdetail_img' width='100px' height='100px' href='uploads/".$attachmentResponse[2]."' target='_blank' >$attachmentResponse[2]</a>
 				</div>
 			</div>
 			
@@ -119,7 +130,7 @@
 				for($i=0; $i<count($assResponse); $i++) {
 					$assName = $assName.$assResponse[$i]." , ";
 					$response = $response.
-					"<span class='userprofile_link darkBlueItalic' onclick='javascript:searchUser(\"$assResponse[$i]\")'> $assResponse[$i] </span> <br> ";
+					"<span class='userprofile_link darkBlueItalic' onclick='javascript:searchUser(\"$assResponse[$i]\")'> $assResponse[$i] </span> , ";
 				}
 			}	
 				

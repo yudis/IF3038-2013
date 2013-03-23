@@ -103,25 +103,27 @@ function upload($file_id, $folder="", $types="") {
 			$query3 	= "INSERT INTO `tag` (`tag_name`, `task_id`) VALUES ('$tagArray[$i]','$taskID')";
 			$result3 = mysql_query($query3);
 		}
-		$query4 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment1','$taskID')";
-		$result4 = mysql_query($query4);
-		$query5 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment2','$taskID')";
-		$result5 = mysql_query($query5);
-		$query6 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment3','$taskID')";
-		$result6 = mysql_query($query6);
 		
-		if($_FILES['attachment_file1']['name']) {
-	list($file,$error) = upload('attachment_file1','uploads/',',jpg,jpeg,gif,png,flv,pdf');
+		
+		
+		
+if($_FILES['attachment_file1']['name']) {
+	list($file,$error) = upload('attachment_file1','uploads',',jpg,jpeg,gif,png,flv,pdf');
 	if($error) print $error;
-		}
-	if($_FILES['attachment_file2']['name']) {
-	list($file,$error) = upload('attachment_file2','uploads/',',jpg,jpeg,gif,png,flv,pdf');
+	$query4 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$file','$taskID')";
+	$result4 = mysql_query($query4);
+}
+if($_FILES['attachment_file2']['name']) {
+	list($file,$error) = upload('attachment_file2','uploads',',jpg,jpeg,gif,png,flv,pdf');
 	if($error) print $error;
-	}
-	
-	if($_FILES['attachment_file3']['name']) {
-	list($file,$error) = upload('attachment_file3','uploads/',',jpg,jpeg,gif,png,flv,pdf');
+	$query5 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$file','$taskID')";
+	$result5 = mysql_query($query5);
+}
+if($_FILES['attachment_file3']['name']) {
+	list($file,$error) = upload('attachment_file3','uploads',',jpg,jpeg,gif,png,flv,pdf');
 	if($error) print $error;
+	$query6 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$file','$taskID')";
+	$result6 = mysql_query($query6);
 }
 
 

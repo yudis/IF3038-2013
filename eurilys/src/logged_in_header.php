@@ -6,7 +6,7 @@
 <html>
 	<head>
     	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >	
-        <meta name="viewport" content="width=device-width; initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='../css/mobile.css' rel='stylesheet' type='text/css'>
 		<link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
         <link href='../css/wide.css' rel='stylesheet' type='text/css'>
@@ -22,7 +22,7 @@
 		<header>
 			<div id="header_container"> 
 				<div class="left">
-					<a href="dashboard.php"> <img src="../img/logo.png" alt="logo"> </a>					
+					<a href="dashboard.php"> <img id="logo" src="../img/logo.png" alt="logo"> </a>					
 				</div>
 				
 				<input id="search_box" type="text" onkeyup="showHint(this.value)" placeholder="Search...">
