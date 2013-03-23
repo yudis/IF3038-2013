@@ -75,7 +75,7 @@
 				".$row['task_name']."
 			</div>
 			
-			<input id='edit_task_button' class='left top30 link_blue_rect' onclick='edit_task()' type='button' value='Edit Task'>
+			<input id='edit_task_button' class='left top30 link_blue_rect' onclick='edit_task(\"$taskID\")' type='button' value='Edit Task'>
 			
 			<input id='save_button_td' class='left top30 link_blue_rect' onclick='save_edit_task()' type='button' value='Save'>
 						
@@ -119,7 +119,7 @@
 				for($i=0; $i<count($assResponse); $i++) {
 					$assName = $assName.$assResponse[$i]." , ";
 					$response = $response.
-					"<span class='userprofile_link darkBlueItalic' onclick='javascript:searchUser(\"$assResponse[$i]\")'> $assResponse[$i] </span> , ";
+					"<span class='userprofile_link darkBlueItalic' onclick='javascript:searchUser(\"$assResponse[$i]\")'> $assResponse[$i] </span> <br> ";
 				}
 			}	
 				
