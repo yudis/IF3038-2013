@@ -281,7 +281,10 @@ class Tugas extends Model
 			if(empty($error))
 			{
 				echo "Success";
-
+			}
+		}
+	}
+	
 	public function isUpdated($id_tugas, $last_request)
 	{
 		$sql = "SELECT COUNT(*) AS n FROM `tugas` WHERE `id` = ? AND `last_mod` > ?";
@@ -324,15 +327,6 @@ class Tugas extends Model
 		
 		$this->addAttachments($docId,$result["id"]);
     }
-	
-    public function store()
-    {
-        $sql = "INSERT INTO tugas 
-                    (nama, tgl_deadline, pemilik,id_kategori)
-                VALUES 
-                    (?, ?, ?, ?);";
-         
-        $data = array(
 
 	public function store()
 	{
@@ -351,5 +345,70 @@ class Tugas extends Model
 		 
 		$sth = $this->_db->prepare($sql);
 		return $sth->execute($data);
+	}
+	
+	public function searchTitle($q, $x, $n)
+	{
+
+		$sql = "SELECT id, nama
+				FROM categories
+				WHERE nama LIKE '".$q."%'			
+				LIMIT ".$x." , ".$n."";
+				
+        $this->_setSql($sql);
+		
+        $r = $this->getAll();
+		
+		
+        if (empty($r))
+        {
+            return false;
+        }
+		
+		return $r;
+	}
+	
+	public function searchTask($q, $x, $n)
+	{
+				
+		$sql = "SELECT id, nama, tgl_deadline, status, pemilik, tag
+				FROM tugas LEFT JOIN tags ON tugas.id = tags.id_tugas
+				WHERE nama LIKE '".$q."%'		
+				LIMIT ".$x." , ".$n."";
+				
+        $this->_setSql($sql);
+		
+        $r = $this->getAll();
+		
+		
+        if (empty($r))
+        {
+            return false;
+        }
+		
+		return $r;
+	}	
+
+	public function countTuple($q, $x, $n)
+	{
+		$sql = "SELECT id, count(tag) as ntag
+				FROM tugas LEFT JOIN tags ON tugas.id = tags.id_tugas
+				WHERE nama LIKE '".$q."%'		
+				GROUP BY id
+				LIMIT ".$x." , ".$n."			
+				";
+
+				
+        $this->_setSql($sql);
+		
+        $r = $this->getAll();
+		
+		
+        if (empty($r))
+        {
+            return false;
+        }
+		
+		return $r;	
 	}
 }

@@ -30,10 +30,12 @@
                                     <option>Title</option>
                                     <option>Task</option>
                                 </select>
+								<input type="text" id="xvar" name="x" value="0" />
+								<input type="text" id="nvar" name="n" value="XXXXX" />
                                 <button class="search"><img src="images/find.png" alt="Search"/></button>
                             </form>
                         </div>
-                    </div>
+					</div>
                 </nav>
                 <div class="welcomebar">
                     <a href="./profile.php"><img src="./images/avatars/<?php echo $_SESSION["user"]["avatar"]; ?>" alt="<?php echo $_SESSION["user"]["full_name"]; ?>" width="32" height="32" /></a> Hi <strong><?php echo $_SESSION["user"]["full_name"]; ?></strong> (<a href="./profile.php"><?php echo $_SESSION["user"]["username"]; ?></a>)

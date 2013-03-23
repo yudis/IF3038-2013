@@ -93,6 +93,16 @@ class User extends Model
 		return $result;
     }
 	
+	public function getUserDetail($username)
+    {
+		$sql = "SELECT * FROM users WHERE username=?";
+		$this->_setSql($sql);
+		
+		$result = $this->getRow(array($username));
+		 
+		return $result;
+    }	
+	
     public function checkAvailabilityEmail($email)
     {
         $sql = "SELECT * FROM users WHERE email=?";
@@ -127,6 +137,58 @@ class User extends Model
         $sth = $this->_db->prepare($sql);
         return $sth->execute($data);
     }
+	
+    public function Update()
+    {
+        $sql = "UPDATE users 
+                    SET `password`=MD5(?), `full_name`=?, `tgl_lahir`=?, `avatar`=?
+                WHERE 
+                    `username`=?;";
+        
+		// echo	json_encode($this->_avatar) . "\n\n";
+		// echo 	$this->_password;
+		// echo 	$this->_full_name;
+		// echo 	$this->_tgl_lahir;
+		// echo 	$this->_avatar;
+		// echo 	$this->_username;			 
+		 
+        $data = array(
+			$this->_password,
+			$this->_full_name,
+			$this->_tgl_lahir,
+			$this->_avatar,
+			$this->_username,			
+        );
+         
+        $sth = $this->_db->prepare($sql);
+        return $sth->execute($data);
+    }	
+	
+	public function searchUsername($q, $x, $n)
+	{
+				
+		if ($q != ""){		
+			$sql = "SELECT username, full_name, avatar
+					FROM users
+					WHERE username LIKE '".$q."%';			
+					LIMIT ".$x." , ".$n."";			
+		} else {
+			$sql = "SELECT username, full_name, avatar
+				FROM users			
+				LIMIT ".$x." , ".$n."";			
+		}
+        $this->_setSql($sql);
+		
+        $r = $this->getAll();
+		
+		
+        if (empty($r))
+        {
+            return false;
+        }
+		
+		return $r;
+	}
 }
 
 ?>

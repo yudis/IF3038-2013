@@ -213,7 +213,7 @@ function validateAvatar() {
 	
 }
 	
-	ajax_get("ajax/profilecategory.php?",function(xhr)
+	ajax_get("ajax/progilTugas.php?username=" + getQueryParameter("username"),function(xhr)
 	{
 			document.getElementById("tasklist").innerHTML=xhr.responseText;
 	});	
