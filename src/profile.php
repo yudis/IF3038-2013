@@ -56,26 +56,32 @@
 						<div class="field">
 							<label>Full Name</label>
 							<input size="30" maxlength="50" name="name" id="name" type="text">
+							<div class="buttons">
+								<button onclick="updateProfile('name',<?php echo $_GET['user_id']; ?>);">Save Name</button>
+							</div><br>&nbsp;
 						</div>
 						<div class="field">
-								<label>New Avatar</label>
-								<input name="avatar" id="avatar" type="file" accept="image/jpeg">
+							<label>New Avatar</label>
+							<input name="avatar" id="avatar" type="file" accept="image/jpeg">
 						</div>
 						<div class="field">
-								<label>Tanggal Lahir Baru</label>
-								<input size = "30" name="tanggal_lahir" id="tanggal_lahir" type="date">
+							<label>Tanggal Lahir Baru</label>
+							<input size = "30" name="tanggal_lahir" id="tanggal_lahir" type="date">
+							<div class="buttons">
+								<button onclick="updateProfile('tanggal_lahir',<?php echo $_GET['user_id']; ?>);">Save Tanggal lahir</button>
+							</div><br>&nbsp;
 							</div>
 						<div class="field">
 								<label>New Password</label>
 								<input size="30" maxlength="50" name="password" id="password" type="password">
-							</div>
-							<div class="field">
-								<label>Confirm New Password</label>
-								<input size="30" maxlength="50" name="password_k" id="password_k" type="password">
-							</div>
-							<div class="field buttons">
-								<button type="submit" name="updateProfile" id="submitButton">Save</button>
-							</div>
+						</div>
+						<div class="field">
+							<label>Confirm New Password</label>
+							<input size="30" maxlength="50" name="password_k" id="password_k" type="password">
+						</div>
+						<div class="buttons">
+							<button onclick="updateProfile('password',<?php echo $_GET['user_id']; ?>);">Save Password</button>
+						</div>
 					</form>
 				</div>
 

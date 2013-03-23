@@ -377,7 +377,7 @@ Rp(function() {
 			Rp('#current-profile').show();
 		}
 		else {
-			Rp('#editProfileLink').nodes[0].innerHTML = '';
+			Rp('#editProfileLink').nodes[0].innerHTML = 'Save';
 			Rp('#editProfileLink').addClass('editingprofile');
 			Rp('#current-profile').hide();
 			Rp('#edit-profile').nodes[0].style.display = 'block';
@@ -402,6 +402,22 @@ function updateTask(mode,task_id){
 	xmlhttp.open("POST","core/updateTask.php",false);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xmlhttp.send("task_id="+task_id+"&mode="+mode+"&value="+value);
+}
+
+function updateProfile(mode,user_id){
+	if (mode == "name") {
+		value = Rp('#name').val();
+	}
+	if (mode == "tanggal_lahir") {
+		value = Rp('#tanggal_lahir').val();
+	}
+//	if (mode == "addtag") {
+//		value = Rp('#addtag').val();
+//	}
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","core/updateProfile.php",false);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send("user_id="+user_id+"&mode="+mode+"&value="+value);
 }
 
 function removeElement(mode,field,task_id,id){
