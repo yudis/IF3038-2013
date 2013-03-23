@@ -13,16 +13,25 @@ foreach ($_POST as $k => $v) {
 }
 
 mysqli_query($con, "INSERT INTO categories (
-				name
+				name, creator
 				)
 				VALUES (
-					'$category_name'
+					'$category_name', $creator_id
 				)");
 				
 $CatId = "SELECT id FROM categories WHERE name='{$category_name}'";
 $GetCatId = mysqli_query($con, $CatId);
 $result = mysqli_fetch_array($GetCatId);
 $idCategory = $result['id'];
+
+mysqli_query($con, "INSERT INTO editors (
+				member,
+				category
+				)
+				VALUES (
+					$creator_id,
+					'$idCategory'
+				)");
 
 $member = array();
 $member = explode(",", $relateduser);
@@ -43,7 +52,7 @@ while($i<=$j)
 				category
 				)
 				VALUES (
-					'$idMember',
+					$idMember,
 					'$idCategory'
 				)");
  	$i++;

@@ -2,7 +2,9 @@
 include 'header.php';
 
 $result=mysqli_query($con,"SELECT DISTINCT `category` FROM `tasks`");
-$cats=mysqli_num_rows($result);
+$cats=mysqli_num_rows($result);   
+
+$id = $_SESSION['id'];
 ?>
 			
 <div id="main2">
@@ -26,13 +28,13 @@ $cats=mysqli_num_rows($result);
 						<label for="password">Pengguna Terkait :</label>
 						<input type ="text" name="relateduser"></input>
 					</div>
+					<input type="hidden" name="creator_id" value="<?php echo $id;?>" />
 					<input type="submit" name="btn_addCat" value="Ok" />
 				</form>
 
 				<a class="close" href="#close"></a>
             </div>
-            <?php                                    
-			$id = $_SESSION['id'];
+            <?php
 			$result1=mysqli_query($con,"SELECT * FROM `categories` ORDER BY id");
 			while ($cat=mysqli_fetch_array($result1)) {
 				$found = false;
@@ -51,8 +53,23 @@ $cats=mysqli_num_rows($result);
             <img onmouseover="javascript:getDashboardFocus('task2');" src ="images/dateschedule.png" id="task2" alt="task2" style="cursor:pointer" />
             <a href ="post.php"><input id ="newtask" type="button" name="Tugas Baru" value="newtask" disabled="true"/></a>-->
             <div onclick="javascript:showtask(<?php echo $cat['id'];?>,<?php echo $cats;?>);"><a href="#"><?php echo $cat['name'];?></a></div>
+            <?php
+			            $result3 = mysqli_query($con, "SELECT * FROM editors WHERE member=$id AND category=$cat_id");
+			        	$count = mysqli_num_rows($result3);
+			        	if ($count == 1) {
+        	?>
             <a href ="post.php?id=<?php echo $cat['id'];?>"><input id ="newtask" type="button" name="Tugas Baru" value="New Task"/></a>
             <?php
+            				if ($cat['creator'] == $id) 
+            				{
+            ?>
+            <form action="deletecategory.php" method="post">
+            	<input type="hidden" name="id" value="<?php echo $cat['id'];?>" />
+            	<input type="submit" value="Delete Category" />
+            </form>
+            <?php
+            				}
+        				}
             			$found = true;
             			break;
         			}
@@ -63,10 +80,20 @@ $cats=mysqli_num_rows($result);
         			if ($count == 1) {
         	?>
         	<div onclick="javascript:showtask(<?php echo $cat['id'];?>,<?php echo $cats;?>);"><a href="#"><?php echo $cat['name'];?></a></div>
-            <a href ="post.php?id=<?php echo $cat['id'];?>"><input id ="newtask" type="button" name="Tugas Baru" value="New Task"/></a>
+            <a href ="post.php?id=<?php echo $cat['id'];?>"><input id ="newtask" type="button" name="Tugas Baru" value="New Task"/></a><br />
             <?php
+            			if ($cat['creator'] == $id) 
+            			{
+            ?>
+            <form action="deletecategory.php" method="post">
+            	<input type="hidden" name="id" value="<?php echo $cat['id'];?>" />
+            	<input type="submit" value="Delete Category" />
+            </form>
+            <?php
+            			}
         			}
         		}
+        		echo "<br />";
 			}
             ?>
         </div>
