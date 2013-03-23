@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 12, 2013 at 12:24 AM
+-- Generation Time: Mar 23, 2013 at 04:44 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `assign` (
   `category_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `assign`
@@ -40,7 +40,13 @@ CREATE TABLE IF NOT EXISTS `assign` (
 
 INSERT INTO `assign` (`id`, `task_id`, `category_id`, `user_id`) VALUES
 (2, 1, NULL, 2),
-(3, NULL, 1, 2);
+(3, NULL, 1, 2),
+(8, 1, NULL, 3),
+(13, NULL, 7, 1),
+(16, 1, NULL, 5),
+(19, NULL, 6, 2),
+(20, 30, NULL, 3),
+(21, NULL, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -52,9 +58,9 @@ CREATE TABLE IF NOT EXISTS `attachment` (
   `attachment_id` int(11) NOT NULL AUTO_INCREMENT,
   `task_id` int(11) DEFAULT NULL,
   `type` enum('image','video','file') NOT NULL,
-  `filename` varchar(100) NOT NULL,
+  `filename` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`attachment_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `attachment`
@@ -63,7 +69,11 @@ CREATE TABLE IF NOT EXISTS `attachment` (
 INSERT INTO `attachment` (`attachment_id`, `task_id`, `type`, `filename`) VALUES
 (1, 1, 'image', '1.jpg'),
 (2, 1, 'video', '2.mp4'),
-(3, 1, 'file', '3.pdf');
+(3, 1, 'file', '3.pdf'),
+(12, 30, 'image', '12.png'),
+(13, 30, 'video', '13.avi'),
+(14, 30, 'file', '14.xlsx'),
+(15, 31, 'image', '15.jpg');
 
 -- --------------------------------------------------------
 
@@ -76,14 +86,16 @@ CREATE TABLE IF NOT EXISTS `category` (
   `user_id` int(11) NOT NULL,
   `name` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`category_id`, `user_id`, `name`) VALUES
-(1, 0, 'Cinta');
+(1, 1, 'Cinta'),
+(6, 1, 'Le Meridien'),
+(7, 2, 'Le Dafuqi');
 
 -- --------------------------------------------------------
 
@@ -98,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `content` text,
   `time` int(11) NOT NULL,
   PRIMARY KEY (`comment_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
 
 --
 -- Dumping data for table `comment`
@@ -118,7 +130,9 @@ INSERT INTO `comment` (`comment_id`, `task_id`, `user_id`, `content`, `time`) VA
 (49, 1, 1, 'dani', 1362967051),
 (50, 1, 1, 'halo', 1362967058),
 (51, 1, 1, 'wawa', 1362967062),
-(52, 1, 2, 'aing kasep', 1363043666);
+(53, 1, 2, 'gyahaha', 1363068620),
+(57, 31, 1, 'wawa', 1364052561),
+(58, 31, 1, 'caca', 1364052564);
 
 -- --------------------------------------------------------
 
@@ -130,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `tag` (
   `tag_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`tag_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `tag`
@@ -139,7 +153,10 @@ CREATE TABLE IF NOT EXISTS `tag` (
 INSERT INTO `tag` (`tag_id`, `name`) VALUES
 (1, 'satu'),
 (2, 'dua'),
-(3, 'tiga');
+(3, 'tiga'),
+(4, 'liar'),
+(5, 'makan'),
+(6, 'lincah');
 
 -- --------------------------------------------------------
 
@@ -152,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
   `task_id` int(11) DEFAULT NULL,
   `tag_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `tags`
@@ -161,7 +178,17 @@ CREATE TABLE IF NOT EXISTS `tags` (
 INSERT INTO `tags` (`id`, `task_id`, `tag_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
-(3, 1, 3);
+(11, 1, 3),
+(16, 29, 1),
+(17, 29, 2),
+(18, 29, 3),
+(19, 29, 5),
+(21, 30, 6),
+(22, 30, 2),
+(23, 31, 1),
+(24, 31, 2),
+(25, 31, 3),
+(26, 31, 5);
 
 -- --------------------------------------------------------
 
@@ -177,14 +204,30 @@ CREATE TABLE IF NOT EXISTS `task` (
   `deadline` date DEFAULT NULL,
   `done` tinyint(1) NOT NULL,
   PRIMARY KEY (`task_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `task`
 --
 
 INSERT INTO `task` (`task_id`, `user_id`, `category_id`, `name`, `deadline`, `done`) VALUES
-(1, 1, 1, 'Mencari Cinta', '2013-03-16', 1);
+(1, 1, 1, 'Mencari Cinta', '2013-03-01', 0),
+(2, 1, 1, 'Mendulang Cinta', '2013-03-01', 1),
+(6, 1, 1, 'Cerita Cinta', '2013-03-01', 1),
+(8, 1, 1, 'Cinta is Love', '2013-03-01', 1),
+(12, 1, 1, 'Katakan Cinta', '2013-03-01', 0),
+(13, 1, 1, 'Cinta Ibu', '2013-03-01', 0),
+(14, 1, 1, 'Cinta Ayah', '2013-03-01', 0),
+(15, 1, 1, 'Cinta Keluarga', '2013-03-01', 1),
+(16, 1, 1, 'Cinta Sahabat', '2013-03-01', 0),
+(17, 1, 1, 'Zona Cinta', '2013-03-01', 0),
+(18, 1, 1, 'Arjuna Mencari Cinta', '2013-03-01', 0),
+(19, 1, 1, 'Cinta Satu Malam', '2013-03-01', 0),
+(20, 1, 1, 'Cinta Ilahi', '2013-03-01', 0),
+(21, 1, 1, 'Cinta Rasul', '2013-03-01', 0),
+(29, 1, 6, 'daca', '2013-03-05', 0),
+(30, 1, 6, 'homa', '2013-03-01', 0),
+(31, 1, 6, 'Irfan Kamil', '2013-03-03', 0);
 
 -- --------------------------------------------------------
 
@@ -200,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `birthdate` date DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `user`
@@ -208,7 +251,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `name`, `birthdate`, `email`) VALUES
 (1, 'admin', 'admin', 'Mr Admin', '2013-03-09', 'admin@admin.com'),
-(2, 'kamilersz', 'test', 'Irfan Kamil', '2013-03-15', 'irfan@kamil.web.id');
+(2, 'kamilersz', 'test', 'Irfan Kamil', '2013-03-15', 'irfan@kamil.web.id'),
+(3, 'cintalaura', 'cinta', 'Cinta Laura', '2013-03-01', 'cinta@laura.com'),
+(4, 'irfankamil2', 'irfankamil', 'irfan kamil', '2013-03-13', 'irfan@kamil.web.id'),
+(5, 'irfankamil', 'kamilersz', 'irfankamil ss', '2013-03-05', 'irfan@kamil.web.ids');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

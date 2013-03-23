@@ -126,21 +126,21 @@ v		dipisah dengan koma
 v	setelah submit, diredirect ke halaman rincian tugas
 	
 HALAMAN PROFIL
-	attribut
-		username
-		full name
-		avatar
-		tanggal lahir
-		email
-		task list
-			task yang sudah diselesaikan
-			task yang sedang dikerjakan
-	edit profile
-		full name
+v	attribut
+v		username
+v		full name
+v		avatar
+v		tanggal lahir
+v		email
+v		task list
+v			task yang sudah diselesaikan
+v			task yang sedang dikerjakan
+v	edit profile
+v		full name
 		upload new avatar
-		change birth date
-		change password
-		confirm change password
+v		change birth date
+v		change password
+v		confirm change password
 		validasi
 		
 DATABASE DESIGN
