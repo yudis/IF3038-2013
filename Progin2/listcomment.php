@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysql_connect("localhost:3306","root","");
+$con = mysql_connect("localhost:3306","progin","progin");
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());

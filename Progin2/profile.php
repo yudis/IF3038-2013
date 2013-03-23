@@ -151,7 +151,7 @@ if(!isset($_SESSION['id']))
 			<div class="menu" id="profile">
 				<a href="profile.php">
 				<img alt="" height=25 width=25 src="<?php
-					$con = mysql_connect("localhost:3306","root","");
+					$con = mysql_connect("localhost:3306","progin","progin");
 					if (!$con)
 					  {
 					  die('Could not connect: ' . mysql_error());
@@ -170,7 +170,7 @@ if(!isset($_SESSION['id']))
 		<div id="profilearea">
 			<div class="profilephoto">
 				<?php
-				$con = mysql_connect("localhost:3306","root","");
+				$con = mysql_connect("localhost:3306","progin","progin");
 				if (!$con)
 				  {
 				  die('Could not connect: ' . mysql_error());
