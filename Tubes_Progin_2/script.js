@@ -804,3 +804,30 @@ function storeComment(){
 	xmlhttp6.open("GET","storeComment.php?q="+comment,true);
 	xmlhttp6.send();
 }
+
+function deleteTask(str){
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp10=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp10=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp10.onreadystatechange=function()
+	  {
+		  if (xmlhttp10.readyState==4 && xmlhttp10.status==200)
+		  {
+			if (xmlhttp10.responseText == "deleted")
+			{
+				alert("Delete task success");
+			}
+			else
+			{
+				alert("You can't delete task you don't own");
+			}
+		  }
+	  }
+	xmlhttp10.open("GET","deleteTask.php?q="+str,true);
+	xmlhttp10.send();
+}

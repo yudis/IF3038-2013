@@ -13,9 +13,6 @@ and open the template in the editor.
 		<script>
 			<?php
 				require "config.php";
-				
-				//$user = mysqli_query($con,$sql);
-				//$current_user = mysqli_fetch_array($user);
 			?>
 		</script>
     </head>
