@@ -25,6 +25,7 @@ class App
 	public $baseUrl;
 
 	public $currentUserId;
+	public $currentUser;
 	public $loggedIn;
 
 	// bootstrap
@@ -143,7 +144,7 @@ class App
 		}
 
 		$this->currentUserId = $_SESSION['user_id'];
-		$this->currentUser = $_SESSION['current_user'];
+		$this->currentUser = User::model()->find('id_user=' . $this->currentUserId);
 		$this->loggedIn = (bool) $_SESSION['user_id'];
 	}
 
