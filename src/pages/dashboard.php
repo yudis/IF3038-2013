@@ -9,13 +9,8 @@
 
 	$cat = (int) $_GET['cat'];
 
-	$id = $this->currentUserId;
-	$baseQ = "id_kategori IN ( SELECT id_kategori FROM ".Category::tableName()." WHERE id_user='$id' ".
-			 "OR id_kategori IN (SELECT id_kategori FROM edit_kategori WHERE id_user='$id') ".
-			 "OR id_kategori IN (SELECT id_kategori FROM ". Task::tableName() ." AS t LEFT OUTER JOIN assign AS a ".
-			 "ON t.id_task=a.id_task WHERE t.id_user = '". $id ."' OR a.id_user = '". $id ."' ))";
-	$todoQ = $baseQ . ' AND status=0';
-	$doneQ = $baseQ . ' AND status=1';
+	$todoQ = 'status=0';
+	$doneQ = 'status=1';
 	$narrowQ = '';
 
 	if ($cat) {
@@ -32,9 +27,9 @@
 		}
 	}
 
-	$tasks = Task::model()->findAll();
-	$todo = Task::model()->findAll($todoQ . $narrowQ);
-	$done = Task::model()->findAll($doneQ . $narrowQ);
+	//$tasks = $this->currentUser->getTasks();
+	$todo = $this->currentUser->getTasks($todoQ . $narrowQ);
+	$done = $this->currentUser->getTasks($doneQ . $narrowQ);
 
 	$categories = $this->currentUser->getCategories();
 
