@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $username=$_GET["username"];
 $password=$_GET["password"];
 $email=$_GET["email"];
@@ -43,10 +46,10 @@ if ($rml["Email"] == $email){
 }
 
 if ($dcheck=="false") {
-$sql="INSERT INTO profil (Username,Password,Fullname,Avatar,Email) VALUES ('$username','$password','$name','$avatar','$email')";
+$sql="INSERT INTO profil (Username,Password,FullName,Avatar,TanggalLahir,Email) VALUES ('$username','$password','$name','$avatar','".$date."','$email')";
 
 $add=mysql_query($sql);
-
+$_SESSION['login'] = $username;
 echo "Accepted";
 }
 else {

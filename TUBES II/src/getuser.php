@@ -5,7 +5,7 @@ session_start();
 $q=$_GET["q"];
 $r=$_GET["r"];
 
-$check="false";
+$check="false";-
 
 $con = mysql_connect('localhost', 'progin', 'progin');
 if (!$con)

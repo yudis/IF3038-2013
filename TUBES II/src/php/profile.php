@@ -11,8 +11,8 @@
 
 <body>
 <div class="header">
-	<a href="dashboard.html"><img align="left" src="images/logo.png" width="150" height="50" />
-	<h6>Dashboard</a> | <a href="profile.html">Profile</a> | <a href="index.html">Logout</a>
+	<a href="dashboard.php"><img align="left" src="images/logo.png" width="150" height="50" />
+	<h6>Dashboard</a> | <a href="profile.php">Profile</a> | <a href="logout.php">Logout</a>
 	
    | Search: <input type="search">
   <input type="submit" value="GO">
@@ -22,42 +22,40 @@
 <center>
 <h1>Profile</h1>
 <img src="images/ava1.jpg" width="200" height="150" hspace="15" vspace="15" />
+<?php
+	$q = $_SESSION['login'];
 
-  <p>User : dekhangga</p>
-  <p>Password : *************</p>
-  <p>Nama Lengkap : Dekha Anggareska</p>
-  <p>Tanggal lahir : 30/01/1993</p>
-  <p>E-mail : danggareska@yahoo.com</p>
+	$con = mysql_connect('localhost', 'progin', 'progin');
+	if (!$con)
+	  {
+	  die('Could not connect: ' . mysql_error());
+	  }
+
+	mysql_select_db("progin", $con);
+
+$sql="SELECT * FROM profil WHERE Username = '".$q."'";
+
+$result = mysql_query($sql);
+
+while($row = mysql_fetch_array($result))
+  {
+  echo "<p>User :".$row['Username']; 
+	echo "</p>";
+		echo "<p>Nama Lengkap :".$row['FullName'];
+			echo "</p>";
+				echo "<p>Tanggal Lahir :".$row['TanggalLahir'];
+					echo "</p>";
+						echo "<p>E-mail :".$row['Email'];
+							echo "</p>";
+  }
+
+mysql_close($con);
+?>
   
   <form id="form1" name="form1" method="post" action="">
 	<input type="image" src="images/edit.png" name="image" ></input>
   </form>
 </center>  
-</div>
-<div class="assignment">
-  <p>Daftar Tugas :</p>
-	<div class="colmid">
-    <div class="colleft">
-        <div class="col1">
-            Mengerjakan tugas besar progin<br/>
-			Mengerjakan tugas besar IB<br/>
-			Futsal di Maranatha<br/>
-			Tidur di kosan
-        </div>
-        <div class="col2">
-            21/02/13<br/>
-			21/02/13<br/>
-			24/02/13<br/>
-			26/02/13
-        </div> 
-        <div class="col3">
-            <img src="images/cek.png" width="35" height="35" /><br/>
-			<img src="images/cek.png" width="35" height="35" /><br/>
-			<br/>
-			<br/>
-        </div> 
-    </div> 
-  </div>
 </div>
 </div>
 </body>

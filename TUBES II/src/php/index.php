@@ -14,6 +14,8 @@ var bln = document.getElementById("DMonth").value;
 var thn = document.getElementById("DYear").value;
 var ava = document.getElementById("DAvatar").value;
 
+alert(ava);
+
 if(newuser==""||newpass==""||newpassc==""||email==""||name==""||tgl==""||bln==""||thn==""||ava==""){
 alert ("semua field harus diisi !");
 }else
@@ -125,7 +127,11 @@ function checkLogin(response)
 		<p>Name: <input  id="DName" name="DName" type="text"></input></p>
 		<p>Tanggal Lahir: <select id="Day" ><option value="01">01</option><option value="02">02</option></select><select id="DMonth"><option value="01">01</option><option value="02">02</option></select><select id="DYear"><option value="1956">1956</option><option value="1957">1957</option></select></p>
 		<p>Alamat email: <input  id="DMail" name="DMail" type="text"></input></p>
-		<p>Avatar : <input type="file" id="DAvatar" name="DAvatar"></input></p>
+		<form action="upload.php" method="post" enctype="multipart/form-data">
+		<label for="file">Avatar :</label> 
+		<input type="file" id="file" name="file"></input>
+		<input id="signup" value="upload" type="submit" ></input>
+		</form>
 		<input id="signup" value="signup" type="submit" ></input>
 	</form>
     </div>
