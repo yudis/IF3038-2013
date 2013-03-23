@@ -23,6 +23,7 @@
 	$username = $row['username'];
 	$fullname = $row['full_name'];
 	$birthdate = $row['birthdate'];
+	$email = $row['email'];
 	
  ?>	
 
@@ -35,25 +36,27 @@
 			<h1>  Edit Profile </h1>
 			<form id="edit_profile_form" method="POST" action="submit_edit_profile.php" enctype="multipart/form-data">
 				<label> Username </label> <?php echo $username;?>
+				<input type="hidden" id="edit_username" value="<?php echo $username;?>">
+				<input type="hidden" id="edit_email" value="<?php echo $email;?>">
 				
 				<h2>Change Password</h2>
 				<label> New Password </label> 	
-				<input type="password" name="password" onkeypress="javascript:regCheck();" id="edit_password" title="Password should be at least 8 characters long" >
-				<img src="img/no.png" id="password_validation" class="signup_form_validation" alt="validation image">
+				<input type="password" name="password" onkeypress="javascript:editProfileCheck();" id="edit_password" title="Password should be at least 8 characters long" >
+				<img src="../img/no.png" id="password_validation" class="signup_form_validation" alt="validation image">
 				
 				<label> Confirm New Password </label> 	
-				<input type="password" name="password_confirm" onkeypress="javascript:regCheck();" id="edit_password_confirm" title="Confirmation password should be the same with Password" >
-				<img src="img/no.png" id="confirm_validation" class="signup_form_validation" alt="validation image">
+				<input type="password" name="password_confirm" onkeypress="javascript:editProfileCheck();" id="edit_password_confirm" title="Confirmation password should be the same with Password" >
+				<img src="../img/no.png" id="confirm_validation" class="signup_form_validation" alt="validation image">
 				<div class="clear"></div>
 				
 				<h2>Change Details</h2>
 				<label> Full Name </label> 
-				<input type="text" name="fullname" id="fullname" onkeypress="javascript:regCheck();" value="<?php echo $fullname; ?>" title="Your name should be at least consists first name and last name">
-				<img src="img/yes.png" id="name_validation" class="signup_form_validation" alt="validation image">
+				<input type="text" name="fullname" id="fullname" onkeypress="javascript:editProfileCheck();" value="<?php echo $fullname; ?>" title="Your name should be at least consists first name and last name">
+				<img src="../img/yes.png" id="name_validation" class="signup_form_validation" alt="validation image">
 				<br><label> Birthdate </label> <input type="date" id="birthdate" name="birthdate" value=<?php echo $birthdate;?>>  
 				<br><label> Avatar </label> <input type="file" id="avatar" name="avatar">
 				
-				<input type="submit" name="edit_profile_submit" class="link_red top10 bold" id="edit_profile_submit" value="SAVE">
+				<input type="submit" name="edit_profile_submit" class="link_red top10 bold" id="edit_profile_submit" value="SAVE" disabled="disabled">
 				
 			</form>
 			<!--<form enctype='multipart/form-data' name='avatarupload' action='submit_edit_profile.php' method='POST'>
