@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2013 at 05:56 AM
+-- Generation Time: Mar 23, 2013 at 07:08 AM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -18,7 +18,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `progin_405_13510011`
 --
-
 DROP DATABASE IF EXISTS `progin_405_13510011`;
 CREATE DATABASE `progin_405_13510011`;
 USE `progin_405_13510011`;
@@ -32,6 +31,7 @@ USE `progin_405_13510011`;
 CREATE TABLE IF NOT EXISTS `assignees` (
   `member` int(11) NOT NULL,
   `task` int(11) NOT NULL,
+  `finished` int(11) NOT NULL,
   PRIMARY KEY (`member`,`task`),
   KEY `task` (`task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -40,12 +40,12 @@ CREATE TABLE IF NOT EXISTS `assignees` (
 -- Dumping data for table `assignees`
 --
 
-INSERT INTO `assignees` (`member`, `task`) VALUES
-(1, 1),
-(2, 1),
-(3, 1),
-(2, 2),
-(1, 3);
+INSERT INTO `assignees` (`member`, `task`, `finished`) VALUES
+(1, 1, 1),
+(1, 3, 0),
+(2, 1, 1),
+(2, 2, 0),
+(3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -216,7 +216,6 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `timestamp` datetime NOT NULL,
   `deadline` datetime NOT NULL,
   `category` int(11) NOT NULL,
-  `done` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `creator` (`creator`),
   KEY `category` (`category`)
@@ -226,10 +225,10 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 -- Dumping data for table `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `name`, `creator`, `timestamp`, `deadline`, `category`, `done`) VALUES
-(1, 'Tubes 1', 1, '2013-02-20 10:50:49', '2013-02-25 22:00:00', 1, 1),
-(2, 'Tubes 2', 2, '2013-03-11 21:20:11', '2013-03-22 22:03:00', 1, 0),
-(3, 'Kencan dengan si "dia"', 1, '2013-02-20 21:21:53', '2013-02-24 20:00:00', 2, 1);
+INSERT INTO `tasks` (`id`, `name`, `creator`, `timestamp`, `deadline`, `category`) VALUES
+(1, 'Tubes 1', 1, '2013-02-20 10:50:49', '2013-02-25 22:00:00', 1),
+(2, 'Tubes 2', 2, '2013-03-11 21:20:11', '2013-03-22 22:03:00', 1),
+(3, 'Kencan dengan si "dia"', 1, '2013-02-20 21:21:53', '2013-02-24 20:00:00', 2);
 
 --
 -- Constraints for dumped tables
