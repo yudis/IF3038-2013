@@ -82,11 +82,12 @@ input.liusername{
 
 
 .listTugas {
-    width: 170px;
-    height: 205px;
+    width: 160px;
+    height: 191px;
     float: left;
-    background-image: url('img/tugas.png');
-    background-repeat: no-repeat
+    background-image: url('img/kertas.png');
+    background-repeat: no-repeat;
+    font-size:12px;
 }
 
 .listTugas:hover {
@@ -94,6 +95,7 @@ input.liusername{
     height: 205px;
     float: left;
     cursor: pointer;
+    font-size:14px;
 }
 
 .addTask {

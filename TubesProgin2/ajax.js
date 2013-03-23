@@ -18,6 +18,7 @@ function createObject() {
     return request_type;
 }
 
+var ab = 0;
 function logins() {
 
     var http = createObject();
@@ -44,47 +45,85 @@ function logins() {
 function showcat() {
 
     var cat = createObject();
-    
+
     cat.onreadystatechange = function() {
         if (cat.readyState == 4)
         {
             var response = cat.responseText;
             if (cat.responseText != "")
             {
-                document.getElementById("category").innerHTML="";
-                document.getElementById("category").innerHTML=response;
+                document.getElementById("category").innerHTML = "";
+                document.getElementById("category").innerHTML = response;
             }
         }
-        
+
     };
-    cat.open('get','listcat.php');
+    cat.open('get', 'listcat.php');
     cat.send(null);
 
 }
 
 function showTask(a) {
- var task = createObject();
-    
+    ab++;
+    var task = createObject();
+
     task.onreadystatechange = function() {
         if (task.readyState == 4)
         {
             var response = task.responseText;
             if (task.responseText != "")
             {
-                document.getElementById("listtugas").innerHTML="";
-                document.getElementById("listtugas").innerHTML=response;
+                document.getElementById("listtugas").innerHTML = "";
+                document.getElementById("listtugas").innerHTML = response;
             }
         }
-        
+
     };
-    task.open('get','listtask.php?category=' + a);
+    task.open('get', 'listtask.php?category=' + a);
     task.send(null);
+
+}
+function changeStatus(a, b, c) {
+    var checkbox = createObject();
+    checkbox.onreadystatechange = function() {
+        if (checkbox.readyState == 4)
+        {
+            var response = checkbox.responseText;
+
+            if (checkbox.responseText != "")
+            {
+                    if (response == "done") {   
+                    document.getElementById("checkedvalue" + c).innerHTML = "";
+                    document.getElementById("checkedvalue" + c).innerHTML = "undone";
+                }
+                else {
+                    document.getElementById("checkedvalue" + c).innerHTML = "";
+                    document.getElementById("checkedvalue" + c).innerHTML = "done";
+                }
+            }
+        }
+
+    };
+    
+
+    if (a.checked)
+    {
+        checkbox.open('get', 'changeStatus.php?IDTask=' + b + '&Status=undone');
+    }
+    else
+    {
+        checkbox.open('get', 'changeStatus.php?IDTask=' + b + '&Status=done');
+    }
+    checkbox.send(null);
 
 }
 
 function update() {
     showcat();
-    showTask();
+    if (ab > 0)
+    {
+        showTask();
+    }
 }
 
 setInterval(update(), 5000);
