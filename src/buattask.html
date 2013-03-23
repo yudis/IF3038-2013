@@ -24,7 +24,7 @@
                 
                 xmlhttp.onreadystatechange = function(){
                     if (xmlhttp.readyState==4 && xmlhttp.status == 200)	{
-                        alert(xmlhttp.responseText);
+                        //alert(xmlhttp.responseText);
                         if (xmlhttp.responseText == 1) {
                             document.getElementById("deadicon").src="pict/centang.png";
                         } else {
@@ -135,8 +135,13 @@
                 }
             }
             
-            function submit_edit(form) {
-                if () {
+            function add_tugas(form) {
+                var centang = window.location.href.substring(0,window.location.href.lastIndexOf("/")) + "/pict/centang.png";
+                //alert(centang);
+                if (document.getElementById("namaicon").src != centang 
+                    || document.getElementById("deadicon").src != centang
+                    || document.getElementById("asicon").src != centang) {
+                    //alert(document.getElementById("namaicon").src);
                     alert("Masukan ada yang belum benar");
                 } else {        
                     var xmlhttp;
@@ -147,24 +152,28 @@
                     }
                     
                     xmlhttp.onreadystatechange = function(){
-                        if (xmlhttp.readyState==4 && xmlhttp.status == 200)	{
-                            //alert(xmlhttp.responseText);
-                            if (xmlhttp.responseText == 1) {
-                                alert("Berhasil Membuat tugas baru");
-                            } else {
-                                alert("Gagal membuat tugas baru");
+                        if (xmlhttp.readyState==4) {
+                            //alert(xmlhttp.status);
+                            if (xmlhttp.status == 200)	{
+                                //alert(xmlhttp.responseText);
+                                if (xmlhttp.responseText == 1) {
+                                    alert("Berhasil Membuat tugas baru");
+                                } else {
+                                    alert("Gagal membuat tugas baru");
+                                }
                             }
                         }
                     }
 
                     var id_kategori = "-1";
                     if ((c = window.location.search.indexOf("id_kategori=")) != -1) {
-                        id_tugas = window.location.search.substring(c+9);
+                        id_kategori = window.location.search.substring(c+12);
                     }     
                     
                     params = "assignee="+escape(form.assignee.value)+"&tag="+escape(form.catname.value)+"&nama="+form.task_name.value;
                     params += "&id_kategori="+id_kategori+"&deadline=";
                     params += escape(form.year.value+"-"+form.month.value+"-"+form.day.value+" "+form.hour.value+":"+form.minute.value+":00");
+                    params += "&attachment="+document.getElementById("attach_upload").innerHTML;
                     
                     //alert(params);
                     xmlhttp.open("POST","buat_tugas.php",true);

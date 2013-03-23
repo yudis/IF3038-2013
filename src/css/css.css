@@ -30,7 +30,7 @@ body{
 }
 
 #logo{
-    background-image: url("pict/logo.png");
+    background-image: url("../pict/logo.png");
     height: 32px;
     width: 81px;
     margin-left: 40px;
@@ -193,7 +193,7 @@ input{
 
 /*FORM CSS*/
 html {
-	background: url('http://subtlepatterns.com/patterns/wood_pattern.png');
+	background: url('../pict/wood_pattern.png');
 	font-size: 10pt;
 }
 label {

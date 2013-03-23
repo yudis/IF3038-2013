@@ -289,6 +289,10 @@ input[type=checkbox] {
     -webkit-border-radius:10px;
 }
 
-#namaicon {
+#attach_upload a:visited {
+    color: purple;
+}
 
+#attach a:visited {
+    color: purple;
 }
