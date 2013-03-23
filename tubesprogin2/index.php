@@ -25,7 +25,7 @@ header( 'src/dashboard.php' );
 	
 		
 			<script src="js/ajaxlogin.js" language="javascript"></script>
-
+			<script src="js/registration.js" language="javascript"></script>
 				
 		<!-- Web Header -->
 		<header>
@@ -72,7 +72,7 @@ header( 'src/dashboard.php' );
 					Have No Account ? 
 				</div>
 				<div id="signup_form_container">
-					<form id="signup_form">
+					<form id="signup_form" action="javascript:register()" method="post">
 						<label> Username </label>	
 						<input type="text" name="username" onkeydown="javascript:regCheck();" id="reg_username" title="Username should be at least 5 characters long" required>
 						<img src="img/yes.png" id="username_validation" class="signup_form_validation" alt="validation image">
@@ -101,7 +101,7 @@ header( 'src/dashboard.php' );
 						<input type="file" onchange="javascript:regCheck();" name="avatar_upload" id="avatar_upload"> 
 						<img src="img/yes.png" id="avatar_validation" class="signup_form_validation" alt="validation image">
 						
-						<div id="signup_button_submit" onclick="javascript:signup();" class="right link_tosca top10 bold" title="Semua elemen form harus diisi dengan benar dahulu."> SIGN UP </div>
+						<div id="signup_button_submit" onclick="javascript:register();" class="right link_tosca top10 bold" title="Semua elemen form harus diisi dengan benar dahulu."> SIGN UP </div>
 					</form>
 				</div>
 			</div>
