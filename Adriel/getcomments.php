@@ -14,6 +14,7 @@
 	$result = mysqli_query($sql);
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
+		echo "<img src='avatar/".$user.".jpg' width='50' height='50' alt='Image not found'/>";
 		echo "<b>";
 		echo $row['writer'];
 		echo "</b> - ";
