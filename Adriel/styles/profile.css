@@ -9,6 +9,13 @@
 	font-weight: bold;
 }
 
+.rincianLabel2
+{
+	width: 20%;
+    display: inline-block;
+    vertical-align: text-top;
+}
+
 .edit_button_profile
 {
 	position: relative;

@@ -4,15 +4,16 @@ function initialize()
 {
 	if (typeof(Storage) !== 'undefined')
 	{
-		if (localstorage.session)
+		if (localStorage.session)
 		{
-			document.getElementById("linkusername").innerHTML = localstorage.session;
+			localStorage.clear();
+			/*document.getElementById("linkusername").innerHTML = localstorage.session;
 			document.getElementById("linkusername").href = "profile.html";
 			showFullName(localstorage.session);
 			showEmail(localstorage.session);
 			showDate(localstorage.session);
 			showPassword(localstorage.session);
-			showRePassword(localstorage.session);
+			showRePassword(localstorage.session);*/
 		}
 		else
 		{
