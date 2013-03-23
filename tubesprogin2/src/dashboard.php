@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+			include_once("../php/loginchecker.php");
+		?>
 <?php include '../php/fungsiget.php'?>
 <?php include '../php/getalltaskfordashboard.php'?>
 <?php include '../php/getassignee.php'?>
@@ -23,18 +26,17 @@
                 
 		<script type="text/javascript" src="../js/catselector.js"> </script> 	
                 <script type="text/javascript" src="../js/add_task.js"></script>
-                <script type="text/javascript" src="../js/fungsiget.js">
-                
+                <script type="text/javascript" src="../js/fungsiget.js"></script>
+                <script type="text/javascript" src="../js/fungsiget.js"></script>
+                <script type="text/javascript" src="../js/tampilprofile.js"></script>
+                <script type="text/javascript" src="../js/add_kategori.js"></script>
                 
                     
-                   <!-- var taskid = "<?php echo $last_idx; ?>";-->
-                   <!-- alert(taskid);-->
-                </script>
+                
                   <script type="text/javascript" src="../js/allkategori.js"></script>
                  <script type="text/javascript" src="../js/hapus.js"></script> 
                 
                 <script type="text/javascript" src="../js/edit_task.js"></script>
-				<script type="text/javascript" src="../js/search.js"></script>
              
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 		<title> Eurilys </title>
@@ -42,23 +44,10 @@
 
 	<body>
 		<!-- Web Header -->
-		<header>
-			<div id="header_container"> 
-				<div class="left">
-					<a href="dashboard.html"> <img src="../img/logo.png" alt=""> </a>
-				</div>
-				<form id="searchform" action="javascript:search()" method="post">
-				<input id="search_box" type="text" placeholder="search..."> <input id="search_type" type="text" placeholder="username/category/task"><br/>   <input type="submit" name="Submit" value="Search"/>
-				</form>
-				<div class="header_menu"> 
-					<div class="header_menu_button current_header_menu"> <a href="dashboard.html"> DASHBOARD </a>   </div>
-					<div class="header_menu_button">  <a href="../src/profile.php"> PROFILE </a> </div>
-					<div class="header_menu_button"> <a id="logout" href="../index.html"> LOGOUT </a> </div>
-				</div>
-				
-			</div>
-			<div class="thin_line"></div>
-		</header>	
+		<?php
+			include_once("header.php");
+		?>
+		
 	
 		
 		<!-- Web Content -->

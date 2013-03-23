@@ -27,10 +27,13 @@ function add_category(){
                           alert(response);
                        var result = eval('('+xmlhttp.responseText+')');
                        var container = document.getElementById('category_item');
-                       
+                       container.innerHTML='';
+                       for(var i=0;i<2;i++){
                          container.innerHTML = container.innerHTML+'<li><a href="#" onclick="get_taskkategorijs('+result[i]['cat_name']+')" >' +result[i]['cat_name']+'</a>'+
                                                             '<img src="../img/no.png" id="del_cat" onclick="deletecat('+result[i]['cat_name']+')" class="task_done_button" alt="" />'+
-                                                        '</li>';
+                                                        '</li>';  
+                       }
+                         
                        
                          
                             

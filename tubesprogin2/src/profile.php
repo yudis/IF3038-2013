@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<?php include '../php/datapengguna.php?t='+"ruth",true?>
 <?php
-$datauser = datapengguna();
+include_once("../php/loginchecker.php");
 ?>
+<?php
+
+if(isset($_SESSION['uname'])){
+    $username = $_SESSION['uname'];
+    print_r("session sekarang usernya".$username);
+}
+?>
+
+<?php include '../php/datapengguna.php'?>
+
 <html>
 	
 	<head>
@@ -12,33 +21,25 @@ $datauser = datapengguna();
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 		<title> Eurilys </title>
 	</head>
-	
+<?php
+$datauser = datapengguna($username);
+
+?>
 	<body>
 		<!-- Web Header -->
-		<header>
-			<div id="header_container"> 
-				<div class="left">
-					<a href="dashboard.html"> <img src="../img/logo.png" alt=""> </a>
-				</div>
-				<input id="search_box" type="text" placeholder="search...">
-				<div class="header_menu"> 
-					<div class="header_menu_button"> <a href="dashboard.html"> DASHBOARD </a>  </div>
-					<div class="header_menu_button current_header_menu"> PROFILE </div>
-					<div class="header_menu_button"> <a id="logout" href="../index.html"> LOGOUT </a> </div>
-				</div>
-				
-			</div>
-			<div class="thin_line"></div>
-		</header>	
-	
+		<?php
+			include_once("header.php");
+		?>
+		
 		
 		<!-- Web Content -->
-		<section>
+                <?php foreach($datauser as $eachdata){?>
+                     <section>
 			<div id="navbar">
 				<div id="short_profile">
-					<img id="profile_picture" src="../file/<?php echo $datauser['avatar']?>" alt="">
+					<img id="profile_picture" src="../file/<?php echo $eachdata['avatar']?>" alt="">
 					<div id="profile_info">
-						<?php echo $datauser['full_name']?>
+						<?php echo $eachdata['fullname']?>
 						<br><br>
 						<div class="link_tosca" id="edit_profile_button"> Edit Profile </div>
 					</div> 
@@ -68,16 +69,16 @@ $datauser = datapengguna();
 			<div id="dynamic_content">
 				<div class="half_div">
 					<div id="upperprof">
-						<img src="../file/<?php echo $datauser['avatar']?>" alt="">
-						<div id="namauser"><?php echo $datauser['full_name']?></div>
+						<img src="../file/<?php echo $eachdata['avatar']?>" alt="">
+						<div id="namauser"><?php echo $eachdata['full_name']?></div>
 					</div>
 					
 					<br/>
-                                       Username :<?php echo $datauser['username']?>
+                                       Username :<?php echo $eachdata['username']?>
                                         <br>
-					Email : <?php echo $datauser['email']?>
+					Email : <?php echo $eachdata['email']?>
 					<br>
-					Birthdate : <?php echo $datauser['birthdate']?>
+					Birthdate : <?php echo $eachdata['birthdate']?>
 
 				</div>
 				<div class="half_div">
@@ -100,6 +101,8 @@ $datauser = datapengguna();
 				
 			</div>
 		</section>
+                <?php }?>
+               
 		
 		<!-- Footer Section -->
 		<div class="thin_line"></div>

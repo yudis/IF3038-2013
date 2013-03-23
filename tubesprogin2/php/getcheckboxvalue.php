@@ -12,7 +12,7 @@ $namatask = $_GET["t"];
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }
  // echo "udah ampe sini";
-     $sql = "SELECT checkbox FROM task WHERE task_name='$namatask'";
+     $sql = "SELECT checkbox FROM task WHERE task_name=.$namatask.";
     if (!mysqli_query($con,$sql))
         {
              die('Error: ' . mysqli_error());

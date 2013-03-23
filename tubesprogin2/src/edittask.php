@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <?php
-			include_once("../php/loginchecker.php");
-		?>
+    include_once("../php/loginchecker.php");
+?>
 <?php include '../php/fungsiget.php'?>
-	<?php
+<?php
       $kategori = get_allkategoriphp();
       print_r($kategori);
+  
+      $taskname = $_GET["t"];
     //$all_task = get_alltaskphp();
     ?>
 <html>
@@ -19,6 +21,7 @@
 		<script type="text/javascript" src="../js/animation.js"> </script>
 		<script type="text/javascript" src="../js/catselector.js"> </script> 	
                 <script type="text/javascript" src="../js/add_task.js"></script>
+                <script type="text/javascript" src="../js/edit_task2.js"></script>
                 <script type="text/javascript" src="../js/fungsiget.js">
                     
                    <!-- var taskid = "<?php echo $last_idx; ?>";-->
@@ -33,7 +36,8 @@
 		<?php
 			include_once("header.php");
 		?>
-		
+
+	
 		
 		<!-- Web Content -->
 		<section>
@@ -83,7 +87,9 @@
                             <form >
 				<div id="add_task_container">
 					<div id="add_task_header" class="left top30 dynamic_content_head">
-						Add New Task
+						Edit Task  <?php echo $taskname?>
+                                                
+                                             
 					</div>
 			
 					<div id="row1_addtask" class="left top30 dynamic_content_row">
@@ -124,7 +130,7 @@
 					</div>
 					
 					<div id="row6_addtask" class="left top10 dynamic_content_row">
-						<input id="add_task_button" type="button" onclick="add_task()" value="Add Task" class="link_blue_rect">
+						<input id="add_task_button" type="button" onclick="ubah_detail_task('<?php echo $taskname?>')" value="Save Task" class="link_blue_rect">
 					</div>
 				</div>
                             </form>

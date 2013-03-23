@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+			include_once("../php/loginchecker.php");
+		?>
 <html>
 	<head>
 		<link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
@@ -11,22 +14,10 @@
 	
 	<body>
 		<!-- Web Header -->
-		<header>
-			<div id="header_container"> 
-				<div class="left">
-					<a href="dashboard.html"> <img src="../img/logo.png" alt=""> </a>
-				</div>
-				<input id="search_box" type="text" placeholder="search...">
-				<div class="header_menu"> 
-					<div class="header_menu_button current_header_menu"> <a href="dashboard.html"> DASHBOARD </a>  </div>
-					<div class="header_menu_button">  <a href="profile.html"> PROFILE </a> </div>
-					<div class="header_menu_button"> <a id="logout" href="../index.html"> LOGOUT </a> </div>
-				</div>
-				
-			</div>
-			<div class="thin_line"></div>
-		</header>
-
+		<?php
+			include_once("header.php");
+		?>
+		
 		<!-- Web Content -->
 		<section>
 			<div id="navbar">

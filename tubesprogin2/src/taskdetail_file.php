@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+	<?php
+			include_once("../php/loginchecker.php");
+		?>
+	
 <?php include '../php/fungsiget.php'?>
 <?php include '../php/getnewtaskdetail.php'?>
 	<?php
@@ -18,31 +22,20 @@
 		<script type="text/javascript" src="../js/catselector.js"> </script> 	
                 <script type="text/javascript" src="../js/add_task.js"></script>
                 <script type="text/javascript" src="../js/fungsiget.js">
-                    
+                   
                    <!-- var taskid = "<?php echo $last_idx; ?>";-->
                    <!-- alert(taskid);-->
                 </script>
+                <script type="text/javascript" src="../js/edit_task2.js"></script>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 		<title> Eurilys </title>
 	</head>
 
 	<body>
 		<!-- Web Header -->
-		<header>
-			<div id="header_container"> 
-				<div class="left">
-					<a href="dashboard.html"> <img src="../img/logo.png" alt=""> </a>
-				</div>
-				<input id="search_box" type="text" placeholder="search...">
-				<div class="header_menu"> 
-					<div class="header_menu_button current_header_menu"> <a href="dashboard.html"> DASHBOARD </a>   </div>
-					<div class="header_menu_button">  <a href="profile.html"> PROFILE </a> </div>
-					<div class="header_menu_button"> <a id="logout" href="../index.html"> LOGOUT </a> </div>
-				</div>
-				
-			</div>
-			<div class="thin_line"></div>
-		</header>	
+		<?php
+			include_once("header.php");
+		?>
 	
 		
 		<!-- Web Content -->
@@ -103,7 +96,7 @@
 				</div>
 				
 				<input id="edit_task_button" class="left top30 link_blue_rect" 
-					onclick="edit_task()" type="button" value="Edit Task" />
+					onclick="edit_task2('<?php echo $tm ?>')" type="button" value="Edit Task" />
 				
 				
 				<input id="save_button_td" class="left top30 link_blue_rect" 

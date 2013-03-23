@@ -75,7 +75,7 @@ function add_task(){
                          var result = eval('('+xmlhttp.responseText+')');
                          alert (result['last_idx']);
                         newtaskdetail(result['last_idx']);    
-                       // window.location.href= "../src/getnewtaskdetail.php?id="+result.last_idx;               
+                      window.location.href= "../src/getnewtaskdetail.php?id="+result.last_idx;               
                     }else{
                             
                     }

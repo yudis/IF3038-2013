@@ -23,7 +23,7 @@ $getUser_RecordCount = mysql_num_rows($getUser);
 if($getUser_RecordCount < 1){ echo '0';} 
 else { echo $getUser_result['username'];
 		session_start();
-		$_SESSION['uname']='username';
+		$_SESSION['uname']=$uname;
 		$_SESSION['loggedin']=1;}
 }
 

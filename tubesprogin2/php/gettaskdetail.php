@@ -22,7 +22,7 @@
     $i = 0;
         // echo "<html><body>";
 
-
+    
     while ($row = mysqli_fetch_array($result)) {
             //echo "row ".$i;
             //print_r($row);
@@ -33,5 +33,7 @@
        /* foreach ($res as $row) {
             echo($row['KATEGORI_TASK']);
         }*/
+    
+ 
   echo json_encode($res);
 ?>
