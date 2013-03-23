@@ -10,9 +10,6 @@ and open the template in the editor.
 session_start();
 
 // Check, if username session is NOT set then this page will jump to login page
-if (!isset($_SESSION['username'])) {
-header('Location: index.php');
-}
 
 ?>
 <html>
@@ -31,7 +28,7 @@ header('Location: index.php');
     
     if(connectDB()){
             
-            $queryProfile = "SELECT* FROM user WHERE Username='".$_SESSION['username']."'";
+            $queryProfile = "SELECT* FROM user WHERE Username='".$_COOKIE['UserLogin']."'";
             $result = mysql_query($queryProfile);
             $data = mysql_fetch_array($result);
             $uname= $data['Username'];
