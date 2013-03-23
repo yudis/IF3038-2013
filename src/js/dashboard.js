@@ -60,6 +60,17 @@ Rp(function()
 		deadlineP.append(deadlineContentSpan);
 		detailsDiv.append(deadlineP).append(tagsP);
 
+		if (task.deletable) {
+			delP = Rp.factory('p').addClass('delete');
+			delA = Rp.factory('a')
+			.attr('data-task-id', task.id)
+			.prop('href', 'delete.php?task_id=' + task.id)
+			.text('delete');
+			delA.on('click', deleteTask);
+			delP.append(delA);
+			detailsDiv.append(delP);
+		}
+
 		article.append(header).append(detailsDiv);	
 		return article;
 	}
@@ -312,8 +323,12 @@ Rp(function()
 		loadCategory(currentCat);
 	});
 
-	deleteTask = function(id) {
-		Rp('article[data-task-id=' + id + ']').addClass('loading');
+	deleteTask = function(e) {
+		e.preventDefault();
+		id = this.getAttribute('data-task-id');
+		Rp('#task' + id).addClass('loading');
 		delreq.post('task_id=' + parseInt(id));
 	}
+
+	Rp('p.delete a').on('click', deleteTask);
 });

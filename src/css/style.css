@@ -466,6 +466,21 @@ ul.suggestions li:hover b {
 .task .details .tags {
 	margin-left: 10px;
 }
+.task .delete a {
+	font-size: 12px;
+	color: #a00;
+	background: #ccc;
+	padding: 2px 4px;
+	border-radius: 3px;
+}
+.task .delete a:hover {
+	font-size: 12px;
+	color: #fff;
+	background: #a00;
+	padding: 2px 4px;
+	border-radius: 3px;
+	text-decoration: none;
+}
 .completed.tasks .task a {
 	text-decoration: line-through;
 }

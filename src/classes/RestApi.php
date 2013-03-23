@@ -180,6 +180,8 @@ class RestApi
 			$dl = new DateTime($task->deadline);
 			$dummy->deadline = $dl->format('j F Y');
 
+			$dummy->deletable = $task->getDeletable($this->app->currentUserId);
+
 			$tags = $task->getTags();
 			$dummy->tags = array();
 			foreach ($tags as $tag) {
