@@ -1,6 +1,8 @@
 var Day = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 var Mon = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Des"];
 
+var id_task = document.getElementById("id_task").value;
+
 Rp(function() 
 {
 	function buildcomment(comment)
@@ -37,7 +39,6 @@ Rp(function()
 	
 	function retrievecomment()
 	{
-		var id_task = document.getElementById("id_task").value;
 		var req = Rp.ajaxRequest();
 		req.onreadystatechange = function() {
 			switch (req.readyState) {
@@ -64,6 +65,35 @@ Rp(function()
 			}
 		}
 		req.get('api/retrieve_comments?id_task=' + id_task+"&timestamp="+timestamp);
+	}
+	
+	var delete_task = document.getElementById("removeTaskLink");
+	delete_task.onclick = function()
+	{
+		var serialized = "task_id="+id_task;
+		var req = Rp.ajaxRequest('api/delete_task');
+		req.onreadystatechange = function() {
+			switch (req.readyState) {
+				case 1:
+				case 2:
+				case 3:
+					break;
+				case 4:
+					try {
+						response = Rp.parseJSON(req.responseText);
+						if (response.success)
+						{
+							window.location = "dashboard";
+						}
+					}
+					catch (e) {
+
+					}
+					break;
+			}
+		}
+		req.post(serialized);
+		return false;
 	}
 	
 	Rp('#commentForm').on('submit', function(e) 
@@ -172,7 +202,6 @@ function prepend_comment(comment)
 
 function more_comment()
 {
-	var id_task = document.getElementById("id_task").value;
 	var req = Rp.ajaxRequest();
 	req.onreadystatechange = function() {
 		switch (req.readyState) {

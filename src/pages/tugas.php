@@ -38,6 +38,10 @@
 					</form>
 
 					<ul>
+						<?php
+							if ($task->getDeletable($this->currentUserId))
+								echo '<li><a href="#" id="removeTaskLink">Remove Task</a></li>';
+						?>
 						<li><a href="#" id="editTaskLink">Edit Task</a></li>
 					</ul>
 				</header>
