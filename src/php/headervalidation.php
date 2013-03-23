@@ -25,14 +25,15 @@ if(strcmp($idx,"1")==0){
 		echo $row['taskname']."|";
 	}
 }else if(strcmp($idx,"2")==0){
-	if(filter=="0"){
+	$query = "";
+	if(strcmp($filterelmt,"1") == 0){
 		$query = "SELECT username FROM user WHERE username LIKE '%$content%'";
-	}else if(filter=="1"){
-		$query = "SELECT username FROM user WHERE username LIKE '%$content%'";
-	}else if(filter=="2"){
-		$query = "SELECT username FROM user WHERE username LIKE '%$content%'";
-	}else if(filter=="3"){
-		$query = "SELECT username FROM user WHERE username LIKE '%$content%'";
+	}else if(strcmp($filterelmt,"2") == 0){
+		$query = "SELECT email FROM user WHERE email LIKE '%$content%'";
+	}else if(strcmp($filterelmt,"3") == 0){
+		$query = "SELECT fullname FROM user WHERE fullname LIKE '%$content%'";
+	}else if(strcmp($filterelmt,"4") == 0){
+		$query = "SELECT birthday FROM user WHERE birthday LIKE '%$content%'";
 	}
 	
 	$result = mysqli_query($con,$query);

@@ -1,14 +1,15 @@
 <?php
-$newava = $_GET['newava'];
-$userid = $_GET['userid'];
+require('init_function.php');
+$username = $_GET['username'];
 
-$file = $newava;
-$extension = end(explode(".", $file));
-$newfile = "../avatar/$userid.".$extension;
+$deletedfile = "../avatar/".getAvatar($username);
+unlink($deletfile);
 
-if (!copy($file, $newfile)) {
-    echo "failed to copy $file...\n";
-}else{
-	echo $newava."ad".$userid;
-}
+$file = $_FILES['changeAvatar'];
+$filename = $file['name'];
+$extension = end(explode(".", $filename));
+$avatarname = $username.".".$extension;
+upload_avatar($file,$username);
+
+header("Location: ../page/profile.php?username=$username");
 ?>
