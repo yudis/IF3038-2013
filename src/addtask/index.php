@@ -3,7 +3,8 @@
 		<title>Shared To Do List - Add Task</title>
 		<link rel="stylesheet" type="text/css" href="../style.css">
 		<link rel="shortcut icon" href="favicon.ico">
-		<script type="text/javascript" src="../validation.js"></script>	
+		<script type="text/javascript" src="../validation.js"></script>		
+		<script type="text/javascript" src="addtaskcontroller.js"></script>	
 		<script type="text/javascript" src="../mpquery.js"></script>
 	</head>
 	<body>

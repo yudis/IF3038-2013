@@ -1,9 +1,9 @@
 <html>
 	<head>
 		<title>Shared To Do List - Task Details</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="../style.css">
 		<link rel="shortcut icon" href="favicon.ico">
-		<script type="text/javascript" src="validation.js"></script>
+		<script type="text/javascript" src="../validation.js"></script>
 		<script type="text/javascript" src="comment.js"></script>
 		<script type="text/javascript" src="listOfComments.js"></script>
 		
@@ -11,11 +11,11 @@
 	<body>
 		
 		<div id="navigation">
-			<img src="images/logo.gif">
-			<a href="dashboard.php">DASHBOARD</a>
-			<a href="profile.php">PROFILE</a>
+			<img>
+			<a href="../dashboard.php">DASHBOARD</a>
+			<a href="../profile.php">PROFILE</a>
 			<a href="#" onclick="toggleSearch()">SEARCH</a>
-			<a href="index.php">LOGOUT</a>			
+			<a href="../index.php">LOGOUT</a>			
 		</div>
 		<div id="search">
 			<input type="text" size="50%">
