@@ -1,35 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Todolist: Create Tugas</title>
-        <link rel="stylesheet" type="text/css" href="styles/default.css" />
-        <link rel="stylesheet" type="text/css" href="styles/mediaqueries.css" />
-        <script src="scripts/formtugas.js" type="application/javascript"></script>
-        <script src="scripts/tugas.js" type="application/javascript"></script>
-        <script src="scripts/createtugas.js" type="application/javascript"></script>
-		
-    </head>
-    <body>
-        <div class="page">
-            <header class="content">
-                <nav>
-                    <div class="logo"><a href="dashboard.html"><img alt="Home" src="images/logo.png" /></a></div>
-                    <ul>
-                        <li><div><a href="dashboard.html">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="index.html">Logout</a></div></li>
-                    </ul>
-                    <div class="search">
-                        <div id="searchwrapper">
-                            <form action="#">
-                                <input type="text" class="searchbox" name="q" value="" placeholder="Enter task name here.." />
-                                <input type="image" src="images/search.png" name="sumbit" class="searchbox_submit" alt="search..."/>
-                            </form>
-                        </div>
-                    </div>
-                </nav>
-            </header>
-            <div class ="content">
+<?php include './includes/header.inc.php' ?>
                 <h1>Buat Tugas Baru</h1>
                 <div class="formtugas">
                     <form name="formTugas1"  method="post" enctype="multipart/form-data" action="create.php">
@@ -91,11 +60,4 @@
                         </ul>
                     </form>
                 </div>
-            </div>
-            <footer class="content">
-                This website is created solely for the purpose of fulfilling our college task.<br />
-                IF3094 - Pemrograman Internet.
-            </footer>
-        </div>
-    </body>
-</html>
+            <?php include './includes/footer.inc.php' ?>
