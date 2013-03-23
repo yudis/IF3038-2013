@@ -100,8 +100,9 @@
 						$rowtask2[] = $rowtask;
 						$taskname=$rowtask['task_name'];
 						$taskstatus=$rowtask['task_status'];
+						$taskID=$rowtask['task_id'];
 						if ($taskstatus==0) {
-							echo "$taskname </br>";
+							echo "<div onclick='javascript:viewTask(\"$taskID\")'>$taskname</div></br>";
 						}
 					}
 					?>
@@ -112,8 +113,9 @@
 					foreach($rowtask2 as $rowtask){
   						$taskname=$rowtask['task_name'];
 						$taskstatus=$rowtask['task_status'];
+						$taskID=$rowtask['task_id'];
 						if ($taskstatus==1){
-							echo "$taskname </br>";
+							echo "<div onclick='javascript:viewTask(\"$taskID\")'>$taskname</div></br>";
 						}
 					}
 					?>

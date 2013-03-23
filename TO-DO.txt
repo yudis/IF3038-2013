@@ -1,7 +1,6 @@
 Nunu : 
-	- edit Profil 			-belum edit ke database
-							-validasi belum jalan
-	- Halaman Profil 		-task dan foto belum
+	- edit Profil		//validasi belum jalan, processing foto belum
+	- Halaman Profil	//foto belum, task blm ada linknya
 	- Login			// Done
 	
 Kania : 
