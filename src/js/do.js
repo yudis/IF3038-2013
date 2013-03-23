@@ -251,6 +251,22 @@ Rp(function() {
 		xmlhttp.open("GET","core/search.php?q="+q+"&mode=5&autocomplete=1",true);
 		xmlhttp.send();
 	};
+	
+	tag_autocomplete = function(field) {
+		q = field.value;
+		xmlhttp=new XMLHttpRequest();
+		xmlhttp.onreadystatechange=function() {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				var parsedJSON = eval('('+xmlhttp.responseText+')');
+				document.getElementById("suggestion").innerHTML = "";
+				for (index=0; index < parsedJSON.length; index++) {
+					document.getElementById("suggestion").innerHTML += '<option value="'+parsedJSON[index].q+'">\n'
+				}
+			}
+		}
+		xmlhttp.open("GET","core/search.php?q="+q+"&mode=6&autocomplete=1",true);
+		xmlhttp.send();
+	};
 
 	Rp('#more_assignee').on('click', function(e) {
 		e.preventDefault();
@@ -338,7 +354,7 @@ Rp(function() {
 			Rp('#current-task').show();
 		}
 		else {
-			Rp('#editTaskLink').nodes[0].innerHTML = 'Save';
+			Rp('#editTaskLink').nodes[0].innerHTML = 'View Task';
 			Rp('#editTaskLink').addClass('editing');
 			Rp('#current-task').hide();
 			Rp('#edit-task').nodes[0].style.display = 'block';
@@ -365,6 +381,30 @@ Rp(function() {
 	});
 	
 });
+
+function updateTask(mode,task_id){
+	if (mode == "deadline") {
+		value = Rp('#deadline').val();
+	}
+	if (mode == "addassignee") {
+		value = Rp('#addassignee').val();
+	}
+	if (mode == "addtag") {
+		value = Rp('#addtag').val();
+	}
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","core/updateTask.php",false);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send("task_id="+task_id+"&mode="+mode+"&value="+value);
+}
+
+function removeElement(mode,field,task_id,id){
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","core/updateTask.php",false);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send("task_id="+task_id+"&mode="+mode+"&value="+id);
+	field.outerHTML = "";
+}
 
 function negateTask(task_id){
 	xmlhttp=new XMLHttpRequest();

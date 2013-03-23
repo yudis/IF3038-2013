@@ -40,17 +40,17 @@ v	Getter by user
 v		AND filter by category using ajax
 v	Setter done
 v	Deleter
-	New Task
-		hanya muncul jika ada kategori yang sedang disorot
+v	New Task
+v		hanya muncul jika ada kategori yang sedang disorot
 	
 CATEGORY (MODEL)
 v	Getter by user
-	New Category
-		nama kategori
-		daftar pengguna yang bisa mengubah
-	Deleter
-		hanya bisa dihapus oleh pembuatnya
-	User lain dapat menambah/mengurangi tugas dalam category
+v	New Category
+v		nama kategori
+v		daftar pengguna yang bisa mengubah
+v	Deleter
+v		hanya bisa dihapus oleh pembuatnya
+v	User lain dapat menambah/mengurangi tugas dalam category
 	
 SEARCH RESULT
 v	tampilan mirip halaman dashboard
@@ -93,18 +93,18 @@ v		input komentar
 v			update via ajax
 v			distore ke database, lalu ditambahin
 v		tags
-	tombol edit task
-		mengubah assignee
-			penambahan dan autocomplete per ketikan keyboard
-			menghapus assignee
-		mengubah tanggal deadline
-		mengubah tag (pake autocomplete)
-			menambah
+v	tombol edit task
+v		mengubah assignee
+v			penambahan dan autocomplete per ketikan keyboard
+v			menghapus assignee
+v		mengubah tanggal deadline
+v		mengubah tag (pake autocomplete)
+v			menambah
 			mengedit
-			menghapus
-		menghapus task
-			bisa sama creator atau assignee
-		realtime edit pake ajax
+v			menghapus
+v		menghapus task
+v			bisa sama creator atau assignee
+v		realtime edit pake ajax
 			
 HALAMAN PEMBUATAN TUGAS
 	nama tugas

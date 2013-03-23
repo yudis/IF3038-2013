@@ -3,8 +3,10 @@
 	$login_permission = 1;
 	include 'inc/header.php';
 	if (!isset($_GET['task_id']))
-		die('Task ID Not Found !');
+		header('Location: dashboard.php');
 	$tugas = query('select * from task where task_id = :task_id',array('task_id' => $_GET['task_id']));
+	if (!$tugas)
+		header('Location: dashboard.php');
 ?>
 		<script>
 			window.onload=function(){_task_id = <?php echo $tugas['task_id']; ?>; localStorage.user_id = <?php echo getUserID(); ?>; refreshComment(_task_id,1);};
@@ -20,10 +22,13 @@
 							</label>
 						</h1>
 					</form>
-
+					<?php 
+					$isPermit = query("select user_id from task where task_id = :task_id and user_id = :user_id union select user_id from assign where task_id = :task_id and user_id = :user_id",array('user_id' => getUserId(), 'task_id' => $_GET['task_id']));
+					if($isPermit['user_id']) :?>
 					<ul>
 						<li><a href="#" id="editTaskLink">Edit Task</a></li>
 					</ul>
+					<?php endif; ?>
 				</header>
 				<div id="current-task">
 					<section class="details">
@@ -87,27 +92,53 @@
 					</section>
 				</div>
 				<div id="edit-task">
+					<?php if ($tugas['user_id'] == getUserId()) :?>
 					<form id="new_tugas" action="#" method="post">
-						<div class="field">
-							<label>Task Name</label>
-							<input size="30" maxlength="25" name="nama" id="nama" type="text">
-						</div>
+						<datalist id="suggestion">
+						</datalist>
 						<div class="field">
 							<label>Deadline</label>
 							<input size="30" name="deadline" id="deadline" type="date">
+							<div class="buttons">
+								<button onclick="updateTask('deadline',<?php echo $_GET['task_id']; ?>);">Save Deadline</button>
+							</div><br>&nbsp;
 						</div>
 						<div class="field">
 							<label>Assignee</label>
-							<input size="30" name="assignee" id="assignee" type="text">
+							<input size="30" name="assignee" id="addassignee" type="text" onkeyup="assignee_autocomplete(this)" list="suggestion">
+							<div class="buttons">
+								<button onclick="updateTask('addassignee',<?php echo $_GET['task_id']; ?>);">Add Assignee</button>
+							</div>
+							<?php $assignees = queryAll('select * from assign where task_id = :task_id',array('task_id' => $_GET['task_id']));
+							if ($assignees) : ?><br><label>click to delete</label>
+								<?php foreach($assignees as $assignee):?>
+									<span class="detail-content names" onclick="removeElement('delassignee',this,<?php echo $_GET['task_id']; ?>,<?php echo $assignee['id'];?>)"><?php echo getUserName($assignee['user_id']) ?></span>
+								<?php endforeach; ?>
+								<br>&nbsp;
+							<?php endif; ?>
 						</div>
 						<div class="field">
 							<label>Tag</label>
-							<input size="30" name="tag" id="tag" type="text">
+							<input size="30" name="tag" id="addtag" type="text" onkeyup="tag_autocomplete(this)" list="suggestion">
+							<div class="buttons">
+								<button onclick="updateTask('addtag',<?php echo $_GET['task_id']; ?>);">Add Tag</button>
+							</div>
+							<?php $tags = queryAll('select * from tags where task_id = :task_id',array('task_id' => $_GET['task_id']));
+							if ($tags) : ?><br><label>click to delete</label>
+								<?php foreach($tags as $tag):?>
+									<span class="tag" onclick="removeElement('deltag',this,<?php echo $_GET['task_id']; ?>,<?php echo $tag['id'];?>)"><?php echo getTagName($tag['tag_id']) ?></span>
+								<?php endforeach; ?>
+								<br>&nbsp;
+							<?php endif; ?>
 						</div>
 						<div class="buttons">
-							<button type="submit">Save</button>
+							<?php endif; ?>
+							<button onclick="deleteTask(<?php echo $_GET['task_id']; ?>);">Delete Task</button>
+					<?php if ($tugas['user_id'] == getUserId()) :?>
+							<br>
 						</div>
 					</form>
+					<?php endif;?>
 				</div>
 				<section class="comments">
 					<header>
