@@ -1,5 +1,5 @@
 <html>
-    <head>
+
         <title> Next | Task Detail </title>
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/buattask.css">
@@ -419,49 +419,18 @@
 				xmlhttp.send(params);
             }
         </script>
-    </head>
-    <body onload="take_data(),jumlah_komentar()">
-        <!-------------------------------HEADER HALAMAN------------------------------------->    
-        <div class="header">
-            <div id="logo">
-                <a hreg="dashboard.php">
-                <img src="pict/logo.png">
-                </a>
-            </div>
-            <div id="border">
-                
-            </div>
-            <div id="dashboard">
-                <a href="dashboard.php">DASHBOARD</a>
-            </div>
-            <div id="profile">
-                <a href="profile.php">PROFILE</a>
-            </div>
-            <div id="search">
-				<section class="searchform cf">
-					<input class="searchbox" type="search" name="search" placeholder="Search.." required>
-					
-				</section>
-				<section class="searchbuttonbox cf">
-					<img class="searchbutton"src="pict/search button.jpg">
-				</section>
-				
-			</div>
-            <div id="wellfaiz">
-                
-            </div>
-            <div id="logout">
-                <a href="index.php">LOGOUT</a>
-            </div>
-        </div>
+
+<?php include 'header.php'; ?>
+
+    <body onLoad="take_data(),jumlah_komentar();showUserLogin();">
         
         <!-------------------------------BODY HALAMAN------------------------------------->
         <div class="main">
-            <div id="edit" onclick="showEdit()">
+            <div id="edit" onClick="showEdit()">
             </div>
             <div>
                 <form>
-                    <input type="button" id="back" value="" onclick="location.href='dashboard.php'">
+                    <input type="button" id="back" value="" onClick="location.href='dashboard.php'">
                 </form>
             </div>
 
@@ -480,11 +449,11 @@
                 </div>
                 <div id="paginasi_komentar">
                     <form name="form_paginasi">
-                        <input class="submitreg" name="prev" type="button" onclick="ubah_hal(-1)" value=" < prev">
+                        <input class="submitreg" name="prev" type="button" onClick="ubah_hal(-1)" value=" < prev">
                         <input type="text" id="halaman_komentar" disabled></input>
                         /
                         <input type="text" id="max_komentar" disabled></input>
-                        <input class="submitreg" name="next" type="button" onclick="ubah_hal(1)" value="next > ">
+                        <input class="submitreg" name="next" type="button" onClick="ubah_hal(1)" value="next > ">
                     </form>
                 </div>
                 <div id="submitkomen">                
@@ -495,7 +464,7 @@
                                 this.value = this.value.replace('\n','');
                                 submit_comment(this.form);
                             }"></textarea>
-                        <input class= "submitreg" name="submit" type="button" onclick="submit_comment(this.form)" value="Submit">
+                        <input class= "submitreg" name="submit" type="button" onClick="submit_comment(this.form)" value="Submit">
                     </form>
                 </div>
             </div>

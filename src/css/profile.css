@@ -1,5 +1,5 @@
 /*=========================PROFILE=============*/
-.profheader{
+#profheader{
     width: 374px;
     height: 570px;
     background-image: url("../pict/bgprof.png");
@@ -55,32 +55,32 @@
     background-color: #000000;
 }
 /*=======================================================*/
-.profil1Form {
+#profil1Form {
     margin-top: -530px;
 	margin-left: 580px;
 }
-.profil1Form ul {
+#profil1Form ul {
 	list-style-type:none;
 	padding: 0;
 	margin: 0;
 	margin-top:-6px;
 }
-.profil1Form li {
+#profil1Form li {
 	margin-top:6px;
 }
-.profil2Form {
+#tugas_selesai {
     margin-top: -432px;
 	margin-left: 845px;
 }
 
 
-.profil2Form ul {
+#tugas_selesai ul {
 	list-style-type:none;
 	padding: 0;
 	margin: 0;
 	margin-top:-6px;
 }
-.profil2Form li {
+#tugas_selesai li {
 	margin-top:6px;
 }
 .listProfilbox{

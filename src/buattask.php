@@ -1,5 +1,5 @@
 <html>
-    <head>
+
         <title> Next | ADD TASK </title>
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/buattask.css">
@@ -170,6 +170,7 @@
                         id_kategori = window.location.search.substring(c+12);
                     }     
                     
+                    //alert(id_kategori);
                     params = "assignee="+escape(form.assignee.value)+"&tag="+escape(form.catname.value)+"&nama="+form.task_name.value;
                     params += "&id_kategori="+id_kategori+"&deadline=";
                     params += escape(form.year.value+"-"+form.month.value+"-"+form.day.value+" "+form.hour.value+":"+form.minute.value+":00");
@@ -182,42 +183,11 @@
                 }
             }            
 		</script>
-    </head>
-    <body onload="prepare()">
+        
+	<?php include 'header.php'; ?>
     
-        <!----------------------------HEADER FILE---------------------------->
-        <div class="header">
-			<div id="logo">
-			    <a hreg="dashboard.html">
-			    <img src="pict/logo.png">
-			    </a>
-			</div>
-			<div id="border">
-			    
-			</div>
-			<div id="dashboard">
-			    <a href="dashboard.html">DASHBOARD</a>
-			</div>
-			<div id="profile">
-			    <a href="profile.html">PROFILE</a>
-			</div>
-			<div id="search">
-					    <section class="searchform cf">
-						    <input class="searchbox" type="search" name="search" placeholder="Search.." required>
-						    
-					    </section>
-					    <section class="searchbuttonbox cf">
-						    <img class="searchbutton"src="pict/search button.jpg">
-					    </section>
-					    
-				    </div>
-			<div id="wellfaiz">
-			    
-			</div>
-			<div id="logout">
-			    <a href="index.html">LOGOUT</a>
-			</div>
-		</div>
+    <body onLoad="prepare();showUserLogin();">
+    
         
         <!-----------------------------BODY FILE-------------------------------->
         <div class="main">
@@ -225,7 +195,7 @@
             </div>
             <div>
                 <form>
-                    <input type="button" id="back" value="" onclick="location.href='dashboard.html'">
+                    <input type="button" id="back" value="" onClick="location.href='dashboard.html'">
                 </form>
             </div>
             
@@ -234,21 +204,21 @@
                 </div>
                 <form id="formtask2">
                     <label>NAMA TUGAS</label>
-                    <input name="task_name" type="text" placeholder="task_name" onkeyup="name_valid(this.value)" />
+                    <input name="task_name" type="text" placeholder="task_name" onKeyUp="name_valid(this.value)" />
                     <img src="pict/blank.png" alt="icon1" id="namaicon"  />                    
                     
                     <label>DEADLINE</label>
-                    <input type="textarea" name="year" id="yearbox" value="" onchange="dead_validating(this.parentNode)">-
-                    <select name="month" id="month" onchange="dead_validating(this.parentNode)">
+                    <input type="textarea" name="year" id="yearbox" value="" onChange="dead_validating(this.parentNode)">-
+                    <select name="month" id="month" onChange="dead_validating(this.parentNode)">
                     </select>-
 
-                    <select name="day" id="day" onchange="dead_validating(this.parentNode)">
+                    <select name="day" id="day" onChange="dead_validating(this.parentNode)">
                     </select> Jam: 
                     
-                    <select name="hour" id="hour" onchange="dead_validating(this.parentNode)">
+                    <select name="hour" id="hour" onChange="dead_validating(this.parentNode)">
                     </select>-
 
-                    <select name="minute" id="minute" onchange="dead_validating(this.parentNode)">
+                    <select name="minute" id="minute" onChange="dead_validating(this.parentNode)">
                     </select>                        
 					<img src="pict/blank.png" alt="icon3" id="deadicon" />
                     
@@ -268,7 +238,7 @@
                     </div>                            
 					<img src="pict/blank.png" alt="icon2" id="attaicon"  />                    
                     
-                    <input type="file" name="file" id="file" onchange="validasi_file(this)">
+                    <input type="file" name="file" id="file" onChange="validasi_file(this)">
                     <br>
                     <input class= "submitreg" name="submit" type="button" value="Submit"
                      onclick="add_tugas(this.form)">

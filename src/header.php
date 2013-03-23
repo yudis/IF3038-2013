@@ -121,6 +121,110 @@
 //			}// end else
 		}
 			
+			
+			
+<!-------------------------------------------------dashboard------------------------------->			
+			            function showAddTask(){<!--SIGIT-->
+                document.getElementById("addtask").style.visibility="visible";
+                document.getElementById("addtask").disabled = false;
+            }
+            
+            function hideAddTask(){
+                document.getElementById("addtask").style.visibility="hidden";
+            }
+			
+			function ubahStatus(nomor) {
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();				
+				}else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+				
+				xmlhttp.onreadystatechange = function(){
+					//alert(xmlhttp.readyState+" "+xmlhttp.status);
+					
+					if (xmlhttp.readyState==4 && xmlhttp.status==200){				
+						//alert(xmlhttp.responseText);
+						//document.getElementById("category").innerHTML=xmlhttp.responseText;
+					}
+				}
+								
+				xmlhttp.open("GET","ubahstatus.php?id_tugas="+nomor,true);
+				xmlhttp.send();				
+			}
+            
+			function getCat(){<!--SIGIT-->
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();				
+				}else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+				
+				xmlhttp.onreadystatechange = function(){
+					//alert(xmlhttp.readyState+" "+xmlhttp.status);
+					
+					if (xmlhttp.readyState==4 && xmlhttp.status==200){				
+						//alert(xmlhttp.responseText);
+						document.getElementById("category").innerHTML=xmlhttp.responseText;					
+					}
+				}
+								
+				xmlhttp.open("GET","getCat.php",true);
+				xmlhttp.send();
+				//alert(xmlhttp.responseText);
+				//alert(xmlhttp.status);
+			}
+			
+			function getTask(){<!--SIGIT-->
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();				
+				}else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+				
+				xmlhttp.onreadystatechange = function(){
+					//alert(xmlhttp.readyState+" "+xmlhttp.status);
+					
+					if (xmlhttp.readyState==4 && xmlhttp.status==200){				
+						//alert(xmlhttp.responseText);
+						document.getElementById("category2").innerHTML=xmlhttp.responseText;					
+					}
+				}
+					
+				xmlhttp.open("GET","getTask.php",true);
+				xmlhttp.send();
+				//alert(xmlhttp.responseText);
+				//alert(xmlhttp.status);
+			}
+			function catTask(n){<!--SIGIT-->
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();				
+				}else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+				
+				xmlhttp.onreadystatechange = function(){
+					//alert(xmlhttp.readyState+" "+xmlhttp.status);
+					
+					if (xmlhttp.readyState==4 && xmlhttp.status==200){				
+						//alert(xmlhttp.responseText);
+						document.getElementById("category2").innerHTML=xmlhttp.responseText;					
+					}
+				}
+                
+				xmlhttp.open("GET","catTask.php?id="+n,true);
+				xmlhttp.send();
+				document.getElementById("kirim").action = "buattask.php?id_kategori="+n;
+                //alert(xmlhttp.responseText);
+				//alert(xmlhttp.status);
+			}
+			
+
+			
         </script>			
             
         </script>
