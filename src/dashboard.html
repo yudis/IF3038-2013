@@ -1,0 +1,174 @@
+<html>
+    <head>
+        <title> Next | Dashboard </title>
+        <link rel="stylesheet" href="css/css.css">
+        <link rel="stylesheet" href="css/dash.css">
+        <script type="text/javascript" src="js/popup.js"></script>
+        <script>
+            var itotal=5;
+            var ipartin=0;
+            var ipartout=0;
+            var itulis=0;
+            
+            function taskawal(itotal){
+                for(var i=0;i<itotal;i++){
+                var para=document.createElement("p");
+                if(i===0){
+                    var node=document.createTextNode("TUBES 1" + " " + (11+(i*4)) + "AGUSTUS2013"  +" KAP");   
+                }else if(i===1){
+                    var node=document.createTextNode("TUBES 2" + " " + ((i*6)-1) + "OKTOBER2013"  +" MSDI");   
+                }else if(i===2){
+                    var node=document.createTextNode("TUBES 3" + " " + ((i*6)-1) + "OKTOBER2013"  +" MSDI");   
+                }else if(i===3){
+                    var node=document.createTextNode("TUBES 4" + " " + ((i*6)-1) + "OKTOBER2013"  +" MSDI");   
+                }else if(i===4){
+                    var node=document.createTextNode("TUBES 5" + " " + ((i*4)-4) + "APRIL2013"  +" PROGIN" );   
+                }else if(i===5){
+                    var node=document.createTextNode("TUBES 6" + " " + ((i*4)-4) + "APRIL2013"  +" PROGIN" );   
+                }
+                para.appendChild(node);
+                para.id="listtask";
+                
+                var element=document.getElementById("div1");
+                element.appendChild(para);
+                ipartout = itotal;
+                }
+            }
+            function addTask(ipartin){
+                
+                for(var i=0;i<ipartin;i++){
+                var para=document.createElement("p");
+                if(ipartin === 1){
+                    var node=document.createTextNode("TUBES " + (i+1) + " " + (11+(i*4)) + "AGUSTUS2013"  +" KAP");
+                } else if(ipartin === 2){
+                    var node=document.createTextNode("TUBES " + (i+5) + " " + (12+(i*4)) + "APRIL2013"  +" PROGIN" );
+                } else if(ipartin === 3){    
+                    var node=document.createTextNode("TUBES " + (i+2) + " " + (5+(i*6)) + "OKTOBER2013"  +" MSDI");
+                }
+                
+                para.appendChild(node);
+                para.id="listtask";
+                
+                var element=document.getElementById("div1");
+                element.appendChild(para);
+                }
+                
+                ipartout=ipartin;
+                itulis=ipartin;
+            }
+            
+            function removeTask(){
+                for(var i=0;i<ipartout;i++){
+                var parent=document.getElementById("div1");
+                var child=document.getElementById("listtask");
+                parent.removeChild(child);
+                }
+            }
+            
+            
+            function showTask(){
+                document.getElementById("addtask").style.visibility="visible";
+            }
+            
+            function hideAddTask(){
+                document.getElementById("addtask").style.visibility="hidden";
+            }
+            
+        </script>
+    </head>
+    <body onload="taskawal(6); ">
+         <div class="header">
+			<div id="logo">
+			    <a hreg="dashboard.html">
+			    <img src="pict/logo.png">
+			    </a>
+			</div>
+			<div id="border">
+			    
+			</div>
+			<div id="dashboard">
+			    <a href="dashboard.html">DASHBOARD</a>
+			</div>
+			<div id="profile">
+			    <a href="profile.html">PROFILE</a>
+			</div>
+			<div id="search">
+					    <section class="searchform cf">
+						    <input class="searchbox" type="search" name="search" placeholder="Search.." required>
+						    
+					    </section>
+					    <section class="searchbuttonbox cf">
+						    <img class="searchbutton"src="pict/search button.jpg">
+					    </section>
+					    
+				    </div>
+			<div id="wellfaiz">
+			    
+			</div>
+			<div id="logout">
+			    <a href="index.html">LOGOUT</a>
+			</div>
+		  </div>
+        <div class="main">
+            <div id="addcat" onclick="popup('popUpDiv')">
+            </div>
+            <a href="buattask.html">
+            <div id="addtask" style="visibility: hidden";>
+            </div>
+            </a>
+            <div id="category">
+                <div id="listcat" onclick="taskawal(6); showTask(); " onmouseover="removeTask(); hideAddTask() ">
+                    <div id="tulcat">
+                    ALL
+                    </div>
+                </div>
+                <div id="listcat" onclick="addTask(1); showTask(); " onmouseover="removeTask(); hideAddTask() ">
+                    <div id="tulcat">
+                    KAP
+                    </div>
+                </div>
+                <div id="listcat" onclick="addTask(3); showTask(); " onmouseover="removeTask(); hideAddTask()">
+                    <div id="tulcat">
+                    MSDI
+                    </div>
+                </div>
+                <div id="listcat" onclick="addTask(2); showTask();" onmouseover="removeTask(); hideAddTask()">
+                    <div id="tulcat">
+                    PROGIN
+                    </div>
+                </div>
+            </div>
+            
+            <div id="task">
+                <a href="rinciantugas.html">
+                <div id="div1">
+                    
+                </div>
+                </a>
+            </div>
+            
+            <div id="blanket" style="display:none;"></div>
+            <div id="popUpDiv" style="display: none;">
+                <div id="newcategory">
+                    <div id="closecat">
+                        <a href="#" onclick="popup('popUpDiv')" >CLOSE</a>
+                    </div>
+                    <div id="cattitle">ADD CATEGORY</div>
+                    <div id="elcategory">
+                        <form action="dashboard.html">
+                            <label>category name</label>
+                            <input name="catname" placeholder="category name">
+                            <label>assignee</label>
+                            <input name="catass" placeholder="assignee"></br></br>
+                            <input class= "submitreg" name="submit" type="submit" value="Submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            Copyright © Ahmad Faiz - Fandi Pradana - Sigit Aji
+        </div>
+        
+    </body>
+</html>

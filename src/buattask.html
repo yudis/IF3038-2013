@@ -1,0 +1,145 @@
+<html>
+    <head>
+        <title> Next | ADD TASK </title>
+        <link rel="stylesheet" href="css/css.css">
+        <link rel="stylesheet" href="css/buattask.css">
+        <link rel="stylesheet" href="css/calendar.css">
+	<script src="js/calendar.js" > </script>
+        <script>
+			function name_valid()
+				{
+					var namaid = document.buatugas.username.value;
+					
+					if((namaid.length > "25" ) || (namaid.match(/[!"#$%&'90*+,.:;<=>?@\^_`{|}~]/))){
+						document.getElementById("namaicon").src="pict/canceled.png";
+					}
+						else
+					{
+						document.getElementById("namaicon").src="pict/centang.png";
+					}
+				}
+				
+			function atta_validating()
+				{
+					var attaid = document.buatugas.attach.value;
+					
+					if((attaid.lastIndexOf(".jpg") != -1) || (attaid.lastIndexOf(".jpeg") != -1) || (attaid.lastIndexOf(".mp3") != -1) || (attaid.lastIndexOf(".mp4") != -1) || (attaid.lastIndexOf(".avi") != -1) || (attaid.lastIndexOf(".mkv") != -1))
+						{
+							document.getElementById("attaicon").src="pict/centang.png";
+						}
+							else
+						{
+							document.getElementById("attaicon").src="pict/canceled.png";
+						}
+				}
+				
+			function dead_validating()
+				{
+					document.getElementById("deadicon").src="pict/centang.png"
+				}
+			
+			function asi_validating()
+				{
+					var asign = document.buatugas.namasign.value;
+					
+					if(asign.match(/([a-zA-Z])+([ \t\r\n\v\f])+([a-zA-Z])/))
+						{
+							document.getElementById("asicon").src="pict/centang.png";
+						}
+							else
+						{
+							document.getElementById("asicon").src="pict/canceled.png";
+						}
+				}
+			
+			function tag_validating()
+				{
+					var tagid = document.buatugas.tag.value;
+					
+					if(tagid.match(/([ \t\r\n\v\f])/)){
+						document.getElementById("tagicon").src="pict/canceled.png";
+					}
+						else
+					{
+						document.getElementById("tagicon").src="pict/centang.png";
+					}
+				}
+			
+			
+		</script>
+    </head>
+    <body onload="taskawal(6);">
+         <div class="header">
+			<div id="logo">
+			    <a hreg="dashboard.html">
+			    <img src="pict/logo.png">
+			    </a>
+			</div>
+			<div id="border">
+			    
+			</div>
+			<div id="dashboard">
+			    <a href="dashboard.html">DASHBOARD</a>
+			</div>
+			<div id="profile">
+			    <a href="profile.html">PROFILE</a>
+			</div>
+			<div id="search">
+					    <section class="searchform cf">
+						    <input class="searchbox" type="search" name="search" placeholder="Search.." required>
+						    
+					    </section>
+					    <section class="searchbuttonbox cf">
+						    <img class="searchbutton"src="pict/search button.jpg">
+					    </section>
+					    
+				    </div>
+			<div id="wellfaiz">
+			    
+			</div>
+			<div id="logout">
+			    <a href="index.html">LOGOUT</a>
+			</div>
+		  </div>
+        <div class="main">
+            <div id="addtask">
+            </div>
+            <a href="dashboard.html">
+            <div id="back">
+            </div>
+            </a>
+            <div id="formtask">
+                <div id="judulform">
+                </div>
+                <div id="formtask2">
+                    <form name="buatugas">
+                        <label>nama tugas</label>
+                        <input name="username" type="text" placeholder="username" onkeyup="name_valid()" />
+						<img src="pict/blank.png" alt="icon1" id="namaicon"  />
+                        <label>attachment</label>
+						<input type="file" name="attach" onchange="atta_validating()" />
+						<img src="pict/blank.png" alt="icon2" id="attaicon"  />
+                        <label>deadline</label>
+						<input type="text" name="deadline" id="datedead" onmousedown="dead_validating()" />
+						<img src="pict/blank.png" alt="icon3" id="deadicon" />
+						<script type="text/javascript">
+							calendar.set("datedead");
+						</script>
+					    <label>asisgnee</label>
+                        <input name="namasign" placeholder="nama lengkap" onkeyup="asi_validating()" >
+						<img src="pict/blank.png" alt="icon4" id="asicon" />
+                        <label>tag</label>
+                        <input name="tag" placeholder="tag" onkeyup="tag_validating()" />
+						<img src="pict/blank.png" alt="icon5" id="tagicon" />
+                            <br><br>
+                        <input class= "submitreg" name="submit" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            Copyright © Ahmad Faiz - Fandi Pradana - Sigit Aji
+        </div>
+        
+    </body>
+</html>
