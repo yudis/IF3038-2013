@@ -25,6 +25,9 @@
     if ($newBirthdate == "-222") {
         $newBirthdate = $row['tanggalLahir'];
     }
+    if ($newPassword == "-333"){
+        $newPassword = $row['password'];
+    }
     
     //update database
     $sql = "UPDATE user SET fullname='$newFullName', tanggalLahir='$newBirthdate',password='$newPassword' WHERE username='$curUser'";

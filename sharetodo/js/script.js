@@ -202,6 +202,9 @@ function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain,
 			newBirthdate = "-222";
 			//alert(newBirthdate);
 		}
+		if (newPassword == "") {
+			newPassword = "-333";
+		}
 		
 		var __xmlhttp;
 		if (window.XMLHttpRequest) {
