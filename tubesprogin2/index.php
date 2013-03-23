@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(isset($_SESSION['loggedin'])){
+header( 'src/dashboard.php' );
+}
+
+?> 
+
 <!DOCTYPE html>
 <html>
 	<!--
