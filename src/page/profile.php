@@ -98,7 +98,7 @@
 		<div id="profile-page-body">
 			<div id="profile-header">
 				<div id="left-profile-header">
-					<img alt="Photo profile" id="photo" src="../avatar/<?php echo $avatar?>" width="240" height="325"/>
+					<img alt="Photo profile" id="photo" src="../avatar/<?php echo $avatar?>" width="250" height="325"/>
 				</div>
 				<div id="right-profile-header">
 					<h2><?php $username = $_GET['username'];
