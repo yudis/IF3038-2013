@@ -40,6 +40,8 @@
 		public function checkValidity()
 		{
 			$error = array();
+			$dateparts = explode("/", $this->birthdate);
+			$birthyear = sizeof($dateparts)-1;
 			if (!preg_match("/^.{5,}$/", $this->username))
 			{
 				$error["username"] = "Username harus minimal 5 karakter.";
@@ -56,7 +58,7 @@
 				$error["name"] = "Nama lengkap harus terdiri dari 2 kata dipisah oleh spasi.";
 			}
 			if ((!preg_match("#^[1-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$#", $this->data['birthdate'])) && 
-				(explode("/", $this->birthdate)[sizeof(explode("/", $this->birthdate))-1]>=1955))
+				$dateparts[$birthyear]>=1955)
 			{
 				$error["birth_date"] = "Format tanggal lahir yang dimasukkan salah.";
 			}
