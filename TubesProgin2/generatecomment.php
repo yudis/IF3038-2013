@@ -36,7 +36,11 @@ if (connectDB()) {
             $getCommentUserQuery = "SELECT * FROM user WHERE username='" . $result[2] . "';";
             $getCommentUser = mysql_query($getCommentUserQuery);
             $usercommentresult = mysql_fetch_array($getCommentUser);
-            echo ('<div class="commentinfo"> <img width=30px height=30px src="' . $usercommentresult[5] . '" /> <a href="profile.php?user=' . $result[2] . '">' . $result[2] . '</a> at ' . $result[4] . '');
+            $arrayTime = explode(" ", $result[4]);
+            $arrayDate = explode("-", $arrayTime[0]);
+            $arrayTimeHour = explode(":", $arrayTime[1]);
+            $time = $arrayTimeHour[0].":".$arrayTimeHour[1]." - ".$arrayDate[2]."/".$arrayDate[1];
+            echo ('<div class="commentinfo"> <img width=30px height=30px src="' . $usercommentresult[5] . '" /> <a href="profile.php?user=' . $result[2] . '">' . $result[2] . '</a> at ' . $time . '');
             if ($result[2] == $_COOKIE['UserLogin']) {
                 echo'<br/><input type="button" class="remove" onclick="removeComment(' . $result[0] . ')" value="remove">';
             }
