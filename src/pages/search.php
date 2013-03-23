@@ -38,6 +38,7 @@ $tasks = Task::model()->findAllLimit("nama_task LIKE '$terms'", array(), 0, 10);
 		<!-- Tasks -->
 		<div id="taskList">
 			<?php foreach ($tasks as $task) { require dirname(__FILE__) . "/../template/task.php"; } ?>
+			<?php if (!$tasks) { echo '<p>No tasks were found.</p>'; } ?>
 		</div>
 	</section>
 </div>
@@ -52,6 +53,7 @@ $tasks = Task::model()->findAllLimit("nama_task LIKE '$terms'", array(), 0, 10);
 			</header>
 			<div id="userList">
 				<?php foreach ($users as $user) { require dirname(__FILE__) . "/../template/user.php"; } ?>
+				<?php if (!$users) { echo '<p>No users were found.</p>'; } ?>
 			</div>
 		</section>
 	</div>
@@ -69,6 +71,7 @@ $tasks = Task::model()->findAllLimit("nama_task LIKE '$terms'", array(), 0, 10);
 
 			<?php endforeach; ?>
 			</ul>
+			<?php if (!$categories) { echo '<p>No categories were found.</p>'; } ?>
 		</section>
 	</div>
 	<?php endif; ?>

@@ -34,15 +34,28 @@
 					<?php endforeach; ?>
 					</ul>
 
+					<?php
+					if ($this->currentPage == 'search') {
+						$q = $_GET['q'];
+						$type = $_GET['type'];
+					}
+					?>
 					<div class="search-box">
 						<form action="search" method="get" id="searchForm">
 							<select name="type">
-								<option value="all">All</option>
-								<option value="user">Users</option>
-								<option value="category">Categories</option>
-								<option value="task">Tasks</option>
+								<?php
+								foreach (array(
+									'all' => 'All',
+									'task' => 'Tasks',
+									'user' => 'Users',
+									'category' => 'Categories'
+									) as $k => $v) {
+									$selected = ($type == $k) ? ' selected' : '';
+									echo "<option value=\"$k\"$selected>$v</option>\n";
+								}
+								?>
 							</select>
-							<input type="search" name="q" placeholder="Search">
+							<input type="search" name="q" placeholder="Search" value="<?php echo $q ?>">
 							<button type="submit">Search</button>
 						</form>
 					</div>
