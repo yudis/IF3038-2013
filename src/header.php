@@ -65,16 +65,20 @@ if (mysqli_connect_errno()) {
 				<div id="menu">
 					<ul>
 						<li id="menuhome2"><a href="dashboard.php">DASHBOARD</a></li>
-						<li id="menudkonten"><a href="profil.php">PROFIL</a></li>
+						<li id="menudkonten">MY PROFILE: <a href="profil.php"><?php echo $_SESSION['myusername']?> &nbsp;<img src="<?php echo $_SESSION['avatar'];?>" height="24" /></a></li>
 						<li id="menuregister2"><a href="logout.php">LOGOUT</a></li>
 					</ul>
-                            <div class ="searchoption"><form action="search.php" method="get">
-                                <input class="searchbox" type="text" name="q" value="Input search" onfocus="searchFocus(this)" onblur="searchBox(this)" />
-                                <input name="submit" type="submit" value="Go" /><br />
-                                <input type="radio" name="o" value="All" checked/>All
-                                <input type="radio" name="o" value="User" />User
-                                <input type="radio" name="o" value="Category" />Category
-                                <input type="radio" name="o" value="Content" />Content
-                            </form></div>
+					
+					<br />
+                    <div class ="searchoption">
+                        <form action="search.php" method="get">
+                            <input class="searchbox" type="text" name="q" value="Input search" onfocus="searchFocus(this)" onblur="searchBox(this)" />
+                            <input name="submit" type="submit" value="Go" /><br />
+                            <input type="radio" name="o" value="All" checked/>All
+                            <input type="radio" name="o" value="User" />User
+                            <input type="radio" name="o" value="Category" />Category
+                            <input type="radio" name="o" value="Content" />Content
+                        </form>
+                    </div>
 				</div>
 			</div>
