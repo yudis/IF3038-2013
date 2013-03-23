@@ -55,7 +55,7 @@
 					<form id="new_profile" action="#" method="post">
 						<div class="field">
 							<label>Full Name</label>
-							<input size="30" maxlength="50" name="name" id="name" type="text">
+							<input size="25" maxlength="50" name="name" id="name" type="text">
 						</div>
 						<div class="field">
 								<label>New Avatar</label>
@@ -63,15 +63,15 @@
 						</div>
 						<div class="field">
 								<label>Tanggal Lahir Baru</label>
-								<input size = "30" name="tanggal_lahir" id="tanggal_lahir" type="date">
+								<input size = "25" name="tanggal_lahir" id="tanggal_lahir" type="date">
 							</div>
 						<div class="field">
 								<label>New Password</label>
-								<input size="30" maxlength="50" name="password" id="password" type="password">
+								<input size="25" maxlength="50" name="password" id="password" type="password">
 							</div>
 							<div class="field">
 								<label>Confirm New Password</label>
-								<input size="30" maxlength="50" name="password_k" id="password_k" type="password">
+								<input size="25" maxlength="50" name="password_k" id="password_k" type="password">
 							</div>
 							<div class="field buttons">
 								<button type="submit" name="updateProfile" id="submitButton">Save</button>
