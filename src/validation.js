@@ -253,6 +253,25 @@ function checkLogin(){
 	xmlhttp.send();
 }
 
+function logout()
+{
+	if(window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
+	}
+	else{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xmlhttp.onreadystatechange = function(){
+		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			window.location = "index.php";
+		}
+	}
+
+	xmlhttp.open("GET", "logout.php", true);
+	xmlhttp.send();
+}
+
 function toggleSearch(){
 	if(getStyle(document.getElementById('search'), 'display') == 'none'){
 		document.getElementById('search').style.display = 'inline';
@@ -368,5 +387,5 @@ function handleFileSelect(evt) {
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
 
 function popupcat(){
-	window.open( "addcat.html" )
+	window.open("addcat/");
 }
