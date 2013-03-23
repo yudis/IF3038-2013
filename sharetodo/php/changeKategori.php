@@ -14,8 +14,8 @@
         $result = mysqli_query($con,"SELECT * FROM task WHERE namaKategori='$kategori'");
         while ($row = mysqli_fetch_array($result)){
             $nama = $row['namaTask'];
-            echo "<div id={$nama}space>";
-                echo "<div id='taskTitle1' class='taskElmtLeft' onclick=toHalamanRincianTugas('taskTitle1');>";
+            echo "<div id='{$nama}space'>";
+                echo "<div id='taskTitle1' class='taskElmtLeft' onclick=\"toHalamanRincianTugas('$nama')\";>";
                     echo "<p></strong>".$nama."</strong></p>";
                 echo "</div>";
                 echo "<div class='taskElmtRight'>";

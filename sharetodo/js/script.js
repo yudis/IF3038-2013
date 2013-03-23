@@ -276,8 +276,9 @@ function changeTaskStatus(namaTask,id) {
 	xmlhttp.send();
 }
 
-function toHalamanRincianTugas(namaHlm) {
-	alert("pindah ke halaman " + namaHlm);
+function toHalamanRincianTugas(namaTask) {
+	//alert("pindah ke halaman " + namaTask);
+	window.location = "taskdetail.php?task=" + namaTask;
 }
 
 function toHalamanPembuatanTugas(kat) {
@@ -286,6 +287,7 @@ function toHalamanPembuatanTugas(kat) {
 }
 function deleteTask(namaTask) {
 	//meminta username dan creator dari task yang hendak dihapus
+	//alert(namaTask);
 	var xmlhttp;
 	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();
@@ -295,10 +297,10 @@ function deleteTask(namaTask) {
 	xmlhttp.onreadystatechange = function(){
 		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
 			$response = xmlhttp.responseText;
-			//alert(xmlhttp.responseText);
+			//alert($response);
 			if ($response == "1") {
-				document.getElementById(namaTask+"space").innerHTML = "";
 				alert("Tugas telah berhasil dihapus");
+				document.getElementById(namaTask+"space").innerHTML = "";
 			} else {
 				alert("Warning. Anda tidak berhak untuk menghapus tugas ini.");
 			}
