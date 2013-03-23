@@ -73,7 +73,7 @@ else
 		$result1	= mysql_query($query1);
 		while ($row = mysql_fetch_array($result1, MYSQL_ASSOC)) {
 			$taskID = $row["task_id"];
-			echo "Task id = ".$taskID;
+			//echo "Task id = ".$taskID;
 		}
 		
 		$assigneeArray = explode(',', $taskAsigneeName); 		
@@ -88,17 +88,14 @@ else
 			$query3 	= "INSERT INTO `tag` (`tag_name`, `task_id`) VALUES ('$tagArray[$i]','$taskID')";
 			$result3 = mysql_query($query3);
 		}
-		
-	
-			$query4 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment1','$taskID')";
-			$result4 = mysql_query($query4);
-			$query5 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment2','$taskID')";
-			$result5 = mysql_query($query5);
-			$query6 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment3','$taskID')";
-			$result6 = mysql_query($query6);
-			
+		$query4 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment1','$taskID')";
+		$result4 = mysql_query($query4);
+		$query5 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment2','$taskID')";
+		$result5 = mysql_query($query5);
+		$query6 	= "INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('$attachment3','$taskID')";
+		$result6 = mysql_query($query6);
 
-		
-		header('location:addtask.php'); //Redirect To Success Page
+		//echo "<script> viewTask(\"$taskID\"); </script>";
+		header('location:dashboard.php'); //Redirect To Success Page
 	}
 ?>
