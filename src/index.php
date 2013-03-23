@@ -1,4 +1,4 @@
-<!-- catatan: var lokasi untuk fungsi loging pada registrasi masih harus dibenerin-->
+<!-- catatan: -->
 
 
 <html>
@@ -11,7 +11,7 @@
 			
 			function isLogin(){	/*---------------------------JO---cek apakah sudah login----------------- */
 				if (localStorage.userLogin!= null)	{
-					window.location="dashboard.html";		
+					window.location="dashboard.php";		
 				}
 			}
 		
@@ -29,7 +29,7 @@
 						if(xmlhttp.responseText==1){
 							localStorage.userLogin=form.userId.value;		/*----simpan user yg login ke local storage ------*/
 							localStorage.tglLogin= new Date().getTime();	/*----simpan waktu login ke local storage ------*/
-							window.location="dashboard.html";
+							window.location="dashboard.php";
 						}else{
 							alert("error password or username");
 						}						
@@ -70,7 +70,7 @@
 				{
 					if(form.userId.value == "admin" && form.password.value == "testing")
 						{
-							window.location="dashboard.html";
+							window.location="dashboard.php";
 						}
 							else
 						{
@@ -88,7 +88,7 @@
 					var aicon = document.getElementById("avaicon").src;
 					var dicon = document.getElementById("dateicon").src;
 
-					var lokasi = window.location.href.substring(0,window.location.href.lastIndexOf("/")) + "/pict/centang.png";	/*------------masih harus diedit-------------*/		
+					var lokasi = window.location.href.substring(0,window.location.href.lastIndexOf("/")) + "/pict/centang.png";	/*-------------------------*/		
 
 					if ((uicon == lokasi) && (picon == lokasi) && (cicon == lokasi) && (nicon == lokasi) && (eicon == lokasi) && (aicon == lokasi) && (dicon == lokasi))
 							{
@@ -112,7 +112,7 @@
 					xmlhttp.send("user="+form.username.value+"&pwd="+form.password.value+"&nama="+form.namaleng.value+"&tgl="+form.tanggal.value+"&email="+form.email.value+"&avatar="+form.avatar.value);
 					localStorage.userLogin=form.username.value;/*----simpan user yg baru register ke local storage ------*/									
 					localStorage.tglLogin= new Date().getTime();	/*----simpan waktu register ke local storage ------*/					
-					window.location="dashboard.html";
+					window.location="dashboard.php";
 				}
 			
 			function user_validating()			/*----------------------------JO---validasi buat registrasi user-----registeruser.php---------------------- */
