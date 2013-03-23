@@ -1,18 +1,18 @@
 <html>
 	<head>
 		<title>Shared To Do List - Add Task</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="../style.css">
 		<link rel="shortcut icon" href="favicon.ico">
-		<script type="text/javascript" src="validation.js"></script>	
-		<script type="text/javascript" src="mpquery.js"></script>
+		<script type="text/javascript" src="../validation.js"></script>	
+		<script type="text/javascript" src="../mpquery.js"></script>
 	</head>
 	<body>
 		<div id="navigation">
-			<img src="images/logo.gif">
-			<a href="dashboard.php">DASHBOARD</a>
-			<a href="../profile/index.php?u=<?=$_SESSION['username']?>">PROFILE</a>
+			<img>
+			<a href="../dashboard.php">DASHBOARD</a>
+			<a href="../profile/index.php?u=<?=$_SESSION['username'];?>">PROFILE</a>
 			<a href="#" onclick="toggleSearch()">SEARCH</a>
-			<a href="index.php">LOGOUT</a>			
+			<a href="../index.php">LOGOUT</a>			
 		</div>
 		<div id="search">
 			<input type="text" size="50%">
@@ -24,11 +24,11 @@
 			<h2>Add Task</h2>
 			<div class="box">
 				<br><br>
-				<h3><img src="images/patrick.png"></h3>
+				<h3><img src="../images/patrick.png"></h3>
 			</div>		
 			<div class="box2">
 				<h3></h3>
-				<form method="POST" action="taskdetails.php" onsubmit="submitNewTask();"><!--addtasksubmit.php"--><!--taskdetails.php"-->
+				<form method="POST" action="../taskdetails/" onsubmit="submitNewTask();"><!--addtasksubmit.php"--><!--taskdetails.php"-->
 				<fieldset>
 					<p>
 						<label>Task Name<abbr title="Required">*</abbr></label>
