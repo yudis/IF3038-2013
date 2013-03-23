@@ -31,7 +31,7 @@
 			Have No Account ? 
 		</div>
 		<div id="signup_form_container">
-			<form id="signup_form" method="POST" action="register_script.php">
+			<form id="signup_form" method="POST" action="register_script.php" enctype="multipart/form-data">
 				<label> Username </label>	
 				<input type="text" name="signup_username" onkeypress="javascript:regCheck();" id="reg_username" title="Username should be at least 5 characters long" required>
 				<img src="img/yes.png" id="username_validation" class="signup_form_validation" alt="validation image">
