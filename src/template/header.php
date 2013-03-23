@@ -29,7 +29,10 @@
 							$active = ($this->currentPage == $page);
 						?>
 
-						<li class="<?php echo $page ?>-link<?php if ($active) echo ' active' ?>" id="<?php echo $page ?>Li"><a href="<?php echo $page ?>" id="<?php echo $page ?>Link"><?php echo $label ?></a></li>
+						<li class="<?php echo $page ?>-link<?php if ($active) echo ' active' ?>" id="<?php echo $page ?>Li"><?php
+							if ($page == 'profile') {
+								?><img src="<?php echo "upload/user_profile_pict/".$this->currentUser->avatar; ?>" alt=""><?php
+							} ?><a href="<?php echo $page ?>" id="<?php echo $page ?>Link"><?php echo $label ?></a></li>
 
 					<?php endforeach; ?>
 					</ul>
