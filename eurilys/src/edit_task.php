@@ -58,96 +58,63 @@
 				}
 			?>
 			
+			
 			<div id='edit_task_header' class='left top30 dynamic_content_head darkBlue'>
 				<?php echo $taskname; ?>
 			</div>
-						
-			<input id="save_edit_task" class='left top30 link_blue_rect' onclick='save_edit_task()' type='button' value='Save'>
-						
-			<div class='left top30 dynamic_content_row'>
-				<div id='task_name_ltd' class='left dynamic_content_left'> Task Name </div>
-				<div id='task_name_rtd' class='left dynamic_content_right'> <?php echo $taskname; ?> </div>
-			</div>
-			<div class='left top20 dynamic_content_row'>
-				<div id='task_status_ltd' class='left dynamic_content_left'> Status </div>
-				<div id='task_status_rtd' class='left dynamic_content_right'> <?php echo $status; ?> </div>
-			</div>
-			<div class='left top20 dynamic_content_row'>
-				<div id='attachment_ltd' class='left dynamic_content_left'>Attachment</div>
-				<div id='attachment_rtd' class='left dynamic_content_right'>
-					??? Belum ada attachment
+				
+			<form method="POST" action="edit_task_script.php">
+				<input id="save_edit_task" class='left top30 link_blue_rect' type='submit' name='edit_task_submit' value='Save'>
+				
+				<input type="hidden" name="edit_task_id" value="<?php echo $taskID;?>"/>
+				<div class='left top30 dynamic_content_row'>
+					<div id='task_name_ltd' class='left dynamic_content_left'> Task Name </div>
+					<div id='task_name_rtd' class='left dynamic_content_right'> <?php echo $taskname; ?> </div>
 				</div>
-			</div>
-			<div class='left top20 dynamic_content_row'>
-				<div id='deadline_ltd' class='left dynamic_content_left'>Deadline</div>
-				<div id='deadline_rtd' class='left dynamic_content_right'> 
-					<input class="edit_task_input" id="edit_task_deadline" type="date" name="deadline_td" value="<?php echo $taskdeadline; ?>"/>
+				<div class='left top20 dynamic_content_row'>
+					<div id='task_status_ltd' class='left dynamic_content_left'> Status </div>
+					<div id='task_status_rtd' class='left dynamic_content_right'> <?php echo $status; ?> </div>
 				</div>
-			</div>
-			
-			<div class='left top20 dynamic_content_row'>
-				<div id='assignee_ltd' class='left dynamic_content_left'>Assignee</div>
-				<div id='assignee_rtd' class='left dynamic_content_right'>
-				<?php 
-					if (count($assResponse) > 0) {
-						for($i=0; $i<count($assResponse); $i++) {
-							$assResponse[$i];
-							echo "
-							<img src='../img/done.png' class='cursorPointer' width='8' onclick='javascript:edittaskDeleteAss(\"$taskID\", \"$assResponse[$i]\");'/> &nbsp;&nbsp;&nbsp;
-							<span class='userprofile_link darkBlueItalic' onclick='javascript:searchUser(\"$assResponse[$i]\")'> $assResponse[$i] </span> 
-							<br>";
-						}
-					}
-				?>
-				<br>
-				<input class="edit_task_input" id="edit_task_assignee" type="text" name="assignee_td" value=""/>
+				<div class='left top20 dynamic_content_row'>
+					<div id='attachment_ltd' class='left dynamic_content_left'>Attachment</div>
+					<div id='attachment_rtd' class='left dynamic_content_right'>
+						??? Belum ada attachment
+					</div>
 				</div>
-			</div>			
-			<div class='left top20 dynamic_content_row'>
-				<div id='tag_ltd' class='left dynamic_content_left'> Tag </div>
-				<div id='tag_rtd' class='left dynamic_content_right'>
-					<input class="edit_task_input" id="edit_task_tag" type="text" name="tag_td" value="<?php echo $tagResponse; ?>"/> 
+				
+				
+				<div class='left top20 dynamic_content_row'>
+					<div id='deadline_ltd' class='left dynamic_content_left'>Deadline</div>
+					<div id='deadline_rtd' class='left dynamic_content_right'> 
+						<input class="edit_task_input" id="edit_task_deadline" name="edit_task_deadline" type="date" name="deadline_td" value="<?php echo $taskdeadline; ?>"/>
+					</div>
 				</div>
-			</div>
-			<div class='left top45 dynamic_content_row'>
-					<div id='comment_ltd' class='left dynamic_content_left'> Comment </div>
-					<div id='comment_rtd' class='left dynamic_content_right'> </div>
-			</div>
-			<?php 
-			if (count($commentContent) > 0) {
-				for($i=0; $i<count($commentContent); $i++) {
-					$date = strtotime( $commentTime[$i] );
-					$date= date('H:m d/m', $date );
-					?>
-					<div class='left top20 dynamic_content_row'>
-						<div id='comment_ltd' class='left dynamic_content_left darkBlueItalic userprofile_link' onclick='javascript:searchUser(\"$commentCreator[$i]\")'> 
-						<img src='../img/avatar1.png' width='55'/> <br>
-						<?php echo $commentCreator[$i]; ?>
-						<br>
-						<?php echo $date; ?>
-						</div>
-						<div id='comment_rtd' class='left dynamic_content_right'> <?php echo $commentContent[$i] ?> </div>
+				
+				<div class='left top20 dynamic_content_row'>
+					<div id='assignee_ltd' class='left dynamic_content_left'>Assignee</div>
+					<div id='assignee_rtd' class='left dynamic_content_right'>
 					<?php 
-					if ($commentCreator[$i] == $username) {
-						echo"<img src='../img/done.png' onclick='javascript:deleteComment(\"$taskID\",\"$commentID[$i]\");' class='cursorPointer' alt=''/>";
-					}
-				}
-			}
-			?>			
-			</div>
-			<div class='left top20 dynamic_content_row'>
-				<div id='addcomment_ltd' class='left dynamic_content_left'> &nbsp; </div>
-				<div id='addcomment_rtd' class='left dynamic_content_right'>
-					<form autocomplete='off' method='POST' action='add_comment.php'>
-						<textarea id='comment_textarea' rows='5' cols='50' name='CommentBox'>
-						</textarea> 
-						<br>
-						<input type='hidden' id='hidden_task_id' name='comment_task_id' value='".$taskID."'/>
-						<input type='submit' value='Add Comment' name='add_comment_button' class='link_red'/>
-						<br><br><br>
-					</form>
+						if (count($assResponse) > 0) {
+							for($i=0; $i<count($assResponse); $i++) {
+								$assResponse[$i];
+								echo "
+								<img src='../img/done.png' class='cursorPointer' width='8' onclick='javascript:edittaskDeleteAss(\"$taskID\", \"$assResponse[$i]\");'/> &nbsp;&nbsp;&nbsp;
+								<span class='userprofile_link darkBlueItalic' onclick='javascript:searchUser(\"$assResponse[$i]\")'> $assResponse[$i] </span> 
+								<br>";
+							}
+						}
+					?>
+					<br>
+					<input class="edit_task_input" id="edit_task_assignee" name="edit_task_assignee" type="text" name="assignee_td" value=""/>
+					</div>
+				</div>			
+				<div class='left top20 dynamic_content_row'>
+					<div id='tag_ltd' class='left dynamic_content_left'> Tag </div>
+					<div id='tag_rtd' class='left dynamic_content_right'>
+						<input class="edit_task_input" id="edit_task_tag" name="edit_task_tag" type="text" name="tag_td" value="<?php echo $tagResponse; ?>"/> 
+					</div>
 				</div>
-			</div> 
+			</form>
 		</div>				
 	</div>
 </section>
