@@ -39,7 +39,7 @@ while($raw = mysql_fetch_array($pswd))
 		$_SESSION['login'] = $q;
 		 echo "Accepted";
 	}else {
-		echo "Password False";
+		echo "Password Salah";
 	}
 	}
 }else {
