@@ -56,8 +56,8 @@
 				<div id="edit-profile" class="editingprofile">
 					<form id="new_profile" action="#" method="post">
 						<div class="field">
-							<label>Username</label>
-							<input size="30" maxlength="50" name="username" id="username" type="text">
+							<label>Full Name</label>
+							<input size="30" maxlength="50" name="name" id="name" type="text">
 						</div>
 						<div class="field">
 								<label>New Avatar</label>
@@ -74,6 +74,9 @@
 							<div class="field">
 								<label>Confirm New Password</label>
 								<input size="30" maxlength="50" name="password_k" id="password_k" type="password">
+							</div>
+							<div class="field buttons">
+								<button type="submit" name="updateProfile" id="submitButton">Save</button>
 							</div>
 					</form>
 				</div>

@@ -302,6 +302,26 @@ Rp(function() {
 		else
 			alert('Invalid username/password combination.');
 	});
+	
+	Rp('#new_profile').on('submit', function(e) {
+
+		e.preventDefault();
+		n = Rp('#name').val();
+		t = Rp('#tanggal_lahir').val();
+		p = Rp('#password').val();
+		pk = Rp('#password_k').val();
+		xmlhttp=new XMLHttpRequest();
+		xmlhttp.open("POST","core/updateProfile.php",false);
+		xmlhttp.send();
+		var parsedJSON = eval('('+xmlhttp.responseText+')');
+
+		if (parsedJSON.success) {
+			alert('Berhasil diubah')
+			window.location.href = 'profile.php';
+		}
+		else
+			alert('Invalid username/password combination.');
+	});
 
 	Rp('#newCategoryForm').on('submit', function(e) {
 
@@ -337,7 +357,7 @@ Rp(function() {
 			Rp('#current-profile').show();
 		}
 		else {
-			Rp('#editProfileLink').nodes[0].innerHTML = 'Save';
+			Rp('#editProfileLink').nodes[0].innerHTML = '';
 			Rp('#editProfileLink').addClass('editingprofile');
 			Rp('#current-profile').hide();
 			Rp('#edit-profile').nodes[0].style.display = 'block';
