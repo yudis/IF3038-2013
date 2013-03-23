@@ -11,21 +11,21 @@
 				<form id="new_tugas" action="#" method="post">
 					<div class="field">
 						<label>Task Name</label>
-						<input size="25" maxlength="25" name="nama" id="nama" type="text">
+						<input size="30" maxlength="25" name="nama" id="nama" type="text">
 					</div>
 					<div class="field">
 						<label>Attachment</label>
-						<input name="attachment" id="attachment" type="file" accept="image/*,video/*">
+						<input size = "30" name="attachment" id="attachment" type="file" accept="image/*,video/*">
 					</div>
 					<div class="field">
 						<label>Deadline</label>
-						<input name="deadline" id="deadline" type="date">
+						<input size = "30" name="deadline" id="deadline" type="date">
 					</div>
 					<div class="field">
 						<label>Assignee</label>
-						<input name="assignee[]" id="assignee" type="text" list="friends"><br>
+						<input size = "30" name="assignee[]" id="assignee" type="text" list="friends"><br>
 						<label></label>
-						<input name="assignee[]" id="assignee" type="text" list="friends"><br>
+						<input size = "30" name="assignee[]" id="assignee" type="text" list="friends"><br>
 						<datalist id="friends">
 							<option value="Irfan Kamil">
 							<option value="Tubagus Andhika Nugraha">
@@ -34,7 +34,7 @@
 					</div>
 					<div class="field">
 						<label>Tag</label>
-						<input name="tag" id="tag" type="text">
+						<input size = "30" name="tag" id="tag" type="text">
 					</div>
 					<div class="buttons">
 						<button type="submit">Save</button>

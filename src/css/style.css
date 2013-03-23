@@ -488,6 +488,10 @@ p.description .detail-label {
 }
 
 /* Profile */
+.editingprofile {
+	display : none;
+}
+
 .profile-details {
 	margin-bottom: 14px;
 	padding-left: 220px;

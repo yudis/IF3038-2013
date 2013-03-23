@@ -53,7 +53,7 @@
 				</section>
 				</div>
 				
-				<div id="edit-profile" class="not-editing">
+				<div id="edit-profile" class="editingprofile">
 					<form id="new_profile" action="#" method="post">
 						<div class="field">
 							<label>Username</label>

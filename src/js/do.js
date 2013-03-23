@@ -330,15 +330,15 @@ Rp(function() {
 	Rp('#editProfileLink').on('click', function(e) {
 		e.preventDefault();
 
-		if (Rp('#editProfileLink').hasClass('editing')) {
+		if (Rp('#editProfileLink').hasClass('editingprofile')) {
 			Rp('#editProfileLink').nodes[0].innerHTML = 'Edit Profile';
-			Rp('#editProfileLink').removeClass('editing');
+			Rp('#editProfileLink').removeClass('editingprofile');
 			Rp('#edit-profile').hide();
 			Rp('#current-profile').show();
 		}
 		else {
 			Rp('#editProfileLink').nodes[0].innerHTML = 'Save';
-			Rp('#editProfileLink').addClass('editing');
+			Rp('#editProfileLink').addClass('editingprofile');
 			Rp('#current-profile').hide();
 			Rp('#edit-profile').nodes[0].style.display = 'block';
 
