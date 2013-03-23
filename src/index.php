@@ -58,19 +58,19 @@ if (ISSET($_SESSION['username']))
                     <div id="formreg">
                     <form name="registration" Method="POST" enctype="multipart/form-data" action="signup_process.php">
                         <label>username</label>
-                        <input name="username" type="text" placeholder="username"  onkeyup="user_validating()" onchange="logingg()" />
-						<img src="pict/blank.png" alt="icon2" id="usericon" onchange="isformvalid()" />
+                        <input name="username" type="text" placeholder="username"  onkeyup="user_validating()"  />
+						<img src="pict/blank.png" alt="icon2" id="usericon"  />
                         <label>password</label>
-                        <input name="password" type="password" placeholder="password" onkeyup="pass_validating()" onchange="logingg()" />
+                        <input name="password" type="password" placeholder="password" onkeyup="pass_validating()"  />
                         <img src="pict/blank.png" alt="icon3" id="passicon" />
 						<label>confirm password</label>
-                        <input name="confirmpass" type="password" placeholder="confirm password" onkeyup="conf_validating()" onchange="logingg()"  />
+                        <input name="confirmpass" type="password" placeholder="confirm password" onkeyup="conf_validating()"   />
 						<img src="pict/blank.png" alt="icon4" id="conficon" />
                         <label>nama lengkap</label>
-                        <input name="namaleng" placeholder="nama lengkap" onkeyup="nama_validating()" onchange="logingg()" />
+                        <input name="namaleng" placeholder="nama lengkap" onkeyup="nama_validating()"  />
 						<img src="pict/blank.png" alt="icon5" id="nameicon" />
                         <label>tanggal lahir</label>
-						<input type="text" name="tanggal" id="date" onmousedown="date_validating()" onchange="logingg()" />
+						<input type="text" name="tanggal" id="date" onmousedown="date_validating()" />
 						<img src="pict/blank.png" alt="icon8" id="dateicon"  />
 						<script type="text/javascript">
 							calendar.set("date");
@@ -80,10 +80,10 @@ if (ISSET($_SESSION['username']))
 						<img src="pict/blank.png" alt="icon6" id="emailicon" />
                             <br><br>
                         <label>avatar</label>
-						<input type="file" name="avatar" onchange="avatar_validating();logingg()" />
+						<input type="file" name="avatar" onchange="avatar_validating()" />
 						<img src="pict/blank.png" alt="icon7" id="avaicon" />
 						<br>
-                        <input class= "submitreg" id="submitb" name="submit" type="submit" value="Submit" />
+                        <button class= "submitreg" disabled id="submitb" name="submit" type="submit"> Submit</button>
                         <input class= "submitreg" name="cancel" type="cancel" onclick="ShowAwal()" value="Cancel">
                     </form>
                 </div>

@@ -1,6 +1,6 @@
 <?
 	session_start();
-	$_SESSION['user']=$_GET["local"];
+	$_SESSION['username']=$_GET["local"];
 	if(isset($_SESSION['username'])){
 		//header( "Location: http://localhost/Progin2/src/home.php") ;
 		echo 'true';
