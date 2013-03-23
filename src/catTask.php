@@ -13,7 +13,7 @@
 	$temp=0;
 	while( $row = mysqli_fetch_array($result)){
 		$temp+=1;
-        echo "<a href=\"rinciantugas.html?id_tugas=".$row['id_tugas']."\">";
+        echo "<a href=\"rinciantugas.php?id_tugas=".$row['id_tugas']."\">";
 		echo "<div id=\"listtask\">";
 		echo "<div>".$row['nama_tugas']."</div>";
 		echo "<div>".$row['deadline']."</div>";

@@ -304,6 +304,18 @@ label {
     margin-right: 220px;
     margin-top: -34px;
 }
+
+#showLoginHeader{
+/*    background-image: url("../pict/welcomefaiz.png");*/
+    font-family: Calibri;
+    font-size: 25px;
+    color: #ffffff;
+    float: right;
+    margin-right: 220px;
+    margin-top: -34px;
+
+}
+
 #logout{
     font-family: Calibri;
     font-size: 25px;

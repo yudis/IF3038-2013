@@ -1,14 +1,14 @@
-	
-        <title> Next | Dashboard </title>
+<head >			<!------memanggil showUserLogin saat load body-------->	
+
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/dash.css">
         <script type="text/javascript" src="js/popup.js"></script>
         <script>
 
-            var itotal=5;
+/*            var itotal=5;
             var ipartin=0;
             var ipartout=0;
-            var itulis=0;
+            var itulis=0;*/
             
 			
 			function showUserLogin(){							/*-----------menampilkan user pada local storage-------------- */
@@ -18,7 +18,8 @@
 //				alert(selisihHari);				
 				
 				if(selisihHari<30){							
-					document.getElementById("wellfaiz").innerHTML="Welcome "+localStorage.userLogin;										
+					document.getElementById("showLoginHeader").innerHTML="Welcome "+localStorage.userLogin;	
+														
 				}else{										//jika sudah 30 hari, user harus login lagi
 					window.location="index.php";	
 				}
@@ -27,7 +28,7 @@
 			function hapusUserLogin(){							/*-----------menghapus user dan waktu pada local storage-------*/
 				localStorage.clear();
 			}
-			
+/*			
             function taskawal(itotal){
                 for(var i=0;i<itotal;i++){
                 var para=document.createElement("p");
@@ -90,7 +91,7 @@
             function hideAddTask(){
                 document.getElementById("addtask").style.visibility="hidden";
             }
-			
+*/			
 			
 <!------------------------------------------------ buat search------------------------------------------>			
 	    function tampilSearch(){
@@ -123,11 +124,9 @@
         </script>			
             
         </script>
-    </head>
-    <body onLoad="taskawal(6);showUserLogin() ">			<!------memanggil showUserLogin saat load body-------->
-         <div class="header">
+                     <div class="header">
 			<div id="logo">
-			    <a hreg="dashboard.html">
+			    <a hreg="dashboard.php">
 			    <img src="pict/logo.png">
 			    </a>
 			</div>
@@ -135,10 +134,10 @@
 			    
 			</div>
 			<div id="dashboard">
-			    <a href="dashboard.html">DASHBOARD</a>
+			    <a href="dashboard.php">DASHBOARD</a>
 			</div>
 			<div id="profile">
-			    <a href="profile.html">PROFILE</a>
+			    <a href="profile.php">PROFILE</a>
 			</div>
 			<div id="search">
             
@@ -162,17 +161,31 @@
 
 
 
-                        <input type="submit" class="searchbuttonbox cf">
+                        <input type="submit" class="searchbuttonbox cf" >
                         
                     </form>
-					    
+				</div>	<!--end div search-->
+			<div id="showLoginHeader">
+
+			</div>	
+            
+            <div id="showAvatarHeader">
+
+			</div>	
+            				    
+            
+            	<div id="logout" onClick="hapusUserLogin()">		<!---------hapus user login dan waktunya ketika logout ---------->
+			    <a href="index.php">LOGOUT</a>
+
+                
 				    </div>
                     
-			<div id="wellfaiz">
-				
-			</div>
-			<div id="logout" onClick="hapusUserLogin()">		<!---------hapus user login dan waktunya ketika logout ---------->
-			    <a href="index.php">LOGOUT</a>
-			</div>
+
+		
 		  </div>
+
+
+        
+    </head>
+
 

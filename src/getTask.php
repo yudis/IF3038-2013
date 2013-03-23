@@ -15,7 +15,7 @@
 		$query2 = "SELECT nama_kategori FROM kategori WHERE (id_kategori=$row[id_kategori])";
 		$result2 = mysqli_query($con,$query2);
 		$row2 = mysqli_fetch_row($result2);
-        echo "<a href=\"rinciantugas.html?id_tugas=".$row['id_tugas']."\">";
+        echo "<a href=\"rinciantugas.php?id_tugas=".$row['id_tugas']."\">";
 		echo "<div id=\"listtask\">";
 		echo "<div>".$row['nama_tugas']."</div>";
 		echo "<div>".$row['deadline']."</div>";

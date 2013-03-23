@@ -1,5 +1,7 @@
 <html>
-    <head>
+
+    
+        <title> Next | Search Result </title>    
 	<?php 
 	include 'header.php'; 
 	$tugas = $_POST["search"];
@@ -31,10 +33,13 @@
 			echo "<div class=\"listtaskJo\">";
 			echo "tugas:";
 			echo "<div >" . $row['nama_kategori']."</div>";		
+			echo " <a href=\"rinciantugas.php?id_tugas=" . $row['id_tugas'] . "\">	";			
 			echo "<div >" . $row['nama_tugas']."</div>";
+			echo " </a>";
 			echo "<div >" . $row['deadline']."</div>";
 			echo "<div >" . "tag : " . $row['tag']."</div>";
 			echo "<div >" . "status : " . $row['status']."</div>";		
+			echo "<input type=\"checkbox\"> ";			
 			echo "</div>";
 		}
 		
@@ -45,8 +50,11 @@
 			echo "<div class=\"listtaskJo\">";
 			echo "tag:";
 			echo "<div >" . $row4['tag']."</div>";
+			echo " <a href=\"rinciantugas.php?id_tugas=" . $row4['id_tugas'] . "\">	";			
 			echo "<div >" . "tugas: " .$row4['nama_tugas']."</div>";
+			echo " </a>";			
 			echo "<div >" . "kategori: " . $row4['nama_kategori']."</div>";
+			echo "<input type=\"checkbox\"> ";						
 			echo "</div>";
 		}	
 	
@@ -149,10 +157,13 @@
 			echo "<div class=\"listtaskJo\">";
 			echo "tugas:";
 			echo "<div >" . $row['nama_kategori']."</div>";		
+			echo " <a href=\"rinciantugas.php?id_tugas=" . $row['id_tugas'] . "\">	";			
 			echo "<div >" . $row['nama_tugas']."</div>";
+			echo " </a>";			
 			echo "<div >" . $row['deadline']."</div>";
 			echo "<div >" . "tag : " . $row['tag']."</div>";
 			echo "<div >" . "status : " . $row['status']."</div>";		
+			echo "<input type=\"checkbox\"> ";						
 			echo "</div>";
 		}			
 	}//end tugas
@@ -165,21 +176,37 @@
 			echo "<div class=\"listtaskJo\">";
 			echo "tag:";
 			echo "<div >" . $row4['tag']."</div>";
-			echo "<div >" . "tugas: " .$row4['nama_tugas']."</div>";
+			echo " <a href=\"rinciantugas.php?id_tugas=" . $row4['id_tugas'] . "\">	";			
+			echo "<div >" . $row4['nama_tugas']."</div>";
+			echo " </a>";			
 			echo "<div >" . "kategori: " . $row4['nama_kategori']."</div>";
+			echo "<input type=\"checkbox\"> ";						
 			echo "</div>";
 		}	
 		
 	}//end tag
 
 	else if($filter=="komentar"){
+		$query4 = "SELECT * FROM komentar WHERE isi = '$tugas'";
+		$result4 = mysqli_query($con,$query4);
+		
+		while($row4= mysqli_fetch_array($result4)){
+			echo "<div class=\"listtaskJo\">";
+			echo "komentar:";
+			echo "<div >" . $row4['isi']."</div>";
+			echo "<div >" . $row4['username']."</div>";
+			echo "<div >" . $row4['id_tugas']."</div>";
+			echo "</div>";
+		}	
 		
 	}//end komentar
 		
 	mysqli_close($con);	
 	?>                 
 <!----------------------------------------- body ----------------------------------------->                 
-        <div class="main">
+
+        
+    <div class="main">
 		       
        		<div id="divTugas">
             
@@ -188,11 +215,13 @@
             
             </div> <!-- end divTugas-->
        
-        </div> <!-- end div main-->
-       
+    </div> <!-- end div main-->
+
+
        
        
 <!----------------------------------------- footer ----------------------------------------->                      
+	<body onLoad="showUserLogin() ">
         <div class="footer">
             Copyright © Ahmad Faiz - Fandi Pradana - Sigit Aji
         </div>

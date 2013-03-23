@@ -87,7 +87,7 @@
                     if (xmlhttp1.readyState == 4 && xmlhttp1.status == 200) {
                         var s = xmlhttp1.responseText;
                         var n = s.indexOf("\n");
-                        //alert(s);
+                        
                         
                         if (n != -1) {
                             //Ambil data-data tugas
@@ -289,7 +289,7 @@
                             }
                             
                             tambah += "<br>"+komentar;
-                            tambah += '</div>'
+                            tambah += '</div>';
                             tambah += "</div>";
                             daftar_komentar.innerHTML += tambah+"\n";
                         }
@@ -424,7 +424,7 @@
         <!-------------------------------HEADER HALAMAN------------------------------------->    
         <div class="header">
             <div id="logo">
-                <a hreg="dashboard.html">
+                <a hreg="dashboard.php">
                 <img src="pict/logo.png">
                 </a>
             </div>
@@ -432,10 +432,10 @@
                 
             </div>
             <div id="dashboard">
-                <a href="dashboard.html">DASHBOARD</a>
+                <a href="dashboard.php">DASHBOARD</a>
             </div>
             <div id="profile">
-                <a href="profile.html">PROFILE</a>
+                <a href="profile.php">PROFILE</a>
             </div>
             <div id="search">
 				<section class="searchform cf">
@@ -451,7 +451,7 @@
                 
             </div>
             <div id="logout">
-                <a href="index.html">LOGOUT</a>
+                <a href="index.php">LOGOUT</a>
             </div>
         </div>
         
@@ -461,7 +461,7 @@
             </div>
             <div>
                 <form>
-                    <input type="button" id="back" value="" onclick="location.href='dashboard.html'">
+                    <input type="button" id="back" value="" onclick="location.href='dashboard.php'">
                 </form>
             </div>
 
