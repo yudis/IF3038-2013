@@ -490,13 +490,39 @@ input[type="search"], isindex {
 	float: left;
 	width: 120px;
 	height: 100px;
+	margin: 2px;
 }
+
 
 #biodata2
 {
 	float: left;
 	width: 170px;
 	height: 100px;
+}
+
+#biodata3
+{
+	float: left;
+	width: 170px;
+	height: 100px;
+	display: none;
+}
+
+#pedit
+{
+	float: left;
+	width: 170px;
+	height: 20px;
+	display: block;
+}
+
+#donepedit
+{	
+	float: left;
+	width: 90px;
+	height: 20px;
+	margin: 5px;
 }
 
 #edit

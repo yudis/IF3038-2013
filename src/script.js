@@ -34,23 +34,73 @@ function validating(month, day, year){
 	}
 }
 
-var idActiveTask;
-var ActiveButton;
-function display(id,button){
-	if (idActiveTask == null) {
-		idActiveTask = "edited";
-	}
-	document.getElementById(idActiveTask).style.display = "none";
-	idActiveTask = id;
-	document.getElementById(id).style.display = "block";
-	displaybutton(button);
+//callback function AJAX
+var xmlhttp;
+var url;
+function loadXMLDoc(url,cfunc)
+{
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.open("GET",url,true);
+xmlhttp.onreadystatechange=cfunc;
+xmlhttp.send();
 }
-			
-function displaybutton(but){
-	if (ActiveButton == null){
-		ActiveButton = "tombol_edit";
+
+var pIdActiveTask;
+var pActiveButton;
+function pdisplay(pid,pbutton){
+	if (pIdActiveTask == null) {
+		pIdActiveTask = "biodata2";
 	}
-	document.getElementById(ActiveButton).style.display = "none";
-	ActiveButton = but;
-	document.getElementById(but).style.display = "block";
+	document.getElementById(pIdActiveTask).style.display = "none";
+	pIdActiveTask = pid;
+	document.getElementById(pid).style.display = "block";
+	pdisplaybutton(pbutton);
+}
+
+function edituser()
+{
+	document.getElementById("editresponse").innerHTML = "LOADING";
+	
+	var x = document.getElementById("edname").value;
+	var i = document.getElementById("edmail").value;
+	var j =  document.getElementById("edpass").value;
+	var k =  document.getElementById("edcpass").value;
+	
+	var y = document.getElementById('tahun').value;
+	var m = document.getElementById('bulan').value;
+	var d = document.getElementById('tanggal').value;
+	
+	loadXMLDoc("euser.php?edname="+x+"&edmail="+i+"&edpass="+j+"&edcpass="+k+
+					   "&tahun="+y+"&bulan="+m+"&tanggal="+d
+	
+	,function()
+	{
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+		{
+			if (xmlhttp.responseText == 1)
+			{
+				document.getElementById("editresponse").innerHTML = "email sudah terpakai";
+			}
+			else if (xmlhttp.responseText == 2)
+			{
+			}
+		}
+	});
+}
+
+		
+function pdisplaybutton(pbut){
+	if (pActiveButton == null){
+		pActiveButton = "pedit";
+	}
+	document.getElementById(pActiveButton).style.display = "none";
+	pActiveButton = pbut;
+	document.getElementById(pbut).style.display = "block";
 }

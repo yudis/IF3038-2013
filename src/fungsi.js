@@ -20,7 +20,6 @@ var bulan = document.getElementById("bulan");
 var tanggal = document.getElementById("tanggal");
 var daftar = document.getElementById("daftar");
 
-<<<<<<< HEAD
 //callback function AJAX
 var xmlhttp;
 var url;
@@ -55,7 +54,8 @@ xmlhttp.send();
 				else 
 				{
 					document.getElementById('loginresponse').innerHTML = 'WELCOME';
-					window.location = "profil.html";
+		
+					window.location = "createSession.php?t="+x;
 				}
 			}
 		});
@@ -66,7 +66,7 @@ xmlhttp.send();
 		document.getElementById('loginresponse').innerHTML = "LOADING";
 		
 		var x = document.getElementById('username').value;
-		var y = document.getElementById('email').value;
+		var e = document.getElementById('email').value;
 		var i = document.getElementById('copassword').value;
 		var j = document.getElementById('namalengkap').value;
 		var k = document.getElementById('inputfile').value;
@@ -74,7 +74,7 @@ xmlhttp.send();
 		var m = document.getElementById('bulan').value;
 		var d = document.getElementById('tanggal').value;
 		
-		loadXMLDoc("register.php?username="+x+"&email="+y+"&copassword="+i+"&namalengkap="
+		loadXMLDoc("register.php?username="+x+"&email="+e+"&copassword="+i+"&namalengkap="
 						   +j+"&inputfile="+k+"&tahun="+y+"&bulan="+m+"&tanggal="+d
 		,function()
 		{
@@ -91,29 +91,12 @@ xmlhttp.send();
 				else if (xmlhttp.responseText == 2)
 				{
 					document.getElementById('regresponse').innerHTML = 'WELCOME';
-					window.location = "profil.html";
 				}
 			}
 		});
 	}
 	
 	/*daftar.onsubmit = function(){
-=======
-	form.onsubmit = function(){
-		if ((idlogin.value == "admin") && (passlogin.value == "admin1234"))
-		{
-			window.location = "dashboard.html";
-		}
-		else
-		{
-			alert("username atau password Anda salah")
-			window.location = "index.html";
-		}
-		return false;
-	}
-	
-	daftar.onsubmit = function(){
->>>>>>> 6af84a95ac77327dac775cb3a1cd878b621e474f
 		if (submit.disabled == "")
 		{
 			alert("register berhasil");
@@ -121,11 +104,7 @@ xmlhttp.send();
 		}
 		
 		return false;
-<<<<<<< HEAD
 	}*/
-=======
-	}
->>>>>>> 6af84a95ac77327dac775cb3a1cd878b621e474f
 
 	username.onkeyup = function()
 	{
