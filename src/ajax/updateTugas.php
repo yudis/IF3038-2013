@@ -45,6 +45,11 @@ try {
 		$tugas->setStats($_GET["id_tugas"], $_GET["status"]);
 
 		$data["responseStatus"] = 200;
+	} else if (isset($_GET["updatedeadline"]) && isset($_GET["id_tugas"]) && isset($_GET["deadline"])) {
+		$tugas = new Tugas();
+		$tugas->updateDeadline($_GET["id_tugas"], $_GET["deadline"]);
+
+		$data["responseStatus"] = 200;
 	} else if (isset($_GET["removea"]) && isset($_GET["id_tugas"]) && isset($_GET["username"])) {
 		$tugas = new Tugas();
 		$tugas->removeAssignee($_GET["id_tugas"], $_GET["username"]);
@@ -70,6 +75,28 @@ try {
 		$data = Array();
 		$data["responseStatus"] = 200;
 		$data["suggestedAssignees"] = $tugas->getSuggestionAssignees($_GET["id_tugas"], $_GET["start"] . '%', 10);
+	} else if (isset($_GET["addt"]) && isset($_GET["id_tugas"]) && isset($_GET["tag"])) {
+		$tugas = new Tugas();
+		$tugas->addTag($_GET["id_tugas"], $_GET["tag"]);
+		$tugas->updateTimestamp($_GET["id_tugas"]);
+		$data = Array();
+		$data["responseStatus"] = 200;
+	} else if (isset($_GET["suggestt"]) && isset($_GET["id_tugas"]) && isset($_GET["start"])) {
+		$tugas = new Tugas();
+		$data = Array();
+		$data["responseStatus"] = 200;
+		$data["suggestedTags"] = $tugas->getSuggestionTags($_GET["id_tugas"], $_GET["start"] . '%', 10);
+	} else if (isset($_GET["removet"]) && isset($_GET["id_tugas"]) && isset($_GET["tag"])) {
+		$tugas = new Tugas();
+		$tugas->removeTag($_GET["id_tugas"], $_GET["tag"]);
+		$tugas->updateTimestamp($_GET["id_tugas"]);
+		$data = Array();
+		$data["responseStatus"] = 200;
+	} else if (isset($_GET["removetugas"]) && isset($_GET["id_tugas"])) {
+		$tugas = new Tugas();
+		$tugas->deleteTask($_GET["id_tugas"]);
+		$data = Array();
+		$data["responseStatus"] = 200;		
 	} else {
 		$data["responseStatus"] = 400;
 		$data["message"] = "Bad request";

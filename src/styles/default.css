@@ -396,6 +396,9 @@ footer.content {
 #komentar .red {
     color: #ff0000;
 }
+#attachmentTugas img {
+    max-width: 960px;
+}
 
 /* CSS untuk halaman create tugas */
 .main .formtugas {

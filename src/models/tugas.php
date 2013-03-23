@@ -13,6 +13,7 @@ class Tugas extends Model
 	private $_tag;
 	private $_kategori;
 	private $_assignees;
+	private $_priviledge;
 	
 	public function get_id_tugas() { return $this->_id_tugas; } 
 	public function get_taskname() { return $this->_taskname; } 
@@ -55,6 +56,7 @@ class Tugas extends Model
 		$this->_assignees = $tugas["assignees"];
 		$this->_kategori = $tugas["kategori"];
 		$this->_id_kategori = $tugas["id_kategori"];
+		//$this->_priviledge = $tugas["priviledge"];
 	}
 	
 	public function toArray()
@@ -71,12 +73,12 @@ class Tugas extends Model
 		$tugas["assignees"] = $this->_assignees;
 		$tugas["kategori"] = $this->_kategori;
 		$tugas["id_kategori"] = $this->_id_kategori;
-		
+		$tugas["priviledge"] = $this->_priviledge;
 		return $tugas;
 	}
 	
 	
-	public function getTugas($id_tugas)
+	public function getTugas($id_tugas, $username = null)
 	{
 		$sql = "SELECT t.id AS id, t.nama AS nama, tgl_deadline,  `status` , t.last_mod AS last_mod, pemilik, id_kategori, c.nama AS nama_kategori
 				FROM categories c, tugas t
@@ -103,6 +105,14 @@ class Tugas extends Model
 		$this->_tag = $this->getTags($id_tugas);
 		$this->_attachment = $this->getAttachments($id_tugas);
 		$this->_assignees = $this->getAssignees($id_tugas);
+		if ($username != null)
+		{
+			$this->_priviledge = $this->isPriviledge($id_tugas, $username);
+		}
+		else
+		{
+			$this->_priviledge = false;
+		}
 
 		return $this->toArray();
 	}
@@ -196,7 +206,7 @@ class Tugas extends Model
 		$this->addAssignee($result["id"],$username);
     }
 	
-	public function addTag($id_tugas,$tag)
+	public function addTag ($id_tugas,$tag)
 	{
 		$sql="INSERT INTO `tags`(`id_tugas`, `tag`) VALUES (?,?); ";
 		$data = array(
@@ -205,7 +215,7 @@ class Tugas extends Model
 		);
 		
 		$sth = $this->_db->prepare($sql);
-		$sth->execute($data);	
+		return $sth->execute($data);	
 	}
 	
 	public function addNewestTag($tag)
@@ -386,7 +396,8 @@ class Tugas extends Model
 
 	public function getSuggestionAssignees($id_tugas, $start, $limit)
 	{
-		$sql = "SELECT `username`, CONCAT(`username`, ' - ', `full_name`) AS `display` FROM `users` 
+		$sql = "SELECT `username`, CONCAT(`username`, ' - ', `full_name`) AS `display` 
+				FROM `users` 
 				WHERE `username` NOT IN (SELECT `username` FROM assignees WHERE `id_tugas`=?)
 				AND `username` LIKE ?
 				LIMIT 0, $limit";
@@ -403,5 +414,51 @@ class Tugas extends Model
 		$this->_setSql($sql);
 		return $this->getAll(array($id_tugas, $id_tugas, $start));
 		*/
+	}
+
+	public function getSuggestionTags($id_tugas, $start, $limit)
+	{
+		$sql = "SELECT `tag` 
+				FROM `tags` 
+				WHERE `id_tugas` <> ?
+				AND `tag` LIKE ?
+				LIMIT 0, $limit";
+		$this->_setSql($sql);
+		return $this->getAll(array($id_tugas, $start));
+	}
+
+	public function removeTag($id_tugas, $tag)
+	{
+		$sql = 'DELETE FROM `tags` WHERE `id_tugas`=? AND `tag`=?;';
+		
+		$data = array($id_tugas, $tag);
+		
+		$sth = $this->_db->prepare($sql);
+		return $sth->execute($data);
+	}
+
+	public function updateDeadline($id_tugas, $tgl_deadline)
+	{
+		$sql = 'UPDATE `tugas` SET `tgl_deadline` = ? WHERE `tugas`.`id` = ?;';
+		
+		$data = array($tgl_deadline, $id_tugas);
+		
+		$sth = $this->_db->prepare($sql);
+		return $sth->execute($data);
+	}
+
+	public function isPriviledge($id_tugas, $username)
+	{
+		$sql = 'SELECT COUNT(*) AS `n` FROM `tugas` t, `assignees` a WHERE t.`id` = ? AND t.`id` = a.`id_tugas` AND (t.`pemilik` = ? OR a.`username` = ?)';
+		$this->_setSql($sql);
+		$priv = $this->getRow(array($id_tugas, $username, $username));
+		if ($priv["n"] > 0) 
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

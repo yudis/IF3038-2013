@@ -17,11 +17,20 @@ else
 	if (isset($_GET["id"]))
 	{
 		$tugas = new Tugas();
-		$data = $tugas->getTugas($_GET["id"]);
+		$data = $tugas->getTugas($_GET["id"], $_SESSION["user"]["username"]);
+
+		//die(json_encode($data));
 		
 		if ($data)
 		{
-			$view = new View('views/tugas/tugas.tpl');
+			if ($data["priviledge"] == true)
+			{
+				$view = new View('views/tugas/tugas.tpl');
+			}
+			else
+			{
+				$view = new View('views/tugas/tugas2.tpl');
+			}
 			$view->set('title', 'Todolist | Rincian Tugas');
 			$view->set('headTags', '<link rel="stylesheet" type="text/css" href="styles/tugas.css" />
 					<link rel="stylesheet" type="text/css" href="./styles/autosuggest.css" />

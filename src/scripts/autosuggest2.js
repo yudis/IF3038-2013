@@ -35,7 +35,6 @@ function AutoSuggestControl(oTextbox /*:HTMLInputElement*/,
     
     //initialize the control
     this.init();
-    
 }
 
 /**
