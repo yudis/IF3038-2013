@@ -1,0 +1,52 @@
+===============================================
+Kategori :
+1. Tugas Kelompok
+idkategori	: 1
+namakategori	: Tugas Kelompok
+hak		: moonray, iLol
+
+2. Tugas Pribadi
+idkategori	: 2
+namakategori	: Tugas Pribadi
+hak		: moonray
+
+===============================================
+Username 	: moonray
+Password 	: 12345678
+Fullname 	: Raymond Lukanta
+Birthdate	: 1 Desember 1992
+Phone Number	: 081912345678
+Email		: raymond@gmail.com
+Avatar		: upload/raymond.jpg
+
+--------------------------------
+Task		:
+1. Tubes 2 Progin
+idtugas		: 1
+namatugas	: Tubes 2 Progin
+attachment	: upload/tubes2progin.pdf
+deadline	: 23 Maret 2013
+idkategori	: 1
+username	: moonray
+tag		: kuliah, tubes
+assignee	: iLol
+status		: not done
+
+2. UTS Psiter
+idtugas		: 2
+namatugas	: UTS Psiter
+attachment	: upload/utspsiter.pdf
+deadline	: 14 Maret 2013
+idkategori	: 2
+username	: moonray
+tag		: kuliah, uts
+status		: done
+	
+===============================================
+Username 	: iLol
+Password 	: 87654321
+Fullname 	: Kevin Winata
+Birthdate	: 25 Desember 1992
+Phone Number	: 081987654321
+Email		: kevin@gmail.com
+Avatar		: upload/kevin.jpg
