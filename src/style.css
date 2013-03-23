@@ -194,6 +194,10 @@ a img {
 	background-color: #cccccc;
 	height: 1px;
 }
+.komen-avatar {
+	float:left;
+	margin-right: 5px;
+}
 .komen-nama {
 	font-weight: bold;
 	color: #db4444;
@@ -730,7 +734,6 @@ a img {
     background-color: #ffffff;
     float:left;
     width:30%;
-    height : 800px;
 }
 
 #main {
