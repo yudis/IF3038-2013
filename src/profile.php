@@ -82,7 +82,11 @@
 						<div class="buttons">
 							<button onclick="updateProfile('password',<?php echo $_GET['user_id']; ?>);">Save Password</button>
 						</div>
+					<?php if ($user['user_id'] == getUserId()) :?>
+							<br>
+						</div>
 					</form>
+					<?php endif;?>
 				</div>
 
 				<div class="primary2">

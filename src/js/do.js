@@ -324,26 +324,6 @@ Rp(function() {
 		else
 			alert('Invalid username/password combination.');
 	});
-	
-	Rp('#new_profile').on('submit', function(e) {
-
-		e.preventDefault();
-		n = Rp('#name').val();
-		t = Rp('#tanggal_lahir').val();
-		p = Rp('#password').val();
-		pk = Rp('#password_k').val();
-		xmlhttp=new XMLHttpRequest();
-		xmlhttp.open("POST","core/updateProfile.php",false);
-		xmlhttp.send();
-		var parsedJSON = eval('('+xmlhttp.responseText+')');
-
-/*		if (parsedJSON.success) {
-			alert('Berhasil diubah');
-			window.location.href = 'profile.php';
-		}
-		else
-			alert('Tidak ada yang diubah');*/
-	});
 
 	Rp('#newCategoryForm').on('submit', function(e) {
 
@@ -411,9 +391,9 @@ function updateProfile(mode,user_id){
 	if (mode == "tanggal_lahir") {
 		value = Rp('#tanggal_lahir').val();
 	}
-//	if (mode == "addtag") {
-//		value = Rp('#addtag').val();
-//	}
+	if (mode == "password") {
+		value = Rp('#password').val();
+	}
 	xmlhttp=new XMLHttpRequest();
 	xmlhttp.open("POST","core/updateProfile.php",false);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
