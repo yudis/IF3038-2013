@@ -12,16 +12,6 @@ $id_creator = $task['creator'];
 $result2=mysqli_query($con,"SELECT * FROM `members` WHERE id=$id_creator");
 $creator = mysqli_fetch_array($result2);
 
-// Get assignee
-$result3=mysqli_query($con,"SELECT * FROM `assignees` WHERE task=$id_task");
-$count_assignee = 0;
-while ($assigned = mysqli_fetch_array($result3)) {
-	$id_assignee = $assigned['member'];
-	$result4=mysqli_query($con,"SELECT * FROM `members` WHERE id=$id_assignee");
-	$assignee[$count_assignee] = mysqli_fetch_array($result4);
-	$count_assignee++;
-}
-
 // Get tags
 $result5=mysqli_query($con,"SELECT * FROM `tags` WHERE tagged=$id_task");
 $count_tag = 0;
@@ -47,6 +37,13 @@ while ($commented = mysqli_fetch_array($result7)) {
 	$commenter[$count_comment] = mysqli_fetch_array($result8);
 	$count_comment++;
 }
+
+$id_user = $_SESSION['id'];
+$res = mysqli_query($con, "SELECT * 
+						FROM assignees 
+						WHERE member=$id_user 
+						AND task=$id_task");
+$assignee = mysqli_fetch_array($res);
 ?>
 <!-- created by Enjella-->
 <div id="main">
@@ -57,7 +54,6 @@ while ($commented = mysqli_fetch_array($result7)) {
 			<div class="judul">
 				<?php echo $task['name'];?>
 			</div>
-                                <div id ="dashboardimage"><img src="images/Prog_In.png" alt="dashboardimgprogin"/></div>
 			<div class="isi">
 			</div>
             
@@ -65,7 +61,10 @@ while ($commented = mysqli_fetch_array($result7)) {
 				<div class="byon">
 					Posted by <strong><span class="by"><?php echo $creator['username'];?></span></strong> on <strong><?php echo $task['timestamp'];?></strong>
 				</div>
-				
+				<div class="byon" id="<?php echo $id_task;?>">
+					Status : <strong><?php if ($assignee['finished'] == 1) echo 'Selesai'; else echo 'Belum selesai';?></strong><br />
+					<input name="YourChoice" type="checkbox" value="selesai" <?php if($assignee['finished']==1) echo "checked"; ?> onclick="change_status('<?php echo $id_task;?>',<?php echo $assignee['finished'];?>,<?php echo $id_task;?>)"> Selesai
+				</div>
 				<div id="done">
 					<br />
 					<div class="byon">
@@ -75,6 +74,17 @@ while ($commented = mysqli_fetch_array($result7)) {
 					<div class="byon">
 						Assignee : <strong>
 						<?php
+						unset($assignee);
+						// Get assignee
+						$result3=mysqli_query($con,"SELECT * FROM `assignees` WHERE task=$id_task");
+						$count_assignee = 0;
+						while ($assigned = mysqli_fetch_array($result3)) {
+							$id_assignee = $assigned['member'];
+							$result4=mysqli_query($con,"SELECT * FROM `members` WHERE id=$id_assignee");
+							$assignee[$count_assignee] = mysqli_fetch_array($result4);
+							$count_assignee++;
+						}
+
 						for ($i = 0; $i < $count_assignee; $i++) {
 							$current=$assignee[$i];
 							echo $current['username'];
