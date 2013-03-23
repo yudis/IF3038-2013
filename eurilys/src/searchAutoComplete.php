@@ -21,21 +21,21 @@
 	
 	/* Searching */
 	if ($filter == 1) { //Search All
-		$query 	= "SELECT full_name, username FROM user WHERE username LIKE '%$q%' OR email LIKE '%$q%' OR full_name LIKE '%$q%' OR birthdate LIKE '%$q%';";
+		$query 	= "SELECT distinct full_name, username FROM user WHERE username LIKE '%$q%' OR email LIKE '%$q%' OR full_name LIKE '%$q%' OR birthdate LIKE '%$q%';";
 		$result	= mysql_query($query);
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 			$a[] = $row["full_name"];
 			$id[] = $row["username"];
 			$tipe[] = "user";
 		}
-		$query 	= "SELECT cat_id, cat_name FROM category WHERE cat_name LIKE '%$q%';";
+		$query 	= "SELECT distinct cat_id, cat_name FROM category WHERE cat_name LIKE '%$q%';";
 		$result	= mysql_query($query);
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 			$a[] = $row["cat_name"];
 			$id[] = $row["cat_id"];
 			$tipe[] = "category";
 		}
-		$query 	= "SELECT * FROM ((task LEFT JOIN tag ON task.task_id = tag.task_id) LEFT JOIN comment ON task.task_id = comment.task_id) 
+		$query 	= "SELECT DISTINCT * FROM ((task LEFT JOIN tag ON task.task_id = tag.task_id) LEFT JOIN comment ON task.task_id = comment.task_id) 
 			WHERE task_name LIKE '%$q%' OR tag_name LIKE '%$q%' OR comment_content LIKE '%$q%'";
 		$result	= mysql_query($query);
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
@@ -47,7 +47,7 @@
 	}
 	else
 	if ($filter == 2) { //Search User (username, email, nama lengkap, birthdate)
-		$query 	= "SELECT full_name, username FROM user WHERE username LIKE '%$q%' OR email LIKE '%$q%' OR full_name LIKE '%$q%' OR birthdate LIKE '%$q%';";
+		$query 	= "SELECT DISTINCT full_name, username FROM user WHERE username LIKE '%$q%' OR email LIKE '%$q%' OR full_name LIKE '%$q%' OR birthdate LIKE '%$q%';";
 		$result	= mysql_query($query);
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 			$a[] = $row["full_name"];
@@ -57,7 +57,7 @@
 	}
 	else 
 	if ($filter == 3) { //Search Category
-		$query 	= "SELECT cat_id, cat_name FROM category WHERE cat_name LIKE '%$q%';";
+		$query 	= "SELECT DISTINCT cat_id, cat_name FROM category WHERE cat_name LIKE '%$q%';";
 		$result	= mysql_query($query);
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 			$a[] = $row["cat_name"];
@@ -68,7 +68,7 @@
 	else 
 	if ($filter == 4) { //Search Task (task name, tag, comment)
 		$query 	= "
-		SELECT * FROM ((task LEFT JOIN tag ON task.task_id = tag.task_id) LEFT JOIN comment ON task.task_id = comment.task_id) 
+		SELECT DISTINCT * FROM ((task LEFT JOIN tag ON task.task_id = tag.task_id) LEFT JOIN comment ON task.task_id = comment.task_id) 
 		WHERE task_name LIKE '%$q%' OR tag_name LIKE '%$q%' OR comment_content LIKE '%$q%'";
 		$result	= mysql_query($query);
 		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
