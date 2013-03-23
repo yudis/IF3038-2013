@@ -131,4 +131,34 @@ function showBuatTugas(cat,user){
     window.location="addtask.php?categoryID="+cat+"&userID="+user;
 }
 
+function delCate(idCat){
+    var deletecat = createObject();
+    deletecat.onreadystatechange = function() {
+        if (deletecat.readyState == 4)
+        {
+            var response = deletecat.responseText;
+            alert(response);
+        }
+
+    };
+    deletecat.open('get', 'deletecategory.php?IDCategory=' +idCat);
+    deletecat.send(null);
+    update();
+}
+
+function delTask(idTask){
+    var deletetask = createObject();
+    deletetask.onreadystatechange = function() {
+        if (deletetask.readyState == 4)
+        {
+            var response = deletetask.responseText;
+
+        }
+
+    };
+    deletetask.open('get', 'deleteTask.php?IDTask=' + idTask );
+    deletetask.send(null);
+    update();
+}
+
 setInterval(update(), 5000);
