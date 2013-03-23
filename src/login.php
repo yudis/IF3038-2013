@@ -31,7 +31,7 @@ if($count==1){
 	$_SESSION['gender'] = $row['gender'];
 	$_SESSION['about'] = $row['about'];
 	mysqli_close($con);
-	header("location:profil.php");
+	header("location:dashboard.php");
 }
 else {
 	mysqli_close($con);
