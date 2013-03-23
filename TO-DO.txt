@@ -1,7 +1,7 @@
 Nunu : 
-	- edit Profil		//validasi belum jalan, processing foto belum
-	- Halaman Profil	//foto belum, task blm ada linknya
-	- Login			// Done
+	- edit Profil		//validasi belum jalan
+	- Halaman Profil	//styling pointer tas
+	- Login				// Done
 	
 Kania : 
 	- Pembuatan Tugas	// Half		- Udah bisa multiple files (3)
@@ -11,8 +11,8 @@ Kania :
 	- Bonus Media Query	// Done 	-Ganti warna header (3 biji)
 	- 
 Sharon : 
-	- Register									// Done
-	- Dashboard									// Done		- Belum di-generate berdasarkan : 
+	- Register			// Done
+	- Dashboard			// Done		- Belum di-generate berdasarkan : 
 														category owner
 														category assignee
 														task assignee														
