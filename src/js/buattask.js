@@ -12,10 +12,13 @@ function atta_validating() {
 	if(
 	   (attaid.lastIndexOf(".jpg") != -1) ||
 	   (attaid.lastIndexOf(".jpeg") != -1) ||
-	   (attaid.lastIndexOf(".mp3") != -1) ||
-	   (attaid.lastIndexOf(".mp4") != -1) ||
+	   (attaid.lastIndexOf(".gif") != -1) ||
+	   (attaid.lastIndexOf(".png") != -1) ||
 	   (attaid.lastIndexOf(".avi") != -1) ||
-	   (attaid.lastIndexOf(".mkv") != -1)
+	   (attaid.lastIndexOf(".mp4") != -1) ||
+	   (attaid.lastIndexOf(".flv") != -1) ||
+	   (attaid.lastIndexOf(".3gp") != -1) ||
+	   (attaid.lastIndexOf(".wmv") != -1)
 	  ) {
 			document.getElementById("attaicon").src="pict/centang.png";
 		} else {
