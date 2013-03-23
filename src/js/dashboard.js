@@ -1,5 +1,6 @@
 var currentCat;
 var canDelete;
+var taskCache;
 
 Rp(function() 
 {
@@ -117,6 +118,7 @@ Rp(function()
 		if (catreq.readyState == 4) {
 			// Loaded
 			response = catreq.responseText;
+			taskCache = response;
 			response = Rp.parseJSON(response);
 			Rp('#dashboardPrimary').removeClass('loading');
 			if (response.success) {
@@ -331,4 +333,34 @@ Rp(function()
 	}
 
 	Rp('p.delete a').on('click', deleteTask);
+
+	// Regular refresh
+	var ref;
+	intreq = Rp.ajax()
+		.complete(function() {
+			// Loaded
+			response = catreq.responseText;
+			if (response != taskCache) {
+				console.log('New tasks found.');
+				taskCache = response;
+				response = this.responseJSON();
+				if (response.success)
+					fillTasks(response.tasks);
+			}
+		});
+
+	refreshTasks = function() {
+		console.log('Checking for new tasks...');
+		catid = currentCat;
+		if (catreq.readyState)
+			return;
+		if (catid!=0) {
+			intreq.get('api/retrieve_tasks?category_id=' + catid);
+		}
+		else {
+			intreq.get('api/retrieve_tasks');
+		}
+	}
+
+	var ref = window.setInterval(refreshTasks, 5000);
 });
