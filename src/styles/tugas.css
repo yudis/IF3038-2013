@@ -1,0 +1,6 @@
+#tagsEditDiv, #assigneeEditDiv, #deadlineEditDiv, #doneButton {
+    display: none;
+}
+#deadlineDisplayDiv, #tagsDisplayDiv, #editButton {
+    display: block;
+}
