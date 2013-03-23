@@ -38,7 +38,7 @@ while ($attachment[$count_attachment] = mysqli_fetch_array($result6)) {
 }
 
 // Get comments
-$result7=mysqli_query($con,"SELECT * FROM `comments` WHERE task=$id_task");
+$result7=mysqli_query($con,"SELECT * FROM `comments` WHERE task=$id_task ORDER BY timestamp DESC");
 $count_comment = 0;
 while ($commented = mysqli_fetch_array($result7)) {
 	$comment[$count_comment] = $commented;
@@ -240,11 +240,18 @@ while ($commented = mysqli_fetch_array($result7)) {
 					<strong><span id="jmlkomen"><?php echo $count_comment;?></span></strong> comments
 				</div>
 				<div class="line-konten"></div>
+				<div id="komen-tulis"><strong>Tulis Komentar</strong></div>
+					<input type="hidden" id="id" name="id" value="<?php echo $_SESSION['id'];?>">
+					<input type="hidden" id="task" name="task" value="<?php echo $id_task;?>">
+					<textarea id="komentar" name="komentar" rows="3" cols="60" id="form-komen"></textarea>
+					<div class="komen-submit"><input type="button" name="submit" value="Submit" onclick="comment();"/></div>
+				<div class="line-konten"></div>
 				<div id="lkomen">
 					<?php
 					for ($i = 0; $i < $count_comment; $i++) {
 						$current1=$comment[$i];
 						$current2=$commenter[$i];
+						echo '<div class="komen-avatar"><img src="'.$current2['avatar'].'" height="24"/></div>';
 						echo '<div class="komen-nama">'.$current2['fullname'].'</div>';
 						echo '<div class="komen-tgl">'.$current1['timestamp'].'</div>';
 						echo '<div class="komen-isi">'.$current1['comment'].'</div>';
@@ -253,20 +260,7 @@ while ($commented = mysqli_fetch_array($result7)) {
 					?>
 				</div>
 				
-					<div id="komen-tulis"><strong>Tulis Komentar</strong></div>
-					<!--
-					<div class="clear"></div>
-					<div class="komen-label btg-mrh" id="komen-btg">*) wajib diisi</div>
-					<div class="clear"></div>
-					<div class="komen-label">Nama <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="nama" id="form-nama" /></div>
-					<div class="clear error" id="error-username"></div>
-					<div class="komen-label">Komentar <span class="btg-mrh">*</span></div><div class="register-td">:</div><div class="register-input"><textarea name="komentar" rows="3" cols="50" id="form-komen"></textarea></div>
-					<div class="clear"></div>
-					-->
-					<input type="hidden" id="id" name="id" value="<?php echo $_SESSION['id'];?>">
-					<input type="hidden" id="task" name="task" value="<?php echo $id_task;?>">
-					<textarea id="komentar" name="komentar" rows="3" cols="60" id="form-komen"></textarea>
-					<div class="komen-submit"><input type="button" name="submit" value="Submit" onclick="comment();"/></div>
+					
 				
 			</div>
 		</div>

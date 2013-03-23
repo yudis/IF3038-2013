@@ -17,7 +17,7 @@ $komentar = $_POST['komentar'];
 mysqli_query($con, "INSERT INTO `comments` (member,task,timestamp,comment) 
 				VALUES ($member, $task, '$timestamp', '$komentar')");
 
-$result7=mysqli_query($con,"SELECT * FROM `comments` WHERE task=$task");
+$result7=mysqli_query($con,"SELECT * FROM `comments` WHERE task=$task ORDER BY timestamp DESC");
 $count_comment = 0;
 while ($commented = mysqli_fetch_array($result7)) {
 	$comment[$count_comment] = $commented;
@@ -29,6 +29,7 @@ while ($commented = mysqli_fetch_array($result7)) {
 for ($i = 0; $i < $count_comment; $i++) {
 	$current1=$comment[$i];
 	$current2=$commenter[$i];
+	echo '<div class="komen-avatar"><img src="'.$current2['avatar'].'" height="24"/></div>';
 	echo '<div class="komen-nama">'.$current2['fullname'].'</div>';
 	echo '<div class="komen-tgl">'.$current1['timestamp'].'</div>';
 	echo '<div class="komen-isi">'.$current1['comment'].'</div>';
