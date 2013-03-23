@@ -715,11 +715,33 @@ function showAttachment(){
 	xmlhttp5.send();
 }
 
-function update2(){showStatus(); showAttachment(); showAssignee(); showTags();}
+function showComment(){
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp4=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp4=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp4.onreadystatechange=function()
+		{
+			if (xmlhttp4.readyState==4 && xmlhttp4.status==200)
+			{
+				var result = "";
+				result += xmlhttp4.responseText;
+				document.getElementById("comment").innerHTML=result;
+			}
+		}
+	xmlhttp4.open("GET","showComment.php",true);
+	xmlhttp4.send();
+}
 
-/*function storeComment(){
-alert("ASA");
+function generate_page(){showStatus(); showAttachment(); showAssignee(); showTags(); showComment();}
+
+function storeComment(){
 	var comment = document.getElementById("comment").value;
+	alert(comment);
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
 	  xmlhttp6=new XMLHttpRequest();
@@ -732,7 +754,7 @@ alert("ASA");
 		{
 			if (xmlhttp6.readyState==4 && xmlhttp6.status==200)
 			{
-				if(xmlhttp6.responseText = ""){
+				if(xmlhttp6.responseText == ""){
 					alert("Komentar berhasil disimpan");
 				}else{
 					alert("Komentar gagal disimpan");
@@ -741,4 +763,4 @@ alert("ASA");
 		}
 	xmlhttp6.open("GET","storeComment.php?q="+comment,true);
 	xmlhttp6.send();
-}*/
+}

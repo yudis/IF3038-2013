@@ -1,6 +1,6 @@
 <?php
-	include "login.php";
-	$username = $_SESSION['username'];
+	//include "login.php";
+	//$username = $_SESSION['username'];
 	
 	require "config.php";
 	$result = "";

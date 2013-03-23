@@ -1,6 +1,5 @@
 <?php
 	require "config.php";
-	require "index.php";
 	session_start();
 	$username = $_POST['regusername'];
 	$fullname = $_POST['regname'];

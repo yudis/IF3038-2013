@@ -63,18 +63,18 @@ and open the template in the editor.
                 Tag: <div id="tag"></div>
 				
                 Comment:<br/>
-                <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
+                <div id="list_comment"></div>
 				
                 <form id="submit_comment">
                     <textArea id="comment"></textarea>
-                    <input type="button" name="submit" value="submit" onClick="storeComment();">
+                    <input type="button" name="submit" value="Submit" onClick="storeComment();">
                 </form>
 				
                 <br/><br/>
                 <a onclick="showEdit();" class="button">edit</a><br/>
             </div>
-			<script> 
-				window.onload=update2;
+			<script>
+				window.onload=generate_page();
 			</script>
     </body>
 </html>
