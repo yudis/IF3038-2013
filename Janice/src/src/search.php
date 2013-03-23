@@ -246,7 +246,7 @@
 								$result = mysqli_query($con,"SELECT * FROM category WHERE category_name LIKE '%$string%'");
 								while($row = mysqli_fetch_array($result))
 								{
-								  $allresult[] = $row['category_id'];
+								  $allresult[] = "C".$row['category_id'];
 								}
 								
 							
@@ -256,7 +256,7 @@
 							$result = mysqli_query($con,"SELECT * FROM task WHERE task_name LIKE '%$string%'");
 							while($row = mysqli_fetch_array($result))
 							{
-							  $allresult[] = $row['task_id'];
+							  $allresult[] = "T".$row['task_id'];
 							}
 						
 					}
@@ -269,7 +269,7 @@
 							$result = mysqli_query($con,"SELECT task_name FROM task, tag, tasktag WHERE tag.tag_name LIKE '%$string%' and task.task_id = tasktag.task_id and tag.tag_id = tasktag.tag_id");
 							while($row = mysqli_fetch_array($result))
 							{
-								 $allresult[] = $row['task_name'];
+								 $allresult[] = "G".$row['task_name'];
 							}
 					}
 					
@@ -294,10 +294,12 @@
 								  echo $isi_close;
 								}
 							}
-							
-						if (mysqli_num_rows(mysqli_query($con,"SELECT * FROM category WHERE category_id = '".$allresult[$i]."'"))>0){
+						
+						if (substr($allresult[$i],0,1)=='C'){
+							echo substr($allresult[$i],1);
+						if (mysqli_num_rows(mysqli_query($con,"SELECT * FROM category WHERE category_id = '".substr($allresult[$i],1)."'"))>0){
 							echo "<h2>Category</h2>";	
-							$result = mysqli_query($con,"SELECT * FROM category WHERE category_id = '".$allresult[$i]."'");
+							$result = mysqli_query($con,"SELECT * FROM category WHERE category_id = '".substr($allresult[$i],1)."'");
 								while($row = mysqli_fetch_array($result))
 								{
 								  $temp = $row['category_name'];
@@ -309,10 +311,12 @@
 								  //$allresult[] = $row['category_name'];
 								}
 						}
+						}
 						
-						if (mysqli_num_rows(mysqli_query($con,"SELECT * FROM task WHERE task_id = '".$allresult[$i]."'"))>0){	
+						if (substr($allresult[$i],0,1)=='T'){
+						if (mysqli_num_rows(mysqli_query($con,"SELECT * FROM task WHERE task_id = '".substr($allresult[$i],1)."'"))>0){	
 							echo "<h2>Taskname</h2>";
-						$result = mysqli_query($con,"SELECT * FROM task WHERE task_id = '".$allresult[$i]."'");
+						$result = mysqli_query($con,"SELECT * FROM task WHERE task_id = '".substr($allresult[$i],1)."'");
 							while($row = mysqli_fetch_array($result))
 							{
 							  $temp = $row['task_id'];
@@ -349,9 +353,11 @@
 							  echo $isi_close;
 							}
 						}
-						if (mysqli_num_rows(mysqli_query($con,"SELECT task.task_id, task.task_name, task.deadline, task.status, tag.tag_name FROM task, tag, tasktag WHERE task.task_name = '".$allresult[$i]."' and task.task_id = tasktag.task_id and tag.tag_id = tasktag.tag_id LIMIT $per_page"))>0){	
+						}
+						if (substr($allresult[$i],0,1)=='G'){
+						if (mysqli_num_rows(mysqli_query($con,"SELECT task.task_id, task.task_name, task.deadline, task.status, tag.tag_name FROM task, tag, tasktag WHERE task.task_name = '".substr($allresult[$i],1)."' and task.task_id = tasktag.task_id and tag.tag_id = tasktag.tag_id LIMIT $per_page"))>0){	
 						echo "<h2>Tag</h2>";
-						$result = mysqli_query($con,"SELECT task.task_id, task.task_name, task.deadline, task.status, tag.tag_name FROM task, tag, tasktag WHERE task.task_name = '".$allresult[$i]."' and task.task_id = tasktag.task_id and tag.tag_id = tasktag.tag_id LIMIT $per_page");
+						$result = mysqli_query($con,"SELECT task.task_id, task.task_name, task.deadline, task.status, tag.tag_name FROM task, tag, tasktag WHERE task.task_name = '".substr($allresult[$i],1)."' and task.task_id = tasktag.task_id and tag.tag_id = tasktag.tag_id LIMIT $per_page");
 							while($row = mysqli_fetch_array($result))
 							{
 								$temp = $row['task_id'];
@@ -388,6 +394,7 @@
 								echo $isi_close;
 								// $allresult[] = $row['tag_id'];
 							}
+						}
 						}
 							
 						$i++;
