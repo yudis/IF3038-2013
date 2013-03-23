@@ -1,4 +1,7 @@
 <?php
+include "login.php";
+$username = $_SESSION['username'];
+
 $q=$_GET["q"];
 $tipe=$_GET["tipe"];
 
@@ -10,7 +13,7 @@ if (strlen($q) > 0)
   $hint="";
   if ($tipe == "all result")
   {
-	$sql="SELECT name FROM task WHERE name LIKE '%$q%'";
+	$sql="SELECT name FROM task WHERE name LIKE '%$q%' AND id_task in (SELECT id_task FROM assignee WHERE username='$username')";
 	$user = mysqli_query($con,$sql);
 	$hasiltask = array();
 	while(($user != null) && ($current_user = mysqli_fetch_array($user)))
@@ -52,7 +55,7 @@ if (strlen($q) > 0)
 		$hint.=",";
 	}
 	
-	$sql="SELECT name FROM category WHERE name LIKE '%$q%'";
+	$sql="SELECT name FROM category WHERE name LIKE '%$q%' AND id_cat in (SELECT id_cat FROM joincategory WHERE username='$username') UNION SELECT name FROM category WHERE id_cat in (SELECT id_cat FROM categorycreator WHERE name LIKE '%$q%' AND username='$username')";
 	$user = mysqli_query($con,$sql);
 	$hasilkategori = array();
 	while(($user != null) && ($current_user = mysqli_fetch_array($user)))
@@ -98,7 +101,8 @@ if (strlen($q) > 0)
   }
   else if($tipe=="task")
   {
-	$sql="SELECT name FROM task WHERE name LIKE '%$q%'";
+	//$sql="SELECT name FROM task WHERE name LIKE '%$q%'";
+	$sql="SELECT name FROM task WHERE name LIKE '%$q%' AND id_task in (SELECT id_task FROM assignee WHERE username='$username')";
 	$user = mysqli_query($con,$sql);
 	$hasiltask = array();
 	while(($user != null) && ($current_user = mysqli_fetch_array($user)))
@@ -121,7 +125,8 @@ if (strlen($q) > 0)
   }
   else if ($tipe=="category")
   {
-	$sql="SELECT name FROM category WHERE name LIKE '%$q%'";
+	//$sql="SELECT name FROM category WHERE name LIKE '%$q%'";
+	$sql="SELECT name FROM category WHERE name LIKE '%$q%' AND id_cat in (SELECT id_cat FROM joincategory WHERE username='$username') UNION SELECT name FROM category WHERE id_cat in (SELECT id_cat FROM categorycreator WHERE name LIKE '%$q%' AND username='$username')";
 	$user = mysqli_query($con,$sql);
 	$hasilkategori = array();
 	while(($user != null) && ($current_user = mysqli_fetch_array($user)))
