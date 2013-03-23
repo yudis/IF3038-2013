@@ -298,12 +298,14 @@ label {
     color: #3f1e1e;
 }
 #wellfaiz{
-    background-image: url("../pict/welcomefaiz.png");
     width: 157px;
     height: 37px;
     float: right;
     margin-right: 190px;
     margin-top: -34px;
+	font-family: Calibri;
+    font-size: 20px;
+    color: white;
 }
 #logout{
     font-family: Calibri;
