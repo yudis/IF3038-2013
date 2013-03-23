@@ -45,13 +45,13 @@ if (mysqli_connect_errno()) {
 	<body 
 	<?php
 		if (strcmp($uri,"profil.php") == 0) {
-			echo "id='profilbackground'";
+			echo "id='profilbackground' onLoad='done_task()'";
 		} else if (strcmp($uri,"dashboard.php") == 0 || strcmp($uri,"search.php") == 0) {
 			$result=mysqli_query($con,"SELECT DISTINCT `category` FROM `tasks`");
 			$cats=mysqli_num_rows($result);
 			echo "id='dashboardbackground'";
 		} else if (strcmp($uri,"rinciantugas.php") == 0) {
-			echo "id='rincianbackground'";
+			echo "id='rincianbackground' onLoad='done_task()'";
 		} else if (strcmp($uri,"post.php") == 0) {
 			echo "id='postbackground'";
 		}
