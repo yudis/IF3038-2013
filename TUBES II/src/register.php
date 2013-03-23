@@ -43,7 +43,7 @@ if ($rml["Email"] == $email){
 }
 
 if ($dcheck=="false") {
-$sql="INSERT INTO profil (Username,Password,Fullname,Avatar,Email) VALUES ('$username','$password','$name','$avatar','$email')";
+$sql="INSERT INTO profil (Username,Password,Fullname,Avatar,TanggalLahir,Email) VALUES ('$username','$password','$name','$avatar','".$date."','$email')";
 
 $add=mysql_query($sql);
 

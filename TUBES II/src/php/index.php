@@ -89,7 +89,7 @@ xmlhttp.send();
 function checkLogin(response)
 {
  if (response == "Accepted") {
-   window.location='Dashboard.html';
+   window.location='dashboard.php';
  }
 }
 </script>
