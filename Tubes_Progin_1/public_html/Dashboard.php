@@ -42,7 +42,7 @@ and open the template in the editor.
             }
             ?>
         </div>
-        
+
         <div id="addCat">
             <a onclick="addCategory();">+ category</a>
         </div>
@@ -54,7 +54,7 @@ and open the template in the editor.
 
             while ($row = mysqli_fetch_array($result)) {
                 echo "<div class='listTugas' id='task" . $row['taskID'] . "'>";
-                echo "<a id='task" . $row['taskID'] . "' onclick='showRinci('" . $row['taskID'] . "');'>" . $row['taskName'] . "</a>";
+                echo "<a id='task" . $row['taskID'] . "' onclick='showRinci(" . $row['taskID'] . ");'>" . $row['taskName'] . "</a>";
                 echo "<div>" . $row['deadline'] . "</div>";
 
                 $queryTag = "SELECT tag.name AS tagName FROM utrelation JOIN tag JOIN ttrelation WHERE username='" . $_SESSION['username'] . "' AND tag.id_tag = ttrelation.id_tag AND utrelation.id_task = ttrelation.id_task AND utrelation.id_task='" . $row['taskID'] . "';";
@@ -79,9 +79,9 @@ and open the template in the editor.
 
                 $queryOwner = "SELECT creator FROM task WHERE id_task='" . $row['taskID'] . "';";
                 $resultOwner = ProginDB::getInstance()->query($queryOwner);
-                while ($rowOwner = mysqli_fetch_array($resultOwner)) {
+                while ($rowOwner = mysqli_fetch_array($resultOwner, MYSQLI_ASSOC)) {
                     if ($_SESSION['username'] === $rowOwner['creator']) {
-                        echo "<div class='removeTask'><input type='submit' id='removeTaskBtn" . $row['taskID'] . "; onclick='removeTask('" . $row['taskID'] . "');' value='Remove Task'/></div>";
+                        echo "<div class='removeTask'><input type='submit' id='removeTaskBtn" . $row['taskID'] . "; onclick='removeTask(" . $row['taskID'] . ");' value='Remove Task'/></div>";
                     }
                 }
 
@@ -90,63 +90,32 @@ and open the template in the editor.
             ?>
         </div>
 
-        <div class="tugas" id="rincitugas">
-            <?php
-            
-            ?>
-<!--            Nama task: Nama Tugas <br/>
-            Attachment: 
-            <div class="attachment">
-                file.zip<br/>
-                picture.jpg<br/>
-                video.mp4<br/>
-            </div><br/>
-            Deadline: 17-12-2014<br/>
-            Assignee: <a href="" class="asignee">Timo</a>, <a href="" class="asignee">Stefan</a>, <a href="" class="asignee">Frilla</a><br/>
-            Tag: <a href="" class="tag">dangerous</a>, <a href="" class="tag">novice</a> <br/>
-            <br/>Komentar:<br/>
-            <div class="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
-            <form>
-                <textArea></textarea>
-                    <input type="button" name="submit" value="submit">
-                </form>
-                <br/><br/>
-                <a onclick="showEdit();" class="button">edit</a><br/>-->
-            </div>
-        
-            <div class="tugas" id ="edittugas">
-                <form>
-                    Nama task: Nama Task<br/>
-                    Attachment: <div class="attachment"><input type="file"></div><br/>
-                    Deadline: <div class="deadline"><input type="date"></div><br/>
-                    Assignee: <div class="asignee"><input type="text"></div><br/>
-                    Tag: <div class="tag"> <input type="text"></div> <br/>
-                    Komentar: <br/>
-                <div class="komentar">lalalsalkdl sajdlkjaslkd sjadlkj sjadlkj jaskjkj jsk. jsad kjasd ajsdlj jksjd as jksjd owjijld.</div><br/>
-                </form> <br/>
-                <a onclick="showRinci()" class="button">save</a><br/>
-            </div>
-        
-			<div id="wanted">
-			<img src="img/kertas2.png">
-			</div>
-        
-            <div class="tugas" id="buattugas">
-                <br/>
-                Nama task: <div class="nama"><input type="text" id="namaTask"></div><br/>
-                Attachment: <div class="attachment"><input type="file"></div><br/>
-                Deadline: <div class="deadline"><input type="date"></div><br/>
-                Assignee: <div class="asignee"><input type="text"></div><br/>
-                Tag: <div class="tag"> <input type="text"></div> <br/>
-                <br/>
-                <a onclick="createTask();" class="button">create</a><br/>
-            </div>
-        
+        <div class="tugas" id="rincitugas"></div>
+
+        <div class="tugas" id ="edittugas"></div>
+
+        <div id="wanted">
+            <img src="img/kertas2.png">
+        </div>
+
+        <div class="tugas" id="buattugas">
+            <br/>
+            Nama task: <div class="nama"><input type="text" id="namaTask"></div><br/>
+            Attachment: <div class="attachment"><input type="file"></div><br/>
+            Deadline: <div class="deadline"><input type="date"></div><br/>
+            Assignee: <div class="asignee"><input type="text"></div><br/>
+            Tag: <div class="tag"> <input type="text"></div> <br/>
+            <br/>
+            <a onclick="createTask();" class="button">create</a><br/>
+        </div>
+
         <div id="add">
-            Category Name:<br/> <input type='text' id='newCategoryName'><br/>
-            Authorized Users:<br/> <input type='text' id="authUsers"><br/>
-            <input type="submit" onclick="addCat();" value="create">
-            <input type="submit" onclick="restore();" value="cancel">
+            <form id="newCategoryForm" action="AddCategory.php">
+                Category Name:<br/> <input type='text' name='newCategoryName 'id='newCategoryName' required><br/>
+                Authorized Users:<br/> <input type='text' name='authUsers' id="authUsers"><br/>
+                <input type="submit" onclick="addCat();" value="create">
+                <input type="submit" onclick="restore();" value="cancel">
+            </form>
         </div>
         <?php
         ProginDB::getInstance()->display_avatar($_SESSION['username']);

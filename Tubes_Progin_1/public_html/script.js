@@ -1,31 +1,4 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-//function showRinci(){
-//document.getElementById("listtugas3").style.visibility="hidden";
-//document.getElementById("listtugas2").style.visibility="hidden";
-//document.getElementById("listtugas").style.visibility="hidden";
-//document.getElementById("rincitugas").style.visibility="visible";
-//document.getElementById("edittugas").style.visibility="hidden";
-//document.getElementById("buattugas").style.visibility="hidden";
-//document.getElementById("wanted").style.visibility="visible";
-//self.focus();
-//}
-
-function showEdit() {
-    document.getElementById("listtugas3").style.visibility = "hidden";
-    document.getElementById("listtugas2").style.visibility = "hidden";
-    document.getElementById("listtugas").style.visibility = "hidden";
-    document.getElementById("rincitugas").style.visibility = "hidden";
-    document.getElementById("edittugas").style.visibility = "visible";
-    document.getElementById("buattugas").style.visibility = "hidden";
-    document.getElementById("wanted").style.visibility = "visible";
-}
 function showBuat() {
-    document.getElementById("listtugas3").style.visibility = "hidden";
-    document.getElementById("listtugas2").style.visibility = "hidden";
     document.getElementById("listtugas").style.visibility = "hidden";
     document.getElementById("rincitugas").style.visibility = "hidden";
     document.getElementById("edittugas").style.visibility = "hidden";
@@ -221,6 +194,12 @@ function showTaskList(code) {
     };
     xmlhttp.open("GET", "GetTaskList.php?q=" + code, true);
     xmlhttp.send();
+
+    document.getElementById("listtugas").style.visibility = "visible";
+    document.getElementById("rincitugas").style.visibility = "hidden";
+    document.getElementById("edittugas").style.visibility = "hidden";
+    document.getElementById("buattugas").style.visibility = "hidden";
+    document.getElementById("wanted").style.visibility = "hidden";
 }
 
 function changeTaskStatus(code, chk) {
@@ -257,6 +236,7 @@ function addCat() {
     if (name !== "") {
         var xmlhttp;
         var url = "AddCategory.php?name=" + name + "&authUsers=" + authUsers;
+        xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 document.getElementById("category").innerHTML = xmlhttp.responseText;
@@ -267,23 +247,60 @@ function addCat() {
         restore();
         showList();
     } else {
-        alert("Input category name");
+        alert("Input category name.");
     }
 }
 
 function showRinci(code) {
+    var xmlhttp;
+    var url = "ShowTaskDetail.php?code=" + code;
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            document.getElementById("rincitugas").innerHTML = xmlhttp.responseText;
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
     document.getElementById("listtugas").style.visibility = "hidden";
     document.getElementById("rincitugas").style.visibility = "visible";
     document.getElementById("edittugas").style.visibility = "hidden";
     document.getElementById("buattugas").style.visibility = "hidden";
     document.getElementById("wanted").style.visibility = "visible";
     self.focus();
+}
 
+function editTaskDetail(code) {
     var xmlhttp;
-    var url = "ShowTaskDetail.php?code=" + code;
+    var url = "EditTaskDetail.php?code=" + code;
+    xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            document.getElementById("rincitugas").innerHTML = xmlhttp.responseText;
+            document.getElementById("edittugas").innerHTML = xmlhttp.responseText;
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
+    document.getElementById("listtugas").style.visibility = "hidden";
+    document.getElementById("rincitugas").style.visibility = "hidden";
+    document.getElementById("edittugas").style.visibility = "visible";
+    document.getElementById("buattugas").style.visibility = "hidden";
+    document.getElementById("wanted").style.visibility = "visible";
+}
+
+function saveTaskDetail(code) {
+    var newDeadline = document.getElementById('newDeadline').value;
+    var newAssignees = document.getElementById('newAssignee').value;
+    var newTags = document.getElementById('newTag').value;
+    var xmlhttp;
+    var url = "SaveTaskDetail.php?code=" + code + "&newDeadline=" + newDeadline
+    + "&newAssignees=" + newAssignees + "&newTags=" + newTags;
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            
         }
     };
     xmlhttp.open("GET", url, true);

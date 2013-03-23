@@ -10,7 +10,7 @@ $result = ProginDB::getInstance()->query($query);
 
 while ($row = mysqli_fetch_array($result)) {
     echo "<div class='listTugas'>";
-    echo "<a id='task" . $row['taskID'] . "' onclick='showRinci();'>" . $row['taskName'] . "</a>";
+    echo "<a id='task" . $row['taskID'] . "' onclick='showRinci(" . $row['taskID'] . ");'>" . $row['taskName'] . "</a>";
     echo "<div>" . $row['deadline'] . "</div>";
 
     $queryTag = "SELECT tag.name AS tagName FROM utrelation JOIN tag JOIN ttrelation WHERE username='" . $_SESSION['username'] . "' AND tag.id_tag = ttrelation.id_tag AND utrelation.id_task = ttrelation.id_task AND utrelation.id_task='" . $row['taskID'] . "';";
@@ -43,5 +43,11 @@ while ($row = mysqli_fetch_array($result)) {
     echo "</div>";
 }
 
-echo "<a onclick='showBuat();' class='addTask'></a>";
+$queryAu = "SELECT authorized_user FROM caurelation WHERE id_category='" . $q . "';";
+$resultAu = ProginDB::getInstance()->query($queryAu);
+while ($rowAu = mysqli_fetch_array($resultAu)) {
+    if ($_SESSION['username'] === $rowAu['authorized_user']) {
+        echo "<a onclick='showBuat();' class='addTask'></a>";
+    }
+}
 ?>
