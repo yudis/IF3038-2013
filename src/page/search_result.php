@@ -3,6 +3,9 @@
 	<head>
 		<title>Search Result</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<script type="text/javascript" src="search_result.js"></script>
+	</head>
+	<body>
 		<div id="main-body-general">
 			<div id="header">
 				<?php
@@ -65,12 +68,13 @@
 									
 							$query3 = "SELECT * FROM task WHERE taskname LIKE '%$text%'";
 							$result3 = mysqli_query($con,$query3);
+							$i = 0;
 							while($row3 = mysqli_fetch_array($result3)){		
 								echo "	<div id=\"task-result\">
 										<ul>
-											<li><a href = \"task_page.php?taskid=".$row3['taskid']."\">".$row3['taskname']."</a><div class=\"task-tag\">submit by : <b><i>".$row3['username']."</i></b>, deadline : ".$row3['deadline'].", status : <b id=\"red-text\">".$row3['status']."</b></div>
+											<li><a href = \"task_page.php?taskid=".$row3['taskid']."\">".$row3['taskname']."</a><div class=\"task-tag\">submit by : <b><i>".$row3['username']."</i></b>, deadline : ".$row3['deadline'].", status : <b id=\"red-text$i\">".$row3['status']."</b></div>
 											<br><div>
-											<div class=\"task-tag\">Set as <a href=\"#\">Change Status</a></div></div><br><br>
+											<div class=\"task-tag\">Set as <a href=\"javascript:setCompleteStatus($i,".$row3['taskid'].")\">Change Status</a></div></div><br><br>
 											<div id=\"task-tag\">
 												Tag :<br>";
 											$query4 = "SELECT * FROM task_tag WHERE taskid=".$row3['taskid'];
@@ -83,6 +87,7 @@
 											</li><br><br>
 										</ul>
 									</div>";
+									$i++;
 							}
 							echo "</div>";	
 							break;
@@ -167,12 +172,13 @@
 									
 							$query3 = "SELECT * FROM task WHERE taskname LIKE '%$text%'";
 							$result3 = mysqli_query(getConnection(),$query3);
+							$i = 0;
 							while($row3 = mysqli_fetch_array($result3)){		
 								echo "	<div id=\"task-result\">
 										<ul>
-											<li><a href = \"task_page.php?taskid=".$row3['taskid']."\">".$row3['taskname']."</a><div class=\"task-tag\">submit by : <b><i>".$row3['username']."</i></b>, deadline : ".$row3['deadline'].", status : <b id=\"red-text\">".$row3['status']."</b></div>
+											<li><a href = \"task_page.php?taskid=".$row3['taskid']."\">".$row3['taskname']."</a><div class=\"task-tag\">submit by : <b><i>".$row3['username']."</i></b>, deadline : ".$row3['deadline'].", status : <b id=\"red-text$i\">".$row3['status']."</b></div>
 											<br><div>
-											<div class=\"task-tag\">Set as <a href=\"#\">Change Status</a></div></div><br><br>
+											<div class=\"task-tag\">Set as <a href=\"javascript:setCompleteStatus($i,".$row3['taskid'].")\">Change Status</a></div></div><br><br>
 											<div id=\"task-tag\">
 												Tag :<br>";
 											$query4 = "SELECT * FROM task_tag WHERE taskid=".$row3['taskid'];
@@ -185,6 +191,7 @@
 											</li><br><br>
 										</ul>
 									</div>";
+									$i++;
 							}	
 									
 							echo "</div>";
