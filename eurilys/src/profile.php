@@ -93,9 +93,11 @@
 		</div>
 		<div class="half_div">
 			<div class="half_tall">
-				<div class="headsdeh">Current Tasks:</div>
-					<?php 
+				<div class="headsdeh">Current Tasks</div>
+					<?php
+					$rowtask2 = array(); 
 					while ($rowtask = mysql_fetch_array($resulttask, MYSQL_ASSOC)) {
+						$rowtask2[] = $rowtask;
 						$taskname=$rowtask['task_name'];
 						$taskstatus=$rowtask['task_status'];
 						if ($taskstatus==0) {
@@ -105,12 +107,12 @@
 					?>
 			</div>
 			<div class="half_tall">
-				<div class="headsdeh">Finished Tasks:</div>
+				<div class="headsdeh">Finished Tasks</div>
 					<?php 
-					while ($rowtask = mysql_fetch_array($resulttask, MYSQL_ASSOC)) {
-						$taskname=$rowtask['task_name'];
+					foreach($rowtask2 as $rowtask){
+  						$taskname=$rowtask['task_name'];
 						$taskstatus=$rowtask['task_status'];
-						if ($taskstatus==1) {
+						if ($taskstatus==1){
 							echo "$taskname </br>";
 						}
 					}
