@@ -169,7 +169,7 @@ function just_edit_avatar(userid){
 	//{
 	//	alert(ajaxRequest.responseText);
 	//}
-	alert("Avatar Saved");
+	alert(newava);
 	
 	ajaxRequest.send();	
 
