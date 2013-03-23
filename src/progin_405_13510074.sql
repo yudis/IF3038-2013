@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 22, 2013 at 03:37 AM
+-- Generation Time: Mar 23, 2013 at 01:19 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -94,11 +94,18 @@ CREATE TABLE IF NOT EXISTS `category` (
 CREATE TABLE IF NOT EXISTS `comment` (
   `username` varchar(15) NOT NULL,
   `namatugas` varchar(30) NOT NULL,
-  `komentar` int(11) NOT NULL,
-  `penulis` varchar(160) NOT NULL,
+  `komentar` varchar(160) NOT NULL,
+  `penulis` varchar(15) NOT NULL,
   KEY `username` (`username`),
   KEY `namatugas` (`namatugas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`username`, `namatugas`, `komentar`, `penulis`) VALUES
+('dummy', 'satu', 'tes komentar', 'dummy');
 
 -- --------------------------------------------------------
 
