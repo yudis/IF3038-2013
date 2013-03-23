@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 21, 2013 at 09:03 AM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Host: localhost
+-- Generation Time: Mar 23, 2013 at 04:28 PM
+-- Server version: 5.5.16
+-- PHP Version: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,20 +27,27 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `assignee` (
-  `id_usertask` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `id_task` int(11) NOT NULL,
-  PRIMARY KEY (`id_usertask`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  UNIQUE KEY `username` (`username`,`id_task`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `assignee`
 --
 
-INSERT INTO `assignee` (`id_usertask`, `username`, `id_task`) VALUES
-(1, 'EndyDoank', 1),
-(2, 'StefanDoank', 2),
-(3, 'ArieDoank', 3);
+INSERT INTO `assignee` (`username`, `id_task`) VALUES
+('', 17),
+('akunih', 18),
+('akunih', 22),
+('apaajadeh', 22),
+('ArieDoank', 16),
+('ArieDoank', 18),
+('ArieDoank', 19),
+('ArieDoank', 21),
+('ArieDoank', 22),
+('StefanDoank', 17),
+('StefanDoank', 22);
 
 -- --------------------------------------------------------
 
@@ -52,18 +59,28 @@ CREATE TABLE IF NOT EXISTS `attachment` (
   `id_attachment` int(11) NOT NULL AUTO_INCREMENT,
   `path` varchar(100) NOT NULL,
   PRIMARY KEY (`id_attachment`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `attachment`
 --
 
 INSERT INTO `attachment` (`id_attachment`, `path`) VALUES
-(1, '/img/foto_anonim.png'),
-(2, '/img/Arie.jpg'),
-(3, '/img/Attachment1'),
-(4, '/img/Attachment2'),
-(5, '/img/Video');
+(1, 'img/foto_anonim.png'),
+(2, 'img/Arie.jpg'),
+(3, 'img/Attachment1.txt'),
+(4, 'img/Attachment2.txt'),
+(5, 'img/Video.mp4'),
+(22, 'att/att11.jpg'),
+(28, 'att/att01.jpg'),
+(29, 'att/att12.jpg'),
+(30, 'att/att23.jpg'),
+(31, 'att/att02.jpg'),
+(32, 'att/att03.jpg'),
+(33, 'att/att01.jpg'),
+(34, 'att/att01.jpg'),
+(35, 'att/att01.jpg'),
+(36, 'att/att02.jpg');
 
 -- --------------------------------------------------------
 
@@ -100,27 +117,26 @@ INSERT INTO `category` (`id_cat`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `categorycreator` (
-  `id_catcreator` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `id_cat` int(11) NOT NULL,
-  PRIMARY KEY (`id_catcreator`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+  UNIQUE KEY `username` (`username`,`id_cat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `categorycreator`
 --
 
-INSERT INTO `categorycreator` (`id_catcreator`, `username`, `id_cat`) VALUES
-(1, 'EndyDoank', 1),
-(2, 'StefanDoank', 2),
-(3, 'ArieDoank', 3),
-(4, 'EndyDoank', 4),
-(5, 'StefanDoank', 5),
-(6, 'ArieDoank', 6),
-(7, 'EndyDoank', 7),
-(8, 'StefanDoank', 8),
-(9, 'ArieDoank', 9),
-(10, 'EndyDoank', 10);
+INSERT INTO `categorycreator` (`username`, `id_cat`) VALUES
+('ArieDoank', 3),
+('ArieDoank', 6),
+('ArieDoank', 9),
+('EndyDoank', 1),
+('EndyDoank', 4),
+('EndyDoank', 7),
+('EndyDoank', 10),
+('StefanDoank', 2),
+('StefanDoank', 5),
+('StefanDoank', 8);
 
 -- --------------------------------------------------------
 
@@ -132,21 +148,18 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `id_comment` int(11) NOT NULL AUTO_INCREMENT,
   `id_task` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `time` varchar(10) NOT NULL,
+  `time` varchar(20) NOT NULL,
   `content` varchar(140) NOT NULL,
   PRIMARY KEY (`id_comment`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `comment`
 --
 
 INSERT INTO `comment` (`id_comment`, `id_task`, `username`, `time`, `content`) VALUES
-(1, 1, 'EndyDoank', '10:20', 'Wuih keren ya'),
-(2, 2, 'StefanDoank', '20:30', 'Ah gampang banget sih ini'),
-(3, 3, 'ArieDoank', '05:50', 'Nyemm... Lucu juga'),
-(4, 1, 'EndyDoank', '01:10', 'Mau donk plisss'),
-(5, 2, 'StefanDoank', '20:02', 'Yay uda beres');
+(7, 1, '', '9 : 26 - 23/3', 'Nyohohohohoh'),
+(8, 1, '', '9 : 27 - 23/3', 'aaa');
 
 -- --------------------------------------------------------
 
@@ -155,20 +168,25 @@ INSERT INTO `comment` (`id_comment`, `id_task`, `username`, `time`, `content`) V
 --
 
 CREATE TABLE IF NOT EXISTS `joincategory` (
-  `id_join` int(11) NOT NULL AUTO_INCREMENT,
   `id_cat` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
-  PRIMARY KEY (`id_join`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  UNIQUE KEY `id_cat` (`id_cat`,`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `joincategory`
 --
 
-INSERT INTO `joincategory` (`id_join`, `id_cat`, `username`) VALUES
-(1, 1, 'EndyDoank'),
-(2, 2, 'StefanDoank'),
-(3, 3, 'ArieDoank');
+INSERT INTO `joincategory` (`id_cat`, `username`) VALUES
+(1, 'EndyDoank'),
+(2, 'StefanDoank'),
+(3, 'akunih'),
+(3, 'apaajadeh'),
+(3, 'ArieDoank'),
+(3, 'StefanDoank'),
+(10, 'apaajadeh'),
+(10, 'EndyDoank'),
+(10, 'StefanDoank');
 
 -- --------------------------------------------------------
 
@@ -179,16 +197,26 @@ INSERT INTO `joincategory` (`id_join`, `id_cat`, `username`) VALUES
 CREATE TABLE IF NOT EXISTS `tag` (
   `id_tag` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL,
-  PRIMARY KEY (`id_tag`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  PRIMARY KEY (`id_tag`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `tag`
 --
 
 INSERT INTO `tag` (`id_tag`, `name`) VALUES
-(1, 'student'),
+(29, ''),
+(30, 'abc'),
+(25, 'arie'),
+(31, 'def'),
+(24, 'endi'),
+(32, 'ghi'),
 (2, 'male'),
+(1, 'student'),
+(26, 'tes1'),
+(27, 'tes2'),
+(28, 'tes3'),
 (3, 'unyu');
 
 -- --------------------------------------------------------
@@ -205,16 +233,18 @@ CREATE TABLE IF NOT EXISTS `task` (
   `id_cat` int(11) NOT NULL,
   `pemilik` varchar(20) NOT NULL,
   KEY `id_task` (`id_task`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `task`
 --
 
 INSERT INTO `task` (`id_task`, `name`, `status`, `deadline`, `id_cat`, `pemilik`) VALUES
-(1, 'Capture Timo', 0, '2013-3-26', 1, 'Nugroho Satrijandi'),
-(2, 'Capture Afif', 1, '2013-4-5', 2, 'Stefan Lauren'),
-(3, 'Capture Rio', 0, '2013-4-14', 3, 'Arie Tando');
+(18, 'tugas2', 1, '2013-03-13', 3, 'ArieDoank'),
+(19, 'tugas3', 0, '2013-03-14', 3, 'ArieDoank'),
+(20, 'tugas3', 0, '2013-03-14', 3, 'ArieDoank'),
+(21, 'tugas4', 0, '2013-03-14', 3, 'ArieDoank'),
+(22, 'tugas6', 0, '2013-03-21', 3, 'ArieDoank');
 
 -- --------------------------------------------------------
 
@@ -232,11 +262,12 @@ CREATE TABLE IF NOT EXISTS `taskattachment` (
 --
 
 INSERT INTO `taskattachment` (`id_task`, `id_attachment`) VALUES
-(1, 1),
-(1, 2),
-(2, 3),
-(2, 4),
-(3, 5);
+(17, 31),
+(18, 32),
+(19, 28),
+(19, 28),
+(21, 28),
+(22, 31);
 
 -- --------------------------------------------------------
 
@@ -249,16 +280,25 @@ CREATE TABLE IF NOT EXISTS `taskcreator` (
   `id_task` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   PRIMARY KEY (`id_taskcreator`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- Dumping data for table `taskcreator`
 --
 
 INSERT INTO `taskcreator` (`id_taskcreator`, `id_task`, `username`) VALUES
-(1, 1, 'Nugroho Satrijandi'),
-(2, 2, 'Stefan Lauren'),
-(3, 3, 'Arie Tando');
+(1, 1, 'EndyDoank'),
+(2, 2, 'StefanDoank'),
+(3, 3, 'ArieDoank'),
+(22, 14, 'ArieDoank'),
+(23, 15, 'ArieDoank'),
+(24, 16, 'ArieDoank'),
+(25, 17, ''),
+(26, 18, 'ArieDoank'),
+(27, 19, 'ArieDoank'),
+(28, 19, 'ArieDoank'),
+(29, 21, 'ArieDoank'),
+(30, 22, 'ArieDoank');
 
 -- --------------------------------------------------------
 
@@ -276,12 +316,18 @@ CREATE TABLE IF NOT EXISTS `tasktag` (
 --
 
 INSERT INTO `tasktag` (`id_task`, `id_tag`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(2, 2),
-(2, 3),
-(3, 1);
+(16, 23),
+(17, 24),
+(17, 25),
+(18, 26),
+(18, 27),
+(18, 28),
+(19, 29),
+(19, 29),
+(21, 29),
+(22, 30),
+(22, 31),
+(22, 32);
 
 -- --------------------------------------------------------
 
@@ -304,9 +350,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`username`, `fullname`, `avatar`, `birthday`, `email`, `password`) VALUES
-('ArieDoank', 'Arie Tando', '/img/Arie.jpg', '1991-11-26', '13510018@std.stei.itb.ac.id', 'arie'),
-('EndyDoank', 'Nugroho Satrijandi', 'img/Endy.jpg', '1992-10-24', 'nugroho.satrijandi@gmail.com', 'endy'),
-('StefanDoank', 'Stefan Lauren', '/img/Stefan.jpg', '1992-3-30', 'stefan.lauren@yahoo.com', 'stefan');
+('akunih', 'aku ini', 'img/akunih1.jpg', '2013-03-05', 'aku@ni.co', '12345123'),
+('apaajadeh', 'apa aja', 'img/apaajadeh2.jpg', '2013-03-06', 'apa@aja.com', '12345123'),
+('ArieDoank', 'Arie Tando', 'img/Arie.jpg', '1991-11-26', '13510018@std.stei.itb.ac.id', 'tando123'),
+('EndyDoank', 'Nugroho Satrijandi', 'img/Endy.jpg', '2013-03-15', 'nugroho.satrijandi@gmail.com', 'nugroho123'),
+('sesuatu', 'sesuatu banget', 'img/sesuatu3.jpg', '2013-03-12', 'sesuatu@co.id', '12345123'),
+('StefanDoank', 'Stefan Lauren', 'img/Stefan.jpg', '1992-03-30', 'stefan.lauren@yahoo.com', 'stefan123');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
