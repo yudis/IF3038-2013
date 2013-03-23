@@ -39,15 +39,19 @@ header('Location: index.php');
 
             if ($type === 'All') {
                 $queryTask = "SELECT * FROM task WHERE TaskName LIKE '%" . $search . "%'";
+                $queryTag = "SELECT * FROM task, tag, tasktag WHERE TaskName LIKE '%" . $search . "%' AND task.IDTask = tasktag.IDTask AND tag.IDTag = tasktag.IDTag";
                 $queryCat = "SELECT * FROM category WHERE CategoryName LIKE '%" . $search . "%'";
                 $queryUser = "SELECT * FROM user WHERE Username LIKE '%" . $search . "%'";
                 $rTask = mysql_query($queryTask);
+                $rTag = mysql_query($queryTag);
                 $rCat = mysql_query($queryCat);
                 $rUser = mysql_query($queryUser);
             } 
             else if ($type === 'Task') {
                 $queryTask = "SELECT * FROM task WHERE TaskName LIKE '%" . $search . "%'";
+                $queryTag = "SELECT * FROM task, tag, tasktag WHERE TaskName LIKE '%" . $search . "%' AND task.IDTask = tasktag.IDTask AND tag.IDTag = tasktag.IDTag";
                 $rTask = mysql_query($queryTask);
+                $rTag = mysql_query($queryTag);
             }
             else if ($type === 'Category') {
                 $queryCat = "SELECT * FROM category WHERE CategoryName LIKE '%" . $search . "%'";
@@ -70,7 +74,7 @@ header('Location: index.php');
                 if (($type === 'All') or ($type === 'Category')) {
                     echo '<div id="rCategory">
                     <strong>Category</strong><br/>
-                    ----------------------------------------------------------------------------------------------------<br/>';
+                    -------------------------------------------------------------------------------------------------------------------<br/>';
                     if (mysql_num_rows($rCat) > 0) {
                         while ($resCat = mysql_fetch_array($rCat)) {
                             $resultCat = $resCat['CategoryName'];
@@ -87,13 +91,34 @@ header('Location: index.php');
                 if (($type === 'All') or ($type === 'Task')) {
                     echo '<div id="rTask">
                     <strong>Task</strong><br/>
-                    ----------------------------------------------------------------------------------------------------<br/>';
+                    -------------------------------------------------------------------------------------------------------------------<br/>';
                     if (mysql_num_rows($rTask) > 0) {
                         while ($resTask = mysql_fetch_array($rTask)) {        
                                 $resultTask = $resTask['TaskName'];
-                                echo $resultTask;
-                                echo '<br/>';    
-                        }  
+                                $resultID = $resTask['IDTask'];
+                                $resultDead = $resTask['Deadline'];
+                                $resultStatus = $resTask['Status'];
+            ?>
+                <p class='searchUser'>
+                    <a title="Go to Profile" href="RinciTugas.php?IDTask=<?php echo $resultID ?>">
+                            <strong><?php echo $resultTask ?></strong><br/>
+                            <?php echo $resultDead ?> <br/>
+                            <?php echo $resultStatus ?><br/>
+                            Tag: <?php
+                                if (mysql_num_rows($rTask) > 0) {
+                                    while ($resTag = mysql_fetch_array($rTag)) {        
+                                        $resultTag = $resTag['TagName'];
+                            ?>
+                            <?php echo $resultTag ?><br/>
+                                    <?php }
+                                } else {
+                                    echo 'none';
+                                }
+                                ?>
+                    </a>
+                </p>
+            <?php
+                        }
                     } else {    
                                 echo 'No result';
                             }
@@ -105,14 +130,25 @@ header('Location: index.php');
                 if (($type === 'All') or ($type === 'Username')) {
                     echo '<div id="rUser">
                     <strong>User</strong><br/>
-                    ----------------------------------------------------------------------------------------------------<br/>';
+                    -------------------------------------------------------------------------------------------------------------------<br/>';
                     if (mysql_num_rows($rUser) > 0) {
                         while ($resUser = mysql_fetch_array($rUser)) {
                             $resultUser = $resUser['Username'];
-                            ?>
-                    <a title="Go to Profile" href="profile.php?user=<?php echo $resultUser ?>"><?php echo $resultUser ?></a>
+                            $resultName = $resUser['Fullname'];
+                            $resultAva = $resUser['Avatar'];
+            ?>
+                <p class='searchUser'>
+                    <a title="Go to Profile" href="profile.php?user=<?php echo $resultUser ?>">
+                        <img src="<?php echo $resultAva ?>" alt="avatar" class="searchAva"/>
+                        <div class="detailUser">
+                            <strong><?php echo $resultUser ?></strong><br/>
+                            <?php echo $resultName ?>
+                        </div>
+                    </a>
+                </p>
+            <br/>
+            <br/>
             <?php
-                            echo '<br/>';            
                         }  
                       } else {    
                                 echo 'No result';

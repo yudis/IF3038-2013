@@ -10,7 +10,16 @@ body {
     background-image: url('img/dashboard_bg.jpg');
     font-family: cambria;
     width: 100%;
-    overflow: hidden;
+    overflow: auto;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:visited {
+    color: white;
 }
 
 header {
@@ -553,6 +562,7 @@ input{
 /* ----------------------SEARCH CSS------------------------ */
 strong {
     font-size: 16pt;
+    color: white;
 }
 
 .title {
@@ -562,8 +572,8 @@ strong {
 #results {
     position: absolute;
     left: 350px;
-    color: white;
     top: 150px;
+    color:white;
 }
 
 #rCategory {
@@ -583,6 +593,7 @@ strong {
     border-radius: 10px;
 }
 #rUser{
+    position: relative;
     background-color: black;
     opacity: 0.8;
     padding: 20px;
@@ -591,4 +602,17 @@ strong {
     border-radius: 10px;
 }
 
+.searchAva {
+    height: 50px;
+    width: 50px;
+    float: left;
+}
+
+.detailUser {
+    float: left;
+}
+
+.searchUser {
+    position: relative;
+}
 /* ----------------------END OF SEARCH CSS----------------------- */
