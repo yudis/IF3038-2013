@@ -9,21 +9,27 @@ session_start();
 if (connectDB()) {
     if (isset($_GET['category'])) {
         $task = 'SELECT * FROM task WHERE IDCategory=\'' . $_GET['category'].'\''; 
-        $crea = 'SELECT Creator FROM task WHERE IDCategory=\'' . $_GET['category'].'\''; 
-        $result = mysql_query($crea);
-        if ($result > 0) {
-            while ($data = mysql_fetch_array($result)) {
-                $creator = $data['Creator'];
+        $crea = 'SELECT Creator FROM category WHERE IDCategory=\'' . $_GET['category'].'\' UNION DISTINCT SELECT Username FROM authority WHERE IDCategory=\'' . $_GET['category'].'\''; 
+        $creator='';
+        $results = mysql_query($crea);
+        if ($results > 0) {
+            while ($data = mysql_fetch_array($results)) {
+                
+                if ($data['Creator'] == $_COOKIE['UserLogin'])
+                {$creator = $data['Creator'];}
+                
             }
             
         }
+        
         $result = mysql_query($task);
         $output = "";
               
         $i=0;
         if ($result > 0) {
             while ($data = mysql_fetch_array($result)) {
-                $output = $output . "<a class=\"listTugas\" onclick=\"showRinci();\">
+                $output = $output . "<a class=\"listTugas\" onclick=\"showRinciTugas(".$data['IDTask'].");\">
+                    
                     <br><b>TaskName : </b><br>".$data['TaskName']."
                     <br><b>Deadline : </b><br>".$data['Deadline']."
                     <br><b>Tag : </b><br>";
@@ -46,9 +52,9 @@ if (connectDB()) {
                     $i++;            
                     
             }
-           if ($creator == $_COOKIE['UserLogin']) {$output = $output . "<a onclick='showBuat()' class='addTask'></a>";}
-            
+           
         }
+        if ($creator == $_COOKIE['UserLogin']) {$output = $output . "<a onclick=\"showBuatTugas(".$_GET['category'].",'".$_COOKIE['UserLogin']."');\" class='addTask'></a>";}
         
         echo($output);
     }

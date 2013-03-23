@@ -24,6 +24,8 @@ and open the template in the editor.
                 $category = "SELECT category.IDCategory,category.CategoryName FROM assignment,task,category WHERE assignment.Username=\"" . $_COOKIE['UserLogin'] . "\" AND assignment.IDTask=task.IDTask AND task.IDCategory=category.IDCategory
         UNION DISTINCT
         SELECT category.IDCategory,category.CategoryName FROM authority,category WHERE authority.Username=\"" . $_COOKIE['UserLogin'] . "\" AND authority.IDCategory=category.IDCategory
+        UNION DISTINCT
+        SELECT IDCategory,CategoryName FROM category WHERE Creator=\"" . $_COOKIE['UserLogin'] . "\" 
         ORDER BY CategoryName";
                 $result = mysql_query($category);
                 if ($result > 0) {
@@ -56,7 +58,7 @@ and open the template in the editor.
                     while ($data = mysql_fetch_array($result)) {
                         ?>
 
-                        <a class="listTugas" onclick="showRinci();">
+                        <a class="listTugas" onclick="showRinciTugas(<?php echo($data['IDTask']); ?>);">
                             <br><b>TaskName : </b><br>
                             <?php
                                 echo($data['TaskName']);
@@ -106,39 +108,20 @@ and open the template in the editor.
                         <a onclick="addCategory();">+ category</a>
                     </div>
 
-
-
-                    <datalist id="assignee">
-                        <option value="Frilla" />
-                        <option value="Stefan" />
-                        <option value="Timo" />
-                        <option value="Yosef" />
-                        <option value="Hasby" />
-                    </datalist>
-
-                    <div class="tugas" id ="edittugas">
-                        <form>
-                            Name: Nama Task<br/>
-                            Attachment: <div class="attachment"><input id="upload" type="file"></div><br/>
-                            Deadline: <input type="date"><br/>
-                            Assignee: <div class="assignee"><input type="text" list="assignee"></div><br/>
-                            Tag: <div class="tag"> <input type="text"></div> <br/>
-                            Comment: <br/>
-                            <div class="komentar">Dangerous criminal. Proceed with caution.</div><br/>
-                        </form> <br/>
-                        <a onclick="showRinci()" class="button">save</a><br/>
-                    </div>
-
-                    <div id="wanted">
-                        <img src="img/kertas2.png">
-                    </div>
-
-
                     <div id='add'>
-                        Category Name:<br/> <input type='text' id='cate'><br/>
-                        User:<br/> <input type='text'><br/>
-                        <input type="submit" onclick="addCat();" value="create">
+                        
+                        <form id="addCatForm" method="post" action="addCat.php" enctype="multipart/form-data">
+                        <br/>
+                        Category Name:<br/>
+                        <input type="text" id="newcat" name="newcat" required ><br>
+                        User:<br/>
+                        <input id="newcatuser" name="newcatuser" type="text" onkeyup="multiAutocomp(this, 'catuser.php', 'add');" onfocusin="multiAutocompClearAll()" required>
+                        <br>
+                        <input type="submit" id="newcatbutton" name="submit" value="create">
                         <input type="submit" onclick="restore();" value="cancel">
+                        
+                        <br/>
+                        </form>
                     </div>
                     </body>  
 
