@@ -135,7 +135,7 @@ function validateTaskName()
 	for(i = 0;i<x.length;i++){
 		var y = x.charAt(i);
 		
-		if ((y.charCodeAt(0)>=48 && y.charCodeAt(0)<=57) || (y.charCodeAt(0)>=65 && y.charCodeAt(0)<=90)|| (y.charCodeAt(0)>=97 && y.charCodeAt(0)<=122)){
+		if ((y.charCodeAt(0)>=48 && y.charCodeAt(0)<=57) || (y.charCodeAt(0)>=65 && y.charCodeAt(0)<=90)|| (y.charCodeAt(0)>=97 && y.charCodeAt(0)<=122) || y == ' '){
 			
 		}
 		else
