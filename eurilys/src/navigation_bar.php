@@ -14,22 +14,26 @@
 		$username = $_SESSION['username']; 
 	}
 	
-	/*
-	$query	= "SELECT avatar FROM user WHERE username='$username' LIMIT 1";
+	
+	/*get user details from database*/
+	$query	= "SELECT * FROM user WHERE username='$username' LIMIT 1";
 	$result	=  mysql_query($query) or die(mysql_error());
-	
-	
-	while ($row = mysql_fetch_row($result)) {
-		echo '<img src="data:image/jpg;base64,'.base64_encode($row[0]).'" alt="photo">';
-	} */
+
+	/*put details to variable*/
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	$username = $row['username'];
+	$fullname = $row['full_name'];
+	$birthdate = $row['birthdate'];
+	$avatar = $row['avatar'];
+	$email = $row['email'];
 
 ?>
 <div id="navbar">
 	<div id="short_profile">
-		<a href="profile.php"> <img id="profile_picture" src="../img/avatar1.png" alt=""> </a>
+		<a href="profile.php"> <img id="profile_picture" src="<?php echo $avatar?>" alt=""> </a>
 		<div id="profile_info">
 			Welcome, <br>
-			<a href="profile.php" class="darkBlue"> <?php if (isset($_SESSION['fullname'])) {echo $_SESSION['fullname']; }?> </a>
+			<a href="profile.php" class="darkBlue"> <?php echo $fullname; ?> </a>
 			<br><br>
 			<div class="link_tosca" id="edit_profile_button"> <a href="edit_profile.php"> Edit Profile </a></div>
 		</div>

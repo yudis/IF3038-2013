@@ -33,8 +33,8 @@
 	<div id="dynamic_content">
 		<div id="edit_profil_container">
 			<h1>  Edit Profile </h1>
-			<form id="edit_profile_form" method="POST" action="submit_edit_profile.php">
-				<!-- <label> Username </label> <?php echo $username;?> -->
+			<form id="edit_profile_form" method="POST" action="submit_edit_profile.php" enctype="multipart/form-data">
+				<label> Username </label> <?php echo $username;?>
 				
 				<h2>Change Password</h2>
 				<label> New Password </label> 	
@@ -51,11 +51,15 @@
 				<input type="text" name="fullname" id="fullname" onkeypress="javascript:regCheck();" value="<?php echo $fullname; ?>" title="Your name should be at least consists first name and last name">
 				<img src="img/yes.png" id="name_validation" class="signup_form_validation" alt="validation image">
 				<br><label> Birthdate </label> <input type="date" id="birthdate" name="birthdate" value=<?php echo $birthdate;?>>  
-				<br><label> Avatar </label> <input type="file" id="avatar" name="avatar">  
+				<br><label> Avatar </label> <input type="file" id="avatar" name="avatar">
 				
 				<input type="submit" name="edit_profile_submit" class="link_red top10 bold" id="edit_profile_submit" value="SAVE">
 				
 			</form>
+			<!--<form enctype='multipart/form-data' name='avatarupload' action='submit_edit_profile.php' method='POST'>
+				<input name='filename' type='file'>
+				<input type='submit' value='Submit' name='submitavatar'>
+			</form>-->
 		</div>
 	</div>
 </section>

@@ -82,7 +82,7 @@
 	<div id="dynamic_content">
 		<div class="half_div">
 			<div id="upperprof">
-				<img src="../img/avatar1.png" alt="">
+				<img id="mainpp" src="<?php echo $avatar; ?>" alt="" />
 				<div id="namauser"><?php echo $fullname; ?></div>
 			</div>
 			<br/><br/>
