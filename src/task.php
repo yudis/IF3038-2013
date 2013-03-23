@@ -64,6 +64,7 @@ $member = array();
 $member = explode(",", $asignee);
 $i=1;
 $j=count($member);
+
 echo "banyak asignee : ".$j."<br>";
 
 while($i<=$j)
@@ -75,20 +76,30 @@ while($i<=$j)
 	$resulta = mysqli_fetch_array($getMem);
 	$idMember = $resulta['id'];
 	echo "<br>nama member : ".$member[$k]." id : ".$idMember;
-	
 	mysqli_query($con, "INSERT INTO assignees (
 				member,
 				task,
 				finished
 				)
 				VALUES (
-					'$idMember',
-					'$idTask',
+					$idMember,
+					$idTask,
 					0
 				)");
 	
  	$i++;
   }
+
+mysqli_query($con, "INSERT INTO assignees (
+				member,
+				task,
+				finished
+				)
+				VALUES (
+					$creator,
+					$idTask,
+					0
+				)");
 
 $tagx = array();
 $tagx = explode(",", $tag);

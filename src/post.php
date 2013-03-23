@@ -15,6 +15,7 @@ $id_cat= $_GET['id'];
 				Post Tugas
 			</div>
 			<div class="isi">
+				<script type="text/javascript" src="mainpage.js"></script>
 				<form action="task.php" method="post" enctype="multipart/form-data">
                 	<input type="hidden" name="id" value="<?php echo $id_cat;?>">
 					<div class="register-label">Judul</div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="judul" id="judul" onkeyup = "validatePostTask()" maxlength="25"/>
@@ -39,7 +40,15 @@ $id_cat= $_GET['id'];
                     
                     
                     
-					<div class="register-label">Deadline</div><div class="register-td">:</div><div class="register-input"><input class="register-input-input" type="text" name="deadline" id="form-tgl" onkeyup="validate()" /></div><div id="caldad"><div id="calendar"></div><a href="javascript:showcal(2,2012);void(0);"><img src="images/cal.gif" alt="Calendar" /></a></div>
+					<div class="register-label">Deadline</div>
+					<div class="register-td">:</div>
+					<div class="register-input">
+						<input class="register-input-input" type="text" name="deadline" id="form-tgl" onkeyup="validate()" />
+					</div>
+					<div id="caldad">
+						<div id="calendar"></div>
+						<a href="javascript:showcal(2,2012);void(0);"><img src="images/cal.gif" alt="Calendar" /></a>
+					</div>
                     
                    
 					<div class="clear" id="error-tgl"></div>
@@ -57,7 +66,7 @@ $id_cat= $_GET['id'];
                     <div class="register-input"><input class="registerinput-input"- type="text" name="tag" id="judul"/><ul><div><a href="profil.php"></a></div>
 					</ul></div>
 												
-					<div class="post-register-submit"><input type="submit" id = "post1" name="post" value="OK" /></div>
+					<div class="post-register-submit"><input type="submit" id = "post1" name="post" value="OK" onclick="postContent();"/></div>
 				</form>
 			</div>
 			

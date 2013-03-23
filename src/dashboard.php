@@ -46,12 +46,6 @@ $id = $_SESSION['id'];
 					$count=mysqli_num_rows($result3);
 					if ($count == 1) {
             ?>
-            <!--<a href ="rinciantugas.php">
-                <img onmouseover="javascript:getDashboardFocus('task1');" src ="images/Prog_In.png" id="task1" alt="task" style="cursor:pointer" />
-            </a>
-            <a href ="post.php"><input id ="newtask" type="button" name="Tugas Baru" value="newtask" disabled="true"/></a>
-            <img onmouseover="javascript:getDashboardFocus('task2');" src ="images/dateschedule.png" id="task2" alt="task2" style="cursor:pointer" />
-            <a href ="post.php"><input id ="newtask" type="button" name="Tugas Baru" value="newtask" disabled="true"/></a>-->
             <br /><div onclick="javascript:gettask(<?php echo $_SESSION['id'];?>,<?php echo $cat['id'];?>);"><a href="#"><?php echo $cat['name'];?></a></div>
             <?php
 			            $result3 = mysqli_query($con, "SELECT * FROM editors WHERE member=$id AND category=$cat_id");
@@ -148,26 +142,6 @@ $id = $_SESSION['id'];
 				}
 			}
 			?>
-			
-			
-			<!--coba checkbox-->
-			<?php
-
-  			 // if(isset($_POST['BtnSubmit']))
-   			// {
-			   //    echo "Notif : {$_POST['YourChoice']}</br>";
-			   //    echo "<hr>";
-			   // }
-			
-			?>
-			
-			<!--<form name="checkbox" method="POST" action="#">
-			      <input name="YourChoice" type="checkbox" value="selesai" <?php if($_POST['YourChoice']=="selesai") echo "checked=checked"; ?> > Selesai
-			      <input name="YourChoice" type="checkbox" value="belum selesai" <?php if($_POST['YourChoice']=="belum selesai") echo "checked=checked"; ?> > Belum selesai
-			      <br/><br/>
-			      <input name="BtnSubmit" type="submit" value="Submit">
-			</form>-->
-            <!--end of pop up-->
             
 		</div>
 	</div>
