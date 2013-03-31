@@ -11,7 +11,7 @@
 		<div id="navigation">
 			<img>
 			<a href="../dashboard.php">DASHBOARD</a>
-			<a href="../profile/index.php?u=<?=$_SESSION['username'];?>">PROFILE</a>
+			<a href="../profile/index.php?u=<?=$_GET['u']?>">PROFILE</a>
 			<a href="#" onclick="toggleSearch()">SEARCH</a>
 			<a href="../index.php">LOGOUT</a>			
 		</div>
@@ -29,7 +29,7 @@
 			</div>		
 			<div class="box2">
 				<h3></h3>
-				<form method="POST" action="../taskdetails/" onsubmit="submitNewTask();"><!--addtasksubmit.php"--><!--taskdetails.php"-->
+				<form method="POST" action="../taskdetails/" onsubmit="submitNewTask('<?=$_GET['category']?>');"><!--addtasksubmit.php"--><!--taskdetails.php"-->
 				<fieldset>
 					<p>
 						<label>Task Name<abbr title="Required">*</abbr></label>

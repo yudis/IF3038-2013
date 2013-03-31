@@ -61,6 +61,7 @@ function CheckFiles()
 	else {
 		if(value[lenghtValue-1].toLowerCase() == "jpeg"||
 			value[lenghtValue-1].toLowerCase() == "jpg"||
+			value[lenghtValue-1].toLowerCase() == "png"||
 			value[lenghtValue-1].toLowerCase() == "bmp") alert("file benar");
 		else alert("file salah");
 	}
@@ -170,10 +171,17 @@ function search(){
 	window.location = "searchresult.php?term=" + term + "&type=" + type;
 }
 
+function search2(){
+	var term = document.getElementById("searchterm").value;
+	var type = document.getElementById("searchtype").value;
+	
+	window.location = "../searchresult.php?term=" + term + "&type=" + type;
+}
 //======================= SHOW TASKS FOR SELECTED CATEGORY
+var category = "";
 function showTasks(element){
 	var id = element.id;
-	
+	category = id;
 	if(window.XMLHttpRequest){
 		xmlhttp = new XMLHttpRequest();
 	}
@@ -183,6 +191,7 @@ function showTasks(element){
 
 	xmlhttp.onreadystatechange = function(){
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			document.getElementById("plustask").style.display = 'inline';
 			document.getElementById("task").innerHTML = xmlhttp.responseText;
 			alert('Tasks berhasil ditampilkan');
 		}
@@ -285,12 +294,45 @@ function checkLogged(){
 				}
 			}
 
-			xmlhttp.open("GET", "loadloggedin.php", true);
+			xmlhttp.open("GET", "loadloggedin.php?username="+login, true);
 			xmlhttp.send();
 		}
 	}
 }
 
+function checkLogged2(){
+	var object = JSON.parse(localStorage.getItem("key"));    
+	
+	if(object == null){
+		window.location = "index.php";
+	}
+	else{
+		// dateString = object.timestamp;
+		// now = new Date().getTime().toString();
+		login = object.username;
+		
+		if(login == null){
+			window.location = "index.php";
+		}
+		else{
+			if(window.XMLHttpRequest){
+				xmlhttp = new XMLHttpRequest();
+			}
+			else{
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+
+			xmlhttp.onreadystatechange = function(){
+				if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+					document.getElementById("navsearch").innerHTML = xmlhttp.responseText;
+				}
+			}
+
+			xmlhttp.open("GET", "../loadloggedin2.php?username="+login, true);
+			xmlhttp.send();
+		}
+	}
+}
 //======================= LOGIN
 function checkLogin(){
 	var u = document.getElementById("usernamelogin").value;
@@ -363,11 +405,11 @@ function getStyle(oElm, strCssRule){
 }
 
 function redirDetails(){
-	window.location="taskdetails.html";
+	window.location="taskdetails/";
 }
 
 function redirAdd(){
-	window.location="addtask.html";
+	window.location="addtask/?category=" + category;
 }
 
 function handleFileSelect(evt) {

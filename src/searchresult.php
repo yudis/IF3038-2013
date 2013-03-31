@@ -38,7 +38,7 @@
 				<div class="row" id="<?php echo $row['username']; ?>">
 					<div class="cell"><?php echo $row['username']; ?></div>
 					<div class="cell centered"><?php echo $row['fullname']; ?></div>
-					<div class="cell centered"><img src="<?php echo $row['photo']; ?>" ></div>
+					<div class="cell centered"><img src="<?php echo "images/".$row['photo']; ?>" ></div>
 				</div>
 			<?php }
 			echo '<br>';
@@ -159,9 +159,9 @@
 			$result = mysql_query($query);
 			while($row = mysql_fetch_array($result)){ ?>
 				<div class="row" id="<?php echo $row['username']; ?>">
-					<div class="cell"><?php echo $row['username']; ?></div>
+					<div class="cell"><a href="profile/?u=<?= $row['username']; ?>"><?php echo $row['username']; ?></a></div>
 					<div class="cell centered"><?php echo $row['fullname']; ?></div>
-					<div class="cell centered"><img src="<?php echo $row['photo']; ?>" ></div>
+					<div class="cell centered"><img src="<?php echo "images/".$row['photo']; ?>" ></div>
 				</div>
 			<?php }
 			echo '<br>';

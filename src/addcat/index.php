@@ -3,6 +3,7 @@
 		<title>Shared To Do List</title>
 		<link rel="stylesheet" type="text/css" href="../style.css">
 		<link rel="shortcut icon" href="favicon.ico">
+		<script type="text/javascript" src="../ajax.js"></script>
 		<script type="text/javascript" src="../mpquery.js"></script>	
 		<script type="text/javascript" src="addcatcontroller.js"></script>	
 	</head>
@@ -39,7 +40,7 @@
 				</p>			
 			</fieldset>
 			<fieldset>
-			<button id="register" type="submit" onclick="submitNewCategory();">Add Category</button>
+			<button id="register" type="submit" onclick="submitNewCategory(); return false;">Add Category</button>
 			</fieldset>
 			</form>
 		</div>			

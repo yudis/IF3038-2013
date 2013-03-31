@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	require_once("../connectDB.php");
 	
 	$type = ($_POST['type'] == "category") ? $_POST['type'] : "username";
@@ -12,7 +11,7 @@
 	{
 		while($row = mysql_fetch_array($result))
 		{
-			if (($output = $row[$type]) != $_SESSION['username'])
+			if ($output = $row[$type])
 			{
 				echo "<p>".$output."</p>";
 			}
