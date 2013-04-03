@@ -65,7 +65,7 @@ function vdUsername(){
 
 function validateUser() {
 	if(window.xmlhttp.readyState == 4 && window.xmlhttp.status == 200) {
-		var response = window.xmlhttp.responseText;alert(response);
+		var response = window.xmlhttp.responseText;
 		if(response == 'free')
 			document.getElementById('icoUsername').src="image/true.png";
 		else {

@@ -6,7 +6,6 @@ package tubes3;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,69 +19,81 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Validator", urlPatterns = {"/Validator"})
 public class Validator extends HttpServlet {
+
     private Tubes3Connection db;
-    
-    public Validator() {
+
+    /*@Override
+    public void Validator(ServletConfig config) throws ServletException {
+        super.init(config);
+        db = new Tubes3Connection();
+    }*/
+
+    public Validator(){
         db = new Tubes3Connection();
     }
     
     public int checkUser(String username) {
-        if(!username.equals("")) {
+        if (!username.equals("")) {
             try {
                 ResultSet result = db.coba(db.getConnection(), "select count(*) from pengguna where username='" + username + "'");
-                if(result.getInt("count(*)") > 0)
+                result.first();
+                if (result.getInt("count(*)") > 0) {
                     return 1;
-                else
+                } else {
                     return 0;
-            }
-            catch (Exception ex) {
+                }
+            } catch (Exception ex) {
                 System.out.println("Exception is ;" + ex);
             }
         }
         return -1;
     }
-    
+
     public int checkEmail(String email) {
-        if(!email.equals("")) {
+        if (!email.equals("")) {
             try {
                 ResultSet result = db.coba(db.getConnection(), "select count(*) from pengguna where email='" + email + "'");
-                if(result.getInt("count(*)") > 0)
+                result.first();
+                if (result.getInt("count(*)") > 0) {
                     return 1;
-                else
+                } else {
                     return 0;
-            }
-            catch (Exception ex) {
+                }
+            } catch (Exception ex) {
                 System.out.println("Exception is ;" + ex);
             }
         }
         return -1;
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         String username, email;
-        if((username = request.getAttribute("username").toString()) != null) {
-            if(checkUser(username) == 1)
+        if ((username = request.getParameter("username")) != null) {
+            if (checkUser(username) == 1) {
                 out.print("notfree");
-            else if(checkUser(username) == 0)
+            } else if (checkUser(username) == 0) {
                 out.print("free");
-            else
+            } else {
                 out.print("error");
+            }
         }
-        if((email = request.getAttribute("email").toString()) != null) {
-            if(checkEmail(email) == 1)
+        if ((email = request.getParameter("email")) != null) {
+            if (checkEmail(email) == 1) {
                 out.print("notfree");
-            else if(checkEmail(email) == 0)
+            } else if (checkEmail(email) == 0) {
                 out.print("free");
-            else
+            } else {
                 out.print("error");
+            }
         }
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
