@@ -40,7 +40,7 @@ public class UserServlet extends HttpServlet {
 			out.println("</head>");
 			out.println("<body>");
 			String username = request.getParameter("username");
-			out.println("<h1>Welcome " + username + "</h1>");
+			out.println("<h1>Welcome, " + username + " Ganteng </h1>");
 			out.println("</body>");
 			out.println("</html>");
 		} finally {			
