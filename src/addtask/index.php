@@ -29,11 +29,11 @@
 			</div>		
 			<div class="box2">
 				<h3></h3>
-				<form method="POST" action="../taskdetails/" onsubmit="submitNewTask('<?=$_GET['category']?>');"><!--addtasksubmit.php"--><!--taskdetails.php"-->
+				<form method="POST" action="addtasksubmit.php" onsubmit="submitNewTask('<?=$_GET['category']?>');"><!--addtasksubmit.php"--><!--taskdetails.php"-->
 				<fieldset>
 					<p>
 						<label>Task Name<abbr title="Required">*</abbr></label>
-						<input value="" id="taskname"
+						<input value="" id="taskname" name="taskname"
 						required="required" aria-required="true"
 						pattern="^[A-Za-z0-9_ ]{1,25}$"
 						title="Your task title"
@@ -41,12 +41,12 @@
 					</p>
 					<p>
 						<label>Deadline <abbr title="Required">*</abbr></label>
-						<input type="date" id="deadline"
+						<input type="date" id="deadline" name="deadline"
 						required="required" aria-required="true"/>
 					</p>
 					<p>
 						<label>Assignee <abbr title="Required">*</abbr></label>
-						<input value="" id="assignee"
+						<input value="" id="assignee" name="assignee"
 						required="required" aria-required="true"
 						pattern="^[a-zA-Z0-9_]{5,}$"
 						title="Username responsible for this task"
@@ -54,7 +54,7 @@
 					</p>
 					<p>
 						<label>Tag <abbr title="Required">*</abbr></label>
-						<input value="" id="tags"
+						<input value="" id="tags" name="tags"
 						required="required" aria-required="true"
 						pattern="^[A-Za-z0-9_ ,]{1,50}$"
 						title="	Tag for this task"
@@ -62,7 +62,7 @@
 					</p>
 					<p>
 						<label>Attachment<abbr title="Required">*</abbr></label>
-						<input type="file" id="attachment" 
+						<input type="file" id="attachment" name="attachment"
 						required="required" aria-required="true"
 						title="Picture or Video related to this task"/>
 					</p>			

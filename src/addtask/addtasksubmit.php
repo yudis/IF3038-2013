@@ -10,12 +10,13 @@
 	$category = "progin";
 	
 	$query = "INSERT INTO task (taskname, deadline, tags, status, category, attachment, type, assignee) VALUES ('$taskname', '$deadline', '$tags', '$status', '$category', '$attachment', '$type', '$assignee')";
-	echo $query;
+	//echo $query;
 	$result = mysql_query($query);
 	
 	if($result)
 	{
 		echo "Successful";
+		header("Location: ../taskdetails.php");
 	}
 	else 
 	{
