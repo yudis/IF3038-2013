@@ -25,6 +25,22 @@
                                         <label>Nama Lengkap:</label>
                                         <p id="namalengkap" class="prof1"><% out.print(p.fullname); %></p>
                                 </li>
+                                <li>
+                                        <label>Email:</label>
+                                        <p class="prof1"><% out.print(p.email); %></p>
+                                </li>
+                                <li>
+                                        <label>Tanggal Lahir:</label>
+                                        <p class="prof1"><% out.print(p.birthday); %></p>
+                                </li>
+                                <li>
+                                        <label>On going tasks:</label>
+                                        <p class="prof1"><% out.print(p.tugasBelumSelesai); %></p>
+                                </li>
+                                <li>
+                                        <label>Tasks done:</label>
+                                        <p class="prof1"><% out.print(p.tugasSelesai); %></p>
+                                </li>
                               
                         </ul>
                 </div>

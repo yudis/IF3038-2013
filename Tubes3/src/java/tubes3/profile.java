@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "profile", urlPatterns = {"/profile"})
 public class profile extends HttpServlet {
     public String username,fullname,email,avatar;
-    public Date birthday;
+    public String birthday;
     public String [] tugasSelesai,tugasBelumSelesai;
     ResultSet rs;
     public profile() throws SQLException {
@@ -38,6 +38,7 @@ public class profile extends HttpServlet {
         fullname=rs.getString("fullname");
         email=rs.getString("email");
         avatar=rs.getString("avatar");
+        birthday=rs.getString("birthday");
         }
         else {
             fullname = "Gak ada";
