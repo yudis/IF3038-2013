@@ -13,9 +13,9 @@
         <script src="./scripts/ajaxhelper.js" type="application/javascript"></script>
         <script src="./scripts/nicEdit.js" type="application/javascript"></script>
         <script src="./scripts/datetimepicker_css.js" type="application/javascript"></script>
-        <c:out value="${headTags}" default="" />
+        <c:out value="${headTags}" escapeXml="false" default="" />
     </head>
-    <body <c:out value="${bodyAttrs}" default="" />>
+    <body <c:out value="${bodyAttrs}" escapeXml="false" default="" />
         <div class="page">
             <header class="content">
                 <nav>
