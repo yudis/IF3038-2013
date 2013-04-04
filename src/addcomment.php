@@ -11,7 +11,7 @@
 		die('Could not connect: ' . mysqli_error());
 	}
 	
-	mysqli_select_db($con, "progin_405_13510035");
+	mysqli_select_db($con, "progin_405_13510029");
 	
 	$sql = "INSERT INTO comment (comment_id, commented_task, writer, writing_time, comment) VALUES ('".$id."', '".$tugas."', '".$user."', '".$date."', '".$comment."')";
 	$result = mysqli_query($con, $sql);
