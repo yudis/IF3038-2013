@@ -1,6 +1,5 @@
 package id.ac.itb.todolist.ajax;
 
-import com.google.gson.JsonObject;
 import id.ac.itb.todolist.dao.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import id.ac.itb.todolist.json.JSONObject;
 
 public class AvailabilityChecker extends HttpServlet {
 
@@ -30,7 +30,7 @@ public class AvailabilityChecker extends HttpServlet {
         String check = request.getParameter("check");
         String data = request.getParameter("data");
         
-        JsonObject jObject = new JsonObject();
+        JSONObject jObject = new JSONObject();
         
 	if (check != null && data != null) {
             UserDao userDao = new UserDao();
@@ -43,12 +43,12 @@ public class AvailabilityChecker extends HttpServlet {
             }
             
             if (checkResult) {
-                jObject.addProperty("status", 200);
+                jObject.put("status", 200);
             } else {
-                jObject.addProperty("status", 401);                
+                jObject.put("status", 401);                
             }
 	} else {
-            jObject.addProperty("status", 401);
+            jObject.put("status", 401);
         }
         
         out.print(jObject);

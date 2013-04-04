@@ -1,10 +1,8 @@
 package id.ac.itb.todolist.ajax;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import id.ac.itb.todolist.dao.TugasDao;
 import id.ac.itb.todolist.model.Tugas;
 import id.ac.itb.todolist.model.User;
+import id.ac.itb.todolist.dao.TugasDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import id.ac.itb.todolist.json.JSONObject;
 
 public class DetilTugas extends HttpServlet {
 
@@ -43,7 +42,7 @@ public class DetilTugas extends HttpServlet {
         
         String priviledgeStr = request.getParameter("priviledge");
        
-        JsonObject jObject = null;
+        JSONObject jObject = null;
         
         if (currentUser != null && idTugasStr != null) {
             TugasDao tugasDao = new TugasDao();
@@ -51,17 +50,16 @@ public class DetilTugas extends HttpServlet {
 
             if (!tugasDao.isUpdated(idTugas, update)) {
                 tugas = tugasDao.getTugas(idTugas, true, true, true);
-                jObject = (JsonObject) tugas.toJsonElement();
+                jObject = tugas.toJsonObject();
             }
         } else {
-            jObject = new JsonObject();
-            jObject.addProperty("responseStatus", 400);
-            jObject.addProperty("responseTime", System.currentTimeMillis() / 1000L);
-            jObject.addProperty("message", "Bad request");
+            jObject = new JSONObject();
+            jObject.put("responseStatus", 400);
+            jObject.put("responseTime", System.currentTimeMillis() / 1000L);
+            jObject.put("message", "Bad request");
         }
         
-        Gson gson = new Gson();
-        out.print(jObject.toString());
+        out.print(jObject);
         out.close();
     }
 

@@ -1,16 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package id.ac.itb.todolist.model;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import id.ac.itb.todolist.util.BaseModel;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
+import id.ac.itb.todolist.json.JSONObject;
 
 public class User extends BaseModel {
     private String username;
@@ -91,15 +86,15 @@ public class User extends BaseModel {
     }
 
     @Override
-    public JsonElement toJsonElement() {
-        JsonObject jObject = new JsonObject();
+    public JSONObject toJsonObject() {
+        JSONObject jObject = new JSONObject();
         
-        jObject.addProperty("username", username);
-        jObject.addProperty("email", email);
-        jObject.addProperty("password", password);
-        jObject.addProperty("fullName", fullName);
-        jObject.addProperty("tglLahir", tglLahir.toString());
-        jObject.addProperty("avatar", avatar);
+        jObject.put("username", username);
+        jObject.put("email", email);
+        jObject.put("password", password);
+        jObject.put("fullName", fullName);
+        jObject.put("tglLahir", tglLahir.toString());
+        jObject.put("avatar", avatar);
         
         return jObject;
     }

@@ -2,8 +2,10 @@ package id.ac.itb.todolist.model;
 
 import id.ac.itb.todolist.util.BaseModel;
 import java.sql.Timestamp;
+import id.ac.itb.todolist.json.JSONObject;
 
 public class Comment extends BaseModel {
+
     private int id;
     private int idTugas;
     private User user;
@@ -59,5 +61,18 @@ public class Comment extends BaseModel {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject jObject = new JSONObject();
+
+        jObject.put("id", id);
+        jObject.put("idTugas", idTugas);
+        jObject.put("user", user);
+        jObject.put("time", time.getTime());
+        jObject.put("content", content);
+
+        return jObject;
     }
 }

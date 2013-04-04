@@ -4,8 +4,7 @@
  */
 package id.ac.itb.todolist.util;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
+import id.ac.itb.todolist.json.JSONObject;
 
 /**
  *
@@ -13,8 +12,7 @@ import com.google.gson.JsonElement;
  */
 public class BaseModel {
     
-    public JsonElement toJsonElement() {
-        Gson gson = new Gson();
-        return gson.toJsonTree(this);
+    public JSONObject toJsonObject() {
+        return null;
     }
 }

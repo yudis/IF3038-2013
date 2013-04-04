@@ -4,7 +4,6 @@
  */
 package id.ac.itb.todolist.ajax;
 
-import com.google.gson.JsonObject;
 import id.ac.itb.todolist.dao.UserDao;
 import id.ac.itb.todolist.model.User;
 import java.io.IOException;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import id.ac.itb.todolist.json.JSONObject;
 
 /**
  *
@@ -54,17 +54,17 @@ public class Login extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
                
-        JsonObject jObject = new JsonObject();
+        JSONObject jObject = new JSONObject();
         
         if (username != null && password != null) {
             UserDao userDao = new UserDao();
             User user = userDao.getUserLogin(username, password);
             if (user != null) {
                 session.setAttribute("user", user);
-                jObject.addProperty("status", 200);
+                jObject.put("status", 200);
             } else {
-                jObject.addProperty("status", 401);
-                jObject.addProperty("message", "Login failed, username/password does not correct.");
+                jObject.put("status", 401);
+                jObject.put("message", "Login failed, username/password does not correct.");
             }
         }
         

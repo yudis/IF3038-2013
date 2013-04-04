@@ -1,13 +1,11 @@
 package id.ac.itb.todolist.model;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import id.ac.itb.todolist.util.BaseModel;
 import java.util.Collection;
 import java.sql.Date;
 import java.sql.Timestamp;
+import id.ac.itb.todolist.json.JSONArray;
+import id.ac.itb.todolist.json.JSONObject;
 
 public class Tugas extends BaseModel {
     private int id;
@@ -118,29 +116,29 @@ public class Tugas extends BaseModel {
     }
 
     @Override
-    public JsonElement toJsonElement() {
-        JsonObject jObject = new JsonObject();
-        jObject.addProperty("id", id);
-        jObject.addProperty("nama", nama);
-        jObject.addProperty("tglDeadline", tglDeadline.toString());
-        jObject.addProperty("status", status);
-        jObject.addProperty("lastMod", lastMod.toString());
-        jObject.add("pemilik", pemilik.toJsonElement());
-        jObject.add("kategori", kategori.toJsonElement());
+    public JSONObject toJsonObject() {
+        JSONObject jObject = new JSONObject();
         
-        JsonArray jAttachments = new JsonArray();
-        for (BaseModel item : attachments) {jAttachments.add(item.toJsonElement());}        
-        jObject.add("attachments", jAttachments);
+        jObject.put("id", id);
+        jObject.put("nama", nama);
+        jObject.put("tglDeadline", tglDeadline.toString());
+        jObject.put("status", status);
+        jObject.put("lastMod", lastMod.toString());
+        jObject.put("pemilik", pemilik.toJsonObject());
+        jObject.put("kategori", kategori.toJsonObject());
         
-        JsonArray jAssignees = new JsonArray();
-        for (BaseModel item : assignees) {jAssignees.add(item.toJsonElement());}        
-        jObject.add("assignees", jAssignees);
+        JSONArray jAttachments = new JSONArray();
+        for (BaseModel item : attachments) {jAttachments.put(item.toJsonObject());}        
+        jObject.put("attachments", jAttachments);
         
-        JsonArray jTags = new JsonArray();
-        Gson gson = new Gson();
-        for (String item : tags) {jTags.add(gson.toJsonTree(item));}        
-        jObject.add("tags", jTags);
+        JSONArray jAssignees = new JSONArray();
+        for (BaseModel item : assignees) {jAssignees.put(item.toJsonObject());}        
+        jObject.put("assignees", jAssignees);
+        
+        JSONArray jTags = new JSONArray();
+        for (String item : tags) {jTags.put(item);}        
+        jObject.put("tags", jTags);
         
         return jObject;
-    }    
+    }
 }
