@@ -34,18 +34,21 @@ public class Dashboard extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         
-        if (session.getAttribute("user") != null)
-        {
+        //if (session.getAttribute("user") != null)
+        //{
             // user sudah login, dialihkan ke halaman lain
-            response.sendRedirect("./dashboard");
-        }
-        else
-        {
-            RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/index/default.jsp");
+            request.setAttribute("title", "Todolist | Dashboard");
+            request.setAttribute("headTags", "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/default.css\" /><link rel=\"stylesheet\" type=\"text/css\" href=\"styles/mediaqueries.css\" /><script src=\"scripts/helper.js\" type=\"application/javascript\"></script><script src=\"scripts/popup.js\" type=\"application/javascript\"></script><script src=\"scripts/dashboard.js\" type=\"application/javascript\"></script><script src=\"scripts/kategori.js\" type=\"application/javascript\"></script>");
+            request.setAttribute("bodyAttrs", "<body onload=\"updateAddButtonVisibility();updateDelButtonVisibility();loadtugas(\'\');\"><div id=\"blanket\"></div><div id=\"popUpDiv\"><h1>Create new category</h1><div class=\"padding12px\"><label for=\"txtNewKategori\">Name</label>:<br /><input id=\"txtNewKategori\" type=\"text\" placeholder=\"eg: IF40XX\" /></div><br /><div class=\"padding12px\">Priviledge users:<br /><ul id=\"userList\" class=\"tag\"></ul><br><input id=\"userL\" name=\"userL\" onfocus=\"showCoordinator()\" type=\"text\" tabindex=\"4\" list=\"user\" /><datalist id=\"user\" ></datalist><button onclick=\"return addCoordinator();\">Add</button></div><br /><div class=\"rightalign padding12px\"><button onclick=\"popup(\'popUpDiv\',\'blanket\',300,600); NewKategori()\">OK</button> <button onclick=\"popup(\'popUpDiv\',\'blanket\',300,600)\">Cancel</button></div><br /></div>");
+            RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/dashboard/dashboard.jsp");
             view.forward(request, response);
-        }
+        //}
+        //else
+        //{
+        //    response.sendRedirect("./dashboard.jsp");
+        //}
     }
-    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
