@@ -12,7 +12,7 @@ var lanjut = 1;
 function checkFile(id) {
 	var fileUrl = document.getElementById(id).value.split("\\");
 	fileUrl = fileUrl[fileUrl.length - 1];
-	xmlHttpReq.open('HEAD', "upload//"+fileUrl, true);
+	xmlHttpReq.open('HEAD', "uploadedFiles//"+fileUrl, true);
 	xmlHttpReq.onreadystatechange = function() {
 		if (xmlHttpReq.readyState == 4) {
 			if (xmlHttpReq.status == 200) {

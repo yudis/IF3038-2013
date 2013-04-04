@@ -16,7 +16,8 @@
 
     <div id="rightsidebar">
         <div id="wrapper-left">
-            <form class="task" name="MakeForm" method="post" onSubmit="checkSubmission(this, event)" enctype="multipart/form-data" action="AddTask">
+            <form class="task" name="MakeForm" method="post" onSubmit="checkSubmission(this, event)" enctype="multipart/form-data" action="addtask.jsp
+                  ">
                 <h1>Fill Details</h1>
                 <ul>
                     <li>
@@ -25,15 +26,15 @@
                     </li>
                     <li>
                         <label for="filebutton1">Attachment 1</label>
-                        <input id="filebutton1" name="filebutton1" type="file" onChange="checkFile('filebutton1')"/>
+                        <input id="filebutton1" name="filebutton" type="file" onChange="checkFile('filebutton1')"/>
                     </li>	
                     <li>
                         <label for="filebutton2">Attachment 2</label>
-                        <input id="filebutton2" name="filebutton2" type="file" onChange="checkFile('filebutton2')"/>
+                        <input id="filebutton2" name="filebutton" type="file" onChange="checkFile('filebutton2')"/>
                     </li>
                     <li>
                         <label for="filebutton3">Attachment 3</label>
-                        <input id="filebutton3" name="filebutton3" type="file" onChange="checkFile('filebutton3')"/>
+                        <input id="filebutton3" name="filebutton" type="file" onChange="checkFile('filebutton3')"/>
                     </li>
                     <li>
                         <label for="asignee">Assignee</label>
