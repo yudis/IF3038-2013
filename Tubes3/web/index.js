@@ -53,7 +53,7 @@ function vdUsername(){
 			return;
 		var username = encodeURIComponent(temporary);
 		var query = 'username=' + username;
-		window.xmlhttp.open('POST', 'validator.php', true);
+		window.xmlhttp.open('POST', 'Validator', true);
 		window.xmlhttp.onreadystatechange = validateUser;
 		window.xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		window.xmlhttp.send(query);
@@ -121,7 +121,7 @@ function vdEmail(){
 			return;
 		var email = encodeURIComponent(temporary);
 		var query = 'email=' + email;
-		window.xmlhttp.open('POST', 'validator.php', true);
+		window.xmlhttp.open('POST', 'Validator', true);
 		window.xmlhttp.onreadystatechange = validateEmail;
 		window.xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		window.xmlhttp.send(query);
@@ -189,8 +189,8 @@ function canLogin() {
 		if(response == 'notsuccess')
 			alert('Username and password are not match.');
 		else if(response == 'success')
-			window.location.replace('home.php');
+			window.location.replace('home.jsp');
 		else
-			window.location.replace('index.php');
+			window.location.replace('index.jsp');
 	}
 }
