@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import javax.servlet.ServletConfig;
@@ -21,9 +22,9 @@ import javax.servlet.ServletConfig;
  * @author TOSHIBA
  */
 public class checkbox extends HttpServlet {
-    private Connection connection;
-    private String query = null;
-    private Statement statement;
+    private Connection connectioncheckbox;
+    private String querycheckbox = null;
+    private PreparedStatement statementcheckbox;
     
     public void init(ServletConfig config) throws ServletException {
  
@@ -33,7 +34,7 @@ public class checkbox extends HttpServlet {
         try {
          Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-         connection = DriverManager.getConnection(url, username , password);
+         connectioncheckbox = DriverManager.getConnection(url, username , password);
         }
         catch (Exception e) {
 
@@ -52,14 +53,17 @@ public class checkbox extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
+    @Override
      protected void doPost(
         HttpServletRequest request, 
         HttpServletResponse response
         ) throws ServletException, IOException {
         
+     
+       
         String taskid = request.getParameter("idcheckbox");
         String value = request.getParameter("checked");
-        String valuenum = "";
+        String valuenum;
         if (value.equals("true")){
             valuenum = "1";
         }else{
@@ -68,16 +72,20 @@ public class checkbox extends HttpServlet {
        
        response.setContentType("text/html;charset=UTF-8");
        PrintWriter out = response.getWriter();
+       querycheckbox = "UPDATE task SET status='"+valuenum+"' WHERE task_id='"+taskid+"'";
       
        
-            query = "UPDATE task SET status= '$valuenum' WHERE task_id = '$taskid'";
             try {
-                statement = connection.createStatement();
-                ResultSet rs = statement.executeQuery(query);
+                statementcheckbox = this.connectioncheckbox.prepareStatement(querycheckbox);
+                
+                statementcheckbox.executeUpdate();
+                
+                ResultSet rs = statementcheckbox.executeQuery("Select * from task where task_id = '"+taskid+"'");
                 while (rs.next()){
                     String task_id = rs.getString(1);
                     out.println("<div class = 'judulhasilsearch'>");
                     String task_name = rs.getString(2);
+                    out.println(task_name);
                     out.println("</div>");
                     out.println("<div>");
                     String deadline = rs.getString(4);
@@ -87,7 +95,7 @@ public class checkbox extends HttpServlet {
                     out.println("<div>");
                     out.print("Tag : ");
                     String subquery = "SELECT tag.tag_name FROM tag,tasktag WHERE tasktag.task_id = '"+task_id+"' and tag.tag_id = tasktag.tag_id";
-                    Statement substatement = connection.createStatement();
+                    Statement substatement = connectioncheckbox.createStatement();
                     ResultSet subrs = substatement.executeQuery(subquery);
                     while(subrs.next()){
                        String tagname = subrs.getString("tag_name");
@@ -115,6 +123,7 @@ public class checkbox extends HttpServlet {
     
       }
    
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);

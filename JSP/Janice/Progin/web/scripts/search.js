@@ -2,9 +2,7 @@
 
 function change(task_id){
 	var container = document.getElementById(task_id);
-	
 	var value = document.getElementById('checkbox_'+task_id).checked;
-	
 	var xmlhttp;
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -17,7 +15,7 @@ function change(task_id){
 	xmlhttp.onreadystatechange=function()
 	  {
 	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-			container.innerHTML = xmlhttp.responseText;
+             container.innerHTML = xmlhttp.responseText;
 	 }
 	xmlhttp.open("GET","checkbox?idcheckbox="+task_id+"&checked="+document.getElementById('checkbox_'+task_id).checked,true);
 	xmlhttp.send();

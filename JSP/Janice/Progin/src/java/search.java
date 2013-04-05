@@ -127,7 +127,7 @@ public class search extends HttpServlet {
        }
        
        int per_page = 1;
-       int last_page = num/per_page;
+       double last_page = Math.ceil(num/per_page);
        int first_page = 1;
        out.println("<a href='?m="+mode+"&s="+s+"&page="+first_page+"'>First page</a> ");
        
@@ -142,15 +142,17 @@ public class search extends HttpServlet {
            }
        }
        
-       if (page == last_page){
+       if ((page==last_page)||(last_page==0)){
            out.println("Next ");
        }else{
            if (request.getParameter("page")==null){
                next = first_page + 1;
                out.println("<a href='?m="+mode+"&s="+s+"&page="+next+"'>Next</a> ");
            }else{
-               next = page+1;
-               out.println("<a href='?m="+mode+"&s="+s+"&page="+next+"'>Next</a> ");
+               if (num!=0){
+                next = page+1;
+                out.println("<a href='?m="+mode+"&s="+s+"&page="+next+"'>Next</a> ");
+               }
            }
        }
        
@@ -163,7 +165,7 @@ public class search extends HttpServlet {
        String limit = "LIMIT "+start + "," + per_page;
        
        if (mode.equals("1")){
-            query = "select * from user where username LIKE '%"+s+"%' ";
+            query = "select * from user where username LIKE '%"+s+"%' " + limit;
             try {
                 statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
@@ -183,7 +185,7 @@ public class search extends HttpServlet {
              e.printStackTrace();
             }
        }else if (mode.equals("2")){
-           query = "SELECT * FROM category WHERE category_name LIKE '%"+s+"%' " ;
+           query = "SELECT * FROM category WHERE category_name LIKE '%"+s+"%' " + limit ;
            try {
                 statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
@@ -208,7 +210,7 @@ public class search extends HttpServlet {
                 while (rs.next()){
                     temp = rs.getString(1);
                     String taskname = rs.getString(2);
-                    out.println(outside);
+                    out.println("<div class = 'tugas' id = '"+temp+"'>");
                     out.println(isi_open);
                     out.println(taskname);
                     out.println(isi_close);
@@ -226,14 +228,18 @@ public class search extends HttpServlet {
                        String tagname = subrs.getString("tag_name");
                        out.print(tagname+" ");
                     }
+                    String parameter = "'"+temp+"'";
+                    String function = "change("+parameter+")";
                     out.println("</div>");
                     out.println("<div>");
                     String status = rs.getString(3);
-                    out.print("Status :");
+                    out.println("Status");
                     if (status.equals("1")){
-                       out.println(" sudah selesai");
+                        out.println("<input id='checkbox_"+temp+"' value = '"+temp+"' type='checkbox' checked='checked' onchange="+function+">");
+                        out.println("sudah selesai");
                     }else{
-                       out.println(" belum selesai");
+                         out.println("<input id='checkbox_"+temp+"' value = '"+temp+"' type='checkbox' onchange="+function+">");
+			 out.println("belum selesai");
                     }
                     out.println("</div>");
                     out.println(isi_close);
@@ -251,7 +257,7 @@ public class search extends HttpServlet {
                 while (rs.next()){
                     temp = rs.getString(1);
                     String taskname = rs.getString(2);
-                    out.println(outside);
+                    out.println("<div class = 'tugas' id = '"+temp+"'>");
                     out.println(isi_open);
                     out.println(taskname);
                     out.println(isi_close);
@@ -269,14 +275,18 @@ public class search extends HttpServlet {
                        String tagname = subrs.getString("tag_name");
                        out.print(tagname+" ");
                     }
+                    String parameter = "'"+temp+"'";
+                    String function = "change("+parameter+")";
                     out.println("</div>");
                     out.println("<div>");
                     String status = rs.getString(3);
-                    out.print("Status :");
+                    out.println("Status");
                     if (status.equals("1")){
-                       out.println(" sudah selesai");
+                        out.println("<input id='checkbox_"+temp+"' value = '"+temp+"' type='checkbox' checked='checked' onchange="+function+">");
+                        out.println("sudah selesai");
                     }else{
-                       out.println(" belum selesai");
+                         out.println("<input id='checkbox_"+temp+"' value = '"+temp+"' type='checkbox' onchange="+function+">");
+			 out.println("belum selesai");
                     }
                     out.println("</div>");
                     out.println(isi_close);
