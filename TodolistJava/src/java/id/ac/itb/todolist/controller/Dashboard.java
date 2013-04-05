@@ -4,6 +4,9 @@
  */
 package id.ac.itb.todolist.controller;
 
+import com.google.gson.JsonObject;
+import id.ac.itb.todolist.dao.UserDao;
+import id.ac.itb.todolist.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -33,20 +36,29 @@ public class Dashboard extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        
-        //if (session.getAttribute("user") != null)
-        //{
+        JsonObject jObject = new JsonObject();
+        UserDao userDao = new UserDao();
+        User user = userDao.getUserLogin("edwardsp", "lalala");
+        if (user != null) {
+            session.setAttribute("user", user);
+            jObject.addProperty("status", 200);
+        } else {
+            jObject.addProperty("status", 401);
+            jObject.addProperty("message", "Login failed, username/password does not correct.");
+        }
+        if (session.getAttribute("user") != null)
+        {
             // user sudah login, dialihkan ke halaman lain
             request.setAttribute("title", "Todolist | Dashboard");
-            request.setAttribute("headTags", "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/default.css\" /><link rel=\"stylesheet\" type=\"text/css\" href=\"styles/mediaqueries.css\" /><script src=\"scripts/helper.js\" type=\"application/javascript\"></script><script src=\"scripts/popup.js\" type=\"application/javascript\"></script><script src=\"scripts/dashboard.js\" type=\"application/javascript\"></script><script src=\"scripts/kategori.js\" type=\"application/javascript\"></script>");
+            request.setAttribute("headTags", "<script src=\"scripts/dashboard.js\" type=\"application/javascript\"></script><script src=\"scripts/kategori.js\" type=\"application/javascript\"></script>");
             request.setAttribute("bodyAttrs", "<body onload=\"updateAddButtonVisibility();updateDelButtonVisibility();loadtugas(\'\');\"><div id=\"blanket\"></div><div id=\"popUpDiv\"><h1>Create new category</h1><div class=\"padding12px\"><label for=\"txtNewKategori\">Name</label>:<br /><input id=\"txtNewKategori\" type=\"text\" placeholder=\"eg: IF40XX\" /></div><br /><div class=\"padding12px\">Priviledge users:<br /><ul id=\"userList\" class=\"tag\"></ul><br><input id=\"userL\" name=\"userL\" onfocus=\"showCoordinator()\" type=\"text\" tabindex=\"4\" list=\"user\" /><datalist id=\"user\" ></datalist><button onclick=\"return addCoordinator();\">Add</button></div><br /><div class=\"rightalign padding12px\"><button onclick=\"popup(\'popUpDiv\',\'blanket\',300,600); NewKategori()\">OK</button> <button onclick=\"popup(\'popUpDiv\',\'blanket\',300,600)\">Cancel</button></div><br /></div>");
             RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/dashboard/dashboard.jsp");
             view.forward(request, response);
-        //}
-        //else
-        //{
-        //    response.sendRedirect("./dashboard.jsp");
-        //}
+        }
+        else
+        {
+           response.sendRedirect("./index");
+        }
     }
 
 

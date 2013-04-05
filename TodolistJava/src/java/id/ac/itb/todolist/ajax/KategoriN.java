@@ -1,21 +1,28 @@
-
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package id.ac.itb.todolist.ajax;
 
-import com.google.gson.JsonObject;
 import id.ac.itb.todolist.dao.CategoryDao;
 import id.ac.itb.todolist.model.Category;
 import id.ac.itb.todolist.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collection;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class kategori extends HttpServlet {
+/**
+ *
+ * @author User
+ */
+@WebServlet(name = "kategoriN", urlPatterns = {"/ajax/KategoriN"})
+public class KategoriN extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -33,13 +40,13 @@ public class kategori extends HttpServlet {
         response.setContentType("application/json");
         
         PrintWriter out = response.getWriter();
-        out.println("tes");
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("user");
+        out.println("test");
         try {
             CategoryDao category =new CategoryDao();
-            ArrayList<Category> result = new ArrayList<Category>();
-            ArrayList<Category> result2 = new ArrayList<Category>();
+            ArrayList<Category> result ;
+            ArrayList<Category> result2 ;
             result=category.getAllCategory();
             result2=category.getAssigneeCat(currentUser.getUsername());
             for (int i = 0; i < result.size(); i++){
