@@ -4,9 +4,17 @@
         <servlet-name>search</servlet-name>
         <servlet-class>search</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>checkbox</servlet-name>
+        <servlet-class>checkbox</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>search</servlet-name>
         <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkbox</servlet-name>
+        <url-pattern>/checkbox</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
