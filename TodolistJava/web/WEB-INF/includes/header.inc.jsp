@@ -6,16 +6,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <!-- <meta name="viewport" content="width=device-width; initial-scale=1.0" /> -->
         <title><c:out value="${title}" default="Todolist" /></title>
-        <link rel="stylesheet" type="text/css" href="./styles/default.css" />
-        <link rel="stylesheet" type="text/css" href="./styles/mediaqueries.css" />
-        <script src="./scripts/json2.js" type="application/javascript"></script>
-        <script src="./scripts/helper.js" type="application/javascript"></script>
-        <script src="./scripts/ajaxhelper.js" type="application/javascript"></script>
-        <script src="./scripts/nicEdit.js" type="application/javascript"></script>
-        <script src="./scripts/datetimepicker_css.js" type="application/javascript"></script>
-        <c:out value="${headTags}" default="" />
+        <link rel="stylesheet" type="text/css" href="styles/default.css" />
+        <link rel="stylesheet" type="text/css" href="styles/mediaqueries.css" />
+        <script type="text/javascript" src="scripts/helper/ajaxhelper.js"></script>
+        <script type="text/javascript" src="scripts/helper/helper.js"></script>
+        <script type="text/javascript" src="scripts/helper/json2.js"></script>
+        <script type="text/javascript" src="scripts/helper/datetimepicker_css.js"></script>
+        <script src="scripts/helper/nicEdit.js" type="application/javascript"></script>
+        <script src="scripts/helper/datetimepicker_css.js" type="application/javascript"></script>
+        <c:out value="${headTags}" escapeXml="false" default="" />
     </head>
-    <body <c:out value="${bodyAttrs}" default="" />>
+    <body <c:out value="${bodyAttrs}" escapeXml="false" default="" />
         <div class="page">
             <header class="content">
                 <nav>
@@ -40,8 +41,5 @@
                         </div>
                     </div>
                 </nav>
-                <div class="welcomebar">
-                    <a href="./profile.php"><img src="./images/avatars/<?php echo $_SESSION["user"]["avatar"]; ?>" alt="<?php echo $_SESSION["user"]["full_name"]; ?>" width="32" height="32" /></a> Hi <strong><?php echo $_SESSION["user"]["full_name"]; ?></strong> (<a href="./profile.php"><?php echo $_SESSION["user"]["username"]; ?></a>)
-                </div>
             </header>
             <div class ="content">
