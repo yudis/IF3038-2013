@@ -6,6 +6,7 @@ package tubes3;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,21 +22,17 @@ import javax.servlet.http.HttpServletResponse;
 public class Validator extends HttpServlet {
 
     private Tubes3Connection db;
-
-    /*@Override
-    public void Validator(ServletConfig config) throws ServletException {
-        super.init(config);
-        db = new Tubes3Connection();
-    }*/
+    private Connection connection;
 
     public Validator(){
         db = new Tubes3Connection();
+        connection = db.getConnection();
     }
     
     public int checkUser(String username) {
         if (!username.equals("")) {
             try {
-                ResultSet result = db.coba(db.getConnection(), "select count(*) from pengguna where username='" + username + "'");
+                ResultSet result = db.coba(connection, "select count(*) from pengguna where username='" + username + "'");
                 result.first();
                 if (result.getInt("count(*)") > 0) {
                     return 1;
@@ -52,7 +49,7 @@ public class Validator extends HttpServlet {
     public int checkEmail(String email) {
         if (!email.equals("")) {
             try {
-                ResultSet result = db.coba(db.getConnection(), "select count(*) from pengguna where email='" + email + "'");
+                ResultSet result = db.coba(connection, "select count(*) from pengguna where email='" + email + "'");
                 result.first();
                 if (result.getInt("count(*)") > 0) {
                     return 1;

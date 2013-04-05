@@ -68,10 +68,12 @@ function validateUser() {
 		var response = window.xmlhttp.responseText;
 		if(response == 'free')
 			document.getElementById('icoUsername').src="image/true.png";
-		else {
+		else if(response == 'notfree'){
 			document.getElementById('icoUsername').src="image/false.png";
 			alert('Username has been used');
 		}
+                else
+                    alert('Error');
 		Validation();
 	}
 }
@@ -164,7 +166,7 @@ function login() {
 	if(!window.xmlhttp)
 		return;
 	var query = 'user=' + encodeURIComponent(document.getElementById('userheader').value) + '&pass=' + encodeURIComponent(document.getElementById('passheader').value);
-	window.xmlhttp.open('POST', 'login.php', true);
+	window.xmlhttp.open('POST', 'Login', true);
 	window.xmlhttp.onreadystatechange = canLogin;
 	window.xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	window.xmlhttp.send(query);
@@ -176,7 +178,7 @@ function loginPressed(keyCode) {
 		if(!window.xmlhttp)
 			return;
 		var query = 'user=' + encodeURIComponent(document.getElementById('userheader').value) + '&pass=' + encodeURIComponent(document.getElementById('passheader').value);
-		window.xmlhttp.open('POST', 'login.php', true);
+		window.xmlhttp.open('POST', 'Login', true);
 		window.xmlhttp.onreadystatechange = canLogin;
 		window.xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		window.xmlhttp.send(query);
@@ -187,7 +189,9 @@ function canLogin() {
 	if(window.xmlhttp.readyState == 4 && window.xmlhttp.status == 200) {
 		var response = window.xmlhttp.responseText;
 		if(response == 'notsuccess')
-			alert('Username and password are not match.');
+                    alert('Username and password are not match.');
+                else if(response == 'error')
+                    alert('Error');
 		else if(response == 'success')
 			window.location.replace('home.jsp');
 		else
