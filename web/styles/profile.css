@@ -1,0 +1,249 @@
+#container {
+	
+	width: 100%;
+	
+	margin: 0;
+}
+#header{
+    height:50px;
+	width:100%;
+	background-image: url('../../images/black_header.png');
+	background-repeat: repeat-x;
+}
+#logo{
+    height:50px;
+	width:200px;
+	float:left;
+}
+#space{
+	height:50px;
+	width:100px;
+	float:left;
+}
+#search{
+    height:50px;
+	width:500px;
+	float:left;
+}
+#searchbox{
+	height:30px;
+	width:400px;
+	margin-top:10px;
+}
+#searchbutton{
+	height:30px;
+	width:30px;
+	position:absolute;
+	left:670px;
+	top:13px;
+	background: transparent url(../../images/search.png) no-repeat;
+	overflow: hidden;
+	border:0;
+}
+#home{
+    height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	text-align:center;
+}
+#home:hover{
+	height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	background-color:#000;
+	text-align:center;
+}
+#profile{
+    height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	text-align:center;
+}
+#profile:hover{
+	height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	background-color:#000;
+	text-align:center;
+}
+#logout{
+    height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	text-align:center;
+}
+#logout:hover{
+	height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	background-color:#000;
+	text-align:center;
+}
+#profilearea {
+	height:594px;
+	width:390px;
+	float:left;
+	border-left:5px solid gray;
+	border-bottom:5px solid gray;
+	margin-top:10px;
+	margin-left:10px;
+}
+.profilephoto{
+	height:245px;
+	width:200px;
+}
+.biodata{
+	height:350px;
+	width:390px;
+	font:18px andy,sans-serif;
+	border-top:2px solid gray;
+	padding-left:5px;
+}
+
+#listarea{
+	height:589px;
+	width:918px;
+	border:5px solid gray;
+	float:left;
+	margin-top:10px;
+	margin-left:10px;
+}
+
+#undonetasktitle{
+	height:45px;
+	width:439px;
+	float:left;
+	border-bottom:2px solid gray;
+	margin-right:10px;
+	font:normal 30px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	padding-left:10px;
+	padding-top:5px;
+}
+#donetasktitle{
+	height:45px;
+	width:434px;
+	float:left;
+	border-bottom:2px solid gray;
+	border-left:5px solid gray;
+	margin-right:10px;
+	font:normal 30px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	padding-left:10px;
+	padding-top:5px;
+}
+#undonetask{
+	height:529px;
+	width:459px;
+	float:left;
+	border-right:5px solid gray;
+	margin-top:10px;
+}
+#donetask{
+	height:529px;
+	width:454px;
+	float:left;
+	margin-top:10px;
+}
+
+.task_block p{
+	font:normal 25px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	margin-top:5px;
+	margin-bottom:5px;
+	text-align: center;
+}
+
+.task_block{
+	width:95%;
+	border: solid 1px #e2e2e2;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom:10px;
+	box-shadow: 1px 1px 1px #535353;
+}
+.task_judul{
+	margin-top:5px;
+	margin-left: 10px;
+	width:100%;
+	font:normal 20px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+#donetask .task_deadline{
+	margin-left:10px;
+	margin-bottom:5px;
+	width:50%;
+	float:left;
+	font:normal 15px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color:#15ff00;
+}
+
+.task_deadline{
+	margin-left:10px;
+	margin-bottom:5px;
+	width:50%;
+	float:left;
+	font:normal 15px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color:#ff0000;
+}
+
+.task_tag{
+	margin-left:10px;
+	margin-bottom:5px;
+	width:100%;
+	font:normal 15px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+body {
+	margin: 0px;
+}
+.menu a {
+	padding:15px 35px;
+	color:#000;
+	text-decoration:none;
+}
+.menu a:hover {
+	color:#FFF;
+	text-decoration:none;
+}
+#editbutton{
+	height:50px;
+	width:50px;
+	position:absolute;
+	top:295px;
+	left:355px;
+	background: transparent url(../../images/edit.png) no-repeat;
+	overflow: hidden;
+	border:0;
+}
+#editbutton:hover{
+	height:50px;
+	width:50px;
+	position:absolute;
+	top:290px;
+	left:355px;
+	background: transparent url(../../images/edit.png) no-repeat;
+	overflow: hidden;
+	border:0;
+}
