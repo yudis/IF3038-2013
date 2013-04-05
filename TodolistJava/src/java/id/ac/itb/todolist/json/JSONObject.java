@@ -1,9 +1,33 @@
 package id.ac.itb.todolist.json;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class JSONObject {
+    
+    private static final class Null {
+        @Override
+        protected final Object clone() {
+            return this;
+        }
+        
+        @Override
+        public boolean equals(Object object) {
+            return object == null || object == this;
+        }
+        
+        @Override
+        public String toString() {
+            return "null";
+        }
+
+        @Override
+        public int hashCode() {
+            return super.hashCode();
+        }
+    }
+    public static final Object NULL = new Null();
 
     private HashMap<String, Object> data;
 
@@ -50,10 +74,10 @@ public class JSONObject {
             if (commanate) {
                 sb.append(',');
             }
-            
+
             sb.append(quote(key.toString()));
             sb.append(':');
-            
+
             sb.append(writeValue(value));
             commanate = true;
         }
@@ -122,10 +146,10 @@ public class JSONObject {
         sb.append('"');
         return sb.toString();
     }
-    
+
     static String writeValue(Object value) {
         StringBuilder sb = new StringBuilder();
-        
+
         if (value == null) {
             sb.append("null");
         } else if (value instanceof JSONObject) {
@@ -141,11 +165,11 @@ public class JSONObject {
         }
         return sb.toString();
     }
-    
-    static String numberToString(Number number) {        
+
+    static String numberToString(Number number) {
         String string = number.toString();
-        if (string.indexOf('.') > 0 && string.indexOf('e') < 0 &&
-                string.indexOf('E') < 0) {
+        if (string.indexOf('.') > 0 && string.indexOf('e') < 0
+                && string.indexOf('E') < 0) {
             while (string.endsWith("0")) {
                 string = string.substring(0, string.length() - 1);
             }
@@ -154,5 +178,28 @@ public class JSONObject {
             }
         }
         return string;
+    }
+
+    static Object wrap(Object object) {
+        try {
+            if (object == null) {
+                return NULL;
+            }
+            if (object instanceof JSONObject || object instanceof JSONArray
+                    || NULL.equals(object)
+                    || object instanceof Byte || object instanceof Character
+                    || object instanceof Short || object instanceof Integer
+                    || object instanceof Long || object instanceof Boolean
+                    || object instanceof Float || object instanceof Double
+                    || object instanceof String) {
+                return object;
+            }
+            else if (object instanceof Collection) {
+                return new JSONArray((Collection) object);
+            }
+            return object;
+        } catch (Exception exception) {
+            return null;
+        }
     }
 }

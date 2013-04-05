@@ -3,6 +3,7 @@ package id.ac.itb.todolist.model;
 import id.ac.itb.todolist.util.BaseModel;
 import java.sql.Timestamp;
 import id.ac.itb.todolist.json.JSONObject;
+import java.text.SimpleDateFormat;
 
 public class Comment extends BaseModel {
 
@@ -69,8 +70,8 @@ public class Comment extends BaseModel {
 
         jObject.put("id", id);
         jObject.put("idTugas", idTugas);
-        jObject.put("user", user);
-        jObject.put("time", time.getTime());
+        jObject.put("user", user.toJsonObject());
+        jObject.put("time", new SimpleDateFormat("dd/MM hh:mm").format(time));
         jObject.put("content", content);
 
         return jObject;

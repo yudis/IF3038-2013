@@ -93,7 +93,7 @@ public class User extends BaseModel {
         jObject.put("email", email);
         jObject.put("password", password);
         jObject.put("fullName", fullName);
-        jObject.put("tglLahir", tglLahir.toString());
+        jObject.put("tglLahir", tglLahir);
         jObject.put("avatar", avatar);
         
         return jObject;

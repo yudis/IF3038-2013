@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class TugasDao extends DataAccessObject {
 
@@ -72,7 +73,7 @@ public class TugasDao extends DataAccessObject {
             preparedStatement.setInt(1, idTugas);
 
             ResultSet rs = preparedStatement.executeQuery();
-            
+
             result = new ArrayList<User>();
             while (rs.next()) {
                 User item = new User();
@@ -82,7 +83,7 @@ public class TugasDao extends DataAccessObject {
                 item.setFullName(rs.getString("full_name"));
                 item.setTglLahir(rs.getDate("tgl_lahir"));
                 item.setAvatar(rs.getString("avatar"));
-                                
+
                 result.add(item);
             }
 
@@ -143,7 +144,7 @@ public class TugasDao extends DataAccessObject {
                     prepareStatement("SELECT COUNT(*) AS n FROM `tugas` WHERE `id` = ? AND `last_mod` > FROM_UNIXTIME(?);");
             preparedStatement.setInt(1, idTugas);
             preparedStatement.setLong(2, lastRequest);
-            
+
             ResultSet rs = preparedStatement.executeQuery();
             rs.next();
             if (rs.getInt("n") > 0) {
@@ -155,7 +156,7 @@ public class TugasDao extends DataAccessObject {
         }
         return true;
     }
-    
+
     public boolean isPemilik(int idTugas, String username) {
         try {
             PreparedStatement preparedStatement = connection.
@@ -163,7 +164,7 @@ public class TugasDao extends DataAccessObject {
             preparedStatement.setInt(1, idTugas);
 
             ResultSet rs = preparedStatement.executeQuery();
-            
+
             if (rs.next()) {
                 return true;
             }
@@ -172,7 +173,7 @@ public class TugasDao extends DataAccessObject {
         }
         return false;
     }
-    
+
     public boolean isAssignees(int idTugas, String username) {
         try {
             PreparedStatement preparedStatement = connection.
@@ -181,7 +182,7 @@ public class TugasDao extends DataAccessObject {
             preparedStatement.setString(2, username);
 
             ResultSet rs = preparedStatement.executeQuery();
-            
+
             if (rs.next()) {
                 return true;
             }
@@ -189,5 +190,95 @@ public class TugasDao extends DataAccessObject {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public int updateTimestamp(int idTugas) {
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("UPDATE `tugas` SET `last_mod` = CURRENT_TIMESTAMP WHERE `tugas`.`id` = ?;");
+            preparedStatement.setInt(1, idTugas);
+
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int setStatus(int idTugas, boolean status) {
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("UPDATE `tugas` SET `status` = ? WHERE `id` = ?;");
+            preparedStatement.setBoolean(1, status);
+            preparedStatement.setInt(2, idTugas);
+
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int setDeadline(int idTugas, java.sql.Date deadline) {
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("UPDATE `tugas` SET `tgl_deadline` = ? WHERE `tugas`.`id` = ?;");
+            preparedStatement.setDate(1, deadline);
+            preparedStatement.setInt(2, idTugas);
+
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int addAssignee(int idTugas, String username) {
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("INSERT INTO `assignees`(`id_tugas`, `username`) VALUES (?, ?);");
+            preparedStatement.setInt(1, idTugas);
+            preparedStatement.setString(2, username);
+
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int removeAssignee(int idTugas, String username) {
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("DELETE FROM `assignees` WHERE `id_tugas` = ? AND `username` = ?;");
+            preparedStatement.setInt(1, idTugas);
+            preparedStatement.setString(2, username);
+
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public List<String> getSuggestionAssignees(int idTugas, String keyword, int limit) {
+        List<String> result = new ArrayList<String>();
+
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("SELECT `username` FROM `users` WHERE `username` NOT IN (SELECT `username` FROM assignees WHERE `id_tugas`=?) AND `username` LIKE ? LIMIT 0, ?;");
+            preparedStatement.setInt(1, idTugas);
+            preparedStatement.setString(2, keyword);
+            preparedStatement.setInt(3, limit);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                result.add(rs.getString("username"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }
