@@ -35,11 +35,26 @@
                                 </li>
                                 <li>
                                         <label>On going tasks:</label>
-                                        <p class="prof1"><% out.print(p.tugasBelumSelesai); %></p>
+                                        <% 
+                                        for (int i=0;i<p.tugasBelumSelesai.size();i++)
+                                        {   out.print("<p class=\"prof1\">");
+                                            out.print(p.tugasBelumSelesai.get(i));
+                                            out.print("</p>");
+                                        }  
+                                        %>
                                 </li>
                                 <li>
                                         <label>Tasks done:</label>
-                                        <p class="prof1"><% out.print(p.tugasSelesai); %></p>
+                                        <% 
+                                        for (int i=0;i<p.tugasSelesai.size();i++)
+                                        {   out.print("<p class=\"prof1\">");
+                                            out.print(p.tugasSelesai.get(i));
+                                            out.print("</p>");
+                                        }  
+                                        %>
+                                </li>
+                                <li>
+                                        <button class="reg" type="button" onclick="location.href='editprofile.jsp'"><b>Edit</b></button>
                                 </li>
                               
                         </ul>
