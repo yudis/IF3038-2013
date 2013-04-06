@@ -36,7 +36,6 @@ function getAjax() //a function to get AJAX from browser
 					ajaxRequest.onreadystatechange = function()
 					{
 						var loginresponse = ajaxRequest.responseText;
-                                                alert(loginresponse);
                                                 
 						if(loginresponse == "true"){
 							self.location="dashboard.jsp";
