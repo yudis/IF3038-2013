@@ -32,10 +32,11 @@ function getAjax() //a function to get AJAX from browser
 				getAjax();
 				
 				if(document.getElementById("login1")!="" && document.getElementById("login2")!=""){
-					ajaxRequest.open("GET","php/checkidexistence.php?id="+document.getElementById("login1").value+"&pass="+document.getElementById("login2").value,false);//+"&pass="+document.getElementById("input2").value
+					ajaxRequest.open("GET","src\\java\\servlet\\checkidexistence?id="+document.getElementById("login1").value+"&pass="+document.getElementById("login2").value,false);//+"&pass="+document.getElementById("input2").value
 					ajaxRequest.onreadystatechange = function()
 					{
 						var loginresponse = ajaxRequest.responseText;
+                                                alert(loginresponse);
 						if(loginresponse == "true"){
 							self.location="page/dashboard.php";
 						}else{

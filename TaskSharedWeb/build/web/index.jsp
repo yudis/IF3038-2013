@@ -3,7 +3,13 @@
     Created on : Apr 3, 2013, 6:48:43 PM
     Author     : VAIO
 --%>
-
+<%-- Session
+<?php 
+	session_start();
+	if (isset($_SESSION["userlistapp"]))
+		header("Location: page/dashboard.php");
+?>
+--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
