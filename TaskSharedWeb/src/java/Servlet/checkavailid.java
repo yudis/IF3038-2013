@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Class.GetConnection;
+import java.sql.*;
 
 /**
  *
  * @author User
  */
+import java.sql.Statement;
 public class checkavailid extends HttpServlet {
 
     /**
@@ -34,8 +36,24 @@ public class checkavailid extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.print("true");
-        } finally {            
+            String idinput = request.getParameter("idinput");
+            
+            GetConnection connection = new GetConnection();
+            Connection conn = connection.getConnection();
+            Statement stmt = conn.createStatement();
+            
+            String query = "SELECT count(*) as isexist FROM user WHERE username = '" + idinput +"'";
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
+            
+            if(rs.getString(1).toString().equals("0")){
+                out.print("");
+            }else{
+                out.print("Username already exist, please try another username");
+            }
+        } catch (Exception ex) {
+            out.print(ex.toString());
+        }  finally {            
             out.close();
         }
     }
