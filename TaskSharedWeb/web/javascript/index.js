@@ -37,10 +37,11 @@ function getAjax() //a function to get AJAX from browser
 					{
 						var loginresponse = ajaxRequest.responseText;
                                                 alert(loginresponse);
+                                                
 						if(loginresponse == "true"){
 							self.location="dashboard.jsp";
 						}else{
-							alert("Username or password is wrong");
+                                                    alert("Username or password is wrong");
 						}
 						
 					}
@@ -71,7 +72,7 @@ function getAjax() //a function to get AJAX from browser
 				if (document.getElementById("username").value.length > 4 && document.getElementById("username").value != document.getElementById("password").value) {
 					var result;
 					
-					ajaxRequest.open("GET","php/checkavailid.php?idinput="+document.getElementById("username").value,false);
+					ajaxRequest.open("GET","checkavailid?idinput="+document.getElementById("username").value,false);
 					ajaxRequest.onreadystatechange = function()
 					{
 						document.getElementById("warning-message").innerHTML = ajaxRequest.responseText;

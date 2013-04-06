@@ -8,6 +8,10 @@
         <servlet-name>checkidexistence</servlet-name>
         <servlet-class>Servlet.checkidexistence</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>checkavailid</servlet-name>
+        <servlet-class>Servlet.checkavailid</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>checkidexistence</servlet-name>
         <url-pattern>/checkidexistence</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkavailid</servlet-name>
+        <url-pattern>/checkavailid</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
