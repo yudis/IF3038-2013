@@ -22,6 +22,11 @@
         <link href="css/calendar.css" rel="stylesheet">
     </head>
     <body onLoad="hide_submit_button();show_register_form();">
+        <%
+        if(request.getSession().getAttribute("userlistapp")!=null){
+            response.sendRedirect("dashboard.jsp");
+        }
+        %>
         <div id="index-body">
         <div id="left-body">
                 <!--Website logo + tagline-->

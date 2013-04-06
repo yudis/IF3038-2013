@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import Class.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -45,10 +46,13 @@ public class checkidexistence extends HttpServlet {
             String query = "SELECT count(*) as JUMLAH FROM user WHERE username='"+username+"' AND password='"+pass+"'";
             ResultSet rs = stmt.executeQuery(query);
             rs.next();
-            
+
             if(rs.getString(1).toString().equals("0")){
                 out.print("false");
             }else if(rs.getString(1).toString().equals("1")){
+                HttpSession session = request.getSession();
+                session.setAttribute("userlistapp", username);
+                System.out.println("session : "+session.getAttribute("userlistapp"));
                 out.print("true");
             }
         } catch(Exception exc){
