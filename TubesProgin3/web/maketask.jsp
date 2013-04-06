@@ -9,6 +9,11 @@
 
 %>
 <div id="isi">
+    <div>
+Server info: <%= application.getServerInfo() %><br>  
+Servlet version: <%= application.getMajorVersion() %>.<%= application.getMinorVersion() %>  
+JSP version: <%= JspFactory.getDefaultFactory().getEngineInfo().getSpecificationVersion() %><br> 
+</div>
     <div id="leftsidebar">
         <b>CREATE NEW TASK</b>
         <img src="image/leftmenu.png"/>
@@ -16,8 +21,7 @@
 
     <div id="rightsidebar">
         <div id="wrapper-left">
-            <form class="task" name="MakeForm" method="post" onSubmit="checkSubmission(this, event)" enctype="multipart/form-data" action="addtask.jsp
-                  ">
+            <form class="task" name="MakeForm" method="post" onSubmit="checkSubmission(this, event)" enctype="multipart/form-data" action="addtask.jsp">
                 <h1>Fill Details</h1>
                 <ul>
                     <li>
@@ -53,7 +57,7 @@
                         <a href="javascript:NewCssCal('demo1','ddmmyyyy')"><img src="image/cal.gif" alt="Pick a date"/></a>
                     </li>
                     <li>
-                        <input type="text" name="kategori" class="hidden" value="<%= kategori %>"/>
+                        <input type="text" name="kategori" class="hidden" value="<%= kategori%>"/>
                         <input type="text" name="user" class="hidden" value="RAYMOND"><!-- $_SESSION['bananauser'];%>"/> TODO!!-->
                         <button class="task" name="submitbutton" type="submit"><b>Submit</b></button>
                     </li>
