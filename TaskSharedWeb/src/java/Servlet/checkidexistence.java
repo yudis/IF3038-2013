@@ -10,7 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import Class.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 /**
  *
  * @author ASUS
@@ -33,8 +36,24 @@ public class checkidexistence extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("true");
-        } finally {            
+            String username = request.getParameter("id");
+            String pass = request.getParameter("pass");
+            
+            GetConnection connection = new GetConnection();
+            Connection conn = connection.getConnection();
+            Statement stmt = conn.createStatement();
+            String query = "SELECT count(*) as JUMLAH FROM user WHERE username='"+username+"' AND password='"+pass+"'";
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
+            
+            if(rs.getString(1).toString().equals("0")){
+                out.print("false");
+            }else if(rs.getString(1).toString().equals("1")){
+                out.print("true");
+            }
+        } catch(Exception exc){
+            out.println("Error : "+exc.toString());
+        }finally {            
             out.close();
         }
     }

@@ -15,18 +15,21 @@ import java.sql.SQLException;
 public class GetConnection {
 
     Connection conn = null;
+    String serverName;
+    String dataBaseName;
     String userName;
     String password;
-    String serverName;
 
-    public GetConnection(String userName, String password, String serverName) {
-        this.userName = userName;
-        this.password = password;
-        this.serverName = serverName;
+    public GetConnection() {
+        this.serverName = "localhost";
+        this.dataBaseName = "progin_405_13511601";
+        this.userName = "root";
+        this.password = "";
     }
     
-    public Connection getConnection() throws SQLException {
-        conn = DriverManager.getConnection("jdbc:mysql://"+serverName, userName, password);
+    public Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
+        conn = DriverManager.getConnection("jdbc:mysql://"+serverName+"/"+dataBaseName, userName, password);
         return conn;
     }
 }
