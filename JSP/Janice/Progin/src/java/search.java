@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import javax.servlet.ServletConfig;
+import java.util.ArrayList;
 
 /**
  *
@@ -118,6 +119,39 @@ public class search extends HttpServlet {
                 statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
                 num = 0;
+                while (rs.next()){
+                    num = num+1;
+                }
+            }catch (SQLException e) {
+                e.printStackTrace();
+            } 
+       }else if(mode.equals("0")){
+            try {
+                query = "Select * from user where username LIKE '%"+s+"%'";
+                statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(query);
+                num = 0;
+                while (rs.next()){
+                    num = num+1;
+                }
+                
+               query = "SELECT * FROM category WHERE category_name LIKE '%"+s+"%'";
+                statement = connection.createStatement();
+                rs = statement.executeQuery(query);
+                while (rs.next()){
+                    num = num+1;
+                }
+                
+                query = "SELECT * FROM task WHERE task_name LIKE '%"+s+"%'";
+                statement = connection.createStatement();
+                rs = statement.executeQuery(query);
+                while (rs.next()){
+                    num = num+1;
+                }
+                
+                query = "SELECT task.task_id, task.task_name, task.deadline, task.status, tag.tag_name FROM task, tag, tasktag WHERE tag.tag_name LIKE '%"+s+"%' and task.task_id = tasktag.task_id and tag.tag_id = tasktag.tag_id";
+                statement = connection.createStatement();
+                rs = statement.executeQuery(query);
                 while (rs.next()){
                     num = num+1;
                 }
@@ -249,7 +283,7 @@ public class search extends HttpServlet {
              e.printStackTrace();
             }
        }else if (mode.equals("4")){
-          query = query = "SELECT task.task_id, task.task_name, task.deadline, task.status, tag.tag_name FROM task, tag, tasktag WHERE tag.tag_name LIKE '%"+s+"%' and task.task_id = tasktag.task_id and tag.tag_id = tasktag.tag_id "+limit;
+          query = "SELECT task.task_id, task.task_name, task.deadline, task.status, tag.tag_name FROM task, tag, tasktag WHERE tag.tag_name LIKE '%"+s+"%' and task.task_id = tasktag.task_id and tag.tag_id = tasktag.tag_id "+limit;
            try {
                 statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(query);
@@ -291,6 +325,262 @@ public class search extends HttpServlet {
                     out.println("</div>");
                     out.println(isi_close);
                 }
+            }
+            catch (SQLException e) {
+             e.printStackTrace();
+            }
+       }else if(mode.equals("0")){
+           try {
+               //untuk username
+               query = "select * from user where username LIKE '%"+s+"%' ";
+                ArrayList<String> allresult = new ArrayList<String>();
+                int n = 0;
+                statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(query);
+                while (rs.next()){
+                    n++;
+                }
+                
+                
+                if (n>0){
+                    statement = connection.createStatement();
+                    rs = statement.executeQuery(query);
+                    while (rs.next()){
+                        String username = rs.getString(1);
+                        allresult.add(username);
+                    }
+                }
+                
+               //untuk category
+               query = "SELECT * FROM category WHERE category_name LIKE '%"+s+"%' ";
+               // ArrayList<String> allresult = new ArrayList<String>();
+                n = 0;
+                statement = connection.createStatement();
+                rs = statement.executeQuery(query);
+                while (rs.next()){
+                    n++;
+                }
+                
+                
+                if (n>0){
+                    statement = connection.createStatement();
+                    rs = statement.executeQuery(query);
+                    while (rs.next()){
+                        String categoryid = rs.getString(1);
+                        allresult.add("C"+categoryid);
+                    }
+                }
+                
+                //untuk task
+                query = "SELECT * FROM task WHERE task_name LIKE '%"+s+"%'";
+                // ArrayList<String> allresult = new ArrayList<String>();
+                n = 0;
+                statement = connection.createStatement();
+                rs = statement.executeQuery(query);
+                while (rs.next()){
+                    n++;
+                }
+
+                
+                if (n>0){
+                    statement = connection.createStatement();
+                    rs = statement.executeQuery(query);
+                    while (rs.next()){
+                        String taskid = rs.getString(1);
+                        allresult.add("T"+taskid);
+                    }
+                }
+                
+                //untuk tag
+                query = "SELECT task.task_id, task.task_name, task.deadline, task.status, tag.tag_name FROM task, tag, tasktag WHERE tag.tag_name LIKE '%"+s+"%' and task.task_id = tasktag.task_id and tag.tag_id = tasktag.tag_id ";
+                // ArrayList<String> allresult = new ArrayList<String>();
+                n = 0;
+                statement = connection.createStatement();
+                rs = statement.executeQuery(query);
+                while (rs.next()){
+                    n++;
+                }
+                
+                
+                if (n>0){
+                    statement = connection.createStatement();
+                    rs = statement.executeQuery(query);
+                    while (rs.next()){
+                        String tag = rs.getString(2);
+                        allresult.add("G"+tag);
+                    }
+                }
+                
+                
+                int i = start;
+                
+                while (i<finish){
+                    //untuk username
+                    query = "select * from user where username ='"+allresult.get(i)+"' ";
+                     //ArrayList<String> allresult = new ArrayList<String>();
+                     n = 0;
+                     statement = connection.createStatement();
+                     rs = statement.executeQuery(query);
+                     while (rs.next()){
+                         n++;
+                     }
+                     
+                     if (n>0){
+                         statement = connection.createStatement();
+                         rs = statement.executeQuery(query);
+                         out.println("<h2>Username</h2>");
+                         while (rs.next()){
+                            String username = rs.getString(1);
+                            out.println(outside);
+                            out.println(isi_open);
+                            out.println(username);
+                            out.println(isi_close);
+                            out.println("<div>");
+                            out.print("Fullname : "+rs.getString(3));
+                            out.println("</div>");
+                            out.println(isi_close); 
+                         }
+                     }
+                     
+                     if (allresult.get(i).substring(0, 1).equals("C")){
+                        //untuk category
+                       query = "SELECT * FROM category WHERE category_id='"+allresult.get(i).substring(1)+"' ";
+                       // ArrayList<String> allresult = new ArrayList<String>();
+                        n = 0;
+                        statement = connection.createStatement();
+                        rs = statement.executeQuery(query);
+                        while (rs.next()){
+                            n++;
+                        }
+
+
+                        if (n>0){
+                            statement = connection.createStatement();
+                            rs = statement.executeQuery(query);
+                            out.println("<h2>Category</h2>");
+                            while (rs.next()){
+                                String category = rs.getString(2);
+                                out.println(outside);
+                                out.println(isi_open);
+                                out.println(category);
+                                out.println(isi_close);
+                                out.println(isi_close);
+                            }
+                        }
+                     }
+                     if (allresult.get(i).substring(0, 1).equals("T")){
+                        //untuk category
+                       query = "SELECT * FROM task WHERE task_id ='"+allresult.get(i).substring(1)+"'";
+                       // ArrayList<String> allresult = new ArrayList<String>();
+                        n = 0;
+                        statement = connection.createStatement();
+                        rs = statement.executeQuery(query);
+                        while (rs.next()){
+                            n++;
+                        }
+                        if (n>0){
+                            statement = connection.createStatement();
+                            rs = statement.executeQuery(query);
+                            String temp = "";
+                            out.println("<h2>Taskname</h2>");
+                            while (rs.next()){
+                                temp = rs.getString(1);
+                                String taskname = rs.getString(2);
+                                out.println("<div class = 'tugas' id = '"+temp+"'>");
+                                out.println(isi_open);
+                                out.println(taskname);
+                                out.println(isi_close);
+                                out.println("<div>");
+                                out.print("Deadline : ");
+                                String deadline = rs.getString(4);
+                                out.println(deadline);
+                                out.println("</div>");
+                                out.println("<div>");
+                                out.print("Tag : ");
+                                String subquery = "SELECT tag.tag_name FROM tag,tasktag WHERE tasktag.task_id = '"+temp+"' and tag.tag_id = tasktag.tag_id";
+                                Statement substatement = connection.createStatement();
+                                ResultSet subrs = substatement.executeQuery(subquery);
+                                while(subrs.next()){
+                                   String tagname = subrs.getString("tag_name");
+                                   out.print(tagname+" ");
+                                }
+                                String parameter = "'"+temp+"'";
+                                String function = "change("+parameter+")";
+                                out.println("</div>");
+                                out.println("<div>");
+                                String status = rs.getString(3);
+                                out.println("Status");
+                                if (status.equals("1")){
+                                    out.println("<input id='checkbox_"+temp+"' value = '"+temp+"' type='checkbox' checked='checked' onchange="+function+">");
+                                    out.println("sudah selesai");
+                                }else{
+                                     out.println("<input id='checkbox_"+temp+"' value = '"+temp+"' type='checkbox' onchange="+function+">");
+                                     out.println("belum selesai");
+                                }
+                                out.println("</div>");
+                                out.println(isi_close);
+                            }
+                        }
+                     }
+                    
+                     if (allresult.get(i).substring(0, 1).equals("G")){
+                        //untuk category
+                       query = "SELECT task.task_id, task.task_name, task.deadline, task.status, tag.tag_name FROM task, tag, tasktag WHERE task.task_name = '"+allresult.get(i).substring(1)+"' and task.task_id = tasktag.task_id and tag.tag_id = tasktag.tag_id LIMIT "+per_page;
+                       // ArrayList<String> allresult = new ArrayList<String>();
+                        n = 0;
+                        statement = connection.createStatement();
+                        rs = statement.executeQuery(query);
+                        while (rs.next()){
+                            n++;
+                        }
+
+
+                        if (n>0){
+                            statement = connection.createStatement();
+                            rs = statement.executeQuery(query);
+                            String temp = "";
+                            out.println("<h2>Tag</h2>");
+                            while (rs.next()){
+                                temp = rs.getString(1);
+                                String taskname = rs.getString(2);
+                                out.println("<div class = 'tugas' id = '"+temp+"'>");
+                                out.println(isi_open);
+                                out.println(taskname);
+                                out.println(isi_close);
+                                out.println("<div>");
+                                out.print("Deadline : ");
+                                String deadline = rs.getString(4);
+                                out.println(deadline);
+                                out.println("</div>");
+                                out.println("<div>");
+                                out.print("Tag : ");
+                                String subquery = "SELECT tag.tag_name FROM tag,tasktag WHERE tasktag.task_id = '"+temp+"' and tag.tag_id = tasktag.tag_id";
+                                Statement substatement = connection.createStatement();
+                                ResultSet subrs = substatement.executeQuery(subquery);
+                                while(subrs.next()){
+                                   String tagname = subrs.getString("tag_name");
+                                   out.print(tagname+" ");
+                                }
+                                String parameter = "'"+temp+"'";
+                                String function = "change("+parameter+")";
+                                out.println("</div>");
+                                out.println("<div>");
+                                String status = rs.getString(3);
+                                out.println("Status");
+                                if (status.equals("1")){
+                                    out.println("<input id='checkbox_"+temp+"' value = '"+temp+"' type='checkbox' checked='checked' onchange="+function+">");
+                                    out.println("sudah selesai");
+                                }else{
+                                     out.println("<input id='checkbox_"+temp+"' value = '"+temp+"' type='checkbox' onchange="+function+">");
+                                     out.println("belum selesai");
+                                }
+                                out.println("</div>");
+                                out.println(isi_close);
+                            }
+                        }
+                     }
+                     i++;
+              }
             }
             catch (SQLException e) {
              e.printStackTrace();
