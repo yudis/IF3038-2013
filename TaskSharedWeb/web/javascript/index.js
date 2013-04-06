@@ -142,7 +142,7 @@ function getAjax() //a function to get AJAX from browser
 				if (at > 0 && (dot - at) > 1 && dot < str.length - 2) {
 					var result;
 					
-					ajaxRequest.open("GET","php/checkavailemail.php?emailinput="+document.getElementById("email").value,false);
+					ajaxRequest.open("GET","checkavailemail?emailinput="+document.getElementById("email").value,false);
 					ajaxRequest.onreadystatechange = function()
 					{
 						document.getElementById("warning-message").innerHTML = ajaxRequest.responseText;

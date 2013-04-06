@@ -12,6 +12,10 @@
         <servlet-name>checkavailid</servlet-name>
         <servlet-class>Servlet.checkavailid</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>checkavailemail</servlet-name>
+        <servlet-class>Servlet.checkavailemail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>checkavailid</servlet-name>
         <url-pattern>/checkavailid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkavailemail</servlet-name>
+        <url-pattern>/checkavailemail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
