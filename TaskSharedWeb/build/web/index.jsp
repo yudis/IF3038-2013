@@ -23,6 +23,7 @@
     </head>
     <body onLoad="hide_submit_button();show_register_form();">
         <%
+        /*session management*/
         if(request.getSession().getAttribute("userlistapp")!=null){
             response.sendRedirect("dashboard.jsp");
         }

@@ -16,6 +16,12 @@
         <link href="css/calendar.css" rel="stylesheet">
     </head>
     <body onLoad="check_html5()">
+        <%
+        /*session management*/
+        if(request.getSession().getAttribute("userlistapp")==null){
+            response.sendRedirect("index.jsp");
+        }
+        %>
         <div id="main-body-general">
                 <!--Header-->
                 <div id="header">

@@ -14,6 +14,12 @@
 	<script type="text/javascript" src="javascript/search_result.js"></script>
     </head>
     <body>
+        <%
+        /*session management*/
+        if(request.getSession().getAttribute("userlistapp")==null){
+            response.sendRedirect("index.jsp");
+        }
+        %>
         <div id="main-body-general">
                 <div id="header">
                         <?php

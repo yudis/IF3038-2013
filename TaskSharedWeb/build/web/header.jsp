@@ -61,7 +61,7 @@
                                 You logged as, <b><?php echo $_SESSION["userlistapp"]?></b>
                                 <ul>
                                         <li><a href="profile.php?username=<?php echo $_SESSION["userlistapp"]?>">Go to Profile</a></li>
-                                        <li><a href="../php/signout.php">Sign Out</a></li>
+                                        <li><a href="signout">Sign Out</a></li>
                                 </ul>
                         </div>
                 </div>

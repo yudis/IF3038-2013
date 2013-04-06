@@ -15,6 +15,12 @@
         <script type="text/javascript" src="javascript/dashboard.js"></script>
     </head>
     <body>
+        <%
+        /*session management*/
+        if(request.getSession().getAttribute("userlistapp")==null){
+            response.sendRedirect("index.jsp");
+        }
+        %>
         <div id="main-body-general">
             <!--Header-->
             <div id="header">
