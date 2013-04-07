@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Waktu pembuatan: 12. Maret 2013 jam 14:36
+-- Waktu pembuatan: 23. Maret 2013 jam 14:21
 -- Versi Server: 5.5.16
 -- Versi PHP: 5.3.8
 
@@ -19,8 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `progin_405_13510086`
 --
-CREATE DATABASE IF NOT EXISTS progin_405_13510086;
-USE progin_405_13510086;
+
 -- --------------------------------------------------------
 
 --
@@ -32,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `attachment` (
   `att_content` text NOT NULL,
   `att_task_id` int(11) NOT NULL,
   PRIMARY KEY (`att_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data untuk tabel `attachment`
@@ -40,7 +39,20 @@ CREATE TABLE IF NOT EXISTS `attachment` (
 
 INSERT INTO `attachment` (`att_id`, `att_content`, `att_task_id`) VALUES
 (1, 'dsadasdsdadsadasds', 1),
-(2, 'sadasdasdsaddsdas', 1);
+(2, 'sadasdasdsaddsdas', 1),
+(3, '', 6),
+(4, '', 7),
+(5, '', 7),
+(6, '', 7),
+(7, '', 8),
+(8, '', 8),
+(9, '', 8),
+(10, '', 9),
+(11, '', 9),
+(12, '', 9),
+(13, 'IF3056_TugasBesar1.pdf', 10),
+(14, '', 10),
+(15, '', 10);
 
 -- --------------------------------------------------------
 
@@ -53,17 +65,18 @@ CREATE TABLE IF NOT EXISTS `category` (
   `cat_name` varchar(50) NOT NULL,
   `cat_creator` varchar(50) NOT NULL,
   PRIMARY KEY (`cat_id`),
-  UNIQUE KEY `cat_name` (`cat_name`),
-  UNIQUE KEY `cat_creator` (`cat_creator`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  UNIQUE KEY `cat_name` (`cat_name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data untuk tabel `category`
 --
 
 INSERT INTO `category` (`cat_id`, `cat_name`, `cat_creator`) VALUES
-(1, 'Schoolicious', 'kennyazrina'),
-(2, 'Household', 'sharonloh');
+(2, 'Household', 'sharonloh'),
+(6, 'paper', 'nflubis'),
+(10, 'Personal', 'sharonloh'),
+(11, 'Love', 'sharonloh');
 
 -- --------------------------------------------------------
 
@@ -75,14 +88,6 @@ CREATE TABLE IF NOT EXISTS `cat_asignee` (
   `cat_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `cat_asignee`
---
-
-INSERT INTO `cat_asignee` (`cat_id`, `username`) VALUES
-(1, 'nflubis'),
-(1, 'sharonloh');
 
 -- --------------------------------------------------------
 
@@ -98,15 +103,16 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `comment_creator` varchar(50) NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `task_id` (`task_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data untuk tabel `comment`
 --
 
 INSERT INTO `comment` (`comment_id`, `comment_timestamp`, `comment_content`, `task_id`, `comment_creator`) VALUES
-(1, '2013-03-12 04:44:26', 'asdasdasdas', 1, 'sharonloh'),
-(2, '2013-03-12 04:44:26', 'sndajasndnsajkdans', 1, 'nflubis');
+(5, '2013-03-22 14:02:55', '					asfasdf	', 4, 'sharonloh'),
+(7, '2013-03-22 14:03:37', '			asdfasdfasdfasdfasd			', 4, 'sharonloh'),
+(18, '2013-03-23 09:16:18', '		bb				', 4, 'sharonloh');
 
 -- --------------------------------------------------------
 
@@ -124,8 +130,26 @@ CREATE TABLE IF NOT EXISTS `tag` (
 --
 
 INSERT INTO `tag` (`tag_name`, `task_id`) VALUES
-('capek', 1),
-('males', 2);
+('HTML', 1),
+('males', 2),
+('CSS', 1),
+('jQuery', 1),
+('jQuery', 2),
+('Tugas Besar', 2),
+('piring', 6),
+(' cuci', 6),
+('cinta', 7),
+(' gila', 7),
+('cinta', 8),
+(' gila', 8),
+(' lalala', 8),
+('cinta', 9),
+(' gila', 9),
+(' lalala', 9),
+('tugas', 10),
+(' rumah', 10),
+(' buah', 10),
+(' mangga', 10);
 
 -- --------------------------------------------------------
 
@@ -142,15 +166,17 @@ CREATE TABLE IF NOT EXISTS `task` (
   `task_creator` varchar(50) NOT NULL,
   PRIMARY KEY (`task_id`),
   KEY `task_id` (`task_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data untuk tabel `task`
 --
 
 INSERT INTO `task` (`task_id`, `task_name`, `task_status`, `task_deadline`, `cat_name`, `task_creator`) VALUES
-(1, 'Tubes Progin 2', 0, '2013-03-23', 'Schoolicious', 'kennyazrina'),
-(2, 'Tubes Progin 3', 0, '2013-04-25', 'Schoolicious', 'nflubis');
+(4, 'CCC', 0, '2013-03-23', 'Household', 'sharonloh'),
+(6, 'Cuci Piring', 0, '2013-03-14', 'Household', 'sharonloh'),
+(7, 'Cinta', 0, '2013-03-20', 'Personal', 'sharonloh'),
+(8, 'Ini baru cinta', 0, '2013-03-28', 'Love', 'sharonloh');
 
 -- --------------------------------------------------------
 
@@ -168,9 +194,13 @@ CREATE TABLE IF NOT EXISTS `task_asignee` (
 --
 
 INSERT INTO `task_asignee` (`task_id`, `username`) VALUES
-(1, 'nflubis'),
-(2, 'sharonloh'),
-(1, 'sharonloh');
+(4, 'kennyazrina'),
+(4, 'nflubis'),
+(7, 'kennyazrina'),
+(7, ' nflubis'),
+(8, ''),
+(9, ''),
+(10, 'nflubis');
 
 -- --------------------------------------------------------
 
@@ -195,17 +225,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`username`, `password`, `full_name`, `birthdate`, `avatar`, `email`) VALUES
 ('kennyazrina', 'kennyazrina', 'Kania Azrina', '1992-03-13', NULL, 'kaniaazrina@gmail.com'),
 ('nflubis', 'nflubis', 'Nurul Fithria Lubis', '1992-04-17', NULL, 'nflubis@gmail.com'),
-('sharonloh', 'sharonloh', 'Sharon Loh', '1992-02-10', NULL, 'sharonloh@gmail.com');
+('sharonloh', 'insaneinsane', 'Sharon Loh', '1992-02-10', 0x2e2e2f696d672f736861726f6e6c6f6844534330313137362e4a5047, 'sharonloh@gmail.com');
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
-
---
--- Ketidakleluasaan untuk tabel `category`
---
-ALTER TABLE `category`
-  ADD CONSTRAINT `category_ibfk_1` FOREIGN KEY (`cat_creator`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `comment`

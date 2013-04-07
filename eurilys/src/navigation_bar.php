@@ -62,6 +62,8 @@
 				}
 			?>
 		</ul>
+		<script type="text/javascript" src="../js/animation.js"> </script> 
+
 		<div id="add_task_link"> <a id="add_task" name="" onclick="addCatName();" href="addtask.php"> + new task </a> </div>
 		<div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
 		<div id="category_form">
@@ -71,7 +73,8 @@
 					<input type="text" name="add_category_name" id="add_category_name" value="">
 					<br><br>
 					Assignee(s) : <br>
-					<input type="text" name="add_category_asignee_name" id="add_category_asignee_name" value="">
+					<input type="text" name="add_category_asignee_name" onkeyup="showAssigne(this.value)" id="add_category_asignee_name" value="">
+					<div id="categoryHint"> </div>
 					<br><br>
 					<button type="submit" id="add_category_button" name="add_category_button" class="link_red"> Add </div>
 				</form>

@@ -25,10 +25,10 @@
 
 		if (mysql_num_rows($res) > 0) {
 			$_SESSION['username'] = $username;
-			$_SESSION['fullname'] = $name;
+			$_SESSION['fullname'] = $name;			
 			header('location:src/dashboard.php'); //redirect to dashboard
 		} else {
-			header('location:index.php');
+			header('location:index.php');			
 		}
 	}
 

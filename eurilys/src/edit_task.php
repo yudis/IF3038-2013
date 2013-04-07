@@ -105,7 +105,8 @@
 						}
 					?>
 					<br>
-					<input class="edit_task_input" id="edit_task_assignee" name="edit_task_assignee" type="text" name="assignee_td" value=""/>
+					<input class="edit_task_input" id="edit_task_assignee" onkeyup="showAssigne1(this.value)" name="edit_task_assignee" type="text" name="assignee_td" value=""/>
+					<div id="taskAssId"></div>
 					</div>
 				</div>			
 				<div class='left top20 dynamic_content_row'>

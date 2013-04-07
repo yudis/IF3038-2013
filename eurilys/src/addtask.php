@@ -28,7 +28,7 @@
 				</div>
 			</div>
 			
-            <div id="row2_addtask" class="left top10 dynamic_content_row">
+			<div id="row2_addtask" class="left top10 dynamic_content_row">
 				<div id="attachment_lat" class="left dynamic_content_left">Add more attachment</div>
 				<div id="attachment_rat" class="left dynamic_content_right">
 					<input id="attachment_file2" type="file" name="attachment_file2" onchange="javascript:checkTaskAttachment();"  class="left">
@@ -55,7 +55,8 @@
 			<div id="row4_addtask" class="left top10 dynamic_content_row">
 				<div id="assignee_lat" class="left dynamic_content_left">Assignee</div>
 				<div id="assignee_rat" class="left dynamic_content_right">
-					<input id="assignee_input" type="text" name="assignee_input" autocomplete="on">
+					<input id="assignee_input" type="text" name="assignee_input" autocomplete="on" onkeyup="showAss1(this.value)">
+					<div id="addTaskAssId"></div>
 				</div>
 			</div>
 		

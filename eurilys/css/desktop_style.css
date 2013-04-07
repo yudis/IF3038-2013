@@ -152,7 +152,7 @@ label#remember_me {
 #search_box_filter {
 	float:left; height:30px; margin-top:45px; margin-left:5px; 
 }
-#txtHint {
+#txtHint,#categoryHint, #taskAssId, #addTaskAssId {
 	position:absolute;
 	display:block;
 	color:gray;

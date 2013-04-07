@@ -191,6 +191,81 @@ function showHint(str) {
 	xmlhttp.send();
 }
 
+function showAss1(str) {
+	document.getElementById('addTaskAssId').style.display = "block";
+	
+	if (str.length==0) { 
+		document.getElementById("addTaskAssId").innerHTML="";
+		return;
+	}
+	
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else {// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("addTaskAssId").innerHTML=xmlhttp.responseText;
+		}
+	}
+	
+	xmlhttp.open("GET","addCategoryAutoComplete.php?q="+str,true);
+	xmlhttp.send();
+}
+
+function showAssigne1(str) {
+	document.getElementById('taskAssId').style.display = "block";
+	
+	if (str.length==0) { 
+		document.getElementById("taskAssId").innerHTML="";
+		return;
+	}
+	
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else {// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("taskAssId").innerHTML=xmlhttp.responseText;
+		}
+	}
+	
+	xmlhttp.open("GET","addCategoryAutoComplete.php?q="+str,true);
+	xmlhttp.send();
+}
+
+function showAssigne(str) {
+	document.getElementById('categoryHint').style.display = "block";
+	
+	if (str.length==0) { 
+		document.getElementById("categoryHint").innerHTML="";
+		return;
+	}
+	
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else {// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("categoryHint").innerHTML=xmlhttp.responseText;
+		}
+	}
+	
+	xmlhttp.open("GET","addCategoryAutoComplete.php?q="+str,true);
+	xmlhttp.send();
+}
+
 function searchResult(resultID, resultType) {
 	document.getElementById('dynamic_content').innerHTML = "<br>";
 	document.getElementById('dynamic_content').innerHTML += "Search result for : " + resultID + "<br><br>";
