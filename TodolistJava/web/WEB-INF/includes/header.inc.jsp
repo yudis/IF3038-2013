@@ -15,13 +15,12 @@
         <script src="./scripts/datetimepicker_css.js" type="application/javascript"></script>
         <c:out value="${headTags}" default="" escapeXml="false" />
     </head>
-    <body <c:out value="${bodyAttrs}" default="" escapeXml="false" />>
-        <div class="page">
+    <body <c:out value="${bodyAttrs}" default="" escapeXml="false" />>        <div class="page">
             <header class="content">
                 <nav>
                     <div class="logo"><a href="dashboard.php"><img alt="Home" src="images/logo.png" /></a></div>
                     <ul>
-                        <li><div><a href="dashboard.php">Dashboard</a></div></li><li><div><a href="profile.php">Profile</a></div></li><li><div><a href="index.php?logout">Logout</a></div></li>
+                        <li><div><a href="dashboard.jsp">Dashboard</a></div></li><li><div><a href="profile.php">Profile</a></div></li><li><div><a href="index.php?logout">Logout</a></div></li>
                     </ul>
                     <div class="search">
                         <div id="searchwrapper">
@@ -40,8 +39,6 @@
                         </div>
                     </div>
                 </nav>
-                <div class="welcomebar">
-                    <a href="./profile.php"><img src="./images/avatars/<?php echo $_SESSION["user"]["avatar"]; ?>" alt="<?php echo $_SESSION["user"]["full_name"]; ?>" width="32" height="32" /></a> Hi <strong><?php echo $_SESSION["user"]["full_name"]; ?></strong> (<a href="./profile.php"><?php echo $_SESSION["user"]["username"]; ?></a>)
-                </div>
+                    <a href="./profile.jsp"><img src="./images/avatars/<?php echo $_SESSION["user"]["avatar"]; ?>" alt="<?php echo $_SESSION["user"]["full_name"]; ?>" width="32" height="32" /></a> Hi <strong><?php echo $_SESSION["user"]["full_name"]; ?></strong> (<a href="./profile.php"><?php echo $_SESSION["user"]["username"]; ?></a>)
             </header>
             <div class ="content">
