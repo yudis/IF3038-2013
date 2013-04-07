@@ -32,7 +32,7 @@ public class AddFile extends HttpServlet {
 
     public AddFile() {
         super();
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,25 +47,7 @@ public class AddFile extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException  {
-
-        for (Part part : request.getParts()) {
-            //System.out.println("PART:" + part.getHeaderNames());
-            InputStream is = request.getPart(part.getName()).getInputStream();
-            int i = is.available();
-            byte[] b = new byte[i];
-            is.read(b);
-            String fileName = getFileName(part);
-            System.out.println("FILE:" + fileName);
-            if (fileName != null && !fileName.equals("")) {
-                System.out.println("MASUk");
-                FileOutputStream os = new FileOutputStream(getServletContext().getRealPath("/") + "uploadedFile/" + fileName);
-                //System.out.println(getServletContext().getRealPath("/") + fileName);
-                os.write(b);
-                os.close();
-            }
-            is.close();
-        }
+            throws ServletException, IOException {
         String username = request.getParameter("user");
         String nama = request.getParameter("tugas");
         String asignee = request.getParameter("asignee");
@@ -77,6 +59,7 @@ public class AddFile extends HttpServlet {
         connection = db.getConnection();
         String insertTugas = "INSERT INTO tugas (`IDKategori`, `deadline`, `name`, `tag`, `username`) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement insTugas;
+        ResultSet res;
         int rs;
         try {
             insTugas = connection.prepareStatement(insertTugas);
@@ -85,13 +68,51 @@ public class AddFile extends HttpServlet {
             insTugas.setString(3, nama);
             insTugas.setString(4, tag);
             insTugas.setString(5, username);
-            rs = insTugas.executeUpdate( );
-           String maxIDTask = "SELECT max(IDTask) FROM tugas";
+            rs = insTugas.executeUpdate();
+            String maxIDTask = "SELECT max(IDTask) FROM tugas";
+            res = db.coba(connection, maxIDTask);
+            res.first();
+            String maxID = res.getString(1);
+
+            String insertPelampiran = "INSERT INTO pelampiran (`IDTugas`, `lampiran`) VALUES (?, ?)";
+            PreparedStatement insPelampiran;
+
+
+            for (Part part : request.getParts()) {
+                //System.out.println("PART:" + part.getHeaderNames());
+                InputStream is = request.getPart(part.getName()).getInputStream();
+                int i = is.available();
+                byte[] b = new byte[i];
+                is.read(b);
+                String fileName = getFileName(part);
+                System.out.println("FILE:" + fileName);
+                if (fileName != null && !fileName.equals("")) {
+                    System.out.println("MASUk");
+                    insPelampiran = connection.prepareStatement(insertPelampiran);
+                    insPelampiran.setString(1, maxID);
+                    insPelampiran.setString(2, fileName);
+                    //System.out.println("fileName");
+
+                    rs = insPelampiran.executeUpdate();
+                    FileOutputStream os = new FileOutputStream(getServletContext().getRealPath("/") + "uploadedFile/" + fileName);
+                    //System.out.println(getServletContext().getRealPath("/") + fileName);
+                    os.write(b);
+                    os.close();
+                }
+                is.close();
+            }
+            String insertPenugasan = "INSERT INTO penugasan (`username`, `IDTask`) VALUES (?, ?)";
+            PreparedStatement insPenugasan;
+            insPenugasan = connection.prepareStatement(insertPenugasan);
+            insPenugasan.setString(1, asignee);
+            insPenugasan.setString(2, maxID);
+            rs = insPenugasan.executeUpdate();
+
         } catch (SQLException e) {
 
             System.out.println(e.getMessage());
 
-        
+
         }
     }
 

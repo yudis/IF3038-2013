@@ -148,10 +148,10 @@ function setSearchKeyword(value) {
 }
 
 /* SEARCH*/
-function doSearch(filter, keyword, i, user) {
+function doSearch(filter, keyword, user, cnt) {
 	if (xmlHttpReq.readyState == 4 || xmlHttpReq.readyState == 0) {
 		//var str = escape(document.getElementById('asignee').value);
-		xmlHttpReq.open("GET", 'DoSearch?filter=' + filter + '&keyword=' + escape(keyword)+ '&id=' + i+ '&user=' + user, true);
+		xmlHttpReq.open("GET", 'DoSearch1?filter=' + filter + '&keyword=' + escape(keyword)+ '&user=' + user+ '&continue=' + cnt, true);
 		//alert("memee");
                 xmlHttpReq.onreadystatechange = handleDoSearch; 
 		xmlHttpReq.send(null);

@@ -15,8 +15,7 @@ if ((request.getParameter("filter") != null) &&
         String filter = request.getParameter("filter");
         String keyword = request.getParameter("keyword");
         out.print("<input type='text' id='filter1' class='hidden' value='"+filter+"'/> <input type='text' class='hidden' id='keyword1' value='"+keyword+"'/><input type='text' class='hidden' id='user' value='RAYMOND'/>");
-        int i = 1;
-        out.print("<script type='text/javascript' language='javascript'> var i = 1; window.onload = doSearch('"+filter+"', '"+keyword+"', '"+i+"', 'RAYMOND'); </script>");
+        out.print("<script type='text/javascript' language='javascript'> var i = 1; window.onload = doSearch('"+filter+"', '"+keyword+"', 'RAYMOND', 'false'); </script>");
 %>	
 
 <div id="isi">				
@@ -47,8 +46,8 @@ if ((request.getParameter("filter") != null) &&
 <script type="text/javascript" language="javascript">		
     document.onscroll = function(){
         //alert("+: "+(window.pageYOffset + window.innerHeight)+"hegi:"+document.body.offsetHeight);
-        if ((window.pageYOffset + window.innerHeight) == document.body.offsetHeight){
-            doSearch(document.getElementById('filter1').value, document.getElementById('keyword1').value, i++, document.getElementById('user').value);
+        if ((window.scrollY + window.innerHeight) >= document.body.offsetHeight){
+            doSearch(document.getElementById('filter1').value, document.getElementById('keyword1').value, document.getElementById('user').value, 'true');
         }
 		
 		
