@@ -9,12 +9,31 @@
 <%@page import="tubes3.profile"%>
 <!DOCTYPE html>
 <jsp:include page="/header.jsp" />
-
-
+<script src="editprofile.js" type="text/javascript" language="javascript"> </script>
+<%profile p=new profile(); 
+//HttpSession session = request.getSession(false);
+if (((HttpServletRequest) request).getSession().getAttribute("flag") != null)
+       {
+         Integer flag= (Integer) session.getAttribute("flag");
+            if(flag== 1)
+            {
+                out.print("<script type=\"text/javascript\">notifikasi();</script>");
+            }
+         else
+            {
+                out.print ("<script type=\"text/javascript\">notifikasiquery();</script>");
+            }
+            
+       }
+else
+       {
+    out.print("masuk1");
+}
+%>
 <!-- Foto profile -->
         <div id="isi">
                 <div id="leftsidebar">
-					<img id="leftsidebar" class="foto" src=<% profile p=new profile(); out.print(p.avatar);%> alt="Smiley face"/>
+					<img id="leftsidebar" class="foto" src=<%out.print(p.avatar);%> alt="Smiley face"/>
 					<b><%out.print(p.username); %></b>
 				</div>
 

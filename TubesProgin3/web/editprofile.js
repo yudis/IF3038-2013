@@ -3,10 +3,10 @@ function notifikasi(){
 }
 
 function notifikasiquery(){
-	alert("Data berhasil ditambahkan");
+	alert("Data berhasil diubah");
 }
 function notifikasiquery2(){
-	alert("Data tidak berhasil ditambahkan");
+	alert("Data tidak berhasil diubah");
 }
 function notifikasigagalupload(){
 	alert("Avatar tidak berhasil diupload, silahkan ulangi lagi");	
