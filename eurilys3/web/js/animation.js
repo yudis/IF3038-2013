@@ -175,33 +175,3 @@ function addCatName(){
 	var first = getUrlVars()["cat_name"];
 	document.getElementById("cat_name").setAttribute('value',first);
 }
-
-function GetXmlHttpObject() {
-    if (window.XMLHttpRequest)
-    {
-       return new XMLHttpRequest();
-    }
-    if (window.ActiveXObject)
-    {
-      return new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    return null;
-}
-
-function loadCategoryList() {
-    xmlhttp=GetXmlHttpObject();
-    if (xmlhttp==null) {
-        alert ("Your browser does not support Ajax HTTP");
-        return;
-    }
-
-    var url="loadCategory.jsp";
-    
-    //Get Output
-    if (xmlhttp.readyState==4)
-    {
-        document.getElementById("category_item").innerHTML=xmlhttp.responseText;
-    }
-    xmlhttp.open("GET",url,true);
-    xmlhttp.send(null);
-}

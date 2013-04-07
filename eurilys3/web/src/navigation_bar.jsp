@@ -13,10 +13,7 @@
 		<div class="link_blue_rect" id="category_title"><a href="#" onclick=""> All Categories </a> </div>
 		<script> loadCategoryList(); </script>
                 <ul id="category_item">   
-                    <li> <span class='categoryList' onclick=''> CATEGORY 1 </span> </li>
-                    <li> <span class='categoryList' onclick=''> CATEGORY 2 </span> </li>
-                    <li> <span class='categoryList' onclick=''> CATEGORY 3 </span> </li>
-				
+                    <%@include file="loadCategory.jsp"%>	
 		</ul>
 		<div id="add_task_link"> <a id="add_task" name="" onclick="addCatName();" href="addtask.jsp"> + new task </a> </div>
 		<div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
