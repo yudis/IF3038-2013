@@ -156,6 +156,8 @@ public class JSONObject {
             sb.append(value);
         } else if (value instanceof JSONArray) {
             sb.append(value);
+        } else if (value instanceof JSONModel) {
+            sb.append(((JSONModel) value).toJsonObject());
         } else if (value instanceof Number) {
             sb.append(numberToString((Number) value));
         } else if (value instanceof Boolean) {
@@ -185,7 +187,7 @@ public class JSONObject {
             if (object == null) {
                 return NULL;
             }
-            if (object instanceof JSONObject || object instanceof JSONArray
+            if (object instanceof JSONObject || object instanceof JSONArray  || object instanceof JSONModel
                     || NULL.equals(object)
                     || object instanceof Byte || object instanceof Character
                     || object instanceof Short || object instanceof Integer

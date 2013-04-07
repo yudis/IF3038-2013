@@ -8,14 +8,14 @@
         <title><c:out value="${title}" default="Todolist" /></title>
         <link rel="stylesheet" type="text/css" href="./styles/default.css" />
         <link rel="stylesheet" type="text/css" href="./styles/mediaqueries.css" />
-        <script src="./scripts/json2.js" type="application/javascript"></script>
+        <script src="./scripts/jsonhelper.js" type="application/javascript"></script>
         <script src="./scripts/helper.js" type="application/javascript"></script>
         <script src="./scripts/ajaxhelper.js" type="application/javascript"></script>
         <script src="./scripts/nicEdit.js" type="application/javascript"></script>
         <script src="./scripts/datetimepicker_css.js" type="application/javascript"></script>
-        <c:out value="${headTags}" default="" />
+        <c:out value="${headTags}" default="" escapeXml="false" />
     </head>
-    <body <c:out value="${bodyAttrs}" default="" />>
+    <body <c:out value="${bodyAttrs}" default="" escapeXml="false" />>
         <div class="page">
             <header class="content">
                 <nav>

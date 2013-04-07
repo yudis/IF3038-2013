@@ -1,9 +1,9 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.util.BaseModel;
+import id.ac.itb.todolist.json.JSONModel;
 import id.ac.itb.todolist.json.JSONObject;
 
-public class Attachment extends BaseModel {
+public class Attachment extends JSONModel {
 
     private int idAttachment;
     private int idTugas;

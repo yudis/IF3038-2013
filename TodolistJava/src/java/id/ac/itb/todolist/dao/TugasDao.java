@@ -13,6 +13,19 @@ import java.util.List;
 
 public class TugasDao extends DataAccessObject {
 
+    public int deleteTugas(int idTugas) {
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("DELETE FROM `tugas` WHERE id=?;");
+            preparedStatement.setInt(1, idTugas);
+
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+                
     public Tugas getTugas(int idTugas, boolean retTags, boolean retAttachment, boolean retAssignees) {
         Tugas tugas = null;
         try {
@@ -156,12 +169,34 @@ public class TugasDao extends DataAccessObject {
         }
         return true;
     }
+    
+    public boolean isAvailable(int idTugas) {
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("SELECT * FROM `tugas` WHERE `id`=? LIMIT 0, 1;");
+            preparedStatement.setInt(1, idTugas);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            if (rs.next()) {
+                return true;
+            }
+            else
+            {
+                System.out.println("---------------------------------- huhuhuhu");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public boolean isPemilik(int idTugas, String username) {
         try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM `tugas` WHERE `id_tugas`=? AND `pemilik`=? LIMIT 0, 1");
+                    prepareStatement("SELECT * FROM `tugas` WHERE `id`=? AND `pemilik`=? LIMIT 0, 1");
             preparedStatement.setInt(1, idTugas);
+            preparedStatement.setString(2, username);
 
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -174,7 +209,7 @@ public class TugasDao extends DataAccessObject {
         return false;
     }
 
-    public boolean isAssignees(int idTugas, String username) {
+    public boolean isAssignee(int idTugas, String username) {
         try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement("'SELECT * FROM `tugas` t NATURAL JOIN `assignees` a ON t.`id` = a.`id_tugas` WHERE t.`id` = ? AND a.`username` = ?'");
@@ -274,6 +309,55 @@ public class TugasDao extends DataAccessObject {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 result.add(rs.getString("username"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public int addTag(int idTugas, String tag) {
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("INSERT INTO `tags`(`id_tugas`, `tag`) VALUES (?,?); ");
+            preparedStatement.setInt(1, idTugas);
+            preparedStatement.setString(2, tag);
+
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int removeTag(int idTugas, String tag) {
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("DELETE FROM `tags` WHERE `id_tugas`=? AND `tag`=?;");
+            preparedStatement.setInt(1, idTugas);
+            preparedStatement.setString(2, tag);
+
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public List<String> getSuggestionTags(int idTugas, String keyword, int limit) {
+        List<String> result = new ArrayList<String>();
+
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("SELECT `tag` FROM `tags` WHERE `id_tugas` <> ? AND `tag` LIKE ? LIMIT 0, ?");
+            preparedStatement.setInt(1, idTugas);
+            preparedStatement.setString(2, keyword);
+            preparedStatement.setInt(3, limit);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                result.add(rs.getString("tag"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,13 +1,13 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.util.BaseModel;
+import id.ac.itb.todolist.json.JSONModel;
 import java.util.Collection;
 import java.sql.Date;
 import java.sql.Timestamp;
 import id.ac.itb.todolist.json.JSONArray;
 import id.ac.itb.todolist.json.JSONObject;
 
-public class Tugas extends BaseModel {
+public class Tugas extends JSONModel {
     private int id;
     private String nama;
     private Date tglDeadline;
@@ -126,18 +126,9 @@ public class Tugas extends BaseModel {
         jObject.put("lastMod", lastMod.toString());
         jObject.put("pemilik", pemilik.toJsonObject());
         jObject.put("kategori", kategori.toJsonObject());
-        
-        JSONArray jAttachments = new JSONArray();
-        for (BaseModel item : attachments) {jAttachments.put(item.toJsonObject());}        
-        jObject.put("attachments", jAttachments);
-        
-        JSONArray jAssignees = new JSONArray();
-        for (BaseModel item : assignees) {jAssignees.put(item.toJsonObject());}        
-        jObject.put("assignees", jAssignees);
-        
-        JSONArray jTags = new JSONArray();
-        for (String item : tags) {jTags.put(item);}        
-        jObject.put("tags", jTags);
+        jObject.put("attachments", new JSONArray(attachments));
+        jObject.put("assignees", new JSONArray(assignees));
+        jObject.put("tags", new JSONArray(tags));
         
         return jObject;
     }

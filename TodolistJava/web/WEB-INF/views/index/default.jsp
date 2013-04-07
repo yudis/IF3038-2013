@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="styles/mediaqueries.css" />
         <script type="text/javascript" src="scripts/helper/ajaxhelper.js"></script>
         <script type="text/javascript" src="scripts/helper/helper.js"></script>
-        <script type="text/javascript" src="scripts/helper/json2.js"></script>
+        <script type="text/javascript" src="scripts/helper/jsonhelper.js"></script>
         <script type="text/javascript" src="scripts/helper/datetimepicker_css.js"></script>
         <script type="text/javascript" src="scripts/index.js"></script>
     </head> 

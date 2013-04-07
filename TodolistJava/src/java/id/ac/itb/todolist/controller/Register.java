@@ -2,22 +2,23 @@ package id.ac.itb.todolist.controller;
 
 import id.ac.itb.todolist.dao.UserDao;
 import id.ac.itb.todolist.model.User;
+import id.ac.itb.todolist.util.Helper;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
+@MultipartConfig(location = "/tmp", fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 2, maxRequestSize = 1024 * 1024 * 2 * 5)
 public class Register extends HttpServlet {
 
     // location to store file uploaded
@@ -35,7 +36,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("./index");
+        response.sendRedirect("./");
     }
 
     /**
@@ -52,55 +53,41 @@ public class Register extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        if (session.getAttribute("user") == null && ServletFileUpload.isMultipartContent(request)) {
-            String uploadPath = getServletContext().getRealPath("") + File.separator + AVATARS_DIRECTORY;
+        if (session.getAttribute("user") == null) {
+            String uploadPath = getServletContext().getRealPath(AVATARS_DIRECTORY);
+
+            User user = null;
 
             try {
-                FileItemFactory factory = new DiskFileItemFactory();
-                ServletFileUpload upload = new ServletFileUpload(factory);
+                user = new User();
+                user.setUsername(request.getParameter("uname"));
+                user.setEmail(request.getParameter("email"));
+                user.setPassword(request.getParameter("pwd"));
+                user.setFullName(request.getParameter("name"));
+                user.setTglLahir(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("bday")).getTime()));
 
-                User user = new User();
-                FileItem avatar = null;
-
-                List<FileItem> fields = upload.parseRequest(request);
-                for (FileItem item : fields) {
-                    if (item.getFieldName().equals("uname")) {
-                        user.setUsername(item.getString());
-                    } else if (item.getFieldName().equals("email")) {
-                        user.setEmail(item.getString());
-                    } else if (item.getFieldName().equals("pwd")) {
-                        user.setPassword(item.getString());
-                    } else if (item.getFieldName().equals("name")) {
-                        user.setFullName(item.getString());
-                    } else if (item.getFieldName().equals("bday")) {
-                        user.setTglLahir(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(item.getString()).getTime()));
-                    } else if (!item.isFormField() && item.getSize() > 0 && item.getFieldName().equals("ava")) {
-                        avatar = item;
-                        user.setAvatar(user.getUsername() + "." + org.apache.commons.io.FilenameUtils.getExtension(item.getName()));
-                    }
-                }
+                Part avatar = request.getPart("ava");
+                user.setAvatar(user.getUsername() + "." + Helper.getFileExtention(Helper.getFileName(avatar)));
 
                 if (user.getUsername() != null && user.getEmail() != null && user.getPassword() != null && user.getFullName() != null && user.getTglLahir() != null && avatar != null) {
                     String filePath = uploadPath + File.separator + user.getAvatar();
-                    File storeFile = new File(filePath);
-                    // saves the file on disk
-                    avatar.write(storeFile);
-                    
+                    Helper.writeFile(avatar.getInputStream(), filePath);
+
                     UserDao userDao = new UserDao();
                     userDao.addUser(user);
                     session.setAttribute("user", user);
-                    
+
                     response.sendRedirect("./dashboard.jsp");
                 } else {
-                    response.sendRedirect("./index.jsp");
+                    response.sendRedirect("./");
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
                 response.setStatus(400);
             }
-            
         } else {
             response.sendRedirect("./dashboard.jsp");
         }
     }
+
 }

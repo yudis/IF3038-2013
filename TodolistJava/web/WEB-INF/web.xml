@@ -28,6 +28,14 @@
         <servlet-name>Dashboard</servlet-name>
         <servlet-class>id.ac.itb.todolist.controller.Dashboard</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>Upload</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Tugas</servlet-name>
+        <servlet-class>id.ac.itb.todolist.controller.Tugas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index.jsp</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Tugas</servlet-name>
+        <url-pattern>/tugas.jsp</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
