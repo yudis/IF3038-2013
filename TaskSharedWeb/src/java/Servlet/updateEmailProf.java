@@ -4,8 +4,11 @@
  */
 package Servlet;
 
+import Class.GetConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,14 +36,19 @@ public class updateEmailProf extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet updateEmailProf</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet updateEmailProf at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String email = request.getParameter("email");
+            String userid = request.getParameter("userid");
+
+            GetConnection getCon = new GetConnection();
+            Connection conn = getCon.getConnection();
+            Statement stt = conn.createStatement();
+            String query = "UPDATE user SET aboutme = '"+email+"' WHERE username='"+userid+"'";
+            stt.execute(query);
+            
+            System.out.println("Succes Update");
+            out.print(email);
+        }catch(Exception ex){
+            System.out.println(ex.toString());
         } finally {            
             out.close();
         }

@@ -49,10 +49,6 @@
         <servlet-class>Servlet.headervalidation</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>init_function</servlet-name>
-        <servlet-class>Servlet.init_function</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>insertcategory</servlet-name>
         <servlet-class>Servlet.insertcategory</servlet-class>
     </servlet>
@@ -91,6 +87,10 @@
     <servlet>
         <servlet-name>updateTagDB</servlet-name>
         <servlet-class>Servlet.updateTagDB</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>init_function</servlet-name>
+        <servlet-class>Servlet.init_function</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
@@ -141,10 +141,6 @@
         <url-pattern>/headervalidation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>init_function</servlet-name>
-        <url-pattern>/init_function</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>insertcategory</servlet-name>
         <url-pattern>/insertcategory</url-pattern>
     </servlet-mapping>
@@ -183,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>updateTagDB</servlet-name>
         <url-pattern>/updateTagDB</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>init_function</servlet-name>
+        <url-pattern>/init_function</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -4,8 +4,10 @@
  */
 package Servlet;
 
+import Class.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,14 +35,18 @@ public class changepassword extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet changepassword</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet changepassword at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String newpass = request.getParameter("newpass");
+            String userid = request.getParameter("userid");
+
+            GetConnection getCon = new GetConnection();
+            Connection conn = getCon.getConnection();
+            Statement stt = conn.createStatement();
+            String query = "UPDATE user SET password = '"+newpass+"' WHERE username='"+userid+"'";
+            stt.execute(query);
+            
+            System.out.println("Succes Update");
+        }catch(Exception ex){
+            System.out.println(ex.toString());
         } finally {            
             out.close();
         }

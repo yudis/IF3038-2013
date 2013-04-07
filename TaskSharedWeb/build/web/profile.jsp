@@ -4,7 +4,12 @@
     Author     : VAIO
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Class.*"%>
+<%@page import="java.util.HashMap"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,66 +23,67 @@
     <body onLoad="hidden_update_box()">
         <%
         /*session management*/
+        String userActive = "";
         if(request.getSession().getAttribute("userlistapp")==null){
             response.sendRedirect("index.jsp");
+        }else{
+            userActive = request.getSession().getAttribute("userlistapp").toString();
         }
         %>
         <div id="main-body-general">
                 <!--Header-->
                 <div id="header">
-                        <?php
-                                include("header.php");
-                                require("../php/init_function.php");
-                                $user_show =  $_GET['username'];
-                                $avatar = getAvatar($user_show);
-                        ?>
+                <jsp:include page="header.jsp" />
+                <%
+                    Function func = new Function();
+                    String usernameToShow = request.getParameter("username");
+                    HashMap<String, String> userShow = func.GetUser(usernameToShow);
+                %>
                 </div>
                 <div><hr id="border"></div>
                 <!--Body-->
         <div id="profile-page-body">
                 <div id="profile-header">
                         <div id="left-profile-header">
-                                <img alt="Photo profile" id="photo" src="../avatar/<?php echo $avatar?>" width="250" height="325"/>
+                                <img alt="Photo profile" id="photo" src="avatar/<% out.print(userShow.get("avatar"));%>" width="250" height="325"/>
                         </div>
                         <div id="right-profile-header">
-                                <h2><?php $username = $_GET['username'];
-                                                    echo $username;
-                                                $user = getUser($username);?></h2>
-
-                <?php
-                                                if($username == $_SESSION['userlistapp']){
-                                                        <!--echo "<div id=\"upload_button\"><a href=\"#\" onClick=\"edit_avatar('$user_show')\">Upload New Avatar</a></div>";-->
-                                                        echo "<div id=\"uploader\">";
-                                                        echo "<form enctype=\"multipart/form-data\" method=\"post\" action=\"../php/getavatar.php?username=".$username."\">";
-                                                        echo "	<input type=\"file\" name=\"changeAvatar\" id=\"inputfileid\">";
-                                                        echo "	<input type=\"submit\">";
-                                                        echo "</form>";
-                                                        echo "</div>";
-                                                        <!--echo "<div id=\"change_password\"><a href=\"#\" onClick=\"edit_password('$user_show')\">Change Password</a></div>";-->
-                                                        echo "<div id=\"password_form\">";
-                                                        echo "<div id=\"newpassword\">";
-                                                        <!--echo "<div id=\"left-profile-body\">New Password</div><div id=\"right-profile-body\"> : <input type=\"text\" name=\"newPass\" id=\"newpasstext\" onKeyUp=\"check_password('$user_show')\"></div>";-->
-                                                        echo "</div>";
-                                                        echo "<div id=\"warning-message\"></div>";
-                                                        echo "<br>";
-                                                        echo "</div>";
-                                                }
-                                        ?>
-                                <p>Joined on : <?php echo $user['join']?></p>
+                            <h2><% out.print(userShow.get("username")); %></h2>
+                <%
+                    if(userActive.equals(usernameToShow)){
+                        out.print("<div id=\"upload_button\"><a href=\"#\" onClick=\"edit_avatar('"+usernameToShow+"')\">Upload New Avatar</a></div>");
+                        out.print("<div id=\"uploader\">");
+                        out.print("<form enctype=\"multipart/form-data\" method=\"post\" action=\"getavatar?username="+usernameToShow+"\">");
+                        out.print("	<input type=\"file\" name=\"changeAvatar\" id=\"inputfileid\">");
+                        out.print("	<input type=\"submit\">");
+                        out.print("</form>");
+                        out.print("</div>");
+                        
+                        out.print("<div id=\"change_password\"><a href=\"#\" onClick=\"edit_password('"+usernameToShow+"')\">Change Password</a></div>");
+                        out.print("<div id=\"password_form\">");
+                        out.print("<div id=\"newpassword\">");
+                        out.print("<div id=\"left-profile-body\">New Password</div><div id=\"right-profile-body\"> : <input type=\"text\" name=\"newPass\" id=\"newpasstext\" onKeyUp=\"check_password('"+usernameToShow+"')\"></div>");
+                        out.print("</div>");
+                        out.print("<div id=\"warning-message\"></div>");
+                        out.print("<br>");
+                        out.print("</div>");
+                    }
+                %>
+                <p>Joined on : <% out.print(userShow.get("join"));%></p>
                                 <div>
                                         <div id="left-main-body"><p>About Me :</p></div>
                                         <div id="right-main-body">
-                        <?php 
-                                if($username == $_SESSION['userlistapp'] ){
-                                                                <!--echo "<a href=\"#\" onClick=\"edit_aboutme('$user_show')\"><u><p>edit</p></u></a>";-->
-                                                        }else{
-                                                                echo "<br />";	
-                                                        }
-                                                ?>
+                        <% 
+                            if(userActive.equals(usernameToShow)){
+                                out.print("<a href=\"#\" onClick=\"edit_aboutme('"+userActive+"')\"><u><p>edit</p></u></a>");
+                            }else{
+                                out.print("<br />");	
+                            }
+                        %>
                 </div>
                                 </div>
                                 <div id="about">
-                                        <div id="aboutme_show"><?php echo $user['aboutme']?></div>
+                                        <div id="aboutme_show"><% out.print(userShow.get("aboutme"));%></div>
                                 <div id="aboutme_edit"><input type="text" id="aboutme_to_edit" size=80></div>
                                 </div>
                         </div>
@@ -86,37 +92,38 @@
                 <div><hr id="border"></div>
                 <div id="biodata">
                         <div>
-                                <div id="left-profile-name"><p>Full Name : <?php echo $user['fullname']; ?></p></div>
+                                <div id="left-profile-name"><p>Full Name : <% out.print(userShow.get("fullname"));%></p></div>
                                 <div id="left-profile-newname"><p>Full Name : <input type="text" id="newname"></p></div>
                                 <div id="right-profile-editname">
-                <?php 
-                                if($username == $_SESSION['userlistapp'] ){
-                                                                <!--echo "<a href=\"#\" onclick=\"edit_fullname('$user_show')\"><u><p>edit</p></u></a>";-->
-                                                        }
-                                        ?>
+                                <% 
+                                    if(userActive.equals(usernameToShow)){
+                                        out.print("<a href=\"#\" onclick=\"edit_fullname('"+userActive+"')\"><u><p>edit</p></u></a>");
+                                    }
+                                %>
             </div>
                         </div>
                         <br><br><br>
                         <div>
-                                <div id="left-profile-birthday"><p>Birth Date : <?php echo $user['birthday'];?></p></div>
+                                <div id="left-profile-birthday"><p>Birth Date : <% out.print(userShow.get("birthday"));%></p></div>
                                 <div id="left-profile-newbirthday"><p>Birth Date : <input type="text" id="newbirthday" class="calendarSelectDate" name="textDeadline"/><div id="calendarDiv"></div></p></div>
                                 <div id="right-profile-editbirthday">
-                <?php 
-                                if($username == $_SESSION['userlistapp'] ){
-                                                                <!--echo "<a href=\"#\" onClick=\"edit_birthday('$user_show')\"><u><p>edit</p></u></a>";-->
-                                                        }
-                                        ?>
+                                <% 
+                                    if(userActive.equals(usernameToShow)){
+                                        out.print("<a href=\"#\" onClick=\"edit_birthday('"+usernameToShow+"')\"><u><p>edit</p></u></a>");
+                                    }
+                                %>
             </div>
                         </div>
                         <br><br><br>
                         <div>
-                                <div id="left-profile-email"><p>Email : <i><?php echo $user['email'];?></i></p></div>
+                                <div id="left-profile-email"><p>Email : <i><% out.print(userShow.get("email"));%></i></p></div>
                                 <div id="left-profile-newemail"><p>Email : <input type="text" id="newemail"></i></p></div>
                                 <div id="right-profile-editemail">
-                <?php 
-                    <!--if($username == $_SESSION['userlistapp'] ){ echo "<a href=\"#\" onClick=\"edit_email('$user_show')\"><u><p>edit</p></u></a>";-->
-}
-                ?>
+                <% 
+                    if(userActive.equals(usernameToShow)){ 
+                        out.print("<a href=\"#\" onClick=\"edit_email('"+usernameToShow+"')\"><u><p>edit</p></u></a>");
+                    }
+                %>
             </div>
                         </div>
                 </div>
@@ -134,17 +141,21 @@
 
                         <div>
                                 <ul>
-                                <?php 
-                                        $con = getConnection();
-                                        $query = "SELECT distinct taskid FROM assignee WHERE username='".$user_show."'";
-                                        $result = mysqli_query($con,$query);
-                                        while($row = mysqli_fetch_array($result)){
-                                                $task = getTask($row['taskid']);
-                                                if(strcmp($task['status'],"UNCOMPLETE") == 0){
-                                                        echo "<li><a href=\"task_page.php?taskid=".$row['taskid']."\">".$task['taskname']."</a></li>";		
-                                                }
+                                <% 
+                                    GetConnection getCon = new GetConnection();
+                                    Connection conn = getCon.getConnection();
+                                    Statement stt = conn.createStatement();
+                                    String query = "SELECT distinct taskid FROM assignee WHERE username='"+usernameToShow+"'";
+                                    ResultSet rs = stt.executeQuery(query);
+                                    while(rs.next()){
+                                        HashMap<String,String> task = func.GetTask(rs.getString("taskid"));
+                                        if (task != null){
+                                            if(task.get("status").equals("UNCOMPLETE")){
+                                                    out.print("<li><a href=\"task_page.jsp?taskid="+task.get("taskid") +"\">"+task.get("taskname")+"</a></li>");
+                                            }
                                         }
-                                ?>
+                                    }
+                                %>
                                 </ul>
                         </div>
                 </div>
@@ -163,17 +174,18 @@
 
                         <div>
                                 <ul>
-                                        <?php 
-                                                $con = getConnection();
-                                                $query = "SELECT distinct taskid FROM assignee WHERE username='".$user_show."'";
-                                                $result = mysqli_query($con,$query);
-                                                while($row = mysqli_fetch_array($result)){
-                                                        $task = getTask($row['taskid']);
-                                                        if(strcmp($task['status'],"COMPLETE") == 0){
-                                                                echo "<li>".$task['taskname']."</li>";		
-                                                        }
-                                                }
-                                        ?>
+                                <% 
+                                    query = "SELECT distinct taskid FROM assignee WHERE username='"+usernameToShow+"'";
+                                    rs = stt.executeQuery(query);
+                                    while(rs.next()){
+                                        HashMap<String,String> task = func.GetTask(rs.getString("taskid"));
+                                        if (task != null){
+                                            if(task.get("status").equals("COMPLETE")){
+                                                    out.print("<li><a href=\"task_page.jsp?taskid="+task.get("taskid") +"\">"+task.get("taskname")+"</a></li>");
+                                            }
+                                        }
+                                    }
+                                %>
                                 </ul>
                         </div>
                 </div>

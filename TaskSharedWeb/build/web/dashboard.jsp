@@ -25,12 +25,6 @@
             <!--Header-->
             <div id="header">
                     <jsp:include page="header.jsp" />
-                    <?php
-                            include("header.php");
-                            require("../php/init_function.php");
-                            $useractive = $_SESSION['userlistapp'];
-                            $avatar = getAvatar($useractive);
-                    ?>
             </div>
             <div><hr id="border"></div>
             <!--Body-->

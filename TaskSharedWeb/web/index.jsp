@@ -60,7 +60,7 @@
                         Email: <br>
                         Your Avatar: <br>
                 </div>
-                <form enctype="multipart/form-data" method="post" action="php/registration.php">
+                <form action="registration" enctype="multipart/form-data" method="post">
                         <!--Username (min. 5 characters != password)-->
                         <input type="text" id="username" name="textUsername" onKeyUp="check_username()"/><br />
                         <!--Password (min. 8 characters) != username and email-->

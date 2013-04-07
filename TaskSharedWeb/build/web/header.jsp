@@ -4,7 +4,9 @@
     Author     : VAIO
 --%>
 
+<%@page import="java.util.HashMap"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Class.*"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,9 +16,9 @@
 	<script type="text/javascript" src="javascript/header.js"></script>
     </head>
     <body onLoad="initialize()">
-        <div id="header-logo"><a href="dashboard.php"><img src="image/logo.png" width="100px" height="60px"/></a></div>
-        <div id="header-title"><a href="dashboard.php"><img src="image/title.png" width="250px" height="80px"/></a></div>
-        <div id="header-link"><a href="dashboard.php"><b>Go To Dashboard</b></a></div>
+        <div id="header-logo"><a href="dashboard.jsp"><img src="image/logo.png" width="100px" height="60px"/></a></div>
+        <div id="header-title"><a href="dashboard.jsp"><img src="image/title.png" width="250px" height="80px"/></a></div>
+        <div id="header-link"><a href="dashboard.jsp"><b>Go To Dashboard</b></a></div>
         <div id="header-right-side">
                 <div id="header-right-search">
                         <form action="search_result.php" method="post">
@@ -42,25 +44,19 @@
                         </form>
                 </div>
                 <div id="header-right-user">
-                <?php // Create connection
-                                $con=mysqli_connect("localhost","root","","progin_405_13511601");
-                                // Check connection
-                                if (mysqli_connect_errno($con))
-                                {
-                                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                                }
-                                $username = $_SESSION['userlistapp'];
-                                $query = "SELECT * FROM user WHERE username='$username'";
-                                $result = mysqli_query($con,$query);
-                                $row = mysqli_fetch_array($result);
-                        ?>
-                        <div id="header-photo"><a href="profile.php?username=<?php echo $row['username']?>"><img id="photo" src="../avatar/<?php 
-                                echo $row['avatar'];
-                        ?>" width="60" height="60"/></a></div>
+                        <%
+                        /*session management*/
+                        String userActive = "";
+                        if(request.getSession().getAttribute("userlistapp")!=null){
+                            userActive = request.getSession().getAttribute("userlistapp").toString();
+                        }
+                        %>
+                        <div id="header-photo"><a href="profile.jsp?username=<% out.print(userActive); %>"><img id="photo" src="avatar/<%Function func = new Function();HashMap<String, String> user = func.GetUser(userActive);if(user != null) out.print(user.get("avatar"));%>
+                                                                                                                " width="60" height="60" alt="Avatar Tidak Tersedia, <% if(user != null) out.print(user.get("avatar")); %>"/></a></div>
                         <div id="header-profile">
-                                You logged as, <b><?php echo $_SESSION["userlistapp"]?></b>
+                                You logged as, <b><% if(user != null) out.print(user.get("username")); %>
                                 <ul>
-                                        <li><a href="profile.php?username=<?php echo $_SESSION["userlistapp"]?>">Go to Profile</a></li>
+                                        <li><a href="profile.jsp?username=<% if(user != null) out.print(user.get("username")); %>">Go to Profile</a></li>
                                         <li><a href="signout">Sign Out</a></li>
                                 </ul>
                         </div>
