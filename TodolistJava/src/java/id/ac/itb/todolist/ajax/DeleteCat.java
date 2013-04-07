@@ -5,7 +5,6 @@
 package id.ac.itb.todolist.ajax;
 
 import id.ac.itb.todolist.dao.CategoryDao;
-import id.ac.itb.todolist.model.Category;
 import id.ac.itb.todolist.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author User
  */
-@WebServlet(name = "kategoriN", urlPatterns = {"/ajax/KategoriN"})
-public class KategoriN extends HttpServlet {
+@WebServlet(name = "DeleteCat", urlPatterns = {"/ajax/DeleteCat"})
+public class DeleteCat extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -37,35 +36,22 @@ public class KategoriN extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("application/json");
-        
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("user");
+        String q = request.getParameter("q");
         try {
-            CategoryDao category =new CategoryDao();
-            ArrayList<Category> result ;
-            ArrayList<Category> result2 ;
-            result=category.getAllCategory();
-            result2=category.getAssigneeCat(currentUser.getUsername());
-            for (int i = 0; i < result.size(); i++){
-                ArrayList<String> users= category.getUser(result.get(i).getId());
-                for (int n = 0; n < users.size(); n++){
-                    if(users.get(n) == null ? currentUser.getUsername() == null : users.get(n).equals(currentUser.getUsername()))
-                    {
-                        int id_kategori=result.get(i).getId();
-                        out.println("<li><a name='"+id_kategori+"' href=\"\" onclick=\"loadtugas('"+id_kategori+"');setChosen('"+id_kategori+"'); return false;\" >"); 
-                        out.println(result.get(i).getNama());
-                        out.println("</a></li>");
-                        break;
-                    }
+            CategoryDao category = new CategoryDao();
+            ArrayList<String> users = new ArrayList<String>();
+            users = category.getUser(Integer.parseInt(q));
+            int i=0;
+            while(i<users.size())
+            {
+                if(users.get(i).equals(currentUser.getUsername())){
+                    category.DeleteKategori(Integer.parseInt(q));
+                    break;
                 }
-            }
-            for(int i=0;i < result2.size(); i++){
-                int id_kategori=result2.get(i).getId();
-		out.println("<li><a name='"+id_kategori+"' href=\"\" onclick=\"loadtugas('"+id_kategori+"');setChosen('"+id_kategori+"'); return false;\" >"); 
-                out.println(result2.get(i).getNama());
-                out.println("</a></li>");
+                i++;
             }
         } finally {            
             out.close();

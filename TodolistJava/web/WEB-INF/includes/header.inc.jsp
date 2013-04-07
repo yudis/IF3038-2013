@@ -11,9 +11,8 @@
         <script type="text/javascript" src="scripts/helper/ajaxhelper.js"></script>
         <script type="text/javascript" src="scripts/helper/helper.js"></script>
         <script type="text/javascript" src="scripts/helper/json2.js"></script>
-        <script type="text/javascript" src="scripts/helper/datetimepicker_css.js"></script>
-        <script src="scripts/helper/nicEdit.js" type="application/javascript"></script>
-        <script src="scripts/helper/datetimepicker_css.js" type="application/javascript"></script>
+        <script type="application/javascript" src="scripts/helper/nicEdit.js"></script>
+        <script type="application/javascript" src="scripts/helper/datetimepicker_css.js"></script>
         <c:out value="${headTags}" escapeXml="false" default="" />
     </head>
     <body <c:out value="${bodyAttrs}" escapeXml="false" default="" />
@@ -22,7 +21,7 @@
                 <nav>
                     <div class="logo"><a href="dashboard.php"><img alt="Home" src="images/logo.png" /></a></div>
                     <ul>
-                        <li><div><a href="dashboard.php">Dashboard</a></div></li><li><div><a href="profile.php">Profile</a></div></li><li><div><a href="index.php?logout">Logout</a></div></li>
+                        <li><div><a href="dashboard">Dashboard</a></div></li><li><div><a href="profile.php">Profile</a></div></li><li><div><a href="index.php?logout">Logout</a></div></li>
                     </ul>
                     <div class="search">
                         <div id="searchwrapper">
