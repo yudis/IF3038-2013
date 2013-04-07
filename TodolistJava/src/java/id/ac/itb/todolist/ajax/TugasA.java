@@ -55,7 +55,7 @@ public class TugasA extends HttpServlet {
                     {
                         out.println("<h2>"+result.get(i).getKategori().getNama()+"</h2>");
 				out.println("<div class=\"tugas\">");
-					out.println("<div><a href=\"tugas.php?id="+result.get(i).getId()+"\">"+result.get(i).getNama()+"</a></div>");
+					out.println("<div><a href=\"tugas.jsp?id="+result.get(i).getId()+"\">"+result.get(i).getNama()+"</a></div>");
 					out.println("<div>Deadline: <strong>"+result.get(i).getTglDeadline()+"</strong></div>");
 					out.println("<div>");
 						out.println("Tags: ");
@@ -86,7 +86,7 @@ public class TugasA extends HttpServlet {
                             {
                                 out.println("<h2>"+result.get(i).getKategori().getNama()+"</h2>");
 				out.println("<div class=\"tugas\">");
-					out.println("<div><a href=\"tugas.php?id="+result.get(i).getId()+"\">"+result.get(i).getNama()+"</a></div>");
+					out.println("<div><a href=\"tugas.jsp?id="+result.get(i).getId()+"\">"+result.get(i).getNama()+"</a></div>");
 					out.println("<div>Deadline: <strong>"+result.get(i).getTglDeadline()+"</strong></div>");
 					out.println("<div>");
 						out.println("Tags: ");
@@ -123,7 +123,7 @@ public class TugasA extends HttpServlet {
                         {
                             out.println("<h2>"+result.get(i).getKategori().getNama()+"</h2>");
                                     out.println("<div class=\"tugas\">");
-                                            out.println("<div><a href=\"tugas.php?id="+result.get(i).getId()+"\">"+result.get(i).getNama()+"</a></div>");
+                                            out.println("<div><a href=\"tugas.jsp?id="+result.get(i).getId()+"\">"+result.get(i).getNama()+"</a></div>");
                                             out.println("<div>Deadline: <strong>"+result.get(i).getTglDeadline()+"</strong></div>");
                                             out.println("<div>");
                                                     out.println("Tags: ");
@@ -154,7 +154,7 @@ public class TugasA extends HttpServlet {
                                 {
                                     out.println("<h2>"+result.get(i).getKategori().getNama()+"</h2>");
                                     out.println("<div class=\"tugas\">");
-                                            out.println("<div><a href=\"tugas.php?id="+result.get(i).getId()+"\">"+result.get(i).getNama()+"</a></div>");
+                                            out.println("<div><a href=\"tugas.jsp?id="+result.get(i).getId()+"\">"+result.get(i).getNama()+"</a></div>");
                                             out.println("<div>Deadline: <strong>"+result.get(i).getTglDeadline()+"</strong></div>");
                                             out.println("<div>");
                                                     out.println("Tags: ");

@@ -1,4 +1,4 @@
-<?php include './includes/header.inc.php' ?>
+<jsp:include page="/WEB-INF/includes/header.inc.jsp" />
                 <h1>Rincian Tugas</h1>
                 <div class="padding12px">
                     <h2>Detail</h2>
@@ -38,4 +38,4 @@
                     </div>
                 </div>
                 <br />
-<?php include './includes/footer.inc.php' ?>
+<jsp:include page="/WEB-INF/includes/footer.inc.jsp" />

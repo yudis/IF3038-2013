@@ -304,7 +304,7 @@ function loginX() {
     ajax_post("./ajax/login", qry, function(xhr) {
         var loginres = json_parse(xhr.responseText);
         if (loginres.status == 200) {
-            window.location.replace("dashboard");
+            window.location.replace("dashboard.jsp");
         } else {
             alert(loginres.message);
         }

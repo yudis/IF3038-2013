@@ -8,7 +8,6 @@ import id.ac.itb.todolist.model.Comment;
 import id.ac.itb.todolist.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -87,8 +86,10 @@ public class UpdateTugas extends HttpServlet {
                 int idTugas = Integer.parseInt(request.getParameter("id_tugas"));
                 String username = request.getParameter("username");
                 
-                tugasDao.addAssignee(idTugas, username);
-                tugasDao.updateTimestamp(idTugas);
+                if (!tugasDao.isPemilik(idTugas, username)) {
+                    tugasDao.addAssignee(idTugas, username);
+                    tugasDao.updateTimestamp(idTugas);
+                }
 
                 jObject.put("responseStatus", 200);
             } else if (request.getParameter("removea") != null && request.getParameter("id_tugas") != null && request.getParameter("username") != null) {
@@ -98,6 +99,7 @@ public class UpdateTugas extends HttpServlet {
                 String username = request.getParameter("username");
                 
                 tugasDao.removeAssignee(idTugas, username);
+                tugasDao.updateTimestamp(idTugas);
 
                 if (username.equals(((User) session.getAttribute("user")).getUsername())) {
                     jObject.put("killself", 1);

@@ -1,20 +1,15 @@
-
 package id.ac.itb.todolist.controller;
 
-import id.ac.itb.todolist.dao.UserDao;
-import id.ac.itb.todolist.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "Dashboard", urlPatterns = {"/dashboard.jsp"})
-public class Dashboard extends HttpServlet {
+public class Attachment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -28,24 +23,17 @@ public class Dashboard extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        
-        if (session.getAttribute("user") != null)
+        String file = request.getParameter("file");
+        String nama = request.getParameter("nama");
+        if (session.getAttribute("user") != null && file != null &&  nama != null)
         {
-            // user sudah login, dialihkan ke halaman lain
-            request.setAttribute("title", "Todolist | Dashboard");
-            request.setAttribute("headTags", "<script src=\"scripts/dashboard.js\" type=\"application/javascript\"></script><script type=\"application/javascript\" src=\"scripts/helper/popup.js\"></script><script src=\"scripts/kategori.js\" type=\"application/javascript\"></script>");
-            request.setAttribute("bodyAttrs", "onload=\"updateAddButtonVisibility();updateDelButtonVisibility();loadtugas(\'\');\"");
-            RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/dashboard/dashboard.jsp");
-            view.forward(request, response);
-        }
-        else
-        {
-           response.sendRedirect("./index.jsp");
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + nama + "\"");
+            RequestDispatcher dispathcer = request.getRequestDispatcher("./files/" + file);
+            dispathcer.forward(request, response);
         }
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP

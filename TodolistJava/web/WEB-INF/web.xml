@@ -36,6 +36,10 @@
         <servlet-name>Tugas</servlet-name>
         <servlet-class>id.ac.itb.todolist.controller.Tugas</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Attachment</servlet-name>
+        <servlet-class>id.ac.itb.todolist.controller.Attachment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index.jsp</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>Tugas</servlet-name>
         <url-pattern>/tugas.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Attachment</servlet-name>
+        <url-pattern>/attachment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package id.ac.itb.todolist.controller;
 
 import id.ac.itb.todolist.dao.TugasDao;
@@ -15,10 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Edward Samuel
- */
 public class Tugas extends HttpServlet {
 
     /**
@@ -70,7 +62,7 @@ public class Tugas extends HttpServlet {
                     dispathcer = request.getRequestDispatcher("/WEB-INF/views/tugas/default.jsp");
                 }
                 
-                request.setAttribute("headTags", "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/tugas.css\" /><link rel=\"stylesheet\" type=\"text/css\" href=\"./styles/autosuggest.css\" /><script src=\"./scripts/tugas.js\" type=\"application/javascript\"></script><script type=\"text/javascript\" src=\"./scripts/autosuggest2.js\"></script><script type=\"text/javascript\" src=\"./scripts/assigneesSuggestion.js\"></script>");
+                request.setAttribute("headTags", "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/tugas.css\" /><script src=\"./scripts/tugas.js\" type=\"application/javascript\"></script>");
                 request.setAttribute("bodyAttrs", "onload=\"onload(" + idTugas + ");\"");
                 request.setAttribute("title", "Todolist | Rincian Tugas");  
                 dispathcer.forward(request, response);

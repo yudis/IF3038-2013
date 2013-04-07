@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <br /><br />
-                    <button id="editButton" onclick="return editTugas();">Edit</button> <button id="doneButton" onclick="saveTugas(); return false;">Done</button> <button id="deleteButton" onclick="deleteTugas(); return false;">Delete</button>
+                    <button id="editButton" onclick="return editTugas();">Edit</button> <button id="doneButton" onclick="saveTugas(); return false;">Done</button>
                     <br />
                     <h2>Attachment</h2>
                     <div id="attachmentTugas">Loading...</div>

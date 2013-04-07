@@ -212,7 +212,7 @@ public class TugasDao extends DataAccessObject {
     public boolean isAssignee(int idTugas, String username) {
         try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("'SELECT * FROM `tugas` t NATURAL JOIN `assignees` a ON t.`id` = a.`id_tugas` WHERE t.`id` = ? AND a.`username` = ?'");
+                    prepareStatement("SELECT * FROM `tugas` t INNER JOIN `assignees` a ON t.`id` = a.`id_tugas` WHERE t.`id` = ? AND a.`username` = ?;");
             preparedStatement.setInt(1, idTugas);
             preparedStatement.setString(2, username);
 
@@ -300,10 +300,13 @@ public class TugasDao extends DataAccessObject {
 
         try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT `username` FROM `users` WHERE `username` NOT IN (SELECT `username` FROM assignees WHERE `id_tugas`=?) AND `username` LIKE ? LIMIT 0, ?;");
+                    prepareStatement("SELECT `username` FROM `users` WHERE `username` NOT IN (SELECT `username` FROM assignees WHERE `id_tugas`=? UNION SELECT `pemilik` AS `username` FROM `tugas` WHERE `id`=?) AND `username` LIKE ? LIMIT 0, ?;");
             preparedStatement.setInt(1, idTugas);
-            preparedStatement.setString(2, keyword);
-            preparedStatement.setInt(3, limit);
+            preparedStatement.setInt(2, idTugas);
+            preparedStatement.setString(3, keyword);
+            preparedStatement.setInt(4, limit);
+            
+            System.out.println(preparedStatement);
 
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -393,15 +396,15 @@ public class TugasDao extends DataAccessObject {
         return -1;
     }
     
-    public int AddTask(String nama,Date deadline, String pemilik, int id){
+    public int AddTask(String nama, java.sql.Date deadline, String pemilik, int idKategori){
         try {
             
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("INSERT INTO tugas(nama, tgl_deadline, pemilik,id_kategori) VALUES (?, ?, ?, ?);");
+                    prepareStatement("INSERT INTO tugas(nama, tgl_deadline, pemilik, id_kategori) VALUES (?, ?, ?, ?);");
             preparedStatement.setString(1, nama);
             preparedStatement.setDate(2, deadline);
             preparedStatement.setString(3, pemilik);
-            preparedStatement.setInt(4, id);
+            preparedStatement.setInt(4, idKategori);
             int x= preparedStatement.executeUpdate();
             return x;
             
