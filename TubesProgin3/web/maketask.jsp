@@ -9,11 +9,6 @@
 
 %>
 <div id="isi">
-    <div>
-Server info: <%= application.getServerInfo() %><br>  
-Servlet version: <%= application.getMajorVersion() %>.<%= application.getMinorVersion() %>  
-JSP version: <%= JspFactory.getDefaultFactory().getEngineInfo().getSpecificationVersion() %><br> 
-</div>
     <div id="leftsidebar">
         <b>CREATE NEW TASK</b>
         <img src="image/leftmenu.png"/>
@@ -21,7 +16,7 @@ JSP version: <%= JspFactory.getDefaultFactory().getEngineInfo().getSpecification
 
     <div id="rightsidebar">
         <div id="wrapper-left">
-            <form class="task" name="MakeForm" method="post" onSubmit="checkSubmission(this, event)" enctype="multipart/form-data" action="addtask.jsp">
+            <form class="task" name="MakeForm" method="post" onSubmit="checkSubmission(this, event)" enctype="multipart/form-data" action="AddFile">
                 <h1>Fill Details</h1>
                 <ul>
                     <li>
@@ -54,7 +49,7 @@ JSP version: <%= JspFactory.getDefaultFactory().getEngineInfo().getSpecification
                     <li>
                         <label for="deadline">Deadline</label>
                         <input id="demo1" name="deadline" type="text" size="25"/>
-                        <a href="javascript:NewCssCal('demo1','ddmmyyyy')"><img src="image/cal.gif" alt="Pick a date"/></a>
+                        <a href="javascript:NewCssCal('demo1','yyyymmdd')"><img src="image/cal.gif" alt="Pick a date"/></a>
                     </li>
                     <li>
                         <input type="text" name="kategori" class="hidden" value="<%= kategori%>"/>

@@ -7,7 +7,10 @@ package tubes3;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -15,19 +18,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import org.apache.tomcat.dbcp.pool.impl.GenericKeyedObjectPool;
-import org.apache.tomcat.util.net.SecureNioChannel;
 
 /**
  *
  * @author Raymond
  */
-@WebServlet(name = "Harapan", urlPatterns = {"/Harapan"})
+@WebServlet(name = "AddFile", urlPatterns = {"/AddFile"})
 @MultipartConfig
 public class AddFile extends HttpServlet {
 
+    private Tubes3Connection db;
+    private Connection connection;
+
     public AddFile() {
         super();
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -42,21 +47,52 @@ public class AddFile extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+            throws ServletException, IOException  {
+
         for (Part part : request.getParts()) {
+            //System.out.println("PART:" + part.getHeaderNames());
             InputStream is = request.getPart(part.getName()).getInputStream();
             int i = is.available();
             byte[] b = new byte[i];
             is.read(b);
             String fileName = getFileName(part);
-            FileOutputStream os = new FileOutputStream(getServletContext().getRealPath("/")+"uploadedFile/" + fileName);
-            System.out.println(getServletContext().getRealPath("/") + fileName);
-            os.write(b);
-            os.close();
+            System.out.println("FILE:" + fileName);
+            if (fileName != null && !fileName.equals("")) {
+                System.out.println("MASUk");
+                FileOutputStream os = new FileOutputStream(getServletContext().getRealPath("/") + "uploadedFile/" + fileName);
+                //System.out.println(getServletContext().getRealPath("/") + fileName);
+                os.write(b);
+                os.close();
+            }
             is.close();
         }
+        String username = request.getParameter("user");
+        String nama = request.getParameter("tugas");
+        String asignee = request.getParameter("asignee");
+        String tag = request.getParameter("tag");
+        String deadline = request.getParameter("deadline");
+        String kategori = request.getParameter("kategori");
+        // System.out.println(username + nama+asignee+tag+deadline+kategori);
+        db = new Tubes3Connection();
+        connection = db.getConnection();
+        String insertTugas = "INSERT INTO tugas (`IDKategori`, `deadline`, `name`, `tag`, `username`) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement insTugas;
+        int rs;
+        try {
+            insTugas = connection.prepareStatement(insertTugas);
+            insTugas.setString(1, kategori);
+            insTugas.setString(2, deadline);
+            insTugas.setString(3, nama);
+            insTugas.setString(4, tag);
+            insTugas.setString(5, username);
+            rs = insTugas.executeUpdate( );
+           String maxIDTask = "SELECT max(IDTask) FROM tugas";
+        } catch (SQLException e) {
 
+            System.out.println(e.getMessage());
+
+        
+        }
     }
 
     private String getFileName(Part part) {
@@ -64,16 +100,16 @@ public class AddFile extends HttpServlet {
         //System.out.println("partgetHeaderNames:" + part.getHeaderNames());
 
 
-        String partHeader = part.getHeader("content-disposition");
+        // String partHeader = part.getHeader("content-disposition");
+        //if (part.getHeader("content-type") != null) {
         for (String cd : part.getHeader("content-disposition").split(";")) {
             //System.out.println("CD:" + cd);
             if (cd.trim().startsWith("filename")) {
-                return cd.substring(cd.indexOf('=') + 1).trim()
-                        .replace("\"", "");
+                return cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
             }
         }
+        //}
         return null;
-
     }
 
     @Override
