@@ -236,7 +236,7 @@ function searchResult(resultID, resultType) {
     else
     if (resultType == "task") {
         //s= "search_result.jsp?q="+resultID+"&type=task";
-        window.location.href = "task_detail?task_id="+resultID;
+        window.location.href = "task_detail.jsp?task_id="+resultID;
     }
     
 }
