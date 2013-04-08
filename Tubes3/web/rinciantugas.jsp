@@ -12,7 +12,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" href="css/css.css">
+        <link rel="stylesheet" href="css/buattask.css">        
+        <title>Rincian Tugas : <%out.println(data.getNama());%> </title>
     </head>
     <body>
         <%-- Mulai daerah header buatan Jo--%>

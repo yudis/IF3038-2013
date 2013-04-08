@@ -17,6 +17,7 @@ public class DataAwal extends HttpServlet{
     private Connection conn;
     private Statement query;
     
+    private String nama;
     private int status;
     private String deadline;
     private String tag,sem;
@@ -30,6 +31,7 @@ public class DataAwal extends HttpServlet{
             query = conn.createStatement();
             ResultSet result = query.executeQuery("SELECT * FROM tugas WHERE id_tugas="+n);
             while (result.next()) {
+                nama = result.getString("nama");
                 status = result.getInt("status");
                 deadline = result.getString("deadline");
                 tag = result.getString("tag");
@@ -57,51 +59,31 @@ public class DataAwal extends HttpServlet{
         }
     }
 
+    public String getNama() {
+        return nama;
+    }
+    
     public int getStatus() {
         return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public String getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
-    }
-
     public String getTag() {
         return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
     }
 
     public String getCreator() {
         return creator;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
     public String[] getAttachment() {
         return attachment;
     }
 
-    public void setAttachment(String[] attachment) {
-        this.attachment = attachment;
-    }
-
     public String[] getAssignee() {
         return assignee;
-    }
-
-    public void setAssignee(String[] assignee) {
-        this.assignee = assignee;
     }
 }
