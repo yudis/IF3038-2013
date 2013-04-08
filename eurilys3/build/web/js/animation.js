@@ -176,25 +176,29 @@ function addCatName(){
 	document.getElementById("cat_name").setAttribute('value',first);
 }
 
-/*
-function generateTask(category) {
-	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
-	}
-	else {// code for IE6, IE5
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-        
-        xmlhttp.onreadystatechange=function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
-            }
+function showSearchHint(str) { 
+    document.getElementById('txtHint').style.display = "block";
+    if (str.length==0) { 
+        document.getElementById("txtHint").innerHTML="";
+        return;
+    }
+    
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
         }
-        xmlhttp.open("GET","dashboard_dynamic_content.jsp?category="+category+"&taskdone=&taskid=", true);
-
-	if (category != "all"){
-            document.getElementById("add_task_link").style.display = "block";
-            document.getElementById("add_task").setAttribute('href',"addtask.jsp?cat_name="+category);	
-	}
-	xmlhttp.send();	
-} */
+    } 
+    var selectOption = document.getElementById("search_box_filter");
+    var filter = selectOption.options[selectOption.selectedIndex].value;
+    
+    var url="search_autocomplete.jsp?hint="+str+"&filter="+filter;
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
