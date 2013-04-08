@@ -224,17 +224,21 @@ function searchResult(resultID, resultType) {
     var s = "";    
     if (resultType == "user") {
         s = "search_result.jsp?q="+resultID+"&type=user";	
+        xmlhttp.open("GET", s, true);
+        xmlhttp.send();
     }
     else
     if (resultType == "category") {
         s = "search_result.jsp?q="+resultID+"&type=category";
+        xmlhttp.open("GET", s, true);
+        xmlhttp.send();
     }
     else
     if (resultType == "task") {
-        s= "search_result.jsp?q="+resultID+"&type=task";
+        //s= "search_result.jsp?q="+resultID+"&type=task";
+        window.location.href = "task_detail?task_id="+resultID;
     }
-    xmlhttp.open("GET", s, true);
-    xmlhttp.send();
+    
 }
 
 /*
