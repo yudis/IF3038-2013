@@ -82,9 +82,9 @@ function editTask(jumlahAssignee)
 }
 function save(jumlahA){
     
-	document.getElementById("edit").innerHTML="<b>Edit</b>";
-	
+	document.getElementById("edit").innerHTML="<b>Edit</b>";	
 	document.getElementById("tanggal").setAttribute('onclick', 'return false');
+        document.getElementById("edit").setAttribute('onclick','editTask('+jumlahA+')');
 	document.getElementById("inputtag").setAttribute("style","visibility:hidden;position:absolute; top:15px; left:154px;");
         document.getElementById("asignee").setAttribute("style","visibility:hidden;");
 	var assignee=document.getElementById("asignee").value;
@@ -93,7 +93,6 @@ function save(jumlahA){
                 
                 var jumlah=document.getElementById("jumlahA").innerHTML;
                 jumlah++;
-                alert(jumlah);
                 document.getElementById("jumlahA").innerHTML=jumlah;
                 document.getElementById("edit").setAttribute('onclick','editTask('+jumlah+')');
             }
@@ -110,7 +109,6 @@ function save(jumlahA){
 	}
 	var tag=document.getElementById("inputtag").value;
 	var deadline=document.getElementById("deadline").value;
-        
         var n=deadline.split("-"); 
         deadline=n[2]+"-"+n[1]+"-"+n[0];
 	document.getElementById("inputtag").value="";
@@ -165,25 +163,7 @@ function save(jumlahA){
                                   document.getElementById("deadline").setAttribute('value', cal);
                                   
                               }
-                          else if(deadline=="" && tag!="" && assignee!="")
-                          {
-                             var total=xmlhttp.responseText.split(",");
-                             document.getElementById("data").innerHTML = total[0];
-                             document.getElementById("anggota").innerHTML+="<div id=\""+total[1] +"\"><a  href=\"profile.jsp?username="+total[1]+"\">"+total[1]+"</a><a id=\"r"+jumlahA+"\" href=\"#\" style=\"visibility:hidden\" onclick=\"removeA('"+total[1]+"')\">(remove)</a><br></div>";			  
-                          }
-                          else if(deadline=="" && tag!="" && assignee=="")
-                              {
-                                document.getElementById("data").innerHTML = xmlhttp.responseText;
-                                  
-                              }
-                          else if(deadline=="" && tag=="" && assignee!="")
-                              {
-                                 document.getElementById("anggota").innerHTML+="<div id=\""+xmlhttp.responseText+"\"><a  href=\"profile.jsp?username="+xmlhttp.responseText+"\">"+xmlhttp.responseText+"</a><a id=\"r"+jumlahA+"\" href=\"#\" style=\"visibility:hidden\" onclick=\"removeA('"+xmlhttp.responseText+"')\">(remove)</a><br></div>";			     
-                              }
-                          else
-                              {
-                                  alert("error");
-                              }
+                          
                               //window.location.reload();
 			}
 

@@ -125,46 +125,15 @@ public class edittask extends HttpServlet {
 	else if(!(request.getParameter("deadline").equals("")))
 	{
 		query="UPDATE tugas SET deadline='"+request.getParameter("deadline")+"' WHERE IDTask="+IDTask;
-	}
-        else if( !(request.getParameter("tag").equals("")) &&  !(request.getParameter("assignee").equals("")))
-        {
-            query="UPDATE tugas SET tag='"+request.getParameter("tag")+"' WHERE IDTask="+IDTask;
-            query2="INSERT INTO penugasan(IDTask,username) values("+IDTask+",'"+request.getParameter("assignee")+"')";
-            try {
-                    pst = connection.createStatement();
-                    pst.execute(query);
-                    pst.execute(query2);
-                    out.print(request.getParameter("tag")+","+request.getParameter("assignee"));
-                } catch (SQLException ex) {
-                    Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        else if(!(request.getParameter("tag").equals("")))
-        {
-             query="UPDATE tugas SET tag='"+request.getParameter("tag")+"' WHERE IDTask="+IDTask;
              try {
                     pst = connection.createStatement();
                     pst.execute(query);
-                    out.print(request.getParameter("tag"));
-             } catch (SQLException ex) {
+                    out.print(request.getParameter("deadline"));
+                } catch (SQLException ex) {
                     Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
-             }
-        }
-        else if(!(request.getParameter("assignee").equals("")))
-        {
-            query2="INSERT INTO penugasan(IDTask,username) values("+IDTask+",'"+request.getParameter("assignee")+"')";
-            try {
-                    pst = connection.createStatement();
-                    pst.execute(query2);
-                    out.print(request.getParameter("assignee"));
-             } catch (SQLException ex) {
-                    Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
-             }
-        }
-        else
-        {
+                }
+	}
         
-        }
         //response.sendRedirect("taskdetails.jsp");
         
     }
