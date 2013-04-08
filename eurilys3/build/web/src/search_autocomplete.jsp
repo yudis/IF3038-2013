@@ -107,12 +107,11 @@
         System.out.println("name list size : " + nameList.size());
         for (int i=0; i<nameList.size(); i++) {
             if (buffer.equals("")) {
-                buffer = "<div style='cursor:pointer;display:block;margin-bottom:2px;width:100%;' onclick=\"javascript:searchResult('"+idList.get(i)+"' ,'"+typeList.get(i)+"');\">"+nameList.get(i)+"</div>";
+                buffer = "<div class='search_recommend' onclick=\"javascript:searchResult('"+idList.get(i)+"' ,'"+typeList.get(i)+"');\">"+nameList.get(i)+"</div>";
             }
             else {
-                buffer = buffer + "<br> <div style='cursor:pointer;display:block;margin-bottom:2px;width:100%;' onclick=\"javascript:searchResult('"+idList.get(i)+"' ,'"+typeList.get(i)+"');\">"+nameList.get(i)+"</div>";
+                buffer = buffer + "<br> <div class='search_recommend' onclick=\"javascript:searchResult('"+idList.get(i)+"' ,'"+typeList.get(i)+"');\">"+nameList.get(i)+"</div>";
             }
-            System.out.println("Iterate ke-" + i + " : " + nameList.get(i));
         }
     }
     

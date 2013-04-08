@@ -202,3 +202,56 @@ function showSearchHint(str) {
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 }
+
+function searchResult(resultID, resultType) {
+    //document.getElementById('dynamic_content').innerHTML = "<br>";
+    //document.getElementById('dynamic_content').innerHTML += "Search result for : " + resultID + "<br><br>";
+    document.getElementById('txtHint').style.display = "none";
+
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
+        }
+    }
+    
+    var s = "";    
+    if (resultType == "user") {
+        s = "search_result.jsp?q="+resultID+"&type=user";	
+    }
+    else
+    if (resultType == "category") {
+        s = "search_result.jsp?q="+resultID+"&type=category";
+    }
+    else
+    if (resultType == "task") {
+        s= "search_result.jsp?q="+resultID+"&type=task";
+    }
+    xmlhttp.open("GET", s, true);
+    xmlhttp.send();
+}
+
+/*
+function searchUser(userID) {	
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	else {// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
+		}
+	}
+		
+	xmlhttp.open("GET","search_result.jsp?q="+userID+"&type=user",true);
+	xmlhttp.send();
+} */

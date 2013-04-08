@@ -12,6 +12,14 @@ h1{
 
 /* HEADER SECTION 
 ------------------------------------------------------------------------------------------- */
+.search_recommend {
+    cursor:pointer;
+    display:block;
+    margin-bottom:2px;
+    width:100%;
+    color:gray;
+}
+
 header {
 	width:100%;
 	height:90px;
@@ -160,7 +168,6 @@ label#remember_me {
 #txtHint {
 	position:absolute;
 	display:block;
-	color:gray;
 	margin-top:73px;
 	margin-left:275px;	
 	width:16%;
@@ -175,8 +182,7 @@ label#remember_me {
 	border-width: 3px 1px 1px;
 	border-style: solid;
 	border-color: #333 #DEDEDE #DEDEDE;
-	background-color: white;
-	
+	background-color: white;	
 }
 /* LOGO 
 ----------------------------------------------------------------------------------------------------------------- */
