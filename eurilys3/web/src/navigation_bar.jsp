@@ -1,7 +1,28 @@
+<%@page import="java.sql.Blob"%>
 <script type="text/javascript" src="../js/animation.js"> </script>
 <div id="navbar">
 	<div id="short_profile">
-		<a href="profile.jsp"> <img id="profile_picture" src="" alt=""> </a>
+                <%
+                Blob avatar_ = null;
+                Connection con_avatar = null;    
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    System.out.println("Berhasil connect ke Mysql JDBC Driver ... ");
+                } catch (ClassNotFoundException ex) {
+                    System.out.println("Where is your MySQL JDBC Driver?");
+                }
+                con_avatar = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");
+
+                PreparedStatement stmt_avatar = con_avatar.prepareStatement("SELECT avatar FROM user WHERE username=?");
+                stmt_avatar.setString(1, (String) session.getAttribute("username"));
+                ResultSet rs_avatar_ = stmt_avatar.executeQuery();
+                rs_avatar_.beforeFirst();
+                while (rs_avatar_.next()) {
+                    avatar_ = rs_avatar_.getBlob("avatar");
+                }         
+                con_avatar.close();
+                %>
+		<a href="profile.jsp"> <img id="profile_picture" src="<%= avatar_ %>" alt=""> </a>
 		<div id="profile_info">
 			Welcome, <br>
                         <a href="profile.jsp" class="darkBlue"> <%= session.getAttribute("fullname") %> </a>
