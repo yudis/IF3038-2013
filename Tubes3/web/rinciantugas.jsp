@@ -34,7 +34,7 @@
                 <div id="judultugas"><%out.println(data.getNama());%></div>
                 <div id="detail">
                     <label>NAMA KATEGORI</label>
-                    <a id="kategori"><%%></a>
+                    <a id="kategori"><%out.println(data.getKategori());%></a>
                     
                     <label>STATUS TUGAS</label>
                     <a id="status"><%
@@ -70,28 +70,15 @@
                                     +attachment[i].substring(attachment[i].lastIndexOf('/')+1)+"</a>");
                             String ext = attachment[i].substring(attachment[i].lastIndexOf('.')+1);
                             
-                            if (ext.equals("jpg")) {
-                                
+                            if (ext.equals("jpg") || ext.equals("jpeg") || ext.equals("png")) {
+                                out.println("<div class=\"attach_image\"><img src=\""+attachment[i]+"\"></div>");
                             } else if (ext.equals("mp4")) {
-                                
+                                out.println("<div class=\"attach_image\"></div>");
                             }
                         }
                     %>
                     </div>
                     <!--
-                    var detail = document.getElementById("detail");
-                            
-                            var tambah = "<label>NAMA KATEGORI</label>";
-                            tambah += '<a id="kategori">'+nama_kategori+'</a>';
-                            var tambah2 = tambah;
-                            
-                            tambah2 += '<form>';
-                            
-                            tambah2 += '<label>STATUS TUGAS';
-                            if (status == 1) tambah2 += '<input type="checkbox" name="status" value="done" checked>';
-                            else tambah2 += '<input type="checkbox" name="status" value="done">';
-                            tambah2 += '</label>';
-                            
                             tambah2 += '<label>DEADLINE</label>';
                             tambah2 += '<input type="textarea" name="year" id="yearbox" value="'+tanggal.substring(0,4)+'" onchange="dead_validating()">-';
                             tambah2 += '<select name="month" onchange="dead_validating()">';
@@ -165,7 +152,22 @@
                     -->
                 </div>
                 <div id ="detailedit">
+                    <label>NAMA KATEGORI</label>
+                    <a id="kategori"><%out.println(data.getKategori());%></a>
                     
+                    <form action="edit_detail_tugas.java" method="POST">
+                        <label>STATUS TUGAS</label>
+                        <input type="checkbox" name="status" value="done"<%if (data.getStatus()==1) out.println("checked");%>> 
+                        
+                        <label>DEADLINE</label>
+                        
+                        <label>TAG</label>
+                        <input type="textarea" name="catname" placeholder="tag" value="<%out.println(data.getTag());%>">
+                        
+                        <input type="file" name="file" id="file" onchange="validasi_file(this);">
+                        
+                        <input type="submit" value="submit">
+                    </form>
                 </div>
             </div>
             <div id="komen">

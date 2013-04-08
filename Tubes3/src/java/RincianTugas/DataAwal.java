@@ -18,7 +18,9 @@ public class DataAwal extends HttpServlet{
     private Statement query;
     
     private String nama;
+    private String kategori;
     private int status;
+    private int id_kategori;
     private String deadline;
     private String tag,sem;
     private String creator;
@@ -37,6 +39,7 @@ public class DataAwal extends HttpServlet{
                 tag = result.getString("tag");
                 sem = result.getString("attachment");
                 creator = result.getString("creator");
+                id_kategori = result.getInt("id_kategori");
             }
             result.close();
             
@@ -53,6 +56,11 @@ public class DataAwal extends HttpServlet{
             for (int i=0;result.next();++i) {
                 assignee[i] = result.getString("username");
             }
+            result.close();
+            
+            result = query.executeQuery("SELECT * FROM kategori where id_kategori="+id_kategori);
+            result.first();
+            kategori = result.getString("nama_kategori");
             result.close();
         } catch(Exception e) {
 
@@ -85,5 +93,9 @@ public class DataAwal extends HttpServlet{
 
     public String[] getAssignee() {
         return assignee;
+    }
+    
+    public String getKategori() {
+        return kategori;
     }
 }
