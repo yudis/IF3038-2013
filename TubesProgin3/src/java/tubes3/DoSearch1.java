@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Raymond
  */
-@WebServlet(name = "DoSearch", urlPatterns = {"/DoSearch"})
-public class DoSearch extends HttpServlet {
+@WebServlet(name = "DoSearch1", urlPatterns = {"/DoSearch1"})
+public class DoSearch1 extends HttpServlet {
+int i;
 
     /**
      * Processes requests for both HTTP
@@ -52,24 +54,25 @@ public class DoSearch extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         ResultSet rs;
-        System.out.println(request.getParameter("keyword"));
+        //System.out.println(request.getParameter("keyword"));
         if ((request.getParameter("filter") != null)
                 && (request.getParameter("keyword") != null)
                 && (!request.getParameter("keyword").equals("Enter search query"))) {
-            System.out.println("dddMMMM");
-
             String user = request.getParameter("user");
             String filter = request.getParameter("filter");
             String keyword = request.getParameter("keyword");
-            int i = Integer.parseInt(request.getParameter("id"));
+            if(request.getParameter("continue").equals("true")){
+                i++;
+            }else{
+                i=1;
+            }
             int awal = 10 * (i - 1);
-            int akhir = (10 * i) - 1;
             Tubes3Connection tu = new Tubes3Connection();
             Connection connection = tu.getConnection();
-            String queryUser = "SELECT username FROM pengguna WHERE username LIKE('%" + keyword + "%') ORDER BY username LIMIT " + awal + "," + akhir + ";";
-            String queryAllTugas = "SELECT IDTask, name, deadline, stat, username, tag FROM `tugas` WHERE name LIKE '%" + keyword + "%' OR tag LIKE '%" + keyword + "%' LIMIT " + awal + "," + akhir + ";";
+            String queryUser = "SELECT username FROM pengguna WHERE username LIKE('%" + keyword + "%') ORDER BY username LIMIT " + awal + ", 10;";
+            String queryAllTugas = "SELECT IDTask, name, deadline, stat, username, tag FROM `tugas` WHERE name LIKE '%" + keyword + "%' OR tag LIKE '%" + keyword + "%' LIMIT " + awal + ", 10;";
             System.out.println("DOOOO:" + queryAllTugas);
-            String queryKategori = "SELECT judul FROM kategori WHERE judul LIKE('" + keyword + "%') ORDER BY judul LIMIT " + awal + "," + akhir + ";";
+            String queryKategori = "SELECT judul FROM kategori WHERE judul LIKE('" + keyword + "%') ORDER BY judul LIMIT " + awal + ", 10;";
             boolean satu, dua, tiga;
             try {
                 if ("semua".equals(filter)) {
@@ -86,8 +89,9 @@ public class DoSearch extends HttpServlet {
                                 out.print("<div>");
                                 out.print("<input type='checkbox' value='None' id='checklist" + rs.getString("username") + "' name='check' onchange='changevalues(" + rs.getString("username") + ")'");
                                 if (rs.getString("stat").equals("1")) {
-                                    out.print("checked/>");
+                                    out.print("checked");
                                 }
+                                out.print("/>");
                             }
                             out.print("<a class='list' href='taskdetails.php?id=" + rs.getString("IDTask") + "'><span>Tag:" + rs.getString("tag") + "</span>" + rs.getString("name") + "</a>");
 

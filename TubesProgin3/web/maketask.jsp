@@ -16,8 +16,7 @@
 
     <div id="rightsidebar">
         <div id="wrapper-left">
-            <form class="task" name="MakeForm" method="post" onSubmit="checkSubmission(this, event)" enctype="multipart/form-data" action="addtask.jsp
-                  ">
+            <form class="task" name="MakeForm" method="post" onSubmit="checkSubmission(this, event)" enctype="multipart/form-data" action="AddFile">
                 <h1>Fill Details</h1>
                 <ul>
                     <li>
@@ -50,10 +49,10 @@
                     <li>
                         <label for="deadline">Deadline</label>
                         <input id="demo1" name="deadline" type="text" size="25"/>
-                        <a href="javascript:NewCssCal('demo1','ddmmyyyy')"><img src="image/cal.gif" alt="Pick a date"/></a>
+                        <a href="javascript:NewCssCal('demo1','yyyymmdd')"><img src="image/cal.gif" alt="Pick a date"/></a>
                     </li>
                     <li>
-                        <input type="text" name="kategori" class="hidden" value="<%= kategori %>"/>
+                        <input type="text" name="kategori" class="hidden" value="<%= kategori%>"/>
                         <input type="text" name="user" class="hidden" value="RAYMOND"><!-- $_SESSION['bananauser'];%>"/> TODO!!-->
                         <button class="task" name="submitbutton" type="submit"><b>Submit</b></button>
                     </li>
