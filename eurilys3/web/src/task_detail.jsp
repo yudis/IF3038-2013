@@ -1,3 +1,4 @@
+<%@page import="java.sql.Blob"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
@@ -13,6 +14,7 @@
         <%
             String taskID = (String) request.getParameter("task_id");                
             String tagList = "";
+            Blob user_avatar = null;
             
             List<String> commentContent = new ArrayList<String>();
             List<String> commentID = new ArrayList<String>();
@@ -21,6 +23,7 @@
             
             ResultSet rs_taskdetail = null;
             ResultSet rs_assigne = null;
+            ResultSet rs_avatar = null;
 
             try {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -111,7 +114,16 @@
                     <% for (int i=0; i<commentContent.size(); i++) { %>
                     <div class='left top20 dynamic_content_row'>
                         <div id='comment_ltd' class='left dynamic_content_left darkBlueItalic userprofile_link' onclick="javascript:searchUser('<%= commentCreator.get(i) %>')"> 
-                            <img src='' width='55'/> 
+                            <%
+                            stmt_taskdetail = con_taskdetail.prepareStatement("SELECT avatar FROM user WHERE username=?");
+                            stmt_taskdetail.setString(1, (String)session.getAttribute("username"));
+                            rs_avatar = stmt_taskdetail.executeQuery();
+                            rs_avatar.beforeFirst();
+                            while (rs_avatar.next()) {
+                                user_avatar = rs_avatar.getBlob("avatar");
+                            }
+                            %>
+                            <img src='<%= user_avatar %>' width='55'/> 
                             <br> <%= commentCreator.get(i) %>
                             <br> <%= commentTimestamp.get(i) %>
                         </div>
