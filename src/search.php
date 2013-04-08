@@ -24,7 +24,8 @@
 		?>
 			<div class='judul'>
 				<img class='search-img' align='middle' src='<?php echo $row['avatar']?>' alt='avatar' height='150'/>
-				<a href="profile.php?id=<?php echo $row['id']?>"><?php echo $row['username']?></a>
+				<a href="profil.php?id=<?php echo $row['id']?>"><?php echo $row['username']?></a><br />
+				<?php echo $row['fullname'];?>
 			</div>
 		<?php
 				}
@@ -74,7 +75,7 @@
 
 		if (strcmp($o,"All") == 0 || (strcmp($o,"Content") == 0)) {
 			mysqli_query($con, "CREATE VIEW task_tags AS SELECT tasks.*, tags.name as tag FROM tasks, tags WHERE tasks.id = tags.tagged");
-			$qres = mysqli_query($con, "SELECT DISTINCT id, name, creator, timestamp, deadline, category FROM task_tags WHERE name LIKE '%$q%' LIMIT 0, 10");
+			$qres = mysqli_query($con, "SELECT DISTINCT id, name, creator, timestamp, deadline, category FROM task_tags WHERE name LIKE '%$q%' OR tag LIKE '%$q%' LIMIT 0, 10");
 			$count = mysqli_num_rows($qres);
 			echo "<span id='searchtype'>[Content]</span><br />";
 			if ($count == 0) {
@@ -82,12 +83,16 @@
 			} else {
 				echo '<div id="result2">';
 				while ($row=mysqli_fetch_array($qres)) {
+					$task_id = $row['id'];
+					$member_id = $_SESSION['id'];
+					$result4=mysqli_query($con,"SELECT * FROM `assignees` WHERE task=$task_id AND member=$member_id");
 		?>
 			<div class='judul'>
 				<a href="rinciantugas.php?id=<?php echo $row['id'];?>"><?php echo $row['name']?></a>
 			</div>
 			<div class='detail'>
 				<div>
+					Tanggal deadline : <?php echo $row['deadline']?><br />
 					Tags : 
 					<?php
 					$task_id = $row['id'];
@@ -96,6 +101,16 @@
 					echo $tag['name'];
 					while ($tag=mysqli_fetch_array($tags)) {
 						echo ", ".$tag['name'];
+					}
+					if (mysqli_num_rows($result4) > 0)
+					{
+						$assignee = mysqli_fetch_array($result4);
+					?>
+					<div id="<?php echo $task_id;?>">
+						Status : <strong><?php if ($assignee['finished'] == 1) echo 'Selesai'; else echo 'Belum selesai';?></strong><br />
+						<input name="YourChoice" type="checkbox" value="selesai" <?php if($assignee['finished']==1) echo "checked"; ?> onclick="change_status('<?php echo $task_id;?>',<?php echo $assignee['finished'];?>,<?php echo $task_id;?>)"> Selesai
+					</div>
+					<?php
 					}
 					?>
 				</div>

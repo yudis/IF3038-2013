@@ -54,7 +54,7 @@ if (strcmp($filter,"User") == 0) {
 	}
 } else if (strcmp($filter,"Content") == 0) {
 	mysqli_query($con, "CREATE VIEW task_tags AS SELECT tasks.*, tags.name as tag FROM tasks, tags WHERE tasks.id = tags.tagged");
-	$qres = mysqli_query($con, "SELECT DISTINCT id, name, creator, timestamp, deadline, category FROM task_tags WHERE name LIKE '%$q%' LIMIT 0, 10");
+	$qres = mysqli_query($con, "SELECT DISTINCT id, name, creator, timestamp, deadline, category FROM task_tags WHERE name LIKE '%$q%' OR tag LIKE '%$q%' LIMIT 0, 10");
 	$count = mysqli_num_rows($qres);
 	if ($count > 0) {
 		while ($row=mysqli_fetch_array()) {
@@ -63,6 +63,8 @@ if (strcmp($filter,"User") == 0) {
 			echo '</div>';
 			echo '<div class="detail">';
 			echo '<div>';
+			echo 'Deadline :';
+
 			echo 'Tags :';
 			$task_id = $row['id'];
 			$tags = mysqli_query($con, "SELECT name FROM tags WHERE tagged=$task_id");
@@ -79,6 +81,7 @@ if (strcmp($filter,"User") == 0) {
 		echo '<input type="button" value="More" onclick="search_more('."'Content'".",'".$q."'".','.$next.');this.style.display=\'none\'">';
 		echo '</div>';
 	}
+	// mysqli_query($con, "DROP VIEW task_tags");
 } 
 
 mysqli_close($con);

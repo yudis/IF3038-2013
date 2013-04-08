@@ -123,11 +123,10 @@ while($i<=$j)
   }
 
 mysqli_query($con, "INSERT INTO attachments (path,filetype,task) VALUES ('$direktori','$file','$idTask')");
-
 echo "<br>".$direktori;
 echo "<br>".$file;
 echo "<br>".$idTask;
 
-header("location:dashboard.php");
+header("location:rinciantugas.php?id=".$TaskId);
 
 ?>
