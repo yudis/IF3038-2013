@@ -4,7 +4,10 @@
     Author     : Christianto
 --%>
 
+<%@page import="RincianTugas.DataAwal"%>
+<%@page import="javax.xml.crypto.Data"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%DataAwal data = new DataAwal(Integer.parseInt(request.getParameter("id_tugas")));%>
 <!DOCTYPE html>
 <html>
     <head>
