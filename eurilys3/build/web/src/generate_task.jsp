@@ -19,7 +19,7 @@
     conn_ = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");
     
     // Get Task where user is either the task creator or the task asignee
-    PreparedStatement stmt_ = conn_.prepareStatement("SELECT DISTINCT * FROM (`task` natural join `task_asignee`) WHERE (task_creator =?) OR (username=?);");
+    PreparedStatement stmt_ = conn_.prepareStatement("SELECT DISTINCT task.* FROM task INNER JOIN task_asignee WHERE task.task_creator=? OR task_asignee.username=?;");
     stmt_.setString(1, username_);
     stmt_.setString(2, username_);
     ResultSet rs_task = stmt_.executeQuery();
