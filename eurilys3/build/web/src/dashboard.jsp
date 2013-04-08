@@ -1,4 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="logged_in_header.jsp"%>	
 
 <section>
@@ -6,7 +5,7 @@
         <%@include file="navigation_bar.jsp"%>
 	
 	<div id="dynamic_content">
-		Generate task here				
+            <%@include file="generate_task.jsp"%>
 	</div>
 </section>
 		
