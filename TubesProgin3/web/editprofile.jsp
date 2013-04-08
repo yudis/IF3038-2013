@@ -7,7 +7,6 @@
 
 <%@page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@page import="tubes3.profile"%>
-<jsp:include page="/header.jsp" />
 <!DOCTYPE html>
 <jsp:include page="/header.jsp" />
         <script src="editprofile.js" type="text/javascript" language="javascript"> </script>
@@ -19,7 +18,7 @@
 			
 			<div id="rightsidebar">
 			<ul>
-				<form class="prof" action="src\java\tubes3\profile.java" method="post" enctype="multipart/form-data">
+				<form class="prof" action="profile" method="post" enctype="multipart/form-data">
 					<h1 align="left">Edit Profile</h1>
 					<li>
 						<label style="width:230px; display:inline-block">Nama Lengkap:</label>
