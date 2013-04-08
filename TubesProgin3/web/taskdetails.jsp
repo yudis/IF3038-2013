@@ -25,8 +25,8 @@
                             </li>
                             <li>
                                     <label for="tugas">Status</label>
-                                    <div class="text"><%out.print(task.status);;%></div>
-                                    <form method="post" action="taskdetailscontroller.php">
+                                    <div class="text"><%out.print(task.status);%></div>
+                                    <form method="post" action="Task">
                                     <button>ubah status</button>
                                     </form>
                             </li>
@@ -47,19 +47,24 @@
                             </li>
                             <li>
                                     <label for="deadline">Deadline</label>
-                                    <input id="deadline" type="text" size="25" value="<%out.print(task.deadline);%>"readonly>
-                                    <a id="tanggal" href="javascript:NewCal('deadline','ddmmyyyy')" onclick="return false"><img src="image/cal.gif" alt="Pick a date"/></a>
+                                    <input id="deadline" type="text" size="25" value="<%String parser[]=task.deadline.split("-");out.print(parser[2]+"-"+parser[1]+"-"+parser[0]);%>"readonly>
+                                    <a id="tanggal" href="javascript:NewCssCal('deadline','ddmmyyyy')" onclick="return false"><img src="image/cal.gif" alt="Pick a date"/></a>
                             </li>
                             <li>
                                     <label for="assignee">Assignee</label>
                                     <div id="anggota">
                                     <%
-                                    for(int i=0;i<task.assignee.size();i++)
+                                    if(task.assignee.size()==0)
                                     {
-                                        out.print(task.assignee.get(i));
-                                        if(i<task.assignee.size()-1)
+                                            out.print("<br>");
+                                    }
+                                    else{
+                                        for(int i=0;i<task.assignee.size();i++)
                                         {
-                                            out.print(", ");
+                                            out.print ("<div id=\""+task.assignee.get(i) +"\">");
+                                            out.print ("<a  href=\"profile.jsp?username="+task.assignee.get(i)+"\">"+task.assignee.get(i)+"</a>");
+                                            out.print ("<a id=\"r"+i+"\" href=\"#\" style=\"visibility:hidden\" onclick=\"removeA('"+task.assignee.get(i)+"')\">(remove)</a><br>");
+                                            out.print ("</div>");
                                         }
                                     }
 
@@ -79,9 +84,12 @@
                                        out.print(task.tag);
                                     %>
                                     </div>
-                                    <input id="inputtag" type="text" style="visibility:hidden;" placeholder="example1,example2"></input>
+                                    <input id="inputtag" type="text"  style="visibility:hidden;" placeholder="example1,example2"></input>
                             </li>
-                            <button id="edit" name="edit" type="button"><b>Edit</b></button><br>
+                            <div id="jumlahA" style="visibility:hidden">
+                                <%out.print(task.jumlahA);%>
+                                </div>
+                            <button id="edit" name="edit" onclick="editTask(document.getElementById('jumlahA').innerHTML)" type="button"><b>Edit</b></button><br>
                     <div class="task">
                     <%
                         out.print("<li>");
@@ -123,7 +131,7 @@
                             <form id="commentform">
                                     <input class="task" id="commentfield" name="commentfield" type="text" size="1000"/> 
 
-                                    <input id="commentbutton" name="commentbutton" type="submit" value="Comment"/>
+                                    <input id="commentbutton" name="commentbutton" type="submit" value="Comment" onClick="addcomment(<%out.print("'yuli'");%>);return false;"/>
                             </form>
                             </div>
                     </ul>

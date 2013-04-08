@@ -5,6 +5,7 @@ package tubes3;
  * and open the template in the editor.
  */
 
+import java.sql.Statement;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -12,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,6 +51,12 @@ public class Task extends HttpServlet {
         String queryComment="SELECT * FROM komentar WHERE IDTask="+IDTask+" order by waktu DESC";
         String queryAssignee="SELECT username FROM penugasan WHERE IDTask="+IDTask;
         String queryJumlahKomentar="SELECT count(*) as jumlah FROM komentar where IDTask="+IDTask;
+        String queryJumlahAssignee="select count(*) as jumlah from penugasan where IDTask="+IDTask;
+        rs=tu.coba(connection,queryJumlahAssignee);
+        if(rs.next())
+        {
+            jumlahA=rs.getInt("jumlah");
+        }
         rs=tu.coba(connection,queryTask);
         if (rs.next())
         {
@@ -72,9 +81,7 @@ public class Task extends HttpServlet {
             rs=tu.coba(connection,queryComment);
             while(rs.next())
             {
-                System.out.println(rs.getString("username"));
                 String queryAvatar="SELECT avatar FROM pengguna WHERE username='"+rs.getString("username")+"'";
-                 System.out.println(queryAvatar);
                 rs2=tu.coba(connection,queryAvatar);
                 if(rs2.next())
                 {
@@ -144,7 +151,30 @@ public class Task extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String query;
+	if(status==1)
+	{
+            status=0;
+            query="UPDATE tugas SET stat='0' WHERE IDTask="+IDTask;
+	}
+	else
+	{
+            status=1;
+            query="UPDATE tugas SET stat='1' WHERE IDTask="+IDTask;
+	}
+        Tubes3Connection tu = new Tubes3Connection();
+        Connection connection = tu.getConnection();
+        Statement pst;
+        try {
+            pst = connection.createStatement();
+            pst.executeUpdate(query);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+	response.sendRedirect("taskdetails.jsp");
     }
 
     /** 
