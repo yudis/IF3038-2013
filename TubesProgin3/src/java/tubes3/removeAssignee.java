@@ -91,7 +91,6 @@ public class removeAssignee extends HttpServlet {
             Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        response.sendRedirect("taskdetails.jsp");
     }
 
     /** 

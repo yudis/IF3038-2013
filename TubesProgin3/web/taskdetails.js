@@ -83,18 +83,23 @@ function editTask(jumlahAssignee)
 function save(jumlahA){
     
 	document.getElementById("edit").innerHTML="<b>Edit</b>";
-	document.getElementById("edit").setAttribute('onclick','editTask('+jumlahA+')');
+	
 	document.getElementById("tanggal").setAttribute('onclick', 'return false');
 	document.getElementById("inputtag").setAttribute("style","visibility:hidden;position:absolute; top:15px; left:154px;");
         document.getElementById("asignee").setAttribute("style","visibility:hidden;");
 	var assignee=document.getElementById("asignee").value;
         if(assignee!="")
             {
+                
                 var jumlah=document.getElementById("jumlahA").innerHTML;
+                jumlah++;
+                alert(jumlah);
                 document.getElementById("jumlahA").innerHTML=jumlah;
+                document.getElementById("edit").setAttribute('onclick','editTask('+jumlah+')');
             }
 	var i=0;
-	document.getElementById("asignee").innerHTML="";
+	document.getElementById("asignee").value="";
+        document.getElementById("assignee").innerHTML="";
 	//document.getElementById("anggota").innerHTML+="<div id=\""+assignee+"\"><a  href=\"profile.php?username="+assignee+"\">"+assignee+"</a><a id=\"r"+(jumlahA++)+"\" href=\"#\" style=\"visibility:hidden\" onclick=\"removeA('"+assignee+"')\">(remove)</a><br></div>";
 	for(i;i<jumlahA;i++) {
             if(document.getElementById("r"+i)!=null)
@@ -126,7 +131,6 @@ function save(jumlahA){
 		  {
 		  
 		  if(xmlhttp.readyState == 4){
-                      alert(xmlhttp.responseText);
                       if(deadline!="" && tag!="" && assignee!="")
                           {
                               var total=xmlhttp.responseText.split(",");
@@ -180,7 +184,7 @@ function save(jumlahA){
                               {
                                   alert("error");
                               }
-                              window.location.reload()
+                              //window.location.reload();
 			}
 
 		  }
