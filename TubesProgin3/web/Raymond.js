@@ -67,7 +67,7 @@ function checkSubmission(e, evt)
 function searchSuggest() {
 	if (xmlHttpReq.readyState == 4 || xmlHttpReq.readyState == 0) {
 		var str = escape(document.getElementById('asignee').value);
-		xmlHttpReq.open("GET", 'GetUsers.php?nama=' + str, true);
+		xmlHttpReq.open("GET", 'GetUsers?nama=' + str, true);
 		xmlHttpReq.onreadystatechange = handleSearchSuggest; 
 		xmlHttpReq.send(null);
 	}		

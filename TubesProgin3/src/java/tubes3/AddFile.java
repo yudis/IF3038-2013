@@ -107,12 +107,8 @@ public class AddFile extends HttpServlet {
             insPenugasan.setString(1, asignee);
             insPenugasan.setString(2, maxID);
             rs = insPenugasan.executeUpdate();
-
         } catch (SQLException e) {
-
             System.out.println(e.getMessage());
-
-
         }
     }
 
