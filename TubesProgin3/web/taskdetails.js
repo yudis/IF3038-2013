@@ -18,7 +18,7 @@ function fileallowed(){
     
 }
 
-function removeComment(idcomment){
+function removeComment(idcomment,jumcom){
 
 	var xmlhttp;
 if (window.XMLHttpRequest)
@@ -32,17 +32,23 @@ else
 	xmlhttp.onreadystatechange=function()
 	  {
 	  if(xmlhttp.readyState == 4){
-	  document.getElementById(idcomment).innerHTML="";
-	  document.getElementById("a").innerHTML="Komentar("+xmlhttp.responseText+")";
-			}
+	  if(xmlhttp.responseText=="berhasil")
+              {
+                  document.getElementById(idcomment).innerHTML="";
+                  jumcom--;
+                  document.getElementById("a").innerHTML="Komentar("+jumcom+")";     
+              }
+          
+            }
 	  }
-  var queryString = "?idcomment="+idcomment;
-xmlhttp.open("GET",'removeComment'+queryString,true);
 
-xmlhttp.send('');
+var queryString = "idcomment="+idcomment;
+xmlhttp.open("POST", 'removeComment', true);
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send(queryString);
 }
 
-function addcomment(username){
+function addcomment(username,jum){
 var xmlhttp;
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -55,7 +61,22 @@ else
 	xmlhttp.onreadystatechange=function()
 	  {
 	  if(xmlhttp.readyState == 4){
-		}
+                var total=xmlhttp.responseText.split(",");
+		document.getElementById("comment").innerHTML+="<div id=\""+i+"\"><div class=\"headerComment\"><div class=avatar style=\"float:left;\"><img src="+total[2]+" height=\"42\" width=\"42\"></div><div class=username style=\"float:left;\"><b>"+total[1]+"</b></div><div class=waktu><b>"+task.comment.get(i).waktu+"</b></div><div>";
+                        
+                        if(!(task.comment.get(i).username.equals("yuli")))
+                        {}
+                        else
+                        {
+                        out.print ("<a class=\"remove\" href=\"\" onClick=\"removeComment("+task.comment.get(i).id+","+task.comment.size()+");return false;\" >remove");
+
+                        out.print ("</a>");
+                        }
+                        out.print ("</div>");
+                        out.print ("</div>");
+                        out.print ( "<li>"+task.comment.get(i).isi+"</li>");
+                        out.print ("</div>");
+            }
 	  }
 	  
 var queryString = "comment="+document.getElementById('commentfield').value+"&usernamecur="+username;
@@ -189,7 +210,11 @@ xmlhttp.onreadystatechange=function()
   {
   
   if(xmlhttp.readyState == 4){
-	document.getElementById(username).innerHTML="";
+      if(xmlhttp.responseText=="sukses")
+          {
+              document.getElementById(username).innerHTML="";
+          }
+	
 	}
 
   }

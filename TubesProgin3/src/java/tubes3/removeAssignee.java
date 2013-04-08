@@ -76,6 +76,8 @@ public class removeAssignee extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String query="";
+        response.setContentType("text/html;charset=UTF-8");
+	PrintWriter out = response.getWriter();
         if(!(request.getParameter("username")==null))
         {
             query="DELETE FROM penugasan WHERE username='"+request.getParameter("username")+"' and IDTask=1";
@@ -86,7 +88,7 @@ public class removeAssignee extends HttpServlet {
         try {
             pst = connection.createStatement();
             pst.executeUpdate(query);
-            
+            out.print("sukses");
         } catch (SQLException ex) {
             Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
         }
