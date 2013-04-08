@@ -31,12 +31,141 @@
             </div>
 
             <div id="rinciantugas">
-                <div id="judultugas"></div>
-                <div id="detail" style="visibility: visible">
-                       
+                <div id="judultugas"><%out.println(data.getNama());%></div>
+                <div id="detail">
+                    <label>NAMA KATEGORI</label>
+                    <a id="kategori"><%%></a>
+                    
+                    <label>STATUS TUGAS</label>
+                    <a id="status"><%
+                        if (data.getStatus() == 1) {
+                            out.println("DONE");
+                        } else {
+                            out.println("IN THE PROCESS");
+                        }
+                    %></a>
+
+                    <label>DEADLINE</label>
+                    <a id="deadline"><%out.println(data.getDeadline());%></a>
+                    
+                    <label>ASSIGNEE</label>
+                    <div id="assignee">
+                    <%
+                        String[] assignee = data.getAssignee();
+                        for (int i=0;i<assignee.length;++i) {
+                            out.println("<a href='profile.jsp?username="+assignee[i]+"'>"+assignee[i]+"</a>");
+                        }
+                    %>
+                    </div>
+                    
+                    <label>TAG</label>
+                    <div id="tag"><%out.println(data.getTag());%></div>
+  
+                    <label>ATTACHMENT</label>
+                    <div id="attach">
+                    <%
+                        String[] attachment = data.getAttachment();
+                        for (int i=0;i<attachment.length;++i) {
+                            out.println("<a href="+attachment[i]+">"
+                                    +attachment[i].substring(attachment[i].lastIndexOf('/')+1)+"</a>");
+                            String ext = attachment[i].substring(attachment[i].lastIndexOf('.')+1);
+                            
+                            if (ext.equals("jpg")) {
+                                
+                            } else if (ext.equals("mp4")) {
+                                
+                            }
+                        }
+                    %>
+                    </div>
+                    <!--
+                    var detail = document.getElementById("detail");
+                            
+                            var tambah = "<label>NAMA KATEGORI</label>";
+                            tambah += '<a id="kategori">'+nama_kategori+'</a>';
+                            var tambah2 = tambah;
+                            
+                            tambah2 += '<form>';
+                            
+                            tambah2 += '<label>STATUS TUGAS';
+                            if (status == 1) tambah2 += '<input type="checkbox" name="status" value="done" checked>';
+                            else tambah2 += '<input type="checkbox" name="status" value="done">';
+                            tambah2 += '</label>';
+                            
+                            tambah2 += '<label>DEADLINE</label>';
+                            tambah2 += '<input type="textarea" name="year" id="yearbox" value="'+tanggal.substring(0,4)+'" onchange="dead_validating()">-';
+                            tambah2 += '<select name="month" onchange="dead_validating()">';
+                            for (var i=1;i<=12;++i) {
+                                if (i == tanggal.substring(5,7)) tambah2 += "<option selected>"+i+"</option>";
+                                else tambah2 += "<option>"+i+"</option>";
+                            }
+                            tambah2 += '</select>-';
+
+                            tambah2 += '<select name="day">     ';
+                            for (var i=1;i<=31;++i) {
+                                if (i == tanggal.substring(8,10)) tambah2 += "<option selected>"+i+"</option>";
+                                else tambah2 += "<option>"+i+"</option>";
+                            }
+                            tambah2 += '</select> Jam: ';
+                            
+                            tambah2 += '<select name="hour">';
+                            for (var i=0;i<=23;++i) {
+                                if (i == tanggal.substring(11,13)) tambah2 += "<option selected>"+i+"</option>";
+                                else tambah2 += "<option>"+i+"</option>";
+                            }
+                            tambah2 += '</select>-';
+
+                            tambah2 += '<select name="minute">';
+                            for (var i=0;i<=59;++i) {
+                                var sem = "";
+                                if (i < 10) sem = "0";
+                                sem += i;
+                                if (sem == tanggal.substring(14,16)) tambah2 += "<option selected>"+sem+"</option>";
+                                else tambah2 += "<option>"+sem+"</option>";
+                            }
+                            tambah2 += '</select>';
+                            
+                            tambah2 += "<label>ASSIGNEE</label>";
+                            tambah2 += '<input type="textarea" name="assignee" placeholder="assignee"';
+                            tambah2 += ' title="Akhiri nama user dengan tanda /, jangan dipisah spasi"';
+                            tambah2 += ' onkeyup=auto_complete(this.value.substring(this.value.lastIndexOf("/")+1)) value="'+orang+'">';
+                            
+                            tambah2 += '<input id="autobox" disabled></input>';
+
+                            tambah2 += "<label>TAG</label>";
+                            tambah2 += '<input type="textarea" name="catname" placeholder="tag" value="'+tag+'">';
+                            
+                            tambah2 += "<label>ATTACHMENT</label>";
+                            tambah2 += '<div id="attach_upload">';                            
+                            
+                            var sem1 = attachment.indexOf(";");
+                            while (sem1 != -1) {
+                                var file = attachment.substring(0,sem1);
+                                var ext = file.substring(file.lastIndexOf(".")+1);
+                                
+                                tambah += '<a href="'+file+'">'+file.substring(file.lastIndexOf("/")+1)+'</a>';                            
+                                if (ext == 'jpeg' || ext == 'jpg') {
+                                    tambah += '<div class="attach_image"><img src="'+file+'"></div>';
+                                } else if () {
+
+                                }
+
+                                tambah2 += '<a href="'+file+'">'+file.substring(file.lastIndexOf("/")+1)+'</a>';
+                                
+                                attachment = attachment.substring(sem1+1);
+                                sem1 = attachment.indexOf(";");
+                            }
+                            tambah += '</div>';
+
+                            tambah2 += '</div>';                            
+                            tambah2 += '<input type="file" name="file" id="file" onchange="validasi_file(this)">';
+                            
+                            tambah2 += '<input class= "submitreg" name="submit" type="button" value="Submit"';
+                            tambah2 += 'onclick="hideEdit(),submit_edit(this.form)"></form>';
+                    -->
                 </div>
-                <div id="detailedit" style="visibility: hidden">
-        
+                <div id ="detailedit">
+                    
                 </div>
             </div>
             <div id="komen">
