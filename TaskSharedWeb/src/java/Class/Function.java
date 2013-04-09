@@ -6,9 +6,12 @@ package Class;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -63,6 +66,54 @@ public class Function {
         } catch (Exception e) {
             System.out.println(e.toString());
             return null;
+        }
+    }
+    
+    public HashMap<String, String> GetTag(String tagId){
+        try {
+            HashMap<String, String> tag = new HashMap<String, String>();
+            GetConnection connection = new GetConnection();
+            Connection conn = connection.getConnection();
+            Statement stmt = conn.createStatement();
+            String query = "SELECT * FROM tag WHERE tagid='"+tagId+"'";
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
+            tag.put("tagid", rs.getString("tagid"));
+            tag.put("tagname", rs.getString("tagname"));
+            
+            return tag;
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+    
+    public int GetTypeFile(String fileName){
+        int beginIndex = fileName.length() - 3;
+        String extension = fileName.substring(beginIndex).toLowerCase();
+        System.out.println(fileName);
+        System.out.println(extension);
+        if(extension.equals("jpg") || extension.equals("png")){
+            return 0;
+        }else if(extension.equals("mp4")){
+            return 1;
+        }else{
+            return 2;
+        }
+    }
+    
+     public int GetNComment(String taskId){
+        try {
+            GetConnection connection = new GetConnection();
+            Connection conn = connection.getConnection();
+            Statement stmt = conn.createStatement();
+            String query = "SELECT count(*) as jumlah FROM comment WHERE taskid="+taskId;
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
+            return Integer.parseInt(rs.getString("jumlah"));
+        } catch (Exception exc) {
+            System.out.println(exc.toString());
+            return 0;
         }
     }
 }
