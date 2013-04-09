@@ -79,7 +79,7 @@
         }
         
         buffer += "<div id='task_name_ltd' class='left dynamic_content_left'> Task Name </div>";
-        buffer += "<div id='task_name_rtd' class='left dynamic_content_right darkBlueLink' onclick='javascript:viewTask('"+taskID+"')'>" +rs_task.getString("task_name")+ "</div>";
+        buffer += "<div id='task_name_rtd' class='left dynamic_content_right darkBlueLink' onclick='javascript:viewTask('"+taskID+"');'>" +rs_task.getString("task_name")+ "</div>";
         buffer += "<br><br>";
         
         buffer += "<div id='deadline_ltd' class='left dynamic_content_left'>Deadline</div>";

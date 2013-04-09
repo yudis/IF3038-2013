@@ -254,6 +254,10 @@ function generateTask(categoryName) {
             document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
         }
     }
+
+    document.getElementById("add_task_link").style.display = "block";
+    document.getElementById("add_task").setAttribute('href',"addtask.jsp?cat_name="+categoryName);
+    
     var url="category_task.jsp?categoryName="+categoryName;
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
