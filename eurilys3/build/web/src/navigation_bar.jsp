@@ -47,7 +47,7 @@
                     Assignee(s) : <br>
                     <input type="text" name="add_category_asignee_name" id="add_category_asignee_name" value="">
                     <br><br>
-                    <button type="submit" id="add_category_button" name="add_category_button" class="link_red"> Add </div>
+                    <button type="submit" id="add_category_button" name="add_category_button" class="link_red"> Add </button>
                 </form>
             </div>
         </div>

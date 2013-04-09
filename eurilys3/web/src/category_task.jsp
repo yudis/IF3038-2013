@@ -3,13 +3,15 @@
 <%@page import="java.util.ArrayList"%>
 <%@page language="java" import ="java.sql.*" %>  
 <%  
-    String categoryName   = request.getParameter("categoryName");  
-    String buffer       = "";
-    String taskID       = "";
-    String taskCreator  = "";
-    String tagList      = "";
-    ResultSet rs_task   = null;
-    ResultSet rs_tag    = null;
+    String categoryName     = request.getParameter("categoryName");  
+    String categoryCreator  = "";
+    String categoryId       = "";
+    String buffer           = "";
+    String taskID           = "";
+    String taskCreator      = "";
+    String tagList          = "";
+    ResultSet rs_task       = null;
+    ResultSet rs_tag        = null;
     
     try {
         Class.forName("com.mysql.jdbc.Driver");
@@ -19,6 +21,23 @@
     }
     Connection conn_categorytask = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");
     PreparedStatement stmt_categorytask = conn_categorytask.prepareStatement("");
+    
+    //Cek category creator
+    stmt_categorytask = conn_categorytask.prepareStatement("SELECT cat_id, cat_creator FROM category WHERE cat_name=?");
+    stmt_categorytask.setString(1, categoryName);
+    rs_task = stmt_categorytask.executeQuery();
+    rs_task.beforeFirst();
+    while (rs_task.next()) {
+        categoryCreator = rs_task.getString("cat_creator");
+        categoryId = rs_task.getString("cat_id");
+    }
+    if (categoryCreator.equals((String) session.getAttribute("username"))) {        
+        buffer += "<form method='POST' action='../ServletHandler?type=delete_category'>";
+            buffer += "<input type='hidden' name='delete_category_id' value='"+categoryId+"'/>";
+            buffer += "<input type='hidden' name='delete_category_name' value='"+categoryName+"'/>";
+            buffer += "<input type='submit' id='delete_category_button' name='delete_category_button' class='link_red top20' value='Delete Category'/>";
+        buffer += "</form>";
+    }
     
     // Get Task where user is either the task creator or the task asignee AND task.cat_name = categoryName
     stmt_categorytask = conn_categorytask.prepareStatement("SELECT DISTINCT task.* FROM task INNER JOIN task_asignee WHERE (task.task_creator=? OR task_asignee.username=?) AND task.cat_name=?;");
