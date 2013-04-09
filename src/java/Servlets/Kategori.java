@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Dashboard_Handlers;
+package Servlets;
 
 import ConnectDB.ConnectDB;
 import java.io.IOException;
@@ -115,9 +115,9 @@ public class Kategori extends HttpServlet {
         out.println("</div>");
         String query = "SELECT nama, idkategori, pembuat FROM kategori, assignee_has_kategori WHERE idkategori = kategori_idkategori AND accounts_idaccounts = " + userID;
         String[][] hasil = ConnectDB.getHasilQuery(query);
-
+        
         for (int i = 0; i < hasil.length; i++) {
-            out.println("<div class='category_block'>");
+            out.println("<div class='category_block' onclick='showListTask(\""+userID+"\", \""+hasil[i][1]+"\")'>");
             if (hasil[i][2].equals("1")) {
                 out.println("<a href='Kategori?aksi=hapus&uid="+hasil[i][1]+"'>");
                 out.println("<div class='tombol_hapus_kategori'>");

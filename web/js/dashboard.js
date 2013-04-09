@@ -27,6 +27,31 @@ function showKategori(uid){
     xmlhttp.send();
 }
 
+<!--AJAX untuk show list task-->
+function showListTask(uid, idKategori){
+    document.getElementById("task").innerHTML="";
+    if(window.XMLHttpRequest)
+    {
+        // untuk IE7, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {
+        //untuk IE jadul
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+				
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("task").innerHTML=xmlhttp.responseText;		
+        }
+    }
+    xmlhttp.open("GET", "Task?aksi=lihat_list_task&idKategori="+idKategori+"&uid="+uid, true);
+    xmlhttp.send();
+}
+
 <!--JS UNTUK SHOW/HIDE TOMBOL DELETE KATEGORI-->
 		
 var isShown = false;
