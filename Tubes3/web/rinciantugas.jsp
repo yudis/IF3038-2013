@@ -17,7 +17,7 @@
         <title>Rincian Tugas : <%out.println(data.getNama());%> </title>
         <script>
             function submit_comment(form) {
-                if (form.comment.value != "") {
+                if (form.comment.value !== "") {
                     var xmlhttp;
                     if (window.XMLHttpRequest){
                         xmlhttp = new XMLHttpRequest();
@@ -26,13 +26,14 @@
                     }
                     
                     xmlhttp.onreadystatechange = function(){
-                        if (xmlhttp.readyState==4 && xmlhttp.status==200)	{
+                        if (xmlhttp.readyState===4 && xmlhttp.status===200)	{
                             jumlah_komentar();
                         }
-                    }
+                    };
 
-                    id_tugas = "-1";
-                    if ((c = window.location.search.indexOf("id_tugas=")) != -1) {
+                    var id_tugas = "-1";
+                    var c = window.location.search.indexOf("id_tugas=");
+                    if (c !== -1) {
                         id_tugas = window.location.search.substring(c+9);
                     } 
 
@@ -53,23 +54,23 @@
                 }
                 
                 xmlhttp.onreadystatechange = function(){
-                    if (xmlhttp.readyState==4 && xmlhttp.status==200)	{
+                    if (xmlhttp.readyState===4 && xmlhttp.status===200)	{
                         //alert(xmlhttp.responseText);
                         jumlah_komentar();
                     }
-                }
+                };
 
-                id_tugas = "-1";
-                if ((c = window.location.search.indexOf("id_tugas=")) != -1) {
+                var id_tugas = "-1";
+                var c = window.location.search.indexOf("id_tugas=");
+                if (c !== -1) {
                     id_tugas = window.location.search.substring(c+9);
                 } 
 
                 var n = comment.innerHTML.indexOf(" ");
                 var tanggal = comment.innerHTML.substring(n+1,n+20);
-                //alert(tanggal);
                 
                 params = 'tanggal='+tanggal+'&user='+localStorage.userLogin+'&id_tugas='+id_tugas;
-                xmlhttp.open("POST","hapus_komentar.php",true);                
+                xmlhttp.open("POST","hapus_komentar",true);                
                 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xmlhttp.send(params);
                 alert(params);
@@ -77,7 +78,7 @@
         
             function validasi_file(place) {
                 var ext=place.value.substring(place.value.indexOf(".")+1);
-                if (ext=="jpeg" || ext == "avi" || ext=="pdf" || ext == "jpg") {
+                if (ext==="jpeg" || ext === "avi" || ext==="pdf" || ext === "jpg") {
                     document.getElementById("attach_upload").innerHTML += place.value+";";
                     place.value = "";
                 } else {
@@ -97,14 +98,13 @@
 
                 var id_tugas = "-1";                
                 xmlhttp2.onreadystatechange = function() {
-                    if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
+                    if (xmlhttp2.readyState === 4 && xmlhttp2.status === 200) {
                         var s = xmlhttp2.responseText;
                         var n = s.indexOf("\n");
                         daftar_komentar = document.getElementById("tempat_komentar");
                         daftar_komentar.innerHTML = "";
-                        //alert(daftar_komentar.innerHTML);
                         
-                        while (n != -1) {
+                        while (n !== -1) {
                             //Ambil satu data komentar
                             var username = s.substring(0,n);
                             s = s.substring(n+1);
@@ -128,24 +128,25 @@
                             tambah += '<div class="data_komentar">';
                             tambah += username + " " + tanggal + " :";
                             
-                            if (username == localStorage.userLogin) {
+                            if (username === localStorage.userLogin) {
                                 tambah += '<input type="button" class="hapus_comment" value="delete" onclick="hapus_komentar(this.parentNode)">';
                             }
                             
                             tambah += "<br>"+komentar;
-                            tambah += '</div>'
+                            tambah += '</div>';
                             tambah += "</div>";
                             daftar_komentar.innerHTML += tambah+"\n";
                         }
                     }
-                }            
+                };
             
-                //Untuk mengambil daftar komentar awal
-                if ((c = window.location.search.indexOf("id_tugas=")) != -1) {
+                //Untuk mengambil daftar komentar
+                var c = window.location.search.indexOf("id_tugas=");
+                if (c  !== -1) {
                     id_tugas = window.location.search.substring(c+9);
                 }                 
                 var params = "id_tugas="+id_tugas+"&start="+document.getElementById("halaman_komentar").value;
-                xmlhttp2.open("POST","ambil_komentar.php",true);
+                xmlhttp2.open("POST","ambil_komentar",true);
                 xmlhttp2.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xmlhttp2.send(params);
             }
@@ -159,19 +160,21 @@
                 }
                 
                 xmlhttp.onreadystatechange = function(){
-                    if (xmlhttp.readyState==4 && xmlhttp.status == 200)	{
+                    if (xmlhttp.readyState===4 && xmlhttp.status === 200)	{
+                        //alert(xmlhttp.responseText);
                         document.getElementById("max_komentar").value=xmlhttp.responseText;
                         document.getElementById("halaman_komentar").value=xmlhttp.responseText;                        
                         ambil_komentar();
                     }
-                }
+                };
                 
                 var id_tugas = "-1";
-                if ((c = window.location.search.indexOf("id_tugas=")) != -1) {
+                var c = window.location.search.indexOf("id_tugas=");
+                if (c !== -1) {
                     id_tugas = window.location.search.substring(c+9);
                 }                 
                 params = "id_tugas="+id_tugas;
-                xmlhttp.open("POST","jumlah_komentar.php",true);
+                xmlhttp.open("POST","jumlah_komentar",true);
                 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xmlhttp.send(params);
             }
@@ -186,7 +189,7 @@
         
             function auto_complete(text) {
                 var xmlhttp;
-                if (text == "") {
+                if (text === "") {
                     document.getElementById("autobox").value = "";                    
                 } else {
                     if (window.XMLHttpRequest){
@@ -196,13 +199,13 @@
                     }
                     
                     xmlhttp.onreadystatechange = function(){
-                        if (xmlhttp.readyState==4 && xmlhttp.status == 200)	{
+                        if (xmlhttp.readyState===4 && xmlhttp.status === 200)	{
                             //alert(xmlhttp.responseText);
                             var s = xmlhttp.responseText;
                             var n = s.indexOf("\n");
                             document.getElementById("autobox").value = "";
                             
-                            while (n != -1) {
+                            while (n !== -1) {
                                 //Ambil satu data komentar
                                 var username = s.substring(0,n);
                                 s = s.substring(n+1);
@@ -213,7 +216,7 @@
                                 document.getElementById("autobox").value += tambah+"\n";
                             }
                         }
-                    }
+                    };
                     
                     params = "assignee="+escape(text);
                     //alert(params);
@@ -240,14 +243,15 @@
                 }
 				
                 xmlhttp.onreadystatechange = function(){
-                    if (xmlhttp.readyState==4)	{
+                    if (xmlhttp.readyState===4)	{
                         //alert(xmlhttp.responseText);
                         take_data();
                     }
-                }
+                };
 
                 var id_tugas = "-1";
-                if ((c = window.location.search.indexOf("id_tugas=")) != -1) {
+                var c = window.location.search.indexOf("id_tugas=");
+                if (c !== -1) {
                     id_tugas = window.location.search.substring(c+9);
                 }     
 				
