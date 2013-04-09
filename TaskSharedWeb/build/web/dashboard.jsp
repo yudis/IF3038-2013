@@ -24,7 +24,7 @@
         <div id="main-body-general">
             <!--Header-->
             <div id="header">
-                    <jsp:include page="header.jsp" />
+            <jsp:include page="header.jsp" />
             </div>
             <div><hr id="border"></div>
             <!--Body-->

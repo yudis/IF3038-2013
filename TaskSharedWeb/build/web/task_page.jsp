@@ -4,6 +4,12 @@
     Author     : VAIO
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="Class.GetConnection"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="Class.Function"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,19 +24,23 @@
     <body onLoad="check_html5()">
         <%
         /*session management*/
+        String userActive = "";
         if(request.getSession().getAttribute("userlistapp")==null){
             response.sendRedirect("index.jsp");
+        }else{
+            userActive = request.getSession().getAttribute("userlistapp").toString();
         }
         %>
         <div id="main-body-general">
                 <!--Header-->
                 <div id="header">
-                        <?php
-                                include("header.php");
-                                require('../php/init_function.php');
-                                $taskid = $_GET['taskid'];
-                                $task = getTask($taskid);
-                        ?>
+                    <jsp:include page="header.jsp" />
+                        <%
+                            Function func = new Function();
+                            HashMap<String,String> task = new HashMap<String, String>();
+                            String idtaskToShow = request.getParameter("taskid");
+                            HashMap<String, String> taskShow = func.GetTask(idtaskToShow);
+                        %>
                 </div>
 
                 <div id="nomargin"><hr id="border"></div>
@@ -39,26 +49,25 @@
                 <div id="task-page-body">
                         <div id="task-page-title">
                                 <div>
-                                        <h1><?php echo $task['taskname']?></h1>
+                                    <h1><% out.print(taskShow.get("taskname"));%></h1>
                                         <i><div id="delete-task">
-                <?php 
-                                        $creator = $task['username'];
-                                        if($creator == $_SESSION['userlistapp']){
-                                                echo " <a href=\"../php/deletetask.php?taskid=".$taskid."\" onClick=\"confirmTask()\"><i>Delete This Task</i></a>";
-                                        }
-                                        ?>
+                                        <% 
+                                            String creator = taskShow.get("username");
+                                            if(creator.equals(userActive)){
+                                                    out.print("<a href=\"deletetask?taskid=\""+taskShow.get("taskid") +"\" onClick=\"confirmTask()\"><i>Delete This Task</i></a>");
+                                            }
+                                        %>
                 <br><br></div></i>
-                                        Submit by <b><i><?php echo $task['username']?></i></b> at. <?php echo $task['createddate']?>
+                                        Submit by <b><i><% out.print(taskShow.get("username"));%></i></b> at. <% out.print(taskShow.get("createddate"));%>
                                 </div>
                                 <br>
                                 <div id="deadline_done">
-                                        <div id="left-main-body">Deadline : <?php echo $task['deadline']?></div>
-                <?php 
-                                                $creator = $task['username'];
-                                                if($creator == $_SESSION['userlistapp']){
-                                                        <!--echo "<div id=\"right-main-body\"><a href=\"#\" onCLick=\"edit_deadline()\"><u>edit</u></a></div>";-->
+                                        <div id="left-main-body">Deadline : <% out.print(taskShow.get("deadline"));%></div>
+                                        <% 
+                                                if(creator.equals(userActive)){
+                                                        out.print("<div id=\"right-main-body\"><a href=\"#\" onCLick=\"edit_deadline()\"><u>edit</u></a></div>");
                                                 }
-                                        ?>
+                                        %>
                                 </div>
                                 <div id="deadline_edit">
                                         <div id="left-main-body"><div id="label">Deadline : </div>
@@ -67,18 +76,17 @@
                                                         <input id="timedeadlineinput" type="text" name="textDeadlineTime" placeholder="HH:MM"/>
                                                 </div>              
                                         </div>
-                                        <div id="right-main-body"><a href="#" onCLick="finish_deadline(<?php echo $taskid ?>)"><u>done</u></a></div>
+                                        <div id="right-main-body"><a href="#" onCLick="finish_deadline(<% out.print(taskShow.get("taskid"));%>)"><u>done</u></a></div>
                                 </div>
                                 <br><br><br>
             <div>
-                                        <div id="left-main-body4">Status : <?php echo $task['status']?></div> 
+                                        <div id="left-main-body4">Status : <% out.print(taskShow.get("status"));%></div> 
                                         <div id="right-main-body">
-                    <?php 
-                                                $creator = $task['username'];
-                                                if($creator == $_SESSION['userlistapp']){
-                                                        echo "<input name=\"changeStatus\" type=\"button\" value=\"Change Status\" onClick=\"setCompleteStatus($taskid)\">";
+                                        <% 
+                                                if(creator.equals(userActive)){
+                                                        out.print("<input name=\"changeStatus\" type=\"button\" value=\"Change Status\" onClick=\"setCompleteStatus("+taskShow.get("taskid")+")\">");
                                                 }
-                                        ?>                   
+                                        %>                   
                 </div>
                                 </div>
                         </div>
@@ -88,104 +96,101 @@
                                         <div>
                                         <br>
                                         <br>
-                        <?php 
-                                                        $con = getConnection();
-                                                        $query = "SELECT filename FROM attachment WHERE taskid = $taskid";
-                                                        $result = mysqli_query($con,$query);
-                                                        while($row = mysqli_fetch_array($result)){
-                                                                $filename = $row['filename'];
-                                                                if(typeFile($filename) == 0){
-                                                                        echo "<img id=\"screenshots\" src=\"../attachment/$filename\" alt=\"$filename\" title=\"$filename\"\">";
-                                                                }
-                                                        }
-                                                ?>
+                                                <% 
+                                                    GetConnection getCon = new GetConnection();
+                                                    Connection con = getCon.getConnection();
+                                                    String query = "SELECT filename FROM attachment WHERE taskid = "+idtaskToShow;
+                                                    Statement stt = con.createStatement();
+                                                    ResultSet result = stt.executeQuery(query);
+                                                    while(result.next()){
+                                                            String filename = result.getString("filename");
+                                                            if(func.GetTypeFile(filename) == 0){
+                                                                    out.print("<img id=\"screenshots\" src=\"attachment/"+filename+"\" alt=\""+filename+"\" title=\"$filename\"\">");
+                                                            }
+                                                    }
+                                                %>
                                         </div>
                                 </div>
             <div id="video-attachment">
-                <?php 
-                                                        $con = getConnection();
-                                                        $query = "SELECT filename FROM attachment WHERE taskid = $taskid";
-                                                        $result = mysqli_query($con,$query);
-                                                        while($row = mysqli_fetch_array($result)){
-                                                                $filename = $row['filename'];
-                                                                if(typeFile($filename) == 1){
-                                                                        echo "<video width=\"320\" height=\"240\" controls>";
-                                                                        echo "<source src=\"../attachment/$filename\" type=\"video/mp4\">";
-                                                                        echo "</video>";
-                                                                }
-                                                        }
-                                        ?>
+                                        <% 
+                                            query = "SELECT filename FROM attachment WHERE taskid = "+idtaskToShow;
+                                            result = stt.executeQuery(query);
+                                            while(result.next()){
+                                                String filename = result.getString("filename");
+                                                if(func.GetTypeFile(filename) == 1){
+                                                    out.print("<video width=\"320\" height=\"240\" controls>");
+                                                    out.print("<source src=\"attachment/"+filename+"\" type=\"video/mp4\">");
+                                                    out.print("</video>");
+                                                }
+                                            }
+                                        %>
                                 </div>
                                 <div id="other-attachment">
                                         <p>External File:</p>
                                         <ul>
-                        <?php 
-                                                        $con = getConnection();
-                                                        $query = "SELECT filename FROM attachment WHERE taskid = $taskid";
-                                                        $result = mysqli_query($con,$query);
-                                                        while($row = mysqli_fetch_array($result)){
-                                                                $filename = $row['filename'];
-                                                                if(typeFile($filename) == 2){
-                                                                        echo "<li><a href=\"../attachment/$filename\">$filename</a></li>";
-                                                                }
+                                                <% 
+                                                    query = "SELECT filename FROM attachment WHERE taskid = "+idtaskToShow;
+                                                    result = stt.executeQuery(query);
+                                                    while(result.next()){
+                                                        String filename = result.getString("filename");
+                                                        if(func.GetTypeFile(filename) == 2){
+                                                            out.print("<li><a href=\"attachment/"+filename+"\">"+filename+"</a></li>");
                                                         }
-                                                ?>
+                                                    }
+                                                %>
                                         <ul>
                                 </div>
                         </div>
                         <div>
                                 <div id="task-nomargin" name="1"><div id="assignee_done">
                                         <div id="left-main-body2">Shared with : <i>
-                        <?php 
-                                                        $con = getConnection();
-                                                        $query = "SELECT username FROM assignee WHERE taskid = $taskid";
-                                                        $result = mysqli_query($con,$query);
-                                                        while($row = mysqli_fetch_array($result)){
-                                                                echo "<a href=\"profile.php?username=".$row['username']."\"><u>".$row['username']."</u></a> ";
-                                                        }
-                                                ?>
+                                        <%
+                                            query = "SELECT username FROM assignee WHERE taskid = "+idtaskToShow;
+                                            result = stt.executeQuery(query);
+                                            while(result.next()){
+                                                out.print("<a href=\"profile.jsp?username="+result.getString("username") +"\"> <u>"+result.getString("username")+"</u> </a>");
+                                            }
+                                        %>
                 </i></div>
                                         <div id="right-main-body">
-                                                <?php 
-                        $creator = $task['username'];
-                        if($creator == $_SESSION['userlistapp']){
-                                        <!--echo "<a href=\"#2\" onClick=\"edit_assignee()\"><u>edit</u></a>";-->
+                    <% 
+                        if(creator.equals(userActive)){
+                                        out.print("<a href=\"#2\" onClick=\"edit_assignee()\"><u>edit</u></a>");
                         }
-                    ?>
+                    %>
                 </div>
                                 </div></div>
                                 <div id="assignee_edit" name="2">
                                         <div id="left-main-body">Shared with : <input id="task-assignee" type="text" name="textAssignee" list="assignee-task" onKeyUp="autoCompleteAsignee()" placeholder="tag1,tag2,tag3"/>
                                         <div id="shared-with"></div>
                                         </div>
-                                        <div id="right-main-body"><a href="#1" onClick="finish_assignee(<?php echo $taskid ?>)"><u>done</u></a></div>
+                                        <div id="right-main-body"><a href="#1" onClick="finish_assignee(<% out.print(idtaskToShow); %>)"><u>done</u></a></div>
                                 </div>
                                 <br>
                                 <br>
                                 <div id="task-nomargin" name="3"><div id="tag_done">
                                         <div id="left-main-body3">Tag : <i>
-                <?php 
-                                                        $con3 = getConnection();
-                                                        $result3 = mysqli_query($con3,"SELECT tagid FROM task_tag WHERE taskid = '".$taskid."'");
-                                                        while($row3 = mysqli_fetch_array($result3))
-                                                        {
-                                                                $tagname = getTagname($row3['tagid']);
-                                                                echo "<u>".$tagname."</u> ";
-                                                        }
-                                                ?>
+                        <% 
+                            query = "SELECT tagid FROM task_tag WHERE taskid = "+idtaskToShow;
+                            result = stt.executeQuery(query);
+                            while(result.next())
+                            {
+                                HashMap<String,String> tag = func.GetTag(result.getString("tagid"));
+                                out.print(" <u>"+tag.get("tagname")+"</u> ");
+                            }
+                        %>
                 </i></div>
                                         <div id="right-main-body">
-                <?php 
-                                                $creator = $task['username'];
-                                                if($creator == $_SESSION['userlistapp']){
-                                <!--echo "<a href=\"#3\" onClick=\"edit_tag()\"><u>edit</u></a>";-->
-                                                }
-                                        ?>
+                <% 
+                    if(creator.equals(userActive)){
+                        out.print("<a href=\"#3\" onClick=\"edit_tag()\"><u>edit</u></a>");
+                    }
+                %>
                 </div>
                                 </div></div>
                                 <div id="tag_edit" name="4">
                                         <div id="left-main-body">Tag : <input id="tag-edit" type="text" placeholder="tag1,tag2,tag3"/></div>
-                                        <div id="right-main-body"><a href="#4" onClick="finish_tag(<?php echo $taskid ?>)"><u>done</u></a></div>
+                                        <div id="right-main-body"><a href="#4" onClick="finish_tag(<% out.print(idtaskToShow);%>)"><u>done</u></a></div>
                                 </div>
                         </div>
                 </div>
@@ -195,37 +200,36 @@
                 <!--Comment-->
                 <div id="task-comment">
                         <div id="user-comment">
-                                <p id="nComment"><b><?php echo getNComment($taskid);?></b></p>
+                            <p id="nComment"><b><% out.print(func.GetNComment(idtaskToShow));%> Comment</b></p>
                                 <div id="comment-list">
-                                        <?php
-                        $con = getConnection();
-                                                $query = "SELECT * FROM comment WHERE taskid = $taskid";
-                                                $result = mysqli_query($con,$query);
-                                                while($row = mysqli_fetch_array($result)){
-                                                        echo " <div id=\"comment\">";
-                                                        echo " 	<div id=\"user-info\">";
-                                                        echo " 		<div id=\"left-comment-body\">";
-                                                        echo " 			<img src=\"../avatar/".getAvatar($row['username'])."\" width=\"50px\" height=\"50px\"/>";
-                                                        echo " 		</div>";
-                                                        echo " 		<div id=\"right-comment-body\">";
-                                                        echo " 			<b id=\"komentator\">".$row['username']."</b>";
-                                                        echo " 			<br>";
-                                                        echo " 			<b id=\"post-date\">Post at ".$row['createdate']."</b>";
-                                                        echo " 		</div>";
-                                                        echo " 		<div id=\"delete-comment\">";
-                                                                if($row['username'] == $_SESSION['userlistapp']){
-                                                                        <!--echo "<a href=\"#\" onClick=\"deleteComment(".$row['commentid'].",$taskid)\"><i>Delete Comment</i></a>";-->
-                                                                }
-                                                        echo " 		</div>";
-                                                        echo " 	</div>";
-                                                        echo " 	<div id=\"comment-box\">";
-                                                        echo " 		<p>";
-                                                        echo $row['message'];
-                                                        echo " 		</p>";
-                                                        echo " 	</div>";
-                                                        echo " </div>";
-                                                }
-                                        ?>
+                <%
+                        query = "SELECT * FROM comment WHERE taskid ="+idtaskToShow;
+                        ResultSet rs = stt.executeQuery(query);
+                        while(rs.next()){
+                                out.print(" <div id=\"comment\">");
+                                out.print(" 	<div id=\"user-info\">");
+                                out.print(" 		<div id=\"left-comment-body\">");
+                                out.print(" 			<img src=\"avatar/"+func.GetUser(rs.getString("username")).get("avatar") +"\" width=\"50px\" height=\"50px\"/>");
+                                out.print(" 		</div>");
+                                out.print(" 		<div id=\"right-comment-body\">");
+                                out.print(" 			<b id=\"komentator\">"+rs.getString("username") +"</b>");
+                                out.print(" 			<br>");
+                                out.print(" 			<b id=\"post-date\">Post at "+rs.getString("createdate") +"</b>");
+                                out.print(" 		</div>");
+                                out.print(" 		<div id=\"delete-comment\">");
+                                        if(rs.getString("username").equals(userActive)){
+                                            out.print("<a href=\"#\" onClick=\"deleteComment("+rs.getString("commentid") +","+idtaskToShow+")\"><i>Delete Comment</i></a>");
+                                        }
+                                out.print(" 		</div>");
+                                out.print(" 	</div>");
+                                out.print(" 	<div id=\"comment-box\">");
+                                out.print(" 		<p>");
+                                out.print(rs.getString("message"));
+                                out.print(" 		</p>");
+                                out.print(" 	</div>");
+                                out.print(" </div>");
+                        }
+                %>
 
                                         <div id="new-comment"></div>
                                 </div>
@@ -235,7 +239,7 @@
                                 <form>
                                         <textarea id="textarea-comment" rows="8" cols="92" placeholder="Comment about this task..."></textarea>
                                 </form>
-                                <div><button id="submit-comment" onClick="addComment(<?php echo $taskid ?>)">Submit</button>&nbsp;</div>
+                                <div><button id="submit-comment" onClick="addComment(<% out.print(idtaskToShow); %>)">Submit</button>&nbsp;</div>
                         </div>
                 </div>
 

@@ -21,7 +21,7 @@
         <div id="header-link"><a href="dashboard.jsp"><b>Go To Dashboard</b></a></div>
         <div id="header-right-side">
                 <div id="header-right-search">
-                        <form action="search_result.php" method="post">
+                        <form action="search_result.jsp" method="post">
                                 <div id="user-filtering">
                                         <select name="filtering" id="filtering">
                                                 <option value="1">None</option>
