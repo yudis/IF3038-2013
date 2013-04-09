@@ -261,6 +261,42 @@ public class ServletHandler extends HttpServlet{
             }
         }
         
+        //add comment
+        else if (req.getParameter("type").equalsIgnoreCase("add_comment")) {
+            String comment          = req.getParameter("CommentBox");
+            String taskID           = req.getParameter("comment_task_id");
+            HttpSession session     = req.getSession(true);
+            String username         = (String) session.getAttribute("username");
+            
+            System.out.println("comment : " + comment);
+            System.out.println("taskID :" + taskID);
+            System.out.println("username " + username);
+            
+            try {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    System.out.println("Berhasil connect ke Mysql JDBC Driver - add_comment ");
+                } catch (ClassNotFoundException ex) {
+                    System.out.println("Where is your MySQL JDBC Driver? - add_comment");
+                }
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");                 
+                Statement st = conn.createStatement(); 
+                st.executeUpdate("INSERT INTO `comment`(`comment_content`,`task_id`,`comment_creator`) VALUES ('"+comment+"','"+taskID+"','"+username+"')");
+                resp.sendRedirect("src/task_detail.jsp?task_id="+taskID);
+            }
+            catch (SQLException e) {
+                System.out.println("Connection Failed! Check output console - add_comment");
+            } 
+            finally { 
+                try { 
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Can not close connection - add_comment");
+                }
+            }
+        }
+        
         //other
         else if (req.getParameter("type").equalsIgnoreCase("")) {
             
@@ -307,7 +343,6 @@ public class ServletHandler extends HttpServlet{
         //Delete Task
         if (req.getParameter("type").equalsIgnoreCase("delete_task")) {
             String taskID = req.getParameter("task_id");
-            System.out.println("delete task " + taskID);
             try {                
                 // Make connection to database
                 try {
