@@ -165,7 +165,7 @@ label#remember_me {
 #search_box_filter {
 	float:left; height:30px; margin-top:45px; margin-left:5px; 
 }
-#txtHint {
+#txtHint , #category_asignee_autocomplete {
 	position:absolute;
 	display:block;
 	margin-top:73px;

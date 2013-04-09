@@ -25,7 +25,7 @@ if (session.getAttribute("fullname") == null) {
                     <a href="dashboard.php"> <img id="logo" src="../img/logo.png" alt="logo"> </a>					
                 </div>
 
-                <input id="search_box" type="text" onkeyup="showSearchHint(this.value)" placeholder="Search...">
+                <input id="search_box" autocomplete="off" type="text" onkeyup="showSearchHint(this.value)" placeholder="Search...">
                 <div id="txtHint"> </div>
 
                 <select id="search_box_filter">

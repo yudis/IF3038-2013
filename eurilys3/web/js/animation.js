@@ -203,6 +203,37 @@ function showSearchHint(str) {
     xmlhttp.send();
 }
 
+function AddCategoryAssigneHint(str) { 
+    document.getElementById('category_asignee_autocomplete').style.display = "block";
+    if (str.length==0) { 
+        document.getElementById("category_asignee_autocomplete").innerHTML="";
+        return;
+    }
+    
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("category_asignee_autocomplete").innerHTML = xmlhttp.responseText;
+        }
+    } 
+    
+    var url="addcategory_autocomplete.jsp?hint="+str;
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
+
+function addCategoryAssigne(userID) {
+    var user = document.getElementById('cat_ass_'+userID).innerHTML;
+    document.getElementById('add_category_asignee_name').value += user;
+    document.getElementById('add_category_asignee_name').value += ", ";
+}
+
 function searchResult(resultID, resultType) {
     document.getElementById('txtHint').style.display = "none";
 

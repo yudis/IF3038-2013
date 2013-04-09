@@ -45,7 +45,8 @@
                     <input type="text" name="add_category_name" id="add_category_name" value="">
                     <br><br>
                     Assignee(s) : <br>
-                    <input type="text" name="add_category_asignee_name" id="add_category_asignee_name" value="">
+                    <input type="text" onkeyup="AddCategoryAssigneHint(this.value)" name="add_category_asignee_name" id="add_category_asignee_name" value="">
+                    <div id="category_asignee_autocomplete"> </div>
                     <br><br>
                     <button type="submit" id="add_category_button" name="add_category_button" class="link_red"> Add </button>
                 </form>
