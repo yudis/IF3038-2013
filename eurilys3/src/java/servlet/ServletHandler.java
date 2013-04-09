@@ -266,4 +266,41 @@ public class ServletHandler extends HttpServlet{
             
         }
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Connection conn = null;
+        if (req.getParameter("type").equalsIgnoreCase("finish_task")) {
+            String taskID = req.getParameter("task_id");
+            try {                
+                // Make connection to database
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    System.out.println("Berhasil connect ke Mysql JDBC Driver -- ServletHandler.java - finish_task ");
+                } catch (ClassNotFoundException ex) {
+                    System.out.println("Where is your MySQL JDBC Driver? -- ServletHandler.java - finish_task");
+                }
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");
+                
+                Statement st = conn.createStatement(); 
+                st.executeUpdate("UPDATE task SET task_status='1' WHERE task_id='"+taskID+"';");
+                
+                //Redirect
+                resp.sendRedirect("src/dashboard.jsp");
+            }
+            catch (SQLException e) {
+                System.out.println("Connection Failed! Check output console");
+            }
+            finally {                 
+                try { 
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Can not close connection");
+                }
+            }
+        }
+    }
+    
+    
 }

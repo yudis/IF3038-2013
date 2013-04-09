@@ -258,3 +258,18 @@ function generateTask(categoryName) {
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 }
+
+function finishTask(taskID) {
+    var finishTaskConfirm = confirm("Are you sure this task has been completely done?");
+    if (finishTaskConfirm == true)
+    {
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.open('GET', '../ServletHandler?type=finish_task&task_id=' + taskID, true);
+        xmlhttp.send(null);
+    }
+}
