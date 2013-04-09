@@ -41,7 +41,7 @@
 		<div id="category_form">
 			<div id="category_form_inner">
                                 <!-- ganti post action -->
-				<form method="POST" action="CategoryHandler?type=add">
+				<form method="POST" action="../ServletHandler?type=add_category">
 					Category name : <br>
 					<input type="text" name="add_category_name" id="add_category_name" value="">
 					<br><br>

@@ -28,7 +28,7 @@
             <div id="login_form_container">
                     
                     
-                    <form id="login_form" method="POST" action="IndexHandler?type=login">
+                    <form id="login_form" method="POST" action="ServletHandler?type=login">
                             <label> Username </label> <input type="text" id="login_username" name="login_username"/> <br/>
                             <label> Password </label> <input type="password" id="login_password" name="login_password"/> 
                             <input type="submit" name="login_submit" class="link_red top10 bold" id="login_submit" value="LOG IN">
@@ -43,7 +43,7 @@
                     <div class="red"> Sign Up Failed </div>
                 <% } %>
                 
-                <form id="signup_form" method="POST" action="IndexHandler?type=signup">
+                <form id="signup_form" method="POST" action="ServletHandler?type=signup">
                     <label> Username </label>	
                     <input type="text" name="signup_username" onkeypress="javascript:regCheck();" id="reg_username" title="Username should be at least 5 characters long" required>
                     <img src="img/yes.png" id="username_validation" class="signup_form_validation" alt="validation image">
