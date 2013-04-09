@@ -38,7 +38,7 @@
                     <li>
                         <label for="asignee">Assignee</label>
                         <input id="asignee" name="asignee" type="text" onKeyUp="searchSuggest()"/>
-                        <button class="task" name="addButton" type="button"><b>Add</b></button>
+                        <button class="task" name="addButton" type="button" onclick="add()"><b>Add</b></button>
                     </li>
                     <li id="layer1">
                     </li>
