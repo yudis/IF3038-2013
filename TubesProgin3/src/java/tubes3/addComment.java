@@ -7,6 +7,7 @@ package tubes3;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -76,16 +77,27 @@ public class addComment extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String query="";
+        String queryU="";
+         response.setContentType("text/html;charset=UTF-8");
+	PrintWriter out = response.getWriter();
         if(!(request.getParameter("comment").equals("")) && !(request.getParameter("usernamecur").equals(""))){
             query="INSERT INTO komentar(IDTask,username,isi) values(1,'"+request.getParameter("usernamecur")+"', '"+request.getParameter("comment")+"')";
+            queryU="SELECT * from pengguna where username="+request.getParameter("usernamecur");
         }
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
         Statement pst;
+        ResultSet rs;
         try {
             pst = connection.createStatement();
             pst.executeUpdate(query);
-            
+            out.print(request.getParameter("comment,"));
+            rs=tu.coba(connection,queryU);
+             if (rs.next())
+            {
+            out.print(rs.getString("username,"));
+            out.print(rs.getString("avatar"));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
         }

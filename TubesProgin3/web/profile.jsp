@@ -50,7 +50,8 @@ else
                                 </li>
                                 <li>
                                         <label>Tanggal Lahir:</label>
-                                        <p class="prof1"><% out.print(p.birthday); %></p>
+                                        <p class="prof1"><% String date[]=p.birthday.split("-"); out.print(date[2]+"-"+date[1]+"-"+date[0]); %></p>
+                                        
                                 </li>
                                 <li>
                                         <label>On going tasks:</label>

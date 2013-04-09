@@ -63,24 +63,8 @@ public class removeComment extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
-	PrintWriter out = response.getWriter();
-        String query;
-        if(!(request.getParameter("idcomment").equals("")))
-        {
-                query="DELETE FROM komentar WHERE IDKomentar="+request.getParameter("idcomment");
-                Tubes3Connection tu = new Tubes3Connection();
-                Connection connection = tu.getConnection();
-                Statement pst;
-                try {
-                    pst = connection.createStatement();
-                    pst.executeUpdate(query);
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        response.sendRedirect("taskdetails.jsp");
+        
+        
     }
 
     /** 
@@ -93,7 +77,24 @@ public class removeComment extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html");
+	PrintWriter out = response.getWriter();
+        String query;
+        if(!(request.getParameter("idcomment").equals("")))
+        {
+                query="DELETE FROM komentar WHERE IDKomentar="+request.getParameter("idcomment");
+                Tubes3Connection tu = new Tubes3Connection();
+                Connection connection = tu.getConnection();
+                Statement pst;
+                try {
+                    pst = connection.createStatement();
+                    pst.executeUpdate(query);
+                    out.print("berhasil");
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
        
     }
 
