@@ -66,14 +66,14 @@
         
         //Generate Output
         buffer += "<br>";
-        buffer += "<div class='task_view' id='" +taskID+ "'>";        
+        buffer = buffer + "<div class='task_view' id='" +taskID+ "'>";        
         if (taskCreator.equals((String) session.getAttribute("username"))) {
-            buffer += "<div onclick='javascript:deleteTask('" + taskID + "')' class='task_done_button'> Delete </div>";
-            buffer += "<div class='task_done_button'> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; </div>";
+            buffer = buffer + "<div onclick='javascript:deleteTask('"+taskID +"');' class='task_done_button'> Delete </div>";
+            buffer = buffer + "<div class='task_done_button'> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; </div>";
         }
         //Task has not been finished 
         if (rs_task.getString("task_status").equals("0")) {
-            buffer += "<div onclick='javascript:finishTask('" +taskID+ "')' class='task_done_button'> Mark as Finished </div>";
+            buffer = buffer + "<div onclick='javascript:finishTask('"+taskID+"');' class='task_done_button'> Mark as Finished </div>";
         } else {
             buffer += "<img src='../img/yes.png' class='task_done_button' alt=''/>";
         }
@@ -83,14 +83,14 @@
         buffer += "<br><br>";
         
         buffer += "<div id='deadline_ltd' class='left dynamic_content_left'>Deadline</div>";
-        buffer += "<div id='deadline_rtd' class='left dynamic_content_right'>"+ rs_task.getString("task_deadline") +"</div>";
+        buffer = buffer + "<div id='deadline_rtd' class='left dynamic_content_right'>"+ rs_task.getString("task_deadline") +"</div>";
         buffer += "<br><br>";
         
         buffer += "<div id='tag_ltd' class='left dynamic_content_left'>Tag</div>";
-        buffer += "<div id='tag_rtd' class='left dynamic_content_right'>" +tagList+ "</div>";
+        buffer = buffer + "<div id='tag_rtd' class='left dynamic_content_right'>" +tagList+ "</div>";
         buffer += "<br>";
         
-        buffer += "<div class='task_view_category'>" +rs_task.getString("cat_name") +"</div>";
+        buffer = buffer + "<div class='task_view_category'>" +rs_task.getString("cat_name") +"</div>";
         buffer += "<br></div>";
     }
     

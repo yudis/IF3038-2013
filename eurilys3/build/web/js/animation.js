@@ -273,3 +273,17 @@ function finishTask(taskID) {
         xmlhttp.send(null);
     }
 }
+
+function deleteTask(taskID) {
+    var deleteTaskConfirm = confirm("Are you sure you want to delete this task?");
+    if (deleteTaskConfirm == true) {
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.open('GET', '../ServletHandler?type=delete_task&task_id=' + taskID, true);
+        xmlhttp.send(null);
+    }
+}

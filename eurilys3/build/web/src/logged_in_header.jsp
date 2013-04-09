@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<% if (session.getAttribute("fullname") == null) {
+<% 
+if (session.getAttribute("fullname") == null) {
     response.sendRedirect("../index.jsp");
-} %>
+} 
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >	
