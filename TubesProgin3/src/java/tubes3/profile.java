@@ -44,15 +44,13 @@ public class profile extends HttpServlet {
     //,tugasBelumSelesai;
     ResultSet rs;
 
-    public profile() throws SQLException {
+    public profile(String username) throws SQLException {
         Tubes3Connection tu = new Tubes3Connection();
-        Connection connection = tu.getConnection();
-        String user = "yuli";
-        username = user;
+        Connection connection = tu.getConnection();this.username=username;
 
-        String queryUser = "SELECT * FROM pengguna WHERE username ='" + user + "'";
-        String queryTaskSelesai = "SELECT name FROM tugas WHERE username='" + user + "' and stat=1";
-        String queryTaskBelumSelesai = "SELECT name FROM tugas WHERE username='" + user + "' and stat=0";
+        String queryUser = "SELECT * FROM pengguna WHERE username ='" + this.username + "'";
+        String queryTaskSelesai = "SELECT name FROM tugas WHERE username='" + this.username + "' and stat=1";
+        String queryTaskBelumSelesai = "SELECT name FROM tugas WHERE username='" + this.username + "' and stat=0";
         rs = tu.coba(connection, queryUser);
         if (rs.next()) {
             fullname = rs.getString("fullname");
@@ -111,7 +109,6 @@ public class profile extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        username = "";
     }
     /** 
      * Handles the HTTP <code>POST</code> method.

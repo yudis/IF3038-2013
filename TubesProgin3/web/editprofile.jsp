@@ -22,7 +22,7 @@
 					<h1 align="left">Edit Profile</h1>
 					<li>
 						<label style="width:230px; display:inline-block">Nama Lengkap:</label>
-						<input type="text" value="<% profile p=new profile(); out.print(p.fullname);%>" onchange="checkNamaLengkap()" id="namalengkap" name="namalengkap"></input>
+						<input type="text" value="<% profile p=new profile("yuli"); out.print(p.fullname);%>" onchange="checkNamaLengkap()" id="namalengkap" name="namalengkap"></input>
 					</li>
                     <li>
 						<label style="width:230px; display:inline-block">Tanggal Lahir:</label>
