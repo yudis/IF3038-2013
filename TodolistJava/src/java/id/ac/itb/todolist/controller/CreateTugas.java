@@ -36,19 +36,19 @@ public class CreateTugas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         
-        //if (session.getAttribute("user") != null)
-        //{
-            // user sudah login, dialihkan ke halaman lain
+        if (session.getAttribute("user") != null)
+        {
+            //user sudah login, dialihkan ke halaman lain
             
             request.setAttribute("title", "Todolist | Create Tugas");
             request.setAttribute("headTags", "<script src=\"scripts/formtugas.js\" type=\"application/javascript\"><script src=\"scripts/tugas.js\" type=\"application/javascript\"></script><script src=\"scripts/createtugas.js\" type=\"application/javascript\"></script>");
             RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/create/createtugas.jsp");
             view.forward(request, response);
-        //}
-        //else
-        //{
-          // response.sendRedirect("./index");
-        //}
+        }
+        else
+        {
+            response.sendRedirect("./index.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

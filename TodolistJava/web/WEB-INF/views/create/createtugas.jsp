@@ -1,7 +1,7 @@
 <jsp:include page="/WEB-INF/includes/header.inc.jsp" />
                 <h1>Buat Tugas Baru</h1>
                 <div class="formtugas">
-                    <form name="formTugas1" enctype="multipart/form-data" onsubmit="return false;">
+                    <form name="formTugas1" method="post" enctype="multipart/form-data" action="Create">
                         <ul class="item">
 							<li id="folil0">
                                 <div>
@@ -21,7 +21,7 @@
                             <li id="folil2">
                                 <label id="title2">Attachment:</label>
                                 <div>
-                                    <input id="attachment" name="attachments[]" type="file" tabindex="2" accept="application/pdf,application/msword,image/*" multiple />
+                                    <input id="attachment" name="attachments" type="file" tabindex="2" accept="application/pdf,application/msword,image/*" multiple="multiple" />
                                 </div>
                             </li>
 
@@ -55,7 +55,7 @@
                             </li>
 
                             <li id="btn">
-                                <input type="submit" class="button" onclick="return createT()"/>
+                                <input type="submit" class="button" />
                             </li>
                         </ul>
                     </form>

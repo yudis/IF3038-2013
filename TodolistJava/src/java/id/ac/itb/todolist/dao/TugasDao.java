@@ -333,6 +333,22 @@ public class TugasDao extends DataAccessObject {
         return -1;
     }
 
+    public int addAttachment(int idTugas, String name, String filename,String type ) {
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("INSERT INTO `attachments`(`id_tugas`, `name`, `filename`, `type`) VALUES (?,?,?,?); ");
+            preparedStatement.setInt(1, idTugas);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, filename);
+            preparedStatement.setString(4, type);
+            
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+    
     public int removeTag(int idTugas, String tag) {
         try {
             PreparedStatement preparedStatement = connection.
