@@ -273,6 +273,11 @@ function finishTask(taskID) {
         else {// code for IE6, IE5
             xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                window.location = "dashboard.jsp";
+            }
+        } 
         xmlhttp.open('GET', '../ServletHandler?type=finish_task&task_id=' + taskID, true);
         xmlhttp.send(null);
     }
@@ -287,7 +292,31 @@ function deleteTask(taskID) {
         else {// code for IE6, IE5
             xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                window.location = "dashboard.jsp";
+            }
+        } 
         xmlhttp.open('GET', '../ServletHandler?type=delete_task&task_id=' + taskID, true);
+        xmlhttp.send(null);
+    }
+}
+
+function deleteComment(taskID, commentID) {
+    var deleteCommentConfirm = confirm("Delete this comment?");
+    if (deleteCommentConfirm == true) { //GET servlet
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                window.location = "task_detail.jsp?task_id="+taskID;
+            }
+        }        
+        xmlhttp.open('GET', '../ServletHandler?type=delete_comment&task_id='+taskID+'&comment_id='+commentID, true);
         xmlhttp.send(null);
     }
 }

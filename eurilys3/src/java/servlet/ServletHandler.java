@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -322,9 +323,6 @@ public class ServletHandler extends HttpServlet{
                 
                 Statement st = conn.createStatement(); 
                 st.executeUpdate("UPDATE task SET task_status='1' WHERE task_id='"+taskID+"';");
-                
-                //Redirect
-                resp.sendRedirect("src/dashboard.jsp");
             }
             catch (SQLException e) {
                 System.out.println("Connection Failed! Check output console");
@@ -338,10 +336,9 @@ public class ServletHandler extends HttpServlet{
                 }
             }
         }
-        else
         
         //Delete Task
-        if (req.getParameter("type").equalsIgnoreCase("delete_task")) {
+        else if (req.getParameter("type").equalsIgnoreCase("delete_task")) {
             String taskID = req.getParameter("task_id");
             try {                
                 // Make connection to database
@@ -359,10 +356,7 @@ public class ServletHandler extends HttpServlet{
                 st.executeUpdate();
                 st = conn.prepareStatement("DELETE FROM task WHERE task_id=?");
                 st.setString(1, taskID);
-                st.executeUpdate();
-                
-                //Redirect
-                resp.sendRedirect("src/dashboard.jsp");
+                st.executeUpdate();                
             }
             catch (SQLException e) {
                 System.out.println("Connection Failed! Check output console");
@@ -373,6 +367,39 @@ public class ServletHandler extends HttpServlet{
                 } catch (SQLException ex) {
                     Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println("Can not close connection");
+                }
+            }
+        }
+        
+        //Delete Comment
+        else if (req.getParameter("type").equalsIgnoreCase("delete_comment")) {
+            String taskID       = req.getParameter("task_id");
+            String commentID    = req.getParameter("comment_id"); 
+            System.out.println("taskID - commentID : " + taskID + " - " + commentID);
+            try {                
+                // Make connection to database
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    System.out.println("Berhasil connect ke Mysql JDBC Driver -- ServletHandler.java - delete_comment ");
+                } catch (ClassNotFoundException ex) {
+                    System.out.println("Where is your MySQL JDBC Driver? -- ServletHandler.java - delete_comment");
+                }
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");
+                
+                PreparedStatement st;
+                st = conn.prepareStatement("DELETE FROM comment WHERE comment_id=?");
+                st.setString(1, commentID);
+                st.executeUpdate();                
+            }
+            catch (SQLException e) {
+                System.out.println("Connection Failed! Check output console - delete_comment");
+            }
+            finally {                 
+                try { 
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Can not close connection - delete_comment");
                 }
             }
         }
