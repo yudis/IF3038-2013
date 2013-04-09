@@ -35,8 +35,9 @@
         stmt_.setString(1, taskID);
         ResultSet rs_tag = stmt_.executeQuery();
         rs_tag.beforeFirst();
+        tagList = "";
         while (rs_tag.next()) {
-            tagList = rs_tag.getString("tag_name") + " , " ;
+            tagList = tagList + rs_tag.getString("tag_name") + " , " ;
         }
         
         //Generate Output 
@@ -76,7 +77,6 @@
         </div>
         
         <%
-    }
-    
+    }    
     conn_.close();
 %>

@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -147,11 +146,9 @@ public class ServletHandler extends HttpServlet{
                     System.out.println("Where is your MySQL JDBC Driver?");
                 }
                 conn_category = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");
-                System.out.println("Berhasil connect................");
                 
                 Statement st = conn_category.createStatement(); 
                 st.executeUpdate("INSERT INTO category (cat_name, cat_creator) VALUES ('"+categoryName+"','"+categoryCreator+"')");
-                System.out.println("Insert category");
                 
                 PreparedStatement stmt_category = conn_category.prepareStatement("SELECT cat_id FROM category WHERE cat_name=?");
                 stmt_category.setString(1, categoryName);
@@ -159,15 +156,11 @@ public class ServletHandler extends HttpServlet{
                 rs_category.beforeFirst();
                 while (rs_category.next()) { 
                     categoryID = rs_category.getString("cat_id");
-                }
-                System.out.println("select cat_id");
-                
+                }                
                 String[] assigneArray = categoryAssigne.split(",");
                 for (int i=0; i<assigneArray.length; i++) {
                     st.executeUpdate("INSERT INTO cat_asignee (cat_id, username) VALUES ('"+categoryID+"','"+assigneArray[i]+"')");
-                }
-                System.out.println("insert cat asignee");
-                
+                }                
                 //Redirect
                 resp.sendRedirect("src/dashboard.jsp");
             }
@@ -182,6 +175,11 @@ public class ServletHandler extends HttpServlet{
                     System.out.println("Can not close connection");
                 }
             }
+        }
+        
+        //Delete Category
+        else if (req.getParameter("type").equalsIgnoreCase("delete_category")) {
+            //Code here
         }
     }
 }

@@ -236,27 +236,25 @@ function searchResult(resultID, resultType) {
         //s= "search_result.jsp?q="+resultID+"&type=task";
         window.location.href = "task_detail.jsp?task_id="+resultID;
     }
-    
 }
 
 function viewTask(taskID) {
     window.location.href = "task_detail.jsp?task_id="+taskID;
 }
-/*
-function searchUser(userID) {	
-	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
-	}
-	else {// code for IE6, IE5
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	
-	xmlhttp.onreadystatechange=function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
-		}
-	}
-		
-	xmlhttp.open("GET","search_result.jsp?q="+userID+"&type=user",true);
-	xmlhttp.send();
-} */
+
+function generateTask(categoryName) {
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
+        }
+    }
+    var url="category_task.jsp?categoryName="+categoryName;
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
