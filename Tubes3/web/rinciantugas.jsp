@@ -13,12 +13,265 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/css.css">
-        <link rel="stylesheet" href="css/buattask.css">        
+        <link rel="stylesheet" href="css/buattask.css">
         <title>Rincian Tugas : <%out.println(data.getNama());%> </title>
+        <script>
+            function submit_comment(form) {
+                if (form.comment.value != "") {
+                    var xmlhttp;
+                    if (window.XMLHttpRequest){
+                        xmlhttp = new XMLHttpRequest();
+                    } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+                    }
+                    
+                    xmlhttp.onreadystatechange = function(){
+                        if (xmlhttp.readyState==4 && xmlhttp.status==200)	{
+                            jumlah_komentar();
+                        }
+                    }
+
+                    id_tugas = "-1";
+                    if ((c = window.location.search.indexOf("id_tugas=")) != -1) {
+                        id_tugas = window.location.search.substring(c+9);
+                    } 
+
+                    params = "komentar="+escape(form.comment.value)+"&user="+localStorage.userLogin+"&id_tugas="+id_tugas;
+                    xmlhttp.open("POST","tambah_komentar.php",true);                
+                    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    xmlhttp.send(params);
+                    form.comment.value = "";
+                }
+            }
+        
+            function hapus_komentar(comment) {
+                var xmlhttp;
+                if (window.XMLHttpRequest){
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+                }
+                
+                xmlhttp.onreadystatechange = function(){
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)	{
+                        //alert(xmlhttp.responseText);
+                        jumlah_komentar();
+                    }
+                }
+
+                id_tugas = "-1";
+                if ((c = window.location.search.indexOf("id_tugas=")) != -1) {
+                    id_tugas = window.location.search.substring(c+9);
+                } 
+
+                var n = comment.innerHTML.indexOf(" ");
+                var tanggal = comment.innerHTML.substring(n+1,n+20);
+                //alert(tanggal);
+                
+                params = 'tanggal='+tanggal+'&user='+localStorage.userLogin+'&id_tugas='+id_tugas;
+                xmlhttp.open("POST","hapus_komentar.php",true);                
+                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xmlhttp.send(params);
+                alert(params);
+            }
+        
+            function validasi_file(place) {
+                var ext=place.value.substring(place.value.indexOf(".")+1);
+                if (ext=="jpeg" || ext == "avi" || ext=="pdf" || ext == "jpg") {
+                    document.getElementById("attach_upload").innerHTML += place.value+";";
+                    place.value = "";
+                } else {
+                    alert("Ekstensi file tidak didukung web");
+                    place.value = "";
+                }
+                //alert(place.value);
+            }
+                
+            function ambil_komentar() {
+                var xmlhttp2;
+                if (window.XMLHttpRequest) {
+                    xmlhttp2 = new XMLHttpRequest();                
+                } else {
+                    xmlhttp2 = new ActiveXObject("Microsoft.XMLHTTP"); 
+                }
+
+                var id_tugas = "-1";                
+                xmlhttp2.onreadystatechange = function() {
+                    if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
+                        var s = xmlhttp2.responseText;
+                        var n = s.indexOf("\n");
+                        daftar_komentar = document.getElementById("tempat_komentar");
+                        daftar_komentar.innerHTML = "";
+                        //alert(daftar_komentar.innerHTML);
+                        
+                        while (n != -1) {
+                            //Ambil satu data komentar
+                            var username = s.substring(0,n);
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+                            
+                            var tanggal = s.substring(0,n);
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+
+                            var komentar = unescape(s.substring(0,n));
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+
+                            var avatar = unescape(s.substring(0,n));
+                            s = s.substring(n+1);
+                            n = s.indexOf("\n");
+                            
+                            //Tampilkan datanya
+                            var tambah = '<div id = "daftarkomen">';
+                            tambah += '<div class="gambar_user"><img src="'+avatar+'"></div>';
+                            tambah += '<div class="data_komentar">';
+                            tambah += username + " " + tanggal + " :";
+                            
+                            if (username == localStorage.userLogin) {
+                                tambah += '<input type="button" class="hapus_comment" value="delete" onclick="hapus_komentar(this.parentNode)">';
+                            }
+                            
+                            tambah += "<br>"+komentar;
+                            tambah += '</div>'
+                            tambah += "</div>";
+                            daftar_komentar.innerHTML += tambah+"\n";
+                        }
+                    }
+                }            
+            
+                //Untuk mengambil daftar komentar awal
+                if ((c = window.location.search.indexOf("id_tugas=")) != -1) {
+                    id_tugas = window.location.search.substring(c+9);
+                }                 
+                var params = "id_tugas="+id_tugas+"&start="+document.getElementById("halaman_komentar").value;
+                xmlhttp2.open("POST","ambil_komentar.php",true);
+                xmlhttp2.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xmlhttp2.send(params);
+            }
+        
+            function jumlah_komentar() {
+                var xmlhttp;
+                if (window.XMLHttpRequest){
+                    xmlhttp = new XMLHttpRequest();				
+                } else {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+                }
+                
+                xmlhttp.onreadystatechange = function(){
+                    if (xmlhttp.readyState==4 && xmlhttp.status == 200)	{
+                        document.getElementById("max_komentar").value=xmlhttp.responseText;
+                        document.getElementById("halaman_komentar").value=xmlhttp.responseText;                        
+                        ambil_komentar();
+                    }
+                }
+                
+                var id_tugas = "-1";
+                if ((c = window.location.search.indexOf("id_tugas=")) != -1) {
+                    id_tugas = window.location.search.substring(c+9);
+                }                 
+                params = "id_tugas="+id_tugas;
+                xmlhttp.open("POST","jumlah_komentar.php",true);
+                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xmlhttp.send(params);
+            }
+        
+            function ubah_hal(i) {
+                var n = parseInt(document.getElementById("halaman_komentar").value)+i;
+                if (n > 0 && n <= document.getElementById("max_komentar").value) {
+                    document.getElementById("halaman_komentar").value = n;
+                    ambil_komentar();
+                }
+            }
+        
+            function auto_complete(text) {
+                var xmlhttp;
+                if (text == "") {
+                    document.getElementById("autobox").value = "";                    
+                } else {
+                    if (window.XMLHttpRequest){
+                        xmlhttp = new XMLHttpRequest();				
+                    } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+                    }
+                    
+                    xmlhttp.onreadystatechange = function(){
+                        if (xmlhttp.readyState==4 && xmlhttp.status == 200)	{
+                            //alert(xmlhttp.responseText);
+                            var s = xmlhttp.responseText;
+                            var n = s.indexOf("\n");
+                            document.getElementById("autobox").value = "";
+                            
+                            while (n != -1) {
+                                //Ambil satu data komentar
+                                var username = s.substring(0,n);
+                                s = s.substring(n+1);
+                                n = s.indexOf("\n");
+     
+                                //Tampilkan datanya
+                                var tambah = username+" ";
+                                document.getElementById("autobox").value += tambah+"\n";
+                            }
+                        }
+                    }
+                    
+                    params = "assignee="+escape(text);
+                    //alert(params);
+                    xmlhttp.open("POST","auto_complete_user.php",true);
+                    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    xmlhttp.send(params);
+                }
+            }
+        
+            function showEdit(){
+                document.getElementById("detail").innerHTML=document.getElementById("detailedit").innerHTML;
+            }
+            function hideEdit(){
+                document.getElementById("detailedit").style.visibility="hidden";
+                document.getElementById("detail").style.visibility="visible";
+            }
+            
+            function submit_edit(form) {
+                var xmlhttp;
+                if (window.XMLHttpRequest){
+                        xmlhttp = new XMLHttpRequest();				
+                } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+                }
+				
+                xmlhttp.onreadystatechange = function(){
+                    if (xmlhttp.readyState==4)	{
+                        //alert(xmlhttp.responseText);
+                        take_data();
+                    }
+                }
+
+                var id_tugas = "-1";
+                if ((c = window.location.search.indexOf("id_tugas=")) != -1) {
+                    id_tugas = window.location.search.substring(c+9);
+                }     
+				
+                params = "assignee="+escape(form.assignee.value)+"&tag="+escape(form.catname.value)+"&id_tugas="+id_tugas+"&status=";
+                if (form.status.checked) params += "1";
+                else params += "0";
+                params += "&deadline=";
+                params += escape(form.year.value+"-"+form.month.value+"-"+form.day.value+" "+form.hour.value+":"+form.minute.value+":00");
+                
+                //alert(params);
+                xmlhttp.open("POST","edit_detail_tugas.php",true);
+                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xmlhttp.send(params);
+            }
+            
+            function hapus_task() {
+                
+            }
+        </script>        
+        
     </head>
-    <body>
+    <body onload="jumlah_komentar();">
         <%-- Mulai daerah header buatan Jo--%>
-        <jsp:include page="header.jsp" flush="true" />
+        <%--<jsp:include page="header.jsp" flush="true" />--%>
         
         <!-------------------------------BODY HALAMAN------------------------------------->
         <div class="main">
@@ -29,6 +282,7 @@
                     <input type="button" id="back" value="" onclick="location.href='dashboard.html';">
                 </form>
             </div>
+            <div id="hapus" onclick="hapus_task();"></div>
 
             <div id="rinciantugas">
                 <div id="judultugas"><%out.println(data.getNama());%></div>
@@ -48,12 +302,15 @@
                     <label>DEADLINE</label>
                     <a id="deadline"><%out.println(data.getDeadline());%></a>
                     
+                    <label>TASK CREATOR</label>
+                    <a id="creator"><%out.println(data.getCreator());%></a>
+                    
                     <label>ASSIGNEE</label>
                     <div id="assignee">
                     <%
                         String[] assignee = data.getAssignee();
                         for (int i=0;i<assignee.length;++i) {
-                            out.println("<a href='profile.jsp?username="+assignee[i]+"'>"+assignee[i]+"</a>");
+                            out.println("<a href='profile.jsp?username="+assignee[i]+"'>"+assignee[i]+"</a><br>");
                         }
                     %>
                     </div>
@@ -75,6 +332,7 @@
                             } else if (ext.equals("mp4")) {
                                 out.println("<div class=\"attach_image\"></div>");
                             }
+                            out.println("<br>");
                         }
                     %>
                     </div>
@@ -151,7 +409,7 @@
                             tambah2 += 'onclick="hideEdit(),submit_edit(this.form)"></form>';
                     -->
                 </div>
-                <div id ="detailedit">
+                <%--<div id ="detailedit">
                     <label>NAMA KATEGORI</label>
                     <a id="kategori"><%out.println(data.getKategori());%></a>
                     
@@ -168,7 +426,7 @@
                         
                         <input type="submit" value="submit">
                     </form>
-                </div>
+                </div>--%>
             </div>
             <div id="komen">
                 <div id="tempat_komentar">
@@ -201,7 +459,5 @@
         <div class="footer">
             Copyright © Christianto Handojo - Johannes Ridho - Ahmad Faiz - Fandi Pradana - Sigit Aji
         </div>        
-        
-        <h1>Hello World!</h1>
     </body>
 </html>

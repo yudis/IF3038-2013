@@ -29,16 +29,17 @@ public class DataAwal extends HttpServlet{
     
     public DataAwal(int n) {
         try {
-            conn = DriverManager.getConnection("jdbc:3306:progin_405_13510003", "root", "");
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");        
             query = conn.createStatement();
             ResultSet result = query.executeQuery("SELECT * FROM tugas WHERE id_tugas="+n);
             while (result.next()) {
-                nama = result.getString("nama");
+                nama = result.getString("nama_tugas");
                 status = result.getInt("status");
                 deadline = result.getString("deadline");
                 tag = result.getString("tag");
                 sem = result.getString("attachment");
-                creator = result.getString("creator");
+                creator = result.getString("username");
                 id_kategori = result.getInt("id_kategori");
             }
             result.close();
@@ -62,8 +63,10 @@ public class DataAwal extends HttpServlet{
             result.first();
             kategori = result.getString("nama_kategori");
             result.close();
-        } catch(Exception e) {
-
+        } catch(SQLException e) {
+            nama = e.getMessage();
+        } catch (ClassNotFoundException e) {
+            nama = e.getMessage();
         }
     }
 
