@@ -85,7 +85,7 @@ public class AddFile extends HttpServlet {
                 byte[] b = new byte[i];
                 is.read(b);
                 String fileName = getFileName(part);
-                System.out.println("FILE:" + fileName);
+                //System.out.println("FILE:" + fileName);
                 if (fileName != null && !fileName.equals("")) {
                     System.out.println("MASUk");
                     insPelampiran = connection.prepareStatement(insertPelampiran);
@@ -110,6 +110,7 @@ public class AddFile extends HttpServlet {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        response.sendRedirect("taskdetails.jsp");
     }
 
     private String getFileName(Part part) {
