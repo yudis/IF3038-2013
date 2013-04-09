@@ -19,13 +19,13 @@ public class ConnectDB {
     public static final String dbUsername = "progin";
     public static final String dbPassword = "progin";
     
-    public static Object[][] jalankanQuery(String query) throws ServletException, SQLException {
+    public static String[][] jalankanQuery(String query) throws ServletException, SQLException {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
         ResultSetMetaData metadata;
         int jumlah_kolom = 0;
-        ArrayList<Object[]> data = null;
+        ArrayList<String[]> data = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(ConnectDB.dbURL, ConnectDB.dbUsername, ConnectDB.dbPassword);
@@ -33,12 +33,12 @@ public class ConnectDB {
             rs = st.executeQuery(query);
             metadata = rs.getMetaData();
             jumlah_kolom = metadata.getColumnCount();
-            data = new ArrayList<Object[]>();
+            data = new ArrayList<String[]>();
 
             while (rs.next()) {
-                Object[] row = new Object[jumlah_kolom];
+                String[] row = new String[jumlah_kolom];
                 for (int i = 0; i < jumlah_kolom; i++) {
-                    row[i] = rs.getObject(i + 1);
+                    row[i] = rs.getString(i + 1);
                 }
                 data.add(row);
             }
@@ -60,7 +60,7 @@ public class ConnectDB {
                 con = null;
             }
         }
-        Object[][] hasil = new Object[data.size()][jumlah_kolom];
+        String[][] hasil = new String[data.size()][jumlah_kolom];
         for (int i = 0; i < data.size(); i++) {
             System.arraycopy(data.get(i), 0, hasil[i], 0, jumlah_kolom);
         }

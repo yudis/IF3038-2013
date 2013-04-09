@@ -110,9 +110,9 @@ public class Kategori extends HttpServlet {
         out.println("Kategori");
         out.println("</div>");
         String query = "SELECT nama, idkategori, pembuat FROM kategori, assignee_has_kategori WHERE idkategori = kategori_idkategori AND accounts_idaccounts = " + userID;
-        Object[][] hasil = ConnectDB.jalankanQuery(query);
-        out.println(hasil[1][0]);
-
+        String[][] hasil = ConnectDB.jalankanQuery(query);
+        out.println(hasil[1][2]);
+        
         //connect ke DB
 //        Connection connection = null;
 //        Statement statement = null;
