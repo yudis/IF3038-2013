@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-//import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -31,8 +30,7 @@ public class IndexHandler extends HttpServlet{
             String password = req.getParameter("login_password");
             String fullname = "";
             
-            try {
-                
+            try {                
                 // Make connection to database
                 try {
                     Class.forName("com.mysql.jdbc.Driver");

@@ -204,8 +204,6 @@ function showSearchHint(str) {
 }
 
 function searchResult(resultID, resultType) {
-    //document.getElementById('dynamic_content').innerHTML = "<br>";
-    //document.getElementById('dynamic_content').innerHTML += "Search result for : " + resultID + "<br><br>";
     document.getElementById('txtHint').style.display = "none";
 
     if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -241,6 +239,9 @@ function searchResult(resultID, resultType) {
     
 }
 
+function viewTask(taskID) {
+    window.location.href = "task_detail.jsp?task_id="+taskID;
+}
 /*
 function searchUser(userID) {	
 	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
