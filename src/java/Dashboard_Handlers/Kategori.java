@@ -8,7 +8,6 @@ import ConnectDB.ConnectDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -66,7 +65,15 @@ public class Kategori extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            showKategori("1", response);
+            if (request.getParameter("aksi").equals("lihat")) {
+                showKategori(request.getParameter("uid"), response);
+            }
+            else if(request.getParameter("aksi").equals("tambah")){
+                addKategori(request.getParameter("namaKategori"), request.getParameter("uid"), request.getParameter("assignee"));
+            }
+            else if(request.getParameter("aksi").equals("hapus")){
+                deleteKategori(request.getParameter("uid"), response);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Kategori.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -101,149 +108,81 @@ public class Kategori extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void buatKategori() {
-    }
-
     private void showKategori(String userID, HttpServletResponse response) throws ServletException, SQLException, IOException {
         PrintWriter out = response.getWriter();
         out.println("<div id='category_head'>");
         out.println("Kategori");
         out.println("</div>");
         String query = "SELECT nama, idkategori, pembuat FROM kategori, assignee_has_kategori WHERE idkategori = kategori_idkategori AND accounts_idaccounts = " + userID;
-        String[][] hasil = ConnectDB.jalankanQuery(query);
-        out.println(hasil[1][2]);
-        
-        //connect ke DB
-//        Connection connection = null;
-//        Statement statement = null;
-//        ResultSet resultSet = null;
-//
-//        String query = "SELECT nama, idkategori, pembuat FROM kategori, assignee_has_kategori WHERE idkategori = kategori_idkategori AND accounts_idaccounts = " + userID;
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            connection = DriverManager.getConnection(DBInfo.dbURL, DBInfo.dbUsername, DBInfo.dbPassword);
-//            statement = connection.createStatement();
-//            resultSet = statement.executeQuery(query);
-//            //show hasil
-//            int jumlah_hasil = 0;
-//            while (resultSet.next()) {
-//                out.println("<div class='category_block'>");
-//                if (resultSet.getInt("pembuat") == 1) {
-//                    out.println("<div class='tombol_hapus_kategori'>");
-//                    out.println("X");
-//                    out.println("</div>");
-//                }
-//                out.println("<div class='category_pic'>");
-//                out.println("<img src='images/Book-icon.png' alt=''/>");
-//                out.println("</div>");
-//                out.println("<div class='category_name'>");
-//                out.println(resultSet.getString("nama"));
-//                out.println("</div>");
-//                out.println("</div>");
-//                jumlah_hasil++;
-//            }
-//            out.println("<div class=\"category_block\" id=\"tambah_kategori\" onclick=\"location.href='#category_form'\">");
-//            out.println("<div class=\"category_pic\">");
-//            out.println("<img src=\"images/tambah.png\" alt=''/>");
-//            out.println("</div>");
-//            out.println("<div class=\"category_name\">");
-//            out.println("Tambah kategori...");
-//            out.println("</div>");
-//            out.println("</div>");
-//
-//            if (jumlah_hasil > 0) {
-//                out.println("<div class=\"category_block\" id=\"tambah_kategori\" onclick=\"location.href='#category_form'\">");
-//                out.println("<div class=\"category_pic\">");
-//                out.println("<img src=\"images/hapus.png\" alt=''/>");
-//                out.println("</div>");
-//                out.println("<div class=\"category_name\">");
-//                out.println("Hapus kategori...");
-//                out.println("</div>");
-//                out.println("</div>");
-//            }
-//        } catch (SQLException e) {
-//            out.print("error");
-//            throw new ServletException("Servlet Could not display records.", e);
-//        } catch (ClassNotFoundException e) {
-//            throw new ServletException("JDBC Driver not found.", e);
-//        } finally {
-//            if (resultSet != null) {
-//                resultSet.close();
-//                resultSet = null;
-//            }
-//            if (statement != null) {
-//                statement.close();
-//                statement = null;
-//            }
-//            if (connection != null) {
-//                connection.close();
-//                connection = null;
-//            }
-//        }
-//        
+        String[][] hasil = ConnectDB.getHasilQuery(query);
+
+        for (int i = 0; i < hasil.length; i++) {
+            out.println("<div class='category_block'>");
+            if (hasil[i][2].equals("1")) {
+                out.println("<a href='Kategori?aksi=hapus&uid="+hasil[i][1]+"'>");
+                out.println("<div class='tombol_hapus_kategori'>");
+                out.println("X");
+                out.println("</div>");
+                out.println("</a>");
+            }
+            out.println("<div class='category_pic'>");
+            out.println("<img src='images/Book-icon.png' alt=''/>");
+            out.println("</div>");
+            out.println("<div class='category_name'>");
+            out.println(hasil[i][0]);
+            out.println("</div>");
+            out.println("</div>");
+        }
+        out.println("<div class=\"category_block\" id=\"tambah_kategori\" onclick=\"location.href='#category_form'\">");
+        out.println("<div class=\"category_pic\">");
+        out.println("<img src=\"images/tambah.png\" alt=''/>");
+        out.println("</div>");
+        out.println("<div class=\"category_name\">");
+        out.println("Tambah kategori...");
+        out.println("</div>");
+        out.println("</div>");
+        if (hasil.length > 0) {
+            out.println("<div class=\"category_block\" id=\"hapus_kategori\" onclick=\"show_del_cat()\">");
+            out.println("<div class=\"category_pic\">");
+            out.println("<img src=\"images/hapus.png\" alt=''/>");
+            out.println("</div>");
+            out.println("<div class=\"category_name\">");
+            out.println("Hapus kategori...");
+            out.println("</div>");
+            out.println("</div>");
+        }
     }
 
-    private void addKategori(String namaKategori, String idPembuat, String assignee) throws ServletException {
+    private void addKategori(String namaKategori, String idPembuat, String assignee) throws ServletException, SQLException {
         //query bikin kategori baru
-        
-        String query1 = "INSERT INTO kategori (nama, pembuat) VALUES('\".$_POST[\"catname\"].\"',\".$_POST[\"pembuat\"].\")";
-        
+
+        String query1 = "INSERT INTO kategori (nama, pembuat) VALUES('" + namaKategori + "'," + idPembuat + ")";
+        ConnectDB.jalankanQuery(query1);
 
         //query update assignee_has_kategori masukin pembuat sebagai assignee
-
+        String query2 = "INSERT INTO assignee_has_kategori (accounts_idaccounts, kategori_idkategori) VALUES(" + idPembuat + ",(SELECT idkategori from kategori where nama = '" + namaKategori + "' and pembuat = " + idPembuat + "))";
+        ConnectDB.jalankanQuery(query2);
 
         //query update assignee_has_kategori masukin semua assignee
+        String[] list_assignee = assignee.split(", ");
+        for (int i = 0; i < list_assignee.length; i++) {
+            String query3 = "INSERT INTO assignee_has_kategori (accounts_idaccounts, kategori_idkategori) VALUES((SELECT idaccounts FROM accounts WHERE username = '" + list_assignee[i] + "'),(SELECT idkategori from kategori where nama = '" + namaKategori + "' and pembuat = " + idPembuat + "))";
+            ConnectDB.jalankanQuery(query3);
+        }
     }
 
-    /*
-     * Fungsi bantuan untuk jalanin query.
-     */
-//    private Object[][] jalankanQuery(String query) throws ServletException, SQLException {
-//        Connection con = null;
-//        Statement st = null;
-//        ResultSet rs = null;
-//        ResultSetMetaData metadata;
-//        int jumlah_kolom = 0;
-//        ArrayList<Object[]> data = null;
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            con = DriverManager.getConnection(ConnectDB.dbURL, ConnectDB.dbUsername, ConnectDB.dbPassword);
-//            st = con.createStatement();
-//            rs = st.executeQuery(query);
-//            metadata = rs.getMetaData();
-//            jumlah_kolom = metadata.getColumnCount();
-//            data = new ArrayList<Object[]>();
-//
-//            while (rs.next()) {
-//                Object[] row = new Object[jumlah_kolom];
-//                for (int i = 0; i < jumlah_kolom; i++) {
-//                    row[i] = rs.getObject(i + 1);
-//                }
-//                data.add(row);
-//            }
-//        } catch (SQLException e) {
-//            throw new ServletException("Servlet Could not display records.", e);
-//        } catch (ClassNotFoundException e) {
-//            throw new ServletException("JDBC Driver not found.", e);
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//                rs = null;
-//            }
-//            if (st != null) {
-//                st.close();
-//                st = null;
-//            }
-//            if (con != null) {
-//                con.close();
-//                con = null;
-//            }
-//        }
-//        Object[][] hasil = new Object[data.size()][jumlah_kolom];
-//        for (int i = 0; i < data.size(); i++) {
-//            System.arraycopy(data.get(i), 0, hasil[i], 0, jumlah_kolom);
-//        }
-//
-//        return hasil;
-//    }
+    private void deleteKategori(String idkategori, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        String query1 = "DELETE FROM accounts_has_tugas WHERE tugas_idtugas in (SELECT idtugas FROM tugas WHERE kategori_idkategori = " + idkategori + ")";
+        String query2 = "DELETE FROM tugas_has_tag WHERE tugas_idtugas in (SELECT idtugas FROM tugas WHERE kategori_idkategori =" + idkategori + ")";
+        String query3 = "DELETE FROM tugas WHERE kategori_idkategori = " + idkategori;
+        String query4 = "DELETE FROM assignee_has_kategori WHERE kategori_idkategori = " + idkategori;
+        String query5 = "DELETE FROM kategori WHERE idkategori = " + idkategori;
+
+        ConnectDB.jalankanQuery(query1);
+        ConnectDB.jalankanQuery(query2);
+        ConnectDB.jalankanQuery(query3);
+        ConnectDB.jalankanQuery(query4);
+        ConnectDB.jalankanQuery(query5);
+        response.sendRedirect("dashboard.jsp");
+    }
 }

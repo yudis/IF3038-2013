@@ -19,7 +19,10 @@ public class ConnectDB {
     public static final String dbUsername = "progin";
     public static final String dbPassword = "progin";
     
-    public static String[][] jalankanQuery(String query) throws ServletException, SQLException {
+    /*
+     * Untuk query yang ada hasilnya. Seperti query SELECT
+     */
+    public static String[][] getHasilQuery(String query) throws ServletException, SQLException {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
@@ -66,5 +69,34 @@ public class ConnectDB {
         }
 
         return hasil;
+    }
+    
+    /*
+     * Untuk query yang ga ada hasilnya. Seperti INSERT
+     */
+    public static void jalankanQuery(String query) throws ServletException, SQLException {
+        Connection con = null;
+        Statement st = null;
+       
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(ConnectDB.dbURL, ConnectDB.dbUsername, ConnectDB.dbPassword);
+            st = con.createStatement();
+            st.executeUpdate(query);
+        } catch (SQLException e) {
+            throw new ServletException("Servlet Could not display records.", e);
+        } catch (ClassNotFoundException e) {
+            throw new ServletException("JDBC Driver not found.", e);
+        } finally {
+            if (st != null) {
+                st.close();
+                st = null;
+            }
+            if (con != null) {
+                con.close();
+                con = null;
+            }
+        }
+        
     }
 }

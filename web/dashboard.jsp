@@ -7,91 +7,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-
 <html>
     <head>
-
         <title>Dashboard</title>
         <link href="styles/header.css" rel="stylesheet" type="text/css" />
         <link href="styles/dashboard.css" rel="stylesheet" type="text/css" />
-
+        <script src="js/dashboard.js"></script>
     </head>
 
-    <body>
+    <body onload="showKategori(1)">
         <div id="container">
-            <div id="header">
-                <div class=logo id="logo">
-                    <a href="dashboard.html"><img src="../images/logo.png" title="Home" alt="Home"/></a>
-                </div>
-                <div id="space">
-                </div>
-                <div id="search">
-                    <input type="text" name="search" id="searchbox">
-                    <button type="submit" id="searchbutton"></button>
-                </div>
-                <div class="menu" id="logout">
-                    <a href="index.html">Logout</a>
-                </div>
-                <div class="menu" id="profile">
-                    <a href="profile.html">Profile</a>
-                </div>
-                <div class="menu" id="home">
-                    <a href="dashboard.html">Home</a>
-                </div>
-            </div>
+            <%@include file="header.jsp" %>
 
             <div id="category">
-                <div id="category_head">
-                    Kategori
-                </div>
-
-                <div class="category_block" id="k1" onclick="showK1()">
-                    <div class="tombol_hapus_kategori">
-                        X
-                    </div>
-                    <div class="category_pic">
-                        <img src="../images/Book-icon.png" alt=""/>
-                    </div>
-                    <div class="category_name">
-                        Kuliah
-                    </div>
-                </div>
-
-                <div class="category_block" id="k2" onclick="showK2()">
-                    <div class="category_pic">
-                        <img src="../images/Book-icon.png" alt=""/>
-                    </div>
-                    <div class="category_name">
-                        Eksperimen
-                    </div>
-                </div>
-
-                <div class="category_block" id="k3" onclick="showK3()">
-                    <div class="category_pic">
-                        <img src="../images/menguasai-dunia.png" alt=""/>
-                    </div>
-                    <div class="category_name">
-                        Menguasai Dunia
-                    </div>
-                </div>
-
-                <div class="category_block" id="tambah_kategori" onclick="location.href='#category_form'">
-                    <div class="category_pic">
-                        <img src="../images/tambah.png" alt=""/>
-                    </div>
-                    <div class="category_name">
-                        Tambah kategori...
-                    </div>
-                </div>
-
-                <div class="category_block" id="delete_kategori" onclick="">
-                    <div class="category_pic">
-                        <img src="../images/hapus.png" alt=""/>
-                    </div>
-                    <div class="category_name">
-                        Hapus kategori...
-                    </div>
-                </div>
+                
             </div>
             <div id="task">
                 <div id="task_header">
@@ -168,4 +97,3 @@
         </div>
     </body>
 </html>
-
