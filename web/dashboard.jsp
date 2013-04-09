@@ -46,6 +46,9 @@
                 </div>
 
                 <div class="category_block" id="k1" onclick="showK1()">
+                    <div class="tombol_hapus_kategori">
+                        X
+                    </div>
                     <div class="category_pic">
                         <img src="../images/Book-icon.png" alt=""/>
                     </div>
@@ -80,17 +83,29 @@
                         Tambah kategori...
                     </div>
                 </div>
+
+                <div class="category_block" id="delete_kategori" onclick="">
+                    <div class="category_pic">
+                        <img src="../images/hapus.png" alt=""/>
+                    </div>
+                    <div class="category_name">
+                        Hapus kategori...
+                    </div>
+                </div>
             </div>
             <div id="task">
                 <div id="task_header">
                     Tasks
                 </div>
 
-                <div class="task_block" id="tambah_task" onclick="location.href='newtask.html'">
+                <div class="aksi_task" onclick="location.href='newtask.html'">
                     <p>Tambah Task...</p>
                 </div>
 
                 <div class="task_block" id="k11">
+                    <div class="tombol_hapus_task">
+                        X
+                    </div>
                     <div class="task_judul">
                         <a href="viewtask.html">Mengerjakan Tugas Progin</a>
                     </div>
@@ -99,6 +114,9 @@
                     </div>
                     <div class="task_tag">
                         Tags: kuliah
+                    </div>
+                    <div class="task_status">
+                        Selesai
                     </div>
                 </div>
 
@@ -114,7 +132,11 @@
                     </div>
                 </div>
 
-                
+                <div class="aksi_task">
+                    <p>Hapus Task...</p>
+                </div>
+
+
             </div>
         </div>
 
