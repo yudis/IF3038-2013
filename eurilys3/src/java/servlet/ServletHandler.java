@@ -22,6 +22,7 @@ public class ServletHandler extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection conn = null;
         
+        //Login
         if (req.getParameter("type").equalsIgnoreCase("login")) {
             System.out.println("Login Handler...");
             
@@ -77,8 +78,9 @@ public class ServletHandler extends HttpServlet{
                 }
             }
         }
-        else
-        if (req.getParameter("type").equalsIgnoreCase("signup")) {
+        
+        //Sign Up
+        else if (req.getParameter("type").equalsIgnoreCase("signup")) {
             System.out.println("Sign Up Handler... ");
             String username = req.getParameter("signup_username");
             String password = req.getParameter("signup_password");
@@ -126,8 +128,9 @@ public class ServletHandler extends HttpServlet{
                 }
             }
         }
-        else
-        if (req.getParameter("type").equalsIgnoreCase("add_category")) {
+
+        //Add Category
+        else if (req.getParameter("type").equalsIgnoreCase("add_category")) {
             Connection conn_category = null;
             ResultSet rs_category = null;
             String categoryID       = "";
@@ -144,27 +147,26 @@ public class ServletHandler extends HttpServlet{
                     System.out.println("Where is your MySQL JDBC Driver?");
                 }
                 conn_category = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");
-
-                PreparedStatement stmt_category = conn_category.prepareStatement("INSERT INTO `category`(`cat_name`, `cat_creator`) VALUES (?,?)");
-                stmt_category.setString(1, categoryName);
-                stmt_category.setString(2, categoryCreator);
-                stmt_category.executeQuery();
+                System.out.println("Berhasil connect................");
                 
-                stmt_category = conn_category.prepareStatement("SELECT cat_id FROM category WHERE cat_name=?");
+                Statement st = conn_category.createStatement(); 
+                st.executeUpdate("INSERT INTO category (cat_name, cat_creator) VALUES ('"+categoryName+"','"+categoryCreator+"')");
+                System.out.println("Insert category");
+                
+                PreparedStatement stmt_category = conn_category.prepareStatement("SELECT cat_id FROM category WHERE cat_name=?");
                 stmt_category.setString(1, categoryName);
                 rs_category = stmt_category.executeQuery();
                 rs_category.beforeFirst();
                 while (rs_category.next()) { 
                     categoryID = rs_category.getString("cat_id");
                 }
+                System.out.println("select cat_id");
                 
                 String[] assigneArray = categoryAssigne.split(",");
                 for (int i=0; i<assigneArray.length; i++) {
-                    stmt_category = conn_category.prepareStatement("INSERT INTO `cat_asignee`(`cat_id`, `username`) VALUES (?,?)");
-                    stmt_category.setString(1, categoryID);
-                    stmt_category.setString(2, assigneArray[i]);
-                    stmt_category.executeQuery();
+                    st.executeUpdate("INSERT INTO cat_asignee (cat_id, username) VALUES ('"+categoryID+"','"+assigneArray[i]+"')");
                 }
+                System.out.println("insert cat asignee");
                 
                 //Redirect
                 resp.sendRedirect("src/dashboard.jsp");
