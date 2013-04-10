@@ -526,6 +526,53 @@ public class TugasDao extends DataAccessObject {
 
         return result;        
     }
+
+    public Collection<Tugas> getTugas2(String id){
+        ArrayList<Tugas> result = null;
+        Tugas tugas = null;
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("SELECT t.`id` AS `id`, t.`nama` AS `nama`, `tgl_deadline`,  `status` , t.`last_mod` AS `last_mod`, t.`pemilik` AS `pemilik_username`, u.`email` AS `pemilik_email`, u.`password` AS `pemilik_password`, u.`full_name` AS `pemilik_full_name`, u.`tgl_lahir` AS `pemilik_tgl_lahir`, u.`avatar` AS `pemilik_avatar`, c.`id` AS `kategori_id`, c.`nama` AS `kategori_nama`, c.`last_mod` AS `kategori_last_mod` FROM `categories` c, `tugas` t, `users` u WHERE  c.`id` = t.`id_kategori` AND u.`username` = t.`pemilik`;");
+
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            result = new ArrayList<Tugas>();
+            while (rs.next()) {
+                tugas = new Tugas();
+
+                tugas.setId(rs.getInt("id"));
+                tugas.setNama(rs.getString("nama"));
+                tugas.setTglDeadline(rs.getDate("tgl_deadline"));
+                tugas.setStatus(rs.getBoolean("status"));
+                tugas.setLastMod(rs.getTimestamp("last_mod"));
+
+                User pemilik = new User();
+                pemilik.setUsername(rs.getString("pemilik_username"));
+                pemilik.setEmail(rs.getString("pemilik_email"));
+                pemilik.setHashedPassword(rs.getString("pemilik_password"));
+                pemilik.setFullName(rs.getString("pemilik_full_name"));
+                pemilik.setTglLahir(rs.getDate("pemilik_tgl_lahir"));
+                pemilik.setAvatar(rs.getString("pemilik_avatar"));
+                tugas.setPemilik(pemilik);
+
+                Category kategori = new Category();
+                kategori.setId(rs.getInt("kategori_id"));
+                kategori.setNama(rs.getString("kategori_nama"));
+                kategori.setLastMod(rs.getTimestamp("kategori_last_mod"));
+                tugas.setKategori(kategori);
+                
+                tugas.setTags(getTags(rs.getInt("id")));
+                tugas.setAttachments(getAttachments(rs.getInt("id")));
+                tugas.setAssignees(getAssignees(rs.getInt("id")));
+                
+                result.add(tugas);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }    
     
     public Collection<Tugas> getTugasSearch(String name, int start, int n) {
         Tugas tugas = null;

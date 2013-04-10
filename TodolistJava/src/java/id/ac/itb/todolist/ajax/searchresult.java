@@ -82,23 +82,53 @@ public class searchresult extends HttpServlet {
         TugasDao tugasdao = new TugasDao();
         CategoryDao categorydao = new CategoryDao();
         
-        
         JSONObject result = new JSONObject();
         JSONArray jArray = null;
         if (request.getParameter("filter") != null){
             
             if (request.getParameter("filter").equals("All")){
-                
+
                 if (curTable.equals("username") && (n > 0)){
                     jArray = new JSONArray(userdao.getUserSearch(q, x, n));
+                    result.put("user", jArray);                    
                     if (jArray.size() >= n){
                         result.put("x", (x + n));
                         result.put("n", "username");
+                        n = 0;
                     } else {
-                        result.put("x", null);
-                        result.put("n", null);
-                    }          
+                        n -= jArray.size();
+                        x = 0;
+                        curTable = "category";
+                    }
                 }
+                
+                if (curTable.equals("category") && (n > 0)){
+                    jArray = new JSONArray(categorydao.getCategorySearch(q, x, n));
+                    result.put("category", jArray);                    
+                    if (jArray.size() >= n){
+                        result.put("x", (x + n));
+                        result.put("n", "category");
+                        n = 0;
+                    } else {
+                        n -= jArray.size();
+                        x = 0;
+                        curTable = "tugas";
+                    }
+                }
+                
+                if (curTable.equals("tugas") && (n > 0)){
+                    jArray = new JSONArray(tugasdao.getTugasSearch(q, x, n));
+                    result.put("tugas", jArray);                   
+                    if (jArray.size() >= n){
+                        result.put("x", (x + n));
+                        result.put("n", "tugas");
+                        n = 0;
+                    } else {
+                        n -= jArray.size();
+                        result.put("x", 0);
+                        result.put("n", null);
+                    }
+                }                
                 
             } else if (request.getParameter("filter").equals("Username")){
                 
