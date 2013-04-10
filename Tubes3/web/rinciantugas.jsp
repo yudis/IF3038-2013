@@ -239,40 +239,7 @@
                     calendar.set("date");
                 }
             }
-            
-            function submit_edit(form) {
-                var xmlhttp;
-                if (window.XMLHttpRequest){
-                    xmlhttp = new XMLHttpRequest();				
-                } else {
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
-                }
-				
-                xmlhttp.onreadystatechange = function(){
-                    if (xmlhttp.readyState===4)	{
-                        //alert(xmlhttp.responseText);
-                        take_data();
-                    }
-                };
-
-                var id_tugas = "-1";
-                var c = window.location.search.indexOf("id_tugas=");
-                if (c !== -1) {
-                    id_tugas = window.location.search.substring(c+9);
-                }     
-				
-                params = "assignee="+escape(form.assignee.value)+"&tag="+escape(form.catname.value)+"&id_tugas="+id_tugas+"&status=";
-                if (form.status.checked) params += "1";
-                else params += "0";
-                params += "&deadline=";
-                params += escape(form.year.value+"-"+form.month.value+"-"+form.day.value+" "+form.hour.value+":"+form.minute.value+":00");
-                
-                //alert(params);
-                xmlhttp.open("POST","edit_detail_tugas",true);
-                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-                xmlhttp.send(params);
-            }
-            
+                        
             function hapus_task() {
                 if (localStorage.userLogin !== <%out.print(data.getCreator());%>) {
                     alert("Anda bukan pembuat tugas");
@@ -404,7 +371,7 @@
                     <label>NAMA KATEGORI</label>
                     <a id="kategori"><%out.println(data.getKategori());%></a>
                     
-                    <form action="edit_detail_tugas" method="POST">
+                    <form action="edit_detail_tugas" method="POST" enctype="multipart/form-data">
                         <label>STATUS TUGAS</label>
                         <input type="checkbox" name="status" value="done"<%if (data.getStatus()==1) out.println("checked");%>> 
                         
@@ -426,7 +393,7 @@
                         <input type="textarea" name="catname" placeholder="tag" value="<%out.println(data.getTag());%>">
                         
                         <label>ATTACHMENT</label>
-                        <input type="file" name="file" id="file" onchange="validasi_file(this);">
+                        <input type="file" name="file" id="file" onchange="validasi_file(this);" multiple>
                         
                         <input class="submitreg" name="submit" type="submit" value="submit">
                     </form>

@@ -14,7 +14,10 @@
 	width:70px;
 }
 .calendar-box .calendar-cancel {
-	width:100%;
+    height: 25px;
+    margin-bottom: 5px;
+    padding: 0;
+    width: 100%;
 }
 .calendar-box table td {
 	width:14%;
@@ -34,4 +37,13 @@
 	padding:0 5px;
 	margin-left:-5px;
 	background-color:#c9ff8b;
+}
+
+.calendar-box .header {
+    padding-top: 1px;
+    height: 35px;
+    width: 1280px;
+    background-color: #e58100;
+    margin-left: -10px;
+    margin-top: -10px;      
 }
