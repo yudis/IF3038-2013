@@ -50,7 +50,6 @@ public class AddFile extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("user");
         String nama = request.getParameter("tugas");
-        String asignee = request.getParameter("asignee");
         String tag = request.getParameter("tag");
         String deadline = request.getParameter("deadline");
         String kategori = request.getParameter("kategori");
@@ -104,9 +103,16 @@ public class AddFile extends HttpServlet {
             String insertPenugasan = "INSERT INTO penugasan (`username`, `IDTask`) VALUES (?, ?)";
             PreparedStatement insPenugasan;
             insPenugasan = connection.prepareStatement(insertPenugasan);
-            insPenugasan.setString(1, asignee);
             insPenugasan.setString(2, maxID);
-            rs = insPenugasan.executeUpdate();
+            String[] assignee = request.getParameterValues("asignee");
+            int i = 0;
+            while (i < assignee.length && assignee[i] != null) {
+                if (!assignee[i].equals("")) {
+                    insPenugasan.setString(1, assignee[i]);
+                    rs = insPenugasan.executeUpdate();
+                }
+                i++;
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -17,6 +17,7 @@
     <div id="rightsidebar">
         <div id="wrapper-left">
             <form class="task" name="MakeForm" method="post" onSubmit="checkSubmission(this, event)" enctype="multipart/form-data" action="AddFile">
+                <input type="text" name="jmlAssignee" id="jmlAssignee"value="1"/>
                 <h1>Fill Details</h1>
                 <ul>
                     <li>
@@ -35,10 +36,10 @@
                         <label for="filebutton3">Attachment 3</label>
                         <input id="filebutton3" name="filebutton" type="file" onChange="checkFile('filebutton3')"/>
                     </li>
-                    <li>
+                    <li id="tmptAssignee">
                         <label for="asignee">Assignee</label>
-                        <input id="asignee" name="asignee" type="text" onKeyUp="searchSuggest()"/>
-                        <button class="task" name="addButton" type="button" onclick="add()"><b>Add</b></button>
+                        <input id="asignee1" name="asignee" type="text" onKeyUp="searchSuggest(this.id)"/>
+                        <button id="btn" class="task" name="addButton" type="button" onclick="add()"><b>Add</b></button>
                     </li>
                     <li id="layer1">
                     </li>
