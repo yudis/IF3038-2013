@@ -190,17 +190,6 @@ public class ServletHandler extends HttpServlet{
             HttpSession session     = req.getSession(true);
             List<String> deleteTaskId = new ArrayList<String>();
             
-            /*
-            PrintWriter out = resp.getWriter();            
-            String confirm_script = "";
-            confirm_script += "<script>";
-                confirm_script += "var deleteCategoryConfirm = confirm('Are you sure you want to delete this CATEGORY and all the TASKS related?');";
-                confirm_script += "if (deleteCategoryConfirm == false) {";
-                        confirm_script += "window.location.href='src/dashboard.jsp';";
-                confirm_script += "}";
-            confirm_script += "</script>";
-            out.println(confirm_script); */
-            
             /* The following will be executed if confirmed */    
             try {                
                 // Make connection to database
@@ -298,6 +287,13 @@ public class ServletHandler extends HttpServlet{
             }
         }
         
+        //edit task
+        else if (req.getParameter("type").equalsIgnoreCase("edit_task")) {
+            String taskID   = req.getParameter("edit_task_id");
+            String deadline = req.getParameter("edit_task_deadline");
+            //.. belum selesai             
+        }
+        
         //other
         else if (req.getParameter("type").equalsIgnoreCase("")) {
             
@@ -375,7 +371,6 @@ public class ServletHandler extends HttpServlet{
         else if (req.getParameter("type").equalsIgnoreCase("delete_comment")) {
             String taskID       = req.getParameter("task_id");
             String commentID    = req.getParameter("comment_id"); 
-            System.out.println("taskID - commentID : " + taskID + " - " + commentID);
             try {                
                 // Make connection to database
                 try {
@@ -390,7 +385,7 @@ public class ServletHandler extends HttpServlet{
                 st = conn.prepareStatement("DELETE FROM comment WHERE comment_id=?");
                 st.setString(1, commentID);
                 st.executeUpdate();                
-            }
+            } 
             catch (SQLException e) {
                 System.out.println("Connection Failed! Check output console - delete_comment");
             }
@@ -400,6 +395,39 @@ public class ServletHandler extends HttpServlet{
                 } catch (SQLException ex) {
                     Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println("Can not close connection - delete_comment");
+                }
+            }
+        }
+        
+        //Edit Task - Delete Assignee
+        else if (req.getParameter("type").equalsIgnoreCase("edittask_deleteAssignee")) {
+            String taskID       = req.getParameter("task_id");
+            String userID       = req.getParameter("user_id");
+            try {                
+                // Make connection to database
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    System.out.println("Berhasil connect ke Mysql JDBC Driver -- ServletHandler.java - edit task : delete assignee  ");
+                } catch (ClassNotFoundException ex) {
+                    System.out.println("Where is your MySQL JDBC Driver? -- ServletHandler.java - edit task : delete assignee ");
+                }
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");
+                
+                PreparedStatement st;
+                st = conn.prepareStatement("DELETE FROM task_assigne WHERE task_id=? AND username=?");
+                st.setString(1, taskID);
+                st.setString(2, userID);
+                st.executeUpdate();                
+            } 
+            catch (SQLException e) {
+                System.out.println("Connection Failed! Check output console - edit task : delete assignee ");
+            }
+            finally {                 
+                try { 
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Can not close connection - edit task : delete assignee ");
                 }
             }
         }

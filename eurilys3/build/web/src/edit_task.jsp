@@ -51,10 +51,10 @@
                     <%=task_name%>
             </div>
 
-            <form method="POST" action="">
+            <form method="POST" action="../ServletHandler?type=edit_task">
                     <input type='submit' id="save_edit_task" name='edit_task_submit' class='left top30 link_blue_rect' value='Save'>
 
-                    <input type="hidden" name="edit_task_id" value=""/>
+                    <input type="hidden" name="edit_task_id" value="<%=taskID%>"/>
                     <div class='left top30 dynamic_content_row'>
                             <div id='task_name_ltd' class='left dynamic_content_left'> Task Name </div>
                             <div id='task_name_rtd' class='left dynamic_content_right'> <%=task_name%> </div>
@@ -93,7 +93,7 @@
                                     rs_assigne = stmt_edittask.executeQuery();
                                     rs_assigne.beforeFirst();
                                     while (rs_assigne.next()) { %>
-                                    <img src='../img/done.png' class='cursorPointer' width='8' onclick=''/> &nbsp;&nbsp;&nbsp;
+                                    <img src='../img/done.png' class='cursorPointer' width='8' onclick="javascript:deleteTaskAssigne('<%= taskID %>','<%= rs_assigne.getString("username") %>')"/> &nbsp;&nbsp;&nbsp;
                                     <span class='userprofile_link darkBlueItalic' onclick="javascript:searchUser('<%= rs_assigne.getString("username") %>')"> <%= rs_assigne.getString("username") %> </span> 
                                     <br> 
                                 <% } %>                                
@@ -112,7 +112,7 @@
                                 rs_taskdetail.beforeFirst();            
                                 while (rs_taskdetail.next()) { %>
                                    <img src='../img/done.png' class='cursorPointer' width='8' onclick=''/> &nbsp;&nbsp;&nbsp;
-                                   <span class='userprofile_link darkBlueItalic' onclick="javascript:searchUser('<%= rs_taskdetail.getString("tag_name") %>')"> <%= rs_taskdetail.getString("tag_name") %> </span> 
+                                   <span class='darkBlueItalic' onclick="javascript:searchUser('<%= rs_taskdetail.getString("tag_name") %>')"> <%= rs_taskdetail.getString("tag_name") %> </span> 
                                    <br> 
                              <% } %>
                                     <br>

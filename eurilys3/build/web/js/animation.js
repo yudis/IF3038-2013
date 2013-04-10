@@ -351,3 +351,22 @@ function deleteComment(taskID, commentID) {
         xmlhttp.send(null);
     }
 }
+
+function deleteTaskAssigne(taskID, userID) {
+    var deleteConfirm = confirm("Delete " + userID + " from this task?");
+    if (deleteConfirm == true) {
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                window.location = "edit_task.jsp?task_id="+taskID;
+            }
+        } 
+        xmlhttp.open('GET', '../ServletHandler?type=edittask_deleteAssignee&task_id='+taskID+'&user_id='+userID, true);
+        xmlhttp.send(null);
+    }
+}
