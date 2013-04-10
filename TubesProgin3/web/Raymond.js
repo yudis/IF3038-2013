@@ -176,7 +176,7 @@ var ids = null;
 function changevalues(id) {
     ids = id;
     if (xmlHttpReq.readyState == 4 || xmlHttpReq.readyState == 0) {
-        xmlHttpReq.open("GET", 'ChangeTaskStatus.php?id='+id, true);
+        xmlHttpReq.open("GET", 'ChangeTaskStatus.php?id='+id, true);//TODO
         xmlHttpReq.onreadystatechange = handleStatusChange; 
         xmlHttpReq.send(null);
     }		

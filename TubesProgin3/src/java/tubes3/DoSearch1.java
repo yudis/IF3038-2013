@@ -70,9 +70,9 @@ public class DoSearch1 extends HttpServlet {
             int awal = 10 * (i - 1);
             Tubes3Connection tu = new Tubes3Connection();
             Connection connection = tu.getConnection();
-            String queryUser = "SELECT username, avatar FROM pengguna WHERE username LIKE('%" + keyword + "%') ORDER BY username LIMIT " + awal + ", 10;";
+            String queryUser = "SELECT username, avatar, fullname FROM pengguna WHERE username LIKE('%" + keyword + "%') ORDER BY username LIMIT " + awal + ", 10;";
             String queryAllTugas = "SELECT IDTask, name, deadline, stat, username, tag FROM `tugas` WHERE name LIKE '%" + keyword + "%' OR tag LIKE '%" + keyword + "%' LIMIT " + awal + ", 10;";
-            System.out.println("DOOOO:" + queryAllTugas);
+            //System.out.println("DOOOO:" + queryAllTugas);
             String queryKategori = "SELECT judul FROM kategori WHERE judul LIKE('" + keyword + "%') ORDER BY judul LIMIT " + awal + ", 10;";
             boolean satu, dua, tiga;
             try {
@@ -120,8 +120,8 @@ public class DoSearch1 extends HttpServlet {
                         out.print("<input type='text' id='user' class='hidden' value='" + keyword + "'><li class='Task1'>");
                         out.print("<div><b class='design1'>Daftar User</b></div>");
                         while (rs.next()) {
-                            out.print("<div><a class='list' href='profile.jsp?username=" + rs.getString("username") + "'>" + rs.getString("username") + "</a>");
-                            out.print("<p><img src="+ rs.getString("avatar") +" class='profPic1'></img> </p></div>");
+                            out.print("<div><a class='list' href='profile.jsp?username=" + rs.getString("username") + "'>" + rs.getString("username") + "<span>Username: " + rs.getString("fullname") + "</span></a>");
+                            out.print("<img src="+ rs.getString("avatar") +" class='profPic1'></img> </div>");
                         }
                         out.print("</li>");
                     }
