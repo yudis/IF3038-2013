@@ -257,12 +257,17 @@ function addCategoryAssigne(userID) {
     var user = document.getElementById('cat_ass_'+userID).innerHTML;
     document.getElementById('add_category_asignee_name').value += user;
     document.getElementById('add_category_asignee_name').value += ", ";
+    document.getElementById("category_asignee_autocomplete").innerHTML="";
+    document.getElementById("add_category_asignee_name_auto").value = "";    
+    
 }
 
 function addEditTaskAssigne(userID) {
     var user = document.getElementById('edittask_ass_'+userID).innerHTML;
     document.getElementById('edit_task_assignee').value += user;
     document.getElementById('edit_task_assignee').value += ", ";
+    document.getElementById("edit_task_asignee_autocomplete").innerHTML="";
+    document.getElementById("edit_task_assignee_auto").value = "";
 }
 
 function searchResult(resultID, resultType) {

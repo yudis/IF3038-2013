@@ -31,12 +31,12 @@
     }
     
     if (hint.length() > 0) {
-        for (int i=0; i<nameList.size(); i++) {
+        for (int i=0; i<idList.size(); i++) {
             if (buffer.equals("")) {
-                buffer = "<div class='search_recommend' id='cat_ass_"+idList.get(i)+"' onclick=\"javascript:addCategoryAssigne('"+idList.get(i)+"');\">"+nameList.get(i)+"</div>";
+                buffer = "<div class='search_recommend' id='cat_ass_"+idList.get(i)+"' onclick=\"javascript:addCategoryAssigne('"+idList.get(i)+"');\">"+idList.get(i)+"</div>";
             }
             else {
-                buffer = buffer + "<br> <div class='search_recommend' id='cat_ass_"+idList.get(i)+"' onclick=\"javascript:addCategoryAssigne('"+idList.get(i)+"');\">"+nameList.get(i)+"</div>";
+                buffer = buffer + "<br> <div class='search_recommend' id='cat_ass_"+idList.get(i)+"' onclick=\"javascript:addCategoryAssigne('"+idList.get(i)+"');\">"+idList.get(i)+"</div>";
             }
         }
     }

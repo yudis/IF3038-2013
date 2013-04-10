@@ -26,17 +26,17 @@
     rs_autoAssignee = stmt_autoAssignee.executeQuery();
     rs_autoAssignee.beforeFirst();
     while (rs_autoAssignee.next()) {
-        nameList.add(rs_autoAssignee.getString("full_name"));
+        //nameList.add(rs_autoAssignee.getString("full_name"));
         idList.add(rs_autoAssignee.getString("username"));
     }
     
     if (hint.length() > 0) {
-        for (int i=0; i<nameList.size(); i++) {
+        for (int i=0; i<idList.size(); i++) {
             if (buffer.equals("")) {
-                buffer = "<div class='search_recommend' id='edittask_ass_"+idList.get(i)+"' onclick=\"javascript:addEditTaskAssigne('"+idList.get(i)+"');\">"+nameList.get(i)+"</div>";
+                buffer = "<div class='search_recommend' id='edittask_ass_"+idList.get(i)+"' onclick=\"javascript:addEditTaskAssigne('"+idList.get(i)+"');\">"+idList.get(i)+"</div>";
             }
             else {
-                buffer = buffer + "<br> <div class='search_recommend' id='edittask_ass_"+idList.get(i)+"' onclick=\"javascript:addEditTaskAssigne('"+idList.get(i)+"');\">"+nameList.get(i)+"</div>";
+                buffer = buffer + "<br> <div class='search_recommend' id='edittask_ass_"+idList.get(i)+"' onclick=\"javascript:addEditTaskAssigne('"+idList.get(i)+"');\">"+idList.get(i)+"</div>";
             }
         }
     }

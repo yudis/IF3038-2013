@@ -291,7 +291,47 @@ public class ServletHandler extends HttpServlet{
         else if (req.getParameter("type").equalsIgnoreCase("edit_task")) {
             String taskID   = req.getParameter("edit_task_id");
             String deadline = req.getParameter("edit_task_deadline");
-            //.. belum selesai             
+            String assigneeList = req.getParameter("edit_task_assignee");
+            String tagList = req.getParameter("edit_task_tag");
+            
+            try {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    System.out.println("Berhasil connect ke Mysql JDBC Driver - edit task ");
+                } catch (ClassNotFoundException ex) {
+                    System.out.println("Where is your MySQL JDBC Driver? - edit task");
+                }
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");                 
+                Statement st = conn.createStatement(); 
+                
+                //Update task_asignee
+                String[] assigneArray = assigneeList.split(",");
+                for (int i=0; i<assigneArray.length; i++) {
+                    st.executeUpdate("INSERT INTO task_asignee (task_id, username) VALUES ('"+taskID+"','"+assigneArray[i]+"')");
+                }
+                
+                //Update tag
+                String[] tagArray = tagList.split(",");
+                for (int i=0; i<tagArray.length; i++) {
+                    st.executeUpdate("INSERT INTO tag (tag_name, task_id) VALUES ('"+tagArray[i]+"','"+taskID+"')");
+                }
+                
+                //Update task
+                st.executeUpdate("UPDATE task SET task_deadline='"+deadline+"' WHERE task_id='"+taskID+"'");
+                resp.sendRedirect("src/task_detail.jsp?task_id="+taskID);
+                
+            }
+            catch (SQLException e) {
+                System.out.println("Connection Failed! Check output console - edit task");
+            } 
+            finally { 
+                try { 
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Can not close connection - edit task");
+                }
+            }
         }
         
         //other
