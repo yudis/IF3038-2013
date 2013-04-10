@@ -403,7 +403,6 @@ public class ServletHandler extends HttpServlet{
         else if (req.getParameter("type").equalsIgnoreCase("edittask_deleteAssignee")) {
             String taskID       = req.getParameter("task_id");
             String userID       = req.getParameter("user_id");
-            System.out.println("task ID : " + taskID + " , userID : " + userID);
             try {                
                 // Make connection to database
                 try {

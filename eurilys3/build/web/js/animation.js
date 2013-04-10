@@ -416,7 +416,7 @@ function deleteTaskTag(taskID, tagName) {
                 window.location = "edit_task.jsp?task_id="+taskID;
             }
         } 
-        xmlhttp.open('GET', '../ServletHandler?type=edittask_deleteTag&task_id='+taskID+'&tagName='+tagName, true);
+        xmlhttp.open('GET', '../ServletHandler?type=edittask_deleteTag&task_id='+taskID+'&tag_name='+tagName, true);
         xmlhttp.send(null);
     }
 }
