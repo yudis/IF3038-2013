@@ -15,57 +15,20 @@
         <script src="js/dashboard.js"></script>
     </head>
 
-    <body onload="showKategori(1)">
+    <body onload="showKategori(2)">
         <div id="container">
             <%@include file="header.jsp" %>
 
             <div id="category">
-                
+                <div id="category_head">
+                    Kategori
+                </div>
             </div>
+            
             <div id="task">
                 <div id="task_header">
                     Tasks
                 </div>
-
-                <div class="aksi_task" onclick="location.href='newtask.html'">
-                    <p>Tambah Task...</p>
-                </div>
-
-                <div class="task_block" id="k11">
-                    <div class="tombol_hapus_task">
-                        X
-                    </div>
-                    <div class="task_judul">
-                        <a href="viewtask.html">Mengerjakan Tugas Progin</a>
-                    </div>
-                    <div class="task_deadline">
-                        Deadline: 21 February 2013
-                    </div>
-                    <div class="task_tag">
-                        Tags: kuliah
-                    </div>
-                    <div class="task_status">
-                        Selesai
-                    </div>
-                </div>
-
-                <div class="task_block" id="k12">
-                    <div class="task_judul">
-                        Tugas Intelegensia Buatan
-                    </div>
-                    <div class="task_deadline">
-                        Deadline: 22 February 2013
-                    </div>
-                    <div class="task_tag">
-                        Tags: kuliah, IB, tugas
-                    </div>
-                </div>
-
-                <div class="aksi_task">
-                    <p>Hapus Task...</p>
-                </div>
-
-
             </div>
         </div>
 
