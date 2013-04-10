@@ -68,11 +68,11 @@
                                     </select>&nbsp;			
                             </div>
                             <!--Category list (static)-->
-                            <?php
-                                    include("listCategory.php");
-                            ?>
+                            <div id="category">
+                                <jsp:include page="listCategory.jsp" />
+                            </div>
 
-                                    <div id="new-category"></div>
+                            <div id="new-category"></div>
                             <!--New category button ==> popup-->
                                     <!--Name-->
                                     <!--List of priveleged users-->

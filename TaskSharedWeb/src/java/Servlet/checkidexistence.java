@@ -53,7 +53,7 @@ public class checkidexistence extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("userlistapp", username);
                 session.setMaxInactiveInterval(30*24*60*60);
-                System.out.println("session : "+session.getAttribute("userlistapp"));
+                //System.out.println("session : "+session.getAttribute("userlistapp"));
                 out.print("true");
             }
         } catch(Exception exc){

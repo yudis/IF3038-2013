@@ -116,4 +116,66 @@ public class Function {
             return 0;
         }
     }
+     
+    public String getTaskId(String taskname,String categoryid){
+        String toOut ="";
+        try{
+            GetConnection getCon = new GetConnection();
+            Connection conn = getCon.getConnection();
+            Statement stt = conn.createStatement();
+            String query = "SELECT taskid FROM task WHERE taskname ='"+ taskname+"' AND categoryid='"+categoryid+"'";
+            ResultSet rs = stt.executeQuery(query);
+            rs.next();
+            toOut = rs.getString("taskid");
+        }catch(Exception e){
+        }
+        return toOut;
+    }
+    
+    public boolean isAssignee(String useractive,String taskid){
+        boolean result = false;
+        try{
+            GetConnection getCon = new GetConnection();
+            Connection conn = getCon.getConnection();
+            Statement stt = conn.createStatement();
+            String query = "SELECT count(*) as isexist FROM assignee WHERE username="+useractive+ "AND taskid="+taskid;
+            ResultSet rs = stt.executeQuery(query);
+            if(!rs.getString("isexist").equals("0")){
+                result = true;
+            }
+        }catch(Exception e){
+        }
+        return result;
+    }
+    
+    public String getTagname(String tagid){
+        String toOut ="";
+        try{
+            GetConnection getCon = new GetConnection();
+            Connection conn = getCon.getConnection();
+            Statement stt = conn.createStatement();
+            String query = "SELECT tagname FROM tag WHERE tagid = "+tagid;
+            ResultSet rs = stt.executeQuery(query);
+            rs.next();
+            toOut = rs.getString("tagname");
+        }catch(Exception e){
+        }
+        return toOut;
+    }
+    
+    public boolean isResponsibility(String categoryid, String useractive){
+        boolean result = false;
+        try{
+            GetConnection getCon = new GetConnection();
+            Connection conn = getCon.getConnection();
+            Statement stt = conn.createStatement();
+            String query = "SELECT count(*) as responsibility FROM responsibility WHERE categoryid="+categoryid+ "and username="+useractive;
+            ResultSet rs = stt.executeQuery(query);
+            if(!rs.getString("responsibility").equals("0")){
+                result = true;
+            }
+        }catch(Exception e){
+        }
+        return result;
+    }
 }
