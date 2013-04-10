@@ -138,12 +138,15 @@ public class Function {
             GetConnection getCon = new GetConnection();
             Connection conn = getCon.getConnection();
             Statement stt = conn.createStatement();
-            String query = "SELECT count(*) as isexist FROM assignee WHERE username="+useractive+ "AND taskid="+taskid;
+            System.out.println(useractive+" dann "+taskid);
+            String query = "SELECT count(*) as isexist FROM assignee WHERE username='"+useractive+ "' AND taskid="+taskid;
             ResultSet rs = stt.executeQuery(query);
+            rs.next();
             if(!rs.getString("isexist").equals("0")){
                 result = true;
             }
         }catch(Exception e){
+            
         }
         return result;
     }
@@ -169,8 +172,9 @@ public class Function {
             GetConnection getCon = new GetConnection();
             Connection conn = getCon.getConnection();
             Statement stt = conn.createStatement();
-            String query = "SELECT count(*) as responsibility FROM responsibility WHERE categoryid="+categoryid+ "and username="+useractive;
+            String query = "SELECT count(*) as responsibility FROM responsibility WHERE categoryid='"+categoryid+ "' and username='"+useractive+"'";
             ResultSet rs = stt.executeQuery(query);
+            rs.next();
             if(!rs.getString("responsibility").equals("0")){
                 result = true;
             }
