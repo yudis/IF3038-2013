@@ -35,12 +35,21 @@
                                     <br>
                                     <br>
                                     <%
+                                    String ext[];
                                         for(int i=0;i<task.attachment.size();i++)
                                         {
-                                            out.print(task.attachment.get(i));
-                                            if(i<task.attachment.size()-1)
+                                            ext=task.attachment.get(i).split("\\.");
+                                            if(ext[1].equals("jpg"))
                                             {
-                                                out.print(", ");
+                                                out.print("<img src="+task.attachment.get(i)+" style=\"width: 220px;height: 230px;\"><br>");
+                                            }
+                                            else if(ext[1].equals("ogg"))
+                                            {
+                                                out.print("<video width=\"320\" height=\"240\" controls autoplay><source src="+task.attachment.get(i)+" type=\"video/"+ext[1]+"\"></video><br>");
+                                            }
+                                            else
+                                            {
+                                                out.print("<a href=\""+task.attachment.get(i)+"\" target=\"_blank\">"+task.attachment.get(i).substring(7) +"</a><br>");
                                             }
                                         }
                                      %>
