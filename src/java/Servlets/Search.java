@@ -4,12 +4,17 @@
  */
 package Servlets;
 
+import ConnectDB.ConnectDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,13 +42,13 @@ public class Search extends HttpServlet {
              */
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Search</title>");            
+            out.println("<title>Servlet Search</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Search at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {            
+        } finally {
             out.close();
         }
     }
@@ -61,7 +66,24 @@ public class Search extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        if (request.getParameter("key").equals("username")) {
+            try {
+                hasil_username(request.getParameter("value"), 0, 10, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (request.getParameter("key").equals("kategori")) {
+            try {
+                hasil_kategori(request.getParameter("value"), 0, 10, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (request.getParameter("key").equals("task")) {
+        } else if (request.getParameter("key").equals("email")) {
+        } else if (request.getParameter("key").equals("komentar")) {
+        } else if (request.getParameter("key").equals("semua")) {
+        }
     }
 
     /**
@@ -88,4 +110,54 @@ public class Search extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void hasil_username(String input, int limit1, int limit2, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        PrintWriter out = response.getWriter();
+        String query = "SELECT idaccounts, username, nama_lengkap, avatar FROM accounts WHERE username like '%" + input + "%' LIMIT " + limit1 + ", " + limit2;
+
+        String[][] hasil = ConnectDB.getHasilQuery(query);
+        for (int i = 0; i < hasil.length; i++) {
+            out.println("<div class='hasil_username'>");
+
+            out.println("<div class='user_ava'>");
+            out.println("<img src=''>");
+            out.println("</div>");
+
+            out.println("<div class='username'>");
+            out.println(hasil[i][1]);
+            out.println("</div>");
+
+            out.println("<div class='fullname'>");
+            out.println(hasil[i][2]);
+            out.println("</div>");
+
+
+            out.println("</div>");
+        }
+    }
+
+    private void hasil_kategori(String input, int limit1, int limit2, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        PrintWriter out = response.getWriter();
+        String query = "SELECT nama FROM kategori WHERE nama like '%" + input + "%' LIMIT " + limit1 + ", " + limit2;
+        String[][] hasil = ConnectDB.getHasilQuery(query);
+        for (int i = 0; i < hasil.length; i++) {
+            out.println("<div class='category_block'>");
+            out.println("<div class='category_pic'>");
+            out.println("<img src='images/Book-icon.png' alt=''/>");
+            out.println("</div>");
+            
+            out.println("<div class='category_name'>");
+            out.println(hasil[i][0]);
+            out.println("</div>");
+            out.println("</div>");
+        }
+    }
+
+    private void hasil_task(String input, int limit1, int limit2, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        PrintWriter out = response.getWriter();
+        String query = "SELECT DISTINCT idtugas, tugas.nama, deadline, status_selesai FROM tag, tugas, tugas_has_tag WHERE (tugas_idtugas = idtugas AND tag.nama like '%" + input + "%' AND tag_idtag = idtag) OR (tugas.nama LIKE '%" + input + "%') LIMIT " + limit1 + ", " + limit2;
+        String[][] hasil = ConnectDB.getHasilQuery(query);
+        for (int i = 0; i < hasil.length; i++) {
+        }
+    }
 }
