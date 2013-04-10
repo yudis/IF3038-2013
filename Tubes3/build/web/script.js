@@ -60,7 +60,7 @@ username.onkeyup = function()
     };
 
     var usersend = encodeURI(username.value);
-    xmlhttp.open('get', 'checkuser.php?username=' + usersend);
+    xmlhttp.open('get', 'controller?type=checkuser&username=' + usersend);
     xmlhttp.send(null);
 };
 
@@ -168,7 +168,7 @@ email.onkeyup = function()
     };
 
     var emailsend = encodeURI(email.value);
-    xmlhttp.open('get', 'checkemail.php?email=' + emailsend);
+    xmlhttp.open('get', 'controller?type=checkemail&email=' + emailsend);
     xmlhttp.send(null);
 }
 

@@ -42,7 +42,7 @@
                 Avatar<br>
             </div>
             <div id="inputregister">
-                <form id="regForm" method="post" action="register" enctype="multipart/form-data">
+                <form id="regForm" method="post" action="controller?type=register" enctype="multipart/form-data">
                     <input type="text" id="regusername" name="regusername" pattern="^.{5,}$" required onkeyup="CheckValidity()"><img id="valid1" src=""><br>
                     <input type="text" id="regname" name="regname" pattern="^.+ .+$" required><img id="valid2" src=""><br>
                     <input type="date" id="regdate" name="regdate" onchange="dateChange();"><img id="valid7" src=""><br>

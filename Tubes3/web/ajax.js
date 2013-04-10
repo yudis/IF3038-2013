@@ -38,7 +38,7 @@ function logins() {
 
     var username = encodeURI(document.getElementById('logusername').value);
     var pass = encodeURI(document.getElementById('logpassword').value);
-    http.open('get', 'login?username=' + username + '&pass=' + pass);
+    http.open('get', 'controller?type=login&username=' + username + '&pass=' + pass);
     http.send(null);
 }
 

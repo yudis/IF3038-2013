@@ -1,6 +1,6 @@
 <% 
 if (session.getAttribute("username") == null) {
-   response.sendRedirect("index.jsp");
+  // response.sendRedirect("index.jsp");
 } 
 %>
 <header>
