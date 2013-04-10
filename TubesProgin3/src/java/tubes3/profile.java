@@ -43,6 +43,7 @@ public class profile extends HttpServlet {
     public String password;
     //,tugasBelumSelesai;
     ResultSet rs;
+    public profile(){}
 
     public profile(String username) throws SQLException {
         Tubes3Connection tu = new Tubes3Connection();
@@ -108,7 +109,7 @@ public class profile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
+       processRequest(request, response);
     }
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -130,17 +131,36 @@ public class profile extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         session = request.getSession();
+        String username="yuli";
+        String queryUser = "SELECT * FROM pengguna WHERE username ='" + username + "'";
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
+        ResultSet rs = null;
         Statement pst;
         String query = "";
-        String full, birthday, password, confpassword, avatar = null;
+        String namalengkap="";
+        String ultah="";
+        String sandi="";
+        String avatar2="";
+        try {
+            rs=tu.coba(connection,queryUser);
+              if(rs.next())
+                {
+                      namalengkap = rs.getString("fullname");
+                      avatar2 = rs.getString("avatar");
+                      ultah = rs.getString("birthday");
+                      sandi = rs.getString("password");
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(profile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        String full, birthday, password, avatar = null;
         full = request.getParameter("namalengkap");
         birthday = request.getParameter("birthday");
         String data[]=birthday.split("-");
         birthday=data[2]+"-"+data[1]+"-"+data[0];
         password = request.getParameter("password");
-        confpassword = request.getParameter("confirmedpass");
         //avatar=request.getParameter("avatar");
         final Part filePart = request.getPart("avatar");
         final String fileName = getFileName(filePart);
@@ -149,17 +169,19 @@ public class profile extends HttpServlet {
         final PrintWriter writer = response.getWriter();
 
 
-        String[] parts = this.avatar.split("/");
-        if (this.fullname.equals(full) && this.birthday.equals(birthday) && this.password.equals(password) && (fileName == null || fileName.equals("")||fileName.equals(parts[1]))) {
+        if (namalengkap.equals(full) && ultah.equals(birthday) && sandi.equals(password) && (fileName == null || fileName.equals(""))) {
             session.setAttribute("flag", 1);
         } else {
             session.setAttribute("flag", 0);
             //$_SESSION['flag']=0;
+            /*
             this.fullname = full;
             this.birthday = birthday;
             this.password = password;
+             
+             */
             if (fileName == null || fileName.equals("")) {
-                query = "UPDATE pengguna SET fullname='" + full + "',birthday='" + birthday + "', password='" + password + "' WHERE username='" + this.username + "'";
+                query = "UPDATE pengguna SET fullname='" + full + "',birthday='" + birthday + "', password='" + password + "' WHERE username='" + username + "'";
             } else {
                 try {
                     out = new FileOutputStream(getServletContext().getRealPath("/") + "avatar/" + fileName);
@@ -187,8 +209,8 @@ public class profile extends HttpServlet {
                         filecontent.close();
                     }
                 }
-                this.avatar = "avatar/" + fileName;
-                query = "UPDATE pengguna SET fullname=\'" + full + "\',birthday=\'" + birthday + "\', password=\'" + password + "\', avatar=\'" + this.avatar + "\' WHERE username=\'" + this.username + "\'";
+                avatar2="avatar/"+fileName;
+                query = "UPDATE pengguna SET fullname=\'" + full + "\',birthday=\'" + birthday + "\', password=\'" + password + "\', avatar=\'" + avatar2 + "\' WHERE username=\'" + username + "\'";
             }
             try {
                 pst = connection.createStatement();

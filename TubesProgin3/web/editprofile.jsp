@@ -26,7 +26,7 @@
 					</li>
                     <li>
 						<label style="width:230px; display:inline-block">Tanggal Lahir:</label>
-                                                <input type="date"id="tgllahir" value="<%String date[]=p.birthday.split("-"); out.print(date[2]+"-"+date[1]+"-"+date[0]);%>" name="birthday" /readonly></input>
+                                                <input type="text"id="tgllahir" value="<%String date[]=p.birthday.split("-"); out.print(date[2]+"-"+date[1]+"-"+date[0]);%>" name="birthday" /readonly></input>
                                                 <a href="javascript:NewCssCal('tgllahir','ddmmyyyy')"><img src="image/cal.gif" alt="Pick a date"/></a>
 					</li>
 					<li>

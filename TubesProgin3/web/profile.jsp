@@ -37,12 +37,13 @@ if (((HttpServletRequest) request).getSession().getAttribute("flag") != null)
             {
                 out.print ("<script type=\"text/javascript\">notifikasiquery();</script>");
             }
+         ((HttpServletRequest) request).getSession().setAttribute("flag",null);
             
        }
 else
        {
-    out.print("masuk1");
 }
+
 %>
 <!-- Foto profile -->
         <div id="isi">
@@ -91,7 +92,7 @@ else
                                if(editable==true)
 				{
                                     out.print("<li>");
-                                    out.print("<button class=\"reg\" type=\"button\" onclick=\"location.href='editprofile.php'\"><b>Edit</b></button>");
+                                    out.print("<button class=\"reg\" type=\"button\" onclick=\"location.href='editprofile.jsp'\"><b>Edit</b></button>");
                                     out.print("</li>");
 				}
                               %>
