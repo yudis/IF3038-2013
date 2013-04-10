@@ -4,13 +4,27 @@
     Created on : Apr 3, 2013, 2:28:46 PM
     Author     : Yulianti Oenang
 --%>
-
 <%@page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@page import="tubes3.profile"%>
 <!DOCTYPE html>
 <jsp:include page="/header.jsp" />
 <script src="editprofile.js" type="text/javascript" language="javascript"> </script>
-<%profile p=new profile(); 
+
+<%
+String user;boolean editable;
+if(request.getParameter("username")==null)
+       {
+           user="yuli";            
+           editable=true;
+       }
+else
+       {
+    user=request.getParameter("username");
+    editable=false;
+}
+  
+
+profile p=new profile(user); 
 //HttpSession session = request.getSession(false);
 if (((HttpServletRequest) request).getSession().getAttribute("flag") != null)
        {
@@ -23,12 +37,13 @@ if (((HttpServletRequest) request).getSession().getAttribute("flag") != null)
             {
                 out.print ("<script type=\"text/javascript\">notifikasiquery();</script>");
             }
+         ((HttpServletRequest) request).getSession().setAttribute("flag",null);
             
        }
 else
        {
-    out.print("masuk1");
 }
+
 %>
 <!-- Foto profile -->
         <div id="isi">
@@ -73,10 +88,14 @@ else
                                         }  
                                         %>
                                 </li>
-                                <li>
-                                        <button class="reg" type="button" onclick="location.href='editprofile.jsp'"><b>Edit</b></button>
-                                </li>
-                              
+                                <%
+                               if(editable==true)
+				{
+                                    out.print("<li>");
+                                    out.print("<button class=\"reg\" type=\"button\" onclick=\"location.href='editprofile.jsp'\"><b>Edit</b></button>");
+                                    out.print("</li>");
+				}
+                              %>
                         </ul>
                 </div>
         </div>
