@@ -66,7 +66,7 @@
                     <div id='edit_task_header' class='left top30 dynamic_content_head darkBlue'>
                         <%=rs_taskdetail.getString("task_name")%>
                     </div>
-                    <input id='edit_task_button' class='left top30 link_blue_rect' onclick='edit_task('<%=taskID%>')' type='button' value='Edit Task'>									
+                    <a id="edit_task_button" href="edit_task.jsp?task_id=<%=taskID%>" class='left top30 link_blue_rect'> Edit Task </a>
                     <div class='left top30 dynamic_content_row'>
                         <div id='task_name_ltd' class='left dynamic_content_left'> Task Name </div>
                         <div id='task_name_rtd' class='left dynamic_content_right'> <%=rs_taskdetail.getString("task_name")%> </div>
