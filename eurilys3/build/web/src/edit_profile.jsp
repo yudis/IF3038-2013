@@ -39,8 +39,8 @@
             <h1>  Edit Profile </h1>
             <form id="edit_profile_form" method="POST" action="../ServletHandler?type=edit_profile">
                 <label> Username </label> <%= session.getAttribute("username") %>
-                <input type="hidden" id="edit_username" value="<%=user_name%>">
-                <input type="hidden" id="edit_email" value="<%=email%>">
+                <input type="hidden" id="edit_username" name="edit_username" value="<%= session.getAttribute("username") %>">
+                <input type="hidden" id="edit_email" name="edit_email" value="<%=email%>">
 
                 <h2>Change Password</h2>
                 <label> New Password </label> 	

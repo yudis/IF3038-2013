@@ -339,11 +339,14 @@ public class ServletHandler extends HttpServlet{
         else if (req.getParameter("type").equalsIgnoreCase("edit_profile")) {
             String user_name = req.getParameter("edit_username");
             String password = req.getParameter("password");
-            String password_validation = req.getParameter("password_confirm");
             String fullname = req.getParameter("fullname");
             String birthdate = req.getParameter("birthdate");
-            String avatarName = req.getParameter("avatar");
+            //String avatarName = req.getParameter("avatar");
             //FileItem avatar = (FileItem) req.getParameter("avatar");
+            System.out.println("Username : " + user_name);
+            System.out.println("Password : " + password);
+            System.out.println("Fullname : " + fullname);
+            System.out.println("Birthdate :" + birthdate);
             try {
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
@@ -359,6 +362,8 @@ public class ServletHandler extends HttpServlet{
                 } else {
                     st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' WHERE username='"+user_name+"'");          
                 }
+                HttpSession session = req.getSession(true);
+                session.setAttribute("fullname", fullname);
                 resp.sendRedirect("src/profile.jsp");
             }
             catch (SQLException e) {
