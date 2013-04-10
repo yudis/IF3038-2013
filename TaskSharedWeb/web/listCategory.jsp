@@ -44,7 +44,7 @@
             out.print("<div><div class=\"category-title\"><b>"+rs.getString("categoryname") +"</b></div><div class=\"delete-category\" align=\"right\">");
             
             if(userActive.equals(rs.getString("username"))){
-                out.print("<a href=\"../php/deletecategory.php?id="+rs.getString("categoryid")+"\"><input name=\"delete\" type=\"button\" value=\"Delete Category\"/></a>");
+                out.print("<a href=\"deletecategory?id="+rs.getString("categoryid")+"\"><input name=\"delete\" type=\"button\" value=\"Delete Category\"/></a>");
                 out.print("</div>");
                 out.print("</div>");
                 out.print("<div class=\"category-title-secondary\">Created by : <i>"+rs.getString("username")+"</i>, at "+rs.getString("createddate")+"</div><br>");
@@ -63,11 +63,11 @@
             
             while(rs2.next()){
                 String taskid = FuncClass.getTaskId(rs2.getString("taskname"), rs2.getString("categoryid"));
-                out.print("<br><li><a href = \"task_page.php?taskid=$taskid\">"+rs2.getString("taskname")+"</a><div class=\"task-tag\">submit by : <b><i>"+rs2.getString("username")+"</i></b>, deadline : "+rs2.getString("deadline")+", status : <b id=\"red-text"+(i++)+"\">"+rs2.getString("status")+"</b></div>");
+                out.print("<br><li><a href = \"task_page.jsp?taskid="+taskid+"\">"+rs2.getString("taskname")+"</a><div class=\"task-tag\">submit by : <b><i>"+rs2.getString("username")+"</i></b>, deadline : "+rs2.getString("deadline")+", status : <b id=\"red-text"+(i++)+"\">"+rs2.getString("status")+"</b></div>");
 		out.print("<br><div><div id=\"task-tag-delete\">");
                 
                 if(userActive.equals(rs2.getString("username"))){
-                    out.print("<a href=\"../php/deletetask.php?taskid="+rs2.getString("taskid")+"\" onClick=\"confirmTask()\"><i>Delete Task</i></a>");
+                    out.print("<a href=\"deletetask?taskid="+rs2.getString("taskid")+"\" onClick=\"confirmTask()\"><i>Delete Task</i></a>");
                 }
                 
                 if(FuncClass.isAssignee(userActive, taskid)){
@@ -90,7 +90,7 @@
             }
             out.print("<br><br><br>");
             if(FuncClass.isResponsibility(rs.getString("categoryid"), userActive)){
-        	out.print("<div class = \"add-task\"><a href = \"add_task.php?categoryid="+rs.getString("categoryid")+"\"><button>+New Task</button></a></div>");
+        	out.print("<div class = \"add-task\"><a href = \"add_task.jsp?categoryid="+rs.getString("categoryid")+"\"><button>+New Task</button></a></div>");
             }
             out.print("</ul>");
             out.print("</div>");

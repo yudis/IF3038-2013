@@ -4,8 +4,11 @@
  */
 package Servlet;
 
+import Class.GetConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,15 +36,15 @@ public class deletecategory extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet deletecategory</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet deletecategory at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
+            String categoryid = request.getParameter("id");
+            GetConnection getCon = new GetConnection();
+            Connection conn = getCon.getConnection();
+            Statement stt = conn.createStatement();
+            String query = "DELETE FROM category WHERE categoryid="+categoryid;
+            stt.execute(query);
+            response.sendRedirect("dashboard.jsp");
+        }catch(Exception e){ 
+        }finally {            
             out.close();
         }
     }
