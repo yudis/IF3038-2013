@@ -7,8 +7,6 @@ package RincianTugas;
 import java.sql.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,10 +42,9 @@ public class hapus_komentar extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");
             query = conn.createStatement();
-            ResultSet result = query.executeQuery("DELETE FROM komentar WHERE (username="
-                    +request.getParameter("user")+" && id_tugas="+request.getParameter("id_tugas")
-                    +" && waktu="+request.getParameter("waktu")+")");
-            
+            int result = query.executeUpdate("DELETE FROM komentar WHERE (username='"
+                    +request.getParameter("user")+"' && id_tugas="+request.getParameter("id_tugas")
+                    +" && waktu='"+request.getParameter("tanggal")+"')");
         } catch (ClassNotFoundException ex) {
             out.println("Failed to create connection");
         } catch (SQLException ex) {

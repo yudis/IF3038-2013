@@ -45,7 +45,7 @@ public class auto_complete_user extends HttpServlet {
      
             if (result.next()) {
                 do {
-                    out.println(result.getString(1));
+                    out.print(result.getString(1)+"\n");
                 } while (result.next());
             } else {
                 out.println("Tidak ada user dengan nama itu");

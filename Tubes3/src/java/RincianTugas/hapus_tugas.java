@@ -40,14 +40,9 @@ public class hapus_tugas extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");
             query = conn.createStatement();
-            ResultSet result = query.executeQuery("DELETE FROM tugas WHERE id_tugas="
+            int result = query.executeUpdate("DELETE FROM tugas WHERE id_tugas="
                     +request.getParameter("id_tugas"));
 
-            while (result.next()) {
-                out.println(result.getString(1));
-            }
-            
-            result.close();
             response.sendRedirect("dashboard.jsp");
         } catch (SQLException ex) {
             out.println("Failure to execute SQL query");

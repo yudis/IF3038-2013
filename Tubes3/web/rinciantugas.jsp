@@ -28,7 +28,8 @@
                     }
                     
                     xmlhttp.onreadystatechange = function(){
-                        if (xmlhttp.readyState===4 && xmlhttp.status===200)	{
+                        if (xmlhttp.readyState===4 && xmlhttp.status===200) {
+                            //alert(xmlhttp.responseText);
                             jumlah_komentar();
                         }
                     };
@@ -44,6 +45,7 @@
                     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                     xmlhttp.send(params);
                     form.comment.value = "";
+                    //alert("OK");
                 }
             }
         
@@ -57,7 +59,7 @@
                 
                 xmlhttp.onreadystatechange = function(){
                     if (xmlhttp.readyState===4 && xmlhttp.status===200)	{
-                        //alert(xmlhttp.responseText);
+                        alert(xmlhttp.responseText);
                         jumlah_komentar();
                     }
                 };
@@ -75,7 +77,7 @@
                 xmlhttp.open("POST","hapus_komentar",true);                
                 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xmlhttp.send(params);
-                alert(params);
+                //alert(params);
             }
         
             function validasi_file(place) {
@@ -105,7 +107,7 @@
                         var n = s.indexOf("\n");
                         daftar_komentar = document.getElementById("tempat_komentar");
                         daftar_komentar.innerHTML = "";
-                        //alert(s);
+                        //alert(localStorage.userLogin);
                         
                         while (n !== -1) {
                             //Ambil satu data komentar

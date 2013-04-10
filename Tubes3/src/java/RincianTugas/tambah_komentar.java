@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class tambah_komentar extends HttpServlet {
     private Connection conn;
     private Statement query;
+    String waktu;
     
     /**
      * Processes requests for both HTTP
@@ -46,15 +47,14 @@ public class tambah_komentar extends HttpServlet {
             Date date = new Date();
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             df.setTimeZone(TimeZone.getDefault());
-            String waktu = df.format(date);
+            waktu = df.format(date);
             
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");
             query = conn.createStatement();
-            ResultSet result = query.executeQuery("INSERT INTO komentar (username, id_tugas, waktu, isi) "
-                    + "VALUES ("+request.getParameter("user")+","+request.getParameter("id_tugas")+","
-                    + waktu +","+request.getParameter("komentar")+")");
-            
+            int result = query.executeUpdate("INSERT INTO komentar(username, id_tugas, waktu, isi) "
+                    + "VALUES ('"+request.getParameter("user")+"',"+request.getParameter("id_tugas")+",'"
+                    + waktu +"','"+request.getParameter("komentar")+"')");
         } catch (ClassNotFoundException ex) {
             out.println("Failed to create connection");
         } catch (SQLException ex) {

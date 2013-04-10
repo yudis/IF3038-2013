@@ -63,11 +63,11 @@ public class ambil_komentar extends HttpServlet {
             for (int i=0;i<username.length;++i) {
                 ResultSet r2 = query.executeQuery("SELECT avatar FROM pengguna WHERE (username = '"
                         +username[i]+"')");
-                out.println(username[i]);
-                out.println(waktu[i]);
-                out.println(isi[i]);
+                out.print(username[i]+"\n");
+                out.print(waktu[i]+"\n");
+                out.print(isi[i]+"\n");
                 r2.first();
-                out.println(r2.getString(1));
+                out.print(r2.getString(1)+"\n");
                 r2.close();
             }
         } catch (ClassNotFoundException ex) {
