@@ -85,21 +85,23 @@
                     </div>
 
                     <div class='left top20 dynamic_content_row'>
-                            <div id='assignee_ltd' class='left dynamic_content_left'>Assignee</div>
-                            <div id='assignee_rtd' class='left dynamic_content_right'>
-                                <%
-                                    stmt_edittask = con_edittask.prepareStatement("SELECT username from task_asignee WHERE task_id=?");
-                                    stmt_edittask.setString(1, taskID);
-                                    rs_assigne = stmt_edittask.executeQuery();
-                                    rs_assigne.beforeFirst();
-                                    while (rs_assigne.next()) { %>
-                                    <img src='../img/done.png' class='cursorPointer' width='8' onclick="javascript:deleteTaskAssigne('<%= taskID %>','<%= rs_assigne.getString("username") %>')"/> &nbsp;&nbsp;&nbsp;
-                                    <span class='userprofile_link darkBlueItalic' onclick="javascript:searchUser('<%= rs_assigne.getString("username") %>')"> <%= rs_assigne.getString("username") %> </span> 
-                                    <br> 
-                                <% } %>                                
+                        <div id='assignee_ltd' class='left dynamic_content_left'>Assignee</div>
+                        <div id='assignee_rtd' class='left dynamic_content_right'>
+                            <%
+                                stmt_edittask = con_edittask.prepareStatement("SELECT username from task_asignee WHERE task_id=?");
+                                stmt_edittask.setString(1, taskID);
+                                rs_assigne = stmt_edittask.executeQuery();
+                                rs_assigne.beforeFirst();
+                                while (rs_assigne.next()) { %>
+                                <img src='../img/done.png' class='cursorPointer' width='8' onclick="javascript:deleteTaskAssigne('<%= taskID %>','<%= rs_assigne.getString("username") %>')"/> &nbsp;&nbsp;&nbsp;
+                                <span class='userprofile_link darkBlueItalic' onclick="javascript:searchUser('<%= rs_assigne.getString("username") %>')"> <%= rs_assigne.getString("username") %> </span> 
+                                <br> 
+                            <% } %>                                
                             <br>
-                            <input class="edit_task_input" id="edit_task_assignee" name="edit_task_assignee" type="text" name="assignee_td" value=""/>
-                            </div>
+                            <input type="text" autocomplete="off" name="edit_task_assignee" id="edit_task_assignee" value="">
+                            <input type="text" autocomplete="off" name="edit_task_assignee_auto" id="edit_task_assignee_auto" class="edit_task_input" onkeyup="EditTaskAssigneHint(this.value)" value="">
+                            <div id="edit_task_asignee_autocomplete"></div>
+                        </div>
                     </div>			
                     <div class='left top20 dynamic_content_row'>
                             <div id='tag_ltd' class='left dynamic_content_left'> Tag </div>
