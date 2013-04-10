@@ -8,7 +8,7 @@
     
     if (resultSet.next()) 
     {
-        out.print(resultSet.getString(1).trim());
+        out.print(resultSet.getString("username").trim());
     }
     
     ConnectDB.closeDB();

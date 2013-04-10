@@ -15,22 +15,18 @@
         static String user = "progin";
         static String password = "progin";
 
-        public static String good() {
-            return "rezamp";
-        }
-
         public static ResultSet mysql_query(String sqlQuery) {
             ResultSet resultSet = null;
             System.out.println("Masuk DB");
 
-            try {
+            try 
+            {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
 
                 connection = DriverManager.getConnection(connectionURL + dbName, user, password);
                 statement = connection.createStatement();
-                System.out.println(sqlQuery);
+                //System.out.println(sqlQuery);
                 resultSet = statement.executeQuery(sqlQuery);
-
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InstantiationException ex) {
@@ -44,11 +40,18 @@
             return resultSet;
         }
         
-        public static void closeDB() throws SQLException
+        public static void closeDB()
         {
-            if (connection != null)
+            try
             {
-                connection.close();
+                if(connection != null)
+                {
+                    connection.close();
+                }
+            } 
+            catch (SQLException ex) 
+            {
+                Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

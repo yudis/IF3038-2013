@@ -1,7 +1,3 @@
-<%
-    String username = request.getParameter("u");
-    String e = (Integer.parseInt(request.getParameter("e")) == 1) ? ("" + 1) : ("" + 0);
-%>
 <html>
 	<head>
 		<title>Shared To Do List - Profile</title>
@@ -12,7 +8,7 @@
 		<script type="text/javascript" src="../validation.js"></script>
 		<script type="text/javascript" src="profilecontroller.js"></script>
 	</head>
-	<body onload="checkLogged(); loadProfile('<%=username%>', '<%=e%>');">
+	<body onload="checkLogged(); loadProfile('<%=request.getParameter("u")%>', '<%=request.getParameter("e")%>');">
 		<div id="navsearch">
 		</div>
 		<div class="clearall container topcontainer" id="profile container">

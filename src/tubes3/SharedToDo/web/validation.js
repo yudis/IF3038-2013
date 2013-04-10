@@ -58,7 +58,7 @@ function CheckFiles()
     var value = document.getElementById('filename').value.split('.');
     var lenghtValue = value.length;
     if (lenghtValue <= 1)
-        alert("file undefined")
+        alert("file undefined");
     else {
         if (value[lenghtValue - 1].toLowerCase() == "jpeg" ||
                 value[lenghtValue - 1].toLowerCase() == "jpg" ||
@@ -134,7 +134,7 @@ function deleteComment(element) {
             alert('Comment berhasil di delete');
             parentid.parentNode.removeChild(parentid);
         }
-    }
+    };
 
     xmlhttp.open("GET", id, true);
     xmlhttp.send();
@@ -143,7 +143,7 @@ function deleteComment(element) {
 //======================= LOAD TASKS DETAILS
 function loadTaskDetails() {
     var taskname = document.getElementsByName("taskname");
-    var tasknameid = taskname[0].getAttribute("id")
+    var tasknameid = taskname[0].getAttribute("id");
     var category = document.getElementsByName("category");
     var categoryid = category[0].getAttribute("id");
     var object = JSON.parse(localStorage.getItem("key"));
@@ -160,7 +160,7 @@ function loadTaskDetails() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             document.getElementById("details").innerHTML = xmlhttp.responseText;
         }
-    }
+    };
 
     xmlhttp.open("GET", "loadtaskdetails.jsp?taskname=" + tasknameid + "&category=" + categoryid + "&username=" + username, true);
     xmlhttp.send();
@@ -198,7 +198,7 @@ function showTasks(element) {
             document.getElementById("task").innerHTML = xmlhttp.responseText;
             alert('Tasks berhasil ditampilkan');
         }
-    }
+    };
 
     xmlhttp.open("GET", "loadtask.jsp?category=" + id, true);
     xmlhttp.send();
@@ -222,7 +222,7 @@ function deleteTask(element) {
             alert('Task berhasil di delete');
             parentid.parentNode.removeChild(parentid);
         }
-    }
+    };
 
     xmlhttp.open("GET", id, true);
     xmlhttp.send();
@@ -251,7 +251,7 @@ function changeStatus(element) {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var statusstring;
-            if (status == 1) {
+            if (status !== 1) {
                 statusstring = "Selesai";
 
             }
@@ -262,7 +262,7 @@ function changeStatus(element) {
             alert('Status changed to "' + statusstring + '"');
             document.getElementById('status' + classname).innerHTML = statusstring;
         }
-    }
+    };
 
     xmlhttp.open("GET", id + '&newvalue=' + status, true);
     xmlhttp.send();
@@ -273,7 +273,7 @@ function checkLogged() {
     var object = JSON.parse(localStorage.getItem("key"));
 
     if (object == null) {
-        window.location = "index.jsp";
+        window.location = "../index.jsp";
     }
     else {
         // dateString = object.timestamp;
@@ -295,7 +295,7 @@ function checkLogged() {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     document.getElementById("navsearch").innerHTML = xmlhttp.responseText;
                 }
-            }
+            };
 
             xmlhttp.open("GET", "../login/loadloggedin.jsp?username=" + login, true);
             xmlhttp.send();
@@ -320,11 +320,11 @@ function checkLogin()
 
     xmlhttp.onreadystatechange = function() 
     {
-        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) 
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
         {
             if (xmlhttp.responseText !== u) // jika sama
             {
-                alert(u);
+                //alert(u);
                 var object = {username: u, timestamp: new Date().getTime()};
                 localStorage.setItem("key", JSON.stringify(object));
                 window.location = "dashboard/";
@@ -353,14 +353,14 @@ function logout()
         if (xmlhttp.readyState  == 4 && xmlhttp.status == 200) {
             window.location = "../index.jsp";
         }
-    }
+    };
 
     xmlhttp.open("GET", "../logout/", true);
     xmlhttp.send();
 }
 
 function toggleSearch() {
-    if (getStyle(document.getElementById('search'), 'display') == 'none') {
+    if (getStyle(document.getElementById('search'), 'display') !== 'none') {
         document.getElementById('search').style.display = 'inline';
     }
     else {
