@@ -172,6 +172,7 @@ label#remember_me {
 	margin-left:275px;	
 	width:16%;
 	z-index:300;
+        color:gray;
 	border:solid 1px #dedede;
 	overflow:hidden;
 	border-bottom-right-radius: 6px;
@@ -184,6 +185,7 @@ label#remember_me {
 	border-color: #333 #DEDEDE #DEDEDE;
 	background-color: white;	
 }
+
 /* LOGO 
 ----------------------------------------------------------------------------------------------------------------- */
 #fleur {

@@ -41,14 +41,15 @@
         <div id="category_form">
             <div id="category_form_inner">
                 <form method="POST" action="../ServletHandler?type=add_category">
+                    <button type="submit" id="add_category_button" name="add_category_button" class="link_red"> Add </button>
+                    <br>
                     Category name : <br>
                     <input type="text" name="add_category_name" id="add_category_name" value="">
-                    <br><br>
+                    <br>
                     Assignee(s) : <br>
-                    <input type="text" onkeyup="AddCategoryAssigneHint(this.value)" name="add_category_asignee_name" id="add_category_asignee_name" value="">
-                    <div id="category_asignee_autocomplete"> </div>
-                    <br><br>
-                    <button type="submit" id="add_category_button" name="add_category_button" class="link_red"> Add </button>
+                    <input type="text" autocomplete="off" name="add_category_asignee_name" id="add_category_asignee_name" value="">
+                    <input type="text" autocomplete="off" onkeyup="AddCategoryAssigneHint(this.value)" id="add_category_asignee_name_auto" placeholder="Type here..." value="">
+                    <div id="category_asignee_autocomplete"> </div>                    
                 </form>
             </div>
         </div>
