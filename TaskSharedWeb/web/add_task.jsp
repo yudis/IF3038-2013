@@ -4,7 +4,12 @@
     Author     : VAIO
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Class.*"%>
+<%@page import="java.util.HashMap"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,14 +30,21 @@
         <div id="main-body-general">
                 <!--Header-->
                 <div id="header">
-                        <?php
-                                include("header.php");
-                        ?>
+                <jsp:include page="header.jsp" />
+                <%
+                    Function func = new Function();
+                    String usernameToShow = request.getParameter("username");
+                    HashMap<String, String> userShow = func.GetUser(usernameToShow);
+                %>
                 </div>
                 <div><hr id="border"></div>
                 <!--Body-->
                 <div id="task-page-body">
                         <h1>Category: 
+                        <%
+                            String categoryid = request.getParameter("categoryid");
+                            out.print(func.getCategoryName(categoryid));
+                        %>
         <?php 
                                 require('../php/init_function.php');
                                 $categoryid = $_GET['categoryid'];

@@ -116,6 +116,22 @@ public class Function {
             return 0;
         }
     }
+    
+    public String getCategoryName(String categoryid) 
+    {
+        String toOut ="";
+        try{
+            GetConnection getCon = new GetConnection();
+            Connection conn = getCon.getConnection();
+            Statement stt = conn.createStatement();
+            String query = "SELECT categoryname FROM category WHERE categoryid ='"+ categoryid + "'";
+            ResultSet rs = stt.executeQuery(query);
+            rs.next();
+            toOut = rs.getString("categoryname");
+        }catch(Exception e){
+        }
+        return toOut;
+    }
      
     public String getTaskId(String taskname,String categoryid){
         String toOut ="";

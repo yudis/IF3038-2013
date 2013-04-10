@@ -54,10 +54,10 @@
                                 while(rs.next()){
                                     out.print("<div id=\"user-result\">"
                                             + " <div id=\"user-result-image\">"
-                                            + "     <a href=\"profile.php?username="+rs.getString("username")+"\"><img alt=\"Avatar\" id=\"photo\" src=\"../avatar/"+rs.getString("avatar")+"\" width=\"100\" height=\"120\"/></a>"
+                                            + "     <a href=\"profile.jsp?username="+rs.getString("username")+"\"><img alt=\"Avatar\" id=\"photo\" src=\"../avatar/"+rs.getString("avatar")+"\" width=\"100\" height=\"120\"/></a>"
                                             + " </div>"
                                             + " <div id=\"user-result-name\">"
-                                            + "     <div id=\"dashboard-title\"><a href=\"profile.php?username="+rs.getString("username")+"\"><b>"+rs.getString("username")+"</b></a></div><br>"
+                                            + "     <div id=\"dashboard-title\"><a href=\"profile.jsp?username="+rs.getString("username")+"\"><b>"+rs.getString("username")+"</b></a></div><br>"
                                             + "     Full Name : "+rs.getString("fullname")+"<br>"
                                             + "     Joined On : "+rs.getString("join")+""
                                             + " </div>"
@@ -77,7 +77,7 @@
                                     String query2 = "SELECT * FROM task WHERE categoryid="+rs.getString("categoryid");
                                     ResultSet rs2 = stt2.executeQuery(query2);
                                     while(rs2.next()) {
-                                        out.print("<li><a href = \"task_page.php?taskid="+rs2.getString("taskid")+"\">"+rs2.getString("taskname")+"</a></li>");
+                                        out.print("<li><a href = \"task_page.jsp?taskid="+rs2.getString("taskid")+"\">"+rs2.getString("taskname")+"</a></li>");
                                     }
                                     out.print(" </ul>"
                                             + "</div>");
@@ -91,7 +91,7 @@
                                 while(rs.next()) {
                                     out.print("<div id=\"task-result\">"
                                             + " <ul>"
-                                            + "     <li><a href = \"task_page.php?taskid="+rs.getString("taskid")+"\">"+rs.getString("taskname")+"</a><div class=\"task-tag\">submit by : <b><i>"+rs.getString("username")+"</i></b>, deadline : "+rs.getString("deadline")+", status : <b id=\"red-text\">"+rs.getString("status")+"</b></div>"
+                                            + "     <li><a href = \"task_page.jsp?taskid="+rs.getString("taskid")+"\">"+rs.getString("taskname")+"</a><div class=\"task-tag\">submit by : <b><i>"+rs.getString("username")+"</i></b>, deadline : "+rs.getString("deadline")+", status : <b id=\"red-text\">"+rs.getString("status")+"</b></div>"
                                             + "     <br><div>"
                                             + "     <div class=\"task-tag\">Set as <a href=\"javascript:setCompleteStatus("+i+","+rs.getString("taskid")+")\">Change Status</a></div></div><br><br>"
                                             + "     <div id=\"task-tag\">"
@@ -127,10 +127,10 @@
                                 while (rs.next()) {
                                     out.print("<div id=\"user-result\">"
                                             + " <div id=\"user-result-image\">"
-                                            + "     <a href=\"profile.php?username="+rs.getString("username")+"\"><img alt=\"Avatar\" id=\"photo\" src=\"../avatar/"+rs.getString("avatar")+"\" width=\"100\" height=\"120\"/></a>"
+                                            + "     <a href=\"profile.jsp?username="+rs.getString("username")+"\"><img alt=\"Avatar\" id=\"photo\" src=\"../avatar/"+rs.getString("avatar")+"\" width=\"100\" height=\"120\"/></a>"
                                             + " </div>"
                                             + " <div id=\"user-result-name\">"
-                                            + "     <div id=\"dashboard-title\"><a href=\"profile.php?username="+rs.getString("username")+"\"><b>"+rs.getString("username")+"</b></a></div><br>"
+                                            + "     <div id=\"dashboard-title\"><a href=\"profile.jsp?username="+rs.getString("username")+"\"><b>"+rs.getString("username")+"</b></a></div><br>"
                                             + "     Full Name : "+rs.getString("fullname")+"<br>"
                                             + "     Joined On : "+rs.getString("join")+""
                                             + " </div>"
@@ -160,7 +160,7 @@
                                     String query2 = "SELECT * FROM task WHERE categoryid="+rs.getString("categoryid");
                                     ResultSet rs2 = stt2.executeQuery(query2);
                                     while(rs2.next()) {
-                                        out.print("<li><a href = \"task_page.php?taskid="+rs2.getString("taskid")+"\">"+rs2.getString("taskname")+"</a></li>");
+                                        out.print("<li><a href = \"task_page.jsp?taskid="+rs2.getString("taskid")+"\">"+rs2.getString("taskname")+"</a></li>");
                                     }
                                     out.print(" </ul>"
                                             + "</div>");
@@ -184,7 +184,7 @@
                                 while(rs.next()) {
                                     out.print("<div id=\"task-result\">"
                                             + " <ul>"
-                                            + "     <li><a href = \"task_page.php?taskid="+rs.getString("taskid")+"\">"+rs.getString("taskname")+"</a><div class=\"task-tag\">submit by : <b><i>"+rs.getString("username")+"</i></b>, deadline : "+rs.getString("deadline")+", status : <b id=\"red-text\">"+rs.getString("status")+"</b></div>"
+                                            + "     <li><a href = \"task_page.jsp?taskid="+rs.getString("taskid")+"\">"+rs.getString("taskname")+"</a><div class=\"task-tag\">submit by : <b><i>"+rs.getString("username")+"</i></b>, deadline : "+rs.getString("deadline")+", status : <b id=\"red-text\">"+rs.getString("status")+"</b></div>"
                                             + "     <br><div>"
                                             + "     <div class=\"task-tag\">Set as <a href=\"javascript:setCompleteStatus("+j+","+rs.getString("taskid")+")\">Change Status</a></div></div><br><br>"
                                             + "     <div id=\"task-tag\">"

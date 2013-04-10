@@ -43,7 +43,7 @@
                             <div class="popup">
                                     <h2>Add New Category</h2>
                                     <br>
-            <form action="../php/insertcategory.php" method="post">
+                            <form action="../php/insertcategory.php" method="post">
                                     <div>
                                             <label for="login">Name:</label>
                                             <input type="text" id="login" value="" name="newCategory"/>
