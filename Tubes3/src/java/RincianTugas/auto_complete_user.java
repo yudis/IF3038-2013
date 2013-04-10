@@ -41,10 +41,14 @@ public class auto_complete_user extends HttpServlet {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");
             query = conn.createStatement();
             ResultSet result = query.executeQuery("SELECT username FROM pengguna WHERE (LEFT(username,"
-                    +request.getParameter("assignee").length()+") = "+request.getParameter("assignee")+")");
-
-            while (result.next()) {
-                out.println(result.getString(1));
+                    +request.getParameter("assignee").length()+") = '"+request.getParameter("assignee")+"')");
+     
+            if (result.next()) {
+                do {
+                    out.println(result.getString(1));
+                } while (result.next());
+            } else {
+                out.println("Tidak ada user dengan nama itu");
             }
             
             result.close();

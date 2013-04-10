@@ -209,7 +209,6 @@ calendar = {
 		if(!input) return; //If the input field is not there, exit.
 		
 		if(!this.opt['calendar']) this.init();
-		
 		var ths = this;
 		input.onclick=function(){
 			ths.opt['input'] = this.id;
@@ -219,14 +218,6 @@ calendar = {
 	
 	/// Will be called once when the first input is set.
 	init: function() {
-		if(!this.opt['calendar'] || !document.getElementById(this.opt['calendar'])) {
-			var div = document.createElement('div');
-			if(!this.opt['calendar']) this.opt['calendar'] = 'calender_div_'+ Math.round(Math.random() * 100);
-
-			div.setAttribute('id',this.opt['calendar']);
-			div.className="calendar-box";
-
-			document.getElementsByTagName("body")[0].insertBefore(div,document.getElementsByTagName("body")[0].firstChild);
-		}
+            this.opt['calendar'] = 'calendar';
 	}
-}
+};

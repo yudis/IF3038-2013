@@ -46,6 +46,8 @@
     background-image: url("../pict/tulisanedit.png");
     background-repeat: no-repeat;
     background-position: center;
+    padding-left: auto;
+    padding-right: auto;    
 }
 
 #addtask:hover{
@@ -69,6 +71,8 @@
     background-image: url("../pict/back.png");
     background-repeat: no-repeat;
     background-position: center;
+    padding-left: auto;
+    padding-right: auto;    
 }
 
 #back:hover{
@@ -89,6 +93,8 @@
     background-image: url("../pict/tulisanedit.png");
     background-repeat: no-repeat;
     background-position: center;
+    padding-left: auto;
+    padding-right: auto;    
 }
 
 #hapus:hover{
@@ -122,7 +128,7 @@
 #rinciantugas{
     padding-top: 30px;
     width: 400px;
-    height: 660px;
+    height: 760px;
     background-color: #ececec;
     border-radius:20px;
     -moz-border-radius:20px;
@@ -136,7 +142,7 @@
     width: 337px;
     height: 500px;
     margin-left: 760px;
-    margin-top: -680px;
+    margin-top: -790px;
 }
 
 #tempat_komentar{
@@ -320,4 +326,8 @@ input[type=checkbox] {
 
 #attach a:visited {
     color: purple;
+}
+
+#date {
+    width: 90px;
 }

@@ -14,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/buattask.css">
+        <link rel="stylesheet" href="css/calendar.css">
         <title>Rincian Tugas : <%out.println(data.getNama());%> </title>
         <script type="text/JavaScript" src="js/calendar.js"></script>
         <script type="text/javascript">
@@ -230,20 +231,19 @@
             }
         
             function showEdit(){
-                calendar.set("date");          
-                document.getElementById("detail").innerHTML=document.getElementById("detailedit").innerHTML;
-            }
-            function hideEdit(){
-                document.getElementById("detailedit").style.visibility="hidden";
-                document.getElementById("detail").style.visibility="visible";
+                if (document.getElementById("detailedit").innerHTML !== "") {
+                    document.getElementById("detail").innerHTML=document.getElementById("detailedit").innerHTML;
+                    document.getElementById("detailedit").innerHTML = "";
+                    calendar.set("date");
+                }
             }
             
             function submit_edit(form) {
                 var xmlhttp;
                 if (window.XMLHttpRequest){
-                        xmlhttp = new XMLHttpRequest();				
+                    xmlhttp = new XMLHttpRequest();				
                 } else {
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
                 }
 				
                 xmlhttp.onreadystatechange = function(){
@@ -266,13 +266,41 @@
                 params += escape(form.year.value+"-"+form.month.value+"-"+form.day.value+" "+form.hour.value+":"+form.minute.value+":00");
                 
                 //alert(params);
-                xmlhttp.open("POST","edit_detail_tugas.php",true);
+                xmlhttp.open("POST","edit_detail_tugas",true);
                 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xmlhttp.send(params);
             }
             
             function hapus_task() {
-                
+                if (localStorage.userLogin !== <%out.print(data.getCreator());%>) {
+                    alert("Anda bukan pembuat tugas");
+                } else {
+                    var xmlhttp;
+                    if (window.XMLHttpRequest){
+                        xmlhttp = new XMLHttpRequest();				
+                    } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+                    }
+
+                    xmlhttp.onreadystatechange = function(){
+                        if (xmlhttp.readyState===4)	{
+                            //alert(xmlhttp.responseText);
+                        }
+                    };
+
+                    var id_tugas = "-1";
+                    var c = window.location.search.indexOf("id_tugas=");
+                    if (c !== -1) {
+                        id_tugas = window.location.search.substring(c+9);
+                    }     
+
+                    var params = "id_tugas="+id_tugas;
+
+                    //alert(params);
+                    xmlhttp.open("POST","edit_detail_tugas.php",true);
+                    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    xmlhttp.send(params);                    
+                }
             }
         </script>        
         
@@ -287,7 +315,7 @@
             </div>
             <div>
                 <form>
-                    <input type="button" id="back" value="" onclick="location.href='dashboard.html';">
+                    <input type="button" id="back" value="" onclick="location.href='dashboard.jsp';">
                 </form>
             </div>
             <div id="hapus" onclick="hapus_task();"></div>
@@ -344,40 +372,7 @@
                         }
                     %>
                     </div>
-                    <!--
-                            tambah2 += '<label>DEADLINE</label>';
-                            tambah2 += '<input type="textarea" name="year" id="yearbox" value="'+tanggal.substring(0,4)+'" onchange="dead_validating()">-';
-                            tambah2 += '<select name="month" onchange="dead_validating()">';
-                            for (var i=1;i<=12;++i) {
-                                if (i == tanggal.substring(5,7)) tambah2 += "<option selected>"+i+"</option>";
-                                else tambah2 += "<option>"+i+"</option>";
-                            }
-                            tambah2 += '</select>-';
-
-                            tambah2 += '<select name="day">     ';
-                            for (var i=1;i<=31;++i) {
-                                if (i == tanggal.substring(8,10)) tambah2 += "<option selected>"+i+"</option>";
-                                else tambah2 += "<option>"+i+"</option>";
-                            }
-                            tambah2 += '</select> Jam: ';
-                            
-                            tambah2 += '<select name="hour">';
-                            for (var i=0;i<=23;++i) {
-                                if (i == tanggal.substring(11,13)) tambah2 += "<option selected>"+i+"</option>";
-                                else tambah2 += "<option>"+i+"</option>";
-                            }
-                            tambah2 += '</select>-';
-
-                            tambah2 += '<select name="minute">';
-                            for (var i=0;i<=59;++i) {
-                                var sem = "";
-                                if (i < 10) sem = "0";
-                                sem += i;
-                                if (sem == tanggal.substring(14,16)) tambah2 += "<option selected>"+sem+"</option>";
-                                else tambah2 += "<option>"+sem+"</option>";
-                            }
-                            tambah2 += '</select>';
-                            
+                    <!--           
                             tambah2 += "<label>ATTACHMENT</label>";
                             tambah2 += '<div id="attach_upload">';                            
                             
@@ -412,7 +407,7 @@
                         <input type="checkbox" name="status" value="done"<%if (data.getStatus()==1) out.println("checked");%>> 
                         
                         <label>DEADLINE</label>
-                        <input type="text" name="date" id=""date>
+                        <input type="text" name="date" id="date" value ="<%out.println(data.getDeadline().substring(0,10));%>"> 
 
                         <label>ASSIGNEE</label>
                         <input type="textarea" name="assignee" placeholder="assignee"
@@ -460,6 +455,7 @@
                     </form>
                 </div>
             </div>
+            <div id="calendar" class="calendar-box">
         </div>
         
         <!-------------------------------FOOTER HALAMAN------------------------------------->        
