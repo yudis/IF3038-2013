@@ -143,5 +143,31 @@ public class CategoryDao extends DataAccessObject {
             e.printStackTrace();
         }
         return result;
-    }
+    }    
+    
+    public Collection<Category> getCategorySearch(String name, int start, int n){
+        Category category = null;
+        ArrayList<Category> result= new ArrayList<Category>();
+        String qry = "SELECT * FROM categories WHERE nama LIKE '%" + name + "%' LIMIT " + start + ", " + n + ";";
+        try{
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement(qry);
+            //        prepareStatement("SELECT * FROM categories WHERE nama LIKE '%?%' LIMIT ?, ?;");
+            //preparedStatement.setString(1, name);
+            //preparedStatement.setInt(2, start);
+            //preparedStatement.setInt(3, n);
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            while (rs.next()) {
+                category = new Category();
+                category.setId(rs.getInt("id"));
+                category.setNama(rs.getString("nama"));
+                category.setLastMod(rs.getTimestamp("last_mod"));
+                result.add(category);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }    
 }

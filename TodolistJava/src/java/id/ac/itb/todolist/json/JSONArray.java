@@ -66,4 +66,8 @@ public class JSONArray {
         sb.append(']');
         return sb.toString();
     }
+    
+    public int size(){
+        return data.size();
+    }
 }

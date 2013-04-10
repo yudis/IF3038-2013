@@ -16,7 +16,7 @@
         <script src="scripts/helper/datetimepicker_css.js" type="application/javascript"></script>
         <c:out value="${headTags}" escapeXml="false" default="" />
     </head>
-    <body <c:out value="${bodyAttrs}" escapeXml="false" default="" />
+    <body <c:out value="${bodyAttrs}" escapeXml="false" default="" />>
         <div class="page">
             <header class="content">
                 <nav>

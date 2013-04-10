@@ -28,6 +28,30 @@
         <servlet-name>Dashboard</servlet-name>
         <servlet-class>id.ac.itb.todolist.controller.Dashboard</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Profile</servlet-name>
+        <servlet-class>id.ac.itb.todolist.controller.Profile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateUser</servlet-name>
+        <servlet-class>id.ac.itb.todolist.ajax.updateUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>profilecategory</servlet-name>
+        <servlet-class>id.ac.itb.todolist.ajax.profilecategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>id.ac.itb.todolist.controller.Search</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>searchresult</servlet-name>
+        <servlet-class>id.ac.itb.todolist.ajax.searchresult</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateStatus</servlet-name>
+        <servlet-class>id.ac.itb.todolist.ajax.updateStatus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index.jsp</url-pattern>
@@ -55,6 +79,30 @@
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Profile</servlet-name>
+        <url-pattern>/profile.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateUser</servlet-name>
+        <url-pattern>/ajax/updateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>profilecategory</servlet-name>
+        <url-pattern>/ajax/profilecategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/search.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>searchresult</servlet-name>
+        <url-pattern>/ajax/searchresult</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateStatus</servlet-name>
+        <url-pattern>/ajax/updateStatus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
