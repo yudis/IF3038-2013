@@ -118,7 +118,7 @@ function setSearch(value, id) {
 function searchSuggestKeyword() {
     if (xmlHttpReq.readyState == 4 || xmlHttpReq.readyState == 0) {
         var str = escape(document.getElementById('keyword').value);
-        xmlHttpReq.open("GET", 'GetAll.php?nama=' + str, true);
+        xmlHttpReq.open("GET", 'GetAll?nama=' + str, true);
         xmlHttpReq.onreadystatechange = handleSearchSuggestKeyword; 
         xmlHttpReq.send(null);
     }		
@@ -176,7 +176,7 @@ var ids = null;
 function changevalues(id) {
     ids = id;
     if (xmlHttpReq.readyState == 4 || xmlHttpReq.readyState == 0) {
-        xmlHttpReq.open("GET", 'ChangeTaskStatus.php?id='+id, true);//TODO
+        xmlHttpReq.open("GET", 'ChangeTaskStatus?id='+id, true);//TODO
         xmlHttpReq.onreadystatechange = handleStatusChange; 
         xmlHttpReq.send(null);
     }		

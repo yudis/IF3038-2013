@@ -88,7 +88,7 @@ public class DoSearch1 extends HttpServlet {
                             out.print("<div>");
                             if (user.equals(rs.getString("username"))) {
                                 out.print("<div>");
-                                out.print("<input type='checkbox' value='None' id='checklist" + rs.getString("username") + "' name='check' onchange='changevalues(" + rs.getString("username") + ")'");
+                                out.print("<input type='checkbox' value='None' id='checklist" + rs.getString("username") + "' name='check' onchange='changevalues(" + rs.getString("IDTask") + ")'");
                                 if (rs.getString("stat").equals("1")) {
                                     out.print("checked");
                                 }
@@ -121,7 +121,7 @@ public class DoSearch1 extends HttpServlet {
                         out.print("<div><b class='design1'>Daftar User</b></div>");
                         while (rs.next()) {
                             out.print("<div><a class='list' href='profile.jsp?username=" + rs.getString("username") + "'>" + rs.getString("username") + "<span>Username: " + rs.getString("fullname") + "</span></a>");
-                            out.print("<img src="+ rs.getString("avatar") +" class='profPic1'></img> </div>");
+                            out.print("<img src=" + rs.getString("avatar") + " class='profPic1'></img> </div>");
                         }
                         out.print("</li>");
                     }
@@ -133,8 +133,8 @@ public class DoSearch1 extends HttpServlet {
                         out.print("<input type='text' id='user' class='hidden' value='" + keyword + "'><li class='Task1'>");
                         out.print("<div><b class='design1'>Daftar User</b></div>");
                         while (rs.next()) {
-                            out.print("<div><a class='list' href='profile.jsp?username=" + rs.getString("username") + "'>" + rs.getString("username") + "</a>");
-                            out.print("<p>" + rs.getString("avatar") + "</p></div>");
+                            out.print("<div><a class='list' href='profile.jsp?username=" + rs.getString("username") + "'>" + rs.getString("username") + "<span>Username: " + rs.getString("fullname") + "</span></a>");
+                            out.print("<img src=" + rs.getString("avatar") + " class='profPic1'></img> </div>");
                         }
                         out.print("</li>");
                     }
