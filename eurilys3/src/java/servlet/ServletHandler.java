@@ -403,6 +403,7 @@ public class ServletHandler extends HttpServlet{
         else if (req.getParameter("type").equalsIgnoreCase("edittask_deleteAssignee")) {
             String taskID       = req.getParameter("task_id");
             String userID       = req.getParameter("user_id");
+            System.out.println("task ID : " + taskID + " , userID : " + userID);
             try {                
                 // Make connection to database
                 try {
@@ -414,10 +415,11 @@ public class ServletHandler extends HttpServlet{
                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");
                 
                 PreparedStatement st;
-                st = conn.prepareStatement("DELETE FROM task_assigne WHERE task_id=? AND username=?");
+                st = conn.prepareStatement("DELETE FROM task_asignee WHERE task_id=? AND username=?");
                 st.setString(1, taskID);
                 st.setString(2, userID);
-                st.executeUpdate();                
+                st.executeUpdate();     
+
             } 
             catch (SQLException e) {
                 System.out.println("Connection Failed! Check output console - edit task : delete assignee ");

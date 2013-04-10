@@ -98,8 +98,8 @@
                                 <br> 
                             <% } %>                                
                             <br>
-                            <input type="text" autocomplete="off" name="edit_task_assignee" id="edit_task_assignee" value="">
-                            <input type="text" autocomplete="off" name="edit_task_assignee_auto" id="edit_task_assignee_auto" class="edit_task_input" onkeyup="EditTaskAssigneHint(this.value)" value="">
+                            <input type="text" autocomplete="off" name="edit_task_assignee" id="edit_task_assignee" value=""> <br>
+                            <input type="text" autocomplete="off" name="edit_task_assignee_auto" id="edit_task_assignee_auto" class="edit_task_input" onkeyup="EditTaskAssigneHint(this.value)" Placeholder="Type here..." value="">
                             <div id="edit_task_asignee_autocomplete"></div>
                         </div>
                     </div>			
