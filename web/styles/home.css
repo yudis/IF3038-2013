@@ -84,7 +84,33 @@ body {
 .field_kanan select{
 	width:33%;
 }
+#usericon{
+	height: 20px;
+}
 
+#passicon{
+	height: 20px;
+}
+
+#conficon{
+	height: 20px;
+}
+
+#nameicon{
+	height: 20px;
+}
+
+#emailicon{
+	height: 20px;
+}
+
+#avaicon{
+	height: 20px;
+}
+
+#dateicon{
+	height: 20px;
+}
 
 }
 
@@ -165,7 +191,7 @@ body {
 }
 
 .field_kanan input{
-	width:100%;
+	width:80%;
 }
 
 .field_kanan select{

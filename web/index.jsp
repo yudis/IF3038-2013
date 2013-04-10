@@ -11,9 +11,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Organize Homepage</title>
         <link href="styles/home.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="styles/calendar.css">
+        <script src="js/home.js"></script>
+        <script src="js/calendar.js" > </script>
     </head>
     
-    <body onload="makeTgl();makeThn();">
+    <body >
 	<div id="container">
 		<div id="header">
         	<div class=logo id="logo">
@@ -39,14 +42,15 @@
 		</div>
 		
 		<div id="register_tab">
-			<form name="register_form">
+			<form name="registration">
 			<div id="formulir">
 				<div class="form_field">
 					<div class="field_kiri">
 						Username: 
 					</div>
 					<div class="field_kanan">
-						<input name="username" type="text"  maxlength="256" onkeyup="checkUserName(document.register_form.username.value)">
+						<input name="username" type="text" placeholder="username" maxlength="256" onkeyup="user_validating()">
+                                                <img src="images/blank.png" alt="icon2" id="usericon"  />
 					</div>
 					<div id="v_uname">
 					</div>
@@ -56,8 +60,9 @@
 						Password: 
 					</div>
 					<div class="field_kanan">
-						<input name="password" type="password"  maxlength="24" onkeyup="checkPass(document.register_form.password.value, document.register_form.username.value, document.register_form.email.value)">
-					</div>
+						<input name="password" type="password" placeholder="password" maxlength="24" onkeyup="pass_validating()">
+                                                <img src="images/blank.png" alt="icon3" id="passicon" />
+                                        </div>
 					<div id="v_pass">
 					</div>
 				</div>
@@ -66,8 +71,9 @@
 						Confirm Password: 
 					</div>
 					<div class="field_kanan">
-						<input name="confirm_password" type="password"  maxlength="24" onkeyup="checkCPass(document.register_form.confirm_password.value, document.register_form.password.value)">
-					</div>
+                                            <input name="confirmpass" type="password" placeholder="confirm password"  maxlength="24" onkeyup="conf_validating()">
+                                                <img src="images/blank.png" alt="icon4" id="conficon" />
+                                        </div>
 					<div id="v_cpass">
 					</div>
 				</div>
@@ -76,8 +82,9 @@
 						Nama lengkap: 
 					</div>
 					<div class="field_kanan">
-						<input type="text" name="nama_lengkap" maxlength="256">
-					</div>
+                                            <input type="text" name="namaleng" placeholder="nama lengkap" maxlength="256" onkeyup="nama_validating()">
+                                            <img src="images/blank.png" alt="icon5" id="nameicon" />
+                                        </div>
 					<div id="v_nama">
 					</div>
 				</div>
@@ -86,27 +93,11 @@
 						Tanggal lahir: 
 					</div>
 					<div class="field_kanan">
-						<select name="tanggal" id="tgl">
-							<option>--Tanggal--</option>
-						</select>
-						<select name="bulan">
-							<option>--Bulan--</option>
-							<option value="Januari">Januari</option>
-							<option value="Februari">Februari</option>
-							<option value="Maret">Maret</option>
-							<option value="April">April</option>
-							<option value="Mei">Mei</option>
-							<option value="Juni">Juni</option>
-							<option value="Juli">Juli</option>
-							<option value="Agustus">Agustus</option>
-							<option value="September">September</option>
-							<option value="Oktober">Oktober</option>
-							<option value="November">November</option>
-							<option value="Desember">Desember</option>
-						</select>
-						<select name="tahun" id="thn">
-							<option>--Tahun--</option>
-						</select>
+						<input type="text" name="tanggal" id="date"  />
+                                                <script type="text/javascript">
+							calendar.set("date");
+						</script>
+                                                <img src="images/blank.png" alt="icon8" id="dateicon"  />
 					</div>
 					<div id="v_lahir">
 					</div>
@@ -116,8 +107,9 @@
 						Email: 
 					</div>
 					<div class="field_kanan">
-						<input type="text" name="email" maxlength="256" onkeyup="checkEmail(document.register_form.email.value)">
-					</div>
+						<input type="text" name="email" maxlength="256" onkeyup="email_validating()">
+                                                <img src="images/blank.png" alt="icon6" id="emailicon" />
+                                        </div>
 					<div id="v_email">
 					</div>
 				</div>
