@@ -167,7 +167,7 @@ function handleDoSearch() {
         var ss = document.getElementById('searchAll');
         var str =xmlHttpReq.responseText;
         ss.innerHTML += str;
-        alert(str);
+        //alert(str);
     }
 }
 

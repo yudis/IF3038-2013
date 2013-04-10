@@ -21,7 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "DoSearch1", urlPatterns = {"/DoSearch1"})
 public class DoSearch1 extends HttpServlet {
-int i;
+
+    int i;
 
     /**
      * Processes requests for both HTTP
@@ -61,15 +62,15 @@ int i;
             String user = request.getParameter("user");
             String filter = request.getParameter("filter");
             String keyword = request.getParameter("keyword");
-            if(request.getParameter("continue").equals("true")){
+            if (request.getParameter("continue").equals("true")) {
                 i++;
-            }else{
-                i=1;
+            } else {
+                i = 1;
             }
             int awal = 10 * (i - 1);
             Tubes3Connection tu = new Tubes3Connection();
             Connection connection = tu.getConnection();
-            String queryUser = "SELECT username FROM pengguna WHERE username LIKE('%" + keyword + "%') ORDER BY username LIMIT " + awal + ", 10;";
+            String queryUser = "SELECT username, avatar FROM pengguna WHERE username LIKE('%" + keyword + "%') ORDER BY username LIMIT " + awal + ", 10;";
             String queryAllTugas = "SELECT IDTask, name, deadline, stat, username, tag FROM `tugas` WHERE name LIKE '%" + keyword + "%' OR tag LIKE '%" + keyword + "%' LIMIT " + awal + ", 10;";
             System.out.println("DOOOO:" + queryAllTugas);
             String queryKategori = "SELECT judul FROM kategori WHERE judul LIKE('" + keyword + "%') ORDER BY judul LIMIT " + awal + ", 10;";
@@ -93,7 +94,7 @@ int i;
                                 }
                                 out.print("/>");
                             }
-                            out.print("<a class='list' href='taskdetails.php?id=" + rs.getString("IDTask") + "'><span>Tag:" + rs.getString("tag") + "</span>" + rs.getString("name") + "</a>");
+                            out.print("<a class='list' href='taskdetails.jsp?id=" + rs.getString("IDTask") + "'><span>Tag:" + rs.getString("tag") + "</span>" + rs.getString("name") + "</a>");
 
                             out.print("<p>" + rs.getString("deadline") + "</p></div>");
                         }
@@ -116,10 +117,11 @@ int i;
                     tiga = rs.first();
                     if (tiga) {
                         rs.previous();
-                        out.print("<input type='text' id='user' class='hidden' value='{$keyword}'><li class='Task1'>");
+                        out.print("<input type='text' id='user' class='hidden' value='" + keyword + "'><li class='Task1'>");
                         out.print("<div><b class='design1'>Daftar User</b></div>");
                         while (rs.next()) {
-                            out.print("<div><a class='list' href='profile.php?username='" + rs.getString("username") + "'>" + rs.getString("username") + "</a></div>");
+                            out.print("<div><a class='list' href='profile.jsp?username=" + rs.getString("username") + "'>" + rs.getString("username") + "</a>");
+                            out.print("<p><img src="+ rs.getString("avatar") +" class='profPic1'></img> </p></div>");
                         }
                         out.print("</li>");
                     }
@@ -128,10 +130,11 @@ int i;
                     tiga = rs.first();
                     if (tiga) {
                         rs.previous();
-                        out.print("<input type='text' id='user' class='hidden' value='{$keyword}'><li class='Task1'>");
+                        out.print("<input type='text' id='user' class='hidden' value='" + keyword + "'><li class='Task1'>");
                         out.print("<div><b class='design1'>Daftar User</b></div>");
                         while (rs.next()) {
-                            out.print("<div><a class='list' href='profile.php?username='" + rs.getString("username") + "'>" + rs.getString("username") + "</a></div>");
+                            out.print("<div><a class='list' href='profile.jsp?username=" + rs.getString("username") + "'>" + rs.getString("username") + "</a>");
+                            out.print("<p>" + rs.getString("avatar") + "</p></div>");
                         }
                         out.print("</li>");
                     }
@@ -165,7 +168,7 @@ int i;
                                     out.print("checked/>");
                                 }
                             }
-                            out.print("<a class='list' href='taskdetails.php?id=" + rs.getString("IDTask") + "'><span>Tag:" + rs.getString("tag") + "</span>" + rs.getString("name") + "</a>");
+                            out.print("<a class='list' href='taskdetails.jsp?id=" + rs.getString("IDTask") + "'><span>Tag:" + rs.getString("tag") + "</span>" + rs.getString("name") + "</a>");
 
                             out.print("<p>" + rs.getString("deadline") + "</p></div>");
                         }
