@@ -15,7 +15,8 @@
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/buattask.css">
         <title>Rincian Tugas : <%out.println(data.getNama());%> </title>
-        <script>
+        <script type="text/JavaScript" src="js/calendar.js"></script>
+        <script type="text/javascript">
             function submit_comment(form) {
                 if (form.comment.value !== "") {
                     var xmlhttp;
@@ -38,7 +39,7 @@
                     } 
 
                     params = "komentar="+escape(form.comment.value)+"&user="+localStorage.userLogin+"&id_tugas="+id_tugas;
-                    xmlhttp.open("POST","tambah_komentar.php",true);                
+                    xmlhttp.open("POST","tambah_komentar",true);                
                     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                     xmlhttp.send(params);
                     form.comment.value = "";
@@ -103,6 +104,7 @@
                         var n = s.indexOf("\n");
                         daftar_komentar = document.getElementById("tempat_komentar");
                         daftar_komentar.innerHTML = "";
+                        //alert(s);
                         
                         while (n !== -1) {
                             //Ambil satu data komentar
@@ -177,6 +179,7 @@
                 xmlhttp.open("POST","jumlah_komentar",true);
                 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xmlhttp.send(params);
+                //alert("HOHOHO");
             }
         
             function ubah_hal(i) {
@@ -220,13 +223,14 @@
                     
                     params = "assignee="+escape(text);
                     //alert(params);
-                    xmlhttp.open("POST","auto_complete_user.php",true);
+                    xmlhttp.open("POST","auto_complete_user",true);
                     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                     xmlhttp.send(params);
                 }
             }
         
             function showEdit(){
+                calendar.set("date");          
                 document.getElementById("detail").innerHTML=document.getElementById("detailedit").innerHTML;
             }
             function hideEdit(){
@@ -374,16 +378,6 @@
                             }
                             tambah2 += '</select>';
                             
-                            tambah2 += "<label>ASSIGNEE</label>";
-                            tambah2 += '<input type="textarea" name="assignee" placeholder="assignee"';
-                            tambah2 += ' title="Akhiri nama user dengan tanda /, jangan dipisah spasi"';
-                            tambah2 += ' onkeyup=auto_complete(this.value.substring(this.value.lastIndexOf("/")+1)) value="'+orang+'">';
-                            
-                            tambah2 += '<input id="autobox" disabled></input>';
-
-                            tambah2 += "<label>TAG</label>";
-                            tambah2 += '<input type="textarea" name="catname" placeholder="tag" value="'+tag+'">';
-                            
                             tambah2 += "<label>ATTACHMENT</label>";
                             tambah2 += '<div id="attach_upload">';                            
                             
@@ -406,31 +400,40 @@
                             }
                             tambah += '</div>';
 
-                            tambah2 += '</div>';                            
-                            tambah2 += '<input type="file" name="file" id="file" onchange="validasi_file(this)">';
-                            
-                            tambah2 += '<input class= "submitreg" name="submit" type="button" value="Submit"';
-                            tambah2 += 'onclick="hideEdit(),submit_edit(this.form)"></form>';
+                            tambah2 += '</div>';
                     -->
                 </div>
-                <%--<div id ="detailedit">
+                <div id ="detailedit">
                     <label>NAMA KATEGORI</label>
                     <a id="kategori"><%out.println(data.getKategori());%></a>
                     
-                    <form action="edit_detail_tugas.java" method="POST">
+                    <form action="edit_detail_tugas" method="POST">
                         <label>STATUS TUGAS</label>
                         <input type="checkbox" name="status" value="done"<%if (data.getStatus()==1) out.println("checked");%>> 
                         
                         <label>DEADLINE</label>
+                        <input type="text" name="date" id=""date>
+
+                        <label>ASSIGNEE</label>
+                        <input type="textarea" name="assignee" placeholder="assignee"
+                         title="Akhiri nama user dengan tanda /, jangan dipisah spasi"
+                         onkeyup="auto_complete(this.value.substring(this.value.lastIndexOf('/')+1));"
+                         value="<%
+                            for (int i=0;i<assignee.length;++i) {
+                                out.print(assignee[i] + "/");
+                            }
+                         %>">
+                        <input id="autobox" disabled>
                         
                         <label>TAG</label>
                         <input type="textarea" name="catname" placeholder="tag" value="<%out.println(data.getTag());%>">
                         
+                        <label>ATTACHMENT</label>
                         <input type="file" name="file" id="file" onchange="validasi_file(this);">
                         
-                        <input type="submit" value="submit">
+                        <input class="submitreg" name="submit" type="submit" value="submit">
                     </form>
-                </div>--%>
+                </div>
             </div>
             <div id="komen">
                 <div id="tempat_komentar">

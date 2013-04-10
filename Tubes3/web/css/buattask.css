@@ -37,7 +37,7 @@
     width: 139px;
     height: 68px;
     border-radius:20px;
-    border: solid 1px;
+    border: solid 1px #dedede;
     -moz-border-radius:20px;
     -webkit-border-radius:20px;
     box-shadow: 1px 1px 5px 0px #e1e1e1;
@@ -80,7 +80,7 @@
     width: 139px;
     height: 68px;
     border-radius:20px;
-    border: solid 1px;
+    border: solid 1px #dedede;
     -moz-border-radius:20px;
     -webkit-border-radius:20px;
     box-shadow: 1px 1px 5px 0px #e1e1e1;
