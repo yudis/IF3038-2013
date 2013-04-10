@@ -35,12 +35,21 @@
                                     <br>
                                     <br>
                                     <%
+                                    String ext[];
                                         for(int i=0;i<task.attachment.size();i++)
                                         {
-                                            out.print(task.attachment.get(i));
-                                            if(i<task.attachment.size()-1)
+                                            ext=task.attachment.get(i).split("\\.");
+                                            if(ext[1].equals("jpg"))
                                             {
-                                                out.print(", ");
+                                                out.print("<img src="+task.attachment.get(i)+" style=\"width: 220px;height: 230px;\"><br>");
+                                            }
+                                            else if(ext[1].equals("ogg"))
+                                            {
+                                                out.print("<video width=\"320\" height=\"240\" controls autoplay><source src="+task.attachment.get(i)+" type=\"video/"+ext[1]+"\"></video><br>");
+                                            }
+                                            else
+                                            {
+                                                out.print("<a href=\""+task.attachment.get(i)+"\" target=\"_blank\">"+task.attachment.get(i).substring(7) +"</a><br>");
                                             }
                                         }
                                      %>
@@ -90,16 +99,19 @@
                                 <%out.print(task.jumlahA);%>
                                 </div>
                             <button id="edit" name="edit" onclick="editTask(document.getElementById('jumlahA').innerHTML)" type="button"><b>Edit</b></button><br>
+                    <div id="jumkom" style="visibility:hidden">
+                                  <%out.print(task.jumlah);%>
+                    </div>        
                     <div class="task">
                     <%
                         out.print("<li>");
-			out.print("<label id=\"a\"  for=\"komentar\">Komentar("+task.comment.size()+")</label>");
+			out.print("<label id=\"a\"  for=\"komentar\">Komentar("+task.jumlah+")</label>");
 			out.print("</li>");
 			out.print ("<br>");	
                         out.print("<div id=\"comment\">");
                         for(int i=0;i<task.comment.size();i++)
                         {
-                        out.print ("<div id=\""+i+"\">");
+                        out.print ("<div id=\""+task.comment.get(i).id +"\">");
                         out.print ("<div class=\"headerComment\">");
                         out.print ("<div class=avatar style=\"float:left;\">");
                         out.print ("<img src="+task.comment.get(i).avatar+" height=\"42\" width=\"42\">");
@@ -113,7 +125,7 @@
                         {}
                         else
                         {
-                        out.print ("<a class=\"remove\" href=\"\" onClick=\"removeComment("+task.comment.get(i).id+","+task.comment.size()+");return false;\" >remove");
+                        out.print ("<a class=\"remove\" href=\"\" onClick=\"removeComment("+task.comment.get(i).id+","+task.jumlah+");return false;\" >remove");
 
                         out.print ("</a>");
                         }
@@ -127,13 +139,12 @@
                     out.print ("</div>");
                            
                                     %>
-
+                            
 
 
                             <form id="commentform">
                                     <input class="task" id="commentfield" name="commentfield" type="text" size="1000"/> 
-
-                                    <input id="commentbutton" name="commentbutton" type="submit" value="Comment" onClick="addcomment(<%out.print("'yuli,'");out.print(task.jumlah);%>);return false;"/>
+                                    <input id="commentbutton" name="commentbutton" type="submit" value="Comment" onClick="addcomment(<%out.print("'yuli'");%>);return false;"/>
                             </form>
                             </div>
                     </ul>

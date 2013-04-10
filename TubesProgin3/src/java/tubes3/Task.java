@@ -57,6 +57,11 @@ public class Task extends HttpServlet {
         {
             jumlahA=rs.getInt("jumlah");
         }
+        rs=tu.coba(connection,queryJumlahKomentar);
+        if(rs.next())
+        {
+            jumlah=rs.getInt("jumlah");
+        }
         rs=tu.coba(connection,queryTask);
         if (rs.next())
         {

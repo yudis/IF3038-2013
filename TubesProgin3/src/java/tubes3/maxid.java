@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Yulianti Oenang
  */
-@WebServlet(name = "addComment", urlPatterns = {"/addComment"})
-public class addComment extends HttpServlet {
+@WebServlet(name = "maxid", urlPatterns = {"/maxid"})
+public class maxid extends HttpServlet {
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +39,10 @@ public class addComment extends HttpServlet {
             /* TODO output your page here
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet addComment</title>");  
+            out.println("<title>Servlet maxid</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet addComment at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet maxid at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
              */
@@ -76,34 +75,30 @@ public class addComment extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String query="";
-        String queryU="";
-         response.setContentType("text/html;charset=UTF-8");
-	PrintWriter out = response.getWriter();
-        if(!(request.getParameter("comment").equals("")) && !(request.getParameter("usernamecur").equals(""))){
-            query="INSERT INTO komentar(IDTask,username,isi) values(1,'"+request.getParameter("usernamecur")+"','"+request.getParameter("comment")+"')";
-            queryU="SELECT * from pengguna where username='"+request.getParameter("usernamecur")+"'";
-        }
+        String query="SELECT MAX(IDKomentar) AS idkomen FROM komentar";
+        String query2="SELECT waktu from komentar where IDKomentar=(SELECT MAX(IDKomentar) FROM komentar)";
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
-        Statement pst;
-        ResultSet rs;
-        try {
-            pst = connection.createStatement();
-            pst.executeUpdate(query);
-            out.print(request.getParameter("comment"));
-            out.print(",");
-            rs=tu.coba(connection,queryU);
-             if (rs.next())
-            {
-            out.print(rs.getString("username"));
-            out.print(",");
-            out.print(rs.getString("avatar"));
-            System.out.println("comment="+request.getParameter("comment")+" username"+rs.getString("username")+" avatar="+rs.getString("avatar"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ResultSet rs,rs2;
+        response.setContentType("text/html;charset=UTF-8");
+	PrintWriter out = response.getWriter();
+        int max;
+            try {
+                rs=tu.coba(connection,query);
+                  if(rs.next())
+                    {
+                        max=rs.getInt("idkomen");
+                        out.print(max+",");
+                        
+                        rs2=tu.coba(connection, query2);
+                        if(rs2.next())
+                        {
+                            out.print(rs2.getString("waktu"));
+                        }
+                    }
+            } catch (SQLException ex) {
+                Logger.getLogger(maxid.class.getName()).log(Level.SEVERE, null, ex);
+            }                                                          
     }
 
     /** 

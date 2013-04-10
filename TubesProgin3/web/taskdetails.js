@@ -21,6 +21,7 @@ function fileallowed(){
 function removeComment(idcomment,jumcom){
 
 	var xmlhttp;
+        var jum;
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
   xmlhttp=new XMLHttpRequest();
@@ -34,9 +35,12 @@ else
 	  if(xmlhttp.readyState == 4){
 	  if(xmlhttp.responseText=="berhasil")
               {
+                  jum=document.getElementById("jumkom").innerHTML;
+                  jum--;
+                  document.getElementById("jumkom").innerHTML=jum;
                   document.getElementById(idcomment).innerHTML="";
-                  jumcom--;
-                  document.getElementById("a").innerHTML="Komentar("+jumcom+")";     
+                  
+                  document.getElementById("a").innerHTML="Komentar("+jum+")";     
               }
           
             }
@@ -48,8 +52,38 @@ xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send(queryString);
 }
 
-function addcomment(username,jum){
+function addcomment(username){
 var xmlhttp;
+var komen=document.getElementById("commentfield").value;
+document.getElementById("commentfield").value="";
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+  
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if(xmlhttp.readyState == 4){
+              data=xmlhttp.responseText;
+              maxid(data);
+              
+            }
+	  }
+	  
+var queryString = "comment="+komen+"&usernamecur="+username;
+xmlhttp.open("POST", 'addComment', true);
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send(queryString);
+
+}
+function maxid(total){
+var xmlhttp;
+var max;
+var jum=document.getElementById("jumkom").innerHTML;
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
   xmlhttp=new XMLHttpRequest();
@@ -61,30 +95,28 @@ else
 	xmlhttp.onreadystatechange=function()
 	  {
 	  if(xmlhttp.readyState == 4){
-                var total=xmlhttp.responseText.split(",");
-		document.getElementById("comment").innerHTML+="<div id=\""+i+"\"><div class=\"headerComment\"><div class=avatar style=\"float:left;\"><img src="+total[2]+" height=\"42\" width=\"42\"></div><div class=username style=\"float:left;\"><b>"+total[1]+"</b></div><div class=waktu><b>"+task.comment.get(i).waktu+"</b></div><div>";
-                        
-                        if(!(task.comment.get(i).username.equals("yuli")))
-                        {}
-                        else
-                        {
-                        out.print ("<a class=\"remove\" href=\"\" onClick=\"removeComment("+task.comment.get(i).id+","+task.comment.size()+");return false;\" >remove");
-
-                        out.print ("</a>");
-                        }
-                        out.print ("</div>");
-                        out.print ("</div>");
-                        out.print ( "<li>"+task.comment.get(i).isi+"</li>");
-                        out.print ("</div>");
+                max=xmlhttp.responseText;
+              jum++;
+              document.getElementById("jumkom").innerHTML=jum;
+              document.getElementById("a").innerHTML="Komentar("+jum+")";
+              total=total.split(",");
+              waktuid=max.split(",");
+                 var com=document.getElementById("comment").innerHTML;
+		document.getElementById("comment").innerHTML="<div id=\""
+                    +waktuid[0]+"\"><div class=\"headerComment\"><div class=avatar style=\"float:left;\"><img src="
+                    +total[2]+" height=\"42\" width=\"42\"></div><div class=username style=\"float:left;\"><b>"
+                    +total[1]+"</b></div><div class=waktu><b>"+waktuid[1]+"</b></div><div><a class=\"remove\" href=\"\" onClick=\"removeComment("
+                        +waktuid[0]+","+jum+");return false;\" >remove</a></div></div><li>"
+                    +total[0]+"</li></div>"+com;
             }
 	  }
 	  
-var queryString = "comment="+document.getElementById('commentfield').value+"&usernamecur="+username;
-xmlhttp.open("POST", 'addComment', true);
+xmlhttp.open("POST", 'maxid', true);
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send(queryString);
-}
+xmlhttp.send();  
 
+}
+function time(){}
 function editTask(jumlahAssignee)
 {
 	document.getElementById("edit").innerHTML="<b>Save</b>";
@@ -99,7 +131,7 @@ function editTask(jumlahAssignee)
                 }
 	}
         document.getElementById("inputtag").setAttribute("style","visibility:visible;position:absolute; top:15px; left:154px;");	
-	document.getElementById("assignee").innerHTML+="<br><input id=\"asignee\" type=\"text\" placeholder=\"assignee\" onkeyup='searchSuggest()'></input>";
+	document.getElementById("assignee").innerHTML+="<br><input id=\"asignee\" type=\"text\" placeholder=\"assignee\" onkeyup='searchSuggest(this.id)'></input>";
 }
 function save(jumlahA){
     
@@ -213,6 +245,7 @@ xmlhttp.onreadystatechange=function()
       if(xmlhttp.responseText=="sukses")
           {
               document.getElementById(username).innerHTML="";
+              //parseInt(document.getElementById("jumkom").innerHTML, radix);
           }
 	
 	}
