@@ -92,6 +92,14 @@
         <servlet-name>init_function</servlet-name>
         <servlet-class>Servlet.init_function</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updatecomment</servlet-name>
+        <servlet-class>Servlet.updatecomment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updatecompletestatus</servlet-name>
+        <servlet-class>Servlet.updatecompletestatus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet</url-pattern>
@@ -183,6 +191,14 @@
     <servlet-mapping>
         <servlet-name>init_function</servlet-name>
         <url-pattern>/init_function</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updatecomment</servlet-name>
+        <url-pattern>/updatecomment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updatecompletestatus</servlet-name>
+        <url-pattern>/updatecompletestatus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -107,7 +107,7 @@ public class Function {
             GetConnection connection = new GetConnection();
             Connection conn = connection.getConnection();
             Statement stmt = conn.createStatement();
-            String query = "SELECT count(*) as jumlah FROM comment WHERE taskid="+taskId;
+            String query = "SELECT count(*) as jumlah FROM comment WHERE taskid= '"+taskId+"'";
             ResultSet rs = stmt.executeQuery(query);
             rs.next();
             return Integer.parseInt(rs.getString("jumlah"));
@@ -138,8 +138,7 @@ public class Function {
             GetConnection getCon = new GetConnection();
             Connection conn = getCon.getConnection();
             Statement stt = conn.createStatement();
-            System.out.println(useractive+" dann "+taskid);
-            String query = "SELECT count(*) as isexist FROM assignee WHERE username='"+useractive+ "' AND taskid="+taskid;
+            String query = "SELECT count(*) as isexist FROM assignee WHERE username='"+useractive+ "' AND taskid='"+taskid+"'";
             ResultSet rs = stt.executeQuery(query);
             rs.next();
             if(!rs.getString("isexist").equals("0")){
@@ -157,7 +156,7 @@ public class Function {
             GetConnection getCon = new GetConnection();
             Connection conn = getCon.getConnection();
             Statement stt = conn.createStatement();
-            String query = "SELECT tagname FROM tag WHERE tagid = "+tagid;
+            String query = "SELECT tagname FROM tag WHERE tagid = '"+tagid+"'";
             ResultSet rs = stt.executeQuery(query);
             rs.next();
             toOut = rs.getString("tagname");

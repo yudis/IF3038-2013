@@ -94,7 +94,7 @@ function setCompleteStatus(idx,taskid){
 	var status = document.getElementById("red-text"+idx).innerHTML;
 	//alert("aaaaaaaaa "+document.getElementById("red-text"+idx).innerHTML);
 	if(status!=""){
-		ajaxRequest.open("GET","../php/updatecompletestatus.php?status="+status+"&taskid="+taskid,false);
+		ajaxRequest.open("GET","updatecompletestatus?status="+status+"&taskid="+taskid,false);
 	
 		ajaxRequest.onreadystatechange = function()
 		{

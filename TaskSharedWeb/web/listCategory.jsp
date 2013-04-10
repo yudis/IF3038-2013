@@ -58,7 +58,7 @@
             out.print("<ul>");
             
             Statement stt2 = conn.createStatement();
-            String query2 = "SELECT * FROM task WHERE categoryid = "+rs.getString("categoryid");
+            String query2 = "SELECT * FROM task WHERE categoryid = '"+rs.getString("categoryid")+"'";
             ResultSet rs2 = stt2.executeQuery(query2);
             
             while(rs2.next()){
@@ -78,7 +78,7 @@
 		out.print("<div id=\"task-tag\">Tag :<br>");
                 
                 Statement stt3 = conn.createStatement();
-                String query3 = "SELECT tagid FROM task_tag WHERE taskid = "+taskid;
+                String query3 = "SELECT tagid FROM task_tag WHERE taskid = '"+taskid+"'";
                 ResultSet rs3 = stt3.executeQuery(query3);
                 
                 while(rs3.next()){
