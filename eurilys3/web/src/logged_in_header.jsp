@@ -11,9 +11,7 @@ if (session.getAttribute("fullname") == null) {
         <link href='../css/mobile.css' rel='stylesheet' type='text/css'>
         <link href='../css/desktop_style.css' rel='stylesheet' type='text/css'>
         <link href='../css/wide.css' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="../js/edit_task.js"> </script> 
         <script type="text/javascript" src="../js/animation.js"> </script> 
-        <script type="text/javascript" src="../js/catselector.js"> </script> 	
         <title> Eurilys </title>
     </head>
 	

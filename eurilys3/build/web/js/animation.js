@@ -425,3 +425,64 @@ function deleteTaskTag(taskID, tagName) {
         xmlhttp.send(null);
     }
 }
+
+function editProfileCheck() {
+	var username = document.getElementById("edit_username").value;
+        var email = document.getElementById("edit_email").value;
+	var password = document.getElementById("edit_password").value;
+	var confirm = document.getElementById("edit_password_confirm").value;
+	var name = document.getElementById("fullname").value;
+	var birthdate = document.getElementById("birthdate").value;
+	var avatar = document.getElementById("avatar").value;
+	
+        var passwordValid = 1;        
+	//check password
+	if ((password.length > 7) && (password != username) && (password != email)) {
+		document.getElementById("password_validation").src = "../img/yes.png";
+		passwordValid = 1;
+	}
+	else {
+		document.getElementById("password_validation").src = "../img/no.png";
+		passwordValid = 0;
+	}
+	document.getElementById("password_validation").style.display = "block";
+        
+        var confirmValid = 1;
+	//check confirm
+	if ((confirm != password) || (confirm == '') || (confirm == null)) {
+		document.getElementById("confirm_validation").src = "../img/no.png";
+		confirmValid = 0;
+	}
+	else
+	if ( (confirm == password) && (password.length > 7) ) {
+		document.getElementById("confirm_validation").src = "../img/yes.png";
+		confirmValid = 1;
+	}
+	document.getElementById("confirm_validation").style.display = "block";
+	
+	if ((password == confirm) && (password.length == 0)) {
+		passwordValid = 1; 
+                confirmValid = 1;
+		document.getElementById("password_validation").src = "../img/yes.png";
+		document.getElementById("confirm_validation").src = "../img/yes.png";
+	}
+	
+        var nameValid = 1;
+	//check name
+	if (name.indexOf(' ') >= 0) {
+		document.getElementById("name_validation").src = "../img/yes.png";
+		nameValid = 1;
+	}
+	else {
+		document.getElementById("name_validation").src = "../img/no.png";
+		nameValid = 0;
+	}
+	document.getElementById("name_validation").style.display = "block";
+	
+	if ((passwordValid == 1) & (confirmValid == 1) & (nameValid == 1)) {
+		document.getElementById('edit_profile_submit').removeAttribute("disabled");
+	}
+	else {
+		document.getElementById('edit_profile_submit').disabled = "disabled";
+	}
+}

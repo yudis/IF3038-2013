@@ -318,7 +318,6 @@ public class ServletHandler extends HttpServlet{
                 
                 //Update task
                 st.executeUpdate("UPDATE task SET task_deadline='"+deadline+"' WHERE task_id='"+taskID+"'");
-                resp.sendRedirect("src/task_detail.jsp?task_id="+taskID);
                 
             }
             catch (SQLException e) {
@@ -332,6 +331,11 @@ public class ServletHandler extends HttpServlet{
                     System.out.println("Can not close connection - edit task");
                 }
             }
+        }
+        
+        //edit profile
+        else if (req.getParameter("type").equalsIgnoreCase("edit_profile")) {
+            
         }
         
         //other
