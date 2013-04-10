@@ -77,15 +77,15 @@ public class CommentDao extends DataAccessObject {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                Comment c = new Comment();
-                c.setContent(rs.getString("content"));
-                c.setId(rs.getInt("id"));
-                c.setIdTugas(rs.getInt("id_tugas"));
-                c.setTime(rs.getTimestamp("time"));
+                comment = new Comment();
+                comment.setContent(rs.getString("content"));
+                comment.setId(rs.getInt("id"));
+                comment.setIdTugas(rs.getInt("id_tugas"));
+                comment.setTime(rs.getTimestamp("time"));
                 
                 User u = new User();
                 u.setUsername(rs.getString("user"));
-                c.setUser(u);
+                comment.setUser(u);
             }
         } catch (SQLException e) {
             e.printStackTrace();

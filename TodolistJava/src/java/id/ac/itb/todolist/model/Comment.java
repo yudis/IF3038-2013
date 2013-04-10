@@ -1,11 +1,11 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.util.BaseModel;
+import id.ac.itb.todolist.json.JSONModel;
 import java.sql.Timestamp;
 import id.ac.itb.todolist.json.JSONObject;
 import java.text.SimpleDateFormat;
 
-public class Comment extends BaseModel {
+public class Comment extends JSONModel {
 
     private int id;
     private int idTugas;

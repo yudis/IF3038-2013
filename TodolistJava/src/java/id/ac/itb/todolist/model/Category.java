@@ -1,10 +1,10 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.util.BaseModel;
+import id.ac.itb.todolist.json.JSONModel;
 import java.sql.Timestamp;
 import id.ac.itb.todolist.json.JSONObject;
 
-public class Category extends BaseModel {
+public class Category extends JSONModel {
 
     private int id;
     private String nama;

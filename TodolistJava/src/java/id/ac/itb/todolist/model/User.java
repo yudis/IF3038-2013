@@ -1,13 +1,13 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.util.BaseModel;
+import id.ac.itb.todolist.json.JSONModel;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import id.ac.itb.todolist.json.JSONObject;
 
-public class User extends BaseModel {
+public class User extends JSONModel {
     private String username;
     private String email;
     private String password;

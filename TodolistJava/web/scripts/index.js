@@ -56,7 +56,7 @@ function validateUName() {
         uname.style.border = '';
         var qry = 'check=username&data=' + encodeURIComponent(uname.value);
         ajax_get("./ajax/availability?" + qry, function(xhr) {
-            var res = JSON.parse(xhr.responseText);
+            var res = json_parse(xhr.responseText);
             isValidUname = (res.status == 200);
             if (isValidUname) {
                 uname.style.border = '2px #5fae53 solid';
@@ -151,7 +151,7 @@ function validateEmail() {
         email.style.border = '';
         var qry = 'check=email&data=' + encodeURIComponent(email.value);
         ajax_get("./ajax/availability?" + qry, function(xhr) {
-            var res = JSON.parse(xhr.responseText);
+            var res = json_parse(xhr.responseText);
             isValidEmail = (res.status == 200);
             if (isValidEmail) {
                 email.style.border = '2px #5fae53 solid';
@@ -302,9 +302,9 @@ function validateForm()
 function loginX() {
     var qry = 'username=' + encodeURIComponent(document.forms["login"]["username"].value) + '&password=' + encodeURIComponent(document.forms["login"]["password"].value);
     ajax_post("./ajax/login", qry, function(xhr) {
-        var loginres = JSON.parse(xhr.responseText);
+        var loginres = json_parse(xhr.responseText);
         if (loginres.status == 200) {
-            window.location.replace("dashboard");
+            window.location.replace("dashboard.jsp");
         } else {
             alert(loginres.message);
         }

@@ -1,10 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package id.ac.itb.todolist.controller;
 
+import id.ac.itb.todolist.dao.TugasDao;
+import id.ac.itb.todolist.model.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,11 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Edward Samuel
- */
-public class Index extends HttpServlet {
+public class Tugas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -31,26 +26,51 @@ public class Index extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         
-        if (session.getAttribute("user") != null)
+        User user = (User) session.getAttribute("user");
+        if (user == null)
         {
-            if (request.getParameter("logout") != null)
-            {		
-                session.invalidate();
-                request.getSession(true);
-                response.sendRedirect("./");
-            }
-            else
-            {
-                // user sudah login, dialihkan ke halaman lain
-                response.sendRedirect("./dashboard.jsp");
-            }
+            // user sudah login, dialihkan ke halaman lain
+            response.sendRedirect("./");
         }
         else
         {
-            RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/views/index/default.jsp");
-            dispathcer.forward(request, response);
+            String idTugasStr = request.getParameter("id");
+            if (idTugasStr != null)
+            {
+                int idTugas = Integer.parseInt(idTugasStr);
+                
+                TugasDao tugasDao = new TugasDao();
+                
+                RequestDispatcher dispathcer;
+                if (!tugasDao.isAvailable(idTugas))
+                {
+                    dispathcer = request.getRequestDispatcher("/WEB-INF/views/tugas/error.jsp");
+                }
+                else if (tugasDao.isPemilik(idTugas, user.getUsername()))
+                {
+                    dispathcer = request.getRequestDispatcher("/WEB-INF/views/tugas/creator.jsp");
+                }
+                else if (tugasDao.isAssignee(idTugas, user.getUsername()))
+                {
+                    dispathcer = request.getRequestDispatcher("/WEB-INF/views/tugas/assignee.jsp");
+                }
+                else
+                {
+                    dispathcer = request.getRequestDispatcher("/WEB-INF/views/tugas/default.jsp");
+                }
+                
+                request.setAttribute("headTags", "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/tugas.css\" /><script src=\"./scripts/tugas.js\" type=\"application/javascript\"></script>");
+                request.setAttribute("bodyAttrs", "onload=\"onload(" + idTugas + ");\"");
+                request.setAttribute("title", "Todolist | Rincian Tugas");  
+                dispathcer.forward(request, response);
+            }
+            else
+            {
+                response.sendRedirect("./dashboard.jsp");
+            }
         }
     }
 

@@ -1,22 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package id.ac.itb.todolist.controller;
+package id.ac.itb.todolist.ajax;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import id.ac.itb.todolist.dao.UserDao;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Edward Samuel
- */
-public class Index extends HttpServlet {
+@WebServlet(name = "AssigneeList", urlPatterns = {"/ajax/AssigneeList"})
+public class AssigneeList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -31,26 +26,16 @@ public class Index extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        
-        if (session.getAttribute("user") != null)
-        {
-            if (request.getParameter("logout") != null)
-            {		
-                session.invalidate();
-                request.getSession(true);
-                response.sendRedirect("./");
-            }
-            else
-            {
-                // user sudah login, dialihkan ke halaman lain
-                response.sendRedirect("./dashboard.jsp");
-            }
-        }
-        else
-        {
-            RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/views/index/default.jsp");
-            dispathcer.forward(request, response);
+        PrintWriter out = response.getWriter();
+        UserDao user = new UserDao();
+        try {
+            ArrayList<String> result=user.getUsers();
+            for (int i = 0; i < result.size(); i++)
+                {
+                    out.println("<option value='"+result.get(i)+"'>");
+                }
+        } finally {            
+            out.close();
         }
     }
 

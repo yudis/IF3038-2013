@@ -2,11 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package id.ac.itb.todolist.controller;
+package id.ac.itb.todolist.ajax;
 
+import id.ac.itb.todolist.dao.CategoryDao;
+import id.ac.itb.todolist.model.User;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +18,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Edward Samuel
+ * @author User
  */
-public class Index extends HttpServlet {
+@WebServlet(name = "DeleteCat", urlPatterns = {"/ajax/DeleteCat"})
+public class DeleteCat extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -31,26 +36,25 @@ public class Index extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-        
-        if (session.getAttribute("user") != null)
-        {
-            if (request.getParameter("logout") != null)
-            {		
-                session.invalidate();
-                request.getSession(true);
-                response.sendRedirect("./");
-            }
-            else
+        User currentUser = (User) session.getAttribute("user");
+        String q = request.getParameter("q");
+        try {
+            CategoryDao category = new CategoryDao();
+            ArrayList<String> users = new ArrayList<String>();
+            users = category.getUser(Integer.parseInt(q));
+            int i=0;
+            while(i<users.size())
             {
-                // user sudah login, dialihkan ke halaman lain
-                response.sendRedirect("./dashboard.jsp");
+                if(users.get(i).equals(currentUser.getUsername())){
+                    category.DeleteKategori(Integer.parseInt(q));
+                    break;
+                }
+                i++;
             }
-        }
-        else
-        {
-            RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/views/index/default.jsp");
-            dispathcer.forward(request, response);
+        } finally {            
+            out.close();
         }
     }
 

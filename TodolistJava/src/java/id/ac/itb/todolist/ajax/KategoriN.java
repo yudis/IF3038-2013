@@ -42,7 +42,6 @@ public class KategoriN extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("user");
-        out.println("test");
         try {
             CategoryDao category =new CategoryDao();
             ArrayList<Category> result ;

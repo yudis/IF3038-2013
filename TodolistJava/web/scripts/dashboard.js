@@ -13,7 +13,6 @@ function addCoordinator() {
 	coordinatorArr+=newcoordinator.value+",";
     coordinatorList.innerHTML += "<li>" + newcoordinator.value + "</li> ";
     newcoordinator.value = "";
-	coordinatorIndex++;
     
     return false;
 }
@@ -56,24 +55,35 @@ function setChosenT(str)
 	chosenTask=str;
 }
 
+function loadKategori()
+{
+    ajax_get("./ajax/KategoriN", function(xhr) {
+    document.getElementById("nama_k").innerHTML=xhr.responseText;
+    });
+}
+
 function NewKategori() {
     var q = document.getElementById('txtNewKategori').value;
-    ajax_get("./ajax/createkategori?q="+q+"&Arr="+coordinatorArr, function(xhr) {
-        document.getElementById("nama_k").innerHTML=xhr.responseText;
+    ajax_get("./ajax/CreateKategori?q="+q+"&Arr="+coordinatorArr, function(xhr) {
+        loadKategori();
     });
+    
     return false;
 }
 
 function showCoordinator()
 {
-    ajax_get("./ajax/updateStatus?q="+str+"&n="+n, function(xhr) {
+    ajax_get("./ajax/AssigneeList", function(xhr) {
         document.getElementById("user").innerHTML=xhr.responseText;
     });
 }
 
 function updateStatus(n,str) {
-    ajax_get("./ajax/assigneeList", function(xhr) {
+    ajax_get("./ajax/UpdateStatus?q="+str+"&n="+n, function(xhr) {
         document.getElementById("stats").innerHTML=xhr.responseText;
+    });
+    ajax_get("./ajax/TugasA?q="+chosen, function(xhr) {
+        document.getElementById("tugasT").innerHTML=xhr.responseText;
     });
     return false;
 }
@@ -81,29 +91,34 @@ function updateStatus(n,str) {
 function NewTask() {
     if(chosen!=0)
     {
-            window.location = "createtugas.php?id_kat="+chosen;
+            window.location = "./CreateTugas?id_kat="+chosen;
     }
 }
 
 function deleteCategory()
 {
-	if(chosen!=0)
-	{
-		window.location = "deleteCat.php?q="+chosen;
-	}
+    if(chosen!=0)
+    {
+        ajax_get("./ajax/DeleteCat?q="+chosen, function(xhr) {
+            window.location = "./dashboard.jsp";
+        });
+           
+    }
 }
 
 function deleteTask()
 {
-	if(chosenTask!=0)
-	{
-		window.location = "deleteTask.php?q="+chosenTask;
-	}
+    if(chosenTask!=0)
+    {
+        ajax_get("./ajax/DeleteTask?q="+chosenTask, function(xhr) {
+            window.location = "./dashboard.jsp";
+        });
+    }
 }
 
 function loadtugas(str)
 {
-    ajax_get("./ajax/tugas?q="+str, function(xhr) {
+    ajax_get("./ajax/TugasA?q="+str, function(xhr) {
         document.getElementById("tugasT").innerHTML=xhr.responseText;
     });
 	

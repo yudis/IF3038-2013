@@ -1,22 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package id.ac.itb.todolist.controller;
+
+package id.ac.itb.todolist.ajax;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
+import id.ac.itb.todolist.dao.CategoryDao;
+import id.ac.itb.todolist.dao.UserDao;
+import id.ac.itb.todolist.model.User;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Edward Samuel
- */
-public class Index extends HttpServlet {
+@WebServlet(name = "CreateKategori", urlPatterns = {"/ajax/CreateKategori"})
+public class CreateKategori extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -31,26 +29,24 @@ public class Index extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-        
-        if (session.getAttribute("user") != null)
-        {
-            if (request.getParameter("logout") != null)
-            {		
-                session.invalidate();
-                request.getSession(true);
-                response.sendRedirect("./");
-            }
-            else
+        User currentUser = (User) session.getAttribute("user");
+        String q = request.getParameter("q");
+        String[] Arr = request.getParameter("Arr").split("[ ,]+");
+        try {
+            CategoryDao category = new CategoryDao();
+            UserDao user = new UserDao();
+            category.NewKategori(q,currentUser.getUsername());
+            for (int i = 0; i < Arr.length; i++)
             {
-                // user sudah login, dialihkan ke halaman lain
-                response.sendRedirect("./dashboard.jsp");
+                if(!Arr[i].equals(currentUser.getUsername()) && user.isAvailableUsername(Arr[i]))
+                {
+                    category.addNewestCoordinator(Arr[i]);
+                }
             }
-        }
-        else
-        {
-            RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/views/index/default.jsp");
-            dispathcer.forward(request, response);
+        } finally {            
+            out.close();
         }
     }
 

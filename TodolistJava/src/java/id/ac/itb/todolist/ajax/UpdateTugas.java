@@ -8,7 +8,6 @@ import id.ac.itb.todolist.model.Comment;
 import id.ac.itb.todolist.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -81,6 +80,18 @@ public class UpdateTugas extends HttpServlet {
                 tugasDao.setDeadline(idTugas, deadline);
 
                 jObject.put("responseStatus", 200);
+            } else if (request.getParameter("adda") != null && request.getParameter("id_tugas") != null && request.getParameter("username") != null) {
+                TugasDao tugasDao = new TugasDao();
+                
+                int idTugas = Integer.parseInt(request.getParameter("id_tugas"));
+                String username = request.getParameter("username");
+                
+                if (!tugasDao.isPemilik(idTugas, username)) {
+                    tugasDao.addAssignee(idTugas, username);
+                    tugasDao.updateTimestamp(idTugas);
+                }
+
+                jObject.put("responseStatus", 200);
             } else if (request.getParameter("removea") != null && request.getParameter("id_tugas") != null && request.getParameter("username") != null) {
                 TugasDao tugasDao = new TugasDao();
                 
@@ -88,22 +99,13 @@ public class UpdateTugas extends HttpServlet {
                 String username = request.getParameter("username");
                 
                 tugasDao.removeAssignee(idTugas, username);
+                tugasDao.updateTimestamp(idTugas);
 
                 if (username.equals(((User) session.getAttribute("user")).getUsername())) {
                     jObject.put("killself", 1);
                 } else {
                     jObject.put("killself", 0);
                 }
-
-                jObject.put("responseStatus", 200);
-            } else if (request.getParameter("adda") != null && request.getParameter("id_tugas") != null && request.getParameter("username") != null) {
-                TugasDao tugasDao = new TugasDao();
-                
-                int idTugas = Integer.parseInt(request.getParameter("id_tugas"));
-                String username = request.getParameter("username");
-                
-                tugasDao.addAssignee(idTugas, username);
-                tugasDao.updateTimestamp(idTugas);
 
                 jObject.put("responseStatus", 200);
             } else if (request.getParameter("suggesta") != null && request.getParameter("id_tugas") != null && request.getParameter("start") != null) {
@@ -114,35 +116,46 @@ public class UpdateTugas extends HttpServlet {
                 
                 jObject.put("suggestedAssignees", new JSONArray(tugasDao.getSuggestionAssignees(idTugas, startWith, 10)));
                 jObject.put("responseStatus", 200);
+            } else if (request.getParameter("addt") != null && request.getParameter("id_tugas") != null && request.getParameter("tag") != null) {
+                TugasDao tugasDao = new TugasDao();
+                
+                int idTugas = Integer.parseInt(request.getParameter("id_tugas"));
+                String tag = request.getParameter("tag");
+                
+                tugasDao.addTag(idTugas, tag);
+                tugasDao.updateTimestamp(idTugas);
+
+                jObject.put("responseStatus", 200);
+            } else if (request.getParameter("removet") != null && request.getParameter("id_tugas") != null && request.getParameter("tag") != null) {
+                TugasDao tugasDao = new TugasDao();
+                
+                int idTugas = Integer.parseInt(request.getParameter("id_tugas"));
+                String tag = request.getParameter("tag");
+                
+                tugasDao.removeTag(idTugas, tag);
+                tugasDao.updateTimestamp(idTugas);
+
+                jObject.put("responseStatus", 200);
+            } else if (request.getParameter("suggestt") != null && request.getParameter("id_tugas") != null && request.getParameter("start") != null) {
+                TugasDao tugasDao = new TugasDao();
+                
+                int idTugas = Integer.parseInt(request.getParameter("id_tugas"));
+                String startWith = request.getParameter("start") + "%";
+                
+                jObject.put("suggestedTags", new JSONArray(tugasDao.getSuggestionTags(idTugas, startWith, 10)));
+                jObject.put("responseStatus", 200);
+            } else if (request.getParameter("removetugas") != null && request.getParameter("id_tugas") != null) {
+                TugasDao tugasDao = new TugasDao();
+                
+                int idTugas = Integer.parseInt(request.getParameter("id_tugas"));
+                
+                tugasDao.deleteTugas(idTugas);
+
+                jObject.put("responseStatus", 200);
+            } else {
+                jObject.put("responseStatus", 400);
+                jObject.put("message", "Bad request");
             }
-//            
-//            } else if (request.getParameter("addt") != null && request.getParameter("id_tugas") != null && request.getParameter("tag") != null) {
-//                $tugas = new Tugas();
-//                $tugas - > addTag($_GET["id_tugas"], $_GET["tag");
-//                $tugas - > updateTimestamp($_GET["id_tugas");
-//                jObject = Array();
-//                jObject.put("responseStatus", 200);
-//            } else if (request.getParameter("suggestt") != null && request.getParameter("id_tugas") != null && request.getParameter("start") != null) {
-//                $tugas = new Tugas();
-//                jObject = Array();
-//                jObject.put("responseStatus", 200);
-//                jObject.put("suggestedTags", $tugas - > getSuggestionTags($_GET["id_tugas"], $_GET["start"] . 
-//              '%', 10));
-//            } else if (request.getParameter("removet") != null && request.getParameter("id_tugas") != null && request.getParameter("tag") != null) {
-//                $tugas = new Tugas();
-//                $tugas - > removeTag($_GET["id_tugas"], $_GET["tag");
-//                $tugas - > updateTimestamp($_GET["id_tugas");
-//                jObject = Array();
-//                jObject.put("responseStatus", 200);
-//            } else if (request.getParameter("removetugas") != null && request.getParameter("id_tugas") != null) {
-//                $tugas = new Tugas();
-//                $tugas - > deleteTask($_GET["id_tugas");
-//                jObject = Array();
-//                jObject.put("responseStatus", 200);
-//            } else {
-//                jObject.put("responseStatus", 400);
-//                jObject.put("message", "Bad request");
-//            }
         } catch (Exception e) {
             jObject.put("responseStatus", 400);
             jObject.put("message", e.getMessage());

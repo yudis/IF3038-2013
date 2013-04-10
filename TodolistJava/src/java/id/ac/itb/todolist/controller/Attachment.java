@@ -1,10 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package id.ac.itb.todolist.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,11 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Edward Samuel
- */
-public class Index extends HttpServlet {
+public class Attachment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -30,26 +23,13 @@ public class Index extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        
-        if (session.getAttribute("user") != null)
+        String file = request.getParameter("file");
+        String nama = request.getParameter("nama");
+        if (session.getAttribute("user") != null && file != null &&  nama != null)
         {
-            if (request.getParameter("logout") != null)
-            {		
-                session.invalidate();
-                request.getSession(true);
-                response.sendRedirect("./");
-            }
-            else
-            {
-                // user sudah login, dialihkan ke halaman lain
-                response.sendRedirect("./dashboard.jsp");
-            }
-        }
-        else
-        {
-            RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/views/index/default.jsp");
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + nama + "\"");
+            RequestDispatcher dispathcer = request.getRequestDispatcher("./files/" + file);
             dispathcer.forward(request, response);
         }
     }

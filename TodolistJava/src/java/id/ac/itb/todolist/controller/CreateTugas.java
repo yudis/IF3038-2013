@@ -5,8 +5,10 @@
 package id.ac.itb.todolist.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +16,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Edward Samuel
+ * @author User
  */
-public class Index extends HttpServlet {
+@WebServlet(name = "createTugas", urlPatterns = {"/CreateTugas"})
+public class CreateTugas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -35,22 +38,16 @@ public class Index extends HttpServlet {
         
         if (session.getAttribute("user") != null)
         {
-            if (request.getParameter("logout") != null)
-            {		
-                session.invalidate();
-                request.getSession(true);
-                response.sendRedirect("./");
-            }
-            else
-            {
-                // user sudah login, dialihkan ke halaman lain
-                response.sendRedirect("./dashboard.jsp");
-            }
+            //user sudah login, dialihkan ke halaman lain
+            
+            request.setAttribute("title", "Todolist | Create Tugas");
+            request.setAttribute("headTags", "<script src=\"scripts/formtugas.js\" type=\"application/javascript\"><script src=\"scripts/tugas.js\" type=\"application/javascript\"></script><script src=\"scripts/createtugas.js\" type=\"application/javascript\"></script>");
+            RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/create/createtugas.jsp");
+            view.forward(request, response);
         }
         else
         {
-            RequestDispatcher dispathcer = request.getRequestDispatcher("/WEB-INF/views/index/default.jsp");
-            dispathcer.forward(request, response);
+            response.sendRedirect("./index.jsp");
         }
     }
 

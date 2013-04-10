@@ -48,8 +48,6 @@ public class DetilTugas extends HttpServlet {
             idTugas = Integer.parseInt(idTugasStr);
         }
 
-        String priviledgeStr = request.getParameter("priviledge");
-
         JSONObject jObject = null;
 
         if (currentUser != null && idTugasStr != null) {
@@ -59,6 +57,23 @@ public class DetilTugas extends HttpServlet {
             if (!tugasDao.isUpdated(idTugas, update)) {
                 tugas = tugasDao.getTugas(idTugas, true, true, true);
                 jObject = tugas.toJsonObject();
+                
+                if (tugas.getPemilik().getUsername().equals(currentUser.getUsername())) {
+                    jObject.put("priviledge", "creator");
+                } else {
+                    boolean flagAssignee = false;
+                    for (User assignee : tugas.getAssignees()) {
+                        if (assignee.getUsername().equals(currentUser.getUsername())) {
+                            jObject.put("priviledge", "assignee");
+                            flagAssignee = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!flagAssignee) {
+                        jObject.put("priviledge", "default");
+                    }
+                }
 
                 /* Get Komentar */
                 String startindexStr = request.getParameter("startc");
@@ -90,6 +105,9 @@ public class DetilTugas extends HttpServlet {
                 jObject.put("comments", datakomentar);
                 jObject.put("responseStatus", 200);
                 jObject.put("responseTime", System.currentTimeMillis() / 1000L);
+            } else {
+                jObject = new JSONObject();
+                jObject.put("responseStatus", 304);
             }
         } else {
             jObject = new JSONObject();

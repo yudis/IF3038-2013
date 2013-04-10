@@ -70,6 +70,19 @@ public class CategoryDao extends DataAccessObject {
         }
     }
     
+    public int DeleteKategori(int id){
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM categories WHERE id=?");
+            // Parameters start with 1
+            preparedStatement.setInt(1, id);
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    
     public int addCoordinator(int id,String pembuat) {
         try {
             PreparedStatement preparedStatement = connection
