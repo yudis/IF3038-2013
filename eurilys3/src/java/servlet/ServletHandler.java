@@ -431,6 +431,39 @@ public class ServletHandler extends HttpServlet{
                 }
             }
         }
+        
+        //Edit Task - Delete Tag
+        else if (req.getParameter("type").equalsIgnoreCase("edittask_deleteTag")) {
+            String taskID       = req.getParameter("task_id");
+            String tagName       = req.getParameter("tag_name");
+            try {                
+                // Make connection to database
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    System.out.println("Berhasil connect ke Mysql JDBC Driver -- ServletHandler.java - edit task : delete tag ");
+                } catch (ClassNotFoundException ex) {
+                    System.out.println("Where is your MySQL JDBC Driver? -- ServletHandler.java - edit task : delete tag ");
+                }
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");
+                
+                PreparedStatement st;
+                st = conn.prepareStatement("DELETE FROM tag WHERE task_id=? AND tag_name=?");
+                st.setString(1, taskID);
+                st.setString(2, tagName);
+                st.executeUpdate();                
+            } 
+            catch (SQLException e) {
+                System.out.println("Connection Failed! Check output console - edit task : delete tag ");
+            }
+            finally {                 
+                try { 
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Can not close connection - edit task : delete tag");
+                }
+            }
+        }
     }
     
     

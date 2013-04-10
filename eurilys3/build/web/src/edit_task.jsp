@@ -111,7 +111,7 @@
                                 rs_taskdetail = stmt_edittask.executeQuery();
                                 rs_taskdetail.beforeFirst();            
                                 while (rs_taskdetail.next()) { %>
-                                   <img src='../img/done.png' class='cursorPointer' width='8' onclick=''/> &nbsp;&nbsp;&nbsp;
+                                   <img src='../img/done.png' class='cursorPointer' width='8' onclick="javascript:deleteTaskTag('<%= taskID %>','<%= rs_taskdetail.getString("tag_name") %>')"/> &nbsp;&nbsp;&nbsp;
                                    <span class='darkBlueItalic' onclick="javascript:searchUser('<%= rs_taskdetail.getString("tag_name") %>')"> <%= rs_taskdetail.getString("tag_name") %> </span> 
                                    <br> 
                              <% } %>
