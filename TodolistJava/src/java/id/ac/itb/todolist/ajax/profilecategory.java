@@ -50,7 +50,7 @@ public class profilecategory extends HttpServlet {
                         out.println("                                  <h2>" + result.get(i).get(3) + "</h2>");
                         do {						
                                 out.println("					<div class=\"tugas\">");
-                                out.println("					<div><a href=\"tugas.php?id=" + result.get(i).get(2) + "\">" + result.get(i).get(4) + "</a></div>");
+                                out.println("					<div><a href=\"tugas.jsp?id=" + result.get(i).get(2) + "\">" + result.get(i).get(4) + "</a></div>");
                                 out.println("						 <div>Submission: <strong>" + result.get(i).get(6) + "</strong></div>");
                                 out.println("						 <div>");
                                 out.println("							 Tags: ");

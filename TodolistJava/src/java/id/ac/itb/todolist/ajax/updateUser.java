@@ -6,6 +6,7 @@ package id.ac.itb.todolist.ajax;
 
 import id.ac.itb.todolist.dao.UserDao;
 import id.ac.itb.todolist.model.User;
+import id.ac.itb.todolist.util.Helper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -15,19 +16,20 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import javax.servlet.http.Part;
+
 
 /**
  *
  * @author Felix
  */
+@MultipartConfig(location = "/tmp", fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 2, maxRequestSize = 1024 * 1024 * 2 * 5)
 public class updateUser extends HttpServlet {
 
     /**
@@ -89,23 +91,24 @@ public class updateUser extends HttpServlet {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
 
-            FileItemFactory factory = new DiskFileItemFactory();
-            ServletFileUpload upload = new ServletFileUpload(factory);
-
-            List<FileItem> fields = upload.parseRequest(request);
-            for (FileItem item : fields) {
-                if (item.getFieldName().equals("fname")){   
-                    user.setFullName(item.getString());
-                } else if (item.getFieldName().equals("Bday")){        
-                    user.setTglLahir(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(item.getString()).getTime()));
-                } else if (item.getFieldName().equals("pwd_confirm")){
-                    if (!"".equals(item.getString())){
-                        user.setPassword(item.getString());
-                    }
-                }
+            if (!"".equals(request.getParameter("pwd_confirm"))){
+                user.setPassword(request.getParameter("pwd_confirm"));
             }
-            UserDao userDao = new UserDao();    
+            if (!"".equals(request.getParameter("fname"))){
+                user.setFullName(request.getParameter("fname"));          
+            }
+            if (!"".equals(request.getParameter("Bday"))){
+                user.setTglLahir(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("Bday")).getTime()));
+            }
+            if (!"".equals(request.getParameter("ava"))){
+                Part avatar = request.getPart("ava");
+                user.setAvatar(user.getUsername() + "." + Helper.getFileExtention(Helper.getFileName(avatar))); 
+                Helper.writeFile(avatar.getInputStream(), user.getAvatar());                
+            }
+ 
+            UserDao userDao = new UserDao();
             userDao.Update(user);
+            
             session.setAttribute("user", user);
             response.sendRedirect("../profile.jsp");               
             

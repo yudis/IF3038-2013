@@ -64,17 +64,7 @@
         <servlet-name>updateStatus</servlet-name>
         <servlet-class>id.ac.itb.todolist.ajax.updateStatus</servlet-class>
     </servlet>
-        <servlet-name>Search</servlet-name>
-        <servlet-class>id.ac.itb.todolist.controller.Search</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>searchresult</servlet-name>
-        <servlet-class>id.ac.itb.todolist.ajax.searchresult</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>updateStatus</servlet-name>
-        <servlet-class>id.ac.itb.todolist.ajax.updateStatus</servlet-class>
-    </servlet>    <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index.jsp</url-pattern>
     </servlet-mapping>

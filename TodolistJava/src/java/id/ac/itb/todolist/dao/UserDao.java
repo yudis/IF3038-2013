@@ -124,7 +124,7 @@ public class UserDao extends DataAccessObject {
         }
         return result;
     }
-}
+
     public int Update(User user){
         try {
             PreparedStatement preparedStatement = connection.
