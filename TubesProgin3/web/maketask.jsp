@@ -17,7 +17,6 @@
     <div id="rightsidebar">
         <div id="wrapper-left">
             <form class="task" name="MakeForm" method="post" onSubmit="checkSubmission(this, event)" enctype="multipart/form-data" action="AddFile">
-                <input type="text" name="jmlAssignee" id="jmlAssignee"value="1"/>
                 <h1>Fill Details</h1>
                 <ul>
                     <li>

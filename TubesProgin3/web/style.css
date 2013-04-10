@@ -718,6 +718,8 @@ border-bottom-width: 1px;
 border-bottom-style: solid;
 }
 
+
+
 .user a, .user a:visited
 
 {
@@ -1026,6 +1028,16 @@ float:left;
 margin-right:10px;
 height:35px;
 width:35px;
+
+color: #351b02;
+background-color: #feff95;
+padding: 12px;
+margin: 0;
+font-family: 'Segoe UI';
+font-size: 18px;
+border-bottom-color: #fe9227;
+border-bottom-width: 1px;
+border-bottom-style: solid;
 }
 .text{
 margin-top:3px;

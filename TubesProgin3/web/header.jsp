@@ -12,7 +12,7 @@
         <div id="content">	
             <div id="header">
                 <div id="logo">
-                    <img src="image/logo.png"/>
+                    <a href="home.jsp"><img src="image/logo.png"/></a>
                 </div>
                 <div id="menu">
                     <ul>
@@ -22,7 +22,7 @@
                     </ul>
                     <form method="post" action="searchresult.jsp">
 
-                        <img src="image/avatar.jpg" id="profPic"></img>
+                        <a href="profile.jsp"><img src="image/avatar.jpg" id="profPic"/></a><!-- TODO -->
                         <select name="filter">
                             <option value="semua">Semua</option>
                             <option value="username">User Name</option>
