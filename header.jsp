@@ -67,7 +67,7 @@ try
 		}
 		rs.close();
 		pst.close();
-		out.print("id=\"dashboard.jsp\"");
+		out.print("id=\"dashboardbackground\"");
 	}
 	else if (uri.equals("rinciantugas.jsp"))
 	{

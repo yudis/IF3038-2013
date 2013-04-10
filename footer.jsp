@@ -28,6 +28,7 @@
 </html>
 <%
 		con.close();
+	}
 	catch (SQLException ex)
 	{
 		out.print("Error : " + ex.getMessage());

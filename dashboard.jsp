@@ -1,16 +1,16 @@
 <%@include file="/header.jsp"%>
 <%
-PreparedStatement pst0 = con.prepareStatement("SELECT DISTINCT `category` FROM `tasks`");
-ResultSet rs0 = pst0.executeQuery();
-int cats = 0;
-while (rs0.next())
-{
-	cats++;
-}
-rs0.close();
-pst0.close();
+// PreparedStatement pst0 = con.prepareStatement("SELECT DISTINCT `category` FROM `tasks`");
+// ResultSet rs0 = pst0.executeQuery();
+// int cats = 0;
+// while (rs0.next())
+// {
+// 	cats++;
+// }
+// rs0.close();
+// pst0.close();
 
-int id = Integer.parseInt(session.getAttribute("id"));
+Integer id = (Integer)session.getAttribute("id");
 %>
 			
 <div id="main2">
@@ -42,7 +42,7 @@ int id = Integer.parseInt(session.getAttribute("id"));
             </div>
             <%
             PreparedStatement pst1 = con.prepareStatement("SELECT * FROM `categories` ORDER BY id");
-            ResultSet rs1 = pst.executeQuery();
+            ResultSet rs1 = pst1.executeQuery();
             while (rs1.next())
             {
         		boolean found = false;
@@ -61,12 +61,12 @@ int id = Integer.parseInt(session.getAttribute("id"));
             <%
             			PreparedStatement pst4 = con.prepareStatement("SELECT * FROM editors WHERE member="+id+" AND category="+cat_id);
             			ResultSet rs4 = pst4.executeQuery();
-            			if (rst4.next())
+            			if (rs4.next())
             			{
             %>
             <a href ='post.jsp?id=<% out.print(rs1.getInt(1)); %>'><input id ="newtask" type="button" name="Tugas Baru" value="New Task"/></a>
             <%
-            				if (rs2.getInt(3) == id)
+            				if (rs1.getInt(3) == id)
             				{
             %>
             <form action="deletecategory.jsp" method="post">
@@ -95,14 +95,14 @@ int id = Integer.parseInt(session.getAttribute("id"));
             		if (rs5.next())
             		{
             %>
-        	<br /><div onclick="javascript:gettask(<?php echo $_SESSION['id'];?>,<?php echo $cat['id'];?>);"><a href="#"><?php echo $cat['name'];?></a></div>
-            <a href ="post.php?id=<?php echo $cat['id'];?>"><input id ="newtask" type="button" name="Tugas Baru" value="New Task"/></a><br />
+        	<br /><div onclick='javascript:gettask(<% out.print(session.getAttribute("id")); %>,<% out.print(rs1.getInt(1)); %>);'><a href="#"><% out.print(rs1.getString(2)); %></a></div>
+            <a href ="post.jsp?id=<% out.print(rs1.getInt(1)); %>"><input id ="newtask" type="button" name="Tugas Baru" value="New Task"/></a><br />
             <%
-            			if (rs2.getInt(3) == id)
+            			if (rs1.getInt(3) == id)
             			{
             %>
-            <form action="deletecategory.php" method="post">
-            	<input type="hidden" name="id" value="<?php echo $cat['id'];?>" />
+            <form action="deletecategory.jsp" method="post">
+            	<input type="hidden" name="id" value="<% out.print(rs1.getInt(1)); %>" />
             	<input type="submit" value="Delete Category" />
             </form>
             <%
@@ -133,55 +133,66 @@ int id = Integer.parseInt(session.getAttribute("id"));
 				ResultSet rs7 = pst7.executeQuery();
 				while (rs7.next())
 				{
-					int task_id = rst7.getInt(1);
+					int task_id = rs7.getInt(1);
 					PreparedStatement pst8 = con.prepareStatement("SELECT * FROM `assignees` WHERE task="+task_id+" AND member="+id);
 					ResultSet rs8 = pst8.executeQuery();
 					if (rs8.next())
 					{
 			%>
-			<br /><a href="rinciantugas.php?id=<?php echo $task['id'];?>"><?php echo $task['name']?></a><br />
-			Deadline: <strong><?php echo $task['deadline'];?></strong><br />
-			<?php
-						$res = mysqli_query($con,"SELECT * FROM tags WHERE tagged=$task_id");
-						$count_tag = 0;
-						while ($tagged = mysqli_fetch_array($res)) {
-							$tag[$count_tag] = $tagged['name'];
-							$count_tag++;
-						}
-			?>
+			<br /><a href="rinciantugas.jsp?id=<% out.print(rs7.getInt(1)); %>"><% out.print(rs7.getString(2)); %></a><br />
+			Deadline: <strong><% out.print(rs7.getString(5)); %></strong><br />
 			<%
 						PreparedStatement pst9 = con.prepareStatement("SELECT * FROM `tags` WHERE tagged="+task_id);
+						ResultSet rs9 = pst9.executeQuery();
 						int count_tag = 0;
-
+						java.util.ArrayList<String> tag = new java.util.ArrayList<String>();
+						while (rs9.next())
+						{
+							tag.add(rs9.getString(1));
+							count_tag++;
+						}
 			%>
 			Tag: <strong>
-			<?php
-						for ($i = 0; $i < $count_tag; $i++) {
-							echo $tag[$i];
-							if ($i < $count_tag - 1) echo ",";
+			<%
+						for (int i = 0; i < count_tag; i++)
+						{
+							out.print(tag.get(i));
+							if (i < count_tag - 1)
+							{
+								out.print(",");
+							}
 						}
-			?>
+			%>
 			</strong>
 			<br />
 			<div id="<?php echo $task_id;?>">
-				Status : <strong><?php if ($assignee['finished'] == 1) echo 'Selesai'; else echo 'Belum selesai';?></strong><br />
-				<input name="YourChoice" type="checkbox" value="selesai" <?php if($assignee['finished']==1) echo "checked"; ?> onclick="change_status('<?php echo $task_id;?>',<?php echo $assignee['finished'];?>,<?php echo $task_id;?>)"> Selesai
+				Status : <strong><% if (rs8.getInt(3) == 1) out.print("Selesai"); else out.print("Belum selsesai"); %></strong><br />
+				<input name="YourChoice" type="checkbox" value="selesai" <% if (rs8.getInt(3) == 1) out.print("checked"); %> onclick="change_status('<% out.print(task_id); %>',<% out.print(rs8.getInt(3)); %>,<% out.print(task_id); %>)"> Selesai
 			</div>
-			<?php
-						if ($task['creator'] == $id) {
-			?>
+			<%
+						if (rs7.getInt(3) == id)
+						{
+			%>
 			<form action="deletetask.php" method="post">
-				<input type="hidden" name="deltask" value="<?php echo $task_id?>" />
+				<input type="hidden" name="deltask" value="<% out.print(task_id); %>" />
 				<input type="submit" name="submit" value="Delete" />
 			</form>
-			<?php
+			<%
 						}
+						rs9.close();
+						pst9.close();
 					}
+					rs8.close();
+					pst8.close();
 				}
+				rs7.close();
+				pst7.close();
 			}
-			?>
+			rs6.close();
+			pst6.close();
+			%>
             
 		</div>
 	</div>
 	
-<?php include 'footer.php';?>
+<%@include file="/footer.jsp"%>
