@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.tomcat.util.http.fileupload.FileItem;
 
 public class ServletHandler extends HttpServlet{
     
@@ -335,7 +337,41 @@ public class ServletHandler extends HttpServlet{
         
         //edit profile
         else if (req.getParameter("type").equalsIgnoreCase("edit_profile")) {
-            
+            String user_name = req.getParameter("edit_username");
+            String password = req.getParameter("password");
+            String password_validation = req.getParameter("password_confirm");
+            String fullname = req.getParameter("fullname");
+            String birthdate = req.getParameter("birthdate");
+            String avatarName = req.getParameter("avatar");
+            //FileItem avatar = (FileItem) req.getParameter("avatar");
+            try {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    System.out.println("Berhasil connect ke Mysql JDBC Driver - edit profile ");
+                } catch (ClassNotFoundException ex) {
+                    System.out.println("Where is your MySQL JDBC Driver? - edit profile");
+                }
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");                 
+                Statement st = conn.createStatement(); 
+                
+                if (! password.equals("")) {
+                    st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' , password='"+password+"' WHERE username='"+user_name+"'");                
+                } else {
+                    st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' WHERE username='"+user_name+"'");          
+                }
+                resp.sendRedirect("src/profile.jsp");
+            }
+            catch (SQLException e) {
+                System.out.println("Connection Failed! Check output console - edit profile");
+            } 
+            finally { 
+                try { 
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Can not close connection - edit profile");
+                }
+            }
         }
         
         //other
