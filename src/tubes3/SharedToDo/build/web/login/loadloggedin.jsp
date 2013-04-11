@@ -2,7 +2,7 @@
 	String username = (request.getParameter("username") == "") ? "" : request.getParameter("username");
 %>
 <div id="navigation">
-	<img src="../images/logo.gif">
+	<img src="images/logo.gif">
 	<a href="../dashboard/">DASHBOARD</a>
 	<a href="../profile/?u=<%=username%>&e=1">PROFILE</a>
 	<a href="#" onclick="toggleSearch()">SEARCH</a>
