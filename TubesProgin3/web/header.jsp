@@ -1,17 +1,17 @@
 <%@page import="tubes3.SetAvatar"%>
 <%
-String username = null;
-SetAvatar avtar = null;
-    if (((HttpServletRequest) request).getSession().getAttribute("bananauser") == null) {
-        ((HttpServletResponse) response).sendRedirect("index.jsp");
-                System.out.println("TTTT" + ((HttpServletRequest) request).getSession().getAttribute("bananauser"));
-
+    String username = null;
+    SetAvatar avtar = null;
+    if (((HttpServletRequest) request).getSession().getAttribute("bananauser") == null) {      
+        System.out.println("TTTT" + ((HttpServletRequest) request).getSession().getAttribute("bananauser"));
+        response.sendRedirect("index.jsp");
+        return;
     } else {
-    username = ((HttpServletRequest) request).getSession().getAttribute("bananauser").toString();
-    System.out.println("DDD"+username);
+        username = ((HttpServletRequest) request).getSession().getAttribute("bananauser").toString();
+        System.out.println("DDD" + username);
         avtar = new SetAvatar();
-    }
-%>
+        System.out.println("DDD" + ((HttpServletRequest) request).getSession().getAttribute("bananauser"));
+    %>
 <!DOCTYPE html>
 <html>	
     <head>
@@ -48,3 +48,8 @@ SetAvatar avtar = null;
                     <div id="layer"></div>
                 </div>
             </div>
+            
+ <%           
+        System.out.println("SSS" + ((HttpServletRequest) request).getSession().getAttribute("bananauser"));
+   }
+%>

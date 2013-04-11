@@ -1,4 +1,4 @@
-<jsp:include page="/header.jsp" />
+<%@ include file="header.jsp" %>
 <%
     String kategori;
     if (request.getParameter("kategori") != null) {
