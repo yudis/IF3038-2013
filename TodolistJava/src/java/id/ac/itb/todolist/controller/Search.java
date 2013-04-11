@@ -66,11 +66,12 @@ public class Search extends HttpServlet {
         //processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
         if (session.getAttribute("user") != null)
         {
             // user sudah login, dialihkan ke halaman lain
             request.setAttribute("title", "Todolist | Profile");
-            request.setAttribute("bodyAttrs", "onload=\"saatload(\'" + request.getParameter("q") + "\',\'" + request.getParameter("filter") + "\',\'" + request.getParameter("x") + "\',\'" + request.getParameter("n") + "\');\"");
+            request.setAttribute("bodyAttrs", "onload=\"saatload(\'" + request.getParameter("q") + "\',\'" + request.getParameter("filter") + "\',\'" + request.getParameter("x") + "\',\'" + request.getParameter("n") + "\',\'"+ user.getUsername() +"\');\"");
             request.setAttribute("headTags", "<script src=\"./scripts/search.js\" type=\"application/javascript\"></script>");
             RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/search/search.jsp");
             view.forward(request, response);

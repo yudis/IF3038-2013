@@ -7,6 +7,7 @@ package id.ac.itb.todolist.ajax;
 import id.ac.itb.todolist.dao.UserDao;
 import id.ac.itb.todolist.model.User;
 import id.ac.itb.todolist.util.Helper;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -101,11 +102,13 @@ public class updateUser extends HttpServlet {
                 user.setTglLahir(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("Bday")).getTime()));
             }
             if (!"".equals(request.getParameter("ava"))){
+          
                 Part avatar = request.getPart("ava");
-                user.setAvatar(user.getUsername() + "." + Helper.getFileExtention(Helper.getFileName(avatar))); 
-                Helper.writeFile(avatar.getInputStream(), user.getAvatar());                
+                String uploadPath = getServletContext().getRealPath("./images/avatars");
+                user.setAvatar(Helper.getFileName(avatar)); 
+                Helper.writeFile(avatar.getInputStream(), uploadPath + File.separator + user.getAvatar());                
             }
- 
+
             UserDao userDao = new UserDao();
             userDao.Update(user);
             

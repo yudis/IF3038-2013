@@ -5,8 +5,10 @@
 package id.ac.itb.todolist.ajax;
 
 import id.ac.itb.todolist.dao.TugasDao;
+import id.ac.itb.todolist.model.Tugas;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,93 +36,82 @@ public class profilecategory extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out= response.getWriter();
         TugasDao tugasdao = new TugasDao();
-        List<List<String>> result = tugasdao.getTugas(request.getParameter("id"));
+        ArrayList<Tugas> result = (ArrayList<Tugas>) tugasdao.getTugas(request.getParameter("id"));
      
 //////////
         out.println("<h2> </h2>");
         out.println("<h1> Undone </h1>");
-
+        out.println("<h2> </h2>");
         if (result != null)
         {
                 int i = 0;
-                while(true)
+                while((i < result.size()) && !(result.get(i).isStatus()))
                 {
-                        String lastKN = result.get(i).get(1);
+                        int lastKN = result.get(i).getKategori().getId();
 
-                        out.println("                                  <h2>" + result.get(i).get(3) + "</h2>");
+                        out.println("                                  <h2>" + result.get(i).getKategori().getNama() + "</h2>");
                         do {						
                                 out.println("					<div class=\"tugas\">");
-                                out.println("					<div><a href=\"tugas.jsp?id=" + result.get(i).get(2) + "\">" + result.get(i).get(4) + "</a></div>");
-                                out.println("						 <div>Submission: <strong>" + result.get(i).get(6) + "</strong></div>");
+                                out.println("					<div><a href=\"tugas.jsp?id=" + result.get(i).getId() + "\">" + result.get(i).getNama() + "</a></div>");
+                                out.println("						 <div>Submission: <strong>" + result.get(i).getTglDeadline() + "</strong></div>");
                                 out.println("						 <div>");
                                 out.println("							 Tags: ");
                                 out.println("							 <ul class=\"tag\">");
 
-
-                                String lastTN = result.get(i).get(2);
-
-                                do {
-                                        out.println("							<li>" + result.get(i).get(6) + "</li>");
-                                        i++;
-                                } while((i < result.size()) && (lastTN.equals(result.get(i).get(2))));
+                                for (int j = 0; j < ((ArrayList<String>) result.get(i).getTags()).size(); j++){
+                                        out.println("							<li>" + ((ArrayList<String>) result.get(i).getTags()).get(j) + "</li>");
+                                }
                                 out.println("							  </ul>");
                                 out.println("						 </div>");
+
+                                if (!result.get(i).isStatus()){
+                                        out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() +")\" value=\"" + result.get(i).isStatus() + "\"></div>");
+                                } else {
+                                        out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + result.get(i).isStatus() + "\" checked></div>");
+                                }                                       
                                 out.println("				</div>");
                                 
-                                if (i >= result.size()){
-                                    break;
-                                }
-                        } while((lastKN.equals(result.get(i).get(1))));
- 
-                        if ((i < result.size())){
-                            if ("1".equals(result.get(i).get(0))){
-                                break;
-                            }
-                        } else {
-                            break;
-                        }
+                                i++;
+
+                        } while((i < result.size()) && (lastKN == result.get(i).getKategori().getId()) && !(result.get(i).isStatus()));
+
                 }
                 out.println(" <h2> </h2>");
                 out.println("<h1> Done </h1>");
+                out.println("<h2> </h2>");
+                while((i < result.size()) && (result.get(i).isStatus()))
+                {
+                        int lastKN = result.get(i).getKategori().getId();
 
-                if (i < result.size()){
+                        out.println("                                  <h2>" + result.get(i).getKategori().getNama() + "</h2>");
+                        do {						
+                                out.println("					<div class=\"tugas\">");
+                                out.println("					<div><a href=\"tugas.jsp?id=" + result.get(i).getId() + "\">" + result.get(i).getNama() + "</a></div>");
+                                out.println("						 <div>Submission: <strong>" + result.get(i).getTglDeadline() + "</strong></div>");
+                                out.println("						 <div>");
+                                out.println("							 Tags: ");
+                                out.println("							 <ul class=\"tag\">");
 
-                        while(true)
-                        {
-                                String lastKN = result.get(i).get(1);
-
-                                out.println("				<h2>" + result.get(i).get(3) + "</h2>");
-                                do {						
-                                        out.println("				<div class=\"tugas\">");
-                                        out.println("					<div><a href=\"#\">" + result.get(i).get(4) + "</a></div>");
-                                        out.println("						 <div>Submission: <strong>" + result.get(i).get(5) + "</strong></div>");
-                                        out.println("						 <div>");
-                                        out.println("							 Tags: ");
-                                        out.println("								 <ul class=\"tag\">");								 
-
-                                        String lastTN = result.get(i).get(2);
-                                        do {
-                                                out.println("							<li>" + result.get(i).get(6) + "</li>");
-                                                i++;
-                                        } while((i < result.size()) && (lastTN.equals(result.get(i).get(2))));
-                                        out.println("							  </ul>");
-                                        out.println("						 </div>");
-                                        out.println("				</div>");
-                                        if (i >= result.size()){
-                                            break;
-                                        }                                        
-                                } while((lastKN.equals(result.get(i).get(1))));
-                                if ((i < result.size())){
-                                    if ("1".equals(result.get(i).get(0))){
-                                        break;
-                                    }
-                                } else {
-                                    break;
+                                for (int j = 0; j < ((ArrayList<String>) result.get(i).getTags()).size(); j++){
+                                        out.println("							<li>" + ((ArrayList<String>) result.get(i).getTags()).get(j) + "</li>");
                                 }
-                        }
-                } else {
+                                out.println("							  </ul>");
+                                out.println("						 </div>");
+                                
+                                if (!result.get(i).isStatus()){
+                                        out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() +")\" value=\"" + result.get(i).isStatus() + "\"></div>");
+                                } else {
+                                        out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + result.get(i).isStatus() + "\" checked></div>");
+                                }
+                                                                      
+                                out.println("				</div>");
+                                
+                                i++;
+
+                        } while((i < result.size()) && (lastKN == result.get(i).getKategori().getId()) && (result.get(i).isStatus()));
 
                 }
+        
         }        
 //////////        
         
