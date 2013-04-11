@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php
+<%--<?php
 include_once("../php/loginchecker.php");
 ?>
 <?php
@@ -10,7 +10,14 @@ if(isset($_SESSION['uname'])){
 }
 ?>
 
-<?php include '../php/datapengguna.php'?>
+<?php include '../php/datapengguna.php'?>--%>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.io.*" %> 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="../php/datapengguna.jsp"%>
+<%@include file="../php/getalltaskuser.jsp"%>
+<%@include file="../php/getalltaskuserfinish.jsp"%>
+<%String activeuser="ruth";%>
 
 <html>
 	
@@ -23,64 +30,44 @@ if(isset($_SESSION['uname'])){
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 		<title> Eurilys </title>
 	</head>
-<?php
-$datauser = datapengguna($username);
 
-?>
+<%
+    //String catchoosen = request.getParameter("kategori")
+    ResultSet userdata = datapengguna(activeuser);
+    ResultSet alltask = getalltaskuser(activeuser);
+%>  ResultSet alltaskfinish = getalltaskuserfinish(activeuser);
 	<body>
 		<!-- Web Header -->
-		<?php
-			include_once("header.php");
-		?>
+		<%@include file="../src/header.jsp"%>
 		
 		
 		<!-- Web Content -->
-                <?php foreach($datauser as $eachdata){?>
-                     <section>
+                <%  while(userdata.next()){%>
+                    <section>
 			<div id="navbar">
 				<div id="short_profile">
-					<img id="profile_picture" src="../file/<?php echo $eachdata['avatar']?>" alt="">
+					<img id="profile_picture" src="../file/<%out.println(userdata.getString("avatar"));%>" alt="">
 					<div id="profile_info">
-						<?php echo $eachdata['fullname']?>
+						<%out.println(userdata.getString("full_name"));%>
 						<br><br>
-						<div class="link_tosca" id="edit_profile_button" onclick="edit_profile('<?php echo $eachdata['username']?>')"> Edit Profile </div>
+						<div class="link_tosca" id="edit_profile_button" onclick="edit_profile(<%out.println(userdata.getString("username"));%>)"> Edit Profile </div>
 					</div> 
 				</div>
-				<div id="category_list">
-					<div class="link_blue_rect" id="category_title"><a href="#" onclick="catchange(0)">All Categories </a> </div>
-					<ul id="category_item">
-						<li><a href="dashboard.html" onclick="catchange(1)" id="kuliah">Kuliah</a></li>
-						<li><a href="dashboard.html" onclick="catchange(2)" id="proyek">Proyek</a></li>
-						<li><a href="dashboard.html" onclick="catchange(3)" id="tugas">Tugas</a></li>
-						<li><a href="dashboard.html" onclick="catchange(4)" id="lomba">Lomba</a></li>
-					</ul>
-					<div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>
-					<div id="category_form">
-						<div id="category_form_inner">
-							Category name : <br>
-							<input type="text" id="add_category_name" value="">
-							<br><br>
-							Assignee(s) : <br>
-							<input type="text" id="add_category_asignee_name" value="">
-							<br><br>
-							<div id="add_category_button" class="link_red" onclick="add_category()"> Add </div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 			<div id="dynamic_content">
 				<div class="half_div">
 					<div id="upperprof">
 						<img src="../file/<?php echo $eachdata['avatar']?>" alt="">
-						<div id="namauser"><?php echo $eachdata['full_name']?></div>
+						<div id="namauser"><%out.println(userdata.getString("full_name"));%></div>
 					</div>
 					
 					<br/>
-                                       Username :<?php echo $eachdata['username']?>
+                                       Username :<%out.println(userdata.getString("username"));%>
                                         <br>
-					Email : <?php echo $eachdata['email']?>
+					Email : <%out.println(userdata.getString("email"));%>
 					<br>
-					Birthdate : <?php echo $eachdata['birthdate']?>
+					Birthdate : 
 
 				</div>
 				<div class="half_div">
@@ -103,7 +90,8 @@ $datauser = datapengguna($username);
 				
 			</div>
 		</section>
-                <?php }?>
+                <%}%>
+                
                
 		
 		<!-- Footer Section -->

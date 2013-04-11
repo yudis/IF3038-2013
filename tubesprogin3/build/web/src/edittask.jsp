@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<?php
-			include_once("../php/loginchecker.php");
-		?>
+<%--<?php
+    include_once("../php/loginchecker.php");
+?>
 <?php include '../php/fungsiget.php'?>
-	<?php
+<?php
       $kategori = get_allkategoriphp();
       print_r($kategori);
+  
+      $taskname = $_GET["t"];
     //$all_task = get_alltaskphp();
-    ?>
+    ?>--%>
+<%@include file="../php/ubahtask.jsp"%>
+<%
+    String taskname=request.getParameter("t");
+%>
 <html>
 	<!--
 	<IFRAME name="iframe" src="src/header.html" width='100%' height='auto' marginwidth=0 marginheight=0 hspace=0 vspace=0 frameborder=0 scrolling=auto></IFRAME>
@@ -19,10 +25,10 @@
 		<script type="text/javascript" src="../js/animation.js"> </script>
 		<script type="text/javascript" src="../js/catselector.js"> </script> 	
                 <script type="text/javascript" src="../js/add_task.js"></script>
+                <script type="text/javascript" src="../js/edit_task2.js"></script>
                 <script type="text/javascript" src="../js/fungsiget.js">
                     
-                   <!-- var taskid = "<?php echo $last_idx; ?>";-->
-                   <!-- alert(taskid);-->
+                 
                 </script>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 		<title> Eurilys </title>
@@ -30,10 +36,9 @@
 
 	<body>
 		<!-- Web Header -->
-		<?php
-			include_once("header.php");
-		?>
+		<%@include file="../src/header.jsp"%>
 		
+	
 		
 		<!-- Web Content -->
 		<section>
@@ -46,44 +51,15 @@
 						<div class="link_tosca" id="edit_profile_button"> Edit Profile </div>
 					</div>
 				</div>
-				<div id="category_list">
-					<div class="link_blue_rect" id="category_title"><a href="#" onclick="catchange(0)">All Categories </a> </div>
-					<ul id="category_item">
-                                                <?php
-                                                  
-                                                    foreach($kategori as $eachkategori){
-                                                ?>
-                                                      
-                                                        <li><a href="#" onclick="get_taskkategorijs('<?php echo $eachkategori['cat_name']?>')" > <?php echo $eachkategori['cat_name']?></a></li>
-                                                      
-                                                      
-                                                        
-                                                <?php }
-                                                ?>
-					
-					</ul>
-					<!--<div id="add_task_link"> <a href="../src/addtask.php"> + new task </a> </div>-->
-					<div id="add_new_category" onclick="toggle_visibility('category_form')";> + new category </div>
-					<div id="category_form">
-                                          
-						<div id="category_form_inner">
-							Category name : <br>
-							<input type="text" id="add_category_name" name="nama_kategori" value="">
-							<br><br>
-							Assignee(s) : <br>
-							<input type="text" id="add_category_asignee_name" name="assignee_name" value="">
-							<br><br>
-							<div id="add_category_button" class="link_red" onclick="add_category()"> Add </div>
-						</div>
-                                         
-					</div>
-				</div>
+				
 			</div>
 			<div id="dynamic_content">
                             <form >
 				<div id="add_task_container">
 					<div id="add_task_header" class="left top30 dynamic_content_head">
-						Add New Task
+						Edit Task  <?php echo $taskname?>
+                                                
+                                             
 					</div>
 			
 					<div id="row1_addtask" class="left top30 dynamic_content_row">
@@ -124,7 +100,7 @@
 					</div>
 					
 					<div id="row6_addtask" class="left top10 dynamic_content_row">
-						<input id="add_task_button" type="button" onclick="add_task()" value="Add Task" class="link_blue_rect">
+						<input id="add_task_button" type="button" onclick="ubah_detail_task('<%out.print(taskname);%>')" value="Save Task" class="link_blue_rect">
 					</div>
 				</div>
                             </form>

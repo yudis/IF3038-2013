@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-	<?php
+
+
+	<%--<?php
 			include_once("../php/loginchecker.php");
 		?>
 	
@@ -9,7 +11,13 @@
       $kategori = get_allkategoriphp();
       print_r($kategori);
     //$all_task = get_alltaskphp();
-    ?>
+    ?>--%>
+<%@include file="../php/loginchecker.jsp"%>
+<%@include file="../php/fungsiget.jsp"%>
+<%@include file="../php/getnewtaskdetail.jsp"%>
+<%@include file="../php/tampilkomen.jsp"%>
+<%String username="ruth";%>
+
 <html>
 	<!--
 	<IFRAME name="iframe" src="src/header.html" width='100%' height='auto' marginwidth=0 marginheight=0 hspace=0 vspace=0 frameborder=0 scrolling=auto></IFRAME>
@@ -21,8 +29,10 @@
 		<script type="text/javascript" src="../js/animation.js"> </script>
 		<script type="text/javascript" src="../js/catselector.js"> </script> 	
                 <script type="text/javascript" src="../js/add_task.js"></script>
+                <script type="text/javascript" src="../js/addkomen.js">   </script>
+                <script type="text/javascript" src="../js/edit_task2.js">   </script>
                 <script type="text/javascript" src="../js/fungsiget.js">
-                   
+                
                    <!-- var taskid = "<?php echo $last_idx; ?>";-->
                    <!-- alert(taskid);-->
                 </script>
@@ -33,10 +43,7 @@
 
 	<body>
 		<!-- Web Header -->
-		<?php
-			include_once("header.php");
-		?>
-	
+		  <%@include file="../src/header.jsp"%>
 		
 		<!-- Web Content -->
 		<section>
@@ -49,54 +56,25 @@
 						<div class="link_tosca" id="edit_profile_button"> Edit Profile </div>
 					</div>
 				</div>
-				<div id="category_list">
-					<div class="link_blue_rect" id="category_title"><a href="#" onclick="catchange(0)">All Categories </a> </div>
-					<ul id="category_item">
-                                                <?php
-                                                  
-                                                    foreach($kategori as $eachkategori){
-                                                ?>
-                                                      
-                                                        <li><a href="#" onclick="get_taskkategorijs('<?php echo $eachkategori['cat_name']?>')" > <?php echo $eachkategori['cat_name']?></a></li>
-                                                      
-                                                      
-                                                        
-                                                <?php }
-                                                ?>
-					
-					</ul>
-					<!--<div id="add_task_link"> <a href="../src/addtask.php"> + new task </a> </div>-->
-					<div id="add_new_category" onclick="toggle_visibility('category_form')";> + new category </div>
-					<div id="category_form">
-                                          
-						<div id="category_form_inner">
-							Category name : <br>
-							<input type="text" id="add_category_name" name="nama_kategori" value="">
-							<br><br>
-							Assignee(s) : <br>
-							<input type="text" id="add_category_asignee_name" name="assignee_name" value="">
-							<br><br>
-							<div id="add_category_button" class="link_red" onclick="add_category()"> Add </div>
-						</div>
-                                         
-					</div>
-				</div>
+				
 			</div>
-                        <?php
-                            $ct = $_GET["ct"];
-                            $tm = $_GET["tm"];
-                            $ts = $_GET["ts"];
-                            $td = $_GET["td"];
-                            $ttm = $_GET["ttm"];
-                            $c = $_GET["c"];
-                        ?>
+                        <%
+                            String namakategori=request.getParameter("ct");
+                            String namatask=request.getParameter("tm");
+                            String taskstatus=request.getParameter("ts");
+                            String tasktag=request.getParameter("ttm");
+                            String checkbox=request.getParameter("c");
+                            String asigne=request.getParameter("asign");
+                             ResultSet komen = getkomen(namakategori,namatask);
+                        %>
+                     
 			<div id="dynamic_content">
                             <div id="edit_task_header" class="left top30 dynamic_content_head">
-                                    <?php echo $ct?>
+                                    <%out.print(namatask);%>
 				</div>
 				
 				<input id="edit_task_button" class="left top30 link_blue_rect" 
-					onclick="edit_task2('<?php echo $tm ?>')" type="button" value="Edit Task" />
+					onclick="edit_task2('<%out.print(namatask);%>')" type="button" value="Edit Task" />
 				
 				
 				<input id="save_button_td" class="left top30 link_blue_rect" 
@@ -105,7 +83,7 @@
 				
 				<div id="row1_taskdetail" class="left top30 dynamic_content_row">
 					<div id="task_name_ltd" class="left dynamic_content_left">Task Name</div>
-					<div id="task_name_rtd" class="left dynamic_content_right"><?php echo $tm ?></div>
+					<div id="task_name_rtd" class="left dynamic_content_right"><%out.print(namatask);%></div>
 				</div>
 				
 				<div id="row2_taskdetail" class="left top10 dynamic_content_row">
@@ -117,34 +95,26 @@
 				
 				<div id="row3_taskdetail" class="left top10 dynamic_content_row">
 					<div id="deadline_ltd" class="left dynamic_content_left">Deadline</div>
-					<div id="deadline_rtd" class="left dynamic_content_right"><?php echo $td ?></div>
+					<div id="deadline_rtd" class="left dynamic_content_right"></div>
 				</div>
 				
 				<div id="row4_taskdetail" class="left top10 dynamic_content_row">
 					<div id="assignee_ltd" class="left dynamic_content_left">Assignee</div>
-					<div id="assignee_rtd" class="left dynamic_content_right">Sharon</div>
+					<div id="assignee_rtd" class="left dynamic_content_right"><%out.print(asigne);%></div>
 				</div>
 			
 				<div id="row5_taskdetail" class="left top10 dynamic_content_row">
 					<div id="tag_ltd" class="left dynamic_content_left">Tag</div>
-					<div id="tag_rtd" class="left dynamic_content_right"><?php echo $ttm ?></div>
+					<div id="tag_rtd" class="left dynamic_content_right"><%out.print(namatask);%></div>
 				</div>
 				
 				<div id="row6_taskdetail" class="left top10 dynamic_content_row">
 					<div id="comment_ltd" class="left dynamic_content_left">Comment</div>
-					<div id="comment_rtd" class="left dynamic_content_right">Lorem ipsum dolor sit amet, 
-					ea per meliore copiosae gubergren, ei latine iracundia euripidis sed, 
-					ut odio lorem qui. Mea ne nobis feugait, sea iuvaret pertinax at, 
-					harum commodo ne per. Per timeam dolorum no. Ne nam utroque percipitur, 
-					augue partem imperdiet in pri. At est omnes habemus. Atqui antiopam 
-					indoctum quo cu, no purto antiopam vis. Agam vidit ea nam, audiam alterum 
-					appellantur mel ad. Copiosae erroribus vulputate no est, eos affert 
-					minimum atomorum ei. Id nec choro luptatum, oblique suscipit nam ex.
-					Sit elitr legere postulant te. Id putent dolorem usu, in sanctus 
-					scripserit est. Has at zril quaeque sensibus, at case elaboraret vis, 
-					nec natum noluisse salutandi ut. Putent habemus adversarium vim et, 
-					has platonem hendrerit eu, vim at urbanitas pertinacia. Id pri partem 
-					malorum aliquando, ne eum veniam animal probatus.
+					<div id="comment_rtd" class="left dynamic_content_right">
+                                            <ul >
+                                           
+                                           
+                                            </ul>
 					</div>
 				</div>
 				
@@ -154,7 +124,8 @@
 						<form autocomplete="off">
 							<textarea id="comment_textarea" rows="5" cols="50" name="CommentBox">
 							</textarea><br>
-							<input type="submit" value="Add">
+							<input id="edit_profile_button" class="link_tosca" 
+                                                        onclick="add_komen('<%out.print(namakategori);%>','<%out.print(namatask);%>')" type="button" value="Add Comment" />
 						</form>
 					</div>
 				</div>
