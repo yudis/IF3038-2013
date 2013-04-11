@@ -4,11 +4,10 @@
  */
 package Servlet;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -44,18 +43,8 @@ public class Register extends HttpServlet {
       String email = request.getParameter("signup_email");
       String birthdate = request.getParameter("signup_birthdate");
       Part filePart = request.getPart("avatar_upload");
-      String avatar = "img/avatar/" + getFilename(filePart);
+      String avatar = "img/avatar/" + username + getExtension(getFilename(filePart));
       String filePath = getServletContext().getRealPath("/") + avatar;
-
-      /* BEGIN File exist resolver */
-      File file = new File(filePath);
-      int i = 2;
-      while (file.exists()) {
-         avatar = incrementFilename(avatar, i++);
-         filePath = getServletContext().getRealPath("/") + avatar;
-         file = new File(filePath);
-      }
-      /* END File exist resolver */
       
       try {
          try {
@@ -74,10 +63,11 @@ public class Register extends HttpServlet {
          stmt.setString(6, avatar);
          
          if (stmt.executeUpdate() != 0) {
-            Files.copy(filePart.getInputStream(), Paths.get(filePath));
+            Files.copy(filePart.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
             session.setAttribute("name", name);
+            session.setAttribute("avatar", avatar);
             response.sendRedirect("src/dashboard.jsp");
          }
       } catch (SQLException e) {
@@ -102,15 +92,8 @@ public class Register extends HttpServlet {
       }
       return null;
    }
-
-   private static String incrementFilename(String filename, int i) {
-      int indexOfDot = filename.indexOf(".");
-      if (filename.indexOf(")") != indexOfDot - 1) {
-         return filename.substring(0, indexOfDot) + "(" + i + ")"
-                 + filename.substring(indexOfDot);
-      } else {
-         return filename.substring(0, indexOfDot - 2) + i + ")"
-                 + filename.substring(indexOfDot);
-      }
+   
+   private static String getExtension (String filename){
+      return filename.substring(filename.lastIndexOf("."));
    }
 }

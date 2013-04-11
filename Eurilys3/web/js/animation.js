@@ -308,7 +308,7 @@ function regCheck() {
    var email = document.getElementById("reg_email").value;
    var birthdate = document.getElementById("reg_birthdate").value;
    var avatar = document.getElementById("avatar_upload").value;
-   var usernameValid = 0;
+   var usernameValid;
    var passwordValid = 0;
    var confirmValid = 0;
    var nameValid = 0;
@@ -338,13 +338,13 @@ function regCheck() {
                usernameValid = 0;
                document.getElementById("username_validation").src = "img/no.png";
             }
-            else if (xmlhttp.responseText=="false"){
-               document.getElementById("username_validation").src = "img/yes.png";
+            else if (xmlhttp.responseText=="false") {
                usernameValid = 1;
+               document.getElementById("username_validation").src = "img/yes.png";
             }
          }
       }  
-      xmlhttp.open("GET","ServletHandler?type=CheckUsername&username="+username,true);
+      xmlhttp.open("GET","ServletHandler?type=CheckUsername&username="+username,false);
       xmlhttp.send();
    }
    else {
@@ -421,27 +421,28 @@ function regCheck() {
          document.getElementById("email_validation").src = "img/no.png";
    }
    else {
-      var xmlhttp2;
+      var xmlhttp;
       if (window.XMLHttpRequest)
       {// code for IE7+, Firefox, Chrome, Opera, Safari
-         xmlhttp2=new XMLHttpRequest();
+         xmlhttp=new XMLHttpRequest();
       }
       else
       {// code for IE6, IE5
-         xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
       }
-      xmlhttp2.onreadystatechange=function()
+      xmlhttp.onreadystatechange=function()
       {
-         if(xmlhttp2.responseText=="true"){
+         if(xmlhttp.responseText=="true"){
+            emailValid= 0; 
             document.getElementById("email_validation").src = "img/no.png";	
          }
-         else if (xmlhttp2.responseText=="false"){
-            document.getElementById("email_validation").src = "img/yes.png";
+         else if (xmlhttp.responseText=="false"){
             emailValid = 1;
+            document.getElementById("email_validation").src = "img/yes.png";
          }
       }  
-      xmlhttp2.open("GET","ServletHandler?type=CheckEmail&email="+email,true);
-      xmlhttp2.send();
+      xmlhttp.open("GET","ServletHandler?type=CheckEmail&email="+email,false);
+      xmlhttp.send();
    }
    document.getElementById("email_validation").style.display = "block";
 	
@@ -484,7 +485,7 @@ function regCheck() {
    document.getElementById("avatar_validation").style.display = "block";
    if (usernameValid == 1 && passwordValid == 1 && confirmValid == 1 && 
       nameValid == 1 && emailValid == 1 && birthdateValid == 1 && avatarValid == 1){
-		
+      
       regValid = 1;
       document.getElementById("signup_button_submit").className = "link_blue_big right top10 bold";
    }
