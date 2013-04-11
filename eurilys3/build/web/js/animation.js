@@ -268,6 +268,14 @@ function addEditTaskAssigne(userID) {
     document.getElementById('edit_task_assignee').value += ", ";
     document.getElementById("edit_task_asignee_autocomplete").innerHTML="";
     document.getElementById("edit_task_assignee_auto").value = "";
+
+}
+function addAddTaskAssigne(userID) {
+    var user = document.getElementById('addtask_ass_'+userID).innerHTML;
+    document.getElementById('add_task_assignee_input').value += user;
+    document.getElementById('add_task_assignee_input').value += ", ";
+    document.getElementById("add_task_asignee_autocomplete").innerHTML="";
+    document.getElementById("add_task_assignee_auto").value = "";
 }
 
 function searchResult(resultID, resultType) {
@@ -310,6 +318,7 @@ function viewTask(taskID) {
 }
 
 function generateTask(categoryName) {
+    document.getElementById("dynamic_content").innerHTML = "";
     if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
     }

@@ -381,9 +381,74 @@ public class ServletHandler extends HttpServlet{
             }
         }
         
-        //other
-        else if (req.getParameter("type").equalsIgnoreCase("")) {
+        //Add Task
+        else if (req.getParameter("type").equalsIgnoreCase("add_task")) {
+            String task_name = req.getParameter("task_name_input");
+            //attachment
+            String task_deadline = req.getParameter("deadline_input");
+            String assigneeList = req.getParameter("assignee_input");
+            String tagList = req.getParameter("tag_input");
+            String catName = req.getParameter("addtask_cat_name");
+            HttpSession session = req.getSession(true);
+            String taskCreator = (String) session.getAttribute("username");
             
+            System.out.println("task name : "  + task_name);
+            System.out.println("task_deadline : " + task_deadline);
+            System.out.println("ass list : " + assigneeList);
+            System.out.println("tagList : " + tagList);
+            System.out.println("catName : " + catName);
+            System.out.println("taskCreator : " + taskCreator);
+                    
+            try {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    System.out.println("Berhasil connect ke Mysql JDBC Driver - Add Task ");
+                } catch (ClassNotFoundException ex) {
+                    System.out.println("Where is your MySQL JDBC Driver? - Add Task");
+                }
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");                 
+                Statement st = conn.createStatement(); 
+                st.executeUpdate("INSERT INTO task(task_name, task_status, task_deadline, cat_name, task_creator) VALUES ('"+task_name+"','0','"+task_deadline+"','"+catName+"','"+taskCreator+"')");
+                
+                System.out.println("Insert task");
+                
+                PreparedStatement stmt = conn.prepareStatement("SELECT task_id FROM task WHERE task_name=? AND cat_name=?");
+                stmt.setString(1, task_name);
+                stmt.setString(2, catName);
+                ResultSet rs = stmt.executeQuery();
+                rs.beforeFirst();
+                 String taskID = "";
+                while (rs.next()) {          
+                    taskID = rs.getString("task_id");
+                }
+                System.out.println("select task id");
+                
+                //Insert Task Assignee
+                String[] assigneArray = assigneeList.split(",");
+                for (int i=0; i<assigneArray.length; i++) {
+                    st.executeUpdate("INSERT INTO task_asignee (task_id, username) VALUES ('"+taskID+"','"+assigneArray[i]+"')");
+                }  
+                System.out.println("insert task asignee");
+                
+                //Insert Task Tag
+                String[] tagArray = tagList.split(",");
+                for (int i=0; i<tagArray.length; i++) {
+                    st.executeUpdate("INSERT INTO tag(tag_name, task_id) VALUES ('"+tagArray[i]+"','"+taskID+"')");
+                }                
+                System.out.println("insert tag");
+                resp.sendRedirect("src/task_detail.jsp?task_id="+taskID);
+            }
+            catch (SQLException e) {
+                System.out.println("Connection Failed! Check output console - Add Task");
+            } 
+            finally { 
+                try { 
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Can not close connection - Add Task");
+                }
+            }
         }
     }
 
