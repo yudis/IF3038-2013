@@ -44,7 +44,7 @@
     height:30px;
     width:30px;
     position:absolute;
-    left:770px;
+    left:780px;
     top:13px;
     background: transparent url(../images/search.png) no-repeat;
     overflow: hidden;
@@ -55,8 +55,12 @@
 #searchdropdown{
     position:absolute;
     left:310px;
-    top:15px;
+    top:10px;
 }
+#opsisearch{
+    height: 30px;
+}
+
 #home{
     height:50px;
     width:150px;

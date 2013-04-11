@@ -75,3 +75,109 @@ function show_del_cat()
     }
 }
 
+function showResult(str)
+{
+    if(str.length==0)
+    {
+        document.getElementById("hasil_autocomplete").innerHTML="";
+        
+        return;
+    }
+				
+    var str_arr = str.split(", ");
+				
+    if(window.XMLHttpRequest)
+    {
+        // untuk IE7, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {
+        //untuk IE jadul
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+				
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("hasil_autocomplete").innerHTML=xmlhttp.responseText;
+           
+        }
+    }
+    xmlhttp.open("GET", "Search?aksi=suggest&key=username&value="+str_arr[str_arr.length -1], true);
+    
+    xmlhttp.send();
+}
+		
+	
+		
+function sort_and_unique( my_array ) {
+    my_array.sort();
+    for ( var i = 1; i < my_array.length; i++ ) {
+        if ( my_array[i] === my_array[ i - 1 ] ) {
+            my_array.splice( i--, 1 );
+        }
+    }
+    return my_array;
+};
+		
+	
+<!--JS UNTUK AUTOCOMPLETE-->
+		
+function autocomplete_diklik(str)
+{
+    var string_awal = document.getElementById("input_assignees").value;
+    var str_arr = string_awal.split(", ");
+
+    str_arr[str_arr.length-1]=str;
+    str_arr = sort_and_unique(str_arr);
+    document.getElementById("input_assignees").value = str_arr.join(", ")+", ";
+    document.getElementById("input_assignees").focus();
+    document.getElementById("hasil_autocomplete").innerHTML="";
+}
+		
+		
+<!--AJAX UNTUK MENAMPILKAN TASKS-->
+		
+var prev_selected = 0;
+function showTasks(uid, str)
+{
+    document.getElementById("task").innerHTML="";
+
+    if(prev_selected == 0)
+    {
+        prev_selected = str;
+    }
+    document.getElementById("id"+prev_selected).style.border="none";
+				
+    if(window.XMLHttpRequest)
+    {
+        // untuk IE7, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {
+        //untuk IE jadul
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+				
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+					
+            var elements = document.getElementsByClassName("tulcat");
+						
+            document.getElementById("id"+str).style.border="solid #FF0000";
+            document.getElementById("task").innerHTML=xmlhttp.responseText;
+            document.getElementById("link_buattask").href="buattask.php?idkategori="+str;
+            document.getElementById("addtask").style.display = "block";
+            document.getElementById("deltask").style.display = "block";
+						
+            prev_selected = str;
+        }
+    }
+    xmlhttp.open("GET", "show_list_task.php?idaccounts="+uid+"&id_kategori="+str, true);
+    xmlhttp.send();
+}

@@ -16,8 +16,9 @@
     </head>
 
     <body onload="showKategori(2)">
+        <%@include file="header.jsp" %>
         <div id="container">
-            <%@include file="header.jsp" %>
+            
 
             <div id="category">
                 <div id="category_head">
@@ -35,13 +36,14 @@
         <!--Popup bikin kategori baru -->
         <a href="#x" class="overlay" id="category_form"></a>
         <div class="popup">
+            <div>Tambah Kategori</div>
             <form action="Kategori" method="post">
                 <div class="form_baris">
                     <div class="form_kiri">
                         Nama Kategori: 
                     </div>
                     <div class="form_kanan">
-                        <input type="text"/>
+                        <input type="text" name="nama">
                     </div>
                 </div>
                 <div class="form_baris">
@@ -49,7 +51,8 @@
                         Assignees: 
                     </div>
                     <div class="form_kanan">
-                        <input type="text"/>
+                        <input type="text" name="assignees" onkeyup="showResult(this.value)" id="input_assignees">
+                        <div id="hasil_autocomplete"> </div>
                     </div>
                 </div>
                 <div class="form_baris">

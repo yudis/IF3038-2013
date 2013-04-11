@@ -297,7 +297,8 @@
 
 .form_baris{
     width: 100%;
-    margin-top: 10px;
+    padding-bottom: 20px;
+    padding-top: 20px;
 }
 
 .form_kiri{
@@ -329,4 +330,17 @@
     margin-right: 5px;
     margin-bottom: 5px;
     border: solid #606060 1px;
+}
+
+#hasil_autocomplete{
+    position: absolute;
+    background-color: #dfdfdf;
+    box-shadow: 3px 3px 5px #888888;
+    width: 47%;
+    cursor: hand; cursor: pointer;
+}
+
+.hasil_suggest:hover{
+    background-color: #444;
+    color: white;
 }

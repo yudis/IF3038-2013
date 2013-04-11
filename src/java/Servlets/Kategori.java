@@ -91,8 +91,7 @@ public class Kategori extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            processRequest(request, response);
-
+            addKategori(request.getParameter("nama"), "2", request.getParameter("assignees"), response);
         } catch (SQLException ex) {
             Logger.getLogger(Kategori.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -118,7 +117,7 @@ public class Kategori extends HttpServlet {
         
         for (int i = 0; i < hasil.length; i++) {
             out.println("<div class='category_block' onclick='showListTask(\""+userID+"\", \""+hasil[i][1]+"\")'>");
-            if (hasil[i][2].equals("1")) {
+            if (hasil[i][2].equals(userID)) {
                 out.println("<a href='Kategori?aksi=hapus&uid="+hasil[i][1]+"'>");
                 out.println("<div class='tombol_hapus_kategori'>");
                 out.println("X");
@@ -133,7 +132,7 @@ public class Kategori extends HttpServlet {
             out.println("</div>");
             out.println("</div>");
         }
-        out.println("<div class=\"category_block\" id=\"tambah_kategori\" onclick=\"location.href='#category_form'\">");
+        out.println("<div class=\"category_block\" id=\"tambah_kategori\" onclick=\"location.href='#category_form' ; document.getElementById('input_assignees').value='';\">");
         out.println("<div class=\"category_pic\">");
         out.println("<img src=\"images/tambah.png\" alt=''/>");
         out.println("</div>");

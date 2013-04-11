@@ -8,12 +8,12 @@
 <script src="js/suggestion.js"> </script>
 <div id="header">
     <div class=logo id="logo">
-        <a href="dashboard.html"><img src="images/logo.png" title="Home" alt="Home"/></a>
+        <a href="dashboard.jsp"><img src="images/logo.png" title="Home" alt="Home"/></a>
     </div>
     <div id="space">
     </div>
     <div id="search">
-        <form name="cari" method="get" action="Search">
+        <form name="cari" method="get" action="search_result.jsp">
             <section id="searchdropdown">
                 <select name="key" id="opsisearch">
                     <option value="semua">Semua</option>
@@ -29,12 +29,12 @@
         </form>
     </div>
     <div class="menu" id="logout">
-        <a href="index.html">Logout</a>
+        <a href="index.jsp">Logout</a>
     </div>
     <div class="menu" id="profile">
-        <a href="profile.html">Profile</a>
+        <a href="profile.jsp">Profile</a>
     </div>
     <div class="menu" id="home">
-        <a href="dashboard.html">Home</a>
+        <a href="dashboard.jsp">Home</a>
     </div>
 </div>
