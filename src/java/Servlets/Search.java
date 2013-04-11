@@ -64,25 +64,55 @@ public class Search extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        if (request.getParameter("key").equals("username")) {
-            try {
-                hasil_username(request.getParameter("value"), 0, 10, response);
-            } catch (SQLException ex) {
-                Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("aksi").equals("cari")) {
+            if (request.getParameter("key").equals("username")) {
+                try {
+                    hasil_username(request.getParameter("value"), 0, 10, response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (request.getParameter("key").equals("kategori")) {
+                try {
+                    hasil_kategori(request.getParameter("value"), 0, 10, response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (request.getParameter("key").equals("task")) {
+            } else if (request.getParameter("key").equals("email")) {
+            } else if (request.getParameter("key").equals("komentar")) {
+            } else if (request.getParameter("key").equals("semua")) {
             }
-        } else if (request.getParameter("key").equals("kategori")) {
-            try {
-                hasil_kategori(request.getParameter("value"), 0, 10, response);
-            } catch (SQLException ex) {
-                Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        else{
+            if(request.getParameter("key").equals("username")){
+                try {
+                    suggest_username(request.getParameter("value"), response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        } else if (request.getParameter("key").equals("task")) {
-        } else if (request.getParameter("key").equals("email")) {
-        } else if (request.getParameter("key").equals("komentar")) {
-        } else if (request.getParameter("key").equals("semua")) {
+            else if(request.getParameter("key").equals("kategori")){
+                try {
+                    suggest_kategori(request.getParameter("value"), response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else if(request.getParameter("key").equals("task")){
+                try {
+                    suggest_task(request.getParameter("value"), response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else if(request.getParameter("key").equals("semua")){
+                try {
+                    suggest_all(request.getParameter("value"), response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 
@@ -145,7 +175,7 @@ public class Search extends HttpServlet {
             out.println("<div class='category_pic'>");
             out.println("<img src='images/Book-icon.png' alt=''/>");
             out.println("</div>");
-            
+
             out.println("<div class='category_name'>");
             out.println(hasil[i][0]);
             out.println("</div>");
@@ -159,5 +189,61 @@ public class Search extends HttpServlet {
         String[][] hasil = ConnectDB.getHasilQuery(query);
         for (int i = 0; i < hasil.length; i++) {
         }
+    }
+
+    private void suggest_username(String input, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        PrintWriter out = response.getWriter();
+
+        String query = "SELECT idaccounts, username, avatar FROM accounts WHERE username like '%" + input + "%' LIMIT 0,10";
+        String[][] hasil = ConnectDB.getHasilQuery(query);
+        for (int i = 0; i < hasil.length; i++) {
+            out.println("<div class='hasil_suggest'>");
+            out.println(hasil[i][1]);
+            out.println("</div>");
+        }
+    }
+
+    private void suggest_kategori(String input, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        PrintWriter out = response.getWriter();
+
+        String query = "SELECT idkategori, nama FROM kategori WHERE nama like '%" + input + "%' LIMIT 0,10";
+        String[][] hasil = ConnectDB.getHasilQuery(query);
+        for (int i = 0; i < hasil.length; i++) {
+            out.println("<div class='hasil_suggest'>");
+            out.println(hasil[i][1]);
+            out.println("</div>");
+        }
+    }
+
+    private void suggest_task(String input, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        PrintWriter out = response.getWriter();
+
+        String query = "SELECT DISTINCT idtugas, tugas.nama FROM tag, tugas, tugas_has_tag WHERE (tugas_idtugas = idtugas AND tag.nama like '%" + input + "%' AND tag_idtag = idtag) OR (tugas.nama LIKE '%" + input + "%') LIMIT 0, 10";
+        String[][] hasil = ConnectDB.getHasilQuery(query);
+        for (int i = 0; i < hasil.length; i++) {
+            out.println("<div class='hasil_suggest'>");
+            out.println(hasil[i][1]);
+            out.println("</div>");
+        }
+    }
+
+    //masih error
+    private void suggest_all(String input, HttpServletResponse response) throws ServletException, SQLException, IOException {
+        PrintWriter out = response.getWriter();
+
+        out.println("<fieldset>");
+        out.println("<legend>Username</legend>");
+        suggest_username(input, response);
+        out.println("</fieldset>");
+
+        out.println("<fieldset>");
+        out.println("<legend>Kategori</legend>");
+        suggest_kategori(input, response);
+        out.println("</fieldset>");
+
+        out.println("<fieldset>");
+        out.println("<legend>Task</legend>");
+        suggest_task(input, response);
+        out.println("</fieldset>");
     }
 }

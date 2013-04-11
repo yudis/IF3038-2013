@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script src="js/suggestion.js"> </script>
 <div id="header">
     <div class=logo id="logo">
         <a href="dashboard.html"><img src="images/logo.png" title="Home" alt="Home"/></a>
@@ -12,8 +13,20 @@
     <div id="space">
     </div>
     <div id="search">
-        <input type="text" name="search" id="searchbox">
-        <button type="submit" id="searchbutton"></button>
+        <form name="cari" method="get" action="Search">
+            <section id="searchdropdown">
+                <select name="key" id="opsisearch">
+                    <option value="semua">Semua</option>
+                    <option value="username">Username</option>
+                    <option value="kategori">Kategori</option>
+                    <option value="task">Task</option>
+                </select>
+            </section>
+            <input type="hidden" name="aksi" value="cari">
+            <input type="text" name="value" id="searchbox" autocomplete="off" onkeyup="autocomplete_search(document.getElementById('opsisearch').value, this.value)">
+            <div id="hasil_ac"></div>
+            <button type="submit" id="searchbutton"></button>
+        </form>
     </div>
     <div class="menu" id="logout">
         <a href="index.html">Logout</a>

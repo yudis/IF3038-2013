@@ -69,7 +69,7 @@ public class Kategori extends HttpServlet {
                 showKategori(request.getParameter("uid"), response);
             }
             else if(request.getParameter("aksi").equals("tambah")){
-                addKategori(request.getParameter("namaKategori"), request.getParameter("uid"), request.getParameter("assignee"));
+                addKategori(request.getParameter("namaKategori"), request.getParameter("uid"), request.getParameter("assignee"), response);
             }
             else if(request.getParameter("aksi").equals("hapus")){
                 deleteKategori(request.getParameter("uid"), response);
@@ -153,7 +153,7 @@ public class Kategori extends HttpServlet {
         }
     }
 
-    private void addKategori(String namaKategori, String idPembuat, String assignee) throws ServletException, SQLException {
+    private void addKategori(String namaKategori, String idPembuat, String assignee, HttpServletResponse response) throws ServletException, SQLException, IOException {
         //query bikin kategori baru
 
         String query1 = "INSERT INTO kategori (nama, pembuat) VALUES('" + namaKategori + "'," + idPembuat + ")";
@@ -169,6 +169,8 @@ public class Kategori extends HttpServlet {
             String query3 = "INSERT INTO assignee_has_kategori (accounts_idaccounts, kategori_idkategori) VALUES((SELECT idaccounts FROM accounts WHERE username = '" + list_assignee[i] + "'),(SELECT idkategori from kategori where nama = '" + namaKategori + "' and pembuat = " + idPembuat + "))";
             ConnectDB.jalankanQuery(query3);
         }
+        
+        response.sendRedirect("dashboard.jsp");
     }
 
     private void deleteKategori(String idkategori, HttpServletResponse response) throws ServletException, SQLException, IOException {
