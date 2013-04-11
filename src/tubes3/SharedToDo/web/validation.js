@@ -383,11 +383,11 @@ function getStyle(oElm, strCssRule) {
 }
 
 function redirDetails() {
-    window.location = "taskdetails/";
+    window.location = "../taskdetails/";
 }
 
 function redirAdd() {
-    window.location = "addtask/?category=" + category;
+    window.location = "../addtask/?category=" + category;
 }
 
 function handleFileSelect(evt) {

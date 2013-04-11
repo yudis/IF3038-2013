@@ -44,7 +44,7 @@
          %>">
 
         <a href="<%
-            out.print("taskdetails/index.jsp?taskname=\'" + resultset.getString("taskname").trim() + "\'&category=\'" + resultset.getString("category").trim() + "\'");
+            out.print("../taskdetails/index.jsp?taskname=\'" + resultset.getString("taskname").trim() + "\'&category=\'" + resultset.getString("category").trim() + "\'");
            %>">
             <div class="cell"><%
                 out.print(resultset.getString("taskname").trim());
@@ -69,7 +69,7 @@
             <input class="<%
                 out.print(resultset.getString("taskname").trim() + resultset.getString("category").trim());
                    %>"type="checkbox" id="<%
-                out.print("changestatus/index.jsp?taskname=\'" + resultset.getString("taskname").trim() + "\'&category=\'" + resultset.getString("category").trim() + "\'");
+                out.print("../changestatus/index.jsp?taskname=\'" + resultset.getString("taskname").trim() + "\'&category=\'" + resultset.getString("category").trim() + "\'");
                    %>" value="1" <%
                 out.print(resultset.getString("status").trim().equals("1") ? "checked " : " ");
                    %>onchange="changeStatus(this)" />
@@ -79,7 +79,7 @@
             <button class="<%
                 out.print(resultset.getString("taskname").trim() + resultset.getString("category").trim());
                     %>" id="<%
-                out.print("deletetask/index.jsp?taskname=\'" + resultset.getString("taskname").trim() + "\'&category=\'" + resultset.getString("category").trim() + "\'");
+                out.print("../deletetask/index.jsp?taskname=\'" + resultset.getString("taskname").trim() + "\'&category=\'" + resultset.getString("category").trim() + "\'");
                     %>" onclick="deleteTask(this); return false;">Delete</button>
         </div>
     </div>

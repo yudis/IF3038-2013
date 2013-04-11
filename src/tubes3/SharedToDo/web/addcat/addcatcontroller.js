@@ -42,7 +42,7 @@ function submitNewCategory()
         {
             alert(xmlhttp.responseText);
             alert('Category successfully added!');
-            window.location = "../dashboard.jsp";
+            window.location = "../dashboard/";
         }
     }
 
