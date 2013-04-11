@@ -1,27 +1,21 @@
-<%-- 
-    Document   : dashboard
-    Created on : Apr 8, 2013, 1:32:44 PM
-    Author     : M Reza MP
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.*" %>
-<%@page import="javax.servlet.*" %>
-<!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dashboard Page</title>
+        <title>Shared To Do List - Dashboard</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="shortcut icon" href="../favicon.ico">		
+        <script type="text/javascript" src="../validation.js"></script>		
     </head>
     <body>
-        <% 
-            String username = (String)session.getAttribute("username");
-        %>
-        <div>
-            <a href="Logout">Log Out</a>
+        <div id="navsearch">
+            <script>checkLogged()</script>
         </div>
-        <center>
-            <div>Hello <a href='profile/'><%=username%></a></div>
-        </center>    
+        <div class="clearall container">
+            <h2>Category&nbsp;&nbsp;<img onclick="popupcat()" src="../images/plus.png" id="pluscat"></h2>			
+                <%@include file = "loadcategory.jsp" %>
+        </div>
+        <div class="clearall container">
+            <h2>Task&nbsp;&nbsp;<img onclick="redirAdd()" src="../images/plus.png" id="plustask"></h2>			
+                <%@include file = "loadtask.jsp" %>
+        </div>		
     </body>
 </html>
