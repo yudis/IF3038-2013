@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "DoSearch1", urlPatterns = {"/DoSearch1"})
 public class DoSearch1 extends HttpServlet {
 
-    int i;
+    private Tubes3Connection tu;
+    private Connection connection;
+    private int i;
 
     /**
      * Processes requests for both HTTP
@@ -68,8 +69,8 @@ public class DoSearch1 extends HttpServlet {
                 i = 1;
             }
             int awal = 10 * (i - 1);
-            Tubes3Connection tu = new Tubes3Connection();
-            Connection connection = tu.getConnection();
+            tu = new Tubes3Connection();
+            connection = tu.getConnection();
             String queryUser = "SELECT username, avatar, fullname FROM pengguna WHERE username LIKE('%" + keyword + "%') ORDER BY username LIMIT " + awal + ", 10;";
             String queryAllTugas = "SELECT IDTask, name, deadline, stat, username, tag FROM `tugas` WHERE name LIKE '%" + keyword + "%' OR tag LIKE '%" + keyword + "%' LIMIT " + awal + ", 10;";
             //System.out.println("DOOOO:" + queryAllTugas);

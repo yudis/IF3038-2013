@@ -1,3 +1,17 @@
+<%@page import="tubes3.SetAvatar"%>
+<%
+String username = null;
+SetAvatar avtar = null;
+    if (((HttpServletRequest) request).getSession().getAttribute("bananauser") == null) {
+        ((HttpServletResponse) response).sendRedirect("index.jsp");
+                System.out.println("TTTT" + ((HttpServletRequest) request).getSession().getAttribute("bananauser"));
+
+    } else {
+    username = ((HttpServletRequest) request).getSession().getAttribute("bananauser").toString();
+    System.out.println("DDD"+username);
+        avtar = new SetAvatar();
+    }
+%>
 <!DOCTYPE html>
 <html>	
     <head>
@@ -6,12 +20,11 @@
         <script src="Dashboard.js" type="text/javascript" language="javascript"> </script>
         <script src="Raymond.js" type="text/javascript" language="javascript"> </script>
         <script src="datetimepicker_css.js" type="text/javascript" language="javascript"> </script>
-
     </head>
     <body>	
         <div id="content">	
             <div id="header">
-                <div id="logo">
+                <div id="logo" >
                     <a href="home.jsp"><img src="image/logo.png"/></a>
                 </div>
                 <div id="menu">
@@ -20,9 +33,9 @@
                         <li> <a href="profile.jsp"> PROFILE </a> </li>
                         <li> <a href="logout.jsp"> LOGOUT </a> </li>
                     </ul>
-                    <form method="post" action="searchresult.jsp">
+                    <form method="post" action="searchresult.jsp" class="setSpan">
 
-                        <a href="profile.jsp"><img src="image/avatar.jpg" id="profPic"/></a><!-- TODO -->
+                        <a href="profile.jsp"><span><% out.print(username);%></span><img src="<% out.print(avtar.getAvatar(username));%>" id="profPic"/></a><!-- TODO -->
                         <select name="filter">
                             <option value="semua">Semua</option>
                             <option value="username">User Name</option>
