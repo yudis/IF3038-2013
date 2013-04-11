@@ -4,6 +4,8 @@
     Author     : VAIO
 --%>
 
+<%@page import="Class.Function"%>
+<%@page import="java.util.HashMap"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,8 +19,11 @@
     <body>
         <%
         /*session management*/
+        String userActive = "";
         if(request.getSession().getAttribute("userlistapp")==null){
             response.sendRedirect("index.jsp");
+        }else{
+            userActive = request.getSession().getAttribute("userlistapp").toString();
         }
         %>
         <div id="main-body-general">
@@ -30,9 +35,13 @@
             <!--Body-->
             <div id="dashboard-body">
                     <div id="profile-pic">
+                        <%
+                        HashMap<String,String> userActiveData = (new Function()).GetUser(userActive);
+                        %>
+                        <a href="profile.jsp?username=<%=userActive %>"><img alt="" id="photo" src="avatar/<%=userActiveData.get("avatar") %>" width="120" height="150"/>
                             <a href="profile?username=<?php echo $useractive;?>"><img alt="" id="photo" src="../avatar/<?php echo $avatar;?>" width="120" height="150"/>
                             <br />
-                            <b><?php echo $useractive?></b></a>
+                            <b><%=userActive %></b></a>
                     </div>
                     <div id="main-dashboard">
                             <div id="dashboard-title"><b>MY TASK<br /></b><br /></div>
@@ -50,7 +59,7 @@
                                     </div>
                                     <div>
                                             <label for="asignee">Assignee:</label>
-                                            <input type="text" id="asignee" value="" name="listAssignee" onKeyUp="autoCompleteAsignee()" list="assignee" placeholder="tag1,tag2,tag3"/>
+                                            <input type="text" id="asignee" value="" name="listAssignee" onKeyUp="autoCompleteAsignee()" list="assignee" placeholder="Assignee1,Assignee2,Assignee3"/>
                                             <div id="assignee-suggest"></div>
                                     </div>
                                     <div align="right"><input type="submit" value="Finish"/></div>

@@ -201,11 +201,9 @@ function autoCompleteAsignee() {
 }
 
 function setCompleteStatus(taskid){
-        alert(taskid);
 	getAjax();
 	var status = document.getElementById("left-main-body4").innerHTML;
 	status = status.substring(9,status.length);
-        alert(status);
 	if(status!=""){
 		ajaxRequest.open("GET","updatecompletestatus?status="+status+"&taskid="+taskid,false);
 	

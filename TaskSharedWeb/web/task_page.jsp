@@ -54,7 +54,7 @@
                                         <% 
                                             String creator = taskShow.get("username");
                                             if(creator.equals(userActive)){
-                                                    out.print("<a href=\"deletetask?taskid=\""+taskShow.get("taskid") +"\" onClick=\"confirmTask()\"><i>Delete This Task</i></a>");
+                                                    out.print("<a href=\"deletetask?taskid="+idtaskToShow +"\" onClick=\"confirmTask()\"><i>Delete This Task</i></a>");
                                             }
                                         %>
                 <br><br></div></i>
