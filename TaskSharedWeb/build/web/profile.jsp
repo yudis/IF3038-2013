@@ -131,11 +131,7 @@
                 <div id="unfinished-task">
                         <div>
                                 <div id="left-profile-unfinished"><h3>Unfinished Task</h3></div>
-                                <div id="right-profile-body"><p></p>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
+                                <div id="right-profile-body">
                                 </div>	
                         </div>
 
@@ -163,12 +159,7 @@
                 <div id="finished-task">
                         <div>
                                 <div id="left-profile-finished"><h3>Finished Task</h3></div>
-
                                 <div id="right-profile-body"><p></p>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
                                 </div>	
                         </div>
 
@@ -189,6 +180,7 @@
                                 </ul>
                         </div>
                 </div>
+                <br>
         </div>
     </body>
 </html>

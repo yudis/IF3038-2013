@@ -196,16 +196,18 @@
                 </div>
 
                 <div id="nomargin"><hr id="border"></div>
-
+             
                 <!--Comment-->
                 <div id="task-comment">
+                        <br>
                         <div id="user-comment">
                             <p id="nComment"><b><% out.print(func.GetNComment(idtaskToShow));%> Comment</b></p>
                                 <div id="comment-list">
-                <%
+                        <%
                         query = "SELECT * FROM comment WHERE taskid ="+idtaskToShow;
                         ResultSet rs = stt.executeQuery(query);
-                        while(rs.next()){
+                        int i = 0;
+                        while(rs.next() && i < 5){
                                 out.print(" <div id=\"comment\">");
                                 out.print(" 	<div id=\"user-info\">");
                                 out.print(" 		<div id=\"left-comment-body\">");
@@ -228,10 +230,9 @@
                                 out.print(" 		</p>");
                                 out.print(" 	</div>");
                                 out.print(" </div>");
+                                i++;
                         }
                 %>
-
-                                        <div id="new-comment"></div>
                                 </div>
                         </div>
                         <div id="add-comment">
@@ -241,6 +242,7 @@
                                 </form>
                                 <div><button id="submit-comment" onClick="addComment(<% out.print(idtaskToShow); %>)">Submit</button>&nbsp;</div>
                         </div>
+                        <br>
                 </div>
 
         </div>

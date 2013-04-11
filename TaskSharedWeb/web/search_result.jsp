@@ -34,7 +34,9 @@
                     HashMap<String, String> userShow = func.GetUser(usernameToShow);
                 %>
                 </div>
-        <div><hr id="border"></div>
+                
+                <div><hr id="border"></div>
+                
                 <!--Body-->
                 <div id="search-result-body">
                     <%
@@ -48,7 +50,7 @@
                         ResultSet rs;
                         switch(mode) {
                             case 1: 
-                                out.print("<div id=\"main-dashboard\"><div id=\"dashboard-title\"><i><b>USER<br /></b></i></div><br><div><hr id=\"border-search\"></div><br>");
+                                out.print("<div id=\"task-search\"><div id=\"dashboard-title\"><i><b>USER<br /></b></i></div><br><div><hr id=\"border-search\"></div><br>");
                                 query = "SELECT * FROM user WHERE username LIKE '%"+text+"%'";
                                 rs = stt.executeQuery(query);
                                 while(rs.next()){
@@ -168,7 +170,7 @@
                                 out.print("</div>");
                                 break;
                             case 4:
-                                out.print("<div id=\"main-dashboard\">"
+                                out.print("<div id=\"task-search\">"
                                         + " <div id=\"dashboard-title\"><b>TASK<br /></b><br /></div>"
                                         + " <div id=\"sort\">"
                                         + "     Sort by :"
