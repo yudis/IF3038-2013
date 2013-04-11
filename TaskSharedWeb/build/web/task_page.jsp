@@ -240,7 +240,7 @@
                                 <form>
                                         <textarea id="textarea-comment" rows="8" cols="92" placeholder="Comment about this task..."></textarea>
                                 </form>
-                                <div><button id="submit-comment" onClick="addComment(<% out.print(idtaskToShow); %>)">Submit</button>&nbsp;</div>
+                                <div><button id="submit-comment" onClick="addComment(<% out.print("'"+idtaskToShow+"'"); %>)">Submit</button>&nbsp;</div>
                         </div>
                         <br>
                 </div>

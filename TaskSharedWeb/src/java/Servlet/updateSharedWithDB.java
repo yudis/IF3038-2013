@@ -4,8 +4,12 @@
  */
 package Servlet;
 
+import Class.GetConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,15 +37,39 @@ public class updateSharedWithDB extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet updateSharedWithDB</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet updateSharedWithDB at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
+            String listAssignee = request.getParameter("listAssigne");
+            String taskid = request.getParameter("taskid");
+            GetConnection connection = new GetConnection();
+            Connection conn = connection.getConnection();
+            Statement stmt = conn.createStatement();
+            
+            String query = "DELETE FROM assignee WHERE taskid = "+taskid;
+            stmt.execute(query);
+
+            String userActive = "";
+            if(request.getSession().getAttribute("userlistapp")!=null){
+                userActive = request.getSession().getAttribute("userlistapp").toString();
+            }
+            
+            query = "INSERT INTO assignee VALUES ('"+userActive+"', "+taskid+")";
+            stmt.execute(query);
+            
+            String [] assignee = listAssignee.split(",");
+            for(int i = 0; i < assignee.length ; i++){
+                query = "INSERT INTO `assignee` (`username`, `taskid`) VALUES ('"+assignee[i]+"', "+taskid+")";
+                stmt.execute(query);
+            }
+            
+            query = "SELECT username FROM assignee WHERE taskid = "+taskid;
+            ResultSet resultSet = stmt.executeQuery(query);
+            out.print("Shared with : <i>");
+            while(resultSet.next()){
+                out.print("<a href=\"profile?username="+resultSet.getString("username") +"\"><u>"+resultSet.getString("username")+"</u></a> ");
+            }
+            out.print("</i>");
+        } catch(Exception exc){
+            System.out.println("Error : "+exc.toString());
+        }finally {            
             out.close();
         }
     }

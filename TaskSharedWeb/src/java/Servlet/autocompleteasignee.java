@@ -4,8 +4,12 @@
  */
 package Servlet;
 
+import Class.GetConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,15 +37,26 @@ public class autocompleteasignee extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet autocompleteasignee</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet autocompleteasignee at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
+            GetConnection connection = new GetConnection();
+            Connection conn = connection.getConnection();
+            Statement stmt = conn.createStatement();
+
+            String asignee = request.getParameter("asignee");
+            String [] asigneepieces = asignee.split("-");
+            ResultSet result;
+
+            if(asigneepieces[(asigneepieces.length)-1]!=""){
+                    String tosearch = asigneepieces[(asigneepieces.length)-1];
+                    String query = "SELECT username FROM user WHERE username LIKE '%"+tosearch+"%'";
+                    result = stmt.executeQuery(query);
+
+                    while(result.next()){
+                        out.print(result.getString("username")+"|");
+                    }
+            }
+        } catch(Exception exc){
+            System.out.println("Error : "+exc.toString());
+        }finally {            
             out.close();
         }
     }

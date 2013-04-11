@@ -4,13 +4,18 @@
  */
 package Servlet;
 
+import Class.GetConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import Class.*;
+import java.util.HashMap;
 /**
  *
  * @author User
@@ -33,15 +38,39 @@ public class updateTagDB extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet updateTagDB</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet updateTagDB at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
+            Function func = new Function();
+            
+            String listTag = request.getParameter("tag");
+            String taskid = request.getParameter("taskid");
+            
+            GetConnection connection = new GetConnection();
+            Connection conn = connection.getConnection();
+            Statement stmt = conn.createStatement();
+            
+            String query = "DELETE FROM task_tag WHERE taskid = "+taskid;
+            stmt.execute(query);
+            
+            String [] tag = listTag.split(",");
+            for(int i = 0; i < tag.length ; i++){
+                String tagId = func.GetTagId(tag[i]);
+                System.out.println(i);
+                System.out.println(tag[i]);
+                System.out.println(">>"+tagId+"<<");
+                query = "INSERT INTO task_tag VALUES ("+taskid+", "+tagId+");";
+                stmt.execute(query);
+            }
+            
+            query = "SELECT tagid FROM task_tag WHERE taskid = '"+taskid+"'";
+            ResultSet resultSet = stmt.executeQuery(query);
+            out.print("Tag : <i>");
+            while(resultSet.next()){
+                HashMap<String, String> tagData = func.GetTag(resultSet.getString("tagid"));
+                out.print("<u>"+tagData.get("tagname") +"</u> ");
+            }
+            out.print("</i>");
+        } catch(Exception exc){
+            System.out.println("Error : "+exc.toString());
+        }finally {            
             out.close();
         }
     }

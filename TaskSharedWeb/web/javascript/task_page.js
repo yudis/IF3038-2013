@@ -30,13 +30,12 @@ function getAjax() //a function to get AJAX from browser
 function addComment(taskid){
 	getAjax();
 	var comment = document.getElementById("textarea-comment").value;
-	
 	if(comment!=""){
-		ajaxRequest.open("GET","../php/updatecomment.php?comment="+comment+"&taskid="+taskid,false);
-	
+		ajaxRequest.open("GET","updatecomment?comment="+comment+"&taskid="+taskid,false);
+                
 		ajaxRequest.onreadystatechange = function()
 		{
-			document.getElementById("user-comment").innerHTML =  ajaxRequest.responseText;
+                    document.getElementById("user-comment").innerHTML =  ajaxRequest.responseText;
 		}
 		
 		ajaxRequest.send();
@@ -45,7 +44,7 @@ function addComment(taskid){
 
 function deleteComment(commentid,taskid){
 	getAjax();
-	ajaxRequest.open("GET","../php/deleteComment.php?commentid="+commentid+"&taskid="+taskid,false);
+	ajaxRequest.open("GET","deleteComment?commentid="+commentid+"&taskid="+taskid,false);
 	ajaxRequest.onreadystatechange = function()
 	{
 		document.getElementById("user-comment").innerHTML =  ajaxRequest.responseText;
@@ -62,8 +61,7 @@ function finish_deadline(taskid) {
 	getAjax();
 
 	var deadlinetime = document.getElementById("datedeadlineinput").value + " " + document.getElementById("timedeadlineinput").value;
-	ajaxRequest.open("GET","../php/changedeadline.php?deadlinetime="+deadlinetime+"&taskid="+taskid,false);
-
+	ajaxRequest.open("GET","changedeadline?deadlinetime="+deadlinetime+"&taskid="+taskid,false);
 	ajaxRequest.onreadystatechange = function()
 	{
 		document.getElementById("left-main-body").innerHTML =  ajaxRequest.responseText;
@@ -80,10 +78,10 @@ function edit_assignee() {
 }
 function finish_assignee(taskid) {
 	getAjax();
-	var tag = document.getElementById("task-assignee").value;
-	if(tag!=""){
-		ajaxRequest.open("GET","../php/updateSharedWithDB.php?tag="+tag+"&taskid="+taskid,false);
-
+	var listAssigne = document.getElementById("task-assignee").value;
+	if(listAssigne!=""){
+		ajaxRequest.open("GET","updateSharedWithDB?listAssigne="+listAssigne+"&taskid="+taskid,false);
+                
 		ajaxRequest.onreadystatechange = function()
 		{
 			document.getElementById("left-main-body2").innerHTML = ajaxRequest.responseText;
@@ -101,7 +99,7 @@ function finish_tag(taskid) {
 	getAjax();
 	var tag = document.getElementById("tag-edit").value;
 	if(tag!=""){
-		ajaxRequest.open("GET","../php/updateTagDB.php?tag="+tag+"&taskid="+taskid,false);
+		ajaxRequest.open("GET","updateTagDB?tag="+tag+"&taskid="+taskid,false);
 
 		ajaxRequest.onreadystatechange = function()
 		{
@@ -151,7 +149,7 @@ function autoCompleteAsignee() {
 			konkat = asignee.substr(0,index);
 		}
 		
-		ajaxRequest.open("GET","../php/autocompleteasignee.php?asignee="+document.getElementById("task-assignee").value,false);
+		ajaxRequest.open("GET","autocompleteasignee?asignee="+document.getElementById("task-assignee").value,false);
 
 		ajaxRequest.onreadystatechange = function()
 		{
@@ -175,16 +173,16 @@ function autoCompleteAsignee() {
 	{
 		konkat = "";
 	}
-	
-	//ajaxRequest.open("GET","php/checkavailid.php?idinput="+document.getElementById("username").value,false);
 }
 
 function setCompleteStatus(taskid){
+        alert(taskid);
 	getAjax();
 	var status = document.getElementById("left-main-body4").innerHTML;
 	status = status.substring(9,status.length);
+        alert(status);
 	if(status!=""){
-		ajaxRequest.open("GET","../php/updatecompletestatus.php?status="+status+"&taskid="+taskid,false);
+		ajaxRequest.open("GET","updatecompletestatus?status="+status+"&taskid="+taskid,false);
 	
 		ajaxRequest.onreadystatechange = function()
 		{

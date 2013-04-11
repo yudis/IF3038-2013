@@ -102,7 +102,7 @@ public class Function {
         }
     }
     
-     public int GetNComment(String taskId){
+     public String GetNComment(String taskId){
         try {
             GetConnection connection = new GetConnection();
             Connection conn = connection.getConnection();
@@ -110,10 +110,10 @@ public class Function {
             String query = "SELECT count(*) as jumlah FROM comment WHERE taskid= '"+taskId+"'";
             ResultSet rs = stmt.executeQuery(query);
             rs.next();
-            return Integer.parseInt(rs.getString("jumlah"));
+            return rs.getString("jumlah");
         } catch (Exception exc) {
             System.out.println(exc.toString());
-            return 0;
+            return "Error : "+exc.toString();
         }
     }
     
@@ -197,4 +197,63 @@ public class Function {
         }
         return result;
     }
+    
+    public String getNextCommentId(){
+         try {
+            GetConnection connection = new GetConnection();
+            Connection conn = connection.getConnection();
+            Statement stmt = conn.createStatement();
+            String query = "SELECT max(commentid) as max FROM comment";
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
+            int max = Integer.parseInt(rs.getString("max"));
+            return ""+(max+1);
+        } catch (Exception exc) {
+            System.out.println(exc.toString());
+            return ""+0;
+        }
+     }
+
+     
+        public String GetTagId(String tagname){
+            try {
+                GetConnection connection = new GetConnection();
+                Connection conn = connection.getConnection();
+                Statement stmt = conn.createStatement();
+                if (IsTagExist(tagname)){
+                        String query = "SELECT tagid FROM tag WHERE tagname = '"+tagname+"'";
+                        ResultSet result = stmt.executeQuery(query);
+                        result.next();
+                        return result.getString("tagid");
+                }else{ 
+                        String nextId = "SELECT max(tagid) as maxid FROM tag";
+                        ResultSet result = stmt.executeQuery(nextId);
+                        result.next();
+                        nextId = ""+(Integer.parseInt(result.getString("maxid"))+1);
+                        
+                        String query = "INSERT INTO tag values ("+nextId+",'"+tagname+"')";
+                        stmt.execute(query);
+                        return GetTagId(tagname);
+                }
+            } catch (Exception ex) {
+                return "Error : "+ex.toString();
+            }
+	}
+        
+public boolean IsTagExist(String tagname){
+            try {
+                GetConnection connection = new GetConnection();
+                Connection conn = connection.getConnection();
+                Statement stmt = conn.createStatement();
+                String query = "SELECT count(*) as count FROM tag WHERE tagname = '"+tagname+"'";
+                ResultSet result = stmt.executeQuery(query);
+                result.next();
+                if (result.getString("count").equals("0"))
+                        return false;
+                else
+                        return true;
+            } catch (Exception ex) {
+                return false;
+            }
+	}
 }

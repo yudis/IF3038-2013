@@ -10,7 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import Class.*;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
 /**
  *
  * @author User
@@ -33,15 +36,57 @@ public class deleteComment extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet deleteComment</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet deleteComment at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
+            Function func = new Function();
+            String userActive = "";
+            if(request.getSession().getAttribute("userlistapp")!=null){
+                userActive = request.getSession().getAttribute("userlistapp").toString();
+            }
+        
+            String commentid = request.getParameter("commentid");
+            String taskid = request.getParameter("taskid");
+            
+            GetConnection getCon = new GetConnection();
+            Connection conn = getCon.getConnection();
+            Statement stt = conn.createStatement();
+            ResultSet rs = null;
+            
+            String query = "DELETE FROM comment WHERE commentid="+commentid;
+            stt.execute(query);
+
+            query = "SELECT * FROM comment WHERE taskid ="+taskid;
+            rs = stt.executeQuery(query);
+            
+            out.print("<p><b>"+func.GetNComment(taskid) +"</b></p>");
+            out.print("<div id=\"comment-list\">");
+            
+            while(rs.next()){
+                out.print(" <div id=\"comment\">");
+                out.print(" 	<div id=\"user-info\">");
+                out.print(" 		<div id=\"left-comment-body\">");
+                out.print(" 			<img src=\"avatar/"+func.GetUser(rs.getString("username")).get("avatar") +"\" width=\"50px\" height=\"50px\"/>");
+                out.print(" 		</div>");
+                out.print(" 		<div id=\"right-comment-body\">");
+                out.print(" 			<b id=\"komentator\">"+rs.getString("username") +"</b>");
+                out.print(" 			<br>");
+                out.print(" 			<b id=\"post-date\">Post at "+rs.getString("createdate") +"</b>");
+                out.print(" 		</div>");
+                out.print(" 		<div id=\"delete-comment\">");
+                        if(rs.getString("username").equals(userActive)){
+                            out.print("<a href=\"#\" onClick=\"deleteComment("+rs.getString("commentid") +","+taskid+")\"><i>Delete Comment</i></a>");
+                        }
+                out.print(" 		</div>");
+                out.print(" 	</div>");
+                out.print(" 	<div id=\"comment-box\">");
+                out.print(" 		<p>");
+                out.print(rs.getString("message"));
+                out.print(" 		</p>");
+                out.print(" 	</div>");
+                out.print(" </div>");
+            }
+            out.print(" </div>");
+        } catch(Exception exc){
+            System.out.println(exc.toString());
+        }finally {            
             out.close();
         }
     }
