@@ -123,7 +123,7 @@
     -webkit-border-radius:20px;
     box-shadow: 1px 1px 5px 0px #e1e1e1;
     margin-left: 300px;
-    margin-top: -150px;
+    margin-top: -60px;
 }
 #rinciantugas{
     padding-top: 30px;
@@ -285,6 +285,11 @@ input[type=checkbox] {
 
 #file {
     height: auto;
+}
+
+#file_upload{
+    visibility: hidden;
+    height: 0px;
 }
 
 .attach_image {

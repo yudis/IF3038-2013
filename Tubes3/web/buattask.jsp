@@ -63,8 +63,13 @@
 
             function validasi_file(place) {
                 var ext=place.value.substring(place.value.indexOf(".")+1);
-                if (ext==="jpeg" || ext === "avi" || ext==="pdf" || ext === "jpg") {
+                if (ext==="jpeg" || ext === "avi" || ext==="pdf" || ext === "jpg" || ext === "mp4" || ext==="ogg") {
                     document.getElementById("attach_upload").innerHTML += place.value+";";
+                    if (document.getElementById("file_upload").innerHTML !== "") {
+                        document.getElementById("file_upload").innerHTML += ", "+place.value;
+                    } else {
+                        document.getElementById("file_upload").innerHTML += place.value;
+                    }
                     place.value = "";
                 } else {
                     alert("Ekstensi file tidak didukung web");
@@ -75,6 +80,16 @@
 			
             function prepare() {
                 calendar.set("date");
+                for (var i=0;i<=23;++i) {
+                    document.getElementById("hour").innerHTML += "<option>"+i+"</option>";
+                }
+                
+                for (var i=0;i<=59;++i) {
+                    var sem = "";
+                    if (i < 10) sem = "0";
+                    sem += i;
+                    document.getElementById("minute").innerHTML += "<option>"+sem+"</option>";
+                }
             }
             
             function auto_complete(text) {
@@ -123,24 +138,23 @@
         
         <!-----------------------------BODY FILE-------------------------------->
         <div class="main">
-            <div id="addtask">
-            </div>
-            <div>
-                <form>
-                    <input type="button" id="back" value="" onclick="location.href='dashboard.jsp';">
-                </form>
-            </div>
+            <div id="back" onclick="location.href='dashboard.jsp';"></div>            
             
             <div id="formtask">
                 <div id = "judulform">
                 </div>
-                <form id="formtask2" enctype="multipart/form-data" method="POST">
+                <form id="formtask2" enctype="multipart/form-data" method="POST" action="addTugas">
                     <label>NAMA TUGAS</label>
                     <input name="task_name" type="text" placeholder="task_name" onkeyup="name_valid(this.value);" />
                     <img src="pict/blank.png" alt="icon1" id="namaicon"  />                    
                     
                     <label>DEADLINE</label>
                     <input type="text" id="date" name="date" placeholder="2000-12-20">
+                    <select name="hour" id="hour" onchange="dead_validating(this.parentNode);">
+                    </select>-
+
+                    <select name="minute" id="minute" onchange="dead_validating(this.parentNode);">
+                    </select>  
                     <img src="pict/blank.png" alt="icon3" id="deadicon" />
                     
                     <label>ASSIGNEE</label>
@@ -159,7 +173,8 @@
                     </div>                            
 		    <img src="pict/blank.png" alt="icon2" id="attaicon"  />                    
                     
-                    <input type="file" name="file" id="file" onchange="validasi_file(this);">
+                    Upload File: <input type="file" name="file" id="file" onchange="validasi_file(this);">
+                    <input type="file" name="file_upload" id="file_upload" multiple>
                     <br>
                     <input class= "submitreg" name="submit" type="submit" value="Submit">
                     <input type="text" name="id_kategori" id="id_kategori" 

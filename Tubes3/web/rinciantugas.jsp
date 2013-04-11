@@ -82,13 +82,18 @@
         
             function validasi_file(place) {
                 var ext=place.value.substring(place.value.indexOf(".")+1);
-                if (ext==="jpeg" || ext === "avi" || ext==="pdf" || ext === "jpg" || ext === "mp4" || ext === "ogg") {
+                if (ext==="jpeg" || ext === "avi" || ext==="pdf" || ext === "jpg" || ext === "mp4" || ext==="ogg") {
                     document.getElementById("attach_upload").innerHTML += place.value+";";
+                    if (document.getElementById("file_upload").innerHTML !== "") {
+                        document.getElementById("file_upload").innerHTML += ", "+place.value;
+                    } else {
+                        document.getElementById("file_upload").innerHTML += place.value;
+                    }
                     place.value = "";
                 } else {
                     alert("Ekstensi file tidak didukung web");
+                    place.value = "";
                 }
-                //alert(place.value);
             }
                 
             function ambil_komentar() {
@@ -347,12 +352,39 @@
                     <a id="kategori"><%out.println(data.getKategori());%></a>
                     
                     <form action="edit_detail_tugas" method="POST" enctype="multipart/form-data">
-                        <label>STATUS TUGAS</label>
-                        <input type="checkbox" name="status" value="done"<%if (data.getStatus()==1) out.println("checked");%>> 
+                        <label>STATUS TUGAS
+                        <input type="checkbox" name="status" value="done"<%if (data.getStatus()==1) out.print("checked");%>> 
+                        </label>
                         
                         <label>DEADLINE</label>
-                        <input type="text" name="date" id="date" value ="<%out.println(data.getDeadline().substring(0,10));%>"> 
-
+                        <input type="text" name="date" id="date" value ="<%out.print(data.getDeadline().substring(0,10));%>"> 
+                        <select name="hour" id="hour">
+                        <%
+                        for (int i=0;i<24;++i) {
+                            if (Integer.parseInt(data.getDeadline().substring(11,13)) == i) {
+                                out.println("<option selected>"+i+"</option>");
+                            } else {
+                                out.println("<option>"+i+"</option>");
+                            }
+                        }
+                        %>    
+                        </select>-
+                        <select name="minute" id="minute">
+                        <%
+                        for (int i=0;i<59;++i) {
+                            String sem; 
+                            if (i < 10) sem = "0"+String.valueOf(i);
+                            else sem = String.valueOf(i);
+                            
+                            if (data.getDeadline().substring(14,16) == sem) {
+                                out.println("<option selected>"+sem+"</option>");
+                            } else {
+                                out.println("<option>"+sem+"</option>");
+                            }
+                        }
+                        %>    
+                        </select>
+                        
                         <label>ASSIGNEE</label>
                         <input type="textarea" name="assignee" placeholder="assignee"
                          title="Akhiri nama user dengan tanda /, jangan dipisah spasi"
@@ -369,9 +401,10 @@
                         
                         <label>ATTACHMENT</label>
                         <div id="attach_upload">
-                            <input type="file" name="file_upload" id="file_upload" multiple>
+                            
                         </div>
                         <input type="file" name="file" id="file" onchange="validasi_file(this);" multiple>
+                        <input type="file" name="file_upload" id="file_upload" multiple>
                         
                         <input class="submitreg" name="submit" type="submit" value="submit">
                     </form>
