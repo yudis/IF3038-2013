@@ -42,7 +42,7 @@ public class autocompleteasignee extends HttpServlet {
             Statement stmt = conn.createStatement();
 
             String asignee = request.getParameter("asignee");
-            String [] asigneepieces = asignee.split("-");
+            String [] asigneepieces = asignee.split(",");
             ResultSet result;
 
             if(asigneepieces[(asigneepieces.length)-1]!=""){

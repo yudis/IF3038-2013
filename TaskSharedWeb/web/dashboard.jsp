@@ -30,7 +30,7 @@
             <!--Body-->
             <div id="dashboard-body">
                     <div id="profile-pic">
-                            <a href="profile.php?username=<?php echo $useractive;?>"><img alt="" id="photo" src="../avatar/<?php echo $avatar;?>" width="120" height="150"/>
+                            <a href="profile?username=<?php echo $useractive;?>"><img alt="" id="photo" src="../avatar/<?php echo $avatar;?>" width="120" height="150"/>
                             <br />
                             <b><?php echo $useractive?></b></a>
                     </div>
@@ -43,7 +43,7 @@
                             <div class="popup">
                                     <h2>Add New Category</h2>
                                     <br>
-                            <form action="../php/insertcategory.php" method="post">
+                            <form action="insertcategory" method="post">
                                     <div>
                                             <label for="login">Name:</label>
                                             <input type="text" id="login" value="" name="newCategory"/>

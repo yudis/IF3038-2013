@@ -48,41 +48,46 @@ function autoCompleteAsignee(){
 	getAjax();
 
 	var asignee = document.getElementById("asignee").value;
+        var asigneeindex;
+        var asigneearray;
 	var suggestion = "";
 	var suggestionarray;
 	
 	var index = asignee.length;
 	
-	if(asignee!="")
+	if(asignee !== "")
 	{
-		if (asignee.charAt(index - 1) == ',')
+            if (asignee.indexOf(",") !== -1) {
+                if (asignee.charAt(index - 1) === ',')
 		{
 			konkat = asignee.substr(0,index);
 		}
-	
-		ajaxRequest.open("GET","../php/autocompleteasignee.php?asignee="+document.getElementById("asignee").value,false);
+                asigneearray = asignee.split(",");
+                asigneeindex = asigneearray.length - 1;
+                ajaxRequest.open("GET","autocompleteasignee?asignee="+asigneearray[asigneeindex],false);
+            }
+            else {
+                ajaxRequest.open("GET","autocompleteasignee?asignee="+asignee,false);
+            }
+            ajaxRequest.onreadystatechange = function()
+            {
+                suggestion =  ajaxRequest.responseText;
+                suggestion = suggestion.substr(0,suggestion.length-1);
+                suggestionarray = suggestion.split("|");
 
-		ajaxRequest.onreadystatechange = function()
-		{
-			suggestion =  ajaxRequest.responseText;
-			suggestion = suggestion.substr(0,suggestion.length-1);
-			suggestionarray = suggestion.split("|");
-			//alert(suggestionarray);
-			
-			var x;
-			x="<datalist id=\"assignee\">";
-			for (var i = 0; i < suggestionarray.length; i++) {
-				x += "<option value=\""+konkat+suggestionarray[i]+"\">";
-			}
-			x += "</datalist>";
-			document.getElementById("assignee-suggest").innerHTML=x;
-		}
-		
-		ajaxRequest.send();
+                var x;
+                x="<datalist id=\"assignee\">";
+                for (var i = 0; i < suggestionarray.length; i++) {
+                        x += "<option value=\""+konkat+suggestionarray[i]+"\">";
+                }
+                x += "</datalist>";
+                document.getElementById("assignee-suggest").innerHTML=x;
+            };
+            ajaxRequest.send();
 	}
 	else
 	{
-		konkat = "";
+            konkat = "";
 	}
 	
 	//ajaxRequest.open("GET","php/checkavailid.php?idinput="+document.getElementById("username").value,false);
