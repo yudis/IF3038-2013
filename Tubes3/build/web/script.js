@@ -442,11 +442,10 @@ function addComment(user, IDTask) {
             if (xmlhttp.readyState == 4)
             {
                 var response = xmlhttp.responseText;
-                comment = "www";
                 //document.getElementById("isikomentar").innerHTML+=response;
             }
         }
-        xmlhttp.open('get', 'addcomment.php?comment=' + encodeURI(comment) + '&user=' + encodeURI(user) + '&task=' + encodeURI(IDTask));
+        xmlhttp.open('get', 'addcomment.jsp?comment=' + encodeURI(comment) + '&user=' + encodeURI(user) + '&task=' + encodeURI(IDTask));
         xmlhttp.send(null);
     }
 }
@@ -470,7 +469,7 @@ function loadcomment() {
             document.getElementById("komentaryey").innerHTML = response;
         }
     }
-    xmlhttp.open('get', 'generatecomment.php?IDTask=' + encodeURI(IDTask+"&page="+page));
+    xmlhttp.open('get', 'generatecomment.jsp?IDTask=' + encodeURI(IDTask)+"&page="+encodeURI(page));
     xmlhttp.send(null);
 
     setTimeout('loadcomment()', 500);
@@ -493,7 +492,7 @@ function removeComment(IDComment) {
         {
         }
     }
-    xmlhttp.open('get', 'deletecomment.php?IDComment=' + encodeURI(IDComment));
+    xmlhttp.open('get', 'deletecomment.jsp?IDComment=' + encodeURI(IDComment));
     xmlhttp.send(null);
 }
 
@@ -595,7 +594,7 @@ function changestatus(IDTask) {
             document.getElementById("checkstatus").innerHTML = response;
         }
     }
-    xmlhttp.open('get', 'updatestatus.php?IDTask=' + encodeURI(IDTask)+"&status="+encodeURI(status));
+    xmlhttp.open('get', 'updatestatus.jsp?IDTask=' + encodeURI(IDTask)+"&status="+encodeURI(status));
     xmlhttp.send(null);
     setTimeout('changestatus('+IDTask+')', 500);
 
