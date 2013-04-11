@@ -1,6 +1,9 @@
 package servlet;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -20,6 +23,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 public class ServletHandler extends HttpServlet{
     
@@ -342,13 +348,42 @@ public class ServletHandler extends HttpServlet{
             String user_name = req.getParameter("edit_username");
             String password = req.getParameter("password");
             String fullname = req.getParameter("fullname");
+            String fileName = req.getParameter("avatar");
             String birthdate = req.getParameter("birthdate");
+            File filenameImg;
+            List<FileItem> items = null;
             //String avatarName = req.getParameter("avatar");
             //FileItem avatar = (FileItem) req.getParameter("avatar");
             System.out.println("Username : " + user_name);
             System.out.println("Password : " + password);
             System.out.println("Fullname : " + fullname);
             System.out.println("Birthdate :" + birthdate);
+            System.out.println("Avatar :" + fileName);
+            
+            //menggambar
+            /*
+             * if (fileName.isEmpty())
+            {
+                System.out.println("masuk sini");
+            } else
+            {
+            try {        
+             FileInputStream fis = new FileInputStream(new File("C:\\Users\\Nurul Fithria\\Pictures\\"+fileName));
+             BufferedInputStream bis = new BufferedInputStream(fis);             
+             resp.setContentType("image/jpeg");
+             BufferedOutputStream output = new BufferedOutputStream(resp.getOutputStream());
+                for (int data; (data = bis.read()) > -1;) {
+                    output.write(data);
+                    //System.out.println("write data "+data);
+                } 
+            } catch (IOException e) {
+            throw new ServletException("Cannot parse multipart request.", e);
+            }
+            }
+            * */
+            //selesai menggambar
+            
+            
             try {
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
@@ -360,9 +395,18 @@ public class ServletHandler extends HttpServlet{
                 Statement st = conn.createStatement(); 
                 
                 if (! password.equals("")) {
-                    st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' , password='"+password+"' WHERE username='"+user_name+"'");                
+                    if (!fileName.isEmpty()){
+                        st.executeUpdate("UPDATE user SET avatar='"+fileName+"' , full_name='"+fullname+"' , birthdate='"+birthdate+"' , password='"+password+"' WHERE username='"+user_name+"'");} 
+                    else {
+                        st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' , password='"+password+"' WHERE username='"+user_name+"'"); 
+                    }
+                        
                 } else {
-                    st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' WHERE username='"+user_name+"'");          
+                    if (!fileName.isEmpty()){
+                        st.executeUpdate("UPDATE user SET avatar='"+fileName+"' , full_name='"+fullname+"' , birthdate='"+birthdate+"' WHERE username='"+user_name+"'");} 
+                    else {
+                        st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' WHERE username='"+user_name+"'"); 
+                    }
                 }
                 HttpSession session = req.getSession(true);
                 session.setAttribute("fullname", fullname);
@@ -379,6 +423,12 @@ public class ServletHandler extends HttpServlet{
                     System.out.println("Can not close connection - edit profile");
                 }
             }
+            
+            
+            
+            
+            
+            
         }
         
         //Add Task
