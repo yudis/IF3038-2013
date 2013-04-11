@@ -17,26 +17,25 @@
     </head>
     
     <body >
-	<div id="container">
 		<div id="header">
         	<div class=logo id="logo">
 				<a href="index.html"><img src="images/logo.png" title="Home" alt="Home"/></a>
 			</div>
-			<form name=login>
+			<form name=login action="login2" method="post" >
 			<div class="login_form">
-				<input type="button" name="submit" value="Login" onClick="validateLogin()">
+				<input type="submit" name="submit" value="Login" >
 			</div>
 			<div class="login_form">
-				Password: <input type="password" name="login_pass" onKeyPress="checkSubmit(event)">
+				Password: <input type="password" name="passid" >
 			</div>
 			<div class="login_form">
-				Email: <input type="text" name="login_email" onKeyPress="checkSubmit(event)">
+				Username: <input type="text" name="userid">
 			</div>
 			</form>
 			
 			
         </div>
-		
+	<div id="container">
 		<div id="left_tab">
 			<img src="images/registerglass.png" alt="Register dong gan">
 		</div>
