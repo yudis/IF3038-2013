@@ -40,6 +40,31 @@
             return resultSet;
         }
         
+        public static int mysql_query_updatedata(String sqlQuery) {
+            int result = 0;
+            System.out.println("Masuk DB");
+
+            try 
+            {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+                connection = DriverManager.getConnection(connectionURL + dbName, user, password);
+                statement = connection.createStatement();
+                //System.out.println(sqlQuery);
+                result = statement.executeUpdate(sqlQuery);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            return result;
+        }
+        
         public static void closeDB()
         {
             try
