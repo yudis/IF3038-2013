@@ -1,7 +1,7 @@
 <%@page import="java.io.PrintWriter"%>
 <% 
 if (session.getAttribute("username") == null) {
-  // response.sendRedirect("index.jsp");
+    response.sendRedirect("index.jsp");
 }
 String username = (String)session.getAttribute("username");
 String ava = (String)session.getAttribute("ava");
