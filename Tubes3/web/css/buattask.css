@@ -123,7 +123,7 @@
     -webkit-border-radius:20px;
     box-shadow: 1px 1px 5px 0px #e1e1e1;
     margin-left: 300px;
-    margin-top: -225px;
+    margin-top: -150px;
 }
 #rinciantugas{
     padding-top: 30px;
@@ -330,4 +330,10 @@ input[type=checkbox] {
 
 #date {
     width: 90px;
+}
+
+#id_kategori {
+    visibility: hidden;
+    width: 0px;
+    height: 0px;
 }

@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/buattask.css">
         <link rel="stylesheet" href="css/calendar.css">
-        <title>Rincian Tugas : <%out.println(data.getNama());%> </title>
+        <title>Next | Rincian Tugas : <%out.println(data.getNama());%> </title>
         <script type="text/JavaScript" src="js/calendar.js"></script>
         <script type="text/javascript">
             function submit_comment(form) {
@@ -82,12 +82,11 @@
         
             function validasi_file(place) {
                 var ext=place.value.substring(place.value.indexOf(".")+1);
-                if (ext==="jpeg" || ext === "avi" || ext==="pdf" || ext === "jpg") {
+                if (ext==="jpeg" || ext === "avi" || ext==="pdf" || ext === "jpg" || ext === "mp4" || ext === "ogg") {
                     document.getElementById("attach_upload").innerHTML += place.value+";";
                     place.value = "";
                 } else {
                     alert("Ekstensi file tidak didukung web");
-                    place.value = "";
                 }
                 //alert(place.value);
             }
@@ -335,37 +334,13 @@
                             if (ext.equals("jpg") || ext.equals("jpeg") || ext.equals("png")) {
                                 out.println("<div class=\"attach_image\"><img src=\""+attachment[i]+"\"></div>");
                             } else if (ext.equals("mp4")) {
-                                out.println("<div class=\"attach_image\"></div>");
+                                out.println("<div class=\"attach_image\"><video width=200 height=200 controls>"
+                                        + "<></div>");
                             }
                             out.println("<br>");
                         }
                     %>
                     </div>
-                    <!--           
-                            tambah2 += "<label>ATTACHMENT</label>";
-                            tambah2 += '<div id="attach_upload">';                            
-                            
-                            var sem1 = attachment.indexOf(";");
-                            while (sem1 != -1) {
-                                var file = attachment.substring(0,sem1);
-                                var ext = file.substring(file.lastIndexOf(".")+1);
-                                
-                                tambah += '<a href="'+file+'">'+file.substring(file.lastIndexOf("/")+1)+'</a>';                            
-                                if (ext == 'jpeg' || ext == 'jpg') {
-                                    tambah += '<div class="attach_image"><img src="'+file+'"></div>';
-                                } else if () {
-
-                                }
-
-                                tambah2 += '<a href="'+file+'">'+file.substring(file.lastIndexOf("/")+1)+'</a>';
-                                
-                                attachment = attachment.substring(sem1+1);
-                                sem1 = attachment.indexOf(";");
-                            }
-                            tambah += '</div>';
-
-                            tambah2 += '</div>';
-                    -->
                 </div>
                 <div id ="detailedit">
                     <label>NAMA KATEGORI</label>
@@ -393,6 +368,9 @@
                         <input type="textarea" name="catname" placeholder="tag" value="<%out.println(data.getTag());%>">
                         
                         <label>ATTACHMENT</label>
+                        <div id="attach_upload">
+                            <input type="file" name="file_upload" id="file_upload" multiple>
+                        </div>
                         <input type="file" name="file" id="file" onchange="validasi_file(this);" multiple>
                         
                         <input class="submitreg" name="submit" type="submit" value="submit">
@@ -424,7 +402,7 @@
                     </form>
                 </div>
             </div>
-            <div id="calendar" class="calendar-box">
+            <div id="calendar" class="calendar-box"></div>
         </div>
         
         <!-------------------------------FOOTER HALAMAN------------------------------------->        
