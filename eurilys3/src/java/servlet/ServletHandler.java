@@ -321,6 +321,8 @@ public class ServletHandler extends HttpServlet{
                 //Update task
                 st.executeUpdate("UPDATE task SET task_deadline='"+deadline+"' WHERE task_id='"+taskID+"'");
                 
+                resp.sendRedirect("src/task_detail.jsp?task_id="+taskID);
+                
             }
             catch (SQLException e) {
                 System.out.println("Connection Failed! Check output console - edit task");
