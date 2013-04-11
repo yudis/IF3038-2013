@@ -24,8 +24,10 @@
                     Deadline: <div class="deadline"><input id="newDeadlineTask" name="newDeadlineTask" type="date" required></div><br/>
                     Assignee: <div class="asignee"><input id="newAssigneeTask" name="newAssigneeTask" type="text" onkeyup="multiAutocomp(this, 'assignee.php', 'buattugas');" onfocusin="multiAutocompClearAll()" required></div><br/>
                     Tag: <div class="tag"> <input id="newTagTask" name="newTagTask" type="text" required></div> <br/>
-                    <input id="newCategoryID" name="newCategoryID" type="text" hidden="true" value="<?php echo$categoryID?>">
-                    <input id="newUserID" name="newUserID" type="text" hidden="true" value="<?php echo $userID ?>">
+                    <%
+                        out.print("<input id=\"newCategoryID\" name=\"newCategoryID\" type=\"text\" hidden=\"true\" value=\""+categoryID+"\">");
+                        out.print("<input id=\"newUserID\" name=\"newUserID\" type=\"text\" hidden=\"true\" value=\""+userID+"\">");
+                    %>
                     <input type="submit" id="regbuttosn" name="submit" value="create">
                     <br/>
                     <!-- <a type="submit" onclick="createTask();" class="button">create</a><br/> !-->
