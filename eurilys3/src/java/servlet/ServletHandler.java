@@ -392,13 +392,6 @@ public class ServletHandler extends HttpServlet{
             HttpSession session = req.getSession(true);
             String taskCreator = (String) session.getAttribute("username");
             
-            System.out.println("task name : "  + task_name);
-            System.out.println("task_deadline : " + task_deadline);
-            System.out.println("ass list : " + assigneeList);
-            System.out.println("tagList : " + tagList);
-            System.out.println("catName : " + catName);
-            System.out.println("taskCreator : " + taskCreator);
-                    
             try {
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
@@ -410,7 +403,6 @@ public class ServletHandler extends HttpServlet{
                 Statement st = conn.createStatement(); 
                 st.executeUpdate("INSERT INTO task(task_name, task_status, task_deadline, cat_name, task_creator) VALUES ('"+task_name+"','0','"+task_deadline+"','"+catName+"','"+taskCreator+"')");
                 
-                System.out.println("Insert task");
                 
                 PreparedStatement stmt = conn.prepareStatement("SELECT task_id FROM task WHERE task_name=? AND cat_name=?");
                 stmt.setString(1, task_name);
@@ -421,21 +413,18 @@ public class ServletHandler extends HttpServlet{
                 while (rs.next()) {          
                     taskID = rs.getString("task_id");
                 }
-                System.out.println("select task id");
                 
                 //Insert Task Assignee
                 String[] assigneArray = assigneeList.split(",");
                 for (int i=0; i<assigneArray.length; i++) {
                     st.executeUpdate("INSERT INTO task_asignee (task_id, username) VALUES ('"+taskID+"','"+assigneArray[i]+"')");
                 }  
-                System.out.println("insert task asignee");
                 
                 //Insert Task Tag
                 String[] tagArray = tagList.split(",");
                 for (int i=0; i<tagArray.length; i++) {
                     st.executeUpdate("INSERT INTO tag(tag_name, task_id) VALUES ('"+tagArray[i]+"','"+taskID+"')");
                 }                
-                System.out.println("insert tag");
                 resp.sendRedirect("src/task_detail.jsp?task_id="+taskID);
             }
             catch (SQLException e) {
