@@ -9,18 +9,16 @@ import java.io.PrintWriter;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author user
  */
-public class login2 extends HttpServlet {
+public class validasiRegist extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -42,10 +40,10 @@ public class login2 extends HttpServlet {
              */
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet login2</title>");            
+            out.println("<title>Servlet validasiRegist</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet login2 at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet validasiRegist at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
@@ -65,22 +63,8 @@ public class login2 extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP
-     * <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         ResultSet rs = null;
@@ -88,40 +72,20 @@ public class login2 extends HttpServlet {
         Connection con = null;
         try
         {
-            String name = request.getParameter("userid");
-            String pass = request.getParameter("passid");
+            String name = request.getParameter("username");
+            String email = request.getParameter("email");
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin","progin","progin");
             s = con.createStatement();
-            rs = s.executeQuery("select* from accounts where username='"+name+"'");
+            rs = s.executeQuery("select* from accounts where username='"+name+"' or email='"+email+"'");
             if(rs.next())
-                {
-                    if((name.trim().equals(rs.getString("username").trim())) && (pass.trim().equals(rs.getString("password").trim())))
-                    {
-                        //New Session Creation
-                        HttpSession session = request.getSession(true);
-                        
-                        //Setting atrribute on session
-                        session.setAttribute("username", name);
-                        session.setAttribute("id",rs.getString("idaccounts"));
-                        
-                        //send request to next page
-                        RequestDispatcher view = request.getRequestDispatcher("dashboard.jsp");
-                        view.forward(request, response);
-                    }
-                        else
-                    {
-                        RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-                        view.include(request, response);
-                        out.println("<script> alert('Password salah ');</script>");
-                    }
-                }
-                    else
-                {
-                    RequestDispatcher view=request.getRequestDispatcher("index.jsp");
-                    view.include(request, response);
-                    out.println("<script> alert('Username tidak ditemukan ');</script>");
-                }
+            {
+                out.println(false);
+            }
+                else
+            {
+                out.println(true);
+            }
         }catch(SQLException e) {
             throw new ServletException("Servlet Could not display records.", e);
         } catch (ClassNotFoundException e) {
@@ -144,7 +108,21 @@ public class login2 extends HttpServlet {
                 }
             }
         }
+    }
 
+    /**
+     * Handles the HTTP
+     * <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**

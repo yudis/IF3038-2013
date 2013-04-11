@@ -44,7 +44,7 @@ function user_validating()
                     }
                 }
             }
-        xmlhttp.open("GET","validasiRegist.php?username="+userid+"&email="+email,true);
+        xmlhttp.open("GET","validasiRegist?username="+userid+"&email="+email,true);
         xmlhttp.send();
 }
 
@@ -115,7 +115,7 @@ function email_validating()
         document.getElementById("emailicon").src="images/canceled.png";
     }
 					
-    var xmlhttp;
+    
     if (window.XMLHttpRequest)
     {
         xmlhttp=new XMLHttpRequest();
@@ -140,6 +140,8 @@ function email_validating()
             }
         }
     }
-    xmlhttp.open("GET","validasiRegist.php?username=''&email="+emails,true);
+    xmlhttp.open("GET","validasiRegist?username=''&email="+emails,true);
     xmlhttp.send();
 }
+
+
