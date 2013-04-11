@@ -1,4 +1,4 @@
-IF3038-2012-2
+IF3038-2012
 =============
 
-Tugas 2 PROGIN
+Tugas 3 PROGIN
