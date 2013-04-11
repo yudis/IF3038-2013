@@ -102,25 +102,25 @@ function validateLogin() {
 	}
 	if (login ==true)
 	{
-		window.location='profil.php';
+		window.location='profil.jsp';
 	}
 	else
 	{
-		window.location='index.php';
+		window.location='index.jsp';
 	}
 }
 
 function validateLogout() {
 	login = false;
-	window.location='index.php';
+	window.location='index.jsp';
 }
 
 function editTask() {
-	window.location='rinciantugas2.php';
+	window.location='rinciantugas2.jsp';
 }
 
 function editTask2() {
-	window.location='rinciantugas.php';
+	window.location='rinciantugas.jsp';
 }
 
 function validateTaskName()
@@ -205,7 +205,7 @@ function gettask(user, cat) {
 			document.getElementById("rincian").innerHTML = xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("POST","getcategory.php",true);
+	xmlhttp.open("POST","getcategory.jsp",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	var post = "";
 	post = post.concat("id=",user,"&cat=",cat);
@@ -234,7 +234,7 @@ function comment() {
 			document.getElementById("lkomen").innerHTML = xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("POST","comment.php",true);
+	xmlhttp.open("POST","comment.jsp",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	var id = document.getElementById("id").value;
 	var task = document.getElementById("task").value;
@@ -257,7 +257,7 @@ function change_status(id,prev,task) {
 			document.getElementById(id).innerHTML = xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("POST","changestat.php",true);
+	xmlhttp.open("POST","changestat.jsp",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	var finish;
 	if (prev == 0) {
@@ -282,7 +282,7 @@ function delete_comment(task,id) {
 			document.getElementById("lkomen").innerHTML = xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("POST","deletecomment.php",true);
+	xmlhttp.open("POST","deletecomment.jsp",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	var post = "";
 	post = post.concat("id=",id,"&task=",task);
@@ -311,7 +311,7 @@ function search_more(filter, string, start) {
 			}
 		}
 	}
-	xmlhttp.open("POST","searchresult.php",true);
+	xmlhttp.open("POST","searchresult.jsp",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	var post = "";
 	post = post.concat("filter=",filter,"&string=",string,"&start=",start);
@@ -331,7 +331,7 @@ function comment_more(task, start) {
 			document.getElementById("lkomen").innerHTML = komen.concat(xmlhttp.responseText);
 		}
 	}
-	xmlhttp.open("POST","morecomment.php",true);
+	xmlhttp.open("POST","morecomment.jsp",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	var post = "";
 	post = post.concat("task=",task,"&start=",start);
