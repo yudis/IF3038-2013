@@ -10,6 +10,20 @@
 <jsp:include page="/header.jsp" />
 <script src="taskdetails.js" type="text/javascript" language="javascript"> </script>
 <!DOCTYPE html>
+<%
+int ID=1;
+if (((HttpServletRequest) request).getSession().getAttribute("idtugas") != null)
+       {
+            response.sendRedirect("home.jsp");
+       }
+else
+       {
+            ID=(Integer)((HttpServletRequest) request).getSession().getAttribute("idtugas");            
+            
+       }
+Task task=new Task(ID);
+%>
+
 <div id="isi">
     <div id="leftsidebar">
             <b>TASK DETAILS</b>
@@ -21,7 +35,7 @@
                             <h1>Details</h1>
                             <li>
                                     <label for="tugas">Nama Tugas</label>
-                                    <div class="text"><%Task task=new Task();out.print(task.name);%></div>
+                                    <div class="text"><%out.print(task.name);%></div>
                             </li>
                             <li>
                                     <label for="tugas">Status</label>
@@ -159,31 +173,16 @@
 				Yulianti - Raymond - Devin</p>			
 			</div>
         </div>
-         <script	type="text/javascript">
-			var temp = document.getElementById("commentform");
-			temp.onsubmit = function()
-			{
-				postComment();
-				return false;
-			}
-			
-			
-			
-			function postComment()
-			{
-				var form = document.getElementById("commentform");
-			
-				var a = document.getElementById("commentbox");
-				var b = document.getElementById("commentfield")
-				a.value += "User: " + b.value + "\n\n";
-				
-				b.value = "";
-			}
-			
-			
-			
-			
-		</script>
+<script type="text/javascript" language="javascript">		
+    document.onscroll = function(){
+        //alert("+: "+(window.pageYOffset + window.innerHeight)+"hegi:"+document.body.offsetHeight);
+        if ((window.scrollY + window.innerHeight) >= document.body.offsetHeight){
+            doSearch(document.getElementById('filter1').value, document.getElementById('keyword1').value, document.getElementById('user').value, 'true');
+        }
+		
+		
+    }
+</script>
         
     </body>
 </html>

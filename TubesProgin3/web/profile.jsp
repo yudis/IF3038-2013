@@ -14,7 +14,7 @@
 String user;boolean editable;
 if(request.getParameter("username")==null)
        {
-           user="yuli";            
+           user=(String)((HttpServletRequest) request).getSession().getAttribute("bananauser");            
            editable=true;
        }
 else

@@ -126,12 +126,14 @@ public class profile extends HttpServlet {
     private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
     private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
     public HttpSession session;
+    public HttpSession sesi;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         session = request.getSession();
-        String username="yuli";
+        sesi=request.getSession();
+        username=(String)sesi.getAttribute("bananauser");
         String queryUser = "SELECT * FROM pengguna WHERE username ='" + username + "'";
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
