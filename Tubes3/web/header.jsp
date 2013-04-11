@@ -10,44 +10,44 @@
             var ipartout=0;
             var itulis=0;*/
 //            
-//	function auto_complete_search(text) {
-//
-//                if (text == "") {
-//                    document.getElementById("autosearch").value = "";                    
-//                } else {
-//                    if (window.XMLHttpRequest){
-//                        xmlhttp = new XMLHttpRequest();				
-//                    } else {
-//                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
-//                    }
-//                    
-//                    xmlhttp.onreadystatechange = function(){
-//                        if (xmlhttp.readyState==4 && xmlhttp.status == 200)	{
-//                            //alert(xmlhttp.responseText);
-//                            var s = xmlhttp.responseText;
-//                            var n = s.indexOf("\n");
-//                            document.getElementById("autosearch").value = "";
-//                            
-//                            while (n != -1) {
-//                                //Ambil satu data komentar
-//                                var username = s.substring(0,n);
-//                                s = s.substring(n+1);
-//                                n = s.indexOf("\n");
-//     
-//                                //Tampilkan datanya
-//                                var tambah = username+" ";
-//                                document.getElementById("autosearch").value += tambah+"\n";
-//                            }
-//                        }
-//                    }
-//                    
-//                    params = "assignee="+escape(text);
-//                    //alert(params);
-//                    xmlhttp.open("POST","auto_complete_search.php",true);
-//                    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-//                    xmlhttp.send(params);
-//                }
-//            }//end autocomplete
+	function auto_complete_search(text) {
+
+                if (text == "") {
+                    document.getElementById("autosearch").value = "";                    
+                } else {
+                    if (window.XMLHttpRequest){
+                        xmlhttp = new XMLHttpRequest();				
+                    } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+                    }
+                    
+                    xmlhttp.onreadystatechange = function(){
+                        if (xmlhttp.readyState==4 && xmlhttp.status == 200)	{
+                            //alert(xmlhttp.responseText);
+                            var s = xmlhttp.responseText;
+                            var n = s.indexOf("\n");
+                            document.getElementById("autosearch").value = "";
+                            
+                            while (n != -1) {
+                                //Ambil satu data komentar
+                                var username = s.substring(0,n);
+                                s = s.substring(n+1);
+                                n = s.indexOf("\n");
+     
+                                //Tampilkan datanya
+                                var tambah = username+" ";
+                                document.getElementById("autosearch").value += tambah+"\n";
+                            }
+                        }
+                    }
+                    
+                    params = "assignee="+escape(text);
+                    //alert(params);
+                    xmlhttp.open("POST","auto_complete_search",true);
+                    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    xmlhttp.send(params);
+                }
+            }//end autocomplete
 //			
 //	function showUserLogin(){							/*-----------menampilkan user pada local storage-------------- */
 //				var waktuLogin = Math.round(localStorage.tglLogin/(1000*60*60*24)); 
@@ -269,7 +269,7 @@
         </script>
                      <div class="header">
 			<div id="logo">
-			    <a hreg="dashboard.php">
+			    <a hreg="dashboard.jsp">
 			    <img src="pict/logo.png">
 			    </a>
 			</div>
@@ -277,18 +277,17 @@
 			    
 			</div>
 			<div id="dashboard">
-			    <a href="dashboard.php">DASHBOARD</a>
+			    <a href="dashboard.jsp">DASHBOARD</a>
 			</div>
 			<div id="profile">
-			    <a href="profile.php">PROFILE</a>
+			    <a href="profile.jsp">PROFILE</a>
 			</div>
 			<div id="search">
             
-	            	<form action="searchresult.php" method="post">
+	            	<form action="searchresult.jsp" method="post">
 					    <section class="searchform cf">
-						    <input id="cari" class="searchbox" type="search" name="search" placeholder="Search.." required>		
-<!--                                                           onkeyup=auto_complete_search(this.value.substring(this.value.lastIndexOf("/")+1)) 
--->
+						    <input onkeyup="auto_complete_search(this.value.substring(this.value.lastIndexOf("/")+1))" id="cari" class="searchbox" type="search" name="search" placeholder="Search.." required>                           
+
                                                            				
                                             </section>                        
                             <select name="searchFilter" class="dropdownJo" id="searchFilter"> 	<!-------dropdown filter-->
@@ -329,7 +328,7 @@
 		
 		  </div>
           
-<input id="autosearch" disabled></input>  <!--autocomplete box-->
+        <input id="autosearch" disabled></input>  <!--autocomplete box-->
 
         
     </head>

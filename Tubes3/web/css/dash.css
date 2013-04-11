@@ -192,6 +192,20 @@
     color: #ffffff;
 }
 
+#autosearch {
+    border: solid 1px;
+    background-color: white;
+    margin-left: 490px;
+    font-style: Calibri;
+    font-size: 12pt;
+    display: block;
+    color: #A4A4A4;
+    margin-top: 1px;
+    z-index: 100;
+    width:130px;
+}
+
+
 A:link {text-decoration: none}
 A:visited {text-decoration: none}
 A:active {text-decoration: none}

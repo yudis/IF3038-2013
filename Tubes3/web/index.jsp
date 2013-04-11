@@ -257,7 +257,7 @@
                         function cobaAlert(){
                             alert("tes");
                         }
-        </script>
+</script>
     </head>
     <body onLoad="isLogin()">		<!-----------------------panggil isLogin------------------------->
         <div class="header">
