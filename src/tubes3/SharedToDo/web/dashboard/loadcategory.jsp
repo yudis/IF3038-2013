@@ -1,5 +1,5 @@
 <%@page import = "java.sql.ResultSet"%>
-<%@include file="../connect.jsp" %>
+<%@include file="../ConnectDB.jsp" %>
 
 <div class="row">
     <div class="cell th centered">Category Name</div>
@@ -8,7 +8,7 @@
 <%
     String query = "select * from category";
     ResultSet result;
-    result = mysql_query(query);
+    result = ConnectDB.mysql_query(query);
     while (result.next()) {
 %>
 <div class="row" id="<%
@@ -19,4 +19,5 @@
         %></div>
 </div>
 <% }
+    ConnectDB.closeDB();
 %>
