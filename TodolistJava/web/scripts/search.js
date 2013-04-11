@@ -68,7 +68,7 @@ function updateContent(){
 		curX = searchResult.x;
 		curN = searchResult.n;
         
-		if (searchResult.user != null){
+		if (searchResult.user.length != 0){
                         if (!isUser){
                             tempStr += "	<h2> User </h2>";	
                             isUser = true;
@@ -83,7 +83,7 @@ function updateContent(){
 			} while(i < searchResult.user.length);
 		}
                 
-		if ((searchResult.category != null)){
+		if ((searchResult.category.length != 0)){
                         if (!isCategory){
                             tempStr += "	<h2> Category </h2>";
                             isCategory = true;
@@ -97,7 +97,7 @@ function updateContent(){
 			} while(i < searchResult.category.length);
 		}
 
-		if (searchResult.tugas != null){
+		if (searchResult.tugas.length != 0){
                         if (!isTugas){
                             tempStr += "<h2> Task </h2>";
                             isTugas = true;
