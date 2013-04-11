@@ -235,10 +235,10 @@ function changeStatus(element) {
     var classname = element.className;
 
     if (status == true) {
-        status = 1;
+        status = 0;
     }
     else {
-        status = 0;
+        status = 1;
     }
 
     if (window.XMLHttpRequest) {

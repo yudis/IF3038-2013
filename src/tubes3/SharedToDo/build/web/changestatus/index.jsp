@@ -6,6 +6,6 @@
 	String newvalue = request.getParameter("newvalue");
 	
 	String query = "update task set status = " + newvalue + " where taskname = " + taskname + " and category = " + category;
-	ResultSet result = ConnectDB.mysql_query(query);
+	int result = ConnectDB.mysql_query_updatedata(query);
 	ConnectDB.closeDB();
 %>
