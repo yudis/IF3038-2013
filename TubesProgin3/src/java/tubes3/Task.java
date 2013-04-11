@@ -40,18 +40,17 @@ public class Task extends HttpServlet {
     ResultSet rs;
     ResultSet rs2;
     public int IDTask;
-    public Task() throws SQLException {
+    public Task(int IDTask) throws SQLException {
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
-        int IDtask = 1;
-        IDTask=IDtask;
+        this.IDTask=IDTask;
         
-        String queryTask = "SELECT * FROM tugas WHERE IDTask="+ IDTask;
-        String queryAttachment="SELECT * FROM pelampiran WHERE IDTugas="+IDTask;
-        String queryComment="SELECT * FROM komentar WHERE IDTask="+IDTask+" order by waktu DESC";
-        String queryAssignee="SELECT username FROM penugasan WHERE IDTask="+IDTask;
-        String queryJumlahKomentar="SELECT count(*) as jumlah FROM komentar where IDTask="+IDTask;
-        String queryJumlahAssignee="select count(*) as jumlah from penugasan where IDTask="+IDTask;
+        String queryTask = "SELECT * FROM tugas WHERE IDTask="+ this.IDTask;
+        String queryAttachment="SELECT * FROM pelampiran WHERE IDTugas="+this.IDTask;
+        String queryComment="SELECT * FROM komentar WHERE IDTask="+this.IDTask+" order by waktu DESC";
+        String queryAssignee="SELECT username FROM penugasan WHERE IDTask="+this.IDTask;
+        String queryJumlahKomentar="SELECT count(*) as jumlah FROM komentar where IDTask="+this.IDTask;
+        String queryJumlahAssignee="select count(*) as jumlah from penugasan where IDTask="+this.IDTask;
         rs=tu.coba(connection,queryJumlahAssignee);
         if(rs.next())
         {

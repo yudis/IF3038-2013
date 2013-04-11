@@ -11,6 +11,15 @@
 <jsp:include page="/header.jsp" />
         <script src="editprofile.js" type="text/javascript" language="javascript"> </script>
 
+<%
+String user;boolean editable;
+user=(String)((HttpServletRequest) request).getSession().getAttribute("bananauser");
+  
+
+profile p=new profile(user);
+%>        
+        
+        
 <!-- Foto profile -->
        <div id="isi">
 			<div id="leftsidebaredit">
@@ -22,7 +31,7 @@
 					<h1 align="left">Edit Profile</h1>
 					<li>
 						<label style="width:230px; display:inline-block">Nama Lengkap:</label>
-						<input type="text" value="<% profile p=new profile("yuli"); out.print(p.fullname);%>" onchange="checkNamaLengkap()" id="namalengkap" name="namalengkap"></input>
+						<input type="text" value="<%out.print(p.fullname);%>" onchange="checkNamaLengkap()" id="namalengkap" name="namalengkap"></input>
 					</li>
                     <li>
 						<label style="width:230px; display:inline-block">Tanggal Lahir:</label>
