@@ -64,6 +64,10 @@
         <servlet-name>updateStatus</servlet-name>
         <servlet-class>id.ac.itb.todolist.ajax.updateStatus</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AutoCompleteSearch</servlet-name>
+        <servlet-class>id.ac.itb.todolist.ajax.AutoCompleteSearch</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/index.jsp</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>updateStatus</servlet-name>
         <url-pattern>/ajax/updateStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AutoCompleteSearch</servlet-name>
+        <url-pattern>/ajax/AutoCompleteSearch</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

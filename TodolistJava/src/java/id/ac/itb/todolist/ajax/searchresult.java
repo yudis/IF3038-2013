@@ -69,10 +69,6 @@ public class searchresult extends HttpServlet {
         response.setContentType("application/json");        
         //processRequest(request, response);
         PrintWriter out = response.getWriter();
-        //out.println(request.getParameter("q"));
-        //out.println(request.getParameter("filter"));
-        //out.println(request.getParameter("x"));
-        //out.println(request.getParameter("n"));
         
         String q = request.getParameter("q");
         int x = Integer.parseInt(request.getParameter("x"));

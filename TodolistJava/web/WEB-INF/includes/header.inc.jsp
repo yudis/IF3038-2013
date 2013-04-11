@@ -16,6 +16,7 @@
         <script type="application/javascript" src="./scripts/helper/ajaxhelper.js"></script>
         <script type="application/javascript" src="./scripts/helper/nicEdit.js"></script>
         <script type="application/javascript" src="./scripts/helper/datetimepicker_css.js"></script>
+        <script type="application/javascript" src="./scripts/header.js"></script>        
         <c:out value="${headTags}" default="" escapeXml="false" />
     </head>
 
@@ -31,7 +32,9 @@
                     <div class="search">
                         <div id="searchwrapper">
                             <form method="GET" action="search.jsp">
-                                <input type="text" class="searchbox" name="q" placeholder="Enter task name here.." />
+                                <input type="text" list="autoC" class="searchbox" name="q" id="q" onfocus="searchAutoComplete()" onkeyup="searchAutoComplete()" onclick="searchAutoComplete()" placeholder="Enter task name here.." />
+                                <datalist id="autoC">
+                                </datalist>                                
                                 <select class="type" name="filter" id="filter">
                                     <option>All</option>
                                     <option>Username</option>

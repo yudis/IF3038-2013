@@ -552,14 +552,11 @@ public class TugasDao extends DataAccessObject {
     public Collection<Tugas> getTugasSearch(String name, int start, int n) {
         Tugas tugas = null;
         ArrayList<Tugas> result = new ArrayList<Tugas>();
-        String qry = "SELECT t.`id` AS `id`, t.`nama` AS `nama`, `tgl_deadline`,  `status` , t.`last_mod` AS `last_mod`, t.`pemilik` AS `pemilik_username`, u.`email` AS `pemilik_email`, u.`password` AS `pemilik_password`, u.`full_name` AS `pemilik_full_name`, u.`tgl_lahir` AS `pemilik_tgl_lahir`, u.`avatar` AS `pemilik_avatar`, c.`id` AS `kategori_id`, c.`nama` AS `kategori_nama`, c.`last_mod` AS `kategori_last_mod` FROM `categories` c, `tugas` t, `users` u WHERE t.`nama` LIKE '%" + name + "%' AND c.`id` = t.`id_kategori` AND u.`username` = t.`pemilik` LIMIT " + start + ", " + n + ";";
+        String qry = "SELECT t.`id` AS `id`, t.`nama` AS `nama`, `tgl_deadline`,  `status` , t.`last_mod` AS `last_mod`, t.`pemilik` AS `pemilik_username`, u.`email` AS `pemilik_email`, u.`password` AS `pemilik_password`, u.`full_name` AS `pemilik_full_name`, u.`tgl_lahir` AS `pemilik_tgl_lahir`, u.`avatar` AS `pemilik_avatar`, c.`id` AS `kategori_id`, c.`nama` AS `kategori_nama`, c.`last_mod` AS `kategori_last_mod` FROM `categories` c, `tugas` t, `users` u, `tags` teg WHERE (t.`nama` LIKE '%" + name + "%' OR teg.`tag` LIKE '%" + name + "%') AND c.`id` = t.`id_kategori` AND u.`username` = t.`pemilik` AND teg.`id_tugas` = t.`id`LIMIT " + start + ", " + n + ";";
+        //String qry = "SELECT t.`id` AS `id`, t.`nama` AS `nama`, `tgl_deadline`,  `status` , t.`last_mod` AS `last_mod`, t.`pemilik` AS `pemilik_username`, u.`email` AS `pemilik_email`, u.`password` AS `pemilik_password`, u.`full_name` AS `pemilik_full_name`, u.`tgl_lahir` AS `pemilik_tgl_lahir`, u.`avatar` AS `pemilik_avatar`, c.`id` AS `kategori_id`, c.`nama` AS `kategori_nama`, c.`last_mod` AS `kategori_last_mod` FROM `categories` c, `tugas` t, `users` u WHERE t.`nama` LIKE '%" + name + "%' AND c.`id` = t.`id_kategori` AND u.`username` = t.`pemilik` LIMIT " + start + ", " + n + ";";
         try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement(qry);
-            //        prepareStatement("SELECT t.`id` AS `id`, t.`nama` AS `nama`, `tgl_deadline`,  `status` , t.`last_mod` AS `last_mod`, t.`pemilik` AS `pemilik_username`, u.`email` AS `pemilik_email`, u.`password` AS `pemilik_password`, u.`full_name` AS `pemilik_full_name`, u.`tgl_lahir` AS `pemilik_tgl_lahir`, u.`avatar` AS `pemilik_avatar`, c.`id` AS `kategori_id`, c.`nama` AS `kategori_nama`, c.`last_mod` AS `kategori_last_mod` FROM `categories` c, `tugas` t, `users` u WHERE t.`nama` LIKE '%?%' AND c.`id` = t.`id_kategori` AND u.`username` = t.`pemilik` LIMIT ?, ?;");
-            //preparedStatement.setString(1, name);
-            //preparedStatement.setInt(2, start);
-            //preparedStatement.setInt(3, n);
 
             ResultSet rs = preparedStatement.executeQuery();
 

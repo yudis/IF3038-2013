@@ -140,8 +140,6 @@ function updateContent(){
 					i++;
 			} while(i < searchResult.tugas.length);
 		}
-
-		
 		contentAdded.innerHTML += tempStr;		
 }    
 
