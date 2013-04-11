@@ -62,12 +62,21 @@ public class updatecomment extends HttpServlet {
             
             String query = "INSERT INTO comment VALUES ("+commentid+",'"+createdate+"','"+comment+"','"+userActive+"',"+taskid+")";
             stt.execute(query);
-
-            query = "SELECT * FROM comment WHERE taskid ="+taskid;
+            
+            int numpage;
+            if (Integer.parseInt(func.GetNComment(taskid))%5 == 0) {
+                numpage = (Integer.parseInt(func.GetNComment(taskid))/5);
+            }
+            else {
+                numpage = (Integer.parseInt(func.GetNComment(taskid))/5)+1;
+            }
+            int index = 5*(numpage-1);
+            
+            query = "SELECT * FROM comment WHERE taskid ="+taskid+" limit "+index+",5";
             rs = stt.executeQuery(query);
             
-            out.print("<p><b>"+func.GetNComment(taskid) +"</b></p>");
-            out.print("<div id=\"comment-list\">");
+            out.print("<p><b>"+func.GetNComment(taskid) +" Comment</b></p>");
+            out.print("<div name=\"cmnt\" id=\"comment-list\">");
             
             while(rs.next()){
                 out.print(" <div id=\"comment\">");
@@ -82,7 +91,7 @@ public class updatecomment extends HttpServlet {
                 out.print(" 		</div>");
                 out.print(" 		<div id=\"delete-comment\">");
                         if(rs.getString("username").equals(userActive)){
-                            out.print("<a href=\"#\" onClick=\"deleteComment("+rs.getString("commentid") +","+taskid+")\"><i>Delete Comment</i></a>");
+                            out.print("<a href=\"#cmnt\" onClick=\"deleteComment("+rs.getString("commentid") +","+taskid+","+index+")\"><i>Delete Comment</i></a>");
                         }
                 out.print(" 		</div>");
                 out.print(" 	</div>");
@@ -94,6 +103,10 @@ public class updatecomment extends HttpServlet {
                 out.print(" </div>");
             }
             out.print(" </div>");
+            if (numpage > 1) {
+                out.print(" <a href=\"#cmnt\" onClick=\"prevPage("+taskid+","+index+")\"><i>Prev</i></a>");
+            }
+            conn.close();
         } catch(Exception exc){
             System.out.println(exc.toString());
         }finally {            

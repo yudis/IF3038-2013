@@ -4,21 +4,23 @@
  */
 package Servlet;
 
+import Class.Function;
+import Class.GetConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Class.*;
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
+
 /**
  *
- * @author User
+ * @author M.ECKY.RABANI
  */
-public class deleteComment extends HttpServlet {
+public class prevcomment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -42,17 +44,8 @@ public class deleteComment extends HttpServlet {
                 userActive = request.getSession().getAttribute("userlistapp").toString();
             }
             
-            String commentid = request.getParameter("commentid");
             String taskid = request.getParameter("taskid");
-            int index = Integer.parseInt(request.getParameter("index"));
-            
-            GetConnection getCon = new GetConnection();
-            Connection conn = getCon.getConnection();
-            Statement stt = conn.createStatement();
-            ResultSet rs = null;
-            
-            String query = "DELETE FROM comment WHERE commentid="+commentid;
-            stt.execute(query);
+            int index = Integer.parseInt(request.getParameter("index"))-5;
             
             int numpage;
             if (Integer.parseInt(func.GetNComment(taskid))%5 == 0) {
@@ -61,8 +54,13 @@ public class deleteComment extends HttpServlet {
             else {
                 numpage = (Integer.parseInt(func.GetNComment(taskid))/5)+1;
             }
-
-            query = "SELECT * FROM comment WHERE taskid ="+taskid+" limit "+index+",5";
+            
+            GetConnection getCon = new GetConnection();
+            Connection conn = getCon.getConnection();
+            Statement stt = conn.createStatement();
+            ResultSet rs = null;
+            
+            String query = "SELECT * FROM comment WHERE taskid ="+taskid+" limit "+index+",5";
             rs = stt.executeQuery(query);
             
             out.print("<p><b>"+func.GetNComment(taskid) +" Comment</b></p>");
@@ -110,7 +108,7 @@ public class deleteComment extends HttpServlet {
         } catch(Exception exc){
             System.out.println(exc.toString());
         }finally {            
-            out.close();     
+            out.close();
         }
     }
 

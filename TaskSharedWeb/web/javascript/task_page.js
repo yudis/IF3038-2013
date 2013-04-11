@@ -27,11 +27,11 @@ function getAjax() //a function to get AJAX from browser
 	}
 }
 
-function addComment(taskid){
+function addComment(taskid,index){
 	getAjax();
 	var comment = document.getElementById("textarea-comment").value;
 	if(comment!=""){
-		ajaxRequest.open("GET","updatecomment?comment="+comment+"&taskid="+taskid,false);
+		ajaxRequest.open("GET","updatecomment?comment="+comment+"&taskid="+taskid+"&index="+index,false);
                 
 		ajaxRequest.onreadystatechange = function()
 		{
@@ -42,13 +42,38 @@ function addComment(taskid){
 	}
 }
 
-function deleteComment(commentid,taskid){
+function nextPage(taskid,index){
 	getAjax();
-	ajaxRequest.open("GET","deleteComment?commentid="+commentid+"&taskid="+taskid,false);
+        ajaxRequest.open("GET","nextcomment?taskid="+taskid+"&index="+index,false);
+
+        ajaxRequest.onreadystatechange = function()
+        {
+            document.getElementById("user-comment").innerHTML =  ajaxRequest.responseText;
+        }
+
+        ajaxRequest.send();
+}
+
+function prevPage(taskid,index){
+	getAjax();
+        ajaxRequest.open("GET","prevcomment?taskid="+taskid+"&index="+index,false);
+
+        ajaxRequest.onreadystatechange = function()
+        {
+            document.getElementById("user-comment").innerHTML =  ajaxRequest.responseText;
+        }
+
+        ajaxRequest.send();
+	
+}
+
+function deleteComment(commentid,taskid,index){
+	getAjax();
+	ajaxRequest.open("GET","deleteComment?commentid="+commentid+"&taskid="+taskid+"&index="+index,false);
 	ajaxRequest.onreadystatechange = function()
 	{
 		document.getElementById("user-comment").innerHTML =  ajaxRequest.responseText;
-	}
+	};
 	
 	ajaxRequest.send();
 }

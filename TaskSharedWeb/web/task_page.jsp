@@ -202,12 +202,19 @@
                         <br>
                         <div id="user-comment">
                             <p id="nComment"><b><% out.print(func.GetNComment(idtaskToShow));%> Comment</b></p>
-                                <div id="comment-list">
+                                <div name="cmnt" id="comment-list">
                         <%
-                        query = "SELECT * FROM comment WHERE taskid ="+idtaskToShow;
+                        int numpage;
+                        if (Integer.parseInt(func.GetNComment(idtaskToShow))%5 == 0) {
+                            numpage = (Integer.parseInt(func.GetNComment(idtaskToShow))/5);
+                        }
+                        else {
+                            numpage = (Integer.parseInt(func.GetNComment(idtaskToShow))/5)+1;
+                        }
+                        int index = 0;
+                        query = "SELECT * FROM comment WHERE taskid ="+idtaskToShow+" limit "+index+",5";
                         ResultSet rs = stt.executeQuery(query);
-                        int i = 0;
-                        while(rs.next() && i < 5){
+                        while(rs.next()){
                                 out.print(" <div id=\"comment\">");
                                 out.print(" 	<div id=\"user-info\">");
                                 out.print(" 		<div id=\"left-comment-body\">");
@@ -220,7 +227,7 @@
                                 out.print(" 		</div>");
                                 out.print(" 		<div id=\"delete-comment\">");
                                         if(rs.getString("username").equals(userActive)){
-                                            out.print("<a href=\"#\" onClick=\"deleteComment("+rs.getString("commentid") +","+idtaskToShow+")\"><i>Delete Comment</i></a>");
+                                            out.print("<a href=\"#cmnt\" onClick=\"deleteComment("+rs.getString("commentid") +","+idtaskToShow+","+index+")\"><i>Delete Comment</i></a>");
                                         }
                                 out.print(" 		</div>");
                                 out.print(" 	</div>");
@@ -230,17 +237,19 @@
                                 out.print(" 		</p>");
                                 out.print(" 	</div>");
                                 out.print(" </div>");
-                                i++;
-                        }
-                %>
-                                </div>
+                            }
+                            out.print("</div>");
+                            if (numpage > 1) {
+                                out.print("<a href=\"#cmnt\" onClick=\"nextPage("+idtaskToShow+","+index+")\"><i>Next</i></a>");
+                            }
+                        %>      
                         </div>
                         <div id="add-comment">
                                 <p><b>Leave a comment</b></p>
                                 <form>
                                         <textarea id="textarea-comment" rows="8" cols="92" placeholder="Comment about this task..."></textarea>
                                 </form>
-                                <div><button id="submit-comment" onClick="addComment(<% out.print("'"+idtaskToShow+"'"); %>)">Submit</button>&nbsp;</div>
+                                <div><button id="submit-comment" onClick="addComment(<% out.print("'"+idtaskToShow+"','"+index+"'"); %>)">Submit</button>&nbsp;</div>
                         </div>
                         <br>
                 </div>

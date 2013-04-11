@@ -100,6 +100,14 @@
         <servlet-name>updatecompletestatus</servlet-name>
         <servlet-class>Servlet.updatecompletestatus</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>nextcomment</servlet-name>
+        <servlet-class>Servlet.nextcomment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>prevcomment</servlet-name>
+        <servlet-class>Servlet.prevcomment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet</url-pattern>
@@ -199,6 +207,14 @@
     <servlet-mapping>
         <servlet-name>updatecompletestatus</servlet-name>
         <url-pattern>/updatecompletestatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>nextcomment</servlet-name>
+        <url-pattern>/nextcomment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>prevcomment</servlet-name>
+        <url-pattern>/prevcomment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
