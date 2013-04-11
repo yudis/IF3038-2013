@@ -82,7 +82,7 @@ public class TugasA extends HttpServlet {
                         ArrayList<User> assignees=new ArrayList<User>(result.get(i).getAssignees());
                         for (int x = 0; x < assignees.size(); x++)
                         {
-                            if(assignees.get(x).getUsername() == null ? currentUser.getUsername() == null : assignees.get(x).getUsername().equals(currentUser.getUsername()))
+                            if((result.get(i).getPemilik().getUsername() == null ? assignees.get(x).getUsername() != null : !result.get(i).getPemilik().getUsername().equals(assignees.get(x).getUsername())) && assignees.get(x).getUsername() == null ? currentUser.getUsername() == null : assignees.get(x).getUsername().equals(currentUser.getUsername()))
                             {
                                 out.println("<h2>"+result.get(i).getKategori().getNama()+"</h2>");
 				out.println("<div class=\"tugas\">");
@@ -149,7 +149,7 @@ public class TugasA extends HttpServlet {
                             ArrayList<User> assignees=new ArrayList<User>(result.get(i).getAssignees());
                             for (int x = 0; x < assignees.size(); x++)
                             {
-                                if(assignees.get(x).getUsername() == null ? currentUser.getUsername() == null : assignees.get(x).getUsername().equals(currentUser.getUsername()))
+                                if((result.get(i).getPemilik().getUsername() == null ? assignees.get(x).getUsername() != null : !result.get(i).getPemilik().getUsername().equals(assignees.get(x).getUsername())) && assignees.get(x).getUsername() == null ? currentUser.getUsername() == null : assignees.get(x).getUsername().equals(currentUser.getUsername()))
                                 {
                                     out.println("<h2>"+result.get(i).getKategori().getNama()+"</h2>");
                                     out.println("<div class=\"tugas\">");

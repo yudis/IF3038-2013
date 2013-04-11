@@ -44,6 +44,7 @@ public class Create extends HttpServlet {
             try {
                 tugas.AddTask(request.getParameter("namatask"), Date.valueOf(request.getParameter("deadline")), currentUser.getUsername(), Integer.parseInt(request.getParameter("namakategori")));
                 String[] assigneeArr= request.getParameter("assigneeI").split("[ ,]+");
+                tugas.addAssignee(tugas.getNewestId(),currentUser.getUsername());
                 for (int i = 0; i < assigneeArr.length; i++)
                 {
                     if(!assigneeArr[i].equals(currentUser.getUsername()) && userDao.isAvailableUsername(assigneeArr[i]))
@@ -66,7 +67,7 @@ public class Create extends HttpServlet {
                         out.println(part.getHeaders(header));
                     }
                     out.println("tes");
-                    if(part.getName().equals("attachments"))
+                    if(part.getName().equals("attachments") && !"".equals(Helper.getFileName(part)))
                     {
                         String temp1=Helper.getFileName(part);
                         String[] temp = temp1.split("[ .]+");
