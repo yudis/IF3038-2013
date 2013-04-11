@@ -1,7 +1,10 @@
+<%@page import="java.io.PrintWriter"%>
 <% 
 if (session.getAttribute("username") == null) {
   // response.sendRedirect("index.jsp");
 } 
+PrintWriter outs = response.getWriter();
+String ava = (String)session.getAttribute("ava");
 %>
 <header>
     <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
@@ -19,5 +22,5 @@ if (session.getAttribute("username") == null) {
         </select>
         <input type="submit" value="Search">
     </form>
-    <img id="smallava" src="<?php echo $ava ?>" />
+    <% outs.print("<img id=\"smallava\" src=\""+ava+"\"/>");%>
 </header>

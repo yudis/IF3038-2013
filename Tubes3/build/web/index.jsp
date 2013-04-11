@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
     if (session.getAttribute("username") != null) {
-       response.sendRedirect("dashboard.jsp");
+      // response.sendRedirect("dashboard.jsp");
     } 
 %>
 <!DOCTYPE html>

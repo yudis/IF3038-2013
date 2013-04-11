@@ -69,19 +69,22 @@ public class login extends HttpServlet {
             }
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510020", "root", "");
 
-            PreparedStatement stmt = conn.prepareStatement("SELECT username FROM user WHERE username=? AND password=?;");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username=? AND password=?;");
             stmt.setString(1, username);
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
 
             rs.beforeFirst();
             String checkuser="";
+            String target="";
             while (rs.next()) {
                 checkuser = rs.getString(1);
+                target = rs.getString("Avatar");
             }
             if(!checkuser.equals("")){
                 HttpSession session = request.getSession(true);
                 session.setAttribute("username", username);
+                session.setAttribute("ava", target);
                 out.print(1);
             }else{
                 out.print(0);
