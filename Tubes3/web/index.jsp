@@ -16,37 +16,37 @@
         <link rel="stylesheet" href="css/css.css">
         <script>
 			
-			function isLogin(){	/*---------------------------JO---cek apakah sudah login----------------- */
-				if (localStorage.userLogin!= null)	{
-					window.location="dashboard.php";		
-				}
-			}
+//			function isLogin(){	/*---------------------------JO---cek apakah sudah login----------------- */
+//				if (localStorage.userLogin!= null)	{
+//					window.location="dashboard.php";		
+//				}
+//			}
 		
 		
-			function validateLogin(form){					/*---------------------------JO---validasi form login--phpnya:login.php----------------- */
-
-				if (window.XMLHttpRequest){
-					xmlhttp = new XMLHttpRequest();				
-				}else{
-					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
-				}
-				
-				xmlhttp.onreadystatechange = function(){
-					if (xmlhttp.readyState==4 && xmlhttp.status==200)	{				
-						if(xmlhttp.responseText==1){
-							localStorage.userLogin=form.userId.value;		/*----simpan user yg login ke local storage ------*/
-							localStorage.tglLogin= new Date().getTime();	/*----simpan waktu login ke local storage ------*/
-							window.location="dashboard.php";
-						}else{
-							alert("error password or username");
-						}						
-					}
-
-				}
-					
-				xmlhttp.open("GET","login.php?user="+form.userId.value+"&pwd="+form.password.value,true);
-				xmlhttp.send();
-			}												
+//			function validateLogin(form){					/*---------------------------JO---validasi form login--phpnya:login.php----------------- */
+//
+//				if (window.XMLHttpRequest){
+//					xmlhttp = new XMLHttpRequest();				
+//				}else{
+//					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+//				}
+//				
+//				xmlhttp.onreadystatechange = function(){
+//					if (xmlhttp.readyState==4 && xmlhttp.status==200)	{				
+//						if(xmlhttp.responseText==1){
+//							localStorage.userLogin=form.userId.value;		/*----simpan user yg login ke local storage ------*/
+//							localStorage.tglLogin= new Date().getTime();	/*----simpan waktu login ke local storage ------*/
+//							window.location="dashboard.php";
+//						}else{
+//							alert("error password or username");
+//						}						
+//					}
+//
+//				}
+//					
+//				xmlhttp.open("GET","login.php?user="+form.userId.value+"&pwd="+form.password.value,true);
+//				xmlhttp.send();
+//			}												
 		
             function ShowAkhir()
                 {
@@ -73,54 +73,54 @@
                      }
                 }
 				
-			function check(form)											/*-------------------------------udah ngga kepake----------------------------------- */
-				{
-					if(form.userId.value == "admin" && form.password.value == "testing")
-						{
-							window.location="dashboard.php";
-						}
-							else
-						{
-							alert("error password or username");
-						}
-				}
+//			function check(form)											/*-------------------------------udah ngga kepake----------------------------------- */
+//				{
+//					if(form.userId.value == "admin" && form.password.value == "testing")
+//						{
+//							window.location="dashboard.php";
+//						}
+//							else
+//						{
+//							alert("error password or username");
+//						}
+//				}
 				
-			function logingg()
-				{	
-					var uicon = document.getElementById("usericon").src;
-					var picon = document.getElementById("passicon").src;
-					var cicon = document.getElementById("conficon").src;
-					var nicon = document.getElementById("nameicon").src;
-					var eicon = document.getElementById("emailicon").src;
-					var aicon = document.getElementById("avaicon").src;
-					var dicon = document.getElementById("dateicon").src;
-
-					var lokasi = window.location.href.substring(0,window.location.href.lastIndexOf("/")) + "/pict/centang.png";	/*-------------------------*/		
-
-					if ((uicon == lokasi) && (picon == lokasi) && (cicon == lokasi) && (nicon == lokasi) && (eicon == lokasi) && (aicon == lokasi) && (dicon == lokasi))
-							{
-								document.getElementById("submitb").disabled = false;
-							}
-					else{
-								document.getElementById("submitb").disabled = true;
-					}
-				}
+//			function logingg()
+//				{	
+//					var uicon = document.getElementById("usericon").src;
+//					var picon = document.getElementById("passicon").src;
+//					var cicon = document.getElementById("conficon").src;
+//					var nicon = document.getElementById("nameicon").src;
+//					var eicon = document.getElementById("emailicon").src;
+//					var aicon = document.getElementById("avaicon").src;
+//					var dicon = document.getElementById("dateicon").src;
+//
+//					var lokasi = window.location.href.substring(0,window.location.href.lastIndexOf("/")) + "/pict/centang.png";	/*-------------------------*/		
+//
+//					if ((uicon == lokasi) && (picon == lokasi) && (cicon == lokasi) && (nicon == lokasi) && (eicon == lokasi) && (aicon == lokasi) && (dicon == lokasi))
+//							{
+//								document.getElementById("submitb").disabled = false;
+//							}
+//					else{
+//								document.getElementById("submitb").disabled = true;
+//					}
+//				}
 			
-			function masuk(form)							/*------------masuk ke dashboard & masukin form ke db-php:insertReg.php---------- */
-				{											
-					if (window.XMLHttpRequest){
-						xmlhttpReg = new XMLHttpRequest();				
-					}else{
-						xmlhttpReg = new ActiveXObject("Microsoft.XMLHTTP");	
-					}									
-						
-					xmlhttpReg.open("POST","insertReg.php",true);
-					xmlhttpReg.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-					xmlhttpReg.send("user="+form.username.value+"&pwd="+form.password.value+"&nama="+form.namaleng.value+"&tgl="+form.tanggal.value+"&email="+form.email.value+"&avatar="+form.avatar.value);
-					localStorage.userLogin=form.username.value;/*----simpan user yg baru register ke local storage ------*/									
-					localStorage.tglLogin= new Date().getTime();	/*----simpan waktu register ke local storage ------*/					
-					window.location="dashboard.php";
-				}
+//			function masuk(form)							/*------------masuk ke dashboard & masukin form ke db-php:insertReg.php---------- */
+//				{											
+//					if (window.XMLHttpRequest){
+//						xmlhttpReg = new XMLHttpRequest();				
+//					}else{
+//						xmlhttpReg = new ActiveXObject("Microsoft.XMLHTTP");	
+//					}									
+//						
+//					xmlhttpReg.open("POST","insertReg.php",true);
+//					xmlhttpReg.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+//					xmlhttpReg.send("user="+form.username.value+"&pwd="+form.password.value+"&nama="+form.namaleng.value+"&tgl="+form.tanggal.value+"&email="+form.email.value+"&avatar="+form.avatar.value);
+//					localStorage.userLogin=form.username.value;/*----simpan user yg baru register ke local storage ------*/									
+//					localStorage.tglLogin= new Date().getTime();	/*----simpan waktu register ke local storage ------*/					
+//					window.location="dashboard.php";
+//				}
 			
 			function user_validating()			/*----------------------------JO---validasi buat registrasi user-----registeruser.php---------------------- */
 				{
@@ -268,8 +268,7 @@
                 <section class="loginform cf">
 		<form name="login" method="POST" accept-charset="utf-8">
 			<ul>
-				<li>
-					
+				<li>					
 					<input class="loginFormBaru" type="userID" name="userIdLogin" placeholder="yourID" required>
 				</li>
 				<li>    
@@ -325,42 +324,49 @@
                         try and be awesome 
                     </div>
                 </div>
-                 <div id="regakhir" style="DISPLAY: none">
+                 
+                <div id="regakhir" style="DISPLAY: none">
                     <div id="formreg">
-                    <form name="registration">
-                        <label>username</label>
-                        <input name="username" type="text" placeholder="username"  onkeyup="user_validating()" onChange="logingg()" />
-						<img src="pict/blank.png" alt="icon2" id="usericon" onchange="isformvalid()" />
-                        <label>password</label>
-                        <input name="password" type="password" placeholder="password" onKeyUp="pass_validating()" onChange="logingg()" />
-                        <img src="pict/blank.png" alt="icon3" id="passicon" />
-						<label>confirm password</label>
-                        <input name="confirmpass" type="password" placeholder="confirm password" onKeyUp="conf_validating()" onChange="logingg()"  />
-						<img src="pict/blank.png" alt="icon4" id="conficon" />
-                        <label>nama lengkap</label>
-                        <input name="namaleng" placeholder="nama lengkap" onKeyUp="nama_validating()" onChange="logingg()" />
-						<img src="pict/blank.png" alt="icon5" id="nameicon" />
-                        <label>tanggal lahir</label>
-						<input type="text" name="tanggal" id="date" onMouseDown="date_validating()" onChange="logingg()" />
-						<img src="pict/blank.png" alt="icon8" id="dateicon"  />
-						<script type="text/javascript">
-							calendar.set("date");
-						</script>
-                        <label>email</label>
-                        <input name="email" type="email" placeholder="email" onKeyUp="email_validating()" onChange="logingg()" />
-						<img src="pict/blank.png" alt="icon6" id="emailicon" />
-                            <br><br>
-                        <label>avatar</label>
-						<input type="file" name="avatar"  />
-<!--
-onChange="avatar_validating();logingg()"
--->
-						<img src="pict/blank.png" alt="icon7" id="avaicon" />
-						<br>
-                        <input class= "submitreg" id="submitb" name="submit" type="button" value="Submit" onClick="masuk(this.form)" disabled />
-                        <input class= "submitreg" name="cancel" type="cancel" onClick="ShowAwal()" value="Cancel">
-                    </form>
-                </div>
+                
+                        <form name="registration" method="post" action="registerUser.jsp">
+                            
+                            <label>username</label>
+                            <input name="usernameReg" type="text" placeholder="username"  onkeyup="user_validating()" onChange="logingg()" />
+                                                    <img src="pict/blank.png" alt="icon2" id="usericon" onchange="isformvalid()" />
+                            <label>password</label>
+                            <input name="passwordReg" type="password" placeholder="password" onKeyUp="pass_validating()" onChange="logingg()" />
+                            <img src="pict/blank.png" alt="icon3" id="passicon" />
+                                                    <label>confirm password</label>
+                            <input name="confirmpass" type="password" placeholder="confirm password" onKeyUp="conf_validating()" onChange="logingg()"  />
+                                                    <img src="pict/blank.png" alt="icon4" id="conficon" />
+                            <label>nama lengkap</label>
+                            <input name="namaleng" placeholder="nama lengkap" onKeyUp="nama_validating()" onChange="logingg()" />
+                                                    <img src="pict/blank.png" alt="icon5" id="nameicon" />
+                            <label>tanggal lahir</label>
+                                <input type="text" name="tanggalReg" id="date" onMouseDown="date_validating()" onChange="logingg()" />
+                                <img src="pict/blank.png" alt="icon8" id="dateicon"  />
+                                <script type="text/javascript">
+                                        calendar.set("date");
+                                </script>
+                            <label>email</label>
+                            <input name="emailReg" type="email" placeholder="email" onKeyUp="email_validating()" onChange="logingg()" />
+                                                    <img src="pict/blank.png" alt="icon6" id="emailicon" />
+                                <br><br>
+                            <label>avatar</label>
+                                                    <input type="fileReg" name="avatar"  />
+    <!--
+    onChange="avatar_validating();logingg()"
+    -->
+                                                    <img src="pict/blank.png" alt="icon7" id="avaicon" />
+                                                    <br>
+                            <input class= "submitreg" id="submitb" name="submit" type="submit" value="Submit"/> <!--disabled--> 
+                            <input class= "submitreg" name="cancel" type="cancel" onClick="ShowAwal()" value="Cancel"/>
+                        
+                        </form>                                                
+                    </div>
+
+                 
+                    
                 </div>
                
             </div>
