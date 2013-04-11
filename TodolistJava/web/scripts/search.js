@@ -140,10 +140,12 @@ function updateContent(){
 					i++;
 			} while(i < searchResult.tugas.length);
 		}
-		contentAdded.innerHTML += tempStr;		
+                if (tempStr != ""){
+                    contentAdded.innerHTML += tempStr;	
+                } else {
+                    contentAdded.innerHTML += "<h4> Your search - " + curQ + "</italic> - did not match any documents.  </h4>";
+                }
 }    
-
-
 
 document.onscroll = function(){
 	if (curX != null && curN != null){
