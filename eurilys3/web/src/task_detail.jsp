@@ -96,8 +96,8 @@
                             stmt_taskdetail.setString(1, taskID);
                             rs_assigne = stmt_taskdetail.executeQuery();
                             rs_assigne.beforeFirst();
-                            while (rs_assigne.next()) { %>
-                                <span class='userprofile_link darkBlueItalic' onclick="javascript:searchUser('<%= rs_assigne.getString("username") %>')"> <%= rs_assigne.getString("username") %> </span> , 
+                            while (rs_assigne.next()) { %> 
+                                <span class='userprofile_link darkBlueItalic' onclick="javascript:searchResult('<%= rs_assigne.getString("username")%>' , 'user')"> <%= rs_assigne.getString("username") %> </span> , 
                             <% }
                             %>
                         </div>
