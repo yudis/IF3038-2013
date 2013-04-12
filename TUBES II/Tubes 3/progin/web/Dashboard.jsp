@@ -10,6 +10,104 @@
 <html>
     
 <head>
+    <script>
+var getkat="";
+
+function hapuskategori(){
+if(getkat == ""){
+	alert("Pilih kategori terlebih dahulu !!!");
+}else {
+	var conf = confirm("Anda yakin menghapus kategori ini ?\nSeluruh task akan dihapus");
+	//alert(getkat);
+	if(conf == true){
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+		  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+			alert(xmlhttp.responseText);
+			location.reload();
+			}
+		  }
+	xmlhttp.open("GET","../progin/HapusCategory?kategori="+getkat ,true);
+	xmlhttp.send();
+	}else{
+		alert("check");
+	}
+}
+}
+
+function taketask(ktg)
+{
+alert (ktg);
+
+getkat = ktg;
+
+if (ktg=="")
+  {
+  document.getElementById("div1").innerHTML="";
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("div1").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","../progin/daftartask?kategori="+ktg,true);
+xmlhttp.send();
+}
+function addkategori(){
+var inputkategori = prompt("Masukkan nama kategori","");
+
+	if(inputkategori=="") {
+	alert("kolom harus diisi !");
+	}else {
+		callkategori(inputkategori);
+	}
+}
+
+function callkategori(ckt){
+if (ckt=="")
+  {
+  return;
+  } 
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+	location.reload();
+    }
+  }
+xmlhttp.open("GET","../progin/newcategory?newkategori="+ckt ,true);
+xmlhttp.send();
+
+}
+</script>
     <title>Dashboard | So La Si Do</title>
 	
     <link href="css/dashboard.css" rel="stylesheet" type="text/css" />
@@ -39,6 +137,7 @@
         </form>
 	</div>
     <br>
+    <div id="contentdashboard">
     <center>Pilih Kategori	:
 		<form>
 		<select name="users" onChange="taketask(this.value)">
@@ -94,5 +193,6 @@
  
 	
 </center>
+                    </div>
 </body>
 </html>

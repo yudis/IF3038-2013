@@ -25,7 +25,7 @@
 	<img alt="" src="images/fitur.png" width="403" height="403" class="fitur"></img>
 	<div class="login">
 	<h4 class="judul">Login</h4>
-	<form action="login.jsp" name="login" method="post" >
+	<form action="../progin/dbconn" name="login" method="post" >
         <p>Username: <input type="text" name="ID" id="user" ></input></p>
         <p>Password: <input type="password" name="pwd" id="password" ></input> </p>
         <input type="submit" name="submitHome" value="login"></input> <br/>
@@ -33,12 +33,9 @@
     </div>
 	<div class="register">
 	<h4 class="judul">Register</h4>
-		<form action="upload_file.php" method="post" enctype="multipart/form-data">
-		<label for="file">Avatar :</label> 
-		<input type="file" id="file" name="file"></input>
-		<input id="signup" value="upload" type="submit" ></input>
-		</form>
-	<form action="javascript:registertake()" name="registrasi">
+		
+	<form action="../progin/register" name="registrasi" method="post">
+                <p>Avatar: <input type="file" id="file" name="file"></input></p>
 		<p>Username: <input  id="DID" name="DID" type="text"></input></p>
 		<p>Password: <input id="DP" name="DP" type="password"></input></p>
 		<p>Confirm Password: <input  id="DCP" name="DCP" type="password"></input></p>
@@ -51,4 +48,6 @@
 </body>   
 
 </html>
+
+
 

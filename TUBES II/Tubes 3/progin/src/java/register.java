@@ -5,18 +5,16 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Asus
  */
-public class HapusCategory extends HttpServlet {
+public class register extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -28,9 +26,6 @@ public class HapusCategory extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    DBConnector dbc = new DBConnector();
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -39,10 +34,10 @@ public class HapusCategory extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HapusCategory</title>");            
+            out.println("<title>Servlet register</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HapusCategory at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet register at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
@@ -63,21 +58,7 @@ public class HapusCategory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        String hapuskategori = request.getParameter("kategori");
-        try{
-        dbc.Init();
-        
-                   int rs = dbc.ExecuteUpdate("delete from category where Category='"+hapuskategori+"' and Creator=''");
-
-        dbc.Close();
-        }
-        catch(Exception e){
-        out.println(e);
-        }
-        
+        processRequest(request, response);
     }
 
     /**

@@ -5,7 +5,10 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Asus
  */
-public class HapusCategory extends HttpServlet {
+public class dbconn extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -28,25 +31,32 @@ public class HapusCategory extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     DBConnector dbc = new DBConnector();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HapusCategory</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HapusCategory at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
+        HttpSession session = request.getSession();
+        String userid = request.getParameter("ID");
+        String password = request.getParameter("pwd");
+        try{
+        dbc.Init();
+        
+        ResultSet rs = dbc.ExecuteQuery("select * from profil where Username='"+userid+"'");
+        while (rs.next()){
+        if(rs.getString(2).equals(password)){
+            session.setAttribute("userid",userid);
+            response.sendRedirect("dashboard.jsp");
+        }else {
+            response.sendRedirect("index.jsp");
+            }
+        }
+
+        dbc.Close();
+        }
+        catch(Exception e){
+        System.out.println(e);
         }
     }
 
@@ -63,21 +73,7 @@ public class HapusCategory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        String hapuskategori = request.getParameter("kategori");
-        try{
-        dbc.Init();
-        
-                   int rs = dbc.ExecuteUpdate("delete from category where Category='"+hapuskategori+"' and Creator=''");
-
-        dbc.Close();
-        }
-        catch(Exception e){
-        out.println(e);
-        }
-        
+        processRequest(request, response);
     }
 
     /**

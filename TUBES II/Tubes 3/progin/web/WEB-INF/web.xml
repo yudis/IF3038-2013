@@ -12,6 +12,30 @@
         <servlet-name>AddTask</servlet-name>
         <servlet-class>AddTask</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HapusCategory</servlet-name>
+        <servlet-class>HapusCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>daftartask</servlet-name>
+        <servlet-class>daftartask</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>dbconn</servlet-name>
+        <servlet-class>dbconn</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>editprofile</servlet-name>
+        <servlet-class>editprofile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>register</servlet-name>
+        <servlet-class>register</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>newcategory</servlet-name>
+        <servlet-class>newcategory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Search</servlet-name>
         <url-pattern>/Search</url-pattern>
@@ -24,9 +48,33 @@
         <servlet-name>AddTask</servlet-name>
         <url-pattern>/AddTask</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HapusCategory</servlet-name>
+        <url-pattern>/HapusCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>daftartask</servlet-name>
+        <url-pattern>/daftartask</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dbconn</servlet-name>
+        <url-pattern>/dbconn</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editprofile</servlet-name>
+        <url-pattern>/editprofile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>newcategory</servlet-name>
+        <url-pattern>/newcategory</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
-    </session-config>
-</web-app>
+    </session-config>s
+    </web-app>
