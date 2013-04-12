@@ -1,8 +1,8 @@
 <%@ include file="header.jsp" %>
 <%
     String kategori;
-    if (request.getParameter("kategori") != null) {
-        kategori = request.getParameter("kategori");
+    if (request.getParameter("idkategori") != null) {
+        kategori = request.getParameter("idkategori");
     } else {
         kategori = "1";
     }

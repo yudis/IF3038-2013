@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.HashSet;
+import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "GetAll", urlPatterns = {"/GetAll"})
 public class GetAll extends HttpServlet {
-private Tubes3Connection db;
+
+    private Tubes3Connection db;
     private Connection connection;
 
     /**
@@ -38,17 +42,32 @@ private Tubes3Connection db;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String nama = request.getParameter("nama");
+        HashSet<String> set = new HashSet<String>();
         if ((nama != null) && (!nama.equals(""))) {
             ResultSet rs;
             try {
                 db = new Tubes3Connection();
                 connection = db.getConnection();
-                String queryUser = "SELECT DISTINCT * FROM tugas WHERE name LIKE('"+nama+ "%') OR username LIKE('" +nama+ "%')";
+                String queryUser = "SELECT DISTINCT * FROM pengguna  WHERE username LIKE '%" + nama + "%' OR email LIKE '%" + nama + "%' OR birthday LIKE '%" + nama + "%' OR fullname LIKE '%" + nama + "%'";
                 System.out.println(queryUser);
                 rs = db.coba(connection, queryUser);
-                while(rs.next()){
-                    out.print(rs.getString("name")+"\n");
-                    out.print(rs.getString("username")+"\n");
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int columnsNumber = rsmd.getColumnCount();
+                String temp = "";
+                String temp2;
+
+                while (rs.next()) {
+                    //out.print(rs.getString("name")+"\n");
+                    for (int i = 0; i < columnsNumber; i++) {
+                        if (!temp.equals(temp2 = rs.getString(i+1).toLowerCase())) {
+                            temp = temp2;
+                            set.add(temp);
+                        }
+                    }
+                }
+                Iterator iter = set.iterator();
+                while (iter.hasNext()) {
+                    out.println(iter.next());
                 }
             } catch (Exception ex) {
                 System.out.println("Exception is ;" + ex);
