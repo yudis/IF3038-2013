@@ -286,7 +286,7 @@
             
 	            	<form action="searchresult.jsp" method="post">
 					    <section class="searchform cf">
-						    <input onkeyup="auto_complete_search(this.value.substring(this.value.lastIndexOf("/")+1))" id="cari" class="searchbox" type="search" name="search" placeholder="Search.." required>                           
+						    <input onkeyup="auto_complete_search(this.value.substring(this.value.lastIndexOf('/')+1))" id="cari" class="searchbox" type="search" name="search" placeholder="Search.." required>                           
 
                                                            				
                                             </section>                        
