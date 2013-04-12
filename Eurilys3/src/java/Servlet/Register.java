@@ -4,6 +4,7 @@
  */
 package Servlet;
 
+import Class.FileManager;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -43,7 +44,7 @@ public class Register extends HttpServlet {
       String email = request.getParameter("signup_email");
       String birthdate = request.getParameter("signup_birthdate");
       Part filePart = request.getPart("avatar_upload");
-      String avatar = "img/avatar/" + username + getExtension(getFilename(filePart));
+      String avatar = "img/avatar/" + username + FileManager.getExtension(FileManager.getFilename(filePart));
       String filePath = getServletContext().getRealPath("/") + avatar;
       
       try {
@@ -81,19 +82,5 @@ public class Register extends HttpServlet {
             System.out.println("Connection can not be closed");
          }
       }
-   }
-
-   private static String getFilename(Part part) {
-      for (String cd : part.getHeader("content-disposition").split(";")) {
-         if (cd.trim().startsWith("filename")) {
-            String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
-            return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
-         }
-      }
-      return null;
-   }
-   
-   private static String getExtension (String filename){
-      return filename.substring(filename.lastIndexOf("."));
    }
 }
