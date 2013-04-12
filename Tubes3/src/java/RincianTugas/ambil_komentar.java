@@ -47,28 +47,29 @@ public class ambil_komentar extends HttpServlet {
                     + "WHERE (id_tugas = "+request.getParameter("id_tugas")+") ORDER BY waktu LIMIT "
                     + (Integer.parseInt(request.getParameter("start"))-1)*10+",10");
             
-            result.last();
-            String[] username = new String[result.getRow()];
-            String[] waktu = new String[result.getRow()];
-            String[] isi = new String[result.getRow()];
-            result.beforeFirst();
+            if (result.last()){
+                String[] username = new String[result.getRow()];
+                String[] waktu = new String[result.getRow()];
+                String[] isi = new String[result.getRow()];
+                result.beforeFirst();
 
-            for (int i=0;result.next();++i) {
-                username[i] = result.getString("username");
-                waktu[i] = result.getString("waktu");
-                isi[i] = result.getString("isi");
-            }
-            result.close();
-            
-            for (int i=0;i<username.length;++i) {
-                ResultSet r2 = query.executeQuery("SELECT avatar FROM pengguna WHERE (username = '"
-                        +username[i]+"')");
-                out.print(username[i]+"\n");
-                out.print(waktu[i]+"\n");
-                out.print(isi[i]+"\n");
-                r2.first();
-                out.print(r2.getString(1)+"\n");
-                r2.close();
+                for (int i=0;result.next();++i) {
+                    username[i] = result.getString("username");
+                    waktu[i] = result.getString("waktu");
+                    isi[i] = result.getString("isi");
+                }
+                result.close();
+
+                for (int i=0;i<username.length;++i) {
+                    ResultSet r2 = query.executeQuery("SELECT avatar FROM pengguna WHERE (username = '"
+                            +username[i]+"')");
+                    out.print(username[i]+"\n");
+                    out.print(waktu[i]+"\n");
+                    out.print(isi[i]+"\n");
+                    r2.first();
+                    out.print(r2.getString(1)+"\n");
+                    r2.close();
+                }
             }
         } catch (ClassNotFoundException ex) {
             out.println("Failed to create connection");
