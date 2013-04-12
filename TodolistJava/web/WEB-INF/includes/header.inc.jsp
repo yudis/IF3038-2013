@@ -32,7 +32,7 @@
                     <div class="search">
                         <div id="searchwrapper">
                             <form method="GET" action="search.jsp">
-                                <input type="text" list="autoC" class="searchbox" name="q" id="q" onfocus="searchAutoComplete()" onkeyup="searchAutoComplete()" onclick="searchAutoComplete()" placeholder="Enter task name here.." />
+                                <input type="text" list="autoC" class="searchbox" name="q" id="q" onkeyup="searchAutoComplete(event)" placeholder="Enter task name here.." />
                                 <datalist id="autoC">
                                 </datalist>                                
                                 <select class="type" name="filter" id="filter">

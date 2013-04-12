@@ -8,17 +8,19 @@ var isUser = false;
 var isCategory = false;
 var isTugas = false;
 var curUsername = "";
+var curCategory = "";
+var isQueried = false;
 
 
 function saatload(q, filter, x, n, uname) {
 	curQ = q;
 	curF = filter;
         curUsername = uname;
-        
 	ajax_get("ajax/searchresult?q=" + q + "&filter=" + filter + "&x=" + x + "&n=" + n,function(xhr)
 	{
 			searchResult = JSON.parse(xhr.responseText); 
 			updateContent();
+                        isQueried = true;                        
 	});
 }
 
@@ -70,7 +72,7 @@ function updateContent(){
         
 		if (searchResult.user.length != 0){
                         if (!isUser){
-                            tempStr += "	<h2> User </h2>";	
+                            tempStr += "	<h1> User </h1>";	
                             isUser = true;
                         }
 			var i = 0;
@@ -85,7 +87,7 @@ function updateContent(){
                 
 		if ((searchResult.category.length != 0)){
                         if (!isCategory){
-                            tempStr += "	<h2> Category </h2>";
+                            tempStr += "	<h1> Category </h1>";
                             isCategory = true;
                         }
 			var i = 0;
@@ -99,12 +101,21 @@ function updateContent(){
 
 		if (searchResult.tugas.length != 0){
                         if (!isTugas){
-                            tempStr += "<h2> Task </h2>";
+                            tempStr += "<h1> Task </h1>";
                             isTugas = true;
                         }
 			var i = 0;
 
 			do {
+                            if (curCategory == ""){
+                                curCategory = searchResult.tugas[i].kategori.nama;
+                                tempStr += " <h2> "+ curCategory +" </h2>";                                
+                            } else {
+                                if (curCategory != searchResult.tugas[i].kategori.nama){
+                                    curCategory = searchResult.tugas[i].kategori.nama;
+                                    tempStr += " <h2> "+ curCategory +" </h2>";                                   
+                                }
+                            }
 					tempStr += "	<div class=\"tugas\">";
 					tempStr += "		<div><a href=\"tugas.jsp?id="+ searchResult.tugas[i].id +"\">" + searchResult.tugas[i].nama + "</a></div>";
 					tempStr += "		<div>Submission: <strong>" + searchResult.tugas[i].tglDeadline + "</strong></div>";
@@ -143,7 +154,9 @@ function updateContent(){
                 if (tempStr != ""){
                     contentAdded.innerHTML += tempStr;	
                 } else {
-                    contentAdded.innerHTML += "<h4> Your search - " + curQ + "</italic> - did not match any documents.  </h4>";
+                    if (!isQueried){
+                        contentAdded.innerHTML += "<h4> Your search - " + curQ + "</italic> - did not match any documents.  </h4>";
+                    }
                 }
 }    
 

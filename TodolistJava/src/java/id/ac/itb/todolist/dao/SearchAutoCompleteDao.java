@@ -8,13 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 
 /**
  *
  * @author Felix
  */
 public class SearchAutoCompleteDao extends DataAccessObject {
-    
+        
     public ArrayList<String> getSearchAC(String q, String filter){
         ArrayList<String> result = new ArrayList<String>();    
         try {
@@ -73,6 +75,12 @@ public class SearchAutoCompleteDao extends DataAccessObject {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        HashSet h = new HashSet(result);
+        result.clear();
+        result.addAll(h);
+        Collections.sort(result);
+        
         return result;
     }
     

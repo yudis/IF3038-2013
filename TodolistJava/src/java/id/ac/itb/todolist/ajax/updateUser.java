@@ -105,8 +105,8 @@ public class updateUser extends HttpServlet {
           
                 Part avatar = request.getPart("ava");
                 String uploadPath = getServletContext().getRealPath("./images/avatars");
-                user.setAvatar(Helper.getFileName(avatar)); 
-                Helper.writeFile(avatar.getInputStream(), uploadPath + File.separator + user.getAvatar());                
+                user.setAvatar(user.getUsername() + "." + Helper.getFileExtention(Helper.getFileName(avatar))); 
+                Helper.writeFile(avatar.getInputStream(), uploadPath + File.separator + user.getUsername() + "." + Helper.getFileExtention(Helper.getFileName(avatar)));                
             }
 
             UserDao userDao = new UserDao();
