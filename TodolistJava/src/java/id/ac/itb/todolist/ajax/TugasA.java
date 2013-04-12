@@ -105,6 +105,7 @@ public class TugasA extends HttpServlet {
 						{
 							out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value,"+result.get(i).getId()+")\" value=\""+1+"\" checked></div>");
 						}
+                                        out.println("<button id='deleteTugas' onclick='setChosenT(\""+result.get(i).getId()+"\");deleteTaskR()'>Delete Tugas</button>");
 				out.println("</div>");
                             }
                         }
@@ -172,6 +173,7 @@ public class TugasA extends HttpServlet {
                                                     {
                                                             out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value,"+result.get(i).getId()+")\" value=\""+1+"\" checked></div>");
                                                     }
+                                            out.println("<button id='deleteTugas' onclick='setChosenT(\""+result.get(i).getId()+"\");deleteTaskR()'>Delete Tugas</button>");
                                     out.println("</div>");
                                 }
                             }

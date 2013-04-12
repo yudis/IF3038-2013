@@ -116,6 +116,16 @@ function deleteTask()
     }
 }
 
+function deleteTaskR()
+{
+    if(chosenTask!=0)
+    {
+        ajax_get("./ajax/DeleteTaskR?q="+chosenTask, function(xhr) {
+            window.location = "./dashboard.jsp";
+        });
+    }
+}
+
 function loadtugas(str)
 {
     ajax_get("./ajax/TugasA?q="+str, function(xhr) {
