@@ -12,17 +12,17 @@
 		<script src="Raymond.js" type="text/javascript" language="javascript"> </script>
 		<script src="datetimepicker_css.js" type="text/javascript" language="javascript"> </script>
 	</head>
-        <body onLoad ="initDashboard(<>)">	
+        <body onLoad ="initDashboard()">	
         <div id="content">	
             <div id="header">
                 <div id="logo">
-                    <img src="image/logo.png"/>
+                    <a href="home.jsp"><img src="image/logo.png"/></a>
                 </div>
                 <div id="menu">
                     <ul>
-                        <li> <a href="home.php"> DASHBOARD </a> </li>
-                        <li> <a href="profile.php"> PROFILE </a> </li>
-                        <li> <a href="logout.php"> LOGOUT </a> </li>
+                        <li> <a href="home.jsp"> DASHBOARD </a> </li>
+                        <li> <a href="profile.jsp"> PROFILE </a> </li>
+                        <li> <a href="Logout.jsp"> LOGOUT </a> </li>
                     </ul>
                     <form method="post" action="searchresult.jsp">
                         <img src="image/avatar.jpg" id="profPic"></img>
@@ -47,7 +47,7 @@
                 </div>
 
                 <div id="rightsidebar">
-                    <i>&nbsp;&nbsp;&nbsp;<a href='MakeTask.php' id='addtask'></a></i>
+                    <button onclick='maketask.jsp' id='addtask'>Tambah Tugas</button>
                     <ul id="kegiatan">
                     </ul>
                 </div>

@@ -35,7 +35,7 @@
 		</div>		
 		
 		<div id="register">			
-			<form class="reg" action='register.jsp' method="post" name="registerform" enctype="multipart/form-data">
+			<form class="reg" action='Register' method="post" name="registerform" enctype="multipart/form-data">
 				<ul>
 					<p><b>NEW TO BANANA BOARD?</b></p>
 					<h1 align="left">Register now!</h1>
@@ -65,8 +65,8 @@
 					</li>	
 					<li>
 						<label for="tgllahir">Tanggal Lahir:</label>
-						<input id="tgllahir" name='birth' type="text" size="25"/ readonly>
-						<a href="javascript:NewCssCal('tgllahir','ddmmyyyy')"><img src="image/cal.gif" alt="Pick a date"/></a>
+						<input type="text" id="tgllahir" name='birth' size="25"/ readonly>
+						<a href="javascript:NewCssCal('tgllahir','yyyymmdd')"><img src="image/cal.gif" alt="Pick a date"/></a>
 					</li>
 					<li>
 						<label for="email">Email:</label>
@@ -83,7 +83,6 @@
 					<li>
 						<button type="submit" id="registerbutton">Register</button>
 					</li>
-					<li id='registermessage'></li>
 				</ul>
 			</form>
 		</div>
