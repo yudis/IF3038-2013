@@ -292,6 +292,12 @@ label {
 
 }
 
+#showAvatarHeader{
+    float: right;
+    margin-right: 10px;
+    margin-top: -18px;
+}
+
 #logout{
     font-family: Calibri;
     font-size: 25px;
