@@ -1,4 +1,3 @@
-
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="id.ac.itb.todolist.model.User" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,6 +15,7 @@
         <script type="application/javascript" src="./scripts/helper/ajaxhelper.js"></script>
         <script type="application/javascript" src="./scripts/helper/nicEdit.js"></script>
         <script type="application/javascript" src="./scripts/helper/datetimepicker_css.js"></script>
+        <script type="application/javascript" src="./scripts/header.js"></script>        
         <c:out value="${headTags}" default="" escapeXml="false" />
     </head>
 
@@ -31,7 +31,9 @@
                     <div class="search">
                         <div id="searchwrapper">
                             <form method="GET" action="search.jsp">
-                                <input type="text" class="searchbox" name="q" placeholder="Enter task name here.." />
+                                <input type="text" list="autoC" class="searchbox" name="q" id="q" onkeyup="searchAutoComplete();" placeholder="Search here.." />
+                                <datalist id="autoC">
+                                </datalist>                                
                                 <select class="type" name="filter" id="filter">
                                     <option>All</option>
                                     <option>Username</option>
@@ -47,7 +49,7 @@
                 </nav>
                 <div class="welcomebar">
                     <% User _currentUser = (User) session.getAttribute("user"); %>
-                    <a href="./profile.jsp"><img src="./images/avatars/<%= _currentUser.getAvatar() %>" alt="<%= _currentUser.getFullName()%>" width="32" height="32" /></a> Hi <strong><%= _currentUser.getFullName()%></strong> (<a href="./profile.jsp"><%= _currentUser.getUsername() %></a>)
+                    <a href="./profile.jsp"><img src="./images/avatars/<%= _currentUser.getAvatar() %>" alt="<%= _currentUser.getFullName() %>" width="32" height="32" /></a> Hi <strong><%= _currentUser.getFullName() %></strong> (<a href="./profile.jsp"><%= _currentUser.getUsername() %></a>)
                     </div>
             </header>
             <div class ="content">

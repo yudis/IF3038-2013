@@ -177,11 +177,7 @@ public class UserDao extends DataAccessObject {
         try {
             
             PreparedStatement preparedStatement = connection.
-                    prepareStatement(qry);
-            //        prepareStatement("SELECT * FROM users WHERE username LIKE '%?%' LIMIT ?, ?;");
-            //preparedStatement.setString(1, Id);
-            //preparedStatement.setInt(2, start);
-            //preparedStatement.setInt(3, n);       
+                    prepareStatement(qry);   
             
             ResultSet rs = preparedStatement.executeQuery();       
             while (rs.next()) {

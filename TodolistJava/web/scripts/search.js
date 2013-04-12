@@ -7,20 +7,32 @@ var isFirstTime = true;
 var isUser = false;
 var isCategory = false;
 var isTugas = false;
+var curUsername = "";
+var curCategory = "";
+var isQueried = false;
 
-function saatload(q, filter, x, n) {
+
+function saatload(q, filter, x, n, uname) {
 	curQ = q;
 	curF = filter;
-
+        curUsername = uname;
 	ajax_get("ajax/searchresult?q=" + q + "&filter=" + filter + "&x=" + x + "&n=" + n,function(xhr)
 	{
-			searchResult = JSON.parse(xhr.responseText);
-					 //var contentAdded = document.getElementById("SearchResultContent");
-					 //contentAdded.innerHTML += xhr.responseText;    
-                                         //contentAdded.innerHTML += searchResult;    
-                                         //contentAdded.innerHTML += "&&&&&&&&&" + (searchResult.category == null);
+			searchResult = JSON.parse(xhr.responseText); 
 			updateContent();
+                        isQueried = true;                        
 	});
+}
+
+function isAssignee(Tugas, Username){
+    isIt = false;
+    for (var a = 0; a < Tugas.assignees.length; a++){
+        if (Tugas.assignees[a].username == Username){
+            isIt = true;
+            break;
+        }
+    }
+    return isIt;
 }
 
 function updateStatus(n,str) {
@@ -50,80 +62,6 @@ function updateStatus(n,str) {
 	
 	return false;
 }
-/*
-function updateContent(){
-		var contentAdded = document.getElementById("SearchResultContent");
-		var tempStr = "";
-		curX = searchResult.x;
-		curN = searchResult.n;
-		if ((searchResult.category != null) && (searchResult.category != false)){
-			tempStr += "	<h2> Category </h2>";
-			var i = 0;
-			do {
-					tempStr += "	<div class=\"tugas\">";
-					tempStr += "		<div><a href=\"#\">" + searchResult.category[i].nama + "</a></div>";
-					tempStr += "	</div>";
-					i++;
-			} while(i < searchResult.category.length);
-		}
-
-		if ((searchResult.tugas != null) && (searchResult.tugas != false)){
-			tempStr += "<h2> Task </h2>";
-			var i = 0;
-
-			do {
-					tempStr += "	<div class=\"tugas\">";
-					tempStr += "		<div><a href=\"tugas.php?id="+ searchResult.tugas[i].id +"\">" + searchResult.tugas[i].nama + "</a></div>";
-					tempStr += "		<div>Submission: <strong>" + searchResult.tugas[i].tgl_deadline + "</strong></div>";
-					tempStr += "			Tags: ";
-					tempStr += "			<ul class=\"tag\">";			 
-												 
-					var lastTN = searchResult.tugas[i].id;
-					
-					do {
-						if (searchResult.tugas[i].tag != null){
-							tempStr += 			"	<li>" + searchResult.tugas[i].tag + " </li>";
-						}
-						i++;
-						if  (i == searchResult.tugas.length){
-							break;
-						}
-					} while(lastTN == searchResult.tugas[i].id);
-					i--;
-					
-					tempStr += "			</ul>";
-					if (searchResult.tugas[i].status == 0){
-						tempStr += "<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + searchResult.tugas[i].id +")\" value=\"" + searchResult.tugas[i].status + "\"></div>";
-					} else {
-						tempStr += "<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + searchResult.tugas[i].id + ")\" value=\"" + searchResult.tugas[i].status + "\" checked></div>";
-					}
-					
-					tempStr += "		</div>";
-					tempStr += "	</div>";					
-					
-					// tempStr += "			</ul>";
-					// tempStr += "			<div>Status " + searchResult.tugas[i].status + "</div>";
-					// tempStr += "		</div>";
-					// tempStr += "	</div>";
-					i++;
-			} while(i < searchResult.tugas.length);
-		}
-
-				
-		if ((searchResult.user != null) && (searchResult.user != false)){
-			tempStr += "	<h2> User </h2>";			
-			var i = 0;
-
-			do {
-					tempStr += "	<div class=\"tugas\">";
-					tempStr += "		<div> 		<img src=\"images/avatars/" + searchResult.user[i].avatar + "\" alt=\"" + searchResult.user[i].full_name + "\" width=\"32\" height=\"32\" /> <strong>" + searchResult.user[i].full_name + "</strong> (<a href=\"profileM.php?username=" + searchResult.user[i].username + "\">" + searchResult.user[i].username + "</a>)</div>";
-					tempStr += "	</div>";
-					i++;
-			} while(i < searchResult.user.length);
-		}
-		
-		contentAdded.innerHTML += tempStr;		
-}*/
     
 function updateContent(){
                 isFirstTime = false;
@@ -132,9 +70,9 @@ function updateContent(){
 		curX = searchResult.x;
 		curN = searchResult.n;
         
-		if (searchResult.user != null){
+		if (searchResult.user.length != 0){
                         if (!isUser){
-                            tempStr += "	<h2> User </h2>";	
+                            tempStr += "	<h1> User </h1>";	
                             isUser = true;
                         }
 			var i = 0;
@@ -147,9 +85,9 @@ function updateContent(){
 			} while(i < searchResult.user.length);
 		}
                 
-		if ((searchResult.category != null)){
+		if ((searchResult.category.length != 0)){
                         if (!isCategory){
-                            tempStr += "	<h2> Category </h2>";
+                            tempStr += "	<h1> Category </h1>";
                             isCategory = true;
                         }
 			var i = 0;
@@ -161,16 +99,25 @@ function updateContent(){
 			} while(i < searchResult.category.length);
 		}
 
-		if (searchResult.tugas != null){
+		if (searchResult.tugas.length != 0){
                         if (!isTugas){
-                            tempStr += "<h2> Task </h2>";
+                            tempStr += "<h1> Task </h1>";
                             isTugas = true;
                         }
 			var i = 0;
 
 			do {
+                            if (curCategory == ""){
+                                curCategory = searchResult.tugas[i].kategori.nama;
+                                tempStr += " <h2> "+ curCategory +" </h2>";                                
+                            } else {
+                                if (curCategory != searchResult.tugas[i].kategori.nama){
+                                    curCategory = searchResult.tugas[i].kategori.nama;
+                                    tempStr += " <h2> "+ curCategory +" </h2>";                                   
+                                }
+                            }
 					tempStr += "	<div class=\"tugas\">";
-					tempStr += "		<div><a href=\"tugas.php?id="+ searchResult.tugas[i].id +"\">" + searchResult.tugas[i].nama + "</a></div>";
+					tempStr += "		<div><a href=\"tugas.jsp?id="+ searchResult.tugas[i].id +"\">" + searchResult.tugas[i].nama + "</a></div>";
 					tempStr += "		<div>Submission: <strong>" + searchResult.tugas[i].tglDeadline + "</strong></div>";
 					tempStr += "			Tags: ";
 					tempStr += "			<ul class=\"tag\">";			 
@@ -185,33 +132,38 @@ function updateContent(){
 					} while(j < searchResult.tugas[i].tags.length);
 					
 					tempStr += "			</ul>";
-					if (searchResult.tugas[i].status == 0){
-						tempStr += "<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + searchResult.tugas[i].id +")\" value=\"" + searchResult.tugas[i].status + "\"></div>";
-					} else {
-						tempStr += "<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + searchResult.tugas[i].id + ")\" value=\"" + searchResult.tugas[i].status + "\" checked></div>";
-					}
-					
+                                        if ((searchResult.tugas[i].pemilik.username == curUsername) || isAssignee(searchResult.tugas[i], curUsername)){
+                                            if (searchResult.tugas[i].status == 0){
+                                                    tempStr += "<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + searchResult.tugas[i].id +")\" value=\"" + searchResult.tugas[i].status + "\"></div>";
+                                            } else {
+                                                    tempStr += "<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + searchResult.tugas[i].id + ")\" value=\"" + searchResult.tugas[i].status + "\" checked></div>";
+                                            }
+                                        } else {
+                                            if (searchResult.tugas[i].status == 0){
+                                                    tempStr += "<div>Status : Belum Selesai</div>";
+                                            } else {
+                                                    tempStr += "<div>Status : Selesai</div>";
+                                            }                                            
+                                        }
 					tempStr += "		</div>";
 					tempStr += "	</div>";					
-					
-					// tempStr += "			</ul>";
-					// tempStr += "			<div>Status " + searchResult.tugas[i].status + "</div>";
-					// tempStr += "		</div>";
-					// tempStr += "	</div>";
+
 					i++;
 			} while(i < searchResult.tugas.length);
 		}
-
-		
-		contentAdded.innerHTML += tempStr;		
+                if (tempStr != ""){
+                    contentAdded.innerHTML += tempStr;	
+                } else {
+                    if (!isQueried){
+                        contentAdded.innerHTML += "<h4> Your search - " + curQ + "</italic> - did not match any documents.  </h4>";
+                    }
+                }
 }    
-
-
 
 document.onscroll = function(){
 	if (curX != null && curN != null){
 		if ((window.pageYOffset + window.innerHeight) == document.body.scrollHeight){
-			saatload(curQ, curF, curX, curN);
+			saatload(curQ, curF, curX, curN, curUsername);
 		}
 	}
 };

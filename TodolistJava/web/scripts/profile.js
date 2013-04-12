@@ -28,7 +28,7 @@ function saveProfile() {
 			return false;
 		}
 	}
-	
+
 	after = new Array();
 	after[0] = document.getElementById("fname").value;
 	after[1] = document.getElementById("Bday").value;
@@ -225,7 +225,33 @@ function validateAvatar() {
 	
 }
 		
-
+function updateStatus(n,str) {
+    if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("stats").innerHTML=xmlhttp.responseText;
+		}
+	  }
+          var x;
+          if (n == "true"){
+              x = 1;
+          } else if (n == "false"){
+              x = 0;
+          }
+	xmlhttp.open("GET","ajax/UpdateStatus?q="+str+"&n="+x,true);
+	xmlhttp.send();
+	
+	return false;
+}
 	
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message

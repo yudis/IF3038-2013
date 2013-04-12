@@ -165,10 +165,7 @@ public class CategoryDao extends DataAccessObject {
         try{
             PreparedStatement preparedStatement = connection.
                     prepareStatement(qry);
-            //        prepareStatement("SELECT * FROM categories WHERE nama LIKE '%?%' LIMIT ?, ?;");
-            //preparedStatement.setString(1, name);
-            //preparedStatement.setInt(2, start);
-            //preparedStatement.setInt(3, n);
+            
             ResultSet rs = preparedStatement.executeQuery();
             
             while (rs.next()) {
