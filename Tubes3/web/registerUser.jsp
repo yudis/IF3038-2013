@@ -13,5 +13,6 @@
     Statement stLogin2= conLogin2.createStatement(); 
     int rsLogin2=stLogin2.executeUpdate("INSERT INTO pengguna VALUES('"+usrReg+"','"+pwdReg+"','"+namaReg+"','"+tglReg+"','"+emlReg+"','belum')"); 
     
-    
+    session.setAttribute("userLoginSession", usrReg);     
+    response.sendRedirect("dashboard.jsp");
 %>   

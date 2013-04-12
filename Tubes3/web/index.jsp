@@ -143,7 +143,7 @@
 							}		
 						}
 							
-						xmlhttp.open("GET","registeruser.php?user="+userid,true);
+						xmlhttp.open("GET","registeruser?user="+userid,true);
 						xmlhttp.send();									
 				}
 				
@@ -273,8 +273,10 @@
 				</li>
 				<li>    
 					
-					<input class="loginFormBaru" type="password" name="passwordLogin" placeholder="password" required></li>
-				<li>
+					<input class="loginFormBaru" type="password" name="passwordLogin" placeholder="password" required>
+                                </li>
+				
+                                <li>
 					<input class="xsmall" type="submit" value="Login">
 				</li>
 			</ul>                                        
@@ -293,8 +295,7 @@
     if(rsLogin.next()) { 
         if(rsLogin.getString(2).equals(isiPwd)) { 
             session.setAttribute("userLoginSession", isiLogin);     
-            response.sendRedirect("header.jsp");
-            
+            response.sendRedirect("dashboard.jsp");            
         } 
         else {            
  //out.println("Welcome "+session.getAttribute("userLoginSession"));                   

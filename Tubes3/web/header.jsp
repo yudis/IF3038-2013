@@ -1,4 +1,4 @@
-<head >			<!------memanggil showUserLogin saat load body-------->	
+<head>			<!------memanggil showUserLogin saat load body-------->	
 
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/dash.css">
@@ -266,70 +266,74 @@
 			
         </script>			
             
-        </script>
-                     <div class="header">
-			<div id="logo">
-			    <a hreg="dashboard.jsp">
-			    <img src="pict/logo.png">
-			    </a>
-			</div>
-			<div id="border">
-			    
-			</div>
-			<div id="dashboard">
-			    <a href="dashboard.jsp">DASHBOARD</a>
-			</div>
-			<div id="profile">
-			    <a href="profile.jsp">PROFILE</a>
-			</div>
-			<div id="search">
+        <%
+        //HttpSession session = request.getSession(false);// don't create if it doesn't exist
+        if((String)session.getAttribute("userLoginSession") == null) {            
+            response.sendRedirect("index.jsp");
+            //out.print("asdasda");
+        }      
+        %>      
+        
+        <div class="header">
             
-	            	<form action="searchresult.jsp" method="post">
-					    <section class="searchform cf">
-						    <input onkeyup="auto_complete_search(this.value.substring(this.value.lastIndexOf("/")+1))" id="cari" class="searchbox" type="search" name="search" placeholder="Search.." required>                           
+            <div id="logo">
+                <a hreg="dashboard.jsp">
+                <img src="pict/logo.png">
+                </a>
+            </div>
+            
+            <div id="border">
 
-                                                           				
-                                            </section>                        
-                            <select name="searchFilter" class="dropdownJo" id="searchFilter"> 	<!-------dropdown filter-->
-                            <option value="semua">Semua</option>
-                            <option value="username">Username</option>
-                            <option value="email">Email</option>
-                            <option value="namalengkap">Nama Lengkap</option>
-                            <option value="birthdate">Birthdate</option>
-                            <option value="kategori">Kategori</option>
-                            <option value="tugas">Tugas</option>
-                            <option value="tag">Tag</option>                            
-                            <option value="komentar">Komentar</option>                            
-                            </select>
-                        <input type="submit" class="searchbuttonbox cf" >
-                        						
-                    </form>					
-				</div>	<!--end div search-->
+            </div>
+            
+            <div id="dashboard">
+                <a href="dashboard.jsp">DASHBOARD</a>
+            </div>
+            
+            <div id="profile">
+                <a href="profile.jsp">PROFILE</a>
+            </div>
+            
+            <div id="search">
+            
+                <form action="searchresult.jsp" method="post">
+                    <section class="searchform cf">
+                            <input onkeyup="auto_complete_search(this.value.substring(this.value.lastIndexOf('/')+1))" id="cari" class="searchbox" type="search" name="search" placeholder="Search.." required>                           
+                    </section>                        
+                    <select name="searchFilter" class="dropdownJo" id="searchFilter"> 	<!-------dropdown filter-->
+                        <option value="semua">Semua</option>
+                        <option value="username">Username</option>
+                        <option value="email">Email</option>
+                        <option value="namalengkap">Nama Lengkap</option>
+                        <option value="birthdate">Birthdate</option>
+                        <option value="kategori">Kategori</option>
+                        <option value="tugas">Tugas</option>
+                        <option value="tag">Tag</option>                            
+                        <option value="komentar">Komentar</option>                            
+                    </select>
+                    <input type="submit" class="searchbuttonbox cf">
+                </form>					
+            </div>	<!--end div search-->
                                 
 <!--udah-->                                            
-			<div id="showLoginHeader">
+            <div id="showLoginHeader">
 <%
-                            out.println("Welcome "+session.getAttribute("userLoginSession"));       
+                out.println("Welcome "+session.getAttribute("userLoginSession"));       
 %>
-                        </div>	
+            </div>	
             
             <div id="showAvatarHeader">
 
-			</div>	
+            </div>	
             				    
 <!--udah-->            
             <div id="logout" onClick="<%session.removeAttribute("userLoginSession");%>">		<!---------hapus user login dan waktunya ketika logout ---------->
-			    <a href="index.jsp">LOGOUT</a>
-
-                
+			    <a href="index.jsp">LOGOUT</a>              
     	    </div>
-                    
-
-		
-		  </div>
+                    		
+    </div>
           
         <input id="autosearch" disabled></input>  <!--autocomplete box-->
-
         
     </head>
 
