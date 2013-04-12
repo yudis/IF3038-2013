@@ -271,7 +271,7 @@
         if((String)session.getAttribute("userLoginSession") == null) {            
             response.sendRedirect("index.jsp");
             //out.print("asdasda");
-        }        
+        }      
         %>      
         
         <div class="header">

@@ -125,14 +125,14 @@
         <div class="main">
             <div id="addcat" onclick="popup('popUpDiv');" disabled>
             </div>
-            <form id="kirim" action="buattask.html" method="POST">
+            <form id="kirim" action="buattask.jsp" method="POST">
                 <input type="Submit" name="submit" id="addtask" value="">
             </form>
             <div id="category"></div>
             <div id="category2"></div>
             
             <div id="task">
-                <a href="rinciantugas.html">
+                <a href="rinciantugas.jsp">
                 <div id="div1">
                     
                 </div>
