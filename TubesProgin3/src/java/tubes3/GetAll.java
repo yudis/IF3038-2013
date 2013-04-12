@@ -49,7 +49,7 @@ public class GetAll extends HttpServlet {
                 db = new Tubes3Connection();
                 connection = db.getConnection();
                 String queryUser = "SELECT DISTINCT * FROM pengguna  WHERE username LIKE '%" + nama + "%' OR email LIKE '%" + nama + "%' OR birthday LIKE '%" + nama + "%' OR fullname LIKE '%" + nama + "%'";
-                System.out.println(queryUser);
+                //System.out.println(queryUser);
                 rs = db.coba(connection, queryUser);
                 ResultSetMetaData rsmd = rs.getMetaData();
                 int columnsNumber = rsmd.getColumnCount();

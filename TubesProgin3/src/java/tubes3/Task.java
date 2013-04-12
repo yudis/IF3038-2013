@@ -174,7 +174,7 @@ public class Task extends HttpServlet {
                     try {
                         
                         rs=tu.coba(connection, queryKomentar);
-                          System.out.println(queryKomentar);
+                          //System.out.println(queryKomentar);
                         while (rs.next())
                         {
                             String queryUser="SELECT * FROM pengguna WHERE username='"+rs.getString("username") +"'";

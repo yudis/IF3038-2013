@@ -25,7 +25,7 @@ public class SetAvatar {
             rs = db.coba(connection, queryGetAvatar);
             rs.first();
             avatar = rs.getString(1);
-            System.out.println("AAVATARE:" + avatar);
+            //System.out.println("AAVATARE:" + avatar);
         } catch (SQLException ex) {
             Logger.getLogger(SetAvatar.class.getName()).log(Level.SEVERE, null, ex);
         }

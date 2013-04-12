@@ -3,14 +3,11 @@
     String username = null;
     SetAvatar avtar = null;
     if (((HttpServletRequest) request).getSession().getAttribute("bananauser") == null) {      
-        System.out.println("TTTT" + ((HttpServletRequest) request).getSession().getAttribute("bananauser"));
         response.sendRedirect("index.jsp");
         return;
     } else {
         username = ((HttpServletRequest) request).getSession().getAttribute("bananauser").toString();
-        System.out.println("DDD" + username);
         avtar = new SetAvatar();
-        System.out.println("DDD" + ((HttpServletRequest) request).getSession().getAttribute("bananauser"));
     %>
 <!DOCTYPE html>
 <html>	
@@ -50,6 +47,5 @@
             </div>
             
  <%           
-        System.out.println("SSS" + ((HttpServletRequest) request).getSession().getAttribute("bananauser"));
    }
 %>

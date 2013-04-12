@@ -87,7 +87,6 @@ public class AddFile extends HttpServlet {
                 String fileName = getFileName(part);
                 //System.out.println("FILE:" + fileName);
                 if (fileName != null && !fileName.equals("")) {
-                    System.out.println("MASUk");
                     insPelampiran = connection.prepareStatement(insertPelampiran);
                     insPelampiran.setString(1, maxID);
                     insPelampiran.setString(2, fileName);
