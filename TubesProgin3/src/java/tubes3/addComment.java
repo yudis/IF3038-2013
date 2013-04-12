@@ -96,15 +96,9 @@ public class addComment extends HttpServlet {
         try {
             pst = connection.createStatement();
             pst.executeUpdate(query);
-            out.print(request.getParameter("comment"));
-            out.print(",");
+            out.print(IDTask);
             rs=tu.coba(connection,queryU);
-             if (rs.next())
-            {
-            out.print(rs.getString("username"));
-            out.print(",");
-            out.print(rs.getString("avatar"));
-            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
         }

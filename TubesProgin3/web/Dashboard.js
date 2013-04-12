@@ -19,11 +19,12 @@ function getXmlHttpRequest() {
 	return xmlHttpObj;
 }
 
-function initDashboard(sessionID) {
+function initDashboard() {
+        document.getElementById("addtask").disabled = true;
 	window.xmlhttp = getXmlHttpRequest();
 	if(!window.xmlhttp)
 		return;
-	window.xmlhttp.open('POST', 'dashboard.php', true);
+	window.xmlhttp.open('POST', 'Dashboard', true);
 	window.xmlhttp.onreadystatechange = writeDashboard;
 	window.xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	window.xmlhttp.send();
@@ -71,7 +72,7 @@ function writeDashboard() {
 			if(canerase[i].firstChild.nodeValue == 'true') {
 				link = document.createElement('a');
 				link.setAttribute('href', 'javascript:deleteTask("' + id[i].firstChild.nodeValue + '")');
-				link.innerHTML = '<div class="hapus"></div>';
+				link.innerHTML = '<img src="image/deletetask.png" class="hapus" alt="Delete Task"/>';
 				tugas.appendChild(link);
 			}
 			kegiatan.appendChild(tugas);

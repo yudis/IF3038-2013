@@ -59,6 +59,10 @@ public class Login extends HttpServlet {
                 out.print("error");
         }
     }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {}
 
     /**
      * Returns a short description of the servlet.

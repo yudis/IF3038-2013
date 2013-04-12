@@ -89,6 +89,7 @@ public class removeComment extends HttpServlet {
                 try {
                     pst = connection.createStatement();
                     pst.executeUpdate(query);
+                    //out.print
                     out.print("berhasil");
 
                 } catch (SQLException ex) {

@@ -7,7 +7,7 @@
 <%@page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@page import="tubes3.profile"%>
 <!DOCTYPE html>
-<jsp:include page="/header.jsp" />
+<%@ include file="header.jsp" %>
 <script src="editprofile.js" type="text/javascript" language="javascript"> </script>
 
 <%
