@@ -237,7 +237,14 @@
             }
         
             function showEdit(){
-                if (document.getElementById("detailedit").innerHTML !== "") {
+                if (document.getElementById("detailedit").innerHTML !== "" && <%
+                    String[] assignee = data.getAssignee();
+                    out.println("(localStorage.userLogin === "+data.getCreator());
+                    for (int i=0;i<assignee.length;++i) {
+                        out.println("|| localStorage.userLogin === "+assignee[i]);
+                    }
+                    out.println(")");
+                %>) {
                     document.getElementById("detail").innerHTML=document.getElementById("detailedit").innerHTML;
                     document.getElementById("detailedit").innerHTML = "";
                     calendar.set("date");
@@ -317,7 +324,6 @@
                     <label>ASSIGNEE</label>
                     <div id="assignee">
                     <%
-                        String[] assignee = data.getAssignee();
                         for (int i=0;i<assignee.length;++i) {
                             out.println("<a href='profile.jsp?username="+assignee[i]+"'>"+assignee[i]+"</a><br>");
                         }
