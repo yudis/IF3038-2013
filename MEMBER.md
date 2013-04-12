@@ -1,3 +1,4 @@
-13510019 Andreas Bara Timur 13510019@students.if.itb.ac.id
-13510039 Felix Terahadi 13510039@students.if.itb.ac.id
-13510087 Arief Suharsono 13510087@students.if.itb.ac.id ariefsuharsono
+NIM : Nama : GitHub ID : e-mail
+13510053 : Fabrian Oktavino : sm2mlg : 13510053@std.stei.itb.ac.id
+13510055 : Atika Yusuf : atikayusuf : 13510087@std.stei.itb.ac.id
+13510087 : Arief Suharsono : ariefsuharsono : 13510087@std.stei.itb.ac.id
