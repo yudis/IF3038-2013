@@ -168,6 +168,76 @@
 		//alert(xmlhttp.responseText);
 		//alert(xmlhttp.status);
             }
+            
+            function nama_validating()
+            {
+		var name = document.registration.namaleng.value;
+					
+		if(name.match(/([a-zA-Z])+([ \t\r\n\v\f])+([a-zA-Z])/))
+		{
+                    document.getElementById("nameicon").src="pict/centang.png";
+		}
+		else
+		{
+                    document.getElementById("nameicon").src="pict/canceled.png";
+		}
+            }
+            
+            function avatar_validating()
+            {
+		var ekstensi = document.registration.avatar.value;
+					
+		if((ekstensi.lastIndexOf(".jpg") != -1) || (ekstensi.lastIndexOf(".jpeg") != -1) )
+		{
+                    document.getElementById("avaicon").src="pict/centang.png";
+		}
+		else
+		{
+                    document.getElementById("avaicon").src="pict/canceled.png";
+		}
+            }
+            
+            function date_validating()
+            {
+                document.getElementById("dateicon").src="pict/centang.png";
+            }
+            
+            function pass_validating()
+            {
+		var userid = document.registration.username.value;
+                var userpass = document.registration.password.value;
+		var usermail = document.registration.email.value;
+		var confpass = document.registration.confirmpass.value;
+					
+		if((userpass != userid) && (userpass.length >= "8") && (userpass != usermail))
+		{
+                    if(userpass != confpass)
+                    {
+			document.getElementById("conficon").src="pict/canceled.png";
+                    }
+                    document.getElementById("passicon").src="pict/centang.png";
+		}
+		else
+		{
+                    document.getElementById("passicon").src="pict/canceled.png";
+		}
+            }
+				
+            function conf_validating()
+            {
+		var userpass = document.registration.password.value;
+		var confpass = document.registration.confirmpass.value;
+		
+		if(confpass == userpass)
+		{
+                    document.getElementById("conficon").src="pict/centang.png";
+		}
+		else
+		{
+                    document.getElementById("conficon").src="pict/canceled.png";
+		}
+            }
+                                
 	</script>
     <?jsp include 'header.jsp'; ?>
     </head>
@@ -215,15 +285,27 @@
                     <div id="elcategory">
                         <form action="editProfile" method "GET">
                             <label>Full Name</label>
-                            <input name="fn" placeholder="fullname">
+                            <input name="fn" placeholder="nama lengkap" onKeyUp="nama_validating()" onChange="logingg()">
+                            <img src="pict/blank.png" alt="icon5" id="nameicon" />
+                            
                             <label>Upload new avatar</label>
-                            <input name="na" placeholder="newavatar">
+                            <input type="file" name="na" onChange="avatar_validating()" logingg()">
+                             <img src="pict/blank.png" alt="icon7" id="avaicon" />
+                            
                             <label>Change birth date</label>
-                            <input name="bd" placeholder="birthdate">
+                            <input type="text" name="bd" id="date" onMouseDown="date_validating()" onChange="logingg()">
+                            <img src="pict/blank.png" alt="icon8" id="dateicon"  />
+				<script type="text/javascript">
+                                    calendar.set("date");
+				</script>
+                                                
                             <label>Change password</label>
-                            <input name="cp" placeholder="changepassword">
+                            <input name="cp" type="password" placeholder="changepassword" onKeyUp="pass_validating()" onChange="logingg()">
+                            <img src="pict/blank.png" alt="icon3" id="passicon" />
+                            
                             <label>Confirm change password</label>
-                            <input name="ccp" placeholder="confirmpassword">
+                            <input name="ccp" type="password" placeholder="confirmpassword" onKeyUp="conf_validating()" onChange="logingg()">
+                            <img src="pict/blank.png" alt="icon4" id="conficon" />
                             
                             <input class= "submitreg" name="save" type="save" value="SAVE">
                         </form>
