@@ -43,7 +43,7 @@ xmlhttp.open("GET", 'Task?ID=' + ID+ '&continue=' + cnt, true);
 xmlhttp.send();
 }
 
-function removeComment(idcomment,jumcom){
+function removeComment(id,idcomment,jumcom){
 
 	var xmlhttp;
         var jum;
@@ -58,15 +58,10 @@ else
 	xmlhttp.onreadystatechange=function()
 	  {
 	  if(xmlhttp.readyState == 4){
-	  if(xmlhttp.responseText=="berhasil")
-              {
-                  jum=document.getElementById("jumkom").innerHTML;
-                  jum--;
-                  document.getElementById("jumkom").innerHTML=jum;
-                  document.getElementById(idcomment).innerHTML="";
-                  
-                  document.getElementById("a").innerHTML="Komentar("+jum+")";     
-              }
+                  document.getElementById("Komentar").innerHTML="";                  
+                  scroll();
+                  ambildata(id,'false');
+              
           
             }
 	  }
@@ -75,6 +70,18 @@ var queryString = "idcomment="+idcomment;
 xmlhttp.open("POST", 'removeComment', true);
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send(queryString);
+}
+
+function scroll(){
+     document.onscroll = function(){
+        var data=document.getElementById("ID").innerHTML;
+        //alert("+: "+(window.pageYOffset + window.innerHeight)+"hegi:"+document.body.offsetHeight);
+        if ((window.scrollY + window.innerHeight) >= document.body.offsetHeight){
+            ambildata(data, 'true');
+        }
+		
+		
+    }
 }
 
 function addcomment(username){
@@ -93,8 +100,9 @@ else
 	xmlhttp.onreadystatechange=function()
 	  {
 	  if(xmlhttp.readyState == 4){
-              data=xmlhttp.responseText;
-              maxid(data);
+              document.getElementById("Komentar").innerHTML="";
+              scroll();
+              ambildata(xmlhttp.responseText,'false');
               
             }
 	  }
@@ -105,43 +113,6 @@ xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send(queryString);
 
 }
-function maxid(total){
-var xmlhttp;
-var max;
-var jum=document.getElementById("jumkom").innerHTML;
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-	xmlhttp.onreadystatechange=function()
-	  {
-	  if(xmlhttp.readyState == 4){
-                max=xmlhttp.responseText;
-              jum++;
-              document.getElementById("jumkom").innerHTML=jum;
-              document.getElementById("a").innerHTML="Komentar("+jum+")";
-              total=total.split(",");
-              waktuid=max.split(",");
-                 var com=document.getElementById("comment").innerHTML;
-		document.getElementById("comment").innerHTML="<div id=\""
-                    +waktuid[0]+"\"><div class=\"headerComment\"><div class=avatar style=\"float:left;\"><img src="
-                    +total[2]+" height=\"42\" width=\"42\"></div><div class=username style=\"float:left;\"><b>"
-                    +total[1]+"</b></div><div class=waktu><b>"+waktuid[1]+"</b></div><div><a class=\"remove\" href=\"\" onClick=\"removeComment("
-                        +waktuid[0]+","+jum+");return false;\" >remove</a></div></div><li>"
-                    +total[0]+"</li></div>"+com;
-            }
-	  }
-	  
-xmlhttp.open("POST", 'maxid', true);
-xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send();  
-
-}
-function time(){}
 function editTask(jumlahAssignee)
 {
 	document.getElementById("edit").innerHTML="<b>Save</b>";

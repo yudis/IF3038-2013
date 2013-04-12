@@ -31,7 +31,7 @@ public class Task extends HttpServlet {
     public String name;
     public String deadline;
     public int status;
-    int i;
+    int i=0;
     public List<String> attachment=new ArrayList<String>();
     public List<String> assignee=new ArrayList<String>();
     public String tag;
@@ -133,8 +133,6 @@ public class Task extends HttpServlet {
         session=request.getSession();
         
         String user=(String)session.getAttribute("bananauser");
-        
-       System.out.println(user);
          ResultSet rs,rs2;
          PrintWriter out = response.getWriter();
          
@@ -168,14 +166,15 @@ public class Task extends HttpServlet {
                     }
                    int awal = 10 * (i - 1);
                    
-                    String queryKomentar = "SELECT * FROM komentar WHERE IDTask="+id+" ORDER BY waktu LIMIT " + awal + ", 10;";
+                    String queryKomentar = "SELECT * FROM komentar WHERE IDTask="+id+" ORDER BY waktu DESC LIMIT " + awal + ", 10;";
                  
-                    
+                  
                    
                     //String queryUser=;
                     try {
                         
                         rs=tu.coba(connection, queryKomentar);
+                          System.out.println(queryKomentar);
                         while (rs.next())
                         {
                             String queryUser="SELECT * FROM pengguna WHERE username='"+rs.getString("username") +"'";
@@ -192,12 +191,11 @@ public class Task extends HttpServlet {
                         out.print ("<div class=waktu><b>"+rs.getString("waktu"));
                         out.print ("</b></div>");
                         out.print ("<div>");
-                        System.out.println("user comment:"+rs.getString("username")+",pengguna"+user);
                         if(!(rs.getString("username").equals(user)))
                         {}
                         else
                         {
-                        out.print ("<a class=\"remove\" href=\"\" onClick=\"removeComment("+rs.getString("IDKomentar")+","+jum+");return false;\" >remove");
+                        out.print ("<a class=\"remove\" href=\"\" onClick=\"removeComment("+id+","+rs.getString("IDKomentar")+","+jum+");return false;\" >remove");
 
                         out.print ("</a>");
                         }
