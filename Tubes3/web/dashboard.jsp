@@ -119,7 +119,8 @@
 	
 <!------------------------------------------------------------------------->	
     <body onload="getTask();getCat();">
-        <jsp:include page="header.jsp" flush="true"/>
+        
+        <%@ include file="header.jsp" %>
         
         <div class="main">
             <div id="addcat" onclick="popup('popUpDiv');" disabled>
