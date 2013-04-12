@@ -237,7 +237,42 @@ function isAlreadyLogin()
     }
 }
 
-function redirect(){
-    window.location=("index.jsp");
+function logingg()
+{	
+    var uicon = document.getElementById("usericon").src;
+    var picon = document.getElementById("passicon").src;
+    var cicon = document.getElementById("conficon").src;
+    var nicon = document.getElementById("nameicon").src;
+    var eicon = document.getElementById("emailicon").src;
+    var aicon = document.getElementById("avaicon").src;
+    var dicon = document.getElementById("dateicon").src;
+    var lokasi = "http://localhost:8080/IF3038-2013-TUBES3/images/centang.png";
+					
+    if ((uicon == lokasi) && (picon == lokasi) && (cicon == lokasi) && (nicon == lokasi) && (eicon == lokasi) && (aicon == lokasi) && (dicon == lokasi))
+    {
+        document.getElementById("submitb").disabled = false;
+    }
 }
+
+function date_validating()
+{
+    document.getElementById("dateicon").src="images/centang.png";
+    logingg();
+}
+
+function avatar_validating()
+{
+    var ekstensi = document.registration.avatar.value;
+					
+    if((ekstensi.lastIndexOf(".jpg") != -1) || (ekstensi.lastIndexOf(".jpeg") != -1) )
+    {
+        document.getElementById("avaicon").src="images/centang.png";
+        logingg();
+    }
+    else
+    {
+        document.getElementById("avaicon").src="images/canceled.png";
+    }
+}
+
 

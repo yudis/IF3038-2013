@@ -5,6 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    if(session.getAttribute("username")!= null)
+    {
+        response.sendRedirect("dashboard.jsp");
+    }
+    else
+    {
+     
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,14 +51,14 @@
 		</div>
 		
 		<div id="register_tab">
-			<form name="registration">
+			<form name="registration" action="signup_process" method="POST" enctype="multipart/form-data" >
 			<div id="formulir">
 				<div class="form_field">
 					<div class="field_kiri">
 						Username: 
 					</div>
 					<div class="field_kanan">
-						<input name="username" type="text" placeholder="username" maxlength="256" onkeyup="user_validating()">
+						<input name="username" id="username" type="text" placeholder="username" maxlength="256" onkeyup="user_validating()">
                                                 <img src="images/blank.png" alt="icon2" id="usericon"  />
 					</div>
 					<div id="v_uname">
@@ -92,7 +102,7 @@
 						Tanggal lahir: 
 					</div>
 					<div class="field_kanan">
-						<input type="text" name="tanggal" id="date"  />
+                                            <input type="text" name="tanggal" id="date" onmousedown="date_validating()"  />
                                                 <script type="text/javascript">
 							calendar.set("date");
 						</script>
@@ -117,14 +127,15 @@
 						Avatar: 
 					</div>
 					<div class="field_kanan">
-						<input type="file" name="avatar">
+                                            <input type="file" name="avatar" onchange="avatar_validating()">
+                                                <img src="images/blank.png" alt="icon7" id="avaicon" />
 					</div>
 					<div id="v_avatar">
 					</div>
 				</div>
 				<div class="form_field">
 					<div class="field_kiri">
-						<input type="submit" name="submit" value="Register">
+                                            <input type="submit" id="submitb" name="submit" value="Register" onclick="localStorage.setItem('username',document.getElementById('username').value);" disabled>
 					</div>
 					<div class="field_kanan">
 					

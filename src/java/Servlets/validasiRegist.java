@@ -99,6 +99,14 @@ public class validasiRegist extends HttpServlet {
                     Logger.getLogger(login2.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            if (s != null) {
+                try {
+                    s.close();
+                    s = null;
+                } catch (SQLException ex) {
+                    Logger.getLogger(login2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             if (con != null) {
                 try {
                     con.close();
