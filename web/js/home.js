@@ -144,4 +144,100 @@ function email_validating()
     xmlhttp.send();
 }
 
+function logine()
+{
+    var a = document.getElementById("userid");
+    var b = document.getElementById("passid");
+    var flag = false;
+		
+    if (window.XMLHttpRequest)
+    {
+        //code buat IE7 dan browser lainnya
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+						
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+        {
+            if (xmlhttp.responseText.search("true") != -1)
+            {
+                alert("Login berhasil ");
+                window.location="dashboard.jsp";
+                if (typeof(Storage) != "undefined")
+                {
+                    localStorage.setItem('username',a.value);
+                }
+                else
+                {
+                    alert("Sorry, your browser does not support web storage "); 
+                }
+                flag = true;
+            }
+            else
+            {
+                alert("Login gagal ");
+            }
+        }
+    }
+    xmlhttp.open("POST","login2",true);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send("userid="+a.value+"&passid="+b.value);
+						
+    return flag;
+}
+
+function isAlreadyLogin()
+{
+    if (typeof(Storage) != "undefined")
+    {
+        if (window.XMLHttpRequest)
+        {
+            xmlhttp = new XMLHttpRequest();
+        }
+        else
+        {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+							
+        if (localStorage.getItem('username'))
+        {
+									
+            xmlhttp.onreadystatechange = function()
+            {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                {
+                    if (xmlhttp.responseText = "true")
+                    {
+                       alert("Already Login");
+                       window.location =("dashboard.jsp");
+                    }
+                    else
+                    {
+                        alert("Error detected !");
+                    }
+                }
+            }
+            xmlhttp.open("POST","getLocal",true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlhttp.send("locals="+localStorage.getItem('username'));
+        }
+        else
+        {
+            alert("Belum Login");
+        }
+    }
+    else
+    {
+        alert("Sorry, your browser does not support web storage.. ");
+    }
+}
+
+function redirect(){
+    window.location=("index.jsp");
+}
 

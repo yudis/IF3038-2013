@@ -6,19 +6,21 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author user
  */
-public class validasiRegist extends HttpServlet {
+public class logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -40,10 +42,10 @@ public class validasiRegist extends HttpServlet {
              */
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet validasiRegist</title>");            
+            out.println("<title>Servlet logout</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet validasiRegist at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet logout at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
@@ -66,47 +68,16 @@ public class validasiRegist extends HttpServlet {
             throws ServletException, IOException 
     {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        ResultSet rs = null;
-        Statement s = null;
-        Connection con = null;
+        PrintWriter out  = response.getWriter();
         try
         {
-            String name = request.getParameter("username");
-            String email = request.getParameter("email");
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin","progin","progin");
-            s = con.createStatement();
-            rs = s.executeQuery("select* from accounts where username='"+name+"' or email='"+email+"'");
-            if(rs.next())
-            {
-                out.println(false);
-            }
-                else
-            {
-                out.println(true);
-            }
-        }catch(SQLException e) {
-            throw new ServletException("Servlet Could not display records.", e);
-        } catch (ClassNotFoundException e) {
-            throw new ServletException("JDBC Driver not found.", e);
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                    rs = null;
-                } catch (SQLException ex) {
-                    Logger.getLogger(login2.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (con != null) {
-                try {
-                    con.close();
-                    con = null;
-                } catch (SQLException ex) {
-                    Logger.getLogger(login2.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            HttpSession session = request.getSession();
+            session.invalidate();
+            //send request to next page
+            RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+            view.forward(request, response);
+        }finally
+        {
             out.close();
         }
     }

@@ -29,7 +29,7 @@
         </form>
     </div>
     <div class="menu" id="logout">
-        <a href="index.jsp">Logout</a>
+        <a href="logout" onclick="localStorage.clear()" >Logout</a>
     </div>
     <div class="menu" id="profile">
         <a href="profile.jsp">Profile</a>

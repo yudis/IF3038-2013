@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author user
  */
-public class login2 extends HttpServlet {
+public class getLocal extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -42,10 +41,10 @@ public class login2 extends HttpServlet {
              */
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet login2</title>");            
+            out.println("<title>Servlet getLocal</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet login2 at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet getLocal at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
@@ -65,8 +64,9 @@ public class login2 extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException 
+    {
+        
     }
 
     /**
@@ -80,55 +80,45 @@ public class login2 extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        PrintWriter out  = response.getWriter();
+        String locals = request.getParameter("locals");
         ResultSet rs = null;
         Statement s = null;
         Connection con = null;
         try
         {
-            String name = request.getParameter("userid");
-            String pass = request.getParameter("passid");
-            Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin","progin","progin");
             s = con.createStatement();
-            rs = s.executeQuery("select* from accounts where username='"+name+"'");
-            if(rs.next())
+            rs = s.executeQuery("select* from accounts where username='"+locals+"'");
+             if(rs.next())
                 {
-                    if((name.trim().equals(rs.getString("username").trim())) && (pass.trim().equals(rs.getString("password").trim())))
+                    if(locals.trim().equals(rs.getString("username").trim()))
                     {
                         //New Session Creation
                         HttpSession session = request.getSession(true);
                         
                         //Setting atrribute on session
-                        session.setAttribute("username", name);
+                        session.setAttribute("username", locals);
                         session.setAttribute("id",rs.getString("idaccounts"));
                         
-                        //send request to next page
-                        //RequestDispatcher view = request.getRequestDispatcher("dashboard.jsp");
-                        //view.forward(request, response);
+                        
                         out.println(true);
                     }
                         else
                     {
-                        //RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-                        //view.include(request, response);
                         out.println(false);
-                        //out.println("<script> alert('Password salah ');</script>");
                     }
                 }
                     else
                 {
-                    //RequestDispatcher view=request.getRequestDispatcher("index.jsp");
-                    //view.include(request, response);
-                    //out.println("<script> alert('Username tidak ditemukan ');</script>");
+                    
                     out.println(false);
                 }
         }catch(SQLException e) {
             throw new ServletException("Servlet Could not display records.", e);
-        } catch (ClassNotFoundException e) {
-            throw new ServletException("JDBC Driver not found.", e);
         } finally {
             if (rs != null) {
                 try {
@@ -148,7 +138,6 @@ public class login2 extends HttpServlet {
             }
             out.close();
         }
-
     }
 
     /**

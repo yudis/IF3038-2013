@@ -16,20 +16,20 @@
         <script src="js/calendar.js" > </script>
     </head>
     
-    <body >
+    <body onload="isAlreadyLogin()" >
 		<div id="header">
         	<div class=logo id="logo">
 				<a href="index.html"><img src="images/logo.png" title="Home" alt="Home"/></a>
 			</div>
-			<form name=login action="login2" method="post" >
+			<form name=login method="post" >
 			<div class="login_form">
-				<input type="submit" name="submit" value="Login" >
+                            <input type="button" name="submit" value="Login" onclick="logine()" >
 			</div>
 			<div class="login_form">
-				Password: <input type="password" name="passid" >
+				Password: <input type="password" name="passid" id="passid" >
 			</div>
 			<div class="login_form">
-				Username: <input type="text" name="userid">
+				Username: <input type="text" name="userid" id="userid" >
 			</div>
 			</form>
 			
