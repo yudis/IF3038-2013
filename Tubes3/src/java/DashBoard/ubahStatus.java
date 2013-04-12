@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Christianto
  */
-@WebServlet(name = "getTask", urlPatterns = {"/getTask"})
-public class getTask extends HttpServlet {
+@WebServlet(name = "ubahStatus", urlPatterns = {"/ubahStatus"})
+public class ubahStatus extends HttpServlet {
     private Connection conn;
     private Statement query;
     /**
@@ -36,59 +36,23 @@ public class getTask extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
+            /* TODO output your page here. You may use following sample code. */            
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");
             query = conn.createStatement();
-            ResultSet result = query.executeQuery("SELECT * FROM tugas");
-            
-            if (result.last()) {
-                int banyak = result.getRow();
-                String[] id_tugas = new String[banyak];
-                String[] nama_tugas = new String[banyak];
-                String[] deadline = new String[banyak];
-                String[] tag = new String[banyak];
-                String[] id_kategori = new String[banyak];
-                int status[] = new int[banyak];
-
-                result.beforeFirst();
-                for (int i=0;result.next();++i) {
-                    id_tugas[i] = result.getString("id_tugas");
-                    nama_tugas[i] = result.getString("nama_tugas");
-                    deadline[i] = result.getString("deadline");
-                    tag[i] = result.getString("tag");
-                    status[i] = result.getInt("status");
-                    id_kategori[i] = result.getString("id_kategori");
-                }
+            ResultSet result = query.executeQuery("SELECT status from tugas WHERE id_tugas="+request.getParameter("id_tugas"));
+            if (result.next()) {
+                int status = 1-result.getInt(1);
                 result.close();
-
-                for (int i=0;i<banyak;++i) {
-                    result = query.executeQuery("SELECT (nama_kategori) FROM kategori WHERE id_kategori="+id_kategori[i]);
-
-                    out.println("<a href=\"rinciantugas.jsp?id_tugas="+id_tugas[i]+"\">");
-                    out.println("<div id=\"listtask\">");
-                    out.println("<div>"+nama_tugas[i]+"</div>");
-                    out.println("<div>"+deadline[i]+"</div>");
-                    out.println("<div>tag: "+tag[i]+"</div>");
-                    if (status[i] == 1) {
-                        out.println("<input type=\"checkbox\" name=\"status\" checked "
-                                + "onclick=\"ubahStatus("+id_tugas[i]+");\">");
-                    } else {
-                        out.println("<input type=\"checkbox\" name=\"status\" "
-                                + "onclick=\"ubahStatus("+id_tugas[i]+");\">");
-                    }
-
-                    result.first();
-                    out.println("<div>"+result.getString(1)+"</div>");
-                    out.println("</div></a>");
-                    result.close();
-                }
+                query.executeUpdate("UPDATE tugas SET status="+status+" WHERE id_tugas="+request.getParameter("id_tugas"));
+                out.println("SUCCESS");
+            } else {
+                out.println("Failed to update description");
             }
-            
+        } catch (ClassNotFoundException ex) {
+            out.println("Failed to create connection");
         } catch (SQLException ex) {
-            out.println("Failure to execute SQL query");
-        } catch(ClassNotFoundException ex){
-            out.println("Failure to create connection");
+            out.println("Failed to execute SQL query");
         } finally {            
             out.close();
         }
