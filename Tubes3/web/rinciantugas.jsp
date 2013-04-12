@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/buattask.css">
         <link rel="stylesheet" href="css/calendar.css">
-        <title>Next | Rincian Tugas : <%out.println(data.getNama());%> </title>
+        <title>Next | Rincian Tugas : <%out.print(data.getNama());%> </title>
         <script type="text/JavaScript" src="js/calendar.js"></script>
         <script type="text/javascript">
             function submit_comment(form) {
@@ -40,7 +40,7 @@
                         id_tugas = window.location.search.substring(c+9);
                     } 
 
-                    params = "komentar="+escape(form.comment.value)+"&user="+localStorage.userLogin+"&id_tugas="+id_tugas;
+                    params = "komentar="+escape(form.comment.value)+"&user=<%out.print((String)session.getAttribute("userLoginSession"));%>&id_tugas="+id_tugas;
                     xmlhttp.open("POST","tambah_komentar",true);                
                     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                     xmlhttp.send(params);
@@ -73,7 +73,7 @@
                 var n = comment.innerHTML.indexOf(" ");
                 var tanggal = comment.innerHTML.substring(n+1,n+20);
                 
-                params = 'tanggal='+tanggal+'&user='+localStorage.userLogin+'&id_tugas='+id_tugas;
+                params = 'tanggal='+tanggal+'&user=<%out.print((String)session.getAttribute("userLoginSession"));%>&id_tugas='+id_tugas;
                 xmlhttp.open("POST","hapus_komentar",true);                
                 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xmlhttp.send(params);
@@ -111,7 +111,7 @@
                         var n = s.indexOf("\n");
                         daftar_komentar = document.getElementById("tempat_komentar");
                         daftar_komentar.innerHTML = "";
-                        //alert(localStorage.userLogin);
+                        //alert(s);
                         
                         while (n !== -1) {
                             //Ambil satu data komentar
@@ -136,11 +136,13 @@
                             tambah += '<div class="gambar_user"><img src="'+avatar+'"></div>';
                             tambah += '<div class="data_komentar">';
                             tambah += username + " " + tanggal + " :";
-                            
-                            if (username === localStorage.userLogin) {
+                            //alert(tambah);
+                            var a = <%out.print('"'+(String)session.getAttribute("userLoginSession")+'"');%>;
+                            if (username === a) {
                                 tambah += '<input type="button" class="hapus_comment" value="delete" onclick="hapus_komentar(this.parentNode)">';
                             }
                             
+                            //alert("HERE");
                             tambah += "<br>"+komentar;
                             tambah += '</div>';
                             tambah += "</div>";
@@ -239,9 +241,9 @@
             function showEdit(){
                 if (document.getElementById("detailedit").innerHTML !== "" && <%
                     String[] assignee = data.getAssignee();
-                    out.println("(localStorage.userLogin === "+data.getCreator());
+                    out.println("(\""+ (String)session.getAttribute("userLoginSession")+ "\" === \""+data.getCreator()+"\"");
                     for (int i=0;i<assignee.length;++i) {
-                        out.println("|| localStorage.userLogin === "+assignee[i]);
+                        out.println("|| \""+(String)session.getAttribute("userLoginSession")+"\" === \""+assignee[i]+'"');
                     }
                     out.println(")");
                 %>) {
@@ -252,7 +254,7 @@
             }
                         
             function hapus_task() {
-                if (localStorage.userLogin !== <%out.print(data.getCreator());%>) {
+                if (<%out.print('"'+(String)session.getAttribute("userLoginSession")+"\"!== \""+data.getCreator()+'"');%>) {
                     alert("Anda bukan pembuat tugas");
                 } else {
                     var xmlhttp;
@@ -287,7 +289,7 @@
     </head>
     <body onload="jumlah_komentar();">
         <%-- Mulai daerah header buatan Jo--%>
-        <%--@ include file="header.jsp" --%>
+        <%@ include file="header.jsp" %>
         
         <!-------------------------------BODY HALAMAN------------------------------------->
         <div class="main">

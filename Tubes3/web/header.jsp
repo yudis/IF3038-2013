@@ -49,6 +49,7 @@
                 }
             }//end autocomplete
 
+<%--
 ///*			
 //            function taskawal(itotal){
 //                for(var i=0;i<itotal;i++){
@@ -217,7 +218,7 @@
 //			}
 //			
 //
-			
+		--%>	
         </script>			
             
         <%
@@ -252,7 +253,8 @@
             
                 <form action="searchresult.jsp" method="post">
                     <section class="searchform cf">
-                            <input onkeyup="auto_complete_search(this.value.substring(this.value.lastIndexOf('/')+1))" id="cari" class="searchbox" type="search" name="search" placeholder="Search.." required>                           
+                            <input onkeyup="auto_complete_search(this.value.substring(this.value.lastIndexOf('/')+1));"
+                                   id="cari" class="searchbox" type="search" name="search" placeholder="Search.." required>
                     </section>                        
                     <select name="searchFilter" class="dropdownJo" id="searchFilter"> 	<!-------dropdown filter-->
                         <option value="semua">Semua</option>
