@@ -1,4 +1,12 @@
-
+<%
+    if (session.getAttribute("userid")==null){
+        response.sendRedirect("index.jsp");
+    }
+%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     
 <head>
@@ -30,35 +38,47 @@
    <input type="submit" value="GO" />
         </form>
 	</div>
-    <center>
-		<img src="images/newcat.png" name="addCategory" vspace="20" id="addCategory" onClick="showCatPrompt()"></button>
+    <br>
+    <center>Pilih Kategori	:
+		<form>
+		<select name="users" onChange="taketask(this.value)">
+                    <option></option>
+                    <%
+                    java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin","progin","progin"); 
+                    Statement state = con.createStatement();
+                    ResultSet rs = state.executeQuery("select * from category");
+                    while(rs.next()){
+                       %>
+                       <option value="
+                            <%=
+                            rs.getString(1)
+                           %>   
+                               ">
+                           <%=
+                            rs.getString(1)
+                           %>
+                       </option>
+                    <%   
+                    }
+                    state.close();
+                    con.close();
+                    %>
+		</select>
+		</form>
+		<button onclick="addkategori()">Tambah Kategori</input>
+		<button onclick="hapuskategori()">Hapus Kategori</input>
 	</center>
-	
-<div id="contentdashboard">
-    
 	<div class="kategori">
 	<center><h2 class="judul">Daftar Tugas</h2>
 	<table>
 	<tr><td><div class="judulkat"
-        onmouseover="document.getElementById('div2').style.display = 'none'; document.getElementById('addtask').style.display = 'block';"
-		onmouseout="document.getElementById('div2').style.display = 'block'; document.getElementById('addtask').style.display = 'none';">Akademik
+        onmouseover="document.getElementById('div1').style.display = 'block'; document.getElementById('addtask').style.display = 'block';"
+		onmouseout="document.getElementById('div1').style.display = 'block'; document.getElementById('addtask').style.display = 'block';">
 		
-   <div id="div1" style="display: block;"> <div class="ganjil"><a href="rincian.html">Ngerjain Tubes <br>22-02-2013<br>akademik, capek</a></div>
-   <div class="genap"><a href="rincian2.html">Belajar <br>23-02-2013<br>akademik, capek</a></div> 
-	<div id="addtask" style="display: none;">
-		<a href="tambah.html"><img src="images/newtask.png"></a>
-	</div></div>
-   </td>
-   
-   <td><div class="judulkat"
-        onmouseover="document.getElementById('div1').style.display = 'none'; document.getElementById('addtask2').style.display = 'block';"
-		onmouseout="document.getElementById('div1').style.display = 'block'; document.getElementById('addtask2').style.display = 'none';">Hiburan
-		
-   <div id="div2" style="display: block;"> <div class="ganjil"><a href="rincian3.html">Futsal <br>24-02-2013<br>olahraga, capek</a></div>
-   <div class="genap"><a href="rincian4.html">Nonton <br>25-02-2013<br>asik, capek</a></div>
-   <div id="addtask2" style="display: none;">
-		<a href="tambah.html"><img src="images/newtask.png"></a>
-	</div></div>
+   <div id="div1" style="display: block;">
+	
+	</div>
+	</div>
    </td>
    
    <td><div class="judulkat"
@@ -70,10 +90,6 @@
    </td>
    
    </tr></table>  
-            
-</div>
-       
-   </div>
    
  
 	
