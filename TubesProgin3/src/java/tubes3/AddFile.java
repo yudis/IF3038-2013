@@ -89,11 +89,11 @@ public class AddFile extends HttpServlet {
                 if (fileName != null && !fileName.equals("")) {
                     insPelampiran = connection.prepareStatement(insertPelampiran);
                     insPelampiran.setString(1, maxID);
-                    insPelampiran.setString(2, fileName);
+                    insPelampiran.setString(2, "upload/"+fileName);
                     //System.out.println("fileName");
 
                     rs = insPelampiran.executeUpdate();
-                    FileOutputStream os = new FileOutputStream(getServletContext().getRealPath("/") + "uploadedFile/" + fileName);
+                    FileOutputStream os = new FileOutputStream(getServletContext().getRealPath("/") + "upload/" + fileName);
                     //System.out.println(getServletContext().getRealPath("/") + fileName);
                     os.write(b);
                     os.close();

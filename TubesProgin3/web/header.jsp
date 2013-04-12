@@ -2,13 +2,14 @@
 <%
     String username = null;
     SetAvatar avtar = null;
-    if (((HttpServletRequest) request).getSession().getAttribute("bananauser") == null) {      
+    if (((HttpServletRequest) request).getSession().getAttribute("bananauser") == null) {
         response.sendRedirect("index.jsp");
         return;
     } else {
         username = ((HttpServletRequest) request).getSession().getAttribute("bananauser").toString();
         avtar = new SetAvatar();
-    %>
+    }
+%>
 <!DOCTYPE html>
 <html>	
     <head>
@@ -28,7 +29,7 @@
                     <ul>
                         <li> <a href="home.jsp"> DASHBOARD </a> </li>
                         <li> <a href="profile.jsp"> PROFILE </a> </li>
-                        <li> <a href="logout.jsp"> LOGOUT </a> </li>
+                        <li> <a href="Logout.jsp"> LOGOUT </a> </li>
                     </ul>
                     <form method="post" action="searchresult.jsp" class="setSpan">
 
@@ -45,7 +46,4 @@
                     <div id="layer"></div>
                 </div>
             </div>
-            
- <%           
-   }
-%>
+
