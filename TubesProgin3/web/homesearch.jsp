@@ -23,9 +23,9 @@
                 </div>
                 <div id="menu">
                     <ul>
-                        <li> <a href="home.php"> DASHBOARD </a> </li>
-                        <li> <a href="profile.php"> PROFILE </a> </li>
-                        <li> <a href="logout.php"> LOGOUT </a> </li>
+                        <li> <a href="home.jsp"> DASHBOARD </a> </li>
+                        <li> <a href="profile.jsp"> PROFILE </a> </li>
+                        <li> <a href="logout.jsp"> LOGOUT </a> </li>
                     </ul>
                     <form method="post" action="searchresult.jsp">
 

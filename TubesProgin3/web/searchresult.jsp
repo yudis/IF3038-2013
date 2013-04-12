@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="/header.jsp" />
+<%@ include file="header.jsp" %>
 
 <%
 if ((request.getParameter("filter") != null) && 
