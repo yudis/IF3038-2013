@@ -81,55 +81,28 @@
                      }
                 }
 				
-//			function check(form)											/*-------------------------------udah ngga kepake----------------------------------- */
-//				{
-//					if(form.userId.value == "admin" && form.password.value == "testing")
-//						{
-//							window.location="dashboard.php";
-//						}
-//							else
-//						{
-//							alert("error password or username");
-//						}
-//				}
 				
-//			function logingg()
-//				{	
-//					var uicon = document.getElementById("usericon").src;
-//					var picon = document.getElementById("passicon").src;
-//					var cicon = document.getElementById("conficon").src;
-//					var nicon = document.getElementById("nameicon").src;
-//					var eicon = document.getElementById("emailicon").src;
-//					var aicon = document.getElementById("avaicon").src;
-//					var dicon = document.getElementById("dateicon").src;
-//
-//					var lokasi = window.location.href.substring(0,window.location.href.lastIndexOf("/")) + "/pict/centang.png";	/*-------------------------*/		
-//
-//					if ((uicon == lokasi) && (picon == lokasi) && (cicon == lokasi) && (nicon == lokasi) && (eicon == lokasi) && (aicon == lokasi) && (dicon == lokasi))
-//							{
-//								document.getElementById("submitb").disabled = false;
-//							}
-//					else{
-//								document.getElementById("submitb").disabled = true;
-//					}
-//				}
-			
-//			function masuk(form)							/*------------masuk ke dashboard & masukin form ke db-php:insertReg.php---------- */
-//				{											
-//					if (window.XMLHttpRequest){
-//						xmlhttpReg = new XMLHttpRequest();				
-//					}else{
-//						xmlhttpReg = new ActiveXObject("Microsoft.XMLHTTP");	
-//					}									
-//						
-//					xmlhttpReg.open("POST","insertReg.php",true);
-//					xmlhttpReg.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-//					xmlhttpReg.send("user="+form.username.value+"&pwd="+form.password.value+"&nama="+form.namaleng.value+"&tgl="+form.tanggal.value+"&email="+form.email.value+"&avatar="+form.avatar.value);
-//					localStorage.userLogin=form.username.value;/*----simpan user yg baru register ke local storage ------*/									
-//					localStorage.tglLogin= new Date().getTime();	/*----simpan waktu register ke local storage ------*/					
-//					window.location="dashboard.php";
-//				}
-			
+			function logingg()
+				{	
+					var uicon = document.getElementById("usericon").src;
+					var picon = document.getElementById("passicon").src;
+					var cicon = document.getElementById("conficon").src;
+					var nicon = document.getElementById("nameicon").src;
+					var eicon = document.getElementById("emailicon").src;
+					var aicon = document.getElementById("avaicon").src;
+					var dicon = document.getElementById("dateicon").src;
+
+					var lokasi = window.location.href.substring(0,window.location.href.lastIndexOf("/")) + "/pict/centang.png";	/*-------------------------*/		
+
+					if ((uicon == lokasi) && (picon == lokasi) && (cicon == lokasi) && (nicon == lokasi) && (eicon == lokasi) && (aicon == lokasi) && (dicon == lokasi))
+							{
+								document.getElementById("submitb").disabled = false;
+							}
+					else{
+								document.getElementById("submitb").disabled = true;
+					}
+				}
+						
 			function user_validating()			/*----------------------------JO---validasi buat registrasi user-----registeruser.php---------------------- */
 				{
 					var userid = document.registration.username.value;
@@ -363,13 +336,10 @@
                                                     <img src="pict/blank.png" alt="icon6" id="emailicon" />
                                 <br><br>
                             <label>avatar</label>
-                                                    <input type="file" name="avatar"  />
-    <!--
-    onChange="avatar_validating();logingg()"
-    -->
+                                                    <input type="file" name="avatar" onChange="avatar_validating();logingg()" />            
                                                     <img src="pict/blank.png" alt="icon7" id="avaicon" />
                                                     <br>
-                            <input class= "submitreg" id="submitb" name="submit" type="submit" value="Submit"/> <!--disabled--> 
+                            <input class= "submitreg" id="submitb" name="submit" type="submit" value="Submit" disabled />
                             <input class= "submitreg" name="cancel" type="cancel" onClick="ShowAwal()" value="Cancel"/>
                         
                         </form>                                                
