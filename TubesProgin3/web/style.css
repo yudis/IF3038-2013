@@ -279,7 +279,23 @@ body {
     font-family: 'segoe ui';
     font-size: 15px;
 }
-.reg button:hover:enabled  {
+
+#addtask {
+    margin-left: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border-color: #351b02;
+    background-color: #feff95;
+    color: #351b02;
+    font-family: 'segoe ui';
+    font-size: 15px;
+}
+
+#addtask:enabled {
+    cursor: pointer;
+}
+
+.reg button:hover:enabled, #addtask:hover:enabled {
     background-color: #fcff00;
     color: #351b02;
 
@@ -652,9 +668,8 @@ div#leftsidebaredit {
 }
 
 #kegiatan li a .hapus {
-    background-color: red;
-    width: 35px;
-    height: 10px;
+    width: 50px;
+    height: 50px;
     float: right;
     text-decoration: none;
     position: relative;
