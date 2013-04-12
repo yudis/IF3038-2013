@@ -46,7 +46,7 @@
                 <img id="user" src="server/<%= curUser %>.png" alt="userPhoto"/>
 		<div id="photoUploader">
 		    <label><em>Upload new Avatar : </em></label>
-		    <form method="post" action="php/UploadFile.php" enctype="multipart/form-data" name="uploadImage">
+		    <form method="POST" action="UploadImage" enctype="multipart/form-data" name="uploadImage">
 			<input id="fileUpload" type="file" name="image"></input>
 			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo MAX_FILE_SIZE; ?>"/>
 			<input type="submit" value="Upload new Avatar"/>
