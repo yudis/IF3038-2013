@@ -13,32 +13,37 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Cookie;
 
 /**
  *
  * @author Devin
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "AddCategory", urlPatterns = {"/AddCategory"})
+public class AddCategory extends HttpServlet {
 
     private Tubes3Connection db;
     private Connection connection;
 
-    public Login(){
+    public AddCategory(){
         db = new Tubes3Connection();
         connection = db.getConnection();
     }
     
-    public int canLogin(String username, String pass) {
+    public int addCateg(String nama, String maker, String users) {
+        users = users.replaceAll("\\s", "");
+        String userlist[] = users.split(",");
+        int IDKategori = 0;
         try {
-            ResultSet result = db.coba(connection, "select count(*) from pengguna where username='" + username + "' and password='" + pass + "'");
-            result.first();
-            if (result.getInt("count(*)") > 0)
-                return 1;
-            else
-                return 0;
-        } catch (Exception ex) {
+            db.nonReturnQuery(connection, "INSERT INTO kategori(judul, username) VALUES ('" + nama + "', '" + maker + "')");
+            ResultSet qresult = db.coba(connection, "SELECT LAST_INSERT_ID()");
+            qresult.first();
+            IDKategori = qresult.getInt("LAST_INSERT_ID()");
+            db.nonReturnQuery(connection, "INSERT INTO usercateg VALUES ('" + IDKategori + "', '" + maker + "')");
+            for(String user : userlist)
+                db.nonReturnQuery(connection, "INSERT INTO usercateg VALUES ('" + IDKategori + "', '" + user + "')");
+            return IDKategori;
+        }
+        catch (Exception ex) {
             System.out.println("Exception is ;" + ex);
         }
         return -1;
@@ -48,21 +53,7 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        response.setContentType("text/plain");
-        String username, pass;
-        if ((username = request.getParameter("user")) != null && (pass = request.getParameter("pass")) != null) {
-            if (canLogin(username, pass) == 1) {
-                request.getSession().setAttribute("bananauser", username);
-                Cookie bananauser = new Cookie("bananauser", username);
-                bananauser.setMaxAge(60 * 60 * 24 * 30);
-                response.addCookie(bananauser);
-                out.print("success");
-            }
-            else if (canLogin(username, pass) == 0)
-                out.print("notsuccess");
-            else
-                out.print("error");
-        }
+        out.write(addCateg(request.getParameter("name"), (String)request.getSession().getAttribute("bananauser"), request.getParameter("users")));
     }
     
     @Override

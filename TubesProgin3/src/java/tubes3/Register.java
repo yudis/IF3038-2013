@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import javax.servlet.http.Cookie;
 
 /**
  *
@@ -40,7 +41,7 @@ public class Register extends HttpServlet {
             throws ServletException, IOException {
         try {
             List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-            HashMap parameters = new HashMap();
+            HashMap<String,String> parameters = new HashMap();
             for (FileItem item : items) {
                 if (item.isFormField())
                     parameters.put(item.getFieldName(), item.getString());
@@ -68,6 +69,9 @@ public class Register extends HttpServlet {
                 }
             }
             request.getSession().setAttribute("bananauser", parameters.get("username"));
+            Cookie bananauser = new Cookie("bananauser", parameters.get("username"));
+            bananauser.setMaxAge(60 * 60 * 24 * 30);
+            response.addCookie(bananauser);
             response.sendRedirect("home.jsp");
         }
         catch (Exception ex) {

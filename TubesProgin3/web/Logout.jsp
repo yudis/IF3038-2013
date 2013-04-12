@@ -6,7 +6,21 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    ((HttpServletRequest) request).getSession().setAttribute("bananauser", null);
+    ((HttpServletRequest)request).getSession().setAttribute("bananauser", null);
     session.invalidate();
-    ((HttpServletResponse) response).sendRedirect("index.jsp");
+    Cookie[] cookies = ((HttpServletRequest)request).getCookies();
+    int i = 0;
+    boolean found = false;
+    if(cookies != null) {
+        while(i < cookies.length && !found) {
+            if(cookies[i].getName().equals("bananauser")) {
+                cookies[i].setMaxAge(0);
+                ((HttpServletResponse)response).addCookie(cookies[i]);
+                ((HttpServletResponse)response).sendRedirect("index.jsp");
+                found = true;
+            }
+            else
+                i++;
+        }
+    }
 %>

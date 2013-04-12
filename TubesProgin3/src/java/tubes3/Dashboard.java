@@ -33,9 +33,9 @@ public class Dashboard extends HttpServlet {
     public String writeCategory(String username) {
         String result= "";
         try {
-            ResultSet qresult = db.coba(connection, "SELECT DISTINCT kategori.IDKategori AS id, judul FROM kategori INNER JOIN usercateg USING(IDKategori) WHERE usercateg.username='" + username + "'");
+            ResultSet qresult = db.coba(connection, "SELECT kategori.IDKategori AS id, judul FROM kategori INNER JOIN usercateg USING(IDKategori) WHERE usercateg.username='" + username + "'");
             while(qresult.next()) {
-                result = result + "<idkategori>" + qresult.getInt("id") + "</idkategori>";
+                result = result + "<idkategori>" + qresult.getString("id") + "</idkategori>";
                 result = result + "<kategori>" + qresult.getString("judul") + "</kategori>";
             }
         }
@@ -52,12 +52,12 @@ public class Dashboard extends HttpServlet {
 			"FROM tugas INNER JOIN usercateg USING (IDKategori) " +
 			"WHERE usercateg.username='" + username + "'");
             while(qresult.next()) {
-                result = result + "<id>" + qresult.getInt("IDTask") + "</id>";
+                result = result + "<id>" + qresult.getString("IDTask") + "</id>";
                 result = result + "<nama>" + qresult.getString("name") + "</nama>";
                 result = result + "<deadline>" + qresult.getString("deadline") + "</deadline>";
-                result = result + "<status>" + qresult.getInt("stat") + "</status>";
+                result = result + "<status>" + qresult.getString("stat") + "</status>";
                 result = result + "<tag>" + qresult.getString("tag") + "</tag>";
-                ResultSet canerase = db.coba(connection, "SELECT COUNT(*) FROM penugasan WHERE username='" + username + "' AND IDTask='" + qresult.getInt("IDTask") + "'");
+                ResultSet canerase = db.coba(connection, "SELECT COUNT(*) FROM penugasan WHERE username='" + username + "' AND IDTask='" + qresult.getString("IDTask") + "'");
                 canerase.first();
                 if(canerase.getInt("COUNT(*)") > 0)
                     result = result + "<canerase>true</canerase>";
@@ -75,7 +75,7 @@ public class Dashboard extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        String result;
+        String result = "";
         response.setContentType("text/xml");
         out.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         out.write("<root>");
