@@ -4,12 +4,20 @@
  */
 package Servlet;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -33,15 +41,52 @@ public class getavatar extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet getavatar</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet getavatar at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
+            Boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
+            if(!isMultipartContent){
+                out.print("you not gona upload file!!");
+                return;
+            }else{
+                out.print("you try to upload file!!");
+            }
+            
+            String userActive = "";
+            if(request.getSession().getAttribute("userlistapp")!=null){
+                userActive = request.getSession().getAttribute("userlistapp").toString();
+            }
+            
+            FileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            List<FileItem> fields = upload.parseRequest(request);
+            out.println("Number of fields: " + fields.size());
+            Iterator<FileItem> it = fields.iterator();
+            if (!it.hasNext()) {
+                    out.println("No fields found");
+                    return;
+            }
+            while (it.hasNext()) {
+                    FileItem fileItem = it.next();
+                    boolean isFormField = fileItem.isFormField();
+                    if (!isFormField) {
+                            String fileName = fileItem.getName().toString();
+                            int index = fileName.lastIndexOf('.') + 1;
+                            String extension = fileName.substring(index).toLowerCase();
+                            String avatar = userActive+"."+extension;
+                            
+                            byte [] arByte = fileItem.get();
+                            String dir = request.getRealPath("avatar");
+                            File fileAva = new File(dir+"/"+avatar);
+                            fileAva.delete();
+                            
+                            FileOutputStream fileOutStream = new FileOutputStream(dir+"/"+avatar);
+                            fileOutStream.write(arByte);
+                            fileOutStream.close();
+                    }
+            }
+            
+            response.sendRedirect("profile.jsp?username="+userActive);
+        } catch(Exception exc){
+            
+        }finally {            
             out.close();
         }
     }

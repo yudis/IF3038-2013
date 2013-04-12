@@ -46,7 +46,8 @@ public class deletetask extends HttpServlet {
             ResultSet rs = stt.executeQuery(query);
             
             while(rs.next()){
-                String filename = "../attachment/"+rs.getString("filename");
+                String realPath = request.getRealPath("attachment");
+                String filename = realPath+"/"+rs.getString("filename");
                 File n = new File(filename);
                 n.delete();
             }

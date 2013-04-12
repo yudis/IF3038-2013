@@ -256,4 +256,25 @@ public boolean IsTagExist(String tagname){
                 return false;
             }
 	}
+
+    public String GetNextCategoryId() throws Exception{
+        GetConnection connection = new GetConnection();
+        Connection conn = connection.getConnection();
+        Statement stmt = conn.createStatement();
+        String nextId = "SELECT max(categoryid) as maxid FROM category";
+        ResultSet result = stmt.executeQuery(nextId);
+        result.next();
+        nextId = ""+(Integer.parseInt(result.getString("maxid"))+1);
+        return nextId;
+    }
+    public String GetNextTaskId() throws Exception{
+        GetConnection connection = new GetConnection();
+        Connection conn = connection.getConnection();
+        Statement stmt = conn.createStatement();
+        String nextId = "SELECT max(taskid) as maxid FROM task";
+        ResultSet result = stmt.executeQuery(nextId);
+        result.next();
+        nextId = ""+(Integer.parseInt(result.getString("maxid"))+1);
+        return nextId;
+    }
 }

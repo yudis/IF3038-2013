@@ -51,7 +51,7 @@ public class insertcategory extends HttpServlet {
             String datetime = dateFormat.format(date);
             
             String nextCategoryId = (new Function()).GetNextCategoryId();
-            String [] Assignee = listAssignee.split("-");
+            String [] Assignee = listAssignee.split(",");
 
             GetConnection connection = new GetConnection();
             Connection conn = connection.getConnection();
@@ -64,6 +64,7 @@ public class insertcategory extends HttpServlet {
             stmt.execute(query);
             // insert assigne
             for(int i = 0; i < Assignee.length ; i++){
+                System.out.println(Assignee[i]);
                 query = "INSERT INTO responsibility VALUES ('"+Assignee[i]+"','"+nextCategoryId+"')";
                 stmt.execute(query);
             }
