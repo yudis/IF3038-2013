@@ -71,7 +71,8 @@ public class DoSearch1 extends HttpServlet {
             int awal = 10 * (i - 1);
             tu = new Tubes3Connection();
             connection = tu.getConnection();
-            String queryUser = "SELECT username, avatar, fullname FROM pengguna WHERE username LIKE('%" + keyword + "%') ORDER BY username LIMIT " + awal + ", 10;";
+            String queryUser = "SELECT username, avatar, fullname FROM pengguna WHERE username LIKE '%" + keyword + "%' OR email LIKE '%" + keyword + "%' OR birthday LIKE '%" + keyword + "%' OR fullname LIKE '%" + keyword + "%' ORDER BY username LIMIT " + awal + ", 10;";
+            System.out.println("LLLLLLLLLLLLLLLLLLL:"+queryUser);
             String queryAllTugas = "SELECT IDTask, name, deadline, stat, username, tag FROM `tugas` WHERE name LIKE '%" + keyword + "%' OR tag LIKE '%" + keyword + "%' LIMIT " + awal + ", 10;";
             //System.out.println("DOOOO:" + queryAllTugas);
             String queryKategori = "SELECT judul FROM kategori WHERE judul LIKE('" + keyword + "%') ORDER BY judul LIMIT " + awal + ", 10;";
