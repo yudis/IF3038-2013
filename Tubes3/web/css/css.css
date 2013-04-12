@@ -1,4 +1,4 @@
-/*inipynyaregawal
+show/*inipynyaregawal
  <div id="regawal">
                     <div id="were">
                     </div>
@@ -312,7 +312,7 @@ label {
     color: #ffffff;
     float: right;
     margin-right: 220px;
-    margin-top: -34px;
+    margin-top: -45px;
 
 }
 
@@ -322,7 +322,7 @@ label {
     color: #ffffff;
     float: right;
     margin-right: 40px;
-    margin-top: -33px;
+    margin-top: -45px;
 }
 #logout:hover{
     color: #3f1e1e;
@@ -371,7 +371,7 @@ label {
 	background:#f9f9f9;
 	border:1px solid #dedede;
 	padding:5px 10px 5px 10px;
-	margin-top:5px;
+	margin-top:-5px;
 	font-size:1em;
 	color:#3a3a3a;
         border-radius:5px 0px 0px 5px;
@@ -380,7 +380,7 @@ label {
 }
 .searchbuttonbox{
 	margin-left: 700px;
-	margin-top: -31px;
+	margin-top: -28px;
 	width:75px;
 	height:24px;
 	background:#f9f9f9;

@@ -48,25 +48,7 @@
                     xmlhttp.send(params);
                 }
             }//end autocomplete
-//			
-//	function showUserLogin(){							/*-----------menampilkan user pada local storage-------------- */
-//				var waktuLogin = Math.round(localStorage.tglLogin/(1000*60*60*24)); 
-//				var waktuSkrg = Math.round(new Date().getTime()/(1000*60*60*24));
-//				var selisihHari = waktuSkrg-waktuLogin;	 	//new Date().getTime() akan menampilkan selisih waktu milisecond antara midnight 1 januari 1970 dengan saat method dipanggil 
-////				alert(selisihHari);				
-//				
-//				if(selisihHari<30){							
-//					document.getElementById("showLoginHeader").innerHTML="Welcome "+localStorage.userLogin;	
-//														
-//				}else{										//jika sudah 30 hari, user harus login lagi
-//					window.location="index.php";	
-//				}
-//			}
-//			
-//    function hapusUserLogin(){							/*-----------menghapus user dan waktu pada local storage-------*/
-//        sessionStorage.removeAttribute("userLoginSession");
-//
-//    }
+
 ///*			
 //            function taskawal(itotal){
 //                for(var i=0;i<itotal;i++){
@@ -132,35 +114,7 @@
 //            }
 //*/			
 //			
-//<!------------------------------------------------ buat search------------------------------------------>			
-//	  function tampilSearch(){
-////			if(	window.location==window.location.href.substring(0,window.location.href.lastIndexOf("/")) + "/searchresult.php"){							
-//			    var xyz = document.getElementById("cari").value;
-//				var xyz2 = document.getElementById("searchFilter").value;
-//				if (window.XMLHttpRequest){
-//					xmlhttp = new XMLHttpRequest();				
-//				}else{
-//					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
-//				}
-//
-//				xmlhttp.onreadystatechange = function(){
-//					if (xmlhttp.readyState==4 && xmlhttp.status==200)	{				
-//
-//						document.getElementById("divTugas").innerHTML=xmlhttp.responseText;
-//					}
-//				}
-//					
-//				xmlhttp.open("GET","search.php?tugas="+xyz+"&filter="+xyz2,true);
-//				xmlhttp.send();
-////			}//end if searchresult.php
-////			else{
-//
-////				window.location="searchresult.php";
-//				
-////			}// end else
-//		}
-//			
-			
+		
 			
 //<!-------------------------------------------------dashboard------------------------------->			
 //			            function showAddTask(){<!--SIGIT-->
@@ -277,15 +231,15 @@
         <div class="header">
             
             <div id="logo">
-                <a hreg="dashboard.jsp">
-                <img src="pict/logo.png">
+                <a href="dashboard.jsp">
+                    <img src="pict/logo.png">
                 </a>
             </div>
             
             <div id="border">
 
             </div>
-            
+<!--            
             <div id="dashboard">
                 <a href="dashboard.jsp">DASHBOARD</a>
             </div>
@@ -293,7 +247,7 @@
             <div id="profile">
                 <a href="profile.jsp">PROFILE</a>
             </div>
-            
+-->            
             <div id="search">
             
                 <form action="searchresult.jsp" method="post">
@@ -311,15 +265,19 @@
                         <option value="tag">Tag</option>                            
                         <option value="komentar">Komentar</option>                            
                     </select>
-                    <input type="submit" class="searchbuttonbox cf">
+                    <input type="submit" value="search" class="searchbuttonbox cf">
                 </form>					
             </div>	<!--end div search-->
                                 
 <!--udah-->                                            
             <div id="showLoginHeader">
+                
+                <a href="profile.jsp">
 <%
-                out.println("Welcome "+session.getAttribute("userLoginSession"));       
+                    out.println("Welcome "+session.getAttribute("userLoginSession"));       
 %>
+                </a>
+            
             </div>	
             
             <div id="showAvatarHeader">

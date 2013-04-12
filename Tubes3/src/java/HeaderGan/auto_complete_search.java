@@ -47,9 +47,7 @@ public class auto_complete_search extends HttpServlet {
                 do {
                     out.print(result.getString(1)+"\n");
                 } while (result.next());
-            } else {
-                out.println("Tidak ada user dengan nama itu");
-            }
+            } 
             
             result.close();
         } catch (SQLException ex) {
