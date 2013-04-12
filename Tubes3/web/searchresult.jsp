@@ -13,6 +13,8 @@
 
     <title> Next | Search Result </title>    
 
+    
+    <body>
 <%
     String cari = request.getParameter("search");
     String filter = request.getParameter("searchFilter");
@@ -406,7 +408,7 @@
        
        
 <!----------------------------------------- footer ----------------------------------------->                      
-	<body>
+	
         <div class="footer">
             Copyright © Ahmad Faiz - Fandi Pradana - Sigit Aji
         </div>
