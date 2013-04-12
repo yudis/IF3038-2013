@@ -71,7 +71,7 @@ try
 	}
 	else if (uri.equals("rinciantugas.jsp"))
 	{
-		out.print("id=\"rincianbackground\" onLoad=\"daone_task()\"");
+		out.print("id=\"rincianbackground\" onLoad=\"done_task()\"");
 	}
 	else if (uri.equals("post.jsp"))
 	{

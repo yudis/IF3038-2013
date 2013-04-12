@@ -110,5 +110,8 @@ rs1.next();
 		</div>
 	</div>
 </div>
-
+<%
+rs1.close();
+pst1.close();
+%>
 <%@include file="/footer.jsp"%>

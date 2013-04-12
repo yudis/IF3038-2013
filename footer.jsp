@@ -29,7 +29,7 @@
 <%
 		con.close();
 	}
-	catch (SQLException ex)
+	catch (Exception ex)
 	{
 		out.print("Error : " + ex.getMessage());
 	}

@@ -1,18 +1,9 @@
 <%@include file="/header.jsp"%>
 <%
-// PreparedStatement pst0 = con.prepareStatement("SELECT DISTINCT `category` FROM `tasks`");
-// ResultSet rs0 = pst0.executeQuery();
-// int cats = 0;
-// while (rs0.next())
-// {
-// 	cats++;
-// }
-// rs0.close();
-// pst0.close();
 
 Integer id = (Integer)session.getAttribute("id");
 %>
-			
+
 <div id="main2">
     <div id ="dashboardcontainer">
         <div id ="staticcomponentlist">
@@ -165,15 +156,15 @@ Integer id = (Integer)session.getAttribute("id");
 			%>
 			</strong>
 			<br />
-			<div id="<?php echo $task_id;?>">
-				Status : <strong><% if (rs8.getInt(3) == 1) out.print("Selesai"); else out.print("Belum selsesai"); %></strong><br />
+			<div id="<% out.print(task_id); %>">
+				Status : <strong><% if (rs8.getInt(3) == 1) out.print("Selesai"); else out.print("Belum selesai"); %></strong><br />
 				<input name="YourChoice" type="checkbox" value="selesai" <% if (rs8.getInt(3) == 1) out.print("checked"); %> onclick="change_status('<% out.print(task_id); %>',<% out.print(rs8.getInt(3)); %>,<% out.print(task_id); %>)"> Selesai
 			</div>
 			<%
 						if (rs7.getInt(3) == id)
 						{
 			%>
-			<form action="deletetask.php" method="post">
+			<form action="deletetask.jsp" method="post">
 				<input type="hidden" name="deltask" value="<% out.print(task_id); %>" />
 				<input type="submit" name="submit" value="Delete" />
 			</form>
