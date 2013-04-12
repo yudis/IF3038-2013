@@ -10,6 +10,7 @@
       <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
       <script type="text/javascript" src="../js/animation.js"> </script>
       <script type="text/javascript" src="../js/catselector.js"> </script>
+      <script type="text/javascript" src="../js/navbar.js"> </script>
       <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
       <title> Eurilys </title>
    </head>
