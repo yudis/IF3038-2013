@@ -18,7 +18,6 @@
         response.sendRedirect("home.jsp");
     } else {
         ID = request.getParameter("id");
-        
          out.print("<script type='text/javascript' language='javascript'> window.onload=updateedit("+ID+"); </script>");
         out.print("<script type='text/javascript' language='javascript'> var i = 1; window.onload=scroll(); </script>");
         out.print("<script type='text/javascript' language='javascript'> var i = 1; window.onload=ambildata(" + ID + ",'false'); </script>");
@@ -43,7 +42,9 @@
                 <li>
                     <label for="tugas">Status</label>
                     <div class="text"><%out.print(task.status);%></div>
-                    <form method="post" action="Task">
+                    <form method="post" action="Task" >
+                        <%request.getSession().setAttribute("ID", ID);%>
+                        
                         <button>ubah status</button>
                     </form>
                 </li>
@@ -107,7 +108,7 @@
                 <div id="jumlahA" style="visibility:hidden">
                     <%out.print(task.jumlahA);%>
                 </div>
-                <button id="edit" name="edit" onclick="editTask(document.getElementById('jumlahA').innerHTML)" type="button"><b>Edit</b></button><br>  
+                <button id="edit" name="edit" onclick="editTask(document.getElementById('jumlahA').innerHTML,<%out.print(ID);%>)" type="button"><b>Edit</b></button><br>  
                 <form id="commentform">
                     <input class="task" id="commentfield" name="commentfield" type="text" size="1000"/> 
                     <input id="commentbutton" name="commentbutton" type="submit" value="Comment" onClick="addcomment(<%out.print("'yuli'");%>);return false;"/>

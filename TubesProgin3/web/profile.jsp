@@ -12,7 +12,7 @@
 
 <%
 String user;boolean editable;
-if(request.getParameter("username")==null)
+if(request.getParameter("username")==null || request.getParameter("username").equals(request.getSession().getAttribute("bananauser")))
        {
            user=(String)((HttpServletRequest) request).getSession().getAttribute("bananauser");            
            editable=true;

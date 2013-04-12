@@ -225,29 +225,34 @@ public class Task extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String query;
+        String ID=(String)session.getAttribute("ID");
+        
 	if(status==1)
 	{
             status=0;
-            query="UPDATE tugas SET stat='0' WHERE IDTask="+IDTask;
+            query="UPDATE tugas SET stat='0' WHERE IDTask="+ID;
 	}
 	else
 	{
             status=1;
-            query="UPDATE tugas SET stat='1' WHERE IDTask="+IDTask;
+            query="UPDATE tugas SET stat='1' WHERE IDTask="+ID;
 	}
+        System.out.println(query);
+        System.out.println(ID);
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
         Statement pst;
         try {
             pst = connection.createStatement();
             pst.executeUpdate(query);
+            session.setAttribute("ID", null);
             
         } catch (SQLException ex) {
             Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
         }
        
         
-	response.sendRedirect("taskdetails.jsp");
+	response.sendRedirect("taskdetails.jsp?id="+ID);
     }
 
     /** 

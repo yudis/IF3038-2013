@@ -80,10 +80,9 @@ public edittask(){}
             throws ServletException, IOException {
        
         boolean flag;
-        int IDTask;
+        //int IDTask;
         session=request.getSession();
-        String sID = request.getParameter("id");
-        IDTask= Integer.parseInt(sID);
+        String IDTask = request.getParameter("ID");
         response.setContentType("text/html;charset=UTF-8");
 	PrintWriter out = response.getWriter();
         String query="";
@@ -91,6 +90,10 @@ public edittask(){}
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
         Statement pst;
+        System.out.println("deadline="+request.getParameter("deadline"));
+        System.out.println("tag="+request.getParameter("tag"));
+        System.out.println("assignee="+request.getParameter("assignee"));
+        System.out.println(IDTask);
         if(!(request.getParameter("deadline").equals("")) && !(request.getParameter("tag").equals("")) && !(request.getParameter("assignee").equals("")))
         {
             query="UPDATE tugas SET deadline='"+request.getParameter("deadline")+"', tag='"+request.getParameter("tag")+"' WHERE IDTask="+IDTask;
@@ -122,7 +125,7 @@ public edittask(){}
             query2="INSERT INTO penugasan(IDTask,username) values("+IDTask+",'"+request.getParameter("assignee")+"')";
              try {
                     pst = connection.createStatement();
-                    pst.execute(query);
+                    pst.executeUpdate(query);
                     pst.execute(query2);
                     out.print(request.getParameter("deadline")+","+request.getParameter("assignee"));
                 } catch (SQLException ex) {
@@ -134,7 +137,8 @@ public edittask(){}
 		query="UPDATE tugas SET deadline='"+request.getParameter("deadline")+"' WHERE IDTask="+IDTask;
              try {
                     pst = connection.createStatement();
-                    pst.execute(query);
+                    pst.executeUpdate(query);
+                    System.out.println(query);
                     out.print(request.getParameter("deadline"));
                 } catch (SQLException ex) {
                     Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
