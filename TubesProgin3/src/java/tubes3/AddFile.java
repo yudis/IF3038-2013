@@ -60,6 +60,7 @@ public class AddFile extends HttpServlet {
         PreparedStatement insTugas;
         ResultSet res;
         int rs;
+        String maxID = null;
         try {
             insTugas = connection.prepareStatement(insertTugas);
             insTugas.setString(1, kategori);
@@ -71,7 +72,7 @@ public class AddFile extends HttpServlet {
             String maxIDTask = "SELECT max(IDTask) FROM tugas";
             res = db.coba(connection, maxIDTask);
             res.first();
-            String maxID = res.getString(1);
+            maxID = res.getString(1);
 
             String insertPelampiran = "INSERT INTO pelampiran (`IDTugas`, `lampiran`) VALUES (?, ?)";
             PreparedStatement insPelampiran;
@@ -113,10 +114,12 @@ public class AddFile extends HttpServlet {
                 }
                 i++;
             }
+            insPenugasan.setString(1, username);
+            rs = insPenugasan.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        response.sendRedirect("taskdetails.jsp");
+        response.sendRedirect("taskdetails.jsp?id="+maxID);
     }
 
     private String getFileName(Part part) {
