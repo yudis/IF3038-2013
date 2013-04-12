@@ -11,9 +11,7 @@
     </head>
     <body>
          <center>
-            Register failed!
-            
-            <% getServletContext().getRealPath("/attachment/awkhd.jpg"); %>
+            Username atau email sudah terpakai!
          </center>
     </body>
 </html>
