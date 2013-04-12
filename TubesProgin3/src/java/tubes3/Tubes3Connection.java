@@ -40,4 +40,9 @@ public class Tubes3Connection {
         Statement pst = con.createStatement();
         return pst.executeQuery(query);
     }
+    
+    public int nonReturnQuery(Connection con, String query) throws SQLException {
+        Statement pst = con.createStatement();
+        return pst.executeUpdate(query);
+    }
 }
