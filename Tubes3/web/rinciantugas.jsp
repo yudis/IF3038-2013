@@ -40,7 +40,7 @@
                         id_tugas = window.location.search.substring(c+9);
                     } 
 
-                    params = "komentar="+escape(form.comment.value)+"&user=<%out.print(session.getAttribute("userLoginSession"));%>id_tugas="+id_tugas;
+                    params = "komentar="+escape(form.comment.value)+"&user=<%out.print(session.getAttribute("userLoginSession"));%>&id_tugas="+id_tugas;
                     xmlhttp.open("POST","tambah_komentar",true);                
                     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                     xmlhttp.send(params);
@@ -236,23 +236,22 @@
                 }
             }
         
-            function showEdit(){
-                if (document.getElementById("detailedit").innerHTML !== "" && <%
+            function showEdit() {
+                if (document.getElementById("detailedit").innerHTML !== "" && (<%
                     String[] assignee = data.getAssignee();
                     out.println('"'+(String)session.getAttribute("userLoginSession")+"\" === \""+data.getCreator()+'"');
                     for (int i=0;i<assignee.length;++i) {
                         out.println("|| \""+(String)session.getAttribute("userLoginSession")+"\" === \""+assignee[i]+'"');
                     }
-                    out.println(")");
-                %>) {
+                %>)) {
                     document.getElementById("detail").innerHTML=document.getElementById("detailedit").innerHTML;
                     document.getElementById("detailedit").innerHTML = "";
                     calendar.set("date");
                 }
-            }
+            } 
                         
             function hapus_task() {
-                if (<%out.print('"'+(String)session.getAttribute("userLoginSession")+"\"===\""+data.getCreator()+'"');%>) {
+                if (<%out.print('"'+(String)session.getAttribute("userLoginSession")+"\"!==\""+data.getCreator()+'"');%>) {
                     alert("Anda bukan pembuat tugas");
                 } else {
                     var xmlhttp;
@@ -277,9 +276,9 @@
                     var params = "id_tugas="+id_tugas;
 
                     //alert(params);
-                    xmlhttp.open("POST","edit_detail_tugas.php",true);
+                    xmlhttp.open("POST","hapus_tugas",true);
                     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-                    xmlhttp.send(params);                    
+                    xmlhttp.send(params);
                 }
             }
         </script>        
@@ -287,7 +286,7 @@
     </head>
     <body onload="jumlah_komentar();">
         <%-- Mulai daerah header buatan Jo--%>
-        <%--@ include file="header.jsp" --%>
+        <%@ include file="header.jsp" %>
         
         <!-------------------------------BODY HALAMAN------------------------------------->
         <div class="main">
