@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;

@@ -46,8 +46,6 @@ if(getkat == ""){
 
 function taketask(ktg)
 {
-alert (ktg);
-
 getkat = ktg;
 
 if (ktg=="")
@@ -70,7 +68,7 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("div1").innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("GET","../progin/daftartask?kategori="+ktg,true);
+xmlhttp.open("GET","../progin/daftartask?tkategori="+ktg,true);
 xmlhttp.send();
 }
 function addkategori(){
@@ -115,7 +113,16 @@ xmlhttp.send();
     <link href="css/mediaqueries.css" rel="stylesheet" type ="text/css" />
     <!--<link href='http://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'>-->
-
+<style>
+    .user{
+        width : 400px;
+        height : 100px;
+        margin-top : -55px;
+        margin-left :770px;
+        padding-top : 30px;
+        padding-left: 80px;
+    }
+</style>
 </head>
 
 <body>
@@ -123,8 +130,8 @@ xmlhttp.send();
     <script type="text/javascript" language="javascript" src="js/search.js"></script>
 	
 <div class="header">
-    <a href="dashboard.html"><img align="left" src="images/logo.png" width="150" height="50" />
-	<h6>Dashboard</h6></a> <p>|</p> <a href="profile.html">Profile</a> <p>|</p> <a href="index.html">Logout</a>
+    <a href="Dashboard.jsp"><img align="left" src="images/logo.png" width="150" height="50" />
+	<h6>Dashboard</a> <p>|</p> <a href="profile.jsp">Profile</a> <p>|</p> <a href="logout.jsp">Logout</a>
         <form id="searchform" onsubmit="return searchByFilter()" method="post" >
    | Search:<input type="search" id="searchquery" name="searchquery" /> 
    Filter: <select id="filtertype" name="filtertype">
@@ -134,7 +141,14 @@ xmlhttp.send();
         <option value="Task">Task</option>
    </select>
    <input type="submit" value="GO" />
+   
         </form>
+        <div class="user">Welcome, 
+      <%
+      String login = (String) session.getAttribute("userid");
+      out.print(login);
+      %>
+  </div>
 	</div>
     <br>
     <div id="contentdashboard">
@@ -148,15 +162,7 @@ xmlhttp.send();
                     ResultSet rs = state.executeQuery("select * from category");
                     while(rs.next()){
                        %>
-                       <option value="
-                            <%=
-                            rs.getString(1)
-                           %>   
-                               ">
-                           <%=
-                            rs.getString(1)
-                           %>
-                       </option>
+                       <option value="<%=rs.getString(1)%>"><%=rs.getString(1)%></option>
                     <%   
                     }
                     state.close();

@@ -70,7 +70,7 @@ public class HapusCategory extends HttpServlet {
         try{
         dbc.Init();
         
-                   int rs = dbc.ExecuteUpdate("delete from category where Category='"+hapuskategori+"' and Creator=''");
+                   int rs = dbc.ExecuteUpdate("delete from category where Category='"+hapuskategori+"'");
 
         dbc.Close();
         }

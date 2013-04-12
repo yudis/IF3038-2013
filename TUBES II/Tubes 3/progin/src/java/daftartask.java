@@ -64,23 +64,28 @@ public class daftartask extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String kategori = request.getParameter("kategori");
         HttpSession session = request.getSession();
+        String kategori = request.getParameter("tkategori");
+        String id = (String) session.getAttribute("userid");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         session.setAttribute("kategori", kategori);
         try {
             dbc.Init();
-            ResultSet rs = dbc.ExecuteQuery("select * from task");
+            ResultSet rs = dbc.ExecuteQuery("SELECT * FROM task WHERE Category='"+kategori+"'");
             
             while (rs.next()) {
-                out.println(rs.getString(1));
                 out.println(rs.getString(3));
                 out.println("<br>");
                 out.println(rs.getString(6));
                 out.println("<br>");
-                out.println(rs.getString(7));
+                out.println("<input type=\"submit\" value=\"Lihat Rincian\" ></input>");
+                if (rs.getString(2).equals(id)){
+                out.println("<input type=\"submit\" value=\"Hapus Task\" ></input>");
                 out.println("<br>");
+                }else {
+                out.println("<br>");
+                }
             }
             dbc.Close();  
         } catch(Exception e){
@@ -100,7 +105,6 @@ public class daftartask extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

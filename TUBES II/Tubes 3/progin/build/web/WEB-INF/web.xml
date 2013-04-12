@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddTask</servlet-name>
-        <servlet-class>AddTask</servlet-class>
+        <servlet-class>progin.AddTask</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HapusCategory</servlet-name>

@@ -47,7 +47,7 @@ public class dbconn extends HttpServlet {
         while (rs.next()){
         if(rs.getString(2).equals(password)){
             session.setAttribute("userid",userid);
-            response.sendRedirect("dashboard.jsp");
+            response.sendRedirect("Dashboard.jsp");
         }else {
             response.sendRedirect("index.jsp");
             }

@@ -1,15 +1,12 @@
-<%-- 
-    Document   : profile
-    Created on : Apr 12, 2013, 1:51:47 PM
-    Author     : Asus
---%>
+
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
 <%
     if (session.getAttribute("userid")==null){
         response.sendRedirect("index.jsp");
     }
 %>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="progin.DBConnector"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,29 +17,49 @@
 <link href="css/profile.css" rel="stylesheet" type="text/css" />
 <link href="css/mediaqueries.css" rel="stylesheet" type ="text/css" />
 <link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'/>
+<style>
+    .user{
+        width : 400px;
+        height : 100px;
+        margin-top : -55px;
+        margin-left :770px;
+        padding-top : 30px;
+        padding-left: 80px;
+    }
+</style>
 </head>
 
 <body>
 <div class="header">
-	<a href="dashboard.jsp"><img align="left" src="images/logo.png" width="150" height="50" />
-	<h6>Dashboard</a> | <a href="profile.jsp">Profile</a> | <a href="index.jsp">Logout</a>
+	<a href="Dashboard.jsp"><img align="left" src="images/logo.png" width="150" height="50" />
+	<h6>Dashboard</a> | <a href="profile.jsp">Profile</a> | <a href="logout.jsp">Logout</a>
 	
    | Search: <input type="search">
   <input type="submit" value="GO"></input>
+  <div class="user">Welcome, 
+      <%
+      String login = (String) session.getAttribute("userid");
+      out.print(login);
+      %>
+  </div>
 	</div>
 	<div class="container">
 <div class="data">
 <center>
 <h1>Profile</h1>
 <%
-DBConnector dbc = new DBConnector();
-Object getobj = request.getSession().getAttribute("userid");
-String user = String.valueOf(getobj);
-response.setContentType("text/html;charset=UTF-8");
-try{
-    dbc.Init();
+    Class.forName("com.mysql.jdbc.Driver");
     
-    ResultSet rs = dbc.ExecuteQuery("select * from profil where Username='"+user+"'");
+    java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin","progin","progin"); 
+    Statement state = con.createStatement();
+    
+    Object getobj = request.getSession().getAttribute("userid");
+    String user = String.valueOf(getobj);
+    response.setContentType("text/html;charset=UTF-8");
+
+   
+    
+    ResultSet rs = state.executeQuery("select * from profil where Username='"+user+"'");
     
     while(rs.next()){
         %>
@@ -53,11 +70,8 @@ try{
         <p>Email : <%=rs.getString(6)%></p>
        <%
     }
-    
-    dbc.Close();
-}catch (Exception e){
-    
-}
+    state.close();
+    con.close();
 %>
   <form method="link" action="editprofile.jsp">
 	<input type="submit" Value="edit" name="image" onclick="" ></input>
@@ -67,10 +81,16 @@ try{
 <div class="assignment">
   <p>Daftar Tugas :</p>
 <%
-try {
-    dbc.Init();
+    Class.forName("com.mysql.jdbc.Driver");
     
-    ResultSet nrs = dbc.ExecuteQuery("select * from task where ID='"+user+"'");
+    java.sql.Connection ncon = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin","progin","progin"); 
+    Statement nstate = ncon.createStatement();
+    
+    Object ngetobj = request.getSession().getAttribute("userid");
+    String nuser = String.valueOf(ngetobj);
+    response.setContentType("text/html;charset=UTF-8");
+    
+    ResultSet nrs = nstate.executeQuery("select * from task where IDCreator='"+nuser+"'");
 %>
 <div class="colmid">
 <div class="colleft">
@@ -95,10 +115,9 @@ try {
 %>
 </div>
 <%
-    dbc.Close();
-}catch(Exception e) {
-    
-}
+    nstate.close();
+    ncon.close();
+
 %>
         <div class="col3">
             <img src="images/cek.png" width="35" height="35" /><br/>
