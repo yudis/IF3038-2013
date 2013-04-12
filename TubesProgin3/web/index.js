@@ -188,13 +188,11 @@ function loginPressed(keyCode) {
 function canLogin() {
 	if(window.xmlhttp.readyState == 4 && window.xmlhttp.status == 200) {
 		var response = window.xmlhttp.responseText;
-		if(response == 'notsuccess')
-                    alert('Username and password are not match.');
+		if(response == 'success')
+                    window.location.replace('home.jsp');
                 else if(response == 'error')
                     alert('Error');
-		else if(response == 'success')
-			window.location.replace('home.jsp');
-		else
-			window.location.replace('index.jsp');
+                else
+                    alert('Username and password are not match.');
 	}
 }
