@@ -66,10 +66,10 @@ xmlhttp.send();*/
 	</head>
 	<body>
 <div class="header">
-	
+
 	<a href="dashboard.html"><img align="left" src="images/logo.png" width="150" height="50" />
 	<h6>Dashboard</a> | <a href="profile.html">Profile</a> | <a href="index.html">Logout</a>
-	
+
    | Search: <input type="search">
   <input type="submit" value="GO"></div>
   
@@ -84,7 +84,7 @@ xmlhttp.send();*/
 			Deadline  : 
 			<input type="text" id="datepick2" name="deadline" size="20" /> <br>
 			Assignee : 
-			<input type="text" name="assignee"> <br>
+			<input type="text" name="assignee"/> <br>
 			      <tr>
 			Tag : 
 			<input type="text" name="tag"> <br>
@@ -99,12 +99,12 @@ xmlhttp.send();*/
 				</div></td>
 			</tr>
 			<br>
-			
+
 			<input type="submit" value="Tambah Tugas">
 			</form><br>
-			
-			
-			
+
+
+
 
 </div>
 </div>

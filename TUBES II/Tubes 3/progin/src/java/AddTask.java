@@ -53,8 +53,8 @@ public class AddTask extends HttpServlet {
             
             String taskname = request.getParameter("namatask");
             String deadline = request.getParameter("deadline");
-            String[] assignee = request.getParameterValues("assignee");
-            String[] tag = request.getParameterValues("tag");
+            String assignee = request.getParameter("assignee");
+            String tag = request.getParameter("tag");
             String user = (String) request.getSession().getAttribute("userid");
             String cat = (String) request.getSession().getAttribute("category");
             
@@ -66,15 +66,16 @@ public class AddTask extends HttpServlet {
             
             ResultSet data = con.ExecuteQuery("INSERT INTO task VALUES '"+ID+"','"+user+"','"+taskname+"','"+cat+"','0','"+deadline+"'");
             
-            
-            for( int i = 0; i < tag.length; i++ )  
+            String[] tags = tag.split(",");
+            for( int i = 0; i < tags.length; i++ )  
             {  
-                ResultSet rs = con.ExecuteQuery("INSERT INTO tags VALUES '"+ID+"','"+tag[i]+"'");
+                ResultSet rs = con.ExecuteQuery("INSERT INTO tags VALUES '"+ID+"','"+tags[i]+"'");
             }  
             
-            for( int i = 0; i < assignee.length; i++ )  
+            String[] assignees = assignee.split(",");
+            for( int i = 0; i < assignees.length; i++ )  
             {  
-                ResultSet rs2 = con.ExecuteQuery("INSERT INTO assignee VALUES '"+ID+"','"+assignee[i]+"'");
+                ResultSet rs2 = con.ExecuteQuery("INSERT INTO assignee VALUES '"+ID+"','"+assignees[i]+"'");
             } 
 
             out.print("Tugas baru telah disimpan");
@@ -82,7 +83,7 @@ public class AddTask extends HttpServlet {
             
         
             con.Close();
-            response.sendRedirect("dashboard.jsp");
+            response.sendRedirect("Dashboard.jsp");
         } finally {            
             out.close();
         }
