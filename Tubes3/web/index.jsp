@@ -10,6 +10,14 @@
 <%@ page import ="javax.sql.*" %>              
 
     <head>
+        
+        <%
+        //HttpSession session = request.getSession(false);// don't create if it doesn't exist
+        if((String)session.getAttribute("userLoginSession") != null) {            
+            response.sendRedirect("dashboard.jsp");            
+        }      
+        %> 
+        
         <title> Next : You Can't Do it Alone</title>
 		<link rel="stylesheet" href="css/calendar.css">
 		<script src="js/calendar.js" > </script>

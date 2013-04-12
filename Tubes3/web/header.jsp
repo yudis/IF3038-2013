@@ -327,8 +327,8 @@
             </div>	
             				    
 <!--udah-->            
-            <div id="logout" onClick="<%session.removeAttribute("userLoginSession");%>">		<!---------hapus user login dan waktunya ketika logout ---------->
-			    <a href="index.jsp">LOGOUT</a>              
+            <div id="logout">		<!---------hapus user login dan waktunya ketika logout ---------->
+			    <a href="logout.jsp">LOGOUT</a>              
     	    </div>
                     		
     </div>
