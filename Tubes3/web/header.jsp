@@ -1,5 +1,6 @@
 <head>			<!------memanggil showUserLogin saat load body-------->	
-
+        <%@ page import ="java.sql.*" %>
+        <%@ page import ="javax.sql.*" %>   
         <link rel="stylesheet" href="css/css.css">
         <link rel="stylesheet" href="css/dash.css">
         <script type="text/javascript" src="js/popup.js"></script>
@@ -254,7 +255,7 @@
                     <section class="searchform cf">
                             <input onkeyup="auto_complete_search(this.value.substring(this.value.lastIndexOf('/')+1))" id="cari" class="searchbox" type="search" name="search" placeholder="Search.." required>                           
                     </section>                        
-                    <select name="searchFilter" class="dropdownJo" id="searchFilter"> 	<!-------dropdown filter-->
+                    <select name="searchFilter" class="dropdownJo" id="searchFilter"> 	<!--dropdown filter-->
                         <option value="semua">Semua</option>
                         <option value="username">Username</option>
                         <option value="email">Email</option>
@@ -268,24 +269,39 @@
                     <input type="submit" value="search" class="searchbuttonbox cf">
                 </form>					
             </div>	<!--end div search-->
-                                
-<!--udah-->                                            
+                                                                                 
             <div id="showLoginHeader">
-                
-                <a href="profile.jsp">
-<%
-                    out.println("Welcome "+session.getAttribute("userLoginSession"));       
-%>
-                </a>
-            
-            </div>	
-            
-            <div id="showAvatarHeader">
+                <div id="showAvatarHeader">
+                <%
+                    String ses = (String)session.getAttribute("userLoginSession");                
 
+                    Class.forName("com.mysql.jdbc.Driver");
+                    java.sql.Connection conLogin11 = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003","root","");
+
+                    Statement stLogin11= conLogin11.createStatement(); 
+                    ResultSet rsLogin11=stLogin11.executeQuery("select * from pengguna where username='"+ses+"'");     
+
+                    if(rsLogin11.next()) { 
+                        out.print("<div>");
+                        out.print("<img width=\"60px\" height=\"60px\" src=\"");
+                        out.print(rsLogin11.getString("avatar"));
+                        out.print("\">" );
+                        out.println("</div>");
+                    }
+                %>
             </div>	
+            
+                <a href="profile.jsp">
+                    <%
+                        out.println(session.getAttribute("userLoginSession"));       
+                    %>
+                </a>
+                
+            </div>	
+            
+            
             				    
-<!--udah-->            
-            <div id="logout">		<!---------hapus user login dan waktunya ketika logout ---------->
+            <div id="logout">		<!--hapus user login dan waktunya ketika logout -->
 			    <a href="logout.jsp">LOGOUT</a>              
     	    </div>
                     		
