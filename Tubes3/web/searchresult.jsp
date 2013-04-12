@@ -30,9 +30,11 @@
             out.println("user:");
 
             out.print("<div>");
+            out.print(" <a href=\"profile.jsp\">");
             out.print(rsLogin.getString("username"));
+            out.print(" </a>");
             out.println("</div>");
-
+          
             out.print("<div>");
             out.print(rsLogin.getString("tanggal_lahir"));
             out.println("</div>");
@@ -43,7 +45,7 @@
 
             out.print("<div>");
             out.print("<img width=\"60px\" height=\"60px\" src=\"");
-            out.print(rsLogin.getString("nama_lengkap"));
+            out.print(rsLogin.getString("avatar"));
             out.print("\">" );
             out.println("</div>");
 
@@ -145,7 +147,9 @@
             out.println("user:");
 
             out.print("<div>");
+            out.print(" <a href=\"profile.jsp\">");
             out.print(rsLogin.getString("username"));
+            out.print(" </a>");
             out.println("</div>");
 
             out.print("<div>");
@@ -158,7 +162,7 @@
 
             out.print("<div>");
             out.print("<img width=\"60px\" height=\"60px\" src=\"");
-            out.print(rsLogin.getString("nama_lengkap"));
+            out.print(rsLogin.getString("avatar"));
             out.print("\">" );
             out.println("</div>");
 
@@ -180,7 +184,9 @@
             out.println("</div>");
             
             out.print("<div>");
+            out.print(" <a href=\"profile.jsp\">");
             out.print(rsLogin.getString("username"));
+            out.print(" </a>");
             out.println("</div>");          
 
             out.print("<div>");
@@ -189,7 +195,7 @@
 
             out.print("<div>");
             out.print("<img width=\"60px\" height=\"60px\" src=\"");
-            out.print(rsLogin.getString("nama_lengkap"));
+            out.print(rsLogin.getString("avatar"));
             out.print("\">" );
             out.println("</div>");
 
@@ -205,19 +211,21 @@
 
         while(rsLogin.next()) { 
             out.println("<div class=\"listtaskJo\">");
-            out.println("namalengkap");
+            out.println("nama lengkap:");
 
             out.print("<div>");
             out.print(rsLogin.getString("nama_lengkap"));
             out.println("</div>");            
             
             out.print("<div>");
+            out.print(" <a href=\"profile.jsp\">");
             out.print(rsLogin.getString("username"));
+            out.print(" </a>");
             out.println("</div>");                   
 
             out.print("<div>");
             out.print("<img width=\"60px\" height=\"60px\" src=\"");
-            out.print(rsLogin.getString("nama_lengkap"));
+            out.print(rsLogin.getString("avatar"));
             out.print("\">" );
             out.println("</div>");
 
@@ -238,7 +246,9 @@
             out.println("</div>");
             
             out.print("<div>");
+            out.print(" <a href=\"profile.jsp\">");
             out.print(rsLogin.getString("username"));
+            out.print(" </a>");
             out.println("</div>");                   
             
             out.print("<div>");
@@ -247,7 +257,7 @@
 
             out.print("<div>");
             out.print("<img width=\"60px\" height=\"60px\" src=\"");
-            out.print(rsLogin.getString("nama_lengkap"));
+            out.print(rsLogin.getString("avatar"));
             out.print("\">" );
             out.println("</div>");
 

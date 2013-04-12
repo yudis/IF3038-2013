@@ -283,7 +283,7 @@
  //out.println("Welcome "+session.getAttribute("userLoginSession"));                   
 %>
             <script language="javascript">
-                alert("Invalid password, try again");
+                alert("Invalid username or password, try again");
             </script>
 <%                                 
         } 

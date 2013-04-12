@@ -11,7 +11,7 @@
             var itulis=0;*/
 //            
 	function auto_complete_search(text) {
-
+                var xmlhttp;
                 if (text == "") {
                     document.getElementById("autosearch").value = "";                    
                 } else {
