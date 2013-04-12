@@ -7,8 +7,8 @@ package tubes3;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,8 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Yulianti Oenang
  */
-@WebServlet(name = "removeAssignee", urlPatterns = {"/removeAssignee"})
-public class removeAssignee extends HttpServlet {
+@WebServlet(name = "editbutton", urlPatterns = {"/editbutton"})
+public class editbutton extends HttpServlet {
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,14 +40,15 @@ public class removeAssignee extends HttpServlet {
             /* TODO output your page here
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet removeAssignee</title>");  
+            out.println("<title>Servlet editbutton</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet removeAssignee at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet editbutton at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
-             */
-        } finally {            
+             */ System.out.println("yuyuyuy");
+            
+        } finally {
             out.close();
         }
     }
@@ -65,7 +66,6 @@ public class removeAssignee extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
     /** 
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
@@ -73,28 +73,31 @@ public class removeAssignee extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    public HttpSession session;
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String query="";
-        int IDTask;
-        String sID = ((HttpServletRequest) request).getParameter("id");
-        IDTask= Integer.parseInt(sID);
+        
+        String IDTask="";
+        session = request.getSession();
+        IDTask = request.getParameter("id");
+        PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-	PrintWriter out = response.getWriter();
-        if(!(request.getParameter("username")==null))
-        {
-            query="DELETE FROM penugasan WHERE username='"+request.getParameter("username")+"' and IDTask="+IDTask;
-        }
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
-        Statement pst;
+        ResultSet rs;
+        String queryU = "SELECT username from penugasan where IDTask=" + IDTask;
         try {
-            pst = connection.createStatement();
-            pst.executeUpdate(query);
-            out.print("sukses");
+        rs = tu.coba(connection, queryU);
+        while (rs.next()) {
+        if (rs.getString("username").equals(session.getAttribute("bananauser"))) {
+        out.print("true");
+        break;
+        }
+        }
         } catch (SQLException ex) {
-            Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(edittask.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

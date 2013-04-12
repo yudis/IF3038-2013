@@ -74,15 +74,14 @@ public class addComment extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public HttpSession session;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String query="";
         String queryU="";
         int IDTask;
-        session=request.getSession();
-        IDTask=(Integer)session.getAttribute("idtugas");
+        String sID = ((HttpServletRequest) request).getParameter("id");
+        IDTask= Integer.parseInt(sID);
          response.setContentType("text/html;charset=UTF-8");
 	PrintWriter out = response.getWriter();
         if(!(request.getParameter("comment").equals("")) && !(request.getParameter("usernamecur").equals(""))){

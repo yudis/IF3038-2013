@@ -7,6 +7,7 @@ package tubes3;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "edittask", urlPatterns = {"/edittask"})
 public class edittask extends HttpServlet {
-
+public edittask(){}
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -81,7 +82,8 @@ public class edittask extends HttpServlet {
         boolean flag;
         int IDTask;
         session=request.getSession();
-        IDTask=(Integer)session.getAttribute("idtugas");
+        String sID = request.getParameter("id");
+        IDTask= Integer.parseInt(sID);
         response.setContentType("text/html;charset=UTF-8");
 	PrintWriter out = response.getWriter();
         String query="";
@@ -140,7 +142,7 @@ public class edittask extends HttpServlet {
 	}
         
         //response.sendRedirect("taskdetails.jsp");
-        
+       
     }
 
     /** 

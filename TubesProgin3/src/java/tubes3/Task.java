@@ -39,9 +39,9 @@ public class Task extends HttpServlet {
     public int jumlahA;
     ResultSet rs;
     ResultSet rs2;
-    public int IDTask;
+    public String IDTask;
     public Task(){}
-    public Task(int IDTask) throws SQLException {
+    public Task(String IDTask) throws SQLException {
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
         this.IDTask=IDTask;

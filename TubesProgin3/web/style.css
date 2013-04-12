@@ -1105,3 +1105,6 @@ div#leftsidebaredit {
     z-index: 0;
 
 }
+#edit{
+    visibility: hidden;   
+}

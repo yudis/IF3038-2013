@@ -11,13 +11,15 @@
 <script src="taskdetails.js" type="text/javascript" language="javascript"> </script>
 <!DOCTYPE html>
 <%
-    Integer ID = 1;
-    ((HttpServletRequest) request).getSession().setAttribute("idtugas", 1);
+    boolean editable=false;
+    String ID = "1";
 
-    if (((HttpServletRequest) request).getSession().getAttribute("idtugas") == null) {
+    if (((HttpServletRequest) request).getParameter("id")== null) {
         response.sendRedirect("home.jsp");
     } else {
-        ID = (Integer) ((HttpServletRequest) request).getSession().getAttribute("idtugas");
+        ID = request.getParameter("id");
+        
+         out.print("<script type='text/javascript' language='javascript'> window.onload=updateedit("+ID+"); </script>");
         out.print("<script type='text/javascript' language='javascript'> var i = 1; window.onload=scroll(); </script>");
         out.print("<script type='text/javascript' language='javascript'> var i = 1; window.onload=ambildata(" + ID + ",'false'); </script>");
 
