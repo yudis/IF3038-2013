@@ -2,15 +2,17 @@
     Cookie[] cookies = ((HttpServletRequest)request).getCookies();
     int i = 0;
     boolean found = false;
-    while(i < cookies.length && !found) {
-        if(cookies[i].getName().equals("bananauser"))
-            found = true;
-        else
-            i++;
-    }
-    if (found) {
-        ((HttpServletRequest)request).getSession().setAttribute("bananauser", cookies[i].getValue());
-        ((HttpServletResponse) response).sendRedirect("home.jsp");
+    if(cookies != null) {
+        while(i < cookies.length && !found) {
+            if(cookies[i].getName().equals("bananauser"))
+                found = true;
+            else
+                i++;
+        }
+        if (found) {
+            ((HttpServletRequest)request).getSession().setAttribute("bananauser", cookies[i].getValue());
+            ((HttpServletResponse) response).sendRedirect("home.jsp");
+        }
     }
 %>
 

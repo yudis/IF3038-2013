@@ -32,7 +32,7 @@
                         <li> <a href="Logout.jsp"> LOGOUT </a> </li>
                     </ul>
                     <form method="post" action="searchresult.jsp" class="setSpan">
-                        <a href="profile.jsp"><span><% out.print(username);%></span><img src="<% out.print(avtar.getAvatar(username));%>" id="profPic"/></a><!-- TODO -->
+                        <a href="profile.jsp"><span><% if(username != null) out.print(username);%></span><img src="<% if(avtar != null) out.print(avtar.getAvatar(username));%>" id="profPic"/></a><!-- TODO -->
                         <select name="filter">
                             <option value="semua">Semua</option>
                             <option value="username">User Name</option>
