@@ -60,26 +60,26 @@
                         Email: <br>
                         Your Avatar: <br>
                 </div>
-                <form action="registration" enctype="multipart/form-data" method="post">
+                    <form method="post" action="registration" enctype="multipart/form-data">
                         <!--Username (min. 5 characters != password)-->
-                        <input type="text" id="username" name="textUsername" onKeyUp="check_username()"/><br />
+                        <input type="text" name="textUsername" id="username" onKeyUp="check_username()"/><br />
                         <!--Password (min. 8 characters) != username and email-->
-                        <input type="password" id="password" name="textPassword" onKeyUp="check_password()"/><br />
+                        <input type="password" name="textPassword" id="password" onKeyUp="check_password()"/><br />
                         <!--Confirm password == password-->
-                        <input type="password" id="password2" name="textPassword2" onKeyUp="confirm_password()"/><br />
+                        <input type="password" name="textPassword2" id="password2" onKeyUp="confirm_password()"/><br />
                         <!--Full name (min. 2 spaces between 2 characters)-->
-                        <input type="text" id="fullname" name="textFullName" onKeyUp="check_full_name()"/><br />
+                        <input type="text" name="textFullName" id="fullname" onKeyUp="check_full_name()"/><br />
                         <!--Birth date (drop down, year >= 1955)-->
-                        <input type="text" class="calendarSelectDate" name="textBirthday"/><div id="calendarDiv"></div>
+                        <input type="text" name="textBirthday" class="calendarSelectDate" /><div id="calendarDiv"></div>
                         <br />
                         <!--email, validation:
                                 min. 1 character before @
                                 min. 1 character between @ and .
                                 min. 2 characters after .
                                 != password-->
-                        <input type="text" id="email" name="textEmail" onKeyUp="check_email()"/><br />
+                        <input type="text" name="textEmail" id="email" onKeyUp="check_email()"/><br />
                         <!--Avatar, input file, extension == .jpg or .jpeg-->
-                        <input type="file" id="avatar" name="textAvatar" onChange="check_avatar()"/><br />
+                        <input type="file" name="textAvatar" id="avatar" onChange="check_avatar()"/><br />
                         <!--Register button, disabled if invalid input exists-->
                         <input id="submit" type="submit" value="Sign Up"/>
                         <div id="warning-message"></div>

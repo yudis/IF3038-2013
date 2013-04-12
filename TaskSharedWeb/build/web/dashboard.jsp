@@ -18,7 +18,7 @@
     </head>
     <body>
         <%
-        /*session management*/
+        /*session management  */
         String userActive = "";
         if(request.getSession().getAttribute("userlistapp")==null){
             response.sendRedirect("index.jsp");
@@ -39,7 +39,6 @@
                         HashMap<String,String> userActiveData = (new Function()).GetUser(userActive);
                         %>
                         <a href="profile.jsp?username=<%=userActive %>"><img alt="" id="photo" src="avatar/<%=userActiveData.get("avatar") %>" width="120" height="150"/>
-                            <a href="profile?username=<?php echo $useractive;?>"><img alt="" id="photo" src="../avatar/<?php echo $avatar;?>" width="120" height="150"/>
                             <br />
                             <b><%=userActive %></b></a>
                     </div>

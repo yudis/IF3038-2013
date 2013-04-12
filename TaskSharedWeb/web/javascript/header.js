@@ -36,7 +36,7 @@ function checkHeaderValidation(){
 	var suggestionarray;
 	
 	if(content!=""){
-		ajaxRequest.open("GET","../php/headervalidation.php?content="+content+"&idx="+elmt+"&filter="+filter,false);
+		ajaxRequest.open("GET","headervalidation?content="+content+"&idx="+elmt+"&filter="+filter,false);
 		ajaxRequest.onreadystatechange = function()
 		{
 			suggestion = ajaxRequest.responseText;

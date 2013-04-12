@@ -45,11 +45,7 @@
                             String categoryid = request.getParameter("categoryid");
                             out.print(func.getCategoryName(categoryid));
                         %>
-        <?php 
-                                require('../php/init_function.php');
-                                $categoryid = $_GET['categoryid'];
-                                echo getCategoryName($categoryid);
-                        ?>
+                        
         </h1>
                         <div id="add-task">
                                 Task name:<br><br>
@@ -61,7 +57,7 @@
                                 Tag:
                         </div>
                         <div id="add-task-form">
-                        <form enctype="multipart/form-data" method="post" action="inserttask">
+                            <form enctype="multipart/form-data" method="post" action="inserttask?categoryid=<%=categoryid %>">
                                 <!--Name-->
                                 <div id="spacing">
                                 <input type="text" id="taskname" onKeyUp="check_task_name()" name="textTaskName"/>
