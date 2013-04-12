@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -72,15 +73,19 @@ public class removeAssignee extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    HttpSession session;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String query="";
+        int IDTask;
+        session=request.getSession();
+        IDTask=(Integer)session.getAttribute("idtugas");
         response.setContentType("text/html;charset=UTF-8");
 	PrintWriter out = response.getWriter();
         if(!(request.getParameter("username")==null))
         {
-            query="DELETE FROM penugasan WHERE username='"+request.getParameter("username")+"' and IDTask=1";
+            query="DELETE FROM penugasan WHERE username='"+request.getParameter("username")+"' and IDTask="+IDTask;
         }
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();

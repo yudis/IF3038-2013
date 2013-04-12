@@ -11,19 +11,22 @@
 <script src="taskdetails.js" type="text/javascript" language="javascript"> </script>
 <!DOCTYPE html>
 <%
-int ID=1;
-if (((HttpServletRequest) request).getSession().getAttribute("idtugas") != null)
+Integer ID=1;
+((HttpServletRequest) request).getSession().setAttribute("idtugas",1);
+
+if (((HttpServletRequest) request).getSession().getAttribute("idtugas") == null)
        {
             response.sendRedirect("home.jsp");
        }
 else
        {
-            ID=(Integer)((HttpServletRequest) request).getSession().getAttribute("idtugas");            
+            ID=(Integer)((HttpServletRequest) request).getSession().getAttribute("idtugas");  
+            out.print("<script type='text/javascript' language='javascript'> var i = 1; window.onload=ambildata("+ID+",'false'); </script>");
             
        }
 Task task=new Task(ID);
 %>
-
+<div id="ID" style="visibility:hidden"><%out.print(ID);%></div>
 <div id="isi">
     <div id="leftsidebar">
             <b>TASK DETAILS</b>
@@ -116,8 +119,9 @@ Task task=new Task(ID);
                     <div id="jumkom" style="visibility:hidden">
                                   <%out.print(task.jumlah);%>
                     </div>        
-                    <div class="task">
+                    <div id="Komentar" class="task">
                     <%
+                    /*
                         out.print("<li>");
 			out.print("<label id=\"a\"  for=\"komentar\">Komentar("+task.jumlah+")</label>");
 			out.print("</li>");
@@ -151,7 +155,7 @@ Task task=new Task(ID);
                         //echo "aaa";
                         }
                     out.print ("</div>");
-                           
+                           */
                                     %>
                             
 
@@ -175,9 +179,11 @@ Task task=new Task(ID);
         </div>
 <script type="text/javascript" language="javascript">		
     document.onscroll = function(){
+        var data=document.getElementById("ID").innerHTML;
         //alert("+: "+(window.pageYOffset + window.innerHeight)+"hegi:"+document.body.offsetHeight);
         if ((window.scrollY + window.innerHeight) >= document.body.offsetHeight){
-            doSearch(document.getElementById('filter1').value, document.getElementById('keyword1').value, document.getElementById('user').value, 'true');
+            
+            ambildata(data, 'true');
         }
 		
 		

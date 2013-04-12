@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -72,11 +73,16 @@ public class maxid extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    public HttpSession session;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String query="SELECT MAX(IDKomentar) AS idkomen FROM komentar";
-        String query2="SELECT waktu from komentar where IDKomentar=(SELECT MAX(IDKomentar) FROM komentar)";
+        int IDTask;
+        session=request.getSession();
+        IDTask=(Integer)session.getAttribute("idtugas");
+        String query="SELECT MAX(IDKomentar) AS idkomen FROM komentar WHERE IDTask="+IDTask+"";
+        String query2="SELECT waktu from komentar where IDKomentar=(SELECT MAX(IDKomentar) FROM komentar WHERE IDTask="+IDTask+")";
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
         ResultSet rs,rs2;

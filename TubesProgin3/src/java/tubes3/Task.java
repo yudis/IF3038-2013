@@ -20,7 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tubes3.Tubes3Connection;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,7 +31,7 @@ public class Task extends HttpServlet {
     public String name;
     public String deadline;
     public int status;
-    public List<Komentar> comment=new ArrayList<Komentar>();
+    int i;
     public List<String> attachment=new ArrayList<String>();
     public List<String> assignee=new ArrayList<String>();
     public String tag;
@@ -40,6 +40,7 @@ public class Task extends HttpServlet {
     ResultSet rs;
     ResultSet rs2;
     public int IDTask;
+    public Task(){}
     public Task(int IDTask) throws SQLException {
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
@@ -47,7 +48,6 @@ public class Task extends HttpServlet {
         
         String queryTask = "SELECT * FROM tugas WHERE IDTask="+ this.IDTask;
         String queryAttachment="SELECT * FROM pelampiran WHERE IDTugas="+this.IDTask;
-        String queryComment="SELECT * FROM komentar WHERE IDTask="+this.IDTask+" order by waktu DESC";
         String queryAssignee="SELECT username FROM penugasan WHERE IDTask="+this.IDTask;
         String queryJumlahKomentar="SELECT count(*) as jumlah FROM komentar where IDTask="+this.IDTask;
         String queryJumlahAssignee="select count(*) as jumlah from penugasan where IDTask="+this.IDTask;
@@ -82,21 +82,7 @@ public class Task extends HttpServlet {
                 attachment.add(rs.getString("lampiran"));
             }
             
-            rs=tu.coba(connection,queryComment);
-            while(rs.next())
-            {
-                String queryAvatar="SELECT avatar FROM pengguna WHERE username='"+rs.getString("username")+"'";
-                rs2=tu.coba(connection,queryAvatar);
-                if(rs2.next())
-                {
-                    Komentar comment2=new Komentar(rs.getString("isi"),rs.getString("username"),rs.getString("waktu"),rs2.getString("avatar"),rs.getInt("IDKomentar"));
-                    comment.add(comment2);
-                }
-                else
-                {
-                    System.out.println("username ngaco shg avatar tidak ditemukan");
-                }
-            }
+           
             /*
             rs=tu.coba(connection, queryJumlahKomentar);
             jumlah=rs.getInt("jumlah");*/
@@ -139,10 +125,95 @@ public class Task extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    HttpSession session;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       // System.out.println("masuk ke sini");
+        session=request.getSession();
+        
+        String user=(String)session.getAttribute("bananauser");
+        
+       System.out.println(user);
+         ResultSet rs,rs2;
+         PrintWriter out = response.getWriter();
+         
+          if (request.getParameter("ID") != null)
+              {
+                  String sid=request.getParameter("ID");
+                  int id = Integer.parseInt(sid);
+                  String query="SELECT count(*) as jumlah FROM komentar where IDTask="+id;
+                  Tubes3Connection tu = new Tubes3Connection();
+                  Connection connection = tu.getConnection();
+                  int jum=0;
+                   if (request.getParameter("continue").equals("true")) {
+                    i++;
+                    } else {
+                        i = 1;
+                        try {
+                            rs=tu.coba(connection,query);
+                            if(rs.next())
+                                {
+                                   jum=rs.getInt("jumlah");
+                                    out.print("<li>");
+                                    out.print("<label id=\"a\"  for=\"komentar\">Komentar("+jum+")</label>");
+                                    out.print("</li>");
+                                    out.print ("<br>");	
+                                    out.print("<div id=\"comment\">");
+                                }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                    }
+                   int awal = 10 * (i - 1);
+                   
+                    String queryKomentar = "SELECT * FROM komentar WHERE IDTask="+id+" ORDER BY waktu LIMIT " + awal + ", 10;";
+                 
+                    
+                   
+                    //String queryUser=;
+                    try {
+                        
+                        rs=tu.coba(connection, queryKomentar);
+                        while (rs.next())
+                        {
+                            String queryUser="SELECT * FROM pengguna WHERE username='"+rs.getString("username") +"'";
+                            rs2=tu.coba(connection,queryUser);
+                            if(rs2.next())
+                            {
+                          out.print ("<div id=\""+rs.getString("IDKomentar") +"\">");
+                        out.print ("<div class=\"headerComment\">");
+                        out.print ("<div class=avatar style=\"float:left;\">");
+                        out.print ("<img src="+rs2.getString("avatar")+" height=\"42\" width=\"42\">");
+                        out.print ("</div>");
+                        out.print ("<div class=username style=\"float:left;\"><b>"+rs.getString("username"));
+                        out.print ("</b></div>");
+                        out.print ("<div class=waktu><b>"+rs.getString("waktu"));
+                        out.print ("</b></div>");
+                        out.print ("<div>");
+                        System.out.println("user comment:"+rs.getString("username")+",pengguna"+user);
+                        if(!(rs.getString("username").equals(user)))
+                        {}
+                        else
+                        {
+                        out.print ("<a class=\"remove\" href=\"\" onClick=\"removeComment("+rs.getString("IDKomentar")+","+jum+");return false;\" >remove");
+
+                        out.print ("</a>");
+                        }
+                        out.print ("</div>");
+                        out.print ("</div>");
+                        out.print ( "<li>"+rs.getString("isi") +"</li>");
+                        out.print ("</div>");
+                        
+                        
+                            }
+                        }
+                    }
+                    catch (SQLException ex) {
+                        Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+              }
     }
 
     /** 

@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -73,15 +74,19 @@ public class addComment extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    public HttpSession session;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String query="";
         String queryU="";
+        int IDTask;
+        session=request.getSession();
+        IDTask=(Integer)session.getAttribute("idtugas");
          response.setContentType("text/html;charset=UTF-8");
 	PrintWriter out = response.getWriter();
         if(!(request.getParameter("comment").equals("")) && !(request.getParameter("usernamecur").equals(""))){
-            query="INSERT INTO komentar(IDTask,username,isi) values(1,'"+request.getParameter("usernamecur")+"','"+request.getParameter("comment")+"')";
+            query="INSERT INTO komentar(IDTask,username,isi) values("+IDTask+",'"+request.getParameter("usernamecur")+"','"+request.getParameter("comment")+"')";
             queryU="SELECT * from pengguna where username='"+request.getParameter("usernamecur")+"'";
         }
         Tubes3Connection tu = new Tubes3Connection();
@@ -99,7 +104,6 @@ public class addComment extends HttpServlet {
             out.print(rs.getString("username"));
             out.print(",");
             out.print(rs.getString("avatar"));
-            System.out.println("comment="+request.getParameter("comment")+" username"+rs.getString("username")+" avatar="+rs.getString("avatar"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
