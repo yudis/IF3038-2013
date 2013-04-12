@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Christianto
  */
-@WebServlet(name = "getTask", urlPatterns = {"/getTask"})
-public class getTask extends HttpServlet {
+@WebServlet(name = "addCategory", urlPatterns = {"/addCategory"})
+public class addCategory extends HttpServlet {
     private Connection conn;
     private Statement query;
     /**
@@ -40,51 +40,22 @@ public class getTask extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");
             query = conn.createStatement();
-            ResultSet result = query.executeQuery("SELECT * FROM tugas");
             
-            if (result.last()) {
-                int banyak = result.getRow();
-                String[] id_tugas = new String[banyak];
-                String[] nama_tugas = new String[banyak];
-                String[] deadline = new String[banyak];
-                String[] tag = new String[banyak];
-                String[] id_kategori = new String[banyak];
-                int status[] = new int[banyak];
-
-                result.beforeFirst();
-                for (int i=0;result.next();++i) {
-                    id_tugas[i] = result.getString("id_tugas");
-                    nama_tugas[i] = result.getString("nama_tugas");
-                    deadline[i] = result.getString("deadline");
-                    tag[i] = result.getString("tag");
-                    status[i] = result.getInt("status");
-                    id_kategori[i] = result.getString("id_kategori");
-                }
-                result.close();
-
-                for (int i=0;i<banyak;++i) {
-                    result = query.executeQuery("SELECT (nama_kategori) FROM kategori WHERE id_kategori="+id_kategori[i]);
-
-                    out.println("<a href=\"rinciantugas.jsp?id_tugas="+id_tugas[i]+"\">");
-                    out.println("<div id=\"listtask\">");
-                    out.println("<div>"+nama_tugas[i]+"</div>");
-                    out.println("<div>"+deadline[i]+"</div>");
-                    out.println("<div>tag: "+tag[i]+"</div>");
-                    if (status[i] == 1) {
-                        out.println("<input type=\"checkbox\" name=\"status\" checked "
-                                + "onclick=\"ubahStatus("+id_tugas[i]+");\">");
-                    } else {
-                        out.println("<input type=\"checkbox\" name=\"status\" "
-                                + "onclick=\"ubahStatus("+id_tugas[i]+");\">");
-                    }
-
-                    result.first();
-                    out.println("<div>"+result.getString(1)+"</div>");
-                    out.println("</div></a>");
-                    result.close();
-                }
+            ResultSet result = query.executeQuery("SELECT MAX(id_kategori) FROM kategori");
+            result.first();
+            int id_kategori = result.getInt(1) + 1;
+            result.close();
+            
+            int hasil = query.executeUpdate("INSERT INTO kategori(nama_kategori,id_kategori)"
+                    + " VALUES("+request.getParameter("catname")+","+id_kategori+")");
+            
+            String[] orang = request.getParameter("assignee").split("/");
+            for (int i=0;i<orang.length;++i) {
+                hasil = query.executeUpdate("INSERT INTO hak_akses(username,id_kategori)"
+                    + " VALUES("+orang[i]+","+id_kategori+")");
             }
             
+            response.sendRedirect("dashboard.jsp");
         } catch (SQLException ex) {
             out.println("Failure to execute SQL query");
         } catch(ClassNotFoundException ex){

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Christianto
  */
-@WebServlet(name = "GetCat", urlPatterns = {"/GetCat"})
+@WebServlet(name = "getCat", urlPatterns = {"/getCat"})
 public class getCat extends HttpServlet {
     private Connection conn;
     private Statement query;

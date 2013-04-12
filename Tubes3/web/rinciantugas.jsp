@@ -287,7 +287,7 @@
     </head>
     <body onload="jumlah_komentar();">
         <%-- Mulai daerah header buatan Jo--%>
-        <%--<jsp:include page="header.jsp" flush="true" />--%>
+        <%--@ include file="header.jsp" --%>
         
         <!-------------------------------BODY HALAMAN------------------------------------->
         <div class="main">

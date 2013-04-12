@@ -31,8 +31,9 @@
 #category{
     width: 242px;
     height: auto;
-    margin-left: 282px;
+    margin-left: 300px;
     margin-top: -155px;
+    overflow: scroll;
 }
 
 #addtask:hover{
@@ -58,11 +59,6 @@
     color: #ffffff;
     font-weight: 800;
     font-family: Calibri;
-}
-
-#category {
-    margin-left: 300px;
-    margin-top: -155px;
 }
 
 #category2 {

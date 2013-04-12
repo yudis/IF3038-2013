@@ -136,7 +136,7 @@
     </head>
     <body onload="prepare();">
         <!----------------------------HEADER FILE---------------------------->
-        <%--<jsp:include page="header.jsp" flush="true" />--%>
+        <%@ include file="header.jsp" %>
         
         <!-----------------------------BODY FILE-------------------------------->
         <div class="main">

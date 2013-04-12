@@ -37,10 +37,11 @@
                 if (xmlhttp.readyState==4 && xmlhttp.status==200){				
                     //alert(xmlhttp.responseText);
                     //document.getElementById("category").innerHTML=xmlhttp.responseText;
+                    alert(xmlhttp.responseText);
                 }
             };
 
-            xmlhttp.open("GET","ubahstatus?id_tugas="+nomor,true);
+            xmlhttp.open("GET","ubahStatus?id_tugas="+nomor,true);
             xmlhttp.send();				
         }
 
@@ -64,7 +65,7 @@
             xmlhttp.open("GET","getCat",true);
             xmlhttp.send();
             //alert(xmlhttp.responseText);
-            //alert(xmlhttp.status);
+            //alert("HERE");
         }
 
         function getTask() {
@@ -113,12 +114,12 @@
             //alert(xmlhttp.responseText);
             //alert(xmlhttp.status);
         }
-			
+	
         </script>
     </head>
 	
 <!------------------------------------------------------------------------->	
-    <body onload="getTask();getCat();">
+    <body onload="getCat();getTask();">
         
         <%@ include file="header.jsp" %>
         
@@ -147,7 +148,7 @@
                     </div>
                     <div id="cattitle">ADD CATEGORY</div>
                     <div id="elcategory">
-                        <form action="addCategory">
+                        <form action="addCategory" method="GET">
                             <label>category name</label>
                             <input name="catname" placeholder="category name">
                             <label>assignee</label>

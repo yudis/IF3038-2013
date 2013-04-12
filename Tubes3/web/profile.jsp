@@ -37,7 +37,7 @@
 		alert(xmlhttp.responseText);
 		//alert(xmlhttp.status);
             }
-            function getEmail(){<!--SIGIT-->########
+            function getEmail(){
 		var xmlhttp;
 		if (window.XMLHttpRequest){
                     xmlhttp = new XMLHttpRequest();				
@@ -59,7 +59,7 @@
 		//alert(xmlhttp.status);
             }
 	
-            function getAvatar(){<!--SIGIT-->########
+            function getAvatar(){
 		var xmlhttp;
 		if (window.XMLHttpRequest){
                     xmlhttp = new XMLHttpRequest();				
@@ -81,7 +81,7 @@
 		//alert(xmlhttp.status);
             }
 	
-            function getNamaLengkap(){<!--SIGIT-->##########
+            function getNamaLengkap(){
 		var xmlhttp;
 		if (window.XMLHttpRequest){
                     xmlhttp = new XMLHttpRequest();				
@@ -103,7 +103,7 @@
 		//alert(xmlhttp.status);
             }
 	
-            function getTanggalLahir(){<!--SIGIT-->##################
+            function getTanggalLahir(){
 		var xmlhttp;
 		if (window.XMLHttpRequest){
                     xmlhttp = new XMLHttpRequest();				
@@ -125,7 +125,7 @@
 		//alert(xmlhttp.status);
             }
 	
-            function getProfil1Form(){<!--SIGIT-->###############
+            function getProfil1Form(){
 		var xmlhttp;
 		if (window.XMLHttpRequest){
                     xmlhttp = new XMLHttpRequest();				
@@ -147,7 +147,7 @@
 		//alert(xmlhttp.status);
             }
 	
-            function getTugasSelesai(){<!--SIGIT-->###############
+            function getTugasSelesai(){
 		var xmlhttp;
 		if (window.XMLHttpRequest){
                     xmlhttp = new XMLHttpRequest();				
