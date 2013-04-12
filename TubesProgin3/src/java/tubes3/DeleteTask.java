@@ -18,46 +18,39 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Devin
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "DeleteTask", urlPatterns = {"/DeleteTask"})
+public class DeleteTask extends HttpServlet {
 
     private Tubes3Connection db;
     private Connection connection;
 
-    public Login(){
+    public DeleteTask(){
         db = new Tubes3Connection();
         connection = db.getConnection();
     }
     
-    public int canLogin(String username, String pass) {
-        try {
-            ResultSet result = db.coba(connection, "select count(*) from pengguna where username='" + username + "' and password='" + pass + "'");
-            result.first();
-            if (result.getInt("count(*)") > 0)
-                return 1;
-            else
-                return 0;
-        } catch (Exception ex) {
-            System.out.println("Exception is ;" + ex);
-        }
-        return -1;
-    }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        String username, pass;
-        if ((username = request.getParameter("user")) != null && (pass = request.getParameter("pass")) != null) {
-            if (canLogin(username, pass) == 1) {
-                request.getSession().setAttribute("bananauser", username);
-                out.print("success");
+        String user = (String)request.getSession().getAttribute("bananauser");
+        String id = request.getParameter("id");
+        try {
+            ResultSet result = db.coba(connection, "SELECT username FROM tugas WHERE IDTask='" + id + "'");
+            result.first();
+            String maker = result.getString("username");
+            db.nonReturnQuery(connection, "DELETE FROM penugasan WHERE username='" + user + "' AND IDTask='" + id + "'");
+            if(user.equals(maker)) {
+                db.nonReturnQuery(connection, "DELETE FROM komentar WHERE IDTask='" + id + "'");
+                db.nonReturnQuery(connection, "DELETE FROM pelampiran WHERE IDTugas='" + id + "'");
+                db.nonReturnQuery(connection, "DELETE FROM penugasan WHERE IDTask='" + id + "'");
+                db.nonReturnQuery(connection, "DELETE FROM tugas WHERE IDTask='" + id + "'");
             }
-            else if (canLogin(username, pass) == 0)
-                out.print("notsuccess");
-            else
-                out.print("error");
         }
+        catch (Exception ex) {
+            System.out.println("Exception is ;" + ex);
+        }
+        out.print("1");
     }
     
     @Override
