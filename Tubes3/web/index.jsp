@@ -24,7 +24,7 @@
 		
 		
 //			function validateLogin(form){					/*---------------------------JO---validasi form login--phpnya:login.php----------------- */
-//
+//                              var xmlhttp;
 //				if (window.XMLHttpRequest){
 //					xmlhttp = new XMLHttpRequest();				
 //				}else{
@@ -126,7 +126,9 @@
 				{
 					var userid = document.registration.username.value;
 					var userpass = document.registration.password.value;
-					
+					var xmlhttp;
+                                        
+                                        //alert("xmlhttp.responseText");
 						if (window.XMLHttpRequest){
 							xmlhttp = new XMLHttpRequest();				
 						}else{
@@ -135,6 +137,7 @@
 						
 						xmlhttp.onreadystatechange = function(){
 							if (xmlhttp.readyState==4 && xmlhttp.status==200)	{				
+                                                            //alert(xmlhttp.responseText);
 								if((userid.length >= "5") && (userid != userpass) && (xmlhttp.responseText==1)){
 										document.getElementById("usericon").src="pict/centang.png";
 								}else{
@@ -202,7 +205,8 @@
 			function email_validating()				/*-----------------------------JO--validasi buat email--registeremail.php--------------------------- */
 				{
 					var emails = document.registration.email.value;
-
+                                        var xmlhttp;
+                                        
 					if (window.XMLHttpRequest){
 						xmlhttp = new XMLHttpRequest();				
 					}else{
@@ -219,7 +223,7 @@
 						}		
 					}
 						
-					xmlhttp.open("GET","registeremail.php?email="+emails,true);
+					xmlhttp.open("GET","registeremail?email="+emails,true);
 					xmlhttp.send();														
 				}
 			
@@ -253,10 +257,7 @@
 							document.getElementsByName("submit")[0].disabled = false;
 						}
 				}
-			
-                        function cobaAlert(){
-                            alert("tes");
-                        }
+			                      
 </script>
     </head>
     <body onLoad="isLogin()">		<!-----------------------panggil isLogin------------------------->
@@ -332,10 +333,10 @@
                         <form name="registration" method="post" action="registerUser.jsp">
                             
                             <label>username</label>
-                            <input name="usernameReg" type="text" placeholder="username"  onkeyup="user_validating()" onChange="logingg()" />
+                            <input name="username" type="text" placeholder="username"  onkeyup="user_validating()" onChange="logingg()" />
                                                     <img src="pict/blank.png" alt="icon2" id="usericon" onchange="isformvalid()" />
                             <label>password</label>
-                            <input name="passwordReg" type="password" placeholder="password" onKeyUp="pass_validating()" onChange="logingg()" />
+                            <input name="password" type="password" placeholder="password" onKeyUp="pass_validating()" onChange="logingg()" />
                             <img src="pict/blank.png" alt="icon3" id="passicon" />
                                                     <label>confirm password</label>
                             <input name="confirmpass" type="password" placeholder="confirm password" onKeyUp="conf_validating()" onChange="logingg()"  />
@@ -343,18 +344,18 @@
                             <label>nama lengkap</label>
                             <input name="namaleng" placeholder="nama lengkap" onKeyUp="nama_validating()" onChange="logingg()" />
                                                     <img src="pict/blank.png" alt="icon5" id="nameicon" />
-                            <label>tanggal lahir</label>
-                                <input type="text" name="tanggalReg" id="date" onMouseDown="date_validating()" onChange="logingg()" />
-                                <img src="pict/blank.png" alt="icon8" id="dateicon"  />
-                                <script type="text/javascript">
-                                        calendar.set("date");
-                                </script>
+                             <label>tanggal lahir</label>
+						<input type="text" name="tanggal" id="date" onMouseDown="date_validating()" onChange="logingg()" />
+						<img src="pict/blank.png" alt="icon8" id="dateicon"  />
+						<script type="text/javascript">
+							calendar.set("date");
+						</script>
                             <label>email</label>
-                            <input name="emailReg" type="email" placeholder="email" onKeyUp="email_validating()" onChange="logingg()" />
+                            <input name="email" type="email" placeholder="email" onKeyUp="email_validating()" onChange="logingg()" />
                                                     <img src="pict/blank.png" alt="icon6" id="emailicon" />
                                 <br><br>
                             <label>avatar</label>
-                                                    <input type="fileReg" name="avatar"  />
+                                                    <input type="file" name="avatar"  />
     <!--
     onChange="avatar_validating();logingg()"
     -->

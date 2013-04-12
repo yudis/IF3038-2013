@@ -1,11 +1,11 @@
 <%@ page import ="java.sql.*" %>
 <%@ page import ="javax.sql.*" %>        
 <%  //-------------------------register---------------------------------
-    String usrReg = request.getParameter("usernameReg");
-    String pwdReg = request.getParameter("passwordReg");
+    String usrReg = request.getParameter("username");
+    String pwdReg = request.getParameter("password");
     String namaReg = request.getParameter("namaleng");
-    String tglReg = request.getParameter("tanggalReg");
-    String emlReg = request.getParameter("emailReg");
+    String tglReg = request.getParameter("tanggal");
+    String emlReg = request.getParameter("email");
     
     Class.forName("com.mysql.jdbc.Driver");
     java.sql.Connection conLogin2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003","root","");
