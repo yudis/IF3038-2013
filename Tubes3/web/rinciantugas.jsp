@@ -40,7 +40,7 @@
                         id_tugas = window.location.search.substring(c+9);
                     } 
 
-                    params = "komentar="+escape(form.comment.value)+"&user="+localStorage.userLogin+"&id_tugas="+id_tugas;
+                    params = "komentar="+escape(form.comment.value)+"&user=<%out.print(session.getAttribute("userLoginSession"));%>id_tugas="+id_tugas;
                     xmlhttp.open("POST","tambah_komentar",true);                
                     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                     xmlhttp.send(params);
@@ -73,7 +73,7 @@
                 var n = comment.innerHTML.indexOf(" ");
                 var tanggal = comment.innerHTML.substring(n+1,n+20);
                 
-                params = 'tanggal='+tanggal+'&user='+localStorage.userLogin+'&id_tugas='+id_tugas;
+                params = 'tanggal='+tanggal+'&user=<%out.print(session.getAttribute("userLoginSession"));%>&id_tugas='+id_tugas;
                 xmlhttp.open("POST","hapus_komentar",true);                
                 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xmlhttp.send(params);
@@ -137,7 +137,7 @@
                             tambah += '<div class="data_komentar">';
                             tambah += username + " " + tanggal + " :";
                             
-                            if (username === localStorage.userLogin) {
+                            if (username === "<%out.print(session.getAttribute("userLoginSession"));%>") {
                                 tambah += '<input type="button" class="hapus_comment" value="delete" onclick="hapus_komentar(this.parentNode)">';
                             }
                             
@@ -239,9 +239,9 @@
             function showEdit(){
                 if (document.getElementById("detailedit").innerHTML !== "" && <%
                     String[] assignee = data.getAssignee();
-                    out.println("(localStorage.userLogin === "+data.getCreator());
+                    out.println('"'+(String)session.getAttribute("userLoginSession")+"\" === \""+data.getCreator()+'"');
                     for (int i=0;i<assignee.length;++i) {
-                        out.println("|| localStorage.userLogin === "+assignee[i]);
+                        out.println("|| \""+(String)session.getAttribute("userLoginSession")+"\" === \""+assignee[i]+'"');
                     }
                     out.println(")");
                 %>) {
@@ -252,7 +252,7 @@
             }
                         
             function hapus_task() {
-                if (localStorage.userLogin !== <%out.print(data.getCreator());%>) {
+                if (<%out.print('"'+(String)session.getAttribute("userLoginSession")+"\"===\""+data.getCreator()+'"');%>) {
                     alert("Anda bukan pembuat tugas");
                 } else {
                     var xmlhttp;
@@ -355,7 +355,7 @@
                 </div>
                 <div id ="detailedit">
                     <label>NAMA KATEGORI</label>
-                    <a id="kategori"><%out.println(data.getKategori());%></a>
+                    <a id="kategori"><%out.print(data.getKategori());%></a>
                     
                     <form action="edit_detail_tugas" method="POST" enctype="multipart/form-data">
                         <label>STATUS TUGAS
