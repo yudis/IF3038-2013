@@ -1,20 +1,20 @@
 //Tubes 2
 
-var xmlhttp;
-function loadXMLDocPost(url,parameters,cfunc)
+var xmlhttp = new Array();
+function loadXMLDocPost(index,url,parameters,cfunc)
 {
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
+  xmlhttp[index]=new XMLHttpRequest();
   }
 else
   {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  xmlhttp[index]=new ActiveXObject("Microsoft.XMLHTTP");
   }
-xmlhttp.onreadystatechange=cfunc;
-xmlhttp.open("POST",url,true);
-xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-xmlhttp.send(parameters);
+xmlhttp[index].onreadystatechange=cfunc;
+xmlhttp[index].open("POST",url,true);
+xmlhttp[index].setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xmlhttp[index].send(parameters);
 }
 
 function loadRincian() {
@@ -22,55 +22,54 @@ function loadRincian() {
 }
 
 function onload() {
+    loadTaskDetails();
+    loadComment(1);
+    return false;
 }
 
 function loadTaskDetails()
 {
-    var parameters = "requesttype=load";
-    loadXMLDocPost('Rincian',parameters,
+    var parameters = "requesttype=load&tabletype=taskdetails";
+    loadXMLDocPost(1,'Rincian',parameters,
         function()
         { 
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            if (xmlhttp[1].readyState==4 && xmlhttp[1].status==200)
             {
             console.log("response get");
-            console.log(xmlhttp.responseText);
-            document.getElementById("rincian").innerHTML=xmlhttp.responseText;
+            console.log(xmlhttp[1].responseText);
+            document.getElementById("rincian").innerHTML=xmlhttp[1].responseText;
             }
         });
-    return false;
 }
 
-function loadComment(currpage, idtask)
+function loadComment(currpage)
 {
-var filtertype=encodeURIComponent(document.getElementById("filtertype").value);
-var searchquery=encodeURIComponent(document.getElementById("searchquery").value);
-var parameters = "requesttype=save"+"&searchquery="+searchquery;    
-loadXMLDocGet('php/pagination.php?page='+currpage+
-    '&t='+idtask,function()
+    
+var parameters = "requesttype=load&tabletype=komentar&page="+currpage;    
+loadXMLDocPost(2,'Rincian',parameters,function()
   { 
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+  if (xmlhttp[2].readyState==4 && xmlhttp[2].status==200)
     {
     console.log("response get");
-    console.log(xmlhttp.responseText);
-    document.getElementById("commentpage").innerHTML=xmlhttp.responseText;
+    console.log(xmlhttp[2].responseText);
+    document.getElementById("commentpage").innerHTML=xmlhttp[2].responseText;
     }
     
   });
-return false;
 }
 
 function saveComment() {
-    var param = "?idtask=" + document.getElementById("idtask").value +
-                    "&tabletype=" + "komentar"  +
-                    "&commentarea=" + document.getElementById("commentarea").value;
-loadXMLDocGet('php/db.php'+param,function() { 
-    console.log(xmlhttp.readyState);
-    console.log(xmlhttp.status);
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    var parameters = "requesttype=save"+
+                    "&tabletype=komentar"+
+                    "&commentarea=" + encodeURIComponent(document.getElementById("commentarea").value);
+loadXMLDocPost(3,'Rincian',parameters,function() { 
+    console.log(xmlhttp[3].readyState);
+    console.log(xmlhttp[3].status);
+        if (xmlhttp[3].readyState==4 && xmlhttp[3].status==200)
         {
         alert("db get");
         console.log("response get");
-        console.log(xmlhttp.responseText);
+        console.log(xmlhttp[3].responseText);
         }
 
 });
@@ -85,14 +84,14 @@ function saveTaskDetails() {
                 "&deadline=" + encodeURIComponent(document.getElementById("deadline").value) +
                 "&listassignee=" + encodeURIComponent(document.getElementById("listassignee").value) +
                 "&listtag=" + encodeURIComponent(document.getElementById("listtag").value);
-loadXMLDocPost('Rincian',param,function() { 
-    console.log(xmlhttp.readyState);
-    console.log(xmlhttp.status);
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+loadXMLDocPost(4,'Rincian',param,function() { 
+    console.log(xmlhttp[4].readyState);
+    console.log(xmlhttp[4].status);
+        if (xmlhttp[4].readyState==4 && xmlhttp[4].status==200)
         {
         alert("db get");
         console.log("response get");
-        console.log(xmlhttp.responseText);
+        console.log(xmlhttp[4].responseText);
         }
 });
 return false;
