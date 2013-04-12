@@ -1,3 +1,27 @@
+show/*inipynyaregawal
+ <div id="regawal">
+                    <div id="were">
+                    </div>
+                    <div id="poctreg">
+                    </div>
+                    <div id="textreg">
+                        try and be awesome 
+                    </div>
+                </div>
+                
+                
+ini punya munculin cat
+var nana=document.createElement("div");
+                var node=document.createTextNode("This is new.");
+                nana.id = ':listtask';
+                para.appendChild(nana);
+                
+                var element=document.getElementById("main");
+                var child=document.getElementById("task");
+                element.insertBefore(nana,child);
+
+                */
+
 body{
     background-image: url("../pict/cubes.png");
     background-repeat: repeat;
@@ -11,6 +35,7 @@ body{
     width: 81px;
     margin-left: 40px;
     margin-top: 8px;
+    
 }
 
 #login {

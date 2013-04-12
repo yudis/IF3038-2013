@@ -90,6 +90,8 @@
                     sem += i;
                     document.getElementById("minute").innerHTML += "<option>"+sem+"</option>";
                 }
+                
+                document.getElementById("username").value = localStorage.userLogin;
             }
             
             function auto_complete(text) {
@@ -180,7 +182,7 @@
                     <input type="text" name="id_kategori" id="id_kategori" 
                            value="<%out.print(request.getParameter("id_kategori"));%>">
                     <input type="text" name="username" id="username"
-                           value="<%out.print(session.getAttribute("userLoginSession"));%>">
+                           value="">
                 </form>
             </div>
             <div id="calendar" class="calendar-box"></div>
