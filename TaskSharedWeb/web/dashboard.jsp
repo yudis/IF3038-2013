@@ -18,7 +18,7 @@
     </head>
     <body>
         <%
-        /*session management*/
+        /*session management  */
         String userActive = "";
         if(request.getSession().getAttribute("userlistapp")==null){
             response.sendRedirect("index.jsp");
