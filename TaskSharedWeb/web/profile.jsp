@@ -53,7 +53,7 @@
                     if(userActive.equals(usernameToShow)){
                         out.print("<div id=\"upload_button\"><a href=\"#\" onClick=\"edit_avatar('"+usernameToShow+"')\">Upload New Avatar</a></div>");
                         out.print("<div id=\"uploader\">");
-                        out.print("<form enctype=\"multipart/form-data\" method=\"post\" action=\"getavatar?username="+usernameToShow+"\">");
+                        out.print("<form enctype=\"multipart/form-data\" method=\"post\" action=\"getavatar\">");
                         out.print("	<input type=\"file\" name=\"changeAvatar\" id=\"inputfileid\">");
                         out.print("	<input type=\"submit\">");
                         out.print("</form>");
