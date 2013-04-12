@@ -55,7 +55,7 @@ public class Search extends HttpServlet {
 //            RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/pages/Dashboard.jsp");
 //            requestDispatcher.forward(request,response);
         } catch (Exception ex) {
-            Logger.getLogger(SearchCoba.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -153,10 +153,10 @@ public class Search extends HttpServlet {
                     }
                     out+= "<tr>\n";
                     out+= "        <td>\n";
-                    out+= "        <form name='hiddenidtask2' id='hiddenidtask2' action='rincian.php' method='post'>\n";
+                    out+= "        <form name='hiddenidtask"+resultSet.getString("ID")+"' id='hiddenidtask"+resultSet.getString("ID")+"' action='rincian.jsp' method='post'>\n";
                     out+= "            <input type='hidden' name='idtask' value='"+resultSet.getString("ID")+"' />\n";
                     out+= "        </form>\n";
-                    out+= "        <a href='javascript:document.getElementById('hiddenidtask2').submit();' >"+resultSet.getString("Nama")+"</a>\n";
+                    out+= "        <a href=\"javascript:document.forms['hiddenidtask"+resultSet.getString("ID")+"'].submit()\"  >"+resultSet.getString("Nama")+"</a>\n";
                     out+= "        </td>\n";
                     out+= "        <td>"+resultSet.getString("Deadline")+"</td>\n";
                     if (resultSet.getInt("Status") == 1) {
@@ -223,10 +223,10 @@ public class Search extends HttpServlet {
                     }
                     out+= "<tr>\n";
                     out+= "        <td>\n";
-                    out+= "        <form name='hiddenidtask' id='hiddenidtask' action='rincian.php' method='post'>\n";
+                    out+= "        <form name='hiddenidtask"+resultSet.getString("ID")+"' id='hiddenidtask"+resultSet.getString("ID")+"' action='rincian.jsp' method='post'>\n";
                     out+= "            <input type='hidden' name='idtask' value='"+resultSet.getString("ID")+"' />\n";
                     out+= "        </form>\n";
-                    out+= "        <a href=\"javascript:document.forms['hiddenidtask'].submit()\"  >"+resultSet.getString("Nama")+"</a>\n";
+                    out+= "        <a href=\"javascript:document.forms['hiddenidtask"+resultSet.getString("ID")+"'].submit()\"  >"+resultSet.getString("Nama")+"</a>\n";
                     out+= "        </td>\n";
                     out+= "        <td>"+resultSet.getString("Deadline")+"</td>\n";
                     if (resultSet.getInt("Status") == 1) {
@@ -276,10 +276,10 @@ public class Search extends HttpServlet {
                     }
                     out+= "<tr>\n";
                     out+= "        <td>\n";
-                    out+= "        <form name='hiddenidtask2' id='hiddenidtask2' action='rincian.php' method='post'>\n";
+                    out+= "        <form name='hiddenidtask"+resultSet.getString("ID")+"' id='hiddenidtask"+resultSet.getString("ID")+"' action='rincian.jsp' method='post'>\n";
                     out+= "            <input type='hidden' name='idtask' value='"+resultSet.getString("ID")+"' />\n";
                     out+= "        </form>\n";
-                    out+= "        <a href='javascript:document.getElementById('hiddenidtask2').submit();' >"+resultSet.getString("Nama")+"</a>\n";
+                    out+= "        <a href=\"javascript:document.forms['hiddenidtask"+resultSet.getString("ID")+"'].submit()\"  >"+resultSet.getString("Nama")+"</a>\n";
                     out+= "        </td>\n";
                     out+= "        <td>"+resultSet.getString("Deadline")+"</td>\n";
                     if (resultSet.getInt("Status") == 1) {
