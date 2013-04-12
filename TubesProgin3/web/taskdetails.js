@@ -18,6 +18,31 @@ function fileallowed(){
     
 }
 
+function ambildata(ID,cnt){
+
+var xmlhttp;
+if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+else    
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+xmlhttp.onreadystatechange=function()
+    {
+        if(xmlhttp.readyState == 4){
+           var ss = document.getElementById('Komentar');
+            var str =xmlhttp.responseText;
+            ss.innerHTML += str;
+        }
+    }
+          
+xmlhttp.open("GET", 'Task?ID=' + ID+ '&continue=' + cnt, true);
+xmlhttp.send();
+}
+
 function removeComment(idcomment,jumcom){
 
 	var xmlhttp;
@@ -256,3 +281,4 @@ xmlhttp.open("POST", 'removeAssignee', true)
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 xmlhttp.send(queryString);
 }
+
