@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php
+<%--<?php
     include_once("../php/loginchecker.php");
 ?>
 <?php include '../php/fungsiget.php'?>
@@ -8,7 +8,8 @@
   
       $username = $_GET["t"];
     //$all_task = get_alltaskphp();
- ?>
+ ?>--%>
+<%String activeuser=request.getParameter("t"); %>
 <html>
 	<!--
 	<IFRAME name="iframe" src="src/header.html" width='100%' height='auto' marginwidth=0 marginheight=0 hspace=0 vspace=0 frameborder=0 scrolling=auto></IFRAME>
@@ -33,9 +34,7 @@
 
 	<body>
 		<!-- Web Header -->
-		<?php
-			include_once("header.php");
-		?>
+		 <%@include file="../src/header.jsp"%>
 
 	
 		
@@ -43,17 +42,13 @@
 		<section>
 			<div id="navbar">
 				<div id="short_profile">
-					<img id="profile_picture" src="../img/avatar1.png" alt="">
-					<div id="profile_info">
-						Ruth Natasha 
-						<br><br>
-						<div class="link_tosca" id="edit_profile_button"> Edit Profile </div>
-					</div>
+                                    <img id="profile_picture" src="../file/4.jpg" alt="">
+					
 				</div>
 				
 			</div>
 			<div id="dynamic_content">
-                            <form >
+                            <form action="../ServletEditProfile" method="post" enctype="multipart/form-data" id="edit_profile">
 				<div id="add_task_container">
 					<div id="add_task_header" class="left top30 dynamic_content_head">
 						Edit Profile  <?php echo $username ?>
