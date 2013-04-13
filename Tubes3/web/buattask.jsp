@@ -10,7 +10,7 @@
 <html>
     <head>
         <title> Next | ADD TASK </title>
-        <link rel="stylesheet" href="css/css.css">
+        <!--<link rel="stylesheet" href="css/css.css">-->
         <link rel="stylesheet" href="css/buattask.css">
         <link rel="stylesheet" href="css/calendar.css">
         <script src="js/calendar.js" > </script>
@@ -22,32 +22,33 @@
                     document.getElementById("namaicon").src="pict/centang.png";
                 }
             }
-				
-            function dead_validating(form) {
-                var xmlhttp;
-                if (window.XMLHttpRequest) {
-                    xmlhttp = new XMLHttpRequest();				
+	
+            function isKabisat(x) {
+                if (x % 100 != 0) {
+                    return (x % 4 == 0);
                 } else {
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+                    return (x % 400 == 0);
                 }
-                
-                xmlhttp.onreadystatechange = function(){
-                    if (xmlhttp.readyState===4 && xmlhttp.status === 200)	{
-                        //alert(xmlhttp.responseText);
-                        if (xmlhttp.responseText === 1) {
-                            document.getElementById("deadicon").src="pict/centang.png";
-                        } else {
-                            document.getElementById("deadicon").src="pict/canceled.png";                        
-                        }
+            }
+        
+            function dead_validating(date) {
+                var s = date.value;
+                var regex = new RegExp("^[0-9]{4}-((0[1-9])|(1[0-2]))-([0-2][0-9]|3[0-1])$");
+                alert(s);
+                if (regex.test(x)) {
+                    var d = s.substring(5,7);
+                    var m = s.substring(8,10);
+                    var y = parseInt(s.substring(0,4));
+                    
+                    if (((m=="02"||m=="04"||m=="06"||m=="09"||m=="11")&&(d == "31"))||(m=="02" && d=="30")||
+                            (m=="02" && d=="29" && !isKabisat(y))) {
+                        document.getElementById("deadicon").src = "pict/canceled.png";
+                    } else {
+                        document.getElementById("namaicon").src="pict/centang.png";                        
                     }
-                };
-                
-                params = "tanggal=";
-                params += escape(form.year.value+"-"+form.month.value+"-"+form.day.value+" "+form.hour.value+":"+form.minute.value+":00");                
-                //alert(params);
-                xmlhttp.open("POST","validasi_date",true);
-                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-                xmlhttp.send(params);
+                } else {
+                    document.getElementById("deadicon").src = "pict/canceled.png";
+                }
             }
 			
             function tag_validating()
@@ -94,8 +95,11 @@
             
             function auto_complete(text) {
                 var xmlhttp;
-                if (text === "") {
-                    document.getElementById("autobox").value = "";                    
+                if (text === ""){ 
+                    if (document.getElementById("autobox").value !== "Tidak ada user dengan nama itu") {
+                        document.getElementById("autobox").value = "";
+                        document.getElementById("asicon").src="pict/centang.png"; 
+                    }
                 } else {
                     if (window.XMLHttpRequest){
                         xmlhttp = new XMLHttpRequest();				
@@ -117,8 +121,15 @@
                                 n = s.indexOf("\n");
      
                                 //Tampilkan datanya
-                                var tambah = username+" ";
+                                var tambah = username;
                                 document.getElementById("autobox").value += tambah+"\n";
+                            }
+                            
+                            if (document.getElementById("autobox").value === "") {
+                                document.getElementById("asicon").src="pict/canceled.png";
+                                document.getElementById("autobox").value = "Tidak ada user dengan nama itu";
+                            } else {
+                                document.getElementById("asicon").src="pict/blank.png"; 
                             }
                         }
                     };
@@ -149,18 +160,18 @@
                     <img src="pict/blank.png" alt="icon1" id="namaicon"  />                    
                     
                     <label>DEADLINE</label>
-                    <input type="text" id="date" name="date" placeholder="2000-12-20">
-                    <select name="hour" id="hour" onchange="dead_validating(this.parentNode);">
+                    <input type="text" id="date" name="date" placeholder="2000-12-20" onchange="dead_validating(this);">
+                    <select name="hour" id="hour">
                     </select>-
 
-                    <select name="minute" id="minute" onchange="dead_validating(this.parentNode);">
+                    <select name="minute" id="minute">
                     </select>  
                     <img src="pict/blank.png" alt="icon3" id="deadicon" />
                     
                     <label>ASSIGNEE</label>
                     <input type="textarea" name="assignee" placeholder="assignee"
                       title="Akhiri nama user dengan tanda /, jangan dipisah spasi"
-                      onkeyup="auto_complete(this);" value="">
+                      onkeyup="auto_complete(this.value.substring(this.value.lastIndexOf('/')+1));" value="">
                     <img src="pict/blank.png" alt="icon4" id="asicon" />
                       
                     <input id="autobox" disabled></input>
@@ -168,19 +179,16 @@
                     <label>TAG</label>
                     <input type="textarea" name="catname" placeholder="tag" value="">
                     
-                    <label>ATTACHMENT</label>
-                    <div id="attach_upload">                            
-                    </div>                            
-		    <img src="pict/blank.png" alt="icon2" id="attaicon"  />                    
+                    <label>ATTACHMENT</label>                          
                     
                     Upload File: <input type="file" name="file" id="file" onchange="validasi_file(this);">
-                    <input type="file" name="file_upload" id="file_upload" multiple>
-                    <br>
-                    <input class= "submitreg" name="submit" type="submit" value="Submit">
+		    <img src="pict/blank.png" alt="icon2" id="attaicon"  />  
+                    
                     <input type="text" name="id_kategori" id="id_kategori" 
                            value="<%out.print(request.getParameter("id_kategori"));%>">
                     <input type="text" name="username" id="username"
                            value="<%out.print(session.getAttribute("userLoginSession"));%>">
+                    <input class= "submitreg" name="submit" type="submit" value="Submit">
                 </form>
             </div>
             <div id="calendar" class="calendar-box"></div>

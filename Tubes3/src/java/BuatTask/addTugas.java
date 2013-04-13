@@ -42,6 +42,7 @@ public class addTugas extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");
             query = conn.createStatement();
+            out.println(request.getParameterMap());
             String mau = "INSERT INTO tugas"
                     + "(status,id_kategori,deadline,tag,username,nama_tugas)"
                     + " VALUES(0,"+request.getParameter("id_kategori")+",'"
