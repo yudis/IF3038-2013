@@ -4,13 +4,14 @@
  */
 package RincianTugas;
 
+import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.sql.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import javax.servlet.http.Part;
  * @author Christianto
  */
 @WebServlet(name = "edit_detail_tugas", urlPatterns = {"/edit_detail_tugas"})
+@MultipartConfig(location="")
 public class edit_detail_tugas extends HttpServlet {
     private Connection conn;
     private Statement query;
@@ -46,45 +48,64 @@ public class edit_detail_tugas extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");
             query = conn.createStatement();
+            
             ResultSet result = query.executeQuery("SELECT * from tugas WHERE id_tugas="+request.getParameter("id_tugas"));
             if (result.next()) {
-                result.close();
-                
                 String id_tugas = request.getParameter("id_tugas");
                 if (request.getParameter("status") == null) {
-                    status = 1;
-                } else {
                     status = 0;
+                } else {
+                    status = 1;
                 }
                 
-                Part filepart = request.getPart("file_upload");
-                String filename = "";
-                InputStream baca = filepart.getInputStream();
                 //Create a file in the folder attach
-                try {
-                    FileOutputStream tulis = new FileOutputStream("attach/"+request.getParameter("id_tugas")+"/"+filename);
-                    byte[] data = new byte[1024];
-                    int panjang;
-                    while ((panjang = baca.read(data,0,1024)) != -1) {
-                        tulis.write(data, 0, panjang);
+                String attachment=result.getString("attachment");
+                Part file = request.getPart("file");
+                if (file != null) {
+                    //out.println(file.getHeader("content-disposition"));
+                    String filename="";
+                    for (String cd : file.getHeader("content-disposition").split(";")) {
+                        if (cd.trim().startsWith("filename")) {
+                            filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                            filename = filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
+                        }
                     }
-                    tulis.close();
-                } catch (Exception e) {
+                    //out.println(filename);
                     
+                    if (!filename.equals("")) {     
+                        InputStream masuk = file.getInputStream();
+                        File f = new File(getServletContext().getRealPath(""),"/attach/"+filename);
+                        FileOutputStream tulis = new FileOutputStream(f);
+
+                        int sem;
+                        while ((sem = masuk.read()) != -1) {
+                            tulis.write(sem);
+                        }
+                        tulis.close();
+                        attachment += "attach/"+filename;
+                    }
                 }
+                result.close();
                 
-                int hasil = query.executeUpdate("UPDATE tugas SET status="+status
-                        +",tag="+request.getParameter("tag")
-                        +",deadline="+request.getParameter("date")+" "+request.getParameter("hour")+":"+request.getParameter("minute")+":00"
-                        +" WHERE id_tugas="+id_tugas);
+                String jadi = "UPDATE tugas SET status="+status
+                        +",tag='"+request.getParameter("tag")+"'"
+                        +",deadline='"+request.getParameter("date")+" "+request.getParameter("hour")+":"+request.getParameter("minute")+":00'"
+                        +",attachment='"+attachment+"'"
+                        +" WHERE id_tugas="+id_tugas;
+                
+                //out.println(jadi);
+                int hasil = query.executeUpdate(jadi);
                 
                 hasil = query.executeUpdate("DELETE FROM mengerjakan WHERE id_tugas="+request.getParameter("id_tugas"));
                 
-                String[] orang = request.getParameter("Assignee").split("/");
+                String[] orang = request.getParameter("assignee").split("/");
                 for (int i=0;i<orang.length;++i) {
-                    hasil = query.executeUpdate("INSERT INTO mengerjakan('username',id_tugas'','status_tugas')"
+                    //out.println(orang[i]);
+                    hasil = query.executeUpdate("INSERT INTO `mengerjakan`(`username`,`id_tugas`,`status_tugas`)"
                             + " VALUES('"+orang[i]+"',"+id_tugas+","+status+")");
                 }
+                
+                response.sendRedirect("rinciantugas.jsp?id_tugas="+id_tugas);
             } else {
                 out.println("Failed to update description");
             }
@@ -94,7 +115,6 @@ public class edit_detail_tugas extends HttpServlet {
             out.println("Failed to execute SQL query");
         } finally {            
             out.close();
-            response.sendRedirect("rinciantugas.jsp?id_tugas="+request.getParameter("id_tugas"));
         }
     }
 

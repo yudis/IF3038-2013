@@ -172,7 +172,7 @@
                         //alert(xmlhttp.responseText);
                         document.getElementById("max_komentar").value=xmlhttp.responseText;
                         document.getElementById("halaman_komentar").value=xmlhttp.responseText;                        
-                        ambil_komentar();
+                        if (xmlhttp.responseText != "0") ambil_komentar();
                     }
                 };
                 
@@ -248,38 +248,6 @@
                     calendar.set("date");
                 }
             } 
-                        
-            function hapus_task() {
-                if (<%out.print('"'+(String)session.getAttribute("userLoginSession")+"\"!==\""+data.getCreator()+'"');%>) {
-                    alert("Anda bukan pembuat tugas");
-                } else {
-                    var xmlhttp;
-                    if (window.XMLHttpRequest){
-                        xmlhttp = new XMLHttpRequest();				
-                    } else {
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
-                    }
-
-                    xmlhttp.onreadystatechange = function(){
-                        if (xmlhttp.readyState===4)	{
-                            //alert(xmlhttp.responseText);
-                        }
-                    };
-
-                    var id_tugas = "-1";
-                    var c = window.location.search.indexOf("id_tugas=");
-                    if (c !== -1) {
-                        id_tugas = window.location.search.substring(c+9);
-                    }     
-
-                    var params = "id_tugas="+id_tugas;
-
-                    //alert(params);
-                    xmlhttp.open("POST","hapus_tugas",true);
-                    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-                    xmlhttp.send(params);
-                }
-            }
         </script>        
         
     </head>
@@ -296,7 +264,16 @@
                     <input type="button" id="back" value="" onclick="location.href='dashboard.jsp';">
                 </form>
             </div>
-            <div id="hapus" onclick="hapus_task();"></div>
+            <div>
+                <%
+                    if (data.getCreator().equals((String)session.getAttribute("userLoginSession"))) {
+                        out.println("<form method=\"GET\" action=\"hapus_tugas\">");
+                        out.println("<input type=\"text\" name=\"id_tugas\" value=\""+request.getParameter("id_tugas")+"\">");
+                        out.println("<input type=\"submit\" name=\"hapus\" id=\"hapus\" value=\"\">");
+                        out.println("</form>");
+                    }
+                %>
+            </div>
 
             <div id="rinciantugas">
                 <div id="judultugas"><%out.println(data.getNama());%></div>
@@ -401,15 +378,13 @@
                         <input id="autobox" disabled>
                         
                         <label>TAG</label>
-                        <input type="textarea" name="catname" placeholder="tag" value="<%out.println(data.getTag());%>">
+                        <input type="textarea" name="tag" placeholder="tag" value="<%out.println(data.getTag());%>">
                         
                         <label>ATTACHMENT</label>
-                        <div id="attach_upload">
-                            
-                        </div>
-                        <input type="file" name="file" id="file" onchange="validasi_file(this);" multiple>
-                        <input type="file" name="file_upload" id="file_upload" multiple>
-                        
+                        <input type="file" name="file" id="file" onchange="validasi_file(this);">
+
+                        <input type="text" name="id_tugas" value="<%out.print(request.getParameter("id_tugas"));%>"\>
+
                         <input class="submitreg" name="submit" type="submit" value="submit">
                     </form>
                 </div>

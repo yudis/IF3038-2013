@@ -44,7 +44,7 @@ public class jumlah_komentar extends HttpServlet {
             query = conn.createStatement();
             ResultSet result = query.executeQuery("SELECT count(*) FROM komentar WHERE id_tugas="+request.getParameter("id_tugas"));
             result.first();
-            out.println((result.getInt(1)+9) / 10);
+            out.print((result.getInt(1)+9) / 10);
         } catch (SQLException ex) {
             out.println("Failure to execute SQL query");
         } catch(ClassNotFoundException ex){
