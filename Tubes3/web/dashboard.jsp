@@ -5,7 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
     <head>
         <title> Next | Dashboard </title>
@@ -110,7 +109,7 @@
 
             xmlhttp.open("GET","catTask?id_kategori="+n,true);
             xmlhttp.send();
-            document.getElementById("kirim").action = "buattask.jsp?id_kategori="+n;
+            document.getElementById("id_kategori").value = n;
             //alert(xmlhttp.responseText);
             //alert(xmlhttp.status);
         }
@@ -127,7 +126,8 @@
             <div id="addcat" onclick="popup('popUpDiv');" disabled>
             </div>
             <form id="kirim" action="buattask.jsp" method="POST">
-                <input type="Submit" name="submit" id="addtask" value="">
+                <input type="text" name="id_kategori" id="id_kategori" value="">
+                <input type="Submit" name="submit" id="addtask" value="" disabled>                
             </form>
             <div id="category"></div>
             <div id="category2"></div>

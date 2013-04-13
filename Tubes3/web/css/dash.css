@@ -201,7 +201,11 @@
     width:130px;
 }
 
-
+#id_kategori{
+    visibility:hidden;
+    height: 0px;
+    width: 0px;
+}
 A:link {text-decoration: none}
 A:visited {text-decoration: none}
 A:active {text-decoration: none}

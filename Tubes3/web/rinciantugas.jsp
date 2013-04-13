@@ -268,8 +268,8 @@
                 <%
                     if (data.getCreator().equals((String)session.getAttribute("userLoginSession"))) {
                         out.println("<form method=\"GET\" action=\"hapus_tugas\">");
-                        out.println("<input type=\"text\" name=\"id_tugas\" value=\""+request.getParameter("id_tugas")+"\">");
-                        out.println("<input type=\"submit\" name=\"hapus\" id=\"hapus\" value=\"\">");
+                        out.println("<input type=\"submit\" name=\"hapus\" id=\"hapus\" value=\"\">");                        
+                        out.println("<input type=\"text\" name=\"id_tugas\" id=\"id_tugas\" value=\""+request.getParameter("id_tugas")+"\">");
                         out.println("</form>");
                     }
                 %>
@@ -313,7 +313,7 @@
                     <%
                         String[] attachment = data.getAttachment();
                         for (int i=0;i<attachment.length;++i) {
-                            out.println("<a href="+attachment[i]+">"
+                            out.println("<a href=\""+attachment[i]+"\">"
                                     +attachment[i].substring(attachment[i].lastIndexOf('/')+1)+"</a>");
                             String ext = attachment[i].substring(attachment[i].lastIndexOf('.')+1);
                             
@@ -321,7 +321,7 @@
                                 out.println("<div class=\"attach_image\"><img src=\""+attachment[i]+"\"></div>");
                             } else if (ext.equals("mp4")) {
                                 out.println("<div class=\"attach_image\"><video width=200 height=200 controls>"
-                                        + "<></div>");
+                                        + "<source src=\""+attachment[i]+"\" type=\"video/"+ext+"\"></div>");
                             }
                             out.println("<br>");
                         }
@@ -383,7 +383,8 @@
                         <label>ATTACHMENT</label>
                         <input type="file" name="file" id="file" onchange="validasi_file(this);">
 
-                        <input type="text" name="id_tugas" value="<%out.print(request.getParameter("id_tugas"));%>"\>
+                        <input type="text" name="id_tugas" value="<%out.print(request.getParameter("id_tugas"));%>"
+                               id="id_tugas" \>
 
                         <input class="submitreg" name="submit" type="submit" value="submit">
                     </form>

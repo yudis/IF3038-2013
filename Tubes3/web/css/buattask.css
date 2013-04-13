@@ -11,6 +11,7 @@
     background-image: url("../pict/tulisantask.png");
     background-repeat: no-repeat;
     background-position: center;
+    visibility: hidden;
 }
 
 #edit{
@@ -70,7 +71,7 @@
     -webkit-border-radius:20px;
     box-shadow: 1px 1px 5px 0px #e1e1e1;
     margin-left: 118px;
-    margin-top: 20px;
+    margin-top: 5px;
     background-image: url("../pict/tulisanhapus.png");
     background-repeat: no-repeat;
     background-position: center;
