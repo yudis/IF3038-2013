@@ -61,6 +61,16 @@ public class Rincian extends HttpServlet {
     }
     
     private String doLoadRincian(HttpServletRequest request) throws Exception {
+        if (request.getParameter("tabletype").equals("taskdetails")) {
+            return doLoadTaskDetails(request);
+        } else if (request.getParameter("tabletype").equals("komentar")) {
+            return doLoadComment(request);
+        } else {
+            return "";
+        }
+    }
+    
+    private String doLoadTaskDetails(HttpServletRequest request) throws SQLException, Exception {
         String out = "";
         con.Init();
         String username = (String) request.getSession().getAttribute("userid");
@@ -153,6 +163,141 @@ public class Rincian extends HttpServlet {
         return out;
     }
     
+    private String doLoadComment(HttpServletRequest request) throws Exception {
+        String out = "";
+        con.Init();
+        String iduser = (String) request.getSession().getAttribute("userid");
+        String idtask = (String) request.getSession().getAttribute("taskid");
+        
+
+                // How many adjacent pages should be shown on each side?
+                int adjacents = 3;
+
+                /* 
+                   First get total number of rows in data table. 
+                   If you have a WHERE clause in your query, make sure you mirror it here.
+                */
+                String query = "SELECT COUNT(*) as num FROM komentar INNER JOIN task ON task.ID=komentar.IDTask WHERE task.ID='"+idtask+"'";
+                resultSet = con.ExecuteQuery(query);
+                if (resultSet.next()) {
+                    int total_pages = resultSet.getInt("num");
+                    /* Setup vars for query. */
+                    String targetpage = "php/pagination.php"; 	//your file name  (the name of this file)
+                    int limit = 10; 								//how many items to show per page
+                    int page = 0;
+                    int start;
+                    if (request.getParameter("page") != null && !request.getParameter("page").equals("")) {
+                        page = Integer.parseInt(request.getParameter("page"));
+                        start = (page - 1) * limit; 			//first item to display on this page
+                    } else {
+                        start = 0;								//if no page var is given, set start to 0
+                    }
+                    
+                    /* Get data. */
+                    String sql = "SELECT * FROM komentar INNER JOIN task ON task.ID=komentar.IDTask LIMIT "+start+", "+limit+"";
+                    resultSet = con.ExecuteQuery(sql);
+
+                    /* Setup page vars for display. */
+                    if (page == 0) page = 1;					//if no page var is given, default to 1.
+                    int prev = page - 1;							//previous page is page - 1
+                    int next = page + 1;							//next page is page + 1
+                    int lastpage = (int) Math.ceil((float)total_pages/(float)limit );		//lastpage is = total pages / items per page, rounded up.
+                    int lpm1 = lastpage - 1;						//last page minus 1
+
+                    /* 
+                            Now we apply our rules and draw the pagination object. 
+                            We're actually saving the code to a variable in case we want to draw it more than once.
+                    */
+                    if(lastpage > 1)
+                    {	
+                            out+= "<div class=\"pagination\">\n";
+                            //previous button
+                            if (page > 1) 
+                                    out+= "<a href='#' onclick=\"loadComment("+prev+")\">? previous</a>";
+                            else
+                                    out+= "<span class=\"disabled\">? previous</span>";	
+
+                            //pages
+                            int counter = 1;
+                            if (lastpage < 7 + (adjacents * 2))	//not enough pages to bother breaking it up
+                            {	
+                                    for (counter = 1; counter <= lastpage; counter++)
+                                    {
+                                            if (counter == page)
+                                                    out+= "<span class=\"current\">"+counter+"</span>";
+                                            else
+                                                    out+= "<a href='#' onclick=\"loadComment("+counter+")\">"+counter+"</a>";					
+                                    }
+                            }
+                            else if(lastpage > 5 + (adjacents * 2))	//enough pages to hide some
+                            {
+                                    //close to beginning; only hide later pages
+                                    if(page < 1 + (adjacents * 2))		
+                                    {
+                                            for (counter = 1; counter < 4 + (adjacents * 2); counter++)
+                                            {
+                                                    if (counter == page)
+                                                            out+= "<span class=\"current\">"+counter+"</span>";
+                                                    else
+                                                            out+= "<a href='#' onclick=\"loadComment("+counter+")\">"+counter+"</a>";					
+                                            }
+                                            out+= "...";
+                                            out+= "<a href='#' onclick=\"loadComment("+lpm1+")\">"+lpm1+"</a>";
+                                            out+= "<a href='#' onclick=\"loadComment("+lastpage+")\">"+lastpage+"</a>";		
+                                    }
+                                    //in middle; hide some front and some back
+                                    else if(lastpage - (adjacents * 2) > page && page > (adjacents * 2))
+                                    {
+                                            out+= "<a href='#' onclick=\"loadComment(1)\">1</a>";
+                                            out+= "<a href='#' onclick=\"loadComment(2)\">2</a>";
+                                            out+= "...";
+                                            for (counter = page - adjacents; counter <= page + adjacents; counter++)
+                                            {
+                                                    if (counter == page)
+                                                            out+= "<span class=\"current\">"+counter+"</span>";
+                                                    else
+                                                            out+= "<a href='#' onclick=\"loadComment("+counter+")\">"+counter+"</a>";					
+                                            }
+                                            out+= "...";
+                                            out+= "<a href='#' onclick=\"loadComment("+lpm1+")\">"+lpm1+"</a>";
+                                            out+= "<a href='#' onclick=\"loadComment("+lastpage+")\">"+lastpage+"</a>";		
+                                    }
+                                    //close to end; only hide early pages
+                                    else
+                                    {
+                                            out+= "<a href='#' onclick=\"loadComment(1)\">1</a>";
+                                            out+= "<a href='#' onclick=\"loadComment(2)\">2</a>";
+                                            out+= "...";
+                                            for (counter = lastpage - (2 + (adjacents * 2)); counter <= lastpage; counter++)
+                                            {
+                                                    if (counter == page)
+                                                            out+= "<span class=\"current\">"+counter+"</span>";
+                                                    else
+                                                            out+= "<a href='#' onclick=\"loadComment("+counter+")\">"+counter+"</a>";					
+                                            }
+                                    }
+                            }
+
+                            //next button
+                            if (page < counter - 1) 
+                                    out+= "<a href='#' onclick=\"loadComment("+next+")\">next ?</a>";
+                            else
+                                    out+= "<span class=\"disabled\">next ?</span>\n";
+                            out+= "</div>\n";		
+                    }
+
+
+                    while(resultSet.next())
+                    {
+
+                    out+="-- "+resultSet.getString("IDUser")+" "+resultSet.getString("Waktu")+" "+resultSet.getString("Isi")+" <br>\n";
+
+                    }
+                }
+                
+        return out;
+    }
+    
     private String doSaveRincian(HttpServletRequest request) throws SQLException, Exception {
         if (request.getParameter("tabletype").equals("taskdetails")) {
             return doSaveTaskDetails(request);
@@ -241,7 +386,7 @@ public class Rincian extends HttpServlet {
     private String doSaveComment(HttpServletRequest request) throws SQLException, Exception {
         String out = "";
         con.Init();
-        String idtask = request.getParameter("idtask");
+        String idtask = (String) request.getSession().getAttribute("taskid");
         String iduser = (String) request.getSession().getAttribute("userid");
         String comment = request.getParameter("commentarea");
         String query = "SELECT COUNT(*) as num FROM komentar";
@@ -311,4 +456,5 @@ public class Rincian extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

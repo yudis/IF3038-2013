@@ -20,7 +20,8 @@ $resulttag = mysqli_query($con, "SELECT * FROM tags INNER JOIN task ON task.ID=t
 if (session != null) {
     String username = (String)session.getAttribute("userid");
 }
-if (session.getAttribute("taskid") == null || session.getAttribute("taskid").equals("")) {
+if (session.getAttribute("taskid") == null || session.getAttribute("taskid").equals("") || (
+        request.getParameter("idtask") != null && !request.getParameter("idtask").equals(""))) {
     session.setAttribute("taskid", request.getParameter("idtask"));
 }
 %>
@@ -41,7 +42,7 @@ if (session.getAttribute("taskid") == null || session.getAttribute("taskid").equ
 	
 </head>
     <!--loadComment(1,'<?php  echo $idtask; ?>')-->
-    <body onload="loadTaskDetails()">
+    <body onload="onload()">
     
     
 		<div class="header">
@@ -103,7 +104,6 @@ if (session.getAttribute("taskid") == null || session.getAttribute("taskid").equ
                                 <textarea name="commentarea" id="commentarea" rows="4" cols="45"></textarea> <br> 
                                 <form id="formkomentar"  > 
 				
-                                    <input type="hidden" name="idtask" id="idtask" value="<?php echo $idtask; ?>" />
                                     <input type="button" onclick="saveComment()" value="SUBMIT" /> 
                                     <br><br>
                                 </form>
@@ -141,6 +141,6 @@ function save()
 				'dateFormat': 'm/d/y'
 			});
 </script>
-<script type="text/javascript" language="javascript" src="js/pagination.js"></script>
+<!--<script type="text/javascript" language="javascript" src="js/pagination.js"></script>-->
 </body>
 </html>
