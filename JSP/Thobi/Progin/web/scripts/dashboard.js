@@ -7,7 +7,6 @@ function initialize() {
                         listTask("all");
 			loadUser();
 			loadThumbnail();
-			document.getElementById("dashboardlink").innerHTML = "<a href='dashboard.php?uname="+localStorage.session+"&cat=all'>Dashboard</a>";
 		}
 		else {
 			window.location = "index.php";
@@ -45,7 +44,7 @@ function signout() {
 }
 
 function loadThumbnail() {
-	var innerhtml = "<a href='profile.php'><img src='avatar/"+localStorage.session+".jpg' alt='Profile page' width='50' height='50'><br/>Hi, "+localStorage.session+"!</a>";
+	var innerhtml = "<a href='profile.jsp'><img src='avatar/"+localStorage.session+".jpg' alt='Profile page' width='50' height='50'><br/>Hi, "+localStorage.session+"!</a>";
 	
 	document.getElementById("profil").innerHTML = innerhtml;
 }
@@ -68,7 +67,7 @@ function deleteTask(taskid) {
 			}
 		}
 		
-		xmlhttp5.open("GET","deletetugas.php?t="+taskid,true);
+		xmlhttp5.open("GET","deletetask?t="+taskid,true);
 		xmlhttp5.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xmlhttp5.send();
 	}
@@ -91,7 +90,7 @@ function loadUser() {
 		}
 	}
 	
-	xmlhttp2.open("GET","loaduser.php",true);
+	xmlhttp2.open("GET","loaduser",true);
 	xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp2.send();
 }
@@ -148,7 +147,6 @@ function NewKategori() {
 		listassignee = listassignee+assignee[i]+"~";
 		i++;
 	}
-	
     if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp3=new XMLHttpRequest();
@@ -161,11 +159,11 @@ function NewKategori() {
 	{
 		if (xmlhttp3.readyState==4 && xmlhttp3.status==200)
 		{
-			window.location = "dashboard.php?uname="+localStorage.session+"&cat=all";
+			window.location = "lol.html";
 		}
 	}
 	
-	xmlhttp3.open("GET","addkategori.php?cat="+element.value+"&n="+assignee.length+"&a="+listassignee,true);
+	xmlhttp3.open("GET","addkategori?cat="+element.value+"&n="+assignee.length+"&a="+listassignee,true);
 	xmlhttp3.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp3.send();
     
@@ -175,7 +173,7 @@ function NewKategori() {
 function NewTask() {
     if(typeof(Storage)!=="undefined") {
 		if (localStorage.kategori) {
-			window.location = "createtugas.php?uname="+localStorage.session+"&cat="+localStorage.kategori;
+			window.location = "createtugas.jsp?uname="+localStorage.session+"&cat="+localStorage.kategori;
 		}
 		else {
 			alert("Please select the categori first, by click on left sidebar.", "Todolist");
@@ -238,5 +236,6 @@ function addAssignee() {
 		assignee[assignee.length]=element.value;
 		element2.innerHTML+="<li>"+element.value+"</li> ";
 		found = false;
+                element.value="";
 	}
 }

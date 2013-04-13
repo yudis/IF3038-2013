@@ -115,7 +115,7 @@ public class listtask extends HttpServlet {
 						else {
 							int iterator = 0;
 
-							query="SELECT * FROM category WHERE category.category_id = '"+cat+"'";
+							query="SELECT * FROM category,category_incharge WHERE category.category_id = '"+cat+"' AND category.category_id = category_incharge.category_id GROUP BY category_name";
 
 							statement = connection.createStatement();
 							ResultSet rs = statement.executeQuery(query);

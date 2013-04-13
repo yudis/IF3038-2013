@@ -265,7 +265,6 @@ function validateRegister() {
 	{
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
-			var hasil = xmlhttp.responseText;
 			if (xmlhttp.responseText.search("true") != -1) {
 				isValidRegist = true;
 			} 
@@ -276,7 +275,7 @@ function validateRegister() {
 		}
 	}
 	
-	xmlhttp.open("GET","register.php?uname="+xUsername+"&email="+xEmail,true);
+	xmlhttp.open("GET","register?uname="+xUsername+"&email="+xEmail,true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp.send();
 }

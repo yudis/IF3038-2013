@@ -8,7 +8,7 @@
 <nav>
     <a href="dashboard.jsp"><div class="logo"><img alt="Home" src="images/logo.png" /></div></a>
     <ul>                
-    <li><div id = "dashboardlink"></div></li><li><div id="profil"></div></li><li><div><a href="index.jsp" onclick="signout()">Logout</a></div></li>
+    <li><div id = "dashboardlink"><a href="dashboard.jsp">Dashboard</a></div></li><li><div id="profil"></div></li><li><div><a href="index.jsp" onclick="signout()">Logout</a></div></li>
     </ul>
     <div class="search">
                         <div id="searchwrapper">

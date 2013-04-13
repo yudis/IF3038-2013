@@ -16,7 +16,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import javax.servlet.ServletConfig;
 
-public class listkategori extends HttpServlet {
+public class loaduser extends HttpServlet {
     private Connection connection;
     private String query = null;
     private Statement statement;
@@ -52,29 +52,26 @@ public class listkategori extends HttpServlet {
         HttpServletRequest request, 
         HttpServletResponse response
         ) throws ServletException, IOException {
-
-			String uname = request.getParameter("uname");
 		   
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 		   
-			query = "SELECT category_name, category.category_id FROM category, task, task_incharge, category_incharge WHERE (category.category_id = task.task_category AND task.task_id = task_incharge.task_id AND task_incharge.people_incharge_task = '"+uname+"') OR (category.category_id = category_incharge.category_id AND category_incharge.people_incharge = '"+uname+"') GROUP BY category_name";
+			query = "SELECT username FROM user";
 
-                        out.println ("<ul id='Kategori' class='nav'><li><a id='all' href='dashboard.jsp' onclick='return RemoveKategoriFilter(this)'>All</a></li>");
+                        out.println ("<datalist id='listuser'>");
                         
 			try {
 				statement = connection.createStatement();
 				ResultSet rs = statement.executeQuery(query);
 				while (rs.next()) {
-					out.println ("<li><a id='"+rs.getString("category_id")+"' href='#' onclick='return KategoriSelected(this)'>"+rs.getString("category_name")+"</a></li>");
+					out.println ("<option value='"+rs.getString("username")+"'>");
 				}
+                                out.println ("</datalist>");
 			}
 			catch (SQLException e) {
 			}
-                        out.println ("</ul><ul class='nav'><li><a href='#' onclick=\"popup('popUpDiv','blanket',300,600)\">Tambah Kategori...</a></li></ul>");
 	}
    
-    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);

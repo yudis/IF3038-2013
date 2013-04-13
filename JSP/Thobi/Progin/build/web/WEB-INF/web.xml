@@ -20,6 +20,34 @@
         <servlet-name>editstatustugas</servlet-name>
         <servlet-class>editstatustugas</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deletetask</servlet-name>
+        <servlet-class>deletetask</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deletecategory</servlet-name>
+        <servlet-class>deletecategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loaduser</servlet-name>
+        <servlet-class>loaduser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addkategori</servlet-name>
+        <servlet-class>addkategori</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adduser</servlet-name>
+        <servlet-class>adduser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>register</servlet-name>
+        <servlet-class>register</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addtugas</servlet-name>
+        <servlet-class>addtugas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>search</servlet-name>
         <url-pattern>/search</url-pattern>
@@ -39,6 +67,34 @@
     <servlet-mapping>
         <servlet-name>editstatustugas</servlet-name>
         <url-pattern>/editstatustugas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deletetask</servlet-name>
+        <url-pattern>/deletetask</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deletecategory</servlet-name>
+        <url-pattern>/deletecategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loaduser</servlet-name>
+        <url-pattern>/loaduser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addkategori</servlet-name>
+        <url-pattern>/addkategori</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adduser</servlet-name>
+        <url-pattern>/adduser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addtugas</servlet-name>
+        <url-pattern>/addtugas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

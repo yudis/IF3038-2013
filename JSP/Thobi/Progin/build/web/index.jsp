@@ -49,7 +49,7 @@
                     <div id="registerwrapper">
                         <h1>Register Now!</h1>
                         It only takes you a few more steps!
-                        <form name="registration" onsubmit="return registerCheck();" enctype="multipart/form-data" method="post" action="adduser.php">
+                        <form name="registration" onsubmit="return registerCheck();" enctype="multipart/form-data" method="post" action="adduser">
                             <div class="wrapper">
                                 <input type="text" class="regbox" id="uname" name="uname" placeholder="Username.." required="required" onkeyup="validateUName();" onchange="validateUName();" />
                             </div>
@@ -71,9 +71,10 @@
                             <div class="wrapper">
                                 <p class="regtext">Profile Image:<br /></p><input type="file" id="ava" name="ava" accept="image/*" required="required"  onkeyup="validateAvatar();" onchange="validateAvatar();" />
                             </div>
+                            <input type="hidden" id="path" value="<%=getServletContext().getRealPath("/") %>" name="path">
                             <p>By clicking Sign Up, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use. </p>
                             <div id="login_button">
-                                <button id="register" disabled=true><img src="images/loginbutton.png" id="login_submit" alt="login../"></button>
+                                <button id="register" disabled=true><img src="images/loginbutton.png" id="register_submit" alt="login../"></button>
                             </div>
                         </form>
                     </div>

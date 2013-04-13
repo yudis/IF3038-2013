@@ -316,13 +316,13 @@ button:active, button:hover, .button:active, .button:hover {
 .tugas a:hover, .tugas a:active {
     color: #499b3d;
 }
-ul.tag {
+ul.tag, ul li .tag {
     display: inline;
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
-ul.tag li {
+ul.tag li, ul li .tag {
     list-style: none;
     border: 0px;
     text-align: left;
@@ -451,4 +451,12 @@ footer.content {
 .formtugas ul.item li {
     list-style: none;
     padding: 3px;
+}
+
+.regbox {
+	width: 340px;
+	height: 30px;
+	font-size: 100%;
+	padding-left: 8px;
+	padding-right: 8px;
 }

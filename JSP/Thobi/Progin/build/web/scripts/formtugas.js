@@ -1,4 +1,5 @@
 var assignee = [];
+var jumlahattachment = 1;
 
 /* 
  * To change this template, choose Tools | Templates
@@ -8,14 +9,13 @@ var ck_taskname = /[a-zA-Z0-9 ]{1,25}$/;
 function initializeCreateTugas() {
 	if(typeof(Storage)!=="undefined") {
 		if (localStorage.session) {
-			var innerhtml = "<a href='profile.php'><img src='avatar/"+localStorage.session+".jpg' alt='Profile page' width='50' height='50'><br/>Hi, "+localStorage.session+"!</a>";
+			var innerhtml = "<a href='profile.jsp'><img src='avatar/"+localStorage.session+".jpg' alt='Profile page' width='50' height='50'><br/>Hi, "+localStorage.session+"!</a>";
 	
 			document.getElementById("profil").innerHTML = innerhtml;
-			document.getElementById("dashboardlink").innerHTML = "<a href='dashboard.php?uname="+localStorage.session+"&cat=all'>Dashboard</a>";
 			loadUser();
 		}
 		else {
-			window.location = "index.php";
+			window.location = "index.jsp";
 		}
 	}
 	else {
@@ -40,7 +40,7 @@ function loadUser() {
 		}
 	}
 	
-	xmlhttp2.open("GET","loaduser.php",true);
+	xmlhttp2.open("GET","loaduser",true);
 	xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp2.send();
 }
@@ -99,4 +99,14 @@ function parseForm() {
 	alert("launched");
 	
 	return false;
+}
+
+function addattachment() {
+    var element = document.getElementById('listattachment');
+    var element2 = document.getElementById('n');
+    
+    jumlahattachment++;
+    element2.value = parseInt(element2.value) + 1;
+    alert(element2.value);
+    element.innerHTML = element.innerHTML + "<input type='file' name='files"+jumlahattachment+"' accept='application/pdf,application/msword,image/*'/>";
 }
