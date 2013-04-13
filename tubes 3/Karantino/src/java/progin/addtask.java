@@ -92,10 +92,15 @@ public class addtask extends HttpServlet {
         String url = "jdbc:mysql://localhost:3306/progin_405_13510074";
         Connection connection;
         try{
-            user = "dummy";
+            //user = "dummy";
+            
+            UserBean userbean = (UserBean) request.getSession(false).getAttribute("currentSessionUser");
+            user = userbean.getUsername();
+            System.out.println("user "+user);
+            request.getSession(false).setAttribute("user", user);
             category = "dummy";
             namatask = request.getParameter("nama");
-            HttpSession session = request.getSession(true);
+            HttpSession session = request.getSession(false);
             
             asignee = request.getParameter("asignee");
             tag = request.getParameter("tag");

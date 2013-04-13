@@ -18,7 +18,7 @@ public class ConnectionManager {
     
     public static Connection getConnection(){
         try{
-            url = "jdbc:mysql:" + "//localhost:27456/progin_405_13510074";
+            url = "jdbc:mysql:" + "//localhost:3306/progin_405_13510074";
             Class.forName("com.mysql.jdbc.Driver");
             try{
                 con = DriverManager.getConnection(url, "root", "");

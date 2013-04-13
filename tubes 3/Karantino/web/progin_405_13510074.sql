@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 09, 2013 at 05:46 PM
+-- Generation Time: Apr 13, 2013 at 09:37 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -39,13 +39,18 @@ CREATE TABLE IF NOT EXISTS `asigner` (
 --
 
 INSERT INTO `asigner` (`username`, `namatugas`, `asignee`) VALUES
-('dummy', 'aaaaa', 'sssss'),
-('dummy', 'aaaaa', 'sssss'),
-('dummy', 'qqqqq', 'qq'),
-('dummy', 'www', 'rrr'),
-('dummy', 'www', 'rrr'),
-('dummy', 'satu', 'satu'),
-('dummy', 'satu', 'dua');
+('dummy', 'komen', 'saya'),
+('dummy', 'aaaaa', 'saya'),
+('dummy', 'satu', 'aaaa'),
+('dummy1', 'aaaa', 'asda'),
+('dummy1', 'sadasd', 'sad'),
+('dummy1', 'safa', 'dfs'),
+('dummy1', 'asdasdasd', 'adas'),
+('dummy1', 'testestes', 'asdaasd'),
+('dummy', 'testestes', 'asdaasd'),
+('dummy1', 'aaaaaaa', 'asdaad'),
+('dummy1', 'tiga', 'asdaad'),
+('dummy1', 'empat', 'aasda');
 
 -- --------------------------------------------------------
 
@@ -87,17 +92,6 @@ CREATE TABLE IF NOT EXISTS `comment` (
   KEY `username` (`username`),
   KEY `namatugas` (`namatugas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `comment`
---
-
-INSERT INTO `comment` (`username`, `namatugas`, `komentar`, `penulis`) VALUES
-('dummy', 'satu', 'tes komentar dummy', 'dummy'),
-('dummy', 'satu', 'tes komentar2', 'sayasendiri'),
-('dummy', 'satu', 'tes', 'dummy'),
-('dummy', 'satu', '', 'dummy'),
-('dummy', 'satu', 'anda sampah sekali', 'dummy');
 
 -- --------------------------------------------------------
 
@@ -144,13 +138,18 @@ CREATE TABLE IF NOT EXISTS `tag` (
 --
 
 INSERT INTO `tag` (`username`, `namatugas`, `tag`) VALUES
-('dummy', 'aaaaa', 'ddd'),
-('dummy', 'aaaaa', 'ddd'),
-('dummy', 'qqqqq', 'dddqq'),
-('dummy', 'www', 'ttt'),
-('dummy', 'www', 'ttt'),
-('dummy', 'satu', 'aku'),
-('dummy', 'satu', 'kamu');
+('dummy', 'komen', 'dada'),
+('dummy', 'aaaaa', 'tes'),
+('dummy', 'satu', 'asdsa'),
+('dummy1', 'aaaa', 'asdsad'),
+('dummy1', 'sadasd', 'asdsad'),
+('dummy1', 'safa', 'sf'),
+('dummy1', 'asdasdasd', 'adasd'),
+('dummy1', 'testestes', 'asdsad'),
+('dummy', 'testestes', 'asdsad'),
+('dummy1', 'aaaaaaa', 'asdaaaaaaa'),
+('dummy1', 'tiga', 'asdaaaaaaa'),
+('dummy1', 'empat', 'adsad');
 
 -- --------------------------------------------------------
 
@@ -173,12 +172,17 @@ CREATE TABLE IF NOT EXISTS `tugas` (
 --
 
 INSERT INTO `tugas` (`username`, `namatugas`, `deadline`, `kategori`, `status`) VALUES
-('dummy', 'satu', '2013-01-01', 'dummy', 0),
-('dummy', 'aaaaa', '2013-01-01', 'dummy', 0),
-('dummy', 'aaaaa', '2013-01-01', 'dummy', 0),
-('dummy', 'qqqqq', '2013-01-01', 'dummy', 0),
-('dummy', 'www', '2013-01-01', 'dummy', 0),
-('dummy', 'www', '2013-01-01', 'dummy', 0);
+('dummy', 'komen', '2015-05-05', 'dummy', 0),
+('dummy', 'aaaaa', '2013-03-03', 'dummy', 0),
+('dummy', 'satu', '2013-02-02', 'dummy', 0),
+('dummy1', 'aaaa', '2014-04-04', 'dummy', 0),
+('dummy1', 'sadasd', '2013-02-04', 'dummy', 0),
+('dummy1', 'safa', '2013-04-04', 'dummy', 0),
+('dummy1', 'asdasdasd', '2013-03-04', 'dummy', 0),
+('dummy1', 'testestes', '2014-03-03', 'dummy', 0),
+('dummy1', 'aaaaaaa', '2013-02-02', 'dummy', 0),
+('dummy1', 'tiga', '2014-04-04', 'dummy', 0),
+('dummy1', 'empat', '2013-03-03', 'dummy', 0);
 
 -- --------------------------------------------------------
 
@@ -189,6 +193,10 @@ INSERT INTO `tugas` (`username`, `namatugas`, `deadline`, `kategori`, `status`) 
 CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(15) NOT NULL,
   `password` varchar(20) NOT NULL,
+  `namalengkap` varchar(50) NOT NULL,
+  `tanggallahir` date NOT NULL,
+  `email` varchar(20) NOT NULL,
+  `avatar` varchar(50) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -196,12 +204,15 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`username`, `password`) VALUES
-('akuakuaku', 'aaaaaaaa'),
-('dummy', 'aaaaaaaa'),
-('eeeee', 'aaaaaaaa'),
-('kakakaka', 'hehehehe'),
-('zzzzzzzz', 'aaaaaaaa');
+INSERT INTO `user` (`username`, `password`, `namalengkap`, `tanggallahir`, `email`, `avatar`) VALUES
+('akuakuaku', 'aaaaaaaa', '', '0000-00-00', '', ''),
+('dummy', 'aaaaaaaa', '', '0000-00-00', '', ''),
+('dummy1', 'aaaaaaaa', 'asd asd', '1993-01-19', 'ads@dfa.asda', 'testdir'),
+('eeeee', 'aaaaaaaa', '', '0000-00-00', '', ''),
+('kakakaka', 'hehehehe', '', '0000-00-00', '', ''),
+('samboraonit', 'hahahaha', 'kayden kross', '2014-03-01', 'kkk@kkk.com', 'testdir'),
+('wachid', 'aaaaaaaa', 'sadasfasd as safagdsdsf', '1974-02-14', 'ads@dfa.asda', 'testdir'),
+('zzzzzzzz', 'aaaaaaaa', '', '0000-00-00', '', '');
 
 --
 -- Constraints for dumped tables

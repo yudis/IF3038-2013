@@ -1,3 +1,4 @@
+<%@page import="progin.UserBean"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -19,15 +20,21 @@
 					<div id="topbar_dashboard">
 						<nav>
 							<ul>
-								<li> <a class="active" href="dashboard"> Dashboard </a> </li>
-								<li> <a href="profil">Profil</a> </li>
-								<li> <a href="index">Logout</a> </li>
+								<li> <a class="active" href="dashboard.jsp"> Dashboard </a> </li>
+								<li> <a href="profil.jsp">Profil</a> </li>
+								<li> <a href="index.jsp">Logout</a> </li>
 							</ul>
 						</nav>
 					</div>
 					<div id="topbar_search">  
 						<input type="search" results="5" placeholder="search"/>
 					</div>
+                                          <div id="showUser">
+                                            <% 
+                                                UserBean user = ((UserBean)session.getAttribute("currentSessionUser"));
+                                            %>
+                                            User: <%= user.getUsername() %>
+                                </div>
 				</div>
 			</div>
 		</header>

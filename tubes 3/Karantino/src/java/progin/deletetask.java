@@ -66,9 +66,27 @@ public class deletetask extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+    }
+
+    /**
+     * Handles the HTTP
+     * <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //processRequest(request, response);
         PrintWriter out = response.getWriter();
-        String namatask = request.getParameter("task");
-        String user = request.getParameter("user");
+        //String namatask = request.getParameter("task");
+        String namatask = (String) request.getSession(false).getAttribute("namatask");
+        //String user = request.getParameter("user");
+        String user = (String) request.getSession(false).getAttribute("user");
         String url = "jdbc:mysql://localhost:3306/progin_405_13510074";
         Connection conn;
         try {
@@ -98,25 +116,26 @@ public class deletetask extends HttpServlet {
             pst.executeUpdate();
             
             // send response
-            out.print("dashboard.jsp");
+            //out.println(user+" "+namatask);
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<script type='text/javascript'>");
+            out.println("function redirect(){");
+            out.println("alert('Task deleted');");
+            out.println("window.location = 'dashboard.jsp';");
+            out.println("}");
+            out.println("redirect();");
+            out.println("</script>");
+            out.println("</head>");
+            out.println("<body>");
+            //out.println(user+" "+namatask);
+            out.println("</body>");
+            out.println("</html>");
+            pst.close();
+            conn.close();
         } catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Handles the HTTP
-     * <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

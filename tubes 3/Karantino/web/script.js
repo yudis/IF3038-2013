@@ -181,12 +181,15 @@ function getAjax() //a function to get AJAX from browser
 	}
 }
 
-function deletetask(user, taskname){
+function addcomment(namatask, penulis){
     getAjax();
-    ajaxRequest.open("GET","../src/java/progin/deletetask.jsp?user="+ user +"&task="+taskname, true);
-    ajaxRequest.onreadystatechange = function(){
-        var target = ajaxRequest.responseText;
-        redirect(target);
+    var comment = document.getElementByName("areacomment").value;
+    
+    if (comment!=""){
+        ajaxRequest.open("GET","addcomment?comment="+comment+"&penulis="+penulis+"&namatask="+namatask,true);
+        ajaxRequest.onreadystatechange = function(){
+            document.getElementById("tuliskomen").innerHTML = ajaxRequest.responseText;
+        }
+        ajaxRequest.send();
     }
-    ajaxRequest.send();
 }
