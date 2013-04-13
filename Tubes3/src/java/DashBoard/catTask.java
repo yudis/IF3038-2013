@@ -43,19 +43,20 @@ public class catTask extends HttpServlet {
             ResultSet result = query.executeQuery("SELECT * FROM tugas WHERE id_kategori="+request.getParameter("id_kategori"));
             
             while (result.next()) {
-                out.println("<a href=\"rinciantugas.jsp?id_tugas="+result.getString("id_tugas")+"\">");
                 out.println("<div id=\"listtask\">");
+                out.println("<a href=\"rinciantugas.jsp?id_tugas="+result.getString("id_tugas")+"\">");                
                 out.println("<div>"+result.getString("nama_tugas")+"</div>");
                 out.println("<div>"+result.getString("deadline")+"</div>");
                 out.println("<div>tag: "+result.getString("tag")+"</div>");
+                out.println("</a>");                
                 if (result.getInt("status") == 1) {
                     out.println("<input type=\"checkbox\" name=\"status\" checked "
-                            + "onclick=\"ubahstatus("+result.getString("id_tugas")+");\">");
+                            + "onchange=\"ubahStatus("+result.getString("id_tugas")+");\">");
                 } else {
                     out.println("<input type=\"checkbox\" name=\"status\" "
-                            + "onclick=\"ubahstatus("+result.getString("id_tugas")+");\">");
+                            + "onchange=\"ubahStatus("+result.getString("id_tugas")+");\">");
                 }
-                out.println("</div></a>");
+                out.println("</div>");
             }
 
         } catch (SQLException ex) {

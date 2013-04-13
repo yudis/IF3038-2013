@@ -46,13 +46,15 @@ public class addCategory extends HttpServlet {
             int id_kategori = result.getInt(1) + 1;
             result.close();
             
-            int hasil = query.executeUpdate("INSERT INTO kategori(nama_kategori,id_kategori)"
-                    + " VALUES("+request.getParameter("catname")+","+id_kategori+")");
+            out.println(id_kategori);
+            int hasil = query.executeUpdate("INSERT INTO `kategori`(`nama_kategori`,`id_kategori`,`username`)"
+                    + " VALUES('"+request.getParameter("catname")+"',"+id_kategori+",'"+request.getParameter("username")+"')");
             
-            String[] orang = request.getParameter("assignee").split("/");
+            String[] orang = request.getParameter("catass").split("/");
             for (int i=0;i<orang.length;++i) {
-                hasil = query.executeUpdate("INSERT INTO hak_akses(username,id_kategori)"
-                    + " VALUES("+orang[i]+","+id_kategori+")");
+                out.println(orang[i]);
+                hasil = query.executeUpdate("INSERT INTO `hak_akses`(`username`,`id_kategori`)"
+                    + " VALUES('"+orang[i]+"',"+id_kategori+")");
             }
             
             response.sendRedirect("dashboard.jsp");
