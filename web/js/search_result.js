@@ -27,18 +27,3 @@ function showResult(key, value){
     xmlhttp.open("GET", "Search?aksi=cari&key="+key+"&value="+value, true);
     xmlhttp.send();
 }
-
-var angka = 0;
-var tambahan = window.screen.availHeight - 200;
-window.onscroll = function(ev) {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight + tambahan) {
-        angka++;
-        document.getElementById("judul_search").innerHTML = angka;
-        tambahan+=window.screen.availHeight - 200;
-        alert(tambahan);
-    }
-    else{
-        
-    }
-}
-

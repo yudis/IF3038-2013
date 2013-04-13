@@ -20,6 +20,22 @@
         <servlet-name>validasiRegist</servlet-name>
         <servlet-class>Servlets.validasiRegist</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>Servlets.logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getLocal</servlet-name>
+        <servlet-class>Servlets.getLocal</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>signup_process</servlet-name>
+        <servlet-class>Servlets.signup_process</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>editprofile</servlet-name>
+        <servlet-class>Servlets.editprofile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Kategori</servlet-name>
         <url-pattern>/Kategori</url-pattern>
@@ -39,6 +55,22 @@
     <servlet-mapping>
         <servlet-name>validasiRegist</servlet-name>
         <url-pattern>/validasiRegist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getLocal</servlet-name>
+        <url-pattern>/getLocal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>signup_process</servlet-name>
+        <url-pattern>/signup_process</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editprofile</servlet-name>
+        <url-pattern>/editprofile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
