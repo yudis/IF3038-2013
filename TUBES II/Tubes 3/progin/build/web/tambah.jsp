@@ -162,7 +162,7 @@ else{
 <script type="text/javascript" src="js/datepickr.min.js"></script>
 		<script type="text/javascript">			
 			new datepickr('datepick2', {
-				'dateFormat': 'm/d/y'
+				'dateFormat': 'y/m/d'
 			});
 </script>
 
