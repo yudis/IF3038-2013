@@ -39,11 +39,11 @@
 	<div class="register">
 	<h4 class="judul">Register</h4>
 		
-	<form action="../progin/register" name="registrasi" method="post">
+	<form action="../progin/register" name="registrasi" method="post" enctype="multipart/form-data">
                 <p>Avatar: <input type="file" id="file" name="file"></input></p>
 		<p>Username: <input  id="DID" name="DID" type="text"></input></p>
 		<p>Password: <input id="DP" name="DP" type="password"></input></p>
-		<p>Confirm Password: <input  id="DCP" name="DCP" type="password"></input></p>
+		<p>Confirm Password: <input id="DCP" type="password"></input></p>
 		<p>Name: <input  id="DName" name="DName" type="text"></input></p>
 		<p>Tanggal Lahir: <select id="Day" ><option value="01">01</option><option value="02">02</option></select><select id="DMonth"><option value="01">01</option><option value="02">02</option></select><select id="DYear"><option value="1992">1992</option><option value="1993">1993</option></select></p>
 		<p>Alamat email: <input  id="DMail" name="DMail" type="text"></input></p>

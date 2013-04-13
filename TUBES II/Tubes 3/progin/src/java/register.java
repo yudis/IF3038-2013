@@ -3,17 +3,26 @@
  * and open the template in the editor.
  */
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Iterator;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -84,24 +93,88 @@ public class register extends HttpServlet {
         response.setContentType("text/html");
     PrintWriter out = response.getWriter();
     HttpSession session = request.getSession();
-    String userid = request.getParameter("DID");
-    String password = request.getParameter("DP");
-    String name = request.getParameter("DName");
-    String email = request.getParameter("DMail");
-    String avatar = request.getParameter("file");
+    String userid = null;
+    String password = null;
+    String name = null;
+    String email = null;
+    String avatar = null;
     
+    boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+   if (!isMultipart) {
+   
+   } else {
+    
+    FileItemFactory factory = new DiskFileItemFactory();
+   ServletFileUpload upload = new ServletFileUpload(factory);
+   
+   List<FileItem> items = null;
+   try {
+   items = upload.parseRequest(request);
+   
+   
+   
+    Iterator itr = items.iterator();
+    while (itr.hasNext()) {
+    FileItem item = (FileItem) itr.next();
+    
+    if (item.isFormField())
+           {
+              String name1 = item.getFieldName();
+                  String value = item.getString();
+                  if(name1.equals("DID"))
+                     {
+                     userid = value;       
+                                 
+                     } 
+                  else
+                  if(name1.equals("DP"))
+                  {
+                      password = value;
+                  }
+                  else
+                  if (name1.equals("DName"))
+                  {
+                      name = value;
+                  }
+                  else
+                  if (name1.equals("DMail"))
+                  {
+                      email = value;
+                  }
+                         }
+                            else
+                                {
+                                    try {
+                                    String itemName = item.getName();
+                                    avatar = itemName;
+                                    File savedFile = new File(this.getServletConfig().getServletContext().getRealPath("/")
+                                    +"images\\image\\"+avatar);
+                                    item.write(savedFile);
+
+                                    } catch (Exception e) {
+                                    e.printStackTrace();
+                                    }
+    
+                               }
+       }
+   } catch (FileUploadException e) {
+   e.printStackTrace();
+   }
+   }
+
      try{
         dbc.Init();
        
-        int i = dbc.ExecuteUpdate("insert into profil values ('"+userid+"','"+password+"','"+name+"','"+avatar+"','2111-11-12','"+email+"')");
+            int i = dbc.ExecuteUpdate("insert into profil values ('"+userid+"','"+password+"','"+name+"','"+avatar+"','2111-11-12','"+email+"')");
             session.setAttribute("userid",userid);
             
         dbc.Close();
-        response.sendRedirect("dashboard.jsp");
+        response.sendRedirect("Dashboard.jsp");
         }
         catch(Exception e){
         out.println(e);
         }
+
     }
 
     /**
