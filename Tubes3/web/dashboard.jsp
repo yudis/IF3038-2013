@@ -32,17 +32,17 @@
             }
 
             xmlhttp.onreadystatechange = function(){
-                //alert(xmlhttp.readyState+" "+xmlhttp.status);
-
-                if (xmlhttp.readyState==4 && xmlhttp.status==200){				
+                if (xmlhttp.readyState===4 && xmlhttp.status===200){				
                     //alert(xmlhttp.responseText);
                     //document.getElementById("category").innerHTML=xmlhttp.responseText;
-                    alert(xmlhttp.responseText);
+                    //alert(xmlhttp.responseText);
                 }
             };
 
+            //alert("HAHA");
             xmlhttp.open("GET","ubahStatus?id_tugas="+nomor,true);
-            xmlhttp.send();				
+            xmlhttp.send();
+            //alert("KIRIM");
         }
 
         function getCat() {
@@ -110,7 +110,7 @@
 
             xmlhttp.open("GET","catTask?id_kategori="+n,true);
             xmlhttp.send();
-            document.getElementById("kirim").action = "buattask.jsp?id_kategori="+n;
+            document.getElementById("id_kategori").value = n;
             //alert(xmlhttp.responseText);
             //alert(xmlhttp.status);
         }
@@ -120,14 +120,14 @@
 	
 <!------------------------------------------------------------------------->	
     <body onload="getCat();getTask();">
-        
         <%@ include file="header.jsp" %>
         
         <div class="main">
-            <div id="addcat" onclick="popup('popUpDiv');" disabled>
+            <div id="addcat" onclick="popup('popUpDiv');">
             </div>
             <form id="kirim" action="buattask.jsp" method="POST">
-                <input type="Submit" name="submit" id="addtask" value="">
+                <input type="Submit" name="submit" id="addtask" value="" disabled>                 
+                <input type="text" name="id_kategori" id="id_kategori" value="">
             </form>
             <div id="category"></div>
             <div id="category2"></div>
@@ -154,6 +154,8 @@
                             <label>assignee</label>
                             <input name="catass" placeholder="assignee"></br></br>
                             <input class= "submitreg" name="submit" type="submit" value="Submit">
+                            <input type="username" name="username" id="username"
+                                   value="<%out.print(session.getAttribute("userLoginSession"));%>">
                         </form>
                     </div>
                 </div>

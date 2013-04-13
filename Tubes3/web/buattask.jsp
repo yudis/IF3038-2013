@@ -179,7 +179,7 @@
                     Upload File: <input type="file" name="file" id="file" onchange="validasi_file(this);">
 		    <img src="pict/blank.png" alt="icon2" id="attaicon"  />  
                     
-                    <input type="text" name="id_kategori" id="id_kategori" 
+                    <input type="text" name="id_kategori" id="id_kategori"
                            value="<%out.print(request.getParameter("id_kategori"));%>">
                     <input type="text" name="username" id="username"
                            value="<%out.print(session.getAttribute("userLoginSession"));%>">

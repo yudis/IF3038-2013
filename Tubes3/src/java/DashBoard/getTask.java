@@ -65,11 +65,14 @@ public class getTask extends HttpServlet {
                 for (int i=0;i<banyak;++i) {
                     result = query.executeQuery("SELECT (nama_kategori) FROM kategori WHERE id_kategori="+id_kategori[i]);
 
-                    out.println("<a href=\"rinciantugas.jsp?id_tugas="+id_tugas[i]+"\">");
                     out.println("<div id=\"listtask\">");
+                    out.println("<a href=\"rinciantugas.jsp?id_tugas="+id_tugas[i]+"\">");                    
                     out.println("<div>"+nama_tugas[i]+"</div>");
                     out.println("<div>"+deadline[i]+"</div>");
                     out.println("<div>tag: "+tag[i]+"</div>");
+                    result.first();
+                    out.println("<div>"+result.getString(1)+"</div>");
+                    out.println("</a>");                    
                     if (status[i] == 1) {
                         out.println("<input type=\"checkbox\" name=\"status\" checked "
                                 + "onclick=\"ubahStatus("+id_tugas[i]+");\">");
@@ -77,10 +80,8 @@ public class getTask extends HttpServlet {
                         out.println("<input type=\"checkbox\" name=\"status\" "
                                 + "onclick=\"ubahStatus("+id_tugas[i]+");\">");
                     }
+                    out.println("</div>");
 
-                    result.first();
-                    out.println("<div>"+result.getString(1)+"</div>");
-                    out.println("</div></a>");
                     result.close();
                 }
             }
