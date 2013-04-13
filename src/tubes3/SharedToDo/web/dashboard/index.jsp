@@ -3,7 +3,7 @@
         <title>Shared To Do List - Dashboard</title>
         <link rel="stylesheet" type="text/css" href="../style.css">
         <link rel="shortcut icon" href="../favicon.ico">		
-        <script type="text/javascript" src="../validation.js"></script>		
+        <script type="text/javascript" src="../ivalidation.js"></script>		
     </head>
     <body onload="checkLogged();">
         <div id="navsearch">
