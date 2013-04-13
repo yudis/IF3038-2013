@@ -71,8 +71,8 @@
                                 <div id="deadline_done">
                                         <div id="left-main-body">Deadline : <% out.print(taskShow.get("deadline"));%></div>
                                         <% 
-                                                if(creator.equals(userActive)){
-                                                        out.print("<div id=\"right-main-body\"><a href=\"#\" onCLick=\"edit_deadline()\"><u>edit</u></a></div>");
+                                                if((new Function()).isAssignee(userActive, idtaskToShow)){
+                                                        out.print("<div id=\"right-main-body\"><a href=\"#\" onCLick=\"edit_deadline()\" id=\"editDeadline\"><u>edit</u></a></div>");
                                                 }
                                         %>
                                 </div>
@@ -90,8 +90,8 @@
                                         <div id="left-main-body4">Status : <% out.print(taskShow.get("status"));%></div> 
                                         <div id="right-main-body">
                                         <% 
-                                                if(creator.equals(userActive)){
-                                                        out.print("<input name=\"changeStatus\" type=\"button\" value=\"Change Status\" onClick=\"setCompleteStatus("+taskShow.get("taskid")+")\">");
+                                                if((new Function()).isAssignee(userActive, idtaskToShow)){
+                                                        out.print("<input name=\"changeStatus\" type=\"button\" value=\"Change Status\" onClick=\"setCompleteStatus("+taskShow.get("taskid")+")\" id=\"editStatus\">");
                                                 }
                                         %>                   
                 </div>
@@ -161,8 +161,8 @@
                 </i></div>
                                         <div id="right-main-body">
                     <% 
-                        if(creator.equals(userActive)){
-                                        out.print("<a href=\"#2\" onClick=\"edit_assignee()\"><u>edit</u></a>");
+                        if((new Function()).isAssignee(userActive, idtaskToShow)){
+                                        out.print("<a href=\"#2\" onClick=\"edit_assignee()\"  id=\"editAssignee\"><u>edit</u></a>");
                         }
                     %>
                 </div>
@@ -189,8 +189,8 @@
                 </i></div>
                                         <div id="right-main-body">
                 <% 
-                    if(creator.equals(userActive)){
-                        out.print("<a href=\"#3\" onClick=\"edit_tag()\"><u>edit</u></a>");
+                    if((new Function()).isAssignee(userActive, idtaskToShow)){
+                        out.print("<a href=\"#3\" onClick=\"edit_tag()\" id=\"editTag\"><u>edit</u></a>");
                     }
                 %>
                 </div>

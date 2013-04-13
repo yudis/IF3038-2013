@@ -4,12 +4,14 @@
  */
 package Servlet;
 
+import Class.Function;
 import Class.GetConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +53,8 @@ public class updateSharedWithDB extends HttpServlet {
                 userActive = request.getSession().getAttribute("userlistapp").toString();
             }
             
-            query = "INSERT INTO assignee VALUES ('"+userActive+"', "+taskid+")";
+            HashMap<String,String> task = (new Function()).GetTask(taskid);
+            query = "INSERT INTO assignee VALUES ('"+task.get("username")+"', "+taskid+")";
             stmt.execute(query);
             
             String [] assignee = listAssignee.split(",");

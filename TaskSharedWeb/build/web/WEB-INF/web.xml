@@ -108,6 +108,10 @@
         <servlet-name>prevcomment</servlet-name>
         <servlet-class>Servlet.prevcomment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteassignee</servlet-name>
+        <servlet-class>Servlet.deleteassignee</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet</url-pattern>
@@ -215,6 +219,10 @@
     <servlet-mapping>
         <servlet-name>prevcomment</servlet-name>
         <url-pattern>/prevcomment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteassignee</servlet-name>
+        <url-pattern>/deleteassignee</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -115,6 +115,23 @@ function finish_assignee(taskid) {
 	}
 	document.getElementById("assignee_edit").style.display = 'none';
 	document.getElementById("assignee_done").style.display = 'block';
+        checkIsMeAssignee(taskid);
+}
+
+function checkIsMeAssignee(taskid){
+    getAjax();
+    ajaxRequest.open("GET","deleteassignee?taskid="+taskid,false);
+                
+    ajaxRequest.onreadystatechange = function()
+    {
+        if(ajaxRequest.responseText == "false"){
+            document.getElementById("editAssignee").style.display = 'none';
+            document.getElementById("editDeadline").style.display = 'none';
+            document.getElementById("editStatus").style.display = 'none';
+            document.getElementById("editTag").style.display = 'none';
+        }
+    }
+    ajaxRequest.send();
 }
 function edit_tag() {
 	document.getElementById("tag_edit").style.display = 'block';
@@ -223,4 +240,3 @@ function setCompleteStatus(taskid){
 		ajaxRequest.send();
 	}
 }
-
