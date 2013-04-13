@@ -192,15 +192,18 @@ function showPopUp() {
 /**************************PROFIL**************************/
 
 function showEditForm() {
-	document.getElementById("editForm").style.visibility = "visible";
+    alert("show edit form");
+//	document.getElementById("editForm").style.visibility = "visible";
 }
 function hideEditForm() {
-	document.getElementById("editForm").style.visibility = "hidden";
+    alert("barca");
+	//document.getElementById("editForm").style.visibility = "hidden";
 }
-function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain, fileUpload) {
+function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain) {
+    alert("kade");
 	//alert(newFullName + " "+ newBirthdate + " " + newPassword + " " + newPasswordAgain + " " + fileUpload);
 	
-	if (newPassword == newPasswordAgain) {
+	/*if (newPassword == newPasswordAgain) {
 		//menampilkan notifikasi saat field password tidak diubah
 		if ((newPassword == "") && (newPasswordAgain == "")) {
 			alert("Warning. Field password tidak berubah");
@@ -254,7 +257,7 @@ function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain,
 		__xmlhttp.send("newFullName=" + newFullName + "&newBirthdate=" + newBirthdate + "&newPassword=" + newPassword + "&newFileName=" + fileUpload);
 	} else{
 		alert("Peringatan! kedua password Anda tidak sesuai");
-	}
+	}*/
 }
 
 /**************************DASHBOARD**************************/

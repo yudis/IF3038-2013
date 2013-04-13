@@ -4,7 +4,6 @@
     Author     : Sonny Theo Thumbur
 --%>
 
-<%@page import="com.sun.corba.se.pept.transport.ContactInfo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 
@@ -151,7 +150,7 @@
                     <p></p>
                 </div>
                 <div class="bioRight">
-                    <input class="submitBtn" type="button" value="Submit Form" name='upload' onclick="hideEditForm(); updateProfile(newFullName.value, newBirthdate.value, newPassword.value, newPasswordAgain.value, fileUpload.value);"></input>
+                    <input class="submitBtn" type="button" value="Submit Form" name="upload" onclick="hideEditForm(); updateProfile(newFullName.value, newBirthdate.value, newPassword.value, newPasswordAgain.value);"></input>
                 </div>
             </form>
         </div>
