@@ -56,7 +56,7 @@ function showcat() {
         }
 
     };
-    cat.open('get', 'listcat.php');
+    cat.open('get', 'controller?type=listcat');
     cat.send(null);
 
 }
@@ -74,10 +74,11 @@ function showTask(a) {
         }
 
     };
-    task.open('get', 'listtask.php?category=' + a);
+    task.open('get', 'controller?type=listtask&category=' + a);
     task.send(null);
 
 }
+
 function changeStatus(a, b, c) {
     var checkbox = createObject();
     checkbox.onreadystatechange = function() {
@@ -87,6 +88,7 @@ function changeStatus(a, b, c) {
 
             if (checkbox.responseText != "")
             {
+               
                     if (response == "done") {   
                     document.getElementById("checkedvalue" + c).innerHTML = "";
                     document.getElementById("checkedvalue" + c).innerHTML = "undone";
@@ -103,11 +105,11 @@ function changeStatus(a, b, c) {
 
     if (a.checked)
     {
-        checkbox.open('get', 'changeStatus.php?IDTask=' + b + '&Status=undone');
+        checkbox.open('get', 'controller?type=changeStatus&IDTask=' + b + '&Status=undone');
     }
     else
     {
-        checkbox.open('get', 'changeStatus.php?IDTask=' + b + '&Status=done');
+        checkbox.open('get', 'controller?type=changeStatus&IDTask=' + b + '&Status=done');
     }
     checkbox.send(null);
 
@@ -122,11 +124,11 @@ function update() {
 }
 
 function showRinciTugas(idtask){
-    window.location="RinciTugas.php?IDTask="+idtask;
+    window.location="RinciTugas.jsp?IDTask="+idtask;
 }
 
 function showBuatTugas(cat,user){
-    window.location="addtask.php?categoryID="+cat+"&userID="+user;
+    window.location="addtask.jsp?categoryID="+cat+"&userID="+user;
 }
 
 function delCate(idCat){
@@ -139,7 +141,7 @@ function delCate(idCat){
         }
 
     };
-    deletecat.open('get', 'deletecategory.php?IDCategory=' +idCat);
+    deletecat.open('get', 'controller?type=deletecategory&IDCategory=' +idCat);
     deletecat.send(null);
     update();
 }
@@ -154,7 +156,7 @@ function delTask(idTask){
         }
 
     };
-    deletetask.open('get', 'deleteTask.php?IDTask=' + idTask );
+    deletetask.open('get', 'controller?type=deleteTask&IDTask=' + idTask );
     deletetask.send(null);
     update();
 }
