@@ -34,6 +34,7 @@ function showResult(key, value){
 
 function moreResult(key, value, more){
     _more = more + 10;
+
     if(window.XMLHttpRequest)
     {
         // untuk IE7, Firefox, Chrome, Opera, Safari
