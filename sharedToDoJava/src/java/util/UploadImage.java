@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
@@ -57,17 +58,17 @@ public class UploadImage extends HttpServlet {
                 ServletFileUpload upload = new ServletFileUpload(factory);
                 List items = null;
                 try {
-                    out.println("mulai5");
-                    out.println(upload.parseRequest(request).size());
-                    out.println("mulai7");
+//                    out.println("mulai5");
+//                    out.println(upload.parseRequest(request).size());
+//                    out.println("mulai7");
                     items = upload.parseRequest(request);
                     out.println(items.size());
-                    out.println("mulai6");
+//                    out.println("mulai6");
                     out.println(request);
                 }catch (FileUploadException e) {
                     e.printStackTrace();
                 }
-                out.println("mulai3");
+//                out.println("mulai3");
                 Iterator itr = items.iterator();
                 while(itr.hasNext()){
                     FileItem item = (FileItem) itr.next();
@@ -76,10 +77,10 @@ public class UploadImage extends HttpServlet {
                         String value = item.getString();
                     } else {
                         try {
-                            out.println("mulai2");
+//                            out.println("mulai2");
                             String itemName = item.getName();
-                            Random generator = new Random();
-                            int r = Math.abs(generator.nextInt());
+//                            Random generator = new Random();
+//                            int r = Math.abs(generator.nextInt());
                             
                             String reg = "[.*]";
                             String replacingtext = "";
@@ -94,10 +95,16 @@ public class UploadImage extends HttpServlet {
                             int IndexOf = itemName.indexOf(".");
                             String domainName = itemName.substring(IndexOf);
                             
-                            String finalimage = buffer.toString() + "_" + r + domainName;
+                            String finalimage = buffer.toString() + domainName;
+                            out.println("FINAL = " + finalimage);
                             
-                            out.println("FFFFFFINAL = " + finalimage);
-                            File savedFile = new File("D:/Informatika/Semester 6/Pemrograman Internet/Tubes III/SharedToDoList/web/server" + finalimage);
+                            //mengambil variabel session
+                            HttpSession session = request.getSession(true);
+                            String curUser = (String) session.getValue("username");
+//                            out.println(curUser);
+                            
+//                            File savedFile = new File("D:/Informatika/Semester 6/Pemrograman Internet/Tubes III/SharedToDoList/web/server/" + finalimage);
+                            File savedFile = new File("D:/Informatika/Semester 6/Pemrograman Internet/Tubes III/SharedToDoList/web/server/" + curUser + ".png");
                             try {
                                 item.write(savedFile);
                             } catch (Exception ex) {
@@ -109,6 +116,10 @@ public class UploadImage extends HttpServlet {
                             out.println("<table><tr><td>");
                             out.println("<img src=images/"+finalimage+">");
                             out.println("</td></tr></table>");
+                            
+//                            Thread.sleep(1000);
+                            response.sendRedirect("profile.jsp?");
+                            Thread.sleep(5000);
                         } catch(Exception e){
                             e.printStackTrace();
                         }

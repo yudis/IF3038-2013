@@ -4,7 +4,10 @@
     Author     : Sonny Theo Thumbur
 --%>
 
+<%@page import="com.sun.corba.se.pept.transport.ContactInfo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.*"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,6 +45,7 @@
                 <%
                     String curUser = (String) session.getAttribute("username");
 //                        out.println(curUser);
+//                    response.setIntHeader("Refresh", 5);
                 %>
                 <img id="user" src="server/<%= curUser %>.png" alt="userPhoto"/>
 		<div id="photoUploader">
@@ -53,6 +57,103 @@
 		    </form>
 		</div>
             </div>
+        </div>
+        
+        <%
+            String driver = "com.mysql.jdbc.Driver";
+            Class.forName(driver).newInstance();
+            
+            Connection con = null;
+            ResultSet rs = null;
+            Statement stmt = null;
+            
+            String url = "jdbc:mysql://localhost:3306/progin_405_13510027?user=progin&password=progin";
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            String sql = "SELECT * from user";
+            rs = stmt.executeQuery(sql);
+        %>
+        
+        <%
+            while (rs.next()) {
+                if (rs.getString("username").equals(curUser)) {
+        %>
+            <div id="userData">
+                <h2 id="biodataTitle">BIODATA</h2><hr/>
+                <div id="biodataContent">
+                    <div class="bioLeft">
+                        <p>Nama Lengkap :</p>
+                    </div>
+                    <div id="userFullName" class="bioRight">
+                        <p><%= rs.getString("fullname") %></p>
+                    </div>
+                    <div class="bioLeft">
+                        <p>Username :</p>
+                    </div>
+                    <div class="bioRight">
+                        <p><em><%= rs.getString("username") %></em></p>
+                    </div>
+                    <div class="bioLeft">
+                        <p>Tanggal Lahir :</p>
+                    </div>
+                    <div id="userBirthdate" class="bioRight">
+                        <p><%= rs.getString("tanggalLahir") %></p>
+                    </div>
+                    <div class="bioLeft">
+                        <p>Email :</p>
+                    </div>
+                    <div class="bioRight">
+                        <p><%= rs.getString("email") %></p>
+                    </div>
+                    <div class="bioLeft">
+                        <p></p>
+                    </div>
+                    <div class="bioRight">
+                        <button id="editProfileBtn" onclick="showEditForm();">Edit</button>
+                    </div>
+                </div>
+            </div>
+        <%
+           } else {
+            //do nothing
+           }
+                       }
+        %>
+        
+        <!--FORM EDIT SECTION-->
+        <div id=editForm>
+            <form method="POST" enctype="multipart/form-data" name="uploadImage">
+                <div class="bioLeft">
+                    <p>new Full Name :</p>
+                </div>
+                <div class="bioRight">
+                    <input id="newFullName" type=text name="newFullName"></input>
+                </div>
+                <div class="bioLeft">
+                    <p>new Birthdate :</p>
+                </div>
+                <div class="bioRight">
+                    <input id="newBirthdate" type=date name="newBirthdate"></input>
+                </div>
+                <div class="bioLeft">
+                    <p>new Password :</p>
+                </div>
+                <div class="bioRight">
+                    <input id="newPassword" type="password" name="newPassword"></input>
+                </div>
+                <div class="bioLeft">
+                    <p>Confirm new Password :</p>
+                </div>
+                <div class="bioRight">
+                    <input id="newPasswordAgain" type="password" name="newPasswordAgain"></input>
+                </div>
+                <div class="bioLeft">
+                    <p></p>
+                </div>
+                <div class="bioRight">
+                    <input class="submitBtn" type="button" value="Submit Form" name='upload' onclick="hideEditForm(); updateProfile(newFullName.value, newBirthdate.value, newPassword.value, newPasswordAgain.value, fileUpload.value);"></input>
+                </div>
+            </form>
         </div>
     </body>
 </html>
