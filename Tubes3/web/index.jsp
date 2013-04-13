@@ -20,7 +20,7 @@
         
         <title> Next : You Can't Do it Alone</title>
 		<link rel="stylesheet" href="css/calendar.css">
-		<script src="js/calendar.js" > </script>
+		<script src="js/calendar2.js" > </script>
         <link rel="stylesheet" href="css/css.css">
         <script>
 			
@@ -331,6 +331,7 @@
 						<script type="text/javascript">
 							calendar.set("date");
 						</script>
+                                                
                             <label>email</label>
                             <input name="email" type="email" placeholder="email" onKeyUp="email_validating()" onChange="logingg()" />
                                                     <img src="pict/blank.png" alt="icon6" id="emailicon" />
@@ -342,10 +343,8 @@
                             <input class= "submitreg" id="submitb" name="submit" type="submit" value="Submit" disabled />
                             <input class= "submitreg" name="cancel" type="cancel" onClick="ShowAwal()" value="Cancel"/>
                         
-                        </form>                                                
-                    </div>
-
-                 
+                        </form>                                         
+                    </div>                
                     
                 </div>
                
