@@ -107,3 +107,56 @@ function loginggprof()
         document.getElementById("submitedit").disabled = true;
     }
 }
+
+function showDoneTask(){
+    document.getElementById("donetask").innerHTML="";
+    if(window.XMLHttpRequest)
+    {
+        // untuk IE7, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {
+        //untuk IE jadul
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+				
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("donetask").innerHTML=xmlhttp.responseText;		
+        }
+    }
+    xmlhttp.open("GET", "Task?aksi=lihat_done_task", true);
+    xmlhttp.send();
+}
+
+function showUndoneTask(){
+    document.getElementById("undonetask").innerHTML="";
+    if(window.XMLHttpRequest)
+    {
+        // untuk IE7, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {
+        //untuk IE jadul
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+				
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("undonetask").innerHTML=xmlhttp.responseText;		
+        }
+    }
+    xmlhttp.open("GET", "Task?aksi=lihat_undone_task", true);
+    xmlhttp.send();
+}
+
+function showTasks(){
+    showDoneTask();
+    showUndoneTask();
+}

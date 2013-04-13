@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -90,8 +91,9 @@ public class Kategori extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         try {
-            addKategori(request.getParameter("nama"), "2", request.getParameter("assignees"), response);
+            addKategori(request.getParameter("nama"), (String)session.getAttribute("id"), request.getParameter("assignees"), response);
         } catch (SQLException ex) {
             Logger.getLogger(Kategori.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -107,7 +109,7 @@ public class Kategori extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void showKategori(String userID, HttpServletResponse response) throws ServletException, SQLException, IOException {
+    private void showKategori(String userID, HttpServletResponse response) throws IOException, ServletException, SQLException {
         PrintWriter out = response.getWriter();
         out.println("<div id='category_head'>");
         out.println("Kategori");

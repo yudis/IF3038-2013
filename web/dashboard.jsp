@@ -6,7 +6,16 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+<%
+    if(session.getAttribute("username")== null)
+    {
+        response.sendRedirect("index.jsp");
+    }
+    else
+    {
+     
+    }
+%>
 <html>
     <head>
         <title>Dashboard</title>
@@ -15,7 +24,7 @@
         <script src="js/dashboard.js"></script>
     </head>
 
-    <body onload="showKategori(2)">
+    <body onload="showKategori(<%=session.getAttribute("id")%>)">
         <%@include file="header.jsp" %>
         <div id="container">
             

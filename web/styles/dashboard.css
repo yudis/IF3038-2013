@@ -128,6 +128,7 @@
     line-height: 25px;
     text-align: center;
     color: white;
+    display: none;
 }
 
 .tombol_hapus_task:hover{
@@ -160,14 +161,28 @@
     font:normal 15px "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
-.task_status{
+.tombol_status_on{
     margin-left:10px;
     margin-bottom:5px;
     width: 130px;
     float: left;
     text-align: center;
     font:normal 15px "Trebuchet MS", Arial, Helvetica, sans-serif;
-    background-color: rgba(255, 0, 0, 0.8);
+    background-color: green;
+    color: white;
+    cursor: hand; cursor: pointer;
+}
+
+.tombol_status_off{
+    margin-left:10px;
+    margin-bottom:5px;
+    width: 130px;
+    float: left;
+    text-align: center;
+    font:normal 15px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    background-color: red;
+    color: white;
+    cursor: hand; cursor: pointer;
 }
 
 .panel {

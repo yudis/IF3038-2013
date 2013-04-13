@@ -46,6 +46,7 @@ public class ConnectDB {
                 data.add(row);
             }
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new ServletException("Servlet Could not display records.", e);
         } catch (ClassNotFoundException e) {
             throw new ServletException("JDBC Driver not found.", e);
