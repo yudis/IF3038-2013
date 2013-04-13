@@ -1,6 +1,25 @@
 <%@include file="../ConnectDB.jsp" %>
 <%@include file="../upload.jsp" %>
 <%
+    String directory = "images";
+    out.print(directory);
+    
+    String contentType = request.getContentType();
+    ArrayList<String> result = new ArrayList<String>();
+    String data = "";
+    //System.out.println("Content type is :: " + contentType);
+    if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
+    {
+        byte[] dataBytes = getDataBytes(request.getInputStream(), request.getContentLength());
+        result = upload(dataBytes, contentType, directory); 
+
+        for(String coba: result)
+        {
+            out.print(coba);
+        }
+    }
+
+
     String taskname = request.getParameter("taskname");
     String deadline = request.getParameter("deadline");
     String assignee = request.getParameter("assignee");

@@ -25,7 +25,7 @@
             </div>		
             <div class="box2">
                 <h3></h3>
-                <form method="POST" action="addtasksubmit.jsp" onsubmit="submitNewTask('<%=category%>');">
+                <form method="POST" action="addtasksubmit.jsp" enctype="multipart/form-data" onsubmit="submitNewTask('<%=category%>');">
                     <fieldset>
                         <p>
                             <label>Task Name<abbr title="Required">*</abbr></label>

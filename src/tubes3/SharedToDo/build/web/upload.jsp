@@ -26,6 +26,7 @@
         return dataBytes;
     }
 
+    ///
     public String getFullname(String data) 
     {
         String result = data.substring(data.indexOf("fullname\"") + 10);
@@ -62,6 +63,50 @@
         return result;
     }
     
+    ///
+    public String getTaskname(String data) 
+    {
+        String result = data.substring(data.indexOf("taskname\"") + 10);
+        result = result.substring(0, result.indexOf("-----")).trim();
+        return result;
+    }
+
+    public String getDeadline(String data) 
+    {
+        String result = data.substring(data.indexOf("deadline\"") + 10);
+        result = result.substring(0, result.indexOf("-----")).trim();
+        return result;
+    }
+
+    public String getTags(String data) 
+    {
+        String result = data.substring(data.indexOf("tags\"") + 6);
+        result = result.substring(0, result.indexOf("-----")).trim();
+        return result;
+    }
+
+    public String getStatus(String data) 
+    {
+        String result = data.substring(data.indexOf("status\"") + 8);
+        result = result.substring(0, result.indexOf("-----")).trim();
+        return result;
+    }
+
+    public String getCategory(String data) 
+    {
+        String result = data.substring(data.indexOf("category\"") + 10);
+        result = result.substring(0, result.indexOf("-----")).trim();
+        return result;
+    }
+
+    public String getAssignee(String data) 
+    {
+        String result = data.substring(data.indexOf("assignee\"") + 10);
+        result = result.substring(0, result.indexOf("-----")).trim();
+        return result;
+    }
+
+    //
     public ArrayList<String> upload(byte[] dataBytes, String contentType, String directory)
     {
         String data = new String(dataBytes);
@@ -103,6 +148,27 @@
             {
             
             }
+        }
+        
+        return result;
+    }
+
+    ///
+    public ArrayList<String> upload2(byte[] dataBytes, String contentType, String directory)
+    {
+        String data = new String(dataBytes);
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(getTaskname(data));
+        result.add(getDeadline(data));
+        result.add(getTags(data));
+        result.add(getStatus(data));
+        result.add(getCategory(data));
+        result.add(getAssignee(data));
+        String saveFileName = getFilename(data);
+        result.add(saveFileName);
+        if (!saveFileName.equals("")) 
+        {
+
         }
         
         return result;
