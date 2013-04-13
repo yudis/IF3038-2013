@@ -4,9 +4,44 @@
     Author     : LCF
 --%>
 
+<%@ page import="java.sql.*" %> 
+<%@ page import="java.io.*" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script src="js/suggestion.js"> </script>
 <div id="header">
+    
+    <%
+			String namah = null;
+                        String avah = null;
+                        
+                        try{
+                            ResultSet rs = null;
+                            Statement s = null;
+                            Connection con = null;
+                            String name = (String) session.getAttribute("username");
+                            String connectionURL = "jdbc:mysql://localhost:3306/progin";
+                            Class.forName("com.mysql.jdbc.Driver");
+                            con = DriverManager.getConnection(connectionURL,"progin","progin");
+                            s = con.createStatement();
+                            rs =  s.executeQuery("select* from accounts where username='"+name+"'");
+                            
+                            if(rs.next())
+                                {
+                                    namah = rs.getString("username");
+                                    avah = rs.getString("avatar");
+                                }
+                            
+                            rs.close(); 
+                            s.close(); 
+                            con.close();
+                            
+                            }catch(Exception e)
+                                {
+                                    out.println("Unable to connect to database."); 
+                                }
+                        
+		%>
+    
     <div class=logo id="logo">
         <a href="dashboard.jsp"><img src="images/logo.png" title="Home" alt="Home"/></a>
     </div>
@@ -32,7 +67,8 @@
         <a href="logout" onclick="localStorage.clear()" >Logout</a>
     </div>
     <div class="menu" id="profile">
-        <a href="profile.jsp">Profile</a>
+        <a href="profile.jsp"><img  src=<% out.print("'");out.println(avah);out.print("'");%>/><% out.print("  ");out.println(namah); %> </a>
+        
     </div>
     <div class="menu" id="home">
         <a href="dashboard.jsp">Home</a>
