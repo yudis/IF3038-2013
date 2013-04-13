@@ -1,4 +1,4 @@
-NIM       Nama                Email                     Github_id
-13510005  Aisyah Dzulqaidah
+NIM       Nama
+13510019  Andreas Bara Timur
 13510031  Rahmi Yuwan
-13510055  Atika Yusuf         yusuf.atika@gmail.com     atikayusuf
+13510099  Muhammad Gema Akbar   
