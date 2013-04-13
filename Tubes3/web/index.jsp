@@ -241,7 +241,7 @@
 			                      
 </script>
     </head>
-    <body onLoad="isLogin()">		<!-----------------------panggil isLogin------------------------->
+    <body>		<!-----------------------panggil isLogin------------------------->
         <div class="header">
             <div id="logo">
                 <img src="pict/logo.png">
