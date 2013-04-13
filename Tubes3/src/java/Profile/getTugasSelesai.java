@@ -43,7 +43,7 @@ public class getTugasSelesai extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");
             query = conn.createStatement();
-            ResultSet result = query.executeQuery("SELECT * FROM tugas natural join mengerjakan WHERE username='jo'");
+            ResultSet result = query.executeQuery("SELECT * FROM tugas natural join mengerjakan WHERE username='"+request.getParameter("user")+"'");
             
             while (result.next()) {
                 conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");

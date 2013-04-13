@@ -41,7 +41,7 @@ public class getTanggalLahir extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");
             query = conn.createStatement();
-            ResultSet result = query.executeQuery("SELECT * FROM pengguna WHERE username='jo'");
+            ResultSet result = query.executeQuery("SELECT * FROM pengguna WHERE username='"+request.getParameter("user")+"'");
             
             while (result.next()) {
                 out.println("<div id=\"tanggallahir\">");
