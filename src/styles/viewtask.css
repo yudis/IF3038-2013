@@ -1,0 +1,274 @@
+#container {
+	
+	width: 100%;
+	
+	margin: 0;
+}
+#header{
+    height:50px;
+	width:100%;
+	float:left;
+	background-image: url('../../images/black_header.png');
+	background-repeat: repeat-x;
+}
+#logo{
+    height:50px;
+	width:150px;
+	float:left;
+}
+#space{
+	height:50px;
+	width:150px;
+	float:left;
+}
+#search{
+    height:50px;
+	width:500px;
+	float:left;
+}
+#searchbox{
+	height:30px;
+	width:400px;
+	margin-top:10px;
+}
+#searchbutton{
+	height:30px;
+	width:30px;
+	position:absolute;
+	left:670px;
+	top:13px;
+	background: transparent url(../../images/search.png) no-repeat;
+	overflow: hidden;
+	border:0;
+}
+#home{
+    height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	text-align:center;
+}
+#home:hover{
+	height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	background-color:#000;
+	text-align:center;
+}
+#profile{
+    height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	text-align:center;
+}
+#profile:hover{
+	height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	background-color:#000;
+	text-align:center;
+}
+#logout{
+    height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	text-align:center;
+}
+#logout:hover{
+	height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	background-color:#000;
+	text-align:center;
+}
+#leftspace{
+	height:100%;
+	width:200px;
+	float:left;
+	border-right:1px solid gray;
+}
+#viewtask{
+	height:100%;
+	width:500px;
+	float:left;
+	margin-left: 1%;
+}
+#rightspace{
+	height:100%;
+	width:547px;
+	float:right;
+	border-left:1px solid gray;
+}
+
+.form_field {
+	width:100%;
+	height: 7%;
+    display : inline-block;
+}
+
+.form_attachment{
+	width:100%;
+	height:550px;
+    overflow: scroll;
+}
+
+.viewtask_label {
+	margin-top:5px;
+	margin-left:10px;
+	font:normal 20px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	width:30%;
+	float:left;
+}
+
+.viewtask_field {
+	margin-top:5px;
+	margin-left:10px;
+	font:normal 16px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color:grey;
+	float:left;
+}
+
+.viewtask_edit {
+	margin-top:5px;
+	margin-left:10px;
+	float:right;
+}
+
+#fieldset {
+	width:250px;
+}
+
+#commentLabel {
+	font:normal 16px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+#dlvalue {
+	display:inline;
+}
+
+#asvalue {
+	display:inline;
+}
+
+#tagvalue {
+	display:inline;
+}
+
+#savebutton {
+	display:none;
+}
+
+#dl {
+	display:none;
+}
+
+#as {
+	display:none;
+}
+
+#tag {
+	display:none;
+}
+
+body {
+	margin: 0px;
+}
+
+.form_field {
+	border:1px solid gray;
+}
+.form_attachment img{
+	margin-top:10px;
+	margin-left:10%;
+}
+
+.form_attachment video{
+	margin-top:10px;
+	margin-left:10%;
+}
+.menu a {
+	padding:15px 35px;
+	color:#000;
+	text-decoration:none;
+}
+.menu a:hover {
+	color:#FFF;
+	text-decoration:none;
+}
+
+.imgattach {
+    width: 80%;
+    border: 1px solid #000000;
+}
+.vidattach {
+    width: 80%;
+}
+#viewtask_komen {
+    float: none;
+    height: 330px;
+    overflow: scroll;
+    font-size: 10pt;
+}
+
+.komenkolom {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: top;
+}
+.komennama {
+    text-decoration: none;
+    color: #000;
+    font-size: large;
+    margin-bottom: 100px;
+}
+.komenkomen {
+    width: 250px;
+}
+.komenwaktu {
+    margin-top: 20px;
+    text-decoration: none;
+    font-style: italic;
+    color: #666;
+}
+.komenava {
+    width: 50px;
+}
+.komennama:hover {
+    color: #e58100;
+}
+
+.kotakwarna {
+    background-color: #ececec;
+}
+.daftarkomen{
+    width: 100%-10px;
+    color: #333333;
+    padding-top: 5px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    font-family: Calibri;
+}

@@ -1,0 +1,145 @@
+#container {
+	
+	width: 100%;
+	
+	margin: 0;
+}
+#header{
+    height:50px;
+	width:100%;
+	float:left;
+	background-image: url('../images/black_header.png');
+	background-repeat: repeat-x;
+}
+#logo{
+	margin-left:5px;
+    height:50px;
+	width:150px;
+	float:left;
+}
+#space{
+	height:50px;
+	width:150px;
+	float:left;
+}
+#search{
+    height:50px;
+	width:500px;
+	float:left;
+}
+#searchbox{
+    height:25px;
+    width:400px;
+    margin-left: 100px;
+    margin-top:10px;
+}
+#hasil_ac{
+    width:400px;
+    margin-left: 100px;
+    position: absolute;
+    background-color: #dfdfdf;
+    box-shadow: 3px 3px 5px #888888;
+}
+#searchbutton{
+    height:30px;
+    width:30px;
+    position:absolute;
+    left:780px;
+    top:13px;
+    background: transparent url(../images/search.png) no-repeat;
+    overflow: hidden;
+    border:0;
+    cursor: hand; cursor: pointer;
+}
+
+#searchdropdown{
+    position:absolute;
+    left:310px;
+    top:10px;
+}
+#opsisearch{
+    height: 30px;
+}
+#home{
+    height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	text-align:center;
+}
+#home:hover{
+	height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	background-color:#000;
+	text-align:center;
+}
+#profile{
+    height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	text-align:center;
+}
+#profile img{
+    height:35px;
+    width:35px;
+    margin-top: 3px;
+}
+
+#profile:hover{
+	height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	background-color:#000;
+	text-align:center;
+}
+#logout{
+    height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	text-align:center;
+}
+#logout:hover{
+	height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	background-color:#000;
+	text-align:center;
+}
+
+body {
+	margin: 0px;
+}
+.menu a {
+	padding:15px 5px;
+	color:#000;
+	text-decoration:none;
+}
+.menu a:hover {
+	color:#FFF;
+	text-decoration:none;
+}
+

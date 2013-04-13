@@ -1,0 +1,150 @@
+/* 
+    Document   : search_result
+    Created on : Apr 11, 2013, 5:32:59 PM
+    Author     : LCF
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#judul_search{
+    font:normal 30px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+#hasil{
+    width: 100%;
+    margin: 0px;
+}
+
+#hasil_kategori{
+    width: 30%;
+    margin-top: 10px;
+    float: left;
+}
+
+#hasil_task{
+    width: 40%;
+    margin-top: 10px;
+    float: left;
+}
+
+#hasil_username{
+    width: 30%;
+    margin-top: 10px;
+    float: left;
+}
+
+.category_block{
+    margin-left:5px;
+    margin-right:5px;
+    margin-bottom:5px;
+    height:50px;
+    box-shadow: 1px 1px 1px #535353;
+    border: #d9d9d9 solid 7px;
+    background-color:#dfdfdf;
+}
+
+.category_block:hover{
+    margin-left:5px;
+    margin-right:5px;
+    margin-bottom:5px;
+    height:50px;
+    box-shadow: 1px 1px 1px #535353;
+    border: #836fff solid 7px;
+    background-color:#dfdfdf;
+    cursor: hand; cursor: pointer;
+}
+
+.category_pic{
+    width:50px;
+    float:left;
+}
+
+.category_name{
+    width:270px;
+    float: right;
+    font:normal 20px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin-top:10px;
+}
+
+.task_block p{
+    font:normal 25px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin-top:5px;
+    margin-bottom:5px;
+    text-align: center;
+}
+
+.task_block{
+    width:95%;
+    height: 60px;
+    border: solid 1px #e2e2e2;
+    margin-left: 20px;
+    margin-bottom:10px;
+    box-shadow: 1px 1px 1px #535353;
+}
+
+.tombol_hapus_task{
+    width:25px;
+    height:25px;
+    position: absolute;
+    left: 95.8%;
+    z-index: 2;
+    background-color: rgba(255, 0, 0, 0.8);
+    line-height: 25px;
+    text-align: center;
+    color: white;
+}
+
+.tombol_hapus_task:hover{
+    background-color: rgba(64, 128, 128, 0.8);
+    cursor: hand; cursor: pointer;
+}
+
+.task_judul{
+    margin-top:5px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    width:100%;
+    font:normal 20px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+.task_deadline{
+    margin-left:10px;
+    margin-bottom:5px;
+    color:red;
+    width:30%;
+    float:left;
+    font:normal 15px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+.task_tag{
+    margin-left:10px;
+    margin-bottom:5px;
+    width:50%;
+    float: left;
+    font:normal 15px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+.task_status{
+    margin-left:10px;
+    margin-bottom:5px;
+    width: 130px;
+    float: left;
+    text-align: center;
+    font:normal 15px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    background-color: rgba(255, 0, 0, 0.8);
+}
+
+.hasil_username{
+    width: 95%;
+    box-shadow: 1px 1px 1px #535353;
+    border: #d9d9d9 solid 7px;
+    background-color:#dfdfdf;
+    margin-left:5px;
+    margin-right:5px;
+    margin-bottom:5px;
+}
+
+.hasil_username img{
+    height:35px;
+    width:35px;
+}

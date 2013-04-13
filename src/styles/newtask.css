@@ -1,0 +1,182 @@
+#container {
+	
+	width: 100%;
+	
+	margin: 0;
+}
+#header{
+    height:50px;
+	width:100%;
+	float:left;
+	background-image: url('../../images/black_header.png');
+	background-repeat: repeat-x;
+}
+#logo{
+    height:50px;
+	width:150px;
+	float:left;
+}
+#space{
+	height:50px;
+	width:150px;
+	float:left;
+}
+#search{
+    height:50px;
+	width:500px;
+	float:left;
+}
+#searchbox{
+	height:30px;
+	width:400px;
+	margin-top:10px;
+}
+#searchbutton{
+	height:30px;
+	width:30px;
+	position:absolute;
+	left:670px;
+	top:13px;
+	background: transparent url(../../images/search.png) no-repeat;
+	overflow: hidden;
+	border:0;
+}
+#home{
+    height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	text-align:center;
+}
+#home:hover{
+	height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	background-color:#000;
+	text-align:center;
+}
+#profile{
+    height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	text-align:center;
+}
+#profile:hover{
+	height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	background-color:#000;
+	text-align:center;
+}
+#logout{
+    height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	text-align:center;
+}
+#logout:hover{
+	height:50px;
+	width:150px;
+	float:right;
+	color:#ffffff;
+	font:15px andy,sans-serif;
+	font-size:180%;
+	line-height: 2em;
+	background-color:#000;
+	text-align:center;
+}
+#leftspace{
+	height:572px;
+	width:20%;
+	float:left;
+}
+#newtask{
+	height:572px;
+	width:60%;
+	float:left;
+}
+#rightspace{
+	height:572px;
+	width:20%;
+	float:right;
+}
+
+body {
+	margin: 0px;
+}
+.menu a {
+	padding:15px 35px;
+	color:#000;
+	text-decoration:none;
+}
+.menu a:hover {
+	color:#FFF;
+	text-decoration:none;
+}
+
+.form_field {
+	height:7%;
+	width:100%;
+}
+
+#formulir {
+	width:95%;
+	border: solid 1px #e2e2e2;
+	margin-left: 20px;
+	margin-bottom:10px;
+	box-shadow: 3px 3px 3px #535353;
+	background-color:white;
+}
+
+#newtask_space{
+	height:40%;
+	width:100%;
+}
+
+.newtask_label {
+	margin-top:5px;
+	margin-left: 10px;
+	font:normal 20px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	width:30%;
+	float:left;
+}
+
+.newtask_field {
+	margin-top:5px;
+	margin-left: 10px;
+	width:40%;
+	float:left;
+}
+
+.newtask_warning {
+	margin-top:5px;
+	margin-left: 10px;
+	float:left;
+}
+
+.inputtext {
+	height:25px;
+	font-size:16px;
+}
+body {
+	background-color:gray;
+}
