@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlet;
 
 import java.io.IOException;
@@ -19,10 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Agah
- */
 @WebServlet(name = "MarkAsFinished", urlPatterns = {"/MarkAsFinished"})
 public class MarkAsFinished extends HttpServlet {
 
