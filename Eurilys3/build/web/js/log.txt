@@ -1,0 +1,281 @@
+function toggle_visibility(id) {
+	var e = document.getElementById(id);
+	if(e.style.display == 'block')
+		e.style.display = 'none';
+	else
+		e.style.display = 'block';
+}
+
+function add_category() {
+	var t = "<li>";
+	t += "<a href ='#' onclick='catchange(10)' id='newCategoryAdded'>";
+	t += document.getElementById("add_category_name").value;
+	t += "</a>";
+	t += "</li>";
+	document.getElementById("category_item").innerHTML += t;
+}
+
+var regValid = 0;
+
+function regCheck() {
+	var username = document.getElementById("reg_username").value;
+	var password = document.getElementById("reg_password").value;
+	var confirm = document.getElementById("reg_confirm").value;
+	var name = document.getElementById("reg_name").value;
+	var email = document.getElementById("reg_email").value;
+	var birthdate = document.getElementById("reg_birthdate").value;
+	var avatar = document.getElementById("avatar_upload").value;
+	var usernameValid = 0; var passwordValid = 0; var confirmValid = 0;
+	var nameValid = 0; var emailValid = 0; var birthdateValid = 0; var avatarValid = 0;
+	//alert(username + " " + password+ " " + confirm + " " +email + " " + birthdate + " " +avatar);
+	
+	//check 
+	
+	if ((username.length > 4) && (username != password) && (username.indexOf(" ") == -1)){
+		//AJAX
+		var xmlhttp;
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+				if(xmlhttp.responseText=="true"){
+					usernameValid = 0;
+					document.getElementById("username_validation").src = "img/no.png";
+				}
+				else {
+					document.getElementById("username_validation").src = "img/yes.png";
+					usernameValid = 1;
+				}
+			}
+		  }  
+		xmlhttp.open("GET","checkName.php?name="+username,false);
+		xmlhttp.send();
+	}
+	else {
+		usernameValid = 0;
+		if (username.length == 0)
+			document.getElementById("username_validation").src = "img/none.png";
+		else
+			document.getElementById("username_validation").src = "img/no.png";
+	}
+	document.getElementById("username_validation").style.display = "block";
+	
+	//check password
+	if ((password.length > 7) && (password != username) && (password != email)) {
+		document.getElementById("password_validation").src = "img/yes.png";
+		passwordValid = 1;
+	}
+	else {
+		passwordValid = 0;
+		if (password.length == 0)
+			document.getElementById("password_validation").src = "img/none.png";
+		else
+			document.getElementById("password_validation").src = "img/no.png";
+	}
+	document.getElementById("password_validation").style.display = "block";
+
+	//check confirm
+	if (confirm == password && password != "" && password.length > 7) {
+		document.getElementById("confirm_validation").src = "img/yes.png";
+		confirmValid = 1;
+	}
+	else{
+		confirmValid = 0;
+		if (confirm.length == 0)
+			document.getElementById("confirm_validation").src = "img/none.png";
+		else
+			document.getElementById("confirm_validation").src = "img/no.png";
+	}
+	document.getElementById("confirm_validation").style.display = "block";
+	
+	//check name
+	if (name.indexOf(' ') != -1) {
+		var names = name.split(" ");
+		if (names.length > 1){
+			if (names[1] != ""){
+				document.getElementById("name_validation").src = "img/yes.png";
+				nameValid = 1;
+			}
+			else{
+				document.getElementById("name_validation").src = "img/no.png";
+				nameValid = 0;
+			}
+		}
+		else{
+			document.getElementById("name_validation").src = "img/no.png";
+			nameValid = 0;
+		}
+	}
+	else {
+		nameValid = 0;
+		if (name.length == 0)
+			document.getElementById("name_validation").src = "img/none.png";
+		else
+			document.getElementById("name_validation").src = "img/no.png";
+	}
+	document.getElementById("name_validation").style.display = "block";
+	
+	//check email
+	var emailRegEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+	if ((email==password) || (email.search(emailRegEx) == -1)) {
+		emailValid = 0;
+		if (email.length == 0)
+			document.getElementById("email_validation").src = "img/none.png";
+		else
+			document.getElementById("email_validation").src = "img/no.png";
+	}
+	else {
+		var xmlhttp;
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			if(xmlhttp.responseText=="true"){
+				document.getElementById("email_validation").src = "img/no.png";	
+			}
+			else {
+				document.getElementById("email_validation").src = "img/yes.png";
+				emailValid = 1;
+			}
+		  }  
+		xmlhttp.open("GET","checkEmail.php?email="+email,true);
+		xmlhttp.send();
+	}
+	document.getElementById("email_validation").style.display = "block";
+	
+	//check birthday
+	if (birthdate != "") {
+		if (birthdate.indexOf("-") != -1)
+			var dates = birthdate.split("-");
+		else
+			var dates = birthdate.split("/");
+		var birth = new Date(dates[0], dates[1]-1, dates[2]);
+		var today = new Date();
+		if (birth.getTime() > today.getTime()){
+			document.getElementById("birthdate_validation").src = "img/no.png";
+			birthdateValid = 0;
+		}
+		else{
+			document.getElementById("birthdate_validation").src = "img/yes.png";
+			birthdateValid = 1;
+		}
+	}
+	else {
+		document.getElementById("birthdate_validation").src = "img/none.png";
+		regValid = 0;
+	}
+	document.getElementById("birthdate_validation").style.display = "block";
+	
+	//check avatar
+	var extension = avatar.split('.');
+	if ( (extension[1] == "jpg") || (extension[1] == "jpeg") ) {
+		document.getElementById("avatar_validation").src = "img/yes.png";
+		avatarValid = 1;
+	}
+	else {
+		avatarValid = 0;
+		if (avatar.length == 0)
+			document.getElementById("avatar_validation").src = "img/none.png";
+		else
+			document.getElementById("avatar_validation").src = "img/no.png";
+	}
+	document.getElementById("avatar_validation").style.display = "block";
+	if (usernameValid == 1 && passwordValid == 1 && confirmValid == 1 && 
+		 nameValid == 1 && emailValid == 1 && birthdateValid == 1 && avatarValid == 1){
+		
+		regValid = 1;
+		document.getElementById("signup_button_submit").className = "link_blue_big right top10 bold";
+	 }
+	else{
+		document.getElementById("signup_button_submit").className = "link_blue_big_disabled right top10 bold";
+		regValid = 0;
+	}
+}
+
+function signup() {
+	if (regValid == 1) {
+		window.location.href = "src/dashboard.php";
+	}
+}
+
+function finishTask(i) {
+	if (i == 1) {
+		document.getElementById("curtask1").style.opacity = "0";
+		document.getElementById("curtask2").style.top = "20px";
+		document.getElementById("curtask3").style.top = "200px";
+		document.getElementById("curtask4").style.top = "380px";
+		document.getElementById("curtask5").style.top = "560px";
+		}
+		
+		else {if (i == 2) {
+			document.getElementById("curtask2").style.opacity = "0";
+			document.getElementById("curtask3").style.top = "200px";
+			document.getElementById("curtask4").style.top = "380px";
+			document.getElementById("curtask5").style.top = "560px";
+		}
+		else {
+			if (i==3) {
+				document.getElementById("curtask3").style.opacity = "0";
+				document.getElementById("curtask4").style.top = "380px";
+				document.getElementById("curtask5").style.top = "560px";
+			}
+			else if (i == 4) {
+				document.getElementById("curtask4").style.opacity = "0";
+				document.getElementById("curtask5").style.top = "560px";
+			}
+			else if (i == 5){
+				document.getElementById("curtask5").style.opacity = "0";
+			}
+		}
+	}
+}
+
+function checkTaskName() {
+	var taskName = document.getElementById('task_name_input').value;
+	var taskNameValid = 0;
+	var iChars = "~=-_^&.\\|*|,\":<>[]{}`\';()@&$#%";
+	for (var i = 0; i < taskName.length; i++) {
+		if (iChars.indexOf(taskName.charAt(i)) != -1){
+			taskNameValid = 1; 
+			break;
+		}
+	}
+	
+	if ((taskName.length > 25) || (taskNameValid == 1) || (taskName == "")) {
+		//tidak valid
+		document.getElementById('taskname_validation').src = "../img/no.png";
+	}
+	else {
+		//valid
+		document.getElementById('taskname_validation').src = "../img/yes.png";
+	}
+	document.getElementById('taskname_validation').style.display = "block";
+}
+
+function checkTaskAttachment() {
+	var attachmentName = document.getElementById('attachment_upload').value;
+	var dot = ".";
+	if (attachmentName.indexOf(dot) != -1) {
+		//valid
+		document.getElementById('task_attachment_validation').src = "../img/yes.png";
+	}
+	else {
+		//not valid
+		document.getElementById('task_attachment_validation').src = "../img/no.png";
+	}
+	document.getElementById('task_attachment_validation').style.display = "block";
+}
