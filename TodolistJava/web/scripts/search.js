@@ -69,22 +69,7 @@ function updateContent(){
 		var tempStr = "";
 		curX = searchResult.x;
 		curN = searchResult.n;
-        
-		if (searchResult.user.length != 0){
-                        if (!isUser){
-                            tempStr += "	<h1> User </h1>";	
-                            isUser = true;
-                        }
-			var i = 0;
-
-			do {
-					tempStr += "	<div class=\"tugas\">";
-					tempStr += "		<div> 		<img src=\"images/avatars/" + searchResult.user[i].avatar + "\" alt=\"" + searchResult.user[i].nama + "\" width=\"32\" height=\"32\" /> <strong>" + searchResult.user[i].fullName + "</strong> (<a href=\"profile.jsp?id=" + searchResult.user[i].username + "\">" + searchResult.user[i].username + "</a>)</div>";
-					tempStr += "	</div>";
-					i++;
-			} while(i < searchResult.user.length);
-		}
-                
+                       
 		if ((searchResult.category.length != 0)){
                         if (!isCategory){
                             tempStr += "	<h1> Category </h1>";
@@ -151,6 +136,22 @@ function updateContent(){
 					i++;
 			} while(i < searchResult.tugas.length);
 		}
+                
+		if (searchResult.user.length != 0){
+                        if (!isUser){
+                            tempStr += "	<h1> User </h1>";	
+                            isUser = true;
+                        }
+			var i = 0;
+
+			do {
+					tempStr += "	<div class=\"tugas\">";
+					tempStr += "		<div> 		<img src=\"images/avatars/" + searchResult.user[i].avatar + "\" alt=\"" + searchResult.user[i].nama + "\" width=\"32\" height=\"32\" /> <strong>" + searchResult.user[i].fullName + "</strong> (<a href=\"profile.jsp?id=" + searchResult.user[i].username + "\">" + searchResult.user[i].username + "</a>)</div>";
+					tempStr += "	</div>";
+					i++;
+			} while(i < searchResult.user.length);
+		}               
+    
                 if (tempStr != ""){
                     contentAdded.innerHTML += tempStr;	
                 } else {

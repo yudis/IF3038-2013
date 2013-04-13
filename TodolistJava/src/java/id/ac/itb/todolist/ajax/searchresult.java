@@ -86,21 +86,7 @@ public class searchresult extends HttpServlet {
         if (request.getParameter("filter") != null){
             
             if (request.getParameter("filter").equals("All")){
-
-                if (curTable.equals("username") && (n > 0)){
-                    jArray = new JSONArray(userdao.getUserSearch(q, x, n));
-                    result.put("user", jArray);                    
-                    if (jArray.size() >= n){
-                        result.put("x", (x + n));
-                        result.put("n", "username");
-                        n = 0;
-                    } else {
-                        n -= jArray.size();
-                        x = 0;
-                        curTable = "category";
-                    }
-                }
-                
+               
                 if (curTable.equals("category") && (n > 0)){
                     jArray = new JSONArray(categorydao.getCategorySearch(q, x, n));
                     result.put("category", jArray);                    
@@ -124,10 +110,25 @@ public class searchresult extends HttpServlet {
                         n = 0;
                     } else {
                         n -= jArray.size();
+                        x = 0;
+                        curTable = "username";                        
+
+                    }
+                }
+                
+                if (curTable.equals("username") && (n > 0)){
+                    jArray = new JSONArray(userdao.getUserSearch(q, x, n));
+                    result.put("user", jArray);                    
+                    if (jArray.size() >= n){
+                        result.put("x", (x + n));
+                        result.put("n", "username");
+                        n = 0;
+                    } else {
+                        n -= jArray.size();
                         result.put("x", 0);
                         result.put("n", null);
                     }
-                }              
+                }                
                 
             } else if (request.getParameter("filter").equals("Username")){
                 

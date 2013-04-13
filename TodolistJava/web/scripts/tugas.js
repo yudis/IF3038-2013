@@ -88,9 +88,9 @@ function updateContent(updateAttachment) {
     divDeadlineTugas.innerHTML = detilTugas.tglDeadline;
     txtDeadlineTugas.value = detilTugas.tglDeadline;
 
-    var assigneesTemp = '<li><a href="./profile?u=' + detilTugas.pemilik.username + '">'  + detilTugas.pemilik.fullName +  ' (' + detilTugas.pemilik.username + ')</a></li> ';
+    var assigneesTemp = '<li><a href="./profile.jsp?id=' + detilTugas.pemilik.username + '">'  + detilTugas.pemilik.fullName +  ' (' + detilTugas.pemilik.username + ')</a></li> ';
     detilTugas.assignees.forEach(function(entry) {
-        assigneesTemp += '<li><a href="./profile?u=' + entry.username + '">'  + entry.fullName +  ' (' + entry.username + ')</a>';
+        assigneesTemp += '<li><a href="./profile.jsp?id=' + entry.username + '">'  + entry.fullName +  ' (' + entry.username + ')</a>';
         if (detilTugas.priviledge == "creator" || detilTugas.priviledge == "assignee") {
             assigneesTemp += ' | <a class="red" href="#" onclick="removeAssignee(\'' + entry.username + '\'); return false;">&times;</a>';
         }
@@ -102,7 +102,7 @@ function updateContent(updateAttachment) {
 
     var strKomentar = '';
     detilTugas.comments.comments.forEach(function(entry) {
-        strKomentar += '<div class="item"><div class="title"><strong><img src="./images/avatars/' + entry.user.avatar + '" alt="' + entry.user.fullName + '" width="32" height="32" /> ' + entry.user.fullName + ' (<a href="./profile?u=' + entry.user.username + '">' + entry.user.username + '</a>)</strong> on ' + entry.time;
+        strKomentar += '<div class="item"><div class="title"><strong><img src="./images/avatars/' + entry.user.avatar + '" alt="' + entry.user.fullName + '" width="32" height="32" /> ' + entry.user.fullName + ' (<a href="./profile?jsp=' + entry.user.username + '">' + entry.user.username + '</a>)</strong> on ' + entry.time;
         if (entry.priviledge == 1) {
             strKomentar += ' (<a href="#" class="red" onclick="removeComment(' + entry.id + '); return false;">Remove</a>)';
         }

@@ -41,7 +41,7 @@
                                     <option>Task</option>
                                 </select>
                                 <input type="text" id="xvar" name="x" value="0" />
-                                <input type="text" id="nvar" name="n" value="username" />
+                                <input type="text" id="nvar" name="n" value="category" />
                                 <button class="btnsearch"><img src="./images/search.png" alt="Search"/></button>
                             </form>
                         </div>

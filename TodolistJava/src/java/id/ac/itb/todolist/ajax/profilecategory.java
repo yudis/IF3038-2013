@@ -6,6 +6,7 @@ package id.ac.itb.todolist.ajax;
 
 import id.ac.itb.todolist.dao.TugasDao;
 import id.ac.itb.todolist.model.Tugas;
+import id.ac.itb.todolist.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,6 +38,8 @@ public class profilecategory extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out= response.getWriter();
         TugasDao tugasdao = new TugasDao();
+        HttpSession session = request.getSession();
+        User loginedUser = (User) session.getAttribute("user");
         ArrayList<Tugas> result = (ArrayList<Tugas>) tugasdao.getTugas(request.getParameter("id"));
      
 //////////
@@ -64,11 +68,19 @@ public class profilecategory extends HttpServlet {
                                 out.println("							  </ul>");
                                 out.println("						 </div>");
 
-                                if (!result.get(i).isStatus()){
-                                        out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() +")\" value=\"" + result.get(i).isStatus() + "\"></div>");
+                                if ((request.getParameter("id")).equals(loginedUser.getUsername())){
+                                    if (!result.get(i).isStatus()){
+                                            out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() +")\" value=\"" + result.get(i).isStatus() + "\"></div>");
+                                    } else {
+                                            out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + result.get(i).isStatus() + "\" checked></div>");
+                                    }          
                                 } else {
-                                        out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + result.get(i).isStatus() + "\" checked></div>");
-                                }                                       
+                                    if (!result.get(i).isStatus()){
+                                            out.println("<div>Status : Belum Selesai</div>");
+                                    } else {
+                                            out.println("<div>Status : Selesai</div>");
+                                    }          
+                                }
                                 out.println("				</div>");
                                 
                                 i++;
@@ -98,12 +110,20 @@ public class profilecategory extends HttpServlet {
                                 out.println("							  </ul>");
                                 out.println("						 </div>");
                                 
-                                if (!result.get(i).isStatus()){
-                                        out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() +")\" value=\"" + result.get(i).isStatus() + "\"></div>");
+                                if ((request.getParameter("id")).equals(loginedUser.getUsername())){
+                                    if (!result.get(i).isStatus()){
+                                            out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() +")\" value=\"" + result.get(i).isStatus() + "\"></div>");
+                                    } else {
+                                            out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + result.get(i).isStatus() + "\" checked></div>");
+                                    }          
                                 } else {
-                                        out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + result.get(i).isStatus() + "\" checked></div>");
+                                    if (!result.get(i).isStatus()){
+                                            out.println("<div>Status : Belum Selesai</div>");
+                                    } else {
+                                            out.println("<div>Status : Selesai</div>");
+                                    }          
                                 }
-                                                                      
+
                                 out.println("				</div>");
                                 
                                 i++;
