@@ -51,20 +51,20 @@
 				}
 			}
 
-			function checkAttachment(attachment) {
+			function checkAttachment(attachment,v_attachment) {
 				attachment = attachment.substring(attachment.lastIndexOf('.')+1);
 				if (attachment) {
 					var startIndex = (attachment.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
 					var filename = attachment.substring(startIndex);
 					if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0)
 						filename = filename.substring(1);
-					if(filename == "docx"|| filename == "jpeg" || filename == "bmp" || filename == "gif" || filename == "pdf" || filename == "doc" 
+					if(filename == "docx"|| filename == "jpeg"|| filename == "jpg" || filename == "bmp" || filename == "gif" || filename == "pdf" || filename == "doc" 
 						|| filename == "docx" || filename == "xls" || filename == "xlsx" || filename == "ppt" || filename == "pptx" || filename == "mp4"
 						|| filename == "ogg"|| filename == "webm"|| filename == "3gp"){         
-						document.getElementById('v_attachment').innerHTML='<img src="images/Check.png" title="Benar"/img>'; 
+						document.getElementById(v_attachment).innerHTML='<img src="images/Check.png" title="Benar"/img>'; 
 						return true;
 					}else{   
-						document.getElementById('v_attachment').innerHTML='<img src="images/Cross.png" title="Ekstensi file tidak valid"/img>';
+						document.getElementById(v_attachment).innerHTML='<img src="images/Cross.png" title="Ekstensi file tidak valid"/img>';
 						return false;
 					}
 				}
@@ -99,7 +99,7 @@
 			</div>
 			<div id="newtask">
 				
-                <form name="newtask_form" method="post" action="task.jsp?tujuan=buat">
+                <form name="newtask_form" method="POST" action="createtask" enctype="multipart/form-data">
 					<div id="newtask_space">
 					</div>
 					<div id="formulir">
@@ -112,17 +112,31 @@
 							</div>
 							<div class="newtask_warning" id="v_tname">
 							</div>
-						</div>
-						<div class="form_field">
+						</div><br>
+						<div class="form_field" id="form_attach">
 							<div class="newtask_label">
 								Attachment
 							</div>
+                            <br>
 							<div class="newtask_field">
-								<input type="file" name="attachment" id="upload" onchange="checkAttachment(document.newtask_form.attachment.value)">
+								<input type="file" name="attachment" id="upload" onchange="checkAttachment(document.newtask_form.attachment.value,'va1')"/>
 							</div>
-							<div class="newtask_warning" id="v_attachment">
+							<div class="newtask_warning" id="va1">
 							</div>
-						</div>
+                            <br>
+							<div class="newtask_field">
+								<input type="file" name="attachment2" id="upload" onchange="checkAttachment(document.newtask_form.attachment.value,'va2')"/>
+							</div>
+							<div class="newtask_warning" id="va2">
+							</div>
+                            <br>
+							<div class="newtask_field">
+								<input type="file" name="attachment3" id="upload" onchange="checkAttachment(document.newtask_form.attachment.value,'va3')"/>
+							</div>
+							<div class="newtask_warning" id="va3">
+							</div>
+                            <br>
+						</div><br>
 						<div class="form_field">
 							<div class="newtask_label">
 								Deadline
@@ -136,7 +150,7 @@
 							</div>
 							<div class="newtask_warning" id="v_deadline">
 							</div>
-						</div>
+						</div><br>
 						<div class="form_field">
 							<div class="newtask_label">
 								Assignee
@@ -146,7 +160,7 @@
 							</div>
 							<div class="newtask_warning" id="v_assignee">
 							</div>
-						</div>
+						</div><br>
 						<div class="form_field">
 							<div class="newtask_label">
 								Tag
@@ -156,14 +170,15 @@
 							</div>
 							<div class="newtask_warning" id="v_tag">
 							</div>
-						</div>
+						</div><br>
 						<div class="form_field">
 							<div class="newtask_label">
 							</div>
 							<div class="newtask_field">
+                                <input type="hidden" name="kategori"  value="<%= request.getParameter("idkategori") %>">
 								<input type="submit" value="Add Task" id="addtask_button">
 							</div>
-						</div>
+						</div><br>
 					</div>
 				</form>
 			</div>
