@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link id="style" rel="stylesheet" type="text/css" href="style.css"></link>
+	<script type="text/javascript" src="lefun.js"></script>
+	<title>le fun - konten</title>
+</head>
+
+<body onload="setBodyHeight()">
+	<!-- header section -->
+	<div class="header">
+		<div id="logo">
+			<a href="index.html"><img src="images/logo.png" alt="logo" width="100" height="30" /></a>
+		</div>
+		<div id="konten">
+			<button type="button" onclick="gotoDaftarKonten()">Daftar Konten</button>
+		</div>
+		<div id="tombol">
+			<button type="button" onclick="gotoHalamanRegistrasi()">Register</button>
+		</div>
+		<div id="home">
+			<button type="button" onclick="gotoHalamanUtama()">Home</button>
+		</div>
+		<div id="styles">
+			<select name="styler" onchange="changeStyle(this.options[this.selectedIndex].value)">
+				<option value="style.css">Style 1</option>
+				<option value="style2.css">Style 2</option>
+			</select>
+		</div>
+	</div>
+	<div class="head">
+		<img src="images/main.png" alt="main" width="300px" height="100" />
+	</div>
+	<div class="post" id="kont">
+		<button type="button" onclick="gotoHalamanPost()">Post Your Content</button>
+	</div>
+	<!-- konten konten1-->
+	<div class="content_1" id="body">
+		<div class="judul">
+			<h1>Funny Eggs</h1>
+		</div>
+		<div class="like">
+			<button id="dislike6" class="dislike" type="button" onclick="dislikeDaf(6)" onmouseover="this.style.backgroundColor='#070'" onmouseout="mouseOutDisLikeDaf(6)"><img src="images/dislike.png" alt="dislike" width="30" height="30" /></button>
+			<button id="like6" type="button" onclick="likeDaf(6)" onmouseover="this.style.backgroundColor='#070'" onmouseout="mouseOutLikeDaf(6)"><img src="images/like.png" alt="like" width="30" height="30" /></button>
+			<p id="p6"> Likes = <script type="text/javascript">randomDaf(6);document.write(randDaf[5]);</script></p>
+		</div>
+		<div class="isi">
+			<img src="images/gambar2.jpg" alt="naruto" width="800px" height="600px" />
+		</div>
+		<div class="input_komen">
+			<h1>Post Your Comments</h1>
+			<textarea id="text_com" name="komentar" rows="5" cols="40"></textarea><br />
+			<input id="button_com" type="button" name="submit" value="comment" onclick="addComment()"/><br />
+			<hr />
+		</div>
+		<div class="header_komen">
+			<h1>Comments</h1>
+			<hr />
+		</div>
+		<div class="komen" id="komen">
+			<div class="text">
+				<h4>It's amazing.. It make me laugh a lot..</h4>
+			</div>
+			<div class="user">
+				<p>Commented by Baskara at 5/3/12 10:06</p>
+			</div>
+			<div class="garis">
+				<hr />
+			</div>
+			<div class="text">
+				<h4>What the...</h4>
+			</div>
+			<div class="user">
+				<p>Commented by Detecvie at 4/3/12 15:36</p>
+			</div>
+			<div class="garis">
+				<hr />
+			</div>
+			<div class="text">
+				<h4>LoL... :))</h4>
+			</div>
+			<div class="user">
+				<p>Commented by Lina L at 4/3/12 08:45</p>
+			</div>
+			<div class="garis">
+				<hr />
+			</div>
+			<div class="text">
+				<h4>What the...</h4>
+			</div>
+			<div class="user">
+				<p>Commented by Dunno at 3/3/12 13:35</p>
+			</div>
+			<div class="garis">
+				<hr />
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
