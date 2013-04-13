@@ -56,7 +56,6 @@ public class showTask extends HttpServlet{
             Statement stmt = null;
             ResultSet rs = null;
         try{
-            	out.print("<div id=\"newtask\"><a href=\"newtask.jsp\"> <img id=\"newtaskbutton\" src=\"img/plus.png\" alt=\"plusbutton\" width=\"32\" height=\"32\" ></img>  </a><p id=\"newtasktext\">NEW TASK</p></div>");
             String user = "dummy";
             //String user = request.getAttribute("user");
             String param = request.getParameter("catname");
@@ -74,7 +73,8 @@ public class showTask extends HttpServlet{
                                 String setToButton="";
                                 String delButton="";
                                 String kategori="";
-                                
+                                out.print("<div id=\"newtask\"><a href=\"newtask.jsp?category="+param+"\"> <img id=\"newtaskbutton\" src=\"img/plus.png\" alt=\"plusbutton\" width=\"32\" height=\"32\" ></img>  </a><p id=\"newtasktext\">NEW TASK</p></div>");
+
                                 while(rs.next()){
                                     namatugas = rs.getString(2);
                                     deadline = rs.getString(3);

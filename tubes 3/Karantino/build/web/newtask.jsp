@@ -40,7 +40,8 @@
 		</header>
 		<script src="script.js" type="text/javascript"></script>
                 <div id="inputarea">
-                        <center><h4>CATEGORY : </h4></center>
+                    <center><h4>CATEGORY : <% String category = request.getParameter("category");
+                                               request.getSession(false).setAttribute("category", category); out.print(category); %></h4></center>
                         <form name="input" action="addtask" enctype="multipart/form-data" method="POST" onsubmit="validating(bulan, tanggal, tahun);">
                                 <div id="metadata">
                                         <paa>Nama</paa><br>

@@ -1,4 +1,9 @@
-   <%@ page language="java" 
+   <%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" 
          contentType="text/html; charset=windows-1256"
          pageEncoding="windows-1256"
          import="progin.UserBean"
@@ -10,6 +15,22 @@
 	<title>Profil - TargET</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 	<script src="js/script.js" type="text/javascript" ></script>
+        <%
+                    Connection connection = null;
+                    try{
+                        String url = "jdbc:mysql:" + "//localhost:3306/progin_405_13510074";
+                        Class.forName("com.mysql.jdbc.Driver");
+                        connection = DriverManager.getConnection(url, "root", "");
+                        Statement s = connection.createStatement();
+                        if (s != null)
+                            pageContext.setAttribute("statement", s);
+                    } catch (ClassNotFoundException e1) {
+                        // JDBC driver class not found, print error message to the console
+                        e1.printStackTrace();
+                    } catch (Exception e3){
+                        e3.printStackTrace();
+                    }
+                %>
 </head>
 <body>
 	<header>
@@ -36,9 +57,9 @@
 				</div>
                                 <div id="showUser">
                                     <% 
-                                        UserBean user = ((UserBean)session.getAttribute("currentSessionUser"));
+                                        UserBean user1 = ((UserBean)session.getAttribute("currentSessionUser"));
                                     %>
-                                    User: <%= user.getUsername() %>
+                                    User: <%= user1.getUsername() %>
                                 </div>
 			</div>
 		</div>
@@ -159,8 +180,26 @@
 					List Task
 					<div>
 						<ul>
-							<li>Tugas 3 IMK</li>
-							<li>Tubes 1 Kriptografi </li>
+                                                    <%
+                                                        try {
+                                                            String user = (String) request.getSession(false).getAttribute("user");
+                                                            Statement s1 = (Statement) pageContext.getAttribute("statement");
+                                                            String sql = "SELECT namatugas FROM tugas WHERE username='" +user+ "'";
+                                                            ResultSet rs = s1.executeQuery(sql);
+                                                            while (rs.next()){
+                                                                out.print("<li>");
+                                                                out.print(rs.getString(1));
+                                                                out.print("</li>");
+                                                            }
+                                                            //  rs.close();
+                                                            //  s1.close();
+                                                        } catch (SQLException e2) {
+                                                            // Exception when executing java.sql related commands, print error message to the console
+                                                            e2.printStackTrace();
+                                                        }
+                                                        %>
+							<!--<li>Tugas 3 IMK</li>
+							<li>Tubes 1 Kriptografi </li>-->
 						</ul>
 					</div>
 				</div>
@@ -168,8 +207,26 @@
 					Completed Tasks
 					<div>
 						<ul>
-							<li>Tubes 1 Intelegensi Buatan</li>
-							<li>Tubes 1 Pemrograman Internet</li>
+                                                    <%
+                                                        try {
+                                                            String user = (String) request.getSession(false).getAttribute("user");
+                                                            Statement s1 = (Statement) pageContext.getAttribute("statement");
+                                                            String sql = "SELECT namatugas FROM tugas WHERE username='" +user+ "' AND status='1'";
+                                                            ResultSet rs = s1.executeQuery(sql);
+                                                            while (rs.next()){
+                                                                out.print("<li>");
+                                                                out.print(rs.getString(1));
+                                                                out.print("</li>");
+                                                            }
+                                                            //  rs.close();
+                                                            //  s1.close();
+                                                        } catch (SQLException e2) {
+                                                            // Exception when executing java.sql related commands, print error message to the console
+                                                            e2.printStackTrace();
+                                                        }
+                                                        %>
+							<!--<li>Tubes 1 Intelegensi Buatan</li>
+							<li>Tubes 1 Pemrograman Internet</li>-->
 						</ul>
 					</div>
 				</div>
