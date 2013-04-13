@@ -79,7 +79,10 @@ public class daftartask extends HttpServlet {
                 out.println("<br>");
                 out.println(rs.getString(6));
                 out.println("<br>");
-                out.println("<input type=\"button\" value=\"Lihat Rincian\" onClick=\"rincian.jsp\"></input>");
+                out.println("<form name='hiddenidtask"+rs.getString("ID")+"' id='hiddenidtask"+rs.getString("ID")+"' action='rincian.jsp' method='post'>\n");
+                out.println("     <input type='hidden' name='idtask' value='"+rs.getString("ID")+"' />\n");
+                out.println("<input type='submit' value='Lihat Rincian' />\n");
+//                out.println("<input type=\"button\" value=\"Lihat Rincian\" onClick=\"rincian.jsp\"></input>");
                 if (rs.getString(2).equals(id)){
                 out.println("<input type=\"submit\" value=\"Hapus Task\" ></input>");
                 out.println("<br>");

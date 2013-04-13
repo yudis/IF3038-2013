@@ -191,7 +191,7 @@ xmlhttp.send();
         onmouseover="document.getElementById('div1').style.display = 'none'; document.getElementById('addtask3').style.display = 'block';"
 		onmouseout="document.getElementById('div1').style.display = 'block'; document.getElementById('addtask3').style.display = 'none';"><p id="cats"></p>
 		<div id="addtask3" style="display: none;">
-		<a href="tambah.html"><img src="images/newtask.png"></a>
+		<a href="tambah.jsp"><img src="images/newtask.png"></a>
 	</div>
        </div>
    </td>

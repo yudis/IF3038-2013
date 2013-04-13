@@ -55,32 +55,49 @@ public class AddTask extends HttpServlet {
             String assignee = request.getParameter("assignee");
             String tag = request.getParameter("tag");
             String user = (String) request.getSession().getAttribute("userid");
-            String cat = (String) request.getSession().getAttribute("category");
+            String cat = (String) request.getSession().getAttribute("kategori");
             
-            ResultSet set = con.ExecuteQuery("SELECT COUNT(*) FROM task");
+            ResultSet set = con.ExecuteQuery("SELECT * FROM task");
+            String lastid = "";
+            int lastidnum = 0;
             while (set.next()){
-                ID = set.getInt(1);
+                lastid = set.getString("ID");
             }
-            ID =+ 1;
+            if (!lastid.equals("")) {
+                lastidnum = Integer.parseInt(lastid.substring(1));
+            }
+            ID = lastidnum+1;
+            String nextid;
+            if (ID < 10) {
+                nextid = "T00"+ID;
+            } else if (ID < 100) {
+                nextid = "T0"+ID;
+            } else {
+                nextid = "T"+ID;
+            }
             
-            ResultSet data = con.ExecuteQuery("INSERT INTO task VALUES '"+ID+"','"+user+"','"+taskname+"','"+cat+"','0','"+deadline+"'");
+            if (con.ExecuteUpdate("INSERT INTO task (ID,IDCreator,Nama,Category,Status,Deadline) VALUES ('"+nextid+"','"+user+"','"+taskname+"','"+cat+"',0,now())")!=0) {
+                
+            }
             
             String[] tags = tag.split(",");
             for( int i = 0; i < tags.length; i++ )  
             {  
-                ResultSet rs = con.ExecuteQuery("INSERT INTO tags VALUES '"+ID+"','"+tags[i]+"'");
+                if (con.ExecuteUpdate("INSERT INTO tags (IDTask,Tag) VALUES ('"+nextid+"','"+tags[i]+"')")!=0) {
+                    
+                }
             }  
             
             String[] assignees = assignee.split(",");
             for( int i = 0; i < assignees.length; i++ )  
             {  
-                ResultSet rs2 = con.ExecuteQuery("INSERT INTO assignee VALUES '"+ID+"','"+assignees[i]+"'");
+                if(con.ExecuteUpdate("INSERT INTO assignee (IDtask,IDUser) VALUES ('"+nextid+"','"+assignees[i]+"')")!=0) {
+                    
+                }
             } 
 
-            out.print("Tugas baru telah disimpan");
+            //out.print("Tugas baru telah disimpan");
 
-            
-        
             con.Close();
             response.sendRedirect("Dashboard.jsp");
         } finally {            
