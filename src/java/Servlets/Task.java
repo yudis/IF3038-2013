@@ -114,7 +114,9 @@ public class Task extends HttpServlet {
             }
             
             out.println("<div class='task_judul'>");
+            out.println("<a href='lihattask.jsp?id="+hasil[i][0]+"'>");
             out.println(hasil[i][1]);
+            out.println("</a>");
             out.println("</div>");
             
             out.println("<div class='task_deadline'>");
