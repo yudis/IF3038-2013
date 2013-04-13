@@ -20,6 +20,8 @@ xmlhttp.send(parameters);
 }
 function searchByFilter()
 {
+    
+
 loadXMLDocPost('Search',function()
   { 
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
@@ -29,7 +31,7 @@ loadXMLDocPost('Search',function()
     document.getElementById("contentdashboard").innerHTML=xmlhttp.responseText;
     }
     
-  });
+  });alert("a");
 return false;
 }
 
