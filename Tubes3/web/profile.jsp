@@ -10,6 +10,8 @@
     <head>
         <%--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
         <title>Next: Profile</title>
+        <link rel="stylesheet" href="css/calendar.css">
+		<script src="js/calendar.js" > </script>
 	<link rel="stylesheet" type="text/css" href="css/css.css">
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
         
@@ -27,14 +29,14 @@
 		//alert(xmlhttp.readyState+" "+xmlhttp.status);
 					
                     if (xmlhttp.readyState==4 && xmlhttp.status==200){				
-                        alert(xmlhttp.responseText);
-                        document.getElementById("username").innerHTML=xmlhttp.responseText;					
+                        //alert(xmlhttp.responseText);
+                        document.getElementById("username24").innerHTML=xmlhttp.responseText;					
                     }
 		};
 								
-            xmlhttp.open("GET","getUserName?user=" <%= session.getAttribute("userLoginSession") %>,true);
+                xmlhttp.open("GET","getUserName?user=<%out.print((String)session.getAttribute("userLoginSession"));%>",true);
 		xmlhttp.send();
-		alert(xmlhttp.responseText);
+		//alert(xmlhttp.responseText);
 		//alert(xmlhttp.status);
             }
             function getEmail(){
@@ -53,7 +55,7 @@
                     }
 		}
 								
-		xmlhttp.open("GET","getEmail?user="<%= session.getAttribute("userLoginSession") %>,true);
+                xmlhttp.open("GET","getEmail?user=<%out.print((String)session.getAttribute("userLoginSession"));%>",true);
 		xmlhttp.send();
 		//alert(xmlhttp.responseText);
 		//alert(xmlhttp.status);
@@ -71,11 +73,11 @@
 		//alert(xmlhttp.readyState+" "+xmlhttp.status);
                     if (xmlhttp.readyState==4 && xmlhttp.status==200){				
                     //alert(xmlhttp.responseText);
-                        document.getElementById("avatarnya").innerHTML=xmlhttp.responseText;					
+                        document.getElementById("avatarnya").innerHTML=xmlhttp.responseText;	
                     }
 		}
 								
-		xmlhttp.open("GET","getAvatar?user="<%= session.getAttribute("userLoginSession") %>,true);
+		xmlhttp.open("GET","getAvatar?user=<%out.print((String)session.getAttribute("userLoginSession"));%>",true);
 		xmlhttp.send();
 		//alert(xmlhttp.responseText);
 		//alert(xmlhttp.status);
@@ -93,11 +95,11 @@
 		//alert(xmlhttp.readyState+" "+xmlhttp.status);
                     if (xmlhttp.readyState==4 && xmlhttp.status==200){				
                     //alert(xmlhttp.responseText);
-			document.getElementById("namalengkap").innerHTML=xmlhttp.responseText;					
+			document.getElementById("namalengkap").innerHTML=xmlhttp.responseText;			
                     }
 		}
 								
-		xmlhttp.open("GET","getNamaLengkap?user="<%= session.getAttribute("userLoginSession") %>,true);
+		xmlhttp.open("GET","getNamaLengkap?user=<%out.print((String)session.getAttribute("userLoginSession"));%>",true);
 		xmlhttp.send();
 		//alert(xmlhttp.responseText);
 		//alert(xmlhttp.status);
@@ -119,7 +121,7 @@
                     }
 		}
 								
-		xmlhttp.open("GET","getTanggalLahir?user="<%= session.getAttribute("userLoginSession") %>,true);
+		xmlhttp.open("GET","getTanggalLahir?user=<%out.print((String)session.getAttribute("userLoginSession"));%>",true);
 		xmlhttp.send();
 		//alert(xmlhttp.responseText);
 		//alert(xmlhttp.status);
@@ -141,7 +143,7 @@
                     }
 		}
 								
-		xmlhttp.open("GET","getProfil1Form?user="<%= session.getAttribute("userLoginSession") %>,true);
+		xmlhttp.open("GET","getProfil1Form?user=<%out.print((String)session.getAttribute("userLoginSession"));%>",true);
 		xmlhttp.send();
 		//alert(xmlhttp.responseText);
 		//alert(xmlhttp.status);
@@ -163,7 +165,7 @@
                     }
 		}
 								
-		xmlhttp.open("GET","getTugasSelesai?user="<%= session.getAttribute("userLoginSession") %>,true);
+		xmlhttp.open("GET","getTugasSelesai?user=<%out.print(session.getAttribute("userLoginSession"));%>",true);
 		xmlhttp.send();
 		//alert(xmlhttp.responseText);
 		//alert(xmlhttp.status);
@@ -171,7 +173,7 @@
             
             function nama_validating()
             {
-		var name = document.registration.namaleng.value;
+		var name = document.registration.fn.value;
 					
 		if(name.match(/([a-zA-Z])+([ \t\r\n\v\f])+([a-zA-Z])/))
 		{
@@ -185,7 +187,7 @@
             
             function avatar_validating()
             {
-		var ekstensi = document.registration.avatar.value;
+		var ekstensi = document.registration.na.value;
 					
 		if((ekstensi.lastIndexOf(".jpg") != -1) || (ekstensi.lastIndexOf(".jpeg") != -1) )
 		{
@@ -205,9 +207,9 @@
             function pass_validating()
             {
 		var userid = document.registration.username.value;
-                var userpass = document.registration.password.value;
+                var userpass = document.registration.cp.value;
 		var usermail = document.registration.email.value;
-		var confpass = document.registration.confirmpass.value;
+		var confpass = document.registration.cpp.value;
 					
 		if((userpass != userid) && (userpass.length >= "8") && (userpass != usermail))
 		{
@@ -225,8 +227,8 @@
 				
             function conf_validating()
             {
-		var userpass = document.registration.password.value;
-		var confpass = document.registration.confirmpass.value;
+		var userpass = document.registration.cp.value;
+		var confpass = document.registration.cpp.value;
 		
 		if(confpass == userpass)
 		{
@@ -237,6 +239,26 @@
                     document.getElementById("conficon").src="pict/canceled.png";
 		}
             }
+            
+            function logingg()
+            {	
+		
+                var picon = document.getElementById("passicon").src;
+		var cicon = document.getElementById("conficon").src;
+		var nicon = document.getElementById("nameicon").src;
+		var aicon = document.getElementById("avaicon").src;
+		var dicon = document.getElementById("dateicon").src;
+
+		var lokasi = window.location.href.substring(0,window.location.href.lastIndexOf("/")) + "/pict/centang.png";	/*-------------------------*/		
+
+		if ((picon == lokasi) && (cicon == lokasi) && (nicon == lokasi) && (aicon == lokasi) && (dicon == lokasi))
+		{
+                    document.getElementById("saveep").disabled = false;
+		}
+                else{
+                    document.getElementById("saveep").disabled = true;
+		}
+            }
                                 
 	</script>
     <?jsp include 'header.jsp'; ?>
@@ -245,7 +267,7 @@
         <%@ include file="header.jsp" %>
         <div id="content">
             <div id="profheader">
-		<div id="username">
+		<div id="username24">
 			
 		</div>
 		<div id="avatarnya">
@@ -283,7 +305,7 @@
                     </div>
                     <div id="cattitle">EDIT PROFILE</div>
                     <div id="elcategory">
-                        <form action="editProfile" method "GET">
+                        <form action="editProfile" method "post">
                             <label>Full Name</label>
                             <input name="fn" placeholder="nama lengkap" onKeyUp="nama_validating()" onChange="logingg()">
                             <img src="pict/blank.png" alt="icon5" id="nameicon" />
@@ -307,7 +329,7 @@
                             <input name="ccp" type="password" placeholder="confirmpassword" onKeyUp="conf_validating()" onChange="logingg()">
                             <img src="pict/blank.png" alt="icon4" id="conficon" />
                             
-                            <input class= "submitreg" name="save" type="save" value="SAVE">
+                            <input class= "submitreg" id="saveep" name="save" type="save" value="SAVE">
                         </form>
                     </div>
                     <%--
