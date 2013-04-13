@@ -92,11 +92,21 @@
         return result;
     }
 
-    public String getCategory(String data) 
+    public String getType(String fileName) 
     {
-        String result = data.substring(data.indexOf("category\"") + 10);
-        result = result.substring(0, result.indexOf("-----")).trim();
-        return result;
+        if (fileName.contains("jpeg") || fileName.contains("jpg") || fileName.contains("png") || fileName.contains("bmp"))
+        {
+            return "images";
+        }
+        if (fileName.contains("mp4") || fileName.contains("flv") || fileName.contains("avi") || fileName.contains("mkv"))
+        {
+            return "video";
+        }
+        else
+        {
+            return "file";
+        }
+            
     }
 
     public String getAssignee(String data) 
@@ -154,21 +164,49 @@
     }
 
     ///
-    public ArrayList<String> upload2(byte[] dataBytes, String contentType, String directory)
+    public ArrayList<String> upload2(byte[] dataBytes, String contentType)
     {
         String data = new String(dataBytes);
         ArrayList<String> result = new ArrayList<String>();
         result.add(getTaskname(data));
         result.add(getDeadline(data));
         result.add(getTags(data));
-        result.add(getStatus(data));
-        result.add(getCategory(data));
         result.add(getAssignee(data));
         String saveFileName = getFilename(data);
-        result.add(saveFileName);
+        result.add(saveFileName);   
+        String directory = getType(saveFileName);
+        result.add(directory);
         if (!saveFileName.equals("")) 
         {
+            int lastIndex = contentType.lastIndexOf("=");
+            String boundary = contentType.substring(lastIndex + 1, contentType.length());
 
+            int pos;
+            pos = data.indexOf("filename=\"");
+            pos = data.indexOf("\n", pos) + 1;
+            pos = data.indexOf("\n", pos) + 1;
+            pos = data.indexOf("\n", pos) + 1;
+
+            int boundaryLocation = data.indexOf(boundary, pos) - 4;
+            int startPos = ((data.substring(0, pos)).getBytes()).length;
+            int endPos = ((data.substring(0, boundaryLocation)).getBytes()).length;
+            String realPath = getServletContext().getRealPath(directory + "/" + saveFileName);
+
+            try
+            {
+                FileOutputStream fileOut = new FileOutputStream(realPath);
+                fileOut.write(dataBytes, startPos, (endPos - startPos));
+                fileOut.flush();
+                fileOut.close();
+            }
+            catch (FileNotFoundException ex)
+            {
+            
+            }
+            catch (IOException ex)
+            {
+            
+            }
         }
         
         return result;
