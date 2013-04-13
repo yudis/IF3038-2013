@@ -38,7 +38,6 @@ function ambildata(ID,cnt){
             ss.innerHTML += str;
         }
     }
-          
     xmlhttp.open("GET", 'Task?ID=' + ID+ '&continue=' + cnt, true);
     xmlhttp.send();
 }
@@ -84,7 +83,7 @@ function scroll(){
     }
 }
 
-function addcomment(username){
+function addcomment(username,id){
     var xmlhttp;
     var komen=document.getElementById("commentfield").value;
     document.getElementById("commentfield").value="";
@@ -107,7 +106,7 @@ function addcomment(username){
         }
     }
 	  
-    var queryString = "comment="+komen+"&usernamecur="+username;
+    var queryString = "comment="+komen+"&usernamecur="+username+"&id="+id;
     xmlhttp.open("POST", 'addComment', true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(queryString);

@@ -90,10 +90,6 @@ public edittask(){}
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
         Statement pst;
-        System.out.println("deadline="+request.getParameter("deadline"));
-        System.out.println("tag="+request.getParameter("tag"));
-        System.out.println("assignee="+request.getParameter("assignee"));
-        System.out.println(IDTask);
         if(!(request.getParameter("deadline").equals("")) && !(request.getParameter("tag").equals("")) && !(request.getParameter("assignee").equals("")))
         {
             query="UPDATE tugas SET deadline='"+request.getParameter("deadline")+"', tag='"+request.getParameter("tag")+"' WHERE IDTask="+IDTask;

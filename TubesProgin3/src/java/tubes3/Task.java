@@ -131,16 +131,17 @@ public class Task extends HttpServlet {
             throws ServletException, IOException {
        // System.out.println("masuk ke sini");
         session=request.getSession();
-        
+      
         String user=(String)session.getAttribute("bananauser");
          ResultSet rs,rs2;
          PrintWriter out = response.getWriter();
          
           if (request.getParameter("ID") != null)
               {
-                  String sid=request.getParameter("ID");
-                  int id = Integer.parseInt(sid);
+                    
+                  String id=request.getParameter("ID");
                   String query="SELECT count(*) as jumlah FROM komentar where IDTask="+id;
+                  System.out.println("id="+id);
                   Tubes3Connection tu = new Tubes3Connection();
                   Connection connection = tu.getConnection();
                   int jum=0;
@@ -237,15 +238,12 @@ public class Task extends HttpServlet {
             status=1;
             query="UPDATE tugas SET stat='1' WHERE IDTask="+ID;
 	}
-        System.out.println(query);
-        System.out.println(ID);
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
         Statement pst;
         try {
             pst = connection.createStatement();
             pst.executeUpdate(query);
-            session.setAttribute("ID", null);
             
         } catch (SQLException ex) {
             Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);

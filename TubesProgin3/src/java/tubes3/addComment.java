@@ -80,7 +80,8 @@ public class addComment extends HttpServlet {
         String query="";
         String queryU="";
         //int IDTask;
-        String IDTask = ((HttpServletRequest) request).getParameter("id");
+        String IDTask =(String)request.getParameter("id");
+        System.out.println("idtask="+IDTask);
          response.setContentType("text/html;charset=UTF-8");
 	PrintWriter out = response.getWriter();
         if(!(request.getParameter("comment").equals("")) && !(request.getParameter("usernamecur").equals(""))){

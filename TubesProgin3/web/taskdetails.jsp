@@ -111,7 +111,7 @@
                 <button id="edit" name="edit" onclick="editTask(document.getElementById('jumlahA').innerHTML,<%out.print(ID);%>)" type="button"><b>Edit</b></button><br>  
                 <form id="commentform">
                     <input class="task" id="commentfield" name="commentfield" type="text" size="1000"/> 
-                    <input id="commentbutton" name="commentbutton" type="submit" value="Comment" onClick="addcomment(<%out.print("'yuli'");%>);return false;"/>
+                    <input id="commentbutton" name="commentbutton" type="submit" value="Comment" onClick="addcomment('<%out.print(request.getSession().getAttribute("bananauser"));%>',<%out.print(ID);%>);return false;"/>
                 </form>
                 <div id="Komentar" class="task">
                 </div>
