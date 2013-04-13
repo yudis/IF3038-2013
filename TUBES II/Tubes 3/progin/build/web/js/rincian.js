@@ -1,7 +1,7 @@
 //Tubes 2
 
 var xmlhttp = new Array();
-function loadXMLDocPost(index,url,parameters,cfunc)
+function loadXMLDocPostR(index,url,parameters,cfunc)
 {
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -30,7 +30,7 @@ function onload() {
 function loadTaskDetails()
 {
     var parameters = "requesttype=load&tabletype=taskdetails";
-    loadXMLDocPost(1,'Rincian',parameters,
+    loadXMLDocPostR(1,'Rincian',parameters,
         function()
         { 
             if (xmlhttp[1].readyState==4 && xmlhttp[1].status==200)
@@ -46,7 +46,7 @@ function loadComment(currpage)
 {
     
 var parameters = "requesttype=load&tabletype=komentar&page="+currpage;    
-loadXMLDocPost(2,'Rincian',parameters,function()
+loadXMLDocPostR(2,'Rincian',parameters,function()
   { 
   if (xmlhttp[2].readyState==4 && xmlhttp[2].status==200)
     {
@@ -56,13 +56,14 @@ loadXMLDocPost(2,'Rincian',parameters,function()
     }
     
   });
+  return false;
 }
 
 function saveComment() {
     var parameters = "requesttype=save"+
                     "&tabletype=komentar"+
                     "&commentarea=" + encodeURIComponent(document.getElementById("commentarea").value);
-loadXMLDocPost(3,'Rincian',parameters,function() { 
+loadXMLDocPostR(3,'Rincian',parameters,function() { 
     console.log(xmlhttp[3].readyState);
     console.log(xmlhttp[3].status);
         if (xmlhttp[3].readyState==4 && xmlhttp[3].status==200)
@@ -84,7 +85,7 @@ function saveTaskDetails() {
                 "&deadline=" + encodeURIComponent(document.getElementById("deadline").value) +
                 "&listassignee=" + encodeURIComponent(document.getElementById("listassignee").value) +
                 "&listtag=" + encodeURIComponent(document.getElementById("listtag").value);
-loadXMLDocPost(4,'Rincian',param,function() { 
+loadXMLDocPostR(4,'Rincian',param,function() { 
     console.log(xmlhttp[4].readyState);
     console.log(xmlhttp[4].status);
         if (xmlhttp[4].readyState==4 && xmlhttp[4].status==200)
@@ -95,5 +96,21 @@ loadXMLDocPost(4,'Rincian',param,function() {
         }
 });
 return false;
+}
+
+function deleteComment(commentid) {
+    alert("delete");
+    var parameters = "requesttype=delete&commentid="+commentid;
+    loadXMLDocPostR(5,'Rincian',parameters,function() { 
+        console.log(xmlhttp[5].readyState);
+        console.log(xmlhttp[5].status);
+            if (xmlhttp[5].readyState==4 && xmlhttp[5].status==200)
+            {
+            alert("comment deleted");
+            console.log("response get");
+            console.log(xmlhttp[5].responseText);
+            }
+    });
+    return loadComment(1);
 }
 

@@ -36,7 +36,7 @@ if (session.getAttribute("taskid") == null || session.getAttribute("taskid").equ
 <link href="css/mediaqueries.css" rel="stylesheet" type ="text/css" />
 <link href='http://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" language="javascript" src="js/pagination.js"></script>
+    <!--<script type="text/javascript" language="javascript" src="js/pagination.js"></script>-->
     <script type="text/javascript" language="javascript" src="js/rincian.js"></script>
     
 	
@@ -46,9 +46,9 @@ if (session.getAttribute("taskid") == null || session.getAttribute("taskid").equ
     
     
 		<div class="header">
-    <a href="dashboard.html"><img align="left" src="images/logo.png" width="150" height="50" />
-	<h6>Dashboard</h6></a> <p>|</p> <a href="profile.html">Profile</a> <p>|</p> <a href="index.html">Logout</a>
-        <form id="searchform"  onsubmit="return searchByFilter()" >
+    <a href="Dashboard.jsp"><img align="left" src="images/logo.png" width="150" height="50" />
+	<h6>Dashboard</a> <p>|</p> <a href="profile.jsp">Profile</a> <p>|</p> <a href="logout.jsp">Logout</a>
+        <form id="searchform" onsubmit="return searchByFilter()" method="post" >
    | Search:<input type="search" id="searchquery" name="searchquery" /> 
    Filter: <select id="filtertype" name="filtertype">
         <option value="All" selected>All</option>
@@ -56,9 +56,15 @@ if (session.getAttribute("taskid") == null || session.getAttribute("taskid").equ
         <option value="Category">Category</option>
         <option value="Task">Task</option>
    </select>
-   
    <input type="submit" value="GO" />
+   
         </form>
+        <div class="user">Welcome, 
+      <%
+      String login = (String) session.getAttribute("userid");
+      out.print(login);
+      %>
+  </div>
 	</div>
 	<div id ="contentdashboard" class="container"><br>
 			<div class="rincian" id="rincian">

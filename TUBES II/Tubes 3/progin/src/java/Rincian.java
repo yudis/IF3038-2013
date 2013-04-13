@@ -50,6 +50,8 @@ public class Rincian extends HttpServlet {
                 htmlresponse = doLoadRincian(request);
             } else if (requesttype.equals("save")) {
                 htmlresponse = doSaveRincian(request);
+            } else if (requesttype.equals("delete")) {
+                htmlresponse = doDeleteComment(request);
             }
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
@@ -194,7 +196,7 @@ public class Rincian extends HttpServlet {
                     }
                     
                     /* Get data. */
-                    String sql = "SELECT * FROM komentar INNER JOIN task ON task.ID=komentar.IDTask LIMIT "+start+", "+limit+"";
+                    String sql = "SELECT * FROM komentar INNER JOIN task ON task.ID=komentar.IDTask WHERE task.ID='"+idtask+"' LIMIT "+start+", "+limit+"";
                     resultSet = con.ExecuteQuery(sql);
 
                     /* Setup page vars for display. */
@@ -289,9 +291,16 @@ public class Rincian extends HttpServlet {
 
                     while(resultSet.next())
                     {
-
-                    out+="-- "+resultSet.getString("IDUser")+" "+resultSet.getString("Waktu")+" "+resultSet.getString("Isi")+" <br>\n";
-
+                        out+="-- "+resultSet.getString("IDUser")+" "+resultSet.getString("Waktu")+" "+resultSet.getString("Isi")+"\n";
+                        if (resultSet.getString("IDUser").equals(iduser)) {
+                            out+= "<form name='hiddenidcomment"+resultSet.getString("ID")+"' id='hiddenidcomment"+resultSet.getString("ID")+"' onsubmit=\"return deleteComment('"+resultSet.getString("ID")+"')\" method='post'>\n";
+                            out+= "     <input type='hidden' name='idcomment' value='"+resultSet.getString("ID")+"' />\n";
+                            out+= "<input type='submit' value='delete' />\n";
+                            out+= "</form></br>\n";
+                            
+                        } else {
+                            out+= "</br>\n";
+                        }
                     }
                 }
                 
@@ -389,28 +398,54 @@ public class Rincian extends HttpServlet {
         String idtask = (String) request.getSession().getAttribute("taskid");
         String iduser = (String) request.getSession().getAttribute("userid");
         String comment = request.getParameter("commentarea");
-        String query = "SELECT COUNT(*) as num FROM komentar";
+        String query = "SELECT * FROM komentar";
         resultSet = con.ExecuteQuery(query);
-        if (resultSet.next()) {
-            String nextidstring;
-            int nextid = resultSet.getInt("num")+1;
-            if (nextid < 10) {
-                nextidstring = "K00"+nextid;
-            } else if (nextid < 100) {
-                nextidstring = "K0"+nextid;
-            } else {
-                nextidstring = "K"+nextid;
-            }
-            query = "INSERT INTO komentar (ID,IDTask,IDUser,Waktu,Isi) VALUES ('"+nextidstring+"','"+idtask+"','"+iduser+"',now(),'"+comment+"')";
+        String nextidstring = "";
+        while (resultSet.next()) {
+            nextidstring = resultSet.getString("ID");
+        }
+        int lastid;
+        if (!nextidstring.equals("")) {
+            nextidstring = nextidstring.substring(1);
+            lastid = Integer.parseInt(nextidstring);
+        } else {
+            lastid = 0;
+        }
+        
+        int nextid = lastid+1;
+        if (nextid < 10) {
+            nextidstring = "K00"+nextid;
+        } else if (nextid < 100) {
+            nextidstring = "K0"+nextid;
+        } else {
+            nextidstring = "K"+nextid;
+        }
+        query = "INSERT INTO komentar (ID,IDTask,IDUser,Waktu,Isi) VALUES ('"+nextidstring+"','"+idtask+"','"+iduser+"',now(),'"+comment+"')";
 
-            if (con.ExecuteUpdate(query)!=0)
-            {
-                out+= "Record inserted";
-            }
-            else 
-            {
-                out+= "Error inserting record ";
-            }
+        if (con.ExecuteUpdate(query)!=0)
+        {
+            out+= "Record inserted";
+        }
+        else 
+        {
+            out+= "Error inserting record ";
+        }
+        con.Close();
+        return out;
+    }
+    
+    private String doDeleteComment(HttpServletRequest request) throws Exception {
+        String out = "";
+        con.Init();
+        String idcomment = request.getParameter("commentid");
+        String query = "DELETE FROM komentar WHERE ID='"+idcomment+"'";
+        if (con.ExecuteUpdate(query)!=0)
+        {
+            out+= "Record komentar deleted";
+        }
+        else 
+        {
+            out+= "Error deleting record komentar ";
         }
         con.Close();
         return out;

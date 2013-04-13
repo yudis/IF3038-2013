@@ -111,28 +111,30 @@ xmlhttp.send();
     <link href="css/dashboard.css" rel="stylesheet" type="text/css" />
     <link href="css/search.css" rel="stylesheet" type="text/css" />
     <link href="css/mediaqueries.css" rel="stylesheet" type ="text/css" />
+    <script type="text/javascript" language="javascript" src="js/dashboard.js"></script>
+    <script type="text/javascript" language="javascript" src="js/search.js"></script>
     <!--<link href='http://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'>-->
-<style>
+    <style>
     .user{
-        width : 400px;
+        width : 300px;
         height : 100px;
         margin-top : -55px;
         margin-left :770px;
         padding-top : 30px;
         padding-left: 80px;
+        float:left;
     }
-</style>
+    </style>
+
 </head>
 
 <body>
-    <script type="text/javascript" language="javascript" src="js/dashboard.js"></script>
-    <script type="text/javascript" language="javascript" src="js/search.js"></script>
-	
+    
 <div class="header">
     <a href="Dashboard.jsp"><img align="left" src="images/logo.png" width="150" height="50" />
-	<h6>Dashboard</a> <p>|</p> <a href="profile.jsp">Profile</a> <p>|</p> <a href="logout.jsp">Logout</a>
-        <form id="searchform" onsubmit="return searchByFilter()" method="post" >
+	<h6>Dashboard</h6></a> <p>|</p> <a href="profile.jsp">Profile</a> <p>|</p> <a href="logout.jsp">Logout</a>
+        <form id="searchform" onsubmit="return loadSearchResult(1)" method="post" >
    | Search:<input type="search" id="searchquery" name="searchquery" /> 
    Filter: <select id="filtertype" name="filtertype">
         <option value="All" selected>All</option>
@@ -141,14 +143,13 @@ xmlhttp.send();
         <option value="Task">Task</option>
    </select>
    <input type="submit" value="GO" />
-   
         </form>
         <div class="user">Welcome, 
-      <%
-      String login = (String) session.getAttribute("userid");
-      out.print(login);
-      %>
-  </div>
+            <%
+            String login = (String) session.getAttribute("userid");
+            out.print(login);
+            %>
+        </div>
 	</div>
     <br>
     <div id="contentdashboard">
@@ -170,8 +171,8 @@ xmlhttp.send();
                     %>
 		</select>
 		</form>
-		<button onclick="addkategori()">Tambah Kategori</input>
-		<button onclick="hapuskategori()">Hapus Kategori</input>
+                <button onclick="addkategori()">Tambah Kategori</button>
+		<button onclick="hapuskategori()">Hapus Kategori</button>
 	</center>
 	<div class="kategori">
 	<center><h2 class="judul">Daftar Tugas</h2>
@@ -192,13 +193,15 @@ xmlhttp.send();
 		<div id="addtask3" style="display: none;">
 		<a href="tambah.html"><img src="images/newtask.png"></a>
 	</div>
+       </div>
    </td>
    
    </tr></table>  
-   
+                    
  
 	
 </center>
+            </div>
                     </div>
 </body>
 </html>
