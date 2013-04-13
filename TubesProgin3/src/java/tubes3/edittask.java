@@ -80,10 +80,9 @@ public edittask(){}
             throws ServletException, IOException {
        
         boolean flag;
-        int IDTask;
+        //int IDTask;
         session=request.getSession();
-        String sID = request.getParameter("id");
-        IDTask= Integer.parseInt(sID);
+        String IDTask = request.getParameter("ID");
         response.setContentType("text/html;charset=UTF-8");
 	PrintWriter out = response.getWriter();
         String query="";
@@ -122,7 +121,7 @@ public edittask(){}
             query2="INSERT INTO penugasan(IDTask,username) values("+IDTask+",'"+request.getParameter("assignee")+"')";
              try {
                     pst = connection.createStatement();
-                    pst.execute(query);
+                    pst.executeUpdate(query);
                     pst.execute(query2);
                     out.print(request.getParameter("deadline")+","+request.getParameter("assignee"));
                 } catch (SQLException ex) {
@@ -134,7 +133,8 @@ public edittask(){}
 		query="UPDATE tugas SET deadline='"+request.getParameter("deadline")+"' WHERE IDTask="+IDTask;
              try {
                     pst = connection.createStatement();
-                    pst.execute(query);
+                    pst.executeUpdate(query);
+                    System.out.println(query);
                     out.print(request.getParameter("deadline"));
                 } catch (SQLException ex) {
                     Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);

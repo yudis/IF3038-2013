@@ -131,16 +131,17 @@ public class Task extends HttpServlet {
             throws ServletException, IOException {
        // System.out.println("masuk ke sini");
         session=request.getSession();
-        
+      
         String user=(String)session.getAttribute("bananauser");
          ResultSet rs,rs2;
          PrintWriter out = response.getWriter();
          
           if (request.getParameter("ID") != null)
               {
-                  String sid=request.getParameter("ID");
-                  int id = Integer.parseInt(sid);
+                    
+                  String id=request.getParameter("ID");
                   String query="SELECT count(*) as jumlah FROM komentar where IDTask="+id;
+                  System.out.println("id="+id);
                   Tubes3Connection tu = new Tubes3Connection();
                   Connection connection = tu.getConnection();
                   int jum=0;
@@ -225,15 +226,17 @@ public class Task extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String query;
+        String ID=(String)session.getAttribute("ID");
+        
 	if(status==1)
 	{
             status=0;
-            query="UPDATE tugas SET stat='0' WHERE IDTask="+IDTask;
+            query="UPDATE tugas SET stat='0' WHERE IDTask="+ID;
 	}
 	else
 	{
             status=1;
-            query="UPDATE tugas SET stat='1' WHERE IDTask="+IDTask;
+            query="UPDATE tugas SET stat='1' WHERE IDTask="+ID;
 	}
         Tubes3Connection tu = new Tubes3Connection();
         Connection connection = tu.getConnection();
@@ -247,7 +250,7 @@ public class Task extends HttpServlet {
         }
        
         
-	response.sendRedirect("taskdetails.jsp");
+	response.sendRedirect("taskdetails.jsp?id="+ID);
     }
 
     /** 
