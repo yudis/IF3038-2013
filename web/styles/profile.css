@@ -113,9 +113,15 @@
 	margin-left:10px;
 }
 .profilephoto{
-	height:245px;
-	width:200px;
+	height:300px;
+	width:390px;
 }
+
+.profilephoto img{
+	height:300px;
+	width:390px;
+}
+
 .biodata{
 	height:350px;
 	width:390px;
@@ -231,9 +237,9 @@ body {
 	height:50px;
 	width:50px;
 	position:absolute;
-	top:295px;
+	top:365px;
 	left:355px;
-	background: transparent url(../../images/edit.png) no-repeat;
+	background: transparent url(../images/edit.png) no-repeat;
 	overflow: hidden;
 	border:0;
 }
@@ -241,9 +247,9 @@ body {
 	height:50px;
 	width:50px;
 	position:absolute;
-	top:290px;
+	top:360px;
 	left:355px;
-	background: transparent url(../../images/edit.png) no-repeat;
+	background: transparent url(../images/edit.png) no-repeat;
 	overflow: hidden;
 	border:0;
 }

@@ -276,3 +276,5 @@ function avatar_validating()
 }
 
 
+
+

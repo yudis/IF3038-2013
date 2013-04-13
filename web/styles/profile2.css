@@ -1,0 +1,51 @@
+#popUpDiv {
+	position:absolute;
+	margin-top: -200px;
+	background-color: #ececec;
+	width:400px;
+	height:440px;
+	border:5px solid #e0e0e0;
+	z-index: 9002;
+	border-radius:20px;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+}	
+
+#popUpDiv a {position:relative; top:20px; left:20px}
+
+#editprofile{
+    margin-left: 40px;
+    margin-top: 30px;
+}
+
+#edittitle{
+    color: #e97f2c;
+    font-family: Calibri;
+    font-weight: 800;
+    font-size: 30px;
+    margin-top: -5px;
+}
+
+#blanket {
+   background-color:#111;
+   opacity: 0.65;
+   background:none;
+   position:absolute;
+   z-index: 9001;
+   top:0px;
+   left:0px;
+   width:100%;
+}
+
+#closeedit{
+    color: #e97f2c;
+    float: right;
+    margin-right: 50px;
+    font-family: Calibri;
+    font-size: 20px;
+    margin-top: -15px;
+}
+
+#closeedit:hover{
+    color: #ffffff;
+}
