@@ -20,13 +20,11 @@ function createObject() {
 
 var ab = 0;
 function logins() {
-
     var http = createObject();
 
     http.onreadystatechange = function() {
         if (http.readyState == 4) {
             var response = http.responseText;
-            //alert(response);
             if (response == 0) {
                 alert("username dan password salah");
             } else {
