@@ -32,6 +32,14 @@
 	font-size: 20px;
 	text-align: center;
 }
+#username24{
+	margin-top: 2px;
+        padding-top: 35px;
+	font-family: Calibri;
+	font-size: 35px;
+	text-align: center;
+        color: #e58100;
+}
 
 #editprof{
     margin-top: 30px;
@@ -111,4 +119,10 @@
         border-radius:15px 15px 15px 15px;
         -moz-border-radius:15px 15px 15px 15px;
         -webkit-border-radius:15px 15px 15px 15px;     
+}
+
+
+.submitreg:hover{
+    background:#000000;
+    
 }
