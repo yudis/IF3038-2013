@@ -7,7 +7,7 @@ String username = (String)session.getAttribute("username");
 String ava = (String)session.getAttribute("ava");
 %>
 <header>
-    <a href="dashboard.php" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
+    <a href="dashboard.jsp" title="Home"><img id="logo-small" src="img/Logo_Small2.png" alt="" /></a>
     <div id="dashboard"><a title="Go to Dashboard" href="dashboard.jsp">Dashboard</a></div>
 
     <div id="profile">

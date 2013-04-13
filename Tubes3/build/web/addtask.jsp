@@ -12,7 +12,7 @@
     </head>
     <body>
         <div id="category">
-            <div class = "kategori"><a title="Go to Dashboard" href="dashboard.php">Back to Dashboard</a></div>
+            <div class = "kategori"><a title="Go to Dashboard" href="dashboard.jsp">Back to Dashboard</a></div>
         </div>
         <div id ="listtugas" class="list">
 
