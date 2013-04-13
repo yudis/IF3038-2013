@@ -492,7 +492,7 @@ public class search extends HttpServlet {
                                 out.println(isi_close);
                                 out.println("<div>");
                                 out.print("Deadline : ");
-                                String deadline = rs.getString(4);
+                                String deadline = rs.getString("deadline");
                                 out.println(deadline);
                                 out.println("</div>");
                                 out.println("<div>");
@@ -549,7 +549,7 @@ public class search extends HttpServlet {
                                 out.println(isi_close);
                                 out.println("<div>");
                                 out.print("Deadline : ");
-                                String deadline = rs.getString(4);
+                                String deadline = rs.getString("deadline");
                                 out.println(deadline);
                                 out.println("</div>");
                                 out.println("<div>");

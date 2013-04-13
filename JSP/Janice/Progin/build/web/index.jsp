@@ -103,11 +103,7 @@
                 <script type ="text/javascript">
                     Search("<%=s%>","<%=m%>");
                 </script>
-          <%  }
-			
-			
-			
-	%>
+          <%  }	%>
     </body> 
 </html>
 
