@@ -50,8 +50,7 @@ public class profile extends HttpServlet {
         Connection connection = tu.getConnection();this.username=username;
 
         String queryUser = "SELECT * FROM pengguna WHERE username ='" + this.username + "'";
-        String queryTaskSelesai = "select name from tugas where IDTask=(select IDTask from penugasan where username='"+this.username+"') and stat=1";
-        String queryTaskBelumSelesai = "select name from tugas where IDTask=(select IDTask from penugasan where username='"+this.username+"') and stat=0";
+        String  queryID = "select IDTask from penugasan where username='"+this.username+"'";
         rs = tu.coba(connection, queryUser);
         if (rs.next()) {
             fullname = rs.getString("fullname");
@@ -62,14 +61,26 @@ public class profile extends HttpServlet {
         } else {
             fullname = "Gak ada";
         }
-        rs = tu.coba(connection, queryTaskSelesai);
+        Tubes3Connection tu2=new Tubes3Connection();
+        Connection con=tu.getConnection();
+        ResultSet rs2;
+        rs = tu.coba(connection, queryID);
         while (rs.next()) {
-            tugasSelesai.add(rs.getString("name"));
+            String query="select * from tugas where IDTask="+rs.getString("IDTask");
+            rs2=tu2.coba(con,query);
+            if(rs2.next())
+            {
+                if(rs2.getString("stat").equals("1"))
+                {
+                    tugasSelesai.add(rs2.getString("name"));
+                }
+                else
+                {
+                    tugasBelumSelesai.add(rs2.getString("name"));
+                }
+            }
         }
-        rs = tu.coba(connection, queryTaskBelumSelesai);
-        while (rs.next()) {
-            tugasBelumSelesai.add(rs.getString("name"));
-        }
+       
 
     }
 
