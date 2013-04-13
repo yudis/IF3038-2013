@@ -284,8 +284,8 @@ function checkLogged() {
             }
 
             xmlhttp.onreadystatechange = function() {
-                
-               //alert(xmlhttp.readyState + " " + xmlhttp.status);
+
+                //alert(xmlhttp.readyState + " " + xmlhttp.status);
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     document.getElementById("navsearch").innerHTML = xmlhttp.responseText;
                 }
@@ -355,13 +355,13 @@ function logout()
 
 function toggleSearch() {
     //alert(getStyle(document.getElementById('search'), 'display'));
-    
-    if (getStyle(document.getElementById('search'), 'display') == 'none') 
+
+    if (getStyle(document.getElementById('search'), 'display') == 'none')
     {
         document.getElementById('search').style.display = 'inline';
         //alert("none");
     }
-    else 
+    else
     {
         //alert("inline");
         document.getElementById('search').style.display = 'none';
@@ -419,4 +419,41 @@ document.getElementById('files').addEventListener('change', handleFileSelect, fa
 
 function popupcat() {
     window.open("../addcat/");
+}
+
+function editField() {
+    if (document.getElementById("editbutton").innerHTML == "Edit Task") {
+        e = document.getElementsByClassName("hidden");
+        for (i = 0; i < e.length; i++) {
+            e[i].className = "appeared";
+        }
+
+        document.getElementById("editbutton").innerHTML = "Save Task";
+    }
+    else {
+        e = document.getElementById("query").className;
+        d = document.getElementById("deadline").value;
+        a = document.getElementById("assignee").value;
+        t = document.getElementById("tags").value;
+
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("editbutton").innerHTML = "Edit Task";
+                e = document.getElementsByClassName("appeared");
+                for (i = 0; i < e.length; i++) {
+                    e[i].className = "hidden";
+                }
+            }
+        };
+
+        xmlhttp.open("GET", e + "&deadline='" + d + "'&assignee='" + a + "'&tags='" + t + "'", true);
+        xmlhttp.send();
+    }
 }

@@ -10,9 +10,11 @@
     result.next();
 %>
 <h2><% out.print(result.getString("taskname").trim());%></h2>
+<div id="query" class="<% out.print("updatetask.jsp?taskname=\'" + result.getString("taskname").trim() + "\'&category=\'" + result.getString("category").trim() + "\'"); %>"></div>
 <div class="row">
     <div class="cell">Status</div>
-    <div class="cell" id="status<% out.print(result.getString("taskname").trim() + result.getString("category").trim());%>"><% out.print(result.getString("status").trim().equals("1") ? "Selesai" : "Belum Selesai");%></div>
+    <div class="cell" id="status<% out.print(result.getString("taskname").trim() + result.getString("category").trim());%>"><% out.print(result.getString("status").trim().equals("1") ? "Selesai" : "Belum Selesai");%>
+    </div>
 </div>	
 <div class="row">
     <div class="cell">Change status</div>
@@ -22,18 +24,25 @@
 </div>	
 <div class="row">
     <div class="cell">Deadline</div>
-    <div class="cell"><% out.print(result.getString("deadline").trim());%></div>
+    <div class="cell"><% out.print(result.getString("deadline").trim());%>
+        <input id="deadline" class="hidden" type="text" value="<% out.print(result.getString("deadline").trim());%>"/>
+    </div>
 </div>
 <div class="row">
     <div class="cell">Assignee</div>
-    <div class="cell"><% out.print(result.getString("assignee").trim());%></div>
+    <div class="cell"><% out.print(result.getString("assignee").trim());%>
+        <input id="assignee" class="hidden" type="text" value="<% out.print(result.getString("assignee").trim());%>"/>
+    </div>
 </div>
 <div class="row">
     <div class="cell">Tags</div>
-    <div class="cell"><% out.print(result.getString("tags").trim());%></div>
+    <div class="cell"><% out.print(result.getString("tags").trim());%>
+        <input id="tags" class="hidden" type="text" value="<% out.print(result.getString("tags").trim());%>"/>
+    </div>
 </div>
 <button class="<% out.print(result.getString("taskname").trim() + result.getString("category").trim());%>" id="<% out.print("../deletetask/index.jsp?taskname=\'" + result.getString("taskname").trim() + "\'&category=\'" + result.getString("category").trim() + "\'");%>" onclick="deleteTask(this);
                 return false;">Delete Task</button>
+<button id="editbutton" onclick="editField()">Edit Task</button>
 <%
     query = "select count(*) as count from comments where taskname = " + taskname + " and category = " + category;
     result = ConnectDB.mysql_query(query);

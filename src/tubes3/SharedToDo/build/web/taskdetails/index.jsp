@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Shared To Do List - Task Details</title>
-        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" type="text/css" href="../istyle.css">
         <link rel="shortcut icon" href="=../favicon.ico">
         <script type="text/javascript" src="../ivalidation.js"></script>
         <script type="text/javascript" src="comment.js"></script>
