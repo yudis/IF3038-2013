@@ -9,6 +9,10 @@
         <servlet-name>UploadImage</servlet-name>
         <servlet-class>util.UploadImage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserDataUpdate</servlet-name>
+        <servlet-class>ajax.UserDataUpdate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Suggestion</servlet-name>
         <url-pattern>/Suggestion</url-pattern>
@@ -16,6 +20,10 @@
     <servlet-mapping>
         <servlet-name>UploadImage</servlet-name>
         <url-pattern>/UploadImage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDataUpdate</servlet-name>
+        <url-pattern>/UserDataUpdate</url-pattern>
     </servlet-mapping>
 </web-app>
 <!--    <welcome-file>index.jsp</welcome-file>

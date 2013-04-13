@@ -192,18 +192,15 @@ function showPopUp() {
 /**************************PROFIL**************************/
 
 function showEditForm() {
-    alert("show edit form");
-//	document.getElementById("editForm").style.visibility = "visible";
+	document.getElementById("editForm").style.visibility = "visible";
 }
 function hideEditForm() {
-    alert("barca");
-	//document.getElementById("editForm").style.visibility = "hidden";
+	document.getElementById("editForm").style.visibility = "hidden";
 }
 function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain) {
-    alert("kade");
-	//alert(newFullName + " "+ newBirthdate + " " + newPassword + " " + newPasswordAgain + " " + fileUpload);
+//	alert(newFullName + " "+ newBirthdate + " " + newPassword + " " + newPasswordAgain);
 	
-	/*if (newPassword == newPasswordAgain) {
+	if (newPassword == newPasswordAgain) { //password match
 		//menampilkan notifikasi saat field password tidak diubah
 		if ((newPassword == "") && (newPasswordAgain == "")) {
 			alert("Warning. Field password tidak berubah");
@@ -230,34 +227,36 @@ function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain)
 		}
 		
 		__xmlhttp.onreadystatechange = function() {
-			//alert("readystatechange" + __xmlhttp.readyState + " " + __xmlhttp.status);
+//			alert("readystatechange" + __xmlhttp.readyState + " " + __xmlhttp.status);
 			if ((__xmlhttp.readyState == 4) && (__xmlhttp.status == 200)) {
 				//ditampung xmlresponsenya
-				//alert(__xmlhttp.responseText);
-				$xmlresponse = __xmlhttp.responseXML; //responsexml tidak bisa langsung diambil, akan mengakibatkan null
+//                                alert("aman");
+                                $reply = __xmlhttp.responseText;
+//				alert("Response : " + reply);
+                                var $update = $reply.split("*");
+//                                alert(update[0] + "&" + update[1]);
+				/*$xmlresponse = __xmlhttp.responseXML; //responsexml tidak bisa langsung diambil, akan mengakibatkan null
 				alert("Profile telah berhasil diperbaharui");
 				//mengolah respon dalam bentuk xml
 				$responseElmt = $xmlresponse.getElementsByTagName("response");
 				
 				$fullname = $responseElmt[0].childNodes[0].childNodes[0].nodeValue;
-				$birthdate = $responseElmt[0].childNodes[1].childNodes[0].nodeValue;
+				$birthdate = $responseElmt[0].childNodes[1].childNodes[0].nodeValue;*/
 				
-				document.getElementById("userFullName").innerHTML = "<p>" + $fullname + "</p>";
-				document.getElementById("userBirthdate").innerHTML = "<p>" + $birthdate + "</p>";
-				//setTimeout(function() {
-				//},10000);
+				document.getElementById("userFullName").innerHTML = "<p>" + $update[0] + "</p>";
+				document.getElementById("userBirthdate").innerHTML = "<p>" + $update[1] + "</p>";
 			}
 		}
 		
-		__xmlhttp.open("POST","php/updateProfile.php",true);
+		__xmlhttp.open("POST","UserDataUpdate",true);
 		__xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		//__xmlhttp.setRequestHeader("Content-length", $param.length);
 		//__xmlhttp.setRequestHeader("Connection", "close");
 		
-		__xmlhttp.send("newFullName=" + newFullName + "&newBirthdate=" + newBirthdate + "&newPassword=" + newPassword + "&newFileName=" + fileUpload);
+		__xmlhttp.send("newFullName=" + newFullName + "&newBirthdate=" + newBirthdate + "&newPassword=" + newPassword);
 	} else{
 		alert("Peringatan! kedua password Anda tidak sesuai");
-	}*/
+	}
 }
 
 /**************************DASHBOARD**************************/
