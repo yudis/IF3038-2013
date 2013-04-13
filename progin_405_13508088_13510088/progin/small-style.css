@@ -1,0 +1,229 @@
+@media only screen and (max-device-width: 320px; max-device-height:480 ) {
+	
+	body{
+	margin: 0 auto 0 auto;
+	width: 300px;
+	font-family: calibri;
+	}
+	
+
+h1{
+	font-family: calibri;
+	margin: 0px;
+}
+
+h3{	
+	color:#8A0829;
+}
+
+label{
+	display: inline-block;
+	width: 67px;
+	height: 10px;
+}
+
+a {
+	color: #636363;
+}
+
+.namatugas {
+    font-size: 10px;
+    font-weight: bold;
+    color: darkslategrey;
+}
+
+.commenttugas {
+
+}
+
+.atributtugas {
+    font-weight: bold;
+}
+
+
+.body {
+	width: 900px;
+	clear:both;
+}
+
+.contents{
+	width: 330px;
+	float: left;
+	padding: 3px;
+}
+
+.catagories {
+	float: left;
+	width: 53px;
+	padding: 13px;
+}
+
+#headerother{
+	width: 100px;
+	height: 13px;
+}
+
+header { 
+   height : 8px;
+   width : 100px;
+	border-bottom: solid 2px #FE2E64;
+	border-top: solid 0px #FE2E64;
+   padding-top: 1px;
+   padding-bottom: 1px;
+}
+
+footer{
+	width : 300px;
+	text-align: center;
+	border-top: solid 2px #FE2E64;
+	clear: both;
+	padding:3px;
+}
+
+.profpic {
+
+	width:100px;
+	float:left;
+	clear: both;
+	margin-right: 6px;
+}
+
+.dataUser{
+	float:left;
+	width:133px;
+	clear: both;
+}
+
+.task {
+	width: 76px;
+	float:left;
+	clear: both;
+	padding:6px;
+
+}
+
+.profile {
+	width:300px;
+	height:123px;
+}
+
+.nama{
+	padding-left: 3px;
+	font-size: 20px;
+}
+
+.atribut{
+	padding-left: 3px;
+	font-size: 10px;
+}
+
+.sfield{
+	margin:1px;
+	float:left;
+}
+
+#loginbutton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
+	background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+	background-color:#3d94f6;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	border:1px solid #337fed;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:5px;
+	font-weight:bold;
+	padding:2px 8px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #1570cd;
+}#loginbutton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
+	background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
+	background-color:#1e62d0;
+}#loginbutton:active {
+	position:relative;
+	top:1px;
+}
+
+#registerbutton{
+	-moz-box-shadow:inset 0px 1px 0px 0px #f7c5c0;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f7c5c0;
+	box-shadow:inset 0px 1px 0px 0px #f7c5c0;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #FF0040), color-stop(1, #FE2E64) );
+	background:-moz-linear-gradient( center top, #FF00405%, #FE2E64100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0040', endColorstr='#FE2E64');
+	background-color:#FF0040;
+	-moz-border-radius:1px;
+	-webkit-border-radius:1px;
+	border-radius:1px;
+	border:1px solid #d83526;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:5px;
+	font-weight:bold;
+	padding:2px 11px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #b23e35;
+}
+#registerbutton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e4685d), color-stop(1, #fc8d83) );
+	background:-moz-linear-gradient( center top, #e4685d 5%, #fc8d83 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e4685d', endColorstr='#fc8d83');
+	background-color:#e4685d;
+}
+#registerbutton:active {
+	position:relative;
+	top:1px;
+}
+
+#loginform {
+	width:133px;
+	float: left;
+	padding: 3px;
+}
+
+.registerform {
+	width:11px;
+	float: none ;
+	padding: 3px;
+}
+
+.logosmall{
+	margin:1px;
+	float:left;
+	height:9px;
+
+}
+
+input {
+    border:1px solid #dadada;
+    border-radius:1px;
+    padding:1px; 
+}
+
+input:focus { 
+    outline:none;
+    border-color:#9ecaed;
+    box-shadow:0 0 5px #9ecaed;
+}
+
+#calender {
+	width: 141px;
+	padding: 0;
+	margin: 0;
+	border-left: 1px solid #A2ADBC;
+	font: normal 12px/20px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	color: #616B76;
+	text-align: center;
+	background-color: #fff;
+}
+	
+}
