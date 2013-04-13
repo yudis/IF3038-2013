@@ -42,7 +42,7 @@ INSERT INTO `kategori` (`IDKategori`, `judul`, `username`) VALUES
 (1, 'apapun', 'doraemon'),
 (2, 'kalkulus', 'devin'),
 (3, 'kamu', 'raymond'),
-(4, 'putih', 'yuli');
+(4, 'putih', 'yuli'),
 
 -- --------------------------------------------------------
 
@@ -66,6 +66,8 @@ CREATE TABLE IF NOT EXISTS `komentar` (
 
 INSERT INTO `komentar` (`IDTask`, `IDKomentar`, `username`, `isi`, `waktu`) VALUES
 (1, 1, 'devin', 'aaa', '2013-04-12 02:18:16'),
+(1, 2, 'devin', 'komentar', '2013-04-10 01:27:38'),
+(1, 5, 'raymond', 'coba komen', '2013-04-11 01:27:38'),
 (2, 3, 'raymond', 'mmm', '0000-00-00 00:00:00'),
 (2, 4, 'raymond', 'zxcvbnm,.', '0000-00-00 00:00:00'),
 (1, 25, 'yuli', 'd', '2013-04-12 01:27:38'),
@@ -108,13 +110,14 @@ CREATE TABLE IF NOT EXISTS `pelampiran` (
 
 INSERT INTO `pelampiran` (`IDTugas`, `lampiran`) VALUES
 (1, 'upload/datetimepicker_css.js'),
-(3, 'Untitled.png'),
-(4, 'Untitled.png'),
-(5, 'Desert.jpg'),
-(2, 'upload/Koala.jpg'),
-(8, 'foto.jpg'),
 (1, 'upload/Koala.jpg'),
 (1, 'upload/movie.ogg');
+(3, 'upload/movie.ogg'),
+(4, 'upload/Koala.jpg'),
+(5, 'upload/datetimepicker_css.js'),
+(2, 'upload/Koala.jpg'),
+(8, 'upload/datetimepicker_css.js'),
+
 
 -- --------------------------------------------------------
 
@@ -138,10 +141,14 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
 --
 
 INSERT INTO `pengguna` (`username`, `password`, `fullname`, `birthday`, `email`, `avatar`) VALUES
+('amelia', 'amelia', 'amelia anasthasia', '1992-12-12', 'amel@hotmail.com', 'avatar/foto.jpg'),
+('anasthasia', 'anasthasia', 'anasthasia amelia', '1992-12-12', 'anasthasia@hotmail.com', 'avatar/Koala.jpg'),
 ('devin', 'devin', 'devin hoesen', '2013-03-11', 'devin@hotmail.com', 'avatar/2.jpg'),
 ('doraemon', 'doraemon', 'doraemon', '2013-03-19', 'doraemon@dorem.com', 'avatar/0.jpg'),
-('raymond', 'aaaaaaaa', 'raymond lukanta aku', '2013-03-05', 'raymond@hotmail.com', 'avatar/0.jpg'),
-('yuli', 'yulianti', 'Yulianti Oenang', '2013-03-07', 'yuli@hotmail.com', 'avatar/3.jpg');
+('lukanta', 'lukanta', 'lukanta raymond', '1992-12-12', 'lukanta@hotmail.com', 'avatar/0.jpg'),
+('oenang', 'oenang', 'oenang yulianti', '1992-12-12', 'oenang@hotmail.com', 'avatar/0.jpg'),
+('raymond', 'raymond', 'raymond lukanta', '2013-03-05', 'raymond@hotmail.com', 'avatar/0.jpg'),
+('yuli', 'yuli', 'Yulianti Oenang', '2013-03-07', 'yuli@hotmail.com', 'avatar/3.jpg');
 
 -- --------------------------------------------------------
 
@@ -166,7 +173,20 @@ INSERT INTO `penugasan` (`username`, `IDTask`) VALUES
 ('doraemon', 2),
 ('raymond', 2),
 ('devin', 3),
+('raymond', 3),
+('yuli', 3),
 ('devin', 4),
+('raymond', 4),
+('yuli', 4),
+('devin', 5),
+('raymond', 5),
+('yuli', 5),
+('devin', 6),
+('raymond', 6),
+('yuli', 6),
+('amelia', 7),
+('lukanta', 7),
+('oenang', 7),
 ('doraemon', 5),
 ('raymond', 8);
 
@@ -195,12 +215,13 @@ CREATE TABLE IF NOT EXISTS `tugas` (
 
 INSERT INTO `tugas` (`IDTask`, `IDKategori`, `name`, `deadline`, `stat`, `tag`, `username`) VALUES
 (1, 1, 'tugas 1', '2013-04-30', 1, 'oo', 'devin'),
-(2, 1, 'a', '2013-03-25', 1, 'yyyyy', 'yuli'),
-(3, 1, 'am', '2013-03-26', 0, 'makan', 'yuli'),
-(4, 1, 'am', '2013-03-26', 0, 'makan', 'yuli'),
-(5, 1, 'jfdsk', '2013-03-27', 0, 'quert', 'yuli'),
-(7, 1, 'ajax', '2013-03-12', 0, 'susah', 'raymond'),
-(8, 1, 'tff', '2013-04-16', 0, 'aka, kjdd', 'raymond');
+(2, 2, 'tugas 2', '2013-04-30', 0, 'oo2', 'devin'),
+(3, 3, 'Tubes 1 Progin', '2012-12-12', 0, 'susah, ribet', 'devin'),
+(4, 3, 'Tubes 2 Progin', '2012-12-12', 1, 'susah, ribet', 'raymond'),
+(5, 3, 'Tubes 3 Progin', '2012-12-12', 0, 'susah, ribet', 'yuli'),
+(6, 4, 'Tubes 1 AI', '2012-12-12', 0, 'susah, ribet', 'devin'),
+(7, 4, 'Tubes 2 AI', '2012-12-12', 0, 'susah, ribet', 'raymond'),
+(8, 1, 'Tubes 3 AI', '2012-12-12', 0, 'susah, ribet', 'yuli');
 
 -- --------------------------------------------------------
 
@@ -219,6 +240,21 @@ CREATE TABLE IF NOT EXISTS `usercateg` (
 --
 
 INSERT INTO `usercateg` (`IDKategori`, `username`) VALUES
+(6, 'amelia'),
+(6, 'anasthasia'),
+(2, 'devin'),
+(5, 'devin'),
+(6, 'devin'),
+(1, 'doraemon'),
+(6, 'oenang'),
+(3, 'raymond'),
+(5, 'raymond'),
+(6, 'raymond'),
+(7, 'raymond'),
+(4, 'yuli'),
+(5, 'yuli'),
+(6, 'yuli'),
+(7, 'yuli');
 (1, 'yuli');
 
 --
@@ -257,6 +293,9 @@ ALTER TABLE `tugas`
   ADD CONSTRAINT `tugas_ibfk_1` FOREIGN KEY (`IDKategori`) REFERENCES `kategori` (`IDKategori`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tugas_ibfk_2` FOREIGN KEY (`username`) REFERENCES `pengguna` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+ALTER TABLE `usercateg`
+  ADD CONSTRAINT `usercateg_ibfk_1` FOREIGN KEY (`IDKategori`) REFERENCES `kategori` (`IDKategori`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usercateg_ibfk_2` FOREIGN KEY (`username`) REFERENCES `pengguna` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
