@@ -1,0 +1,19 @@
+github: username : gabriellewp	
+	password : coconuttree11
+dashboard:background: white : #FFFFFF
+
+header yang berisi:   nama pengguna
+di body nya ada tabel yang berisi tabel semua tugas . Lalu di sebelah paling kiri berisikan kategori.di atas header kiri itu ada tombol new kategori. kALO Kategori ditunjuk maka akan menampilkan list tugas yang behugbungan dengan kategori itu,di bagian paling atas tabel tapi agak ke kanan ada tobol new task.
+Kalo diteken slah satu kategori maka akan menampilkan tabel dengan header nya(ganti page) di atas tabel sebelah kanan ada tombol new task.
+1. nama task
+2. tanggal deadline
+3. tag multivalue
+tapi pas ganti halaman ini masih ada header disebelah kiri yang berisikan kategori apa aja.
+
+kalo pencet new kategori ada muncul pop up yang berisi atribut berupa nama kategori dan daftar pengguna yang nanti akan menambah atau mngurangi ttugas. 
+
+
+
+header : FireBrick #B22222
+
+
