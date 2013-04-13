@@ -162,20 +162,28 @@ function autoCompleteAsignee() {
 	getAjax();
 
 	var asignee = document.getElementById("task-assignee").value;
+	var asigneeindex;
+        var asigneearray;
 	var suggestion = "";
 	var suggestionarray;
 	
 	var index = asignee.length;
-	
+        
 	if(asignee!="")
 	{
-		if (asignee.charAt(index - 1) == ',')
-		{
-			konkat = asignee.substr(0,index);
-		}
-		
-		ajaxRequest.open("GET","autocompleteasignee?asignee="+document.getElementById("task-assignee").value,false);
-
+		if (asignee.indexOf(",") !== -1) {
+                    if (asignee.charAt(index - 1) === ',')
+                    {
+                            konkat = asignee.substr(0,index);
+                    }
+                    asigneearray = asignee.split(",");
+                    asigneeindex = asigneearray.length - 1;
+                    ajaxRequest.open("GET","autocompleteasignee?asignee="+asigneearray[asigneeindex],false);
+                }
+                else {
+                    ajaxRequest.open("GET","autocompleteasignee?asignee="+asignee,false);
+                }
+                
 		ajaxRequest.onreadystatechange = function()
 		{
 			suggestion =  ajaxRequest.responseText;

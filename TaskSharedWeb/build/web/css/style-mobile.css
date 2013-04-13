@@ -97,7 +97,7 @@ body {
 }
 
 #task-page-body {
-	min-height:550px;
+	min-height:1000px;
 	padding-left:20px;
 	padding-top:1px;
 	background-image:url("..//image//taskpagem.jpg");
@@ -467,16 +467,23 @@ body {
 }
 
 #profile-pic {
+        display: inline-block;
 	width:300px;
+        height:auto;
+        float:left;
 	padding:80px 0px 0px 2px;
-	float:left;
 }
 
 #main-dashboard {
+    display: inline-block;
     padding-top:10px;
     width:800px;
-    float:left;
     padding-bottom:25px
+}
+
+#dashboard-empty {
+    display: inline-block;
+    width:180px;
 }
 
 #task-search {
@@ -572,6 +579,7 @@ body {
 .task-tag {
 	margin: 0px 0px 0px 0px;
 	float:right;
+        padding-left:20px;
 	font-size:12px;
 }
 

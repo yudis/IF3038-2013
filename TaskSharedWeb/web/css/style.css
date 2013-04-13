@@ -467,16 +467,23 @@ body {
 }
 
 #profile-pic {
+        display: inline-block;
 	width:300px;
+        height:auto;
         float:left;
 	padding:80px 0px 0px 2px;
 }
 
 #main-dashboard {
+    display: inline-block;
     padding-top:10px;
-    float:left;
     width:800px;
     padding-bottom:25px
+}
+
+#dashboard-empty {
+    display: inline-block;
+    width:180px;
 }
 
 #task-search {
