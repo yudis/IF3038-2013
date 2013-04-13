@@ -33,8 +33,13 @@
         <servlet-class>newcategory</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
+        <servlet-name>HapusTask</servlet-name>
+        <servlet-class>HapusTask</servlet-class>
+=======
         <servlet-name>register</servlet-name>
         <servlet-class>register</servlet-class>
+>>>>>>> 44edc244f8bfa9f77b8b15b8062091566370afd6
     </servlet>
     <servlet-mapping>
         <servlet-name>Search</servlet-name>
@@ -69,8 +74,13 @@
         <url-pattern>/newcategory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
+        <servlet-name>HapusTask</servlet-name>
+        <url-pattern>/HapusTask</url-pattern>
+=======
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
+>>>>>>> 44edc244f8bfa9f77b8b15b8062091566370afd6
     </servlet-mapping>
     <session-config>
         <session-timeout>
