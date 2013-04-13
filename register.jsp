@@ -1,43 +1,144 @@
-<%@ page import="java.io.*" %>
+<%@page import="java.sql.*"%>
+<%@page import="java.io.*,java.util.*, javax.servlet.*" %>
+<%@page import="javax.servlet.http.*" %>
+<%@page import="org.apache.commons.fileupload.*" %>
+<%@page import="org.apache.commons.fileupload.disk.*" %>
+<%@page import="org.apache.commons.fileupload.servlet.*" %>
+<%@page import="org.apache.commons.io.output.*" %>
+<%@include file="/database.jsp"%>
+
 <%
-    //to get the content type information from JSP Request Header
-    String contentType = request.getContentType();
-    //here we are checking the content type is not equal to Null and  as well as the passed data from mulitpart/form-data is greater than or  equal to 0
-    if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) {
-        DataInputStream in = new DataInputStream(request.getInputStream());
-        //we are taking the length of Content type data
-        int formDataLength = request.getContentLength();
-        byte dataBytes[] = new byte[formDataLength];
-        int byteRead = 0;
-        int totalBytesRead = 0;
-        //this loop converting the uploaded file into byte code
-        while (totalBytesRead < formDataLength) {
-            byteRead = in.read(dataBytes, totalBytesRead, formDataLength);
-            totalBytesRead += byteRead;
-            }
-        String file = new String(dataBytes);
-        //for saving the file name
-        String saveFile = file.substring(file.indexOf("filename=\"") + 10);
-        saveFile = saveFile.substring(0, saveFile.indexOf("\n"));
-        saveFile = saveFile.substring(saveFile.lastIndexOf("\\") + 1,saveFile.indexOf("\""));
-        int lastIndex = contentType.lastIndexOf("=");
-        String boundary = contentType.substring(lastIndex + 1, contentType.length());
-        int pos;
-        //extracting the index of file 
-        pos = file.indexOf("filename=\"");
-        pos = file.indexOf("\n", pos) + 1;
-        pos = file.indexOf("\n", pos) + 1;
-        pos = file.indexOf("\n", pos) + 1;
-        int boundaryLocation = file.indexOf(boundary, pos) - 4;
-        int startPos = ((file.substring(0, pos)).getBytes()).length;
-        int endPos = ((file.substring(0, boundaryLocation)).getBytes()).length;
-        // creating a new file with the same name and writing the content in new file
-        FileOutputStream fileOut = new FileOutputStream(saveFile);
-        fileOut.write(dataBytes, startPos, (endPos - startPos));
-        fileOut.flush();
-        fileOut.close();
-    %>
-    <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b>
-    <% out.println(saveFile); %></td></tr></table> <%
-    }
+try
+{
+	// Connect to server and select database
+	String url = "jdbc:mysql://"+host+":3306/"+db_name;
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection con = DriverManager.getConnection(url, username, password);
+
+	File file;
+	int maxFileSize = 5000 * 1024;
+	int maxMemSize = 5000 * 1024;
+	ServletContext context = pageContext.getServletContext();
+	String filePath = "C:\\xampp\\tomcat\\webapps\\tugasku\\";
+	String filePathEnd = "avatars/";
+
+	String contentType = request.getContentType();
+	String passsword = null;
+	String relFileName = "";
+	String usernamee = "";
+	String fullname = "";
+	String birthdate = "";
+	String email = "";
+	String gender = "";
+	String about = "";
+	if (contentType.indexOf("multipart/form-data") >= 0)
+	{
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		// maximum size that will be stored in memory
+		factory.setSizeThreshold(maxMemSize);
+		// location to save data that is larger than maxMemSize
+		factory.setRepository(new File("C:\\xampp\\tomcat\\temp"));
+
+		// Create a new file upload handler
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		// maximum fiel size to be uploaded
+		upload.setSizeMax(maxFileSize);
+
+		// Parse the request to get file items
+		List fileItems = upload.parseRequest(request);
+
+		// Process the uploaded file items
+		Iterator it = fileItems.iterator();
+
+		while (it.hasNext())
+		{
+			FileItem fi = (FileItem)it.next();
+			if (!fi.isFormField())
+			{
+				out.print("start...");
+				// Get the uploaded file parameters
+				String fieldName = fi.getFieldName();
+				String fileName = fi.getName();
+				out.print("Filename: "+fileName);
+				if (fileName != "")
+				{
+					boolean isInMemory = fi.isInMemory();
+					long sizeInBytes = fi.getSize();
+					// Write the file
+					if (fileName.lastIndexOf("\\") >= 0)
+					{
+						relFileName = filePath + filePathEnd + fileName.substring(fileName.lastIndexOf("\\"));
+					}
+					else
+					{
+						relFileName = filePath + filePathEnd + fileName.substring(fileName.lastIndexOf("\\") + 1);
+					}
+					file = new File(relFileName);
+					fi.write(file);
+
+					// Update database
+					relFileName = filePathEnd + fileName.substring(fileName.lastIndexOf("\\") + 1);
+				}
+			}
+			else
+			{
+				String name = fi.getFieldName();
+				if (name.equals("username"))
+				{
+					usernamee = fi.getString();
+				}
+				else if (name.equals("password"))
+				{
+					passsword = fi.getString();
+				}
+				else if (name.equals("nama"))
+				{
+					fullname = fi.getString();
+				}
+				else if (name.equals("tgl"))
+				{
+					birthdate = fi.getString();
+				}
+				else if (name.equals("email"))
+				{
+					email = fi.getString();
+				}
+				else if (name.equals("sex"))
+				{
+					out.print(fi.getString());
+					if (fi.getString().equals("male"))
+					{
+						gender = "M";
+					}
+					else if (fi.getString().equals("female"))
+					{
+						gender = "F";
+					}
+				}
+				else if (name.equals("about"))
+				{
+					about = fi.getString();
+				}
+			}
+		}
+
+		PreparedStatement pst = con.prepareStatement("INSERT INTO `members` (username,password,fullname,birthdate,email,avatar,gender,about) VALUES (?,sha1(?),?,?,?,?,'"+gender+"',?)");
+		pst.setString(1, usernamee);
+		pst.setString(2, passsword);
+		pst.setString(3, fullname);
+		pst.setString(4, birthdate);
+		pst.setString(5, email);
+		pst.setString(6, relFileName);
+		pst.setString(7, about);
+		pst.executeUpdate();
+		pst.close();
+	}
+
+	con.close();
+	response.sendRedirect("index.jsp?status=4");
+}
+catch (Exception ex)
+{
+	out.print("Error : " + ex.getMessage());
+}
 %>
