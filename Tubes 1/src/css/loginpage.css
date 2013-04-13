@@ -1,0 +1,15 @@
+/* 
+    Document   : LoginPage
+    Created on : Feb 19, 2013, 7:09:01 AM
+    Author     : Arief
+    Description:
+        CSS for Login Page
+*/
+
+
+#FrontLogo {
+    width: 75%;
+    height: 75%;
+}
+
+body {color: grey}

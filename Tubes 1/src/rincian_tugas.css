@@ -1,0 +1,103 @@
+/* 
+    Document   : tambah_tugas
+    Created on : Feb 22, 2013, 7:46:57 PM
+    Author     : Toshiba L645
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+form, button{border:0; margin:0; padding:0;}
+
+.form-rincian-tugas{
+    margin:0 auto;
+    width:400px;
+    padding:14px;
+}
+
+
+#efek{
+    border:solid 2px #b7ddf2;
+    background:#ebf4ab;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+}
+
+#efek label{
+    display:block;
+    font-weight:bold;
+    text-align:right;
+    width:140px;
+    float:left;
+}
+#efek input{
+    float:left;
+    font-size:12px;
+    padding:4px 2px;
+    border:solid 1px #aacfe4;
+    width:200px;
+    margin:2px 0 20px 10px;
+}
+#efek .isi{
+    
+    float:left;
+    font-size:16px;
+    padding:0px 0px;
+    font-weight: bold;
+    width:200px;
+    margin:2px 0 20px 10px;
+}
+
+#efek video{
+    float:left;
+    font-size:12px;
+    padding:0px 0px;
+    margin:2px 0 2px 10px;
+}
+
+#efek button{
+    clear:both;
+    margin-left:150px;
+    width:125px;
+    height:31px;
+    background:#666666;
+    text-align:center;
+    line-height:31px;
+    color:#FFFFFF;
+    font-size:11px;
+    font-weight:bold;
+}
+
+#efek p{
+    font-size:11px;
+    color:#666666;
+    margin-bottom:20px;
+    border-bottom:solid 1px #b7ddf2;
+    padding-bottom:10px;
+    float:left;
+}
+
+#efek h1
+{
+    color: #ebf4ab;
+    position:absolute;
+    text-align:left;
+    color:#FFFFFF;
+    font-size:43px;
+    color:#FFF;	
+    left:14px;
+    top:18px;
+    float:left;
+}
+
+#efek h2
+{
+    color : #ebf4ab;
+    position:absolute;
+    text-align:right;
+    color:#EAEAEA;
+    left:490px;
+    top:38px;
+    width:400px;
+    float:left;
+}

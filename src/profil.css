@@ -1,0 +1,55 @@
+.label-biodata{
+  font-family:"Times New Roman", Times, serif;
+	color:white;
+	font-size:15px;
+	
+}
+
+#profile-header{
+	width:980px;
+	border : 1px solid #ccc;
+	border-radius : 5px;
+	-mox-border-radius : 5px;
+	-webkit-border-radius : 5px;
+	-o-border-radius : 5px;
+    border-style: dashed;
+	margin: 10px 0px;
+}
+
+#profile-tugas{
+	width:600px; 
+	height:550px; 
+	float:right;
+	border : 1px solid #ccc;
+	border-radius : 5px;
+	-mox-border-radius : 5px;
+	-webkit-border-radius : 5px;
+	-o-border-radius : 5px;
+    border-style: dashed;
+	padding: 0px 25px;
+}
+
+#profile-biodata{
+	width:250px; 
+	height:500px;
+	float:left;
+	border : 1px solid #ccc;
+	border-radius : 5px;
+	-mox-border-radius : 5px;
+	-webkit-border-radius : 5px;
+	-o-border-radius : 5px;
+    border-style: dashed;
+	margin-right:10px;
+	padding : 25px;
+
+}
+
+h1{color:white;}
+
+#profile-title{
+	text-align: center;
+}
+
+#profile-img{
+	
+}
