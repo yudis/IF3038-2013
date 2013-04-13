@@ -351,7 +351,7 @@ public class ServletHandler extends HttpServlet{
             String user_name = req.getParameter("edit_username");
             String password = req.getParameter("password");
             String fullname = req.getParameter("fullname");
-            String fileName = req.getParameter("avatar");
+            //String fileName = req.getParameter("avatar");
             String birthdate = req.getParameter("birthdate");
             File filenameImg;
             List<FileItem> items = null;
@@ -361,7 +361,7 @@ public class ServletHandler extends HttpServlet{
             System.out.println("Password : " + password);
             System.out.println("Fullname : " + fullname);
             System.out.println("Birthdate :" + birthdate);
-            System.out.println("Avatar :" + fileName);
+            //System.out.println("Avatar :" + fileName);
             
             //menggambar
             /*
@@ -398,19 +398,10 @@ public class ServletHandler extends HttpServlet{
                 Statement st = conn.createStatement(); 
                 
                 if (! password.equals("")) {
-                    if (!fileName.isEmpty()){
-                        st.executeUpdate("UPDATE user SET avatar='"+fileName+"' , full_name='"+fullname+"' , birthdate='"+birthdate+"' , password='"+password+"' WHERE username='"+user_name+"'");} 
-                    else {
-                        st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' , password='"+password+"' WHERE username='"+user_name+"'"); 
-                    }
-                        
-                } else {
-                    if (!fileName.isEmpty()){
-                        st.executeUpdate("UPDATE user SET avatar='"+fileName+"' , full_name='"+fullname+"' , birthdate='"+birthdate+"' WHERE username='"+user_name+"'");} 
-                    else {
-                        st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' WHERE username='"+user_name+"'"); 
-                    }
-                }
+                    st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' , password='"+password+"' WHERE username='"+user_name+"'");} 
+                   } else {
+                    st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' WHERE username='"+user_name+"'");} 
+                   }
                 HttpSession session = req.getSession(true);
                 session.setAttribute("fullname", fullname);
                 resp.sendRedirect("src/profile.jsp");
