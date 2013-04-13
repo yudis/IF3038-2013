@@ -311,7 +311,7 @@
                 <div id="regakhir" style="DISPLAY: none">
                     <div id="formreg">
                 
-                        <form name="registration" method="post" action="registerUser.jsp">
+                        <form name="registration" method="post" action="UploadData" enctype="multipart/form-data">
                             
                             <label>username</label>
                             <input name="username" type="text" placeholder="username"  onkeyup="user_validating()" onChange="logingg()" />
@@ -337,9 +337,10 @@
                                                     <img src="pict/blank.png" alt="icon6" id="emailicon" />
                                 <br><br>
                             <label>avatar</label>
-                                                    <input type="file" name="avatar" onChange="avatar_validating();logingg()" />            
-                                                    <img src="pict/blank.png" alt="icon7" id="avaicon" />
-                                                    <br>
+                            <input type="file" name="avatar" onChange="avatar_validating();logingg()" />            
+                            <img src="pict/blank.png" alt="icon7" id="avaicon" />
+                            <br>
+                            
                             <input class= "submitreg" id="submitb" name="submit" type="submit" value="Submit" disabled />
                             <input class= "submitreg" name="cancel" type="cancel" onClick="ShowAwal()" value="Cancel"/>
                         
