@@ -58,6 +58,8 @@ xmlhttp.send();*/
 </script>
 
 <link href="css/utama.css" rel="stylesheet" type="text/css" />
+<link href="css/dashboard.css" rel="stylesheet" type="text/css" />
+<link href="css/search.css" rel="stylesheet" type="text/css" />
 <link href="css/mediaqueries.css" rel="stylesheet" type ="text/css" />
 <link href='http://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'>
@@ -66,28 +68,42 @@ xmlhttp.send();*/
 	</head>
 	<body>
 <div class="header">
-
-	<a href="dashboard.html"><img align="left" src="images/logo.png" width="150" height="50" />
-	<h6>Dashboard</a> | <a href="profile.html">Profile</a> | <a href="index.html">Logout</a>
-
-   | Search: <input type="search">
-  <input type="submit" value="GO"></div>
+    <a href="Dashboard.jsp"><img align="left" src="images/logo.png" width="150" height="50" />
+	<h6>Dashboard</a> <p>|</p> <a href="profile.jsp">Profile</a> <p>|</p> <a href="logout.jsp">Logout</a>
+        <form id="searchform" onsubmit="return searchByFilter()" method="post" >
+   | Search:<input type="search" id="searchquery" name="searchquery" /> 
+   Filter: <select id="filtertype" name="filtertype">
+        <option value="All" selected>All</option>
+        <option value="Username">Username</option>
+        <option value="Category">Category</option>
+        <option value="Task">Task</option>
+   </select>
+   <input type="submit" value="GO" />
+   
+        </form>
+        <div class="user">Welcome, 
+      <%
+      String login = (String) session.getAttribute("userid");
+      out.print(login);
+      %>
+  </div>
+	</div>
   
   <div id="containercoba">
   </div>
 	<div class="container"><br>
 			<div class="tambah">
-			<form action="javascript:addTask()" name="myform">	
+			<form onsubmit="return addNewTask()" name="myform">	
 			<h1 class="judul">Tambah Tugas</h1>
 			Nama Task: 
-			<input type="text" name="namatask" id="task"/><br>
+			<input type="text" id="namatask" name="namatask" id="task"/><br>
 			Deadline  : 
 			<input type="text" id="datepick2" name="deadline" size="20" /> <br>
 			Assignee : 
-			<input type="text" name="assignee"/> <br>
+			<input type="text" id="assignee" name="assignee"/> <br>
 			      <tr>
 			Tag : 
-			<input type="text" name="tag"> <br>
+			<input type="text" id="tag" name="tag"/> <br>
 			<td><div align="left"><strong>Attachment</strong></div>
 				<strong>
 				</th>
@@ -146,7 +162,7 @@ else{
 <script type="text/javascript" src="js/datepickr.min.js"></script>
 		<script type="text/javascript">			
 			new datepickr('datepick2', {
-				'dateFormat': 'm/d/y'
+				'dateFormat': 'y/m/d'
 			});
 </script>
 

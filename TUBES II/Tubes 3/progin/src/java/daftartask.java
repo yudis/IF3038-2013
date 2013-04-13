@@ -79,14 +79,18 @@ public class daftartask extends HttpServlet {
                 out.println("<br>");
                 out.println(rs.getString(6));
                 out.println("<br>");
-                out.println("<form action=\"rincian.jsp\">");
-                out.println("<input type=\"submit\" value=\"Lihat Rincian\"></input>");
-                out.println("</form>");
+                out.println("<form name='hiddenidtask"+rs.getString("ID")+"' id='hiddenidtask"+rs.getString("ID")+"' action='rincian.jsp' method='post'>\n");
+                out.println("     <input type='hidden' name='idtask' value='"+rs.getString("ID")+"' />\n");
+                out.println("<input type='submit' value='Lihat Rincian' />\n");
+                out.println("</form></br>\n");
                 if (rs.getString(2).equals(id)){
-                out.println("<input type=\"submit\" value=\"Hapus Task\" ></input>");
-                out.println("<br>");
+                    out.println("<form name='hiddenidtask2"+rs.getString("ID")+"' id='hiddenidtask2"+rs.getString("ID")+"' onsubmit=\"return deleteTask('"+rs.getString("ID")+"')\" method='post'>\n");
+                    out.println("     <input type='hidden' id='idtask"+rs.getString("ID")+"' name='idtask' value='"+rs.getString("ID")+"' />\n");
+                    out.println("<input type='submit' value='Hapus Task' />\n");
+                    out.println("</form></br>\n");
+                    out.println("<br>");    
                 }else {
-                out.println("<br>");
+                    out.println("<br>");
                 }
             }
             dbc.Close();  

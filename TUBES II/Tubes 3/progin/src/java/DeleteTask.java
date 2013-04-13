@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author user
+ * @author Compaq
  */
-public class AddTask extends HttpServlet {
+public class DeleteTask extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -39,68 +39,35 @@ public class AddTask extends HttpServlet {
         con = new DBConnector();
     }
     
-   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /*
-             * TODO output your page here. You may use following sample code.
-             */
             con.Init();
-            
-            String taskname = request.getParameter("namatask");
-            String deadline0 = request.getParameter("deadline");
-            String deadline = "20"+deadline0.substring(0,2)+"-"+deadline0.substring(3,5)+"-"+deadline0.substring(6,8)+" 00:00:00";
-            String assignee = request.getParameter("assignee");
-            String tag = request.getParameter("tag");
-            String user = (String) request.getSession().getAttribute("userid");
-            String cat = (String) request.getSession().getAttribute("kategori");
-            
-            ResultSet set = con.ExecuteQuery("SELECT * FROM task");
-            String lastid = "";
-            int lastidnum = 0;
-            while (set.next()){
-                lastid = set.getString("ID");
+            String idtask = request.getParameter("idtask");
+            String query = "DELETE FROM task WHERE ID='"+idtask+"'";
+            if (con.ExecuteUpdate(query)!=0) {
+                out.println("task deleted");
             }
-            if (!lastid.equals("")) {
-                lastidnum = Integer.parseInt(lastid.substring(1));
+            query = "DELETE FROM assignee WHERE IDTask='"+idtask+"'";
+            if (con.ExecuteUpdate(query)!=0) {
+                out.println("assignee deleted");
             }
-            ID = lastidnum+1;
-            String nextid;
-            if (ID < 10) {
-                nextid = "T00"+ID;
-            } else if (ID < 100) {
-                nextid = "T0"+ID;
-            } else {
-                nextid = "T"+ID;
+            query = "DELETE FROM attachment WHERE IDTask='"+idtask+"'";
+            if (con.ExecuteUpdate(query)!=0) {
+                out.println("attachment deleted");
+            }
+            query = "DELETE FROM komentar WHERE IDTask='"+idtask+"'";
+            if (con.ExecuteUpdate(query)!=0) {
+                out.println("komentar deleted");
+            }
+            query = "DELETE FROM tags WHERE IDTask='"+idtask+"'";
+            if (con.ExecuteUpdate(query)!=0) {
+                out.println("tags deleted");
             }
             
-            if (con.ExecuteUpdate("INSERT INTO task (ID,IDCreator,Nama,Category,Status,Deadline) VALUES ('"+nextid+"','"+user+"','"+taskname+"','"+cat+"',0,'"+deadline+"')")!=0) {
-                
-            }
-            
-            String[] tags = tag.split(",");
-            for( int i = 0; i < tags.length; i++ )  
-            {  
-                if (con.ExecuteUpdate("INSERT INTO tags (IDTask,Tag) VALUES ('"+nextid+"','"+tags[i]+"')")!=0) {
-                    
-                }
-            }  
-            
-            String[] assignees = assignee.split(",");
-            for( int i = 0; i < assignees.length; i++ )  
-            {  
-                if(con.ExecuteUpdate("INSERT INTO assignee (IDtask,IDUser) VALUES ('"+nextid+"','"+assignees[i]+"')")!=0) {
-                    
-                }
-            } 
-
-            //out.print("Tugas baru telah disimpan");
-
             con.Close();
-            response.sendRedirect("Dashboard.jsp");
         } finally {            
             out.close();
         }
@@ -122,7 +89,7 @@ public class AddTask extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(AddTask.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteTask.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -141,7 +108,7 @@ public class AddTask extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(AddTask.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteTask.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
