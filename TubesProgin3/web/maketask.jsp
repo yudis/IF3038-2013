@@ -54,7 +54,7 @@
                     </li>
                     <li>
                         <input type="text" name="kategori" class="hidden" value="<%= kategori%>"/>
-                        <input type="text" name="user" class="hidden" value="RAYMOND"><!-- $_SESSION['bananauser'];%>"/> TODO!!-->
+                        <input type="text" name="user" class="hidden" value="<% out.print(username);%>"/>
                         <button class="task" name="submitbutton" type="submit"><b>Submit</b></button>
                     </li>
                 </ul>

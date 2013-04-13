@@ -14,8 +14,8 @@ if ((request.getParameter("filter") != null) &&
             (!request.getParameter("keyword").equals("Enter search query"))) {
         String filter = request.getParameter("filter");
         String keyword = request.getParameter("keyword");
-        out.print("<input type='text' id='filter1' class='hidden' value='"+filter+"'/> <input type='text' class='hidden' id='keyword1' value='"+keyword+"'/><input type='text' class='hidden' id='user' value='RAYMOND'/>");
-        out.print("<script type='text/javascript' language='javascript'> var i = 1; window.onload = doSearch('"+filter+"', '"+keyword+"', 'RAYMOND', 'false'); </script>");
+        out.print("<input type='text' id='filter1' class='hidden' value='"+filter+"'/> <input type='text' class='hidden' id='keyword1' value='"+keyword+"'/>");
+        out.print("<script type='text/javascript' language='javascript'> var i = 1; window.onload = doSearch('"+filter+"', '"+keyword+"','"+username+"', 'false'); </script>");
 %>	
 
 <div id="isi">				

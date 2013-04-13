@@ -88,7 +88,8 @@ public class DoSearch1 extends HttpServlet {
                         out.print("<b class='design1'>Daftar Tugas</b>");
                         while (rs.next()) {
                             out.print("<div>");
-                            if (user.equals(rs.getString("username"))) {
+                            //System.out.println("user:"+user+"username:"+rs.getString("username"));
+                            if (user.toLowerCase().equals(rs.getString("username").toLowerCase())) {
                                 out.print("<div>");
                                 out.print("<input type='checkbox' value='None' id='checklist" + rs.getString("username") + "' name='check' onchange='changevalues(" + rs.getString("IDTask") + ")'");
                                 if (rs.getString("stat").equals("1")) {
