@@ -11,7 +11,6 @@ body{
     width: 81px;
     margin-left: 40px;
     margin-top: 8px;
-    
 }
 
 #login {
@@ -24,7 +23,6 @@ body{
 input{
     display: inline;
 }
-
 
 .header{
     padding-top: 1px;
@@ -57,7 +55,6 @@ input{
     width: 458px;
     margin-left: 750px;
     margin-top: -500px;
-    
 }
 
 #were{
@@ -176,8 +173,8 @@ label {
     margin-left: 1px;
     font-style: Calibri;
     font-size: 14pt;
-	display: block;
-	color: #e58100;
+    display: block;
+    color: #e58100;
     margin-top: 5px;
 }
 
@@ -289,7 +286,6 @@ label {
     float: right;
     margin-right: 220px;
     margin-top: -45px;
-
 }
 
 #showAvatarHeader{
@@ -389,7 +385,6 @@ label {
 	margin-top: -27px;
 	width:75px;
 	height:24px;
-
 }
 
 .loginFormBaru{
