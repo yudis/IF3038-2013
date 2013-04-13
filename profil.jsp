@@ -23,7 +23,7 @@ rs1.next();
 					PROFIL
 				</div>
 				<div class="isi">
-					<img src=<% out.print(rs1.getString(7)); %> alt="avatar" width="150"/>
+					<img src="<% out.print(rs1.getString(7)); %>" alt="avatar" width="150"/>
 				</div>
 				
 				<div id="profiledetail">
@@ -90,7 +90,7 @@ rs1.next();
 					%>
 				</div>
 			</div>
-			<form id="edit" enctyp="multipart/form-data" action="editprofil.jsp" method="post">
+			<form id="edit" enctype="multipart/form-data" action="editprofil.jsp" method="post">
 				<script type="text/javascript" src="mainpage.js"></script>
 				Change fullname: <input type="text" name="fullname" value='<% out.print(session.getAttribute("fullname")); %>'/><br />
 				Upload new avatar: <input type="file" name="avatar"/ ><br />
