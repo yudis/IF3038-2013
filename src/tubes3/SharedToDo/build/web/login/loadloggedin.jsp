@@ -8,7 +8,7 @@
     <a href="#" onclick="toggleSearch()">SEARCH</a>
     <a href="../index.jsp" onclick="logout()">LOGOUT</a>			
 </div>
-<div id="search" style="display: inline">
+<div id="search">
     <input id="searchterm" type="text" size="50%" />
     <select id="searchtype">
         <option value="semua" selected>Semua</option>

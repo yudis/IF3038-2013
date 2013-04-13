@@ -285,7 +285,7 @@ function checkLogged() {
 
             xmlhttp.onreadystatechange = function() {
                 
-               alert(xmlhttp.readyState + " " + xmlhttp.status);
+               //alert(xmlhttp.readyState + " " + xmlhttp.status);
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     document.getElementById("navsearch").innerHTML = xmlhttp.responseText;
                 }
@@ -356,7 +356,7 @@ function logout()
 function toggleSearch() {
     //alert(getStyle(document.getElementById('search'), 'display'));
     
-    if (getStyle(document.getElementById('search'), 'display') !== 'none') 
+    if (getStyle(document.getElementById('search'), 'display') == 'none') 
     {
         document.getElementById('search').style.display = 'inline';
         //alert("none");
