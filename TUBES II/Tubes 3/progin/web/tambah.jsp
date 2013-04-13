@@ -93,7 +93,7 @@ xmlhttp.send();*/
   </div>
 	<div class="container"><br>
 			<div class="tambah">
-			<form onsubmit="return addNewTask()" name="myform">	
+                            <form action="AddTask" name="myform" enctype="multipart/form-data" method="post">	
 			<h1 class="judul">Tambah Tugas</h1>
 			Nama Task: 
 			<input type="text" id="namatask" name="namatask" id="task"/><br>

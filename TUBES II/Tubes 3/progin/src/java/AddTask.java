@@ -3,15 +3,23 @@
  * and open the template in the editor.
  */
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -48,15 +56,79 @@ public class AddTask extends HttpServlet {
             /*
              * TODO output your page here. You may use following sample code.
              */
-            con.Init();
             
-            String taskname = request.getParameter("namatask");
-            String deadline0 = request.getParameter("deadline");
-            String deadline = "20"+deadline0.substring(0,2)+"-"+deadline0.substring(3,5)+"-"+deadline0.substring(6,8)+" 00:00:00";
-            String assignee = request.getParameter("assignee");
-            String tag = request.getParameter("tag");
+            String taskname = null;
+            String deadline0 = null;
+            String deadline = null;
+            //String deadline = "20"+deadline0.substring(0,2)+"-"+deadline0.substring(3,5)+"-"+deadline0.substring(6,8)+" 00:00:00";
+            String assignee = null;
+            String tag = null;
             String user = (String) request.getSession().getAttribute("userid");
             String cat = (String) request.getSession().getAttribute("kategori");
+            String attach = null;
+            
+            boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+   if (!isMultipart) {
+   
+   } else {
+    
+    FileItemFactory factory = new DiskFileItemFactory();
+   ServletFileUpload upload = new ServletFileUpload(factory);
+   
+   List<FileItem> items = null;
+   try {
+   items = upload.parseRequest(request);
+   
+    Iterator itr = items.iterator();
+    while (itr.hasNext()) {
+    FileItem item = (FileItem) itr.next();
+    
+    if (item.isFormField())
+           {
+              String name1 = item.getFieldName();
+                  String value = item.getString();
+                  if(name1.equals("namatask"))
+                     {
+                     taskname = value;       
+                                 
+                     } 
+                  else
+                  if(name1.equals("deadline"))
+                  {
+                      deadline0 = value;
+                      deadline = "20"+deadline0.substring(0,2)+"-"+deadline0.substring(3,5)+"-"+deadline0.substring(6,8)+" 00:00:00";
+                  }
+                  else
+                  if (name1.equals("assignee"))
+                  {
+                      assignee = value;
+                  }
+                  else
+                  if (name1.equals("tag"))
+                  {
+                      tag = value;
+                  }
+                         }
+                            else
+                                {
+                                    try {
+                                    String itemName = item.getName();
+                                    attach = itemName;
+                                    File savedFile = new File(this.getServletConfig().getServletContext().getRealPath("/")
+                                    +"attachment\\"+attach);
+                                    item.write(savedFile);
+
+                                    } catch (Exception e) {
+                                    e.printStackTrace();
+                                    }
+    
+                               }
+       }
+   } catch (FileUploadException e) {
+   e.printStackTrace();
+   }
+   }
+            con.Init();
             
             ResultSet set = con.ExecuteQuery("SELECT * FROM task");
             String lastid = "";
@@ -96,6 +168,10 @@ public class AddTask extends HttpServlet {
                     
                 }
             } 
+            
+            if (con.ExecuteUpdate("INSERT INTO attachment (IDTask,Attachment) VALUES ('"+nextid+"','"+attach+"')")!=0) {
+                    
+                }
 
             //out.print("Tugas baru telah disimpan");
 

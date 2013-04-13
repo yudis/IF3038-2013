@@ -63,7 +63,7 @@
     
     while(rs.next()){
         %>
-        <img src="upload/<%=rs.getString(4)%>" width="200" height="150" hspace="15" vspace="15" />
+        <img src="images/image/<%=rs.getString(4)%>" width="200" height="150" hspace="15" vspace="15" />
         <p>User : <%=rs.getString(1)%></p>
         <p>Nama Lengkap : <%=rs.getString(3)%></p>
         <p>Tanggal Lahir : <%=rs.getString(5)%></p>

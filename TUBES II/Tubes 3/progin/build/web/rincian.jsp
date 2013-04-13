@@ -1,21 +1,4 @@
-<!--<?
 
-$iduser = $_SESSION['login'];
-ChromePhp::log($iduser);
-$idtask = $_POST['idtask'];
-ChromePhp::log($idtask);
-
-$con = mysqli_connect(localhost,"progin","progin","progin") or die ('Cannot connect to database : ' . mysql_error());
-    ChromePhp::log("userid: ".$userid);
-    
-$result = mysqli_query($con, "SELECT * FROM task WHERE ID='".$idtask."'");
-$row = mysqli_fetch_array($result);
-$resultassignee = mysqli_query($con, "SELECT * FROM task INNER JOIN assignee ON task.ID=assignee.IDTask WHERE task.ID='".$idtask."'");
-
-$resulttag = mysqli_query($con, "SELECT * FROM tags INNER JOIN task ON task.ID=tags.IDTask WHERE task.ID='".$idtask."'");
-
-
-?>-->
 <%
 if (session != null) {
     String username = (String)session.getAttribute("userid");
@@ -69,40 +52,7 @@ if (session.getAttribute("taskid") == null || session.getAttribute("taskid").equ
 	<div id ="contentdashboard" class="container"><br>
 			<div class="rincian" id="rincian">
                             <p>Curr ID Task: </p> <%= request.getParameter("idtask") %>
-<!--				<form name="rincian">
-				<h1 class="judul">Rincian Tugas</h1>
-                                <?php
-                                echo "Nama Task : <input type='text' id='namatask' value='".$row['Nama']."' border='0' /> <br>";
-                                ?>
-				Attachment : <br> 
-				<video width="320" height="240" controls="controls">
-  				<source src="assets/mov_bbb.ogg" type="video/ogg">
-				Your browser does not support the video tag.
-				</video>
-				<br>
-                                <?php
-                                echo "Deadline : <input  type='text' id='deadline' value='".$row['Deadline']."' border='0' /><br>";
-                                ?>
-				<?php 
-                                $listassignee = "";
-                                while ($rowassignee = mysqli_fetch_array($resultassignee)) {
-                                    $listassignee.=$rowassignee['IDUser'].",";
-                                }
-                                $listassignee1 = substr($listassignee, 0, strlen($listassignee)-1);
-                                echo "Assignee : <input type='text' id='listassignee' value='".$listassignee1."' border='0' />";
-                                
-                                $listag = "";
-                                while ($rowtag = mysqli_fetch_array($resulttag)) {
-                                    $listag.=$rowtag['Tag'].",";
-                                }
-                                $listag1 = substr($listag, 0, strlen($listag)-1);
-                                
-                                ?>
-				
-				<?Php echo "Tag : <input  type='text' id='listtag' value='".$listag1."' border='0' /> <br> "?>
-				<img src="images/edit.png" width="150" id="edit-button" value="EDIT" onClick="edit()" />
-				<img src="images/save.png" width="150" id="save-button" value="SAVE" onClick="saveTaskDetails()" /><br><br>-->
-				
+
 			</div>
 
 			<div class="comment">

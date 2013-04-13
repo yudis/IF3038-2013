@@ -77,9 +77,10 @@ public class Rincian extends HttpServlet {
         con.Init();
         String username = (String) request.getSession().getAttribute("userid");
         String taskid = (String) request.getSession().getAttribute("taskid");
-        String query = "SELECT * FROM task LEFT JOIN assignee "+
+        String query = "SELECT * FROM (SELECT * FROM task LEFT JOIN assignee "+
                         "ON task.ID=assignee.IDTask "+
-                        "WHERE task.ID='"+taskid+"' AND (task.IDCreator='"+username+"' OR assignee.IDUser='"+username+"')";
+                        "WHERE task.ID='"+taskid+"' AND (task.IDCreator='"+username+"' OR assignee.IDUser='"+username+"')) as tabel1 "
+                + "LEFT JOIN attachment ON tabel1.ID=attachment.IDTask";
         resultSet = con.ExecuteQuery(query);
         resultSet2 = con.ExecuteQuery(query);
         if (resultSet.next()) {
@@ -87,10 +88,9 @@ public class Rincian extends HttpServlet {
             out+= "<h1 class='judul'>Rincian Tugas</h1>\n";
             out+= "Nama Task : <input type='text' id='namatask' value='"+resultSet.getString("Nama")+"' border='0' /> <br>";
             out+= "Attachment : <br> \n";
-            out+= "<video width='320' height='240' controls='controls'>\n";
-            out+= "<source src='assets/mov_bbb.ogg' type='video/ogg'>\n";
-            out+= "Your browser does not support the video tag.\n";
-            out+= "</video>\n";
+            if (!resultSet.getString("Attachment").equals("null")) {
+                    out+= "<a href='attachment/"+resultSet.getString("Attachment")+"'>"+resultSet.getString("Attachment")+"</a>";
+                }
             out+= "<br>\n";
             out+= "Deadline : <input  type='text' id='deadline' value='"+resultSet.getString("Deadline")+"' border='0' /><br>\n";
             
@@ -120,9 +120,10 @@ public class Rincian extends HttpServlet {
             out+= "<img src='images/edit.png' width='150' id='edit-button' value='EDIT' onClick='edit()' />\n";
             out+= "<img src='images/save.png' width='150' id='save-button' value='SAVE' onClick='saveTaskDetails()' /><br><br>\n";
         } else {
-            query = "SELECT * FROM task LEFT JOIN assignee "+
-                    "ON task.ID=assignee.IDTask "+
-                    "WHERE task.ID='"+taskid+"'";
+            query = "SELECT * FROM (SELECT * FROM task LEFT JOIN assignee "+
+                        "ON task.ID=assignee.IDTask "+
+                        ") as tabel1 "
+                + "LEFT JOIN attachment ON tabel1.ID=attachment.IDTask";
             resultSet = con.ExecuteQuery(query);
             resultSet2 = con.ExecuteQuery(query);
             if (resultSet.next()) {
@@ -130,10 +131,10 @@ public class Rincian extends HttpServlet {
                 out+= "<h1 class='judul'>Rincian Tugas</h1>\n";
                 out+= "Nama Task : <input type='text' id='namatask' value='"+resultSet.getString("Nama")+"' border='0' /> <br>";
                 out+= "Attachment : <br> \n";
-                out+= "<video width='320' height='240' controls='controls'>\n";
-                out+= "<source src='assets/mov_bbb.ogg' type='video/ogg'>\n";
-                out+= "Your browser does not support the video tag.\n";
-                out+= "</video>\n";
+                if (!resultSet.getString("Attachment").equals("null")) {
+                    out+= "<a href='attachment/"+resultSet.getString("Attachment")+"'>"+resultSet.getString("Attachment")+"</a>";
+                }
+                
                 out+= "<br>\n";
                 out+= "Deadline : <input  type='text' id='deadline' value='"+resultSet.getString("Deadline")+"' border='0' /><br>\n";
 
