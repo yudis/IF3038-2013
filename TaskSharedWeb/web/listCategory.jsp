@@ -71,7 +71,7 @@
                 }
                 
                 if(FuncClass.isAssignee(userActive, taskid)){
-                    out.print("<div class=\"task-tag\">Set as <a href=\"javascript:setCompleteStatus("+(i-1)+","+taskid+")\">Change Status</a></div>");
+                    out.print("<div class=\"task-tag\"><a href=\"javascript:setCompleteStatus("+(i-1)+","+taskid+")\"><i>Change Status</i></a></div>");
                 }
                 
                 out.print("</div><br><br>");
@@ -97,6 +97,7 @@
             out.print("<div><hr id=\"border\"></div>");
         }
         out.print("</div>");
+        conn.close();
         %>
     </body>
 </html>

@@ -58,7 +58,6 @@ public class getavatar extends HttpServlet {
             if(request.getSession().getAttribute("userlistapp")!=null){
                 userActive = request.getSession().getAttribute("userlistapp").toString();
             }
-            
             FileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);
             List<FileItem> fields = upload.parseRequest(request);
@@ -98,7 +97,7 @@ public class getavatar extends HttpServlet {
             
             response.sendRedirect("profile.jsp?username="+userActive);
         } catch(Exception exc){
-            
+            System.out.println("ERROR : "+exc.toString()+"<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         }finally {            
             out.close();
         }

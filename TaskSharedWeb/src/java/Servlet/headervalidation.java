@@ -117,6 +117,7 @@ public class headervalidation extends HttpServlet {
                     }
                     break;    
             }
+            conn.close();
         } catch(Exception exc){
             System.out.println("Error : "+exc.toString());
         }finally {            

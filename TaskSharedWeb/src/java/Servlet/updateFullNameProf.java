@@ -47,6 +47,7 @@ public class updateFullNameProf extends HttpServlet {
             
             System.out.println("Succes Update");
             out.print(name);
+            conn.close();
         }catch(Exception ex){
             System.out.println(ex.toString());
         } finally {            

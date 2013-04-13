@@ -47,6 +47,7 @@ public class updateAboutMe extends HttpServlet {
             
             System.out.println("Succes Update");
             out.print(aboutme);
+            conn.close();
         }catch(Exception ex){
             System.out.println(ex.toString());
         } finally {            

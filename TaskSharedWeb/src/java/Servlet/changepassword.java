@@ -45,6 +45,7 @@ public class changepassword extends HttpServlet {
             stt.execute(query);
             
             System.out.println("Succes Update");
+            conn.close();
         }catch(Exception ex){
             System.out.println(ex.toString());
         } finally {            

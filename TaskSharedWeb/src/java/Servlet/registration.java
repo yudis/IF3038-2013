@@ -127,6 +127,7 @@ public class registration extends HttpServlet {
             session.setMaxInactiveInterval(30*24*60*60);
                 
             response.sendRedirect("dashboard.jsp");
+            conn.close();
         } catch (Exception exc){
             out.print("Error : ");
             out.print(exc.toString());

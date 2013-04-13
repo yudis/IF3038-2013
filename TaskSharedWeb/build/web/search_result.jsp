@@ -222,6 +222,7 @@
                                 out.print("</div>");
                                 break;
                         }
+                        conn.close();
                     %>
             </div>
         </div>

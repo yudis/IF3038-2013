@@ -54,6 +54,7 @@ public class autocompleteasignee extends HttpServlet {
                         out.print(result.getString("username")+"|");
                     }
             }
+            conn.close();
         } catch(Exception exc){
             System.out.println("Error : "+exc.toString());
         }finally {            

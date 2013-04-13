@@ -70,6 +70,7 @@ public class insertcategory extends HttpServlet {
             }
             
             response.sendRedirect("dashboard.jsp");
+            conn.close();
         } catch(Exception exc){
             System.out.println(exc.toString());
         }finally {            

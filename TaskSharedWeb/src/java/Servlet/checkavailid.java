@@ -51,6 +51,7 @@ public class checkavailid extends HttpServlet {
             }else{
                 out.print("Username already exist, please try another username");
             }
+            conn.close();
         } catch (Exception ex) {
             out.print(ex.toString());
         }  finally {            

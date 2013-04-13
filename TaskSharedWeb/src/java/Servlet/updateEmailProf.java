@@ -47,6 +47,7 @@ public class updateEmailProf extends HttpServlet {
             
             System.out.println("Succes Update");
             out.print(email);
+            conn.close();
         }catch(Exception ex){
             System.out.println(ex.toString());
         } finally {            

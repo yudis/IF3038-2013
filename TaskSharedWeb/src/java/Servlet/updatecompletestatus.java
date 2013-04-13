@@ -52,6 +52,7 @@ public class updatecompletestatus extends HttpServlet {
                 stt.execute(query);
                 out.print("UNCOMPLETE");
             }
+            conn.close();
         } catch(Exception e){
         }finally {            
             out.close();

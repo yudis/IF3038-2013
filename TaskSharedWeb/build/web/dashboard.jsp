@@ -34,6 +34,7 @@
             <div><hr id="border"></div>
             <!--Body-->
             <div id="dashboard-body">
+                <div id="dashboard-body">
                     <div id="profile-pic">
                         <%
                         HashMap<String,String> userActiveData = (new Function()).GetUser(userActive);
@@ -86,6 +87,7 @@
                                     <!--List of priveleged users-->
                             <!--New task button ==> new_task.html (this button only appears if a category is selected)-->
                     </div>
+                </div>
             </div>
         </div>
     </body>

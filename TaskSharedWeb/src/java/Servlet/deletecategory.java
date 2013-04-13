@@ -43,6 +43,7 @@ public class deletecategory extends HttpServlet {
             String query = "DELETE FROM category WHERE categoryid="+categoryid;
             stt.execute(query);
             response.sendRedirect("dashboard.jsp");
+            conn.close();
         }catch(Exception e){ 
         }finally {            
             out.close();

@@ -68,6 +68,7 @@ public class updateTagDB extends HttpServlet {
                 out.print("<u>"+tagData.get("tagname") +"</u> ");
             }
             out.print("</i>");
+            conn.close();
         } catch(Exception exc){
             System.out.println("Error : "+exc.toString());
         }finally {            

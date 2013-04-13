@@ -56,6 +56,7 @@ public class checkidexistence extends HttpServlet {
                 //System.out.println("session : "+session.getAttribute("userlistapp"));
                 out.print("true");
             }
+            conn.close();
         } catch(Exception exc){
             out.println("Error : "+exc.toString());
         }finally {            

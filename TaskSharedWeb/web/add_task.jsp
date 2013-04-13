@@ -79,7 +79,7 @@
                                 </div>
                                 <!--Assignee-->
                                 <div id="spacing">
-                                <input type="text" id="task-assignee" onKeyUp="addAssignee()" name="textAssignee" list="assignee-task" value="" placeholder="tag1,tag2,tag3">
+                                <input type="text" id="task-assignee" onKeyUp="addAssignee()" name="textAssignee" list="assignee-task" value="" placeholder="Assignee1,Assignee2,Assignee3">
                                 <div id="shared-with"></div>
                                 </div>
                                 <!--Tag (multivalue)-->

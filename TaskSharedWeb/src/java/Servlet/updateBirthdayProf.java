@@ -47,6 +47,7 @@ public class updateBirthdayProf extends HttpServlet {
             
             System.out.println("Succes Update");
             out.print(birthday);
+            conn.close();
         }catch(Exception ex){
             System.out.println(ex.toString());
         } finally {            

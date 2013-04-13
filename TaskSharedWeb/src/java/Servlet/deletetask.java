@@ -57,6 +57,7 @@ public class deletetask extends HttpServlet {
             stt2.execute(query2);
             
             response.sendRedirect("dashboard.jsp");
+            conn.close();
         }catch(Exception e){ 
         }finally {               
             out.close();

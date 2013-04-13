@@ -52,6 +52,7 @@ public class checkavailemail extends HttpServlet {
             }else{
                 out.print("Email already exist, please try another email");
             }
+            conn.close();
         } catch (Exception ex) {
             out.print(ex.toString());
         }  finally {            

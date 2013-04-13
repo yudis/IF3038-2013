@@ -48,6 +48,7 @@ public class changedeadline extends HttpServlet {
             stt.execute(query);
             
             out.print("Deadline : "+deadlinetime);
+            conn.close();
         } catch(Exception exc){
             System.out.println("Error : "+exc.toString());
         }finally {            

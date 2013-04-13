@@ -242,6 +242,7 @@
                             if (numpage > 1) {
                                 out.print("<a href=\"#cmnt\" onClick=\"nextPage("+idtaskToShow+","+index+")\"><i>Next</i></a>");
                             }
+                            con.close();
                         %>      
                         </div>
                         <div id="add-comment">

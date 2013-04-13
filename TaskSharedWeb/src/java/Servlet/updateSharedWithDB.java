@@ -67,6 +67,7 @@ public class updateSharedWithDB extends HttpServlet {
                 out.print("<a href=\"profile?username="+resultSet.getString("username") +"\"><u>"+resultSet.getString("username")+"</u></a> ");
             }
             out.print("</i>");
+            conn.close();
         } catch(Exception exc){
             System.out.println("Error : "+exc.toString());
         }finally {            
