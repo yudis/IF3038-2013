@@ -5,8 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+
+
 <html>
     <head>
         <title> Next | ADD TASK </title>
@@ -51,11 +51,11 @@
                 }
             }
 			
-            function tag_validating()
+            function tag_validating(haha)
             {
-                var tagid = document.buatugas.tag.value;
+                var tagid = haha.value;
                 
-                if(tagid.match(/([ \t\r\n\v\f])/)){
+                if(tagid.length == 0){
                     document.getElementById("tagicon").src="pict/canceled.png";
                 } else {
                     document.getElementById("tagicon").src="pict/centang.png";
@@ -64,17 +64,11 @@
 
             function validasi_file(place) {
                 var ext=place.value.substring(place.value.indexOf(".")+1);
-                if (ext==="jpeg" || ext === "avi" || ext==="pdf" || ext === "jpg" || ext === "mp4" || ext==="ogg") {
-                    document.getElementById("attach_upload").innerHTML += place.value+";";
-                    if (document.getElementById("file_upload").innerHTML !== "") {
-                        document.getElementById("file_upload").innerHTML += ", "+place.value;
-                    } else {
-                        document.getElementById("file_upload").innerHTML += place.value;
-                    }
-                    place.value = "";
+                if (ext === "" || ext==="jpeg" || ext === "avi" || ext==="pdf" || ext === "jpg" || ext === "mp4" || ext==="ogg") {
+                    document.getElementById("attaicon").src = "pict/centang.png";
                 } else {
                     alert("Ekstensi file tidak didukung web");
-                    place.value = "";
+                    document.getElementById("attaicon").src = "pict/canceled.png";                    
                 }
                 //alert(place.value);
             }
@@ -171,16 +165,17 @@
                     <label>ASSIGNEE</label>
                     <input type="textarea" name="assignee" placeholder="assignee"
                       title="Akhiri nama user dengan tanda /, jangan dipisah spasi"
-                      onkeyup="auto_complete(this.value.substring(this.value.lastIndexOf('/')+1));" value="">
+                      onkeyup="auto_complete(this.value.substring(this.value.lastIndexOf('/')+1));" value=""
+                      autocomplete="off">
                     <img src="pict/blank.png" alt="icon4" id="asicon" />
                       
                     <input id="autobox" disabled></input>
                     
                     <label>TAG</label>
-                    <input type="textarea" name="catname" placeholder="tag" value="">
+                    <input type="textarea" name="tag" id="tag" placeholder="tag" value="" onkeyup="tag_validating(this);">
+		    <img src="pict/blank.png" alt="icon2" id="tagicon"  />                     
                     
                     <label>ATTACHMENT</label>                          
-                    
                     Upload File: <input type="file" name="file" id="file" onchange="validasi_file(this);">
 		    <img src="pict/blank.png" alt="icon2" id="attaicon"  />  
                     

@@ -4,20 +4,26 @@
  */
 package BuatTask;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Christianto
  */
 @WebServlet(name = "addTugas", urlPatterns = {"/addTugas"})
+@MultipartConfig(location = "")
 public class addTugas extends HttpServlet {
     private Connection conn;
     private Statement query;
@@ -37,39 +43,71 @@ public class addTugas extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+
         try {
             /* TODO output your page here. You may use following sample code. */            
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");
             query = conn.createStatement();
-            out.println(request.getParameterMap());
-            String mau = "INSERT INTO tugas"
-                    + "(status,id_kategori,deadline,tag,username,nama_tugas)"
-                    + " VALUES(0,"+request.getParameter("id_kategori")+",'"
-                    + request.getParameter("date")+" "+request.getParameter("hour")+":"+request.getParameter("minute")
-                    + "','"+ request.getParameter("tag")+"','"+request.getParameter("username")
-                    + "','"+ request.getParameter("task_name")+"')";
             
-            out.println(mau);
-            int hasil = query.executeUpdate(mau);
-            
-            int id_tugas;
             ResultSet result = query.executeQuery("SELECT MAX(id_tugas) from tugas");
             result.first();
-            id_tugas = result.getInt(1);
-            status = 0;
+            int id_tugas = result.getInt(1)+1;
+            result.close();
             
-            String[] orang = request.getParameter("Assignee").split("/");
-            for (int i=0;i<orang.length;++i) {
-                hasil = query.executeUpdate("INSERT INTO mengerjakan('username',id_tugas'','status_tugas')"
-                        + " VALUES ('"+orang[i]+"',"+id_tugas+","+status+")");
-            }
+            String attachment="";
+            Part file = request.getPart("file");
+            if (file != null) {
+                String filename="";
+                for (String cd : file.getHeader("content-disposition").split(";")) {
+                    if (cd.trim().startsWith("filename")) {
+                        filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                        filename = filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
+                    }
+                }            
 
-            response.sendRedirect("rinciantugas.jsp?id_tugas="+id_tugas);
+                out.print(filename+"\n");
+                InputStream masuk = file.getInputStream();
+                out.print(getServletContext().getRealPath("/attach/"+filename)+"\n");
+                File f = new File(getServletContext().getRealPath(""),"/attach/"+filename);
+                FileOutputStream tulis = new FileOutputStream(f);
+                out.print(f.getAbsolutePath()+"\n");
+                
+                byte[] baca = new byte[1024];
+                int sem;
+                while ((sem = masuk.read(baca)) != -1) {
+                    //out.println(sem+" ");
+                    tulis.write(baca, 0, sem);
+                }
+                tulis.close();
+                attachment = "attach/"+filename;
+            }
+            
+            //out.println(id_tugas);
+            String mau = "INSERT INTO tugas"
+                    + "(status,id_kategori,deadline,tag,username,nama_tugas,id_tugas,attachment)"
+                    + " VALUES(0,"+request.getParameter("id_kategori")+",'"
+                    + request.getParameter("date")+" "+request.getParameter("hour")+":"+request.getParameter("minute")+":00"
+                    + "','"+ request.getParameter("tag")+"','"+request.getParameter("username")
+                    + "','"+ request.getParameter("task_name")+"',"+id_tugas+",'"+attachment+"')";
+            
+            out.println(mau);
+            //int hasil = query.executeUpdate(mau);
+
+            //status = 0;
+            
+            //String[] orang = request.getParameter("Assignee").split("/");
+            //for (int i=0;i<orang.length;++i) {
+            //    hasil = query.executeUpdate("INSERT INTO mengerjakan('username',id_tugas'','status_tugas')"
+            //            + " VALUES ('"+orang[i]+"',"+id_tugas+","+status+")");
+            //}
+
+            //response.sendRedirect("rinciantugas.jsp?id_tugas="+id_tugas);
         } catch (ClassNotFoundException ex) {
             out.println("Failed to create connection");
         } catch (SQLException ex) {
             out.println("Failed to execute SQL query");
+            out.println(ex.getLocalizedMessage());
         } finally {            
             out.close();
         }

@@ -8,7 +8,6 @@
 <%@page import="javax.xml.crypto.Data"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%DataAwal data = new DataAwal(Integer.parseInt(request.getParameter("id_tugas")));%>
-<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
