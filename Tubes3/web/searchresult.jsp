@@ -10,7 +10,29 @@
 <%@ include file="header.jsp" %>
 
 <html>
+    <script>
+        function ubahStatus(nomor) {
+            var xmlhttp;
+            if (window.XMLHttpRequest){
+                xmlhttp = new XMLHttpRequest();				
+            }else{
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+            }
 
+            xmlhttp.onreadystatechange = function(){
+                if (xmlhttp.readyState===4 && xmlhttp.status===200){				
+                    //alert(xmlhttp.responseText);
+                    //document.getElementById("category").innerHTML=xmlhttp.responseText;
+                    //alert(xmlhttp.responseText);
+                }
+            };
+
+            //alert("HAHA");
+            xmlhttp.open("GET","ubahStatus?id_tugas="+nomor,true);
+            xmlhttp.send();
+            //alert("KIRIM");
+        }        
+    </script>
     <title> Next | Search Result </title>    
 
     
@@ -103,7 +125,9 @@
             out.print(rsLogin3.getString("status"));        
             out.println("</div>");
 
-            out.println("<input type=\"checkbox\"> ");
+            out.print("<input type=\"checkbox\" onchange=\"ubahStatus("+rsLogin3.getString("id_tugas")+")\" ");
+            if (rsLogin3.getInt("status") == 1) out.print("checked");
+            out.println(">");
 
             out.println("</div>");
         }//end tugas
@@ -320,7 +344,9 @@
             out.print(rsLogin3.getString("status"));        
             out.println("</div>");
 
-            out.println("<input type=\"checkbox\"> ");
+            out.print("<input type=\"checkbox\" onchange=\"ubahStatus("+rsLogin3.getString("id_tugas")+")\" ");
+            if (rsLogin3.getInt("status") == 1) out.print("checked");
+            out.println(">");
 
             out.println("</div>");
         }//end tugas
