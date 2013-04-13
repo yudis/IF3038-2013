@@ -64,23 +64,20 @@ public class addTugas extends HttpServlet {
                         filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
                         filename = filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
                     }
-                }            
-
-                out.print(filename+"\n");
-                InputStream masuk = file.getInputStream();
-                out.print(getServletContext().getRealPath("/attach/"+filename)+"\n");
-                File f = new File(getServletContext().getRealPath(""),"/attach/"+filename);
-                FileOutputStream tulis = new FileOutputStream(f);
-                out.print(f.getAbsolutePath()+"\n");
-                
-                byte[] baca = new byte[1024];
-                int sem;
-                while ((sem = masuk.read(baca)) != -1) {
-                    //out.println(sem+" ");
-                    tulis.write(baca, 0, sem);
                 }
-                tulis.close();
-                attachment = "attach/"+filename;
+
+                if (!filename.equals("")) {
+                    InputStream masuk = file.getInputStream();
+                    File f = new File(getServletContext().getRealPath(""),"/attach/"+filename);
+                    FileOutputStream tulis = new FileOutputStream(f);
+
+                    int sem;
+                    while ((sem = masuk.read()) != -1) {
+                        tulis.write(sem);
+                    }
+                    tulis.close();
+                    attachment = "attach/"+filename;
+                }
             }
             
             //out.println(id_tugas);
@@ -91,18 +88,20 @@ public class addTugas extends HttpServlet {
                     + "','"+ request.getParameter("tag")+"','"+request.getParameter("username")
                     + "','"+ request.getParameter("task_name")+"',"+id_tugas+",'"+attachment+"')";
             
-            out.println(mau);
-            //int hasil = query.executeUpdate(mau);
+            //out.println(mau);
+            int hasil = query.executeUpdate(mau);
 
-            //status = 0;
+            status = 0;
             
-            //String[] orang = request.getParameter("Assignee").split("/");
-            //for (int i=0;i<orang.length;++i) {
-            //    hasil = query.executeUpdate("INSERT INTO mengerjakan('username',id_tugas'','status_tugas')"
-            //            + " VALUES ('"+orang[i]+"',"+id_tugas+","+status+")");
-            //}
-
-            //response.sendRedirect("rinciantugas.jsp?id_tugas="+id_tugas);
+            String[] orang = request.getParameter("assignee").split("/");
+            //out.println(orang.length);
+            for (int i=0;i<orang.length;++i) {
+                //out.println(i);
+                hasil = query.executeUpdate("INSERT INTO `mengerjakan` (`username`,`id_tugas`,`status_tugas`)"
+                        + " VALUES ('"+orang[i]+"',"+id_tugas+","+status+")");
+            }
+            //out.print("HERE");
+            response.sendRedirect("rinciantugas.jsp?id_tugas="+id_tugas);
         } catch (ClassNotFoundException ex) {
             out.println("Failed to create connection");
         } catch (SQLException ex) {
