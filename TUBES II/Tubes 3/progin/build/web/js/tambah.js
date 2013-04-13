@@ -16,7 +16,7 @@ xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 xmlhttp.send(parameters);
 }
 
-function saveTaskDetails() {
+function addtask() {
     var param = "requesttype=save" +
                 "&tabletype=" + "taskdetails"  +
                 "&namatask=" + encodeURIComponent(document.getElementById("namatask").value) +
