@@ -71,7 +71,9 @@ function writeDashboard() {
             tugas.appendChild(link);
             var form = document.createElement('form');
             form.innerHTML = "<label for='deadline'>Deadline</label>: " + deadline[i].firstChild.nodeValue + "<br />";
-            form.innerHTML = form.innerHTML + "<label for='tag'>Tag</label>: " + tag[i].firstChild.nodeValue + "<br />";
+            form.innerHTML = form.innerHTML + "<label for='tag'>Tag</label>: ";
+            if(tag[i].firstChild != null)
+                form.innerHTML = form.innerHTML + tag[i].firstChild.nodeValue + "<br />";
             if(canerase[i].firstChild.nodeValue == 'true') {
                 if(status[i].firstChild.nodeValue == 0) {
                     form.innerHTML = form.innerHTML + "<label for='status'>Status</label>: <span id='task" + id[i].firstChild.nodeValue + "'>Belum selesai</span><br />";
@@ -173,7 +175,9 @@ function selectCategory(id) {
                 tugas.appendChild(link);
                 var form = document.createElement('form');
                 form.innerHTML = "<label for='deadline'>Deadline</label>: " + deadline[i].firstChild.nodeValue + "<br />";
-                form.innerHTML = form.innerHTML + "<label for='tag'>Tag</label>: " + tag[i].firstChild.nodeValue + "<br />";
+                form.innerHTML = form.innerHTML + "<label for='tag'>Tag</label>: ";
+                if(tag[i].firstChild != null)
+                    form.innerHTML = form.innerHTML + tag[i].firstChild.nodeValue + "<br />";
                 if(canerase[i].firstChild.nodeValue == 'true') {
                     if(status[i].firstChild.nodeValue == 0) {
                         form.innerHTML = form.innerHTML + "<label for='status'>Status</label>: <span id='task" + id[i].firstChild.nodeValue + "'>Belum selesai</span><br />";
