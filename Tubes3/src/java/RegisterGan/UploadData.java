@@ -84,7 +84,6 @@ public class UploadData extends HttpServlet {
             
             out.println(mau);
             int hasil = query.executeUpdate(mau);
-
             response.sendRedirect("dashboard.jsp");
         } catch (ClassNotFoundException ex) {
             out.println("Failed to create connection");

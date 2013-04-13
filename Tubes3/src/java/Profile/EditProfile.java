@@ -4,20 +4,28 @@
  */
 package Profile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Sigit Aji Nugroho
  */
 @WebServlet(name = "EditProfile", urlPatterns = {"/EditProfile"})
+@MultipartConfig(location="")
 public class EditProfile extends HttpServlet {
     private Connection conn;
     private Statement query;
@@ -37,26 +45,55 @@ public class EditProfile extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
+            /* TODO output your page here. You may use following sample code. */            
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510003", "root", "");
             query = conn.createStatement();
             
-            ResultSet result = query.executeQuery("SELECT * FROM pengguna WHERE username='jo'");
-            
-            if(!request.getParameter("cp").equals(result.getString("password"))){
-                out.println("<div>Password tidak berubah</div>");
-            }else if(request.getParameter("cp").equals(request.getParameter("ccp"))){
-                int hasil = query.executeUpdate("UPDATE pengguna SET nama_lengkap = VALUES("+request.getParameter("fn")+"),tanggal_lahir=VALUES("+request.getParameter("fn")+"),password=VALUES("+request.getParameter("cp")+")WHERE username='jo'");
+            String avatar="";
+            Part file = request.getPart("na");
+            if (file != null) {
+                String filename="";
+                for (String cd : file.getHeader("content-disposition").split(";")) {
+                    if (cd.trim().startsWith("filename")) {
+                        filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                        filename = filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
+                    }
+                }
+
+                if (!filename.equals("")) {
+                    InputStream masuk = file.getInputStream();
+                    File f = new File(getServletContext().getRealPath(""),"/pict/"+filename);
+                    FileOutputStream tulis = new FileOutputStream(f);
+
+                    int sem;
+                    while ((sem = masuk.read()) != -1) {
+                        tulis.write(sem);
+                    }
+                    tulis.close();
+                    avatar = "pict/"+filename;
+                }
             }
             
+            //out.println(id_tugas);
+            String mau = "UPDATE pengguna SET"
+                    + "nama_lengkap=' " + request.getParameter("fn") + "',"
+                    + "password='" + request.getParameter("cp") + "',"
+                    + "tanggal_lahir='"+request.getParameter("date")+"',"
+                    + "avatar='"+avatar+"')";
+            
+            //out.println(mau);
+            int hasil = query.executeUpdate(mau);
+            //out.print("HERE");
+            response.sendRedirect("profile.jsp");
+        } catch (ClassNotFoundException ex) {
+            out.println("Failed to create connection");
         } catch (SQLException ex) {
-            out.println("Failure to execute SQL query");
-        } catch(ClassNotFoundException ex){
-            out.println("Failure to create connection");
+            out.println("Failed to execute SQL query");
+            out.println(ex.getLocalizedMessage());
         } finally {            
             out.close();
-        }
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

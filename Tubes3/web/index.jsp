@@ -311,7 +311,7 @@
                 <div id="regakhir" style="DISPLAY: none">
                     <div id="formreg">
                 
-                        <form name="registration" method="post" action="UploadData" enctype="multipart/form-data">
+                        <form name="registration" method="post" action="registerUser.jsp" enctype="multipart/form-data">
                             
                             <label>username</label>
                             <input name="username" type="text" placeholder="username"  onkeyup="user_validating()" onChange="logingg()" />

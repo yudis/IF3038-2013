@@ -305,7 +305,7 @@
                     </div>
                     <div id="cattitle">EDIT PROFILE</div>
                     <div id="elcategory">
-                        <form action="editProfile" method "post">
+                        <form action="editProfile" method="post" enctype="multipart/form-data">
                             <label>Full Name</label>
                             <input name="fn" placeholder="nama lengkap" onKeyUp="nama_validating()" onChange="logingg()">
                             <img src="pict/blank.png" alt="icon5" id="nameicon" />
