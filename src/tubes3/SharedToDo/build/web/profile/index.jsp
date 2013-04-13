@@ -10,7 +10,6 @@
     </head>
     <body onload="checkLogged(); loadProfile('<%=request.getParameter("u")%>', '<%=request.getParameter("e")%>');">
         <div id="navsearch">
-            <script>checkLogged()</script>
         </div>
         <div class="clearall container topcontainer" id="profile container">
             <div class="clearall container">				

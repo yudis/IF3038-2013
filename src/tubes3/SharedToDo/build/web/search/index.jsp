@@ -2,13 +2,12 @@
 <%@include file="../ConnectDB.jsp" %><html>
     <head>
         <title>Shared To Do List - Dashboard</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="../style.css">
         <link rel="shortcut icon" href="favicon.ico">		
         <script type="text/javascript" src="../validation.js"></script>
     </head>
-    <body>
+    <body onload="checkLogged();">
         <div id="navsearch">
-            <script>checkLogged()</script>
         </div>
         <div class="clearall container">
             <h2>Search Result</h2>
