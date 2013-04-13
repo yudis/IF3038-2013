@@ -4,7 +4,9 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
@@ -438,7 +441,7 @@ public class ServletHandler extends HttpServlet{
             String task_deadline = req.getParameter("deadline_input");
             String assigneeList = req.getParameter("assignee_input");
             String tagList = req.getParameter("tag_input");
-            String catName = req.getParameter("addtask_cat_name");
+            String catName = req.getParameter("addtask_cat_name");        
             HttpSession session = req.getSession(true);
             String taskCreator = (String) session.getAttribute("username");
             
@@ -450,19 +453,46 @@ public class ServletHandler extends HttpServlet{
                     System.out.println("Where is your MySQL JDBC Driver? - Add Task");
                 }
                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");                 
-                Statement st = conn.createStatement(); 
-                st.executeUpdate("INSERT INTO task(task_name, task_status, task_deadline, cat_name, task_creator) VALUES ('"+task_name+"','0','"+task_deadline+"','"+catName+"','"+taskCreator+"')");
                 
+                Statement st = conn.createStatement(); 
+                st.executeUpdate("INSERT INTO task(task_name, task_status, task_deadline, cat_name, task_creator) VALUES ('"+task_name+"','0','"+task_deadline+"','"+catName+"','"+taskCreator+"')"); 
                 
                 PreparedStatement stmt = conn.prepareStatement("SELECT task_id FROM task WHERE task_name=? AND cat_name=?");
                 stmt.setString(1, task_name);
                 stmt.setString(2, catName);
                 ResultSet rs = stmt.executeQuery();
                 rs.beforeFirst();
-                 String taskID = "";
+                String taskID = "";
                 while (rs.next()) {          
                     taskID = rs.getString("task_id");
                 }
+                
+                //Insert Task Attachment
+                Part filePart = req.getPart("attachment_file1"); // Retrieves <input type="file" name="file">
+                String filename = "";
+                //filename = getFilename(filePart);
+                String dir = "uploads/" + filename;
+                byte buf[] = new byte[1024 * 4];
+                if (!filename.isEmpty()) {
+                    Statement st2 = conn.createStatement(); 
+                    st2.executeUpdate("INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('"+filename+"','"+taskID+"')");
+                    FileOutputStream output = new FileOutputStream(getServletContext().getRealPath("/") + "uploads/" + filename);
+                    try {
+                    InputStream input = filePart.getInputStream();
+                    try {
+                    while (true) {
+                        int count = input.read(buf);
+                        if (count == -1)
+                            break;
+                        output.write(buf, 0, count);
+                    }
+                        } finally {
+                        input.close();
+                  }
+                } finally {
+                output.close();
+                 }
+                 }
                 
                 //Insert Task Assignee
                 String[] assigneArray = assigneeList.split(",");
@@ -656,6 +686,19 @@ public class ServletHandler extends HttpServlet{
                 }
             }
         }
+        
+    }
+    
+   private static String getFilename(Part part) {
+       /* 
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
+            }
+        }
+        */
+        return null;
     }
     
     
