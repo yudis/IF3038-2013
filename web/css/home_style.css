@@ -1,0 +1,74 @@
+/*HEADER CONTAINER*/
+header {
+	width:100%;
+	height:90px;
+	background-color:#DEB887;
+	display:block;
+}
+
+#header_container{
+	width:80%;
+	height:100%;
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+}
+
+#login_container{
+	position:relative;
+	background-color:#DEB887;
+	float:right;
+	width:90%;
+	height:130px;
+	margin-right:5%;
+	z-index:100;
+}
+
+#login_form{
+	font-family:Century Schoolbook; font-weight:lighter;
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:15px;
+	z-index:200;
+}
+
+#login_form label{
+	color:#fff;
+	float:left;
+	width:35%;
+	margin-left:3px;
+}
+
+#login_form input{
+	color:grey;
+	float:left;
+	margin-left:7px;
+	width:55%;
+}
+
+#left_side {
+	height:100%;
+	width:65%;
+	background-color:#f9f9f9;
+	float:left;
+}
+
+#right_side{
+	height:100%;
+	width:35%;
+	float:left;
+	padding-top:40px;
+}
+
+/*STYLING*/
+.left{float:left;}
+.line{display:block; height:8px; margin-left:0px; width:100%;background-color:#4b5944;}
+
+/*MAIN PAGE*/
+#blank_container{
+	width:90%;
+	margin:auto;
+	margin-top:60px;
+	display:block;
+}
