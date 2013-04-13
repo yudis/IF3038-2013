@@ -50,8 +50,8 @@ public class profile extends HttpServlet {
         Connection connection = tu.getConnection();this.username=username;
 
         String queryUser = "SELECT * FROM pengguna WHERE username ='" + this.username + "'";
-        String queryTaskSelesai = "SELECT name FROM tugas WHERE username='" + this.username + "' and stat=1";
-        String queryTaskBelumSelesai = "SELECT name FROM tugas WHERE username='" + this.username + "' and stat=0";
+        String queryTaskSelesai = "select name from tugas where IDTask=(select IDTask from penugasan where username='"+this.username+"') and stat=1";
+        String queryTaskBelumSelesai = "select name from tugas where IDTask=(select IDTask from penugasan where username='"+this.username+"') and stat=0";
         rs = tu.coba(connection, queryUser);
         if (rs.next()) {
             fullname = rs.getString("fullname");
