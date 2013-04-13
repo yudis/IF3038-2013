@@ -13,11 +13,6 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-<<<<<<< HEAD
-
-=======
->>>>>>> e163f807936e95f3544aec95149e0b638e3f968f
-
 
 
 /**
