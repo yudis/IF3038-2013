@@ -28,20 +28,37 @@
 	float:left;
 }
 #searchbox{
-	height: 30px;
-        width: 300px;
-        margin-top: -15px;
-        margin-left: 116px;
+    height:25px;
+    width:400px;
+    margin-left: 100px;
+    margin-top:10px;
+}
+#hasil_ac{
+    width:400px;
+    margin-left: 100px;
+    position: absolute;
+    background-color: #dfdfdf;
+    box-shadow: 3px 3px 5px #888888;
 }
 #searchbutton{
-	height:30px;
-	width:30px;
-	position:absolute;
-	left:770px;
-	top:13px;
-	background: transparent url(../images/search.png) no-repeat;
-	overflow: hidden;
-	border:0;
+    height:30px;
+    width:30px;
+    position:absolute;
+    left:780px;
+    top:13px;
+    background: transparent url(../images/search.png) no-repeat;
+    overflow: hidden;
+    border:0;
+    cursor: hand; cursor: pointer;
+}
+
+#searchdropdown{
+    position:absolute;
+    left:310px;
+    top:10px;
+}
+#opsisearch{
+    height: 30px;
 }
 #home{
     height:50px;
@@ -125,3 +142,4 @@ body {
 	color:#FFF;
 	text-decoration:none;
 }
+

@@ -87,7 +87,6 @@ public class Search extends HttpServlet {
             } else if (request.getParameter("key").equals("email")) {
             } else if (request.getParameter("key").equals("komentar")) {
             } else if (request.getParameter("key").equals("semua")) {
-                System.out.println("asd");
                 try {
                     hasil_username(request.getParameter("value"), 0, 10, response);
                     hasil_kategori(request.getParameter("value"), 0, 10, response);
@@ -97,7 +96,7 @@ public class Search extends HttpServlet {
                 }
             }
         }
-        else{
+        else if(request.getParameter("aksi").equals("suggest")){
             if(request.getParameter("key").equals("username")){
                 try {
                     suggest_username(request.getParameter("value"), response);
@@ -122,6 +121,38 @@ public class Search extends HttpServlet {
             else if(request.getParameter("key").equals("semua")){
                 try {
                     suggest_all(request.getParameter("value"), response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        else if(request.getParameter("aksi").equals("more")){
+            if (request.getParameter("key").equals("username")) {
+                try {
+                    hasil_username(request.getParameter("value"), Integer.parseInt(request.getParameter("limit1")), Integer.parseInt(request.getParameter("limit2")), response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (request.getParameter("key").equals("kategori")) {
+                try {
+                    hasil_kategori(request.getParameter("value"), Integer.parseInt(request.getParameter("limit1")), Integer.parseInt(request.getParameter("limit2")), response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (request.getParameter("key").equals("task")) {
+                try {
+                    hasil_task(request.getParameter("value"), Integer.parseInt(request.getParameter("limit1")), Integer.parseInt(request.getParameter("limit2")), response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (request.getParameter("key").equals("email")) {
+            } else if (request.getParameter("key").equals("komentar")) {
+            } else if (request.getParameter("key").equals("semua")) {
+                System.out.println("masuk");
+                try {
+                    hasil_username(request.getParameter("value"), Integer.parseInt(request.getParameter("limit1")), Integer.parseInt(request.getParameter("limit2")), response);
+                    hasil_kategori(request.getParameter("value"), Integer.parseInt(request.getParameter("limit1")), Integer.parseInt(request.getParameter("limit2")), response);
+                    hasil_task(request.getParameter("value"), Integer.parseInt(request.getParameter("limit1")), Integer.parseInt(request.getParameter("limit2")), response);
                 } catch (SQLException ex) {
                     Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -163,14 +194,16 @@ public class Search extends HttpServlet {
             out.println("<div class='hasil_username'>");
 
             out.println("<div class='user_ava'>");
-            out.println("<img src=''>");
+            out.println("<img src='"+hasil[i][3]+"'>");
             out.println("</div>");
 
             out.println("<div class='username'>");
+            out.print("Username: ");
             out.println(hasil[i][1]);
             out.println("</div>");
 
             out.println("<div class='fullname'>");
+            out.print("Fullname: ");
             out.println(hasil[i][2]);
             out.println("</div>");
 
@@ -207,7 +240,9 @@ public class Search extends HttpServlet {
         for (int i = 0; i < hasil.length; i++) {
             out.println("<div class='task_block'>");
             out.println("<div class='task_judul'>");
+            out.println("<a href='lihattask.jsp?id=" + hasil[i][0] + "'>");
             out.println(hasil[i][1]);
+            out.println("</a>");
             out.println("</div>");
             
             out.println("<div class='task_deadline'>");
@@ -268,7 +303,9 @@ public class Search extends HttpServlet {
         String[][] hasil = ConnectDB.getHasilQuery(query);
         for (int i = 0; i < hasil.length; i++) {
             out.println("<div class='hasil_suggest'>");
+            out.println("<a href='lihattask.jsp?id=" + hasil[i][0] + "'>");
             out.println(hasil[i][1]);
+            out.println("</a>");
             out.println("</div>");
         }
     }

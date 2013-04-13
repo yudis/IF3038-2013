@@ -65,15 +65,14 @@ public class Kategori extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         try {
             if (request.getParameter("aksi").equals("lihat")) {
                 showKategori(request.getParameter("uid"), response);
-            }
-            else if(request.getParameter("aksi").equals("tambah")){
-                addKategori(request.getParameter("namaKategori"), request.getParameter("uid"), request.getParameter("assignee"), response);
-            }
-            else if(request.getParameter("aksi").equals("hapus")){
-                deleteKategori(request.getParameter("uid"), response);
+            } else if (request.getParameter("aksi").equals("tambah")) {
+                addKategori(request.getParameter("namaKategori"), (String) session.getAttribute("id"), request.getParameter("assignee"), response);
+            } else if (request.getParameter("aksi").equals("hapus")) {
+                deleteKategori((String) session.getAttribute("id"), response);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Kategori.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +92,7 @@ public class Kategori extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         try {
-            addKategori(request.getParameter("nama"), (String)session.getAttribute("id"), request.getParameter("assignees"), response);
+            addKategori(request.getParameter("nama"), (String) session.getAttribute("id"), request.getParameter("assignees"), response);
         } catch (SQLException ex) {
             Logger.getLogger(Kategori.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -116,11 +115,11 @@ public class Kategori extends HttpServlet {
         out.println("</div>");
         String query = "SELECT nama, idkategori, pembuat FROM kategori, assignee_has_kategori WHERE idkategori = kategori_idkategori AND accounts_idaccounts = " + userID;
         String[][] hasil = ConnectDB.getHasilQuery(query);
-        
+
         for (int i = 0; i < hasil.length; i++) {
-            out.println("<div class='category_block' onclick='showListTask(\""+userID+"\", \""+hasil[i][1]+"\")'>");
+            out.println("<div class='category_block' onclick='showListTask(\"" + userID + "\", \"" + hasil[i][1] + "\")'>");
             if (hasil[i][2].equals(userID)) {
-                out.println("<a href='Kategori?aksi=hapus&uid="+hasil[i][1]+"'>");
+                out.println("<a href='Kategori?aksi=hapus&uid=" + hasil[i][1] + "'>");
                 out.println("<div class='tombol_hapus_kategori'>");
                 out.println("X");
                 out.println("</div>");
@@ -165,12 +164,13 @@ public class Kategori extends HttpServlet {
         ConnectDB.jalankanQuery(query2);
 
         //query update assignee_has_kategori masukin semua assignee
-        String[] list_assignee = assignee.split(", ");
-        for (int i = 0; i < list_assignee.length; i++) {
-            String query3 = "INSERT INTO assignee_has_kategori (accounts_idaccounts, kategori_idkategori) VALUES((SELECT idaccounts FROM accounts WHERE username = '" + list_assignee[i] + "'),(SELECT idkategori from kategori where nama = '" + namaKategori + "' and pembuat = " + idPembuat + "))";
-            ConnectDB.jalankanQuery(query3);
+        if (assignee.contains(", ")) {
+            String[] list_assignee = assignee.split(", ");
+            for (int i = 0; i < list_assignee.length; i++) {
+                String query3 = "INSERT INTO assignee_has_kategori (accounts_idaccounts, kategori_idkategori) VALUES((SELECT idaccounts FROM accounts WHERE username = '" + list_assignee[i] + "'),(SELECT idkategori from kategori where nama = '" + namaKategori + "' and pembuat = " + idPembuat + "))";
+                ConnectDB.jalankanQuery(query3);
+            }
         }
-        
         response.sendRedirect("dashboard.jsp");
     }
 
