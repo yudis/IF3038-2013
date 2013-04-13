@@ -8,7 +8,6 @@
 <% 
     if (session.getAttribute("username") != null) {
         response.sendRedirect("dashboard.jsp");
-        //session.invalidate();
     } 
 %>
 <!DOCTYPE html>

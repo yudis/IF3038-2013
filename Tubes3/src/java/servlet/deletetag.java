@@ -24,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Martha Monica
  */
-@WebServlet(name = "deletecategory", urlPatterns = {"/deletecategory"})
-public class deletecategory extends HttpServlet {
+@WebServlet(name = "deletetag", urlPatterns = {"/deletetag"})
+public class deletetag extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -37,6 +37,7 @@ public class deletecategory extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
@@ -50,52 +51,26 @@ public class deletecategory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-
+         try {
             Connection conn = null;
             ResultSet rs = null;
-            int rst =0;
             PrintWriter out = response.getWriter();
-
+            String output = "";
 
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510020", "root", "");
             HttpSession session = request.getSession(true);
             Statement stmt = conn.createStatement();
-            if (request.getParameter("IDCategory") != null) {
-                //delete categorynya sendiri
-                rst = stmt.executeUpdate("DELETE FROM category WHERE IDCategory='" + request.getParameter("IDCategory") + "'");
-
-                //delete authority
-                rst = stmt.executeUpdate("DELETE FROM authority WHERE IDCategory='" + request.getParameter("IDCategory") + "'");
-
-                //delete semua yang terkait sama task
-                rs = stmt.executeQuery("SELECT IDTask FROM task WHERE IDCategory='" + request.getParameter("IDCategory") + "'");
-
-                while (rs.next()) {
-                    //delete tasknya sendiri
-                    rst = stmt.executeUpdate("DELETE FROM task WHERE IDTask='" + rs.getString(1) + "'");
-
-                    //delete tasktag
-                    rst = stmt.executeUpdate("DELETE FROM tasktag WHERE IDTask='" + rs.getString(1) + "'");
-
-                    //delete comment
-                    rst = stmt.executeUpdate("DELETE FROM comment WHERE IDTask='" + rs.getString(1) + "'");
-
-                    //delete attachment
-                    rst = stmt.executeUpdate("DELETE FROM attachment WHERE IDTask='" + rs.getString(1) + "'");
-
-                    //delete assignment
-                    rst = stmt.executeUpdate("DELETE FROM assignment WHERE IDTask='" + rs.getString(1) + "'");
-
+            int res = stmt.executeUpdate("DELETE FROM tasktag WHERE IDTaskTag='" + request.getParameter("IDTag") + "'");
+            rs = stmt.executeQuery("SELECT * FROM tasktag,tag WHERE IDTask=" + request.getParameter("IDTask")+" AND tasktag.IDTag=tag.IDTag");
+            while (rs.next()) {
+                if (rs.getString("Username").compareToIgnoreCase(session.getAttribute("username").toString()) == 0) {
+                    output = output + "<a href=\"\" class=\"asignee\">' "+ rs.getString("TagName")+" '</a> <img src=\"img/salah.png\" alt=\"\" onclick=\"deletetag(' "+rs.getString("IDTaskTag")+" ',' "+request.getParameter("IDTask")+" ')\" /><br/> ";
                 }
-                
-                 //delete task
-                rst = stmt.executeUpdate("DELETE FROM task WHERE IDCategory='" + request.getParameter("IDCategory") + "'");
+                output= output + "<br/>";
             }
-
-
+            out.write(output);
         } catch (SQLException ex) {
-            Logger.getLogger(changeStatus.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(deleteassignment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -111,6 +86,7 @@ public class deletecategory extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
     }
 
     /**

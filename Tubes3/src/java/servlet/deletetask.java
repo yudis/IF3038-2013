@@ -50,6 +50,36 @@ public class deletetask extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            Connection conn = null;
+            int rs = 0;
+            PrintWriter out = response.getWriter();
+
+
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510020", "root", "");
+            HttpSession session = request.getSession(true);
+            Statement stmt = conn.createStatement();
+            if (request.getParameter("IDTask") != null) {
+                //delete tasknya sendiri
+                rs = stmt.executeUpdate("DELETE FROM task WHERE IDTask='" + request.getParameter("IDTask") + "'");
+
+                //delete tasktag
+                rs = stmt.executeUpdate("DELETE FROM tasktag WHERE IDTask='" + request.getParameter("IDTask") + "'");
+
+                //delete comment
+                rs = stmt.executeUpdate("DELETE FROM comment WHERE IDTask='" + request.getParameter("IDTask") + "'");
+
+                //delete attachment
+                rs = stmt.executeUpdate("DELETE FROM attachment WHERE IDTask='" + request.getParameter("IDTask") + "'");
+
+                //delete assignment
+                rs = stmt.executeUpdate("DELETE FROM assignment WHERE IDTask='" + request.getParameter("IDTask") + "'");
+
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(deletetask.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -64,37 +94,6 @@ public class deletetask extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            Connection conn = null;
-            ResultSet rs = null;
-            PrintWriter out = response.getWriter();
-
-
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510020", "root", "");
-            HttpSession session = request.getSession(true);
-            Statement stmt = conn.createStatement();
-            if (request.getParameter("IDTask") != null) {
-                //delete tasknya sendiri
-                rs = stmt.executeQuery("DELETE FROM task WHERE IDTask='" + request.getParameter("IDTask") + "'");
-
-                //delete tasktag
-                rs = stmt.executeQuery("DELETE FROM tasktag WHERE IDTask='" + request.getParameter("IDTask") + "'");
-
-                //delete comment
-                rs = stmt.executeQuery("DELETE FROM comment WHERE IDTask='" + request.getParameter("IDTask") + "'");
-
-                //delete attachment
-                rs = stmt.executeQuery("DELETE FROM attachment WHERE IDTask='" + request.getParameter("IDTask") + "'");
-
-                //delete assignment
-                rs = stmt.executeQuery("DELETE FROM assignment WHERE IDTask='" + request.getParameter("IDTask") + "'");
-
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(deletetask.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
     /**

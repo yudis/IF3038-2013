@@ -24,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Martha Monica
  */
-@WebServlet(name = "deletecategory", urlPatterns = {"/deletecategory"})
-public class deletecategory extends HttpServlet {
+@WebServlet(name = "updatestatus", urlPatterns = {"/updatestatus"})
+public class updatestatus extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -37,6 +37,8 @@ public class deletecategory extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
@@ -50,53 +52,7 @@ public class deletecategory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-
-            Connection conn = null;
-            ResultSet rs = null;
-            int rst =0;
-            PrintWriter out = response.getWriter();
-
-
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510020", "root", "");
-            HttpSession session = request.getSession(true);
-            Statement stmt = conn.createStatement();
-            if (request.getParameter("IDCategory") != null) {
-                //delete categorynya sendiri
-                rst = stmt.executeUpdate("DELETE FROM category WHERE IDCategory='" + request.getParameter("IDCategory") + "'");
-
-                //delete authority
-                rst = stmt.executeUpdate("DELETE FROM authority WHERE IDCategory='" + request.getParameter("IDCategory") + "'");
-
-                //delete semua yang terkait sama task
-                rs = stmt.executeQuery("SELECT IDTask FROM task WHERE IDCategory='" + request.getParameter("IDCategory") + "'");
-
-                while (rs.next()) {
-                    //delete tasknya sendiri
-                    rst = stmt.executeUpdate("DELETE FROM task WHERE IDTask='" + rs.getString(1) + "'");
-
-                    //delete tasktag
-                    rst = stmt.executeUpdate("DELETE FROM tasktag WHERE IDTask='" + rs.getString(1) + "'");
-
-                    //delete comment
-                    rst = stmt.executeUpdate("DELETE FROM comment WHERE IDTask='" + rs.getString(1) + "'");
-
-                    //delete attachment
-                    rst = stmt.executeUpdate("DELETE FROM attachment WHERE IDTask='" + rs.getString(1) + "'");
-
-                    //delete assignment
-                    rst = stmt.executeUpdate("DELETE FROM assignment WHERE IDTask='" + rs.getString(1) + "'");
-
-                }
-                
-                 //delete task
-                rst = stmt.executeUpdate("DELETE FROM task WHERE IDCategory='" + request.getParameter("IDCategory") + "'");
-            }
-
-
-        } catch (SQLException ex) {
-            Logger.getLogger(changeStatus.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
 
     /**
@@ -111,6 +67,51 @@ public class deletecategory extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            Connection conn = null;
+            ResultSet rs = null;
+            PrintWriter out = response.getWriter();
+
+
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510020", "root", "");
+            HttpSession session = request.getSession(true);
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM task WHERE IDTask="+request.getParameter("IDTask"));
+            
+            boolean check;
+            int i = stmt.executeUpdate("UPDATE  `task` SET  `Status` ='done' WHERE IDTask=" + request.getParameter("IDTask"));
+            
+            if (rs.getString(3).compareToIgnoreCase("done")==0){
+                if (request.getParameter("status").compareToIgnoreCase("true")==0){
+                    check=true;
+                }
+                else
+                {
+                    check=false;
+                    i = stmt.executeUpdate("UPDATE  `task` SET  `Status` ='undone' WHERE IDTask="+request.getParameter("IDTask"));
+                }
+            }
+            else{
+                if (request.getParameter("status").compareToIgnoreCase("true")==0){
+                    check=true;
+                    i = stmt.executeUpdate("UPDATE  `task` SET  `Status` ='done' WHERE IDTask="+request.getParameter("IDTask"));
+                }
+                else
+                {
+                    check=false;
+                    
+                }
+            }
+            out.print("uyeee;");
+            if (check){
+                out.print(" DONE <input type=\"checkbox\" id=\"checkboxstatus\" checked onclick=\"changestatus(' "+request.getParameter("IDTask")+" ')\" >");
+            }
+            else{
+                out.print(" DONE <input type=\"checkbox\" id=\"checkboxstatus\" onclick=\"changestatus(' "+request.getParameter("IDTask")+" ')\" >"); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(deletetask.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

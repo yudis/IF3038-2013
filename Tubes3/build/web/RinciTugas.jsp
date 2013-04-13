@@ -98,7 +98,7 @@
              ?>//*/
         %>    
         <div id="category">      
-            <div class = "kategori"><a title="Go to Dashboard" href="dashboard.php">Back to Dashboard</a></div>
+            <div class = "kategori"><a title="Go to Dashboard" href="dashboard.jsp">Back to Dashboard</a></div>
             <div>
                 <%
                     out.print("<input value=\"" + IDTask + "\" hidden=\"true\" id=\"HiddenIDTask\">");

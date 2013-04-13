@@ -518,7 +518,7 @@ function editTask(IDTask) {
             window.location = "RinciTugas.php?IDTask=" + IDTask;
         }
     }
-    xmlhttp.open('get', 'edittask.php?deadline=' + encodeURI(deadline) + "&IDTask=" + encodeURI(IDTask) + "&assignee=" + encodeURI(assignee) + "&tag=" + encodeURI(tag));
+    xmlhttp.open('get', 'edittask?deadline=' + encodeURI(deadline) + "&IDTask=" + encodeURI(IDTask) + "&assignee=" + encodeURI(assignee) + "&tag=" + encodeURI(tag));
     xmlhttp.send(null);
 }
 
@@ -544,7 +544,7 @@ function deleteassignee(IDAssignment, IDTask) {
             document.getElementById("ListEditAssignee").innerHTML = response;
         }
     }
-    xmlhttp.open('get', 'deleteassignment.php?IDAssignment=' + encodeURI(IDAssignment) + '&IDTask=' + encodeURI(IDTask));
+    xmlhttp.open('get', 'deleteassignment?IDAssignment=' + encodeURI(IDAssignment) + '&IDTask=' + encodeURI(IDTask));
     xmlhttp.send(null);
 }
 
@@ -570,7 +570,7 @@ function deletetag(IDTag, IDTask) {
             document.getElementById("ListEditTag").innerHTML = response;
         }
     }
-    xmlhttp.open('get', 'deletetag.php?IDTag=' + encodeURI(IDTag) + '&IDTask=' + encodeURI(IDTask));
+    xmlhttp.open('get', 'deletetag?IDTag=' + encodeURI(IDTag) + '&IDTask=' + encodeURI(IDTask));
     xmlhttp.send(null);
 }
 
@@ -591,10 +591,11 @@ function changestatus(IDTask) {
         if (xmlhttp.readyState == 4)
         {
             var response = xmlhttp.responseText;
+            //alert(response);
             document.getElementById("checkstatus").innerHTML = response;
         }
     }
-    xmlhttp.open('get', 'updatestatus.jsp?IDTask=' + encodeURI(IDTask)+"&status="+encodeURI(status));
+    xmlhttp.open('get', 'updatestatus?IDTask=' + encodeURI(IDTask)+"&status="+encodeURI(status));
     xmlhttp.send(null);
     setTimeout('changestatus('+IDTask+')', 500);
 
@@ -627,10 +628,10 @@ function deleteTaskYey(IDTask){
         if (xmlhttp.readyState == 4)
         {
             var response = xmlhttp.responseText;
-            window.location="Dashboard.php";
+            window.location="dashboard.jsp";
         }
     }
-    xmlhttp.open('get', 'deletetask.php?IDTask=' + encodeURI(IDTask));
+    xmlhttp.open('get', 'deletetask?IDTask=' + encodeURI(IDTask));
     xmlhttp.send(null);
 
 }
@@ -650,10 +651,10 @@ function deleteTaskYeys(IDTask){
         if (xmlhttp.readyState == 4)
         {
             var response = xmlhttp.responseText;
-            window.location="Dashboard.php";
+            window.location="dashboard.jsp";
         }
     }
-    xmlhttp.open('get', 'deletetask.php?IDTask=' + encodeURI(IDTask));
+    xmlhttp.open('get', 'deletetask?IDTask=' + encodeURI(IDTask));
     xmlhttp.send(null);
 
 }

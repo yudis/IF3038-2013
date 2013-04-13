@@ -37,7 +37,7 @@
         
         <div id="results">
             <%
-                if (type == "All" || type == "Category") {
+                if (type.compareTo("All") == 0 || type.compareTo("Category") == 0) {
                     Statement  sCategory = conn.createStatement();
                     ResultSet rCategory = sCategory.executeQuery("SELECT * FROM category WHERE CategoryName LIKE '%" + query + "%'");
                     out.print ("<div id='rCategory'><strong>Category</strong><br/>-------------------------------------------------------------------------------------------------------------------<br/>");
@@ -49,22 +49,23 @@
                     } else {
                         out.print ("No Result");
                     }
+                    out.print ("</div>");
                 } 
-                if (type == "All" || type == "Task") {
+                if (type.compareTo("All") == 0 || type.compareTo("Task") == 0) {
                     Statement sTask = conn.createStatement();
                     ResultSet rTask = sTask.executeQuery("SELECT * FROM task, tag, tasktag WHERE TaskName LIKE '%" + query + "%' AND task.IDTask = tasktag.IDTask AND tag.IDTag = tasktag.IDTag");
-                    out.print ("<div id='rTask'><strong>Category</strong><br/>-------------------------------------------------------------------------------------------------------------------<br/>");
+                    out.print ("<div id='rTask'><strong>Task</strong><br/>-------------------------------------------------------------------------------------------------------------------<br/>");
                     if (!rTask.wasNull()) {
                         while (rTask.next()) {
-                            String resTaskID = rTask.getString("TaskID");
+                            String resTaskID = rTask.getString("IDTask");
                             String resTaskName = rTask.getString("TaskName");
                             String resTaskStatus = rTask.getString("Status");
                             String resTaskDeadline = rTask.getString("Deadline");
-                            String resTaskTag = rTask.getString("Tag");
+                            String resTaskTag = rTask.getString("TagName");
             %>
                 <p class='searchUser'>
-                    <a title="Go to Profile" href="RinciTugas.php?IDTask=<% out.print(resTaskID); %>">
-                            <strong><% out.print(resTaskName); %></strong><br/>
+                    <a title="Go to Profile" href="RinciTugas.jsp?IDTask=<% out.print(resTaskID); %>">    
+                        <strong><% out.print(resTaskName); %></strong><br/>
                             <% out.print(resTaskDeadline); %> <br/>
                             <% out.print(resTaskStatus); %><br/>
                             Tag: 
@@ -78,13 +79,14 @@
                     } else {
                         out.print ("No Result");
                     }
+                    out.print ("</div>");
                 }
             %>
             
-            <% if (type == "All" || type == "User") {
+            <% if (type.compareTo("All") == 0 || type.compareTo("Category") == 0) {
                     Statement sUser = conn.createStatement();
                     ResultSet rUser = sUser.executeQuery("SELECT * FROM user WHERE Username LIKE '%" + query + "%'");
-                    out.print ("<div id='rUser'><strong>Category</strong><br/>-------------------------------------------------------------------------------------------------------------------<br/>");
+                    out.print ("<div id='rUser'><strong>User</strong><br/>-------------------------------------------------------------------------------------------------------------------<br/>");
                     if (!rUser.wasNull()) {
                         while (rUser.next()) {
                             String resUser = rUser.getString("Username");
@@ -92,12 +94,13 @@
                             String resAva = rUser.getString("Avatar"); 
             %> 
             <p class='searchUser'>
-                    <a title="Go to Profile" href="profile.php?user=<% out.print(resUser); %>">
+                    <a title="Go to Profile" href="profile.jsp?user=<% out.print(resUser); %>">
                         <img src="<% out.print(resAva); %>" alt="avatar" class="searchAva"/>
                         <div class="detailUser">
                             <strong><% out.print(resUser); %></strong><br/>
                             <% out.print(resName); %>
                         </div>
+                        <br/>
                     </a>
                 </p>
             <br/>
@@ -106,6 +109,7 @@
                     } else {
                         out.print ("No Result");
                     }
+                    out.print ("</div>");
                 }
             %>
             

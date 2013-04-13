@@ -55,10 +55,10 @@ public class changeStatus extends HttpServlet {
             Statement stmt = conn.createStatement();
             if ((request.getParameter("IDTask") != null) && (request.getParameter("Status") != null)) {
                 if ((request.getParameter("Status").compareToIgnoreCase("done"))==0) {
-                    ResultSet rs = stmt.executeQuery("UPDATE task SET Status='undone' WHERE IDTask='"+request.getParameter("Status")+"'");
+                    int rs = stmt.executeUpdate("UPDATE task SET Status='undone' WHERE IDTask="+request.getParameter("IDTask"));
                 }
                 else{
-                ResultSet rs = stmt.executeQuery("UPDATE task SET Status='done' WHERE IDTask='"+request.getParameter("Status")+"'");
+                int rs = stmt.executeUpdate("UPDATE task SET Status='done' WHERE IDTask="+request.getParameter("IDTask"));
                 }
             }
             out.write(request.getParameter("Status"));

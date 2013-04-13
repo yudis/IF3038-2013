@@ -101,14 +101,14 @@ public class listtask extends HttpServlet {
                 if (rs.getString(4).compareToIgnoreCase("done") == 0) {
                     output = output +" checked='checked'";
                 }
-                output = output + "onclick='changeStatus(this, " + rs.getString(1) + "," + i
+                output = output + "onclick='changeStatus(this, " + rs.getString("IDTask") + "," + i
                         + ");'> <span id='checkedvalue" + i + "'>"
                         + rs.getString(4) + "</span></a>";
                 i++;
             }
             if (creator.compareToIgnoreCase(session.getAttribute("username").toString()) == 0) {
-                output = output + "<a onclick='showBuatTugas(" + category
-                        + ",'" + session.getAttribute("username") + "');' class='addTask'></a>";
+                output = output + "<a onclick=\"showBuatTugas(" + category
+                        + ",'" + session.getAttribute("username") + "');\" class=\"addTask\"></a>";
                
             }
              out.write(output);

@@ -20,11 +20,13 @@ function createObject() {
 
 var ab = 0;
 function logins() {
+
     var http = createObject();
 
     http.onreadystatechange = function() {
         if (http.readyState == 4) {
             var response = http.responseText;
+            //alert(response);
             if (response == 0) {
                 alert("username dan password salah");
             } else {
@@ -88,7 +90,6 @@ function changeStatus(a, b, c) {
 
             if (checkbox.responseText != "")
             {
-               
                     if (response == "done") {   
                     document.getElementById("checkedvalue" + c).innerHTML = "";
                     document.getElementById("checkedvalue" + c).innerHTML = "undone";
@@ -137,13 +138,13 @@ function delCate(idCat){
         if (deletecat.readyState == 4)
         {
             var response = deletecat.responseText;
-            alert(response);
+            window.location="dashboard.jsp";
         }
 
     };
-    deletecat.open('get', 'controller?type=deletecategory&IDCategory=' +idCat);
+    deletecat.open('get', 'deletecategory?IDCategory=' +idCat);
     deletecat.send(null);
-    update();
+    
 }
 
 function delTask(idTask){
