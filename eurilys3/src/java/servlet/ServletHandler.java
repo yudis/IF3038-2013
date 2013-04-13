@@ -461,7 +461,7 @@ public class ServletHandler extends HttpServlet{
                 //Insert Task Attachment
                 Part filePart = req.getPart("attachment_file1"); // Retrieves <input type="file" name="file">
                 String filename = "";
-                //filename = getFilename(filePart);
+                filename = getFilename(filePart);
                 String dir = "uploads/" + filename;
                 byte buf[] = new byte[1024 * 4];
                 if (!filename.isEmpty()) {
@@ -681,14 +681,12 @@ public class ServletHandler extends HttpServlet{
     }
     
    private static String getFilename(Part part) {
-       /* 
         for (String cd : part.getHeader("content-disposition").split(";")) {
             if (cd.trim().startsWith("filename")) {
                 String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
                 return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
             }
         }
-        */
         return null;
     }
     
