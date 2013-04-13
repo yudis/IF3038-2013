@@ -1,0 +1,50 @@
+.taskcontainer{
+	margin-left:auto;
+	margin-right:auto;
+	border-right:2px solid #618926;
+	border-left:2px solid #618926;
+	border-bottom:2px solid #618926;
+	border-top:0px solid #618926;
+	width:600px;
+}
+
+.profile{
+	display:inline;
+	float:left;
+	line-height:160%;
+	margin:0 40px 0 0;
+	color:#666;
+	text-align:justify;
+}
+
+.even{
+	background-color: #CCFF99;
+}
+
+.tasktable{
+	float:left;
+	width:200px;
+	color:#666;
+	text-align:center;
+	margin:0px;
+}
+
+#taskheaders{
+	float:left;
+	width:600px;
+}
+
+#taskcontents{
+	float:left;
+	width:600px;
+}
+
+h4{
+	margin-left:5px;
+}
+
+.header{
+	background:-moz-linear-gradient(#98ba40, #a6c250 35%, #618926);
+	color:#ffffff;
+	text-align:center;
+}
