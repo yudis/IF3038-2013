@@ -65,7 +65,31 @@ CREATE TABLE IF NOT EXISTS `komentar` (
 --
 -- Dumping data untuk tabel `komentar`
 --
-
+INSERT INTO `komentar` (`IDTask`, `IDKomentar`, `username`, `isi`, `waktu`) VALUES
+(3, 1, 'amelia', '11111', '2013-04-13 00:00:00'),
+(3, 2, 'anasthasia', '22222', '2013-04-13 00:00:00'),
+(3, 3, 'devin', '33333', '2013-04-13 00:00:00'),
+(3, 4, 'doraemon', '44444', '2013-04-13 00:00:00'),
+(3, 5, 'lukanta', '55555', '2013-04-13 00:00:00'),
+(3, 6, 'oenang', '66666', '2013-04-13 00:00:00'),
+(3, 7, 'raymond', '77777', '2013-04-13 00:00:00'),
+(3, 8, 'yuli', '88888', '2013-04-13 00:00:00'),
+(3, 9, 'amelia', '99999', '2013-04-13 00:00:00'),
+(3, 10, 'anasthasia', '101010', '2013-04-13 00:00:00'),
+(3, 11, 'devin', '111111', '2013-04-13 00:00:00'),
+(3, 12, 'doraemon', '121212', '2013-04-13 00:00:00'),
+(3, 13, 'lukanta', '131313', '2013-04-13 00:00:00'),
+(3, 14, 'oenang', '141414', '2013-04-13 00:00:00'),
+(3, 15, 'raymond', '151515', '2013-04-13 00:00:00'),
+(3, 16, 'yuli', '161616', '2013-04-13 00:00:00'),
+(3, 17, 'amelia', '171717', '2013-04-13 00:00:00'),
+(3, 18, 'anasthasia', '181818', '2013-04-13 00:00:00'),
+(3, 19, 'devin', '191919', '2013-04-13 00:00:00'),
+(3, 20, 'doraemon', '202020', '2013-04-13 00:00:00'),
+(3, 21, 'lukanta', '212121', '2013-04-13 00:00:00'),
+(3, 22, 'oenang', '222222', '2013-04-13 00:00:00'),
+(3, 23, 'raymond', '232323', '2013-04-13 00:00:00'),
+(3, 24, 'yuli', '242424', '2013-04-13 00:00:0012');
 
 -- --------------------------------------------------------
 
@@ -83,6 +107,15 @@ CREATE TABLE IF NOT EXISTS `pelampiran` (
 -- Dumping data untuk tabel `pelampiran`
 --
 
+INSERT INTO `pelampiran` (`IDTugas`, `lampiran`) VALUES
+(1, 'upload/datetimepicker_css.js'),
+(1, 'upload/Koala.jpg'),
+(1, 'upload/movie.ogg');
+(3, 'upload/movie.ogg'),
+(4, 'upload/Koala.jpg'),
+(5, 'upload/datetimepicker_css.js'),
+(2, 'upload/Koala.jpg'),
+(8, 'upload/datetimepicker_css.js');
 
 -- --------------------------------------------------------
 
@@ -176,6 +209,8 @@ CREATE TABLE IF NOT EXISTS `tugas` (
 --
 
 INSERT INTO `tugas` (`IDTask`, `IDKategori`, `name`, `deadline`, `stat`, `tag`, `username`) VALUES
+(1, 5, 'Tubes 1 Progin', '2012-12-12', 0, 'susah, ribet', 'devin'),
+(2, 5, 'Tubes 1 Progin', '2012-12-12', 0, 'susah, ribet', 'devin'),
 (3, 5, 'Tubes 1 Progin', '2012-12-12', 0, 'susah, ribet', 'devin'),
 (4, 5, 'Tubes 2 Progin', '2012-12-12', 1, 'susah, ribet', 'raymond'),
 (5, 5, 'Tubes 3 Progin', '2012-12-12', 0, 'susah, ribet', 'yuli'),
