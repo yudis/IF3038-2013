@@ -14,6 +14,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<style>
+    .user{
+        width : 400px;
+        height : 100px;
+        margin-top : -55px;
+        margin-left :770px;
+        padding-top : 30px;
+        padding-left: 80px;
+    }
+</style>
 <script>
 function updateprofil() {
 
@@ -56,11 +66,17 @@ xmlhttp.send();
 
 <body>
 <div class="header">
-	<a href="dashboard.jsp"><img align="left" src="images/logo.png" width="150" height="50" />
-	<h6>Dashboard</a> | <a href="profile.jsp">Profile</a> | <a href="index.jsp">Logout</a>
+	<a href="Dashboard.jsp"><img align="left" src="images/logo.png" width="150" height="50" />
+	<h6>Dashboard</a> | <a href="profile.jsp">Profile</a> | <a href="logout.jsp">Logout</a>
 	
    | Search: <input type="search">
   <input type="submit" value="GO">
+      <div class="user">Welcome, 
+      <%
+      String login = (String) session.getAttribute("userid");
+      out.print(login);
+      %>
+  </div>
 	</div>
 	<div class="container">
 <div class="data">

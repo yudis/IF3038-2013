@@ -5,10 +5,15 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -26,6 +31,9 @@ public class register extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    DBConnector dbc = new DBConnector();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -58,7 +66,7 @@ public class register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+    
     }
 
     /**
@@ -73,7 +81,27 @@ public class register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+    HttpSession session = request.getSession();
+    String userid = request.getParameter("DID");
+    String password = request.getParameter("DP");
+    String name = request.getParameter("DName");
+    String email = request.getParameter("DMail");
+    String avatar = request.getParameter("file");
+    
+     try{
+        dbc.Init();
+       
+        int i = dbc.ExecuteUpdate("insert into profil values ('"+userid+"','"+password+"','"+name+"','"+avatar+"','2111-11-12','"+email+"')");
+            session.setAttribute("userid",userid);
+            
+        dbc.Close();
+        response.sendRedirect("dashboard.jsp");
+        }
+        catch(Exception e){
+        out.println(e);
+        }
     }
 
     /**

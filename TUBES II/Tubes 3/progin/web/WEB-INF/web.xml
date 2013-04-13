@@ -13,32 +13,33 @@
         <servlet-class>AddTask</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HapusCategory</servlet-name>
-        <servlet-class>HapusCategory</servlet-class>
+        <servlet-name>dbconn</servlet-name>
+        <servlet-class>dbconn</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>daftartask</servlet-name>
         <servlet-class>daftartask</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>dbconn</servlet-name>
-        <servlet-class>dbconn</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>editprofile</servlet-name>
         <servlet-class>editprofile</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>register</servlet-name>
-        <servlet-class>register</servlet-class>
+        <servlet-name>HapusCategory</servlet-name>
+        <servlet-class>HapusCategory</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>newcategory</servlet-name>
         <servlet-class>newcategory</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>HapusTask</servlet-name>
         <servlet-class>HapusTask</servlet-class>
+=======
+        <servlet-name>register</servlet-name>
+        <servlet-class>register</servlet-class>
+>>>>>>> 44edc244f8bfa9f77b8b15b8062091566370afd6
     </servlet>
     <servlet-mapping>
         <servlet-name>Search</servlet-name>
@@ -53,36 +54,37 @@
         <url-pattern>/AddTask</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HapusCategory</servlet-name>
-        <url-pattern>/HapusCategory</url-pattern>
+        <servlet-name>dbconn</servlet-name>
+        <url-pattern>/dbconn</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>daftartask</servlet-name>
         <url-pattern>/daftartask</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>dbconn</servlet-name>
-        <url-pattern>/dbconn</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>editprofile</servlet-name>
         <url-pattern>/editprofile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>register</servlet-name>
-        <url-pattern>/register</url-pattern>
+        <servlet-name>HapusCategory</servlet-name>
+        <url-pattern>/HapusCategory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>newcategory</servlet-name>
         <url-pattern>/newcategory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>HapusTask</servlet-name>
         <url-pattern>/HapusTask</url-pattern>
+=======
+        <servlet-name>register</servlet-name>
+        <url-pattern>/register</url-pattern>
+>>>>>>> 44edc244f8bfa9f77b8b15b8062091566370afd6
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
-    </session-config>s
-    </web-app>
+    </session-config>
+</web-app>
