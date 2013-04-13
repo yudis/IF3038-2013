@@ -124,7 +124,22 @@
                                         + "         <option value=\"Date\">Date</option>"
                                         + "     </select>&nbsp;"
                                         + " </div>");
-                                query = "SELECT * FROM user WHERE username LIKE '%"+text+"%'";
+                                int mode2 = Integer.parseInt(request.getParameter("filtering"));
+                                query = "";
+                                switch(mode2){
+                                    case 1 :
+                                        query = "SELECT * FROM user WHERE username LIKE '%"+text+"%'";
+                                        break;
+                                    case 2 :
+                                        query = "SELECT * FROM user WHERE email LIKE '%"+text+"%'";
+                                        break;
+                                    case 3 :
+                                        query = "SELECT * FROM user WHERE fullname LIKE '%"+text+"%'";
+                                        break;
+                                    case 4 :
+                                        query = "SELECT * FROM user WHERE birthdate LIKE '%"+text+"%'";
+                                        break;
+                                }
                                 rs = stt.executeQuery(query);
                                 while (rs.next()) {
                                     out.print("<div id=\"user-result\">"
