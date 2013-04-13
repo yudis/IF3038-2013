@@ -4,10 +4,15 @@
  */
 package Servlet;
 
+import Class.Function;
+import Class.GetConnection;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -74,12 +79,20 @@ public class getavatar extends HttpServlet {
                             
                             byte [] arByte = fileItem.get();
                             String dir = request.getRealPath("avatar");
-                            File fileAva = new File(dir+"/"+avatar);
+                            HashMap<String,String> user = (new Function()).GetUser(userActive);
+                            File fileAva = new File(dir+"/"+user.get("avatar"));
                             fileAva.delete();
                             
                             FileOutputStream fileOutStream = new FileOutputStream(dir+"/"+avatar);
                             fileOutStream.write(arByte);
                             fileOutStream.close();
+                            
+                            GetConnection connection = new GetConnection();
+                            Connection conn = connection.getConnection();
+                            Statement stmt = conn.createStatement();
+                            String query = "update user set avatar='"+avatar+"' where username='"+userActive+"'";
+                            stmt.execute(query);
+                            conn.close();
                     }
             }
             
