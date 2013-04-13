@@ -8,6 +8,10 @@
         <servlet-name>Rincian</servlet-name>
         <servlet-class>Rincian</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddTask</servlet-name>
+        <servlet-class>AddTask</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Search</servlet-name>
         <url-pattern>/Search</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>Rincian</servlet-name>
         <url-pattern>/Rincian</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddTask</servlet-name>
+        <url-pattern>/AddTask</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

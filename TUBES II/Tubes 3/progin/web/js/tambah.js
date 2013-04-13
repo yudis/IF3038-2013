@@ -1,6 +1,6 @@
 //Tubes 2
 var xmlhttp;
-function loadXMLDocPost(url,cfunc)
+function loadXMLDocPost(url,parameters,cfunc)
 {
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -12,7 +12,29 @@ else
   }
 xmlhttp.onreadystatechange=cfunc;
 xmlhttp.open("POST",url,true);
-xmlhttp.send();
+xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xmlhttp.send(parameters);
+}
+
+function saveTaskDetails() {
+    var param = "requesttype=save" +
+                "&tabletype=" + "taskdetails"  +
+                "&namatask=" + encodeURIComponent(document.getElementById("namatask").value) +
+                //"&attachment=" + document.getElementById("attachment").value +
+                "&deadline=" + encodeURIComponent(document.getElementById("deadline").value) +
+                "&assignee=" + encodeURIComponent(document.getElementById("assignee").value) +
+                "&tag=" + encodeURIComponent(document.getElementById("tag").value);
+loadXMLDocPost('Rincian',param,function() { 
+    console.log(xmlhttp.readyState);
+    console.log(xmlhttp.status);
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+        alert("db get");
+        console.log("response get");
+        console.log(xmlhttp.responseText);
+        }
+});
+return false;
 }
 
 
