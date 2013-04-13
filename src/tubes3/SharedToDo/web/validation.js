@@ -171,14 +171,7 @@ function search() {
     var term = document.getElementById("searchterm").value;
     var type = document.getElementById("searchtype").value;
 
-    window.location = "searchresult.jsp?term=" + term + "&type=" + type;
-}
-
-function search2() {
-    var term = document.getElementById("searchterm").value;
-    var type = document.getElementById("searchtype").value;
-
-    window.location = "../searchresult.jsp?term=" + term + "&type=" + type;
+    window.location = "../search/?term=" + term + "&type=" + type;
 }
 //======================= SHOW TASKS FOR SELECTED CATEGORY
 var category = "";
@@ -271,7 +264,6 @@ function changeStatus(element) {
 //======================= CHECK IF LOGGED IN
 function checkLogged() {
     var object = JSON.parse(localStorage.getItem("key"));
-
     if (object == null) {
         window.location = "../index.jsp";
     }
@@ -292,6 +284,8 @@ function checkLogged() {
             }
 
             xmlhttp.onreadystatechange = function() {
+                
+               alert(xmlhttp.readyState + " " + xmlhttp.status);
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     document.getElementById("navsearch").innerHTML = xmlhttp.responseText;
                 }
@@ -304,23 +298,23 @@ function checkLogged() {
 }
 
 //======================= LOGIN
-function checkLogin() 
-{   
+function checkLogin()
+{
     var u = document.getElementById("usernamelogin").value;
     var p = document.getElementById("passwordlogin").value;
 
-    if (window.XMLHttpRequest) 
-    {    
+    if (window.XMLHttpRequest)
+    {
         xmlhttp = new XMLHttpRequest();
     }
-    else 
+    else
     {
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    xmlhttp.onreadystatechange = function() 
+    xmlhttp.onreadystatechange = function()
     {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
         {
             if (xmlhttp.responseText !== u) // jika sama
             {
@@ -329,7 +323,7 @@ function checkLogin()
                 localStorage.setItem("key", JSON.stringify(object));
                 window.location = "dashboard/";
             }
-            else 
+            else
             {
                 alert('Username/password error!');
             }
@@ -350,7 +344,7 @@ function logout()
     }
 
     xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState  == 4 && xmlhttp.status == 200) {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             window.location = "../index.jsp";
         }
     };
@@ -360,10 +354,16 @@ function logout()
 }
 
 function toggleSearch() {
-    if (getStyle(document.getElementById('search'), 'display') !== 'none') {
+    //alert(getStyle(document.getElementById('search'), 'display'));
+    
+    if (getStyle(document.getElementById('search'), 'display') !== 'none') 
+    {
         document.getElementById('search').style.display = 'inline';
+        //alert("none");
     }
-    else {
+    else 
+    {
+        //alert("inline");
         document.getElementById('search').style.display = 'none';
     }
 }

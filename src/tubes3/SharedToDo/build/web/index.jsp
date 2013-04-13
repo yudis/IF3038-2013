@@ -1,13 +1,13 @@
 <html>
     <head>
-        <title>Shared To Do List</title>      
+        <title>Shared To Do List</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="shortcut icon" href="favicon.ico">
         <script type="text/javascript" src="validation.js"></script>
     </head>
     <body>
         <div id="navigation">
-            <img />
+            <a href="#"><img src="../images/logo.gif" /></a>
             <a>HOME</a>
             <a href="#features">FEATURES</a>
             <a href="#registerform">REGISTER</a>
@@ -17,7 +17,7 @@
             <div class="videobox">
                 <video width="570" height="320" controls>
                     <!-- <source src="movie.mp4" type="video/mp4"> -->
-                </video>				
+                </video>
             </div>
             <div class="besidevideobox">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat</p>
@@ -51,7 +51,7 @@
             <div class="box">
                 <h3><img src="images/dollar.png">API For Developers</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magn nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolt, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-            </div>			
+            </div>
         </div>
         <div class="clearall container" id="registerform">
             <h2>Register Now</h2>
@@ -96,7 +96,7 @@
                                pattern="^[- \w\d\u00c0-\u024f]{8,}$"
                                title="Your password (same as above)"
                                type="password" spellcheck="false" size="20" />
-                    </p>			
+                    </p>
                     <p>
                         <label>Date of birth <abbr title="Required">*</abbr></label>
                         <input value=""  id="dob" onchange="checkDOB()"
@@ -107,7 +107,7 @@
                     </p>
 
                     <output id="list"></output>
-                    <input type="file" id="files" name="files[]" onchange="CheckFiles()" />				
+                    <input type="file" id="files" name="files[]" onchange="CheckFiles()" />
                 </fieldset>
                 <fieldset>
                     <button id="register" type="submit" onclick="alert('Successfully registered!')">Register</button>
@@ -133,12 +133,13 @@
                                pattern="^[- \w\d\u00c0-\u024f]{8,}$"
                                title="Your password"
                                type="password" spellcheck="false" size="20" />
-                    </p>				
+                    </p>
                 </fieldset>
                 <fieldset>
-                    <button id="login" onclick="checkLogin(); return false;">Login</button>
+                    <button id="login" onclick="checkLogin();
+                                return false;">Login</button>
                 </fieldset>
             </form>
-        </div>		
+        </div>
     </body>
 </html>
