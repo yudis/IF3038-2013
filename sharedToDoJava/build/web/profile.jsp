@@ -154,5 +154,71 @@
                 </div>
             </form>
         </div>
+        
+        <h2 id="taskTitle">TASKS</h2>
+        <hr/>
+        
+        <%
+            String sqlTask = "SELECT DISTINCT task.namaTask, deadline FROM task LEFT JOIN tasktoasignee ON task.namaTask=tasktoasignee.namaTask WHERE creatorTaskName='" + curUser + "' OR asigneeName='" + curUser + "'";
+            rs = stmt.executeQuery(sqlTask);
+            
+            while(rs.next()) {
+        %>
+
+            <div id="taskContent">
+                <div class="bioLeft">
+                    <p>Nama</p>
+                </div>
+                <div class="bioRight">
+                    <p>Deadline</p>
+                </div>
+
+                <div class="tableElmtLeft">
+                    <a href="halamanRincianTugas.jsp?task=<%= rs.getString("namaTask") %>"><p><%= rs.getString("namaTask") %></p></a>
+                </div>
+                <div class="tableElmtRight">
+                    <p><%= rs.getString("deadline") %></p>
+                </div>
+            </div>
+            
+            
+        <%
+           }
+        %>
+        
+            <h2 id="doneTaskTitle">DONE TASKS</h2><hr/>
+                <div class="bioLeft">
+                    <p>Nama</p>
+                </div>
+                <div class="bioRight">
+                    <p>Tag</p>
+                </div>
+        
+        <%
+            String sqlDoneTask = "SELECT DISTINCT task.namaTask, status FROM task LEFT JOIN tasktoasignee ON task.namaTask=tasktoasignee.namaTask WHERE (creatorTaskName='" + curUser + "' OR asigneeName='" + curUser + "') AND task.status='selesai'";
+            rs = stmt.executeQuery(sqlDoneTask);
+            
+            while(rs.next()) {
+        %>
+            
+            <%
+                String sqlTag = "SELECT tag FROM tagging WHERE namaTask='" + rs.getString("namaTask") + "'";
+                ResultSet rsTag = stmt.executeQuery(sqlTag);
+                
+                String tag = "";
+                while (rsTag.next()) {
+                    tag = rsTag.getString("tag") + " | ";
+                }
+            %>
+
+            <div class="tableElmtLeft">
+                <p><%= rs.getString("namaTask") %></p>
+            </div>
+            <div class="tableElmtRight">
+                <p><%= tag %></p>
+            </div>
+            <%
+                }
+            %>
     </body>
 </html>
