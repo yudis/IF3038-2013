@@ -520,7 +520,7 @@ div.taskElmtLeft p {
 }
 div.taskElmtRight {
 	float: left;
-	height: 20px;
+	min-height: 20px;
 	width: 48%;
 	margin-bottom: 1%;
 }

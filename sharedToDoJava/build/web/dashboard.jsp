@@ -20,12 +20,6 @@
     <body>
         
         <%
-//        $curUser = "smanurung"; //hanya dummy
-//        if (isset($_SESSION["username"])) { //hanya untuk memastikan
-//            $curUser = $_SESSION["username"];
-//        } else {
-//            header("Location:index.php"); //mengembalikan ke halaman utama untuk user yang belum login
-//        }
             if (session.getAttribute("username") == null) {
                 response.sendRedirect("index.jsp");
             } else {
