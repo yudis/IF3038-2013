@@ -33,6 +33,10 @@
         <servlet-name>GetDeletionInfo</servlet-name>
         <servlet-class>ajax.GetDeletionInfo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteKategori</servlet-name>
+        <servlet-class>ajax.DeleteKategori</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Suggestion</servlet-name>
         <url-pattern>/Suggestion</url-pattern>
@@ -64,6 +68,10 @@
     <servlet-mapping>
         <servlet-name>GetDeletionInfo</servlet-name>
         <url-pattern>/GetDeletionInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteKategori</servlet-name>
+        <url-pattern>/DeleteKategori</url-pattern>
     </servlet-mapping>
 </web-app>
 <!--    <welcome-file>index.jsp</welcome-file>

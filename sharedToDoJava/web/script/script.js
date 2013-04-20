@@ -380,7 +380,7 @@ function deleteKategori(namaKategori) {
 			alert($response);
 		}
 	}
-	xmlhttp.open("GET","php/deleteKategori.php?kat="+namaKategori,true);
+	xmlhttp.open("GET","DeleteKategori?kat="+namaKategori,true);
 	xmlhttp.send();
 	//cek apakah user yang sedang aktif berhak untuk menghapus kategori
 	
