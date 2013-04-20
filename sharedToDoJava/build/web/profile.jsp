@@ -16,7 +16,6 @@
         <script LANGUAGE="Javascript" src="script/script.js"></script>
     </head>
     <body>
-        <!--<h1>Hello World!</h1>-->
         <form action="Suggestion" method="get">
     	<div id="header">
             <a href="dashboard.jsp"><img id="logo" src="res/logo1.png" alt="to-do list"></img></a>
@@ -160,9 +159,11 @@
         
         <%
             String sqlTask = "SELECT DISTINCT task.namaTask, deadline FROM task LEFT JOIN tasktoasignee ON task.namaTask=tasktoasignee.namaTask WHERE creatorTaskName='" + curUser + "' OR asigneeName='" + curUser + "'";
-            rs = stmt.executeQuery(sqlTask);
+            Statement stmt1 = con.createStatement();
+            rs = stmt1.executeQuery(sqlTask);
             
             while(rs.next()) {
+                String namaTask = rs.getString("namaTask");
         %>
 
             <div id="taskContent">
@@ -196,9 +197,11 @@
         
         <%
             String sqlDoneTask = "SELECT DISTINCT task.namaTask, status FROM task LEFT JOIN tasktoasignee ON task.namaTask=tasktoasignee.namaTask WHERE (creatorTaskName='" + curUser + "' OR asigneeName='" + curUser + "') AND task.status='selesai'";
-            rs = stmt.executeQuery(sqlDoneTask);
+            Statement stmt2 = con.createStatement();
+            rs = stmt2.executeQuery(sqlDoneTask);
             
             while(rs.next()) {
+                String namaTask = rs.getString("namaTask");
         %>
             
             <%
@@ -212,7 +215,7 @@
             %>
 
             <div class="tableElmtLeft">
-                <p><%= rs.getString("namaTask") %></p>
+                <p><%= namaTask %></p>
             </div>
             <div class="tableElmtRight">
                 <p><%= tag %></p>

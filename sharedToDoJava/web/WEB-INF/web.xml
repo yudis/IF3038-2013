@@ -13,6 +13,22 @@
         <servlet-name>UserDataUpdate</servlet-name>
         <servlet-class>ajax.UserDataUpdate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>changeKategori</servlet-name>
+        <servlet-class>ajax.changeKategori</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommitStatus</servlet-name>
+        <servlet-class>ajax.CommitStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>showAllKategori</servlet-name>
+        <servlet-class>ajax.showAllKategori</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertKategori</servlet-name>
+        <servlet-class>ajax.InsertKategori</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Suggestion</servlet-name>
         <url-pattern>/Suggestion</url-pattern>
@@ -24,6 +40,22 @@
     <servlet-mapping>
         <servlet-name>UserDataUpdate</servlet-name>
         <url-pattern>/UserDataUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changeKategori</servlet-name>
+        <url-pattern>/changeKategori</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommitStatus</servlet-name>
+        <url-pattern>/CommitStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showAllKategori</servlet-name>
+        <url-pattern>/showAllKategori</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertKategori</servlet-name>
+        <url-pattern>/InsertKategori</url-pattern>
     </servlet-mapping>
 </web-app>
 <!--    <welcome-file>index.jsp</welcome-file>

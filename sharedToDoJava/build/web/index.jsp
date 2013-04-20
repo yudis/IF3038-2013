@@ -24,7 +24,8 @@
             session.setAttribute("username",name);
 
 //            redirection
-            String URL = "profile.jsp";
+//            String URL = "profile.jsp";
+            String URL = "dashboard.jsp";
             response.sendRedirect(URL);
         %>
     </body>

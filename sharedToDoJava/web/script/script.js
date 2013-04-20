@@ -32,7 +32,6 @@ function showHint(str) {
 //        var url = "http://localhost:8080/SharedToDoList/Suggestion?k=" + str;
         var url = "Suggestion?k=" + str;
         xmlhttp.open("GET",url,true);
-//        alert("selesai mengirim");
         xmlhttp.send();
 }
 
@@ -41,7 +40,7 @@ function keProfil() {
 }
 
 function showKategori(kategori) {
-	//alert(kategori);
+//	alert(kategori);
 	
 	var _xmlhttp;
 	if (window.XMLHttpRequest) { //membuat objek XMLHttpRequest
@@ -50,14 +49,15 @@ function showKategori(kategori) {
 		_xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
-	_xmlhttp.open("GET","php/changeKategori.php?k=" + kategori,true);
+	_xmlhttp.open("GET","changeKategori?k=" + kategori,true);
 	_xmlhttp.send();
 	
 	_xmlhttp.onreadystatechange = function() {
 		if ((_xmlhttp.readyState == 4) && (_xmlhttp.status == 200)) {
+//                        alert("aman");
 			var replacement = _xmlhttp.responseText;
-			//var sementara = _xmlhttp.responseXML;
-			//alert(sementara);
+//                        alert("aman");
+//                        alert(replacement);
 			document.getElementById("dynamicSpace").innerHTML = replacement;
 		}
 	}
@@ -70,7 +70,7 @@ function showAllKategori() {
 		_xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
-	_xmlhttp.open("GET","php/showAllKategori.php",true);
+	_xmlhttp.open("GET","showAllKategori",true);
 	_xmlhttp.send();
 	
 	_xmlhttp.onreadystatechange = function() {
@@ -263,18 +263,19 @@ function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain)
 
 var isTaskStatusClicked = false;
 function changeTaskStatus(namaTask,id) {
-	//alert(namaTask);
+//    alert(namaTask + " dan " + id);
 	$status = "undefined";
+        $kodeUbah = "";
 	if (!isTaskStatusClicked) {
 		isTaskStatusClicked = true;
 		$status = "selesai";
-		document.getElementById(id).innerHTML = "<p>selesai</p>";
+                $kodeUbah = "0";
 	} else {
 		isTaskStatusClicked = false;
 		$status = "belum";
-		document.getElementById(id).innerHTML = "<p>belum selesai</p>";
+                $kodeUbah = "1";
 	}
-	
+        
 	//melakukan update database mengenai status terbaru
 	var xmlhttp;
 	if (window.XMLHttpRequest) {
@@ -286,17 +287,28 @@ function changeTaskStatus(namaTask,id) {
 	xmlhttp.onreadystatechange = function(){
 		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
 			$responseUpdate = xmlhttp.responseText;
-			alert($responseUpdate);
+//			alert($responseUpdate);
+                        
+                        if ($responseUpdate == 1) {
+                            if ($kodeUbah == "0") {
+                                    document.getElementById(id).innerHTML = "<p>selesai</p>";
+                            } else {
+                                    document.getElementById(id).innerHTML = "<p>belum</p>";
+                            }
+                            alert("Sucess. Status telah berhasil diubah");
+                        } else if ($responseUpdate == 0) {
+                            alert("Warning. Anda tidak berhak edit tugas!");
+                        }
 		}
 	}
 	
-	xmlhttp.open("GET","php/CommitStatus.php?stat=" + $status + "&task=" + namaTask,true);
+	xmlhttp.open("GET","CommitStatus?stat=" + $status + "&task=" + namaTask,true);
 	xmlhttp.send();
 }
 
 function toHalamanRincianTugas(namaTask) {
-	//alert("pindah ke halaman " + namaTask);
-	window.location = "taskdetail.php?task=" + namaTask;
+//	alert("pindah ke halaman " + namaTask);
+	window.location = "halamanRincianTugas.jsp?task=" + namaTask;
 }
 
 function toHalamanPembuatanTugas(kat) {
@@ -348,7 +360,7 @@ function addKategori(katName,userList) {
 			//menampilkan penambahan kolom kategori secara langsung
 		}
 	}
-	xmlhttp.open("GET","php/insertKategori.php?kat="+katName+"&userList="+userList,true);
+	xmlhttp.open("GET","InsertKategori?kat="+katName+"&userList="+userList,true);
 	xmlhttp.send();
 }
 function deleteKategori(namaKategori) {

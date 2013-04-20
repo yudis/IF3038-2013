@@ -302,8 +302,8 @@ button#editProfileBtn{
 	width:25%;
 	height:75%;
 	margin-left:5%;
-	/*border:dotted;*/
-	float:left;
+	border:dotted;
+        float: left;
 }
 
 #semuaTugas {
@@ -311,10 +311,15 @@ button#editProfileBtn{
 	margin-bottom:auto;
 }
 
-#dynamicContainer {
-	width:60%;
+div#dynamicContainer {
+    border: solid 1px;
+    /*color: #0F3;*/
+	/*width:60%;*/
+        width: 350%;
 	height:70%;
+        height: 400px;
 	float:left;
+        /*float: right;*/
 	margin-left:1%;
 	position:relative;
 }
@@ -409,6 +414,8 @@ button#editProfileBtn{
 
 .rincianText {
 	margin:1% auto auto 70%;
+        /*border: #330033;*/
+        /*color: #FF0;*/
 }
 
 #addKategori {

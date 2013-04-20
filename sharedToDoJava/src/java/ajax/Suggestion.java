@@ -66,8 +66,6 @@ public class Suggestion extends HttpServlet {
         }
         Connection con = DriverManager.getConnection(host, uName, uPass);
 
-        System.out.println("koneksi aman");
-
         Statement stmt = (Statement) con.createStatement();
         String SQL = "SELECT namaTask FROM task";
         ResultSet rs = stmt.executeQuery(SQL);
