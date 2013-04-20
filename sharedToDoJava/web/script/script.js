@@ -317,7 +317,7 @@ function toHalamanPembuatanTugas(kat) {
 }
 function deleteTask(namaTask) {
 	//meminta username dan creator dari task yang hendak dihapus
-	//alert(namaTask);
+//	alert(namaTask);
 	var xmlhttp;
 	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();
@@ -327,16 +327,18 @@ function deleteTask(namaTask) {
 	xmlhttp.onreadystatechange = function(){
 		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
 			$response = xmlhttp.responseText;
-			//alert($response);
-			if ($response == "1") {
-				alert("Tugas telah berhasil dihapus");
+//			alert($response);
+			if ($response == 1) {
+				alert("Success. Tugas telah berhasil dihapus");
 				document.getElementById(namaTask+"space").innerHTML = "";
-			} else {
-				alert("Warning. Anda tidak berhak untuk menghapus tugas ini.");
-			}
+			} else if ($response == 0){
+                            alert("Failed. Tugas tidak berhasil dihapus karena alasan teknis");
+			} else if ($response == 2) {
+                            alert("Warning. Anda tidak berhak untuk menghapus tugas ini.");
+                        }
 		}
 	}
-	xmlhttp.open("GET","php/getDeletionInfo.php?task="+namaTask,true);
+	xmlhttp.open("GET","GetDeletionInfo?task="+namaTask,true);
 	xmlhttp.send();
 }
 function closeKategoriForm(id) {
