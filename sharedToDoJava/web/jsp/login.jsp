@@ -1,4 +1,4 @@
-<%@page import="util.Vector"%>
+<%@page import="java.util.Vector"%>
 <%@ page import ="java.sql.*" %>
 <%@ page import ="javax.sql.*" %>
 <%@page import="com.mysql.jdbc.Driver"%>
