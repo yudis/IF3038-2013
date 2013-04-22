@@ -2,7 +2,7 @@
 <%@page import="com.mysql.jdbc.exceptions.jdbc4.CommunicationsException" %>
 <%@ page import ="java.sql.*" %>
 <%@ page import ="javax.sql.*" %>
-<%@page import="java.util.Vector"%>
+<%@page import="util.Vector"%>
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page import="org.json.simple.JSONObject"%>
     
@@ -21,14 +21,16 @@
 	String usr = request.getParameter("key");
     String hint = "";
     if (usr.length() > 0){    	
-        for (int i = 0; i < username.size(); i++) {        	
-            if ( usr.toLowerCase().compareTo(username.get(i).substring(0, usr.length()).toLowerCase()) == 0) {
-                if (hint == "") {
-                    hint = username.get(i);
-                } else {
-                    hint = hint + ", " + username.get(i) ;
-                }
-            }
+        for (int i = 0; i < username.size(); i++) {
+        	if(usr.length() <= username.get(i).length()) {
+        		if ( usr.toLowerCase().compareTo(username.get(i).substring(0, usr.length()).toLowerCase()) == 0) {
+                    if (hint == "") {
+                        hint = username.get(i);
+                    } else {
+                        hint = hint + ", " + username.get(i) ;
+                    }
+                }	
+        	}            
         }
     }
     

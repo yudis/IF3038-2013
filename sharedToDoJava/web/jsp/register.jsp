@@ -1,11 +1,9 @@
-<?php
-    session_start();
-        
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $full_name = $_POST["full_name"];
-    $birth_date = $_POST["birth_date"];
+<% 
+	String username = request.getParameter("username");
+	String email = request.getParameter("email");
+	String password = request.getParameter("password");
+	String full_name = request.getParameter("full_name");
+	String birth_date = request.getParameter("birth_date");    
     
     /***upload avatar***/
     sleep(0.5);    
@@ -30,4 +28,4 @@
     $_SESSION["username"] = $username;
     $_SESSION["loggedin"] = "yes";
     header("Location:dashboard.php");
-?>
+%>
