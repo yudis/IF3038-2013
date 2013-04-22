@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+        <title>Todolist</title>
+        <link rel="stylesheet" type="text/css" href="default.css" />
+        <link rel="stylesheet" type="text/css" href="mediaqueries.css" />
+        <script src="scripts/helper.js" type="application/javascript"></script>
+        <script src="scripts/popup.js" type="application/javascript"></script>
+        <script src="scripts/search.js" type="application/javascript"></script>
+    </head>
+    <?php
+    	$phpvalue = "test";
+    ?>
+    <body onload="updateAddButtonVisibility();">
+        <div id="blanket"></div>
+        <div class="page">
+            <header class="content">
+                <nav>
+                    <div class="logo"><a href="dashboard.html"><img alt="Home" src="images/logo.png" /></a></div>
+                    <ul>
+                        <li><div><a href="dashboard.html">Dashboard</a></div></li><li><div><a href="profile.html">Profile</a></div></li><li><div><a href="search.html">Search</a></div></li><li><div><a href="index.html">Logout</a></div></li>
+                    </ul>
+                    <div class="search">
+                        <div id="searchwrapper">
+                            <form action="#" method="get">
+                                <input type="text" id="search" class="searchbox" name="searchword_header" value="" placeholder="Search.." />
+                                <button type="button"  name="sumbit" class="searchbox_submit" alt="search..." onClick="Search()"/><img src="images/search.png" class="search_image"></button>
+                                <button type="button" name="filter" class="filter_submit" onClick="showfilterbox()"><img src = "images/filterarrow.png" class="filter_image"></button>
+                            </form>
+                            
+                        </div>
+                        
+                        <div id = "f_menu">
+                        <form>
+                            	<div id= "menuleft">
+                                    <div id = "mainfilter"><input type = "checkbox" name="filter" value="username" id = "user">Username</input></div>
+                                    <!--<div id = "subfilter"><input type = "checkbox" name="filter" value="user_otherfiltering" id = "other_user">Other Filtering</input></div>-->
+                                    <div id = "mainfilter"><input type = "checkbox" name="filter" value="category" id="categ">Judul Kategori</input></div>
+                                </div>
+                                <div id = "verticalline"></div>
+                                <div id = "menuright">
+                                    <div id = "mainfilter"><input type = "checkbox" name="filter" value="task" id="task" onclick="checkedchild()">Task</input></div>
+                                    <div id = "subfilter"><input type = "checkbox" name="filter" value="judultask" id="taskname">Judul Task</input></div>
+                                    <div id = "subfilter"><input type = "checkbox" name="filter" value="judultask" id="tag">Tag</input></div>
+                                    <!--<div id = "subfilter"><input type = "checkbox" name="filter" value="judultask" id="other_task">Other Filtering</input></div>-->
+                                </div>
+                         </form>
+                        </div>
+                           
+                    </div>
+                </nav>
+            </header>
+            <div class="content">
+                <div class="sidebar">
+                    <ul id="FilterKategori" class="nav">
+                    <form action="">
+                   	 	<input type="radio" name="searchmode" value="all" id="all_rb" checked>All<br>
+                        <input type="radio" name="searchmode" value="username" id="username_rb">Username<br>
+                       	<input type="radio" name="searchmode" value="category" id="category_rb">Category<br>
+                        <input type="radio" name="searchmode" value="taskname" id="taskname_rb">Taskname<br>
+                       	<input type="radio" name="searchmode" value="tag" id="tag_rb">Tag<br>
+					</form>
+                    </ul>
+                </div>
+                <div id="listTugas" class="main">
+                    <h1 class="inlineblock">Search </h1>
+                    <div id = "searchtextfield">
+                    	<input type="text" id="search_textfield" class="searchbox_textfield" name="q" value="" placeholder="Search.." />
+                        <button type="button"  name="sumbit" class="searchbox_submit_textfield" alt="search..." onClick="Searchmode()"/><img src="images/search.png" class="search_image_textfield"></button>
+                    </div>
+                    <section id="main-F0">
+                        
+                        <!--<div class="tugas">
+                            <div><a href="tugas.html?name=Tugas%20Besar%201%3A%20Algoritma%20Genetik&amp;deadline=2013-02-22&amp;tags=AI%2C%20Genetics%2C%20Algorithm">Tugas Besar 1: Algoritma Genetik</a></div>
+                            <div>Deadline: <strong>22 Februari 2013</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>AI</li>
+                                    <li>Genetics</li>
+                                    <li>Algorithm</li>
+                                </ul>
+                            </div>                            
+                        </div>-->
+                        <!--<div class="tugas">
+                            <div><a href="tugas.html?name=PR%20CSP%20Problem&amp;deadline=2013-02-22&amp;tags=AI%2C%20CSP">PR CSP Problem</a></div>
+                            <div>Deadline: <strong>22 Februari 2013</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>AI</li>
+                                    <li>CSP</li>
+                                </ul>
+                            </div>                            
+                        </div>-->
+                    </section>
+                    <!--<section id="main-K1">
+                        <h2>IF3094 - Komunikasi Antar Personal</h2>
+                        <div class="tugas">
+                            <div><a href="tugas.html?name=Cerita%20Liburan&amp;deadline=2013-02-27&amp;tags=KAP%2C%20Cerita">Cerita Liburan</a></div>
+                            <div>Deadline: <strong>27 Februari 2013</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>KAP</li>
+                                    <li>Cerita</li>
+                                </ul>
+                            </div>                            
+                        </div>
+                    </section>
+                    <section id="main-K2">
+                        <h2>IF3038 - Pemrograman Internet</h2>
+                        <div class="tugas">
+                            <div><a href="tugas.html?name=Tugas%20Besar%201%3A%20Pengenalan%20HTML%20%2B%20CSS%20%2B%20JS&amp;deadline=2013-02-22&amp;tags=Internet%2C%20HTML%2C%20CSS%2C%20JS">Tugas Besar 1: Pengenalan HTML + CSS + JS</a></div>
+                            <div>Deadline: <strong>22 Februari 2013</strong></div>
+                            <div>
+                                Tags: 
+                                <ul class="tag">
+                                    <li>Internet</li>
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>JS</li>
+                                </ul>
+                            </div>                            
+                        </div>
+                    </section>-->
+                </div>
+            </div>
+            
+            <footer class="content">
+                This website is created solely for the purpose of fulfilling our college task.<br />
+                IF3094 - Pemrograman Internet.
+            </footer>
+        </div>
+       
+    </body> 
+</html>

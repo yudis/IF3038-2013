@@ -1,0 +1,28 @@
+#nameEditDiv, #emailEditDiv, #dateEditDiv, #passwordEditDiv, #repasswordEditDiv, #doneProfileButton, #passwordDisplayDiv, #repasswordDisplayDiv, #changeProfilePictureButton{
+    display: none;
+}
+#nameDisplayDiv, #emailDisplayDiv, #dateDisplayDiv,  #editProfileButton{
+    display: inline;
+}
+#emailDisplayDiv, #nameDisplayDiv, #dateDisplayDiv, #majorDisplayDiv
+{
+	font-weight: bold;
+}
+
+#cppname
+{
+	display: none;
+}
+
+.rincianLabel2
+{
+	width: 20%;
+    display: inline-block;
+    vertical-align: text-top;
+}
+
+.edit_button_profile
+{
+	position: relative;
+	top: 50px;
+}
