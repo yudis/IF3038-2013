@@ -37,6 +37,10 @@
         <servlet-name>DeleteKategori</servlet-name>
         <servlet-class>ajax.DeleteKategori</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertComment</servlet-name>
+        <servlet-class>ajax.InsertComment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Suggestion</servlet-name>
         <url-pattern>/Suggestion</url-pattern>
@@ -72,6 +76,10 @@
     <servlet-mapping>
         <servlet-name>DeleteKategori</servlet-name>
         <url-pattern>/DeleteKategori</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertComment</servlet-name>
+        <url-pattern>/InsertComment</url-pattern>
     </servlet-mapping>
 </web-app>
 <!--    <welcome-file>index.jsp</welcome-file>

@@ -208,11 +208,11 @@
         <div class="taskElmtLeft">
         </div>
         <div class="taskElmtRight">
-            <textarea rows="15" cols="80" placeholder="Masukan komentar kamu disini ..."></textarea>
+            <textarea id="CommentArea" rows="15" cols="80" placeholder="Masukan komentar kamu disini ..."></textarea>
         </div>
         <div class="taskElmtLeft">
         </div>
-        <div id="CommentSubmitBtn" class="taskElmtRight">
+        <div id="CommentSubmitBtn" class="taskElmtRight" onclick="InsertComment('<%= taskToShow %>')">
             <button>Kirim Komentar!</button>
         </div>
         <br/><br/><br/>

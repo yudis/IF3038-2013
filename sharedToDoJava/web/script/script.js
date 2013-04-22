@@ -393,3 +393,22 @@ function toUserProfile(userName) {
 //    alert(userName);
     window.location = "profile.jsp?username=" + userName + "";
 }
+
+function InsertComment(task) {
+    $content = document.getElementById("CommentArea").value;
+    alert($content + " dan " + task);
+    var xmlhttp;
+    if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+    } else {
+            xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
+    }
+    xmlhttp.onreadystatechange = function(){
+            if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+                    $response = xmlhttp.responseText;
+                    alert($response);
+            }
+    }
+    xmlhttp.open("GET","InsertComment?content=" + $content + "&task=" + task,true);
+    xmlhttp.send();
+}
