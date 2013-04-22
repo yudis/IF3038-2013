@@ -423,10 +423,11 @@ function userhint(str) {
     
     xmlhttp.onreadystatechange = function() {
         if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)){
-            document.getElementById("error_assignee").innerHTML = xmlhttp.responseText;
+        	var json = eval('('+xmlhttp.responseText+')');
+            document.getElementById("error_assignee").innerHTML = json.response;
         }
     };
-    xmlhttp.open("GET","php/userhint.php?key=" + str, true);
+    xmlhttp.open("GET","jsp/userhint.jsp?key=" + str, true);
     xmlhttp.send();
 }
 
