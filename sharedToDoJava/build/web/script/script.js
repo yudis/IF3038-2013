@@ -32,7 +32,6 @@ function showHint(str) {
 //        var url = "http://localhost:8080/SharedToDoList/Suggestion?k=" + str;
         var url = "Suggestion?k=" + str;
         xmlhttp.open("GET",url,true);
-//        alert("selesai mengirim");
         xmlhttp.send();
 }
 
@@ -41,7 +40,7 @@ function keProfil() {
 }
 
 function showKategori(kategori) {
-	//alert(kategori);
+//	alert(kategori);
 	
 	var _xmlhttp;
 	if (window.XMLHttpRequest) { //membuat objek XMLHttpRequest
@@ -50,14 +49,15 @@ function showKategori(kategori) {
 		_xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
-	_xmlhttp.open("GET","php/changeKategori.php?k=" + kategori,true);
+	_xmlhttp.open("GET","changeKategori?k=" + kategori,true);
 	_xmlhttp.send();
 	
 	_xmlhttp.onreadystatechange = function() {
 		if ((_xmlhttp.readyState == 4) && (_xmlhttp.status == 200)) {
+//                        alert("aman");
 			var replacement = _xmlhttp.responseText;
-			//var sementara = _xmlhttp.responseXML;
-			//alert(sementara);
+//                        alert("aman");
+//                        alert(replacement);
 			document.getElementById("dynamicSpace").innerHTML = replacement;
 		}
 	}
@@ -70,7 +70,7 @@ function showAllKategori() {
 		_xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	
-	_xmlhttp.open("GET","php/showAllKategori.php",true);
+	_xmlhttp.open("GET","showAllKategori",true);
 	_xmlhttp.send();
 	
 	_xmlhttp.onreadystatechange = function() {
@@ -197,10 +197,10 @@ function showEditForm() {
 function hideEditForm() {
 	document.getElementById("editForm").style.visibility = "hidden";
 }
-function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain, fileUpload) {
-	//alert(newFullName + " "+ newBirthdate + " " + newPassword + " " + newPasswordAgain + " " + fileUpload);
+function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain) {
+//	alert(newFullName + " "+ newBirthdate + " " + newPassword + " " + newPasswordAgain);
 	
-	if (newPassword == newPasswordAgain) {
+	if (newPassword == newPasswordAgain) { //password match
 		//menampilkan notifikasi saat field password tidak diubah
 		if ((newPassword == "") && (newPasswordAgain == "")) {
 			alert("Warning. Field password tidak berubah");
@@ -227,31 +227,33 @@ function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain,
 		}
 		
 		__xmlhttp.onreadystatechange = function() {
-			//alert("readystatechange" + __xmlhttp.readyState + " " + __xmlhttp.status);
+//			alert("readystatechange" + __xmlhttp.readyState + " " + __xmlhttp.status);
 			if ((__xmlhttp.readyState == 4) && (__xmlhttp.status == 200)) {
 				//ditampung xmlresponsenya
-				//alert(__xmlhttp.responseText);
-				$xmlresponse = __xmlhttp.responseXML; //responsexml tidak bisa langsung diambil, akan mengakibatkan null
+//                                alert("aman");
+                                $reply = __xmlhttp.responseText;
+//				alert("Response : " + reply);
+                                var $update = $reply.split("*");
+//                                alert(update[0] + "&" + update[1]);
+				/*$xmlresponse = __xmlhttp.responseXML; //responsexml tidak bisa langsung diambil, akan mengakibatkan null
 				alert("Profile telah berhasil diperbaharui");
 				//mengolah respon dalam bentuk xml
 				$responseElmt = $xmlresponse.getElementsByTagName("response");
 				
 				$fullname = $responseElmt[0].childNodes[0].childNodes[0].nodeValue;
-				$birthdate = $responseElmt[0].childNodes[1].childNodes[0].nodeValue;
+				$birthdate = $responseElmt[0].childNodes[1].childNodes[0].nodeValue;*/
 				
-				document.getElementById("userFullName").innerHTML = "<p>" + $fullname + "</p>";
-				document.getElementById("userBirthdate").innerHTML = "<p>" + $birthdate + "</p>";
-				//setTimeout(function() {
-				//},10000);
+				document.getElementById("userFullName").innerHTML = "<p>" + $update[0] + "</p>";
+				document.getElementById("userBirthdate").innerHTML = "<p>" + $update[1] + "</p>";
 			}
 		}
 		
-		__xmlhttp.open("POST","php/updateProfile.php",true);
+		__xmlhttp.open("POST","UserDataUpdate",true);
 		__xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		//__xmlhttp.setRequestHeader("Content-length", $param.length);
 		//__xmlhttp.setRequestHeader("Connection", "close");
 		
-		__xmlhttp.send("newFullName=" + newFullName + "&newBirthdate=" + newBirthdate + "&newPassword=" + newPassword + "&newFileName=" + fileUpload);
+		__xmlhttp.send("newFullName=" + newFullName + "&newBirthdate=" + newBirthdate + "&newPassword=" + newPassword);
 	} else{
 		alert("Peringatan! kedua password Anda tidak sesuai");
 	}
@@ -261,18 +263,19 @@ function updateProfile(newFullName, newBirthdate, newPassword, newPasswordAgain,
 
 var isTaskStatusClicked = false;
 function changeTaskStatus(namaTask,id) {
-	//alert(namaTask);
+//    alert(namaTask + " dan " + id);
 	$status = "undefined";
+        $kodeUbah = "";
 	if (!isTaskStatusClicked) {
 		isTaskStatusClicked = true;
 		$status = "selesai";
-		document.getElementById(id).innerHTML = "<p>selesai</p>";
+                $kodeUbah = "0";
 	} else {
 		isTaskStatusClicked = false;
 		$status = "belum";
-		document.getElementById(id).innerHTML = "<p>belum selesai</p>";
+                $kodeUbah = "1";
 	}
-	
+        
 	//melakukan update database mengenai status terbaru
 	var xmlhttp;
 	if (window.XMLHttpRequest) {
@@ -284,17 +287,28 @@ function changeTaskStatus(namaTask,id) {
 	xmlhttp.onreadystatechange = function(){
 		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
 			$responseUpdate = xmlhttp.responseText;
-			alert($responseUpdate);
+//			alert($responseUpdate);
+                        
+                        if ($responseUpdate == 1) {
+                            if ($kodeUbah == "0") {
+                                    document.getElementById(id).innerHTML = "<p>selesai</p>";
+                            } else {
+                                    document.getElementById(id).innerHTML = "<p>belum</p>";
+                            }
+                            alert("Sucess. Status telah berhasil diubah");
+                        } else if ($responseUpdate == 0) {
+                            alert("Warning. Anda tidak berhak edit tugas!");
+                        }
 		}
 	}
 	
-	xmlhttp.open("GET","php/CommitStatus.php?stat=" + $status + "&task=" + namaTask,true);
+	xmlhttp.open("GET","CommitStatus?stat=" + $status + "&task=" + namaTask,true);
 	xmlhttp.send();
 }
 
 function toHalamanRincianTugas(namaTask) {
-	//alert("pindah ke halaman " + namaTask);
-	window.location = "taskdetail.php?task=" + namaTask;
+//	alert("pindah ke halaman " + namaTask);
+	window.location = "halamanRincianTugas.jsp?task=" + namaTask;
 }
 
 function toHalamanPembuatanTugas(kat) {
@@ -303,7 +317,7 @@ function toHalamanPembuatanTugas(kat) {
 }
 function deleteTask(namaTask) {
 	//meminta username dan creator dari task yang hendak dihapus
-	//alert(namaTask);
+//	alert(namaTask);
 	var xmlhttp;
 	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();
@@ -313,16 +327,18 @@ function deleteTask(namaTask) {
 	xmlhttp.onreadystatechange = function(){
 		if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
 			$response = xmlhttp.responseText;
-			//alert($response);
-			if ($response == "1") {
-				alert("Tugas telah berhasil dihapus");
+//			alert($response);
+			if ($response == 1) {
+				alert("Success. Tugas telah berhasil dihapus");
 				document.getElementById(namaTask+"space").innerHTML = "";
-			} else {
-				alert("Warning. Anda tidak berhak untuk menghapus tugas ini.");
-			}
+			} else if ($response == 0){
+                            alert("Failed. Tugas tidak berhasil dihapus karena alasan teknis");
+			} else if ($response == 2) {
+                            alert("Warning. Anda tidak berhak untuk menghapus tugas ini.");
+                        }
 		}
 	}
-	xmlhttp.open("GET","php/getDeletionInfo.php?task="+namaTask,true);
+	xmlhttp.open("GET","GetDeletionInfo?task="+namaTask,true);
 	xmlhttp.send();
 }
 function closeKategoriForm(id) {
@@ -346,7 +362,7 @@ function addKategori(katName,userList) {
 			//menampilkan penambahan kolom kategori secara langsung
 		}
 	}
-	xmlhttp.open("GET","php/insertKategori.php?kat="+katName+"&userList="+userList,true);
+	xmlhttp.open("GET","InsertKategori?kat="+katName+"&userList="+userList,true);
 	xmlhttp.send();
 }
 function deleteKategori(namaKategori) {
@@ -364,7 +380,7 @@ function deleteKategori(namaKategori) {
 			alert($response);
 		}
 	}
-	xmlhttp.open("GET","php/deleteKategori.php?kat="+namaKategori,true);
+	xmlhttp.open("GET","DeleteKategori?kat="+namaKategori,true);
 	xmlhttp.send();
 	//cek apakah user yang sedang aktif berhak untuk menghapus kategori
 	

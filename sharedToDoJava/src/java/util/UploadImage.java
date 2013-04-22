@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -119,24 +118,13 @@ public class UploadImage extends HttpServlet {
                             
 //                            Thread.sleep(1000);
                             response.sendRedirect("profile.jsp?");
-                            Thread.sleep(5000);
+                            Thread.sleep(3000);
                         } catch(Exception e){
                             e.printStackTrace();
                         }
                     }
                 }
             }
-            
-            
-            
-            /*out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UploadImage</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UploadImage at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");*/
         } finally {            
             out.close();
         }

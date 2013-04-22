@@ -4,7 +4,6 @@
     Author     : Sonny Theo Thumbur
 --%>
 
-<%@page import="com.sun.corba.se.pept.transport.ContactInfo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 
@@ -17,7 +16,6 @@
         <script LANGUAGE="Javascript" src="script/script.js"></script>
     </head>
     <body>
-        <!--<h1>Hello World!</h1>-->
         <form action="Suggestion" method="get">
     	<div id="header">
             <a href="dashboard.jsp"><img id="logo" src="res/logo1.png" alt="to-do list"></img></a>
@@ -151,9 +149,79 @@
                     <p></p>
                 </div>
                 <div class="bioRight">
-                    <input class="submitBtn" type="button" value="Submit Form" name='upload' onclick="hideEditForm(); updateProfile(newFullName.value, newBirthdate.value, newPassword.value, newPasswordAgain.value, fileUpload.value);"></input>
+                    <input class="submitBtn" type="button" value="Submit Form" name="upload" onclick="hideEditForm(); updateProfile(newFullName.value, newBirthdate.value, newPassword.value, newPasswordAgain.value);"></input>
                 </div>
             </form>
         </div>
+        
+        <h2 id="taskTitle">TASKS</h2>
+        <hr/>
+        
+        <%
+            String sqlTask = "SELECT DISTINCT task.namaTask, deadline FROM task LEFT JOIN tasktoasignee ON task.namaTask=tasktoasignee.namaTask WHERE creatorTaskName='" + curUser + "' OR asigneeName='" + curUser + "'";
+            Statement stmt1 = con.createStatement();
+            rs = stmt1.executeQuery(sqlTask);
+            
+            while(rs.next()) {
+                String namaTask = rs.getString("namaTask");
+        %>
+
+            <div id="taskContent">
+                <div class="bioLeft">
+                    <p>Nama</p>
+                </div>
+                <div class="bioRight">
+                    <p>Deadline</p>
+                </div>
+
+                <div class="tableElmtLeft">
+                    <a href="halamanRincianTugas.jsp?task=<%= rs.getString("namaTask") %>"><p><%= rs.getString("namaTask") %></p></a>
+                </div>
+                <div class="tableElmtRight">
+                    <p><%= rs.getString("deadline") %></p>
+                </div>
+            </div>
+            
+            
+        <%
+           }
+        %>
+        
+            <h2 id="doneTaskTitle">DONE TASKS</h2><hr/>
+                <div class="bioLeft">
+                    <p>Nama</p>
+                </div>
+                <div class="bioRight">
+                    <p>Tag</p>
+                </div>
+        
+        <%
+            String sqlDoneTask = "SELECT DISTINCT task.namaTask, status FROM task LEFT JOIN tasktoasignee ON task.namaTask=tasktoasignee.namaTask WHERE (creatorTaskName='" + curUser + "' OR asigneeName='" + curUser + "') AND task.status='selesai'";
+            Statement stmt2 = con.createStatement();
+            rs = stmt2.executeQuery(sqlDoneTask);
+            
+            while(rs.next()) {
+                String namaTask = rs.getString("namaTask");
+        %>
+            
+            <%
+                String sqlTag = "SELECT tag FROM tagging WHERE namaTask='" + rs.getString("namaTask") + "'";
+                ResultSet rsTag = stmt.executeQuery(sqlTag);
+                
+                String tag = "";
+                while (rsTag.next()) {
+                    tag = rsTag.getString("tag") + " | ";
+                }
+            %>
+
+            <div class="tableElmtLeft">
+                <p><%= namaTask %></p>
+            </div>
+            <div class="tableElmtRight">
+                <p><%= tag %></p>
+            </div>
+            <%
+                }
+            %>
     </body>
 </html>
