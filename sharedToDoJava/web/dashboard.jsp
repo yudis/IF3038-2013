@@ -20,10 +20,11 @@
     <body>
         
         <%
+        String curUser = "";
             if (session.getAttribute("username") == null) {
                 response.sendRedirect("index.jsp");
             } else {
-                String curUser = (String) session.getAttribute("username");
+                curUser = (String) session.getAttribute("username");
             }
         %>
         
@@ -40,7 +41,7 @@
                 <option>task</option>
             </select>
             <input id="submitForm" type="submit" name="search" value="search" onclick="toSearchResult(searchForm.value,filter.value)">
-	    <a href="profile.jsp"><img id="profile" src="res/profileLogo.png" onclick="keProfil()"/></a>
+	    <a href="profile.jsp"><img id="profile" src="server/<%= curUser %>.png" onclick="keProfil()"/></a>
 	    <a id="logout" href="logout.php">Log Out</a>
 	    <div class="suggest">Suggestion : <span id="textHint"></span></div>
         </div>

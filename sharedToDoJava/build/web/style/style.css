@@ -561,3 +561,13 @@ div#photoUploader{
 	margin-top: 10%;
 	border: solid 3px #890;
 }
+
+/*------------------------------------RINCIAN TUGAS------------------------------------*/
+div#CommentSubmitBtn > button {
+    background-color: rgb(116,227,230);
+    margin: auto 0 auto 75%;
+}
+
+div#DeleteComment > button {
+    background-color: rgb(116,227,230);
+}

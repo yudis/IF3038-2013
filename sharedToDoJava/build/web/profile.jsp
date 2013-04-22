@@ -16,6 +16,17 @@
         <script LANGUAGE="Javascript" src="script/script.js"></script>
     </head>
     <body>
+        
+        <%
+            String param = request.getParameter("username");
+//        String param = "sonnymanurung";
+            String curUser = "";
+            if (param == null) {
+                curUser = (String) session.getAttribute("username");
+            } else {
+                curUser = param;
+            }
+        %>
         <form action="Suggestion" method="get">
     	<div id="header">
             <a href="dashboard.jsp"><img id="logo" src="res/logo1.png" alt="to-do list"></img></a>
@@ -29,7 +40,7 @@
                 <option>task</option>
             </select>
             <input id="submitForm" type="submit" name="search" value="search" onclick="toSearchResult(searchForm.value,filter.value)">
-	    <a href="profile.jsp"><img id="profile" src="res/profileLogo.png" onclick="keProfil()";/></a>
+	    <a href="profile.jsp"><img id="profile" src="server/<%= curUser %>.png" onclick="keProfil()"/></a>
 	    <a id="logout" href="logout.php">Log Out</a>
 	    <div class="suggest">Suggestion : <span id="textHint"></span></div>
         </div>
@@ -37,14 +48,10 @@
         
         <div id="spasi">
         </div>
-        
+            
         <div id="photoSpace">
         	<div id="userPhoto">
-                <%
-                    String curUser = (String) session.getAttribute("username");
-//                        out.println(curUser);
-//                    response.setIntHeader("Refresh", 5);
-                %>
+                
                 <img id="user" src="server/<%= curUser %>.png" alt="userPhoto"/>
 		<div id="photoUploader">
 		    <label><em>Upload new Avatar : </em></label>

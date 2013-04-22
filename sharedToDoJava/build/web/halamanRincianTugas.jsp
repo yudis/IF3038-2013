@@ -4,6 +4,7 @@
     Author     : Sonny Theo Thumbur
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.ResultSet"%>
@@ -18,6 +19,15 @@
         <script LANGUAGE="Javascript" src="script/script.js"></script>
     </head>
     <body>
+        <%
+        //            ambil variabel session
+        String curUser = "";
+            if (session.getAttribute("username") == null) {
+                response.sendRedirect("index.jsp");
+            } else {
+                curUser = (String) session.getAttribute("username");
+            }
+        %>
         <form action="Suggestion" method="get">
     	<div id="header">
             <a href="dashboard.jsp"><img id="logo" src="res/logo1.png" alt="to-do list"></img></a>
@@ -31,7 +41,7 @@
                 <option>task</option>
             </select>
             <input id="submitForm" type="submit" name="search" value="search" onclick="toSearchResult(searchForm.value,filter.value)">
-	    <a href="profile.jsp"><img id="profile" src="res/profileLogo.png" onclick="keProfil()"/></a>
+	    <a href="profile.jsp"><img id="profile" src="server/<%= curUser %>.png" onclick="keProfil()"/></a>
 	    <a id="logout" href="logout.php">Log Out</a>
 	    <div class="suggest">Suggestion : <span id="textHint"></span></div>
         </div>
@@ -41,17 +51,11 @@
         </div>
         
         <%
-//            ambil variabel session
-            if (session.getAttribute("username") == null) {
-                response.sendRedirect("index.jsp");
-            } else {
-                String curUser = (String) session.getAttribute("username");
-            }
+
             
 //            String taskToShow = (String) request.getAttribute("task");
             String taskToShow = request.getParameter("task");
-//            String taskToShow = "Asistensi Akhir";
-        
+            String idStatus = taskToShow + "status";        
 //            koneksi database
             String driver = "com.mysql.jdbc.Driver";
             Class.forName(driver).newInstance();
@@ -79,13 +83,13 @@
             <div class="taskElmtLeft">
                 <p>Status Tugas : </p>
             </div>
-            <div id="statustask" class="taskElmtRight">
+            <div id="<%= idStatus %>" class="taskElmtRight">
                 <p><%= status %></p>
             </div>
             <div class="taskElmtLeft">
             </div>
             <div class="taskElmtRight">
-                <button class="ubahStatusTask" onclick="changeTaskStatus('<%= taskToShow %>','<%= status %>')">Ubah Status</button>
+                <button class="ubahStatusTask" onclick="changeTaskStatus('<%= taskToShow %>','<%= idStatus %>')">Ubah Status</button>
             </div>
             <div class="taskElmtLeft">
                 <p><em>Attachment : </em></p>
@@ -136,7 +140,7 @@
                     <div class="taskElmtLeft">
                         <img src="server/<%= assName %>.png" alt="user attachment" height="50" width="50" align="right"/>
                     </div>
-                    <div class="taskElmtRight">
+                    <div id="<%= assName %>" class="taskElmtRight" onclick="toUserProfile(this.id)">
                         <p><%= assName %></p>
                     </div>
             <%
@@ -144,9 +148,73 @@
             %>
             
         </div>
+            <div class="taskElmtLeft">
+                <p>Komentar :</p>
+            </div>
+            <div class="taskElmtRight">
+            </div>
             
+            <%
+//                seleksi komentar
+                Statement stmtKomentar = con.createStatement();
+                String sqlKomentar = "SELECT komentator, isikomentar, timestamp FROM komentar WHERE namaTask='" + taskToShow + "'";
+                ResultSet rsKomentar = stmtKomentar.executeQuery(sqlKomentar);
+                while (rsKomentar.next()) {
+//                    Statement stmtKomentator = con.createStatement();
+//                    String sqlKomentator = "SELECT avatar FROM user WHERE username='" + rsKomentar.getString("komentator") + "'";
+//                    ResultSet rsKomentator = stmtKomentator.executeQuery(sqlKomentator);
+            %>
+            <div class="taskElmtLeft">
+                <img src="server/<%= rsKomentar.getString("komentator") %>.png" alt="UserKomentator" height="50" width="50" align="right"/>
+            </div>
+            <div class="taskElmtRight">                
+                <p><%= rsKomentar.getString("komentator") %></p>
+            </div>
+            <div class="taskElmtLeft">
+                <p><%= rsKomentar.getString("timestamp") %></p>
+            </div>
+            <div class="taskElmtRight">
+                <p><%= rsKomentar.getString("isikomentar") %></p>
+            </div>
+            <div class="taskElmtLeft">
+            </div>
+            <div id="DeleteComment" class="taskElmtRight">
+                <button class="DeleteComment">Delete</button>
+            </div>
         <%
+                }
            }
+            
+//            seleksi Tag
+            Statement stmtTag = con.createStatement();
+            String sqlTag = "SELECT tag FROM tagging WHERE namaTask='" + taskToShow + "'";
+            ResultSet rsTag = stmtTag.executeQuery(sqlTag);
+            
+            ArrayList<String> tagList = new ArrayList<String>();
+            String tagTotal = "";
+            while (rsTag.next()) {
+                if (!tagList.contains(rsTag.getString("tag"))) {
+                    tagList.add(rsTag.getString("tag"));
+                    tagTotal += rsTag.getString("tag") + " | ";
+                }
+            }
         %>
+        <div class="taskElmtLeft">
+            <p>Tag :</p>
+        </div>
+        <div class="taskElmtRight">
+            <p><%= tagTotal %></p>
+        </div>
+        <div class="taskElmtLeft">
+        </div>
+        <div class="taskElmtRight">
+            <textarea rows="15" cols="80" placeholder="Masukan komentar kamu disini ..."></textarea>
+        </div>
+        <div class="taskElmtLeft">
+        </div>
+        <div id="CommentSubmitBtn" class="taskElmtRight">
+            <button>Kirim Komentar!</button>
+        </div>
+        <br/><br/><br/>
     </body>
 </html>

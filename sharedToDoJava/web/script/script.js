@@ -295,7 +295,7 @@ function changeTaskStatus(namaTask,id) {
                             } else {
                                     document.getElementById(id).innerHTML = "<p>belum</p>";
                             }
-                            alert("Sucess. Status telah berhasil diubah");
+                            alert("Success. Status telah berhasil diubah");
                         } else if ($responseUpdate == 0) {
                             alert("Warning. Anda tidak berhak edit tugas!");
                         }
@@ -385,4 +385,11 @@ function deleteKategori(namaKategori) {
 	//cek apakah user yang sedang aktif berhak untuk menghapus kategori
 	
 	//hapus semua table terkait : tabel kategori, editKategori, task
+}
+
+/**************************Halaman Rincian Tugas**************************/
+
+function toUserProfile(userName) {
+//    alert(userName);
+    window.location = "profile.jsp?username=" + userName + "";
 }
