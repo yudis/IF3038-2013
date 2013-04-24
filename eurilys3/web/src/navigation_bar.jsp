@@ -2,12 +2,12 @@
 <script type="text/javascript" src="../js/animation.js"> </script>
 <div id="navbar">
     <div id="short_profile">
-        <a href="profile.jsp"> <img id="profile_picture" src="" alt=""> </a>
+        <a href="profile.jsp"> <img id="profile_picture" src="../img/faceyourmanga.jpg" alt=""> </a>
         <div id="profile_info">
             Welcome, <br>
             <a href="profile.jsp" class="darkBlue"> <%= session.getAttribute("fullname") %> </a>
             <br><br>
-            <div class="link_tosca" id="edit_profile_button"> <a href="edit_profile.jsp"> Edit Profile </a></div>
+            <div class="link_red" id="edit_profile_button"> <a href="edit_profile.jsp"> Edit Profile </a></div>
         </div>
     </div>
     <div id="category_list">

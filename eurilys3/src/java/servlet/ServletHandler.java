@@ -357,6 +357,7 @@ public class ServletHandler extends HttpServlet{
             List<FileItem> items = null;
             //String avatarName = req.getParameter("avatar");
             //FileItem avatar = (FileItem) req.getParameter("avatar");
+            
             System.out.println("Username : " + user_name);
             System.out.println("Password : " + password);
             System.out.println("Fullname : " + fullname);
@@ -386,7 +387,6 @@ public class ServletHandler extends HttpServlet{
             * */
             //selesai menggambar
             
-            
             try {
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
@@ -398,10 +398,22 @@ public class ServletHandler extends HttpServlet{
                 Statement st = conn.createStatement(); 
                 
                 if (! password.equals("")) {
-                    st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' , password='"+password+"' WHERE username='"+user_name+"'");} 
-                   } else {
-                    st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' WHERE username='"+user_name+"'");} 
-                   }
+                    st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' , password='"+password+"' WHERE username='"+user_name+"'");
+                    /*
+                    if (fileName != null) {
+                        st.executeUpdate("UPDATE user SET avatar='"+fileName+"' , full_name='"+fullname+"' , birthdate='"+birthdate+"' , password='"+password+"' WHERE username='"+user_name+"'");
+                    } else {
+                        st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' , password='"+password+"' WHERE username='"+user_name+"'"); 
+                    } */
+                } else {
+                    st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' WHERE username='"+user_name+"'");
+                    /*
+                    if (fileName != null){
+                        st.executeUpdate("UPDATE user SET avatar='"+fileName+"' , full_name='"+fullname+"' , birthdate='"+birthdate+"' WHERE username='"+user_name+"'");
+                    } else {
+                        st.executeUpdate("UPDATE user SET full_name='"+fullname+"' , birthdate='"+birthdate+"' WHERE username='"+user_name+"'"); 
+                    }*/
+                }                    
                 HttpSession session = req.getSession(true);
                 session.setAttribute("fullname", fullname);
                 resp.sendRedirect("src/profile.jsp");
@@ -417,12 +429,6 @@ public class ServletHandler extends HttpServlet{
                     System.out.println("Can not close connection - edit profile");
                 }
             }
-            
-            
-            
-            
-            
-            
         }
         
         //Add Task
@@ -461,29 +467,32 @@ public class ServletHandler extends HttpServlet{
                 //Insert Task Attachment
                 Part filePart = req.getPart("attachment_file1"); // Retrieves <input type="file" name="file">
                 String filename = "";
-                filename = getFilename(filePart);
-                String dir = "uploads/" + filename;
-                byte buf[] = new byte[1024 * 4];
-                if (!filename.isEmpty()) {
-                    Statement st2 = conn.createStatement(); 
-                    st2.executeUpdate("INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('"+filename+"','"+taskID+"')");
-                    FileOutputStream output = new FileOutputStream(getServletContext().getRealPath("/") + "uploads/" + filename);
-                    try {
-                    InputStream input = filePart.getInputStream();
-                    try {
-                    while (true) {
-                        int count = input.read(buf);
-                        if (count == -1)
-                            break;
-                        output.write(buf, 0, count);
-                    }
+                
+                if (filePart != null ) {
+                    filename = getFilename(filePart);
+                    String dir = "uploads/" + filename;
+                    byte buf[] = new byte[1024 * 4];
+                    if (!filename.isEmpty()) {
+                        Statement st2 = conn.createStatement(); 
+                        st2.executeUpdate("INSERT INTO `attachment` (`att_content`, `att_task_id`) VALUES ('"+filename+"','"+taskID+"')");
+                        FileOutputStream output = new FileOutputStream(getServletContext().getRealPath("/") + "uploads/" + filename);
+                        try {
+                            InputStream input = filePart.getInputStream();
+                            try {
+                                while (true) {
+                                    int count = input.read(buf);
+                                    if (count == -1)
+                                        break;
+                                    output.write(buf, 0, count);
+                                }
+                            } finally {
+                                input.close();
+                            }
                         } finally {
-                        input.close();
-                  }
-                } finally {
-                output.close();
-                 }
-                 }
+                            output.close();
+                        }
+                     }
+                }
                 
                 //Insert Task Assignee
                 String[] assigneArray = assigneeList.split(",");

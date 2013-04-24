@@ -253,6 +253,8 @@ function EditTaskAssigneHint(str) {
     xmlhttp.send();
 }
 
+
+
 function addCategoryAssigne(userID) {
     var user = document.getElementById('cat_ass_'+userID).innerHTML;
     document.getElementById('add_category_asignee_name').value += user;
@@ -268,8 +270,10 @@ function addEditTaskAssigne(userID) {
     document.getElementById('edit_task_assignee').value += ", ";
     document.getElementById("edit_task_asignee_autocomplete").innerHTML="";
     document.getElementById("edit_task_assignee_auto").value = "";
-
 }
+
+
+
 function addAddTaskAssigne(userID) {
     var user = document.getElementById('addtask_ass_'+userID).innerHTML;
     document.getElementById('add_task_assignee_input').value += user;

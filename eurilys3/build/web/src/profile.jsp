@@ -73,7 +73,7 @@
     <div id="dynamic_content">
         <div class="half_div">
             <div id="upperprof">
-                    <img id="mainpp" width="225" src="" alt=""/>
+                    <img id="mainpp" width="225" src="../img/faceyourmanga.jpg" alt=""/>
                     <div id="namauser"> <%=fullname%> </div>
             </div>
             <br/><br/>

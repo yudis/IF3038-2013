@@ -56,7 +56,11 @@
                     <div id="row4_addtask" class="left top10 dynamic_content_row">
                             <div id="assignee_lat" class="left dynamic_content_left">Assignee</div>
                             <div id="assignee_rat" class="left dynamic_content_right">                                
-                                <input id="add_task_assignee_input" type="text" name="assignee_input"> <br>
+                                <!-- <input id="add_task_assignee_input" type="text" name="assignee_input"> <br> -->
+                                
+                                <input type="text" autocomplete="off" name="add_task_assignee" id="add_task_assignee_input" value=""> <br>
+                                <input type="text" autocomplete="off" name="add_task_assignee_auto" id="add_task_assignee_input_auto" class="edit_task_input" onkeyup="xxx(this.value)" Placeholder="Type here..." value="">
+                                <div id="add_task_asignee_autocomplete"></div>
                                 <!--
                                 <input id="add_task_assignee_auto" type="text" onkeyup="AddTaskAssigneHint(this.value)" Placeholder="Type here..." value="">
                                 <div id="add_task_asignee_autocomplete"></div> -->
@@ -81,3 +85,38 @@
 </section>
 
 <%@include file="footer.jsp"%>        
+
+<script type="text/javascript">
+    function xxx(str) {
+    document.getElementById('add_task_asignee_autocomplete').style.display = "block";
+    if (str.length==0) { 
+        document.getElementById("add_task_asignee_autocomplete").innerHTML="";
+        return;
+    }
+    
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("add_task_asignee_autocomplete").innerHTML = xmlhttp.responseText;
+        }
+    } 
+    
+    var url="x_autocomplete.jsp?hint="+str;
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
+
+function addXTaskAssigne(userID) {
+    var user = document.getElementById('addtask_ass_'+userID).innerHTML;
+    document.getElementById('add_task_assignee').value += user;
+    document.getElementById('add_task_assignee').value += ", ";
+    document.getElementById("add_task_asignee_autocomplete").innerHTML="";
+    document.getElementById("add_task_assignee_auto").value = "";
+}
+</script>

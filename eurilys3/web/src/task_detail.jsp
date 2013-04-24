@@ -123,7 +123,7 @@
                                 user_avatar = rs_avatar.getBlob("avatar");
                             }
                             %>
-                            <img src='<%= user_avatar %>' width='55'/> 
+                            <img src='../img/faceyourmanga.jpg' width='55'/> 
                             <br> <%= commentCreator.get(i) %>
                             <br> <%= commentTimestamp.get(i) %>
                         </div>
