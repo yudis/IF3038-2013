@@ -15,8 +15,28 @@
     <servlet-name>UserResource</servlet-name>
     <servlet-class>id.ac.itb.todolist.rest.resource.UserResource</servlet-class>
   </servlet>
+  <servlet>
+    <description></description>
+    <display-name>CategoryResource</display-name>
+    <servlet-name>CategoryResource</servlet-name>
+    <servlet-class>id.ac.itb.todolist.rest.resource.CategoryResource</servlet-class>
+  </servlet>
+  <servlet>
+    <description></description>
+    <display-name>SearchAutoCompleteResource</display-name>
+    <servlet-name>SearchAutoCompleteResource</servlet-name>
+    <servlet-class>id.ac.itb.todolist.rest.resource.SearchAutoCompleteResource</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>UserResource</servlet-name>
     <url-pattern>/rest/user/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CategoryResource</servlet-name>
+    <url-pattern>/rest/category/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SearchAutoCompleteResource</servlet-name>
+    <url-pattern>/rest/searchac/*</url-pattern>
   </servlet-mapping>
 </web-app>

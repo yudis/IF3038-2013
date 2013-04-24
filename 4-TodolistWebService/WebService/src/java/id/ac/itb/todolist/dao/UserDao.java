@@ -100,6 +100,8 @@ public class UserDao extends DataAccessObject {
 
     
     public ArrayList<String> getUsers() {
+    // GET
+    // rest/user/
         ArrayList<String> result = null;
         try {
             PreparedStatement preparedStatement = connection.
@@ -119,6 +121,8 @@ public class UserDao extends DataAccessObject {
     }
 
     public int Update(User user){
+    // POST
+    // rest/user/felixt
         try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement("UPDATE users SET `password`=?, `full_name`=?, `tgl_lahir`=?, `avatar`=? WHERE `username`=?;");
@@ -138,6 +142,8 @@ public class UserDao extends DataAccessObject {
     }
     
     public User getUser(String userId) {
+    // GET
+    // rest/user/felixt    
         User user = null;
 
         try {
@@ -164,6 +170,8 @@ public class UserDao extends DataAccessObject {
     }    
 
     public Collection<User> getUserSearch(String Id, int start, int n) throws IOException {
+    // GET
+    // rest/user/w/0/3
         User user = null;
         ArrayList<User> result = new ArrayList<User>();
         String qry = "SELECT * FROM users WHERE username LIKE '%" + Id + "%' LIMIT " + start + ", " + n + ";";
