@@ -18,9 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UserResource extends HttpServlet {
 	private Pattern regexLogin = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)$");
 	private Pattern regexUser = Pattern.compile("^/([\\w._%].*)$");
-        public UserResource(){
-            super();
-        }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)

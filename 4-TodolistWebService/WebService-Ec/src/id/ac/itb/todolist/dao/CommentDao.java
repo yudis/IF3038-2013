@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentDao extends DataAccessObject {
-    
     public int getCommentsCount(int idTugas) {
-        //url/rest/comment/[idTugas]
         try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement("SELECT COUNT(*) as `n` FROM `comments` WHERE `id_tugas`=?");
@@ -29,7 +27,6 @@ public class CommentDao extends DataAccessObject {
     }
     
     public List<Comment> getComments(int idTugas, int startIndex, int count) {
-        //url/rest/comment/[idTugas]/[startIndex]/[count]
         ArrayList<Comment> comments = null;
         
         try {
@@ -70,7 +67,6 @@ public class CommentDao extends DataAccessObject {
     }
     
     public Comment getCommentById(int idComment) {
-        //url/rest/comment/idComment[idComment]
         Comment comment = null;
 
         try {
@@ -114,7 +110,6 @@ public class CommentDao extends DataAccessObject {
     }
     
     public int deleteComment(int commentId) {
-        //url/comment/[commentId]
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("DELETE FROM `comments` WHERE `id`=?");
