@@ -1,11 +1,11 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.json.JSONModel;
+import org.json.JSONModel;
 import java.util.Collection;
 import java.sql.Date;
 import java.sql.Timestamp;
-import id.ac.itb.todolist.json.JSONArray;
-import id.ac.itb.todolist.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Tugas extends JSONModel {
     private int id;

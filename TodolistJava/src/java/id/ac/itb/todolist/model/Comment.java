@@ -1,8 +1,8 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.json.JSONModel;
+import org.json.JSONModel;
 import java.sql.Timestamp;
-import id.ac.itb.todolist.json.JSONObject;
+import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 
 public class Comment extends JSONModel {

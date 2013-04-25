@@ -4,7 +4,7 @@ import id.ac.itb.todolist.dao.CommentDao;
 import id.ac.itb.todolist.model.Tugas;
 import id.ac.itb.todolist.model.User;
 import id.ac.itb.todolist.dao.TugasDao;
-import id.ac.itb.todolist.json.JSONArray;
+import org.json.JSONArray;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import id.ac.itb.todolist.json.JSONObject;
+import org.json.JSONObject;
 import id.ac.itb.todolist.model.Comment;
 import java.util.List;
 

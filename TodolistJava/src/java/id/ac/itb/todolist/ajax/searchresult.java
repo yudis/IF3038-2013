@@ -7,12 +7,10 @@ package id.ac.itb.todolist.ajax;
 import id.ac.itb.todolist.dao.CategoryDao;
 import id.ac.itb.todolist.dao.TugasDao;
 import id.ac.itb.todolist.dao.UserDao;
-import id.ac.itb.todolist.json.JSONArray;
-import id.ac.itb.todolist.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import javax.enterprise.inject.New;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -90,12 +88,12 @@ public class searchresult extends HttpServlet {
                 if (curTable.equals("username") && (n > 0)){
                     jArray = new JSONArray(userdao.getUserSearch(q, x, n));
                     result.put("user", jArray);                    
-                    if (jArray.size() >= n){
+                    if (jArray.length() >= n){
                         result.put("x", (x + n));
                         result.put("n", "username");
                         n = 0;
                     } else {
-                        n -= jArray.size();
+                        n -= jArray.length();
                         x = 0;
                         curTable = "category";
                     }
@@ -104,12 +102,12 @@ public class searchresult extends HttpServlet {
                 if (curTable.equals("category") && (n > 0)){
                     jArray = new JSONArray(categorydao.getCategorySearch(q, x, n));
                     result.put("category", jArray);                    
-                    if (jArray.size() >= n){
+                    if (jArray.length() >= n){
                         result.put("x", (x + n));
                         result.put("n", "category");
                         n = 0;
                     } else {
-                        n -= jArray.size();
+                        n -= jArray.length();
                         x = 0;
                         curTable = "tugas";
                     }
@@ -118,14 +116,14 @@ public class searchresult extends HttpServlet {
                 if (curTable.equals("tugas") && (n > 0)){
                     jArray = new JSONArray(tugasdao.getTugasSearch(q, x, n));
                     result.put("tugas", jArray);                   
-                    if (jArray.size() >= n){
+                    if (jArray.length() >= n){
                         result.put("x", (x + n));
                         result.put("n", "tugas");
                         n = 0;
                     } else {
-                        n -= jArray.size();
+                        n -= jArray.length();
                         result.put("x", 0);
-                        result.put("n", null);
+//                        result.put("n", null);
                     }
                 }              
                 
@@ -135,12 +133,12 @@ public class searchresult extends HttpServlet {
                 //result.put("category",null);
                 //result.put("tugas",null);
                 result.put("user", jArray);
-                if (jArray.size() >= n){
+                if (jArray.length() >= n){
                     result.put("x", (x + n));
                     result.put("n", "username");
                 } else {
-                    result.put("x", null);
-                    result.put("n", null);
+//                    result.put("x", null);
+//                    result.put("n", null);
                 }
             } else if (request.getParameter("filter").equals("Title")){
                 
@@ -148,12 +146,12 @@ public class searchresult extends HttpServlet {
                 result.put("category",jArray);
                 //result.put("tugas",null);
                 //result.put("user", null);
-                if (jArray.size() >= n){
+                if (jArray.length() >= n){
                     result.put("x", (x + n));
                     result.put("n", "category");
                 } else {
-                    result.put("x", null);
-                    result.put("n", null);
+//                    result.put("x", null);
+//                    result.put("n", null);
                 }                
                 
             } else if (request.getParameter("filter").equals("Task")){
@@ -162,12 +160,12 @@ public class searchresult extends HttpServlet {
                 //result.put("category",null);
                 result.put("tugas",jArray);
                 //result.put("user", null);
-                if (jArray.size() >= n){
+                if (jArray.length()>= n){
                     result.put("x", (x + n));
                     result.put("n", "tugas");
                 } else {
-                    result.put("x", null);
-                    result.put("n", null);
+//                    result.put("x", null);
+//                    result.put("n", null);
                 }                
              
             }

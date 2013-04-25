@@ -1,7 +1,7 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.json.JSONModel;
-import id.ac.itb.todolist.json.JSONObject;
+import org.json.JSONModel;
+import org.json.JSONObject;
 
 public class Attachment extends JSONModel {
 

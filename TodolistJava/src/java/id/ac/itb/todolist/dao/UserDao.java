@@ -4,19 +4,15 @@
  */
 package id.ac.itb.todolist.dao;
 
-import id.ac.itb.todolist.json.JSONArray;
 import id.ac.itb.todolist.model.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.servlet.http.HttpServletResponse;
 
 
 public class UserDao extends DataAccessObject {
