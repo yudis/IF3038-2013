@@ -20,53 +20,6 @@ import org.json.JSONArray;
  * Servlet implementation class UserResource
  */
 public class UserResource extends HttpServlet {
-<<<<<<< HEAD
-	private Pattern regexLogin = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)$");
-	private Pattern regexUser = Pattern.compile("^/([\\w._%].*)$");
-        public UserResource(){
-            super();
-        }
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		String pathInfo = request.getPathInfo();
-		Matcher matcher;
-
-		matcher = regexUser.matcher(pathInfo);
-		if (matcher.find()) {
-			UserDao userDao = new UserDao();
-			out.print(userDao.getUser(matcher.group(1)).toJsonObject());
-			return;
-		}
-		
-		throw new ServletException("Invalid URI");
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		
-		out.print("lalala");
-		out.close();
-	}
-
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doPut(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-=======
->>>>>>> 7bc9947f603256ad0516cc7c1205f46963445805
 
     private Pattern regexAllUser = Pattern.compile("^/$");
     private Pattern regexUser = Pattern.compile("^/([\\w._%].*)$");
