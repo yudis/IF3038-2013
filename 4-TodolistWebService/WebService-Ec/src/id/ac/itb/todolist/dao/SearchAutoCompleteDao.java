@@ -10,8 +10,6 @@ import java.util.HashSet;
 public class SearchAutoCompleteDao extends DataAccessObject {
         
     public ArrayList<String> getSearchAC(String q, String filter){
-    // GET
-    // rest/searchac/username/w
         ArrayList<String> result = new ArrayList<String>();    
         try {
             int n = 0;

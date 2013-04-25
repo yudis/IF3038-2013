@@ -1,11 +1,14 @@
 package id.ac.itb.todolist.rest.resource;
 
 import id.ac.itb.todolist.dao.UserDao;
+import id.ac.itb.todolist.model.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +21,15 @@ import org.json.JSONArray;
  */
 public class UserResource extends HttpServlet {
 
-    private Pattern regexAll = Pattern.compile("^/$");
+    private Pattern regexAllUser = Pattern.compile("^/$");
     private Pattern regexUser = Pattern.compile("^/([\\w._%].*)$");
+    private Pattern regexLogin = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)$");
+    private Pattern regexUserSearch = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)/([\\w._%].*)$");
+    private Pattern regexUpdate = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)$");
+
+    public UserResource() {
+        super();
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -31,6 +41,15 @@ public class UserResource extends HttpServlet {
         String pathInfo = request.getPathInfo();
         Matcher matcher;
 
+        matcher = regexUserSearch.matcher(pathInfo);
+        if (matcher.find()) {
+            UserDao userDao = new UserDao();
+            Collection<User> result = userDao.getUserSearch(matcher.group(1),Integer.parseInt(matcher.group(2)),Integer.parseInt(matcher.group(3)));
+            
+            out.print(new JSONArray(result));
+            return;
+        }
+        
         matcher = regexUser.matcher(pathInfo);
         if (matcher.find()) {
             UserDao userDao = new UserDao();
@@ -38,12 +57,14 @@ public class UserResource extends HttpServlet {
             return;
         }
         
-        matcher = regexAll.matcher(pathInfo);
+        matcher = regexAllUser.matcher(pathInfo);
         if (matcher.find()) {
             UserDao userDao = new UserDao();
-            out.print(new JSONArray(userDao.getUsers()));
+            ArrayList<String> result = userDao.getUsers();
+            
+            out.print(new JSONArray(result));
             return;
-        }       
+        }
 
         throw new ServletException("Invalid URI");
     }
@@ -56,8 +77,17 @@ public class UserResource extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
 
-        out.print("lalala");
-        out.close();
+        String pathInfo = request.getPathInfo();
+        Matcher matcher;
+
+        matcher = regexUpdate.matcher(pathInfo);
+        if (matcher.find()) {
+            UserDao userDao = new UserDao();
+            userDao.Update(userDao.getUser(matcher.group(1)));
+            return;
+        }
+        
+        throw new ServletException("Invalid URI");
     }
 
     /**

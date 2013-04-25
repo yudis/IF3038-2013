@@ -12,8 +12,6 @@ import java.util.Collection;
 public class CategoryDao extends DataAccessObject {
     
     public Category getCategory(int idKategori){
-    // GET
-    // rest/category/1
         Category category=null;
         try{
             PreparedStatement preparedStatement = connection.
@@ -35,8 +33,6 @@ public class CategoryDao extends DataAccessObject {
     }
     
     public ArrayList<Category> getAllCategory(){
-    // GET
-    // rest/category/
         ArrayList<Category> result = null;
         try {
             PreparedStatement preparedStatement = connection.
@@ -75,8 +71,6 @@ public class CategoryDao extends DataAccessObject {
     }
     
     public int DeleteKategori(int id){
-    // DELETE
-    // rest/category/1
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("DELETE FROM categories WHERE id=?");
@@ -121,14 +115,11 @@ public class CategoryDao extends DataAccessObject {
     }
     
     public ArrayList<Category> getAssigneeCat(String username){
-    // GET
-    // rest/category/assignee/wilson
         ArrayList<Category> result = null;
         try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement("SELECT t.id AS id, t.nama AS nama, tgl_deadline,  `status` , t.last_mod AS last_mod, pemilik, id_kategori,username, c.nama AS nama_kategori FROM categories c, tugas t, assignees s WHERE id_kategori NOT IN (SELECT id_kategori FROM coordinator WHERE user=? ) AND username=? AND t.id=s.id_tugas AND t.id_kategori=c.id");
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, username);
             ResultSet rs = preparedStatement.executeQuery();
             
             result = new ArrayList<Category>();
@@ -148,8 +139,6 @@ public class CategoryDao extends DataAccessObject {
     }
     
     public ArrayList<String> getUser(int idKategori){
-    // GET
-    // rest/category/user/1
         ArrayList<String> result = null;
         try{
             PreparedStatement preparedStatement = connection.
@@ -170,8 +159,6 @@ public class CategoryDao extends DataAccessObject {
     }    
     
     public Collection<Category> getCategorySearch(String name, int start, int n){
-    // GET
-    // rest/category/e/0/5
         Category category = null;
         ArrayList<Category> result= new ArrayList<Category>();
         String qry = "SELECT * FROM categories WHERE nama LIKE '%" + name + "%' LIMIT " + start + ", " + n + ";";
