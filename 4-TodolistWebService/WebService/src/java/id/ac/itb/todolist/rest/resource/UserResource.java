@@ -11,52 +11,60 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
 
 /**
  * Servlet implementation class UserResource
  */
 public class UserResource extends HttpServlet {
-	private Pattern regexLogin = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)$");
-	private Pattern regexUser = Pattern.compile("^/([\\w._%].*)$");
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		String pathInfo = request.getPathInfo();
-		Matcher matcher;
+    private Pattern regexAll = Pattern.compile("^/$");
+    private Pattern regexUser = Pattern.compile("^/([\\w._%].*)$");
 
-		matcher = regexUser.matcher(pathInfo);
-		if (matcher.find()) {
-			UserDao userDao = new UserDao();
-			out.print(userDao.getUser(matcher.group(1)).toJsonObject());
-			return;
-		}
-		
-		throw new ServletException("Invalid URI");
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     * response)
+     */
+    protected void doGet(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        String pathInfo = request.getPathInfo();
+        Matcher matcher;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		
-		out.print("lalala");
-		out.close();
-	}
+        matcher = regexUser.matcher(pathInfo);
+        if (matcher.find()) {
+            UserDao userDao = new UserDao();
+            out.print(userDao.getUser(matcher.group(1)).toJsonObject());
+            return;
+        }
+        
+        matcher = regexAll.matcher(pathInfo);
+        if (matcher.find()) {
+            UserDao userDao = new UserDao();
+            out.print(new JSONArray(userDao.getUsers()));
+            return;
+        }       
 
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doPut(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+        throw new ServletException("Invalid URI");
+    }
 
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     * response)
+     */
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+
+        out.print("lalala");
+        out.close();
+    }
+
+    /**
+     * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
+     */
+    protected void doPut(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+    }
 }

@@ -97,7 +97,6 @@ public class UserDao extends DataAccessObject {
 
         return true;
     }
-
     
     public ArrayList<String> getUsers() {
         ArrayList<String> result = null;

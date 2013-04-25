@@ -11,7 +11,7 @@ import java.util.Collection;
 
 public class CategoryDao extends DataAccessObject {
     
-    public Category getCategory(int idKategori){
+    public Category getCategory(int idKategori) {
         Category category=null;
         try{
             PreparedStatement preparedStatement = connection.
@@ -32,7 +32,7 @@ public class CategoryDao extends DataAccessObject {
         return category;
     }
     
-    public ArrayList<Category> getAllCategory(){
+    public ArrayList<Category> getAllCategory() {
         ArrayList<Category> result = null;
         try {
             PreparedStatement preparedStatement = connection.
@@ -56,7 +56,7 @@ public class CategoryDao extends DataAccessObject {
         return result;
     }
     
-    public int NewKategori(String nama,String pembuat){
+    public int NewKategori(String nama, String pembuat) {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("INSERT INTO categories(id,nama) VALUES (0,?);");

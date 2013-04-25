@@ -9,7 +9,7 @@ import java.util.HashSet;
 
 public class SearchAutoCompleteDao extends DataAccessObject {
         
-    public ArrayList<String> getSearchAC(String q, String filter){
+    public ArrayList<String> getSearchAC(String q, String filter) {
         ArrayList<String> result = new ArrayList<String>();    
         try {
             int n = 0;
