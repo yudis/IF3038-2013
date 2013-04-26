@@ -14,15 +14,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import id.ac.itb.todolist.model.User;
+import org.json.JSONArray;
 
 /**
  *
  * @author Raymond
  */
-public class User extends HttpServlet {
+public class UserRest extends HttpServlet {
 
-    private Pattern regexUpdate = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)$");
-    private Pattern regexUserDetail = Pattern.compile("^/([\\w._%].*)$");
+    private Pattern regexUserNames = Pattern.compile("^/$");
+    private Pattern regexUpdate = Pattern.compile("^/update/([\\w._%].*)$");
+    private Pattern regexUserDetail = Pattern.compile("^/detil/([\\w._%].*)$");
+    private Pattern regexSearchUser = Pattern.compile("^/search/([\\w._%].*)/([\\d]{1,})/([\\d]{1,})$");
 
     /**
      * Processes requests for both HTTP
@@ -61,8 +65,29 @@ public class User extends HttpServlet {
 
         String pathInfo = request.getPathInfo();
         Matcher matcher;
-
+        
         matcher = regexUserDetail.matcher(pathInfo);
+        if (matcher.find()) {
+            UserDao userDao = new UserDao();
+            out.print(userDao.getUser(matcher.group(1)).toJsonObject());
+            return;
+        }
+        System.out.println("SDFD");
+        matcher = regexSearchUser.matcher(pathInfo);
+        if (matcher.find()) {
+            System.out.println("MATCH");
+            UserDao userDao = new UserDao();
+            Collection<User> result = userDao.getUserSearch(matcher.group(1), Integer.parseInt( matcher.group(2)), Integer.parseInt(matcher.group(3)));
+            out.print(new JSONArray(result));
+            return;
+        }
+         matcher = regexUpdate.matcher(pathInfo);
+        if (matcher.find()) {
+            UserDao userDao = new UserDao();
+            out.print(userDao.getUser(matcher.group(1)).toJsonObject());
+            return;
+        }
+         matcher = regexUserNames.matcher(pathInfo);
         if (matcher.find()) {
             UserDao userDao = new UserDao();
             out.print(userDao.getUser(matcher.group(1)).toJsonObject());
