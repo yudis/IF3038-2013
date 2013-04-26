@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import id.ac.itb.todolist.model.Category;
+import java.util.ArrayList;
 import org.json.JSONArray;
 
 /**
@@ -27,6 +28,8 @@ public class CategoryRest extends HttpServlet {
     private Pattern regexCategoryDetail = Pattern.compile("^/detil/([0-9]{1,})$");
     private Pattern regexSearchCategory = Pattern.compile("^/search/([\\w._%].*)/([\\d]{1,})/([\\d]{1,})$");
     private Pattern regexCategoryNames = Pattern.compile("^/$");
+    private Pattern regexAssigneeCategory = Pattern.compile("^/assign/([\\w._%].*)$");
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -71,7 +74,15 @@ public class CategoryRest extends HttpServlet {
             out.print(categoryDao.getCategory(Integer.parseInt(matcher.group(1))).toJsonObject());
             return;
         }
-
+        
+        matcher = regexAssigneeCategory.matcher(pathInfo);
+        if (matcher.find()) {
+            CategoryDao categoryDao = new CategoryDao();
+            ArrayList<Category> result = categoryDao.getAssigneeCat(matcher.group(1));
+            out.print(new JSONArray(result));
+            return;
+        }
+        
         matcher = regexSearchCategory.matcher(pathInfo);
         if (matcher.find()) {
             System.out.println("MATCH");
@@ -80,16 +91,11 @@ public class CategoryRest extends HttpServlet {
             out.print(new JSONArray(result));
             return;
         }
-         matcher = regexUpdate.matcher(pathInfo);
-        if (matcher.find()) {
-            CategoryDao categoryDao = new CategoryDao();
-            out.print(categoryDao.getCategory(Integer.parseInt(matcher.group(1))).toJsonObject());
-            return;
-        }
          matcher = regexCategoryNames.matcher(pathInfo);
         if (matcher.find()) {
             CategoryDao categoryDao = new CategoryDao();
-            out.print(categoryDao.getCategory(Integer.parseInt(matcher.group(1))).toJsonObject());
+            ArrayList<Category> result = categoryDao.getAllCategory();
+            out.print(new JSONArray(result));
             return;
         }
         throw new ServletException("Invalid URI");
