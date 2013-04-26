@@ -492,7 +492,7 @@ public class TugasDao extends DataAccessObject {
     public Collection<Tugas> getTugas(String username) {
         // GET
         // /rest/tugas/username/[username]
-        
+
         ArrayList<Tugas> result = null;
         Tugas tugas = null;
         try {
@@ -543,7 +543,7 @@ public class TugasDao extends DataAccessObject {
     public Collection<Tugas> getTugasSearch(String keyword, int start, int limit) {
         // GET
         // /rest/tugas/search/[keyword]/[start]/[limit]
-        
+
         Tugas tugas = null;
         ArrayList<Tugas> result = new ArrayList<Tugas>();
         String qry = "SELECT DISTINCT t.`id` AS `id`, t.`nama` AS `nama`, `tgl_deadline`,  `status` , t.`last_mod` AS `last_mod`, t.`pemilik` AS `pemilik_username`, u.`email` AS `pemilik_email`, u.`password` AS `pemilik_password`, u.`full_name` AS `pemilik_full_name`, u.`tgl_lahir` AS `pemilik_tgl_lahir`, u.`avatar` AS `pemilik_avatar`, c.`id` AS `kategori_id`, c.`nama` AS `kategori_nama`, c.`last_mod` AS `kategori_last_mod` FROM `categories` c, `tugas` t, `users` u, `tags` teg WHERE (t.`nama` LIKE '%" + keyword + "%' OR teg.`tag` LIKE '%" + keyword + "%') AND c.`id` = t.`id_kategori` AND u.`username` = t.`pemilik` AND teg.`id_tugas` = t.`id` ORDER BY kategori_id LIMIT " + start + ", " + limit + ";";

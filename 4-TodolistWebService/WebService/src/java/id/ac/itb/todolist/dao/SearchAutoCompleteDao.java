@@ -8,16 +8,16 @@ import java.util.Collections;
 import java.util.HashSet;
 
 public class SearchAutoCompleteDao extends DataAccessObject {
-        
-    public ArrayList<String> getSearchAC(String q, String filter){
-    // GET
-    // rest/searchac/username/w
-        ArrayList<String> result = new ArrayList<String>();    
+
+    public ArrayList<String> getSearchAC(String q, String filter) {
+        // GET
+        // rest/searchac/username/w
+        ArrayList<String> result = new ArrayList<String>();
         try {
             int n = 0;
-            
-            if ((("All".equals(filter)) || ("Username".equals(filter))) && (n < 4)){
-                String qry1 = "SELECT username FROM users WHERE username LIKE '" + q + "%';";            
+
+            if ((("All".equals(filter)) || ("Username".equals(filter))) && (n < 4)) {
+                String qry1 = "SELECT username FROM users WHERE username LIKE '" + q + "%';";
                 PreparedStatement preparedStatement1 = connection.
                         prepareStatement(qry1);
 
@@ -28,9 +28,9 @@ public class SearchAutoCompleteDao extends DataAccessObject {
                     n++;
                 }
             }
-            
-            if ((("All".equals(filter)) || ("Title".equals(filter))) && (n < 4)){
-                String qry2 = "SELECT nama FROM categories WHERE nama LIKE '" + q + "%';";            
+
+            if ((("All".equals(filter)) || ("Title".equals(filter))) && (n < 4)) {
+                String qry2 = "SELECT nama FROM categories WHERE nama LIKE '" + q + "%';";
                 PreparedStatement preparedStatement2 = connection.
                         prepareStatement(qry2);
 
@@ -41,9 +41,9 @@ public class SearchAutoCompleteDao extends DataAccessObject {
                     n++;
                 }
             }
-            
-            if ((("All".equals(filter)) || ("Task".equals(filter))) && (n < 4)){
-                String qry3 = "SELECT nama FROM tugas WHERE nama LIKE '" + q + "%';";            
+
+            if ((("All".equals(filter)) || ("Task".equals(filter))) && (n < 4)) {
+                String qry3 = "SELECT nama FROM tugas WHERE nama LIKE '" + q + "%';";
                 PreparedStatement preparedStatement3 = connection.
                         prepareStatement(qry3);
 
@@ -53,8 +53,8 @@ public class SearchAutoCompleteDao extends DataAccessObject {
                     result.add(rs3.getString("nama"));
                     n++;
                 }
-                
-                String qry4 = "SELECT tag FROM tags WHERE tag LIKE '" + q + "%';";            
+
+                String qry4 = "SELECT tag FROM tags WHERE tag LIKE '" + q + "%';";
                 PreparedStatement preparedStatement4 = connection.
                         prepareStatement(qry4);
 
@@ -63,19 +63,18 @@ public class SearchAutoCompleteDao extends DataAccessObject {
                 while ((rs4.next()) && (n < 4)) {
                     result.add(rs4.getString("tag"));
                     n++;
-                }                
+                }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         HashSet h = new HashSet(result);
         result.clear();
         result.addAll(h);
         Collections.sort(result);
-        
+
         return result;
     }
-    
 }

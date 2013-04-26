@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import id.ac.itb.todolist.json.JSONObject;
+import org.json.JSONObject;
 
 /**
  *
@@ -24,14 +24,6 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
-//        PrintWriter out = response.getWriter();
-//        
-//        JsonObject jObject = new JsonObject();
-//        jObject.addProperty("status", 403);
-//        jObject.addProperty("message", "Bad request");
-//        
-//        out.print(jObject);
-//        out.close();
     }
         
     /**

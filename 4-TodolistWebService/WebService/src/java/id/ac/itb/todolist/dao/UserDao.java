@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
 public class UserDao extends DataAccessObject {
 
     public int addUser(User user) {
@@ -97,17 +96,17 @@ public class UserDao extends DataAccessObject {
 
         return true;
     }
-    
+
     public ArrayList<String> getUsers() {
-    // GET
-    // rest/user/
+        // GET
+        // rest/user/
         ArrayList<String> result = null;
         try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement("SELECT username FROM users ;");
 
             ResultSet rs = preparedStatement.executeQuery();
-            
+
             result = new ArrayList<String>();
             while (rs.next()) {
                 result.add(rs.getString("username"));
@@ -119,9 +118,9 @@ public class UserDao extends DataAccessObject {
         return result;
     }
 
-    public int Update(User user){
-    // POST
-    // rest/user/felixt
+    public int Update(User user) {
+        // POST
+        // rest/user/felixt
         try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement("UPDATE users SET `password`=?, `full_name`=?, `tgl_lahir`=?, `avatar`=? WHERE `username`=?;");
@@ -132,23 +131,23 @@ public class UserDao extends DataAccessObject {
             preparedStatement.setString(3, tglL);
             preparedStatement.setString(4, user.getAvatar());
             preparedStatement.setString(5, user.getUsername());
-            
+
             return preparedStatement.executeUpdate();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             return -1;
         }
     }
-    
-    public User getUser(String userId) {
-    // GET
-    // rest/user/felixt    
+
+    public User getUser(String username) {
+        // GET
+        // rest/user/felixt    
         User user = null;
 
         try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement("SELECT * FROM users WHERE username=?");
-            preparedStatement.setString(1, userId);
+            preparedStatement.setString(1, username);
 
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -166,20 +165,20 @@ public class UserDao extends DataAccessObject {
         }
 
         return user;
-    }    
+    }
 
-    public Collection<User> getUserSearch(String Id, int start, int n) throws IOException {
-    // GET
-    // rest/user/w/0/3
+    public Collection<User> getUserSearch(String keyword, int start, int limit) throws IOException {
+        // GET
+        // rest/user/w/0/3
         User user = null;
         ArrayList<User> result = new ArrayList<User>();
-        String qry = "SELECT * FROM users WHERE username LIKE '%" + Id + "%' LIMIT " + start + ", " + n + ";";
+        String qry = "SELECT * FROM users WHERE username LIKE '%" + keyword + "%' LIMIT " + start + ", " + limit + ";";
         try {
-            
+
             PreparedStatement preparedStatement = connection.
-                    prepareStatement(qry);   
-            
-            ResultSet rs = preparedStatement.executeQuery();       
+                    prepareStatement(qry);
+
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 user = new User();
                 user.setUsername(rs.getString("username"));
@@ -193,7 +192,7 @@ public class UserDao extends DataAccessObject {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-            
+
         return result;
-    }        
+    }
 }

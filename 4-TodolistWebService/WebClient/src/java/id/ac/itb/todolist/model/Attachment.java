@@ -1,7 +1,7 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.json.JSONModel;
-import id.ac.itb.todolist.json.JSONObject;
+import org.json.JSONModel;
+import org.json.JSONObject;
 
 public class Attachment extends JSONModel {
 
@@ -73,5 +73,14 @@ public class Attachment extends JSONModel {
         jObject.put("type", type);
 
         return jObject;
+    }
+
+    @Override
+    public void fromJsonObject(JSONObject jObject) {
+        this.idAttachment = jObject.getInt("idAttachment");
+        this.idTugas = jObject.getInt("idTugas");
+        this.name = jObject.getString("name");
+        this.filename = jObject.getString("filename");
+        this.type = jObject.getString("type");
     }
 }
