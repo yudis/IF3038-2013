@@ -20,11 +20,15 @@ import org.json.JSONArray;
 
 /**
  *
- * @author Raymond
+ * @author Kevin
  */
 public class CategoryRest extends HttpServlet {
 
     private Pattern regexUpdate = Pattern.compile("^/update/([\\w._%].*)/([\\w._%].*)$");
+    private Pattern regexNewKat = Pattern.compile("^/newkat/([\\w._%].*)/([\\w._%].*)$");
+    private Pattern regexDelKat = Pattern.compile("^/delkat/([\\d]{1,})$");
+    private Pattern regexAddNewestCoor = Pattern.compile("^/addnewestcoor/([\\w._%].*)$");
+    private Pattern regexAddCoor = Pattern.compile("^/addcoor/([\\d]{1,})/([\\w._%].*)$");
     private Pattern regexCategoryDetail = Pattern.compile("^/detil/([0-9]{1,})$");
     private Pattern regexSearchCategory = Pattern.compile("^/search/([\\w._%].*)/([\\d]{1,})/([\\d]{1,})$");
     private Pattern regexCategoryNames = Pattern.compile("^/$");
@@ -113,6 +117,47 @@ public class CategoryRest extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+
+        String pathInfo = request.getPathInfo();
+        Matcher matcher;
+        matcher = regexAddNewestCoor.matcher(pathInfo);
+        if (matcher.find()) {
+            CategoryDao categoryDao = new CategoryDao();
+            if (request.getParameter("pembuat") != null) {
+                categoryDao.addNewestCoordinator(request.getParameter("pembuat"));
+                 out.print("Update Berhasil");
+            }
+            return;
+        }
+        matcher = regexAddCoor.matcher(pathInfo);
+        if (matcher.find()) {
+            CategoryDao categoryDao = new CategoryDao();
+            if ((request.getParameter("pembuat") != null) &&(request.getParameter("id") != null)) {
+                categoryDao.addCoordinator(Integer.parseInt(request.getParameter("id")),request.getParameter("pembuat"));
+                 out.print("Update Berhasil");
+            }
+            return;
+        }
+        matcher = regexDelKat.matcher(pathInfo);
+        if (matcher.find()) {
+            CategoryDao categoryDao = new CategoryDao();
+            if (request.getParameter("id") != null) {
+                categoryDao.DeleteKategori(Integer.parseInt(request.getParameter("id")));
+                 out.print("Update Berhasil");
+            }
+            return;
+        }
+        matcher = regexNewKat.matcher(pathInfo);
+        if (matcher.find()) {
+            CategoryDao categoryDao = new CategoryDao();
+            if ((request.getParameter("pembuat") != null) &&(request.getParameter("nama") != null)) {
+                categoryDao.NewKategori(request.getParameter("nama"),request.getParameter("pembuat"));
+                 out.print("Update Berhasil");
+            }
+            return;
+        }
+        throw new ServletException("Invalid URI");
     }
 
     /**

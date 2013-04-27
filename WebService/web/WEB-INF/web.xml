@@ -13,7 +13,11 @@
         <servlet-name>CategoryRest</servlet-name>
         <servlet-class>id.ac.itb.todolist.rest.CategoryRest</servlet-class>
     </servlet> 
-    <servlet-mapping>        
+    <servlet-mapping>
+	<servlet>
+        <servlet-name>SearchAutoCompleteRest</servlet-name>
+        <servlet-class>id.ac.itb.todolist.rest.SearchAutoCompleteRest</servlet-class>
+    </servlet>	
 		<servlet-name>UserRest</servlet-name>
         <url-pattern>/rest/user/*</url-pattern>
     </servlet-mapping>
@@ -25,7 +29,10 @@
         <servlet-name>CategoryRest</servlet-name>
         <url-pattern>/rest/category/*</url-pattern>
     </servlet-mapping>
-
+	<servlet-mapping>
+        <servlet-name>SearchAutoCompleteRest</servlet-name>
+        <url-pattern>/rest/searchautocomplete/*</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>        
 		<welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
