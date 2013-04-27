@@ -1,15 +1,14 @@
 package id.ac.itb.todolist.util;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.Part;
 
 public class Helper {
+
+    public static int QUERY_RESULT_NOT_FOUND = 0;
 
     public static String getFileName(Part part) {
         for (String content : part.getHeader("content-disposition").split(";")) {
@@ -21,6 +20,7 @@ public class Helper {
     }
 
     public static String getFileExtention(String filename) {
+        System.out.println("FILE:" + filename);
         return filename.substring(filename.lastIndexOf('.') + 1).trim();
     }
 

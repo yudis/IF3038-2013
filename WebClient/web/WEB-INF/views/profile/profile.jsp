@@ -47,7 +47,7 @@
                                     out.println("<div id=\"editButton\" class=\"edit_button\"><button type=\"button\" onclick=\"return editProfile()\">Edit</button> </div>");
                                 }
                             %>
-                            <div id="doneButton" class="done_button"><input type="submit" onclick="return saveProfile()" value="Done" /> </div>			
+                            <div id="doneButton" class="done_button"><input type="submit" onclick="return saveProfile();" value="Done" /> </div>			
                         </div>
                     </form>
                     <div class="profilepict"><img src="images/avatars/<c:out value="${user.getAvatar()}"/>" width="200" height="200" alt="Edo Thobi Bram"/></div>

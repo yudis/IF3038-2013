@@ -15,12 +15,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import id.ac.itb.todolist.model.User;
+import id.ac.itb.todolist.util.Helper;
+import java.io.DataInputStream;
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
 import org.json.JSONArray;
 
 /**
  *
  * @author Raymond
  */
+@MultipartConfig(location = "/tmp", fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 2, maxRequestSize = 1024 * 1024 * 2 * 5)
 public class UserRest extends HttpServlet {
 
     private Pattern regexUserNames = Pattern.compile("^/$");
@@ -28,27 +40,6 @@ public class UserRest extends HttpServlet {
     private Pattern regexUserDetail = Pattern.compile("^/detil/([\\w._%].*)$");
     private Pattern regexSearchUser = Pattern.compile("^/search/([\\w._%].*)/([\\d]{1,})/([\\d]{1,})$");
 
-    /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-        } finally {
-            out.close();
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.
@@ -65,36 +56,41 @@ public class UserRest extends HttpServlet {
 
         String pathInfo = request.getPathInfo();
         Matcher matcher;
-        
+
         matcher = regexUserDetail.matcher(pathInfo);
         if (matcher.find()) {
             UserDao userDao = new UserDao();
-            out.print(userDao.getUser(matcher.group(1)).toJsonObject());
+            User user = userDao.getUser(matcher.group(1));
+            if (user != null) {
+                out.print(user.toJsonObject());
+            } else {
+                out.print(Helper.QUERY_RESULT_NOT_FOUND);
+            }
             return;
         }
-        System.out.println("SDFD");
         matcher = regexSearchUser.matcher(pathInfo);
+
         if (matcher.find()) {
-            System.out.println("MATCH");
             UserDao userDao = new UserDao();
-            Collection<User> result = userDao.getUserSearch(matcher.group(1), Integer.parseInt( matcher.group(2)), Integer.parseInt(matcher.group(3)));
+            Collection<User> result = userDao.getUserSearch(matcher.group(1), Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)));
+            if (result.size() > 0) {
+                out.print(new JSONArray(result));
+            } else {
+                out.print(Helper.QUERY_RESULT_NOT_FOUND);
+            }
+            return;
+        }
+        matcher = regexUserNames.matcher(pathInfo);
+
+        if (matcher.find()) {
+            UserDao userDao = new UserDao();
+            ArrayList<String> result = userDao.getUsers();
             out.print(new JSONArray(result));
             return;
         }
-         matcher = regexUpdate.matcher(pathInfo);
-        if (matcher.find()) {
-            UserDao userDao = new UserDao();
-            out.print(userDao.getUser(matcher.group(1)).toJsonObject());
-            return;
-        }
-         matcher = regexUserNames.matcher(pathInfo);
-        if (matcher.find()) {
-            UserDao userDao = new UserDao();
-            out.print(userDao.getUser(matcher.group(1)).toJsonObject());
-            return;
-        }
 
-        throw new ServletException("Invalid URI");
+        throw new ServletException(
+                "Invalid URI");
     }
 
     /**
@@ -109,6 +105,40 @@ public class UserRest extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+
+        String pathInfo = request.getPathInfo();
+        Matcher matcher;
+        matcher = regexUpdate.matcher(pathInfo);
+        if (matcher.find()) {
+            UserDao userDao = new UserDao();
+            User usrBaru = userDao.getUser(matcher.group(1));
+
+            if (request.getParameter("fname") != null) {
+                usrBaru.setFullName(request.getParameter("fname"));
+            }
+            if (request.getParameter("Bday") != null) {
+                try {
+                    usrBaru.setTglLahir(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("Bday")).getTime()));
+                } catch (ParseException ex) {
+                    Logger.getLogger(UserRest.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (request.getParameter("pwd") != null) {
+                usrBaru.setPassword(request.getParameter("pwd"));
+            }
+            if (request.getParameter("ava") != null) { //TODO RYMD
+                Part avatar = request.getPart("ava");
+                String uploadPath = getServletContext().getRealPath("./images/avatars");
+                usrBaru.setAvatar(usrBaru.getUsername() + "." + Helper.getFileExtention(Helper.getFileName(avatar)));
+                Helper.writeFile(avatar.getInputStream(), uploadPath + File.separator + usrBaru.getUsername() + "." + Helper.getFileExtention(Helper.getFileName(avatar)));
+            }
+            userDao.Update(usrBaru);
+            out.print("Update Berhasil");
+            return;
+
+        }
+        throw new ServletException("Invalid URI");
     }
 
     /**

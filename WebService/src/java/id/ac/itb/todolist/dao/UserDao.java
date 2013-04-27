@@ -132,7 +132,7 @@ public class UserDao extends DataAccessObject {
             preparedStatement.setString(3, tglL);
             preparedStatement.setString(4, user.getAvatar());
             preparedStatement.setString(5, user.getUsername());
-            
+            System.out.println("cfcff: "+preparedStatement.toString());
             return preparedStatement.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();

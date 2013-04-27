@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentDao extends DataAccessObject {
-    
+
     public int getCommentsCount(int idTugas) {
         //url/rest/comment/[idTugas]
         try {
@@ -19,7 +19,7 @@ public class CommentDao extends DataAccessObject {
 
             ResultSet rs = preparedStatement.executeQuery();
             rs.next();
-            
+
             return rs.getInt("n");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -27,23 +27,22 @@ public class CommentDao extends DataAccessObject {
 
         return 0;
     }
-    
+
     public List<Comment> getComments(int idTugas, int startIndex, int count) {
         //url/rest/comment/[idTugas]/[startIndex]/[count]
-        ArrayList<Comment> comments = null;
-        
+        ArrayList<Comment> comments;
         try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT c.`id` AS `id`, c.`user` AS `user`, u.`full_name` AS `full_name`,  u.`avatar` AS `avatar`,  c.`time` AS `time`, c.`content` AS `content` " +
-	    	        "FROM `comments` c, `users` u " +
-	    	        "WHERE `id_tugas`=? AND c.`user`=u.`username` ORDER BY c.`time` DESC LIMIT ?, ?");
+                    prepareStatement("SELECT c.`id` AS `id`, c.`user` AS `user`, u.`full_name` AS `full_name`,  u.`avatar` AS `avatar`,  c.`time` AS `time`, c.`content` AS `content` "
+                    + "FROM `comments` c, `users` u "
+                    + "WHERE `id_tugas`=? AND c.`user`=u.`username` ORDER BY c.`time` DESC LIMIT ?, ?");
             preparedStatement.setInt(1, idTugas);
             preparedStatement.setInt(2, startIndex);
             preparedStatement.setInt(3, count);
-            
+
 
             ResultSet rs = preparedStatement.executeQuery();
-            
+
             comments = new ArrayList<Comment>();
             while (rs.next()) {
                 Comment c = new Comment();
@@ -51,16 +50,16 @@ public class CommentDao extends DataAccessObject {
                 c.setId(rs.getInt("id"));
                 c.setIdTugas(idTugas);
                 c.setTime(rs.getTimestamp("time"));
-                
+
                 User u = new User();
                 u.setUsername(rs.getString("user"));
                 u.setAvatar(rs.getString("avatar"));
                 u.setFullName(rs.getString("full_name"));
                 c.setUser(u);
-                
+
                 comments.add(c);
             }
-            
+
             return comments;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,9 +67,9 @@ public class CommentDao extends DataAccessObject {
 
         return null;
     }
-    
+
     public Comment getCommentById(int idComment) {
-        //url/rest/comment/idComment[idComment]
+        //url/rest/comment/byid/[idComment]
         Comment comment = null;
 
         try {
@@ -86,7 +85,7 @@ public class CommentDao extends DataAccessObject {
                 comment.setId(rs.getInt("id"));
                 comment.setIdTugas(rs.getInt("id_tugas"));
                 comment.setTime(rs.getTimestamp("time"));
-                
+
                 User u = new User();
                 u.setUsername(rs.getString("user"));
                 comment.setUser(u);
@@ -97,7 +96,7 @@ public class CommentDao extends DataAccessObject {
 
         return comment;
     }
-    
+
     public int addComment(Comment c) {
         try {
             PreparedStatement preparedStatement = connection
@@ -105,21 +104,20 @@ public class CommentDao extends DataAccessObject {
             preparedStatement.setInt(1, c.getIdTugas());
             preparedStatement.setString(2, c.getUser().getUsername());
             preparedStatement.setString(3, c.getContent());
-            
+
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return -1;
     }
-    
+
     public int deleteComment(int commentId) {
-        //url/comment/[commentId]
+        //url/comment/delete/[commentId]
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("DELETE FROM `comments` WHERE `id`=?");
             preparedStatement.setInt(1, commentId);
-            
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
