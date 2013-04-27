@@ -6,18 +6,23 @@
         <servlet-class>id.ac.itb.todolist.rest.UserRest</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>TugasRest</servlet-name>
-        <servlet-class>id.ac.itb.todolist.rest.TugasRest</servlet-class>
-    </servlet>
-    <servlet-mapping>
+        <servlet-name>CategoryRest</servlet-name>
+        <servlet-class>id.ac.itb.todolist.rest.CategoryRest</servlet-class>
+    </servlet>    
+	<servlet-mapping>
         <servlet-name>UserRest</servlet-name>
         <url-pattern>/rest/user/*</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>CategoryRest</servlet-name>
+        <url-pattern>/rest/category/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TugasRest</servlet-name>
         <url-pattern>/rest/tugas/*</url-pattern>
-    </servlet-mapping>
-    <welcome-file-list>
+    </servlet-mapping>    
+	
+	<welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
