@@ -15,7 +15,7 @@ public class TugasDao extends DataAccessObject {
 
     public int deleteTugas(int idTugas) {
         // DELETE
-        // /rest/tugas/[id]
+        // /rest/tugas/delete/[id]
 
         try {
             PreparedStatement preparedStatement = connection.
@@ -31,7 +31,7 @@ public class TugasDao extends DataAccessObject {
 
     public Tugas getTugas(int idTugas, boolean retTags, boolean retAttachment, boolean retAssignees) {
         // GET
-        // /rest/tugas/[id]/[int3bool]
+        // /rest/tugas/[id]/[0-1/true/false]/[0-1/true/false]/[0-1/true/false]
 
         Tugas tugas = null;
         try {
@@ -159,7 +159,7 @@ public class TugasDao extends DataAccessObject {
 
     public boolean isUpdated(int idTugas, long lastRequest) {
         // GET
-        // /rest/tugas/[idTugas]/u/[lastRequest]
+        // /rest/tugas/isu/[idTugas]/[lastRequest]
 
         try {
             PreparedStatement preparedStatement = connection.
@@ -180,7 +180,7 @@ public class TugasDao extends DataAccessObject {
 
     public boolean isAvailable(int idTugas) {
         // GET
-        // /rest/tugas/[id]/0        
+        // /rest/tugas/isa/[id]        
 
         try {
             PreparedStatement preparedStatement = connection.
@@ -200,7 +200,7 @@ public class TugasDao extends DataAccessObject {
 
     public boolean isPemilik(int idTugas, String username) {
         // GET
-        // /rest/tugas/14/pemilik/edwardsp
+        // /rest/tugas/isp/[id]/[username]
 
         try {
             PreparedStatement preparedStatement = connection.
@@ -221,7 +221,7 @@ public class TugasDao extends DataAccessObject {
 
     public boolean isAssignee(int idTugas, String username) {
         // GET
-        // /rest/tugas/14/assignee/edwardsp
+        // /rest/tugas/isass/[id]/[username]
 
         try {
             PreparedStatement preparedStatement = connection.
@@ -241,7 +241,7 @@ public class TugasDao extends DataAccessObject {
 
     public int updateTimestamp(int idTugas) {
         // POST
-        // /rest/tugas/[idTugas]/timestamp
+        // /rest/tugas/utime/[idTugas]
 
         try {
             PreparedStatement preparedStatement = connection.
@@ -257,7 +257,7 @@ public class TugasDao extends DataAccessObject {
 
     public int setStatus(int idTugas, boolean status) {
         // POST
-        // /rest/tugas/[idTugas]/[0-1]
+        // /rest/tugas/sets/[idTugas]/[0-1/true/false]
 
         try {
             PreparedStatement preparedStatement = connection.
@@ -274,7 +274,7 @@ public class TugasDao extends DataAccessObject {
 
     public int setDeadline(int idTugas, java.sql.Date deadline) {
         // POST
-        // /rest/tugas/[idTugas]/deadline/[yyyy]/[mm]/[dd]
+        // /rest/tugas/setd/[idTugas]/[yyyy]/[mm]/[dd]
 
         try {
             PreparedStatement preparedStatement = connection.
@@ -305,7 +305,7 @@ public class TugasDao extends DataAccessObject {
 
     public int removeAssignee(int idTugas, String username) {
         // DELETE
-        // /rest/tugas/assignee/edwardsp
+        // /rest/tugas/remove/assignee/[id]/[username]
 
         try {
             PreparedStatement preparedStatement = connection.
@@ -322,11 +322,12 @@ public class TugasDao extends DataAccessObject {
 
     public List<String> getSuggestionAssignees(int idTugas, String keyword, int limit) {
         // GET
-        // /rest/tugas/suggestion/assignees/23/p%25/10
-
+        // /rest/tugas/suggestion/assignee/[id]/[keyword]/10
+        System.out.println("tes");
         List<String> result = new ArrayList<String>();
-
+        
         try {
+            
             PreparedStatement preparedStatement = connection.
                     prepareStatement("SELECT `username` FROM `users` WHERE `username` NOT IN (SELECT `username` FROM assignees WHERE `id_tugas`=? UNION SELECT `pemilik` AS `username` FROM `tugas` WHERE `id`=?) AND `username` LIKE ? LIMIT 0, ?;");
             preparedStatement.setInt(1, idTugas);
@@ -379,7 +380,7 @@ public class TugasDao extends DataAccessObject {
 
     public int removeTag(int idTugas, String tag) {
         // DELETE
-        // /rest/tugas/tag/edwardsp
+        // /rest/tugas/remove/tag/[id_tugas]/[tag]
 
         try {
             PreparedStatement preparedStatement = connection.
@@ -396,7 +397,7 @@ public class TugasDao extends DataAccessObject {
 
     public List<String> getSuggestionTags(int idTugas, String keyword, int limit) {
         // GET
-        // /rest/tugas/suggestion/tags/23/p%25/10
+        // /rest/tugas/suggestion/tag/[id]/[keyword]/10
 
         List<String> result = new ArrayList<String>();
 

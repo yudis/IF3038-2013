@@ -5,9 +5,17 @@
         <servlet-name>UserRest</servlet-name>
         <servlet-class>id.ac.itb.todolist.rest.UserRest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TugasRest</servlet-name>
+        <servlet-class>id.ac.itb.todolist.rest.TugasRest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserRest</servlet-name>
         <url-pattern>/rest/user/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TugasRest</servlet-name>
+        <url-pattern>/rest/tugas/*</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
