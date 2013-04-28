@@ -372,10 +372,12 @@ function deleteTask(taskID) {
         }
         xmlhttp.onreadystatechange=function() {
             if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                window.location = "dashboard.jsp";
+                if (xmlhttp.responseText == 1) {
+                    document.getElementById(taskID).parentNode.removeChild(document.getElementById(taskID));                    
+                }
             }
         } 
-        xmlhttp.open('GET', '../ServletHandler?type=delete_task&task_id=' + taskID, true);
+        xmlhttp.open('GET', '../task/delete_task?task_id=' + taskID, true);
         xmlhttp.send(null);
     }
 }

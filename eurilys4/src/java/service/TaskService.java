@@ -390,8 +390,8 @@ public class TaskService extends HttpServlet {
                 conn = connector.getConnection ();
                 PreparedStatement st = conn.prepareStatement("DELETE FROM task WHERE task_id=?");
                 st.setString(1, task_id);
-                st.executeUpdate();
-                out.println("Task with id : " + task_id + " has been deleted!");                
+                int row = st.executeUpdate();
+                out.println(row); //row = 1 berhasil, row = 0 gagal
             } catch (SQLException ex) {
                 Logger.getLogger(TaskService.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
