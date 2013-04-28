@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -285,6 +286,70 @@ public class TaskService extends HttpServlet {
                     taskArray.put(taskObject);
                     out.println(taskArray);
                 }
+            }       
+            catch (ClassNotFoundException ex) {
+                Logger.getLogger(TaskService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(TaskService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        /* 
+         * pathInfo             : baseURL/task/all_task
+         * requestParameter     : username=
+         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         */
+        else if (pathInfo.equals("/all_task")) {
+            try {                
+                String username = request.getParameter("username");
+                JSONArray taskArray = new JSONArray();
+                List<String> tagList = new ArrayList<String>();
+                conn = connector.getConnection ();
+                
+                //Get task detail
+                PreparedStatement stmt = conn.prepareStatement("SELECT DISTINCT task.* FROM task INNER JOIN task_asignee WHERE task.task_creator=? OR task_asignee.username=?;");
+                stmt.setString(1, username);
+                stmt.setString(2, username);
+                ResultSet rs = stmt.executeQuery();
+                rs.beforeFirst();
+                
+                String task_id = "";
+                String task_name = "";
+                String task_status = "";
+                String task_deadline = "";
+                String task_category = "";
+                String task_creator = "";
+
+                while (rs.next()) { 
+                    JSONObject taskObject = new JSONObject();
+                    task_id = rs.getString(1);
+                    task_name = rs.getString(2);
+                    task_status = rs.getString(3);
+                    task_deadline = rs.getString(4);
+                    task_category = rs.getString(5);
+                    task_creator = rs.getString(6);
+                    
+                    //Get Tag List                    
+                    stmt = conn.prepareStatement("SELECT * from tag WHERE task_id=?");
+                    stmt.setString(1, task_id);                
+                    ResultSet rs_tag = stmt.executeQuery();
+                    rs_tag.beforeFirst();
+                    tagList.clear();
+                    while (rs_tag.next()) {
+                        tagList.add(rs_tag.getString("tag_name"));
+                    }
+                    
+                    taskObject.put("task_id", task_id);
+                    taskObject.put("task_name", task_name);
+                    taskObject.put("task_status", task_status);
+                    taskObject.put("task_deadline", task_deadline);
+                    taskObject.put("task_category", task_category);
+                    taskObject.put("task_creator", task_creator);
+                    taskObject.put("tag_list", tagList);
+                    
+                    taskArray.put(taskObject);
+                }
+                out.println(taskArray);
             }       
             catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaskService.class.getName()).log(Level.SEVERE, null, ex);
