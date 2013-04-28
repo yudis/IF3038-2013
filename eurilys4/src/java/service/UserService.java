@@ -23,6 +23,8 @@ import org.json.*;
  *      - register
  *      - user_detail
  *      - update_profile
+ *      - current_task
+ *      - finished_task
  */
 
 public class UserService extends HttpServlet {
@@ -203,6 +205,72 @@ public class UserService extends HttpServlet {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+        }
+        
+        /* 
+         * pathInfo             : baseURL/user/current_task
+         * requestParameter     : username=
+         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         */
+        else if (pathInfo.equals("/current_task")) {
+            try {                
+                String username = request.getParameter("username");                
+                conn = connector.getConnection ();
+              
+                PreparedStatement stmt = conn.prepareStatement("SELECT DISTINCT task.task_name, task.task_id, task.task_status FROM task_asignee LEFT JOIN task ON task.task_id=task_asignee.task_id WHERE username=? OR task_creator=?");
+                stmt.setString(1, username);
+                stmt.setString(2, username);
+                ResultSet rs = stmt.executeQuery();
+                rs.beforeFirst();
+                JSONArray currentTaskArray = new JSONArray();
+                while (rs.next()) {  
+                    if ("0".equals(rs.getString("task_status"))) {
+                        JSONObject currentTask = new JSONObject();
+                        currentTask.put("task_name", rs.getString("task_name"));
+                        currentTask.put("task_id", rs.getString("task_id"));
+                        currentTaskArray.put(currentTask);
+                    }
+                }
+                out.println(currentTaskArray);
+            }      
+            catch (SQLException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        /* 
+         * pathInfo             : baseURL/user/finished_task
+         * requestParameter     : username=
+         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         */
+        else if (pathInfo.equals("/finished_task")) {
+            try {                
+                String username = request.getParameter("username");                
+                conn = connector.getConnection ();
+              
+                PreparedStatement stmt = conn.prepareStatement("SELECT DISTINCT task.task_name, task.task_id, task.task_status FROM task_asignee LEFT JOIN task ON task.task_id=task_asignee.task_id WHERE username=? OR task_creator=?");
+                stmt.setString(1, username);
+                stmt.setString(2, username);
+                ResultSet rs = stmt.executeQuery();
+                rs.beforeFirst();
+                JSONArray finishedTaskArray = new JSONArray();
+                while (rs.next()) {  
+                    if ("1".equals(rs.getString("task_status"))) {
+                        JSONObject finishedTask = new JSONObject();
+                        finishedTask.put("task_name", rs.getString("task_name"));
+                        finishedTask.put("task_id", rs.getString("task_id"));
+                        finishedTaskArray.put(finishedTask);
+                    }
+                }
+                out.println(finishedTaskArray);
+            }      
+            catch (SQLException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
