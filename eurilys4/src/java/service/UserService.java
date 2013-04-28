@@ -159,17 +159,11 @@ public class UserService extends HttpServlet {
          */
         else if (pathInfo.equals("/update_profile")) {
             try {
-                String username = request.getParameter("username");
+                String username = request.getParameter("edit_username");
                 String password = request.getParameter("password");
                 String fullname = request.getParameter("fullname");
                 String birthdate = request.getParameter("birthdate");
                 String avatar = request.getParameter("avatar");
-                
-                out.println("username : " + username);
-                out.println("password : " + password);
-                out.println("fullname : " + fullname);
-                out.println("birthdate : " + birthdate);
-                out.println("avatar : " + avatar);
                 
                 conn = connector.getConnection();
                 
@@ -183,21 +177,19 @@ public class UserService extends HttpServlet {
                 }      
                 
                 Statement st = conn.createStatement();
-                if (!password.equals("")) {
+                if (!("".equals(password))) {
                     st.executeUpdate("UPDATE user SET full_name='" + fullname + "' , birthdate='" + birthdate + "' , password='" + password + "' WHERE username='" + username + "'");
-                    out.println("ganti with password");
                 } else {
                     st.executeUpdate("UPDATE user SET full_name='" + fullname + "' , birthdate='" + birthdate + "' WHERE username='" + username + "'");
-                    out.println("ganti without password");
                 }
                 
                 if (oldpassword.equals(password)) {
                     //profile berhasil di update, password tidak diganti
-                    response.sendRedirect("../src/edit_profile.jsp?profileupdate=pwd");
+                    response.sendRedirect("../src/profile.jsp?profileupdate=pwd");
                 } else
                 {
                     //profile berhasil di update, password diganti
-                    response.sendRedirect("../src/edit_profile.jsp?profileupdate=ok");
+                    response.sendRedirect("../src/profile.jsp?profileupdate=ok");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
