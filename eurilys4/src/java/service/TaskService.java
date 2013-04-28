@@ -369,8 +369,8 @@ public class TaskService extends HttpServlet {
                 Statement stmt = conn.createStatement();
                 String taskID = request.getParameter("task_id");
                 //Update task status
-                stmt.executeUpdate("UPDATE task SET task_status=1 WHERE task_id='" + taskID + "'");
-                out.println("task finished!");
+                int updated_row = stmt.executeUpdate("UPDATE task SET task_status=1 WHERE task_id='" + taskID + "'");
+                out.println(updated_row); //return 1, berarti berhasil. 0 berarti gagal
             }       
             catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaskService.class.getName()).log(Level.SEVERE, null, ex);

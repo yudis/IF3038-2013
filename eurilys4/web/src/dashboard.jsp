@@ -41,12 +41,13 @@
                     out.println("<div onclick=\"javascript:deleteTask('"+task_id+"')\" class=\"task_done_button\"> Delete </div>");
                     out.println("<div class=\"task_done_button\"> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; </div>"); 
                 }
+                out.println("<div id='taskHandler_"+task_id+"'>");
                 if ("0".equals(task_status)) {
                     out.println("<div onclick=\"javascript:finishTask('"+task_id+"')\" class=\"task_done_button\"> Mark as Finished </div>");
                 } else {
                     out.println("<img src=\"../img/yes.png\" class=\"task_done_button\" alt=''/>");
                 }
-                
+                out.println("</div>");
                     out.println("<div id='task_name_ltd' class=\"left dynamic_content_left\"> Task Name </div>");
                     out.println("<div id='task_name_rtd' class=\"left dynamic_content_right darkBlueLink\" onclick=\"javascript:viewTask('"+task_id+"')\">" +task_name+ "</div><br><br>");
                     

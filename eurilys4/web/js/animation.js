@@ -351,10 +351,12 @@ function finishTask(taskID) {
         }
         xmlhttp.onreadystatechange=function() {
             if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                window.location = "dashboard.jsp";
+                if (xmlhttp.responseText == 1) {
+                    document.getElementById("taskHandler_"+taskID).innerHTML = "<img src=\"../img/yes.png\" class=\"task_done_button\" alt=''/>";
+                } 
             }
         } 
-        xmlhttp.open('GET', '../ServletHandler?type=finish_task&task_id=' + taskID, true);
+        xmlhttp.open('GET', '../task/finish_task?task_id=' + taskID, true);
         xmlhttp.send(null);
     }
 }
