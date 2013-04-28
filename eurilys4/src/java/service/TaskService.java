@@ -75,6 +75,16 @@ public class TaskService extends HttpServlet {
                     commentTimestamp.add(rs.getString("comment_timestamp"));
                 }
                 
+                //Get Assignee List 
+                List<String> assignee = new ArrayList<String>();
+                stmt = conn.prepareStatement("SELECT username from task_asignee WHERE task_id=?");
+                stmt.setString(1, task_id);
+                rs = stmt.executeQuery();
+                rs.beforeFirst();
+                while (rs.next()) {
+                    assignee.add(rs.getString("username"));
+                }
+                
                 //Get task detail
                 JSONObject taskObject = new JSONObject();
                 stmt = conn.prepareStatement("SELECT * FROM task WHERE task_id=?");
@@ -91,13 +101,15 @@ public class TaskService extends HttpServlet {
                     taskObject.put("task_id", task_id);
                     taskObject.put("task_name", task_name);
                     taskObject.put("task_deadline", task_deadline);
+                    taskObject.put("task_status", task_status);
                     taskObject.put("task_category", task_category);
-                    taskObject.put("task_cretor", task_creator);
+                    taskObject.put("task_creator", task_creator);
                     taskObject.put("tag_list", tagList);
                     taskObject.put("comment_content", commentContent);
                     taskObject.put("comment_id", commentID);
                     taskObject.put("comment_creator", commentCreator);
                     taskObject.put("comment_timestamp", commentTimestamp);
+                    taskObject.put("task_assignee", assignee);
                 }
                 out.println(taskObject);
             }      
