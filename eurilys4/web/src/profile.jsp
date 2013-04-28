@@ -87,6 +87,12 @@
             <%=email%>
             <br>
             <%=birthdate%>
+            <br><br><br><br>
+            <% if ("ok".equals(request.getParameter("profileupdate"))) { %>
+                <div class="red"> Profile has been successfully updated </div>
+            <% } else if ("pwd".equals(request.getParameter("profileupdate"))) { %>
+                <div class="red"> Profile has been successfully updated. <br> Password is not changed. </div>
+            <% } %>
         </div>
         
         <div class="half_div">
