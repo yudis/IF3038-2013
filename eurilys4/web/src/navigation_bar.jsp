@@ -1,5 +1,33 @@
+<%@page import="org.json.*"%>
+<%@page import="java.io.InputStreamReader"%>
+<%@page import="java.io.BufferedReader"%>
+<%@page import="java.net.HttpURLConnection"%>
+<%@page import="java.net.URL"%>
 <%@page import="java.sql.Blob"%>
 <script type="text/javascript" src="../js/animation.js"> </script>
+
+<%
+    URL url = new URL("http://localhost:8084/eurilys4/category/get_list?username=" + session.getAttribute("username"));
+    //URL url = new URL("http://eurilys.ap01.aws.af.cm/category/get_list?username=" + session.getAttribute("username"));
+    HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+    httpConn.setRequestMethod("GET");
+    httpConn.setRequestProperty("Accept", "application/json");
+    if (httpConn.getResponseCode() != 200) {
+        throw new RuntimeException("Failed : HTTP error code : " + httpConn.getResponseCode());
+    }
+    BufferedReader br = new BufferedReader(new InputStreamReader((httpConn.getInputStream())));
+    String output;
+    String categoryJSONObject = "";
+    while ((output = br.readLine()) != null) {
+        categoryJSONObject += output;
+    } 
+    httpConn.disconnect();
+    
+    //Parse categoryJSONObject 
+    JSONTokener tokener = new JSONTokener(categoryJSONObject);
+    JSONArray root = new JSONArray(tokener);    
+%>
+
 <div id="navbar">
     <div id="short_profile">
         <a href="profile.jsp"> <img id="profile_picture" src="" alt=""> </a>
@@ -13,7 +41,18 @@
     <div id="category_list">
         <div class="link_blue_rect" id="category_title"><a href="dashboard.jsp" onclick=""> All Categories </a> </div>
         <ul id="category_item">   
-            <%@include file="loadCategory.jsp"%>	
+            <%
+                for (int i=0; i<root.length(); i++) {
+                    JSONObject category = root.getJSONObject(i);
+                    String categoryId = category.getString("category_id");
+                    String categoryName = category.getString("category_name");
+            %>
+                <li> 
+                    <span class='categoryList' onclick="javascript:generateTask('<%= categoryName %>');"> <%= categoryName %> </span> 
+                </li>
+            <%    
+                }
+            %>
         </ul>
         <div id="add_task_link"> <a id="add_task" name="" onclick="addCatName();" href="addtask.jsp"> + new task </a> </div>
         <div id="add_new_category" onclick="toggle_visibility('category_form');"> + new category </div>

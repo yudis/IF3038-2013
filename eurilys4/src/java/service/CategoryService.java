@@ -44,26 +44,21 @@ public class CategoryService extends HttpServlet {
                 String username = (String) session.getAttribute("username");
                 */
                 String username = request.getParameter("username");
-                JSONObject categoryObject = new JSONObject();
+                
                 JSONArray categoryArray = new JSONArray();
                 conn = connector.getConnection ();
-                PreparedStatement stmt = conn.prepareStatement("");
-                ResultSet rs = null;
                 
                 /* Search Category by Creator */
-                stmt = conn.prepareStatement("SELECT * FROM category WHERE cat_creator=?;");
+                PreparedStatement  stmt = conn.prepareStatement("SELECT * FROM category WHERE cat_creator=?;");
                 stmt.setString(1, username);
-                rs = stmt.executeQuery();
+                ResultSet rs = stmt.executeQuery();
                 
-                String category_name = "";
-                String category_id = "";
                 //Result set is not empty
                 rs.beforeFirst();
                 while (rs.next()) {
-                    category_name = rs.getString("cat_name");
-                    category_id = rs.getString("cat_id");
-                    categoryObject.put("category_id", category_id);
-                    categoryObject.put("category_name", category_name);  
+                    JSONObject categoryObject = new JSONObject();
+                    categoryObject.put("category_id", rs.getString("cat_id"));
+                    categoryObject.put("category_name", rs.getString("cat_name"));  
                     categoryArray.put(categoryObject);
                 }
                 
@@ -80,12 +75,12 @@ public class CategoryService extends HttpServlet {
                     ResultSet rs2 = stmt2.executeQuery();
                     rs2.beforeFirst();
                     while (rs2.next()) {
+                        JSONObject categoryObject = new JSONObject();
                         categoryObject.put("category_id", categoryId);
                         categoryObject.put("category_name", rs2.getString("cat_name"));  
                         categoryArray.put(categoryObject);
                     }
                 }
-                
                 out.println(categoryArray);
                
             } catch (SQLException ex) {
