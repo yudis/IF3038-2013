@@ -29,6 +29,12 @@
     </servlet>
     <servlet>
         <description/>
+        <display-name>UserResource</display-name>
+        <servlet-name>UserResource</servlet-name>
+        <servlet-class>id.ac.itb.todolist.rest.resource.UserResource</servlet-class>
+    </servlet>
+    <servlet>
+        <description/>
         <display-name>SearchAutoCompleteResource</display-name>
         <servlet-name>SearchAutoCompleteResource</servlet-name>
         <servlet-class>id.ac.itb.todolist.rest.resource.SearchAutoCompleteResource</servlet-class>
@@ -68,6 +74,10 @@
     <servlet-mapping>
         <servlet-name>SearchAutoCompleteResource</servlet-name>
         <url-pattern>/rest/searchac/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserResource</servlet-name>
+        <url-pattern>/rest/user/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserSoap</servlet-name>
