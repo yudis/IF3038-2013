@@ -7,12 +7,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import org.json.JSONArray;
 
 import org.json.JSONObject;
@@ -21,8 +19,8 @@ import org.json.JSONTokener;
 public class UserDao extends DataAccessObject {
 
     public int addUser(User user) {
-        id.ac.itb.todolist.soap.client.UserSoap_Service service = new id.ac.itb.todolist.soap.client.UserSoap_Service();
-        id.ac.itb.todolist.soap.client.UserSoap port = service.getUserSoapPort();
+        id.ac.itb.todolist.soap.user.UserSoap_Service service = new id.ac.itb.todolist.soap.user.UserSoap_Service();
+        id.ac.itb.todolist.soap.user.UserSoap port = service.getUserSoapPort();
         return port.addUser(user.toJsonObject().toString());
     }
 

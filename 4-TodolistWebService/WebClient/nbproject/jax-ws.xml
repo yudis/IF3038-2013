@@ -3,9 +3,9 @@
   <services/>
   <clients>
     <client name="UserSoap">
-      <wsdl-url>http://localhost:8084/Todolist-WebService/UserSoap?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_8084/Todolist-WebService/UserSoap.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">id.ac.itb.todolist.soap.client</package-name>
+      <wsdl-url>http://ranger.ap01.aws.af.cm/UserSoap?wsdl</wsdl-url>
+      <local-wsdl-file>ranger.ap01.aws.af.cm/UserSoap.wsdl</local-wsdl-file>
+      <package-name forceReplace="true">id.ac.itb.todolist.soap.user</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -18,7 +18,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8084/Todolist-WebService/UserSoap?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://ranger.ap01.aws.af.cm/UserSoap?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -30,7 +30,39 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>id.ac.itb.todolist.soap.client</wsimport-option-value>
+          <wsimport-option-value>id.ac.itb.todolist.soap.user</wsimport-option-value>
+        </wsimport-option>
+      </wsimport-options>
+    </client>
+    <client name="CategorySoap">
+      <wsdl-url>http://ranger.ap01.aws.af.cm/CategorySoap?wsdl</wsdl-url>
+      <local-wsdl-file>ranger.ap01.aws.af.cm/CategorySoap.wsdl</local-wsdl-file>
+      <package-name forceReplace="true">id.ac.itb.todolist.soap.category</package-name>
+      <catalog-file>catalog.xml</catalog-file>
+      <wsimport-options>
+        <wsimport-option>
+          <wsimport-option-name>extension</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>verbose</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>wsdlLocation</wsimport-option-name>
+          <wsimport-option-value>http://ranger.ap01.aws.af.cm/CategorySoap?wsdl</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xnocompile</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xendorsed</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>package</wsimport-option-name>
+          <wsimport-option-value>id.ac.itb.todolist.soap.category</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>

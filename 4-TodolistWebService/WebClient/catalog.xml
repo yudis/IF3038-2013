@@ -2,4 +2,8 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8084/Todolist-WebService/UserSoap?wsdl" uri="src/conf/xml-resources/web-service-references/UserSoap/wsdl/localhost_8084/Todolist-WebService/UserSoap.wsdl"/>
     <system systemId="http://localhost:8084/Todolist-WebService/UserSoap?xsd=1" uri="src/conf/xml-resources/web-service-references/UserSoap/wsdl/localhost_8084/Todolist-WebService/UserSoap.xsd_1.xsd"/>
+    <system systemId="http://ranger.ap01.aws.af.cm/UserSoap?wsdl" uri="src/conf/xml-resources/web-service-references/UserSoap/wsdl/ranger.ap01.aws.af.cm/UserSoap.wsdl"/>
+    <system systemId="http://ranger.ap01.aws.af.cm:80/UserSoap?xsd=1" uri="src/conf/xml-resources/web-service-references/UserSoap/wsdl/ranger.ap01.aws.af.cm_80/UserSoap.xsd_1.xsd"/>
+    <system systemId="http://ranger.ap01.aws.af.cm/CategorySoap?wsdl" uri="src/conf/xml-resources/web-service-references/CategorySoap/wsdl/ranger.ap01.aws.af.cm/CategorySoap.wsdl"/>
+    <system systemId="http://ranger.ap01.aws.af.cm:80/CategorySoap?xsd=1" uri="src/conf/xml-resources/web-service-references/CategorySoap/wsdl/ranger.ap01.aws.af.cm_80/CategorySoap.xsd_1.xsd"/>
 </catalog>

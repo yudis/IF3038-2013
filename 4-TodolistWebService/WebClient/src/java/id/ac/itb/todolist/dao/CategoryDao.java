@@ -58,12 +58,6 @@ public class CategoryDao extends DataAccessObject {
         return result;
     }
 
-    public int createNewKategori(String nama, String pembuat) {
-
-        throw new UnsupportedOperationException("Not supported yet.");
-        //return -1;
-    }
-
     public int deleteKategori(int id) {
         // DELETE
         // rest/category/[1]
@@ -78,16 +72,6 @@ public class CategoryDao extends DataAccessObject {
         }
 
         return -1;
-    }
-
-    public int addCoordinator(int id, String pembuat) {
-        throw new UnsupportedOperationException("Not supported yet.");
-        //return -1;
-    }
-
-    public int addNewestCoordinator(String pembuat) {
-        throw new UnsupportedOperationException("Not supported yet.");
-        //return -1;
     }
 
     public ArrayList<Category> getAssigneeCat(String username) {
@@ -149,5 +133,23 @@ public class CategoryDao extends DataAccessObject {
             ex.printStackTrace();
         }
         return result;
+    }
+
+    public int createNewKategori(java.lang.String nama, java.lang.String pembuat) {
+        id.ac.itb.todolist.soap.category.CategorySoap_Service service = new id.ac.itb.todolist.soap.category.CategorySoap_Service();
+        id.ac.itb.todolist.soap.category.CategorySoap port = service.getCategorySoapPort();
+        return port.newKategori(nama, pembuat);
+    }
+
+    public int addCoordinator(int id, java.lang.String pembuat) {
+        id.ac.itb.todolist.soap.category.CategorySoap_Service service = new id.ac.itb.todolist.soap.category.CategorySoap_Service();
+        id.ac.itb.todolist.soap.category.CategorySoap port = service.getCategorySoapPort();
+        return port.addCoordinator(id, pembuat);
+    }
+
+    public int addNewestCoordinator(java.lang.String pembuat) {
+        id.ac.itb.todolist.soap.category.CategorySoap_Service service = new id.ac.itb.todolist.soap.category.CategorySoap_Service();
+        id.ac.itb.todolist.soap.category.CategorySoap port = service.getCategorySoapPort();
+        return port.addNewestCoordinator(pembuat);
     }
 }
