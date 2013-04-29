@@ -39,10 +39,10 @@ public class CategoryService extends HttpServlet {
          */
         if (pathInfo.equals("/get_list")) {
             try {
-                /*
-                HttpSession session = request.getSession(true);
-                String username = (String) session.getAttribute("username");
-                */
+                
+                //HttpSession session = request.getSession(true);
+                //String username = (String) session.getAttribute("username");
+                
                 String username = request.getParameter("username");
                 
                 JSONArray categoryArray = new JSONArray();

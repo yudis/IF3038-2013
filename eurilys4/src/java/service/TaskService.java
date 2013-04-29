@@ -165,6 +165,7 @@ public class TaskService extends HttpServlet {
         }
         
         /* 
+         * HTTP Method          : GET
          * pathInfo             : baseURL/task/delete_comment
          * requestParameter     : comment_id=
          * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
@@ -177,8 +178,8 @@ public class TaskService extends HttpServlet {
                 PreparedStatement st;
                 st = conn.prepareStatement("DELETE FROM comment WHERE comment_id=?");
                 st.setString(1, comment_id);
-                st.executeUpdate();
-                out.println("Comment with id : " + comment_id + " has been deleted");                
+                int row = st.executeUpdate();
+                out.println(row); //row = 1 berhasil, row = 0 gagal
             } catch (SQLException ex) {
                 Logger.getLogger(TaskService.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

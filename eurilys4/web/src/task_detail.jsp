@@ -107,7 +107,7 @@
             </div>
             
             <% for (int i=0; i<comment_id.length();i++) { %>
-                <div class='left top20 dynamic_content_row'>
+                <div class='left top20 dynamic_content_row' id="comment_<%=comment_id.get(i)%>">
                     <div id='comment_ltd' class='left dynamic_content_left darkBlueItalic userprofile_link' onclick="javascript:searchUser('<%= comment_creator.get(i) %>')">
                         <!-- get avatar -->
                         <img src='' width='55'/> 
@@ -116,7 +116,7 @@
                     </div>
                     <div id='comment_rtd' class='left dynamic_content_right'> <%= comment_content.get(i) %> </div> 
                     <% if (session.getAttribute("username").equals(comment_creator.get(i))) { %>
-                        <img src='../img/done.png' onclick="javascript:deleteComment('<%=taskID%>','<%=comment_id.get(i)%>')" class='cursorPointer' alt=''>
+                        <img src='../img/done.png' onclick="javascript:deleteComment('<%=comment_id.get(i)%>')" class='cursorPointer' alt=''>
                     <% } %>
                 </div>
             <% } %>

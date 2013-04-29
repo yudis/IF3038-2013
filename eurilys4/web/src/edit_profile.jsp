@@ -9,13 +9,36 @@
     <!-- Navigation Bar -->        
     <%@include file="navigation_bar.jsp"%>
     <%
-        String userDetailURL = "/user/user_detail?username="+session.getAttribute("username");
-        //call service here 
+        URL userDetailURL = new URL("http://localhost:8084/eurilys4/user/user_detail?username=" + session.getAttribute("username"));
+        //URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/user/user_detail?username=" + session.getAttribute("username"));
+        HttpURLConnection userDetailConn = (HttpURLConnection) userDetailURL.openConnection();
+        userDetailConn.setRequestMethod("GET");
+        userDetailConn.setRequestProperty("Accept", "application/json");
+        if (userDetailConn.getResponseCode() != 200) {
+            throw new RuntimeException("Failed : HTTP error code : " + userDetailConn.getResponseCode());
+        }
+        BufferedReader userDetailBr = new BufferedReader(new InputStreamReader((userDetailConn.getInputStream())));
+        String userDetailOutput;
+        String userDetailJSONObject = "";
+        while ((userDetailOutput = userDetailBr.readLine()) != null) {
+            userDetailJSONObject += userDetailOutput;
+        } 
+        userDetailConn.disconnect();
+
+        //Parse userDetailJSONObject 
+        JSONTokener userDetailTokener = new JSONTokener(userDetailJSONObject);
+        JSONObject userDetailroot = new JSONObject(userDetailTokener);
+        String user_name = userDetailroot.getString("username");
+        String password = userDetailroot.getString("password");
+        String fullname = userDetailroot.getString("fullname");
+        String birthdate = userDetailroot.getString("birthdate");
+        String email = userDetailroot.getString("email");
+        String avatar = userDetailroot.getString("avatar");
     %>
     <div id="dynamic_content">
         <div id="edit_profil_container">
             <h1>  Edit Profile </h1>
-            <form id="edit_profile_form" method="POST" action="../ServletHandler?type=edit_profile">
+            <form id="edit_profile_form" method="POST" action="../user/update_profile">
                 <label> Username </label> <%= session.getAttribute("username") %>
                 <input type="hidden" id="edit_username" name="edit_username" value="<%= session.getAttribute("username") %>">
                 <input type="hidden" id="edit_email" name="edit_email" value="">
@@ -32,9 +55,9 @@
 
                 <h2>Change Details</h2>
                 <label> Full Name </label> 
-                <input type="text" name="fullname" id="fullname" onkeyup="editProfileCheck()" value="" title="Your name should be at least consists first name and last name">
+                <input type="text" name="fullname" id="fullname" onkeyup="editProfileCheck()" value="<%=fullname%>" title="Your name should be at least consists first name and last name">
                 <img src="../img/yes.png" id="name_validation" class="signup_form_validation" alt="validation image">
-                <br><label> Birth Date </label> <input type="date" id="birthdate" name="birthdate" value="">  
+                <br><label> Birth Date </label> <input type="date" id="birthdate" name="birthdate" value="<%=birthdate%>">  
                 <br><label> Avatar </label> <input type="file" id="avatar" name="avatar" onchange="javascript:editProfileCheck();">
 
                 <input type="submit" name="edit_profile_submit" class="link_red top10 bold" id="edit_profile_submit" value="SAVE" disabled="disabled">
