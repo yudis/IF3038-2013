@@ -57,6 +57,7 @@ public class CategoryService extends HttpServlet {
                 rs.beforeFirst();
                 while (rs.next()) {
                     JSONObject categoryObject = new JSONObject();
+                    categoryObject.put("category_creator", username);
                     categoryObject.put("category_id", rs.getString("cat_id"));
                     categoryObject.put("category_name", rs.getString("cat_name"));  
                     categoryArray.put(categoryObject);
@@ -76,6 +77,7 @@ public class CategoryService extends HttpServlet {
                     rs2.beforeFirst();
                     while (rs2.next()) {
                         JSONObject categoryObject = new JSONObject();
+                        categoryObject.put("category_creator", rs2.getString("cat_creator"));
                         categoryObject.put("category_id", categoryId);
                         categoryObject.put("category_name", rs2.getString("cat_name"));  
                         categoryArray.put(categoryObject);
@@ -101,8 +103,8 @@ public class CategoryService extends HttpServlet {
                 conn = connector.getConnection ();
                 PreparedStatement st = conn.prepareStatement("DELETE FROM category WHERE cat_id=?");
                 st.setString(1, category_id);
-                st.executeUpdate();
-                out.println("Category with id : " + category_id + " has been deleted!");                
+                int row = st.executeUpdate();
+                response.sendRedirect("../src/dashboard.jsp");
             } catch (SQLException ex) {
                 Logger.getLogger(TaskService.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

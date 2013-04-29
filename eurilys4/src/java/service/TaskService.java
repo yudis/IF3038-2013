@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -244,7 +243,6 @@ public class TaskService extends HttpServlet {
         else if (pathInfo.equals("/get_category_task")) {
             try {
                 String category_name = request.getParameter("category_name");
-                JSONObject taskObject = new JSONObject();
                 JSONArray taskArray = new JSONArray();
                 List<String> tagList = new ArrayList<String>();
                 conn = connector.getConnection ();
@@ -262,6 +260,8 @@ public class TaskService extends HttpServlet {
                 String task_creator = "";
 
                 while (rs.next()) { 
+                    JSONObject taskObject = new JSONObject();
+
                     task_id = rs.getString(1);
                     task_name = rs.getString(2);
                     task_status = rs.getString(3);
@@ -279,14 +279,15 @@ public class TaskService extends HttpServlet {
                     }
                     taskObject.put("task_id", task_id);
                     taskObject.put("task_name", task_name);
+                    taskObject.put("task_status", task_status);
                     taskObject.put("task_deadline", task_deadline);
                     taskObject.put("task_category", category_name);
-                    taskObject.put("task_cretor", task_creator);
+                    taskObject.put("task_creator", task_creator);
                     taskObject.put("tag_list", tagList);
                     
                     taskArray.put(taskObject);
-                    out.println(taskArray);
                 }
+                out.println(taskArray);
             }       
             catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaskService.class.getName()).log(Level.SEVERE, null, ex);
