@@ -73,10 +73,6 @@ public class CommentDao extends DataAccessObject {
         return comment;
     }
 
-    public int addComment(Comment c) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     public int deleteComment(int commentId) {
         // DELETE
         // /comment/[commentId]
@@ -92,5 +88,11 @@ public class CommentDao extends DataAccessObject {
         }
 
         return -1;
+    }
+
+    public int addComment(java.lang.String comment) {
+        id.ac.itb.todolist.soap.comment.CommentSoap_Service service = new id.ac.itb.todolist.soap.comment.CommentSoap_Service();
+        id.ac.itb.todolist.soap.comment.CommentSoap port = service.getCommentSoapPort();
+        return port.addComment(comment);
     }
 }
