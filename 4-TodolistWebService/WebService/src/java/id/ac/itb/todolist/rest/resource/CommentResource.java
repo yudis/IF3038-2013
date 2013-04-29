@@ -51,15 +51,7 @@ public class CommentResource extends HttpServlet {
 		matcher = regexGetComment.matcher(pathInfo);
                 if (matcher.find()) {
 			CommentDao commentDao = new CommentDao();
-                        JSONObject obj = new JSONObject();
-                        JSONArray jArray=new JSONArray();
-                        for(int i=0;i<commentDao.getComments(Integer.parseInt(matcher.group(1)),Integer.parseInt(matcher.group(2)),Integer.parseInt(matcher.group(3))).size();i++)
-                        {
-                            obj=commentDao.getComments(Integer.parseInt(matcher.group(1)),Integer.parseInt(matcher.group(2)),Integer.parseInt(matcher.group(3))).get(i).toJsonObject();
-                            jArray.put(i, obj);
-                        }
-                        for(int ii=0; ii < jArray.length(); ii++)
-                            out.print(jArray.getJSONObject(ii));
+                        out.print(new JSONArray(commentDao.getComments(Integer.parseInt(matcher.group(1)),Integer.parseInt(matcher.group(2)),Integer.parseInt(matcher.group(3)))));
 			return;      
 		}       
                 matcher = regexId_comment.matcher(pathInfo);

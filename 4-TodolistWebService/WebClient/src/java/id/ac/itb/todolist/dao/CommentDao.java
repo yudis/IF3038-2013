@@ -99,18 +99,9 @@ public class CommentDao extends DataAccessObject {
     }
 
     public int addComment(Comment c) {
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO comments (id_tugas, user, content) VALUES (?, ?, ?);");
-            preparedStatement.setInt(1, c.getIdTugas());
-            preparedStatement.setString(2, c.getUser().getUsername());
-            preparedStatement.setString(3, c.getContent());
-
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
+        id.ac.itb.todolist.soap.comment.CommentSoap_Service service = new id.ac.itb.todolist.soap.comment.CommentSoap_Service();
+        id.ac.itb.todolist.soap.comment.CommentSoap port = service.getCommentSoapPort();
+        return port.addComment(c.toJsonObject().toString());
     }
 
     public int deleteComment(int commentId) {
