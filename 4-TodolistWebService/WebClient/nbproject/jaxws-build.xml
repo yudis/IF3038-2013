@@ -58,5 +58,37 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/id/ac/itb/todolist/soap/category"/>
         <delete dir="${build.generated.dir}/jax-wsCache/CategorySoap"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-UserSoap, wsimport-client-CategorySoap"/>
+    <target name="wsimport-client-CommentSoap" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/CommentSoap"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/CommentSoap" destdir="${build.generated.dir}/jax-wsCache/CommentSoap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/CommentSoap/wsdl/ranger.ap01.aws.af.cm/CommentSoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://ranger.ap01.aws.af.cm/CommentSoap?wsdl" xnocompile="true" xendorsed="true" package="id.ac.itb.todolist.soap.comment">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/CommentSoap/wsdl/ranger.ap01.aws.af.cm/CommentSoap.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/CommentSoap"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/CommentSoap">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-CommentSoap" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/id/ac/itb/todolist/soap/comment"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/CommentSoap"/>
+    </target>
+    <target name="wsimport-client-TugasSoap" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/TugasSoap"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TugasSoap" destdir="${build.generated.dir}/jax-wsCache/TugasSoap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/TugasSoap/wsdl/ranger.ap01.aws.af.cm/TugasSoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://ranger.ap01.aws.af.cm/TugasSoap?wsdl" xnocompile="true" xendorsed="true" package="id.ac.itb.todolist.soap.tugas">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/TugasSoap/wsdl/ranger.ap01.aws.af.cm/TugasSoap.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/TugasSoap"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/TugasSoap">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-TugasSoap" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/id/ac/itb/todolist/soap/tugas"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/TugasSoap"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-UserSoap, wsimport-client-CategorySoap, wsimport-client-CommentSoap, wsimport-client-TugasSoap"/>
 </project>

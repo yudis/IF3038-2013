@@ -42,7 +42,7 @@ public class Create extends HttpServlet {
             TugasDao tugas = new TugasDao();
             
             try {
-                int newestId = tugas.addTugas(request.getParameter("namatask"), Date.valueOf(request.getParameter("deadline")), currentUser.getUsername(), Integer.parseInt(request.getParameter("namakategori")));
+                int newestId = tugas.addTugas(request.getParameter("namatask"), request.getParameter("deadline"), currentUser.getUsername(), Integer.parseInt(request.getParameter("namakategori")));
 
                 String[] assigneeArr = request.getParameter("assigneeI").split("[ ,]+");
                 tugas.addAssignee(newestId, currentUser.getUsername());
