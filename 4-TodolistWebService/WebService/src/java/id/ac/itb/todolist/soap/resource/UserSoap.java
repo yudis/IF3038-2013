@@ -19,17 +19,6 @@ import org.json.JSONTokener;
 @WebService(serviceName = "UserSoap")
 public class UserSoap {
 
-    /**
-     * This is a sample web service operation
-     */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
-    }
-    
-    /**
-     * This is a sample web service operation
-     */
     @WebMethod(operationName = "addUser")
     public int addUser(@WebParam(name = "addUser") String jsonUser) {
         User user = new User();

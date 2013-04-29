@@ -4,6 +4,15 @@
     <service name="UserSoap">
       <implementation-class>id.ac.itb.todolist.soap.resource.UserSoap</implementation-class>
     </service>
+    <service name="CategorySoap">
+      <implementation-class>id.ac.itb.todolist.soap.resource.CategorySoap</implementation-class>
+    </service>
+    <service name="CommentSoap">
+      <implementation-class>id.ac.itb.todolist.soap.resource.CommentSoap</implementation-class>
+    </service>
+    <service name="TugasSoap">
+      <implementation-class>id.ac.itb.todolist.soap.resource.TugasSoap</implementation-class>
+    </service>
   </services>
   <clients/>
   <jsr109>false</jsr109>

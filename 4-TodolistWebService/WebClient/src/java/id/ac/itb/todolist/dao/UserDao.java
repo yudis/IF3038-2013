@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -63,7 +64,6 @@ public class UserDao extends DataAccessObject {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
         return true;
     }
 
