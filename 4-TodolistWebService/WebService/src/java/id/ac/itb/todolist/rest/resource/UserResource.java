@@ -23,7 +23,7 @@ public class UserResource extends HttpServlet {
 
     private Pattern regexAllUser = Pattern.compile("^/$");
     private Pattern regexUser = Pattern.compile("^/([\\w._%].*)$");
-    private Pattern regexLogin = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)$");
+    private Pattern regexEmail = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)$");
     private Pattern regexUserSearch = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)/([\\w._%].*)$");
     private Pattern regexUpdate = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)$");
 
@@ -46,6 +46,15 @@ public class UserResource extends HttpServlet {
             UserDao userDao = new UserDao();
             Collection<User> result = userDao.getUserSearch(matcher.group(1),Integer.parseInt(matcher.group(2)),Integer.parseInt(matcher.group(3)));
             
+            out.print(new JSONArray(result));
+            return;
+        }
+        
+        matcher = regexEmail.matcher(pathInfo);
+        if (matcher.find()) {
+            UserDao userDao = new UserDao();
+            boolean result = userDao.isAvailableEmail(matcher.group(2));
+                    
             out.print(new JSONArray(result));
             return;
         }
