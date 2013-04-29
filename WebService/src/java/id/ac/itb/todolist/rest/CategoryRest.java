@@ -33,7 +33,7 @@ public class CategoryRest extends HttpServlet {
     private Pattern regexSearchCategory = Pattern.compile("^/search/([\\w._%].*)/([\\d]{1,})/([\\d]{1,})$");
     private Pattern regexCategoryNames = Pattern.compile("^/$");
     private Pattern regexAssigneeCategory = Pattern.compile("^/assign/([\\w._%].*)$");
-    
+    private Pattern regexUserCategory = Pattern.compile("^/user/([0-9]{1,})$");
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -83,6 +83,13 @@ public class CategoryRest extends HttpServlet {
         if (matcher.find()) {
             CategoryDao categoryDao = new CategoryDao();
             ArrayList<Category> result = categoryDao.getAssigneeCat(matcher.group(1));
+            out.print(new JSONArray(result));
+            return;
+        }
+        matcher = regexUserCategory.matcher(pathInfo);
+        if (matcher.find()) {
+            CategoryDao categoryDao = new CategoryDao();
+            ArrayList<String> result = categoryDao.getUser(Integer.parseInt(matcher.group(1)));
             out.print(new JSONArray(result));
             return;
         }
