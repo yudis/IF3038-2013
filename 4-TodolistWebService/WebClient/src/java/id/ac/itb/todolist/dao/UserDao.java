@@ -5,6 +5,7 @@ import id.ac.itb.todolist.model.User;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -57,7 +58,6 @@ public class UserDao extends DataAccessObject {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
         return true;
     }
 
