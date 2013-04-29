@@ -3,9 +3,7 @@ package id.ac.itb.todolist.dao;
 import id.ac.itb.todolist.util.ProxyUtil;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
-import java.net.Proxy;
 import java.net.URL;
 
 public class DataAccessObject {
@@ -13,8 +11,8 @@ public class DataAccessObject {
     protected String mainUrl;
 
     public DataAccessObject() {
-        this.mainUrl = "http://localhost:8084/Todolist-WebService";
-        // this.mainUrl = "ranger.ap01.aws.af.cm";
+        // this.mainUrl = "http://localhost:8084/Todolist-WebService";
+        this.mainUrl = "ranger.ap01.aws.af.cm";
     }
 
     public DataAccessObject(String mainUrl) {
