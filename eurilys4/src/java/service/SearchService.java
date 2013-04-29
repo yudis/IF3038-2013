@@ -127,6 +127,52 @@ public class SearchService extends HttpServlet {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+        
+        /* 
+         * pathInfo             : baseURL/search/category
+         * requestParameter     : id=
+         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         */
+        else if (pathInfo.equals("/category")) {
+            try {                
+                String id = request.getParameter("id");
+                conn = connector.getConnection ();
+                PreparedStatement stmt = conn.prepareStatement("");
+                ResultSet rs = null;
+                JSONObject catResult = new JSONObject();
+                
+                //Search Category
+                stmt = conn.prepareStatement("SELECT * FROM category WHERE cat_id=?");
+                stmt.setString(1, id);
+                rs = stmt.executeQuery();
+                rs.beforeFirst();
+                String cat_name = "";
+                while (rs.next()) {
+                    cat_name = rs.getString("cat_name");
+                    catResult.put("cat_name", rs.getString("cat_name"));
+                    catResult.put("cat_creator", rs.getString("cat_creator"));
+                }
+                
+                //Search corresponding task
+                stmt = conn.prepareStatement("SELECT task_name, task_id FROM task WHERE cat_name=?");
+                stmt.setString(1, cat_name);
+                rs = stmt.executeQuery();
+                rs.beforeFirst();
+                JSONArray taskList = new JSONArray();
+                while (rs.next()) {
+                    taskList.put(rs.getString("task_name"));
+                }
+                catResult.put("task", taskList);
+                   
+                out.println(catResult);
+            }      
+            catch (SQLException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
