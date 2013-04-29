@@ -36,9 +36,13 @@ public class UserDao extends DataAccessObject {
             User tmpUser = new User();
             tmpUser.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
             
+            System.out.println(tmpUser.toJsonObject().toString(4));
+            
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(passwd.getBytes());
-            if (new BigInteger(1, md.digest()).toString(16).contentEquals(tmpUser.getPassword())) {
+            String hashPassword = new BigInteger(1, md.digest()).toString(16);
+            System.out.println(hashPassword);
+            if (hashPassword.equals(tmpUser.getPassword())) {
                 user = tmpUser;
             }
         } catch (Exception ex) {

@@ -39,7 +39,7 @@ public class CategoryDao extends DataAccessObject {
         ArrayList<Category> result = null;
         try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM categories ;");
+                    prepareStatement("SELECT * FROM categories;");
 
             ResultSet rs = preparedStatement.executeQuery();
 

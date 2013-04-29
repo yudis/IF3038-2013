@@ -12,7 +12,7 @@ public class DataAccessObject {
 
     public DataAccessObject() {
         // this.mainUrl = "http://localhost:8084/Todolist-WebService";
-        this.mainUrl = "ranger.ap01.aws.af.cm";
+        this.mainUrl = "http://ranger.ap01.aws.af.cm";
     }
 
     public DataAccessObject(String mainUrl) {
