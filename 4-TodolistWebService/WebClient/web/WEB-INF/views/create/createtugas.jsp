@@ -1,5 +1,6 @@
 <jsp:include page="/WEB-INF/includes/header.inc.jsp" />
                 <h1>Buat Tugas Baru</h1>
+                
                 <div class="formtugas">
                     <form name="formTugas1" method="post" enctype="multipart/form-data" action="Create">
                         <ul class="item">

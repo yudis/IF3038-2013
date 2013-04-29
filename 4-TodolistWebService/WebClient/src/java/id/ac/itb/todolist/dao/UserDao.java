@@ -16,7 +16,9 @@ import org.json.JSONTokener;
 public class UserDao extends DataAccessObject {
 
     public int addUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        id.ac.itb.todolist.soap.client.UserSoap_Service service = new id.ac.itb.todolist.soap.client.UserSoap_Service();
+        id.ac.itb.todolist.soap.client.UserSoap port = service.getUserSoapPort();
+        return port.addUser(user.toJsonObject().toString());
     }
 
     public User getUserLogin(String userId, String passwd) {
@@ -60,7 +62,8 @@ public class UserDao extends DataAccessObject {
     }
 
     public boolean isAvailableEmail(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
+        // throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public ArrayList<String> getUsers() {

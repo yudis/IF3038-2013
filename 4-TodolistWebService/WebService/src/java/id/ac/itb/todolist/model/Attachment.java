@@ -74,4 +74,13 @@ public class Attachment extends JSONModel {
 
         return jObject;
     }
+
+    @Override
+    public void fromJsonObject(JSONObject jObject) {
+        this.idAttachment = jObject.getInt("idAttachment");
+        this.idTugas = jObject.getInt("idTugas");
+        this.name = jObject.getString("name");
+        this.filename = jObject.getString("filename");
+        this.type = jObject.getString("type");
+    }
 }
