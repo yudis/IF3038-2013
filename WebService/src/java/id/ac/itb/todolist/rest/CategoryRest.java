@@ -26,7 +26,7 @@ public class CategoryRest extends HttpServlet {
 
     private Pattern regexUpdate = Pattern.compile("^/update/([\\w._%].*)/([\\w._%].*)$");
     private Pattern regexNewKat = Pattern.compile("^/newkat/([\\w._%].*)/([\\w._%].*)$");
-    private Pattern regexDelKat = Pattern.compile("^/delkat/([\\d]{1,})$");
+    private Pattern regexDelKat = Pattern.compile("^/delkat/$");
     private Pattern regexAddNewestCoor = Pattern.compile("^/addnewestcoor/([\\w._%].*)$");
     private Pattern regexAddCoor = Pattern.compile("^/addcoor/([\\d]{1,})/([\\w._%].*)$");
     private Pattern regexCategoryDetail = Pattern.compile("^/detil/([0-9]{1,})$");
@@ -135,7 +135,7 @@ public class CategoryRest extends HttpServlet {
             CategoryDao categoryDao = new CategoryDao();
             if ((request.getParameter("pembuat") != null) &&(request.getParameter("id") != null)) {
                 categoryDao.addCoordinator(Integer.parseInt(request.getParameter("id")),request.getParameter("pembuat"));
-                 out.print("Update Berhasil");
+                 out.print("Updateaaaaa Berhasil");
             }
             return;
         }
