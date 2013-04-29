@@ -48,7 +48,7 @@ public class DeleteCat extends HttpServlet {
             while(i<users.size())
             {
                 if(users.get(i).equals(currentUser.getUsername())){
-                    category.DeleteKategori(Integer.parseInt(q));
+                    category.deleteKategori(Integer.parseInt(q));
                     break;
                 }
                 i++;

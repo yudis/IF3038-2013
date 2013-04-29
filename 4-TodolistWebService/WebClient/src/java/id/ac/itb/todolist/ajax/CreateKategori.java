@@ -37,7 +37,7 @@ public class CreateKategori extends HttpServlet {
         try {
             CategoryDao category = new CategoryDao();
             UserDao user = new UserDao();
-            category.NewKategori(q,currentUser.getUsername());
+            category.createNewKategori(q,currentUser.getUsername());
             for (int i = 0; i < Arr.length; i++)
             {
                 if(!Arr[i].equals(currentUser.getUsername()) && user.isAvailableUsername(Arr[i]))
