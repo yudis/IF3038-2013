@@ -1,3 +1,4 @@
+<%@page import="org.json.JSONArray"%>
 <%@page import="org.json.JSONObject"%>
 <%@page import="org.json.JSONTokener"%>
 <%@page import="java.io.InputStreamReader"%>
@@ -8,6 +9,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page language="java" import ="java.sql.*" %>  
+
 <%  
     String q     = request.getParameter("q");  
     String type     = request.getParameter("type");
@@ -49,16 +51,41 @@
     }
     else
     if (type.equals("category")) {
-        //call category/category_detail?id=q
+        //call search/category?id=
+        URL searchURL = new URL("http://localhost:8084/eurilys4/search/category?id=" + q);
+        //URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/search/category?id=" + q);
+        HttpURLConnection searchConn = (HttpURLConnection) searchURL.openConnection();
+        searchConn.setRequestMethod("GET");
+        searchConn.setRequestProperty("Accept", "application/json");
+        if (searchConn.getResponseCode() != 200) {
+            throw new RuntimeException("Failed : HTTP error code : " + searchConn.getResponseCode());
+        }
+        BufferedReader searchBr = new BufferedReader(new InputStreamReader((searchConn.getInputStream())));
+        String searchOutput;
+        String searchJSONObject = "";
+        while ((searchOutput = searchBr.readLine()) != null) {
+            searchJSONObject += searchOutput;
+        } 
+        searchConn.disconnect();
         
-        //Search Category
-        //stmt_searchresult = con.prepareStatement("SELECT * FROM category WHERE cat_id=?");
-        //cat_id, cat_name, cat_creator
+        //Parse userDetailJSONObject 
+        JSONTokener searchTokener = new JSONTokener(searchJSONObject);
+        JSONObject searchRoot = new JSONObject(searchTokener);
         
-        //Search corresponding task
-        //stmt_searchresult = con.prepareStatement("SELECT task_name, task_id FROM task WHERE cat_name=?");
-        //task_name
-                 
+        buffer += "<br><br><div class='task_view'>";
+        buffer += "<div class='cat_search_result_label'> Category Name  </div> <div class='left'>"+ searchRoot.getString("cat_name")+"</div>";
+        buffer += "<div class='clear'></div><br>";
+        buffer += "<div class='cat_search_result_label'> Creator  </div> <div class='left'>" + searchRoot.getString("cat_creator") +"</div>";
+        buffer += "<div class='clear'></div><br>";
+        buffer += "<div class='cat_search_result_label'> List of Task </div> <div class='left'>";
+        JSONArray task_list = searchRoot.getJSONArray("task");
+        for (int i=0; i<task_list.length(); i++) {
+            buffer += task_list.get(i);
+            if (i!=task_list.length()-1) {
+                buffer += " , ";
+            }
+        }
+        buffer += "</div></div>";
     }
 
     out.println(buffer);
