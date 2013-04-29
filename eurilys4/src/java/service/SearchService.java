@@ -34,7 +34,7 @@ public class SearchService extends HttpServlet {
                 conn = connector.getConnection ();
                 PreparedStatement stmt = conn.prepareStatement("");
                 ResultSet rs = null;
-                JSONArray searchResult = new JSONArray();
+                String HTMLresult = "";
                 
                 if (filter.equals("1")) { //Search All
                     //Search User
@@ -46,11 +46,10 @@ public class SearchService extends HttpServlet {
                     rs = stmt.executeQuery();
                     rs.beforeFirst();
                     while (rs.next()) {
-                        JSONObject user = new JSONObject();
-                        user.put("search_id", rs.getString("username"));
-                        user.put("search_name",rs.getString("full_name"));
-                        user.put("search_type", "user");
-                        searchResult.put(user);
+                        if (!("".equals(HTMLresult))) {
+                            HTMLresult += "<br>";
+                        }
+                        HTMLresult += "<div class='search_recommend' onclick=\"javascript:searchResult('"+rs.getString("username")+"','user');\">"+ rs.getString("full_name") +"</div>";
                     }
                     
                     //Search Category
@@ -59,11 +58,10 @@ public class SearchService extends HttpServlet {
                     rs = stmt.executeQuery();
                     rs.beforeFirst();
                     while (rs.next()) {
-                        JSONObject category = new JSONObject();
-                        category.put("search_id", rs.getString("cat_id"));
-                        category.put("search_name",rs.getString("cat_name"));
-                        category.put("search_type", "category");
-                        searchResult.put(category);
+                        if (!("".equals(HTMLresult))) {
+                            HTMLresult += "<br>";
+                        }
+                        HTMLresult += "<div class='search_recommend' onclick=\"javascript:searchResult('"+rs.getString("cat_id")+"','category');\">"+ rs.getString("cat_name") +"</div>";
                     }
                     
                     //Search Task
@@ -74,11 +72,10 @@ public class SearchService extends HttpServlet {
                     rs = stmt.executeQuery();
                     rs.beforeFirst();
                     while (rs.next()) {
-                        JSONObject task = new JSONObject();
-                        task.put("search_id", rs.getString("task_id"));
-                        task.put("search_name",rs.getString("task_name"));
-                        task.put("search_type", "task");
-                        searchResult.put(task);
+                        if (!("".equals(HTMLresult))) {
+                            HTMLresult += "<br>";
+                        }
+                        HTMLresult += "<div class='search_recommend' onclick=\"javascript:searchResult('"+rs.getString("task_id")+"','task');\">"+ rs.getString("task_name") +"</div>";
                     }
                 }
                 else if (filter.equals("2")) { //Search User (username, email, nama lengkap, birthdate)
@@ -90,11 +87,10 @@ public class SearchService extends HttpServlet {
                     rs = stmt.executeQuery();
                     rs.beforeFirst();
                     while (rs.next()) {
-                        JSONObject user = new JSONObject();
-                        user.put("search_id", rs.getString("username"));
-                        user.put("search_name",rs.getString("full_name"));
-                        user.put("search_type", "user");
-                        searchResult.put(user);
+                        if (!("".equals(HTMLresult))) {
+                            HTMLresult += "<br>";
+                        }
+                        HTMLresult += "<div class='search_recommend' onclick=\"javascript:searchResult('"+rs.getString("username")+"','user');\">"+ rs.getString("full_name") +"</div>";
                     }
                 }
                 else if (filter.equals("3")) { //Search Category
@@ -103,11 +99,10 @@ public class SearchService extends HttpServlet {
                     rs = stmt.executeQuery();
                     rs.beforeFirst();
                     while (rs.next()) {
-                        JSONObject category = new JSONObject();
-                        category.put("search_id", rs.getString("cat_id"));
-                        category.put("search_name",rs.getString("cat_name"));
-                        category.put("search_type", "category");
-                        searchResult.put(category);
+                        if (!("".equals(HTMLresult))) {
+                            HTMLresult += "<br>";
+                        }
+                        HTMLresult += "<div class='search_recommend' onclick=\"javascript:searchResult('"+rs.getString("cat_id")+"','category');\">"+ rs.getString("cat_name") +"</div>";
                     }
                 }
                 else if (filter.equals("4")) { //Search Task (task name, tag, comment)
@@ -118,15 +113,13 @@ public class SearchService extends HttpServlet {
                     rs = stmt.executeQuery();
                     rs.beforeFirst();
                     while (rs.next()) {
-                        JSONObject task = new JSONObject();
-                        task.put("search_id", rs.getString("task_id"));
-                        task.put("search_name",rs.getString("task_name"));
-                        task.put("search_type", "task");
-                        searchResult.put(task);
+                        if (!("".equals(HTMLresult))) {
+                            HTMLresult += "<br>";
+                        }
+                        HTMLresult += "<div class='search_recommend' onclick=\"javascript:searchResult('"+rs.getString("task_id")+"','task');\">"+ rs.getString("task_name") +"</div>";
                     }
                 }
-                
-                out.println(searchResult);
+                out.println(HTMLresult);
             }      
             catch (SQLException ex) {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
