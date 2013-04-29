@@ -62,8 +62,7 @@ public class UserDao extends DataAccessObject {
     }
 
     public boolean isAvailableEmail(String email) {
-        return true;
-        // throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public ArrayList<String> getUsers() {
@@ -72,7 +71,7 @@ public class UserDao extends DataAccessObject {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public int Update(User user) {
+    public int update(User user) {
         // POST
         // rest/user/[felixt]
         throw new UnsupportedOperationException("Not supported yet.");

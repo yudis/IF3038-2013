@@ -1,16 +1,11 @@
 package id.ac.itb.todolist.dao;
 
-import id.ac.itb.todolist.model.Attachment;
-import id.ac.itb.todolist.model.Category;
 import id.ac.itb.todolist.model.Tugas;
-import id.ac.itb.todolist.model.User;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;

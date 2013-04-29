@@ -110,7 +110,7 @@ public class updateUser extends HttpServlet {
             }
 
             UserDao userDao = new UserDao();
-            userDao.Update(user);
+            userDao.update(user);
             
             session.setAttribute("user", user);
             response.sendRedirect("../profile.jsp");               
