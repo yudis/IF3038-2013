@@ -90,9 +90,9 @@ public class CommentDao extends DataAccessObject {
         return -1;
     }
 
-    public int addComment(java.lang.String comment) {
+    public int addComment(Comment comment) {
         id.ac.itb.todolist.soap.comment.CommentSoap_Service service = new id.ac.itb.todolist.soap.comment.CommentSoap_Service();
         id.ac.itb.todolist.soap.comment.CommentSoap port = service.getCommentSoapPort();
-        return port.addComment(comment);
+        return port.addComment(comment.toJsonObject().toString());
     }
 }
