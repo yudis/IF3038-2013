@@ -186,10 +186,6 @@ public class TugasDao extends DataAccessObject {
         return -1;
     }
 
-    public int addAssignee(int idTugas, String username) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     public int removeAssignee(int idTugas, String username) {
         // DELETE
         // /rest/tugas/[1]/assignee/[edwardsp]
@@ -226,14 +222,6 @@ public class TugasDao extends DataAccessObject {
         }
 
         return result;
-    }
-
-    public int addTag(int idTugas, String tag) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public int addAttachment(int idTugas, String name, String filename, String type) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public int removeTag(int idTugas, String tag) {
@@ -273,11 +261,7 @@ public class TugasDao extends DataAccessObject {
 
         return result;
     }
-
-    public int addTugas(String nama, java.sql.Date deadline, String pemilik, int idKategori) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
+    
     public ArrayList<Tugas> getAllTugas() {
         // GET
         // /rest/tugas/
@@ -343,5 +327,29 @@ public class TugasDao extends DataAccessObject {
         }
 
         return result;
+    }
+
+    public int addAssignee(int idTugas, java.lang.String username) {
+        id.ac.itb.todolist.soap.tugas.TugasSoap_Service service = new id.ac.itb.todolist.soap.tugas.TugasSoap_Service();
+        id.ac.itb.todolist.soap.tugas.TugasSoap port = service.getTugasSoapPort();
+        return port.addAssignee(idTugas, username);
+    }
+
+    public int addAttachment(int idTugas, java.lang.String name, java.lang.String filename, java.lang.String type) {
+        id.ac.itb.todolist.soap.tugas.TugasSoap_Service service = new id.ac.itb.todolist.soap.tugas.TugasSoap_Service();
+        id.ac.itb.todolist.soap.tugas.TugasSoap port = service.getTugasSoapPort();
+        return port.addAttachment(idTugas, name, filename, type);
+    }
+
+    public int addTag(int idTugas, java.lang.String tag) {
+        id.ac.itb.todolist.soap.tugas.TugasSoap_Service service = new id.ac.itb.todolist.soap.tugas.TugasSoap_Service();
+        id.ac.itb.todolist.soap.tugas.TugasSoap port = service.getTugasSoapPort();
+        return port.addTag(idTugas, tag);
+    }
+
+    public int addTugas(java.lang.String nama, java.lang.String deadline, java.lang.String pemilik, int idKategori) {
+        id.ac.itb.todolist.soap.tugas.TugasSoap_Service service = new id.ac.itb.todolist.soap.tugas.TugasSoap_Service();
+        id.ac.itb.todolist.soap.tugas.TugasSoap port = service.getTugasSoapPort();
+        return port.addTugas(nama, deadline, pemilik, idKategori);
     }
 }
