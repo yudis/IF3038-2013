@@ -21,6 +21,11 @@
         <servlet-name>SearchAutoCompleteRest</servlet-name>
         <servlet-class>id.ac.itb.todolist.rest.SearchAutoCompleteRest</servlet-class>
     </servlet>
+	<servlet>
+        <servlet-name>CategorySoap</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserRest</servlet-name>
         <url-pattern>/rest/user/*</url-pattern>
@@ -40,6 +45,10 @@
     <servlet-mapping>
         <servlet-name>TugasRest</servlet-name>
         <url-pattern>/rest/tugas/*</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>CategorySoap</servlet-name>
+        <url-pattern>/CategorySoap</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
