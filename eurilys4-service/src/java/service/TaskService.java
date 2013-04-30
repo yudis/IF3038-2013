@@ -382,6 +382,18 @@ public class TaskService extends HttpServlet {
         }
         
         /* 
+         * pathInfo             : baseURL/task/add_task
+         * requestParameter     : task_id=
+         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         */
+        else if (pathInfo.equals("/add_task")) {
+            try {
+                
+            } catch (Exception e){
+                
+            }
+        }
+        /* 
          * pathInfo             : baseURL/task/delete_task
          * requestParameter     : task_id=
          * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 

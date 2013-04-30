@@ -43,6 +43,12 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class ServletHandler extends HttpServlet {
 
@@ -364,8 +370,8 @@ public class ServletHandler extends HttpServlet {
             
         } 
         
-        //Add Task
         else if (req.getParameter("type").equalsIgnoreCase("add_task")) {
+            out.write("Servlet - Extracting parameter");
             String task_name = req.getParameter("task_name_input");
             //attachment
             String task_deadline = req.getParameter("deadline_input");
@@ -374,9 +380,81 @@ public class ServletHandler extends HttpServlet {
             String catName = req.getParameter("addtask_cat_name");
             HttpSession session = req.getSession(true);
             String taskCreator = (String) session.getAttribute("username");
-
-            try {
+            
+            String server = "http://localhost:8084/eurilys4-service/SOAPtest";
+            //String service = "http://eurilys.ap01.aws.af.cm/SOAPService";
+            
+            //try {
                 try {
+                //DEFINE CONNECTION.
+                out.write("Servlet - Define Connection");
+                HttpURLConnection   connection = (HttpURLConnection) ( new URL(server).openConnection() );
+                                    connection.setDoOutput       (true);
+                                    connection.setDoInput        (true);
+                                    connection.setRequestMethod  ("POST");
+                                    connection.setRequestProperty("SOAPAction", server);
+                //CREATE REQUEST.
+                out.write("Servlet - Create Request");                    
+                String  xml = "<?xml version='1.0'?>"+ 
+                        "<SOAP-ENV:Envelope>"+
+                            "<SOAP-ENV:Body>"+
+                                "<tname>"+task_name+"</tname>"+
+                                "<tdeadline>"+task_deadline+"</tdeadline>"+
+                                "<tassignee>"+assigneeList+"</tassignee>"+
+                                "<ttag>"+tagList+"</ttag>"+
+                                "<tcategory>"+catName+"</tcategory>"+
+                                "<tcreator>"+taskCreator+"</tcreator>"+
+                            "</SOAP-ENV:Body>"+
+                        "</SOAP-ENV:Envelope>";
+                out.write(xml);
+                
+                //SEND REQUEST.
+                out.write("Servlet - Send Request");
+                System.out.println(xml);
+                OutputStream        _out  = connection.getOutputStream();
+                OutputStreamWriter  wout = new OutputStreamWriter(_out, "UTF-8");
+                                    wout.write(xml);
+                                    wout.flush();
+                                    _out.close();
+                
+                //READ RESPONSE.
+                out.write("Servlet - Read Response");
+                InputStream in = connection.getInputStream();
+                int c;
+                String response = "";
+                while ((c = in.read()) != -1) 
+                { 
+                    response += (char) c; 
+                    System.out.println(c);
+                }
+                System.out.println(response);
+                out.write(response);
+                
+                //EXTRACT RESULT.
+                out.write("Servlet - Extract Result");
+                int startTag  = response.indexOf("<result>");
+                int endTag    = response.indexOf("</result>");
+                String parameter = response.substring(startTag,endTag).replaceAll("<result>","");     
+                parameter = parameter.trim();
+                out.write(parameter);
+                
+                //DISPLAY RESULT.
+                System.out.println("Result="+parameter);
+                if (parameter.equals("")){
+                    resp.sendRedirect("src/add_task.jsp");
+                } else {
+                    resp.sendRedirect("src/task_detail.jsp?task_id=" + parameter);
+                }
+
+                //CLOSE ALL.
+                in        .close();
+                out       .close();
+                connection.disconnect();
+                }
+                catch (IOException e) { System.out.println(e.toString()); }                     
+            
+            
+                /*try {
                     Class.forName("com.mysql.jdbc.Driver");
                     System.out.println("Berhasil connect ke Mysql JDBC Driver - Add Task ");
                 } catch (ClassNotFoundException ex) {
@@ -446,7 +524,7 @@ public class ServletHandler extends HttpServlet {
                     Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println("Can not close connection - Add Task");
                 }
-            }
+            }*/
         }
     }
 
