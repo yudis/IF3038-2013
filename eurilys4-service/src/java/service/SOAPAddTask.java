@@ -43,7 +43,6 @@ public class SOAPAddTask extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String pathInfo = request.getPathInfo();
         dbConnection connector = new dbConnection();
         Connection conn = null;
         

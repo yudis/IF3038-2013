@@ -155,14 +155,76 @@ public class ServletHandler extends HttpServlet {
         
         //Add Category
         else if (req.getParameter("type").equalsIgnoreCase("add_category")) {
-            Connection conn_category = null;
-            ResultSet rs_category = null;
-            String categoryID = "";
+            
             String categoryName = req.getParameter("add_category_name");
             String categoryAssigne = req.getParameter("add_category_asignee_name");
             HttpSession session = req.getSession(true);
             String categoryCreator = (String) session.getAttribute("username");
+            
+            String server = "http://localhost:8084/eurilys4-service/SOAPAddCategory";
+            //String service = "http://eurilys.ap01.aws.af.cm/SOAPAddCategory";
+            
             try {
+                //DEFINE CONNECTION.
+                out.write("Servlet - Define Connection");
+                HttpURLConnection   connection = (HttpURLConnection) ( new URL(server).openConnection() );
+                                    connection.setDoOutput       (true);
+                                    connection.setDoInput        (true);
+                                    connection.setRequestMethod  ("POST");
+                                    connection.setRequestProperty("SOAPAction", server);
+                //CREATE REQUEST.
+                out.write("Servlet - Create Request");                    
+                String  xml = "<?xml version='1.0'?>"+ 
+                        "<SOAP-ENV:Envelope>"+
+                            "<SOAP-ENV:Body>"+
+                                "<cname>"+categoryName+"</cname>"+
+                                "<cassignee>"+categoryAssigne+"</cassignee>"+
+                                "<ccreator>"+categoryCreator+"</ccreator>"+
+                            "</SOAP-ENV:Body>"+
+                        "</SOAP-ENV:Envelope>";
+                out.write(xml);
+                
+                //SEND REQUEST.
+                out.write("Servlet - Send Request");
+                System.out.println(xml);
+                OutputStream        _out  = connection.getOutputStream();
+                OutputStreamWriter  wout = new OutputStreamWriter(_out, "UTF-8");
+                                    wout.write(xml);
+                                    wout.flush();
+                                    _out.close();
+                
+                //READ RESPONSE.
+                out.write("Servlet - Read Response");
+                InputStream in = connection.getInputStream();
+                int c;
+                String response = "";
+                while ((c = in.read()) != -1) 
+                { 
+                    response += (char) c; 
+                    System.out.println(c);
+                }
+                System.out.println(response);
+                out.write(response);
+                
+                //EXTRACT RESULT.
+                out.write("Servlet - Extract Result");
+                int startTag  = response.indexOf("<result>");
+                int endTag    = response.indexOf("</result>");
+                String parameter = response.substring(startTag,endTag).replaceAll("<result>","");     
+                parameter = parameter.trim();
+                out.write(parameter);
+                
+                //DISPLAY RESULT.
+                System.out.println("Result="+parameter);
+                resp.sendRedirect("src/dashboard.jsp");
+                
+                //CLOSE ALL.
+                in        .close();
+                out       .close();
+                connection.disconnect();
+            }
+            catch (IOException e) { System.out.println(e.toString()); }
+            /*try {
                 // Make connection to database
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
@@ -197,7 +259,7 @@ public class ServletHandler extends HttpServlet {
                     Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println("Can not close connection");
                 }
-            }
+            }*/
         } 
         
         //Delete Category
