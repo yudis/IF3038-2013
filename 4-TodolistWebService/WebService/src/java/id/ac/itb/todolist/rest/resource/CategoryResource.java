@@ -120,6 +120,6 @@ public class CategoryResource extends HttpServlet {
             return;
         }
         
-        throw new ServletException("Invalid URI");
+        throw new ServletException("Invalid URI: "+pathInfo);
     }
 }
