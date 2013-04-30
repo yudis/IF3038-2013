@@ -7,6 +7,7 @@ import id.ac.itb.todolist.model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -421,7 +422,7 @@ public class TugasDao extends DataAccessObject {
     public int addTugas(String nama, java.sql.Date deadline, String pemilik, int idKategori) {
         try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("INSERT INTO tugas(nama, tgl_deadline, pemilik, id_kategori) VALUES (?, ?, ?, ?);");
+                    prepareStatement("INSERT INTO tugas(nama, tgl_deadline, pemilik, id_kategori) VALUES (?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, nama);
             preparedStatement.setDate(2, deadline);
             preparedStatement.setString(3, pemilik);

@@ -65,7 +65,7 @@ public class Profile extends HttpServlet {
         if (session.getAttribute("user") != null)
         {
             User loginedUser = (User) session.getAttribute("user");
-            User targetUser = userdao.getUser(request.getParameter("id"));
+            User targetUser = request.getParameter("id") == null ? null : userdao.getUser(request.getParameter("id"));
             
             // user sudah login, dialihkan ke halaman lain
             request.setAttribute("title", "Todolist | Profile");
