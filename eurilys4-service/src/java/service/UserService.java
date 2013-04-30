@@ -163,6 +163,13 @@ public class UserService extends HttpServlet {
                 conn = connector.getConnection();
                 PreparedStatement stmt = conn.prepareStatement("");
 
+                if (!"".equals(avatar)) {
+                    stmt = conn.prepareStatement("UPDATE user SET avatar=? WHERE username=?");
+                    stmt.setString(1, avatar);
+                    stmt.setString(2, username);
+                }
+                stmt.executeUpdate();
+                
                 if (!("".equals(password))) {
                     stmt = conn.prepareStatement("UPDATE user SET full_name=?, birthdate=?, password=? WHERE username=?");
                     stmt.setString(1, fullname);

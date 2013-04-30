@@ -2,6 +2,7 @@ package servlet;
 
 //import java.io.BufferedInputStream;
 //import java.io.BufferedOutputStream;
+import Function.FileManager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -42,8 +43,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Iterator;
+import javax.servlet.annotation.MultipartConfig;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-
+@MultipartConfig
 public class ServletHandler extends HttpServlet {
 
     @Override
@@ -315,13 +324,19 @@ public class ServletHandler extends HttpServlet {
             String user_name = req.getParameter("edit_username");
             String password = req.getParameter("password");
             String fullname = req.getParameter("fullname");
-            //String fileName = req.getParameter("avatar");
+            //String target = req.getParameter("avatar");
             String birthdate = req.getParameter("birthdate");
-
+            
+            Part filePart = req.getPart("avatar");
+            System.out.println("file Part : " + filePart);
+            String avatar = "img/avatar/" + user_name + FileManager.getExtension(FileManager.getFilename(filePart));
+            String filePath = getServletContext().getRealPath("/") + avatar;
+            
+            avatar = URLEncoder.encode(avatar, "UTF-8");
             fullname = URLEncoder.encode(fullname, "UTF-8");
             
-            URL url = new URL("http://localhost:8084/eurilys4-service/user/update_profile?username="+user_name+"&password="+password+"&fullname="+fullname+"&birthdate="+birthdate+"&avatar=");
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/user/update_profile?username="+user_name+"&password="+password+"&fullname="+fullname+"&birthdate="+birthdate+"&avatar=");
+            URL url = new URL("http://localhost:8084/eurilys4-service/user/update_profile?username="+user_name+"&password="+password+"&fullname="+fullname+"&birthdate="+birthdate+"&avatar="+avatar);
+            //URL url = new URL("http://eurilys.ap01.aws.af.cm/user/update_profile?username="+user_name+"&password="+password+"&fullname="+fullname+"&birthdate="+birthdate+"&avatar="+avatar);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -338,6 +353,9 @@ public class ServletHandler extends HttpServlet {
             httpConn.disconnect();
             if ("1".equals(outputObject)) {
                 //berhasil
+                Files.copy(filePart.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+                HttpSession session = req.getSession(true);
+                session.setAttribute("avatar", avatar);
                 resp.sendRedirect("src/profile.jsp?profileupdate=ok");
             } else {
                 //failed

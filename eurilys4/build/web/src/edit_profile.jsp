@@ -32,12 +32,12 @@
         String fullname = userDetailroot.getString("fullname");
         String birthdate = userDetailroot.getString("birthdate");
         String email = userDetailroot.getString("email");
-        String avatar = userDetailroot.getString("avatar");
+        //String avatar = userDetailroot.getString("avatar");
     %>
     <div id="dynamic_content">
         <div id="edit_profil_container">
             <h1>  Edit Profile </h1>
-            <form id="edit_profile_form" method="POST" action="../ServletHandler?type=edit_profile">
+            <form id="edit_profile_form" method="POST" action="../ServletHandler?type=edit_profile" enctype="multipart/form-data">
                 <label> Username </label> <%= session.getAttribute("username") %>
                 <input type="hidden" id="edit_username" name="edit_username" value="<%= session.getAttribute("username") %>">
                 <input type="hidden" id="edit_email" name="edit_email" value="">
