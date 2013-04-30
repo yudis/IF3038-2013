@@ -32,6 +32,10 @@
         <servlet-name>SOAPAddCategory</servlet-name>
         <servlet-class>service.SOAPAddCategory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SOAPAddComment</servlet-name>
+        <servlet-class>service.SOAPAddComment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletHandler</servlet-name>
         <url-pattern>/ServletHandler</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>SOAPAddCategory</servlet-name>
         <url-pattern>/SOAPAddCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SOAPAddComment</servlet-name>
+        <url-pattern>/SOAPAddComment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

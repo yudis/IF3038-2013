@@ -224,42 +224,6 @@ public class ServletHandler extends HttpServlet {
                 connection.disconnect();
             }
             catch (IOException e) { System.out.println(e.toString()); }
-            /*try {
-                // Make connection to database
-                try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    System.out.println("Berhasil connect ke Mysql JDBC Driver ... ");
-                } catch (ClassNotFoundException ex) {
-                    System.out.println("Where is your MySQL JDBC Driver?");
-                }
-                conn_category = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086", "root", "");
-
-                Statement st = conn_category.createStatement();
-                st.executeUpdate("INSERT INTO category (cat_name, cat_creator) VALUES ('" + categoryName + "','" + categoryCreator + "')");
-
-                PreparedStatement stmt_category = conn_category.prepareStatement("SELECT cat_id FROM category WHERE cat_name=?");
-                stmt_category.setString(1, categoryName);
-                rs_category = stmt_category.executeQuery();
-                rs_category.beforeFirst();
-                while (rs_category.next()) {
-                    categoryID = rs_category.getString("cat_id");
-                }
-                String[] assigneArray = categoryAssigne.split(",");
-                for (int i = 0; i < assigneArray.length; i++) {
-                    st.executeUpdate("INSERT INTO cat_asignee (cat_id, username) VALUES ('" + categoryID + "','" + assigneArray[i] + "')");
-                }
-                //Redirect
-                resp.sendRedirect("src/dashboard.jsp");
-            } catch (SQLException e) {
-                System.out.println("Connection Failed! Check output console");
-            } finally {
-                try {
-                    conn_category.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println("Can not close connection");
-                }
-            }*/
         } 
         
         //Delete Category
@@ -340,8 +304,71 @@ public class ServletHandler extends HttpServlet {
             System.out.println("comment : " + comment);
             System.out.println("taskID :" + taskID);
             System.out.println("username " + username);
-
+            
+            String server = "http://localhost:8084/eurilys4-service/SOAPAddComment";
+            //String service = "http://eurilys.ap01.aws.af.cm/SOAPAddComment";
+            
             try {
+                //DEFINE CONNECTION.
+                out.write("Servlet - Define Connection");
+                HttpURLConnection   connection = (HttpURLConnection) ( new URL(server).openConnection() );
+                                    connection.setDoOutput       (true);
+                                    connection.setDoInput        (true);
+                                    connection.setRequestMethod  ("POST");
+                                    connection.setRequestProperty("SOAPAction", server);
+                //CREATE REQUEST.
+                out.write("Servlet - Create Request");                    
+                String  xml = "<?xml version='1.0'?>"+ 
+                        "<SOAP-ENV:Envelope>"+
+                            "<SOAP-ENV:Body>"+
+                                "<cbox>"+comment+"</cbox>"+
+                                "<ctaskID>"+taskID+"</ctaskID>"+
+                                "<cusername>"+username+"</cusername>"+
+                            "</SOAP-ENV:Body>"+
+                        "</SOAP-ENV:Envelope>";
+                out.write(xml);
+                
+                //SEND REQUEST.
+                out.write("Servlet - Send Request");
+                System.out.println(xml);
+                OutputStream        _out  = connection.getOutputStream();
+                OutputStreamWriter  wout = new OutputStreamWriter(_out, "UTF-8");
+                                    wout.write(xml);
+                                    wout.flush();
+                                    _out.close();
+                
+                //READ RESPONSE.
+                out.write("Servlet - Read Response");
+                InputStream in = connection.getInputStream();
+                int c;
+                String response = "";
+                while ((c = in.read()) != -1) 
+                { 
+                    response += (char) c; 
+                    System.out.println(c);
+                }
+                System.out.println(response);
+                out.write(response);
+                
+                //EXTRACT RESULT.
+                out.write("Servlet - Extract Result");
+                int startTag  = response.indexOf("<result>");
+                int endTag    = response.indexOf("</result>");
+                String parameter = response.substring(startTag,endTag).replaceAll("<result>","");     
+                parameter = parameter.trim();
+                out.write(parameter);
+                
+                //DISPLAY RESULT.
+                System.out.println("Result="+parameter);
+                resp.sendRedirect("src/task_detail.jsp?task_id=" + parameter);
+                
+                //CLOSE ALL.
+                in        .close();
+                out       .close();
+                connection.disconnect();
+            }
+            catch (IOException e) { System.out.println(e.toString()); }
+            /*try {
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
                     System.out.println("Berhasil connect ke Mysql JDBC Driver - add_comment ");
@@ -361,7 +388,7 @@ public class ServletHandler extends HttpServlet {
                     Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println("Can not close connection - add_comment");
                 }
-            }
+            }*/
         } 
         
         //edit task
