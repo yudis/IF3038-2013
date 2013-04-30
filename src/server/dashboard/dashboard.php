@@ -1,5 +1,4 @@
 <?php
-	require_once("../db.php");
 	function ubahStatus($nomor)
 	{	
 	}
@@ -37,24 +36,10 @@
 			echo json_encode("</div></a>");
 		}
 	}
-	function check($username, $password)
-	{
-		$result = query('SELECT * from pengguna WHERE username = :username AND password = :password', array('username' => $username, 'password' => $password));
-		if ($result)
-		{
-			$output = 1;
-		}
-		else
-		{
-			$output = 0;
-		}
-		
-		echo json_encode($output);
-	}
 	
 	function catTask($n)
 	{
-		$result = queryAll("SELECT * from tugas natural join mengerjakan WHERE id_kategori= :n", array("n" => $n);
+		$result = queryAll("SELECT * from tugas natural join mengerjakan WHERE id_kategori= :n", array("n" => $n));
 		$temp=0;
 		while( $result){
 			$temp+=1;

@@ -1,8 +1,8 @@
 <head >			<!------memanggil showUserLogin saat load body-------->	
 
-        <link rel="stylesheet" href="css/css.css">
-        <link rel="stylesheet" href="css/dash.css">
-        <script type="text/javascript" src="js/popup.js"></script>
+        <link rel="stylesheet" href="../css/css.css">
+        <link rel="stylesheet" href="../css/dash.css">
+        <script type="text/javascript" src="../js/popup.js"></script>
         <script>
 
 /*            var itotal=5;
@@ -21,7 +21,7 @@
 					document.getElementById("showLoginHeader").innerHTML="Welcome "+localStorage.userLogin;	
 														
 				}else{										//jika sudah 30 hari, user harus login lagi
-					window.location="index.php";	
+					window.location="../index.php";	
 				}
 			}
 			
@@ -133,7 +133,7 @@
         </script>
                      <div class="header">
 			<div id="logo">
-			    <a hreg="dashboard.php">
+			    <a href="../dashboard/">
 			    <img src="pict/logo.png">
 			    </a>
 			</div>
@@ -141,14 +141,14 @@
 			    
 			</div>
 			<div id="dashboard">
-			    <a href="dashboard.php">DASHBOARD</a>
+			    <a href="../dashboard/">DASHBOARD</a>
 			</div>
 			<div id="profile">
-			    <a href="profile.php">PROFILE</a>
+			    <a href="../profile/">PROFILE</a>
 			</div>
 			<div id="search">
             
-	            	<form action="searchresult.php" method="post">
+	            	<form action="../searchresult.php" method="post">
 					    <section class="searchform cf">
 						    <input id="cari" class="searchbox" type="search" name="search" placeholder="Search.." required>						
 					    </section>
@@ -182,7 +182,7 @@
             				    
             
             	<div id="logout" onClick="hapusUserLogin()">		<!---------hapus user login dan waktunya ketika logout ---------->
-			    <a href="index.php">LOGOUT</a>
+			    <a href="../">LOGOUT</a>
 
                 
 				    </div>
