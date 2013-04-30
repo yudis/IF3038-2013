@@ -89,7 +89,9 @@ public class Comment extends JSONModel {
             this.user.fromJsonObject(jsonUser);
         }
         
-        this.time = java.sql.Timestamp.valueOf(jObject.optString("time"));
+        String timestr = jObject.optString("time");
+        this.time = "".equals(timestr) ? null : java.sql.Timestamp.valueOf(timestr);
+        
         this.content = jObject.optString("content");
     }
 }
