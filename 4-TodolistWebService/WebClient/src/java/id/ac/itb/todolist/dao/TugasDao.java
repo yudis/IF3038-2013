@@ -212,7 +212,7 @@ public class TugasDao extends DataAccessObject {
         try {
             HttpURLConnection htc = getHttpURLConnection("/rest/tugas/suggestion/assignees/" + idTugas + "/" + URLEncoder.encode(keyword, "UTF-8") + "/" + limit);
             htc.setRequestMethod("GET");
-
+            
             JSONArray jArray = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0, len = jArray.length(); i < len; i++) {
                 result.add(jArray.getString(i));
@@ -266,7 +266,7 @@ public class TugasDao extends DataAccessObject {
         // GET
         // /rest/tugas/
 
-        ArrayList<Tugas> result = null;
+        ArrayList<Tugas> result = new ArrayList<Tugas>();
 
         try {
             HttpURLConnection htc = getHttpURLConnection("/rest/tugas/");
@@ -289,7 +289,7 @@ public class TugasDao extends DataAccessObject {
         // GET
         // /rest/tugas/username/[username]
 
-        ArrayList<Tugas> result = null;
+        ArrayList<Tugas> result = new ArrayList<Tugas>();
         try {
             HttpURLConnection htc = getHttpURLConnection("/rest/tugas/username/" + username);
             htc.setRequestMethod("GET");
@@ -311,7 +311,7 @@ public class TugasDao extends DataAccessObject {
         // GET
         // /rest/tugas/search/[keyword]/[start]/[limit]
 
-        ArrayList<Tugas> result = null;
+        ArrayList<Tugas> result = new ArrayList<Tugas>();
         try {
             HttpURLConnection htc = getHttpURLConnection("/rest/tugas/search/" + URLEncoder.encode(keyword, "UTF-8") + "/" + start + "/" + limit);
             htc.setRequestMethod("GET");

@@ -2,6 +2,7 @@ package id.ac.itb.todolist.dao;
 
 import id.ac.itb.todolist.model.User;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -35,9 +36,9 @@ public class UserDao extends DataAccessObject {
 
             User tmpUser = new User();
             tmpUser.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
-            
+
             System.out.println(tmpUser.toJsonObject().toString(4));
-            
+
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(passwd.getBytes());
             String hashPassword = new BigInteger(1, md.digest()).toString(16);
@@ -61,7 +62,7 @@ public class UserDao extends DataAccessObject {
 
             User tmpUser = new User();
             tmpUser.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
-            
+
             return false;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -72,7 +73,7 @@ public class UserDao extends DataAccessObject {
     public boolean isAvailableEmail(String email) {
         // GET
         // rest/user/email/[email]
-        
+
         try {
             HttpURLConnection htc = getHttpURLConnection("/rest/user/email/" + URLEncoder.encode(email, "UTF-8"));
             htc.setRequestMethod("GET");
@@ -112,7 +113,24 @@ public class UserDao extends DataAccessObject {
         try {
             HttpURLConnection htc = getHttpURLConnection("/rest/user/" + URLEncoder.encode(user.getUsername(), "UTF-8"));
             htc.setRequestMethod("POST");
+            
+            String urlParameters = "user=" + URLEncoder.encode(user.toJsonObject().toString(), "UTF-8");
 
+            htc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            htc.setRequestProperty("Content-Length", "" + Integer.toString(urlParameters.getBytes().length));
+            htc.setRequestProperty("Content-Language", "en-US");
+
+            htc.setUseCaches(false);
+            htc.setDoInput(true);
+            htc.setDoOutput(true);
+
+            //Send request
+            DataOutputStream wr = new DataOutputStream(
+                    htc.getOutputStream());
+            wr.writeBytes(urlParameters);
+            wr.flush();
+            wr.close();
+            
             BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
             return Integer.parseInt(br.readLine());
         } catch (Exception ex) {
@@ -133,7 +151,7 @@ public class UserDao extends DataAccessObject {
 
             User tmpUser = new User();
             tmpUser.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
-            
+
             user = tmpUser;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -145,7 +163,7 @@ public class UserDao extends DataAccessObject {
     public Collection<User> getUserSearch(String keyword, int start, int limit) throws IOException {
         // GET
         // rest/user/w/0/3
-        ArrayList<User> result = null;
+        ArrayList<User> result = new ArrayList<User>();
         try {
             HttpURLConnection htc = getHttpURLConnection("/rest/user/" + URLEncoder.encode(keyword, "UTF-8") + "/" + start + "/" + limit);
             htc.setRequestMethod("GET");

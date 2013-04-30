@@ -49,6 +49,8 @@ public class TugasA extends HttpServlet {
             if("".equals(q) || "0".equals(q))
             {
                 result = tugasDao.getAllTugas();
+                System.out.println("result=");
+                System.out.println("result="+result.get(1).getNama());
                 for (int i = 0; i < result.size(); i++)
                 {
                     if(result.get(i).getPemilik().getUsername() == null ? currentUser.getUsername() == null : result.get(i).getPemilik().getUsername().equals(currentUser.getUsername()))
