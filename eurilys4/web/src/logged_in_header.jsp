@@ -20,7 +20,7 @@ if (session.getAttribute("fullname") == null) {
         <header>
             <div id="header_container"> 
                 <div class="left">
-                    <a href="dashboard.php"> <img id="logo" src="../img/logo.png" alt="logo"> </a>					
+                    <a href="dashboard.jsp"> <img id="logo" src="../img/logo.png" alt="logo"> </a>					
                 </div>
 
                 <input id="search_box" autocomplete="off" type="text" onkeyup="showSearchHint(this.value)" placeholder="Search...">

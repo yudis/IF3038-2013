@@ -50,7 +50,7 @@
 <section>
         <%@include file="navigation_bar.jsp"%>
 	<%
-            URL userDetailURL = new URL("http://localhost:8084/eurilys4/user/user_detail?username=" + session.getAttribute("username"));
+            URL userDetailURL = new URL("http://localhost:8084/eurilys4-service/user/user_detail?username=" + session.getAttribute("username"));
             //URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/user/user_detail?username=" + session.getAttribute("username"));
             HttpURLConnection userDetailConn = (HttpURLConnection) userDetailURL.openConnection();
             userDetailConn.setRequestMethod("GET");
@@ -69,7 +69,6 @@
             //Parse userDetailJSONObject 
             JSONTokener userDetailTokener = new JSONTokener(userDetailJSONObject);
             JSONObject userDetailroot = new JSONObject(userDetailTokener);
-            String user_name = userDetailroot.getString("username");
             String fullname = userDetailroot.getString("fullname");
             String birthdate = userDetailroot.getString("birthdate");
             String email = userDetailroot.getString("email");
@@ -82,16 +81,18 @@
                     <div id="namauser"> <%=fullname%> </div>
             </div>
             <br/><br/>
-            <%=user_name%>
+            <%=session.getAttribute("username")%>
             <br>
             <%=email%>
             <br>
             <%=birthdate%>
             <br><br><br><br>
-            <% if ("ok".equals(request.getParameter("profileupdate"))) { %>
+            <% if ("ok".equals(request.getParameter("profileupdate"))) { 
+                session.setAttribute("fullname", fullname);
+            %>
                 <div class="red"> Profile has been successfully updated </div>
-            <% } else if ("pwd".equals(request.getParameter("profileupdate"))) { %>
-                <div class="red"> Profile has been successfully updated. <br> Password is not changed. </div>
+            <% } else if ("failed".equals(request.getParameter("profileupdate"))) { %>
+                <div class="red"> Profile NOT has been successfully updated. </div>
             <% } %>
         </div>
         
@@ -99,7 +100,7 @@
             <div class="half_tall">
                 <div class="headsdeh">Current Tasks</div>
                 <%
-                    URL currentTaskURL = new URL("http://localhost:8084/eurilys4/user/current_task?username=" + session.getAttribute("username"));
+                    URL currentTaskURL = new URL("http://localhost:8084/eurilys4-service/user/current_task?username=" + session.getAttribute("username"));
                     //URL currentTaskURL = new URL("http://eurilys.ap01.aws.af.cm/user/current_task?username=" + session.getAttribute("username"));
                     HttpURLConnection currentTaskConn = (HttpURLConnection) currentTaskURL.openConnection();
                     currentTaskConn.setRequestMethod("GET");
@@ -132,7 +133,7 @@
             <div class="half_tall">
                 <div class="headsdeh">Finished Tasks</div>
                 <%
-                    currentTaskURL = new URL("http://localhost:8084/eurilys4/user/finished_task?username=" + session.getAttribute("username"));
+                    currentTaskURL = new URL("http://localhost:8084/eurilys4-service/user/finished_task?username=" + session.getAttribute("username"));
                     //currentTaskURL = new URL("http://eurilys.ap01.aws.af.cm/user/finished_task?username=" + session.getAttribute("username"));
                     currentTaskConn = (HttpURLConnection) currentTaskURL.openConnection();
                     currentTaskConn.setRequestMethod("GET");

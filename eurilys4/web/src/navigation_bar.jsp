@@ -8,7 +8,7 @@
 
 <%
     String user_name = (String) session.getAttribute("username");
-    URL url = new URL("http://localhost:8084/eurilys4/category/get_list?username=" + session.getAttribute("username"));
+    URL url = new URL("http://localhost:8084/eurilys4-service/category/get_list?username=" + session.getAttribute("username"));
     //URL url = new URL("http://eurilys.ap01.aws.af.cm/category/get_list?username=" + session.getAttribute("username"));
     HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
     httpConn.setRequestMethod("GET");
@@ -40,6 +40,9 @@
         </div>
     </div>
     <div id="category_list">
+        <% if ("failed".equals(request.getParameter("delete_category"))) { %>
+            <div class="red"> Fail to delete category </div>
+        <% } %>    
         <div class="link_blue_rect" id="category_title"><a href="dashboard.jsp" onclick=""> All Categories </a> </div>
         <ul id="category_item">   
             <%
@@ -86,20 +89,21 @@
             xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
         
+        categoryName = escape(categoryName);
+        
         xmlhttp.onreadystatechange=function() {
+            var buffer = "";
+                
+            if (categoryCreator == username) {
+                buffer += "<form method='POST' action='../ServletHandler?type=delete_category&category_id="+categoryId+"'>";
+                buffer += "<input type='hidden' name='delete_category_id' value='"+categoryId+"'/>";
+                buffer += "<input type='hidden' name='delete_category_name' value='"+categoryName+"'/>";
+                buffer += "<input type='submit' id='delete_category_button' name='delete_category_button' class='link_red top20' value='Delete Category'/>";
+                buffer += "</form>";
+            }
+
             if (xmlhttp.readyState==4 && xmlhttp.status==200) {
                 var taskArray = JSON.parse(xmlhttp.responseText);                
-                
-                
-                var buffer = "";
-                
-                if (categoryCreator == username) {
-                    buffer += "<form method='POST' action='../category/delete?category_id="+categoryId+"'>";
-                    buffer += "<input type='hidden' name='delete_category_id' value='"+categoryId+"'/>";
-                    buffer += "<input type='hidden' name='delete_category_name' value='"+categoryName+"'/>";
-                    buffer += "<input type='submit' id='delete_category_button' name='delete_category_button' class='link_red top20' value='Delete Category'/>";
-                    buffer += "</form>";
-                }
                 
                 for(var i=0; i<taskArray.length; i++) {
                     var task_name = taskArray[i].task_name; 
@@ -108,24 +112,25 @@
                     var task_deadline = taskArray[i].task_deadline;
                     var task_creator = taskArray[i].task_creator;
                     var tagList = taskArray[i].tag_list;
-
+                    
                     //Generate Output
                     buffer += "<br>";
                     buffer = buffer + "<div class='task_view' id='" +task_id+ "'>";  
                     if (task_creator == username) {
-                        buffer = buffer + "<div onclick='javascript:deleteTask('"+task_id+"')' class='task_done_button'> Delete </div>";
+                        buffer = buffer + "<div onclick=\"javascript:deleteTask('"+task_id+"')\" class='task_done_button'> Delete </div>";
                         buffer = buffer + "<div class='task_done_button'> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; </div>";
                     }
                     
+                    buffer = buffer + "<div id='taskHandler_"+task_id+"'>";
                     //Task has not been finished 
                     if (task_status == 0) {
-                        buffer = buffer + "<div onclick='javascript:finishTask('"+task_id+"');' class='task_done_button'> Mark as Finished </div>";
+                        buffer = buffer + "<div onclick=\"javascript:finishTask('"+task_id+"')\" class='task_done_button'> Mark as Finished </div>";
                     } else {
                         buffer += "<img src='../img/yes.png' class='task_done_button' alt=''/>";
                     }
-                    
+                    buffer += "</div>";
                     buffer += "<div id='task_name_ltd' class='left dynamic_content_left'> Task Name </div>";
-                    buffer += "<div id='task_name_rtd' class='left dynamic_content_right darkBlueLink' onclick='javascript:viewTask('"+task_id+"');'>" +task_name+ "</div>";
+                    buffer += "<div id='task_name_rtd' class='left dynamic_content_right darkBlueLink' onclick=\"javascript:viewTask('"+task_id+"')\">" +task_name+ "</div>";
                     buffer += "<br><br>";
 
                     buffer += "<div id='deadline_ltd' class='left dynamic_content_left'>Deadline</div>";
@@ -148,8 +153,7 @@
         document.getElementById("add_task_link").style.display = "block";
         document.getElementById("add_task").setAttribute('href',"addtask.jsp?cat_name="+categoryName);
 
-        //var url="category_task.jsp?categoryName="+categoryName;
-        xmlhttp.open("GET", "../task/get_category_task?category_name="+categoryName, true);
+        xmlhttp.open("GET", "../ServletHandler?type=category_task&category_name="+categoryName, true);
         xmlhttp.send();
     }
 </script>

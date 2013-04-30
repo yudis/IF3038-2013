@@ -34,7 +34,7 @@
                 <div class="red"> Login Failed </div>
             <% } %>
             <div id="login_form_container">
-                <form id="login_form" method="POST" action="user/login_check">
+                <form id="login_form" method="POST" action="ServletHandler?type=login">
                     <label> Username </label> <input type="text" id="login_username" name="login_username"/> <br/>
                     <label> Password </label> <input type="password" id="login_password" name="login_password"/> 
                     <input type="submit" name="login_submit" class="link_red top10 bold" id="login_submit" value="LOG IN">

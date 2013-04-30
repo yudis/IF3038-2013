@@ -14,46 +14,42 @@
                     <img id="tutorial_image" src="img/eurilys_comic.png" alt="tutorial_pic"/>
                 </div>
                 <div id="tutorial">
-                    <!--
+                    <%
+                    service.dbConnection dbConnector = new dbConnection();
+                    Connection con = dbConnector.getConnection();
+                    %>
+                    con : <%= con %> <br>
+                    
                     <span class="red"> Eurilys </span> is an online to-do-list website which is so easy to use, user-friendly, and the most important 
                     of all, it's completely <span class="blue">FREE</span>!
                     <br>
                     You can add task, category for each task, and you can write down all the task's details here. 
                     <br>
                     No more papers, pens, and confusion. <span class="red"> Eurilys </span> is here to be your organization's partner.
-                    -->
-                    <%
-                    service.dbConnection dbConnector = new dbConnection();
-                    Connection con = dbConnector.getConnection();
-                    %>
-                    con : <%= con %> <br>
                 </div>
             </div>
 	</div>
-	<div id="index_right">            
-            <% if (request.getAttribute("result") == "failed_login") { %>
+	<div id="index_right">      
+            <% if ("failed".equals(request.getParameter("login_status"))) { %>
                 <div class="red"> Login Failed </div>
             <% } %>
-
             <div id="login_form_container">
-                    
-                    
-                    <form id="login_form" method="POST" action="ServletHandler?type=login">
-                            <label> Username </label> <input type="text" id="login_username" name="login_username"/> <br/>
-                            <label> Password </label> <input type="password" id="login_password" name="login_password"/> 
-                            <input type="submit" name="login_submit" class="link_red top10 bold" id="login_submit" value="LOG IN">
-                    </form>
+                <form id="login_form" method="POST" action="ServletHandler?type=login">
+                    <label> Username </label> <input type="text" id="login_username" name="login_username"/> <br/>
+                    <label> Password </label> <input type="password" id="login_password" name="login_password"/> 
+                    <input type="submit" name="login_submit" class="link_red top10 bold" id="login_submit" value="LOG IN">
+                </form>
             </div>
 
             <div class="signup_label">
                     Have No Account ? 
             </div>
             <div id="signup_form_container">
-                <% if (request.getAttribute("result") == "failed_register") { %>
+                <% if ("failed".equals(request.getParameter("register_status"))) { %>
                     <div class="red"> Sign Up Failed </div>
                 <% } %>
                 
-                <form id="signup_form" method="POST" action="ServletHandler?type=signup">
+                <form id="signup_form" method="POST" action="user/register">
                     <label> Username </label>	
                     <input type="text" name="signup_username" onkeypress="javascript:regCheck();" id="reg_username" title="Username should be at least 5 characters long" required>
                     <img src="img/yes.png" id="username_validation" class="signup_form_validation" alt="validation image">

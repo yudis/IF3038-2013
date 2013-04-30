@@ -198,8 +198,7 @@ function showSearchHint(str) {
     var selectOption = document.getElementById("search_box_filter");
     var filter = selectOption.options[selectOption.selectedIndex].value;
     
-    var url="search_autocomplete.jsp?hint="+str+"&filter="+filter;
-    xmlhttp.open("GET", url, true);
+    xmlhttp.open("GET", "../ServletHandler?type=search_result&keyword="+str+"&filter="+filter, true);
     xmlhttp.send();
 }
 
@@ -308,7 +307,6 @@ function searchResult(resultID, resultType) {
     }
     else
     if (resultType == "task") {
-        //s= "search_result.jsp?q="+resultID+"&type=task";
         window.location.href = "task_detail.jsp?task_id="+resultID;
     }
 }
@@ -318,6 +316,7 @@ function viewTask(taskID) {
 }
 
 function generateTask(categoryName) {
+    alert("masuk!");
     document.getElementById("dynamic_content").innerHTML = "";
     if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
@@ -325,17 +324,19 @@ function generateTask(categoryName) {
     else {// code for IE6, IE5
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
+    
+    /*
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
             document.getElementById("dynamic_content").innerHTML = xmlhttp.responseText;
         }
-    }
+    }*/
 
     document.getElementById("add_task_link").style.display = "block";
     document.getElementById("add_task").setAttribute('href',"addtask.jsp?cat_name="+categoryName);
     
-    var url="category_task.jsp?categoryName="+categoryName;
-    xmlhttp.open("GET", url, true);
+    //var url="category_task.jsp?categoryName="+categoryName;
+    xmlhttp.open("GET", "../task/get_category_task?category_name="+categoryName, true);
     xmlhttp.send();
 }
 
@@ -351,7 +352,9 @@ function finishTask(taskID) {
         }
         xmlhttp.onreadystatechange=function() {
             if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                window.location = "dashboard.jsp";
+                if (xmlhttp.responseText == 1) {
+                    document.getElementById("taskHandler_"+taskID).innerHTML = "<img src=\"../img/yes.png\" class=\"task_done_button\" alt=''/>";
+                } 
             }
         } 
         xmlhttp.open('GET', '../ServletHandler?type=finish_task&task_id=' + taskID, true);
@@ -370,15 +373,18 @@ function deleteTask(taskID) {
         }
         xmlhttp.onreadystatechange=function() {
             if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                window.location = "dashboard.jsp";
+                if (xmlhttp.responseText == 1) {
+                    document.getElementById(taskID).parentNode.removeChild(document.getElementById(taskID));                    
+                }
             }
         } 
+        //xmlhttp.open('GET', '../task/delete_task?task_id=' + taskID, true);
         xmlhttp.open('GET', '../ServletHandler?type=delete_task&task_id=' + taskID, true);
         xmlhttp.send(null);
     }
 }
 
-function deleteComment(taskID, commentID) {
+function deleteComment(commentID) {
     var deleteCommentConfirm = confirm("Delete this comment?");
     if (deleteCommentConfirm == true) { //GET servlet
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -389,10 +395,13 @@ function deleteComment(taskID, commentID) {
         }
         xmlhttp.onreadystatechange=function() {
             if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                window.location = "task_detail.jsp?task_id="+taskID;
+                if (xmlhttp.responseText == 1) {
+                    document.getElementById("comment_"+commentID).parentNode.removeChild(document.getElementById("comment_"+commentID)); 
+                }
             }
         }        
-        xmlhttp.open('GET', '../ServletHandler?type=delete_comment&task_id='+taskID+'&comment_id='+commentID, true);
+        xmlhttp.open('GET', '../ServletHandler?type=delete_comment&comment_id='+commentID, true);
+        //xmlhttp.open('GET', '../task/delete_comment?comment_id='+commentID, true);
         xmlhttp.send(null);
     }
 }

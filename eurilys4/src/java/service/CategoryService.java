@@ -104,7 +104,7 @@ public class CategoryService extends HttpServlet {
                 PreparedStatement st = conn.prepareStatement("DELETE FROM category WHERE cat_id=?");
                 st.setString(1, category_id);
                 int row = st.executeUpdate();
-                response.sendRedirect("../src/dashboard.jsp");
+                out.println(row);
             } catch (SQLException ex) {
                 Logger.getLogger(TaskService.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

@@ -1,3 +1,8 @@
+<%@page import="org.json.*"%>
+<%@page import="java.io.InputStreamReader"%>
+<%@page import="java.io.BufferedReader"%>
+<%@page import="java.net.HttpURLConnection"%>
+<%@page import="java.net.URL"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.DriverManager"%>
@@ -45,31 +50,30 @@
 <section>
         <%@include file="navigation_bar.jsp"%>
 	<%
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Berhasil connect ke Mysql JDBC Driver - edit_profile.jsp");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Where is your MySQL JDBC Driver? - edit_profile.jsp");
-        }
-        Connection con_editprofile = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");
-        
-        //Get user detail
-        String user_name = (String) session.getAttribute("username");
-        String fullname = "";
-        String birthdate = "";
-        String email = "";
-        
-        PreparedStatement stmt_editprofile = con_editprofile.prepareStatement("SELECT * FROM user WHERE username=?");
-        stmt_editprofile.setString(1, user_name);
-        ResultSet rs_userdetail = stmt_editprofile.executeQuery();
-        rs_userdetail.beforeFirst();
-        while (rs_userdetail.next()) {
-            fullname = rs_userdetail.getString("full_name");
-            birthdate = rs_userdetail.getString("birthdate");
-            email = rs_userdetail.getString("email");
-        }
-    %>
-        
+            URL userDetailURL = new URL("http://localhost:8084/eurilys4-service/user/user_detail?username=" + session.getAttribute("username"));
+            //URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/user/user_detail?username=" + session.getAttribute("username"));
+            HttpURLConnection userDetailConn = (HttpURLConnection) userDetailURL.openConnection();
+            userDetailConn.setRequestMethod("GET");
+            userDetailConn.setRequestProperty("Accept", "application/json");
+            if (userDetailConn.getResponseCode() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : " + userDetailConn.getResponseCode());
+            }
+            BufferedReader userDetailBr = new BufferedReader(new InputStreamReader((userDetailConn.getInputStream())));
+            String userDetailOutput;
+            String userDetailJSONObject = "";
+            while ((userDetailOutput = userDetailBr.readLine()) != null) {
+                userDetailJSONObject += userDetailOutput;
+            } 
+            userDetailConn.disconnect();
+
+            //Parse userDetailJSONObject 
+            JSONTokener userDetailTokener = new JSONTokener(userDetailJSONObject);
+            JSONObject userDetailroot = new JSONObject(userDetailTokener);
+            String fullname = userDetailroot.getString("fullname");
+            String birthdate = userDetailroot.getString("birthdate");
+            String email = userDetailroot.getString("email");
+            String avatar = userDetailroot.getString("avatar");
+        %>
     <div id="dynamic_content">
         <div class="half_div">
             <div id="upperprof">
@@ -77,43 +81,86 @@
                     <div id="namauser"> <%=fullname%> </div>
             </div>
             <br/><br/>
-            <%=user_name%>
+            <%=session.getAttribute("username")%>
             <br>
             <%=email%>
             <br>
             <%=birthdate%>
+            <br><br><br><br>
+            <% if ("ok".equals(request.getParameter("profileupdate"))) { 
+                session.setAttribute("fullname", fullname);
+            %>
+                <div class="red"> Profile has been successfully updated </div>
+            <% } else if ("failed".equals(request.getParameter("profileupdate"))) { %>
+                <div class="red"> Profile NOT has been successfully updated. </div>
+            <% } %>
         </div>
         
         <div class="half_div">
             <div class="half_tall">
                 <div class="headsdeh">Current Tasks</div>
                 <%
-                stmt_editprofile = con_editprofile.prepareStatement("SELECT DISTINCT task.task_name, task.task_id, task.task_status FROM task_asignee LEFT JOIN task ON task.task_id=task_asignee.task_id WHERE username=? OR task_creator=?");
-                stmt_editprofile.setString(1, user_name);
-                stmt_editprofile.setString(2, user_name);
-                rs_userdetail = stmt_editprofile.executeQuery();
-                rs_userdetail.beforeFirst();
-                while (rs_userdetail.next()) {
-                    if (rs_userdetail.getString("task_status").equals("0")) { %>
-                        <div class='cursorPointer darkBlueLink' onclick='javascript:viewTask("<%=rs_userdetail.getString("task_id")%>")'> <%= rs_userdetail.getString("task_name") %> </div>   
-                    <%}
-                }
+                    URL currentTaskURL = new URL("http://localhost:8084/eurilys4-service/user/current_task?username=" + session.getAttribute("username"));
+                    //URL currentTaskURL = new URL("http://eurilys.ap01.aws.af.cm/user/current_task?username=" + session.getAttribute("username"));
+                    HttpURLConnection currentTaskConn = (HttpURLConnection) currentTaskURL.openConnection();
+                    currentTaskConn.setRequestMethod("GET");
+                    currentTaskConn.setRequestProperty("Accept", "application/json");
+                    if (currentTaskConn.getResponseCode() != 200) {
+                        throw new RuntimeException("Failed : HTTP error code : " + currentTaskConn.getResponseCode());
+                    }
+                    BufferedReader currentTaskBr = new BufferedReader(new InputStreamReader((currentTaskConn.getInputStream())));
+                    String currentTaskOutput;
+                    String currentTaskJSONObject = "";
+                    while ((currentTaskOutput = currentTaskBr.readLine()) != null) {
+                        currentTaskJSONObject += currentTaskOutput;
+                    } 
+                    currentTaskConn.disconnect();
+
+                    //Parse userDetailJSONObject 
+                    JSONTokener currentTaskTokener = new JSONTokener(currentTaskJSONObject);
+                    JSONArray currentTaskRoot = new JSONArray(currentTaskTokener);
+                
+                    for (int i=0; i<currentTaskRoot.length(); i++) {
+                        JSONObject currentTask = currentTaskRoot.getJSONObject(i);
+                        String task_name = currentTask.getString("task_name");
+                        String task_id = currentTask.getString("task_id");
+                %>
+                    <div class='cursorPointer darkBlueLink' onclick='javascript:viewTask("<%=task_id%>")'> <%=task_name%> </div>   
+                <%    
+                    }
                 %>
             </div>
             <div class="half_tall">
                 <div class="headsdeh">Finished Tasks</div>
                 <%
-                stmt_editprofile = con_editprofile.prepareStatement("SELECT DISTINCT task.task_name, task.task_id, task.task_status FROM task_asignee LEFT JOIN task ON task.task_id=task_asignee.task_id WHERE username=? OR task_creator=?");
-                stmt_editprofile.setString(1, user_name);
-                stmt_editprofile.setString(2, user_name);
-                rs_userdetail = stmt_editprofile.executeQuery();
-                rs_userdetail.beforeFirst();
-                rs_userdetail.beforeFirst();
-                while (rs_userdetail.next()) {
-                    if (rs_userdetail.getString("task_status").equals("1")) { %>
-                        <div class='cursorPointer darkBlueLink' onclick='javascript:viewTask("<%=rs_userdetail.getString("task_id")%>")'> <%= rs_userdetail.getString("task_name") %> </div>   
-                    <% }
-                }
+                    currentTaskURL = new URL("http://localhost:8084/eurilys4-service/user/finished_task?username=" + session.getAttribute("username"));
+                    //currentTaskURL = new URL("http://eurilys.ap01.aws.af.cm/user/finished_task?username=" + session.getAttribute("username"));
+                    currentTaskConn = (HttpURLConnection) currentTaskURL.openConnection();
+                    currentTaskConn.setRequestMethod("GET");
+                    currentTaskConn.setRequestProperty("Accept", "application/json");
+                    if (currentTaskConn.getResponseCode() != 200) {
+                        throw new RuntimeException("Failed : HTTP error code : " + currentTaskConn.getResponseCode());
+                    }
+                    currentTaskBr = new BufferedReader(new InputStreamReader((currentTaskConn.getInputStream())));
+                    currentTaskOutput = "";
+                    currentTaskJSONObject = "";
+                    while ((currentTaskOutput = currentTaskBr.readLine()) != null) {
+                        currentTaskJSONObject += currentTaskOutput;
+                    } 
+                    currentTaskConn.disconnect();
+
+                    //Parse userDetailJSONObject 
+                    currentTaskTokener = new JSONTokener(currentTaskJSONObject);
+                    currentTaskRoot = new JSONArray(currentTaskTokener);
+                
+                    for (int i=0; i<currentTaskRoot.length(); i++) {
+                        JSONObject currentTask = currentTaskRoot.getJSONObject(i);
+                        String task_name = currentTask.getString("task_name");
+                        String task_id = currentTask.getString("task_id");
+                %>
+                    <div class='cursorPointer darkBlueLink' onclick='javascript:viewTask("<%=task_id%>")'> <%=task_name%> </div>   
+                <%    
+                    }
                 %>
             </div>
         </div>

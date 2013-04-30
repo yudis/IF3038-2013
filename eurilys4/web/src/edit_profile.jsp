@@ -9,7 +9,7 @@
     <!-- Navigation Bar -->        
     <%@include file="navigation_bar.jsp"%>
     <%
-        URL userDetailURL = new URL("http://localhost:8084/eurilys4/user/user_detail?username=" + session.getAttribute("username"));
+        URL userDetailURL = new URL("http://localhost:8084/eurilys4-service/user/user_detail?username=" + session.getAttribute("username"));
         //URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/user/user_detail?username=" + session.getAttribute("username"));
         HttpURLConnection userDetailConn = (HttpURLConnection) userDetailURL.openConnection();
         userDetailConn.setRequestMethod("GET");
@@ -28,7 +28,6 @@
         //Parse userDetailJSONObject 
         JSONTokener userDetailTokener = new JSONTokener(userDetailJSONObject);
         JSONObject userDetailroot = new JSONObject(userDetailTokener);
-        String user_name = userDetailroot.getString("username");
         String password = userDetailroot.getString("password");
         String fullname = userDetailroot.getString("fullname");
         String birthdate = userDetailroot.getString("birthdate");
@@ -38,7 +37,7 @@
     <div id="dynamic_content">
         <div id="edit_profil_container">
             <h1>  Edit Profile </h1>
-            <form id="edit_profile_form" method="POST" action="../user/update_profile">
+            <form id="edit_profile_form" method="POST" action="../ServletHandler?type=edit_profile">
                 <label> Username </label> <%= session.getAttribute("username") %>
                 <input type="hidden" id="edit_username" name="edit_username" value="<%= session.getAttribute("username") %>">
                 <input type="hidden" id="edit_email" name="edit_email" value="">

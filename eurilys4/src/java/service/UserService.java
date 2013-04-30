@@ -59,16 +59,11 @@ public class UserService extends HttpServlet {
                 }
                 
                 if (!fullname.equals("")) {
-                    //berhasil login
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("username", username);
-                    session.setAttribute("fullname", fullname);
-                    response.sendRedirect("../src/dashboard.jsp");
+                    out.println(fullname);
                 }
                 else {
-                    //gagal login
-                    response.sendRedirect("../index.jsp?login_status=failed");
-                }  
+                    out.println("failed");
+                } 
             }      
             catch (SQLException ex) {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);

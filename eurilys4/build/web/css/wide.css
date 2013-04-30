@@ -501,6 +501,7 @@ footer {
 .clear {clear:both;}
 .left {float:left;}
 .right {float:right;}
+.left20 {margin-left:50px;}
 .top10 {margin-top:10px;}
 .top20 {margin-top:20px;}
 .top45 {margin-top:45px;}
