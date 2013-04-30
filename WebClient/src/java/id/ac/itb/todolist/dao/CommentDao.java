@@ -1,99 +1,75 @@
 package id.ac.itb.todolist.dao;
 
 import id.ac.itb.todolist.model.Comment;
-import id.ac.itb.todolist.model.User;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public class CommentDao extends DataAccessObject {
-    public int getCommentsCount(int idTugas) {
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT COUNT(*) as `n` FROM `comments` WHERE `id_tugas`=?");
-            preparedStatement.setInt(1, idTugas);
 
-            ResultSet rs = preparedStatement.executeQuery();
-            rs.next();
+    public int getCommentsCount(int idTugas) {
+        //url/rest/comment/[idTugas]
+        try {
+            HttpURLConnection htc = getConnection("rest/comment/"+idTugas);
+            htc.setRequestMethod("GET");
             
-            return rs.getInt("n");
-        } catch (SQLException e) {
+            BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
+            return Integer.parseInt(br.readLine());
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return 0;
     }
-    
-    public List<Comment> getComments(int idTugas, int startIndex, int count) {
-        ArrayList<Comment> comments = null;
-        
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT c.`id` AS `id`, c.`user` AS `user`, u.`full_name` AS `full_name`,  u.`avatar` AS `avatar`,  c.`time` AS `time`, c.`content` AS `content` " +
-	    	        "FROM `comments` c, `users` u " +
-	    	        "WHERE `id_tugas`=? AND c.`user`=u.`username` ORDER BY c.`time` DESC LIMIT ?, ?");
-            preparedStatement.setInt(1, idTugas);
-            preparedStatement.setInt(2, startIndex);
-            preparedStatement.setInt(3, count);
-            
 
-            ResultSet rs = preparedStatement.executeQuery();
-            
-            comments = new ArrayList<Comment>();
-            while (rs.next()) {
-                Comment c = new Comment();
-                c.setContent(rs.getString("content"));
-                c.setId(rs.getInt("id"));
-                c.setIdTugas(idTugas);
-                c.setTime(rs.getTimestamp("time"));
-                
-                User u = new User();
-                u.setUsername(rs.getString("user"));
-                u.setAvatar(rs.getString("avatar"));
-                u.setFullName(rs.getString("full_name"));
-                c.setUser(u);
-                
-                comments.add(c);
+    public List<Comment> getComments(int idTugas, int startIndex, int count) {
+        //url/rest/comment/[idTugas]/[startIndex]/[count]
+        ArrayList<Comment> comments=null;
+        try {
+            HttpURLConnection htc = getConnection("rest/comment/" + idTugas + "/" + startIndex +"/" + count);
+            htc.setRequestMethod("GET");
+
+            JSONArray jArray = new JSONArray(new JSONTokener(htc.getInputStream()));
+            for (int i = 0, len = jArray.length(); i < len; i++) {
+                Comment comment = new Comment();
+                comment.fromJsonObject(jArray.getJSONObject(i));
+                comments.add(comment);
             }
             
             return comments;
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         return null;
     }
-    
+
     public Comment getCommentById(int idComment) {
+        //url/rest/comment/byid/[idComment]
         Comment comment = null;
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM `comments` WHERE `id`=?");
-            preparedStatement.setInt(1, idComment);
+            HttpURLConnection htc = getConnection("rest/comment/byid/" + idComment);
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-                comment = new Comment();
-                comment.setContent(rs.getString("content"));
-                comment.setId(rs.getInt("id"));
-                comment.setIdTugas(rs.getInt("id_tugas"));
-                comment.setTime(rs.getTimestamp("time"));
-                
-                User u = new User();
-                u.setUsername(rs.getString("user"));
-                comment.setUser(u);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            Comment tmp = new Comment();
+            tmp.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
+            
+            comment = tmp;
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         return comment;
     }
-    
+
     public int addComment(Comment c) {
         try {
             PreparedStatement preparedStatement = connection
@@ -101,23 +77,24 @@ public class CommentDao extends DataAccessObject {
             preparedStatement.setInt(1, c.getIdTugas());
             preparedStatement.setString(2, c.getUser().getUsername());
             preparedStatement.setString(3, c.getContent());
-            
+
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return -1;
     }
-    
+
     public int deleteComment(int commentId) {
+        //url/comment/delete/[commentId]
         try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM `comments` WHERE `id`=?");
-            preparedStatement.setInt(1, commentId);
-            
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            HttpURLConnection htc = getConnection("rest/comment/delete/" + commentId);
+            htc.setRequestMethod("GET");
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
+            return Integer.parseInt(br.readLine());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return -1;
     }

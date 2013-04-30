@@ -4,19 +4,21 @@
  */
 package id.ac.itb.todolist.dao;
 
-import id.ac.itb.todolist.json.JSONArray;
 import id.ac.itb.todolist.model.User;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URLEncoder;
+import java.security.MessageDigest;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
-import javax.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 
 public class UserDao extends DataAccessObject {
@@ -43,24 +45,24 @@ public class UserDao extends DataAccessObject {
         User user = null;
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM users WHERE username=? AND password=MD5(?)");
-            preparedStatement.setString(1, userId);
-            preparedStatement.setString(2, passwd);
+            
+            HttpURLConnection htc = getConnection("rest/user/detil/" + URLEncoder.encode(userId, "UTF-8"));
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-                user = new User();
-                user.setUsername(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setHashedPassword(rs.getString("password"));
-                user.setFullName(rs.getString("full_name"));
-                user.setTglLahir(rs.getDate("tgl_lahir"));
-                user.setAvatar(rs.getString("avatar"));
+            User tmpU = new User();
+            tmpU.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
+            
+            System.out.println(tmpU.toJsonObject().toString(4));
+            
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(passwd.getBytes());
+            String MD5Pass = new BigInteger(1, md.digest()).toString(16);
+            System.out.println(MD5Pass);
+            if (MD5Pass.equals(tmpU.getPassword())) {
+                user = tmpU;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         return user;
@@ -68,130 +70,107 @@ public class UserDao extends DataAccessObject {
 
     public boolean isAvailableUsername(String username) {
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM users WHERE username=?");
-            preparedStatement.setString(1, username);
+            HttpURLConnection htc = getConnection("rest/user/detil/" + URLEncoder.encode(username, "UTF-8"));
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            User tmpU = new User();
+            tmpU.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
+            
+            return false; // tmpU tidak null dan mendapatkan hasil sehingga username tidak dapat digunakan
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
-        return true;
+        return true; // tmpU null dan keluar dari try catch
     }
 
     public boolean isAvailableEmail(String email) {
+        // GET
+        // rest/user/email/[email]
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM users WHERE email=?");
-            preparedStatement.setString(1, email);
+            HttpURLConnection htc = getConnection("rest/user/email/" + URLEncoder.encode(email, "UTF-8"));
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            User tmpU = new User();
+            tmpU.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
+            
+            return false; // tmpU tidak null dan mendapatkan hasil sehingga email tidak dapat digunakan
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
-        return true;
+        return true; // tmpU null dan keluar dari try catch
     }
-
     
     public ArrayList<String> getUsers() {
+    // GET
+    // rest/user/
         ArrayList<String> result = null;
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT username FROM users ;");
+            HttpURLConnection htc = getConnection("rest/user/");
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-            
-            result = new ArrayList<String>();
-            while (rs.next()) {
-                result.add(rs.getString("username"));
+            JSONArray jArray = new JSONArray(new JSONTokener(htc.getInputStream()));
+            for (int i = 0, len = jArray.length(); i < len; i++) {
+                result.add(jArray.getString(i));
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return result;
     }
 
     public int Update(User user){
+    // POST
+    // rest/user/update/username
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("UPDATE users SET `password`=?, `full_name`=?, `tgl_lahir`=?, `avatar`=? WHERE `username`=?;");
-            preparedStatement.setString(1, user.getPassword());
-            preparedStatement.setString(2, user.getFullName());
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            String tglL = df.format(user.getTglLahir());
-            preparedStatement.setString(3, tglL);
-            preparedStatement.setString(4, user.getAvatar());
-            preparedStatement.setString(5, user.getUsername());
-            
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e){
-            e.printStackTrace();
-            return -1;
+            HttpURLConnection htc = getConnection("rest/user/update/" + URLEncoder.encode(user.getUsername(), "UTF-8"));
+            htc.setRequestMethod("POST");
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
+            return Integer.parseInt(br.readLine());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
+        return -1;
     }
     
     public User getUser(String userId) {
+    // GET
+    // rest/user/detil/username    
         User user = null;
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM users WHERE username=?");
-            preparedStatement.setString(1, userId);
+            HttpURLConnection htc = getConnection("rest/user/detil/" + URLEncoder.encode(userId, "UTF-8"));
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-                user = new User();
-                user.setUsername(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setHashedPassword(rs.getString("password"));
-                user.setFullName(rs.getString("full_name"));
-                user.setTglLahir(rs.getDate("tgl_lahir"));
-                user.setAvatar(rs.getString("avatar"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            User tmpU = new User();
+            tmpU.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
+            user = tmpU;
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         return user;
     }    
 
     public Collection<User> getUserSearch(String Id, int start, int n) throws IOException {
-        User user = null;
+    // GET
+    // rest/user/search/w/0/3
         ArrayList<User> result = new ArrayList<User>();
-        String qry = "SELECT * FROM users WHERE username LIKE '%" + Id + "%' LIMIT " + start + ", " + n + ";";
         try {
-            
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement(qry);   
-            
-            ResultSet rs = preparedStatement.executeQuery();       
-            while (rs.next()) {
-                user = new User();
-                user.setUsername(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setHashedPassword(rs.getString("password"));
-                user.setFullName(rs.getString("full_name"));
-                user.setTglLahir(rs.getDate("tgl_lahir"));
-                user.setAvatar(rs.getString("avatar"));
+            HttpURLConnection htc = getConnection("/rest/user/search/" + URLEncoder.encode(Id, "UTF-8") + "/" + start + "/" + n);
+            htc.setRequestMethod("GET");
+
+            JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
+            for (int i = 0; i < ja.length(); i++) {
+                User user = new User();
+                user.fromJsonObject(ja.getJSONObject(i));
                 result.add(user);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
             
         return result;

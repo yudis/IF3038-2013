@@ -1,8 +1,8 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.json.JSONModel;
 import java.sql.Timestamp;
-import id.ac.itb.todolist.json.JSONObject;
+import org.json.JSONModel;
+import org.json.JSONObject;
 
 public class Category extends JSONModel {
 
@@ -52,5 +52,12 @@ public class Category extends JSONModel {
         jObject.put("lastMod", lastMod);
         
         return jObject;
+    }
+    
+    @Override
+    public void fromJsonObject(JSONObject jObject) {
+        this.id = jObject.getInt("id");
+        this.nama = jObject.getString("nama");
+        this.lastMod = java.sql.Timestamp.valueOf(jObject.getString("lastMod"));
     }
 }

@@ -1,9 +1,9 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.json.JSONModel;
 import java.sql.Timestamp;
-import id.ac.itb.todolist.json.JSONObject;
 import java.text.SimpleDateFormat;
+import org.json.JSONModel;
+import org.json.JSONObject;
 
 public class Comment extends JSONModel {
 
@@ -75,5 +75,19 @@ public class Comment extends JSONModel {
         jObject.put("content", content);
 
         return jObject;
+    }
+    
+    @Override
+    public void fromJsonObject(JSONObject jObject) {
+        
+        this.id = jObject.getInt("id");
+        this.idTugas = jObject.getInt("idTugas");
+        JSONObject jsonUser = jObject.getJSONObject("user");
+        if (jsonUser != null) {
+            this.user = new User();
+            this.user.fromJsonObject(jsonUser);
+        }
+        this.time = java.sql.Timestamp.valueOf(jObject.getString("time"));
+        this.content = jObject.getString("content");
     }
 }

@@ -1,11 +1,11 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.json.JSONModel;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
-import id.ac.itb.todolist.json.JSONObject;
+import org.json.JSONModel;
+import org.json.JSONObject;
 
 public class User extends JSONModel {
     private String username;
@@ -97,5 +97,15 @@ public class User extends JSONModel {
         jObject.put("avatar", avatar);
         
         return jObject;
+    }
+    
+    @Override
+    public void fromJsonObject(JSONObject jObject) {
+        this.username = jObject.getString("username");
+        this.email = jObject.getString("email");
+        this.password = jObject.getString("password");
+        this.fullName = jObject.getString("fullName");
+        this.tglLahir = java.sql.Date.valueOf(jObject.getString("tglLahir"));
+        this.avatar = jObject.getString("avatar");
     }
 }
