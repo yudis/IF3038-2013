@@ -40,7 +40,7 @@ public class TaskService extends HttpServlet {
         /* 
          * pathInfo             : baseURL/task/task_detail
          * requestParameter     : task_id=
-         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         * Notes                : baseURL adalah localhost:8084/eurilys4-service ATAU http://eurilys.ap01.aws.af.cm/ 
          */
         if (pathInfo.equals("/task_detail")) {
             try {                
@@ -123,7 +123,7 @@ public class TaskService extends HttpServlet {
         /* 
          * pathInfo             : baseURL/task/update_task
          * requestParameter     : edit_task_id=&edit_task_deadline=&edit_task_assignee=&edit_task_tag=
-         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         * Notes                : baseURL adalah localhost:8084/eurilys4-service ATAU http://eurilys.ap01.aws.af.cm/ 
          */
         else if (pathInfo.equals("/update_task")) {
             try {
@@ -134,12 +134,16 @@ public class TaskService extends HttpServlet {
 
                 conn = connector.getConnection ();
                 Statement stmt = conn.createStatement();
-
+                
+                int row1 = 0;
+                int row2 = 0;
+                int row3 = 0;
+                
                 //Update task_asignee
                 String[] assigneArray = assigneeList.split(",");
                 for (int i = 0; i < assigneArray.length; i++) {
                     if (!("".equals(assigneArray[i]))) {
-                        stmt.executeUpdate("INSERT INTO task_asignee (task_id, username) VALUES ('" + taskID + "','" + assigneArray[i] + "')");
+                        row1 = stmt.executeUpdate("INSERT INTO task_asignee (task_id, username) VALUES ('" + taskID + "','" + assigneArray[i] + "')");
                     }
                 }
                 
@@ -147,14 +151,14 @@ public class TaskService extends HttpServlet {
                 String[] tagArray = tagList.split(",");
                 for (int i = 0; i < tagArray.length; i++) {
                     if (!("".equals(tagArray[i]))) {
-                        stmt.executeUpdate("INSERT INTO tag (tag_name, task_id) VALUES ('" + tagArray[i] + "','" + taskID + "')");
+                        row2 = stmt.executeUpdate("INSERT INTO tag (tag_name, task_id) VALUES ('" + tagArray[i] + "','" + taskID + "')");
                     }
                 }
                 
                 //Update task
-                stmt.executeUpdate("UPDATE task SET task_deadline='" + deadline + "' WHERE task_id='" + taskID + "'"); 
+                row3 = stmt.executeUpdate("UPDATE task SET task_deadline='" + deadline + "' WHERE task_id='" + taskID + "'"); 
                 
-                out.println("task updated");
+                out.println(row1+row2+row3);
                 
             } catch (SQLException ex) {
                 Logger.getLogger(TaskService.class.getName()).log(Level.SEVERE, null, ex);
@@ -167,7 +171,7 @@ public class TaskService extends HttpServlet {
          * HTTP Method          : GET
          * pathInfo             : baseURL/task/delete_comment
          * requestParameter     : comment_id=
-         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         * Notes                : baseURL adalah localhost:8084/eurilys4-service ATAU http://eurilys.ap01.aws.af.cm/ 
          */
         else if (pathInfo.equals("/delete_comment")) {
             try {
@@ -189,20 +193,19 @@ public class TaskService extends HttpServlet {
         /* 
          * pathInfo             : baseURL/task/delete_tag
          * requestParameter     : tag_name=&task_id=
-         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         * Notes                : baseURL adalah localhost:8084/eurilys4-service ATAU http://eurilys.ap01.aws.af.cm/ 
          */
         else if (pathInfo.equals("/delete_tag")) {
             try {
                 String tag_name = request.getParameter("tag_name");
                 String task_id = request.getParameter("task_id");
                 conn = connector.getConnection ();
-                ResultSet rs = null;
                 PreparedStatement st;
                 st = conn.prepareStatement("DELETE FROM tag WHERE tag_name=? AND task_id=?");
                 st.setString(1, tag_name);
                 st.setString(2, task_id);
-                st.executeUpdate();
-                out.println("Tag " + tag_name + " from Task " + task_id + " has been deleted");                
+                int row = st.executeUpdate();
+                out.println(row);
             } catch (SQLException ex) {
                 Logger.getLogger(TaskService.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -211,23 +214,21 @@ public class TaskService extends HttpServlet {
         }
         
         /* 
+         * Delete Assignee in a Task
          * pathInfo             : baseURL/task/delete_assignee
          * requestParameter     : task_id=&username=
-         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         * Notes                : baseURL adalah localhost:8084/eurilys4-service ATAU http://eurilys.ap01.aws.af.cm/ 
          */
         else if (pathInfo.equals("/delete_assignee")) {
-            //task_asignee
             try {
                 String task_id = request.getParameter("task_id");
                 String username = request.getParameter("username");
                 conn = connector.getConnection ();
-                ResultSet rs = null;
-                PreparedStatement st;
-                st = conn.prepareStatement("DELETE FROM task_asignee WHERE task_id=? AND username=?");
+                PreparedStatement st = conn.prepareStatement("DELETE FROM task_asignee WHERE task_id=? AND username=?");
                 st.setString(1, task_id);
                 st.setString(2, username);
-                st.executeUpdate();
-                out.println("Assignee " + username + " from Task " + task_id + " has been deleted");                
+                int row = st.executeUpdate();
+                out.println(row);               
             } catch (SQLException ex) {
                 Logger.getLogger(TaskService.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -238,7 +239,7 @@ public class TaskService extends HttpServlet {
         /* 
          * pathInfo             : baseURL/task/get_category_task
          * requestParameter     : category_name=
-         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         * Notes                : baseURL adalah localhost:8084/eurilys4-service ATAU http://eurilys.ap01.aws.af.cm/ 
          */
         else if (pathInfo.equals("/get_category_task")) {
             try {
@@ -299,7 +300,7 @@ public class TaskService extends HttpServlet {
         /* 
          * pathInfo             : baseURL/task/all_task
          * requestParameter     : username=
-         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         * Notes                : baseURL adalah localhost:8084/eurilys4-service ATAU http://eurilys.ap01.aws.af.cm/ 
          */
         else if (pathInfo.equals("/all_task")) {
             try {                
@@ -363,7 +364,7 @@ public class TaskService extends HttpServlet {
         /* 
          * pathInfo             : baseURL/task/finish_task
          * requestParameter     : task_id=
-         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         * Notes                : baseURL adalah localhost:8084/eurilys4-service ATAU http://eurilys.ap01.aws.af.cm/ 
          */
         else if (pathInfo.equals("/finish_task")) {
             try {
@@ -396,7 +397,7 @@ public class TaskService extends HttpServlet {
         /* 
          * pathInfo             : baseURL/task/delete_task
          * requestParameter     : task_id=
-         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         * Notes                : baseURL adalah localhost:8084/eurilys4-service ATAU http://eurilys.ap01.aws.af.cm/ 
          */
         else if (pathInfo.equals("/delete_task")) {
             try {

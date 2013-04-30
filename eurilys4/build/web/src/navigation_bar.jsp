@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@page import="org.json.*"%>
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.BufferedReader"%>
@@ -31,7 +32,7 @@
 
 <div id="navbar">
     <div id="short_profile">
-        <a href="profile.jsp"> <img id="profile_picture" src="" alt=""> </a>
+        <a href="profile.jsp"> <img id="profile_picture" src="../<%=URLDecoder.decode((String)session.getAttribute("avatar"), "UTF-8")%>" alt=""> </a>
         <div id="profile_info">
             Welcome, <br>
             <a href="profile.jsp" class="darkBlue"> <%= session.getAttribute("fullname") %> </a>

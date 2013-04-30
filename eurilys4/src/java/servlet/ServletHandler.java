@@ -2,6 +2,7 @@ package servlet;
 
 //import java.io.BufferedInputStream;
 //import java.io.BufferedOutputStream;
+import Function.FileManager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -42,14 +43,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Iterator;
+import javax.servlet.annotation.MultipartConfig;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
+@MultipartConfig
 public class ServletHandler extends HttpServlet {
 
     @Override
@@ -290,62 +293,50 @@ public class ServletHandler extends HttpServlet {
         else if (req.getParameter("type").equalsIgnoreCase("edit_task")) {
             String taskID = req.getParameter("edit_task_id");
             String deadline = req.getParameter("edit_task_deadline");
-            String assigneeList = req.getParameter("edit_task_assignee");
-            String tagList = req.getParameter("edit_task_tag");
+            String assigneeList = URLEncoder.encode(req.getParameter("edit_task_assignee"), "UTF-8");
+            String tagList = URLEncoder.encode(req.getParameter("edit_task_tag"), "UTF-8");
+            
+            URL url = new URL("http://localhost:8084/eurilys4-service/task/update_task?edit_task_id="+taskID+"&edit_task_deadline="+deadline+"&edit_task_assignee="+assigneeList+"&edit_task_tag="+tagList);
+            //URL url = new URL("http://eurilys.ap01.aws.af.cm/task/update_task?edit_task_id="+taskID+"&edit_task_deadline="+deadline+"&edit_task_assignee="+assigneeList+"&edit_task_tag="+tagList);
 
-            try {
-                try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    System.out.println("Berhasil connect ke Mysql JDBC Driver - edit task ");
-                } catch (ClassNotFoundException ex) {
-                    System.out.println("Where is your MySQL JDBC Driver? - edit task");
-                }
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086", "root", "");
-                Statement st = conn.createStatement();
-
-                //Update task_asignee
-                String[] assigneArray = assigneeList.split(",");
-                for (int i = 0; i < assigneArray.length; i++) {
-                    st.executeUpdate("INSERT INTO task_asignee (task_id, username) VALUES ('" + taskID + "','" + assigneArray[i] + "')");
-                }
-
-                //Update tag
-                String[] tagArray = tagList.split(",");
-                for (int i = 0; i < tagArray.length; i++) {
-                    st.executeUpdate("INSERT INTO tag (tag_name, task_id) VALUES ('" + tagArray[i] + "','" + taskID + "')");
-                }
-
-                //Update task
-                st.executeUpdate("UPDATE task SET task_deadline='" + deadline + "' WHERE task_id='" + taskID + "'");
-
-                resp.sendRedirect("src/task_detail.jsp?task_id=" + taskID);
-
-            } catch (SQLException e) {
-                System.out.println("Connection Failed! Check output console - edit task");
-            } finally {
-                try {
-                    conn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println("Can not close connection - edit task");
-                }
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+            httpConn.setRequestMethod("GET");
+            httpConn.setRequestProperty("Accept", "application/json");
+            if (httpConn.getResponseCode() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : " + httpConn.getResponseCode());
+            }
+            BufferedReader br = new BufferedReader(new InputStreamReader((httpConn.getInputStream())));
+            String output;
+            String outputObject = "";
+            while ((output = br.readLine()) != null) {
+                outputObject += output;
+            } 
+            httpConn.disconnect();
+            if ("3".equals(outputObject)) {
+                resp.sendRedirect("src/task_detail.jsp?task_id="+taskID+"&update_task=ok");
+            } else {
+                resp.sendRedirect("src/task_detail.jsp?task_id="+taskID+"&update_task=failed");
             }
         } 
         
         //edit profile
         else if (req.getParameter("type").equalsIgnoreCase("edit_profile")) {
-            // baseURL/user/update_profile?username=&password=&fullname=&birthdate=&avatar=
-            
             String user_name = req.getParameter("edit_username");
             String password = req.getParameter("password");
             String fullname = req.getParameter("fullname");
-            //String fileName = req.getParameter("avatar");
+            //String target = req.getParameter("avatar");
             String birthdate = req.getParameter("birthdate");
-
+            
+            Part filePart = req.getPart("avatar");
+            System.out.println("file Part : " + filePart);
+            String avatar = "img/avatar/" + user_name + FileManager.getExtension(FileManager.getFilename(filePart));
+            String filePath = getServletContext().getRealPath("/") + avatar;
+            
+            avatar = URLEncoder.encode(avatar, "UTF-8");
             fullname = URLEncoder.encode(fullname, "UTF-8");
             
-            URL url = new URL("http://localhost:8084/eurilys4-service/user/update_profile?username="+user_name+"&password="+password+"&fullname="+fullname+"&birthdate="+birthdate+"&avatar=");
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/user/update_profile?username="+user_name+"&password="+password+"&fullname="+fullname+"&birthdate="+birthdate+"&avatar=");
+            URL url = new URL("http://localhost:8084/eurilys4-service/user/update_profile?username="+user_name+"&password="+password+"&fullname="+fullname+"&birthdate="+birthdate+"&avatar="+avatar);
+            //URL url = new URL("http://eurilys.ap01.aws.af.cm/user/update_profile?username="+user_name+"&password="+password+"&fullname="+fullname+"&birthdate="+birthdate+"&avatar="+avatar);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -362,6 +353,9 @@ public class ServletHandler extends HttpServlet {
             httpConn.disconnect();
             if ("1".equals(outputObject)) {
                 //berhasil
+                Files.copy(filePart.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+                HttpSession session = req.getSession(true);
+                session.setAttribute("avatar", avatar);
                 resp.sendRedirect("src/profile.jsp?profileupdate=ok");
             } else {
                 //failed
@@ -370,8 +364,8 @@ public class ServletHandler extends HttpServlet {
             
         } 
         
+        //Add Task
         else if (req.getParameter("type").equalsIgnoreCase("add_task")) {
-            out.write("Servlet - Extracting parameter");
             String task_name = req.getParameter("task_name_input");
             //attachment
             String task_deadline = req.getParameter("deadline_input");
@@ -380,81 +374,9 @@ public class ServletHandler extends HttpServlet {
             String catName = req.getParameter("addtask_cat_name");
             HttpSession session = req.getSession(true);
             String taskCreator = (String) session.getAttribute("username");
-            
-            String server = "http://localhost:8084/eurilys4-service/SOAPtest";
-            //String service = "http://eurilys.ap01.aws.af.cm/SOAPService";
-            
-            //try {
-                try {
-                //DEFINE CONNECTION.
-                out.write("Servlet - Define Connection");
-                HttpURLConnection   connection = (HttpURLConnection) ( new URL(server).openConnection() );
-                                    connection.setDoOutput       (true);
-                                    connection.setDoInput        (true);
-                                    connection.setRequestMethod  ("POST");
-                                    connection.setRequestProperty("SOAPAction", server);
-                //CREATE REQUEST.
-                out.write("Servlet - Create Request");                    
-                String  xml = "<?xml version='1.0'?>"+ 
-                        "<SOAP-ENV:Envelope>"+
-                            "<SOAP-ENV:Body>"+
-                                "<tname>"+task_name+"</tname>"+
-                                "<tdeadline>"+task_deadline+"</tdeadline>"+
-                                "<tassignee>"+assigneeList+"</tassignee>"+
-                                "<ttag>"+tagList+"</ttag>"+
-                                "<tcategory>"+catName+"</tcategory>"+
-                                "<tcreator>"+taskCreator+"</tcreator>"+
-                            "</SOAP-ENV:Body>"+
-                        "</SOAP-ENV:Envelope>";
-                out.write(xml);
-                
-                //SEND REQUEST.
-                out.write("Servlet - Send Request");
-                System.out.println(xml);
-                OutputStream        _out  = connection.getOutputStream();
-                OutputStreamWriter  wout = new OutputStreamWriter(_out, "UTF-8");
-                                    wout.write(xml);
-                                    wout.flush();
-                                    _out.close();
-                
-                //READ RESPONSE.
-                out.write("Servlet - Read Response");
-                InputStream in = connection.getInputStream();
-                int c;
-                String response = "";
-                while ((c = in.read()) != -1) 
-                { 
-                    response += (char) c; 
-                    System.out.println(c);
-                }
-                System.out.println(response);
-                out.write(response);
-                
-                //EXTRACT RESULT.
-                out.write("Servlet - Extract Result");
-                int startTag  = response.indexOf("<result>");
-                int endTag    = response.indexOf("</result>");
-                String parameter = response.substring(startTag,endTag).replaceAll("<result>","");     
-                parameter = parameter.trim();
-                out.write(parameter);
-                
-                //DISPLAY RESULT.
-                System.out.println("Result="+parameter);
-                if (parameter.equals("")){
-                    resp.sendRedirect("src/add_task.jsp");
-                } else {
-                    resp.sendRedirect("src/task_detail.jsp?task_id=" + parameter);
-                }
 
-                //CLOSE ALL.
-                in        .close();
-                out       .close();
-                connection.disconnect();
-                }
-                catch (IOException e) { System.out.println(e.toString()); }                     
-            
-            
-                /*try {
+            try {
+                try {
                     Class.forName("com.mysql.jdbc.Driver");
                     System.out.println("Berhasil connect ke Mysql JDBC Driver - Add Task ");
                 } catch (ClassNotFoundException ex) {
@@ -524,7 +446,7 @@ public class ServletHandler extends HttpServlet {
                     Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println("Can not close connection - Add Task");
                 }
-            }*/
+            }
         }
     }
 
@@ -683,67 +605,79 @@ public class ServletHandler extends HttpServlet {
             out.println(outputObject);
         } 
         
+        //Assignee Autocomplete
+        else if (req.getParameter("type").equalsIgnoreCase("assignee_autocomplete")) {
+            PrintWriter out = resp.getWriter();
+            String keyword = req.getParameter("keyword");
+            
+            URL url = new URL("http://localhost:8084/eurilys4-service/user/autocomplete?keyword="+keyword);
+            //URL url = new URL("http://eurilys.ap01.aws.af.cm/user/autocomplete?keyword="+keyword);
+
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+            httpConn.setRequestMethod("GET");
+            httpConn.setRequestProperty("Accept", "application/json");
+            if (httpConn.getResponseCode() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : " + httpConn.getResponseCode());
+            }
+            BufferedReader br = new BufferedReader(new InputStreamReader((httpConn.getInputStream())));
+            String output;
+            String outputObject = "";
+            while ((output = br.readLine()) != null) {
+                outputObject += output;
+            } 
+            httpConn.disconnect();
+            out.println(outputObject);
+        } 
+        
         //Edit Task - Delete Assignee
         else if (req.getParameter("type").equalsIgnoreCase("edittask_deleteAssignee")) {
             String taskID = req.getParameter("task_id");
             String userID = req.getParameter("user_id");
-            try {
-                // Make connection to database
-                try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    System.out.println("Berhasil connect ke Mysql JDBC Driver -- ServletHandler.java - edit task : delete assignee  ");
-                } catch (ClassNotFoundException ex) {
-                    System.out.println("Where is your MySQL JDBC Driver? -- ServletHandler.java - edit task : delete assignee ");
-                }
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086", "root", "");
+            PrintWriter out = resp.getWriter();
+            
+            URL url = new URL("http://localhost:8084/eurilys4-service/task/delete_assignee?task_id="+taskID+"&username="+userID);
+            //URL url = new URL("http://eurilys.ap01.aws.af.cm/task/delete_assignee?task_id="+taskID+"&username="+userID);
 
-                PreparedStatement st;
-                st = conn.prepareStatement("DELETE FROM task_asignee WHERE task_id=? AND username=?");
-                st.setString(1, taskID);
-                st.setString(2, userID);
-                st.executeUpdate();
-
-            } catch (SQLException e) {
-                System.out.println("Connection Failed! Check output console - edit task : delete assignee ");
-            } finally {
-                try {
-                    conn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println("Can not close connection - edit task : delete assignee ");
-                }
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+            httpConn.setRequestMethod("GET");
+            httpConn.setRequestProperty("Accept", "application/json");
+            if (httpConn.getResponseCode() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : " + httpConn.getResponseCode());
             }
+            BufferedReader br = new BufferedReader(new InputStreamReader((httpConn.getInputStream())));
+            String output;
+            String outputObject = "";
+            while ((output = br.readLine()) != null) {
+                outputObject += output;
+            } 
+            httpConn.disconnect();            
+            out.println(outputObject);
         } 
         
         //Edit Task - Delete Tag
         else if (req.getParameter("type").equalsIgnoreCase("edittask_deleteTag")) {
             String taskID = req.getParameter("task_id");
             String tagName = req.getParameter("tag_name");
-            try {
-                // Make connection to database
-                try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    System.out.println("Berhasil connect ke Mysql JDBC Driver -- ServletHandler.java - edit task : delete tag ");
-                } catch (ClassNotFoundException ex) {
-                    System.out.println("Where is your MySQL JDBC Driver? -- ServletHandler.java - edit task : delete tag ");
-                }
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086", "root", "");
+            
+            PrintWriter out = resp.getWriter();
+            
+            URL url = new URL("http://localhost:8084/eurilys4-service/task/delete_tag?tag_name="+tagName+"&task_id="+taskID);
+            //URL url = new URL("http://eurilys.ap01.aws.af.cm/task/delete_tag?tag_name="+tagName+"&task_id="+taskID);
 
-                PreparedStatement st;
-                st = conn.prepareStatement("DELETE FROM tag WHERE task_id=? AND tag_name=?");
-                st.setString(1, taskID);
-                st.setString(2, tagName);
-                st.executeUpdate();
-            } catch (SQLException e) {
-                System.out.println("Connection Failed! Check output console - edit task : delete tag ");
-            } finally {
-                try {
-                    conn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ServletHandler.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println("Can not close connection - edit task : delete tag");
-                }
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+            httpConn.setRequestMethod("GET");
+            httpConn.setRequestProperty("Accept", "application/json");
+            if (httpConn.getResponseCode() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : " + httpConn.getResponseCode());
             }
+            BufferedReader br = new BufferedReader(new InputStreamReader((httpConn.getInputStream())));
+            String output;
+            String outputObject = "";
+            while ((output = br.readLine()) != null) {
+                outputObject += output;
+            } 
+            httpConn.disconnect();            
+            out.println(outputObject);
         }
 
     }

@@ -247,8 +247,7 @@ function EditTaskAssigneHint(str) {
         }
     } 
     
-    var url="edittask_autocomplete.jsp?hint="+str;
-    xmlhttp.open("GET", url, true);
+    xmlhttp.open("GET", "../ServletHandler?type=assignee_autocomplete&keyword="+str, true);
     xmlhttp.send();
 }
 
@@ -417,7 +416,9 @@ function deleteTaskAssigne(taskID, userID) {
         }
         xmlhttp.onreadystatechange=function() {
             if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                window.location = "edit_task.jsp?task_id="+taskID;
+                if (xmlhttp.responseText == 1) {
+                    document.getElementById("user_"+userID).parentNode.removeChild(document.getElementById("user_"+userID)); 
+                }
             }
         } 
         xmlhttp.open('GET', '../ServletHandler?type=edittask_deleteAssignee&task_id='+taskID+'&user_id='+userID, true);
@@ -436,7 +437,9 @@ function deleteTaskTag(taskID, tagName) {
         }
         xmlhttp.onreadystatechange=function() {
             if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                window.location = "edit_task.jsp?task_id="+taskID;
+                if (xmlhttp.responseText == 1) {
+                    document.getElementById("tag_"+tagName).parentNode.removeChild(document.getElementById("tag_"+tagName));  
+                }
             }
         } 
         xmlhttp.open('GET', '../ServletHandler?type=edittask_deleteTag&task_id='+taskID+'&tag_name='+tagName, true);

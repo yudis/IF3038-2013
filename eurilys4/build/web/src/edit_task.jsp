@@ -14,37 +14,40 @@
     <div id="dynamic_content">
         <div class='taskDetail'>
             <%
-                String taskID = (String) request.getParameter("task_id");     
-                String tagList = "";
-                ResultSet rs_taskdetail = null;
-                ResultSet rs_assigne = null;
-                ResultSet rs_avatar = null;
+                String taskID = (String) request.getParameter("task_id");                            
+                URL taskDetailURL = new URL("http://localhost:8084/eurilys4-service/task/task_detail?task_id=" + taskID);
+                //URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/task/task_detail?task_id=" + taskID);
+                HttpURLConnection taskDetailConn = (HttpURLConnection) taskDetailURL.openConnection();
+                taskDetailConn.setRequestMethod("GET");
+                taskDetailConn.setRequestProperty("Accept", "application/json");
+                if (taskDetailConn.getResponseCode() != 200) {
+                    throw new RuntimeException("Failed : HTTP error code : " + taskDetailConn.getResponseCode());
+                }
+                BufferedReader taskDetailBr = new BufferedReader(new InputStreamReader((taskDetailConn.getInputStream())));
+                String taskDetailOutput;
+                String taskDetailJSONObject = "";
+                while ((taskDetailOutput = taskDetailBr.readLine()) != null) {
+                    taskDetailJSONObject += taskDetailOutput;
+                } 
+                taskDetailConn.disconnect();
+                //Parse userDetailJSONObject 
+                JSONTokener taskDetailTokener = new JSONTokener(taskDetailJSONObject);
+                JSONObject taskDetailroot = new JSONObject(taskDetailTokener);
 
-                try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    System.out.println("Berhasil connect ke Mysql JDBC Driver - edit_task.jsp");
-                } catch (ClassNotFoundException ex) {
-                    System.out.println("Where is your MySQL JDBC Driver? - edit_task.jsp");
-                }
-                Connection con_edittask = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root","");
-                PreparedStatement stmt_edittask = con_edittask.prepareStatement("");
+                String task_name = taskDetailroot.getString("task_name");
+                String task_id = taskDetailroot.getString("task_id");
+                String task_deadline = taskDetailroot.getString("task_deadline");
+                String task_status = taskDetailroot.getString("task_status");
+                String task_category = taskDetailroot.getString("task_category");
+                String task_creator = taskDetailroot.getString("task_creator");
+
+                JSONArray comment_id = taskDetailroot.getJSONArray("comment_id");
+                JSONArray comment_timestamp = taskDetailroot.getJSONArray("comment_timestamp");
+                JSONArray comment_content = taskDetailroot.getJSONArray("comment_content");
+                JSONArray comment_creator = taskDetailroot.getJSONArray("comment_creator");
                 
-                //Get task detail
-                String task_name = "";
-                String task_status = "";
-                String task_deadline = "";
-                String task_category = "";
-                stmt_edittask = con_edittask.prepareStatement("SELECT * FROM task WHERE task_id=?");
-                stmt_edittask.setString(1, taskID);
-                rs_taskdetail = stmt_edittask.executeQuery();
-                rs_taskdetail.beforeFirst();
-                while (rs_taskdetail.next()) {
-                    task_name = rs_taskdetail.getString("task_name");
-                    task_status = rs_taskdetail.getString("task_status");
-                    task_deadline = rs_taskdetail.getString("task_deadline");
-                    task_category = rs_taskdetail.getString("cat_name");
-                }
-                
+                JSONArray tag_list = taskDetailroot.getJSONArray("tag_list");
+                JSONArray task_assignee = taskDetailroot.getJSONArray("task_assignee");
             %>
             
             <div id='edit_task_header' class='left top30 dynamic_content_head darkBlue'>
@@ -54,7 +57,7 @@
             <form method="POST" action="../ServletHandler?type=edit_task">
                     <input type='submit' id="save_edit_task" name='edit_task_submit' class='left top30 link_blue_rect' value='Save'>
 
-                    <input type="hidden" name="edit_task_id" value="<%=taskID%>"/>
+                    <input type="hidden" name="edit_task_id" value="<%=task_id%>"/>
                     <div class='left top30 dynamic_content_row'>
                             <div id='task_name_ltd' class='left dynamic_content_left'> Task Name </div>
                             <div id='task_name_rtd' class='left dynamic_content_right'> <%=task_name%> </div>
@@ -72,10 +75,9 @@
                     <div class='left top20 dynamic_content_row'>
                             <div id='attachment_ltd' class='left dynamic_content_left'>Attachment</div>
                             <div id='attachment_rtd' class='left dynamic_content_right'>
-                                    ATTACHMENT, gimana caranya? 
+                                    Belom dibikin. Hahaha. 
                             </div>
                     </div>
-
 
                     <div class='left top20 dynamic_content_row'>
                             <div id='deadline_ltd' class='left dynamic_content_left'>Deadline</div>
@@ -87,16 +89,13 @@
                     <div class='left top20 dynamic_content_row'>
                         <div id='assignee_ltd' class='left dynamic_content_left'>Assignee</div>
                         <div id='assignee_rtd' class='left dynamic_content_right'>
-                            <%
-                                stmt_edittask = con_edittask.prepareStatement("SELECT username from task_asignee WHERE task_id=?");
-                                stmt_edittask.setString(1, taskID);
-                                rs_assigne = stmt_edittask.executeQuery();
-                                rs_assigne.beforeFirst();
-                                while (rs_assigne.next()) { %>
-                                <img src='../img/done.png' class='cursorPointer' width='8' onclick="javascript:deleteTaskAssigne('<%= taskID %>','<%= rs_assigne.getString("username") %>')"/> &nbsp;&nbsp;&nbsp;
-                                <span class='userprofile_link darkBlueItalic' onclick="javascript:searchUser('<%= rs_assigne.getString("username") %>')"> <%= rs_assigne.getString("username") %> </span> 
-                                <br> 
-                            <% } %>                                
+                            <% for (int i=0; i<task_assignee.length(); i++) { %>                                
+                                <div id="user_<%=task_assignee.get(i)%>">
+                                    <img src='../img/done.png' class='cursorPointer' width='8' onclick="javascript:deleteTaskAssigne('<%= task_id %>','<%= task_assignee.get(i) %>')"/> &nbsp;&nbsp;&nbsp;
+                                    <span class='userprofile_link darkBlueItalic' onclick="javascript:searchUser('<%= task_assignee.get(i) %>')"> <%= task_assignee.get(i) %> </span> 
+                                    <br> 
+                                </div>
+                            <% } %>
                             <br>
                             <input type="text" autocomplete="off" name="edit_task_assignee" id="edit_task_assignee" value=""> <br>
                             <input type="text" autocomplete="off" name="edit_task_assignee_auto" id="edit_task_assignee_auto" class="edit_task_input" onkeyup="EditTaskAssigneHint(this.value)" Placeholder="Type here..." value="">
@@ -105,17 +104,13 @@
                     </div>			
                     <div class='left top20 dynamic_content_row'>
                             <div id='tag_ltd' class='left dynamic_content_left'> Tag </div>
-                            <div id='tag_rtd' class='left dynamic_content_right'>
-                            <%
-                                //Get Tag List
-                                stmt_edittask = con_edittask.prepareStatement("SELECT * from tag WHERE task_id=?");
-                                stmt_edittask.setString(1, taskID);
-                                rs_taskdetail = stmt_edittask.executeQuery();
-                                rs_taskdetail.beforeFirst();            
-                                while (rs_taskdetail.next()) { %>
-                                   <img src='../img/done.png' class='cursorPointer' width='8' onclick="javascript:deleteTaskTag('<%= taskID %>','<%= rs_taskdetail.getString("tag_name") %>')"/> &nbsp;&nbsp;&nbsp;
-                                   <span class='darkBlueItalic' onclick="javascript:searchUser('<%= rs_taskdetail.getString("tag_name") %>')"> <%= rs_taskdetail.getString("tag_name") %> </span> 
-                                   <br> 
+                            <div id='tag_rtd' class='left dynamic_content_right' id="edit_task_tag">
+                            <% for (int i=0; i<tag_list.length();i++) { %>
+                                <div id="tag_<%=tag_list.get(i)%>">
+                                    <img src='../img/done.png' class='cursorPointer' width='8' onclick="javascript:deleteTaskTag('<%= task_id %>','<%= tag_list.get(i) %>')"/> &nbsp;&nbsp;&nbsp;
+                                    <span class='darkBlueItalic' onclick="javascript:searchUser('<%=tag_list.get(i)%>')"> <%=tag_list.get(i)%> </span> 
+                                    <br>
+                                </div>
                              <% } %>
                                     <br>
                                     <input class="edit_task_input" id="edit_task_tag" name="edit_task_tag" type="text" name="tag_td" value=""/> 

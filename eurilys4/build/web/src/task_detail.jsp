@@ -59,6 +59,13 @@
         %>
         
         <div class='taskDetail'>
+            
+            <% if ("ok".equals(request.getParameter("update_task"))) { %>
+                <div class="red"> Task has been successfully updated </div>
+            <% } else if ("failed".equals(request.getParameter("update_task"))) { %>
+                <div class="red"> Tasl NOT has been successfully updated. </div>
+            <% } %>
+            
             <div id='edit_task_header' class='left top30 dynamic_content_head darkBlue'>
                 <%=task_name%>
             </div>
