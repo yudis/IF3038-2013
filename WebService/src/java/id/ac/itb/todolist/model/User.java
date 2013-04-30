@@ -9,6 +9,7 @@ import org.json.JSONModel;
 import org.json.JSONObject;
 
 public class User extends JSONModel {
+
     private String username;
     private String email;
     private String password;
@@ -27,7 +28,7 @@ public class User extends JSONModel {
         this.tglLahir = tglLahir;
         this.avatar = avatar;
     }
-    
+
     public String getUsername() {
         return username;
     }
@@ -57,7 +58,7 @@ public class User extends JSONModel {
             ex.printStackTrace();
         }
     }
-    
+
     public void setHashedPassword(String hashedPassword) {
         this.password = hashedPassword;
     }
@@ -89,14 +90,24 @@ public class User extends JSONModel {
     @Override
     public JSONObject toJsonObject() {
         JSONObject jObject = new JSONObject();
-        
+
         jObject.put("username", username);
         jObject.put("email", email);
         jObject.put("password", password);
         jObject.put("fullName", fullName);
         jObject.put("tglLahir", tglLahir);
         jObject.put("avatar", avatar);
-        
+
         return jObject;
+    }
+
+    @Override
+    public void fromJsonObject(JSONObject jObject) {
+        this.username = jObject.getString("username");
+        this.email = jObject.getString("email");
+        this.password = jObject.getString("password");
+        this.fullName = jObject.getString("fullName");
+        this.tglLahir = java.sql.Date.valueOf(jObject.getString("tglLahir"));
+        this.avatar = jObject.getString("avatar");
     }
 }
