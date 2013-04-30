@@ -80,6 +80,8 @@ public class UserDao extends DataAccessObject {
     }
 
     public boolean isAvailableEmail(String email) {
+        // GET
+        // rest/user/email/[email]
         try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement("SELECT * FROM users WHERE email=?");

@@ -1,11 +1,12 @@
 package id.ac.itb.todolist.model;
 
-import id.ac.itb.todolist.json.JSONModel;
-import java.util.Collection;
 import java.sql.Date;
 import java.sql.Timestamp;
-import id.ac.itb.todolist.json.JSONArray;
-import id.ac.itb.todolist.json.JSONObject;
+import java.util.ArrayList;
+import java.util.Collection;
+import org.json.JSONArray;
+import org.json.JSONModel;
+import org.json.JSONObject;
 
 public class Tugas extends JSONModel {
     private int id;
@@ -131,5 +132,71 @@ public class Tugas extends JSONModel {
         jObject.put("tags", new JSONArray(tags));
         
         return jObject;
+    }
+    
+    @Override
+    public void fromJsonObject(org.json.JSONObject jObject) {
+        this.id = jObject.getInt("id");
+        this.nama = jObject.getString("nama");
+        this.tglDeadline = Date.valueOf(jObject.getString("tglDeadline"));;
+        this.status = jObject.getBoolean("status");
+        this.lastMod = Timestamp.valueOf(jObject.getString("lastMod"));
+//        this.pemilik = pemilik;
+//        this.kategori = kategori;
+//        this.attachments = attachment;
+//        this.assignees = assignees;
+//        this.tags = tags;
+        
+        JSONObject jPemilik = jObject.getJSONObject("pemilik");
+        if(jPemilik!=null){
+            this.pemilik = new User();
+            this.pemilik.fromJsonObject(jPemilik);
+        }
+        
+        JSONObject jKat = jObject.getJSONObject("kategori");
+        if(jKat != null){
+            this.kategori = new Category();
+            this.kategori.fromJsonObject(jKat);
+        }
+        
+        JSONArray jAttach = jObject.getJSONArray("attachment");
+        if(jAttach != null){
+            if(jAttach.length()>0){
+                this.attachments = new ArrayList<Attachment>();
+            }
+            
+            for(int i=0;i<jAttach.length();i++)
+            {
+                JSONObject jsonAttach = jAttach.getJSONObject(i);
+                Attachment attachment = new Attachment();
+                attachment.fromJsonObject(jsonAttach);
+                this.attachments.add(attachment);
+            }
+        }
+        
+        JSONArray jAss = jObject.getJSONArray("assignees");
+        if (jAss != null) {
+            if (jAss.length() > 0) {
+                this.assignees = new ArrayList<User>();
+            }
+
+            for (int i = 0; i < jAss.length(); i++) {
+                JSONObject jsonAss = jAss.getJSONObject(i);
+                User assignee = new User();
+                assignee.fromJsonObject(jsonAss);
+                this.assignees.add(assignee);
+            }
+        }
+
+        JSONArray jTags = jObject.getJSONArray("tags");
+        if (jTags != null) {
+            if (jTags.length() > 0) {
+                this.tags = new ArrayList<String>();
+            }
+
+            for (int i = 0; i < jTags.length(); i++) {
+                this.tags.add(jTags.getString(i));
+            }
+        }
     }
 }

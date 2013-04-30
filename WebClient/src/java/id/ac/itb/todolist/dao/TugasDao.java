@@ -1,290 +1,171 @@
 package id.ac.itb.todolist.dao;
 
-import id.ac.itb.todolist.model.Attachment;
-import id.ac.itb.todolist.model.Category;
 import id.ac.itb.todolist.model.Tugas;
-import id.ac.itb.todolist.model.User;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URLEncoder;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public class TugasDao extends DataAccessObject {
 
     public int deleteTugas(int idTugas) {
         // DELETE
-        // /rest/tugas/[id]
+        // /rest/tugas/delete/[id]
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("DELETE FROM `tugas` WHERE id=?;");
-            preparedStatement.setInt(1, idTugas);
+            HttpURLConnection htc = getConnection("rest/tugas/delete/" + idTugas);
+            htc.setRequestMethod("GET");
 
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
+            return Integer.parseInt(br.readLine());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return -1;
     }
 
     public Tugas getTugas(int idTugas, boolean retTags, boolean retAttachment, boolean retAssignees) {
         // GET
-        // /rest/tugas/[id]/[int3bool]
+        // /rest/tugas/[id]/[0-1/true/false]/[0-1/true/false]/[0-1/true/false]
 
         Tugas tugas = null;
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT t.`id` AS `id`, t.`nama` AS `nama`, `tgl_deadline`,  `status` , t.`last_mod` AS `last_mod`, t.`pemilik` AS `pemilik_username`, u.`email` AS `pemilik_email`, u.`password` AS `pemilik_password`, u.`full_name` AS `pemilik_full_name`, u.`tgl_lahir` AS `pemilik_tgl_lahir`, u.`avatar` AS `pemilik_avatar`, c.`id` AS `kategori_id`, c.`nama` AS `kategori_nama`, c.`last_mod` AS `kategori_last_mod` FROM `categories` c, `tugas` t, `users` u WHERE t.`id` = ? AND c.`id` = t.`id_kategori` AND u.`username` = t.`pemilik`;");
-            preparedStatement.setInt(1, idTugas);
+            HttpURLConnection htc = getConnection("rest/tugas/" + idTugas + "/" + retTags + "/" + retAttachment + "/" + retAssignees);
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
+            Tugas tmp = new Tugas();
+            tmp.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
 
-            if (rs.next()) {
-                tugas = new Tugas();
-
-                tugas.setId(rs.getInt("id"));
-                tugas.setNama(rs.getString("nama"));
-                tugas.setTglDeadline(rs.getDate("tgl_deadline"));
-                tugas.setStatus(rs.getBoolean("status"));
-                tugas.setLastMod(rs.getTimestamp("last_mod"));
-
-                User pemilik = new User();
-                pemilik.setUsername(rs.getString("pemilik_username"));
-                pemilik.setEmail(rs.getString("pemilik_email"));
-                pemilik.setHashedPassword(rs.getString("pemilik_password"));
-                pemilik.setFullName(rs.getString("pemilik_full_name"));
-                pemilik.setTglLahir(rs.getDate("pemilik_tgl_lahir"));
-                pemilik.setAvatar(rs.getString("pemilik_avatar"));
-                tugas.setPemilik(pemilik);
-
-                Category kategori = new Category();
-                kategori.setId(rs.getInt("kategori_id"));
-                kategori.setNama(rs.getString("kategori_nama"));
-                kategori.setLastMod(rs.getTimestamp("kategori_last_mod"));
-                tugas.setKategori(kategori);
-
-                if (retTags) {
-                    tugas.setTags(getTags(idTugas));
-                }
-
-                if (retAttachment) {
-                    tugas.setAttachments(getAttachments(idTugas));
-                }
-
-                if (retAssignees) {
-                    tugas.setAssignees(getAssignees(idTugas));
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            tugas = tmp;
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         return tugas;
     }
 
-    private Collection<User> getAssignees(int idTugas) {
-        ArrayList<User> result = null;
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT a.`username` AS `username`, u.`full_name` AS `full_name`, u.`avatar` AS `avatar`, u.`email` AS `email`, u.`password` AS `password`, u.`tgl_lahir` AS `tgl_lahir` FROM `assignees` a, `users` u WHERE a.`id_tugas`=? AND a.`username`=u.`username`;");
-            preparedStatement.setInt(1, idTugas);
-
-            ResultSet rs = preparedStatement.executeQuery();
-
-            result = new ArrayList<User>();
-            while (rs.next()) {
-                User item = new User();
-                item.setUsername(rs.getString("username"));
-                item.setEmail(rs.getString("email"));
-                item.setHashedPassword(rs.getString("password"));
-                item.setFullName(rs.getString("full_name"));
-                item.setTglLahir(rs.getDate("tgl_lahir"));
-                item.setAvatar(rs.getString("avatar"));
-
-                result.add(item);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    private Collection<Attachment> getAttachments(int idTugas) {
-        ArrayList<Attachment> result = null;
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT `id_attachment`, `id_tugas`, `name`, `filename`, `type` FROM attachments WHERE id_tugas=?");
-            preparedStatement.setInt(1, idTugas);
-
-            ResultSet rs = preparedStatement.executeQuery();
-
-            result = new ArrayList<Attachment>();
-            while (rs.next()) {
-                Attachment item = new Attachment();
-                item.setIdAttachment(rs.getInt("id_attachment"));
-                item.setIdTugas(rs.getInt("id_tugas"));
-                item.setName(rs.getString("name"));
-                item.setFilename(rs.getString("filename"));
-                item.setType(rs.getString("type"));
-
-                result.add(item);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    private Collection<String> getTags(int idTugas) {
-        ArrayList<String> result = null;
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT tag FROM tags WHERE id_tugas=?");
-            preparedStatement.setInt(1, idTugas);
-
-            ResultSet rs = preparedStatement.executeQuery();
-
-            result = new ArrayList<String>();
-            while (rs.next()) {
-                result.add(rs.getString("tag"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
     public boolean isUpdated(int idTugas, long lastRequest) {
         // GET
-        // /rest/tugas/[idTugas]/u/[lastRequest]
+        // /rest/tugas/isu/[idTugas]/[lastRequest]
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM `tugas` WHERE `id` = ? AND `last_mod` > FROM_UNIXTIME(?);");
-            preparedStatement.setInt(1, idTugas);
-            preparedStatement.setLong(2, lastRequest);
+            HttpURLConnection htc = getConnection("rest/tugas/isu/" + idTugas + "/" + lastRequest);
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
+            return Boolean.parseBoolean(br.readLine());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return true;
     }
 
     public boolean isAvailable(int idTugas) {
         // GET
-        // /rest/tugas/[id]/0        
+        // /rest/tugas/isa/[id]        
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM `tugas` WHERE `id`=? LIMIT 0, 1;");
-            preparedStatement.setInt(1, idTugas);
+            HttpURLConnection htc = getConnection("rest/tugas/isa/" + idTugas);
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
+            Tugas tmp = new Tugas();
+            tmp.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
 
-            if (rs.next()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return false;
     }
 
     public boolean isPemilik(int idTugas, String username) {
         // GET
-        // /rest/tugas/14/pemilik/edwardsp
+        // /rest/tugas/isp/[id]/[username]
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM `tugas` WHERE `id`=? AND `pemilik`=? LIMIT 0, 1");
-            preparedStatement.setInt(1, idTugas);
-            preparedStatement.setString(2, username);
+            HttpURLConnection htc = getConnection("rest/tugas/isp/" + idTugas + "/" + username);
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
+            return Boolean.parseBoolean(br.readLine());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return false;
     }
 
     public boolean isAssignee(int idTugas, String username) {
         // GET
-        // /rest/tugas/14/assignee/edwardsp
+        // /rest/tugas/isass/[id]/[username]
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM `tugas` t INNER JOIN `assignees` a ON t.`id` = a.`id_tugas` WHERE t.`id` = ? AND a.`username` = ?;");
-            preparedStatement.setInt(1, idTugas);
-            preparedStatement.setString(2, username);
+            HttpURLConnection htc = getConnection("rest/tugas/isass/" + idTugas + "/" + username);
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
+            return Boolean.parseBoolean(br.readLine());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return false;
     }
 
     public int updateTimestamp(int idTugas) {
         // POST
-        // /rest/tugas/[idTugas]/timestamp
+        // /rest/tugas/utime/[idTugas]
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("UPDATE `tugas` SET `last_mod` = CURRENT_TIMESTAMP WHERE `tugas`.`id` = ?;");
-            preparedStatement.setInt(1, idTugas);
+            HttpURLConnection htc = getConnection("rest/tugas/utime/" + idTugas);
+            htc.setRequestMethod("POST");
 
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
+            return Integer.parseInt(br.readLine());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return -1;
     }
 
     public int setStatus(int idTugas, boolean status) {
         // POST
-        // /rest/tugas/[idTugas]/[0-1]
+        // /rest/tugas/sets/[idTugas]/[0-1/true/false]
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("UPDATE `tugas` SET `status` = ? WHERE `id` = ?;");
-            preparedStatement.setBoolean(1, status);
-            preparedStatement.setInt(2, idTugas);
+            HttpURLConnection htc = getConnection("rest/tugas/sets/" + idTugas + "/" + status);
+            htc.setRequestMethod("POST");
 
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
+            return Integer.parseInt(br.readLine());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return -1;
     }
 
     public int setDeadline(int idTugas, java.sql.Date deadline) {
         // POST
-        // /rest/tugas/[idTugas]/deadline/[yyyy]/[mm]/[dd]
+        // /rest/tugas/setd/[idTugas]/[yyyy]/[mm]/[dd]
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("UPDATE `tugas` SET `tgl_deadline` = ? WHERE `tugas`.`id` = ?;");
-            preparedStatement.setDate(1, deadline);
-            preparedStatement.setInt(2, idTugas);
+            Calendar c = Calendar.getInstance();
+            c.setTime(deadline);
+            HttpURLConnection htc = getConnection("rest/tugas/setd/" + idTugas + c.get(Calendar.YEAR) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.DATE));
+            htc.setRequestMethod("POST");
 
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
+            return Integer.parseInt(br.readLine());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return -1;
     }
@@ -305,43 +186,35 @@ public class TugasDao extends DataAccessObject {
 
     public int removeAssignee(int idTugas, String username) {
         // DELETE
-        // /rest/tugas/assignee/edwardsp
+        // /rest/tugas/remove/assignee/[id]/[username]
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("DELETE FROM `assignees` WHERE `id_tugas` = ? AND `username` = ?;");
-            preparedStatement.setInt(1, idTugas);
-            preparedStatement.setString(2, username);
+            HttpURLConnection htc = getConnection("rest/tugas/remove/assignee/" + idTugas + "/" + username);
+            htc.setRequestMethod("GET");
 
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
+            return Integer.parseInt(br.readLine());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return -1;
     }
 
     public List<String> getSuggestionAssignees(int idTugas, String keyword, int limit) {
         // GET
-        // /rest/tugas/suggestion/assignees/23/p%25/10
-
+        // /rest/tugas/suggestion/assignee/[id]/[keyword]/10
         List<String> result = new ArrayList<String>();
-
+        
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT `username` FROM `users` WHERE `username` NOT IN (SELECT `username` FROM assignees WHERE `id_tugas`=? UNION SELECT `pemilik` AS `username` FROM `tugas` WHERE `id`=?) AND `username` LIKE ? LIMIT 0, ?;");
-            preparedStatement.setInt(1, idTugas);
-            preparedStatement.setInt(2, idTugas);
-            preparedStatement.setString(3, keyword);
-            preparedStatement.setInt(4, limit);
+            HttpURLConnection htc = getConnection("rest/tugas/suggestion/assignee/" + idTugas + "/" + URLEncoder.encode(keyword, "UTF-8") + "/" + limit);
+            htc.setRequestMethod("GET");
 
-            System.out.println(preparedStatement);
-
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                result.add(rs.getString("username"));
+            JSONArray jArray = new JSONArray(new JSONTokener(htc.getInputStream()));
+            for (int i = 0, len = jArray.length(); i < len; i++) {
+                result.add(jArray.getString(i));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         return result;
@@ -379,40 +252,36 @@ public class TugasDao extends DataAccessObject {
 
     public int removeTag(int idTugas, String tag) {
         // DELETE
-        // /rest/tugas/tag/edwardsp
+        // /rest/tugas/remove/tag/[id_tugas]/[tag]
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("DELETE FROM `tags` WHERE `id_tugas`=? AND `tag`=?;");
-            preparedStatement.setInt(1, idTugas);
-            preparedStatement.setString(2, tag);
+            HttpURLConnection htc = getConnection("rest/tugas/remove/tag/" + idTugas + "/" + tag);
+            htc.setRequestMethod("GET");
 
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
+            return Integer.parseInt(br.readLine());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return -1;
     }
 
     public List<String> getSuggestionTags(int idTugas, String keyword, int limit) {
         // GET
-        // /rest/tugas/suggestion/tags/23/p%25/10
+        // /rest/tugas/suggestion/tag/[id]/[keyword]/10
 
         List<String> result = new ArrayList<String>();
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT `tag` FROM `tags` WHERE `id_tugas` <> ? AND `tag` LIKE ? LIMIT 0, ?");
-            preparedStatement.setInt(1, idTugas);
-            preparedStatement.setString(2, keyword);
-            preparedStatement.setInt(3, limit);
+            HttpURLConnection htc = getConnection("rest/tugas/suggestion/tag/" + idTugas + "/" + URLEncoder.encode(keyword, "UTF-8") + "/" + limit);
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                result.add(rs.getString("tag"));
+            JSONArray jArray = new JSONArray(new JSONTokener(htc.getInputStream()));
+            for (int i = 0, len = jArray.length(); i < len; i++) {
+                result.add(jArray.getString(i));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         return result;
@@ -444,47 +313,19 @@ public class TugasDao extends DataAccessObject {
         // /rest/tugas/
 
         ArrayList<Tugas> result = null;
-        Tugas tugas = null;
+        Tugas tugas ;
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT t.`id` AS `id`, t.`nama` AS `nama`, `tgl_deadline`,  `status` , t.`last_mod` AS `last_mod`, t.`pemilik` AS `pemilik_username`, u.`email` AS `pemilik_email`, u.`password` AS `pemilik_password`, u.`full_name` AS `pemilik_full_name`, u.`tgl_lahir` AS `pemilik_tgl_lahir`, u.`avatar` AS `pemilik_avatar`, c.`id` AS `kategori_id`, c.`nama` AS `kategori_nama`, c.`last_mod` AS `kategori_last_mod` FROM `categories` c, `tugas` t, `users` u WHERE  c.`id` = t.`id_kategori` AND u.`username` = t.`pemilik`;");
+            HttpURLConnection htc = getConnection("rest/tugas/");
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            result = new ArrayList<Tugas>();
-            while (rs.next()) {
+            JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
+            for (int i = 0; i < ja.length(); i++) {
                 tugas = new Tugas();
-
-                tugas.setId(rs.getInt("id"));
-                tugas.setNama(rs.getString("nama"));
-                tugas.setTglDeadline(rs.getDate("tgl_deadline"));
-                tugas.setStatus(rs.getBoolean("status"));
-                tugas.setLastMod(rs.getTimestamp("last_mod"));
-
-                User pemilik = new User();
-                pemilik.setUsername(rs.getString("pemilik_username"));
-                pemilik.setEmail(rs.getString("pemilik_email"));
-                pemilik.setHashedPassword(rs.getString("pemilik_password"));
-                pemilik.setFullName(rs.getString("pemilik_full_name"));
-                pemilik.setTglLahir(rs.getDate("pemilik_tgl_lahir"));
-                pemilik.setAvatar(rs.getString("pemilik_avatar"));
-                tugas.setPemilik(pemilik);
-
-                Category kategori = new Category();
-                kategori.setId(rs.getInt("kategori_id"));
-                kategori.setNama(rs.getString("kategori_nama"));
-                kategori.setLastMod(rs.getTimestamp("kategori_last_mod"));
-                tugas.setKategori(kategori);
-
-                tugas.setTags(getTags(rs.getInt("id")));
-                tugas.setAttachments(getAttachments(rs.getInt("id")));
-                tugas.setAssignees(getAssignees(rs.getInt("id")));
-
+                tugas.fromJsonObject(ja.getJSONObject(i));
                 result.add(tugas);
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return result;
     }
@@ -494,48 +335,19 @@ public class TugasDao extends DataAccessObject {
         // /rest/tugas/username/[username]
         
         ArrayList<Tugas> result = null;
-        Tugas tugas = null;
+        Tugas tugas;
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT t.`id` AS `id`, t.`nama` AS `nama`, `tgl_deadline`,  `status` , t.`last_mod` AS `last_mod`, t.`pemilik` AS `pemilik_username`, u.`email` AS `pemilik_email`, u.`password` AS `pemilik_password`, u.`full_name` AS `pemilik_full_name`, u.`tgl_lahir` AS `pemilik_tgl_lahir`, u.`avatar` AS `pemilik_avatar`, c.`id` AS `kategori_id`, c.`nama` AS `kategori_nama`, c.`last_mod` AS `kategori_last_mod` FROM `categories` c, `tugas` t, `users` u WHERE  c.`id` = t.`id_kategori` AND u.`username` = t.`pemilik` ORDER BY `status`,`kategori_id`;");
+            HttpURLConnection htc = getConnection("rest/tugas/username/" + username);
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            result = new ArrayList<Tugas>();
-            while (rs.next()) {
+            JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
+            for (int i = 0; i < ja.length(); i++) {
                 tugas = new Tugas();
-
-                tugas.setId(rs.getInt("id"));
-                tugas.setNama(rs.getString("nama"));
-                tugas.setTglDeadline(rs.getDate("tgl_deadline"));
-                tugas.setStatus(rs.getBoolean("status"));
-                tugas.setLastMod(rs.getTimestamp("last_mod"));
-
-                User pemilik = new User();
-                pemilik.setUsername(rs.getString("pemilik_username"));
-                pemilik.setEmail(rs.getString("pemilik_email"));
-                pemilik.setHashedPassword(rs.getString("pemilik_password"));
-                pemilik.setFullName(rs.getString("pemilik_full_name"));
-                pemilik.setTglLahir(rs.getDate("pemilik_tgl_lahir"));
-                pemilik.setAvatar(rs.getString("pemilik_avatar"));
-                tugas.setPemilik(pemilik);
-
-                Category kategori = new Category();
-                kategori.setId(rs.getInt("kategori_id"));
-                kategori.setNama(rs.getString("kategori_nama"));
-                kategori.setLastMod(rs.getTimestamp("kategori_last_mod"));
-                tugas.setKategori(kategori);
-
-                tugas.setTags(getTags(rs.getInt("id")));
-                tugas.setAttachments(getAttachments(rs.getInt("id")));
-                tugas.setAssignees(getAssignees(rs.getInt("id")));
-
-                if (isAssignee(tugas.getId(), username) || (isPemilik(tugas.getId(), username))) {
-                    result.add(tugas);
-                }
+                tugas.fromJsonObject(ja.getJSONObject(i));
+                result.add(tugas);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return result;
     }
@@ -544,46 +356,20 @@ public class TugasDao extends DataAccessObject {
         // GET
         // /rest/tugas/search/[keyword]/[start]/[limit]
         
-        Tugas tugas = null;
+        Tugas tugas;
         ArrayList<Tugas> result = new ArrayList<Tugas>();
-        String qry = "SELECT DISTINCT t.`id` AS `id`, t.`nama` AS `nama`, `tgl_deadline`,  `status` , t.`last_mod` AS `last_mod`, t.`pemilik` AS `pemilik_username`, u.`email` AS `pemilik_email`, u.`password` AS `pemilik_password`, u.`full_name` AS `pemilik_full_name`, u.`tgl_lahir` AS `pemilik_tgl_lahir`, u.`avatar` AS `pemilik_avatar`, c.`id` AS `kategori_id`, c.`nama` AS `kategori_nama`, c.`last_mod` AS `kategori_last_mod` FROM `categories` c, `tugas` t, `users` u, `tags` teg WHERE (t.`nama` LIKE '%" + keyword + "%' OR teg.`tag` LIKE '%" + keyword + "%') AND c.`id` = t.`id_kategori` AND u.`username` = t.`pemilik` AND teg.`id_tugas` = t.`id` ORDER BY kategori_id LIMIT " + start + ", " + limit + ";";
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement(qry);
+            HttpURLConnection htc = getConnection("rest/tugas/search/" + URLEncoder.encode(keyword, "UTF-8") + "/" + start + "/" + limit);
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
+            JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
+            for (int i = 0; i < ja.length(); i++) {
                 tugas = new Tugas();
-
-                tugas.setId(rs.getInt("id"));
-                tugas.setNama(rs.getString("nama"));
-                tugas.setTglDeadline(rs.getDate("tgl_deadline"));
-                tugas.setStatus(rs.getBoolean("status"));
-                tugas.setLastMod(rs.getTimestamp("last_mod"));
-
-                User pemilik = new User();
-                pemilik.setUsername(rs.getString("pemilik_username"));
-                pemilik.setEmail(rs.getString("pemilik_email"));
-                pemilik.setHashedPassword(rs.getString("pemilik_password"));
-                pemilik.setFullName(rs.getString("pemilik_full_name"));
-                pemilik.setTglLahir(rs.getDate("pemilik_tgl_lahir"));
-                pemilik.setAvatar(rs.getString("pemilik_avatar"));
-                tugas.setPemilik(pemilik);
-
-                Category kategori = new Category();
-                kategori.setId(rs.getInt("kategori_id"));
-                kategori.setNama(rs.getString("kategori_nama"));
-                kategori.setLastMod(rs.getTimestamp("kategori_last_mod"));
-                tugas.setKategori(kategori);
-
-                tugas.setTags(getTags(tugas.getId()));
-                tugas.setAttachments(getAttachments(tugas.getId()));
-                tugas.setAssignees(getAssignees(tugas.getId()));
+                tugas.fromJsonObject(ja.getJSONObject(i));
                 result.add(tugas);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         return result;

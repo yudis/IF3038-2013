@@ -38,6 +38,7 @@ public class UserRest extends HttpServlet {
     private Pattern regexUserNames = Pattern.compile("^/$");
     private Pattern regexUpdate = Pattern.compile("^/update/([\\w._%].*)$");
     private Pattern regexUserDetail = Pattern.compile("^/detil/([\\w._%].*)$");
+    private Pattern regexEmail = Pattern.compile("^/email/([\\w._%].*)$");
     private Pattern regexSearchUser = Pattern.compile("^/search/([\\w._%].*)/([\\d]{1,})/([\\d]{1,})$");
 
     /**
@@ -68,6 +69,15 @@ public class UserRest extends HttpServlet {
             }
             return;
         }
+        
+        matcher = regexEmail.matcher(pathInfo);
+        if (matcher.find()) {
+            UserDao userDao = new UserDao();
+            boolean b = userDao.isAvailableEmail(matcher.group(1));
+            out.println(new JSONArray(b));
+            return;
+        }
+        
         matcher = regexSearchUser.matcher(pathInfo);
 
         if (matcher.find()) {
