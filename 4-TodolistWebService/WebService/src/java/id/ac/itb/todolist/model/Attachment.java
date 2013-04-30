@@ -77,10 +77,10 @@ public class Attachment extends JSONModel {
 
     @Override
     public void fromJsonObject(JSONObject jObject) {
-        this.idAttachment = jObject.getInt("idAttachment");
-        this.idTugas = jObject.getInt("idTugas");
-        this.name = jObject.getString("name");
-        this.filename = jObject.getString("filename");
-        this.type = jObject.getString("type");
+        this.idAttachment = jObject.optInt("idAttachment");
+        this.idTugas = jObject.optInt("idTugas");
+        this.name = jObject.optString("name");
+        this.filename = jObject.optString("filename");
+        this.type = jObject.optString("type");
     }
 }

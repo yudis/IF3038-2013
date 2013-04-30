@@ -80,16 +80,16 @@ public class Comment extends JSONModel {
 
     @Override
     public void fromJsonObject(JSONObject jObject) {
-        this.id = jObject.getInt("id");
-        this.idTugas = jObject.getInt("idTugas");
+        this.id = jObject.optInt("id");
+        this.idTugas = jObject.optInt("idTugas");
         
-        JSONObject jsonUser = jObject.getJSONObject("user");
+        JSONObject jsonUser = jObject.optJSONObject("user");
         if (jsonUser != null) {
             this.user = new User();
             this.user.fromJsonObject(jsonUser);
         }
         
-        this.time = java.sql.Timestamp.valueOf(jObject.getString("time"));
-        this.content = jObject.getString("content");
+        this.time = java.sql.Timestamp.valueOf(jObject.optString("time"));
+        this.content = jObject.optString("content");
     }
 }

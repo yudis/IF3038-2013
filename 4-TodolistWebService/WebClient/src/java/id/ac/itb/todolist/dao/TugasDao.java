@@ -51,7 +51,7 @@ public class TugasDao extends DataAccessObject {
 
             HttpURLConnection htc = getHttpURLConnection("/rest/tugas/" + idTugas + "/" + val);
             htc.setRequestMethod("GET");
-
+            
             Tugas tmp = new Tugas();
             tmp.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
 
@@ -155,7 +155,7 @@ public class TugasDao extends DataAccessObject {
         // /rest/tugas/[idTugas]/[0-1]
 
         try {
-            HttpURLConnection htc = getHttpURLConnection("/rest/tugas/" + idTugas + "/" + (status ? 0 : 1));
+            HttpURLConnection htc = getHttpURLConnection("/rest/tugas/" + idTugas + "/" + (status ? 1 : 0));
             htc.setRequestMethod("POST");
 
             BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
@@ -176,6 +176,8 @@ public class TugasDao extends DataAccessObject {
             c.setTime(deadline);
             HttpURLConnection htc = getHttpURLConnection("/rest/tugas/" + idTugas + "/deadline/" + c.get(Calendar.YEAR) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.DATE));
             htc.setRequestMethod("POST");
+            
+            System.out.println(htc.getURL());
 
             BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
             return Integer.parseInt(br.readLine());

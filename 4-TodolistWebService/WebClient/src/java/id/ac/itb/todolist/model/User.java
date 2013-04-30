@@ -104,10 +104,12 @@ public class User extends JSONModel {
     @Override
     public void fromJsonObject(JSONObject jObject) {
         this.username = jObject.getString("username");
-        this.email = jObject.getString("email");
-        this.password = jObject.getString("password");
-        this.fullName = jObject.getString("fullName");
-        this.tglLahir = java.sql.Date.valueOf(jObject.getString("tglLahir"));
-        this.avatar = jObject.getString("avatar");
+        this.email = jObject.optString("email");
+        this.password = jObject.optString("password");
+        this.fullName = jObject.optString("fullName");
+        
+        String date = jObject.optString("tglLahir");
+        this.tglLahir = "".equals(date) ? null : java.sql.Date.valueOf(date);
+        this.avatar = jObject.optString("avatar");
     }
 }

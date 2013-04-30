@@ -69,9 +69,9 @@ public class TugasResouce extends HttpServlet {
             int id = Integer.parseInt(matcher.group(1));
             int tmp = Integer.parseInt(matcher.group(2));
 
-            boolean retTags = (tmp & 4) > 1;
-            boolean retAttachment = (tmp & 2) > 1;
-            boolean retAssignees = (tmp & 1) > 1;
+            boolean retTags = (tmp & 4) > 0;
+            boolean retAttachment = (tmp & 2) > 0;
+            boolean retAssignees = (tmp & 1) > 0;
 
             TugasDao tugasDao = new TugasDao();
             out.print(tugasDao.getTugas(id, retTags, retAttachment, retAssignees).toJsonObject());
@@ -174,7 +174,8 @@ public class TugasResouce extends HttpServlet {
         matcher = regexDeadline.matcher(pathInfo);
         if (matcher.find()) {
             int id = Integer.parseInt(matcher.group(1));
-            java.sql.Date date = new java.sql.Date(Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));
+            
+            java.sql.Date date = new java.sql.Date(Integer.parseInt(matcher.group(2)) - 1900, Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));
 
             TugasDao tugasDao = new TugasDao();
             out.print(tugasDao.setDeadline(id, date));

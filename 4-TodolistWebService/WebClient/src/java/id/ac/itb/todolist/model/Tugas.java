@@ -140,58 +140,58 @@ public class Tugas extends JSONModel {
     public void fromJsonObject(JSONObject jObject) {
         this.id = jObject.getInt("id");
         this.nama = jObject.getString("nama");
-        this.tglDeadline = Date.valueOf(jObject.getString("tglDeadline"));
-        this.status = jObject.getBoolean("status");
-        this.lastMod = Timestamp.valueOf(jObject.getString("lastMod"));
+        this.tglDeadline = Date.valueOf(jObject.optString("tglDeadline"));
+        this.status = jObject.optBoolean("status");
+        this.lastMod = Timestamp.valueOf(jObject.optString("lastMod"));
 
-        JSONObject jsonPemilik = jObject.getJSONObject("pemilik");
+        JSONObject jsonPemilik = jObject.optJSONObject("pemilik");
         if (jsonPemilik != null) {
             this.pemilik = new User();
             this.pemilik.fromJsonObject(jsonPemilik);
         }
 
-        JSONObject jsonKategori = jObject.getJSONObject("kategori");
+        JSONObject jsonKategori = jObject.optJSONObject("kategori");
         if (jsonKategori != null) {
             this.kategori = new Category();
             this.kategori.fromJsonObject(jsonKategori);
         }
 
-        JSONArray jsonAttachments = jObject.getJSONArray("attachments");
+        JSONArray jsonAttachments = jObject.optJSONArray("attachments");
         if (jsonAttachments != null) {
             if (jsonAttachments.length() > 0) {
                 this.attachments = new ArrayList<Attachment>();
             }
 
             for (int i = 0, len = jsonAttachments.length(); i < len; i++) {
-                JSONObject jsonAttachment = jsonAttachments.getJSONObject(i);
+                JSONObject jsonAttachment = jsonAttachments.optJSONObject(i);
                 Attachment attachment = new Attachment();
                 attachment.fromJsonObject(jsonAttachment);
                 this.attachments.add(attachment);
             }
         }
 
-        JSONArray jsonAssignees = jObject.getJSONArray("assignees");
+        JSONArray jsonAssignees = jObject.optJSONArray("assignees");
         if (jsonAssignees != null) {
             if (jsonAssignees.length() > 0) {
                 this.assignees = new ArrayList<User>();
             }
 
             for (int i = 0, len = jsonAssignees.length(); i < len; i++) {
-                JSONObject jsonAssignee = jsonAssignees.getJSONObject(i);
+                JSONObject jsonAssignee = jsonAssignees.optJSONObject(i);
                 User assignee = new User();
                 assignee.fromJsonObject(jsonAssignee);
                 this.assignees.add(assignee);
             }
         }
 
-        JSONArray jsonTags = jObject.getJSONArray("tags");
+        JSONArray jsonTags = jObject.optJSONArray("tags");
         if (jsonTags != null) {
             if (jsonTags.length() > 0) {
                 this.tags = new ArrayList<String>();
             }
 
             for (int i = 0, len = jsonTags.length(); i < len; i++) {
-                this.tags.add(jsonTags.getString(i));
+                this.tags.add(jsonTags.optString(i));
             }
         }
     }
