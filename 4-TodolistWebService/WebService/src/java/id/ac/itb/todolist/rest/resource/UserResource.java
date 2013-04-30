@@ -26,7 +26,7 @@ public class UserResource extends HttpServlet {
     private Pattern regexUser = Pattern.compile("^/([\\w._%].*)$");
     private Pattern regexEmail = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)$");
     private Pattern regexUserSearch = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)/([\\w._%].*)$");
-    private Pattern regexUpdate = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)$");
+    private Pattern regexUpdate = Pattern.compile("^/$");
 
     public UserResource() {
         super();
@@ -95,6 +95,7 @@ public class UserResource extends HttpServlet {
             User user = new User();
             user.fromJsonObject(new JSONObject(request.getParameter("user")));
             
+            System.out.println("AAAAAAAAA" + request.getParameter("user"));
             UserDao userDao = new UserDao();
             userDao.Update(user);
             return;

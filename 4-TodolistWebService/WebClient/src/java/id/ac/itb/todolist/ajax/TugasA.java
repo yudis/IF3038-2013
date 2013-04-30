@@ -38,144 +38,113 @@ public class TugasA extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         response.setContentType("application/json");
-        
+
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         String q = request.getParameter("q");
         User currentUser = (User) session.getAttribute("user");
         ArrayList<Tugas> result;
-        TugasDao tugasDao=new TugasDao();
+        TugasDao tugasDao = new TugasDao();
         try {
-            if("".equals(q) || "0".equals(q))
-            {
+            System.out.println("--- query : " + q);
+            if ("".equals(q) || "0".equals(q)) {
                 result = tugasDao.getAllTugas();
-                System.out.println("result=");
-                System.out.println("result="+result.get(1).getNama());
-                for (int i = 0; i < result.size(); i++)
-                {
-                    if(result.get(i).getPemilik().getUsername() == null ? currentUser.getUsername() == null : result.get(i).getPemilik().getUsername().equals(currentUser.getUsername()))
-                    {
-                        out.println("<h2>"+result.get(i).getKategori().getNama()+"</h2>");
-				out.println("<div class=\"tugas\">");
-					out.println("<div><a href=\"tugas.jsp?id="+result.get(i).getId()+"\">"+result.get(i).getNama()+"</a></div>");
-					out.println("<div>Deadline: <strong>"+result.get(i).getTglDeadline()+"</strong></div>");
-					out.println("<div>");
-						out.println("Tags: ");
-						out.println("<ul class=\"tag\">");
-							for (int n = 0; n < result.get(i).getTags().size(); n++)
-							{
-								out.println("<li>"+result.get(i).getTags().toArray()[n].toString()+"</li>");
-							}
-						out.println("</ul>");
-					out.println("</div>");   
-					if(!result.get(i).isStatus())
-						{
-							out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value,"+result.get(i).getId()+")\" value=\""+0 +"\"></div>");
-						}
-					else if(result.get(i).isStatus())
-						{
-							out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value,"+result.get(i).getId()+")\" value=\""+1+"\" checked></div>");
-						}
-					out.println("<button id='deleteTugas' onclick='setChosenT(\""+result.get(i).getId()+"\");deleteTask()'>Delete Tugas</button>");
-				out.println("</div>");
-                    }
-                    else
-                    {
-                        ArrayList<User> assignees=new ArrayList<User>(result.get(i).getAssignees());
-                        for (int x = 0; x < assignees.size(); x++)
-                        {
-                            if((result.get(i).getPemilik().getUsername() == null ? assignees.get(x).getUsername() != null : !result.get(i).getPemilik().getUsername().equals(assignees.get(x).getUsername())) && assignees.get(x).getUsername() == null ? currentUser.getUsername() == null : assignees.get(x).getUsername().equals(currentUser.getUsername()))
-                            {
-                                out.println("<h2>"+result.get(i).getKategori().getNama()+"</h2>");
-				out.println("<div class=\"tugas\">");
-					out.println("<div><a href=\"tugas.jsp?id="+result.get(i).getId()+"\">"+result.get(i).getNama()+"</a></div>");
-					out.println("<div>Deadline: <strong>"+result.get(i).getTglDeadline()+"</strong></div>");
-					out.println("<div>");
-						out.println("Tags: ");
-						out.println("<ul class=\"tag\">");
-							for (int n = 0; n < result.get(i).getTags().size(); n++)
-							{
-								out.println("<li>"+result.get(i).getTags().toArray()[n].toString()+"</li>");
-							}
-						out.println("</ul>");
-					out.println("</div>");   
-					if(!result.get(i).isStatus())
-						{
-							out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value,"+result.get(i).getId()+")\" value=\""+0+"\"></div>");
-						}
-					else if(result.get(i).isStatus())
-						{
-							out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value,"+result.get(i).getId()+")\" value=\""+1+"\" checked></div>");
-						}
-                                        out.println("<button id='deleteTugas' onclick='setChosenT(\""+result.get(i).getId()+"\");deleteTaskR()'>Delete Tugas</button>");
-				out.println("</div>");
+                for (int i = 0; i < result.size(); i++) {
+                    if (result.get(i).getPemilik().getUsername() == null ? currentUser.getUsername() == null : result.get(i).getPemilik().getUsername().equals(currentUser.getUsername())) {
+                        out.println("<h2>" + result.get(i).getKategori().getNama() + "</h2>");
+                        out.println("<div class=\"tugas\">");
+                        out.println("<div><a href=\"tugas.jsp?id=" + result.get(i).getId() + "\">" + result.get(i).getNama() + "</a></div>");
+                        out.println("<div>Deadline: <strong>" + result.get(i).getTglDeadline() + "</strong></div>");
+                        out.println("<div>");
+                        out.println("Tags: ");
+                        out.println("<ul class=\"tag\">");
+                        for (int n = 0; n < result.get(i).getTags().size(); n++) {
+                            out.println("<li>" + result.get(i).getTags().toArray()[n].toString() + "</li>");
+                        }
+                        out.println("</ul>");
+                        out.println("</div>");
+                        if (!result.get(i).isStatus()) {
+                            out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + 0 + "\"></div>");
+                        } else if (result.get(i).isStatus()) {
+                            out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + 1 + "\" checked></div>");
+                        }
+                        out.println("<button id='deleteTugas' onclick='setChosenT(\"" + result.get(i).getId() + "\");deleteTask()'>Delete Tugas</button>");
+                        out.println("</div>");
+                    } else {
+                        if (result.get(i).getAssignees() != null) {
+                            ArrayList<User> assignees = new ArrayList<User>(result.get(i).getAssignees());
+                            for (int x = 0; x < assignees.size(); x++) {
+                                if ((result.get(i).getPemilik().getUsername() == null ? assignees.get(x).getUsername() != null : !result.get(i).getPemilik().getUsername().equals(assignees.get(x).getUsername())) && assignees.get(x).getUsername() == null ? currentUser.getUsername() == null : assignees.get(x).getUsername().equals(currentUser.getUsername())) {
+                                    out.println("<h2>" + result.get(i).getKategori().getNama() + "</h2>");
+                                    out.println("<div class=\"tugas\">");
+                                    out.println("<div><a href=\"tugas.jsp?id=" + result.get(i).getId() + "\">" + result.get(i).getNama() + "</a></div>");
+                                    out.println("<div>Deadline: <strong>" + result.get(i).getTglDeadline() + "</strong></div>");
+                                    out.println("<div>");
+                                    out.println("Tags: ");
+                                    out.println("<ul class=\"tag\">");
+                                    for (int n = 0; n < result.get(i).getTags().size(); n++) {
+                                        out.println("<li>" + result.get(i).getTags().toArray()[n].toString() + "</li>");
+                                    }
+                                    out.println("</ul>");
+                                    out.println("</div>");
+                                    if (!result.get(i).isStatus()) {
+                                        out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + 0 + "\"></div>");
+                                    } else if (result.get(i).isStatus()) {
+                                        out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + 1 + "\" checked></div>");
+                                    }
+                                    out.println("<button id='deleteTugas' onclick='setChosenT(\"" + result.get(i).getId() + "\");deleteTaskR()'>Delete Tugas</button>");
+                                    out.println("</div>");
+                                }
                             }
                         }
                     }
                 }
-            }
-            else
-            {
+            } else {
                 result = tugasDao.getAllTugas();
-                for (int i = 0; i < result.size(); i++)
-                {
-                    if(result.get(i).getKategori().getId()==Integer.parseInt(q))
-                    {
-                        if(result.get(i).getPemilik().getUsername() == null ? currentUser.getUsername() == null : result.get(i).getPemilik().getUsername().equals(currentUser.getUsername()))
-                        {
-                            out.println("<h2>"+result.get(i).getKategori().getNama()+"</h2>");
+                for (int i = 0; i < result.size(); i++) {
+                    if (result.get(i).getKategori().getId() == Integer.parseInt(q)) {
+                        if (result.get(i).getPemilik().getUsername() == null ? currentUser.getUsername() == null : result.get(i).getPemilik().getUsername().equals(currentUser.getUsername())) {
+                            out.println("<h2>" + result.get(i).getKategori().getNama() + "</h2>");
+                            out.println("<div class=\"tugas\">");
+                            out.println("<div><a href=\"tugas.jsp?id=" + result.get(i).getId() + "\">" + result.get(i).getNama() + "</a></div>");
+                            out.println("<div>Deadline: <strong>" + result.get(i).getTglDeadline() + "</strong></div>");
+                            out.println("<div>");
+                            out.println("Tags: ");
+                            out.println("<ul class=\"tag\">");
+                            for (int n = 0; n < result.get(i).getTags().size(); n++) {
+                                out.println("<li>" + result.get(i).getTags().toArray()[n].toString() + "</li>");
+                            }
+                            out.println("</ul>");
+                            out.println("</div>");
+                            if (!result.get(i).isStatus()) {
+                                out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + 0 + "\"></div>");
+                            } else if (result.get(i).isStatus()) {
+                                out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + 1 + "\" checked></div>");
+                            }
+                            out.println("<button id='deleteTugas' onclick='setChosenT(\"" + result.get(i).getId() + "\");deleteTask()'>Delete Tugas</button>");
+                            out.println("</div>");
+                        } else {
+                            ArrayList<User> assignees = new ArrayList<User>(result.get(i).getAssignees());
+                            for (int x = 0; x < assignees.size(); x++) {
+                                if ((result.get(i).getPemilik().getUsername() == null ? assignees.get(x).getUsername() != null : !result.get(i).getPemilik().getUsername().equals(assignees.get(x).getUsername())) && assignees.get(x).getUsername() == null ? currentUser.getUsername() == null : assignees.get(x).getUsername().equals(currentUser.getUsername())) {
+                                    out.println("<h2>" + result.get(i).getKategori().getNama() + "</h2>");
                                     out.println("<div class=\"tugas\">");
-                                            out.println("<div><a href=\"tugas.jsp?id="+result.get(i).getId()+"\">"+result.get(i).getNama()+"</a></div>");
-                                            out.println("<div>Deadline: <strong>"+result.get(i).getTglDeadline()+"</strong></div>");
-                                            out.println("<div>");
-                                                    out.println("Tags: ");
-                                                    out.println("<ul class=\"tag\">");
-                                                            for (int n = 0; n < result.get(i).getTags().size(); n++)
-                                                            {
-                                                                    out.println("<li>"+result.get(i).getTags().toArray()[n].toString()+"</li>");
-                                                            }
-                                                    out.println("</ul>");
-                                            out.println("</div>");   
-                                            if(!result.get(i).isStatus())
-                                                    {
-                                                            out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value,"+result.get(i).getId()+")\" value=\""+0+"\"></div>");
-                                                    }
-                                            else if(result.get(i).isStatus())
-                                                    {
-                                                            out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value,"+result.get(i).getId()+")\" value=\""+1+"\" checked></div>");
-                                                    }
-                                            out.println("<button id='deleteTugas' onclick='setChosenT(\""+result.get(i).getId()+"\");deleteTask()'>Delete Tugas</button>");
+                                    out.println("<div><a href=\"tugas.jsp?id=" + result.get(i).getId() + "\">" + result.get(i).getNama() + "</a></div>");
+                                    out.println("<div>Deadline: <strong>" + result.get(i).getTglDeadline() + "</strong></div>");
+                                    out.println("<div>");
+                                    out.println("Tags: ");
+                                    out.println("<ul class=\"tag\">");
+                                    for (int n = 0; n < result.get(i).getTags().size(); n++) {
+                                        out.println("<li>" + result.get(i).getTags().toArray()[n].toString() + "</li>");
+                                    }
+                                    out.println("</ul>");
                                     out.println("</div>");
-                        }
-                        else
-                        {
-                            ArrayList<User> assignees=new ArrayList<User>(result.get(i).getAssignees());
-                            for (int x = 0; x < assignees.size(); x++)
-                            {
-                                if((result.get(i).getPemilik().getUsername() == null ? assignees.get(x).getUsername() != null : !result.get(i).getPemilik().getUsername().equals(assignees.get(x).getUsername())) && assignees.get(x).getUsername() == null ? currentUser.getUsername() == null : assignees.get(x).getUsername().equals(currentUser.getUsername()))
-                                {
-                                    out.println("<h2>"+result.get(i).getKategori().getNama()+"</h2>");
-                                    out.println("<div class=\"tugas\">");
-                                            out.println("<div><a href=\"tugas.jsp?id="+result.get(i).getId()+"\">"+result.get(i).getNama()+"</a></div>");
-                                            out.println("<div>Deadline: <strong>"+result.get(i).getTglDeadline()+"</strong></div>");
-                                            out.println("<div>");
-                                                    out.println("Tags: ");
-                                                    out.println("<ul class=\"tag\">");
-                                                            for (int n = 0; n < result.get(i).getTags().size(); n++)
-                                                            {
-                                                                    out.println("<li>"+result.get(i).getTags().toArray()[n].toString()+"</li>");
-                                                            }
-                                                    out.println("</ul>");
-                                            out.println("</div>");   
-                                            if(!result.get(i).isStatus())
-                                                    {
-                                                            out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value,"+result.get(i).getId()+")\" value=\""+0+"\"></div>");
-                                                    }
-                                            else if(result.get(i).isStatus())
-                                                    {
-                                                            out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value,"+result.get(i).getId()+")\" value=\""+1+"\" checked></div>");
-                                                    }
-                                            out.println("<button id='deleteTugas' onclick='setChosenT(\""+result.get(i).getId()+"\");deleteTaskR()'>Delete Tugas</button>");
+                                    if (!result.get(i).isStatus()) {
+                                        out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + 0 + "\"></div>");
+                                    } else if (result.get(i).isStatus()) {
+                                        out.println("<div>Status : <input id=\"stats\" type=\"checkbox\" onchange=\"updateStatus(this.value," + result.get(i).getId() + ")\" value=\"" + 1 + "\" checked></div>");
+                                    }
+                                    out.println("<button id='deleteTugas' onclick='setChosenT(\"" + result.get(i).getId() + "\");deleteTaskR()'>Delete Tugas</button>");
                                     out.println("</div>");
                                 }
                             }
@@ -183,8 +152,8 @@ public class TugasA extends HttpServlet {
                     }
                 }
             }
-            
-        } finally {            
+
+        } finally {
             out.close();
         }
     }

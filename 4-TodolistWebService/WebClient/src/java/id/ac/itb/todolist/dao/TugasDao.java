@@ -268,12 +268,13 @@ public class TugasDao extends DataAccessObject {
         // GET
         // /rest/tugas/
 
-        ArrayList<Tugas> result = new ArrayList<Tugas>();
+        ArrayList<Tugas> result = null;
 
         try {
             HttpURLConnection htc = getHttpURLConnection("/rest/tugas/");
             htc.setRequestMethod("GET");
 
+            result=new ArrayList<Tugas>();
             JSONArray jArray = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0, len = jArray.length(); i < len; i++) {
                 Tugas tugas = new Tugas();
