@@ -3,18 +3,15 @@ package id.ac.itb.todolist.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class DB {
 
-    private static Connection connection = null;
 
     public static Connection getConnection() {
-        if (connection != null) {
-            return connection;
-        } else {
+        Connection connection = null;
+        
             try {
                 //String VCAP_SERVICES = "{\"mysql-5.1\":[{\"name\":\"ranger_db\",\"label\":\"mysql-5.1\",\"plan\":\"free\",\"tags\":[\"mysql\",\"mysql-5.1\",\"relational\",\"mysql-5.1\",\"mysql\"],\"credentials\":{\"name\":\"progin_500_13510015\",\"hostname\":\"localhost\",\"host\":\"localhost\",\"port\":3306,\"user\":\"progin\",\"username\":\"progin\",\"password\":\"progin\"}}]}";
                 String VCAP_SERVICES = java.lang.System.getenv("VCAP_SERVICES");
@@ -40,4 +37,3 @@ public class DB {
             return connection;
         }
     }
-}
