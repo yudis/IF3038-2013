@@ -2,12 +2,7 @@ package id.ac.itb.todolist.dao;
 
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import org.json.JSONArray;
 import org.json.JSONTokener;
 

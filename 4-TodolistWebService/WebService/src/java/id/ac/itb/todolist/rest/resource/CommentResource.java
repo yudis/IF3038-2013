@@ -25,7 +25,7 @@ import org.json.JSONObject;
 public class CommentResource extends HttpServlet {
 
 	private Pattern regexId_tugas = Pattern.compile("^/([0-9]{1,})$");
-        private Pattern regexId_comment = Pattern.compile("^/idComment([0-9]{1,})$");
+        private Pattern regexId_comment = Pattern.compile("^/idComment/([0-9]{1,})$");
         private Pattern regexGetComment=Pattern.compile("^/([0-9]{1,})/([0-9]{1,})/([0-9]{1,})$");
          //private Pattern regexAddComment=Pattern.compile("^/([0-9]{1,})/([0-9]{1,})/([a-z].*)/");
         private Pattern regexDeleteComment=Pattern.compile("^/([0-9]{1,})$");

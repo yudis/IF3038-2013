@@ -56,11 +56,11 @@ public class CommentDao extends DataAccessObject {
 
     public Comment getCommentById(int idComment) {
         // GET
-        // /rest/comment/[idComment]
+        // /rest/comment/idComment/[idComment]
         
         Comment comment = null;
         try {
-            HttpURLConnection htc = getHttpURLConnection("/rest/comment/" + idComment);
+            HttpURLConnection htc = getHttpURLConnection("/rest/comment/idComment/" + idComment);
             htc.setRequestMethod("GET");
 
             Comment tmpComment = new Comment();
