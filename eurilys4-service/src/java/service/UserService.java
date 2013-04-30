@@ -252,6 +252,43 @@ public class UserService extends HttpServlet {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+         /* 
+         * pathInfo             : baseURL/user/autocomplete
+         * requestParameter     : keyword=
+         * Notes                : baseURL adalah localhost:8084/eurilys4 ATAU http://eurilys.ap01.aws.af.cm/ 
+         */
+        else if (pathInfo.equals("/autocomplete")) {
+            try {                
+                String keyword = request.getParameter("keyword");
+                conn = connector.getConnection ();
+                PreparedStatement stmt = conn.prepareStatement("");
+                ResultSet rs = null;
+                String HTMLresult = "";
+                
+                //Search User
+                stmt = conn.prepareStatement("SELECT distinct full_name, username FROM user WHERE username LIKE ? OR email LIKE ? OR full_name LIKE ? OR birthdate LIKE ?;");
+                stmt.setString(1, "%" + keyword + "%"); //username
+                stmt.setString(2, "%" + keyword + "%"); //email
+                stmt.setString(3, "%" + keyword + "%"); //full_name
+                stmt.setString(4, "%" + keyword + "%"); //birthdate        
+                rs = stmt.executeQuery();
+                rs.beforeFirst();
+                while (rs.next()) {
+                    if (!("".equals(HTMLresult))) {
+                        HTMLresult += "<br>";
+                    }
+                    //HTMLresult += "<div class='search_recommend' onclick=\"javascript:searchResult('"+rs.getString("username")+"','user');\">"+ rs.getString("full_name") +"</div>";
+                    HTMLresult = HTMLresult + "<div class='search_recommend' id='edittask_ass_"+rs.getString("username")+"' onclick=\"javascript:addEditTaskAssigne('"+rs.getString("username")+"');\">"+rs.getString("username")+"</div>";
+                }
+                out.println(HTMLresult);
+            }      
+            catch (SQLException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
