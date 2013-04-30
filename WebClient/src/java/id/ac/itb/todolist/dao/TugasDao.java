@@ -170,20 +170,6 @@ public class TugasDao extends DataAccessObject {
         return -1;
     }
 
-    public int addAssignee(int idTugas, String username) {
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("INSERT INTO `assignees`(`id_tugas`, `username`) VALUES (?, ?);");
-            preparedStatement.setInt(1, idTugas);
-            preparedStatement.setString(2, username);
-
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
     public int removeAssignee(int idTugas, String username) {
         // DELETE
         // /rest/tugas/remove/assignee/[id]/[username]
@@ -218,36 +204,6 @@ public class TugasDao extends DataAccessObject {
         }
 
         return result;
-    }
-
-    public int addTag(int idTugas, String tag) {
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("INSERT INTO `tags`(`id_tugas`, `tag`) VALUES (?,?); ");
-            preparedStatement.setInt(1, idTugas);
-            preparedStatement.setString(2, tag);
-
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-    public int addAttachment(int idTugas, String name, String filename, String type) {
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("INSERT INTO `attachments`(`id_tugas`, `name`, `filename`, `type`) VALUES (?,?,?,?); ");
-            preparedStatement.setInt(1, idTugas);
-            preparedStatement.setString(2, name);
-            preparedStatement.setString(3, filename);
-            preparedStatement.setString(4, type);
-
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
     }
 
     public int removeTag(int idTugas, String tag) {
@@ -285,27 +241,6 @@ public class TugasDao extends DataAccessObject {
         }
 
         return result;
-    }
-
-    public int addTugas(String nama, java.sql.Date deadline, String pemilik, int idKategori) {
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("INSERT INTO tugas(nama, tgl_deadline, pemilik, id_kategori) VALUES (?, ?, ?, ?);");
-            preparedStatement.setString(1, nama);
-            preparedStatement.setDate(2, deadline);
-            preparedStatement.setString(3, pemilik);
-            preparedStatement.setInt(4, idKategori);
-
-            preparedStatement.executeUpdate();
-
-            ResultSet rs = preparedStatement.getGeneratedKeys();
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
     }
 
     public ArrayList<Tugas> getAllTugas() {
@@ -374,4 +309,30 @@ public class TugasDao extends DataAccessObject {
 
         return result;
     }
+
+    public int addAssignee(int idTugas, java.lang.String username) {
+        TugasSoap.TugasSoap_Service service = new TugasSoap.TugasSoap_Service();
+        TugasSoap.TugasSoap port = service.getTugasSoapPort();
+        return port.addAssignee(idTugas, username);
+    }
+
+    public int addAttachment(int idTugas, java.lang.String name, java.lang.String filename, java.lang.String type) {
+        TugasSoap.TugasSoap_Service service = new TugasSoap.TugasSoap_Service();
+        TugasSoap.TugasSoap port = service.getTugasSoapPort();
+        return port.addAttachment(idTugas, name, filename, type);
+    }
+
+    public int addTag(int idTugas, java.lang.String tag) {
+        TugasSoap.TugasSoap_Service service = new TugasSoap.TugasSoap_Service();
+        TugasSoap.TugasSoap port = service.getTugasSoapPort();
+        return port.addTag(idTugas, tag);
+    }
+
+    public int addTugas(java.lang.String nama, java.lang.String deadline, java.lang.String pemilik, int idKategori) {
+        TugasSoap.TugasSoap_Service service = new TugasSoap.TugasSoap_Service();
+        TugasSoap.TugasSoap port = service.getTugasSoapPort();
+        return port.addTugas(nama, deadline, pemilik, idKategori);
+    }
+    
+    
 }

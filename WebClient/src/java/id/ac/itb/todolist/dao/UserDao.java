@@ -22,25 +22,6 @@ import org.json.JSONTokener;
 
 
 public class UserDao extends DataAccessObject {
-
-    public int addUser(User user) {
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO users (username, email, password, full_name, tgl_lahir, avatar) VALUES  (?, ?, ?, ?, ?, ?);");
-            // Parameters start with 1
-            preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setString(4, user.getFullName());
-            preparedStatement.setDate(5, user.getTglLahir());
-            preparedStatement.setString(6, user.getAvatar());
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
     public User getUserLogin(String userId, String passwd) {
         User user = null;
 
@@ -174,5 +155,12 @@ public class UserDao extends DataAccessObject {
         }
             
         return result;
-    }        
+    }       
+
+    public int addUser(User user) {
+        UserSoap.UserSoap_Service service = new UserSoap.UserSoap_Service();
+        UserSoap.UserSoap port = service.getUserSoapPort();
+        return port.addUser(user.toJsonObject().toString());
+    }
+    
 }

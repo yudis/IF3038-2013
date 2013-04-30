@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/Todolist-WebService/CategorySoap?wsdl" uri="src/conf/xml-resources/web-service-references/CategorySoap/wsdl/localhost_8080/Todolist-WebService/CategorySoap.wsdl"/>
+    <system systemId="http://localhost:8080/Todolist-WebService/CategorySoap?xsd=1" uri="src/conf/xml-resources/web-service-references/CategorySoap/wsdl/localhost_8080/Todolist-WebService/CategorySoap.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/Todolist-WebService/UserSoap?wsdl" uri="src/conf/xml-resources/web-service-references/UserSoap/wsdl/localhost_8080/Todolist-WebService/UserSoap.wsdl"/>
+    <system systemId="http://localhost:8080/Todolist-WebService/UserSoap?xsd=1" uri="src/conf/xml-resources/web-service-references/UserSoap/wsdl/localhost_8080/Todolist-WebService/UserSoap.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/Todolist-WebService/CommentSoap?wsdl" uri="src/conf/xml-resources/web-service-references/CommentSoap/wsdl/localhost_8080/Todolist-WebService/CommentSoap.wsdl"/>
+    <system systemId="http://localhost:8080/Todolist-WebService/CommentSoap?xsd=1" uri="src/conf/xml-resources/web-service-references/CommentSoap/wsdl/localhost_8080/Todolist-WebService/CommentSoap.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/Todolist-WebService/TugasSoap?wsdl" uri="src/conf/xml-resources/web-service-references/TugasSoap/wsdl/localhost_8080/Todolist-WebService/TugasSoap.wsdl"/>
+    <system systemId="http://localhost:8080/Todolist-WebService/TugasSoap?xsd=1" uri="src/conf/xml-resources/web-service-references/TugasSoap/wsdl/localhost_8080/Todolist-WebService/TugasSoap.xsd_1.xsd"/>
+</catalog>

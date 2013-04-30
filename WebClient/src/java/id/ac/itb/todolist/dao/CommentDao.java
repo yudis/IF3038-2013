@@ -70,21 +70,6 @@ public class CommentDao extends DataAccessObject {
         return comment;
     }
 
-    public int addComment(Comment c) {
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO comments (id_tugas, user, content) VALUES (?, ?, ?);");
-            preparedStatement.setInt(1, c.getIdTugas());
-            preparedStatement.setString(2, c.getUser().getUsername());
-            preparedStatement.setString(3, c.getContent());
-
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
     public int deleteComment(int commentId) {
         //url/comment/delete/[commentId]
         try {
@@ -97,5 +82,11 @@ public class CommentDao extends DataAccessObject {
             ex.printStackTrace();
         }
         return -1;
+    }
+
+    public int addComment(Comment comment) {
+        CommentSoap.CommentSoap_Service service = new CommentSoap.CommentSoap_Service();
+        CommentSoap.CommentSoap port = service.getCommentSoapPort();
+        return port.addComment(comment.toJsonObject().toString());
     }
 }

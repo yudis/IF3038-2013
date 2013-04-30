@@ -21,6 +21,8 @@ public class CategoryDao extends DataAccessObject {
     // GET
     // rest/category/[idKategori]
         Category category=null;
+       
+        
         try {
             HttpURLConnection htc = getConnection("rest/category/" + idKategori);
             htc.setRequestMethod("GET");
@@ -55,20 +57,6 @@ public class CategoryDao extends DataAccessObject {
         return result;
     }
     
-    public int NewKategori(String nama,String pembuat){
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO categories(id,nama) VALUES (0,?);");
-            // Parameters start with 1
-            preparedStatement.setString(1, nama);
-            preparedStatement.executeUpdate();
-            return addNewestCoordinator(pembuat);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-    
     public int DeleteKategori(int id){
     // DELETE
     // rest/category/1
@@ -82,37 +70,6 @@ public class CategoryDao extends DataAccessObject {
             ex.printStackTrace();
         }
         return -1;
-    }
-    
-    public int addCoordinator(int id,String pembuat) {
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO coordinator(id_kategori,user) VALUES (?,?);");
-            // Parameters start with 1
-            preparedStatement.setInt(1, id);
-            preparedStatement.setString(2, pembuat);
-            return preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-    
-    public int addNewestCoordinator(String pembuat) {
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("SELECT id FROM categories ORDER BY last_mod DESC LIMIT 1;");
-            ResultSet rs = preparedStatement.executeQuery();
-            
-            int x=-1;
-            if (rs.next()) {
-                x= addCoordinator(rs.getInt("id"),pembuat);
-            }
-            return x;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
-        }
     }
     
     public ArrayList<Category> getAssigneeCat(String username){
@@ -173,4 +130,22 @@ public class CategoryDao extends DataAccessObject {
         }
         return result;
     }    
+
+    public int createNewKategori(java.lang.String nama, java.lang.String pembuat) {
+        soap.CategorySoap_Service service = new soap.CategorySoap_Service();
+        soap.CategorySoap port = service.getCategorySoapPort();
+        return port.newKategori(nama, pembuat);
+    }
+
+   public int addCoordinator(int id, java.lang.String pembuat) {
+        soap.CategorySoap_Service service = new soap.CategorySoap_Service();
+        soap.CategorySoap port = service.getCategorySoapPort();
+        return port.addCoordinator(id, pembuat);
+    }
+
+    public int addNewestCoordinator(java.lang.String pembuat) {
+        soap.CategorySoap_Service service = new soap.CategorySoap_Service();
+        soap.CategorySoap port = service.getCategorySoapPort();
+        return port.addNewestCoordinator(pembuat);
+    }
 }
