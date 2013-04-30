@@ -6,3 +6,6 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+genfiles.properties
+jaxws-build.xml
+project.properties
