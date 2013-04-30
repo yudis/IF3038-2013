@@ -81,6 +81,11 @@ public class ServletHandler extends HttpServlet {
                 outputObject += output;
             } 
             httpConn.disconnect();
+            
+            String[] output_parts = outputObject.split(",");
+            String fullname = output_parts[0]; 
+            String avatar = output_parts[1]; 
+
             if ("failed".equals(outputObject)) {
                 //Login gagal
                 resp.sendRedirect("index.jsp?login_status=failed");
@@ -89,7 +94,8 @@ public class ServletHandler extends HttpServlet {
                 //Login berhasil
                 HttpSession session = req.getSession(true);
                 session.setAttribute("username", username);
-                session.setAttribute("fullname", outputObject);
+                session.setAttribute("fullname", fullname);
+                session.setAttribute("avatar", avatar);
                 resp.sendRedirect("src/dashboard.jsp");
             }
         } 

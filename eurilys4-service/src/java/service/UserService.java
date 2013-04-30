@@ -47,19 +47,21 @@ public class UserService extends HttpServlet {
                 
                 conn = connector.getConnection ();
 
-                PreparedStatement stmt = conn.prepareStatement("SELECT username, full_name FROM user WHERE username=? AND password=?;");
+                PreparedStatement stmt = conn.prepareStatement("SELECT username, full_name , avatar FROM user WHERE username=? AND password=?;");
                 stmt.setString(1, username);
                 stmt.setString(2, password);
                 ResultSet rs = stmt.executeQuery();
                 rs.beforeFirst();
 
                 String fullname = "";
+                String avatar = "";
                 while (rs.next()) {          
                     fullname = rs.getString(2);
+                    avatar = rs.getString(3);
                 }
                 
                 if (!fullname.equals("")) {
-                    out.println(fullname);
+                    out.println(fullname + "," + avatar);
                 }
                 else {
                     out.println("failed");
