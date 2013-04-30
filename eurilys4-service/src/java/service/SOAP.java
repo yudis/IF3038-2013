@@ -27,7 +27,7 @@ import javax.servlet.http.Part;
  *
  * @author Compaq
  */
-public class SOAPtest extends HttpServlet {
+public class SOAP extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -44,11 +44,11 @@ public class SOAPtest extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        //String pathInfo = request.getPathInfo();
+        String pathInfo = request.getPathInfo();
         dbConnection connector = new dbConnection();
         Connection conn = null;
         
-        //if (pathInfo.equals("/add_task")) {
+        if (pathInfo.equals("/add_task")) {
             //GET REQUEST BODY.       
             ServletInputStream i = request.getInputStream();
             int c = 0;
@@ -133,14 +133,12 @@ public class SOAPtest extends HttpServlet {
                 for (int j = 0; j < tagArray.length; j++) {
                     st.executeUpdate("INSERT INTO tag(tag_name, task_id) VALUES ('" + tagArray[j] + "','" + taskID + "')");
                 }
-                //response.sendRedirect("src/task_detail.jsp?task_id=" + taskID);
-                
             } catch (Exception e){
             } finally {
                 try {
                     conn.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(SOAPtest.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SOAP.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println("Can not close connection - Add Task");
                 }
             }
@@ -157,8 +155,7 @@ public class SOAPtest extends HttpServlet {
             
             //RETURN RESPONSE.    
             response.getWriter().println(xml);
-        //}
-        
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

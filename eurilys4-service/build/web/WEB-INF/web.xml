@@ -34,7 +34,7 @@
     </servlet>
     <servlet>
         <servlet-name>SOAPtest</servlet-name>
-        <servlet-class>service.SOAPtest</servlet-class>
+        <servlet-class>service.SOAP</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SOAPService</servlet-name>
