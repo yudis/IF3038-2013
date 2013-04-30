@@ -26,7 +26,7 @@ public class CategoryResource extends HttpServlet {
     private Pattern regexUser = Pattern.compile("^/user/([\\w._%].*)$");
     private Pattern regexCategory = Pattern.compile("^/([\\w._%].*)$");
     private Pattern regexAllCategory = Pattern.compile("^/$");
-    private Pattern regexDelete = Pattern.compile("^/([\\w._%].*)/([\\w._%].*)$");
+    private Pattern regexDelete = Pattern.compile("^/([0-9]{1,})$");
 
     public CategoryResource() {
         super();
@@ -116,7 +116,7 @@ public class CategoryResource extends HttpServlet {
         matcher = regexDelete.matcher(pathInfo);
         if (matcher.find()) {
             CategoryDao categoryDao = new CategoryDao();
-            categoryDao.DeleteKategori(Integer.parseInt(matcher.group(1)));
+            out.print(categoryDao.DeleteKategori(Integer.parseInt(matcher.group(1))));
             return;
         }
         

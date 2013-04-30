@@ -40,7 +40,8 @@ public class profilecategory extends HttpServlet {
         TugasDao tugasdao = new TugasDao();
         HttpSession session = request.getSession();
         User loginedUser = (User) session.getAttribute("user");
-        ArrayList<Tugas> result = (ArrayList<Tugas>) tugasdao.getTugas(request.getParameter("id"));
+        ArrayList<Tugas> result = new ArrayList<Tugas>();
+        result = (ArrayList<Tugas>) tugasdao.getTugas(request.getParameter("id"));
      
 //////////
         out.println("<h2> </h2>");

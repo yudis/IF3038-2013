@@ -111,7 +111,7 @@ public class UserDao extends DataAccessObject {
         // POST
         // rest/user/[felixt]
         try {
-            HttpURLConnection htc = getHttpURLConnection("/rest/user/" + URLEncoder.encode(user.getUsername(), "UTF-8"));
+            HttpURLConnection htc = getHttpURLConnection("/rest/user/");
             htc.setRequestMethod("POST");
             
             String urlParameters = "user=" + URLEncoder.encode(user.toJsonObject().toString(), "UTF-8");

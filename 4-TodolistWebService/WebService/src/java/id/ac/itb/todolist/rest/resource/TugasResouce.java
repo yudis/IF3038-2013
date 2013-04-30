@@ -24,7 +24,7 @@ public class TugasResouce extends HttpServlet {
     private Pattern regexIsUpdate = Pattern.compile("^/([0-9]{1,})/u/([0-9]{1,})$");
     private Pattern regexTimestamp = Pattern.compile("^/([0-9]{1,})/timestamp$");
     private Pattern regexDeadline = Pattern.compile("^/([0-9]{1,})/deadline/([0-9]{4,4})/([0-9]{1,2})/([0-9]{1,2})$");
-    private Pattern regexUsername = Pattern.compile("^/([0-9]{1,})/username/([\\w%]{1,})$");
+    private Pattern regexUsername = Pattern.compile("^/username/([\\w%]{1,})$");
     private Pattern regexSearch = Pattern.compile("^/search/([\\w%]{1,})/([0-9]{1,})/([0-9]{1,})$");
     
     @Override
@@ -124,14 +124,14 @@ public class TugasResouce extends HttpServlet {
         matcher = regexUsername.matcher(pathInfo);
         if (matcher.find()) {
             TugasDao tugasDao = new TugasDao();
-            out.print(tugasDao.getTugas(matcher.group(1)));
+            out.print(new JSONArray(tugasDao.getTugas(matcher.group(1))));
             return;
         }
         
         matcher = regexSearch.matcher(pathInfo);
         if (matcher.find()) {
             TugasDao tugasDao = new TugasDao();
-            out.print(tugasDao.getTugasSearch(matcher.group(1), Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3))));
+            out.print(new JSONArray(tugasDao.getTugasSearch(matcher.group(1), Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)))));
             return;
         }       
 
