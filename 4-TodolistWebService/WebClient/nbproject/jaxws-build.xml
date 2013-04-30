@@ -28,7 +28,7 @@
     </target>
     <target name="wsimport-client-UserSoap" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/UserSoap"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/UserSoap" destdir="${build.generated.dir}/jax-wsCache/UserSoap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/UserSoap/wsdl/ranger.ap01.aws.af.cm/UserSoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://ranger.ap01.aws.af.cm/UserSoap?wsdl" xnocompile="true" xendorsed="true" package="id.ac.itb.todolist.soap.user">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/UserSoap" destdir="${build.generated.dir}/jax-wsCache/UserSoap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/UserSoap/wsdl/ranger.ap01.aws.af.cm/UserSoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://localhost:8084/Todolist-WebService/UserSoap?wsdl" xnocompile="true" xendorsed="true" package="id.ac.itb.todolist.soap.user">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/UserSoap/wsdl/ranger.ap01.aws.af.cm/UserSoap.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/UserSoap"/>
         </wsimport>
@@ -44,7 +44,7 @@
     </target>
     <target name="wsimport-client-CategorySoap" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/CategorySoap"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/CategorySoap" destdir="${build.generated.dir}/jax-wsCache/CategorySoap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/CategorySoap/wsdl/ranger.ap01.aws.af.cm/CategorySoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://ranger.ap01.aws.af.cm/CategorySoap?wsdl" xnocompile="true" xendorsed="true" package="id.ac.itb.todolist.soap.category">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/CategorySoap" destdir="${build.generated.dir}/jax-wsCache/CategorySoap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/CategorySoap/wsdl/ranger.ap01.aws.af.cm/CategorySoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://localhost:8084/Todolist-WebService/CategorySoap?wsdl" xnocompile="true" xendorsed="true" package="id.ac.itb.todolist.soap.category">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/CategorySoap/wsdl/ranger.ap01.aws.af.cm/CategorySoap.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/CategorySoap"/>
         </wsimport>
@@ -60,7 +60,7 @@
     </target>
     <target name="wsimport-client-CommentSoap" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/CommentSoap"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/CommentSoap" destdir="${build.generated.dir}/jax-wsCache/CommentSoap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/CommentSoap/wsdl/ranger.ap01.aws.af.cm/CommentSoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://ranger.ap01.aws.af.cm/CommentSoap?wsdl" xnocompile="true" xendorsed="true" package="id.ac.itb.todolist.soap.comment">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/CommentSoap" destdir="${build.generated.dir}/jax-wsCache/CommentSoap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/CommentSoap/wsdl/ranger.ap01.aws.af.cm/CommentSoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://localhost:8084/Todolist-WebService/CommentSoap?wsdl" xnocompile="true" xendorsed="true" package="id.ac.itb.todolist.soap.comment">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/CommentSoap/wsdl/ranger.ap01.aws.af.cm/CommentSoap.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/CommentSoap"/>
         </wsimport>
@@ -76,7 +76,7 @@
     </target>
     <target name="wsimport-client-TugasSoap" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/TugasSoap"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TugasSoap" destdir="${build.generated.dir}/jax-wsCache/TugasSoap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/TugasSoap/wsdl/ranger.ap01.aws.af.cm/TugasSoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://ranger.ap01.aws.af.cm/TugasSoap?wsdl" xnocompile="true" xendorsed="true" package="id.ac.itb.todolist.soap.tugas">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TugasSoap" destdir="${build.generated.dir}/jax-wsCache/TugasSoap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/TugasSoap/wsdl/ranger.ap01.aws.af.cm/TugasSoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://localhost:8084/Todolist-WebService/TugasSoap?wsdl" xnocompile="true" xendorsed="true" package="id.ac.itb.todolist.soap.tugas">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/TugasSoap/wsdl/ranger.ap01.aws.af.cm/TugasSoap.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/TugasSoap"/>
         </wsimport>

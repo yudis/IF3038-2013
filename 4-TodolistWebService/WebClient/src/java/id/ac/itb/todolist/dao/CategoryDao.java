@@ -46,6 +46,7 @@ public class CategoryDao extends DataAccessObject {
             HttpURLConnection htc = getHttpURLConnection("/rest/category/");
             htc.setRequestMethod("GET");
 
+            result = new ArrayList<Category>();
             JSONArray jArray = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0, len = jArray.length(); i < len; i++) {
                 Category category = new Category();
@@ -83,6 +84,7 @@ public class CategoryDao extends DataAccessObject {
             HttpURLConnection htc = getHttpURLConnection("/rest/category/assignee/"+URLEncoder.encode(username, "UTF-8"));
             htc.setRequestMethod("GET");
 
+            result = new ArrayList<Category>();
             JSONArray jArray = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0, len = jArray.length(); i < len; i++) {
                 Category category = new Category();
@@ -102,7 +104,8 @@ public class CategoryDao extends DataAccessObject {
         try {
             HttpURLConnection htc = getHttpURLConnection("/rest/category/user/" + idKategori);
             htc.setRequestMethod("GET");
-
+            
+            result = new ArrayList<String>();
             JSONArray jArray = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0, len = jArray.length(); i < len; i++) {
                 result.add(jArray.getString(i));
@@ -122,7 +125,8 @@ public class CategoryDao extends DataAccessObject {
         try {
             HttpURLConnection htc = getHttpURLConnection("/rest/category/"+URLEncoder.encode(name, "UTF-8")+"/"+start+"/"+n);
             htc.setRequestMethod("GET");
-
+            
+            result = new ArrayList<Category>();
             JSONArray jArray = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0, len = jArray.length(); i < len; i++) {
                 Category temp = new Category();

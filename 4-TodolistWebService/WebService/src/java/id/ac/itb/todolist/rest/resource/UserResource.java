@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Servlet implementation class UserResource
@@ -91,8 +92,11 @@ public class UserResource extends HttpServlet {
 
         matcher = regexUpdate.matcher(pathInfo);
         if (matcher.find()) {
+            User user = new User();
+            user.fromJsonObject(new JSONObject(request.getParameter("user")));
+            
             UserDao userDao = new UserDao();
-            userDao.Update(userDao.getUser(matcher.group(1)));
+            userDao.Update(user);
             return;
         }
         

@@ -18,7 +18,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://ranger.ap01.aws.af.cm/UserSoap?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://localhost:8084/Todolist-WebService/UserSoap?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -50,7 +50,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://ranger.ap01.aws.af.cm/CategorySoap?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://localhost:8084/Todolist-WebService/CategorySoap?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -82,7 +82,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://ranger.ap01.aws.af.cm/CommentSoap?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://localhost:8084/Todolist-WebService/CommentSoap?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -114,7 +114,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://ranger.ap01.aws.af.cm/TugasSoap?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://localhost:8084/Todolist-WebService/TugasSoap?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
