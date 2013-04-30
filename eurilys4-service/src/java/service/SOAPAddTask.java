@@ -27,7 +27,7 @@ import javax.servlet.http.Part;
  *
  * @author Compaq
  */
-public class SOAP extends HttpServlet {
+public class SOAPAddTask extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -43,12 +43,11 @@ public class SOAP extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
         String pathInfo = request.getPathInfo();
         dbConnection connector = new dbConnection();
         Connection conn = null;
         
-        if (pathInfo.equals("/add_task")) {
+        //if (pathInfo.equals("/add_task")) {
             //GET REQUEST BODY.       
             ServletInputStream i = request.getInputStream();
             int c = 0;
@@ -138,7 +137,7 @@ public class SOAP extends HttpServlet {
                 try {
                     conn.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(SOAP.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SOAPAddTask.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println("Can not close connection - Add Task");
                 }
             }
@@ -155,7 +154,7 @@ public class SOAP extends HttpServlet {
             
             //RETURN RESPONSE.    
             response.getWriter().println(xml);
-        }
+        //}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

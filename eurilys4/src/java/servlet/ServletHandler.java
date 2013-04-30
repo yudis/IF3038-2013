@@ -388,8 +388,8 @@ public class ServletHandler extends HttpServlet {
             HttpSession session = req.getSession(true);
             String taskCreator = (String) session.getAttribute("username");
 
-            String server = "http://localhost:8084/eurilys4-service/SOAP/add_task";
-            //String service = "http://eurilys.ap01.aws.af.cm/SOAP/add_task";
+            String server = "http://localhost:8084/eurilys4-service/SOAPAddTask";
+            //String service = "http://eurilys.ap01.aws.af.cm/SOAPAddTask";
             
             try {
                 //DEFINE CONNECTION.

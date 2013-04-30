@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     <servlet>
-        <servlet-name>SOAPService</servlet-name>
-        <servlet-class>servlet.SOAPService</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ServletHandler</servlet-name>
         <servlet-class>servlet.ServletHandler</servlet-class>
     </servlet>
@@ -29,17 +25,13 @@
         <servlet-class>service.SearchService</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SOAP</servlet-name>
-        <servlet-class>service.SOAP</servlet-class>
+        <servlet-name>SOAPAddTask</servlet-name>
+        <servlet-class>service.SOAPAddTask</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SOAPtest</servlet-name>
-        <servlet-class>service.SOAP</servlet-class>
+        <servlet-name>SOAPAddCategory</servlet-name>
+        <servlet-class>service.SOAPAddCategory</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>SOAPService</servlet-name>
-        <url-pattern>/SOAPService</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletHandler</servlet-name>
         <url-pattern>/ServletHandler</url-pattern>
@@ -65,12 +57,12 @@
         <url-pattern>/search/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SOAP</servlet-name>
-        <url-pattern>/SOAP</url-pattern>
+        <servlet-name>SOAPAddTask</servlet-name>
+        <url-pattern>/SOAPAddTask</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SOAPtest</servlet-name>
-        <url-pattern>/SOAPtest</url-pattern>
+        <servlet-name>SOAPAddCategory</servlet-name>
+        <url-pattern>/SOAPAddCategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
