@@ -19,7 +19,7 @@ public class SearchAutoCompleteDao extends DataAccessObject {
         ArrayList<String> result = new ArrayList<String>();
         
        try {
-            HttpURLConnection htc = getHttpURLConnection("/rest/searchac/"+URLEncoder.encode(q, "UTF-8")+"/"+URLEncoder.encode(filter, "UTF-8"));
+            HttpURLConnection htc = getHttpURLConnection("/rest/searchac/"+URLEncoder.encode(filter, "UTF-8")+"/"+URLEncoder.encode(q, "UTF-8"));
             htc.setRequestMethod("GET");
 
             result=new ArrayList<String>();

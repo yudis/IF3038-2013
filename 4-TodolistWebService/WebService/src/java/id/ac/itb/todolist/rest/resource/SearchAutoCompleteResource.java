@@ -38,7 +38,9 @@ public class SearchAutoCompleteResource extends HttpServlet {
         matcher = regexSearchAC.matcher(pathInfo);
         if (matcher.find()) {
             SearchAutoCompleteDao searchAutoCompleteDao = new SearchAutoCompleteDao();
-            ArrayList<String> result = searchAutoCompleteDao.getSearchAC(matcher.group(2), matcher.group(1));
+            
+            ArrayList<String> result = new ArrayList<String>();
+            result=searchAutoCompleteDao.getSearchAC(matcher.group(2), matcher.group(1));
 
             out.print(new JSONArray(result));
             return;
