@@ -122,7 +122,7 @@ public class CategoryDao extends DataAccessObject {
     
     public ArrayList<Category> getAssigneeCat(String username){
     // GET
-    // rest/category/assignee/wilson
+    // rest/category/assign/wilson
         ArrayList<Category> result = null;
         try {
             PreparedStatement preparedStatement = connection.

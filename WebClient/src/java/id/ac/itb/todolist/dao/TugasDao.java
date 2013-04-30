@@ -5,9 +5,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -75,7 +72,7 @@ public class TugasDao extends DataAccessObject {
         // /rest/tugas/isa/[id]        
 
         try {
-            HttpURLConnection htc = getConnection("rest/tugas/isa/" + idTugas);
+            HttpURLConnection htc = getConnection("rest/tugas/" + idTugas+ "/0/0/0");
             htc.setRequestMethod("GET");
 
             Tugas tmp = new Tugas();
@@ -142,7 +139,7 @@ public class TugasDao extends DataAccessObject {
 
         try {
             HttpURLConnection htc = getConnection("rest/tugas/sets/" + idTugas + "/" + status);
-            htc.setRequestMethod("POST");
+            htc.setRequestMethod("GET");
 
             BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
             return Integer.parseInt(br.readLine());
@@ -159,11 +156,13 @@ public class TugasDao extends DataAccessObject {
         try {
             Calendar c = Calendar.getInstance();
             c.setTime(deadline);
-            HttpURLConnection htc = getConnection("rest/tugas/setd/" + idTugas + c.get(Calendar.YEAR) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.DATE));
-            htc.setRequestMethod("POST");
+            HttpURLConnection htc = getConnection("rest/tugas/setd/" + idTugas +"/"+ c.get(Calendar.YEAR) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.DATE));
+            htc.setRequestMethod("GET");
 
             BufferedReader br = new BufferedReader(new InputStreamReader(htc.getInputStream()));
-            return Integer.parseInt(br.readLine());
+            String s = br.readLine();
+            System.out.println(s);
+            return Integer.parseInt(s);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -248,14 +247,14 @@ public class TugasDao extends DataAccessObject {
         // /rest/tugas/
 
         ArrayList<Tugas> result = null;
-        Tugas tugas ;
         try {
             HttpURLConnection htc = getConnection("rest/tugas/");
             htc.setRequestMethod("GET");
 
+            result=new ArrayList<Tugas>();
             JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
-            for (int i = 0; i < ja.length(); i++) {
-                tugas = new Tugas();
+            for (int i = 0, len=ja.length(); i < len; i++) {
+                Tugas tugas = new Tugas();
                 tugas.fromJsonObject(ja.getJSONObject(i));
                 result.add(tugas);
             }
@@ -274,7 +273,8 @@ public class TugasDao extends DataAccessObject {
         try {
             HttpURLConnection htc = getConnection("rest/tugas/username/" + username);
             htc.setRequestMethod("GET");
-
+            
+            result = new ArrayList<Tugas>();
             JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0; i < ja.length(); i++) {
                 tugas = new Tugas();
@@ -297,6 +297,7 @@ public class TugasDao extends DataAccessObject {
             HttpURLConnection htc = getConnection("rest/tugas/search/" + URLEncoder.encode(keyword, "UTF-8") + "/" + start + "/" + limit);
             htc.setRequestMethod("GET");
 
+            result = new ArrayList<Tugas>();
             JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0; i < ja.length(); i++) {
                 tugas = new Tugas();

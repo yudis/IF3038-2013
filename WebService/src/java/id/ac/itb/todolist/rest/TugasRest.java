@@ -28,7 +28,6 @@ public class TugasRest extends HttpServlet {
     private Pattern regexTugas = Pattern.compile("^/([\\d]{1,})/([\\w._%].*)/([\\w._%].*)/([\\w._%].*)$");
     private Pattern regexDeleteT = Pattern.compile("^/delete/([\\d]{1,})$");
     private Pattern regexisUpdated = Pattern.compile("^/isu/([\\d]{1,})/([\\w._%].*)/(-?\\d{1,19})$");
-    private Pattern regexisAvailable = Pattern.compile("^/isa/([\\d]{1,})$");
     private Pattern regexisPemilik = Pattern.compile("^/isp/([\\d]{1,})/([\\w._%].*)$");
     private Pattern regexisAssignee = Pattern.compile("^/isass/([\\d]{1,})/([\\w._%].*)$");
     private Pattern regexUpdateTimeStamp = Pattern.compile("^/utime/([\\d]{1,})$");
@@ -80,14 +79,6 @@ public class TugasRest extends HttpServlet {
                 TugasDao tugasDao = new TugasDao();
                 
                 out.print(tugasDao.isUpdated(Integer.parseInt(matcher.group(1)),Long.getLong(matcher.group(2))));
-                return;
-            }
-            
-            matcher = regexisAvailable.matcher(pathInfo);
-            if (matcher.find()) {
-                TugasDao tugasDao = new TugasDao();
-                
-                out.print(tugasDao.isAvailable(Integer.parseInt(matcher.group(1))));
                 return;
             }
             

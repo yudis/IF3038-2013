@@ -45,6 +45,7 @@ public class CategoryDao extends DataAccessObject {
             HttpURLConnection htc = getConnection("rest/category/");
             htc.setRequestMethod("GET");
 
+            result = new ArrayList<Category>();
             JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0; i < ja.length(); i++) {
                 Category category = new Category();
@@ -77,11 +78,12 @@ public class CategoryDao extends DataAccessObject {
     // rest/category/assignee/wilson
         ArrayList<Category> result = null;
         try {
-            HttpURLConnection htc = getConnection("rest/category/assignee/"+URLEncoder.encode(username, "UTF-8"));
+            HttpURLConnection htc = getConnection("rest/category/assign/"+URLEncoder.encode(username, "UTF-8"));
             htc.setRequestMethod("GET");
 
+            result = new ArrayList<Category>();
             JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
-            for (int i = 0; i < ja.length(); i++) {
+            for (int i = 0,len=ja.length(); i < len; i++) {
                 Category category = new Category();
                 category.fromJsonObject(ja.getJSONObject(i));
                 result.add(category);
@@ -100,6 +102,7 @@ public class CategoryDao extends DataAccessObject {
             HttpURLConnection htc = getConnection("rest/category/user/" + idKategori);
             htc.setRequestMethod("GET");
 
+            result = new ArrayList<String>();
             JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0; i < ja.length(); i++) {
                 result.add(ja.getString(i));
@@ -119,6 +122,7 @@ public class CategoryDao extends DataAccessObject {
             HttpURLConnection htc = getConnection("/rest/category/"+URLEncoder.encode(name, "UTF-8")+"/"+start+"/"+n);
             htc.setRequestMethod("GET");
 
+            result = new ArrayList<Category>();
             JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0; i < ja.length(); i++) {
                 category = new Category();

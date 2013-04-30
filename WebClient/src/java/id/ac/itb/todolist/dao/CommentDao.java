@@ -36,6 +36,7 @@ public class CommentDao extends DataAccessObject {
             HttpURLConnection htc = getConnection("rest/comment/" + idTugas + "/" + startIndex +"/" + count);
             htc.setRequestMethod("GET");
 
+            comments = new ArrayList<Comment>();
             JSONArray jArray = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0, len = jArray.length(); i < len; i++) {
                 Comment comment = new Comment();

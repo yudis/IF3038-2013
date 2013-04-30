@@ -159,13 +159,13 @@ public class Tugas extends JSONModel {
             this.kategori.fromJsonObject(jKat);
         }
         
-        JSONArray jAttach = jObject.getJSONArray("attachment");
+        JSONArray jAttach = jObject.getJSONArray("attachments");
         if(jAttach != null){
             if(jAttach.length()>0){
                 this.attachments = new ArrayList<Attachment>();
             }
             
-            for(int i=0;i<jAttach.length();i++)
+            for(int i=0,len=jAttach.length();i<len;i++)
             {
                 JSONObject jsonAttach = jAttach.getJSONObject(i);
                 Attachment attachment = new Attachment();

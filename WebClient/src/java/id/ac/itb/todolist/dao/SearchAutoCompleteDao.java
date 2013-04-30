@@ -18,12 +18,13 @@ public class SearchAutoCompleteDao extends DataAccessObject {
         
     public ArrayList<String> getSearchAC(String q, String filter){
     // GET
-    // rest/searchac/[username]/[filter]
+    // rest/searchautocomplete/searchac/[username]/[filter]
         ArrayList<String> result = new ArrayList<String>();    
         try {
-            HttpURLConnection htc = getConnection("rest/searchac/"+URLEncoder.encode(q, "UTF-8")+"/"+URLEncoder.encode(filter, "UTF-8"));
+            HttpURLConnection htc = getConnection("rest/searchautocomplete/searchac/"+URLEncoder.encode(q, "UTF-8")+"/"+URLEncoder.encode(filter, "UTF-8"));
             htc.setRequestMethod("GET");
-
+            
+            result= new ArrayList<String>();
             JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0 ;i < ja.length(); i++) {
                 result.add(ja.getString(i));

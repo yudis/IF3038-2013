@@ -91,6 +91,7 @@ public class UserDao extends DataAccessObject {
             HttpURLConnection htc = getConnection("rest/user/");
             htc.setRequestMethod("GET");
 
+            result = new ArrayList<String>();
             JSONArray jArray = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0, len = jArray.length(); i < len; i++) {
                 result.add(jArray.getString(i));
@@ -144,6 +145,7 @@ public class UserDao extends DataAccessObject {
             HttpURLConnection htc = getConnection("/rest/user/search/" + URLEncoder.encode(Id, "UTF-8") + "/" + start + "/" + n);
             htc.setRequestMethod("GET");
 
+            result=new ArrayList<User>();
             JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0; i < ja.length(); i++) {
                 User user = new User();
