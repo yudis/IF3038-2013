@@ -1,0 +1,3 @@
+13510057 Mario_Orlando_Teng mario_orlando@live.com	marioorlando
+13510059 Yulianti_Oenang 13510059@std.stei.itb.ac.id YuliantiOenang
+13510065 Edward_Samuel_Pasaribu edward_samuel_esp@yahoo.com edwardsamuel

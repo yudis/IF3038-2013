@@ -1,0 +1,131 @@
+* {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	margin: 0px;
+}
+body {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+img {
+    border: 0px;
+}
+.page {
+    float: left;
+    width: 100%;
+    min-width: 1017px;
+}
+.page .content {
+    width: 960px;
+    margin: 0px auto;
+}
+nav {
+	clear: both;
+	width: 960px;
+	display: block;
+	background-color: #5fae53;
+}
+nav div.logo, #slogan, #loginwrapper {
+	display: inline-block;
+}
+nav div.logo {
+	width: 190px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-left: 30px;
+	padding-right: 10px;
+}
+nav .logo img {
+	margin-bottom: -5px;
+}
+#slogan {
+	width: 300px;
+	padding-top: 20px;
+	padding-left: 10px;
+	color: #ffffff;
+}
+#loginwrapper {
+	width: 400px;
+	padding-left: 5px;
+}
+#loginwrapper form #login_username, #loginwrapper form #login_password {
+	display: inline-block;
+	color: #FFFFFF;
+	font-size: 70%;
+}
+#loginwrapper form #login_button {
+	display: inline-block;
+	margin-bottom: 0px;
+	border: none;
+}
+#login_submit{
+	margin-bottom: 0px;
+}
+.textbox {
+	height: 20px;
+	width: 145px;
+}
+#leftcolumn {
+	display: inline-block;
+	width: 600px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+#rightcolumn {
+	display: inline-block;
+	width: 300px;
+	margin-bottom: -100px;
+}
+h1, h2 {
+	color: #5fae53;
+}
+#slide {
+	border: 2px solid black;
+}
+#terms {
+	font-size: 70%;
+	color: gray;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.r_button {
+	background-color: #5fae53;
+	color: #ffffff;
+	border: 0px;
+	width: 100px;
+}
+.regbox {
+	width: 340px;
+	height: 40px;
+	font-size: 110%;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+#registerwrapper form .wrapper {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+#registerwrapper form p.regtext {
+	color: gray;
+}
+footer {
+    clear: both;
+    background-color: #5fae53;
+    width: 960px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 70%;
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+button, .button {
+    display: inline-block;
+    background-color: #78c368;
+    padding: 3px 6px;
+    font: 80%;
+    margin: 0;
+    color: #fff;
+    border: #499b3d 2px solid;
+}
