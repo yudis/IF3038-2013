@@ -115,17 +115,16 @@ public class CategoryDao extends DataAccessObject {
     
     public Collection<Category> getCategorySearch(String name, int start, int n){
     // GET
-    // rest/category/e/0/5
-        Category category = null;
+    // rest/category/search/e/0/5
         ArrayList<Category> result= new ArrayList<Category>();
         try {
-            HttpURLConnection htc = getConnection("/rest/category/"+URLEncoder.encode(name, "UTF-8")+"/"+start+"/"+n);
+            HttpURLConnection htc = getConnection("rest/category/search/"+URLEncoder.encode(name, "UTF-8")+"/"+start+"/"+n);
             htc.setRequestMethod("GET");
 
             result = new ArrayList<Category>();
             JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
-            for (int i = 0; i < ja.length(); i++) {
-                category = new Category();
+            for (int i = 0,len=ja.length(); i < len; i++) {
+                Category category = new Category();
                 category.fromJsonObject(ja.getJSONObject(i));
                 result.add(category);
             }
@@ -133,23 +132,23 @@ public class CategoryDao extends DataAccessObject {
             ex.printStackTrace();
         }
         return result;
-    }    
+    }   
 
-    public int createNewKategori(java.lang.String nama, java.lang.String pembuat) {
-        soap.CategorySoap_Service service = new soap.CategorySoap_Service();
-        soap.CategorySoap port = service.getCategorySoapPort();
+    public static int createNewKategori(java.lang.String nama, java.lang.String pembuat) {
+        wsdl.CategorySoap.CategorySoap_Service service = new wsdl.CategorySoap.CategorySoap_Service();
+        wsdl.CategorySoap.CategorySoap port = service.getCategorySoapPort();
         return port.newKategori(nama, pembuat);
     }
 
-   public int addCoordinator(int id, java.lang.String pembuat) {
-        soap.CategorySoap_Service service = new soap.CategorySoap_Service();
-        soap.CategorySoap port = service.getCategorySoapPort();
+    private static int addCoordinator(int id, java.lang.String pembuat) {
+        wsdl.CategorySoap.CategorySoap_Service service = new wsdl.CategorySoap.CategorySoap_Service();
+        wsdl.CategorySoap.CategorySoap port = service.getCategorySoapPort();
         return port.addCoordinator(id, pembuat);
     }
 
-    public int addNewestCoordinator(java.lang.String pembuat) {
-        soap.CategorySoap_Service service = new soap.CategorySoap_Service();
-        soap.CategorySoap port = service.getCategorySoapPort();
+    public  int addNewestCoordinator(java.lang.String pembuat) {
+        wsdl.CategorySoap.CategorySoap_Service service = new wsdl.CategorySoap.CategorySoap_Service();
+        wsdl.CategorySoap.CategorySoap port = service.getCategorySoapPort();
         return port.addNewestCoordinator(pembuat);
-    }
+    }    
 }

@@ -83,11 +83,11 @@ public class UserRest extends HttpServlet {
         if (matcher.find()) {
             UserDao userDao = new UserDao();
             Collection<User> result = userDao.getUserSearch(matcher.group(1), Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)));
-            if (result.size() > 0) {
+//            if (result.size() > 0) {
                 out.print(new JSONArray(result));
-            } else {
-                out.print(Helper.QUERY_RESULT_NOT_FOUND);
-            }
+//            } else {
+//                out.print(Helper.QUERY_RESULT_NOT_FOUND);
+//            }
             return;
         }
         matcher = regexUserNames.matcher(pathInfo);

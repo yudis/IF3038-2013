@@ -19,7 +19,7 @@ public class DataAccessObject {
 
     
     public DataAccessObject() {
-        ServerURL="http://dolist.ap01.aws.af.cm/";
+        ServerURL="http://progin.ap01.aws.af.cm/";
     }
     
     public DataAccessObject(String URL) {

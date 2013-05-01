@@ -64,6 +64,7 @@ public class TugasRest extends HttpServlet {
                 TugasDao tugasDao = new TugasDao();
                 Tugas tugas = tugasDao.getTugas(Integer.parseInt(matcher.group(1)),Boolean.valueOf(matcher.group(2)),Boolean.valueOf(matcher.group(3)),Boolean.valueOf(matcher.group(4)));
                 out.print(tugas.toJsonObject());
+                System.out.println("tugas"+tugas.toJsonObject());
                 return;
             }
             

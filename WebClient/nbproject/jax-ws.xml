@@ -2,10 +2,10 @@
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services/>
   <clients>
-    <client name="CategorySoap">
-      <wsdl-url>http://localhost:8080/Todolist-WebService/CategorySoap?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_8080/Todolist-WebService/CategorySoap.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">soap</package-name>
+    <client name="CategorySoap_2">
+      <wsdl-url>http://progin.ap01.aws.af.cm/CategorySoap?wsdl</wsdl-url>
+      <local-wsdl-file>progin.ap01.aws.af.cm/CategorySoap.wsdl</local-wsdl-file>
+      <package-name forceReplace="true">wsdl.CategorySoap</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -18,7 +18,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8081/Todolist-WebService/CategorySoap?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://progin.ap01.aws.af.cm/CategorySoap?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -30,14 +30,14 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>soap</wsimport-option-value>
+          <wsimport-option-value>wsdl.CategorySoap</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>
-    <client name="UserSoap">
-      <wsdl-url>http://localhost:8080/Todolist-WebService/UserSoap?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_8080/Todolist-WebService/UserSoap.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">UserSoap</package-name>
+    <client name="UserSoap_2">
+      <wsdl-url>http://progin.ap01.aws.af.cm/UserSoap?wsdl</wsdl-url>
+      <local-wsdl-file>progin.ap01.aws.af.cm/UserSoap.wsdl</local-wsdl-file>
+      <package-name forceReplace="true">wsdl.UserSoap</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -50,7 +50,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8081/Todolist-WebService/UserSoap?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://progin.ap01.aws.af.cm/UserSoap?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -62,46 +62,14 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>UserSoap</wsimport-option-value>
-        </wsimport-option>
-      </wsimport-options>
-    </client>
-    <client name="CommentSoap">
-      <wsdl-url>http://localhost:8080/Todolist-WebService/CommentSoap?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_8080/Todolist-WebService/CommentSoap.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">CommentSoap</package-name>
-      <catalog-file>catalog.xml</catalog-file>
-      <wsimport-options>
-        <wsimport-option>
-          <wsimport-option-name>extension</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>verbose</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8081/Todolist-WebService/CommentSoap?wsdl</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>xnocompile</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>xendorsed</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>CommentSoap</wsimport-option-value>
+          <wsimport-option-value>wsdl.UserSoap</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>
     <client name="TugasSoap">
-      <wsdl-url>http://localhost:8080/Todolist-WebService/TugasSoap?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_8080/Todolist-WebService/TugasSoap.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">TugasSoap</package-name>
+      <wsdl-url>http://progin.ap01.aws.af.cm/TugasSoap?wsdl</wsdl-url>
+      <local-wsdl-file>progin.ap01.aws.af.cm/TugasSoap.wsdl</local-wsdl-file>
+      <package-name forceReplace="true">soap.TugasSoap</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -114,7 +82,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8081/Todolist-WebService/TugasSoap?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://progin.ap01.aws.af.cm/TugasSoap?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -126,7 +94,39 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>TugasSoap</wsimport-option-value>
+          <wsimport-option-value>soap.TugasSoap</wsimport-option-value>
+        </wsimport-option>
+      </wsimport-options>
+    </client>
+    <client name="CommentSoap">
+      <wsdl-url>http://progin.ap01.aws.af.cm/CommentSoap?wsdl</wsdl-url>
+      <local-wsdl-file>progin.ap01.aws.af.cm/CommentSoap.wsdl</local-wsdl-file>
+      <package-name forceReplace="true">soap.CommentSoap</package-name>
+      <catalog-file>catalog.xml</catalog-file>
+      <wsimport-options>
+        <wsimport-option>
+          <wsimport-option-name>extension</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>verbose</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>wsdlLocation</wsimport-option-name>
+          <wsimport-option-value>http://progin.ap01.aws.af.cm/CommentSoap?wsdl</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xnocompile</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xendorsed</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>package</wsimport-option-name>
+          <wsimport-option-value>soap.CommentSoap</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>

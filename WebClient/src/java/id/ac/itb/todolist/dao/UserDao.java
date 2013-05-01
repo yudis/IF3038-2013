@@ -142,10 +142,9 @@ public class UserDao extends DataAccessObject {
     // rest/user/search/w/0/3
         ArrayList<User> result = new ArrayList<User>();
         try {
-            HttpURLConnection htc = getConnection("/rest/user/search/" + URLEncoder.encode(Id, "UTF-8") + "/" + start + "/" + n);
+            HttpURLConnection htc = getConnection("rest/user/search/" + URLEncoder.encode(Id, "UTF-8") + "/" + start + "/" + n);
             htc.setRequestMethod("GET");
 
-            result=new ArrayList<User>();
             JSONArray ja = new JSONArray(new JSONTokener(htc.getInputStream()));
             for (int i = 0; i < ja.length(); i++) {
                 User user = new User();
@@ -157,11 +156,11 @@ public class UserDao extends DataAccessObject {
         }
             
         return result;
-    }       
+    }    
 
     public int addUser(User user) {
-        UserSoap.UserSoap_Service service = new UserSoap.UserSoap_Service();
-        UserSoap.UserSoap port = service.getUserSoapPort();
+        wsdl.UserSoap.UserSoap_Service service = new wsdl.UserSoap.UserSoap_Service();
+        wsdl.UserSoap.UserSoap port = service.getUserSoapPort();
         return port.addUser(user.toJsonObject().toString());
     }
     

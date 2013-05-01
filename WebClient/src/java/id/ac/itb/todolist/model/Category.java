@@ -58,6 +58,7 @@ public class Category extends JSONModel {
     public void fromJsonObject(JSONObject jObject) {
         this.id = jObject.getInt("id");
         this.nama = jObject.getString("nama");
+        System.out.println(this.nama);
         this.lastMod = java.sql.Timestamp.valueOf(jObject.getString("lastMod"));
     }
 }

@@ -2,8 +2,8 @@ package id.ac.itb.todolist.ajax;
 
 import id.ac.itb.todolist.dao.CommentDao;
 import id.ac.itb.todolist.dao.TugasDao;
-import id.ac.itb.todolist.json.JSONArray;
-import id.ac.itb.todolist.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import id.ac.itb.todolist.model.Comment;
 import id.ac.itb.todolist.model.User;
 import java.io.IOException;

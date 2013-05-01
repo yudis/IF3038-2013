@@ -86,8 +86,9 @@ public class CommentDao extends DataAccessObject {
     }
 
     public int addComment(Comment comment) {
-        CommentSoap.CommentSoap_Service service = new CommentSoap.CommentSoap_Service();
-        CommentSoap.CommentSoap port = service.getCommentSoapPort();
+        soap.CommentSoap.CommentSoap_Service service = new soap.CommentSoap.CommentSoap_Service();
+        soap.CommentSoap.CommentSoap port = service.getCommentSoapPort();
         return port.addComment(comment.toJsonObject().toString());
     }
+    
 }

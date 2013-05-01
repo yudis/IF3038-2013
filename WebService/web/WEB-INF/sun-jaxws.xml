@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints version="2.0" xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime">
+  <endpoint implementation="id.ac.itb.todolist.soap.CategorySoap" name="CategorySoap" url-pattern="/CategorySoap"/>
+  <endpoint implementation="id.ac.itb.todolist.soap.TugasSoap" name="TugasSoap" url-pattern="/TugasSoap"/>
+  <endpoint implementation="id.ac.itb.todolist.soap.CommentSoap" name="CommentSoap" url-pattern="/CommentSoap"/>
+  <endpoint implementation="id.ac.itb.todolist.soap.UserSoap" name="UserSoap" url-pattern="/UserSoap"/>
+</endpoints>

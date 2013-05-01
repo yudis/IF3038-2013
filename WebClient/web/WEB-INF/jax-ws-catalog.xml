@@ -8,4 +8,8 @@
     <system systemId="http://localhost:8080/Todolist-WebService/CommentSoap?xsd=1" uri="wsdl/localhost_8080/Todolist-WebService/CommentSoap.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/Todolist-WebService/TugasSoap?wsdl" uri="wsdl/localhost_8080/Todolist-WebService/TugasSoap.wsdl"/>
     <system systemId="http://localhost:8080/Todolist-WebService/TugasSoap?xsd=1" uri="wsdl/localhost_8080/Todolist-WebService/TugasSoap.xsd_1.xsd"/>
+    <system systemId="http://progin.ap01.aws.af.cm/TugasSoap?wsdl" uri="wsdl/progin.ap01.aws.af.cm/TugasSoap.wsdl"/>
+    <system systemId="http://progin.ap01.aws.af.cm:80/TugasSoap?xsd=1" uri="wsdl/progin.ap01.aws.af.cm_80/TugasSoap.xsd_1.xsd"/>
+    <system systemId="http://progin.ap01.aws.af.cm/CommentSoap?wsdl" uri="wsdl/progin.ap01.aws.af.cm/CommentSoap.wsdl"/>
+    <system systemId="http://progin.ap01.aws.af.cm:80/CommentSoap?xsd=1" uri="wsdl/progin.ap01.aws.af.cm_80/CommentSoap.xsd_1.xsd"/>
 </catalog>

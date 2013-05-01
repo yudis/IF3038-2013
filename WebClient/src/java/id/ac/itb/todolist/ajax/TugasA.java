@@ -60,11 +60,14 @@ public class TugasA extends HttpServlet {
 					out.println("<div>");
 						out.println("Tags: ");
 						out.println("<ul class=\"tag\">");
+                                                if(result.get(i).getTags()!=null)
+                                                {
 							for (int n = 0; n < result.get(i).getTags().size(); n++)
 							{
 								out.println("<li>"+result.get(i).getTags().toArray()[n].toString()+"</li>");
 							}
-						out.println("</ul>");
+                                                }
+                                                out.println("</ul>");
 					out.println("</div>");   
 					if(!result.get(i).isStatus())
 						{
@@ -91,10 +94,13 @@ public class TugasA extends HttpServlet {
 					out.println("<div>");
 						out.println("Tags: ");
 						out.println("<ul class=\"tag\">");
-							for (int n = 0; n < result.get(i).getTags().size(); n++)
-							{
-								out.println("<li>"+result.get(i).getTags().toArray()[n].toString()+"</li>");
-							}
+							if(result.get(i).getTags()!=null)
+                                                        {
+                                                                for (int n = 0; n < result.get(i).getTags().size(); n++)
+                                                                {
+                                                                        out.println("<li>"+result.get(i).getTags().toArray()[n].toString()+"</li>");
+                                                                }
+                                                        }
 						out.println("</ul>");
 					out.println("</div>");   
 					if(!result.get(i).isStatus())
@@ -128,9 +134,12 @@ public class TugasA extends HttpServlet {
                                             out.println("<div>");
                                                     out.println("Tags: ");
                                                     out.println("<ul class=\"tag\">");
-                                                            for (int n = 0; n < result.get(i).getTags().size(); n++)
+                                                            if(result.get(i).getTags()!=null)
                                                             {
-                                                                    out.println("<li>"+result.get(i).getTags().toArray()[n].toString()+"</li>");
+                                                                    for (int n = 0; n < result.get(i).getTags().size(); n++)
+                                                                    {
+                                                                            out.println("<li>"+result.get(i).getTags().toArray()[n].toString()+"</li>");
+                                                                    }
                                                             }
                                                     out.println("</ul>");
                                             out.println("</div>");   
@@ -159,9 +168,12 @@ public class TugasA extends HttpServlet {
                                             out.println("<div>");
                                                     out.println("Tags: ");
                                                     out.println("<ul class=\"tag\">");
-                                                            for (int n = 0; n < result.get(i).getTags().size(); n++)
+                                                            if(result.get(i).getTags()!=null)
                                                             {
-                                                                    out.println("<li>"+result.get(i).getTags().toArray()[n].toString()+"</li>");
+                                                                    for (int n = 0; n < result.get(i).getTags().size(); n++)
+                                                                    {
+                                                                            out.println("<li>"+result.get(i).getTags().toArray()[n].toString()+"</li>");
+                                                                    }
                                                             }
                                                     out.println("</ul>");
                                             out.println("</div>");   

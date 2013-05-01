@@ -69,15 +69,17 @@ public class TugasDao extends DataAccessObject {
 
     public boolean isAvailable(int idTugas) {
         // GET
-        // /rest/tugas/isa/[id]        
+        // /rest/tugas/[id]/0/0/0     
 
         try {
             HttpURLConnection htc = getConnection("rest/tugas/" + idTugas+ "/0/0/0");
             htc.setRequestMethod("GET");
 
             Tugas tmp = new Tugas();
+            
+            
             tmp.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
-
+            System.out.println("nama"+tmp.getNama());
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -258,6 +260,7 @@ public class TugasDao extends DataAccessObject {
                 tugas.fromJsonObject(ja.getJSONObject(i));
                 result.add(tugas);
             }
+            System.out.println("test :"+ja.toString());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -312,26 +315,25 @@ public class TugasDao extends DataAccessObject {
     }
 
     public int addAssignee(int idTugas, java.lang.String username) {
-        TugasSoap.TugasSoap_Service service = new TugasSoap.TugasSoap_Service();
-        TugasSoap.TugasSoap port = service.getTugasSoapPort();
+        soap.TugasSoap.TugasSoap_Service service = new soap.TugasSoap.TugasSoap_Service();
+        soap.TugasSoap.TugasSoap port = service.getTugasSoapPort();
         return port.addAssignee(idTugas, username);
     }
 
     public int addAttachment(int idTugas, java.lang.String name, java.lang.String filename, java.lang.String type) {
-        TugasSoap.TugasSoap_Service service = new TugasSoap.TugasSoap_Service();
-        TugasSoap.TugasSoap port = service.getTugasSoapPort();
+        soap.TugasSoap.TugasSoap_Service service = new soap.TugasSoap.TugasSoap_Service();
+        soap.TugasSoap.TugasSoap port = service.getTugasSoapPort();
         return port.addAttachment(idTugas, name, filename, type);
     }
 
-    public int addTag(int idTugas, java.lang.String tag) {
-        TugasSoap.TugasSoap_Service service = new TugasSoap.TugasSoap_Service();
-        TugasSoap.TugasSoap port = service.getTugasSoapPort();
+      public int addTag(int idTugas, java.lang.String tag) {
+        soap.TugasSoap.TugasSoap_Service service = new soap.TugasSoap.TugasSoap_Service();
+        soap.TugasSoap.TugasSoap port = service.getTugasSoapPort();
         return port.addTag(idTugas, tag);
     }
 
-    public int addTugas(java.lang.String nama, java.lang.String deadline, java.lang.String pemilik, int idKategori) {
-        TugasSoap.TugasSoap_Service service = new TugasSoap.TugasSoap_Service();
-        TugasSoap.TugasSoap port = service.getTugasSoapPort();
+    public int addTugas(java.lang.String nama, java.lang.String deadline, java.lang.String pemilik, int idKategori) {soap.TugasSoap.TugasSoap_Service service = new soap.TugasSoap.TugasSoap_Service();
+        soap.TugasSoap.TugasSoap port = service.getTugasSoapPort();
         return port.addTugas(nama, deadline, pemilik, idKategori);
     }
     
