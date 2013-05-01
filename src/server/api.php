@@ -59,6 +59,18 @@
 					$n = $request[1];
 					catTask($n);
 					break;
+				//search result
+				case 'auto_complete_search':
+					$data = $request[1];
+					//echo json_encode("Masuk auto.");
+					autocompletesearch($data);
+					break;
+				case 'search':
+					$cari = $request[1];
+					$filter = $request[2];
+					echo json_encode("Masuk cari.");
+					//search($cari, $filter);
+					break;
 				default:
 					echo json_encode("Masuk Else.");
 					break;
