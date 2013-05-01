@@ -59,6 +59,15 @@ public class SOAPAddTask extends HttpServlet {
             int startTag = xmlrpc.indexOf("<tname>");
             int endTag   = xmlrpc.indexOf("</tname>");
             String task_name = xmlrpc.substring(startTag,endTag).replaceAll("<tname>","");
+            /*startTag = xmlrpc.indexOf("<tattach1>");
+            endTag   = xmlrpc.indexOf("</tattach1>");
+            String attachment1 = xmlrpc.substring(startTag,endTag).replaceAll("<tattach1>","");
+            startTag = xmlrpc.indexOf("<tattach2>");
+            endTag   = xmlrpc.indexOf("</tattach2>");
+            String attachment2 = xmlrpc.substring(startTag,endTag).replaceAll("<tattach2>","");
+            startTag = xmlrpc.indexOf("<tattach3>");
+            endTag   = xmlrpc.indexOf("</tattach3>");
+            String attachment3 = xmlrpc.substring(startTag,endTag).replaceAll("<tattach3>","");*/
             startTag = xmlrpc.indexOf("<tdeadline>");
             endTag   = xmlrpc.indexOf("</tdeadline>");
             String task_deadline = xmlrpc.substring(startTag,endTag).replaceAll("<tdeadline>","");
@@ -82,8 +91,9 @@ public class SOAPAddTask extends HttpServlet {
                 Statement st = conn.createStatement();
                 st.executeUpdate("INSERT INTO task(task_name, task_status, task_deadline, cat_name, task_creator) VALUES ('" + task_name + "','0','" + task_deadline + "','" + catName + "','" + taskCreator + "')");
 
+                PreparedStatement stmt;
 
-                PreparedStatement stmt = conn.prepareStatement("SELECT task_id FROM task WHERE task_name=? AND cat_name=?");
+                stmt = conn.prepareStatement("SELECT task_id FROM task WHERE task_name=? AND cat_name=?");
                 stmt.setString(1, task_name);
                 stmt.setString(2, catName);
                 ResultSet rs = stmt.executeQuery();
@@ -91,9 +101,30 @@ public class SOAPAddTask extends HttpServlet {
                 while (rs.next()) {
                     taskID = rs.getString("task_id");
                 }
-
-                //Insert Task Attachment
-                /*Part filePart = req.getPart("attachment_file1"); // Retrieves <input type="file" name="file">
+                
+                /*if (!"".equals(attachment1)) {
+                    stmt = conn.prepareStatement("INSERT INTO attachment (att_content, att_task_id) VALUES (?,?)");
+                    stmt.setString(1, attachment1);
+                    stmt.setString(2, taskID);
+                    stmt.executeUpdate();
+                }
+                
+                if (!"".equals(attachment2)) {
+                    stmt = conn.prepareStatement("INSERT INTO attachment (att_content, att_task_id) VALUES (?,?)");
+                    stmt.setString(1, attachment2);
+                    stmt.setString(2, taskID);
+                    stmt.executeUpdate();
+                }
+                
+                if (!"".equals(attachment3)) {
+                    stmt = conn.prepareStatement("INSERT INTO attachment (att_content, att_task_id) VALUES (?,?)");
+                    stmt.setString(1, attachment3);
+                    stmt.setString(2, taskID);
+                    stmt.executeUpdate();
+                }*/
+                
+                /*//Insert Task Attachment
+                Part filePart = req.getPart("attachment_file1"); // Retrieves <input type="file" name="file">
                 String filename = "";
                 filename = getFilename(filePart);
                 String dir = "uploads/" + filename;

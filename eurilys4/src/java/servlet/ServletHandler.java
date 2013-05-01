@@ -470,6 +470,23 @@ public class ServletHandler extends HttpServlet {
         else if (req.getParameter("type").equalsIgnoreCase("add_task")) {
             String task_name = req.getParameter("task_name_input");
             //attachment
+            /*Part filePart1 = req.getPart("attachment_file1");
+            Part filePart2 = req.getPart("attachment_file1");
+            Part filePart3 = req.getPart("attachment_file1");
+            System.out.println("file Part 1 : " + filePart1);
+            System.out.println("file Part 2 : " + filePart2);
+            System.out.println("file Part 3 : " + filePart3);
+            String attachment1 = "img/attachment/attachment1" + FileManager.getExtension(FileManager.getFilename(filePart1));
+            String attachment2 = "img/attachment/attachment2" + FileManager.getExtension(FileManager.getFilename(filePart2));
+            String attachment3 = "img/attachment/attachment3" + FileManager.getExtension(FileManager.getFilename(filePart3));
+            String filePath1 = getServletContext().getRealPath("/") + attachment1;
+            String filePath2 = getServletContext().getRealPath("/") + attachment2;
+            String filePath3 = getServletContext().getRealPath("/") + attachment3;
+            
+            attachment1 = URLEncoder.encode(attachment1, "UTF-8");
+            attachment2 = URLEncoder.encode(attachment2, "UTF-8");
+            attachment3 = URLEncoder.encode(attachment3, "UTF-8");*/
+            //
             String task_deadline = req.getParameter("deadline_input");
             String assigneeList = req.getParameter("assignee_input");
             String tagList = req.getParameter("tag_input");
@@ -494,6 +511,9 @@ public class ServletHandler extends HttpServlet {
                         "<SOAP-ENV:Envelope>"+
                             "<SOAP-ENV:Body>"+
                                 "<tname>"+task_name+"</tname>"+
+                                /*"<tattach1>"+attachment1+"</tattach1>"+
+                                "<tattach2>"+attachment2+"</tattach2>"+
+                                "<tattach3>"+attachment3+"</tattach3>"+*/
                                 "<tdeadline>"+task_deadline+"</tdeadline>"+
                                 "<tassignee>"+assigneeList+"</tassignee>"+
                                 "<ttag>"+tagList+"</ttag>"+
