@@ -36,6 +36,8 @@ public class Create extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         
+        System.out.println("assigneeI : " + request.getParameter("assigneeI"));
+        
         if (session.getAttribute("user") != null) {
             UserDao userDao = new UserDao();
             User currentUser = (User) session.getAttribute("user");
@@ -44,11 +46,11 @@ public class Create extends HttpServlet {
             try {
                 int newestId = tugas.addTugas(request.getParameter("namatask"), request.getParameter("deadline"), currentUser.getUsername(), Integer.parseInt(request.getParameter("namakategori")));
 
+                
                 String[] assigneeArr = request.getParameter("assigneeI").split("[ ,]+");
-                tugas.addAssignee(newestId, currentUser.getUsername());
                 for (int i = 0; i < assigneeArr.length; i++) {
-                    if (!assigneeArr[i].equals(currentUser.getUsername()) && userDao.isAvailableUsername(assigneeArr[i])) {
-                        tugas.addAssignee(newestId, assigneeArr[i]);
+                    if (!assigneeArr[i].equals(currentUser.getUsername())) {
+                        System.out.println("- add: " + assigneeArr[i] + " -> " + tugas.addAssignee(newestId, assigneeArr[i]));
                     }
                 }
 
