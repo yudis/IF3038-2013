@@ -1,7 +1,7 @@
 <html>
 
 	<?php
-		include '../header/index.php';
+		include '../header.php';
 	?>
     <head>
         <title> Next : Dashboard</title>
