@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+        *** GENERATED FROM jax-ws.xml - DO NOT EDIT !                             ***
+        *** TO MODIFY wsimport options USE Web Service node -> Edit WS Attributes ***
+        *** TO CHANGE TARGETS GENERATED TO jaxws-build.xml COPY THOSE             ***
+        *** TARGETS TO ../build.xml AND MODIFY THAT FILE INSTEAD                  ***
+
+        --><project xmlns:xalan="http://xml.apache.org/xslt" xmlns:webproject2="http://www.netbeans.org/ns/web-project/2" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <!--
+                ===================
+                JAX-WS WSGEN SECTION
+                ===================
+            -->
+    <!--
+                ===================
+                JAX-WS WSIMPORT SECTION
+                ===================
+            -->
+    <target name="wsimport-init" depends="init">
+        <fail if="${wsimport.bad.version}" message="WsImport ant task defined in the classpath ${j2ee.platform.wsimport.classpath} has a serious bug. See http://wiki.netbeans.org/MetroIssue for details."/>
+        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
+        <property name="j2ee.platform.wsimport.classpath" value="${libs.jaxws21.classpath}"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${java.home}/../lib/tools.jar:${j2ee.platform.wsimport.classpath}:${javac.classpath}"/>
+        </taskdef>
+        <condition property="conf-dir" value="${conf.dir}/" else="">
+            <isset property="conf.dir"/>
+        </condition>
+    </target>
+    <target name="wsimport-client-CategorySoap_2" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/CategorySoap_2"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/CategorySoap_2" destdir="${build.generated.dir}/jax-wsCache/CategorySoap_2" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/CategorySoap_2/wsdl/progin.ap01.aws.af.cm/CategorySoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://progin.ap01.aws.af.cm/CategorySoap?wsdl" xnocompile="true" xendorsed="true" package="wsdl.CategorySoap">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/CategorySoap_2/wsdl/progin.ap01.aws.af.cm/CategorySoap.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/CategorySoap_2"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/CategorySoap_2">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-CategorySoap_2" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/wsdl/CategorySoap"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/CategorySoap_2"/>
+    </target>
+    <target name="wsimport-client-UserSoap_2" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/UserSoap_2"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/UserSoap_2" destdir="${build.generated.dir}/jax-wsCache/UserSoap_2" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/UserSoap_2/wsdl/progin.ap01.aws.af.cm/UserSoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://progin.ap01.aws.af.cm/UserSoap?wsdl" xnocompile="true" xendorsed="true" package="wsdl.UserSoap">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/UserSoap_2/wsdl/progin.ap01.aws.af.cm/UserSoap.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/UserSoap_2"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/UserSoap_2">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-UserSoap_2" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/wsdl/UserSoap"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/UserSoap_2"/>
+    </target>
+    <target name="wsimport-client-TugasSoap" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/TugasSoap"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TugasSoap" destdir="${build.generated.dir}/jax-wsCache/TugasSoap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/TugasSoap/wsdl/progin.ap01.aws.af.cm/TugasSoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://progin.ap01.aws.af.cm/TugasSoap?wsdl" xnocompile="true" xendorsed="true" package="soap.TugasSoap">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/TugasSoap/wsdl/progin.ap01.aws.af.cm/TugasSoap.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/TugasSoap"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/TugasSoap">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-TugasSoap" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/soap/TugasSoap"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/TugasSoap"/>
+    </target>
+    <target name="wsimport-client-CommentSoap" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/CommentSoap"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/CommentSoap" destdir="${build.generated.dir}/jax-wsCache/CommentSoap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/CommentSoap/wsdl/progin.ap01.aws.af.cm/CommentSoap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" wsdlLocation="http://progin.ap01.aws.af.cm/CommentSoap?wsdl" xnocompile="true" xendorsed="true" package="soap.CommentSoap">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/CommentSoap/wsdl/progin.ap01.aws.af.cm/CommentSoap.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/CommentSoap"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/CommentSoap">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-CommentSoap" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/soap/CommentSoap"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/CommentSoap"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-CategorySoap_2, wsimport-client-UserSoap_2, wsimport-client-TugasSoap, wsimport-client-CommentSoap"/>
+</project>
