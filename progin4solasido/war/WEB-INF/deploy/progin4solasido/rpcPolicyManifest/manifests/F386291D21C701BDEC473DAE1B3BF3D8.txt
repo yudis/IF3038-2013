@@ -1,0 +1,2 @@
+serviceClass: com.progin4solasido.client.GreetingService
+path: D428D2FF74D2B936844F7D5E7C8322A7.gwt.rpc
