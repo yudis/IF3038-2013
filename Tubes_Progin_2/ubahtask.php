@@ -36,7 +36,7 @@
 			mysqli_query($con,$sqlassignee);
 			//insert ke kategori
 			$sqljoincat = "REPLACE INTO joincategory SET username='$array_assignee[$i]', id_cat='$id_cat'";
-			mysqli_query($con,$sqljoincat)
+			mysqli_query($con,$sqljoincat);
 		}
 	
 	$tag = $_POST['tag'];

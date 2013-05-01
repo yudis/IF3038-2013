@@ -1,6 +1,9 @@
 <?php
-	$username = $_SESSION['username'];
+	// $username = $_SESSION['username'];
 	require "config.php";
+	require "request.php";
+	$username = "ArieDoank";
+	$user = json_decode(SendRequest("http://localhost/_tubes4/profile?username=$username", 'GET', array()), true);
 	$sql = "SELECT * FROM user WHERE username = '$username'";
 	$user = mysqli_query($con,$sql);
 	$current_user = mysqli_fetch_array($user);

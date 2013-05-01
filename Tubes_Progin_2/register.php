@@ -7,7 +7,7 @@
 	$password = $_POST['regpassword1'];
 	$email = $_POST['regemail'];
 	$target = "img/".$username.$_FILES["regfile"]["name"];
-	move_uploaded_file($_FILES["regfile"]["tmp_name"],$target);	
+	move_uploaded_file($_FILES["regfile"]["tmp_name"],$target);
 	$insert_sql = "INSERT INTO `user`(`username`, `fullname`, `avatar`, `birthday`, `email`, `password`) VALUES ('$username','$fullname', '$target', '$dob', '$email', '$password')";
 	mysqli_query($con,$insert_sql);
 	$_SESSION['username'] = $username;
