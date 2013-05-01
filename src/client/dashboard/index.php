@@ -1,7 +1,7 @@
 <html>
 
 	<?php
-		include '../header.php';
+		include '../header/index.php';
 	?>
     <head>
         <title> Next : Dashboard</title>
@@ -35,7 +35,7 @@
                     </div>
                     <div id="cattitle">ADD CATEGORY</div>
                     <div id="elcategory">
-                        <form action="dashboard.php">
+                        <form action="#">
                             <label>category name</label>
                             <input name="catname" placeholder="category name">
                             <label>assignee</label>
