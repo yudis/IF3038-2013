@@ -14,12 +14,6 @@
                     <img id="tutorial_image" src="img/eurilys_comic.png" alt="tutorial_pic"/>
                 </div>
                 <div id="tutorial">
-                    <%
-                    service.dbConnection dbConnector = new dbConnection();
-                    Connection con = dbConnector.getConnection();
-                    %>
-                    con : <%= con %> <br>
-                    
                     <span class="red"> Eurilys </span> is an online to-do-list website which is so easy to use, user-friendly, and the most important 
                     of all, it's completely <span class="blue">FREE</span>!
                     <br>

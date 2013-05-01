@@ -9,8 +9,8 @@
     <!-- Navigation Bar -->        
     <%@include file="navigation_bar.jsp"%>
     <%
-        URL userDetailURL = new URL("http://localhost:8084/eurilys4-service/user/user_detail?username=" + session.getAttribute("username"));
-        //URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/user/user_detail?username=" + session.getAttribute("username"));
+        //URL userDetailURL = new URL("http://localhost:8084/eurilys4-service/user/user_detail?username=" + session.getAttribute("username"));
+        URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/user/user_detail?username=" + session.getAttribute("username"));
         HttpURLConnection userDetailConn = (HttpURLConnection) userDetailURL.openConnection();
         userDetailConn.setRequestMethod("GET");
         userDetailConn.setRequestProperty("Accept", "application/json");

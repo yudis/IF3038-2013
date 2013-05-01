@@ -7,8 +7,8 @@
         
         <%
             String username = (String) session.getAttribute("username");
-            URL taskURL = new URL("http://localhost:8084/eurilys4-service/task/all_task?username=" + session.getAttribute("username"));
-            //URL taskURL = new URL("http://eurilys.ap01.aws.af.cm/task/all_task?username=" + session.getAttribute("username"));
+            //URL taskURL = new URL("http://localhost:8084/eurilys4-service/task/all_task?username=" + session.getAttribute("username"));
+            URL taskURL = new URL("http://eurilys.ap01.aws.af.cm/task/all_task?username=" + session.getAttribute("username"));
             HttpURLConnection taskConn = (HttpURLConnection) taskURL.openConnection();
             taskConn.setRequestMethod("GET");
             taskConn.setRequestProperty("Accept", "application/json");

@@ -18,8 +18,8 @@
     ResultSet search_result = null;
     
     if (type.equals("user")) {
-        URL userDetailURL = new URL("http://localhost:8084/eurilys4/user/user_detail?username=" + q);
-        //URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/user/user_detail?username=" + q);
+        //URL userDetailURL = new URL("http://localhost:8084/eurilys4/user/user_detail?username=" + q);
+        URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/user/user_detail?username=" + q);
         HttpURLConnection userDetailConn = (HttpURLConnection) userDetailURL.openConnection();
         userDetailConn.setRequestMethod("GET");
         userDetailConn.setRequestProperty("Accept", "application/json");
@@ -52,8 +52,8 @@
     else
     if (type.equals("category")) {
         //call search/category?id=
-        URL searchURL = new URL("http://localhost:8084/eurilys4/search/category?id=" + q);
-        //URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/search/category?id=" + q);
+        //URL searchURL = new URL("http://localhost:8084/eurilys4/search/category?id=" + q);
+        URL searchURL = new URL("http://eurilys.ap01.aws.af.cm/search/category?id=" + q);
         HttpURLConnection searchConn = (HttpURLConnection) searchURL.openConnection();
         searchConn.setRequestMethod("GET");
         searchConn.setRequestProperty("Accept", "application/json");

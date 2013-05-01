@@ -73,8 +73,8 @@ public class ServletHandler extends HttpServlet {
             String username = req.getParameter("login_username");
             String password = req.getParameter("login_password");
             
-            URL url = new URL("http://localhost:8084/eurilys4-service/user/login_check?login_username="+username+"&login_password="+password);
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/user/login_check?login_username="+username+"&login_password="+password);
+            //URL url = new URL("http://localhost:8084/eurilys4-service/user/login_check?login_username="+username+"&login_password="+password);
+            URL url = new URL("http://eurilys.ap01.aws.af.cm/user/login_check?login_username="+username+"&login_password="+password);
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
             httpConn.setRequestProperty("Accept", "application/json");
@@ -89,10 +89,14 @@ public class ServletHandler extends HttpServlet {
             } 
             httpConn.disconnect();
             
+            //out.println("Output : " + outputObject);
+            
             String[] output_parts = outputObject.split(",");
             String fullname = output_parts[0]; 
+            //String avatar = "";
             String avatar = output_parts[1]; 
-
+            
+            
             if ("failed".equals(outputObject)) {
                 //Login gagal
                 resp.sendRedirect("index.jsp?login_status=failed");
@@ -398,8 +402,8 @@ public class ServletHandler extends HttpServlet {
             String assigneeList = URLEncoder.encode(req.getParameter("edit_task_assignee"), "UTF-8");
             String tagList = URLEncoder.encode(req.getParameter("edit_task_tag"), "UTF-8");
             
-            URL url = new URL("http://localhost:8084/eurilys4-service/task/update_task?edit_task_id="+taskID+"&edit_task_deadline="+deadline+"&edit_task_assignee="+assigneeList+"&edit_task_tag="+tagList);
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/task/update_task?edit_task_id="+taskID+"&edit_task_deadline="+deadline+"&edit_task_assignee="+assigneeList+"&edit_task_tag="+tagList);
+            //URL url = new URL("http://localhost:8084/eurilys4-service/task/update_task?edit_task_id="+taskID+"&edit_task_deadline="+deadline+"&edit_task_assignee="+assigneeList+"&edit_task_tag="+tagList);
+            URL url = new URL("http://eurilys.ap01.aws.af.cm/task/update_task?edit_task_id="+taskID+"&edit_task_deadline="+deadline+"&edit_task_assignee="+assigneeList+"&edit_task_tag="+tagList);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -437,8 +441,8 @@ public class ServletHandler extends HttpServlet {
             avatar = URLEncoder.encode(avatar, "UTF-8");
             fullname = URLEncoder.encode(fullname, "UTF-8");
             
-            URL url = new URL("http://localhost:8084/eurilys4-service/user/update_profile?username="+user_name+"&password="+password+"&fullname="+fullname+"&birthdate="+birthdate+"&avatar="+avatar);
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/user/update_profile?username="+user_name+"&password="+password+"&fullname="+fullname+"&birthdate="+birthdate+"&avatar="+avatar);
+            //URL url = new URL("http://localhost:8084/eurilys4-service/user/update_profile?username="+user_name+"&password="+password+"&fullname="+fullname+"&birthdate="+birthdate+"&avatar="+avatar);
+            URL url = new URL("http://eurilys.ap01.aws.af.cm/user/update_profile?username="+user_name+"&password="+password+"&fullname="+fullname+"&birthdate="+birthdate+"&avatar="+avatar);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -494,8 +498,8 @@ public class ServletHandler extends HttpServlet {
             HttpSession session = req.getSession(true);
             String taskCreator = (String) session.getAttribute("username");
 
-            String server = "http://localhost:8084/eurilys4-service/SOAPAddTask";
-            //String service = "http://eurilys.ap01.aws.af.cm/SOAPAddTask";
+            //String server = "http://localhost:8084/eurilys4-service/SOAPAddTask";
+            String server = "http://eurilys.ap01.aws.af.cm/SOAPAddTask";
             
             try {
                 //DEFINE CONNECTION.
@@ -579,8 +583,8 @@ public class ServletHandler extends HttpServlet {
             String taskID = req.getParameter("task_id");
             PrintWriter out = resp.getWriter();
 
-            URL url = new URL("http://localhost:8084/eurilys4-service/task/finish_task?task_id="+taskID);
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/task/finish_task?task_id="+taskID);
+            //URL url = new URL("http://localhost:8084/eurilys4-service/task/finish_task?task_id="+taskID);
+            URL url = new URL("http://eurilys.ap01.aws.af.cm/task/finish_task?task_id="+taskID);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -603,8 +607,8 @@ public class ServletHandler extends HttpServlet {
             String taskID = req.getParameter("task_id");
             PrintWriter out = resp.getWriter();
 
-            URL url = new URL("http://localhost:8084/eurilys4-service/task/delete_task?task_id="+taskID);
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/task/delete_task?task_id="+taskID);
+            //URL url = new URL("http://localhost:8084/eurilys4-service/task/delete_task?task_id="+taskID);
+            URL url = new URL("http://eurilys.ap01.aws.af.cm/task/delete_task?task_id="+taskID);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -625,8 +629,8 @@ public class ServletHandler extends HttpServlet {
         //Delete Comment
         else if (req.getParameter("type").equalsIgnoreCase("delete_comment")) {
             String commentID = req.getParameter("comment_id");
-            URL url = new URL("http://localhost:8084/eurilys4-service/task/delete_comment?comment_id="+commentID);
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/task/delete_comment?comment_id="+commentID);
+            //URL url = new URL("http://localhost:8084/eurilys4-service/task/delete_comment?comment_id="+commentID);
+            URL url = new URL("http://eurilys.ap01.aws.af.cm/task/delete_comment?comment_id="+commentID);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -648,8 +652,8 @@ public class ServletHandler extends HttpServlet {
         //Delete Category
         else if (req.getParameter("type").equalsIgnoreCase("delete_category")) {
             String categoryID = req.getParameter("category_id");
-            URL url = new URL("http://localhost:8084/eurilys4-service/category/delete?category_id="+categoryID);
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/category/delete?category_id="+categoryID);
+            //URL url = new URL("http://localhost:8084/eurilys4-service/category/delete?category_id="+categoryID);
+            URL url = new URL("http://eurilys.ap01.aws.af.cm/category/delete?category_id="+categoryID);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -679,8 +683,8 @@ public class ServletHandler extends HttpServlet {
             String categoryName = req.getParameter("category_name");
             categoryName = URLEncoder.encode(categoryName);
             
-            URL url = new URL("http://localhost:8084/eurilys4-service/task/get_category_task?category_name="+categoryName);
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/task/get_category_task?category_name="+categoryName);
+            //URL url = new URL("http://localhost:8084/eurilys4-service/task/get_category_task?category_name="+categoryName);
+            URL url = new URL("http://eurilys.ap01.aws.af.cm/task/get_category_task?category_name="+categoryName);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -705,8 +709,8 @@ public class ServletHandler extends HttpServlet {
             String keyword = req.getParameter("keyword");
             String filter = req.getParameter("filter");
             
-            URL url = new URL("http://localhost:8084/eurilys4-service/search/result?keyword="+keyword+"&filter="+filter);
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/search/result?keyword="+keyword+"&filter="+filter);
+            //URL url = new URL("http://localhost:8084/eurilys4-service/search/result?keyword="+keyword+"&filter="+filter);
+            URL url = new URL("http://eurilys.ap01.aws.af.cm/search/result?keyword="+keyword+"&filter="+filter);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -730,8 +734,8 @@ public class ServletHandler extends HttpServlet {
             PrintWriter out = resp.getWriter();
             String keyword = req.getParameter("keyword");
             
-            URL url = new URL("http://localhost:8084/eurilys4-service/user/autocomplete?keyword="+keyword);
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/user/autocomplete?keyword="+keyword);
+            //URL url = new URL("http://localhost:8084/eurilys4-service/user/autocomplete?keyword="+keyword);
+            URL url = new URL("http://eurilys.ap01.aws.af.cm/user/autocomplete?keyword="+keyword);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -755,8 +759,8 @@ public class ServletHandler extends HttpServlet {
             String userID = req.getParameter("user_id");
             PrintWriter out = resp.getWriter();
             
-            URL url = new URL("http://localhost:8084/eurilys4-service/task/delete_assignee?task_id="+taskID+"&username="+userID);
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/task/delete_assignee?task_id="+taskID+"&username="+userID);
+            //URL url = new URL("http://localhost:8084/eurilys4-service/task/delete_assignee?task_id="+taskID+"&username="+userID);
+            URL url = new URL("http://eurilys.ap01.aws.af.cm/task/delete_assignee?task_id="+taskID+"&username="+userID);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
@@ -781,8 +785,8 @@ public class ServletHandler extends HttpServlet {
             
             PrintWriter out = resp.getWriter();
             
-            URL url = new URL("http://localhost:8084/eurilys4-service/task/delete_tag?tag_name="+tagName+"&task_id="+taskID);
-            //URL url = new URL("http://eurilys.ap01.aws.af.cm/task/delete_tag?tag_name="+tagName+"&task_id="+taskID);
+            //URL url = new URL("http://localhost:8084/eurilys4-service/task/delete_tag?tag_name="+tagName+"&task_id="+taskID);
+            URL url = new URL("http://eurilys.ap01.aws.af.cm/task/delete_tag?tag_name="+tagName+"&task_id="+taskID);
 
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");

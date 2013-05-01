@@ -50,8 +50,8 @@
 <section>
         <%@include file="navigation_bar.jsp"%>
 	<%
-            URL userDetailURL = new URL("http://localhost:8084/eurilys4-service/user/user_detail?username=" + session.getAttribute("username"));
-            //URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/user/user_detail?username=" + session.getAttribute("username"));
+            //URL userDetailURL = new URL("http://localhost:8084/eurilys4-service/user/user_detail?username=" + session.getAttribute("username"));
+            URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/user/user_detail?username=" + session.getAttribute("username"));
             HttpURLConnection userDetailConn = (HttpURLConnection) userDetailURL.openConnection();
             userDetailConn.setRequestMethod("GET");
             userDetailConn.setRequestProperty("Accept", "application/json");
@@ -72,7 +72,6 @@
             String fullname = userDetailroot.getString("fullname");
             String birthdate = userDetailroot.getString("birthdate");
             String email = userDetailroot.getString("email");
-            String avatar = userDetailroot.getString("avatar");
         %>
     <div id="dynamic_content">
         <div class="half_div">
@@ -100,8 +99,8 @@
             <div class="half_tall">
                 <div class="headsdeh">Current Tasks</div>
                 <%
-                    URL currentTaskURL = new URL("http://localhost:8084/eurilys4-service/user/current_task?username=" + session.getAttribute("username"));
-                    //URL currentTaskURL = new URL("http://eurilys.ap01.aws.af.cm/user/current_task?username=" + session.getAttribute("username"));
+                    //URL currentTaskURL = new URL("http://localhost:8084/eurilys4-service/user/current_task?username=" + session.getAttribute("username"));
+                    URL currentTaskURL = new URL("http://eurilys.ap01.aws.af.cm/user/current_task?username=" + session.getAttribute("username"));
                     HttpURLConnection currentTaskConn = (HttpURLConnection) currentTaskURL.openConnection();
                     currentTaskConn.setRequestMethod("GET");
                     currentTaskConn.setRequestProperty("Accept", "application/json");
@@ -133,8 +132,8 @@
             <div class="half_tall">
                 <div class="headsdeh">Finished Tasks</div>
                 <%
-                    currentTaskURL = new URL("http://localhost:8084/eurilys4-service/user/finished_task?username=" + session.getAttribute("username"));
-                    //currentTaskURL = new URL("http://eurilys.ap01.aws.af.cm/user/finished_task?username=" + session.getAttribute("username"));
+                    //currentTaskURL = new URL("http://localhost:8084/eurilys4-service/user/finished_task?username=" + session.getAttribute("username"));
+                    currentTaskURL = new URL("http://eurilys.ap01.aws.af.cm/user/finished_task?username=" + session.getAttribute("username"));
                     currentTaskConn = (HttpURLConnection) currentTaskURL.openConnection();
                     currentTaskConn.setRequestMethod("GET");
                     currentTaskConn.setRequestProperty("Accept", "application/json");

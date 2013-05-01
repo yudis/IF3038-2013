@@ -9,8 +9,8 @@
 
 <%
     String user_name = (String) session.getAttribute("username");
-    URL url = new URL("http://localhost:8084/eurilys4-service/category/get_list?username=" + session.getAttribute("username"));
-    //URL url = new URL("http://eurilys.ap01.aws.af.cm/category/get_list?username=" + session.getAttribute("username"));
+    //URL url = new URL("http://localhost:8084/eurilys4-service/category/get_list?username=" + session.getAttribute("username"));
+    URL url = new URL("http://eurilys.ap01.aws.af.cm/category/get_list?username=" + session.getAttribute("username"));
     HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
     httpConn.setRequestMethod("GET");
     httpConn.setRequestProperty("Accept", "application/json");

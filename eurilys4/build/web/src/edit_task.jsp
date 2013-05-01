@@ -15,8 +15,8 @@
         <div class='taskDetail'>
             <%
                 String taskID = (String) request.getParameter("task_id");                            
-                URL taskDetailURL = new URL("http://localhost:8084/eurilys4-service/task/task_detail?task_id=" + taskID);
-                //URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/task/task_detail?task_id=" + taskID);
+                //URL taskDetailURL = new URL("http://localhost:8084/eurilys4-service/task/task_detail?task_id=" + taskID);
+                URL userDetailURL = new URL("http://eurilys.ap01.aws.af.cm/task/task_detail?task_id=" + taskID);
                 HttpURLConnection taskDetailConn = (HttpURLConnection) taskDetailURL.openConnection();
                 taskDetailConn.setRequestMethod("GET");
                 taskDetailConn.setRequestProperty("Accept", "application/json");
