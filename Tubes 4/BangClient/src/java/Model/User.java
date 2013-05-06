@@ -4,6 +4,8 @@
  */
 package Model;
 
+import org.json.JSONObject;
+
 /**
  *
  * @author Nicholas Rio
@@ -24,6 +26,15 @@ public class User {
         this.avatar = avatar;
         this.dob = dob;
         this.password = password;
+    }
+    
+    public User (JSONObject jsonObj) {
+        this.username = jsonObj.getString("username");
+        this.fullname = jsonObj.getString("fullname");
+        this.email = jsonObj.getString("email");
+        this.avatar = jsonObj.getString("avatar");
+        this.dob = jsonObj.getString("dob");
+        this.password = jsonObj.getString("password");
     }
     
     public String getUsername() {

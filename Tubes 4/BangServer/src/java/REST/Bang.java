@@ -10,6 +10,7 @@ import Model.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,6 +48,8 @@ public class Bang extends HttpServlet {
     private Pattern rgEditTaskDetail = Pattern.compile("^/editTaskDetail/([\\w._%].*)/([0-9]{1,})");
     private Pattern rgSaveTaskDetail = Pattern.compile("^/saveTaskDetail/([0-9]{1,})/([0-9]{1,})");
     PrintWriter out;
+    private Pattern rgGetAllUser = Pattern.compile("^/getAllUser/([\\w._%].*)");
+    private Pattern rgGetAllTag = Pattern.compile("^/getAllTag/([\\w._%].*)");
 
     public Bang() {
         super();
@@ -138,7 +141,20 @@ public class Bang extends HttpServlet {
 
             matcher = rgSaveTaskDetail.matcher(pathInfo);
             if (matcher.find()) {
+                System.out.println("Save Task Detail");
                 saveTaskDetail(matcher, request);
+                return;
+            }
+
+            matcher = rgGetAllUser.matcher(pathInfo);
+            if (matcher.find()) {
+                getAllUser(matcher);
+                return;
+            }
+
+            matcher = rgGetAllTag.matcher(pathInfo);
+            if (matcher.find()) {
+                getAllTag(matcher);
                 return;
             }
 
@@ -148,33 +164,43 @@ public class Bang extends HttpServlet {
         }
     }
 
+    private void getAllUser(Matcher m) {
+        String code = m.group(1);
+
+        ArrayList<User> users = new ArrayList<User>(userOp.FetchUserForSearch(code));
+
+        JSONObject result = new JSONObject();
+        for (int i = 0; i < users.size(); i++) {
+            result.put("User " + Integer.toString(i), users.get(i).toJSONObject());
+        }
+
+        out.println(result);
+    }
+
+    private void getAllTag(Matcher m) {
+        String code = m.group(1);
+
+        ArrayList<String> tags = new ArrayList<String>(tagOp.FetchTagForSearch(code));
+
+        JSONObject result = new JSONObject();
+        for (int i = 0; i < tags.size(); i++) {
+            result.put("Tag " + Integer.toString(i), tags.get(i));
+        }
+
+        out.println(result);
+    }
+
     private void showCategoryList(Matcher m) {
         String username = m.group(1);
         ArrayList<Category> categories = new ArrayList<Category>(joinOp.GetCategByUsername(username));
         ArrayList<Integer> creator = new ArrayList<Integer>();
 
-        for (Category categ : categories) {
-            if (username.equals(categ.getCateg_creator())) {
-                creator.add(1);
-            } else {
-                creator.add(0);
-            }
-        }
-
-        JSONObject categElmt = new JSONObject();
+        JSONObject result = new JSONObject();
         JSONObject temp;
         for (int i = 0; i < categories.size(); i++) {
             temp = categories.get(i).toJSONObject();
-            categElmt.put("Category " + Integer.toString(i), temp);
+            result.put("Category " + Integer.toString(i), temp);
         }
-        JSONObject creatorElmt = new JSONObject();
-        for (int i = 0; i < categories.size(); i++) {
-            creatorElmt.put("IsCategCreator " + categories.get(i).getId_category(), creator.get(i));
-        }
-
-        JSONObject result = new JSONObject();
-        result.put("Categories", categElmt);
-        result.put("IsCategCreators", creatorElmt);
 
         out.println(result);
     }
@@ -192,7 +218,7 @@ public class Bang extends HttpServlet {
             taskOp.DeleteById(taskId);
         }
 
-        ucrelationOp.DeleteByCategId(categId, username);
+        ucrelationOp.DeleteByCategId(categId);
         caurelationOp.DeleteCaurelationByCategId(categId);
         categoryOp.DeleteCategoryById(categId);
     }
@@ -201,10 +227,9 @@ public class Bang extends HttpServlet {
         String username = m.group(1);
         String categId = m.group(2);
 
-        JSONObject result = new JSONObject();
-
         ArrayList<Task> tasks = new ArrayList<Task>(joinOp.GetTasksByUsernameAndCategoryId(username, categId));
 
+        JSONObject tasksElmt = new JSONObject();
         JSONObject taskElmt;
         JSONObject tagsElmt;
         JSONObject resultElmt;
@@ -228,11 +253,20 @@ public class Bang extends HttpServlet {
             resultElmt.put("Task Detail", taskElmt);
             resultElmt.put("Tags", tagsElmt);
 
-            result.put("Task " + Integer.toString(i), resultElmt);
+            tasksElmt.put("Task " + Integer.toString(i), resultElmt);
         }
 
-        if (caurelationOp.FetchAuthUsersByCategId(categId).contains(username)) {
-            result.put("IsAuthUser", true);
+        JSONObject result = new JSONObject();
+        result.put("Tasks", tasksElmt);
+
+        if (Integer.parseInt(categId) > 0) {
+            if (caurelationOp.FetchAuthUsersByCategId(categId).contains(username)) {
+                result.put("IsAuthUser", true);
+            } else {
+                result.put("IsAuthUser", false);
+            }
+        } else {
+            result.put("IsAuthUser", false);
         }
 
         out.println(result);
@@ -247,6 +281,8 @@ public class Bang extends HttpServlet {
         } else if (newStatus.equals("1")) {
             taskOp.UpdateStatusWithId("T", taskId);
         }
+
+        out.println(taskOp.SelectById(taskId).getStatus());
     }
 
     private void deleteTask(Matcher m) {
@@ -266,7 +302,7 @@ public class Bang extends HttpServlet {
             if (!user.equals(username)) {
                 temp = new ArrayList<Task>(joinOp.GetTasksByUsernameAndCategoryId(user, curCategId));
                 if (temp.isEmpty()) {
-                    ucrelationOp.DeleteByCategId(curCategId, username);
+                    ucrelationOp.DeleteByCategIdAndUsername(curCategId, username);
                 }
             }
         }
@@ -282,50 +318,69 @@ public class Bang extends HttpServlet {
         String curCategId = m.group(2);
         String taskId = m.group(3);
 
-        utrelationOp.DeleteByTaskId(taskId);
+        utrelationOp.DeleteByTaskIdAndUsername(taskId, username);
         ArrayList<Task> temp = new ArrayList<Task>(joinOp.GetTasksByUsernameAndCategoryId(username, curCategId));
         if (temp.isEmpty()) {
-            ucrelationOp.DeleteByCategId(curCategId, username);
+            ucrelationOp.DeleteByCategIdAndUsername(curCategId, username);
         }
     }
 
     private void showTaskDetail(Matcher m) {
         String username = m.group(1);
         String taskId = m.group(2);
-        
-        Task task = taskOp.SelectById(taskId);
-        
-        // ATTACHMENT
 
+        Task task = taskOp.SelectById(taskId);
+
+        ArrayList<Attachment> attachments = joinOp.GetAttachmentFromId_task(task.getId_task());
         ArrayList<String> assignees = utrelationOp.FetchAssigneeByTaskId(task.getId_task());
         ArrayList<Comment> comments = commentOp.FetchCommentByTaskId(task.getId_task());
         ArrayList<String> tags = joinOp.GetTagNamesByTaskId(task.getId_task());
 
         JSONObject taskElmt = task.toJSONObject();
-        // ATTACHMENT
+        JSONObject attachmentElmt = new JSONObject();
+        for (int i = 0; i < attachments.size(); i++) {
+            attachmentElmt.put("Attachment " + Integer.toString(i), attachments.get(i).toJSONObject());
+        }
         JSONObject assigneesElmt = new JSONObject();
         for (int i = 0; i < assignees.size(); i++) {
             assigneesElmt.put("Assignee " + Integer.toString(i), assignees.get(i));
         }
         JSONObject commentsElmt = new JSONObject();
         for (int i = 0; i < comments.size(); i++) {
-            commentsElmt.put("Comment " + Integer.toString(i), comments.get(i));
+            commentsElmt.put("Comment " + Integer.toString(i), comments.get(i).toJSONObject());
         }
         JSONObject tagsElmt = new JSONObject();
         for (int i = 0; i < tags.size(); i++) {
-            tagsElmt.put("Tags " + Integer.toString(i), tags.get(i));
+            tagsElmt.put("Tag " + Integer.toString(i), tags.get(i));
         }
-        
+
+        ArrayList<String> tempArray = new ArrayList<String>();
+        JSONObject avatarElmt = new JSONObject();
+        JSONObject temp;
+        String tempUser;
+        for (int i = 0; i < comments.size(); i++) {
+            tempUser = (userOp.SelectUserInfoByUsername(comments.get(i).getUsername())).getAvatar();
+            if (!tempArray.contains(comments.get(i).getUsername())) {
+                tempArray.add(comments.get(i).getUsername());
+                temp = new JSONObject();
+                temp.put("Username", comments.get(i).getUsername());
+                temp.put("Avatar", tempUser);
+                avatarElmt.put("User " + Integer.toString(i), temp);
+            }
+        }
+
         JSONObject result = new JSONObject();
         result.put("Task Detail", taskElmt);
         result.put("Assignees", assigneesElmt);
+        result.put("Attachments", attachmentElmt);
         result.put("Comments", commentsElmt);
         result.put("Tags", tagsElmt);
-        
-        if (utrelationOp.IsTaskEditable(username, taskId)){
+        result.put("User Avatars", avatarElmt);
+
+        if (utrelationOp.IsTaskEditable(username, taskId)) {
             result.put("IsEditable", true);
         }
-        
+
         out.println(result);
     }
 
@@ -344,7 +399,7 @@ public class Bang extends HttpServlet {
         }
         JSONObject tagsElmt = new JSONObject();
         for (int i = 0; i < tags.size(); i++) {
-            tagsElmt.put("Tags " + Integer.toString(i), tags.get(i));
+            tagsElmt.put("Tag " + Integer.toString(i), tags.get(i));
         }
 
         JSONObject result = new JSONObject();
@@ -356,8 +411,8 @@ public class Bang extends HttpServlet {
             result.put("creator", true);
             result.put("assignee", false);
         } else if (utrelationOp.FetchAssigneeByTaskId(task.getId_task()).contains(username)) {
-            result.put("assignee", true);
             result.put("creator", false);
+            result.put("assignee", true);
         }
 
         out.println(result);
@@ -367,82 +422,83 @@ public class Bang extends HttpServlet {
         String taskId = m.group(1);
         String categId = m.group(2);
 
-        StringBuilder sb = new StringBuilder();
+        System.out.println("taskId = " + taskId);
+        System.out.println("categId = " + categId);
+        
+        StringBuilder jb = new StringBuilder();
         String line = null;
         try {
-            BufferedReader br = request.getReader();
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
+            BufferedReader reader = request.getReader();
+            while ((line = reader.readLine()) != null) {
+                jb.append(line);
             }
-        } catch (Exception e) {
+        } catch (Exception e) { //report an error }
             e.getMessage();
         }
 
-        try {
-            JSONObject jsonObj = new JSONObject(sb.toString());
+        ArrayList<String> newAssignees = new ArrayList<String>();
+        ArrayList<String> newTags = new ArrayList<String>();
+        
+        JSONObject jsonObject = new JSONObject(jb.toString());
+        String deadline = jsonObject.getString("Deadline");
+        JSONObject assignees = jsonObject.getJSONObject("Assignees");
+        for (int i = 0; i < assignees.length(); i++) {
+            newAssignees.add(assignees.getString("Assignee " + Integer.toString(i)));
+        }
+        JSONObject tags = jsonObject.getJSONObject("Tags");
+        for (int i = 0; i < tags.length(); i++) {
+            newTags.add(tags.getString("Tag " + Integer.toString(i)));
+        }
 
-            String deadline = jsonObj.getString("deadline");
-            JSONObject assignees = jsonObj.getJSONObject("assignees");
-            JSONObject tags = jsonObj.getJSONObject("tags");
+        System.out.println("newAssignees = " + newAssignees.toString());
+        System.out.println("newTags = " + newTags.toString());
+        System.out.println("deadline = " + deadline);
+        
+        ArrayList<String> oldAssignees = new ArrayList<String>(utrelationOp.FetchAssigneeByTaskId(taskId));
+        ArrayList<String> oldTagIds = new ArrayList<String>(joinOp.GetTagsIdByTaskId(taskId));
+        
+        taskOp.UpdateDeadlineById(deadline, taskId);
+        
+        for (String oldAssignee : oldAssignees) {
+            utrelationOp.DeleteByTaskIdAndUsername(taskId, oldAssignee);
+        }
 
-            ArrayList<String> newAssignees = new ArrayList<String>();
-            for (int i = 0; i < assignees.length(); i++) {
-                newAssignees.add(assignees.getString("Assignee " + Integer.toString(i)));
-            }
+        for (String oldTagId : oldTagIds) {
+            ttrelationOp.DeleteByTagId(oldTagId);
+        }
 
-            ArrayList<String> newTags = new ArrayList<String>();
-            for (int i = 0; i < tags.length(); i++) {
-                newTags.add(tags.getString("Tag " + Integer.toString(i)));
-            }
-
-            ArrayList<String> oldAssignees = new ArrayList<String>(utrelationOp.FetchAssigneeByTaskId(taskId));
-            ArrayList<String> oldTagIds = new ArrayList<String>(joinOp.GetTagsIdByTaskId(taskId));
-
-            taskOp.UpdateDeadlineById(deadline, taskId);
-            for (String oldAssignee : oldAssignees) {
-                utrelationOp.DeleteByTaskIdAndUsername(taskId, oldAssignee);
-            }
-
-            for (String oldTagId : oldTagIds) {
-                ttrelationOp.DeleteByTagId(oldTagId);
-            }
-
-            for (String newAssignee : newAssignees) {
-                if (userOp.ListAllUsernames().contains(newAssignee.trim())) {
-                    utrelationOp.InsertUtrelation(new Utrelation("", taskId, newAssignee.trim()));
-                    if (ucrelationOp.CheckIfUcrelationExists(newAssignee.trim(), categId) == 0) {
-                        ucrelationOp.InsertUcrelation(new Ucrelation("", newAssignee.trim(), categId));
-                    }
+        for (String newAssignee : newAssignees) {
+            if (userOp.ListAllUsernames().contains(newAssignee.trim())) {
+                utrelationOp.InsertUtrelation(new Utrelation("", taskId, newAssignee.trim()));
+                if (ucrelationOp.CheckIfUcrelationExists(newAssignee.trim(), categId) == 0) {
+                    ucrelationOp.InsertUcrelation(new Ucrelation("", newAssignee.trim(), categId));
                 }
             }
+        }
 
-            for (String newTag : newTags) {
-                if (tagOp.CheckIfTagExists(newTag.trim()) == 0) {
-                    tagOp.InsertTag(newTag.trim());
-                }
-                ttrelationOp.InsertTtrelation(new Ttrelation("", taskId, tagOp.SelectIdByName(newTag.trim())));
+        for (String newTag : newTags) {
+            if (tagOp.CheckIfTagExists(newTag.trim()) == 0) {
+                tagOp.InsertTag(newTag.trim());
             }
+            ttrelationOp.InsertTtrelation(new Ttrelation("", taskId, tagOp.SelectIdByName(newTag.trim())));
+        }
 
-            ArrayList<Task> temp;
-            for (String oldAssignee : oldAssignees) {
-                temp = new ArrayList<Task>(joinOp.GetTasksByUsernameAndCategoryId(oldAssignee, categId));
-                if (temp.isEmpty()) {
-                    ucrelationOp.DeleteByCategId(categId, oldAssignee);
-                }
+        ArrayList<Task> temp;
+        for (String oldAssignee : oldAssignees) {
+            temp = new ArrayList<Task>(joinOp.GetTasksByUsernameAndCategoryId(oldAssignee, categId));
+            if (temp.isEmpty()) {
+                ucrelationOp.DeleteByCategIdAndUsername(categId, oldAssignee);
             }
+        }
 
-            for (String oldTagId : oldTagIds) {
-                if (joinOp.CheckTtrelationByTagId(oldTagId) == 0) {
-                    tagOp.DeleteById(oldTagId);
-                }
+        for (String oldTagId : oldTagIds) {
+            if (joinOp.CheckTtrelationByTagId(oldTagId) == 0) {
+                tagOp.DeleteById(oldTagId);
             }
-
-        } catch (Exception e) {
-            e.getMessage();
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.

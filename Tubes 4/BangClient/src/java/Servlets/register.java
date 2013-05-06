@@ -4,8 +4,6 @@
  */
 package Servlets;
 
-import DBOperation.UserOp;
-import Model.User;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,6 +21,7 @@ import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import java.security.MessageDigest;
 import javax.servlet.http.HttpSession;
+import org.json.JSONObject;
 
 /**
  *
@@ -78,7 +77,7 @@ public class register extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {/*
+            throws ServletException, IOException {
         File file;
         String username = "";
         String fullname = "";
@@ -89,7 +88,7 @@ public class register extends HttpServlet {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         String contextRoot = getServletContext().getRealPath("/");
         String filePath = contextRoot + "..\\..\\web\\uploaded\\";
-        System.out.println(filePath);
+        //System.out.println(filePath);
         factory.setRepository(new File(contextRoot + "..\\..\\web\\temp"));
         ServletFileUpload upload = new ServletFileUpload(factory);
         try {
@@ -100,7 +99,7 @@ public class register extends HttpServlet {
                 if (!fi.isFormField()) {
                     String fieldName = fi.getFieldName();
                     fileName = fi.getName();
-                    System.out.println("File name : " + fileName);
+                    //System.out.println("File name : " + fileName);
                     if (fileName.lastIndexOf("\\") >= 0) {
                         file = new File(filePath
                                 + fileName.substring(fileName.lastIndexOf("\\")));
@@ -137,17 +136,39 @@ public class register extends HttpServlet {
                     }
                 }
             }
-            UserOp UO = new UserOp();
-            UO.InsertUser(username,fullname,fileName,date,email,password);
+            JSONObject newuser = new JSONObject();
+            newuser.put("username", username);
+            newuser.put("fullname",fullname);
+            newuser.put("filename", fileName);
+            newuser.put("date", date);
+            newuser.put("email", email);
+            newuser.put("password", password);
+            
+            // BUAT SOAP USER //
+            try {
+                soapuserClient.UserSoap_Service service = new soapuserClient.UserSoap_Service();
+                soapuserClient.UserSoap port = service.getUserSoapPort();
+                java.lang.String result = port.hello(newuser.toString());
+                PrintWriter out = response.getWriter();
+                out.println("Result = "+result);
+            } catch (Exception ex) {
+                // TODO handle custom exceptions here
+            }
+            //UserOp UO = new UserOp();
+            //UO.InsertUser(username,fullname,fileName,date,email,password);
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
+            session.setAttribute("fullname", fullname);
+            session.setAttribute("avatar", "uploaded/"+fileName);
+            session.setAttribute("dob", date);
+            session.setAttribute("email", email);
             response.sendRedirect("dashboard.jsp");
             //request.getRequestDispatcher("dashboard.jsp").forward(request, response);
         } catch (FileUploadException ex) {
             Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }
 
     /**

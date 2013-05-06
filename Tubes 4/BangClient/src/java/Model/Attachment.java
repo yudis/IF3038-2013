@@ -4,6 +4,8 @@
  */
 package Model;
 
+import org.json.JSONObject;
+
 /**
  *
  * @author dell
@@ -16,6 +18,11 @@ public class Attachment {
     public Attachment(String id_attachment, String path) {
         this.id_attachment = id_attachment;
         this.path = path;
+    }
+    
+    public Attachment(JSONObject jsonObj) {
+        this.id_attachment = jsonObj.getString("id_attachment");
+        this.path = jsonObj.getString("path");
     }
 
     public String getId_attachment() {

@@ -941,4 +941,8 @@ public class JSONArray {
             throw new JSONException(e);
         }
     }
+
+    public boolean getString(String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

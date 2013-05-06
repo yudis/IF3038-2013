@@ -4,6 +4,8 @@
  */
 package Model;
 
+import org.json.JSONObject;
+
 /**
  *
  * @author dell
@@ -22,6 +24,14 @@ public class Comment {
         this.username = username;
         this.timestamp = timestamp;
         this.content = content;
+    }
+    
+    public Comment(JSONObject jsonObj) {
+        this.id_comment = jsonObj.getString("id_comment");
+        this.id_task = jsonObj.getString("id_task");
+        this.username = jsonObj.getString("username");
+        this.timestamp = jsonObj.getString("timestamp");
+        this.content = jsonObj.getString("content");
     }
 
     public String getId_comment() {

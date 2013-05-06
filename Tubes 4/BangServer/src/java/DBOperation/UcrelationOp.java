@@ -34,12 +34,23 @@ public class UcrelationOp {
         }
     }
     
-    public void DeleteByCategId (String categId, String username) {
+    public void DeleteByCategIdAndUsername (String categId, String username) {
         try {
             PreparedStatement ps = connection.prepareStatement(
                     "DELETE FROM ucrelation WHERE id_category=? AND username=?");
             ps.setString(1, categId);
             ps.setString(2, username);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+    }
+    
+    public void DeleteByCategId (String categId) {
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    "DELETE FROM ucrelation WHERE id_category=?");
+            ps.setString(1, categId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.getMessage();

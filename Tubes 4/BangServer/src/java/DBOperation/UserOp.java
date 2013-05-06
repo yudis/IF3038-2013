@@ -92,7 +92,7 @@ public class UserOp {
         }
     }
 
-    public void InsertUser(String username, String fullname, String avatar, String dob, String email, String password) {
+    public String InsertUser(String username, String fullname, String avatar, String dob, String email, String password) {
         try {
             PreparedStatement ps = connection.prepareStatement(
                     "INSERT INTO user (username,fullname,avatar,dob,email,password)"
@@ -103,8 +103,10 @@ public class UserOp {
                     + dob + "','" + email + "','" + password + "')");
             ps.execute();
             //ResultSet rs = ps.executeQuery();
+            return "1";
         } catch (SQLException e) {
             e.getMessage();
+            return "0";
         }
     }
 
@@ -148,7 +150,6 @@ public class UserOp {
                     "SELECT * FROM user WHERE username=?");
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
-
             User temp;
             if (rs.next()) {
                 temp = new User(rs.getString("username"), rs.getString("fullname"), rs.getString("email"), rs.getString("avatar"), rs.getString("dob"), rs.getString("password"));

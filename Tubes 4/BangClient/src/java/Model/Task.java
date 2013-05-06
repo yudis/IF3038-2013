@@ -4,6 +4,8 @@
  */
 package Model;
 
+import org.json.JSONObject;
+
 /**
  *
  * @author dell
@@ -72,5 +74,14 @@ public class Task {
         this.status = status;
         this.id_category = id_category;
         this.creator = creator;
+    }
+    
+    public Task(JSONObject jsonObj) {
+        this.id_task = jsonObj.getString("id_task");
+        this.name = jsonObj.getString("name");
+        this.deadline = jsonObj.getString("deadline");
+        this.status = jsonObj.getString("status");
+        this.id_category = jsonObj.getString("id_category");
+        this.creator = jsonObj.getString("creator");
     }
 }

@@ -5,11 +5,15 @@
  */
 package Servlets;
 
-import DBOperation.UserOp;
 import Model.User;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +28,7 @@ import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.json.JSONObject;
 
 /**
  *
@@ -79,7 +84,7 @@ public class EditProfile extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {/*
+            throws ServletException, IOException {
         File file;
         String fullname = "";
         String date = "";
@@ -94,8 +99,6 @@ public class EditProfile extends HttpServlet {
         try {
             HttpSession session = request.getSession(true);
             String username = session.getAttribute("username").toString();
-            UserOp UO = new UserOp();
-            User U = UO.SelectUserInfoByUsername((String)session.getAttribute("username"));
             
             List fileItems = upload.parseRequest(request);
             Iterator i = fileItems.iterator();
@@ -137,16 +140,54 @@ public class EditProfile extends HttpServlet {
                     }
                 }
             }
-            UO.UpdateUser(username,fullname,fileName,date,password);
-            if (    U.getFullname().equals(fullname) && 
-                    U.getAvatar().equals("uploaded/"+fileName) &&
-                    U.getDob().equals(date) &&
-                    U.getPassword().equals(password)
+            URL url = new URL("http://localhost:8080/BangServer/user/editprofil/" + username);
+            //URL url = new URL("http://progin4.ap01.aws.af.cm/user/login/" + username);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Accept", "application/json");
+
+            JSONObject a = new JSONObject();
+            a.put("username", username);
+            a.put("fullname", fullname);
+            a.put("fileName", fileName);
+            a.put("date", date);
+            a.put("password", password);
+            String updateData = a.toString();
+            
+            OutputStream os = conn.getOutputStream();
+            os.write(updateData.getBytes());
+            os.flush();
+            
+            if (conn.getResponseCode() != 200) {
+                    throw new RuntimeException("Failed : HTTP error code : "
+                                    + conn.getResponseCode());
+            }
+
+            BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+            StringBuilder output = new StringBuilder();
+            String test;
+            while ( (test = br.readLine()) != null)
+            {
+               output.append(test);
+            }
+
+            JSONObject result = new JSONObject(output.toString());
+            
+            if (    result.getString("fullname").equals(fullname) && 
+                    result.getString("avatar").equals("uploaded/"+fileName) &&
+                    result.getString("dob").equals(date) &&
+                    result.getString("password").equals(password)
                 )
             {
                 session.setAttribute("message","No changes have been made");
             } else {
                 session.setAttribute("message","Successfully Done");
+                session.setAttribute("username", result.getString("username"));
+                session.setAttribute("fullname", result.getString("fullname"));
+                session.setAttribute("avatar", result.getString("avatar"));
+                session.setAttribute("dob", result.getString("dob"));
+                session.setAttribute("email", result.getString("email"));
             }
             response.sendRedirect("profile.jsp");
             //request.getRequestDispatcher("profile.jsp").forward(request, response);
@@ -154,7 +195,7 @@ public class EditProfile extends HttpServlet {
             Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }
 
     /**

@@ -1,0 +1,60 @@
+/* 
+    Document   : resultpage
+    Created on : Apr 13, 2013, 12:20:01 PM
+    Author     : Compaq
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#wall{
+    width: 1000px;
+    height: 500px;
+    position: fixed;
+    left: 100px;
+    top: 100px;
+    overflow-y: scroll;
+    border: solid thin;
+    background-color:rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+#category_wall{
+    width: 800px;
+    background-color:rgba(243, 226, 169, 0.7);
+    margin-left: 80px;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+#user_wall{
+    width: 800px;
+    background-color:rgba(206, 206, 246, 0.7);
+    margin-left: 80px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+#user_wall img{
+    width: 100px;
+    height: 100px;
+}
+#task_wall{
+    width: 800px;
+    background-color:rgba(129, 247, 159, 0.7);
+    margin-left: 80px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+.resulttitle{
+    font-size: 20pt;
+    font-weight: bold;
+    margin-left: 50px;
+}
+.resultelm{
+    width: 700px;
+    border: solid thin;
+    margin-left: 50px;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
