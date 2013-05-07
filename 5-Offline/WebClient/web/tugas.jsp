@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    request.setAttribute("headTags", "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/tugas.css\" /><script src=\"./scripts/tugas.js\" type=\"application/javascript\"></script>");
+    //request.setAttribute("bodyAttrs", "onload=\"onload(" + 1 + ");\"");
+    request.setAttribute("title", "Todolist | Rincian Tugas");
+%>
 <jsp:include page="/WEB-INF/includes/header.inc.jsp" />
                 <h1>Rincian Tugas</h1>
                 <div class="padding12px">
@@ -7,7 +13,6 @@
                     <div class="rincianLabel">Deadline:</div><div class="rincianDetail">
                         <div id="deadlineDisplayDiv" class="inlineblock">Loading...</div>
                         <div id="deadlineEditDiv">
-                            <!-- <input type="date" id="deadline" name="deadline" value="2013-02-22" /> -->
                             <input type="text" id="deadline" name="deadline" placeholder="yyyy-mm-dd" /> <a href="#" onclick="NewCssCal('deadline', 'yyyyMMdd'); return false;"><img src="./images/cal/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
                         </div>
                     </div>
