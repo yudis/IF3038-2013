@@ -1,6 +1,6 @@
 	NIM		|		NAMA		|				MAIL				|		GITHUB_ID		|
 ------------|-------------------|-----------------------------------|-----------------------|
-  13510059	|	Yulianti Oenang	|	13510059@std.stei.itb.ac.id		|	  YuliantiOenang	|
-  13510063	|   Raymond Lukanta	|	13510063@std.stei.itb.ac.id		|	 	rymdemon		|
+  13510059	|	Felix Terahadi	|	13510039@std.stei.itb.ac.id		|	  13510039	|
+  13510063	|   Kevin Winata	|	13510073@std.stei.itb.ac.id		|	 	kevinwinata		|
   13510081	|   Devin Hoesen	|	13510081@std.stei.itb.ac.id		|		  V1nz			|
 ---------------------------------------------------------------------------------------------
