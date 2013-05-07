@@ -48,8 +48,7 @@
                     </div>
                 </nav>
                 <div class="welcomebar">
-                    <% User _currentUser = (User) session.getAttribute("user"); %>
-                    <a href="./profile.jsp"><img src="./images/avatars/<%= _currentUser.getAvatar() %>" alt="<%= _currentUser.getFullName() %>" width="32" height="32" /></a> Hi <strong><%= _currentUser.getFullName() %></strong> (<a href="./profile.jsp"><%= _currentUser.getUsername() %></a>)
+                    <a href="./profile.jsp"><img src="" alt="" width="32" height="32" /></a> Hi <strong></strong> (<a href="./profile.jsp"></a>)
                     </div>
             </header>
             <div class ="content">
