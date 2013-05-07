@@ -1,0 +1,544 @@
+/* 
+    Document   : css
+    Created on : Apr 5, 2013, 7:32:56 AM
+    Author     : Nicholas Rio
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    /*background-image: url('img/Dashboard_bg.jpg');*/
+    font-family: cambria;
+    width: 100%;
+    overflow: hidden;
+}
+
+header {
+    width: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding-top: 10px;
+    height: 35px;
+    position: absolute;
+    background-color: #000000;
+}
+
+header a {
+    color: white;
+    font-style: italic;
+    text-decoration: none;
+}
+
+input.liusername{
+    color: white;
+}
+
+#logo-small {
+    position: absolute;
+    left: 10px;
+    height: 40px;
+    top: 0px;
+}
+
+#foto {
+    position: absolute;
+    top: 50px;
+    width: 20%;
+}
+
+
+#box {
+	width: 120px;
+}
+
+.listTugas {
+    width: 170px;
+    height: 160px;
+    float: left;
+    background-image: url('img/tugas.png');
+    background-size: cover;
+    margin-top:20px;
+    margin-left:20px;
+    padding-top: 80px;
+    padding-left: 30px;
+    background-repeat: no-repeat
+}
+
+.listTugas:hover {
+    width: 170px;
+    height: 160px;
+    float: left;
+    background-image: url('img/tugasHover.png');
+}
+
+.addTask {
+    width: 160px;
+    height: 191px;
+    float: left;
+    background-image: url('img/addTask.png');
+}
+
+.button {
+    height: 20px;
+    padding: 10px;
+    color: white;
+    opacity: 0.6;
+    background-color: black;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    text-indent: 40%;
+}
+
+.kategori {
+    width: 200px;
+    height: 30px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: black;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-bottom: 15px;
+	opacity: 0.8;
+}
+
+.kategori:hover {
+    opacity: 1;
+}
+
+
+
+#category {
+    top: 45px;
+    left: 0;
+    padding-top: 100px;
+    padding-left: 35px;
+    width: 250px;
+    height: 100%;
+    position: absolute;
+    overflow: auto;
+    color: white;
+    font-size: 16pt;
+}
+
+.tugas {
+    font-size: 10pt;
+    position:absolute;
+    border:0px;
+    visibility: hidden;
+    top:0px;
+    left: 500px;
+    padding: 80px 50px 100px;
+    overflow: hidden;
+    width: 480px;
+    height: 100%;
+    z-index:-1;
+    /*background-image: url('img/kertastugas.jpg');*/ 
+    background-size: cover;
+}
+
+#nama {
+    font-size: 14pt;
+    font-style: italic;
+}
+
+.attachment {
+    font-style: italic;
+    color: #5c3e19;
+    padding: 10px;
+}
+
+.tag {
+    font-size: 8pt;
+    color: #5c3e19;
+    text-decoration: none;
+}
+
+.asignee {
+    font-size: 12pt;
+    text-decoration: none;
+    font-weight: bold;
+    color: #5c3e19;
+}
+
+textArea {
+    height: 70px;
+    width: 350px;
+}
+
+#wanted{
+    top: 75px;
+    position:absolute;
+    background-color:transparent;
+    border:0px;
+    left: 220px;
+    margin-left: 100px;
+    width: 350px;
+    height: 443px;
+    visibility: hidden;
+}
+
+.overlay {
+   background-color: #000;
+   opacity: .7;
+   position: fixed; top: 0; left: 0;
+   width: 100%; height: 100%;
+   z-index: 10;
+}
+
+#add {
+  position: absolute;
+  z-index: 1000;
+  left: 380px;
+  top: 200px;
+  display: none;
+  color: white;
+  font-weight: bold;
+  background-color: #261d12;
+  padding: 70px;
+  width: 300px;
+  height: 100px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/*.list{
+    font-size: 12pt;
+    top: 75px;
+    position:absolute;
+    background-color:transparent;
+    border:0px;
+    visibility: hidden;
+    left: 250px;
+    padding: 0px;
+    margin-left: 100px;
+    overflow: auto;
+    width: 850px;
+    height: 603px;
+    visibility: hidden;
+}*/
+
+#listwall {
+    position: fixed;
+    top: 80px;
+    left: 330px;
+    visibility: visible;
+    overflow:auto;
+    width: 920px;
+    height: 600px;
+}
+
+#addCat {
+    font-size: 20pt;
+    color: white;
+    background-color: black;
+    width: 250px;
+    bottom: 0px;
+    left: 0px;
+    height: 50px;
+    padding-top: 5px;
+    position: absolute;
+    padding-left: 35px;
+}
+
+
+/*
+ * INDEX
+ */
+input{
+    font-family: Cambria;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+input[type=submit]{
+    font-weight: bold;
+    padding: 3px 20px;
+}
+#homepage-bg {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+}
+#homepage-header {
+    width: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+    height: 10%;
+    position: fixed;
+    background-color: #000000;
+    box-shadow: 0px 5px 30px #000000;
+    z-index: 5;
+}
+#text-logo {
+    position: fixed;
+    left: 10px;
+    top: 6px;
+}
+
+#login{
+    position: fixed;
+    top: 20px;
+    margin-left: 50%;
+    color:white;
+    font-family: Cambria;
+}
+#login input[type=text]{
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#login input[type=password]{
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#pic-logo {
+    position: fixed;
+    left: 20px;
+    top: 100px;
+    width: 50%;
+    height: 50%;
+}
+#register {
+    position:fixed;
+    top: 28%;
+    left: 60%;
+    line-height: 180%;
+    font-family: Cambria, Georgia, serif;
+}
+#register input{
+    position: fixed;
+    left: 72%;
+}
+#register input[type=submit]{
+    position: fixed;
+    left: 70%;
+}
+#register small{
+    color: red;
+    display: none;
+}
+#register normal{
+    position: relative;
+}
+#register input[type=submit]{
+    color:#777777;
+}
+#register img{
+    position: fixed;
+    top: 10%;
+    left: 57%;
+    height: 90%;
+    width: 35%;
+    z-index: -5;
+}
+#regdate{
+    min: "1955-12-31";
+}
+#fpbackground{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -5000;
+}
+#fpposter{
+    position: fixed;
+    width:450px;
+    height:600px;
+    top:12%;
+    left:55%;
+    z-index: -4000;
+}
+#fplogo{
+    position: fixed;
+    width:40%;
+    top:15%;
+    left:6%;
+    z-index: -3000;
+}
+
+/*DASHBOARD*/
+#dashboard-header{
+    width: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+    height: 68px;
+    position: fixed;
+    background-color: #000000;
+    box-shadow: 0px 5px 30px #000000;
+    z-index: 0;
+}
+#dashboard-header a{
+    padding: 24.5px 10px;
+    color:white;
+    font-family: Cambria;
+    font-weight: bold;
+    text-decoration: none;
+}
+#dashboard-header a:hover{
+    background-color: #333333;
+}
+#profile:hover + #avatarsmall{
+    background-color: #333333;
+}
+#avatarsmall{
+    position: absolute;
+    left: 1005px;
+    padding: 14px 6px;
+    width: 40px;
+    height: 40px;
+}
+#profile {
+    position: absolute;
+    left: 925px;
+    text-align: right;
+}
+#dashboard {
+    position: absolute;
+    left: 1070px;
+}
+#logout {
+    position: absolute;
+    left: 1180px;
+}
+#search {
+    position: absolute;
+    left: 90px;
+}
+
+/*PROFILE*/
+#donelist{
+    position: fixed;
+    left: 65%;
+    top: 12%;
+    box-shadow: 0px 5px 30px #000000;
+    background-image: url('img/donelist.png');
+    padding: 40px;
+    padding-top: 160px;
+    width: 340px;
+    height: 360px;
+    text-decoration:line-through
+}
+#todolist{
+    position: fixed;
+    left: 28%;
+    top: 12%;
+    box-shadow: 0px 5px 30px #000000;
+    padding: 40px;
+    padding-top: 160px;
+    width: 340px;
+    height: 360px;
+    background-image: url('img/todolist.png');
+}
+#panel {
+    /*top: 68px;
+    left: 0;
+    padding-top: 0px;
+    padding-left: 0px;
+    height: 560px;
+    width: 250px;
+    position: absolute;
+    overflow: hidden;
+    color: white;
+    font-size: 16pt;*/
+}
+#panelbg{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 290px;
+    height: 100%;
+    z-index: -5;
+}
+#avatarbig{
+    position: absolute;
+    top: 100px;
+    left: 45px;
+    width: 200px;
+    height: 200px;
+}
+#badge{
+    position: fixed;
+    top: 220px;
+    left: 150px;
+    width: 125px; 
+}
+#biousername{
+    position: fixed;
+    font-weight: bold;
+    font-size: 30pt;
+    top: 350px;
+    color: white;
+}
+#biodata{
+    position: fixed;
+    top: 410px;
+    color: white;
+    font-size: 12pt;
+    line-height: 180%;
+}
+#biodata b{
+    position: fixed;
+    left: 80px;
+}
+#biodata input{
+    position: fixed;
+    left: 90px;
+}
+#bioform{
+    position: fixed;
+    top: 200px;
+    left: 400px;
+    color: white;
+    font-size: 12pt;
+    line-height: 180%;
+    display: none;
+    z-index: 15;
+}
+#popoutbg{
+    top: 200px;
+    left: 400px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    position: fixed;
+    background-color: black;
+    width: 350px;
+    height: 250px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+#popoutovl{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity:0.7;
+    filter:alpha(opacity=70); /* For IE8 and earlier */
+}
+#bioform input{
+    position: relative;
+    float: right;
+}
+#bioform input[type=submit]{
+    position: relative;
+    left: -110px;
+}
+#bioform small{
+    display: none;
+    color: red;
+}
+
+

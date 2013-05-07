@@ -1,0 +1,21 @@
+#wall
+{
+	font-family: Cambria;
+        font-size: 15pt;
+        color: white;
+        text-decoration: #ffffff;
+        padding: 80px 380px;
+        margin-top: 200px;
+        margin-left: 100px;
+        margin-right: 100px;
+        background-color: black;
+        width: 280px;
+        left:0px;
+        top:0px;
+        text-align: center;
+        position: absolute;
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+        opacity: 0.9;
+}

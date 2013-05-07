@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/BangServer/CategorySoap?wsdl" uri="wsdl/localhost_8080/BangServer/CategorySoap.wsdl"/>
+    <system systemId="http://localhost:8080/BangServer/CategorySoap?xsd=1" uri="wsdl/localhost_8080/BangServer/CategorySoap.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/BangServer/TaskSoap?wsdl" uri="wsdl/localhost_8080/BangServer/TaskSoap.wsdl"/>
+    <system systemId="http://localhost:8080/BangServer/TaskSoap?xsd=1" uri="wsdl/localhost_8080/BangServer/TaskSoap.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/BangServer/CommentSoap?wsdl" uri="wsdl/localhost_8080/BangServer/CommentSoap.wsdl"/>
+    <system systemId="http://localhost:8080/BangServer/CommentSoap?xsd=1" uri="wsdl/localhost_8080/BangServer/CommentSoap.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/BangServer/UserSoap?wsdl" uri="wsdl/localhost_8080/BangServer/UserSoap.wsdl"/>
+    <system systemId="http://localhost:8080/BangServer/UserSoap?xsd=1" uri="wsdl/localhost_8080/BangServer/UserSoap.xsd_1.xsd"/>
+</catalog>
