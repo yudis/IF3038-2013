@@ -520,27 +520,6 @@ public class Bang extends HttpServlet {
             // =========================== A D D   T A S K ===========================
         } else if (action.equalsIgnoreCase("addTask")) {
             System.out.println("Add Task Bang Client");
-            String assignees = request.getParameter("newTaskAssignee");
-            String tags = request.getParameter("newTaskTags");
-            String name = request.getParameter("newTaskName");
-            String deadline = request.getParameter("newDeadline");
-                        
-            JSONObject newtsk = new JSONObject();
-            newtsk.put("newTaskAssignee", assignees);
-            newtsk.put("newTaskTags",tags);
-            newtsk.put("newTaskName",name);
-            newtsk.put("newDeadline", deadline);
-            newtsk.put("creator", username);
-            newtsk.put("category", curCategId);
-            
-            try {
-                soaptaskClient.TaskSoap_Service service = new TaskSoap_Service();
-                soaptaskClient.TaskSoap port = service.getTaskSoapPort();
-                java.lang.String result = port.hello(newtsk.toString());
-                out.println(result);
-            } catch (Exception ex) {
-                // TODO handle custom exceptions here
-            }
             
             response.sendRedirect("dashboard.jsp");
             

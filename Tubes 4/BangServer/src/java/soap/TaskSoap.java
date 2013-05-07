@@ -31,12 +31,14 @@ public class TaskSoap {
     public String hello(@WebParam(name = "name") String txt) {
         try {
             JSONObject jtask = new JSONObject(new JSONTokener(txt));
+            String fileName = jtask.getString("fileName");
             String[] assignees = jtask.getString("newTaskAssignee").split(",");
             String[] tags = jtask.getString("newTaskTags").split(",");
             String name = jtask.getString("newTaskName");
             String deadline = jtask.getString("newDeadline");
             String username = jtask.getString("creator");
             String category = jtask.getString("category");
+            String found = jtask.getString("upload");
             String idTask;
 
             Connection con = DBUtil.getConnection();
@@ -85,6 +87,22 @@ public class TaskSoap {
                 rs2.next();
                 System.out.println("haiyaa 3");
                 query = "INSERT INTO ttrelation (id_task, id_tags) VALUES ('" + idTask + "', '" + rs2.getString(1) + "');";
+                ps = con.prepareStatement(query);
+                ps.executeUpdate();
+            }
+            
+            if (found.contentEquals("yse"))
+            {
+                query = "INSERT INTO attachment (path) VALUES ('" + fileName + "');";
+                ps = con.prepareStatement(query);
+                ps.executeUpdate();
+
+                query = "SELECT id_attachment FROM attachment WHERE path='" + fileName + "';";
+                ps = con.prepareStatement(query);
+                rs2 = ps.executeQuery();
+                rs2.next();
+
+                query = "INSERT INTO tarelation (id_task, id_attachment) VALUES ('" + idTask + "', '" + rs2.getString(1) + "');";
                 ps = con.prepareStatement(query);
                 ps.executeUpdate();
             }

@@ -44,11 +44,11 @@
         <div id="popoutovl"></div>
         <div id="add2">
             <div class="tugas" id="buattugas">
-                <form method='POST' onsubmit="addTask();" enctype="multipart/form-data">
-                    <div class="nama">Nama task: <input type="text" id="newTaskName" required
+                <form method='POST' action="addTask.jsp" enctype="multipart/form-data">
+                    <div class="nama">Nama task: <input type="text" name="newTaskName" required
                         pattern='[A-Za-z0-9]{1,25}'></div><br/>
-                    <div class="deadline">Deadline: <input type="date" id='newTaskDeadline' required></div><br/>
-                    <div class="attachment">Attachment: <input type="file" id='newTaskAttach' multiple></div><br/>
+                    <div class="deadline">Deadline: <input type="date" name='newTaskDeadline' required></div><br/>
+                    <div class="attachment">Attachment: <input type="file" name='newTaskAttach' multiple></div><br/>
                     <div class="asignee">Assignee: <input type="text" name='newTaskAssignee'
                         id='newTaskAssignee'
                         onkeyup="multiAutocomp(this, 'getAllUser.jsp');"

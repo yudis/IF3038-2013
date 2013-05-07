@@ -1,3 +1,5 @@
+<%@page import="soaptaskClient.TaskSoap_Service"%>
+<%@page import="org.json.JSONObject"%>
 <%@page import="Servlets.register"%>
 <%@page import="java.util.logging.Logger"%>
 <%@page import="java.util.logging.Level"%>
@@ -14,17 +16,15 @@
 <%
     File file;
     String name = "";
-    String[] asignee;
-    String[] tag;
+    String asignee = "";
+    String tag = "";
     String deadline = "";
     String query = "";
     String idTask = "";
+    String fileName = "";
     String category = session.getAttribute("curCategId").toString();
     String username = session.getAttribute("username").toString();
-
-    Connection con = DBUtil.getConnection();
-    PreparedStatement ps;
-    ResultSet rs1, rs2;
+    boolean found = false;
 
     DiskFileItemFactory factory = new DiskFileItemFactory();
     String contextRoot = getServletContext().getRealPath("/");
@@ -39,9 +39,7 @@
             FileItem fi = (FileItem) i.next();
             System.out.println(fi.getFieldName());
             if (!fi.isFormField()) {
-                System.out.println("not isFormField");
-                System.out.println("idTask 1 = " + idTask);
-                String fileName = fi.getName();
+                fileName = fi.getName();
                 if (fileName.lastIndexOf("\\") >= 0) {
                     fileName = filePath + fileName.substring(fileName.lastIndexOf("\\"));
                 } else {
@@ -51,78 +49,49 @@
                 fi.write(file);
                 System.out.println(fileName);
                 fileName="uploaded/"+fi.getName();
-                query = "INSERT INTO attachment (path) VALUES ('" + fileName + "');";
-                ps = con.prepareStatement(query);
-                ps.executeUpdate();
-                
-                System.out.println("idTask 2 = " + idTask);
-                
-                query = "SELECT id_attachment FROM attachment WHERE path='" + fileName + "';";
-                ps = con.prepareStatement(query);
-                rs2 = ps.executeQuery();
-                rs2.next();
-                
-                System.out.println("idTask 3 = " + idTask);
-
-                query = "INSERT INTO tarelation (id_task, id_attachment) VALUES ('" + idTask + "', '" + rs2.getString(1) + "');";
-                ps = con.prepareStatement(query);
-                ps.executeUpdate();
+                found = true;
             } else {
                 if (fi.getFieldName().equalsIgnoreCase("newTaskName")) {
                     name = fi.getString();
                 } else if (fi.getFieldName().equalsIgnoreCase("newTaskDeadline")) {
                     String[] temp = fi.getString().split("-");
                     deadline = temp[0] + "/" + temp[1] + "/" + temp[2];
-                    query = "INSERT INTO task (name, deadline, status, id_category, creator) VALUES ('"
-                            + name + "', '" + deadline + "', 'F', '" + category + "', '" + username + "');";
-                    ps = con.prepareStatement(query);
-                    ps.executeUpdate();
-
-                    query = "SELECT id_task FROM task WHERE name='" + name + "' AND creator='" + username + "';";
-                        ps = con.prepareStatement(query);
-                        rs1 = ps.executeQuery();
-                        rs1.next();
-                        idTask = rs1.getString(1);
-
-                        query = "INSERT INTO utrelation (username, id_task) VALUES ('" + username + "', '" + rs1.getString(1) + "');";
-                        ps = con.prepareStatement(query);
-                        ps.executeUpdate();
+                    
                 } else if (fi.getFieldName().equalsIgnoreCase("newTaskAssignee")) {
-                    asignee = fi.getString().split(",");
-                    for (int j = 0; j < asignee.length; j++) {
-                        if (asignee[j] != "") {
-                            query = "INSERT INTO utrelation (username, id_task) VALUES ('" + asignee[j] + "', '" + idTask + "');";
-                            ps = con.prepareStatement(query);
-                            ps.executeUpdate();
-                        }
-                    }
+                    asignee = fi.getString();
+                    
                 } else if (fi.getFieldName().equalsIgnoreCase("newTaskTag")) {
-                    System.out.println("haiyaa");
-                    tag = fi.getString().split(",");
-                    for (int j = 0; j < tag.length; j++) {
-                        System.out.println("haiyaa 1");
-                        query = "SELECT name FROM tag WHERE name='" + tag[j] + "'";
-                        ps = con.prepareStatement(query);
-                        rs2 = ps.executeQuery();
-                        if (!rs2.next()) {
-                            System.out.println("haiyaa insert new tag");
-                            query = "INSERT INTO tag (name) VALUES ('" + tag[j] + "');";
-                            ps = con.prepareStatement(query);
-                            ps.executeUpdate();
-                        }
-                        System.out.println("haiyaa 2");
-                        query = "SELECT id_tag FROM tag WHERE name='" + tag[j] + "';";
-                        ps = con.prepareStatement(query);
-                        rs2 = ps.executeQuery();
-                        rs2.next();
-                        System.out.println("haiyaa 3");
-                        query = "INSERT INTO ttrelation (id_task, id_tag) VALUES ('" + idTask + "', '" + rs2.getString(1) + "');";
-                        ps = con.prepareStatement(query);
-                        ps.executeUpdate();
-                    }
+                    tag = fi.getString();
                 }
             }
         }
+        System.out.println("AAAAAAAA");
+        System.out.println(name);
+        System.out.println(deadline);
+        JSONObject newtsk = new JSONObject();
+        newtsk.put("newTaskAssignee", asignee);
+        newtsk.put("newTaskTags",tag);
+        newtsk.put("newTaskName",name);
+        newtsk.put("newDeadline", deadline);
+        newtsk.put("creator", username);
+        newtsk.put("category", category);
+        if (found){
+            newtsk.put("fileName",fileName);
+            newtsk.put("upload","yes");
+        }
+        else {
+            newtsk.put("fileName","");
+            newtsk.put("upload","no");
+        }
+        try {
+            soaptaskClient.TaskSoap_Service service = new TaskSoap_Service();
+            soaptaskClient.TaskSoap port = service.getTaskSoapPort();
+            java.lang.String result = port.hello(newtsk.toString());
+            out.println(result);
+        } catch (Exception ex) {
+            // TODO handle custom exceptions here
+        }
+        
         response.sendRedirect("dashboard.jsp");
     } catch (Exception ex) {
         Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
