@@ -8,8 +8,14 @@ import java.net.Socket;
 import java.sql.Timestamp;
 import id.ac.itb.todolist.model.User;
 import id.ac.itb.todolist.dao.UserDao;
+import java.security.KeyFactory;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Random;
+import javax.crypto.Cipher;
+import javax.crypto.KeyAgreement;
+import javax.crypto.interfaces.DHPublicKey;
+import javax.crypto.spec.SecretKeySpec;
 
 public class ConnectionHandler extends Thread {
 
@@ -42,7 +48,6 @@ public class ConnectionHandler extends Thread {
                  *
                  * SESSION_ID ada pada semua message, kecuali MSG_LOGIN
                  */
-                
                 byte msgType = in.readByte();
                 if (msgType != MSG_LOGIN) {
                     sessionId = in.readLong();
@@ -57,9 +62,40 @@ public class ConnectionHandler extends Thread {
                 }
 
                 if (msgType == MSG_LOGIN) {
-                    String username = in.readUTF();
-                    String password = in.readUTF();
+                    out.writeUTF(Controller.servp.toString());
+                    out.writeUTF(Controller.servg.toString());
 
+                    /////////////////////////////// PKI exchange and convert back
+                    byte[] cliPub = new byte[in.readInt()];
+                    in.readFully(cliPub);
+                    out.writeInt(Controller.servPub.length);
+                    out.write(Controller.servPub);
+                    DHPublicKey servCliPub = (DHPublicKey) KeyFactory.getInstance("DH").generatePublic(new X509EncodedKeySpec(cliPub));
+
+                    /////////////////////////////// Server generates secret
+                    KeyAgreement servKA = KeyAgreement.getInstance("DH");
+                    servKA.init(Controller.servKP.getPrivate(), Controller.servParamSpec);
+                    servKA.doPhase(servCliPub, true);
+                    byte[] servSecret = servKA.generateSecret("AES").getEncoded();
+
+                    ////////////////////////////// Server decrypt using AES
+                    Cipher cServer = Cipher.getInstance("AES");
+                    SecretKeySpec kServer = new SecretKeySpec(servSecret, 0, 16, "AES");
+                    cServer.init(Cipher.DECRYPT_MODE, kServer);
+                    
+                    byte[] encryptedData = new byte[in.readInt()];
+                    in.readFully(encryptedData);
+                    byte[] data = cServer.doFinal(encryptedData);
+                    String username = new String(data);
+
+                    encryptedData = new byte[in.readInt()];
+                    in.readFully(encryptedData);
+                    data = cServer.doFinal(encryptedData);
+                    String password = new String(data);
+                    
+                    System.out.println(username);
+                    System.out.println(password);
+                    
                     UserDao userDao = new UserDao();
                     User user = userDao.getUserLogin(username, password);
                     if (user != null) {

@@ -5,31 +5,56 @@
 package id.ac.itb.todolist.server;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.security.AlgorithmParameterGenerator;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidParameterSpecException;
+import javax.crypto.spec.DHParameterSpec;
 
 public class Controller {
-    
+
     private ServerSocket sockServer;
     
-    public Controller(int port) throws IOException {
+    static DHParameterSpec servParamSpec;
+    static BigInteger servp;
+    static BigInteger servg;
+    static KeyPair servKP;
+    static byte[] servPub;
+
+    public Controller(int port) throws IOException, NoSuchAlgorithmException, InvalidParameterSpecException, InvalidAlgorithmParameterException {
         sockServer = new ServerSocket(port);
+
+        AlgorithmParameterGenerator servAPG = AlgorithmParameterGenerator.getInstance("DH");
+        servAPG.init(512);
+
+        /////////////////////////////// Server generates spec
+        servParamSpec = servAPG.generateParameters().getParameterSpec(DHParameterSpec.class);
+        servp = servParamSpec.getP();
+        servg = servParamSpec.getG();
+
+        /////////////////////////////// Server generates keypair
+        KeyPairGenerator servKPG = KeyPairGenerator.getInstance("DH");
+        servKPG.initialize(servParamSpec);
+        servKP = servKPG.generateKeyPair();
+        servPub = servKP.getPublic().getEncoded();
     }
-    
-    public void start()
-    {
+
+    public void start() {
         while (true) {
             try {
                 Socket sockClient = sockServer.accept();
-                
+
                 Thread thread = new Thread(new ConnectionHandler(sockClient));
                 thread.start();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            
+
         }
     }
 }

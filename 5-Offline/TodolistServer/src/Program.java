@@ -17,7 +17,7 @@ public class Program {
         try {
             Controller controller = new Controller(9000);
             controller.start();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
