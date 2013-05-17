@@ -1,3 +1,7 @@
+/Server/build
+/Server/nbproject/private
+/Server/dist
+
 /Client/dist
 /Client/build
 /Client/nbproject/private
