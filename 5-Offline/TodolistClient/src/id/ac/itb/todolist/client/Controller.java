@@ -15,6 +15,7 @@ import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import javax.crypto.Cipher;
@@ -34,7 +35,7 @@ public class Controller {
     private Socket sockClient;
     private HashMap<Integer, UpdateStatus> lUpdates = new HashMap<>();
     private long sessionId;
-    private List<Tugas> tgsList;
+    public List<Tugas> tgsList = new ArrayList<>();
 
     public long getSessionId() {
         return sessionId;
@@ -140,68 +141,57 @@ public class Controller {
         try {
             DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
             DataInputStream in = new DataInputStream(sockClient.getInputStream());
+            
             out.writeByte(MSG_LIST);
             out.writeLong(sessionId);
-            if (tgsList.size()!= 0)
-            {
-                out.writeInt(tgsList.size());
-                for (int i=0;i< tgsList.size();i++)
-                {
-                    out.writeInt(tgsList.get(i).getId());
-                    out.writeLong(tgsList.get(i).getLastMod().getTime());
-                }
-                for (int i = 0; i< in.readInt();i++)
-                {
-                    int status = in.readInt();
-                    Tugas tugas = new Tugas();
-                    
-                    if (status == 3)
-                    {
-                        tugas.readIn(in);
-                        tgsList.add(tugas);
-                    }
-                    else if (status == 0)
-                    {
-                        int idDel = in.readInt();
-                        int j;
-                        for(j = 0; j< tgsList.size();j++)
-                        {
-                            if (tgsList.get(j).getId() == idDel)
-                            {
-                                break;
-                            }
-                        }
-                        tgsList.remove(j);
-                    }
-                    else if (status == 1)
-                    {
-                        int idUpdate = in.readInt();
-                        int j;
-                        for(j = 0; j< tgsList.size();j++)
-                        {
-                            if (tgsList.get(j).getId() == idUpdate)
-                            {
-                                break;
-                            }
-                        }
-                        tgsList.remove(j);
-                        tugas.readIn(in);
-                        tgsList.add(tugas);
-                    }
-                }
-            }
-            else
-            {
-                out.writeInt(0);
-                
-            }
             
+            out.writeInt(tgsList.size());
+            for (int i = 0; i < tgsList.size(); i++) {
+                out.writeInt(tgsList.get(i).getId());
+                out.writeLong(tgsList.get(i).getLastMod().getTime());
+            }
+
+            int status;
+            do {
+                status = in.readInt();
+                Tugas tugas = new Tugas();
+
+                if (status == 3) { // Add
+                    tugas.readIn(in);
+                    System.out.println("Add: " + tugas);
+                    tgsList.add(tugas);
+                } else if (status == 0) { // Delete
+                    int idDel = in.readInt();
+                    System.out.println("Del: " + idDel);
+                    int j;
+                    for (j = 0; j < tgsList.size(); j++) {
+                        if (tgsList.get(j).getId() == idDel) {
+                            break;
+                        }
+                    }
+                    tgsList.remove(j);
+                } else if (status == 1) { // Update
+                    tugas.readIn(in);
+                    System.out.println("Upd: " + tugas);
+                    int j;
+                    for (j = 0; j < tgsList.size(); j++) {
+                        if (tgsList.get(j).getId() == tugas.getId()) {
+                            break;
+                        }
+                    }
+                    tgsList.remove(j);
+                    tgsList.add(tugas);
+                } else if (status == 2) {
+                    System.out.println("Eqs: " + in.readInt());
+                } else if (status == -1) {
+                    System.out.println("ANEEEEH : " + status);
+                }
+            } while (status != -1);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
     }
-	
+
     public void updateStatus(int idTugas, boolean status) {
         if (lUpdates.containsKey(idTugas)) {
             lUpdates.remove(idTugas);
