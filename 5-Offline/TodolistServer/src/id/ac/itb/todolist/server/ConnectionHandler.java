@@ -4,13 +4,17 @@ import id.ac.itb.todolist.dao.TugasDao;
 import id.ac.itb.todolist.model.UpdateStatus;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.lang.reflect.Array;
 import java.net.Socket;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import id.ac.itb.todolist.model.User;
 import id.ac.itb.todolist.dao.UserDao;
 import java.security.KeyFactory;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import javax.crypto.Cipher;
 import javax.crypto.KeyAgreement;
@@ -21,6 +25,7 @@ public class ConnectionHandler extends Thread {
 
     private static final byte MSG_LOGIN = 0;
     private static final byte MSG_UPDATE = 1;
+	private static final byte MSG_LIST = 2;
     private static final byte MSG_SUCCESS = 127;
     private static final byte MSG_FAILED = -1;
     private static Random random = new Random();
@@ -122,6 +127,28 @@ public class ConnectionHandler extends Thread {
                     }
 
                     out.writeByte(MSG_SUCCESS);
+                }else if (msgType == MSG_LIST){
+                    int jmlTugas = in.readInt();
+                    TugasDao tgsDao = new TugasDao();
+                    HashMap hmlist = new HashMap();
+                    int id;
+                    long timestamp;
+                    for (int i = 0; i< jmlTugas;i++)
+                    {
+                        id = in.readInt();
+                        timestamp = in.readLong();
+                        hmlist.put(id, timestamp);
+                    }
+                    
+                    tgsDao.getAllTugasbyUser((String)hm.get(sessionId));
+                    Iterator it = hmlist.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry pairs = (Map.Entry)it.next();
+                        System.out.println(pairs.getKey() + " = " + pairs.getValue());
+
+                        it.remove(); // avoids a ConcurrentModificationException
+                    }
+                        
                 }
             }
         } catch (Exception ex) {

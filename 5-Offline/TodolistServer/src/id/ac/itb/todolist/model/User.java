@@ -1,9 +1,13 @@
 package id.ac.itb.todolist.model;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import org.json.JSONModel;
 import org.json.JSONObject;
@@ -86,7 +90,17 @@ public class User extends JSONModel {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
-
+    
+    public void writeOut(DataOutputStream out) throws IOException {
+        out.writeUTF(username);
+        out.writeUTF(fullName);
+    }
+    
+    public void readIn(DataInputStream in) throws IOException {
+        username = in.readUTF();
+        fullName = in.readUTF();
+    }
+    
     @Override
     public JSONObject toJsonObject() {
         JSONObject jObject = new JSONObject();
