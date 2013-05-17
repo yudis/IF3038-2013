@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -265,6 +266,21 @@ public class TugasDao extends DataAccessObject {
                     prepareStatement("UPDATE `tugas` SET `status` = ? WHERE `id` = ?;");
             preparedStatement.setBoolean(1, status);
             preparedStatement.setInt(2, idTugas);
+
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+    
+    public int setStatus(int idTugas, boolean status, Timestamp timestamp) {
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("UPDATE `tugas` SET `status` = ?, `last_mod` = ? WHERE `id` = ?;");
+            preparedStatement.setBoolean(1, status);
+            preparedStatement.setTimestamp(2, timestamp);
+            preparedStatement.setInt(3, idTugas);
 
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {

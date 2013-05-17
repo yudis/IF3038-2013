@@ -7,6 +7,7 @@ package id.ac.itb.todolist.model;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -14,7 +15,7 @@ import java.util.Date;
  *
  * @author Edward Samuel
  */
-public class UpdateStatus {
+public class UpdateStatus implements Serializable {
     
     private int idTugas;
     private boolean status;

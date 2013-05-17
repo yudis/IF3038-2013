@@ -1,12 +1,11 @@
 package id.ac.itb.todolist.server;
 
+import id.ac.itb.todolist.dao.TugasDao;
 import id.ac.itb.todolist.model.UpdateStatus;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.lang.reflect.Array;
 import java.net.Socket;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import id.ac.itb.todolist.model.User;
 import id.ac.itb.todolist.dao.UserDao;
 import java.util.HashMap;
@@ -18,7 +17,8 @@ public class ConnectionHandler extends Thread {
     private static final byte MSG_UPDATE = 1;
     private static final byte MSG_SUCCESS = 127;
     private static final byte MSG_FAILED = -1;
-    
+    private static Random random = new Random();
+    private HashMap<Long, String> session = new HashMap<>();
     private Socket sockClient;
 
     public ConnectionHandler(Socket sockClient) {
@@ -27,65 +27,72 @@ public class ConnectionHandler extends Thread {
 
     @Override
     public void run() {
+        long sessionId = -1;
         try {
             DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
             DataInputStream in = new DataInputStream(sockClient.getInputStream());
-            
+
             while (true) {
-                byte msgType = in.readByte();
-                long sessionId = -1;
+
+                /**
+                 * *
+                 * +-------------------+---------------------+------------------
+                 * | MSG_TYPE (1 byte) | SESSION_ID (1 long) | ...
+                 * +-------------------+---------------------+------------------
+                 *
+                 * SESSION_ID ada pada semua message, kecuali MSG_LOGIN
+                 */
                 
+                byte msgType = in.readByte();
                 if (msgType != MSG_LOGIN) {
                     sessionId = in.readLong();
+
+                    synchronized (session) {
+                        if (!session.containsKey(sessionId)) {
+                            out.writeByte(MSG_FAILED);
+                            sockClient.close();
+                            return;
+                        }
+                    }
                 }
-                
+
                 if (msgType == MSG_LOGIN) {
-                    UserDao userDao = new UserDao();
-                    HashMap hm = new HashMap();
-                    boolean mapped = false;
-                    User user =  new User();
                     String username = in.readUTF();
                     String password = in.readUTF();
-                    user = userDao.getUserLogin(username,password);
-                    if (user != null)
-                    {
-                        Random rnd = new Random();
-                        long i = rnd.nextLong();
-                        while (!mapped){
-                            i = rnd.nextInt();
-                            if (!hm.containsKey(i) ){
-                                hm.put(i, username);
-                                mapped = true;
+
+                    UserDao userDao = new UserDao();
+                    User user = userDao.getUserLogin(username, password);
+                    if (user != null) {
+                        synchronized (session) {
+                            long i = random.nextLong();
+                            while (session.containsKey(i)) {
+                                i = random.nextLong();
                             }
-                            
+                            session.put(i, username);
+                            out.writeByte(MSG_SUCCESS);
+                            out.writeLong(i);
+                            System.out.println(session.get(i));
                         }
-                        out.writeBoolean(true);
-                        out.writeLong(i);
-                        System.out.println("session = " + i);
-                        System.out.println(hm.get(i)); 
+                    } else {
+                        out.writeByte(MSG_FAILED);
                     }
-                    else
-                    {
-                        out.writeBoolean(false);
-                    } 
                 } else if (msgType == MSG_UPDATE) {
                     int count = in.readInt();
-                    System.out.println("--- MSG_UPDATE : " + count);
-                    ArrayList<UpdateStatus> lUpdates = new ArrayList<>(count);
-                    
-                    for (int i=0; i<count; i++) {
-                        lUpdates.add(new UpdateStatus(in.readInt(), in.readBoolean(), new Timestamp(in.readLong())));
+
+                    TugasDao tugasDao = new TugasDao();
+                    for (int i = 0; i < count; i++) {
+                        UpdateStatus us = new UpdateStatus(in.readInt(), in.readBoolean(), new Timestamp(in.readLong()));
+                        tugasDao.setStatus(us.getIdTugas(), us.getStatus(), us.getTimestamp());
                     }
-                    
-                    System.out.println(lUpdates);
-                    
+
                     out.writeByte(MSG_SUCCESS);
-                    
-                    System.out.println("DONE");
                 }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
+            synchronized (session) {
+                session.remove(sessionId);
+            }
         }
     }
 }
