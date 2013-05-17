@@ -104,15 +104,42 @@ public class ConnectionHandler extends Thread {
                         hmlist.put(id, timestamp);
                     }
                     
-                    tgsDao.getAllTugasbyUser((String)hm.get(sessionId));
+                    HashMap hmlistquery= tgsDao.getAllTugasbyUser((String)session.get(sessionId));
+                    out.writeInt(hmlistquery.size());
                     Iterator it = hmlist.entrySet().iterator();
                     while (it.hasNext()) {
                         Map.Entry pairs = (Map.Entry)it.next();
-                        System.out.println(pairs.getKey() + " = " + pairs.getValue());
-
-                        it.remove(); // avoids a ConcurrentModificationException
+                        if(hmlistquery.containsKey(pairs.getKey()))
+                        {
+                            if (hmlistquery.get(pairs.getKey()) == pairs.getValue()){
+                                //status 2 tetap sama
+                                out.writeInt(2);
+                                out.writeInt((int)pairs.getKey());
+                                hmlistquery.remove(pairs.getKey());
+                            }else
+                            {
+                                //status 1 ada update
+                                out.writeInt(1);
+                                tgsDao.getTugas((int)pairs.getKey(), true, true, true).writeOut(out);
+                                hmlistquery.remove(pairs.getKey());
+                            }
+                        }
+                        else
+                        {
+                            //status 0 dihapus
+                            out.writeInt(0);
+                            out.writeInt((int)pairs.getKey());
+                            hmlistquery.remove(pairs.getKey());
+                        }
                     }
-                        
+                    it = hmlistquery.entrySet().iterator();
+                    while (it.hasNext())
+                    {
+                        //status 3 ada tambah baru
+                        Map.Entry pairs = (Map.Entry)it.next();
+                        out.writeInt(3);
+                        tgsDao.getTugas((int)pairs.getKey(), true, true, true).writeOut(out);
+                    }
                 }
             }
         } catch (Exception ex) {

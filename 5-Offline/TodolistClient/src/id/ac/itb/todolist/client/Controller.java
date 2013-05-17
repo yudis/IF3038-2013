@@ -110,7 +110,45 @@ public class Controller {
                     out.writeInt(tgsList.get(i).getId());
                     out.writeLong(tgsList.get(i).getLastMod().getTime());
                 }
-                
+                for (int i = 0; i< in.readInt();i++)
+                {
+                    int status = in.readInt();
+                    Tugas tugas = new Tugas();
+                    
+                    if (status == 3)
+                    {
+                        tugas.readIn(in);
+                        tgsList.add(tugas);
+                    }
+                    else if (status == 0)
+                    {
+                        int idDel = in.readInt();
+                        int j;
+                        for(j = 0; j< tgsList.size();j++)
+                        {
+                            if (tgsList.get(j).getId() == idDel)
+                            {
+                                break;
+                            }
+                        }
+                        tgsList.remove(j);
+                    }
+                    else if (status == 1)
+                    {
+                        int idUpdate = in.readInt();
+                        int j;
+                        for(j = 0; j< tgsList.size();j++)
+                        {
+                            if (tgsList.get(j).getId() == idUpdate)
+                            {
+                                break;
+                            }
+                        }
+                        tgsList.remove(j);
+                        tugas.readIn(in);
+                        tgsList.add(tugas);
+                    }
+                }
             }
             else
             {
