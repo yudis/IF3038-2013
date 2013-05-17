@@ -31,6 +31,10 @@ public class Controller {
     private HashMap<Integer, UpdateStatus> lUpdates = new HashMap<>();
     
     private long sessionId;
+
+    public long getSessionId() {
+        return sessionId;
+    }
     
     public boolean connect(String serverName, int port) {
         try {
