@@ -69,6 +69,8 @@ public class Controller {
             out.writeInt(sessionId);
             out.writeInt(lUpdates.size());
             
+            System.out.println("size: " + lUpdates.size());
+            
             Iterator<UpdateStatus> iter = lUpdates.values().iterator();
             while (iter.hasNext()) {
                 UpdateStatus us = iter.next();

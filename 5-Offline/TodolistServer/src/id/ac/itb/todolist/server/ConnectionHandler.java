@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.lang.reflect.Array;
 import java.net.Socket;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class ConnectionHandler extends Thread {
@@ -44,7 +45,7 @@ public class ConnectionHandler extends Thread {
                     ArrayList<UpdateStatus> lUpdates = new ArrayList<>(count);
                     
                     for (int i=0; i<count; i++) {
-                        lUpdates.add(new UpdateStatus(in.readInt(), in.readBoolean()));
+                        lUpdates.add(new UpdateStatus(in.readInt(), in.readBoolean(), new Timestamp(in.readLong())));
                     }
                     
                     System.out.println(lUpdates);

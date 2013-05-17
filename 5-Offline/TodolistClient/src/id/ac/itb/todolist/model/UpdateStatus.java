@@ -26,6 +26,12 @@ public class UpdateStatus {
         this.timestamp = new Timestamp(new Date().getTime());
     }
 
+    public UpdateStatus(int idTugas, boolean status, Timestamp timestamp) {
+        this.idTugas = idTugas;
+        this.status = status;
+        this.timestamp = timestamp;
+    }
+
     public int getIdTugas() {
         return idTugas;
     }
