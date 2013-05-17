@@ -1,5 +1,9 @@
 package id.ac.itb.todolist.model;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.sql.Timestamp;
 import org.json.JSONModel;
 import org.json.JSONObject;
 
@@ -61,7 +65,23 @@ public class Attachment extends JSONModel {
     public void setType(String type) {
         this.type = type;
     }
-
+    
+    public void writeOut(DataOutputStream out) throws IOException {
+        out.writeInt(idAttachment);
+        out.writeInt(idTugas);
+        out.writeUTF(name);
+        out.writeUTF(filename);
+        out.writeUTF(type);
+    }
+    
+    public void readIn(DataInputStream in) throws IOException {
+        idAttachment = in.readInt();
+        idTugas = in.readInt();
+        name = in.readUTF();
+        filename = in.readUTF();
+        type = in.readUTF();
+    }
+    
     @Override
     public JSONObject toJsonObject() {
         JSONObject jObject = new JSONObject();
