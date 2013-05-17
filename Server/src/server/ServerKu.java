@@ -1,7 +1,10 @@
 package server;
 
+import id.ac.itb.todolist.dao.TugasDao;
+import id.ac.itb.todolist.model.Tugas;
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +28,7 @@ public class ServerKu extends Thread {
         try {
             System.out.println("Create new socket");
             serverSocket = new ServerSocket(port);
+            System.out.println(serverSocket.getReceiveBufferSize());
         } catch (IOException e) {
             System.err.println("Could not listen on port:"+ port);
             System.exit(-1);
