@@ -439,7 +439,29 @@ public class TugasDao extends DataAccessObject {
         }
         return -1;
     }
+    
+    public Collection<Tugas> getAllTugasbyUser(String username){
+        Collection<Tugas> result = null;
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("SELECT distinct id, last_mod FROM `tugas` left outer join assignees on tugas.id = assignees.id_tugas where tugas.pemilik = ? or assignees.username = ?");
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, username);
+            ResultSet rs = preparedStatement.executeQuery();
+            result = new ArrayList<Tugas>();
+            while (rs.next()) {
+                Tugas tugas = new Tugas();
+                tugas.setId(rs.getInt("id"));
+                tugas.setLastMod(rs.getTimestamp("last_mod"));
+                result.add(tugas);
+            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    } 
+    
     public ArrayList<Tugas> getAllTugas() {
         // GET
         // /rest/tugas/

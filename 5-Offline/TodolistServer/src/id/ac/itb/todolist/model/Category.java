@@ -1,5 +1,8 @@
 package id.ac.itb.todolist.model;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.sql.Timestamp;
 
 import org.json.JSONModel;
@@ -43,7 +46,19 @@ public class Category extends JSONModel {
     public void setLastMod(Timestamp lastMod) {
         this.lastMod = lastMod;
     }
-
+    
+    public void writeOut(DataOutputStream out) throws IOException {
+        out.writeInt(id);
+        out.writeUTF(nama);
+        out.writeLong(lastMod.getTime());
+    }
+    
+    public void readIn(DataInputStream in) throws IOException {
+        id = in.readInt();
+        nama = in.readUTF();
+        lastMod = new Timestamp(in.readLong());
+    }
+    
     @Override
     public JSONObject toJsonObject() {
         JSONObject jObject = new JSONObject();

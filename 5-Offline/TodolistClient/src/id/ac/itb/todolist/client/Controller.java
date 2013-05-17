@@ -5,6 +5,7 @@
 package id.ac.itb.todolist.client;
 
 import id.ac.itb.todolist.model.UpdateStatus;
+import id.ac.itb.todolist.model.Tugas;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,8 +13,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,16 +25,18 @@ import java.util.logging.Logger;
  * @author Edward Samuel
  */
 public class Controller {
+    private static final byte MSG_LOGIN = 0;
     private static final byte MSG_UPDATE = 1;
+    private static final byte MSG_LIST = 2;
     private static final byte MSG_SUCCESS = 127;
     private static final byte MSG_FAILED = -1;
-    private static final byte MSG_LOGIN = 0;
     
     private Socket sockClient;
     private HashMap<Integer, UpdateStatus> lUpdates = new HashMap<>();
     
     private long sessionId;
-
+    private List<Tugas> tgsList;
+    
     public long getSessionId() {
         return sessionId;
     }
@@ -67,6 +72,34 @@ public class Controller {
         }
         
         return false;
+    }
+     
+     public void list() {
+        try {
+            DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
+            DataInputStream in = new DataInputStream(sockClient.getInputStream());
+            out.writeByte(MSG_LIST);
+            out.writeLong(sessionId);
+            if (tgsList.size()!= 0)
+            {
+                out.writeInt(tgsList.size());
+                for (int i=0;i< tgsList.size();i++)
+                {
+                    out.writeInt(tgsList.get(i).getId());
+                    out.writeLong(tgsList.get(i).getLastMod().getTime());
+                }
+                
+            }
+            else
+            {
+                out.writeInt(0);
+                
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
      
     public void updateStatus(int idTugas, boolean status) {
