@@ -4,10 +4,8 @@ import id.ac.itb.todolist.dao.TugasDao;
 import id.ac.itb.todolist.model.UpdateStatus;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.lang.reflect.Array;
 import java.net.Socket;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import id.ac.itb.todolist.model.User;
 import id.ac.itb.todolist.dao.UserDao;
 import java.security.KeyFactory;
@@ -25,7 +23,7 @@ public class ConnectionHandler extends Thread {
 
     private static final byte MSG_LOGIN = 0;
     private static final byte MSG_UPDATE = 1;
-	private static final byte MSG_LIST = 2;
+    private static final byte MSG_LIST = 2;
     private static final byte MSG_SUCCESS = 127;
     private static final byte MSG_FAILED = -1;
     private static Random random = new Random();
@@ -67,6 +65,7 @@ public class ConnectionHandler extends Thread {
                 }
 
                 if (msgType == MSG_LOGIN) {
+                    /////////////////////////////// Server send p and g value                    
                     out.writeUTF(Controller.servp.toString());
                     out.writeUTF(Controller.servg.toString());
 
@@ -87,7 +86,7 @@ public class ConnectionHandler extends Thread {
                     Cipher cServer = Cipher.getInstance("AES");
                     SecretKeySpec kServer = new SecretKeySpec(servSecret, 0, 16, "AES");
                     cServer.init(Cipher.DECRYPT_MODE, kServer);
-                    
+
                     byte[] encryptedData = new byte[in.readInt()];
                     in.readFully(encryptedData);
                     byte[] data = cServer.doFinal(encryptedData);
@@ -97,10 +96,10 @@ public class ConnectionHandler extends Thread {
                     in.readFully(encryptedData);
                     data = cServer.doFinal(encryptedData);
                     String password = new String(data);
-                    
+
                     System.out.println(username);
                     System.out.println(password);
-                    
+
                     UserDao userDao = new UserDao();
                     User user = userDao.getUserLogin(username, password);
                     if (user != null) {
@@ -127,28 +126,27 @@ public class ConnectionHandler extends Thread {
                     }
 
                     out.writeByte(MSG_SUCCESS);
-                }else if (msgType == MSG_LIST){
+                } else if (msgType == MSG_LIST) {
                     int jmlTugas = in.readInt();
                     TugasDao tgsDao = new TugasDao();
                     HashMap hmlist = new HashMap();
                     int id;
                     long timestamp;
-                    for (int i = 0; i< jmlTugas;i++)
-                    {
+                    for (int i = 0; i < jmlTugas; i++) {
                         id = in.readInt();
                         timestamp = in.readLong();
                         hmlist.put(id, timestamp);
                     }
-                    
-                    tgsDao.getAllTugasbyUser((String)hm.get(sessionId));
+
+                    tgsDao.getAllTugasbyUser(session.get(sessionId));
                     Iterator it = hmlist.entrySet().iterator();
                     while (it.hasNext()) {
-                        Map.Entry pairs = (Map.Entry)it.next();
+                        Map.Entry pairs = (Map.Entry) it.next();
                         System.out.println(pairs.getKey() + " = " + pairs.getValue());
 
                         it.remove(); // avoids a ConcurrentModificationException
                     }
-                        
+
                 }
             }
         } catch (Exception ex) {
