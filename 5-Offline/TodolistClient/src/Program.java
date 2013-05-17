@@ -1,5 +1,6 @@
 
 import id.ac.itb.todolist.client.Controller;
+import java.util.Scanner;
 
 /*
  * To change this template, choose Tools | Templates
@@ -19,6 +20,8 @@ public class Program {
         System.out.println(controller.login("edwardsp", "lalalala"));
         System.out.println("SID: " + controller.getSessionId());
         
+        Scanner sc = new Scanner(System.in);
+        sc.next();
 //        controller.updateStatus(1, true);
 //        controller.updateStatus(2, true);
 //        

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package id.ac.itb.todolist.server;
 
 import java.io.IOException;
@@ -56,5 +52,9 @@ public class Controller {
             }
 
         }
+    }
+    
+    public void printSession() {
+        System.out.println(ConnectionHandler.getSessionsString());
     }
 }

@@ -27,7 +27,7 @@ public class ConnectionHandler extends Thread {
     private static final byte MSG_SUCCESS = 127;
     private static final byte MSG_FAILED = -1;
     private static Random random = new Random();
-    private HashMap<Long, String> session = new HashMap<>();
+    static HashMap<Long, String> session = new HashMap<>();
     private Socket sockClient;
 
     public ConnectionHandler(Socket sockClient) {
@@ -155,5 +155,15 @@ public class ConnectionHandler extends Thread {
                 session.remove(sessionId);
             }
         }
+    }
+
+    public static String getSessionsString() {
+        StringBuilder sb = new StringBuilder();
+        synchronized (session) {
+            for (Map.Entry<Long, String> val : session.entrySet()) {
+                System.out.printf("%10d - %s", val.getKey(), val.getValue());
+            }
+        }
+        return sb.toString();
     }
 }
