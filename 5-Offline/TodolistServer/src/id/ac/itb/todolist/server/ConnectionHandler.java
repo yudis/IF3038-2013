@@ -6,6 +6,10 @@ import java.io.DataOutputStream;
 import java.lang.reflect.Array;
 import java.net.Socket;
 import java.util.ArrayList;
+import id.ac.itb.todolist.model.User;
+import id.ac.itb.todolist.dao.UserDao;
+import java.util.HashMap;
+import java.util.Random;
 
 public class ConnectionHandler extends Thread {
 
@@ -35,9 +39,33 @@ public class ConnectionHandler extends Thread {
                 }
                 
                 if (msgType == MSG_LOGIN) {
-                    
-                    
-                    
+                    UserDao userDao = new UserDao();
+                    HashMap hm = new HashMap();
+                    boolean mapped = false;
+                    User user =  new User();
+                    String username = in.readUTF();
+                    String password = in.readUTF();
+                    user = userDao.getUserLogin(username,password);
+                    if (user != null)
+                    {
+                        Random rnd = new Random();
+                        long i = rnd.nextLong();
+                        while (!mapped){
+                            i = rnd.nextInt();
+                            if (!hm.containsKey(i) ){
+                                hm.put(i, username);
+                                mapped = true;
+                            }
+                            
+                        }
+                        out.writeBoolean(true);
+                        out.writeLong(i);
+                        System.out.println(hm.get(i)); 
+                    }
+                    else
+                    {
+                        out.writeBoolean(false);
+                    } 
                 } else if (msgType == MSG_UPDATE) {
                     int count = in.readInt();
                     System.out.println("--- MSG_UPDATE : " + count);

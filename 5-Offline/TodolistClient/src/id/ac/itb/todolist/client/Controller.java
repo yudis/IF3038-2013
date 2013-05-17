@@ -25,11 +25,12 @@ public class Controller {
     private static final byte MSG_UPDATE = 1;
     private static final byte MSG_SUCCESS = 127;
     private static final byte MSG_FAILED = -1;
+    private static final byte MSG_LOGIN = 0;
     
     private Socket sockClient;
     private HashMap<Integer, UpdateStatus> lUpdates = new HashMap<>();
     
-    private int sessionId;
+    private long sessionId;
     
     public boolean connect(String serverName, int port) {
         try {
@@ -45,6 +46,25 @@ public class Controller {
         return (sockClient != null);
     }
     
+     public boolean login(String username, String password) {
+        try {
+            DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
+            DataInputStream in = new DataInputStream(sockClient.getInputStream());
+            out.writeByte(MSG_LOGIN);
+            out.writeUTF(username);
+            out.writeUTF(password);
+            if(in.readBoolean())
+            {
+                sessionId =  in.readLong();
+                return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
+     
     public void updateStatus(int idTugas, boolean status) {
         if (lUpdates.containsKey(idTugas))
         {
@@ -66,7 +86,7 @@ public class Controller {
             DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
             
             out.writeByte(MSG_UPDATE);
-            out.writeInt(sessionId);
+            out.writeLong(sessionId);
             out.writeInt(lUpdates.size());
             
             Iterator<UpdateStatus> iter = lUpdates.values().iterator();
