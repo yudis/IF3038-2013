@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package id.ac.itb.todolist.client;
 
-import id.ac.itb.todolist.model.UpdateStatus;
 import id.ac.itb.todolist.model.Tugas;
+import id.ac.itb.todolist.model.UpdateStatus;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
@@ -13,28 +9,33 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.math.BigInteger;
 import java.net.Socket;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Iterator;
+import javax.crypto.Cipher;
+import javax.crypto.KeyAgreement;
+import javax.crypto.interfaces.DHPublicKey;
+import javax.crypto.spec.DHParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- *
- * @author Edward Samuel
- */
 public class Controller {
 
     private static final byte MSG_UPDATE = 1;
-	private static final byte MSG_LIST = 2;
+    private static final byte MSG_LIST = 2;
     private static final byte MSG_SUCCESS = 127;
     private static final byte MSG_FAILED = -1;
     private static final byte MSG_LOGIN = 0;
     private Socket sockClient;
     private HashMap<Integer, UpdateStatus> lUpdates = new HashMap<>();
     private long sessionId;
-	private List<Tugas> tgsList;
+    private List<Tugas> tgsList;
+
     public long getSessionId() {
         return sessionId;
     }
@@ -55,7 +56,7 @@ public class Controller {
         try {
             FileInputStream in = new FileInputStream("updates.out");
             ObjectInputStream ois = new ObjectInputStream(in);
-            
+
             System.out.println((HashMap<Integer, UpdateStatus>) ois.readObject());
         } catch (Exception e) {
             System.out.println("Problem serializing: " + e);
@@ -80,23 +81,62 @@ public class Controller {
         try {
             DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
             DataInputStream in = new DataInputStream(sockClient.getInputStream());
+
             out.writeByte(MSG_LOGIN);
-            out.writeUTF(username);
-            out.writeUTF(password);
-            
+
+            /////////////////////////////// Client recieves p & g and creates spec
+            BigInteger clip = new BigInteger(in.readUTF());
+            BigInteger clig = new BigInteger(in.readUTF());
+            DHParameterSpec cliParamSpec = new DHParameterSpec(clip, clig);
+
+            /////////////////////////////// Client generates keypair
+            KeyPairGenerator cliKPG = KeyPairGenerator.getInstance("DH");
+            cliKPG.initialize(cliParamSpec);
+            KeyPair cliKP = cliKPG.generateKeyPair();
+
+            byte[] cliPub = cliKP.getPublic().getEncoded();
+
+            /////////////////////////////// PKI exchange and convert back
+            out.writeInt(cliPub.length);
+            out.write(cliPub);
+            byte[] servPub = new byte[in.readInt()];
+            in.readFully(servPub);
+            DHPublicKey cliServPub = (DHPublicKey) KeyFactory.getInstance("DH").generatePublic(new X509EncodedKeySpec(servPub));
+
+            /////////////////////////////// Client gens secret
+            KeyAgreement cliKA = KeyAgreement.getInstance("DH");
+            cliKA.init(cliKP.getPrivate(), cliParamSpec);
+            cliKA.doPhase(cliServPub, true);
+            byte[] cliSecret = cliKA.generateSecret("AES").getEncoded();
+
+            ////////////////////////////// Client encrypt using AES
+            Cipher cClient = Cipher.getInstance("AES");
+            SecretKeySpec kClient = new SecretKeySpec(cliSecret, 0, 16, "AES");
+            cClient.init(Cipher.ENCRYPT_MODE, kClient);
+
+            byte[] dataToSend = username.getBytes();
+            byte[] encryptedData = cClient.doFinal(dataToSend);
+            out.writeInt(encryptedData.length);
+            out.write(encryptedData);
+
+            dataToSend = password.getBytes();
+            encryptedData = cClient.doFinal(dataToSend);
+            out.writeInt(encryptedData.length);
+            out.write(encryptedData);
+
             byte responseType = in.readByte();
             if (responseType == MSG_SUCCESS) {
                 sessionId = in.readLong();
                 return true;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return false;
     }
-	
-	public void list() {
+
+    public void list() {
         try {
             DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
             DataInputStream in = new DataInputStream(sockClient.getInputStream());
