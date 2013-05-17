@@ -1,9 +1,13 @@
 package id.ac.itb.todolist.model;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Collection;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.json.JSONArray;
 import org.json.JSONModel;
@@ -118,7 +122,60 @@ public class Tugas extends JSONModel {
     public void setTags(Collection<String> tags) {
         this.tags = tags;
     }
-
+    
+    public void writeOut(DataOutputStream out) throws IOException {
+        out.writeInt(id);
+        out.writeUTF(nama);
+        out.writeLong(tglDeadline.getTime());
+        out.writeBoolean(status);
+        out.writeLong(lastMod.getTime());
+        pemilik.writeOut(out);
+        kategori.writeOut(out);
+        Iterator<Attachment>iter = attachments.iterator();
+        out.writeInt(attachments.size());
+        while (iter.hasNext()){
+            Attachment attach = iter.next();
+            attach.writeOut(out);
+        }  
+        Iterator<User>iterUser = assignees.iterator();
+        out.writeInt(assignees.size());
+        while (iterUser.hasNext()){
+            User user = iterUser.next();
+            user.writeOut(out);
+        }
+        Iterator<String>iterTag = tags.iterator();
+        out.writeInt(tags.size());
+        while (iterTag.hasNext()){
+            String tag = iterTag.next();
+            out.writeUTF(tag);
+        }
+    }
+    
+    public void readIn(DataInputStream in) throws IOException {
+        id = in.readInt();
+        nama = in.readUTF();
+        tglDeadline = new Date(in.readLong());
+        status = in.readBoolean();
+        lastMod = new Timestamp(in.readLong());
+        pemilik.readIn(in);
+        kategori.readIn(in);
+        for(int i = 0;i< in.readInt();i++){
+            Attachment attach = new Attachment();
+            attach.readIn(in);
+            attachments.add(null);
+        }
+        
+        for(int i = 0;i< in.readInt();i++){
+            User user = new User();
+            user.readIn(in);
+            assignees.add(null);
+        }
+        for(int i = 0;i< in.readInt();i++){
+            String tag = in.readUTF();
+            tags.add(null);
+        }
+    }
+    
     @Override
     public JSONObject toJsonObject() {
         JSONObject jObject = new JSONObject();

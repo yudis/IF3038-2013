@@ -142,24 +142,66 @@ public class Controller {
             DataInputStream in = new DataInputStream(sockClient.getInputStream());
             out.writeByte(MSG_LIST);
             out.writeLong(sessionId);
-            if (tgsList.size() != 0) {
+            if (tgsList.size()!= 0)
+            {
                 out.writeInt(tgsList.size());
-                for (int i = 0; i < tgsList.size(); i++) {
+                for (int i=0;i< tgsList.size();i++)
+                {
                     out.writeInt(tgsList.get(i).getId());
                     out.writeLong(tgsList.get(i).getLastMod().getTime());
                 }
-
-            } else {
-                out.writeInt(0);
-
+                for (int i = 0; i< in.readInt();i++)
+                {
+                    int status = in.readInt();
+                    Tugas tugas = new Tugas();
+                    
+                    if (status == 3)
+                    {
+                        tugas.readIn(in);
+                        tgsList.add(tugas);
+                    }
+                    else if (status == 0)
+                    {
+                        int idDel = in.readInt();
+                        int j;
+                        for(j = 0; j< tgsList.size();j++)
+                        {
+                            if (tgsList.get(j).getId() == idDel)
+                            {
+                                break;
+                            }
+                        }
+                        tgsList.remove(j);
+                    }
+                    else if (status == 1)
+                    {
+                        int idUpdate = in.readInt();
+                        int j;
+                        for(j = 0; j< tgsList.size();j++)
+                        {
+                            if (tgsList.get(j).getId() == idUpdate)
+                            {
+                                break;
+                            }
+                        }
+                        tgsList.remove(j);
+                        tugas.readIn(in);
+                        tgsList.add(tugas);
+                    }
+                }
             }
-
+            else
+            {
+                out.writeInt(0);
+                
+            }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        
     }
-
+	
     public void updateStatus(int idTugas, boolean status) {
         if (lUpdates.containsKey(idTugas)) {
             lUpdates.remove(idTugas);

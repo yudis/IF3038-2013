@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public class TugasDao extends DataAccessObject {
@@ -456,20 +457,17 @@ public class TugasDao extends DataAccessObject {
         return -1;
     }
     
-    public Collection<Tugas> getAllTugasbyUser(String username){
-        Collection<Tugas> result = null;
+    public HashMap getAllTugasbyUser(String username){
+        HashMap result = null;
         try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement("SELECT distinct id, last_mod FROM `tugas` left outer join assignees on tugas.id = assignees.id_tugas where tugas.pemilik = ? or assignees.username = ?");
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, username);
             ResultSet rs = preparedStatement.executeQuery();
-            result = new ArrayList<Tugas>();
+            result = new HashMap<>();
             while (rs.next()) {
-                Tugas tugas = new Tugas();
-                tugas.setId(rs.getInt("id"));
-                tugas.setLastMod(rs.getTimestamp("last_mod"));
-                result.add(tugas);
+                result.put(rs.getInt("id"), rs.getTimestamp("last_mod"));
             }
 
         } catch (SQLException e) {
