@@ -33,10 +33,10 @@ public class ConnectionHandler extends Thread {
             
             while (true) {
                 byte msgType = in.readByte();
-                int sessionId = -1;
+                long sessionId = -1;
                 
                 if (msgType != MSG_LOGIN) {
-                    sessionId = in.readInt();
+                    sessionId = in.readLong();
                 }
                 
                 if (msgType == MSG_LOGIN) {
@@ -61,6 +61,7 @@ public class ConnectionHandler extends Thread {
                         }
                         out.writeBoolean(true);
                         out.writeLong(i);
+                        System.out.println("session = " + i);
                         System.out.println(hm.get(i)); 
                     }
                     else
