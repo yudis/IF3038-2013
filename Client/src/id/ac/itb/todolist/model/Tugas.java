@@ -111,4 +111,5 @@ public class Tugas {
     public void setTags(Collection<String> tags) {
         this.tags = tags;
     }
+
 }

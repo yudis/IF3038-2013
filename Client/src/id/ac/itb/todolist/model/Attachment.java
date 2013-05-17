@@ -1,6 +1,5 @@
 package id.ac.itb.todolist.model;
 
-
 public class Attachment {
 
     private int idAttachment;

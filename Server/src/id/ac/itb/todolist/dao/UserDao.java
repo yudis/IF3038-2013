@@ -4,7 +4,6 @@
  */
 package id.ac.itb.todolist.dao;
 
-import id.ac.itb.todolist.json.JSONArray;
 import id.ac.itb.todolist.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
