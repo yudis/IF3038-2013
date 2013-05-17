@@ -40,7 +40,7 @@ public class UpdateStatus {
         this.idTugas = idTugas;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
