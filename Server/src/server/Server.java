@@ -5,6 +5,9 @@
 package server;
 import java.io.*;
 import java.net.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 /**
  *
  * @author Timotius
@@ -25,13 +28,38 @@ public class Server implements Runnable{
         
     
     public static void main(String[] args) {
+        // <editor-fold desc="Starting connection with database...">
+        System.out.println("-------- MySQL JDBC Connection Testing ------------");
+        try {
+		Class.forName("com.mysql.jdbc.Driver");
+	} catch (ClassNotFoundException e) {
+		System.out.println("Where is your MySQL JDBC Driver?");
+		e.printStackTrace();
+		return;
+	}
+        System.out.println("MySQL JDBC Driver Registered!");
+	Connection connection = null;
+        try {
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root", "");
+        } catch (SQLException e) {
+		System.out.println("Connection Failed! Check output console");
+		e.printStackTrace();
+		return;
+	}
+        if (connection != null) {
+		System.out.println("You made it, take control your database now!");
+	} else {
+		System.out.println("Failed to make connection!");
+	}
+        // </editor-fold>
         
+        //Starts server ...
         try{
             ServerSocket socket = new ServerSocket(port);
             System.out.println("Server ready...");
             while (true) {
-                Socket connection = socket.accept();
-                Runnable runnable = new Server(connection, ++count);
+                Socket conn = socket.accept();
+                Runnable runnable = new Server(conn, ++count);
                 System.out.println("New connection with ID: "+count);
                 Thread thread = new Thread(runnable);
                 thread.start();
