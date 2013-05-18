@@ -97,9 +97,6 @@ public class ConnectionHandler extends Thread {
                     data = cServer.doFinal(encryptedData);
                     String password = new String(data);
 
-                    System.out.println(username);
-                    System.out.println(password);
-
                     UserDao userDao = new UserDao();
                     User user = userDao.getUserLogin(username, password);
                     if (user != null) {
@@ -111,7 +108,6 @@ public class ConnectionHandler extends Thread {
                             session.put(i, username);
                             out.writeByte(MSG_SUCCESS);
                             out.writeLong(i);
-                            System.out.println(session.get(i));
                         }
                     } else {
                         out.writeByte(MSG_FAILED);
@@ -129,7 +125,7 @@ public class ConnectionHandler extends Thread {
                 } else if (msgType == MSG_LIST) {
                     int jmlTugas = in.readInt();
                     TugasDao tgsDao = new TugasDao();
-                    HashMap hmlist = new HashMap();
+                    HashMap<Integer, Long> hmlist = new HashMap<>();
                     int id;
                     long timestamp;
                     for (int i = 0; i < jmlTugas; i++) {
@@ -137,43 +133,44 @@ public class ConnectionHandler extends Thread {
                         timestamp = in.readLong();
                         hmlist.put(id, timestamp);
                     }
+
+                    HashMap<Integer, Long> hmlistquery = tgsDao.getAllTugasbyUser((String) session.get(sessionId));
+                    System.out.println(hmlist);
+                    System.out.println(hmlistquery);
                     
-                    HashMap hmlistquery= tgsDao.getAllTugasbyUser((String)session.get(sessionId));
-                    out.writeInt(hmlistquery.size());
-                    Iterator it = hmlist.entrySet().iterator();
+                    Iterator<Map.Entry<Integer, Long>> it = hmlist.entrySet().iterator();
                     while (it.hasNext()) {
-                        Map.Entry pairs = (Map.Entry)it.next();
-                        if(hmlistquery.containsKey(pairs.getKey()))
-                        {
-                            if (hmlistquery.get(pairs.getKey()) == pairs.getValue()){
-                                //status 2 tetap sama
+                        Map.Entry<Integer, Long> pairs = it.next();
+                        if (hmlistquery.containsKey(pairs.getKey())) {
+                            System.out.println("ID: " + pairs.getKey() + " - R: " + pairs.getValue() + " - Q: " + hmlistquery.get(pairs.getKey()) + " EQ: " + (hmlistquery.get(pairs.getKey()) == pairs.getValue()));
+                            if (pairs.getValue().equals(hmlistquery.get(pairs.getKey()))) {
+                                // Status 2 tetap sama
                                 out.writeInt(2);
-                                out.writeInt((int)pairs.getKey());
+                                out.writeInt(pairs.getKey());
                                 hmlistquery.remove(pairs.getKey());
-                            }else
-                            {
-                                //status 1 ada update
+                            } else {
+                                // Status 1 ada update
                                 out.writeInt(1);
-                                tgsDao.getTugas((int)pairs.getKey(), true, true, true).writeOut(out);
+                                tgsDao.getTugas(pairs.getKey(), true, true, true).writeOut(out);
                                 hmlistquery.remove(pairs.getKey());
                             }
-                        }
-                        else
-                        {
+                        } else {
                             //status 0 dihapus
                             out.writeInt(0);
-                            out.writeInt((int)pairs.getKey());
+                            out.writeInt(pairs.getKey());
                             hmlistquery.remove(pairs.getKey());
                         }
                     }
-                    it = hmlistquery.entrySet().iterator();
-                    while (it.hasNext())
-                    {
+                
+                    Iterator<Map.Entry<Integer, Long>> it2 = hmlistquery.entrySet().iterator();
+                    while (it2.hasNext()) {
                         //status 3 ada tambah baru
-                        Map.Entry pairs = (Map.Entry)it.next();
+                        Map.Entry<Integer, Long> pairs = (Map.Entry) it2.next();
                         out.writeInt(3);
-                        tgsDao.getTugas((int)pairs.getKey(), true, true, true).writeOut(out);
+                        tgsDao.getTugas(pairs.getKey(), true, true, true).writeOut(out);
                     }
+                    
+                    out.writeInt(-1);
                 }
             }
         } catch (Exception ex) {

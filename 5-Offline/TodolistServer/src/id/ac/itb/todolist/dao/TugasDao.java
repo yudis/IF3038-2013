@@ -457,19 +457,19 @@ public class TugasDao extends DataAccessObject {
         return -1;
     }
     
-    public HashMap getAllTugasbyUser(String username){
-        HashMap result = null;
+    public HashMap<Integer, Long> getAllTugasbyUser(String username){
+        HashMap<Integer, Long> result = null;
         try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement("SELECT distinct id, last_mod FROM `tugas` left outer join assignees on tugas.id = assignees.id_tugas where tugas.pemilik = ? or assignees.username = ?");
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, username);
+            
             ResultSet rs = preparedStatement.executeQuery();
             result = new HashMap<>();
             while (rs.next()) {
-                result.put(rs.getInt("id"), rs.getTimestamp("last_mod"));
+                result.put(rs.getInt("id"), rs.getTimestamp("last_mod").getTime());
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

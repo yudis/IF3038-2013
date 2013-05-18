@@ -1,5 +1,6 @@
 package id.ac.itb.todolist.model;
 
+import id.ac.itb.todolist.model.Attachment;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -122,6 +123,12 @@ public class Tugas extends JSONModel {
     public void setTags(Collection<String> tags) {
         this.tags = tags;
     }
+
+    @Override
+    public String toString() {
+        //return "Tugas{" + "id=" + id + ", nama=" + nama + ", tglDeadline=" + tglDeadline + ", status=" + status + ", lastMod=" + lastMod + ", pemilik=" + pemilik + ", kategori=" + kategori + ", attachments=" + attachments + ", assignees=" + assignees + ", tags=" + tags + '}';
+        return "Tugas{" + "id=" + id + ", nama=" + nama + ", status=" + status + ", lastMod=" + lastMod  + '}';
+    }
     
     public void writeOut(DataOutputStream out) throws IOException {
         out.writeInt(id);
@@ -157,22 +164,31 @@ public class Tugas extends JSONModel {
         tglDeadline = new Date(in.readLong());
         status = in.readBoolean();
         lastMod = new Timestamp(in.readLong());
+        
+        pemilik = new User();
         pemilik.readIn(in);
+        
+        kategori = new Category();
         kategori.readIn(in);
-        for(int i = 0;i< in.readInt();i++){
+        
+        attachments = new ArrayList<Attachment>();
+        for(int i = 0, len = in.readInt(); i < len; i++) {
             Attachment attach = new Attachment();
             attach.readIn(in);
-            attachments.add(null);
+            attachments.add(attach);
         }
         
-        for(int i = 0;i< in.readInt();i++){
+        assignees = new ArrayList<User>();
+        for(int i = 0, len = in.readInt(); i < len; i++) {
             User user = new User();
             user.readIn(in);
-            assignees.add(null);
+            assignees.add(user);
         }
-        for(int i = 0;i< in.readInt();i++){
+        
+        tags = new ArrayList<String>();
+        for(int i = 0, len = in.readInt(); i < len; i++) {
             String tag = in.readUTF();
-            tags.add(null);
+            tags.add(tag);
         }
     }
     
