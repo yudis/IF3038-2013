@@ -173,6 +173,10 @@ public class Controller {
         }
         return false;
     }
+    
+    public boolean isConnect() {
+        return((sockClient != null && sockClient.isConnected()));
+    }
 
     public boolean logout() throws IOException, SocketException {
         if (sockClient == null) throw new SocketException("Socket is null");
