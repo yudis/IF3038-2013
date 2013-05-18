@@ -63,11 +63,13 @@ class ColorTableModel extends AbstractTableModel {
 
 public class ClientForm extends javax.swing.JFrame {
 
+    private String username;
     /**
      * Creates new form ClientForm
      */
-    public ClientForm(String username) {
-        initComponents(username);
+    public ClientForm(String uname) {
+        username = uname;
+        initComponents(uname);
     }
 
     /**

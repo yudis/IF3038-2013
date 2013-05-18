@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import client.Client;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,16 +21,15 @@ import java.util.logging.Logger;
 public class LoginForm extends javax.swing.JFrame {
 
     private static Client client = new Client();
-            
+    private static boolean isconnected = false;
+
     /**
      * Creates new form LoginForm
      */
     public LoginForm(String IP, int port) throws InterruptedException {
-        boolean isconnected = false;
         do {
             isconnected = client.connect(IP, port);
         } while (!isconnected);
-        
         initComponents();
     }
 
@@ -200,7 +202,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         final String IP = args[0];
         final int port = Integer.parseInt(args[1]);
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -212,6 +214,40 @@ public class LoginForm extends javax.swing.JFrame {
                 }
             }
         });
+
+        new Thread() {
+            @Override
+            public void run() {
+                InputStream inFromServer = null;
+                while (client.client == null) {
+                    System.out.println("hh");
+                }
+                    System.out.println("masuk");
+                    try {
+                        inFromServer = client.client.getInputStream();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    DataInputStream in = new DataInputStream(inFromServer);
+                    while (true) {
+                        System.out.println("BBBBBBBBBBBBB");
+                        if (!client.checkInput(in)) {
+                            System.out.println("Closed --");
+                            isconnected = false;
+                            do {
+                                try {
+                                    isconnected = client.connect(IP, port);
+                                } catch (InterruptedException ex) {
+                                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            } while (!isconnected);
+                        } else {
+                            System.out.println("AAAAAAAAAAAAAAAAAAA");
+                        }
+                    }
+                
+            }
+        }.start();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
