@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import client.Client;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +22,12 @@ public class LoginForm extends javax.swing.JFrame {
     /**
      * Creates new form LoginForm
      */
-    public LoginForm() {
+    public LoginForm(String IP, int port) throws InterruptedException {
+        boolean isconnected = false;
+        do {
+            isconnected = client.connect(IP, port);
+        } while (!isconnected);
+        
         initComponents();
     }
 
@@ -68,12 +75,17 @@ public class LoginForm extends javax.swing.JFrame {
         jTextField1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if ((jTextField1.getText().equals("mario")) && (jTextField2.getText().equals("wkwk"))) {
-                    new ClientForm(jTextField1.getText()).setVisible(true);
-                    setVisible(false);
-                    dispose();
+                if ((jTextField1.getText().equals("")) || (jTextField2.getText().equals(""))) {
+                    JOptionPane.showMessageDialog(null, "Please input your username / password");
+
                 } else {
-                    JOptionPane.showMessageDialog(null, "Login error! Wrong username / password");
+                    if (client.login(jTextField1.getText(), jTextField2.getText())) {
+                        new ClientForm(jTextField1.getText()).setVisible(true);
+                        setVisible(false);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Login error! Wrong username / password");
+                    }
                 }
             }
         });
@@ -81,12 +93,17 @@ public class LoginForm extends javax.swing.JFrame {
         jTextField2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if ((jTextField1.getText().equals("mario")) && (jTextField2.getText().equals("wkwk"))) {
-                    new ClientForm(jTextField1.getText()).setVisible(true);
-                    setVisible(false);
-                    dispose();
+                if ((jTextField1.getText().equals("")) || (jTextField2.getText().equals(""))) {
+                    JOptionPane.showMessageDialog(null, "Please input your username / password");
+
                 } else {
-                    JOptionPane.showMessageDialog(null, "Login error! Wrong username / password");
+                    if (client.login(jTextField1.getText(), jTextField2.getText())) {
+                        new ClientForm(jTextField1.getText()).setVisible(true);
+                        setVisible(false);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Login error! Wrong username / password");
+                    }
                 }
             }
         });
@@ -157,7 +174,7 @@ public class LoginForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) throws InterruptedException {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -181,20 +198,18 @@ public class LoginForm extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        String IP = args[0];
-        int port = Integer.parseInt(args[1]);
-        
-        boolean isconnected = false;
-        do {
-            client.connect(IP, port);
-        } while (!isconnected);
+        final String IP = args[0];
+        final int port = Integer.parseInt(args[1]);
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                while (true)
-                new LoginForm().setVisible(true);
+                try {
+                    new LoginForm(IP, port).setVisible(true);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

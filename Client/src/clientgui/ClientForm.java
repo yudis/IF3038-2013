@@ -115,7 +115,7 @@ public class ClientForm extends javax.swing.JFrame {
 
         jButton1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new LoginForm().setVisible(true);
+                //new LoginForm().setVisible(true);
                 setVisible(false);
                 dispose();
             }
