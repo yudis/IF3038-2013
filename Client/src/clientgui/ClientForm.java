@@ -6,7 +6,6 @@ package clientgui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
@@ -26,30 +25,37 @@ class ColorTableModel extends AbstractTableModel {
     
     boolean[] canEdit = new boolean[]{false,false,false,false,false,false,true};
     
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return canEdit[columnIndex];
     }
 
+    @Override
     public int getColumnCount() {
         return columnNames.length;
     }
 
+    @Override
     public String getColumnName(int column) {
         return columnNames[column];
     }
 
+    @Override
     public int getRowCount() {
         return rowData.length;
     }
 
+    @Override
     public Object getValueAt(int row, int column) {
         return rowData[row][column];
     }
 
+    @Override
     public Class getColumnClass(int column) {
         return (getValueAt(0, column).getClass());
     }
 
+    @Override
     public void setValueAt(Object value, int row, int column) {
         rowData[row][column] = value;
     }
