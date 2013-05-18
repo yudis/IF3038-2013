@@ -37,7 +37,7 @@ public class ServerKu extends Thread {
         }
 
         while (listening) {
-            System.out.println("Listening");
+            System.out.println("Listening on" + serverSocket.getLocalSocketAddress());
 
             new MultiServerThread(serverSocket.accept()).start();
         }
@@ -63,30 +63,44 @@ class MultiServerThread extends Thread {
     @Override
     public void run() {
         System.out.println("Port: " + server.getPort());
-        while (true) {
-            try {
-                DataInputStream in = new DataInputStream(server.getInputStream());
-                DataOutputStream out = new DataOutputStream(server.getOutputStream());
+        //while (true) {
+        try {
+            DataInputStream in;
+            in = new DataInputStream(server.getInputStream());
+
+
+            System.out.println("waiting for message");
+            while (true) {
 
                 byte resType = in.readByte();
+
+                System.out.println("resType: " + resType);
                 if (resType == MSG_LOGIN) {
                     String username = in.readUTF();
                     String password = in.readUTF();
-
+                    System.out.println("username: " + username + "pass: " + password);
                     UserDao userdao = new UserDao();
                     User user = new User();
-
+                    DataOutputStream out = new DataOutputStream(server.getOutputStream());
                     user = userdao.getUserLogin(username, password);
+                   // System.out.println("USer: "+user.getTglLahir());
                     if (user == null) {
                         out.writeByte(MSG_FAILED);
+                        System.out.println("failed");
                     } else {
                         out.writeByte(MSG_SUCCESS);
+                                                System.out.println("suck");
+
                     }
                 }
-            } catch (IOException e) {
-                System.out.println("Client from IP: " + server.getRemoteSocketAddress() + " disconnected.");
-                break;
             }
+        } catch (IOException e) {
+            System.out.println("Client from IP: " + server.getRemoteSocketAddress() + " disconnected.");
+            e.printStackTrace();
+            System.out.println("closed: " + server.isClosed());
+            System.out.println("closed: " + server.isConnected());
+
         }
+        // }
     }
 }
