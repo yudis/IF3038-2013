@@ -19,33 +19,9 @@ public class Client {
      */
     public static void main(String[] args) {
         String command;
-        String message;
+        String request;
+        String respond;
         Boolean running;
-        
-        // <editor-fold desc="Starting connection with database...">
-        System.out.println("-------- MySQL JDBC Connection Testing ------------");
-        try {
-		Class.forName("com.mysql.jdbc.Driver");
-	} catch (ClassNotFoundException e) {
-		System.out.println("Where is your MySQL JDBC Driver?");
-		e.printStackTrace();
-		return;
-	}
-        System.out.println("MySQL JDBC Driver Registered!");
-	Connection connection = null;
-        try {
-		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/progin_405_13510086","root", "");
-        } catch (SQLException e) {
-		System.out.println("Connection Failed! Check output console");
-		e.printStackTrace();
-		return;
-	}
-        if (connection != null) {
-		System.out.println("You made it, take control your database now!");
-	} else {
-		System.out.println("Failed to make connection!");
-	}
-        // </editor-fold>
         
         try{
             running = true;
@@ -56,9 +32,34 @@ public class Client {
             while (running){
                 System.out.print(">> ");
                 command = inClient.readLine();
-                outServer.writeBytes(command + '\n');
-                message = inServer.readLine();
-                System.out.println("From Server: " + message);
+                command = command.toLowerCase();
+                switch (command){
+                    case ("login"):
+                    {
+                        System.out.print("Enter username: ");
+                        String username = inClient.readLine();
+                        System.out.print("Enter password: ");
+                        String password = inClient.readLine();
+                        request = ("1,"+username+","+password);
+                        
+                        outServer.writeBytes(request + '\n');
+                        respond = inServer.readLine();
+                        if (respond.equals("200")){
+                            System.out.println("Login successful");
+                        } else if (respond.equals("400")){
+                            System.out.println("Login failed");
+                        } else {
+                            System.out.println("Unrecognized respond");
+                        }
+                        break;
+                    }
+                    default:
+                    {
+                        break;
+                    }
+                }
+                
+                //System.out.println("From Server: " + message);
             }
             clientSocket.close();
         } catch (Exception e){
