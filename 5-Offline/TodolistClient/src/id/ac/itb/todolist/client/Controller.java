@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
 import java.net.Socket;
+import java.net.SocketException;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -28,17 +29,16 @@ import java.util.List;
 public class Controller {
 
     private static final byte MSG_LOGIN = 0;
-    private static final byte MSG_UPDATE = 1;
-    private static final byte MSG_LIST = 2;
+    private static final byte MSG_LOGOUT = 1;
+    private static final byte MSG_UPDATE = 11;
+    private static final byte MSG_LIST = 22;
     private static final byte MSG_SUCCESS = 127;
     private static final byte MSG_FAILED = -1;
-    
     private String serverName;
     private int port;
     private Socket sockClient;
     private HashMap<Integer, UpdateStatus> lUpdates = new HashMap<>();
     private long sessionId;
-    
     public List<Tugas> tgsList = new ArrayList<>();
 
     public Controller(String serverName, int port) {
@@ -61,7 +61,7 @@ public class Controller {
     public void setPort(int port) {
         this.port = port;
     }
-    
+
     public long getSessionId() {
         return sessionId;
     }
@@ -155,6 +155,44 @@ public class Controller {
                 sessionId = in.readLong();
                 return true;
             }
+        } catch (SocketException e) {
+            e.printStackTrace();
+            try {
+                sockClient.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                sockClient = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean logout() {
+        if (sockClient == null || !sockClient.isConnected()) {
+            return false;
+        }
+        try {
+            DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
+            DataInputStream in = new DataInputStream(sockClient.getInputStream());
+
+            out.writeByte(MSG_LOGOUT);
+            out.flush();
+
+            byte msgResponse = in.readByte();
+            return (msgResponse == MSG_SUCCESS);
+        } catch (SocketException e) {
+            e.printStackTrace();
+            try {
+                sockClient.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                sockClient = null;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -163,8 +201,10 @@ public class Controller {
     }
 
     public boolean list() {
-        if (sockClient == null || !sockClient.isConnected()) return false;
-        
+        if (sockClient == null || !sockClient.isConnected()) {
+            return false;
+        }
+
         try {
             DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
             DataInputStream in = new DataInputStream(sockClient.getInputStream());
@@ -178,45 +218,53 @@ public class Controller {
                 out.writeLong(tgsList.get(i).getLastMod().getTime());
             }
 
-            int status;
-            do {
-                status = in.readInt();
-                Tugas tugas = new Tugas();
+            out.flush();
 
-                if (status == 3) { // Add
-                    tugas.readIn(in);
-                    System.out.println("Add: " + tugas);
-                    tgsList.add(tugas);
-                } else if (status == 0) { // Delete
-                    int idDel = in.readInt();
-                    System.out.println("Del: " + idDel);
-                    int j;
-                    for (j = 0; j < tgsList.size(); j++) {
-                        if (tgsList.get(j).getId() == idDel) {
-                            break;
+            if (in.readByte() == MSG_SUCCESS) {
+                int status;
+                do {
+                    status = in.readInt();
+                    Tugas tugas = new Tugas();
+
+                    if (status == 3) { // Add
+                        tugas.readIn(in);
+                        tgsList.add(tugas);
+                    } else if (status == 0) { // Delete
+                        int idDel = in.readInt();
+                        int j;
+                        for (j = 0; j < tgsList.size(); j++) {
+                            if (tgsList.get(j).getId() == idDel) {
+                                break;
+                            }
                         }
-                    }
-                    tgsList.remove(j);
-                } else if (status == 1) { // Update
-                    tugas.readIn(in);
-                    System.out.println("Upd: " + tugas);
-                    int j;
-                    for (j = 0; j < tgsList.size(); j++) {
-                        if (tgsList.get(j).getId() == tugas.getId()) {
-                            break;
+                        tgsList.remove(j);
+                    } else if (status == 1) { // Update
+                        tugas.readIn(in);
+                        int j;
+                        for (j = 0; j < tgsList.size(); j++) {
+                            if (tgsList.get(j).getId() == tugas.getId()) {
+                                break;
+                            }
                         }
+                        tgsList.remove(j);
+                        tgsList.add(tugas);
+                    } else if (status == 2) {
+                        in.readInt();
                     }
-                    tgsList.remove(j);
-                    tgsList.add(tugas);
-                } else if (status == 2) {
-                    System.out.println("Eqs: " + in.readInt());
-                } else if (status == -1) {
-                    System.out.println("ANEEEEH : " + status);
-                }
-            } while (status != -1);
-            
-            return true;
-        } catch (IOException e) {
+                } while (status != -1);
+
+                return true;
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+            try {
+                sockClient.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                sockClient = null;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
@@ -235,8 +283,10 @@ public class Controller {
     }
 
     private boolean updateToServer() {
-        if (sockClient == null || !sockClient.isConnected()) return false;
-        
+        if (sockClient == null || !sockClient.isConnected()) {
+            return false;
+        }
+
         try {
             DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
             DataInputStream in = new DataInputStream(sockClient.getInputStream());
@@ -257,11 +307,20 @@ public class Controller {
             if (response == MSG_SUCCESS) {
                 lUpdates.clear();
                 return true;
-            }            
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+            try {
+                sockClient.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                sockClient = null;
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
         return false;
     }
 }

@@ -17,7 +17,10 @@ public class Program {
         Scanner sc = new Scanner(System.in);
         
         Controller controller = new Controller("127.0.0.1", 9000);
-//        System.out.println("--- " + controller.connect("192.168.1.51", 9000));
+        
+        System.out.println("--- " + controller.connect());
+        sc.next();
+        
         System.out.println("--- " + controller.connect());
         System.out.println(controller.login("wIlson", "lalalala"));
         System.out.println("SID: " + controller.getSessionId());

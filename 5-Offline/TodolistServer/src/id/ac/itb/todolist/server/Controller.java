@@ -45,6 +45,8 @@ public class Controller extends Thread {
         while (true) {
             try {
                 Socket sockClient = sockServer.accept();
+                
+                System.out.println("Connection accepted : " + sockClient);
 
                 Thread thread = new Thread(new ConnectionHandler(sockClient));
                 thread.start();

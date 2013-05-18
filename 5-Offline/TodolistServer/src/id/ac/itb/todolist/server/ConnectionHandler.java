@@ -22,8 +22,9 @@ import javax.crypto.spec.SecretKeySpec;
 public class ConnectionHandler extends Thread {
 
     private static final byte MSG_LOGIN = 0;
-    private static final byte MSG_UPDATE = 1;
-    private static final byte MSG_LIST = 2;
+    private static final byte MSG_LOGOUT = 1;
+    private static final byte MSG_UPDATE = 11;
+    private static final byte MSG_LIST = 22;
     private static final byte MSG_SUCCESS = 127;
     private static final byte MSG_FAILED = -1;
     private static Random random = new Random();
@@ -52,6 +53,9 @@ public class ConnectionHandler extends Thread {
                  * SESSION_ID ada pada semua message, kecuali MSG_LOGIN
                  */
                 byte msgType = in.readByte();
+
+                System.out.println("--- MSG_TYPE = " + msgType);
+
                 if (msgType != MSG_LOGIN) {
                     sessionId = in.readLong();
 
@@ -65,6 +69,8 @@ public class ConnectionHandler extends Thread {
                 }
 
                 if (msgType == MSG_LOGIN) {
+                    System.out.println(sockClient + " : MSG_LOGIN");
+
                     /////////////////////////////// Server send p and g value                    
                     out.writeUTF(Controller.servp.toString());
                     out.writeUTF(Controller.servg.toString());
@@ -112,9 +118,21 @@ public class ConnectionHandler extends Thread {
                     } else {
                         out.writeByte(MSG_FAILED);
                     }
-                } else if (msgType == MSG_UPDATE) {
-                    int count = in.readInt();
+                } else if (msgType == MSG_LOGOUT) {
+                    System.out.println(sockClient + " : MSG_LOGOUT");
 
+                    synchronized (session) {
+                        session.remove(sessionId);
+                    }
+
+                    out.writeByte(MSG_SUCCESS);
+                    
+                    sockClient.close();
+                    break;
+                } else if (msgType == MSG_UPDATE) {
+                    System.out.println(sockClient + " : MSG_UPDATE");
+
+                    int count = in.readInt();
                     TugasDao tugasDao = new TugasDao();
                     for (int i = 0; i < count; i++) {
                         UpdateStatus us = new UpdateStatus(in.readInt(), in.readBoolean(), new Timestamp(in.readLong()));
@@ -123,6 +141,8 @@ public class ConnectionHandler extends Thread {
 
                     out.writeByte(MSG_SUCCESS);
                 } else if (msgType == MSG_LIST) {
+                    System.out.println(sockClient + " : MSG_LIST");
+
                     int jmlTugas = in.readInt();
                     TugasDao tgsDao = new TugasDao();
                     HashMap<Integer, Long> hmlist = new HashMap<>();
@@ -138,6 +158,8 @@ public class ConnectionHandler extends Thread {
                     System.out.println(hmlist);
                     System.out.println(hmlistquery);
                     
+                    out.writeByte(MSG_SUCCESS);
+
                     Iterator<Map.Entry<Integer, Long>> it = hmlist.entrySet().iterator();
                     while (it.hasNext()) {
                         Map.Entry<Integer, Long> pairs = it.next();
@@ -161,7 +183,7 @@ public class ConnectionHandler extends Thread {
                             hmlistquery.remove(pairs.getKey());
                         }
                     }
-                
+
                     Iterator<Map.Entry<Integer, Long>> it2 = hmlistquery.entrySet().iterator();
                     while (it2.hasNext()) {
                         //status 3 ada tambah baru
@@ -169,9 +191,11 @@ public class ConnectionHandler extends Thread {
                         out.writeInt(3);
                         tgsDao.getTugas(pairs.getKey(), true, true, true).writeOut(out);
                     }
-                    
+
                     out.writeInt(-1);
                 }
+
+                out.flush();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
