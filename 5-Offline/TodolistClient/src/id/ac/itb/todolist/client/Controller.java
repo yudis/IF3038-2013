@@ -12,9 +12,13 @@ import java.io.ObjectOutputStream;
 import java.math.BigInteger;
 import java.net.Socket;
 import java.net.SocketException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +29,11 @@ import javax.crypto.interfaces.DHPublicKey;
 import javax.crypto.spec.DHParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 public class Controller {
 
@@ -103,7 +112,9 @@ public class Controller {
         return (sockClient != null);
     }
 
-    public boolean login(String username, String password) {
+    public boolean login(String username, String password) throws IOException, SocketException {
+        if (sockClient == null) throw new SocketException("Socket is null");
+        
         try {
             DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
             DataInputStream in = new DataInputStream(sockClient.getInputStream());
@@ -155,122 +166,82 @@ public class Controller {
                 sessionId = in.readLong();
                 return true;
             }
-        } catch (SocketException e) {
-            e.printStackTrace();
-            try {
-                sockClient.close();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            } finally {
-                sockClient = null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException | NoSuchPaddingException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException ex) {
+            ex.printStackTrace();
         }
-
         return false;
     }
 
-    public boolean logout() {
-        if (sockClient == null || !sockClient.isConnected()) {
-            return false;
-        }
-        try {
-            DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
-            DataInputStream in = new DataInputStream(sockClient.getInputStream());
+    public boolean logout() throws IOException, SocketException {
+        if (sockClient == null) throw new SocketException("Socket is null");
+        
+        DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
+        DataInputStream in = new DataInputStream(sockClient.getInputStream());
 
-            out.writeByte(MSG_LOGOUT);
-            out.flush();
+        out.writeByte(MSG_LOGOUT);
+        out.flush();
 
-            byte msgResponse = in.readByte();
-            return (msgResponse == MSG_SUCCESS);
-        } catch (SocketException e) {
-            e.printStackTrace();
-            try {
-                sockClient.close();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            } finally {
-                sockClient = null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return false;
+        byte msgResponse = in.readByte();
+        return (msgResponse == MSG_SUCCESS);
     }
 
-    public boolean list() {
-        if (sockClient == null || !sockClient.isConnected()) {
-            return false;
+    public boolean list() throws IOException, SocketException {
+        if (sockClient == null) throw new SocketException("Socket is null");
+        
+        DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
+        DataInputStream in = new DataInputStream(sockClient.getInputStream());
+
+        out.writeByte(MSG_LIST);
+        out.writeLong(sessionId);
+
+        out.writeInt(tgsList.size());
+        for (int i = 0; i < tgsList.size(); i++) {
+            out.writeInt(tgsList.get(i).getId());
+            out.writeLong(tgsList.get(i).getLastMod().getTime());
         }
 
-        try {
-            DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
-            DataInputStream in = new DataInputStream(sockClient.getInputStream());
+        out.flush();
 
-            out.writeByte(MSG_LIST);
-            out.writeLong(sessionId);
+        if (in.readByte() == MSG_SUCCESS) {
+            int status;
+            do {
+                status = in.readInt();
+                Tugas tugas = new Tugas();
 
-            out.writeInt(tgsList.size());
-            for (int i = 0; i < tgsList.size(); i++) {
-                out.writeInt(tgsList.get(i).getId());
-                out.writeLong(tgsList.get(i).getLastMod().getTime());
-            }
-
-            out.flush();
-
-            if (in.readByte() == MSG_SUCCESS) {
-                int status;
-                do {
-                    status = in.readInt();
-                    Tugas tugas = new Tugas();
-
-                    if (status == 3) { // Add
-                        tugas.readIn(in);
-                        tgsList.add(tugas);
-                    } else if (status == 0) { // Delete
-                        int idDel = in.readInt();
-                        int j;
-                        for (j = 0; j < tgsList.size(); j++) {
-                            if (tgsList.get(j).getId() == idDel) {
-                                break;
-                            }
+                if (status == 3) { // Add
+                    tugas.readIn(in);
+                    tgsList.add(tugas);
+                } else if (status == 0) { // Delete
+                    int idDel = in.readInt();
+                    int j;
+                    for (j = 0; j < tgsList.size(); j++) {
+                        if (tgsList.get(j).getId() == idDel) {
+                            break;
                         }
-                        tgsList.remove(j);
-                    } else if (status == 1) { // Update
-                        tugas.readIn(in);
-                        int j;
-                        for (j = 0; j < tgsList.size(); j++) {
-                            if (tgsList.get(j).getId() == tugas.getId()) {
-                                break;
-                            }
-                        }
-                        tgsList.remove(j);
-                        tgsList.add(tugas);
-                    } else if (status == 2) {
-                        in.readInt();
                     }
-                } while (status != -1);
+                    tgsList.remove(j);
+                } else if (status == 1) { // Update
+                    tugas.readIn(in);
+                    int j;
+                    for (j = 0; j < tgsList.size(); j++) {
+                        if (tgsList.get(j).getId() == tugas.getId()) {
+                            break;
+                        }
+                    }
+                    tgsList.remove(j);
+                    tgsList.add(tugas);
+                } else if (status == 2) {
+                    in.readInt();
+                }
+            } while (status != -1);
 
-                return true;
-            }
-        } catch (SocketException e) {
-            e.printStackTrace();
-            try {
-                sockClient.close();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            } finally {
-                sockClient = null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            return true;
         }
+
         return false;
     }
 
-    public void updateStatus(int idTugas, boolean status) {
+    public void updateStatus(int idTugas, boolean status) throws IOException, SocketException {
         if (lUpdates.containsKey(idTugas)) {
             lUpdates.remove(idTugas);
         } else {
@@ -282,43 +253,28 @@ public class Controller {
         }
     }
 
-    private boolean updateToServer() {
-        if (sockClient == null || !sockClient.isConnected()) {
-            return false;
+    private boolean updateToServer() throws IOException, SocketException {
+        if (sockClient == null) throw new SocketException("Socket is null");
+        
+        DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
+        DataInputStream in = new DataInputStream(sockClient.getInputStream());
+
+        out.writeByte(MSG_UPDATE);
+        out.writeLong(sessionId);
+        out.writeInt(lUpdates.size());
+
+        Iterator<UpdateStatus> iter = lUpdates.values().iterator();
+        while (iter.hasNext()) {
+            UpdateStatus us = iter.next();
+            us.writeOut(out);
+            System.out.println(us);
         }
+        out.flush();
 
-        try {
-            DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
-            DataInputStream in = new DataInputStream(sockClient.getInputStream());
-
-            out.writeByte(MSG_UPDATE);
-            out.writeLong(sessionId);
-            out.writeInt(lUpdates.size());
-
-            Iterator<UpdateStatus> iter = lUpdates.values().iterator();
-            while (iter.hasNext()) {
-                UpdateStatus us = iter.next();
-                us.writeOut(out);
-                System.out.println(us);
-            }
-            out.flush();
-
-            int response = in.readByte();
-            if (response == MSG_SUCCESS) {
-                lUpdates.clear();
-                return true;
-            }
-        } catch (SocketException e) {
-            e.printStackTrace();
-            try {
-                sockClient.close();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            } finally {
-                sockClient = null;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        int response = in.readByte();
+        if (response == MSG_SUCCESS) {
+            lUpdates.clear();
+            return true;
         }
 
         return false;
