@@ -5,6 +5,7 @@
 package id.ac.itb.todolist.dao;
 
 import id.ac.itb.todolist.util.DB;
+import java.io.IOException;
 import java.sql.Connection;
 
 /**
@@ -14,7 +15,7 @@ import java.sql.Connection;
 public class DataAccessObject {
     protected Connection connection;
 
-    public DataAccessObject() {
+    public DataAccessObject() throws IOException {
         connection = DB.getConnection();
     }
 }

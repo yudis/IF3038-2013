@@ -4,6 +4,7 @@ import id.ac.itb.todolist.model.Attachment;
 import id.ac.itb.todolist.model.Category;
 import id.ac.itb.todolist.model.Tugas;
 import id.ac.itb.todolist.model.User;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,9 @@ import java.util.List;
 
 public class TugasDao extends DataAccessObject {
 
+    public TugasDao() throws IOException {
+    }
+    
     public int deleteTugas(int idTugas) {
         try {
             PreparedStatement preparedStatement = connection.

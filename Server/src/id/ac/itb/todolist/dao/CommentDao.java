@@ -2,6 +2,7 @@ package id.ac.itb.todolist.dao;
 
 import id.ac.itb.todolist.model.Comment;
 import id.ac.itb.todolist.model.User;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentDao extends DataAccessObject {
+    
+    public CommentDao() throws IOException{
+    }
+    
     public int getCommentsCount(int idTugas) {
         try {
             PreparedStatement preparedStatement = connection.

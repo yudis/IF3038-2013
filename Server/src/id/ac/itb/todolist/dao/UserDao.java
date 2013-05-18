@@ -19,6 +19,9 @@ import java.util.Collection;
 
 public class UserDao extends DataAccessObject {
 
+    public UserDao() throws IOException {
+    }
+    
     public int addUser(User user) {
         try {
             PreparedStatement preparedStatement = connection

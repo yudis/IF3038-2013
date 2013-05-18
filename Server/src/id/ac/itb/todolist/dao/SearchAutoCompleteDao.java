@@ -4,6 +4,7 @@
  */
 package id.ac.itb.todolist.dao;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +18,9 @@ import java.util.HashSet;
  */
 public class SearchAutoCompleteDao extends DataAccessObject {
         
+    public SearchAutoCompleteDao() throws IOException{
+    }
+    
     public ArrayList<String> getSearchAC(String q, String filter){
         ArrayList<String> result = new ArrayList<String>();    
         try {
