@@ -27,16 +27,41 @@ import java.util.List;
 
 public class Controller {
 
+    private static final byte MSG_LOGIN = 0;
     private static final byte MSG_UPDATE = 1;
     private static final byte MSG_LIST = 2;
     private static final byte MSG_SUCCESS = 127;
     private static final byte MSG_FAILED = -1;
-    private static final byte MSG_LOGIN = 0;
+    
+    private String serverName;
+    private int port;
     private Socket sockClient;
     private HashMap<Integer, UpdateStatus> lUpdates = new HashMap<>();
     private long sessionId;
+    
     public List<Tugas> tgsList = new ArrayList<>();
 
+    public Controller(String serverName, int port) {
+        this.serverName = serverName;
+        this.port = port;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+    
     public long getSessionId() {
         return sessionId;
     }
@@ -64,13 +89,13 @@ public class Controller {
         }
     }
 
-    public boolean connect(String serverName, int port) {
+    public boolean connect() {
         try {
             if (sockClient != null && sockClient.isConnected()) {
                 sockClient.close();
             }
             sockClient = new Socket(serverName, port);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             sockClient = null;
         }
@@ -137,14 +162,16 @@ public class Controller {
         return false;
     }
 
-    public void list() {
+    public boolean list() {
+        if (sockClient == null || !sockClient.isConnected()) return false;
+        
         try {
             DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
             DataInputStream in = new DataInputStream(sockClient.getInputStream());
-            
+
             out.writeByte(MSG_LIST);
             out.writeLong(sessionId);
-            
+
             out.writeInt(tgsList.size());
             for (int i = 0; i < tgsList.size(); i++) {
                 out.writeInt(tgsList.get(i).getId());
@@ -187,9 +214,12 @@ public class Controller {
                     System.out.println("ANEEEEH : " + status);
                 }
             } while (status != -1);
+            
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public void updateStatus(int idTugas, boolean status) {
@@ -199,20 +229,21 @@ public class Controller {
             lUpdates.put(idTugas, new UpdateStatus(idTugas, status));
         }
 
-//        if (!lUpdates.isEmpty()) {
-//            updateServer();
-//        }
+        if (!lUpdates.isEmpty()) {
+            updateToServer();
+        }
     }
 
-    private void updateServer() {
+    private boolean updateToServer() {
+        if (sockClient == null || !sockClient.isConnected()) return false;
+        
         try {
             DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
+            DataInputStream in = new DataInputStream(sockClient.getInputStream());
 
             out.writeByte(MSG_UPDATE);
             out.writeLong(sessionId);
             out.writeInt(lUpdates.size());
-
-            System.out.println("size: " + lUpdates.size());
 
             Iterator<UpdateStatus> iter = lUpdates.values().iterator();
             while (iter.hasNext()) {
@@ -221,18 +252,16 @@ public class Controller {
                 System.out.println(us);
             }
             out.flush();
-            System.out.println("DONE");
 
-            DataInputStream in = new DataInputStream(sockClient.getInputStream());
             int response = in.readByte();
             if (response == MSG_SUCCESS) {
-                System.out.println("Berhasil update status ke server.");
                 lUpdates.clear();
-            } else {
-                System.out.println("Gagal update status ke server.");
-            }
-        } catch (IOException ex) {
+                return true;
+            }            
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
+        
+        return false;
     }
 }

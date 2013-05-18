@@ -1,6 +1,5 @@
 
 import id.ac.itb.todolist.server.Controller;
-import java.io.IOException;
 import java.util.Scanner;
 
 /*
@@ -18,7 +17,7 @@ public class Program {
             Controller controller = new Controller(9000);
             Thread thread = new Thread(controller);
             thread.start();
-            
+
             Scanner sc = new Scanner(System.in);
             int pil;
             do {
@@ -27,7 +26,7 @@ public class Program {
                     controller.printSession();
                 }
             } while (pil != 0);
-            
+
             System.exit(0);
         } catch (Exception ex) {
             ex.printStackTrace();
