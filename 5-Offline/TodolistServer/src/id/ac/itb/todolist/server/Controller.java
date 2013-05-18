@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidParameterSpecException;
 import javax.crypto.spec.DHParameterSpec;
 
-public class Controller {
+public class Controller extends Thread {
 
     private ServerSocket sockServer;
     
@@ -40,7 +40,8 @@ public class Controller {
         servPub = servKP.getPublic().getEncoded();
     }
 
-    public void start() {
+    @Override
+    public void run() {
         while (true) {
             try {
                 Socket sockClient = sockServer.accept();

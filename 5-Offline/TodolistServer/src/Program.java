@@ -16,7 +16,8 @@ public class Program {
     public static void main(String[] args) {
         try {
             Controller controller = new Controller(9000);
-            controller.start();
+            Thread thread = new Thread(controller);
+            thread.start();
             
             Scanner sc = new Scanner(System.in);
             int pil;
@@ -26,6 +27,8 @@ public class Program {
                     controller.printSession();
                 }
             } while (pil != 0);
+            
+            System.exit(0);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
