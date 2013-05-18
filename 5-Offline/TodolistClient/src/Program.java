@@ -1,20 +1,8 @@
 
 import id.ac.itb.todolist.client.Controller;
 import java.io.IOException;
-import java.net.SocketException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- * ^
- *
- * @author Edward Samuel
- */
 public class Program {
 
     public static void main(String[] args) {
@@ -22,13 +10,22 @@ public class Program {
 
         Controller controller = new Controller("127.0.0.1", 9000);
 
-        while (true) {
+        int pil = -1;
+        do {
+            System.out.print("Pilihan: ");
+            pil = sc.nextInt();
             try {
-                System.out.println("Login with wIlson:lalalala@127.0.0.1:9000");
-                System.out.println(controller.login("wIlson", "lalalala"));
-                System.out.println(controller.list());
-                System.out.println(controller.tgsList);
-                sc.next();
+                if (pil == 1) {
+                    System.out.println("Login with wIlson:lalalala@127.0.0.1:9000");
+                    System.out.println(controller.login("wIlson", "lalalala"));
+                } else if (pil == 2) {
+                    System.out.println("List");
+                    System.out.println(controller.list());
+                    System.out.println(controller.listTugas);
+                } else if (pil == 3) {
+                    System.out.println("Logout: " + controller.logout());
+                }
+                System.out.println();
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("Trying connecting...");
@@ -38,6 +35,6 @@ public class Program {
                     System.out.println("Trying connecting...");
                 }
             }
-        }
+        } while (pil != 0);
     }
 }

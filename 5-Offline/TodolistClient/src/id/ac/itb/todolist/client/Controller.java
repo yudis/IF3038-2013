@@ -36,19 +36,21 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 public class Controller {
-
+    // Message Code
     private static final byte MSG_LOGIN = 0;
     private static final byte MSG_LOGOUT = 1;
     private static final byte MSG_UPDATE = 11;
     private static final byte MSG_LIST = 22;
     private static final byte MSG_SUCCESS = 127;
     private static final byte MSG_FAILED = -1;
+    // Attribute
     private String serverName;
     private int port;
     private Socket sockClient;
-    private HashMap<Integer, UpdateStatus> lUpdates = new HashMap<>();
-    private long sessionId;
-    public List<Tugas> tgsList = new ArrayList<>();
+    // Configuration
+    public HashMap<Integer, UpdateStatus> logUpdate = new HashMap<>();
+    public long sessionId;
+    public List<Tugas> listTugas = new ArrayList<>();
 
     public Controller(String serverName, int port) {
         this.serverName = serverName;
@@ -80,7 +82,7 @@ public class Controller {
             FileOutputStream out = new FileOutputStream("updates.out");
             ObjectOutputStream oos = new ObjectOutputStream(out);
 
-            oos.writeObject(lUpdates);
+            oos.writeObject(logUpdate);
             oos.flush();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -179,10 +181,18 @@ public class Controller {
         DataInputStream in = new DataInputStream(sockClient.getInputStream());
 
         out.writeByte(MSG_LOGOUT);
+        out.writeLong(sessionId);
         out.flush();
 
         byte msgResponse = in.readByte();
-        return (msgResponse == MSG_SUCCESS);
+        if (msgResponse == MSG_SUCCESS) {
+            sessionId = -1;
+            logUpdate.clear();
+            listTugas.clear();
+            
+            return true;
+        }
+        return false;
     }
 
     public boolean list() throws IOException, SocketException {
@@ -194,10 +204,10 @@ public class Controller {
         out.writeByte(MSG_LIST);
         out.writeLong(sessionId);
 
-        out.writeInt(tgsList.size());
-        for (int i = 0; i < tgsList.size(); i++) {
-            out.writeInt(tgsList.get(i).getId());
-            out.writeLong(tgsList.get(i).getLastMod().getTime());
+        out.writeInt(listTugas.size());
+        for (int i = 0; i < listTugas.size(); i++) {
+            out.writeInt(listTugas.get(i).getId());
+            out.writeLong(listTugas.get(i).getLastMod().getTime());
         }
 
         out.flush();
@@ -210,26 +220,26 @@ public class Controller {
 
                 if (status == 3) { // Add
                     tugas.readIn(in);
-                    tgsList.add(tugas);
+                    listTugas.add(tugas);
                 } else if (status == 0) { // Delete
                     int idDel = in.readInt();
                     int j;
-                    for (j = 0; j < tgsList.size(); j++) {
-                        if (tgsList.get(j).getId() == idDel) {
+                    for (j = 0; j < listTugas.size(); j++) {
+                        if (listTugas.get(j).getId() == idDel) {
                             break;
                         }
                     }
-                    tgsList.remove(j);
+                    listTugas.remove(j);
                 } else if (status == 1) { // Update
                     tugas.readIn(in);
                     int j;
-                    for (j = 0; j < tgsList.size(); j++) {
-                        if (tgsList.get(j).getId() == tugas.getId()) {
+                    for (j = 0; j < listTugas.size(); j++) {
+                        if (listTugas.get(j).getId() == tugas.getId()) {
                             break;
                         }
                     }
-                    tgsList.remove(j);
-                    tgsList.add(tugas);
+                    listTugas.remove(j);
+                    listTugas.add(tugas);
                 } else if (status == 2) {
                     in.readInt();
                 }
@@ -242,13 +252,13 @@ public class Controller {
     }
 
     public void updateStatus(int idTugas, boolean status) throws IOException, SocketException {
-        if (lUpdates.containsKey(idTugas)) {
-            lUpdates.remove(idTugas);
+        if (logUpdate.containsKey(idTugas)) {
+            logUpdate.remove(idTugas);
         } else {
-            lUpdates.put(idTugas, new UpdateStatus(idTugas, status));
+            logUpdate.put(idTugas, new UpdateStatus(idTugas, status));
         }
 
-        if (!lUpdates.isEmpty()) {
+        if (!logUpdate.isEmpty()) {
             updateToServer();
         }
     }
@@ -261,9 +271,9 @@ public class Controller {
 
         out.writeByte(MSG_UPDATE);
         out.writeLong(sessionId);
-        out.writeInt(lUpdates.size());
+        out.writeInt(logUpdate.size());
 
-        Iterator<UpdateStatus> iter = lUpdates.values().iterator();
+        Iterator<UpdateStatus> iter = logUpdate.values().iterator();
         while (iter.hasNext()) {
             UpdateStatus us = iter.next();
             us.writeOut(out);
@@ -273,7 +283,7 @@ public class Controller {
 
         int response = in.readByte();
         if (response == MSG_SUCCESS) {
-            lUpdates.clear();
+            logUpdate.clear();
             return true;
         }
 
