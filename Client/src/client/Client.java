@@ -4,7 +4,7 @@ import java.net.*;
 import java.io.*;
 
 public class Client {
-    private Socket client;
+    public Socket client;
     
     // Message
     private static final byte MSG_LOGIN = 1;
@@ -20,7 +20,7 @@ public class Client {
     public boolean connect(String serverName, int port) throws InterruptedException {
         System.out.println("Connecting to " + serverName
                 + " on port " + port);
-        try (Socket temp = new Socket(serverName, port)) {
+        try {
 //                    System.out.println("Just connected to " + client.getRemoteSocketAddress());
 //                    OutputStream outToServer = client.getOutputStream();
 //                    DataOutputStream out = new DataOutputStream(outToServer);
@@ -32,7 +32,7 @@ public class Client {
 //
 //                        Thread.sleep(1000);
 //                    }
-            this.client = temp;
+            client = new Socket(serverName, port);
             return true;
         } catch (Exception e) {
             return false;
@@ -50,7 +50,7 @@ public class Client {
             
             InputStream inFromServer = client.getInputStream();
             DataInputStream in = new DataInputStream(inFromServer);
-            
+
             byte resType = in.readByte();
             if (resType == MSG_SUCCESS) {
                 return true;
