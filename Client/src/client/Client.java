@@ -19,7 +19,6 @@ public class Client {
     
     Client(){
         this.running = true;
-        this.lastUpdate = System.currentTimeMillis();
     }
     
     public static void main(String[] args) {
@@ -49,12 +48,17 @@ public class Client {
                         
                         outServer.writeBytes(request + '\n');
                         respond = inServer.readLine();
-                        if (respond.equals("200")){
-                            System.out.println("Login successful, creating 'keep update' thread");
+                        String[] responds = respond.split(",");
+                        if (responds[0].equals("200")){
+                            c.lastUpdate = Long.parseLong(responds[1]);
+                            System.out.println("Login successful, this client lastUpdate is "+c.lastUpdate);
+                            //TODO:
+                            //Synchronize...
+                            System.out.println("Creating 'keep update' thread");
                             Runnable task = new MyRunnable();
                             Thread threadUpdate = new Thread(task);
                             threadUpdate.start();
-                        } else if (respond.equals("400")){
+                        } else if (responds[0].equals("400")){
                             System.out.println("Login failed");
                         } else {
                             System.out.println("Unrecognized respond");

@@ -54,7 +54,7 @@ public class Database {
             preparedStatement.setString(2, password);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()){
-                message = "200\n";    //success
+                message = "200,"+resultSet.getLong("last_update")+"\n";    //success
             }
         } catch (Exception e){
             System.out.println("Login Error: " + e.getMessage());

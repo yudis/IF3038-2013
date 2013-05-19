@@ -15,6 +15,7 @@ import java.sql.SQLException;
 public class Server implements Runnable{
     
     protected static int port = 1234;
+    private static long lastUpdate;
     Socket connection;
     private int ID;
     private static int count = 0;
@@ -22,7 +23,6 @@ public class Server implements Runnable{
     private String respond;
     private String capitalizedMessage;
     private Database db;
-    private long lastUpdate;
     
     Server(Socket socket, int id) {
         this.connection = socket;
@@ -33,7 +33,6 @@ public class Server implements Runnable{
         this.lastUpdate = System.currentTimeMillis();
     }
         
-    
     public static void main(String[] args) {
         
         //Starts server ...
@@ -68,7 +67,8 @@ public class Server implements Runnable{
                         String username = parts[1];
                         String password = parts[2];
                         respond = db.Login(username, password);
-                        if (respond.equals("200\n")){
+                        String[] responds = respond.split(",");
+                        if (responds[0].equals("200")){
                             System.out.println("Login successful, creating 'keep update' thread");
                             Runnable task = new MyRunnable();
                             Thread threadUpdate = new Thread(task);
@@ -85,7 +85,7 @@ public class Server implements Runnable{
                         respond = db.Check(task_id);
                         String[] responds = respond.split(",");
                         if (responds[0].equals("200")){
-                            lastUpdate = Long.parseLong(responds[1]);
+                            lastUpdate = Long.parseLong(responds[1].substring(0,responds[1].length()-1));
                             System.out.println("Check successful");
                         } else {
                             System.out.println("Check failed");
@@ -99,7 +99,7 @@ public class Server implements Runnable{
                         respond = db.Uncheck(task_id);
                         String[] responds = respond.split(",");
                         if (responds[0].equals("200")){
-                            lastUpdate = Long.parseLong(responds[1]);
+                            lastUpdate = Long.parseLong(responds[1].substring(0,responds[1].length()-1));
                             System.out.println("Check successful");
                         } else {
                             System.out.println("Check failed");
