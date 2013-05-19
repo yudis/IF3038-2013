@@ -10,6 +10,14 @@ public class Program {
 
         Controller controller = new Controller("127.0.0.1", 9000);
 
+        // 1 Connect ke Server
+        System.out.println("Trying connecting...");
+        while (!controller.connect()) {
+            System.err.println("Failed connecting");
+            sc.next();
+            System.out.println("Trying connecting...");
+        }
+
         int pil = -1;
         do {
             System.out.print("Pilihan: ");
@@ -23,6 +31,34 @@ public class Program {
                     System.out.println(controller.list());
                     System.out.println(controller.listTugas);
                 } else if (pil == 3) {
+                    System.out.println("Update status id=15 -> true");
+                    try {
+                        controller.updateStatus(15, true);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } else if (pil == 4) {
+                    System.out.println("Update status id=15 -> false");
+                    try {
+                        controller.updateStatus(15, false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } else if (pil == 5) {
+                    System.out.println("Update status id=19 -> true");
+                    try {
+                        controller.updateStatus(19, true);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } else if (pil == 6) {
+                    System.out.println("Update status id=19 -> false");
+                    try {
+                        controller.updateStatus(19, false);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } else if (pil == 9) {
                     System.out.println("Logout: " + controller.logout());
                 }
                 System.out.println();
