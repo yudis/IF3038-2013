@@ -9,6 +9,7 @@ package id.ac.itb.todolist.model;
  * @author Felix
  */
 public class Content {
+
     private String nama;
     private String pemilik;
     private String kategori;
@@ -26,7 +27,7 @@ public class Content {
         this.tags = tags;
         this.status = status;
     }
-    
+
     public String getNama() {
         return nama;
     }
@@ -51,7 +52,7 @@ public class Content {
         return tags;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
@@ -82,6 +83,23 @@ public class Content {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        String NEW_LINE = System.getProperty("line.separator");
+
+        result.append(this.getClass().getName()).append(" Object {").append(NEW_LINE);
+        result.append(" Nama: ").append(nama).append(NEW_LINE);
+        result.append(" Pemilik: ").append(pemilik).append(NEW_LINE);
+        result.append(" Kategori: ").append(kategori).append(NEW_LINE);
+        result.append(" Deadline: ").append(Deadline).append(NEW_LINE);
+        result.append(" Assignees: ").append(assignees).append(NEW_LINE);
+        result.append(" Tags: ").append(tags).append(NEW_LINE);
+        result.append(" Status: ").append(status).append(NEW_LINE);
+
+        result.append("}");
+
+        return result.toString();
+    }
 }

@@ -8,14 +8,17 @@ import Util.Message;
 import id.ac.itb.todolist.model.Content;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
+
 
 /**
  *
@@ -24,12 +27,16 @@ import javax.swing.table.TableModel;
 class ColorTableModel extends AbstractTableModel {
 
     String columnNames[] = {"Nama Tugas", "Pemilik", "Kategori", "Deadline", "Assignee", "Tag", "Status"};
-    Object rowData[][] = {
-        {"Tubes 5 Progin", "raymondddddddddddddddddddddd dddddddddddddddd dddddddddddddddddddd", "Kuliah", "21 Januari 2013", "felixt, mario", "tubes, lima", Boolean.TRUE},
-        {"Technical Report KI", "mario", "Kuliah", "21 Januari 2013", "", "makalah", Boolean.FALSE},
-        {"Koreksi Alstruk", "felixt", "Asisten B)", "21 Januari 2013", "", "alstruk, 2011", Boolean.FALSE},};
+    Object rowData[][];  //   = {     {"Tubes 5 Progin", "raymondddddddddddddddddddddd dddddddddddddddd dddddddddddddddddddd", "Kuliah", "21 Januari 2013", "felixt, mario", "tubes, lima", Boolean.TRUE},
+    //        {"Technical Report KI", "mario", "Kuliah", "21 Januari 2013", "", "makalah", Boolean.FALSE},
+    //        {"Koreksi Alstruk", "felixt", "Asisten B)", "21 Januari 2013", "", "alstruk, 2011", Boolean.FALSE},
+//    };
     boolean[] canEdit = new boolean[]{false, false, false, false, false, false, true};
 
+    public ColorTableModel(int bar, int col) {
+        this.rowData = new Object[bar][col];
+    }
+    
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return canEdit[columnIndex];
@@ -62,6 +69,9 @@ class ColorTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object value, int row, int column) {
+        System.out.println("row " + row);
+        System.out.println("column " + column);
+        System.out.println("value " + value);
         rowData[row][column] = value;
     }
 }
@@ -69,14 +79,36 @@ class ColorTableModel extends AbstractTableModel {
 public class ClientForm extends javax.swing.JFrame {
 
     private String username;
+    ColorTableModel tm;
 
     /**
      * Creates new form ClientForm
      */
     public ClientForm(String uname) throws IOException {
         username = uname;
+        LoginForm.getClient().getList();
+        tm = new ColorTableModel(LoginForm.getClient().getAc().size(),7);
+        initTable(LoginForm.getClient().getAc());
         initComponents(uname);
-        
+    }
+
+    public void initTable(ArrayList<Content> ac) {
+        Iterator it = ac.iterator();
+        int bar = 0;
+        while (it.hasNext()) {
+            Content temp = (Content) it.next();
+            System.out.println(bar);
+            tm.setValueAt(temp.getNama(), bar, 0);
+            tm.setValueAt(temp.getPemilik(), bar, 1);
+            tm.setValueAt(temp.getKategori(), bar, 2);
+            tm.setValueAt(temp.getDeadline(), bar, 3);
+            tm.setValueAt(temp.getAssignees(), bar, 4);
+            tm.setValueAt(temp.getTags(), bar, 5);
+            tm.setValueAt(temp.getStatus(), bar, 6);
+
+            bar++;
+        }
+
     }
 
     /**
@@ -94,8 +126,8 @@ public class ClientForm extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
 
-        TableModel model = new ColorTableModel();
-        jTable1 = new javax.swing.JTable(model);
+
+        jTable1 = new javax.swing.JTable(tm);
         jTable1.setCellSelectionEnabled(true);
         //jTable1 = new javax.swing.JTable();
         jTable1.getColumnModel().getColumn(0).setCellRenderer(new TableCellLongTextRenderer());

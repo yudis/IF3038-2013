@@ -18,6 +18,7 @@ public class Client {
 
     public Client() {
         client = null;
+        ac = new ArrayList<Content>();
     }
 
     public boolean connect(String serverName, int port) throws InterruptedException {
@@ -32,6 +33,10 @@ public class Client {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public ArrayList<Content> getAc() {
+        return ac;
     }
 
     public boolean login(String username, String password) {
@@ -97,36 +102,61 @@ public class Client {
     }
 
     public void getList() throws IOException {
-        
+
         OutputStream outToServer = LoginForm.getClient().getClient().getOutputStream();
         DataOutputStream out = new DataOutputStream(outToServer);
         InputStream inFromServer = LoginForm.getClient().getClient().getInputStream();
         DataInputStream in = new DataInputStream(inFromServer);
         out.writeByte(Message.MSG_LIST);
         out.writeUTF(username);
-        for (int idx = 0; idx < in.readInt(); idx++) {
+        int tugascount = in.readInt();
+        System.out.println(tugascount);
+        for (int idx = 0; idx < tugascount; idx++) {
             String nama = in.readUTF();
+            System.out.println(nama);
             String pemilik = in.readUTF();
+            System.out.println(pemilik);
             String kategori = in.readUTF();
+            System.out.println(kategori);
             String date = in.readUTF();
+            System.out.println(date);
             boolean status = in.readBoolean();
-            String tags = "";
-            for (int i = 0; i < in.readInt(); i++) {
-                tags += in.readUTF();
-                if (i != (in.readInt() - 1)) {
-                    tags += ", ";
-                }
-            }
+            System.out.println(status);
+
             String assignees = "";
-            for (int i = 0; i < in.readInt(); i++) {
+            int aSize = in.readInt();
+            System.out.println("Size assignees :" + aSize);
+            if (aSize == 0) {
+                assignees += "-";
+            }
+            for (int i = 0; i < aSize; i++) {
                 assignees += in.readUTF();
-                if (i != (in.readInt() - 1)) {
+                if (i != (aSize - 1)) {
                     assignees += ", ";
                 }
             }
-            Content c = new Content(nama, pemilik, kategori, date, tags, assignees, status);
+            System.out.println(assignees);
+            String tags = "";
+
+            int tSize = in.readInt();
+            System.out.println("size tags : " + tSize);
+            if (tSize == 0) {
+                tags += "-";
+            }
+            for (int i = 0; i < tSize; i++) {
+                tags += in.readUTF();
+                if (i != (tSize - 1)) {
+                    tags += ", ";
+                }
+            }
+            System.out.println(tags);
+            Content c = new Content(nama, pemilik, kategori, date, assignees, tags, status);
             ac.add(c);
-        }    
+        }
+//            Just Printing
+//        for (int i = 0; i < ac.size(); i++) {
+//            System.out.println(ac.get(i));
+//        }
     }
 
     public String getUsername() {

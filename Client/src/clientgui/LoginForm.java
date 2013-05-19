@@ -247,22 +247,24 @@ public class LoginForm extends javax.swing.JFrame {
                         Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     DataInputStream in = new DataInputStream(inFromServer);
-                    while (true) {
-                        System.out.println("BBBBBBBBBBBBB");
-                        if (!client.checkInput(in)) {
-                            System.out.println("Closed --");
-                            isconnected = false;
-                            do {
-                                try {
-                                    isconnected = client.connect(IP, port);
-                                } catch (InterruptedException ex) {
-                                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                            } while (!isconnected);
-                        } else {
-                            System.out.println("AAAAAAAAAAAAAAAAAAA");
-                        }
-                    }
+                    
+                    // RECONNECT
+//                    while (true) {
+//                        System.out.println("BBBBBBBBBBBBB");
+//                        if (!client.checkInput(in)) {
+//                            System.out.println("Closed --");
+//                            isconnected = false;
+//                            do {
+//                                try {
+//                                    isconnected = client.connect(IP, port);
+//                                } catch (InterruptedException ex) {
+//                                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+//                                }
+//                            } while (!isconnected);
+//                        } else {
+//                            System.out.println("AAAAAAAAAAAAAAAAAAA");
+//                        }
+//                    }
                 
             }
         }.start();
