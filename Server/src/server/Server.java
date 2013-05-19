@@ -30,6 +30,7 @@ public class Server implements Runnable{
         this.db = new Database();
         this.request = "";
         this.respond = "";
+        this.lastUpdate = System.currentTimeMillis();
     }
         
     
@@ -75,28 +76,35 @@ public class Server implements Runnable{
                         } else {
                             System.out.println("Login failed");
                         }
+                        out.writeBytes(respond);
                         break;
                     }
                     case ("2"): //check
                     {
                         String task_id = parts[1];
                         respond = db.Check(task_id);
-                        if (respond.equals("200\n")){
+                        String[] responds = respond.split(",");
+                        if (responds[0].equals("200")){
+                            lastUpdate = Long.parseLong(responds[1]);
                             System.out.println("Check successful");
                         } else {
                             System.out.println("Check failed");
                         }
+                        out.writeBytes(respond);
                         break;
                     }
                     case ("3"): //uncheck
                     {
                         String task_id = parts[1];
                         respond = db.Uncheck(task_id);
-                        if (respond.equals("200\n")){
+                        String[] responds = respond.split(",");
+                        if (responds[0].equals("200")){
+                            lastUpdate = Long.parseLong(responds[1]);
                             System.out.println("Check successful");
                         } else {
                             System.out.println("Check failed");
                         }
+                        out.writeBytes(respond);
                         break;
                     }
                     default:
@@ -104,7 +112,6 @@ public class Server implements Runnable{
                         break;
                     }
                 }
-                out.writeBytes(respond);
                 Thread.sleep(1000);
             }
         } catch (Exception e){

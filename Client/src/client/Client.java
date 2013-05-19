@@ -15,21 +15,26 @@ import java.sql.SQLException;
 public class Client {
 
     private long lastUpdate;
+    private Boolean running;
     
+    Client(){
+        this.running = true;
+        this.lastUpdate = System.currentTimeMillis();
+    }
     
     public static void main(String[] args) {
+        
+        Client c = new Client();
         String command;
         String request;
         String respond;
-        Boolean running;
         
         try{
-            running = true;
             BufferedReader inClient = new BufferedReader( new InputStreamReader(System.in));
             Socket clientSocket = new Socket("localhost", 1234);
             DataOutputStream outServer = new DataOutputStream(clientSocket.getOutputStream());
             BufferedReader inServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            while (running){
+            while (c.running){
                 System.out.print(">> ");
                 command = inClient.readLine();
                 command = command.toLowerCase();
@@ -64,9 +69,11 @@ public class Client {
                         
                         outServer.writeBytes(request + '\n');
                         respond = inServer.readLine();
-                        if (respond.equals("200")){
-                            System.out.println("Check successful");
-                        } else if (respond.equals("400")){
+                        String[] responds = respond.split(",");
+                        if (responds[0].equals("200")){
+                            c.lastUpdate = Long.parseLong(responds[1]);
+                            System.out.println("Check successful, lastUpdate "+c.lastUpdate);
+                        } else if (responds[0].equals("400")){
                             System.out.println("Check failed");
                         } else {
                             System.out.println("Unrecognized respond");
@@ -81,9 +88,11 @@ public class Client {
                         
                         outServer.writeBytes(request + '\n');
                         respond = inServer.readLine();
-                        if (respond.equals("200")){
-                            System.out.println("Uncheck successful");
-                        } else if (respond.equals("400")){
+                        String[] responds = respond.split(",");
+                        if (responds[0].equals("200")){
+                            c.lastUpdate = Long.parseLong(responds[1]);
+                            System.out.println("Uncheck successful, lastUpdate "+c.lastUpdate);
+                        } else if (responds[0].equals("400")){
                             System.out.println("Uncheck failed");
                         } else {
                             System.out.println("Unrecognized respond");

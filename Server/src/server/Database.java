@@ -20,7 +20,7 @@ public class Database {
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-  
+    
     public Database(){
         System.out.println("-------- MySQL JDBC Connection Testing ------------");
         try {
@@ -64,11 +64,12 @@ public class Database {
     
     public String Check(String task_id){
         String message = "400\n";
+        long now = System.currentTimeMillis();
         try{
-            preparedStatement = connection.prepareStatement("UPDATE task SET task_status = 1 WHERE task_id = ?");
+            preparedStatement = connection.prepareStatement("UPDATE task SET task_status = 1, timestamp = "+ now +" WHERE task_id = ?");
             preparedStatement.setString(1, task_id);
             if (preparedStatement.executeUpdate() != 0){
-                message = "200\n";    //success
+                message = "200,"+now+"\n";    //success
             }
         } catch (Exception e){
             System.out.println("UpdateTaskStatus Error: " + e.getMessage());
@@ -78,11 +79,12 @@ public class Database {
     
     public String Uncheck(String task_id){
         String message = "400\n";
+        long now = System.currentTimeMillis();
         try{
-            preparedStatement = connection.prepareStatement("UPDATE task SET task_status = 0 WHERE task_id = ?");
+            preparedStatement = connection.prepareStatement("UPDATE task SET task_status = 0, timestamp = "+ now +" WHERE task_id = ?");
             preparedStatement.setString(1, task_id);
             if (preparedStatement.executeUpdate() != 0){
-                message = "200\n";    //success
+                message = "200,"+now+"\n";    //success
             }
         } catch (Exception e){
             System.out.println("UpdateTaskStatus Error: " + e.getMessage());
