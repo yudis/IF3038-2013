@@ -49,7 +49,6 @@ public class ServerKu extends Thread {
 class MultiServerThread extends Thread {
 
     // Message
-
     private Socket server = null;
 
     public MultiServerThread(Socket socket) {
@@ -95,6 +94,7 @@ class MultiServerThread extends Thread {
                         ArrayList<Tugas> ALT = (ArrayList<Tugas>) TD.getTugas(in.readUTF());
                         DataOutputStream out = new DataOutputStream(server.getOutputStream());
                         out.writeInt(ALT.size());
+                        System.out.println("Size : " + ALT.size());
                         for (int idxTgs = 0; idxTgs < ALT.size(); idxTgs++) {
                             out.writeUTF(ALT.get(idxTgs).getNama());
                             out.writeUTF(ALT.get(idxTgs).getPemilik().getUsername());
@@ -102,9 +102,14 @@ class MultiServerThread extends Thread {
                             out.writeUTF((ALT.get(idxTgs).getTglDeadline()).toString());
                             out.writeBoolean(ALT.get(idxTgs).isStatus());
                             out.writeInt(ALT.get(idxTgs).getAssignees().size());
+                            System.out.println("jml assign: " + ALT.get(idxTgs).getAssignees().size());
                             for (int iA = 0; iA < ALT.get(idxTgs).getAssignees().size(); iA++) {
                                 out.writeUTF(((User) (((ArrayList) ALT.get(idxTgs).getAssignees()).get(iA))).getUsername());
                             }
+                            out.writeInt(ALT.get(idxTgs).getTags().size());
+
+                            System.out.println("jml tags: " + ALT.get(idxTgs).getTags().size());
+
                             for (int iT = 0; iT < ALT.get(idxTgs).getTags().size(); iT++) {
                                 out.writeUTF((String) (((ArrayList) ALT.get(idxTgs).getTags()).get(iT)));
                             }
