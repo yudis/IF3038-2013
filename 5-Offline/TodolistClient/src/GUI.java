@@ -280,7 +280,9 @@ public class GUI extends javax.swing.JFrame {
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try {
             if(haslogin) {
+                progress.setIndeterminate(true);
                 control.logout();
+                progress.setIndeterminate(false);
                 userlabel.setVisible(true);
                 passlabel.setVisible(true);
                 username.setVisible(true);
@@ -299,7 +301,7 @@ public class GUI extends javax.swing.JFrame {
             }
             if(!username.getText().equals("") && pass.getPassword().length > 0) {
                 if(!haslogin) {
-                    progress.setIndeterminate(true);System.out.println(username.getText());System.out.println(pass.getText());
+                    progress.setIndeterminate(true);
                     if(control.login(username.getText(), new String(pass.getPassword()))) {
                         JOptionPane.showMessageDialog(this, "Berhasil log masuk", "Log Masuk", JOptionPane.INFORMATION_MESSAGE);
                         haslogin = true;
