@@ -3,6 +3,7 @@ package id.ac.itb.todolist.rest.resource;
 import id.ac.itb.todolist.dao.TugasDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.ServletException;
@@ -26,6 +27,8 @@ public class TugasResouce extends HttpServlet {
     private Pattern regexDeadline = Pattern.compile("^/([0-9]{1,})/deadline/([0-9]{4,4})/([0-9]{1,2})/([0-9]{1,2})$");
     private Pattern regexUsername = Pattern.compile("^/username/([\\w%]{1,})$");
     private Pattern regexSearch = Pattern.compile("^/search/([\\w%]{1,})/([0-9]{1,})/([0-9]{1,})$");
+    private Pattern regexTugasbyUser = Pattern.compile("^/tgsbyuser/([\\w._%].*)$");
+    private Pattern regexSetStatus = Pattern.compile("^/setstatus/([0-9]{1,})/([0-1])/([0-9]{1,})$");
     
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,7 +56,7 @@ public class TugasResouce extends HttpServlet {
             out.print(tugasDao.removeTag(Integer.parseInt(matcher.group(1)), matcher.group(2)));
             return;
         }
-
+        
         throw new ServletException("Invalid URI");
     }
 
@@ -141,7 +144,15 @@ public class TugasResouce extends HttpServlet {
             out.print(new JSONArray(tugasDao.getAllTugas()));
             return;
         }
+        
+        matcher = regexTugasbyUser.matcher(pathInfo);
+        if (matcher.find()) {
 
+            TugasDao tugasDao = new TugasDao();
+            out.print(new JSONArray(tugasDao.getAllTugasbyUser(matcher.group(1))));
+            return;
+        }
+        
         throw new ServletException("Invalid URI");
     }
 
@@ -179,6 +190,18 @@ public class TugasResouce extends HttpServlet {
 
             TugasDao tugasDao = new TugasDao();
             out.print(tugasDao.setDeadline(id, date));
+            return;
+        }  
+        
+        matcher = regexSetStatus.matcher(pathInfo);
+        if (matcher.find()) {
+            int id = Integer.parseInt(matcher.group(1));
+            boolean bool = Boolean.parseBoolean(matcher.group(2));
+            long time = Long.parseLong(matcher.group(3));
+            Timestamp timestamp = new Timestamp(time);
+            
+            TugasDao tugasDao = new TugasDao();
+            out.print(tugasDao.setStatus(id,bool,timestamp));
             return;
         }   
     }
