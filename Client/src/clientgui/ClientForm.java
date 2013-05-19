@@ -19,7 +19,6 @@ import java.util.Iterator;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
-
 /**
  *
  * @author Mario
@@ -36,7 +35,7 @@ class ColorTableModel extends AbstractTableModel {
     public ColorTableModel(int bar, int col) {
         this.rowData = new Object[bar][col];
     }
-    
+
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return canEdit[columnIndex];
@@ -69,9 +68,9 @@ class ColorTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object value, int row, int column) {
-        System.out.println("row " + row);
-        System.out.println("column " + column);
-        System.out.println("value " + value);
+//        System.out.println("row " + row);
+//        System.out.println("column " + column);
+//        System.out.println("value " + value);
         rowData[row][column] = value;
     }
 }
@@ -87,7 +86,7 @@ public class ClientForm extends javax.swing.JFrame {
     public ClientForm(String uname) throws IOException {
         username = uname;
         LoginForm.getClient().getList();
-        tm = new ColorTableModel(LoginForm.getClient().getAc().size(),7);
+        tm = new ColorTableModel(LoginForm.getClient().getAc().size(), 7);
         initTable(LoginForm.getClient().getAc());
         initComponents(uname);
     }
@@ -203,6 +202,23 @@ public class ClientForm extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
         pack();
+
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                int col = jTable1.columnAtPoint(evt.getPoint());
+                if (col == 6) {
+                    int row = jTable1.rowAtPoint(evt.getPoint());
+                    if (LoginForm.getClient().getAc().get(row).getStatus() != jTable1.getValueAt(row, col)) {
+                        LoginForm.getClient().getAc().get(row).setStatus(!(LoginForm.getClient().getAc().get(row).getStatus()));
+                        System.out.println("update status!");
+
+                    }
+                }
+            }
+        });
+
     }// </editor-fold>                        
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

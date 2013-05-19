@@ -188,9 +188,7 @@ public class LoginForm extends javax.swing.JFrame {
     public static Client getClient() {
         return client;
     }
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -240,17 +238,19 @@ public class LoginForm extends javax.swing.JFrame {
                 while (client.client == null) {
                     System.out.println("hh");
                 }
-                    System.out.println("masuk");
-                    try {
-                        inFromServer = client.client.getInputStream();
-                    } catch (IOException ex) {
-                        Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    DataInputStream in = new DataInputStream(inFromServer);
-                    
-                    // RECONNECT
-//                    while (true) {
-//                        System.out.println("BBBBBBBBBBBBB");
+                System.out.println("masuk");
+                try {
+                    inFromServer = client.client.getInputStream();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                DataInputStream in = new DataInputStream(inFromServer);
+
+                // RECONNECT
+                while (true) {
+//                    System.out.println("BBBBBBBBBBBBB");
+//                    try {
+//                        in.read();
 //                        if (!client.checkInput(in)) {
 //                            System.out.println("Closed --");
 //                            isconnected = false;
@@ -264,8 +264,11 @@ public class LoginForm extends javax.swing.JFrame {
 //                        } else {
 //                            System.out.println("AAAAAAAAAAAAAAAAAAA");
 //                        }
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
 //                    }
-                
+                }
+
             }
         }.start();
     }

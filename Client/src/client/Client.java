@@ -1,5 +1,6 @@
 package client;
 
+import Util.Log;
 import Util.Message;
 import clientgui.LoginForm;
 import id.ac.itb.todolist.model.Content;
@@ -13,17 +14,23 @@ public class Client {
 
     public Socket client;
     private String username;
+    private String servername;
+    private int port;
+    private Log log;
     ArrayList<Content> ac;
     // Message
 
     public Client() {
         client = null;
+        //log = new Log();
         ac = new ArrayList<Content>();
     }
 
     public boolean connect(String serverName, int port) throws InterruptedException {
         System.out.println("Connecting to " + serverName
                 + " on port " + port);
+        this.servername = serverName;
+        this.port = port;
         try {
             client = new Socket(serverName, port);
             System.out.println("CONNECT");
@@ -57,6 +64,11 @@ public class Client {
                 return true;
             }
         } catch (IOException io) {
+            try {
+                connect(servername, port);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            }
             System.out.println("aaaa");
         }
         return false;
@@ -101,8 +113,8 @@ public class Client {
         return client;
     }
 
-    public void getList() throws IOException {
-
+    public void getList() {
+        try{
         OutputStream outToServer = LoginForm.getClient().getClient().getOutputStream();
         DataOutputStream out = new DataOutputStream(outToServer);
         InputStream inFromServer = LoginForm.getClient().getClient().getInputStream();
@@ -152,6 +164,13 @@ public class Client {
             System.out.println(tags);
             Content c = new Content(nama, pemilik, kategori, date, assignees, tags, status);
             ac.add(c);
+        }
+        }catch(IOException e){
+            try {
+                connect(servername, port);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 //            Just Printing
 //        for (int i = 0; i < ac.size(); i++) {
