@@ -37,12 +37,18 @@ import javax.crypto.NoSuchPaddingException;
 
 public class Controller {
     // Message Code
-    private static final byte MSG_LOGIN = 0;
-    private static final byte MSG_LOGOUT = 1;
-    private static final byte MSG_UPDATE = 11;
-    private static final byte MSG_LIST = 22;
-    private static final byte MSG_SUCCESS = 127;
+    private static final byte MSG_LOGIN = 0x00;
+    private static final byte MSG_LOGOUT = 0x01;
+    private static final byte MSG_UPDATE = 0x10;
+    private static final byte MSG_LIST = 0x20;
+    private static final byte MSG_SUCCESS = 0x7f;
     private static final byte MSG_FAILED = -1;
+    // List Status Code
+    private static final byte LIST_STATUS_NEW = 0x00;
+    private static final byte LIST_STATUS_EQL = 0x01;
+    private static final byte LIST_STATUS_DEL = 0x02;
+    private static final byte LIST_STATUS_UPD = 0x03;
+    private static final byte LIST_STATUS_END = -1;
     // Attribute
     private String serverName;
     private int port;
@@ -217,15 +223,15 @@ public class Controller {
         out.flush();
 
         if (in.readByte() == MSG_SUCCESS) {
-            int status;
+            byte status;
             do {
-                status = in.readInt();
+                status = in.readByte();
                 Tugas tugas = new Tugas();
 
-                if (status == 3) { // Add
+                if (status == LIST_STATUS_NEW) { // Add
                     tugas.readIn(in);
                     listTugas.add(tugas);
-                } else if (status == 0) { // Delete
+                } else if (status == LIST_STATUS_DEL) { // Delete
                     int idDel = in.readInt();
                     int j;
                     for (j = 0; j < listTugas.size(); j++) {
@@ -234,7 +240,7 @@ public class Controller {
                         }
                     }
                     listTugas.remove(j);
-                } else if (status == 1) { // Update
+                } else if (status == LIST_STATUS_UPD) { // Update
                     tugas.readIn(in);
                     int j;
                     for (j = 0; j < listTugas.size(); j++) {
@@ -244,10 +250,10 @@ public class Controller {
                     }
                     listTugas.remove(j);
                     listTugas.add(tugas);
-                } else if (status == 2) {
+                } else if (status == LIST_STATUS_EQL) {
                     in.readInt();
                 }
-            } while (status != -1);
+            } while (status != LIST_STATUS_END);
 
             return true;
         }

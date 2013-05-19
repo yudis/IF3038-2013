@@ -21,12 +21,20 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class ConnectionHandler extends Thread {
 
-    private static final byte MSG_LOGIN = 0;
-    private static final byte MSG_LOGOUT = 1;
-    private static final byte MSG_UPDATE = 11;
-    private static final byte MSG_LIST = 22;
-    private static final byte MSG_SUCCESS = 127;
+    // Message Code
+    private static final byte MSG_LOGIN = 0x00;
+    private static final byte MSG_LOGOUT = 0x01;
+    private static final byte MSG_UPDATE = 0x10;
+    private static final byte MSG_LIST = 0x20;
+    private static final byte MSG_SUCCESS = 0x7f;
     private static final byte MSG_FAILED = -1;
+    // List Status Code
+    private static final byte LIST_STATUS_NEW = 0x00;
+    private static final byte LIST_STATUS_EQL = 0x01;
+    private static final byte LIST_STATUS_DEL = 0x02;
+    private static final byte LIST_STATUS_UPD = 0x03;
+    private static final byte LIST_STATUS_END = -1;
+    // Attributes
     private static Random random = new Random();
     static final HashMap<Long, String> session = new HashMap<>();
     private Socket sockClient;
@@ -62,6 +70,8 @@ public class ConnectionHandler extends Thread {
                     synchronized (session) {
                         if (!session.containsKey(sessionId)) {
                             out.writeByte(MSG_FAILED);
+                            
+                            // Tutup Koneksi jika SESSION_ID tidak terdaftar
                             sockClient.close();
                             return;
                         }
@@ -127,6 +137,7 @@ public class ConnectionHandler extends Thread {
 
                     out.writeByte(MSG_SUCCESS);
                     
+                    // Tutup Koneksi jika logout
                     sockClient.close();
                     break;
                 } else if (msgType == MSG_UPDATE) {
@@ -166,19 +177,16 @@ public class ConnectionHandler extends Thread {
                         if (hmlistquery.containsKey(pairs.getKey())) {
                             System.out.println("ID: " + pairs.getKey() + " - R: " + pairs.getValue() + " - Q: " + hmlistquery.get(pairs.getKey()) + " EQ: " + (hmlistquery.get(pairs.getKey()) == pairs.getValue()));
                             if (pairs.getValue().equals(hmlistquery.get(pairs.getKey()))) {
-                                // Status 2 tetap sama
-                                out.writeInt(2);
+                                out.writeByte(LIST_STATUS_EQL);
                                 out.writeInt(pairs.getKey());
                                 hmlistquery.remove(pairs.getKey());
                             } else {
-                                // Status 1 ada update
-                                out.writeInt(1);
+                                out.writeByte(LIST_STATUS_UPD);
                                 tgsDao.getTugas(pairs.getKey(), true, true, true).writeOut(out);
                                 hmlistquery.remove(pairs.getKey());
                             }
                         } else {
-                            //status 0 dihapus
-                            out.writeInt(0);
+                            out.writeByte(LIST_STATUS_DEL);
                             out.writeInt(pairs.getKey());
                             hmlistquery.remove(pairs.getKey());
                         }
@@ -186,13 +194,12 @@ public class ConnectionHandler extends Thread {
 
                     Iterator<Map.Entry<Integer, Long>> it2 = hmlistquery.entrySet().iterator();
                     while (it2.hasNext()) {
-                        //status 3 ada tambah baru
-                        Map.Entry<Integer, Long> pairs = (Map.Entry) it2.next();
-                        out.writeInt(3);
+                        Map.Entry<Integer, Long> pairs = it2.next();
+                        out.writeByte(LIST_STATUS_NEW);
                         tgsDao.getTugas(pairs.getKey(), true, true, true).writeOut(out);
                     }
 
-                    out.writeInt(-1);
+                    out.writeByte(LIST_STATUS_END);
                 }
 
                 out.flush();
