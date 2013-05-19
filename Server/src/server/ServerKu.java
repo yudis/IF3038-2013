@@ -51,6 +51,10 @@ class MultiServerThread extends Thread {
     private static final byte MSG_LOGIN = 1;
     private static final byte MSG_UPDATE = 2;
     private static final byte MSG_LIST = 3;
+    private static final byte MSG_ASSIGNEE = 31;
+    private static final byte MSG_TAGS = 32;
+    private static final byte MSG_NEXTTUGAS = 33;
+    private static final byte MSG_DONE = 34;
     private static final byte MSG_SUCCESS = 0;
     private static final byte MSG_FAILED = -1;
     private Socket server = null;
@@ -83,14 +87,38 @@ class MultiServerThread extends Thread {
                     User user = new User();
                     DataOutputStream out = new DataOutputStream(server.getOutputStream());
                     user = userdao.getUserLogin(username, password);
-                   // System.out.println("USer: "+user.getTglLahir());
+                    // System.out.println("USer: "+user.getTglLahir());
                     if (user == null) {
                         out.writeByte(MSG_FAILED);
                         System.out.println("failed");
                     } else {
                         out.writeByte(MSG_SUCCESS);
-                                                System.out.println("suck");
+                        System.out.println("suck");
 
+                    }
+                } else if (resType == MSG_LIST) {
+                    try {
+                        TugasDao TD = new TugasDao();
+                        ArrayList<Tugas> ALT = (ArrayList<Tugas>) TD.getTugas("username");
+                        DataOutputStream out = new DataOutputStream(server.getOutputStream());
+                        for (int idxTgs = 0; idxTgs < ALT.size(); idxTgs++) {
+                            out.writeUTF(ALT.get(idxTgs).getNama());
+                            out.writeUTF(ALT.get(idxTgs).getKategori().getNama());
+                            out.writeUTF((ALT.get(idxTgs).getTglDeadline()).toString());
+                            out.writeBoolean(ALT.get(idxTgs).isStatus());
+                            out.writeByte(MSG_ASSIGNEE);
+                            for (int iA = 0; iA < ALT.get(idxTgs).getAssignees().size(); iA++) {
+                                out.writeUTF(((User) (((ArrayList) ALT.get(idxTgs).getAssignees()).get(iA))).getUsername());
+                            }
+                            out.writeByte(MSG_TAGS);
+                            for (int iT = 0; iT < ALT.get(idxTgs).getTags().size(); iT++) {
+                                out.writeUTF((String) (((ArrayList) ALT.get(idxTgs).getTags()).get(iT)));
+                            }
+                            out.writeByte(MSG_NEXTTUGAS);
+                        }
+                        out.writeByte(MSG_DONE);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }

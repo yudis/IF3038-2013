@@ -12,6 +12,10 @@ public class Client {
     private static final byte MSG_LOGIN = 1;
     private static final byte MSG_UPDATE = 2;
     private static final byte MSG_LIST = 3;
+    private static final byte MSG_ASSIGNEE = 31;
+    private static final byte MSG_TAGS = 32;
+    private static final byte MSG_NEXTTUGAS = 33;
+    private static final byte MSG_DONE = 34;
     private static final byte MSG_SUCCESS = 0;
     private static final byte MSG_FAILED = -1;
 
@@ -55,10 +59,11 @@ public class Client {
         return false;
     }
 //
+
     public boolean checkInput(DataInputStream di) {
         if (client == null) {
-            return false; }
-        else {
+            return false;
+        } else {
             try {
                 System.out.println("READDDD");
                 di.read();
@@ -88,4 +93,8 @@ public class Client {
 //    public Socket getClient() {
 //        return client;
 //    }
+
+    public void getList() {
+    
+    }
 }
