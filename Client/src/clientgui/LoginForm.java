@@ -64,7 +64,11 @@ public class LoginForm extends javax.swing.JFrame {
 
                 } else {
                     if (client.login(jTextField1.getText(), jTextField2.getText())) {
-                        new ClientForm(jTextField1.getText()).setVisible(true);
+                        try {
+                            new ClientForm(jTextField1.getText()).setVisible(true);
+                        } catch (IOException ex) {
+                            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         setVisible(false);
                         dispose();
                     } else {
@@ -82,7 +86,11 @@ public class LoginForm extends javax.swing.JFrame {
 
                 } else {
                     if (client.login(jTextField1.getText(), jTextField2.getText())) {
-                        new ClientForm(jTextField1.getText()).setVisible(true);
+                        try {
+                            new ClientForm(jTextField1.getText()).setVisible(true);
+                        } catch (IOException ex) {
+                            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         setVisible(false);
                         dispose();
                     } else {
@@ -100,7 +108,11 @@ public class LoginForm extends javax.swing.JFrame {
 
                 } else {
                     if (client.login(jTextField1.getText(), jTextField2.getText())) {
-                        new ClientForm(jTextField1.getText()).setVisible(true);
+                        try {
+                            new ClientForm(client.getUsername()).setVisible(true);
+                        } catch (IOException ex) {
+                            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         setVisible(false);
                         dispose();
                     } else {
@@ -173,6 +185,12 @@ public class LoginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    public static Client getClient() {
+        return client;
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */

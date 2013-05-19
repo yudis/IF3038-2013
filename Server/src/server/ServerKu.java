@@ -4,6 +4,7 @@ import id.ac.itb.todolist.dao.TugasDao;
 import id.ac.itb.todolist.dao.UserDao;
 import id.ac.itb.todolist.model.Tugas;
 import id.ac.itb.todolist.model.User;
+import id.ac.itb.todolist.util.Message;
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -48,15 +49,7 @@ public class ServerKu extends Thread {
 class MultiServerThread extends Thread {
 
     // Message
-    private static final byte MSG_LOGIN = 1;
-    private static final byte MSG_UPDATE = 2;
-    private static final byte MSG_LIST = 3;
-    private static final byte MSG_ASSIGNEE = 31;
-    private static final byte MSG_TAGS = 32;
-    private static final byte MSG_NEXTTUGAS = 33;
-    private static final byte MSG_DONE = 34;
-    private static final byte MSG_SUCCESS = 0;
-    private static final byte MSG_FAILED = -1;
+
     private Socket server = null;
 
     public MultiServerThread(Socket socket) {
@@ -79,7 +72,7 @@ class MultiServerThread extends Thread {
                 byte resType = in.readByte();
 
                 System.out.println("resType: " + resType);
-                if (resType == MSG_LOGIN) {
+                if (resType == Message.MSG_LOGIN) {
                     String username = in.readUTF();
                     String password = in.readUTF();
                     System.out.println("username: " + username + "pass: " + password);
@@ -89,34 +82,33 @@ class MultiServerThread extends Thread {
                     user = userdao.getUserLogin(username, password);
                     // System.out.println("USer: "+user.getTglLahir());
                     if (user == null) {
-                        out.writeByte(MSG_FAILED);
+                        out.writeByte(Message.MSG_FAILED);
                         System.out.println("failed");
                     } else {
-                        out.writeByte(MSG_SUCCESS);
+                        out.writeByte(Message.MSG_SUCCESS);
                         System.out.println("suck");
 
                     }
-                } else if (resType == MSG_LIST) {
+                } else if (resType == Message.MSG_LIST) {
                     try {
                         TugasDao TD = new TugasDao();
-                        ArrayList<Tugas> ALT = (ArrayList<Tugas>) TD.getTugas("username");
+                        ArrayList<Tugas> ALT = (ArrayList<Tugas>) TD.getTugas(in.readUTF());
                         DataOutputStream out = new DataOutputStream(server.getOutputStream());
+                        out.writeInt(ALT.size());
                         for (int idxTgs = 0; idxTgs < ALT.size(); idxTgs++) {
                             out.writeUTF(ALT.get(idxTgs).getNama());
+                            out.writeUTF(ALT.get(idxTgs).getPemilik().getUsername());
                             out.writeUTF(ALT.get(idxTgs).getKategori().getNama());
                             out.writeUTF((ALT.get(idxTgs).getTglDeadline()).toString());
                             out.writeBoolean(ALT.get(idxTgs).isStatus());
-                            out.writeByte(MSG_ASSIGNEE);
+                            out.writeInt(ALT.get(idxTgs).getAssignees().size());
                             for (int iA = 0; iA < ALT.get(idxTgs).getAssignees().size(); iA++) {
                                 out.writeUTF(((User) (((ArrayList) ALT.get(idxTgs).getAssignees()).get(iA))).getUsername());
                             }
-                            out.writeByte(MSG_TAGS);
                             for (int iT = 0; iT < ALT.get(idxTgs).getTags().size(); iT++) {
                                 out.writeUTF((String) (((ArrayList) ALT.get(idxTgs).getTags()).get(iT)));
                             }
-                            out.writeByte(MSG_NEXTTUGAS);
                         }
-                        out.writeByte(MSG_DONE);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

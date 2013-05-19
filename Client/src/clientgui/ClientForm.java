@@ -4,8 +4,16 @@
  */
 package clientgui;
 
+import Util.Message;
+import id.ac.itb.todolist.model.Content;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
@@ -16,15 +24,12 @@ import javax.swing.table.TableModel;
 class ColorTableModel extends AbstractTableModel {
 
     String columnNames[] = {"Nama Tugas", "Pemilik", "Kategori", "Deadline", "Assignee", "Tag", "Status"};
-    
     Object rowData[][] = {
         {"Tubes 5 Progin", "raymondddddddddddddddddddddd dddddddddddddddd dddddddddddddddddddd", "Kuliah", "21 Januari 2013", "felixt, mario", "tubes, lima", Boolean.TRUE},
         {"Technical Report KI", "mario", "Kuliah", "21 Januari 2013", "", "makalah", Boolean.FALSE},
-        {"Koreksi Alstruk", "felixt", "Asisten B)", "21 Januari 2013", "", "alstruk, 2011", Boolean.FALSE},
-    };
-    
-    boolean[] canEdit = new boolean[]{false,false,false,false,false,false,true};
-    
+        {"Koreksi Alstruk", "felixt", "Asisten B)", "21 Januari 2013", "", "alstruk, 2011", Boolean.FALSE},};
+    boolean[] canEdit = new boolean[]{false, false, false, false, false, false, true};
+
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return canEdit[columnIndex];
@@ -64,12 +69,14 @@ class ColorTableModel extends AbstractTableModel {
 public class ClientForm extends javax.swing.JFrame {
 
     private String username;
+
     /**
      * Creates new form ClientForm
      */
-    public ClientForm(String uname) {
+    public ClientForm(String uname) throws IOException {
         username = uname;
         initComponents(uname);
+        
     }
 
     /**
@@ -98,10 +105,10 @@ public class ClientForm extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(4).setCellRenderer(new TableCellLongTextRenderer());
         jTable1.getColumnModel().getColumn(5).setCellRenderer(new TableCellLongTextRenderer());
         jTable1.getColumnModel().getColumn(6).setMaxWidth(50);
-        
+
         jTable1.setColumnSelectionAllowed(false);
         jTable1.setRowSelectionAllowed(false);
-        
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
