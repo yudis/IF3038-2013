@@ -9,7 +9,7 @@ package id.ac.itb.todolist.model;
  * @author Felix
  */
 public class Content {
-
+    private int id;
     private String nama;
     private String pemilik;
     private String kategori;
@@ -18,7 +18,8 @@ public class Content {
     private String tags;
     private boolean status;
 
-    public Content(String nama, String pemilik, String kategori, String Deadline, String assignees, String tags, boolean status) {
+    public Content(int id, String nama, String pemilik, String kategori, String Deadline, String assignees, String tags, boolean status) {
+        this.id = id;
         this.nama = nama;
         this.pemilik = pemilik;
         this.kategori = kategori;
@@ -26,6 +27,14 @@ public class Content {
         this.assignees = assignees;
         this.tags = tags;
         this.status = status;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNama() {

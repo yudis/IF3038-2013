@@ -31,6 +31,7 @@ public class FileManager {
             }
             Files.deleteIfExists(newFile);
             Files.createFile(newFile);
+            System.out.println("selesai bikin file");
         } catch (IOException ex) {
             System.out.println("Error creating file");
         }

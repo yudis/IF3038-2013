@@ -96,6 +96,7 @@ class MultiServerThread extends Thread {
                         out.writeInt(ALT.size());
                         System.out.println("Size : " + ALT.size());
                         for (int idxTgs = 0; idxTgs < ALT.size(); idxTgs++) {
+                            out.writeInt(ALT.get(idxTgs).getId());
                             out.writeUTF(ALT.get(idxTgs).getNama());
                             out.writeUTF(ALT.get(idxTgs).getPemilik().getUsername());
                             out.writeUTF(ALT.get(idxTgs).getKategori().getNama());

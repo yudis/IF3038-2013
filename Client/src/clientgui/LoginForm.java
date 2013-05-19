@@ -231,46 +231,46 @@ public class LoginForm extends javax.swing.JFrame {
             }
         });
 
-        new Thread() {
-            @Override
-            public void run() {
-                InputStream inFromServer = null;
-                while (client.client == null) {
-                    System.out.println("hh");
-                }
-                System.out.println("masuk");
-                try {
-                    inFromServer = client.client.getInputStream();
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                DataInputStream in = new DataInputStream(inFromServer);
-
-                // RECONNECT
-                while (true) {
-//                    System.out.println("BBBBBBBBBBBBB");
-//                    try {
-//                        in.read();
-//                        if (!client.checkInput(in)) {
-//                            System.out.println("Closed --");
-//                            isconnected = false;
-//                            do {
-//                                try {
-//                                    isconnected = client.connect(IP, port);
-//                                } catch (InterruptedException ex) {
-//                                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-//                                }
-//                            } while (!isconnected);
-//                        } else {
-//                            System.out.println("AAAAAAAAAAAAAAAAAAA");
-//                        }
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-                }
-
-            }
-        }.start();
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                InputStream inFromServer = null;
+//                while (client.client == null) {
+//                    System.out.println("hh");
+//                }
+//                System.out.println("masuk");
+//                try {
+//                    inFromServer = client.client.getInputStream();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                DataInputStream in = new DataInputStream(inFromServer);
+//
+//                // RECONNECT
+//                while (true) {
+////                    System.out.println("BBBBBBBBBBBBB");
+////                    try {
+////                        in.read();
+////                        if (!client.checkInput(in)) {
+////                            System.out.println("Closed --");
+////                            isconnected = false;
+////                            do {
+////                                try {
+////                                    isconnected = client.connect(IP, port);
+////                                } catch (InterruptedException ex) {
+////                                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+////                                }
+////                            } while (!isconnected);
+////                        } else {
+////                            System.out.println("AAAAAAAAAAAAAAAAAAA");
+////                        }
+////                    } catch (IOException ex) {
+////                        Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+////                    }
+//                }
+//
+//            }
+//        }.start();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

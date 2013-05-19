@@ -211,9 +211,15 @@ public class ClientForm extends javax.swing.JFrame {
                 if (col == 6) {
                     int row = jTable1.rowAtPoint(evt.getPoint());
                     if (LoginForm.getClient().getAc().get(row).getStatus() != jTable1.getValueAt(row, col)) {
-                        LoginForm.getClient().getAc().get(row).setStatus(!(LoginForm.getClient().getAc().get(row).getStatus()));
+                        boolean newValue = !(LoginForm.getClient().getAc().get(row).getStatus());
+                        String newValue2 = "false";
+                        if (newValue == true){
+                            newValue2 = "true";
+                        }
+                        LoginForm.getClient().getAc().get(row).setStatus(newValue);
+                        LoginForm.getClient().getFm().appendFile(LoginForm.getClient().getUsername(), new java.sql.Timestamp(new java.util.Date().getTime()).toString(), String.valueOf(LoginForm.getClient().getAc().get(row).getId()), newValue2);
                         System.out.println("update status!");
-
+                        
                     }
                 }
             }

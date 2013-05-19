@@ -1,5 +1,6 @@
 package client;
 
+import Util.FileManager;
 import Util.Log;
 import Util.Message;
 import clientgui.LoginForm;
@@ -16,13 +17,13 @@ public class Client {
     private String username;
     private String servername;
     private int port;
-    private Log log;
+    private FileManager fm;
     ArrayList<Content> ac;
     // Message
 
     public Client() {
         client = null;
-        //log = new Log();
+        fm = new FileManager();
         ac = new ArrayList<Content>();
     }
 
@@ -61,6 +62,7 @@ public class Client {
             byte resType = in.readByte();
             if (resType == Message.MSG_SUCCESS) {
                 this.username = username;
+                fm.createFile(username);
                 return true;
             }
         } catch (IOException io) {
@@ -73,7 +75,11 @@ public class Client {
         }
         return false;
     }
-//
+
+    //
+    public FileManager getFm() {
+        return fm;
+    }
 
     public boolean checkInput(DataInputStream di) {
         if (client == null) {
@@ -115,6 +121,7 @@ public class Client {
 
     public void getList() {
         try{
+            System.out.println("masuklist");
         OutputStream outToServer = LoginForm.getClient().getClient().getOutputStream();
         DataOutputStream out = new DataOutputStream(outToServer);
         InputStream inFromServer = LoginForm.getClient().getClient().getInputStream();
@@ -124,6 +131,7 @@ public class Client {
         int tugascount = in.readInt();
         System.out.println(tugascount);
         for (int idx = 0; idx < tugascount; idx++) {
+            int id = in.readInt();
             String nama = in.readUTF();
             System.out.println(nama);
             String pemilik = in.readUTF();
@@ -162,7 +170,7 @@ public class Client {
                 }
             }
             System.out.println(tags);
-            Content c = new Content(nama, pemilik, kategori, date, assignees, tags, status);
+            Content c = new Content(id, nama, pemilik, kategori, date, assignees, tags, status);
             ac.add(c);
         }
         }catch(IOException e){
