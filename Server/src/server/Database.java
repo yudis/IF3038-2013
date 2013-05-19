@@ -61,4 +61,32 @@ public class Database {
         }
         return message;
     }
+    
+    public String Check(String task_id){
+        String message = "400\n";
+        try{
+            preparedStatement = connection.prepareStatement("UPDATE task SET task_status = 1 WHERE task_id = ?");
+            preparedStatement.setString(1, task_id);
+            if (preparedStatement.executeUpdate() != 0){
+                message = "200\n";    //success
+            }
+        } catch (Exception e){
+            System.out.println("UpdateTaskStatus Error: " + e.getMessage());
+        }
+        return message;
+    }
+    
+    public String Uncheck(String task_id){
+        String message = "400\n";
+        try{
+            preparedStatement = connection.prepareStatement("UPDATE task SET task_status = 0 WHERE task_id = ?");
+            preparedStatement.setString(1, task_id);
+            if (preparedStatement.executeUpdate() != 0){
+                message = "200\n";    //success
+            }
+        } catch (Exception e){
+            System.out.println("UpdateTaskStatus Error: " + e.getMessage());
+        }
+        return message;
+    }
 }

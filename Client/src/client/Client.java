@@ -14,9 +14,9 @@ import java.sql.SQLException;
  */
 public class Client {
 
-    /**
-     * @param args the command line arguments
-     */
+    private long lastUpdate;
+    
+    
     public static void main(String[] args) {
         String command;
         String request;
@@ -45,9 +45,46 @@ public class Client {
                         outServer.writeBytes(request + '\n');
                         respond = inServer.readLine();
                         if (respond.equals("200")){
-                            System.out.println("Login successful");
+                            System.out.println("Login successful, creating 'keep update' thread");
+                            Runnable task = new MyRunnable();
+                            Thread threadUpdate = new Thread(task);
+                            threadUpdate.start();
                         } else if (respond.equals("400")){
                             System.out.println("Login failed");
+                        } else {
+                            System.out.println("Unrecognized respond");
+                        }
+                        break;
+                    }
+                    case ("check"):
+                    {
+                        System.out.print("Enter task_id: ");
+                        String task_id = inClient.readLine();
+                        request = ("2,"+task_id);
+                        
+                        outServer.writeBytes(request + '\n');
+                        respond = inServer.readLine();
+                        if (respond.equals("200")){
+                            System.out.println("Check successful");
+                        } else if (respond.equals("400")){
+                            System.out.println("Check failed");
+                        } else {
+                            System.out.println("Unrecognized respond");
+                        }
+                        break;
+                    }
+                    case ("uncheck"):
+                    {
+                        System.out.print("Enter task_id: ");
+                        String task_id = inClient.readLine();
+                        request = ("3,"+task_id);
+                        
+                        outServer.writeBytes(request + '\n');
+                        respond = inServer.readLine();
+                        if (respond.equals("200")){
+                            System.out.println("Uncheck successful");
+                        } else if (respond.equals("400")){
+                            System.out.println("Uncheck failed");
                         } else {
                             System.out.println("Unrecognized respond");
                         }

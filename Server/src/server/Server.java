@@ -22,6 +22,7 @@ public class Server implements Runnable{
     private String respond;
     private String capitalizedMessage;
     private Database db;
+    private long lastUpdate;
     
     Server(Socket socket, int id) {
         this.connection = socket;
@@ -61,11 +62,41 @@ public class Server implements Runnable{
                 String[] parts = request.split(",");
                 String part1 = parts[0];
                 switch (part1){
-                    case ("1"):
+                    case ("1"): //login
                     {
                         String username = parts[1];
                         String password = parts[2];
                         respond = db.Login(username, password);
+                        if (respond.equals("200\n")){
+                            System.out.println("Login successful, creating 'keep update' thread");
+                            Runnable task = new MyRunnable();
+                            Thread threadUpdate = new Thread(task);
+                            threadUpdate.start();
+                        } else {
+                            System.out.println("Login failed");
+                        }
+                        break;
+                    }
+                    case ("2"): //check
+                    {
+                        String task_id = parts[1];
+                        respond = db.Check(task_id);
+                        if (respond.equals("200\n")){
+                            System.out.println("Check successful");
+                        } else {
+                            System.out.println("Check failed");
+                        }
+                        break;
+                    }
+                    case ("3"): //uncheck
+                    {
+                        String task_id = parts[1];
+                        respond = db.Uncheck(task_id);
+                        if (respond.equals("200\n")){
+                            System.out.println("Check successful");
+                        } else {
+                            System.out.println("Check failed");
+                        }
                         break;
                     }
                     default:
