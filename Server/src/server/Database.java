@@ -153,7 +153,7 @@ public class Database {
     public long GetMaxTimestamp(String username){
         long max_timestamp = 0;
         try{
-            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT MAX(timestamp) AS mt FROM task AS t JOIN task_asignee AS ta WHERE t.task_id = ta.task_id AND ta.username = ?");
+            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT MAX(timestamp) AS mt FROM task JOIN task_asignee WHERE task.task_id = task_asignee.task_id AND username = ?");
             preparedStatement1.setString(1, username);
             ResultSet resultSet1 = preparedStatement1.executeQuery();
             if (resultSet1.next()) {
@@ -163,6 +163,21 @@ public class Database {
             System.out.println("GetMaxTimestamp Error: "+e.getMessage());
         }
         return max_timestamp;
+    }
+    
+    public long GetMaxTimestampAbsolute(){
+        //mirip GetMaxTimestamp tapi ini untuk semua task biarpun bukan user tsb. Ini untuk cari tau timestamp terbesar global untuk server last update
+        long max_timestamp_absolute = 0;
+        try{
+            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT MAX(timestamp) AS mt FROM task JOIN task_asignee WHERE task.task_id = task_asignee.task_id");
+            ResultSet resultSet1 = preparedStatement1.executeQuery();
+            if (resultSet1.next()) {
+                max_timestamp_absolute = resultSet1.getLong("mt");
+            }
+        } catch (Exception e){
+            System.out.println("GetMaxTimestampAbsolute Error: "+e.getMessage());
+        }
+        return max_timestamp_absolute;
     }
     
     public String Check(String task_id) {
@@ -181,7 +196,7 @@ public class Database {
     }
 
     public String Uncheck(String task_id) {
-        String message = "400\n";
+        String message = "400";
         long now = System.currentTimeMillis();
         try {
             PreparedStatement preparedStatement1 = connection.prepareStatement("UPDATE task SET task_status = 0, timestamp = " + now + " WHERE task_id = ?");
@@ -209,6 +224,37 @@ public class Database {
             }
         } catch (Exception e) {
             System.out.println("Synchronize Error: " + e.getMessage());
+        }
+        return message;
+    }
+    
+    public String FetchUpdates (String username, Long lastUpdate){
+        String message = "";
+        try{
+            //ambil semua row yang timestamp nya lebih besar dari lastUpdate (lebih baru), ambil task_id sama task_status nya
+            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT * FROM task JOIN task_asignee WHERE task.task_id = task_asignee.task_id AND username = ? AND timestamp > ? ");
+            preparedStatement1.setString(1, username);
+            preparedStatement1.setLong(2, lastUpdate);
+            ResultSet resultSet1 = preparedStatement1.executeQuery();
+            int rowcount1 = 0;
+            if (resultSet1.last()) {
+                rowcount1 = resultSet1.getRow();
+                resultSet1.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
+            }
+            if (rowcount1 != 0){
+                System.out.println("row(s) affected: "+rowcount1);
+                while (resultSet1.next()){
+                    String task_id = resultSet1.getString("task_id");
+                    message = message + task_id + ",";
+                    String task_status = resultSet1.getString("task_status");
+                    message = message + task_status + ",";
+                }
+            }
+        } catch (Exception e){
+            System.out.println("SynchronizeAll Error: " + e.getMessage());
+        }
+        if (message.length() > 0){
+            message = message.substring(0, message.length()-1); //hilangkan koma terakhir
         }
         return message;
     }

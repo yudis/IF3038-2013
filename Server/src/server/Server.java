@@ -32,13 +32,26 @@ public class Server implements Runnable{
         this.db = db;
         this.request = "";
         this.respond = "";
-        this.lastUpdate = System.currentTimeMillis();
     }
-        
+
+    public int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        Server.count = count;
+    }
+    
+    public long getLastUpdate() {
+        return lastUpdate;
+    }
+    
     public static void main(String[] args) {
         
         //Starts server ...
         Database database = new Database();
+        lastUpdate = 0;
+        
         try{
             ServerSocket socket = new ServerSocket(port);
             System.out.println("Server ready...");
@@ -50,7 +63,7 @@ public class Server implements Runnable{
                 thread.start();
             }
         } catch(Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("ServerSocket: " + e.getMessage());
         }
     }
     
@@ -70,13 +83,10 @@ public class Server implements Runnable{
                         String username = parts[1]; //kennyazrina
                         String password = parts[2]; //kennyazrina
                         String respond1 = db.Login(username, password); //200 atau 400
-                        out.writeBytes(respond1 + '\n');
+                        out.writeBytes(respond1 + "," + count +'\n');
                         String[] responds1 = respond1.split(",");
                         if (responds1[0].equals("200")){
-                            System.out.println("Login successful, creating 'keep update' thread");
-                            /*Runnable task = new MyRunnable();
-                            Thread threadUpdate = new Thread(task);
-                            threadUpdate.start();*/
+                            System.out.println("Login successful");
                         } else {
                             System.out.println("Login failed");
                         }
@@ -85,29 +95,31 @@ public class Server implements Runnable{
                     case ("2"): //check
                     {
                         String task_id = parts[1];
-                        respond = db.Check(task_id);
-                        String[] responds = respond.split(",");
-                        if (responds[0].equals("200")){
-                            lastUpdate = Long.parseLong(responds[1].substring(0,responds[1].length()-1));
+                        String respond1 = db.Check(task_id);
+                        System.out.println("respond1: "+respond1);
+                        String[] responds1 = respond1.split(",");
+                        if (responds1[0].equals("200")){
+                            lastUpdate = Long.parseLong(responds1[1]);
                             System.out.println("Check successful");
                         } else {
                             System.out.println("Check failed");
                         }
-                        out.writeBytes(respond);
+                        out.writeBytes(respond1 + '\n');
                         break;
                     }
                     case ("3"): //uncheck
                     {
                         String task_id = parts[1];
-                        respond = db.Uncheck(task_id);
-                        String[] responds = respond.split(",");
-                        if (responds[0].equals("200")){
-                            lastUpdate = Long.parseLong(responds[1].substring(0,responds[1].length()-1));
-                            System.out.println("Check successful");
+                        String respond1 = db.Uncheck(task_id);
+                        System.out.println("respond1: "+respond1);
+                        String[] responds1 = respond1.split(",");
+                        if (responds1[0].equals("200")){
+                            lastUpdate = Long.parseLong(responds1[1]);
+                            System.out.println("Uncheck successful");
                         } else {
-                            System.out.println("Check failed");
+                            System.out.println("Uncheck failed");
                         }
-                        out.writeBytes(respond);
+                        out.writeBytes(respond1 + '\n');
                         break;
                     }
                     case ("4"): //synchronize dari log (tugas-X yang timestamp nya dari log lebih besar dari timestamp tugas-X di database akan overwrite)
@@ -127,15 +139,27 @@ public class Server implements Runnable{
                             //String respond2 = db.UpdateLastUpdate(clientUsername, Long.parseLong(parts[i+2]));
                             i += 3;
                         }
-                        //next step: ambil timestamp terbesar dari semua tugas itu, jadikan user.last_update (sikronisasi selesai)
+                        //next step: ambil timestamp terbesar dari semua tugas user
                         long max_timestamp = db.GetMaxTimestamp(clientUsername);
                         System.out.println("max_timestamp: "+max_timestamp);
+                        
+                        //jadikan max_timestamp sbg user.last_update (sikronisasi selesai)
                         String respond2 = db.UpdateLastUpdate(clientUsername, max_timestamp);
                         System.out.println("respond2: "+respond2);
                         out.writeBytes(respond2 + "," + max_timestamp + '\n');
+                        
+                        //next step: ambil timestamp terbesar global, untuk last update server
+                        long max_timestamp_absolute = db.GetMaxTimestampAbsolute();
+                        lastUpdate = max_timestamp_absolute;
+                        
+                        //next step: ambil semua task username ini, kirim ke client
                         String respond3 = db.GetUserTasks(clientUsername);
                         System.out.println("respond3: "+respond3);
                         out.writeBytes(respond3 + '\n');
+                        
+                        Runnable task = new MyRunnable(this, db);
+                        Thread threadUpdate = new Thread(task);
+                        threadUpdate.start();
 //                        out.writeBytes(respond);    //bila 200 berhasil, bila 400 tak ada update
 //                        String[] responds = respond.split(",");
 //                        if (responds[0].equals("200")){

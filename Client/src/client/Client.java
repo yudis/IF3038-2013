@@ -20,13 +20,43 @@ import javax.swing.JOptionPane;
  */
 public class Client {
 
+    private String username;
     private long lastUpdate;
     private Boolean running;
+    private Socket clientSocket;
 
     Client() {
         this.running = true;
     }
 
+    public Socket getClientSocket() {
+        return clientSocket;
+    }
+
+    public void setClientSocket(Socket clientSocket) {
+        this.clientSocket = clientSocket;
+    }
+    
+    public Boolean getRunning() {
+        return running;
+    }
+    
+    public long getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(long lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+    
     public static void main(String[] args) {
 
         Client c = new Client();
@@ -36,9 +66,9 @@ public class Client {
 
         try {
             BufferedReader inClient = new BufferedReader(new InputStreamReader(System.in));
-            Socket clientSocket = new Socket("localhost", 1234);
-            DataOutputStream outServer = new DataOutputStream(clientSocket.getOutputStream());
-            BufferedReader inServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            c.clientSocket = new Socket("localhost", 1234);
+            DataOutputStream outServer = new DataOutputStream(c.clientSocket.getOutputStream());
+            BufferedReader inServer = new BufferedReader(new InputStreamReader(c.clientSocket.getInputStream()));
             while (c.running) {
                 System.out.print(">> ");
                 command = inClient.readLine();
@@ -47,6 +77,7 @@ public class Client {
                     case ("login"): {
                         System.out.print("Enter username: ");
                         String username = inClient.readLine();
+                        c.setUsername(username);
                         System.out.print("Enter password: ");
                         String password = inClient.readLine();
                         
@@ -58,6 +89,7 @@ public class Client {
                         String[] responds1 = respond1.split(",");
                         if (responds1[0].equals("200")) {
                             c.lastUpdate = Long.parseLong(responds1[1]);
+                            int servercount = Integer.parseInt(responds1[2]);
                             System.out.println("Login successful, " + username + " username.last_update is " + c.lastUpdate);
                             //Baca dari log
                             try {
@@ -100,6 +132,35 @@ public class Client {
                             String respond3 = inServer.readLine();
                             System.out.println("respond3: "+respond3);
                             
+                            String[] responds3 = respond3.split(",");
+                            ArrayList<Log> logs = new ArrayList<>();
+                            int a = 0;
+                            while (a < responds3.length){
+                                Log log = new Log();
+                                log.setId_task(responds3[a]);
+                                log.setTaskname(responds3[a+1]);
+                                log.setDeadline(responds3[a+2]);
+                                String[] responds3Parsed = responds3[a+3].split(":");
+                                for (int n = 0; n < responds3Parsed.length; n++){
+                                    (log.getAssignee()).add(responds3Parsed[n]);
+                                }
+                                log.setStatus(responds3[a+4]);
+                                log.setCategory(responds3[a+5]);
+                                logs.add(log);
+                                a = a + 6;
+                            }
+                            for (int i = 0; i < logs.size(); i++){
+                                System.out.println("Log "+(i+1)+":");
+                                System.out.println(":: task_id: "+logs.get(i).getId_task());
+                                System.out.println(":: task_name: "+logs.get(i).getTaskname());
+                                System.out.println(":: deadline: "+logs.get(i).getDeadline());
+                                System.out.print(":: assignees: ");
+                                for (int j = 0; j < logs.get(i).getAssignee().size(); j++){
+                                    System.out.print(logs.get(i).getAssignee().get(j)+",");
+                                }
+                                System.out.println("\n:: status: "+logs.get(i).getStatus());
+                                System.out.println(":: category: "+logs.get(i).getCategory());
+                            }
                             /*String[] responds2 = respond2.split(",");
                             if (responds[0].equals("200")) {
                                 System.out.println("Synchronizing...");
@@ -128,7 +189,7 @@ public class Client {
                                 System.out.println("unrecognized respond");
                             }*/
                             System.out.println("Creating 'keep update' thread");
-                            Runnable task = new MyRunnable();
+                            Runnable task = new MyRunnable(c, servercount);
                             Thread threadUpdate = new Thread(task);
                             threadUpdate.start();
                         } else {
@@ -139,38 +200,46 @@ public class Client {
                     case ("check"): {
                         System.out.print("Enter task_id: ");
                         String task_id = inClient.readLine();
-                        String request1 = ("2," + task_id);
-
+                        String request1 = ("2," + task_id + "," + c.getUsername());
                         outServer.writeBytes(request1 + '\n');
                         String respond1 = inServer.readLine();
+                        
                         String[] responds = respond1.split(",");
                         if (responds[0].equals("200")) {
                             c.lastUpdate = Long.parseLong(responds[1]);
+                            //write to log
+                            FileWriter fw = new FileWriter("log.txt",true); 
+                            fw.write(task_id + ",1," + c.lastUpdate + "\n"); 
+                            fw.close();
                             System.out.println("Check successful, lastUpdate " + c.lastUpdate);
-                        } else if (responds[0].equals("400")) {
-                            System.out.println("Check failed");
                         } else {
-                            System.out.println("Unrecognized respond");
+                            System.out.println("Check failed");
                         }
                         break;
                     }
                     case ("uncheck"): {
                         System.out.print("Enter task_id: ");
                         String task_id = inClient.readLine();
-                        String request1 = ("3," + task_id);
-
+                        String request1 = ("3," + task_id + "," + c.getUsername());
                         outServer.writeBytes(request1 + '\n');
                         String respond1 = inServer.readLine();
+                        
                         String[] responds = respond1.split(",");
                         if (responds[0].equals("200")) {
                             c.lastUpdate = Long.parseLong(responds[1]);
+                            //write to log
+                            FileWriter fw = new FileWriter("log.txt",true); 
+                            fw.write(task_id + ",0," + c.lastUpdate + "\n"); 
+                            fw.close();
                             System.out.println("Uncheck successful, lastUpdate " + c.lastUpdate);
-                        } else if (responds[0].equals("400")) {
-                            System.out.println("Uncheck failed");
                         } else {
-                            System.out.println("Unrecognized respond");
+                            System.out.println("Uncheck failed");
                         }
                         break;
+                    }
+                    case ("logout"):{
+                        c.running = false;
+                        System.out.println("exited");
                     }
                     default: {
                         break;
@@ -179,9 +248,9 @@ public class Client {
 
                 //System.out.println("From Server: " + message);
             }
-            clientSocket.close();
+            c.clientSocket.close();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("ClientSocket: " + e.getMessage());
         }
     }
 }
