@@ -16,8 +16,7 @@ public class ClientLogin extends javax.swing.JDialog {
     /**
      * Creates new form ClientLogin
      */
-    public ClientLogin(java.awt.Frame parent, boolean modal) {        
-        super(parent, modal);
+    public ClientLogin() {        
         initComponents();
         ready = false;
         username = "";
@@ -46,7 +45,11 @@ public class ClientLogin extends javax.swing.JDialog {
 
         jLabel2.setText("password");
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Log In");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +104,10 @@ public class ClientLogin extends javax.swing.JDialog {
         password = new String(jPasswordField1.getPassword());
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -131,5 +138,7 @@ public class ClientLogin extends javax.swing.JDialog {
     
     public void prepare() {
         ready = false;
+        jTextField1.setText("");
+        jPasswordField1.setText("");
     }
 }

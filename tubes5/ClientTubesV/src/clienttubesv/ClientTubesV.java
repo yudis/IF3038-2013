@@ -4,6 +4,13 @@
  */
 package clienttubesv;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,7 +54,7 @@ public class ClientTubesV {
         while (true) {
             if (status == 0) {
                 //Load Frame Login
-                final ClientLogin dialog = new ClientLogin(new javax.swing.JFrame(), true);
+                final ClientLogin dialog = new ClientLogin();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -86,12 +93,28 @@ public class ClientTubesV {
                     dialog.prepare();
                 }
                 
+                File temp1 = new File("log/log_"+username+".txt");
+                File temp2 = new File("log/log_"+username+"_update.txt");
+                temp1.getParentFile().mkdirs();
+                try {
+                    temp1.createNewFile();
+                    temp2.createNewFile();
+                    BufferedWriter out = new BufferedWriter(new FileWriter(temp1, true));
+                    DateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    out.append(dateformat.format(new Date()));
+                    out.append(" - Logout");
+                    out.append("\n");
+                    out.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(ClientTubesV.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 dialog.setVisible(false);
                 dialog.dispose();
                 status = 1;
             } else if (status == 1) {
                 //Load Frame TaskList
-                final TaskList dialog = new TaskList();
+                final TaskList dialog = new TaskList(username);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -113,18 +136,40 @@ public class ClientTubesV {
                 long last = 0;
                 
                 while (dialog.getStatus()) {
-                    if (System.currentTimeMillis() - last > 4000) {
+                    if (System.currentTimeMillis() - last > 60000) {
                         synch.process();
-                        while (synch.busy()) ;                    
+                        while (synch.busy()) ;
+                        
+                        //Fetch all the new list
+                        Connector conn = new Connector("127.0.0.1",3400);
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(1);
+                        sb.append(username);
+                        conn.setRequest(sb.toString());
+                        conn.sendRequest();
+                        String hasil = conn.getReply();
+                        System.out.println(hasil);
+                        dialog.setData(hasil);
                         last = System.currentTimeMillis();
                     }
                 }
                 
                 synch.process();
-                
+                while (synch.busy()) ;
                 dialog.setVisible(false);
                 dialog.dispose();
                 status = 0;
+
+                try {
+                    BufferedWriter out = new BufferedWriter(new FileWriter("log/log_"+username+".txt", true));
+                    DateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    out.append(dateformat.format(new Date()));
+                    out.append(" - Login");
+                    out.append("\n");
+                    out.close();
+                } catch (IOException ex){
+                    Logger.getLogger(ClientTubesV.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 System.out.println("A Strange error occured. Returning to Login Page.");
                 status = 0;
