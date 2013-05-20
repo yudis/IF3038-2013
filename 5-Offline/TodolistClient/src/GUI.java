@@ -135,7 +135,6 @@ public class GUI extends javax.swing.JFrame {
             try {
                 control = Controller.loadState(STATE_FILENAME);
                 fState.delete();
-
                 System.out.println("-------------- STATE_FILENAME : " + STATE_FILENAME);
                 System.out.println(control);
                 haslogin = true;
