@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,11 +23,38 @@ public class Program {
 	 */
 	
 	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 		Controller controller = new Controller();
 		System.out.println("-Connect- " + controller.connect("127.0.0.1", 9000));
 		System.out.println("-Login- " + controller.login("sharonloh", "gilagila"));
 		controller.loadTask();
-		controller.sync();
+		if (controller.update_list.size() == 0)
+		{
+			System.out.println("daftar update kosong");
+		}
+		controller.update();
+		//sc.next();
+		//controller.list();
+		sc.next();
+		/*
+		controller.ubahStatus();
+		for (int i = 0; i < controller.update_list.size(); i++)
+		{
+			System.out.println("daftar update = " + controller.update_list.get(i));
+		}
+		controller.update();
+		*/
+		//controller.list();
+		controller.logout();
+		/*
+		controller.ubahStatus();
+		//controller.saveTask();
+		for (int i = 0; i < controller.update_list.size(); i++)
+		{
+			System.out.println("daftar update = " + controller.update_list.get(i));
+		}
+		controller.update();
+		controller.list();*/
 	}
 
 }

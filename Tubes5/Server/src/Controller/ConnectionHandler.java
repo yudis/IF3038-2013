@@ -26,6 +26,7 @@ public class ConnectionHandler extends Thread {
 	private static final byte LOGIN = 0;
 	private static final byte SYNC = 1;
 	private static final byte UPDATE = 2;
+	private static final byte LIST = 3;
 	private static final byte LOGOUT = 9;
 	private static final byte SUCCESS = 10;
 	private static final byte FAILED = 11;
@@ -48,7 +49,9 @@ public class ConnectionHandler extends Thread {
 			
 			while(true)
 			{
+				System.out.println("DENGERIN");
 				byte msg = in.readByte();
+				System.out.println("MSG = "+msg);
 				if (msg != LOGIN)
 				{
 					sessionId = in.readLong();
@@ -71,39 +74,46 @@ public class ConnectionHandler extends Thread {
 					data = new byte[in.readInt()];
 					in.readFully(data);
 					String password = new String(data);
-					
-					URL url = new URL("http://eurilys.ap01.aws.af.cm/user/login_check?login_username="+username+"&login_password="+password);
-		            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-		            httpConn.setRequestMethod("GET");
-		            httpConn.setRequestProperty("Accept", "application/json");
-		            if (httpConn.getResponseCode() != 200) {
-		                throw new RuntimeException("Failed : HTTP error code : " + httpConn.getResponseCode());
-		            }
-		            BufferedReader br = new BufferedReader(new InputStreamReader((httpConn.getInputStream())));
-		            String output;
-		            String outputObject = "";
-		            while ((output = br.readLine()) != null) {
-		                outputObject += output;
-		            } 
-		            httpConn.disconnect();
+					try{
+						URL url = new URL("http://eurilys.ap01.aws.af.cm/user/login_check?login_username="+username+"&login_password="+password);
+			            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+			            httpConn.setRequestMethod("GET");
+			            httpConn.setRequestProperty("Accept", "application/json");
 		            
-		            String[] output_parts = outputObject.split(",");
-		            String fullname = output_parts[0];
-		            String avatar = output_parts[1]; 
+			            if (httpConn.getResponseCode() != 200) {
+			            	throw new RuntimeException("Failed : HTTP error code : " + httpConn.getResponseCode());
+			            }
 		            
-		            if ("failed".equals(outputObject)) {
+			            BufferedReader br = new BufferedReader(new InputStreamReader((httpConn.getInputStream())));
+			            String output;
+			            String outputObject = "";
+			            while ((output = br.readLine()) != null) {
+			                outputObject += output;
+			            } 
+			            httpConn.disconnect();
+			            
+			            String[] output_parts = outputObject.split(",");
+			            String fullname = output_parts[0];
+			            String avatar = output_parts[1]; 
+			            
+			            if ("failed".equals(outputObject)) {
+			            	out.writeByte(FAILED);
+			            } else {
+			            	synchronized (session) {
+	                            long i = random.nextLong();
+	                            while (session.containsKey(i)) {
+	                                i = random.nextLong();
+	                            }
+	                            session.put(i, username);
+	                            out.writeByte(SUCCESS);
+	                            out.writeLong(i);
+	                            System.out.println("SESSIONID :: " + i);
+					    	}
+			            }
+					} 
+					catch (Exception e) 
+		            {
 		            	out.writeByte(FAILED);
-		            } else {
-		            	synchronized (session) {
-                            long i = random.nextLong();
-                            while (session.containsKey(i)) {
-                                i = random.nextLong();
-                            }
-                            session.put(i, username);
-                            out.writeByte(SUCCESS);
-                            out.writeLong(i);
-                            System.out.println("SESSIONID :: " + i);
-				    	}
 		            }
 				}
 				else if (msg == SYNC)
@@ -168,9 +178,141 @@ public class ConnectionHandler extends Thread {
 		            }
 		            out.writeByte(SUCCESS);
 				}
+				else if (msg == LIST)
+				{
+						
+						String username = session.get(sessionId);
+						System.out.println("LIST TASK USERNAME :: "+ username);
+						URL taskURL = new URL("http://eurilys.ap01.aws.af.cm/task/all_task?username=" + username);
+			            HttpURLConnection taskConn = (HttpURLConnection) taskURL.openConnection();
+			            taskConn.setRequestMethod("GET");
+			            taskConn.setRequestProperty("Accept", "application/json");
+			            try{
+			            if (taskConn.getResponseCode() != 200) {
+			            	System.out.println("MASUK DI EXC LIST2");
+			            	throw new RuntimeException("Failed : HTTP error code : " + taskConn.getResponseCode());
+			            }
+		            
+		                BufferedReader taskBr = new BufferedReader(new InputStreamReader((taskConn.getInputStream())));
+			            String taskOutput;
+			            String taskJSONObject = "";
+			            while ((taskOutput = taskBr.readLine()) != null) {
+			                taskJSONObject += taskOutput;
+			            } 
+			            taskConn.disconnect();
+			            
+			            JSONTokener taskTokener = new JSONTokener(taskJSONObject);
+			            JSONArray taskroot = new JSONArray(taskTokener);
+			            task_listServer.clear();
+			            for (int i=0; i<taskroot.length(); i++) {
+			                JSONObject task = taskroot.getJSONObject(i);
+			                JSONObject taskObject = new JSONObject();
+			                taskObject.put("task_id", task.getString("task_id"));
+		                    taskObject.put("task_name", task.getString("task_name"));
+		                    taskObject.put("task_status", task.getString("task_status"));
+		                    taskObject.put("task_deadline", task.getString("task_deadline"));
+		                    taskObject.put("task_category", task.getString("task_category"));
+		                    taskObject.put("task_creator", task.getString("task_creator"));
+		                    taskObject.put("tag_list", task.getJSONArray("tag_list"));
+		                    task_listServer.add(new Task(taskObject));
+			            }
+			            System.out.println("mau kirim sukses di sini");
+			            out.writeByte(SUCCESS);
+			            System.out.println("kirim sukses di sini");
+			            out.writeInt(task_listServer.size());
+						for (int i = 0; i < task_listServer.size(); i++)
+						{
+							String taskTemp = task_listServer.get(i).TaskToString();
+							byte[] sendbyte = taskTemp.getBytes();
+							out.writeInt(sendbyte.length);
+							out.write(sendbyte);
+						}
+					} 
+					catch (Exception e) 
+		            {
+		            	System.out.println("MASUK DI EXC LIST");
+		            	out.writeByte(FAILED);
+		            }
+				}
 				else if (msg == UPDATE)
 				{
-					
+					try{
+						int n = in.readInt();
+						for (int i = 0; i < n; i++) {
+							byte[] recv = new byte[in.readInt()];
+							in.readFully(recv);
+							String data = new String(recv);
+							String[] output_parts = data.split(",");
+				            String taskID = output_parts[0];
+				            String status = output_parts[1];
+				            
+				            //update status
+				            if (status.equals("0"))
+				            {
+				            	URL url = new URL("http://eurilys.ap01.aws.af.cm/task/finish_task?task_id="+taskID);
+	
+				                HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+				                httpConn.setRequestMethod("GET");
+				                httpConn.setRequestProperty("Accept", "application/json");
+			                
+					            if (httpConn.getResponseCode() != 200) {
+					            	throw new RuntimeException("Failed : HTTP error code : " + httpConn.getResponseCode());
+					            }
+				            
+				                BufferedReader br = new BufferedReader(new InputStreamReader((httpConn.getInputStream())));
+				                String output;
+				                String outputObject = "";
+				                while ((output = br.readLine()) != null) {
+				                    outputObject += output;
+				                } 
+				                httpConn.disconnect();
+				                
+				                if (outputObject.equals("1"))
+				                {
+				                	System.out.println("UPDATE STATUS "+ taskID +" BERHASIL");
+				                }
+				                else
+				                {
+				                	System.out.println("UPDATE STATUS "+ taskID +" GAGAL");
+				                }
+				            }
+				            else if (status.equals("1"))
+				            {
+				            	URL url = new URL("http://eurilys.ap01.aws.af.cm/task/unfinish_task?task_id="+taskID);
+	
+				                HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+				                httpConn.setRequestMethod("GET");
+				                httpConn.setRequestProperty("Accept", "application/json");
+			                
+					            if (httpConn.getResponseCode() != 200) {
+					            	throw new RuntimeException("Failed : HTTP error code : " + httpConn.getResponseCode());
+					            }
+				            
+				                BufferedReader br = new BufferedReader(new InputStreamReader((httpConn.getInputStream())));
+				                String output;
+				                String outputObject = "";
+				                while ((output = br.readLine()) != null) {
+				                    outputObject += output;
+				                } 
+				                httpConn.disconnect();
+				                
+				                if (outputObject.equals("1"))
+				                {
+				                	System.out.println("UPDATE STATUS "+ taskID +" BERHASIL");
+				                }
+				                else
+				                {
+				                	System.out.println("UPDATE STATUS "+ taskID +" GAGAL");
+				                }
+				            }
+						}
+						
+						out.writeByte(SUCCESS);
+					} 
+	            	catch (Exception e) 
+		            {
+		            	out.writeByte(FAILED);
+		            }
 				}
 				else if (msg == LOGOUT)
 				{
