@@ -8,6 +8,7 @@ public class Log {
     private String taskname;
     private String deadline;
     private List<String> assignee;
+    private List<String> tag;
     private String status;
     private String category;
     
@@ -16,17 +17,19 @@ public class Log {
         taskname=null;
         deadline = null;
         assignee = new ArrayList<String>();
+        tag = new ArrayList<String>();
         status=null;
         category=null;
     }
     
-    Log(String a, String b, String c, List<String>d, String e, String f){
+    Log(String a, String b, String c, List<String>d, List<String>e, String f, String g){
         id_task = a;
         taskname=b;
         deadline=c;
         assignee = new ArrayList<String>(d);
-        status=e;
-        category=f;
+        tag = new ArrayList<String>(e);
+        status=f;
+        category=g;
     }
 
     public String getId_task() {
@@ -75,6 +78,14 @@ public class Log {
 
     public void setDeadline(String deadline) {
         this.deadline = deadline;
+    }
+
+    public List<String> getTag() {
+        return tag;
+    }
+
+    public void setTag(List<String> tag) {
+        this.tag = tag;
     }
     
     

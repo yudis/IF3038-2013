@@ -140,14 +140,18 @@ public class Client {
                                 log.setId_task(responds3[a]);
                                 log.setTaskname(responds3[a+1]);
                                 log.setDeadline(responds3[a+2]);
-                                String[] responds3Parsed = responds3[a+3].split(":");
-                                for (int n = 0; n < responds3Parsed.length; n++){
-                                    (log.getAssignee()).add(responds3Parsed[n]);
+                                String[] respondsA3Parsed = responds3[a+3].split(":");
+                                for (int n = 0; n < respondsA3Parsed.length; n++){
+                                    (log.getAssignee()).add(respondsA3Parsed[n]);
                                 }
-                                log.setStatus(responds3[a+4]);
-                                log.setCategory(responds3[a+5]);
+                                String[] respondsA4Parsed = responds3[a+4].split(":");
+                                for (int n = 0; n < respondsA4Parsed.length; n++){
+                                    (log.getTag()).add(respondsA4Parsed[n]);
+                                }
+                                log.setStatus(responds3[a+5]);
+                                log.setCategory(responds3[a+6]);
                                 logs.add(log);
-                                a = a + 6;
+                                a = a + 7;
                             }
                             for (int i = 0; i < logs.size(); i++){
                                 System.out.println("Log "+(i+1)+":");
@@ -157,6 +161,10 @@ public class Client {
                                 System.out.print(":: assignees: ");
                                 for (int j = 0; j < logs.get(i).getAssignee().size(); j++){
                                     System.out.print(logs.get(i).getAssignee().get(j)+",");
+                                }
+                                System.out.print("\n:: tags: ");
+                                for (int j = 0; j < logs.get(i).getTag().size(); j++){
+                                    System.out.print(logs.get(i).getTag().get(j)+",");
                                 }
                                 System.out.println("\n:: status: "+logs.get(i).getStatus());
                                 System.out.println(":: category: "+logs.get(i).getCategory());

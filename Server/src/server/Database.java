@@ -133,7 +133,27 @@ public class Database {
                         }
                         message = message + ",";
                     } catch (Exception e){
-                        System.out.println("GetUserTasks Fatching Assignee Error: "+e.getMessage());
+                        System.out.println("GetUserTasks Fetching Assignee Error: "+e.getMessage());
+                    }
+                    try {
+                        PreparedStatement preparedStatement3 = connection.prepareStatement("SELECT * FROM tag WHERE task_id = ?");
+                        preparedStatement3.setString(1, task_id);
+                        ResultSet resultSet3 = preparedStatement3.executeQuery();
+                        int rowcount3 = 0;
+                        if (resultSet3.last()) {
+                            rowcount3 = resultSet3.getRow();
+                            resultSet3.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
+                        }
+                        if (rowcount3 != 0){ //ada tag nya
+                            while (resultSet3.next()){
+                                String tag_name = resultSet3.getString("tag_name");
+                                message = message + tag_name + ":";
+                            }
+                            message = message.substring(0,message.length()-1);  //hilangkan : terakhir
+                        }
+                        message = message + ",";
+                    } catch (Exception e){
+                        System.out.println("GetUserTasks Fetching Tags Error: "+e.getMessage());
                     }
                     String task_status = resultSet1.getString("task_status");
                     message = message + task_status + ",";
