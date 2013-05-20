@@ -162,7 +162,7 @@ public class Login extends javax.swing.JDialog {
 		boolean success = doHandshake();
 		if (success)
 		{
-			success = doLogin();
+			success = true;//doLogin();
 			if (success)
 	        {
 				// go to other form
