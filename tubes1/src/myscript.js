@@ -46,7 +46,7 @@ function createcateg(){
 	categ3={task:["Buy a Volkswagen","Buy a house","Build a startup","Go back to the future"], deadline:d3, assignee:"Marty", comment:"urgent matters", tag:"#project #time"};
 }
 
-
+var categ1, categ2, categ3;
 
 function mOver1(categ)
 {
