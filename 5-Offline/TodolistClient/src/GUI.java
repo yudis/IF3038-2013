@@ -6,110 +6,153 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Devin
- */
 public class GUI extends javax.swing.JFrame {
+
+    private Controller control;
+    private boolean haslogin;
+    private javax.swing.Timer timer;
+    private int taskSelected;
 
     /**
      * Creates new form GUI
      */
     public GUI() {
         initComponents();
-        isOnline = false;
         haslogin = false;
+
+        String ip;
+        int port;
+
+        try {
+            Properties prop = new Properties();
+            InputStream inputStream = GUI.class.getClassLoader().getResourceAsStream("/client.properties");
+            prop.load(inputStream);
+            ip = prop.getProperty("ip");
+            port = Integer.parseInt(prop.getProperty("port"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            ip = "127.0.0.1";
+            port = 9000;
+        }
+
         this.addWindowListener(new WindowListener() {
-            public void windowActivated(WindowEvent e) {}
-            public void windowClosed(WindowEvent e) {}
-            public void windowClosing(WindowEvent e) {
-                if(haslogin)
-                    JOptionPane.showMessageDialog(GUI.this, "Anda harus log keluar terlebih dahulu untuk keluar program.",
-                                "Peringatan!", JOptionPane.WARNING_MESSAGE);
-                else
-                    GUI.this.dispose();
+            @Override
+            public void windowActivated(WindowEvent e) {
             }
-            public void windowDeactivated(WindowEvent e) {}
-            public void windowDeiconified(WindowEvent e) {}
-            public void windowIconified(WindowEvent e) {}
-            public void windowOpened(WindowEvent e) {}
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (haslogin) {
+                    JOptionPane.showMessageDialog(GUI.this, "Anda harus log keluar terlebih dahulu untuk keluar program.",
+                            "Peringatan!", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    GUI.this.dispose();
+                }
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
         });
-        control = new Controller("127.0.0.1",9000);
-        isOnline = control.connect();
+
+        control = new Controller(ip, port);
+
+        if (control.connect()) {
+            connectioninfo.setText("Status: Terhubung ke server");
+            connectioninfo.setForeground(Color.BLUE);
+        } else {
+            connectioninfo.setText("Status: Terputus dari server");
+            connectioninfo.setForeground(Color.red);
+        }
+
         tasklist.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                if(tasklist.getModel().getSize() > 0) {
+                if (tasklist.getModel().getSize() > 0) {
                     showSelection(tasklist.getSelectedIndex());
                     tasklist.repaint();
                 }
             }
         });
+
         timer = new javax.swing.Timer(5000, new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
-                if(isOnline) {
-                    connectioninfo.setText("Status: Terhubung ke server");
-                    connectioninfo.setForeground(Color.BLUE);
-                    isOnline = control.isConnect();
-                }
-                else {
-                    connectioninfo.setText("Status: Terputus dari server");
-                    connectioninfo.setForeground(Color.red);
-                    isOnline = control.connect();
-                }
+                // Timer
             }
         });
         timer.setInitialDelay(0);
         timer.start();
     }
-    
+
     private void showSelection(int idx) {
         try {
             taskSelected = control.listTugas.get(idx).getId();
             Vector<String> tasktable = new Vector();
-            for(int i = 0; i < control.listTugas.size(); i++)
+            for (int i = 0; i < control.listTugas.size(); i++) {
                 tasktable.add(control.listTugas.get(i).getNama());
+            }
             tasklist.setModel(new DefaultComboBoxModel(tasktable));
-            if(control.listTugas.size() > 0) {
+            if (control.listTugas.size() > 0) {
                 taskname.setText(control.listTugas.get(idx).getNama());
                 deadline.setText("Tenggat waktu : " + control.listTugas.get(idx).getTglDeadline());
 
                 String assignees = "";
                 ArrayList<User> users = new ArrayList(control.listTugas.get(idx).getAssignees());
-                for(int i = 0; i < users.size(); i++) {
+                for (int i = 0; i < users.size(); i++) {
                     assignees += users.get(i).getUsername();
-                    if(i < users.size() - 1)
+                    if (i < users.size() - 1) {
                         assignees += ", ";
+                    }
                 }
                 assignee.setText("Pengerja : " + assignees);
 
                 String tags = "";
                 Object[] temp = control.listTugas.get(idx).getTags().toArray();
-                for(int i = 0; i < temp.length; i++) {
+                for (int i = 0; i < temp.length; i++) {
                     tags += temp[i];
-                    if(i < temp.length - 1)
+                    if (i < temp.length - 1) {
                         tags += ", ";
+                    }
                 }
                 tag.setText("Tag : " + tags);
 
-                if(control.listTugas.get(idx).isStatus())
+                if (control.listTugas.get(idx).isStatus()) {
                     status.setText("Status : Sudah selesai");
-                else
+                } else {
                     status.setText("Status : Belum selesai");
+                }
 
                 kategori.setText("Kategori : " + control.listTugas.get(idx).getKategori().getNama());
             }
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -273,13 +316,13 @@ public class GUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-	
-    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {                                      
-    }                                     
+
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try {
-            if(haslogin) {
+            if (haslogin) {
                 progress.setIndeterminate(true);
                 control.logout();
                 progress.setIndeterminate(false);
@@ -299,10 +342,10 @@ public class GUI extends javax.swing.JFrame {
                 isOnline = control.connect();
                 timer.restart();
             }
-            if(!username.getText().equals("") && pass.getPassword().length > 0) {
-                if(!haslogin) {
+            if (!username.getText().equals("") && pass.getPassword().length > 0) {
+                if (!haslogin) {
                     progress.setIndeterminate(true);
-                    if(control.login(username.getText(), new String(pass.getPassword()))) {
+                    if (control.login(username.getText(), new String(pass.getPassword()))) {
                         JOptionPane.showMessageDialog(this, "Berhasil log masuk", "Log Masuk", JOptionPane.INFORMATION_MESSAGE);
                         haslogin = true;
                         username.setText("");
@@ -320,33 +363,30 @@ public class GUI extends javax.swing.JFrame {
                         tag.setVisible(true);
                         status.setVisible(true);
                         kategori.setVisible(true);
-                    }
-                    else
+                    } else {
                         JOptionPane.showMessageDialog(this, "Nama Pengguna dan sandi-lewat tidak cocok",
                                 "Log Masuk", JOptionPane.WARNING_MESSAGE);
+                    }
                     progress.setIndeterminate(false);
                 }
             }
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_loginActionPerformed
 
     private void changestatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changestatusActionPerformed
         try {
-            if(haslogin) {
-                if(status.getText().equals("Status : Sudah selesai")) {
+            if (haslogin) {
+                if (status.getText().equals("Status : Sudah selesai")) {
                     status.setText("Status : Belum selesai");
                     control.updateStatus(taskSelected, false);
-                }
-                else {
+                } else {
                     status.setText("Status : Sudah selesai");
                     control.updateStatus(taskSelected, true);
                 }
             }
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_changestatusActionPerformed
@@ -385,12 +425,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
     }
-    
-    private Controller control;
-    private boolean isOnline;
-    private boolean haslogin;
-    private javax.swing.Timer timer;
-    private int taskSelected;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel assignee;
     private javax.swing.JButton changestatus;

@@ -29,8 +29,6 @@ import javax.crypto.interfaces.DHPublicKey;
 import javax.crypto.spec.DHParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -262,6 +260,14 @@ public class Controller {
     }
 
     public void updateStatus(int idTugas, boolean status) throws IOException, SocketException {
+        for (Iterator<Tugas> iter = listTugas.iterator(); iter.hasNext();) {
+            Tugas t = iter.next();
+            if (t.getId() == idTugas) {
+                t.setStatus(status);
+                break;
+            }
+        }
+        
         if (logUpdate.containsKey(idTugas)) {
             logUpdate.remove(idTugas);
         } else {
