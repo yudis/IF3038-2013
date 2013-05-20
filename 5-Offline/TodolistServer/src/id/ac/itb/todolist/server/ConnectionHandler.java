@@ -62,13 +62,14 @@ public class ConnectionHandler extends Thread {
                  */
                 byte msgType = in.readByte();
 
-                System.out.println("--- MSG_TYPE = " + msgType);
+                System.out.println("--- MSG_TYPE = " + msgType + " ---");
 
                 if (msgType != MSG_LOGIN) {
                     sessionId = in.readLong();
 
                     synchronized (session) {
                         if (!session.containsKey(sessionId)) {
+                            System.out.println("Session tidak sesuai");
                             out.writeByte(MSG_FAILED);
                             
                             // Tutup Koneksi jika SESSION_ID tidak terdaftar
@@ -80,7 +81,7 @@ public class ConnectionHandler extends Thread {
 
                 if (msgType == MSG_LOGIN) {
                     System.out.println(sockClient + " : MSG_LOGIN");
-
+                    System.out.println("------------------------------------------");
                     /////////////////////////////// Server send p and g value                    
                     out.writeUTF(Controller.servp.toString());
                     out.writeUTF(Controller.servg.toString());
@@ -148,8 +149,10 @@ public class ConnectionHandler extends Thread {
                     for (int i = 0; i < count; i++) {
                         UpdateStatus us = new UpdateStatus(in.readInt(), in.readBoolean(), new Timestamp(in.readLong()));
                         tugasDao.setStatus(us.getIdTugas(), us.getStatus(), us.getTimestamp());
+                        System.out.println("Id = " + us.getIdTugas() + " Status = " + us.getStatus() + " TimeStamp = " +us.getTimestamp());
+                        System.out.println("------------------------------------------");
                     }
-
+                     
                     out.writeByte(MSG_SUCCESS);
                 } else if (msgType == MSG_LIST) {
                     System.out.println(sockClient + " : MSG_LIST");
@@ -166,28 +169,30 @@ public class ConnectionHandler extends Thread {
                     }
 
                     HashMap<Integer, Long> hmlistquery = tgsDao.getAllTugasbyUser((String) session.get(sessionId));
-                    System.out.println(hmlist);
-                    System.out.println(hmlistquery);
-                    
+                    System.out.println("Tugas dari client = " + hmlist);
+                                        
                     out.writeByte(MSG_SUCCESS);
 
                     Iterator<Map.Entry<Integer, Long>> it = hmlist.entrySet().iterator();
                     while (it.hasNext()) {
                         Map.Entry<Integer, Long> pairs = it.next();
                         if (hmlistquery.containsKey(pairs.getKey())) {
-                            System.out.println("ID: " + pairs.getKey() + " - R: " + pairs.getValue() + " - Q: " + hmlistquery.get(pairs.getKey()) + " EQ: " + (hmlistquery.get(pairs.getKey()) == pairs.getValue()));
+                            System.out.print("ID: " + pairs.getKey() + " - ReadTimeStamp: " + pairs.getValue() + " - QueryTimeStamp: " + hmlistquery.get(pairs.getKey()) + " EQ: " + (hmlistquery.get(pairs.getKey()).equals(pairs.getValue())));
                             if (pairs.getValue().equals(hmlistquery.get(pairs.getKey()))) {
                                 out.writeByte(LIST_STATUS_EQL);
                                 out.writeInt(pairs.getKey());
+                                System.out.println(" | TimeStamp Sama");
                                 hmlistquery.remove(pairs.getKey());
                             } else {
                                 out.writeByte(LIST_STATUS_UPD);
                                 tgsDao.getTugas(pairs.getKey(), true, true, true).writeOut(out);
+                                System.out.println(" | Update dari client");
                                 hmlistquery.remove(pairs.getKey());
                             }
                         } else {
                             out.writeByte(LIST_STATUS_DEL);
                             out.writeInt(pairs.getKey());
+                            System.out.println(" | Tugas tidak ada di database");
                             hmlistquery.remove(pairs.getKey());
                         }
                     }
@@ -196,12 +201,15 @@ public class ConnectionHandler extends Thread {
                     while (it2.hasNext()) {
                         Map.Entry<Integer, Long> pairs = it2.next();
                         out.writeByte(LIST_STATUS_NEW);
+                        System.out.print("ID: " + pairs.getKey() + " - ReadTimeStamp: " + pairs.getValue() + " - QueryTimeStamp: " + hmlistquery.get(pairs.getKey()) + " EQ: " + (hmlistquery.get(pairs.getKey()).equals(pairs.getValue())));
+                        System.out.println(" | Tugas baru dari server");
                         tgsDao.getTugas(pairs.getKey(), true, true, true).writeOut(out);
                     }
-
+                    System.out.println("List dikirim ke client = " + hmlistquery);
+                    System.out.println("------------------------------------------");
                     out.writeByte(LIST_STATUS_END);
                 }
-
+                
                 out.flush();
             }
         } catch (Exception ex) {
