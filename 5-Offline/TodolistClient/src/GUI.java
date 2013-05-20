@@ -2,22 +2,16 @@
 import id.ac.itb.todolist.client.Controller;
 import id.ac.itb.todolist.model.User;
 import java.awt.Color;
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.SocketException;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Vector;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -42,7 +36,9 @@ public class GUI extends javax.swing.JFrame {
         try {
             Properties prop = new Properties();
             InputStream inputStream = GUI.class.getClassLoader().getResourceAsStream("/client.properties");
-            if (inputStream == null) throw new IOException();
+            if (inputStream == null) {
+                throw new IOException();
+            }
             prop.load(inputStream);
             ip = prop.getProperty("ip");
             port = Integer.parseInt(prop.getProperty("port"));
@@ -110,7 +106,7 @@ public class GUI extends javax.swing.JFrame {
                             return;
                         }
                     }
-                    
+
                     if (control.list()) {
                         int idx = tasklist.getSelectedIndex();
                         showSelection(idx == -1 ? control.listTugas.size() > 0 ? 0 : -1 : idx);
@@ -162,7 +158,7 @@ public class GUI extends javax.swing.JFrame {
             tasklist.setModel(new DefaultComboBoxModel(tasktable));
             if (idx > -1) {
                 taskSelected = control.listTugas.get(idx).getId();
-                                
+
                 taskname.setText(control.listTugas.get(idx).getNama());
                 deadline.setText("Tenggat waktu : " + control.listTugas.get(idx).getTglDeadline());
 
@@ -356,7 +352,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {
     }
-    
+
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         if (haslogin) {
             try {
@@ -413,8 +409,16 @@ public class GUI extends javax.swing.JFrame {
                     control.updateStatus(taskSelected, true);
                 }
             }
-        } catch (Exception e) {
+
+        } catch (IOException e) {
             e.printStackTrace();
+        }
+        try {
+            Logger a = new Logger();
+            System.out.println("ascacsaaaaaaaaaaaaaaaaaaaaaaaaaacqwq" + control.logUpdate.size());
+            a.log(control.logUpdate);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_changestatusActionPerformed
 
