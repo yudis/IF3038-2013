@@ -44,16 +44,49 @@ public class Client {
                         String username = inClient.readLine();
                         System.out.print("Enter password: ");
                         String password = inClient.readLine();
-                        request = ("1,"+username+","+password);
                         
+                        request = ("1,"+username+","+password);
                         outServer.writeBytes(request + '\n');
                         respond = inServer.readLine();
+                        
                         String[] responds = respond.split(",");
                         if (responds[0].equals("200")){
                             c.lastUpdate = Long.parseLong(responds[1]);
                             System.out.println("Login successful, this client lastUpdate is "+c.lastUpdate);
-                            //TODO:
+                            
                             //Synchronize...
+                            request = ("4,"+username+","+c.lastUpdate);
+                            outServer.writeBytes(request + '\n');
+                            
+                            //menerima string berisi task_id dan status yang terupdate
+                            respond = inServer.readLine();
+                            responds = respond.split(",");
+                            if (responds[0].equals("200")){
+                                System.out.println("Synchronizing...");
+                                String[] responds2;
+                                for (int i = 1; i < responds.length; i++){
+                                    responds2 = responds[i].split(":");
+                                    System.out.println("task_id: " + responds2[0] + ", current status: " + responds2[1] + ", updated");
+                                }
+                                
+                                String request2, respond2;
+                                long now = System.currentTimeMillis();
+                                request2 = ""+now;
+                                outServer.writeBytes(request2 + '\n');
+
+                                respond2 = inServer.readLine();
+                                if (respond2.equals("200")){
+                                    System.out.println("Update last update successful");
+                                } else if (respond2.equals("400")){
+                                    System.out.println("Update last update failed");
+                                } else {
+                                    System.out.println("Unrecognized respond");
+                                }
+                            } else if (responds[0].equals("400")){
+                                System.out.println("No update...");
+                            } else {
+                                System.out.println("unrecognized respond");
+                            }
                             System.out.println("Creating 'keep update' thread");
                             Runnable task = new MyRunnable();
                             Thread threadUpdate = new Thread(task);

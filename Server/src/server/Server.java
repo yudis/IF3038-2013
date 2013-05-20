@@ -107,6 +107,30 @@ public class Server implements Runnable{
                         out.writeBytes(respond);
                         break;
                     }
+                    case ("4"): //synchronize
+                    {
+                        //argumen 1 adalah username, argumen 2 adalah lastUpdate
+                        String clientUsername = parts[1];
+                        Long clientLastUpdate = Long.parseLong(parts[2]);
+                        //lakukan sinkronisasi
+                        respond = db.SynchronizeUponConnection(clientUsername, clientLastUpdate);
+                        out.writeBytes(respond);    //bila 200 berhasil, bila 400 tak ada update
+                        String[] responds = respond.split(",");
+                        if (responds[0].equals("200")){
+                            System.out.println("Synchronizing...");
+                            String request2, respond2;
+                            respond2 = "400\n";
+                            request2 = in.readLine();
+                            clientLastUpdate = Long.parseLong(request2);
+                            respond2 = db.UpdateLastUpdate(clientUsername, clientLastUpdate);
+                            out.writeBytes(respond2);
+                        } else if (responds[0].equals("400")){
+                            System.out.println("No update...");
+                        } else {
+                            
+                        }
+                        break;
+                    }
                     default:
                     {
                         break;
