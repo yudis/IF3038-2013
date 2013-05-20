@@ -28,14 +28,14 @@ public class Logger {
                     while (it.hasNext()) {
                         Map.Entry<Integer, UpdateStatus> pairs = it.next();
                         int flagBool = 0;
-                        String time = pairs.getValue().getTimestamp().toString();
-                        out.write(pairs.getValue().getIdTugas());
+                        String time = Long.toString(pairs.getValue().getTimestamp().getTime());
+                        out.write(Integer.toString(pairs.getValue().getIdTugas()));
                         out.write(" ");
                         if (pairs.getValue().isStatus())
                         {
                             flagBool = 1;
                         }
-                        out.write(flagBool);
+                        out.write(Integer.toString(flagBool));
                         out.write(" ");
                         out.write(time);
                         out.write("\n");
