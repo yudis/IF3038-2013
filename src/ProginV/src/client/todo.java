@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class Todo {
+public class todo {
 
 	// socket2an
 	private Socket server = null;
@@ -46,7 +46,7 @@ public class Todo {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Todo window = new Todo();
+					todo window = new todo();
 					window.frmToDoList.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +58,7 @@ public class Todo {
 	/**
 	 * Create the application.
 	 */
-	public Todo() {
+	public todo() {
 		initialize();
 	}
 
@@ -166,9 +166,9 @@ public class Todo {
                 server = new Socket("127.0.0.1", 2000);
                 JOptionPane.showMessageDialog(frmToDoList, "Connecting to server.");
             } catch (UnknownHostException ex) {
-                Logger.getLogger(Todo.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(todo.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(Todo.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(todo.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
              
@@ -204,7 +204,7 @@ public class Todo {
             	JOptionPane.showMessageDialog(frmToDoList, "Failed connect to server.");	
             }
         } catch (IOException ex) {
-            Logger.getLogger(Todo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(todo.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return false;
@@ -233,7 +233,7 @@ public class Todo {
                 JOptionPane.showMessageDialog(frmToDoList, (result == 1) ? "Success login." : "Username or password incorrect.");
             }
         } catch (IOException ex) {
-            Logger.getLogger(Todo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(todo.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return result == 1;
