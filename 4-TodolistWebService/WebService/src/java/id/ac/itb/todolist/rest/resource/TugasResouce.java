@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class TugasResouce extends HttpServlet {
 
@@ -29,7 +30,7 @@ public class TugasResouce extends HttpServlet {
     private Pattern regexSearch = Pattern.compile("^/search/([\\w%]{1,})/([0-9]{1,})/([0-9]{1,})$");
     private Pattern regexTugasbyUser = Pattern.compile("^/tgsbyuser/([\\w._%].*)$");
     private Pattern regexSetStatus = Pattern.compile("^/setstatus/([0-9]{1,})/([0-1])/([0-9]{1,})$");
-    
+
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
@@ -56,7 +57,7 @@ public class TugasResouce extends HttpServlet {
             out.print(tugasDao.removeTag(Integer.parseInt(matcher.group(1)), matcher.group(2)));
             return;
         }
-        
+
         throw new ServletException("Invalid URI");
     }
 
@@ -102,41 +103,41 @@ public class TugasResouce extends HttpServlet {
             out.print(new JSONArray(tugasDao.getSuggestionAssignees(idTugas, keyword, limit)));
             return;
         }
-                
+
         matcher = regexAssignee.matcher(pathInfo);
         if (matcher.find()) {
             TugasDao tugasDao = new TugasDao();
             out.print(tugasDao.isAssignee(Integer.parseInt(matcher.group(1)), matcher.group(2)));
             return;
         }
-                  
+
         matcher = regexPemilik.matcher(pathInfo);
         if (matcher.find()) {
             TugasDao tugasDao = new TugasDao();
             out.print(tugasDao.isPemilik(Integer.parseInt(matcher.group(1)), matcher.group(2)));
             return;
         }
-        
+
         matcher = regexIsUpdate.matcher(pathInfo);
         if (matcher.find()) {
             TugasDao tugasDao = new TugasDao();
             out.print(tugasDao.isUpdated(Integer.parseInt(matcher.group(1)), Long.parseLong(matcher.group(2))));
             return;
         }
-        
+
         matcher = regexUsername.matcher(pathInfo);
         if (matcher.find()) {
             TugasDao tugasDao = new TugasDao();
             out.print(new JSONArray(tugasDao.getTugas(matcher.group(1))));
             return;
         }
-        
+
         matcher = regexSearch.matcher(pathInfo);
         if (matcher.find()) {
             TugasDao tugasDao = new TugasDao();
             out.print(new JSONArray(tugasDao.getTugasSearch(matcher.group(1), Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)))));
             return;
-        }       
+        }
 
         matcher = regexAll.matcher(pathInfo);
         if (matcher.find()) {
@@ -144,15 +145,14 @@ public class TugasResouce extends HttpServlet {
             out.print(new JSONArray(tugasDao.getAllTugas()));
             return;
         }
-        
+
         matcher = regexTugasbyUser.matcher(pathInfo);
         if (matcher.find()) {
-
             TugasDao tugasDao = new TugasDao();
-            out.print(new JSONArray(tugasDao.getAllTugasbyUser(matcher.group(1))));
+            out.print(new JSONObject(tugasDao.getAllTugasbyUser(matcher.group(1))));
             return;
         }
-        
+
         throw new ServletException("Invalid URI");
     }
 
@@ -171,7 +171,7 @@ public class TugasResouce extends HttpServlet {
             out.print(tugasDao.setStatus(id, tmp > 0));
             return;
         }
-        
+
         matcher = regexTimestamp.matcher(pathInfo);
         if (matcher.find()) {
             int id = Integer.parseInt(matcher.group(1));
@@ -180,29 +180,29 @@ public class TugasResouce extends HttpServlet {
             out.print(tugasDao.updateTimestamp(id));
             return;
         }
-        
-        
+
+
         matcher = regexDeadline.matcher(pathInfo);
         if (matcher.find()) {
             int id = Integer.parseInt(matcher.group(1));
-            
+
             java.sql.Date date = new java.sql.Date(Integer.parseInt(matcher.group(2)) - 1900, Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));
 
             TugasDao tugasDao = new TugasDao();
             out.print(tugasDao.setDeadline(id, date));
             return;
-        }  
-        
+        }
+
         matcher = regexSetStatus.matcher(pathInfo);
         if (matcher.find()) {
             int id = Integer.parseInt(matcher.group(1));
-            boolean bool = Boolean.parseBoolean(matcher.group(2));
+            boolean bool = Integer.parseInt(matcher.group(2)) == 0 ? false : true;
             long time = Long.parseLong(matcher.group(3));
             Timestamp timestamp = new Timestamp(time);
-            
+
             TugasDao tugasDao = new TugasDao();
-            out.print(tugasDao.setStatus(id,bool,timestamp));
+            out.print(tugasDao.setStatus(id, bool, timestamp));
             return;
-        }   
+        }
     }
 }
