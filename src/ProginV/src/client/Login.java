@@ -4,12 +4,31 @@
  */
 package client;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
+
 /**
  *
  * @author Aisyah
  */
 public class Login extends javax.swing.JDialog {
-
+//deklarasi atribut socket
+    private Socket server = null;
+    private OutputStream dos = null;
+    private InputStream dis = null;
+    
+    private JFrame frmToDoList;
+	private JTextPane usernameTextPane;
+	private JTextPane passwordTextPane;
+    
     /**
      * Creates new form Login
      */
@@ -129,8 +148,109 @@ public class Login extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        /*
+		String username = usernameTextPane.getText();
+        String password = passwordTextPane.getText();
+        System.out.println(username + " " + password);
+        */
+		boolean success = doHandshake();
+		if (success)
+		{
+			success = doLogin();
+			if (success)
+	        {
+				// go to other form
+	        	//frmToDoList.setVisible(false);
+	        }
+		}
     }//GEN-LAST:event_jButton1ActionPerformed
 
+     public boolean doHandshake()
+    {
+        if (server == null)
+        {
+            try 
+            {
+                // TODO add your handling code here:
+                server = new Socket("127.0.0.1", 2000);
+                JOptionPane.showMessageDialog(frmToDoList, "Connecting to server.");
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(todo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(todo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+             
+        try {
+            
+            System.out.println("Mencoba handshake");
+            if (server == null)
+            {
+            	JOptionPane.showMessageDialog(frmToDoList, "Failed connect to server.");	
+            	return false;
+            }
+            
+            dos = server.getOutputStream();
+            if (dos != null)
+            {
+	            dos.write("handshake".getBytes());
+	            dos.flush();
+	            
+	            dis = server.getInputStream();
+	            byte[] b = new byte[1024];
+	            int r = dis.read(b);
+	            if (r != -1)
+	            {
+	                if (new String(b).trim().equals("success"))
+	                {
+	                    JOptionPane.showMessageDialog(frmToDoList, "Success connect to server.");
+	                    return true;
+	                }   
+	            }
+            }
+            else
+            {
+            	JOptionPane.showMessageDialog(frmToDoList, "Failed connect to server.");	
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(todo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    
+    public boolean doLogin()
+    {
+    	int result = 0;
+        try {
+            String username = usernameTextPane.getText();
+            String password = passwordTextPane.getText();
+            System.out.println("Masuk username");
+            
+            dos = server.getOutputStream();
+            dos.write(("login/" + username + "/" + password).getBytes());
+            dos.flush();
+            System.out.println("berhasil kirim message");
+            
+            byte[] b = new byte[1024];
+            dis = server.getInputStream();
+            int r = dis.read(b);
+            if (r != -1)
+            {
+            	result = Integer.parseInt(new String(b).trim());
+            	
+                JOptionPane.showMessageDialog(frmToDoList, (result == 1) ? "Success login." : "Username or password incorrect.");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(todo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return result == 1;
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
