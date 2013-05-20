@@ -1,0 +1,26 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package tubes5;
+
+import Controller.Controller;
+
+/**
+ *
+ * @author Aji
+ */
+public class Tubes5 {
+
+    /**
+     * @param args the command line arguments
+     */
+    
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Controller controller = new Controller();
+        if(controller.connect("127.0.0.1", 9000)){
+            new login(controller).setVisible(true);
+        } 
+    }
+}
