@@ -92,38 +92,23 @@ public class Database {
         return message;
     }
     
-    public String SynchronizeUponConnection(String username, Long lastUpdate){
+    public String SynchronizeUponConnection(String task_id,String status,Long lastUpdate){
         String message = "400\n";
         try{
-            preparedStatement = connection.prepareStatement("SELECT * FROM task JOIN task_asignee WHERE task.task_id = task_asignee.task_id AND username = ? AND timestamp > ? ");
-            preparedStatement.setString(1, username);
+
+            preparedStatement = connection.prepareStatement("UPDATE task SET task_status = ?, timestamp = ? WHERE task_id = ?");
+            preparedStatement.setString(1, status);
             preparedStatement.setLong(2, lastUpdate);
-            resultSet = preparedStatement.executeQuery();
-            int rowcount = 0;
-            if (resultSet.last()) {
-                rowcount = resultSet.getRow();
-                resultSet.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
-            }
-            if (rowcount != 0){ //jika ada hasilnya
-                message = "200,";
+            preparedStatement.setString(3, task_id);
             
-                System.out.println("row(s) affected: "+rowcount);
-                while (resultSet.next()){
-                    String task_id = resultSet.getString("task_id");
-                    String _username = resultSet.getString("username");
-                    String task_status = resultSet.getString("task_status");
-                    long timestamp = resultSet.getLong("timestamp");
-                    message += task_id+":"+task_status+",";
-                    System.out.println("task_id: " + task_id + ", task_status; "+ task_status +", username: "+ _username +", timestamp: " + timestamp);
-                }
-                message = message.substring(0, message.length()-1);
-                message += "\n";
+            if (preparedStatement.executeUpdate() != 0){
+                message = "200\n";    //success
             }
         } catch (Exception e){
-            System.out.println("SynchronizedUponConnection Error: " + e.getMessage());
+            System.out.println("UpdateTaskStatus Error: " + e.getMessage());
         }
-        System.out.println(message);
         return message;
+        
     }
     
     public String UpdateLastUpdate(String username, Long lastUpdate){

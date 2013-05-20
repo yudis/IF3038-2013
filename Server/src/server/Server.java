@@ -8,6 +8,8 @@ import java.net.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Timotius
@@ -23,6 +25,7 @@ public class Server implements Runnable{
     private String respond;
     private String capitalizedMessage;
     private Database db;
+    private List<Log> logs;
     
     Server(Socket socket, int id) {
         this.connection = socket;
@@ -31,6 +34,7 @@ public class Server implements Runnable{
         this.request = "";
         this.respond = "";
         this.lastUpdate = System.currentTimeMillis();
+        this.logs = new ArrayList<Log>();
     }
         
     public static void main(String[] args) {
@@ -107,28 +111,34 @@ public class Server implements Runnable{
                         out.writeBytes(respond);
                         break;
                     }
-                    case ("4"): //synchronize
+                    case ("4"): //synchronize dari log
                     {
                         //argumen 1 adalah username, argumen 2 adalah lastUpdate
                         String clientUsername = parts[1];
                         Long clientLastUpdate = Long.parseLong(parts[2]);
                         //lakukan sinkronisasi
-                        respond = db.SynchronizeUponConnection(clientUsername, clientLastUpdate);
-                        out.writeBytes(respond);    //bila 200 berhasil, bila 400 tak ada update
-                        String[] responds = respond.split(",");
-                        if (responds[0].equals("200")){
-                            System.out.println("Synchronizing...");
-                            String request2, respond2;
-                            respond2 = "400\n";
-                            request2 = in.readLine();
-                            clientLastUpdate = Long.parseLong(request2);
-                            respond2 = db.UpdateLastUpdate(clientUsername, clientLastUpdate);
-                            out.writeBytes(respond2);
-                        } else if (responds[0].equals("400")){
-                            System.out.println("No update...");
-                        } else {
-                            
+                        int i = 3;
+                        while (i< parts.length){
+                            respond = db.SynchronizeUponConnection(parts[i],parts[i+1],Long.parseLong(parts[i+2]));
+                        
+                            String respond2 = db.UpdateLastUpdate(clientUsername, Long.parseLong(parts[i+2]));
+                            i+=3;
                         }
+//                        out.writeBytes(respond);    //bila 200 berhasil, bila 400 tak ada update
+//                        String[] responds = respond.split(",");
+//                        if (responds[0].equals("200")){
+//                            System.out.println("Synchronizing...");
+//                            String request2, respond2;
+//                            respond2 = "400\n";
+//                            request2 = in.readLine();
+//                            clientLastUpdate = Long.parseLong(request2);
+//                            respond2 = db.UpdateLastUpdate(clientUsername, clientLastUpdate);
+//                            out.writeBytes(respond2);
+//                        } else if (responds[0].equals("400")){
+//                            System.out.println("No update...");
+//                        } else {
+//                            
+//                        }
                         break;
                     }
                     default:

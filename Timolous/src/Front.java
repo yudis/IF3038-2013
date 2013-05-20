@@ -25,20 +25,15 @@ public class Front extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
         jPasswordField2 = new javax.swing.JPasswordField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(350, 330, 200, 70);
         getContentPane().add(jTextField1);
         jTextField1.setBounds(440, 260, 130, 28);
 
@@ -50,18 +45,31 @@ public class Front extends javax.swing.JFrame {
         getContentPane().add(jPasswordField1);
         jPasswordField1.setBounds(440, 300, 134, 28);
 
+        jPasswordField2.setText("jPasswordField2");
+        getContentPane().add(jPasswordField2);
+        jPasswordField2.setBounds(430, 300, 134, 28);
+
+        jButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(350, 340, 190, 60);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/front.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 900, 480);
 
-        jPasswordField2.setText("jPasswordField2");
-        getContentPane().add(jPasswordField2);
-        jPasswordField2.setBounds(430, 300, 134, 28);
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(570, 270, 110, 110);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -98,11 +106,10 @@ public class Front extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
