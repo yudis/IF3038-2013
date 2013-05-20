@@ -29,8 +29,6 @@ import javax.crypto.interfaces.DHPublicKey;
 import javax.crypto.spec.DHParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -120,7 +118,7 @@ public class Controller {
         return (sockClient != null);
     }
 
-    public boolean login(String username, String password) throws IOException, SocketException {
+    public boolean login(String username, String password) throws IOException {
         if (sockClient == null) throw new SocketException("Socket is null");
         
         try {
@@ -184,7 +182,7 @@ public class Controller {
         return((sockClient != null && sockClient.isConnected()));
     }
 
-    public boolean logout() throws IOException, SocketException {
+    public boolean logout() throws IOException {
         if (sockClient == null) throw new SocketException("Socket is null");
         
         DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
@@ -205,7 +203,7 @@ public class Controller {
         return false;
     }
 
-    public boolean list() throws IOException, SocketException {
+    public boolean list() throws IOException {
         if (sockClient == null) throw new SocketException("Socket is null");
         
         DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
@@ -261,7 +259,15 @@ public class Controller {
         return false;
     }
 
-    public void updateStatus(int idTugas, boolean status) throws IOException, SocketException {
+    public void updateStatus(int idTugas, boolean status) throws IOException {
+        for (Iterator<Tugas> iter = listTugas.iterator(); iter.hasNext();) {
+            Tugas t = iter.next();
+            if (t.getId() == idTugas) {
+                t.setStatus(status);
+                break;
+            }
+        }
+        
         if (logUpdate.containsKey(idTugas)) {
             logUpdate.remove(idTugas);
         } else {
@@ -273,7 +279,7 @@ public class Controller {
         }
     }
 
-    private boolean updateToServer() throws IOException, SocketException {
+    public boolean updateToServer() throws IOException {
         if (sockClient == null) throw new SocketException("Socket is null");
         
         DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());

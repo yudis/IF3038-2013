@@ -2,114 +2,199 @@
 import id.ac.itb.todolist.client.Controller;
 import id.ac.itb.todolist.model.User;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.SocketException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Devin
- */
 public class GUI extends javax.swing.JFrame {
+
+    private Controller control;
+    private boolean haslogin;
+    private javax.swing.Timer timer;
+    private int taskSelected;
+    private static final int MAX_TRY_CONNECT = 3;
 
     /**
      * Creates new form GUI
      */
     public GUI() {
         initComponents();
-        isOnline = false;
         haslogin = false;
+
+        String ip;
+        int port;
+
+        try {
+            Properties prop = new Properties();
+            InputStream inputStream = GUI.class.getClassLoader().getResourceAsStream("/client.properties");
+            if (inputStream == null) throw new IOException();
+            prop.load(inputStream);
+            ip = prop.getProperty("ip");
+            port = Integer.parseInt(prop.getProperty("port"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            ip = "127.0.0.1";
+            port = 9000;
+        }
+
         this.addWindowListener(new WindowListener() {
-            public void windowActivated(WindowEvent e) {}
-            public void windowClosed(WindowEvent e) {}
-            public void windowClosing(WindowEvent e) {
-                if(haslogin)
-                    JOptionPane.showMessageDialog(GUI.this, "Anda harus log keluar terlebih dahulu untuk keluar program.",
-                                "Peringatan!", JOptionPane.WARNING_MESSAGE);
-                else
-                    GUI.this.dispose();
+            @Override
+            public void windowActivated(WindowEvent e) {
             }
-            public void windowDeactivated(WindowEvent e) {}
-            public void windowDeiconified(WindowEvent e) {}
-            public void windowIconified(WindowEvent e) {}
-            public void windowOpened(WindowEvent e) {}
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (haslogin) {
+                    JOptionPane.showMessageDialog(GUI.this, "Anda harus log keluar terlebih dahulu untuk keluar program.",
+                            "Peringatan!", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    GUI.this.dispose();
+                }
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
         });
-        control = new Controller("127.0.0.1",9000);
-        isOnline = control.connect();
+
+        control = new Controller(ip, port);
+
         tasklist.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                if(tasklist.getModel().getSize() > 0) {
+                if (tasklist.getModel().getSize() > 0) {
                     showSelection(tasklist.getSelectedIndex());
                     tasklist.repaint();
                 }
             }
         });
+
         timer = new javax.swing.Timer(5000, new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
-                if(isOnline) {
-                    connectioninfo.setText("Status: Terhubung ke server");
-                    connectioninfo.setForeground(Color.BLUE);
-                    isOnline = control.isConnect();
-                }
-                else {
-                    connectioninfo.setText("Status: Terputus dari server");
-                    connectioninfo.setForeground(Color.red);
-                    isOnline = control.connect();
+                try {
+                    if (!control.logUpdate.isEmpty()) {
+                        if (!control.updateToServer()) {
+                            loggedOut();
+                            return;
+                        }
+                    }
+                    
+                    if (control.list()) {
+                        int idx = tasklist.getSelectedIndex();
+                        showSelection(idx == -1 ? control.listTugas.size() > 0 ? 0 : -1 : idx);
+                    } else {
+                        loggedOut();
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    connect();
                 }
             }
         });
         timer.setInitialDelay(0);
-        timer.start();
     }
-    
+
+    private void connect() {
+        if (control.connect()) {
+            connectioninfo.setText("Status: Terhubung ke server");
+            connectioninfo.setForeground(Color.BLUE);
+        } else {
+            connectioninfo.setText("Status: Terputus dari server");
+            connectioninfo.setForeground(Color.red);
+        }
+    }
+
+    private void loggedOut() {
+        userlabel.setVisible(true);
+        passlabel.setVisible(true);
+        username.setVisible(true);
+        pass.setVisible(true);
+        login.setText("Log masuk");
+        tasklist.setModel(new DefaultComboBoxModel());
+        taskname.setVisible(false);
+        deadline.setVisible(false);
+        assignee.setVisible(false);
+        tag.setVisible(false);
+        status.setVisible(false);
+        kategori.setVisible(false);
+        haslogin = false;
+        timer.stop();
+    }
+
     private void showSelection(int idx) {
         try {
-            taskSelected = control.listTugas.get(idx).getId();
-            Vector<String> tasktable = new Vector();
-            for(int i = 0; i < control.listTugas.size(); i++)
+            Vector<String> tasktable = new Vector<>();
+            for (int i = 0, len = control.listTugas.size(); i < len; i++) {
                 tasktable.add(control.listTugas.get(i).getNama());
+            }
             tasklist.setModel(new DefaultComboBoxModel(tasktable));
-            if(control.listTugas.size() > 0) {
+            if (idx > -1) {
+                taskSelected = control.listTugas.get(idx).getId();
+                                
                 taskname.setText(control.listTugas.get(idx).getNama());
                 deadline.setText("Tenggat waktu : " + control.listTugas.get(idx).getTglDeadline());
 
                 String assignees = "";
                 ArrayList<User> users = new ArrayList(control.listTugas.get(idx).getAssignees());
-                for(int i = 0; i < users.size(); i++) {
+                for (int i = 0; i < users.size(); i++) {
                     assignees += users.get(i).getUsername();
-                    if(i < users.size() - 1)
+                    if (i < users.size() - 1) {
                         assignees += ", ";
+                    }
                 }
                 assignee.setText("Pengerja : " + assignees);
 
                 String tags = "";
                 Object[] temp = control.listTugas.get(idx).getTags().toArray();
-                for(int i = 0; i < temp.length; i++) {
+                for (int i = 0; i < temp.length; i++) {
                     tags += temp[i];
-                    if(i < temp.length - 1)
+                    if (i < temp.length - 1) {
                         tags += ", ";
+                    }
                 }
                 tag.setText("Tag : " + tags);
 
-                if(control.listTugas.get(idx).isStatus())
+                if (control.listTugas.get(idx).isStatus()) {
                     status.setText("Status : Sudah selesai");
-                else
+                } else {
                     status.setText("Status : Belum selesai");
+                }
 
                 kategori.setText("Kategori : " + control.listTugas.get(idx).getKategori().getNama());
             }
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -128,7 +213,6 @@ public class GUI extends javax.swing.JFrame {
         passlabel = new javax.swing.JLabel();
         pass = new javax.swing.JPasswordField();
         login = new javax.swing.JButton();
-        progress = new javax.swing.JProgressBar();
         tasklabel = new javax.swing.JLabel();
         changestatus = new javax.swing.JButton();
         connectioninfo = new javax.swing.JLabel();
@@ -142,7 +226,6 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Todolist!");
-        setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(600, 450));
 
         userlabel.setText("Nama pengguna");
@@ -216,9 +299,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(tasklist, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(login)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(progress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                         .addComponent(connectioninfo, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,8 +327,7 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(login)
-                    .addComponent(connectioninfo)
-                    .addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(connectioninfo))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tasklabel)
@@ -273,36 +353,22 @@ public class GUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-	
-    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {                                      
-    }                                     
 
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+    
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        try {
-            if(haslogin) {
-                progress.setIndeterminate(true);
+        if (haslogin) {
+            try {
                 control.logout();
-                progress.setIndeterminate(false);
-                userlabel.setVisible(true);
-                passlabel.setVisible(true);
-                username.setVisible(true);
-                pass.setVisible(true);
-                login.setText("Log masuk");
-                tasklist.setModel(new DefaultComboBoxModel());
-                taskname.setVisible(false);
-                deadline.setVisible(false);
-                assignee.setVisible(false);
-                tag.setVisible(false);
-                status.setVisible(false);
-                kategori.setVisible(false);
-                haslogin = false;
-                isOnline = control.connect();
-                timer.restart();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
-            if(!username.getText().equals("") && pass.getPassword().length > 0) {
-                if(!haslogin) {
-                    progress.setIndeterminate(true);
-                    if(control.login(username.getText(), new String(pass.getPassword()))) {
+            loggedOut();
+        } else if (!username.getText().equals("") && pass.getPassword().length > 0) {
+            for (int i = 0; i < MAX_TRY_CONNECT; i++) {
+                try {
+                    if (control.login(username.getText(), new String(pass.getPassword()))) {
                         JOptionPane.showMessageDialog(this, "Berhasil log masuk", "Log Masuk", JOptionPane.INFORMATION_MESSAGE);
                         haslogin = true;
                         username.setText("");
@@ -312,41 +378,42 @@ public class GUI extends javax.swing.JFrame {
                         username.setVisible(false);
                         pass.setVisible(false);
                         login.setText("Log keluar");
-                        control.list();
-                        showSelection(0);
                         taskname.setVisible(true);
                         deadline.setVisible(true);
                         assignee.setVisible(true);
                         tag.setVisible(true);
                         status.setVisible(true);
                         kategori.setVisible(true);
+                        timer.start();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Nama Pengguna dan sandi-lewat tidak cocok", "Log Masuk", JOptionPane.WARNING_MESSAGE);
                     }
-                    else
-                        JOptionPane.showMessageDialog(this, "Nama Pengguna dan sandi-lewat tidak cocok",
-                                "Log Masuk", JOptionPane.WARNING_MESSAGE);
-                    progress.setIndeterminate(false);
+                    break;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    if (i < MAX_TRY_CONNECT - 1) {
+                        connect();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Gagal membuat koneksi ke server", "Log Masuk", JOptionPane.ERROR_MESSAGE);
+                        loggedOut();
+                    }
                 }
             }
-        }
-        catch(Exception e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_loginActionPerformed
 
     private void changestatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changestatusActionPerformed
         try {
-            if(haslogin) {
-                if(status.getText().equals("Status : Sudah selesai")) {
+            if (haslogin) {
+                if (status.getText().equals("Status : Sudah selesai")) {
                     status.setText("Status : Belum selesai");
                     control.updateStatus(taskSelected, false);
-                }
-                else {
+                } else {
                     status.setText("Status : Sudah selesai");
                     control.updateStatus(taskSelected, true);
                 }
             }
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_changestatusActionPerformed
@@ -380,17 +447,12 @@ public class GUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new GUI().setVisible(true);
             }
         });
     }
-    
-    private Controller control;
-    private boolean isOnline;
-    private boolean haslogin;
-    private javax.swing.Timer timer;
-    private int taskSelected;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel assignee;
     private javax.swing.JButton changestatus;
@@ -400,7 +462,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton login;
     private javax.swing.JPasswordField pass;
     private javax.swing.JLabel passlabel;
-    private javax.swing.JProgressBar progress;
     private javax.swing.JLabel status;
     private javax.swing.JLabel tag;
     private javax.swing.JLabel tasklabel;
