@@ -217,8 +217,10 @@ public class Client {
                             c.lastUpdate = Long.parseLong(responds[1]);
                             //write to log
                             FileWriter fw = new FileWriter("log.txt",true); 
-                            fw.write(task_id + ",1," + c.lastUpdate + "\n"); 
-                            fw.close();
+                            BufferedWriter out = new BufferedWriter(fw);
+                            out.newLine();
+                            out.write(task_id + ",1," + c.lastUpdate); 
+                            out.close();
                             System.out.println("Check successful, lastUpdate " + c.lastUpdate);
                         } else {
                             System.out.println("Check failed");
@@ -237,8 +239,10 @@ public class Client {
                             c.lastUpdate = Long.parseLong(responds[1]);
                             //write to log
                             FileWriter fw = new FileWriter("log.txt",true); 
-                            fw.write(task_id + ",0," + c.lastUpdate + "\n"); 
-                            fw.close();
+                            BufferedWriter out = new BufferedWriter(fw);
+                            out.newLine();
+                            out.write(task_id + ",0," + c.lastUpdate); 
+                            out.close();
                             System.out.println("Uncheck successful, lastUpdate " + c.lastUpdate);
                         } else {
                             System.out.println("Uncheck failed");
