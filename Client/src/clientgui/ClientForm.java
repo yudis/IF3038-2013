@@ -214,18 +214,21 @@ public class ClientForm extends javax.swing.JFrame {
                     if (LoginForm.getClient().getAc().get(row).getStatus() != jTable1.getValueAt(row, col)) {
                         boolean newValue = !(LoginForm.getClient().getAc().get(row).getStatus());
                         String newValue2 = "false";
-                        if (newValue == true){
+                        if (newValue == true) {
                             newValue2 = "true";
                         }
-                        
+
                         if (LoginForm.getClient().updateStatus(LoginForm.getClient().getAc().get(row).getId(), newValue)) {
                             LoginForm.getClient().getAc().get(row).setStatus(newValue);
-                            LoginForm.getClient().getFm().appendFile(LoginForm.getClient().getUsername(), new java.sql.Timestamp(new java.util.Date().getTime()).toString(), String.valueOf(LoginForm.getClient().getAc().get(row).getId()), newValue2);
+                            System.out.println("blablabla " + LoginForm.getClient().getIsDC());
+                            if (LoginForm.getClient().getIsDC()) {
+                                LoginForm.getClient().getFm().appendFile(LoginForm.getClient().getUsername(), new java.sql.Timestamp(new java.util.Date().getTime()).toString(), String.valueOf(LoginForm.getClient().getAc().get(row).getId()), newValue2);
+                            }
                         } else {
                             jTable1.setValueAt(!newValue, row, col);
                             JOptionPane.showMessageDialog(null, "Failed to update status " + LoginForm.getClient().getAc().get(row).getNama() + " !");
                         }
-                        
+
                         System.out.println("update status!");
                     }
                 }
