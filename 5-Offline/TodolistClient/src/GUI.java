@@ -1,4 +1,5 @@
 
+import id.ac.itb.todolist.client.Logger;
 import id.ac.itb.todolist.client.Controller;
 import id.ac.itb.todolist.model.User;
 import java.awt.Color;
@@ -6,12 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Vector;
-import java.util.logging.Level;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -22,6 +23,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.Timer timer;
     private int taskSelected;
     private static final int MAX_TRY_CONNECT = 3;
+    private static final String STATE_FILENAME = "client.state";
 
     /**
      * Creates new form GUI
@@ -60,11 +62,15 @@ public class GUI extends javax.swing.JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (haslogin) {
-                    JOptionPane.showMessageDialog(GUI.this, "Anda harus log keluar terlebih dahulu untuk keluar program.",
-                            "Peringatan!", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    GUI.this.dispose();
+                    if (JOptionPane.showConfirmDialog(GUI.this, "Apakah Anda ingin menyimpan keadaan saat ini?", "Keluar", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+                        try {
+                            control.saveState(STATE_FILENAME);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
                 }
+                GUI.this.dispose();
             }
 
             @Override
@@ -83,8 +89,6 @@ public class GUI extends javax.swing.JFrame {
             public void windowOpened(WindowEvent e) {
             }
         });
-
-        control = new Controller(ip, port);
 
         tasklist.addActionListener(new ActionListener() {
             @Override
@@ -120,6 +124,41 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         timer.setInitialDelay(0);
+
+
+        File fState = new File(STATE_FILENAME);
+        if (fState.exists() && JOptionPane.showConfirmDialog(GUI.this, "Apakah Anda ingin membuka keadaan saat dari sesi sebelumnya?", "Buka Keadaan", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+            try {
+                control = Controller.loadState(STATE_FILENAME);
+
+                System.out.println("-------------- STATE_FILENAME : " + STATE_FILENAME);
+                System.out.println(control);
+                haslogin = true;
+                username.setText("");
+                pass.setText("");
+                userlabel.setVisible(false);
+                passlabel.setVisible(false);
+                username.setVisible(false);
+                pass.setVisible(false);
+                login.setText("Log keluar");
+                taskname.setVisible(true);
+                deadline.setVisible(true);
+                assignee.setVisible(true);
+                tag.setVisible(true);
+                status.setVisible(true);
+                kategori.setVisible(true);
+
+                int idx = tasklist.getSelectedIndex();
+                showSelection(idx == -1 ? control.listTugas.size() > 0 ? 0 : -1 : idx);
+
+                timer.start();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                control = new Controller(ip, port);
+            }
+        } else {
+            control = new Controller(ip, port);
+        }
     }
 
     private void connect() {

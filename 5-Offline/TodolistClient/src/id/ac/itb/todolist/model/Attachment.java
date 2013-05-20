@@ -3,11 +3,12 @@ package id.ac.itb.todolist.model;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import org.json.JSONModel;
 import org.json.JSONObject;
 
-public class Attachment extends JSONModel {
+public class Attachment extends JSONModel implements Serializable {
 
     private int idAttachment;
     private int idTugas;

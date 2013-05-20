@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.net.Socket;
 import java.net.SocketException;
@@ -33,8 +34,9 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-public class Controller {
+public class Controller implements Serializable {
     // Message Code
+
     private static final byte MSG_LOGIN = 0x00;
     private static final byte MSG_LOGOUT = 0x01;
     private static final byte MSG_UPDATE = 0x10;
@@ -50,7 +52,7 @@ public class Controller {
     // Attribute
     private String serverName;
     private int port;
-    private Socket sockClient;
+    private transient Socket sockClient;
     // Configuration
     public HashMap<Integer, UpdateStatus> logUpdate = new HashMap<>();
     public long sessionId;
@@ -81,27 +83,24 @@ public class Controller {
         return sessionId;
     }
 
-    public void saveObject() {
-        try {
-            FileOutputStream out = new FileOutputStream("updates.out");
-            ObjectOutputStream oos = new ObjectOutputStream(out);
+    public void saveState(String filename) throws IOException {
+        FileOutputStream out = new FileOutputStream(filename);
+        ObjectOutputStream oos = new ObjectOutputStream(out);
 
-            oos.writeObject(logUpdate);
-            oos.flush();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        oos.writeObject(this);
+        oos.flush();
     }
 
-    public void loadObject() {
+    public static Controller loadState(String filename) throws IOException {
+        FileInputStream in = new FileInputStream(filename);
+        ObjectInputStream ois = new ObjectInputStream(in);
+        
         try {
-            FileInputStream in = new FileInputStream("updates.out");
-            ObjectInputStream ois = new ObjectInputStream(in);
-
-            System.out.println((HashMap<Integer, UpdateStatus>) ois.readObject());
-        } catch (Exception e) {
-            System.out.println("Problem serializing: " + e);
+            return (Controller) ois.readObject();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         }
+        return null;
     }
 
     public boolean connect() {
@@ -119,8 +118,10 @@ public class Controller {
     }
 
     public boolean login(String username, String password) throws IOException {
-        if (sockClient == null) throw new SocketException("Socket is null");
-        
+        if (sockClient == null) {
+            throw new SocketException("Socket is null");
+        }
+
         try {
             DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
             DataInputStream in = new DataInputStream(sockClient.getInputStream());
@@ -177,14 +178,16 @@ public class Controller {
         }
         return false;
     }
-    
+
     public boolean isConnect() {
-        return((sockClient != null && sockClient.isConnected()));
+        return ((sockClient != null && sockClient.isConnected()));
     }
 
     public boolean logout() throws IOException {
-        if (sockClient == null) throw new SocketException("Socket is null");
-        
+        if (sockClient == null) {
+            throw new SocketException("Socket is null");
+        }
+
         DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
         DataInputStream in = new DataInputStream(sockClient.getInputStream());
 
@@ -197,15 +200,17 @@ public class Controller {
             sessionId = -1;
             logUpdate.clear();
             listTugas.clear();
-            
+
             return true;
         }
         return false;
     }
 
     public boolean list() throws IOException {
-        if (sockClient == null) throw new SocketException("Socket is null");
-        
+        if (sockClient == null) {
+            throw new SocketException("Socket is null");
+        }
+
         DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
         DataInputStream in = new DataInputStream(sockClient.getInputStream());
 
@@ -267,7 +272,7 @@ public class Controller {
                 break;
             }
         }
-        
+
         if (logUpdate.containsKey(idTugas)) {
             logUpdate.remove(idTugas);
         } else {
@@ -280,8 +285,10 @@ public class Controller {
     }
 
     public boolean updateToServer() throws IOException {
-        if (sockClient == null) throw new SocketException("Socket is null");
-        
+        if (sockClient == null) {
+            throw new SocketException("Socket is null");
+        }
+
         DataOutputStream out = new DataOutputStream(sockClient.getOutputStream());
         DataInputStream in = new DataInputStream(sockClient.getInputStream());
 
@@ -304,5 +311,10 @@ public class Controller {
         }
 
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Controller{" + "serverName=" + serverName + ", port=" + port + ", sockClient=" + sockClient + ", logUpdate=" + logUpdate + ", sessionId=" + sessionId + ", listTugas=" + listTugas + '}';
     }
 }

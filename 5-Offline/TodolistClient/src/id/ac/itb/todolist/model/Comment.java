@@ -1,12 +1,12 @@
 package id.ac.itb.todolist.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 import org.json.JSONModel;
 import org.json.JSONObject;
 
-public class Comment extends JSONModel {
+public class Comment extends JSONModel implements Serializable {
 
     private int id;
     private int idTugas;

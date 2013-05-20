@@ -4,6 +4,7 @@ import id.ac.itb.todolist.model.Attachment;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Collection;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -14,7 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONModel;
 import org.json.JSONObject;
 
-public class Tugas extends JSONModel {
+public class Tugas extends JSONModel implements Serializable {
 
     private int id;
     private String nama;

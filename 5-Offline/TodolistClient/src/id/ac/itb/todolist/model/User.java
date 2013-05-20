@@ -3,16 +3,16 @@ package id.ac.itb.todolist.model;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
-import java.sql.Timestamp;
 
 import org.json.JSONModel;
 import org.json.JSONObject;
 
-public class User extends JSONModel {
+public class User extends JSONModel implements Serializable {
 
     private String username;
     private String email;

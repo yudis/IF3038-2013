@@ -3,12 +3,13 @@ package id.ac.itb.todolist.model;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import org.json.JSONModel;
 import org.json.JSONObject;
 
-public class Category extends JSONModel {
+public class Category extends JSONModel implements Serializable {
 
     private int id;
     private String nama;

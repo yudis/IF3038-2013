@@ -1,3 +1,5 @@
+package id.ac.itb.todolist.client;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.

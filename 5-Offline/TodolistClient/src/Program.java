@@ -58,6 +58,10 @@ public class Program {
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
+                } else if (pil == 7) {
+                    controller.saveState("controller.out");
+                } else if (pil == 8) {
+                    System.out.println(controller.loadState("controller.out"));
                 } else if (pil == 9) {
                     System.out.println("Logout: " + controller.logout());
                 }
