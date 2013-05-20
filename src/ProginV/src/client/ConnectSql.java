@@ -21,7 +21,13 @@ public class ConnectSql {
         try{
         Class.forName(driver).newInstance();
         Connection conn = DriverManager.getConnection(url+dbname,username,password);
-        
+        //akses tabel
+        Statement st= conn.createStatement();
+        ResultSet res= st.executeQuery("select * from tugas");
+        while(res.next()){
+        String nama= res.getString("nama_tugas");
+        System.out.println(nama);
+        }
         conn.close();
         }
         catch (Exception e)
