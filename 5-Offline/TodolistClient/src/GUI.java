@@ -105,11 +105,16 @@ public class GUI extends javax.swing.JFrame {
         timer = new javax.swing.Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                // Timer
+                try {
+                    control.list();
+                    showSelection(0);
+                }
+                catch(Exception e)  {
+                    e.printStackTrace();
+                }
             }
         });
         timer.setInitialDelay(0);
-        timer.start();
     }
 
     private void showSelection(int idx) {
@@ -323,6 +328,7 @@ public class GUI extends javax.swing.JFrame {
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try {
             if (haslogin) {
+                timer.stop();
                 progress.setIndeterminate(true);
                 control.logout();
                 progress.setIndeterminate(false);
@@ -339,35 +345,40 @@ public class GUI extends javax.swing.JFrame {
                 status.setVisible(false);
                 kategori.setVisible(false);
                 haslogin = false;
-                isOnline = control.connect();
-                timer.restart();
             }
             if (!username.getText().equals("") && pass.getPassword().length > 0) {
                 if (!haslogin) {
                     progress.setIndeterminate(true);
-                    if (control.login(username.getText(), new String(pass.getPassword()))) {
-                        JOptionPane.showMessageDialog(this, "Berhasil log masuk", "Log Masuk", JOptionPane.INFORMATION_MESSAGE);
-                        haslogin = true;
-                        username.setText("");
-                        pass.setText("");
-                        userlabel.setVisible(false);
-                        passlabel.setVisible(false);
-                        username.setVisible(false);
-                        pass.setVisible(false);
-                        login.setText("Log keluar");
-                        control.list();
-                        showSelection(0);
-                        taskname.setVisible(true);
-                        deadline.setVisible(true);
-                        assignee.setVisible(true);
-                        tag.setVisible(true);
-                        status.setVisible(true);
-                        kategori.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Nama Pengguna dan sandi-lewat tidak cocok",
-                                "Log Masuk", JOptionPane.WARNING_MESSAGE);
+                    if(control.connect()) {
+                        if (control.login(username.getText(), new String(pass.getPassword()))) {
+                            JOptionPane.showMessageDialog(this, "Berhasil log masuk", "Log Masuk", JOptionPane.INFORMATION_MESSAGE);
+                            haslogin = true;
+                            username.setText("");
+                            pass.setText("");
+                            userlabel.setVisible(false);
+                            passlabel.setVisible(false);
+                            username.setVisible(false);
+                            pass.setVisible(false);
+                            login.setText("Log keluar");
+                            control.list();
+                            showSelection(0);
+                            taskname.setVisible(true);
+                            deadline.setVisible(true);
+                            assignee.setVisible(true);
+                            tag.setVisible(true);
+                            status.setVisible(true);
+                            kategori.setVisible(true);
+                            timer.start();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Nama Pengguna dan sandi-lewat tidak cocok",
+                                    "Log Masuk", JOptionPane.WARNING_MESSAGE);
+                        }
+                        progress.setIndeterminate(false);
                     }
-                    progress.setIndeterminate(false);
+                    else {
+                        JOptionPane.showMessageDialog(this, "Tidak ada koneksi yang tersedia",
+                                "Log Masuk", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }
         } catch (Exception e) {
