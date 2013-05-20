@@ -3,8 +3,14 @@ package id.ac.itb.todolist.model;
 import java.util.Collection;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
-public class Tugas {
+import org.json.JSONArray;
+import org.json.JSONModel;
+import org.json.JSONObject;
+
+public class Tugas extends JSONModel {
+
     private int id;
     private String nama;
     private Date tglDeadline;
@@ -15,11 +21,11 @@ public class Tugas {
     private Collection<Attachment> attachments;
     private Collection<User> assignees;
     private Collection<String> tags;
-        
+
     public Tugas() {
     }
 
-    public Tugas(int id, String nama, Date tglDeadline, boolean status, Timestamp lastMod, User pemilik, Category kategori, Collection<Attachment> attachment, Collection<User> assignees, Collection<String> tags) {
+    public Tugas(int id, String nama, Date tglDeadline, boolean status, Timestamp lastMod, User pemilik, Category kategori, Collection<Attachment> attachments, Collection<User> assignees, Collection<String> tags) {
         this.id = id;
         this.nama = nama;
         this.tglDeadline = tglDeadline;
@@ -27,7 +33,7 @@ public class Tugas {
         this.lastMod = lastMod;
         this.pemilik = pemilik;
         this.kategori = kategori;
-        this.attachments = attachment;
+        this.attachments = attachments;
         this.assignees = assignees;
         this.tags = tags;
     }
@@ -110,5 +116,83 @@ public class Tugas {
 
     public void setTags(Collection<String> tags) {
         this.tags = tags;
+    }
+
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject jObject = new JSONObject();
+
+        jObject.put("id", id);
+        jObject.put("nama", nama);
+        jObject.put("tglDeadline", tglDeadline.toString());
+        jObject.put("status", status);
+        jObject.put("lastMod", lastMod.toString());
+        jObject.put("pemilik", pemilik.toJsonObject());
+        jObject.put("kategori", kategori.toJsonObject());
+        jObject.put("attachments", new JSONArray(attachments));
+        jObject.put("assignees", new JSONArray(assignees));
+        jObject.put("tags", new JSONArray(tags));
+
+        return jObject;
+    }
+
+    @Override
+    public void fromJsonObject(JSONObject jObject) {
+        this.id = jObject.getInt("id");
+        this.nama = jObject.getString("nama");
+        this.tglDeadline = Date.valueOf(jObject.optString("tglDeadline"));
+        this.status = jObject.optBoolean("status");
+        this.lastMod = Timestamp.valueOf(jObject.optString("lastMod"));
+
+        JSONObject jsonPemilik = jObject.optJSONObject("pemilik");
+        if (jsonPemilik != null) {
+            this.pemilik = new User();
+            this.pemilik.fromJsonObject(jsonPemilik);
+        }
+
+        JSONObject jsonKategori = jObject.optJSONObject("kategori");
+        if (jsonKategori != null) {
+            this.kategori = new Category();
+            this.kategori.fromJsonObject(jsonKategori);
+        }
+
+        JSONArray jsonAttachments = jObject.optJSONArray("attachments");
+        if (jsonAttachments != null) {
+            if (jsonAttachments.length() > 0) {
+                this.attachments = new ArrayList<Attachment>();
+            }
+
+            for (int i = 0, len = jsonAttachments.length(); i < len; i++) {
+                JSONObject jsonAttachment = jsonAttachments.optJSONObject(i);
+                Attachment attachment = new Attachment();
+                attachment.fromJsonObject(jsonAttachment);
+                this.attachments.add(attachment);
+            }
+        }
+
+        JSONArray jsonAssignees = jObject.optJSONArray("assignees");
+        if (jsonAssignees != null) {
+            if (jsonAssignees.length() > 0) {
+                this.assignees = new ArrayList<User>();
+            }
+
+            for (int i = 0, len = jsonAssignees.length(); i < len; i++) {
+                JSONObject jsonAssignee = jsonAssignees.optJSONObject(i);
+                User assignee = new User();
+                assignee.fromJsonObject(jsonAssignee);
+                this.assignees.add(assignee);
+            }
+        }
+
+        JSONArray jsonTags = jObject.optJSONArray("tags");
+        if (jsonTags != null) {
+            if (jsonTags.length() > 0) {
+                this.tags = new ArrayList<String>();
+            }
+
+            for (int i = 0, len = jsonTags.length(); i < len; i++) {
+                this.tags.add(jsonTags.optString(i));
+            }
+        }
     }
 }

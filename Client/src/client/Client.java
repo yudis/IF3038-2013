@@ -66,7 +66,7 @@ public class Client {
         this.port = port;
         try {
             client = new Socket(serverName, port);
-            client.setSoTimeout(5000);
+            client.setSoTimeout(7000);
             System.out.println("CONNECT");
             System.out.println("TIMEOUT : " + client.getSoTimeout());
             isDC = false;

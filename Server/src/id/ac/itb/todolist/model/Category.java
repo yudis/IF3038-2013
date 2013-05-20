@@ -2,7 +2,10 @@ package id.ac.itb.todolist.model;
 
 import java.sql.Timestamp;
 
-public class Category {
+import org.json.JSONModel;
+import org.json.JSONObject;
+
+public class Category extends JSONModel {
 
     private int id;
     private String nama;
@@ -39,5 +42,23 @@ public class Category {
 
     public void setLastMod(Timestamp lastMod) {
         this.lastMod = lastMod;
+    }
+
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject jObject = new JSONObject();
+
+        jObject.put("id", id);
+        jObject.put("nama", nama);
+        jObject.put("lastMod", lastMod);
+
+        return jObject;
+    }
+
+    @Override
+    public void fromJsonObject(JSONObject jObject) {
+        this.id = jObject.optInt("id");
+        this.nama = jObject.optString("nama");
+        this.lastMod = java.sql.Timestamp.valueOf(jObject.optString("lastMod"));
     }
 }
