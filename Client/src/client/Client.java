@@ -31,8 +31,8 @@ public class Client {
 
         Client c = new Client();
         String command;
-        String request;
-        String respond;
+        //String request;
+        //String respond;
 
         try {
             BufferedReader inClient = new BufferedReader(new InputStreamReader(System.in));
@@ -49,45 +49,58 @@ public class Client {
                         String username = inClient.readLine();
                         System.out.print("Enter password: ");
                         String password = inClient.readLine();
-
-                        request = ("1," + username + "," + password);
-                        outServer.writeBytes(request + '\n');
-                        respond = inServer.readLine();
-
-                        String[] responds = respond.split(",");
-                        if (responds[0].equals("200")) {
-                            //Synchronize...
+                        
+                        String request1 = ("1," + username + "," + password);   //kirim: 1,kennyazrina,kennyazrina
+                        outServer.writeBytes(request1 + '\n');
+                        String respond1 = inServer.readLine();                  //terima: 200 atau 400 + user.last_update
+                        System.out.println("respond1: "+respond1);
+                        
+                        String[] responds1 = respond1.split(",");
+                        if (responds1[0].equals("200")) {
+                            c.lastUpdate = Long.parseLong(responds1[1]);
+                            System.out.println("Login successful, " + username + " username.last_update is " + c.lastUpdate);
+                            //Baca dari log
                             try {
                                 Scanner scanner = new Scanner(new FileReader("log.txt"));
                                 String logs = "";
-                                long last=0;
+                                long last = 0;
                                 while (scanner.hasNextLine()) {
-                                    String now = scanner.nextLine();
+                                    String now = scanner.nextLine();    //format now: task_id, task_status, timestamp
                                     String[] logparts = now.split(",");
                                     
-                                    if (Long.parseLong(logparts[2])> c.lastUpdate){
-                                        if (Long.parseLong(logparts[2])>last){
+                                    if (Long.parseLong(logparts[2]) > c.lastUpdate){
+                                        if (Long.parseLong(logparts[2]) > last){
                                             last = Long.parseLong(logparts[2]);
                                         }
-                                        logs+= ","+now;
+                                            logs = logs + now + ",";    //kumpulkan semua line yang punya timestamp > user.last_update
                                     }
                                 }
-                                
-                                c.lastUpdate = Long.parseLong(responds[1]);
-                                System.out.println("Login successful, this client lastUpdate is " + c.lastUpdate);
-
-                                request = ("4,"+ username+","+last+","+c.lastUpdate + logs);
-                                System.out.println(request);
-                                outServer.writeBytes(request + '\n');
-                             
+                                //di sini last bernilai 0 jika tidak ada timestamp log yg lebih baru (>) dari user.last_update 
+                                //Kirim 4,kennyazrina,<last>,<user.last_update>,<deretan line yang punya timestamp > user.last_update>
+                                String request2 = ("4," + username + "," + c.lastUpdate + "," + logs);
+                                request2 = request2.substring(0, request2.length()-1); //hilangkan koma terakhir dari logs
+                                System.out.println("request2: "+request2);
+                                outServer.writeBytes(request2 + '\n');
                             } catch (IOException e) {
-                                //JOptionPane.showMessageDialog(null, "File tidah ditemukan", "Report", 0);
+                                System.out.println("Baca dari log: "+e.getMessage());
+                                System.exit(1);
                             }
+                            //menerima lastupdate terbaru merdasar max_timestamp
+                            String respond2 = inServer.readLine();
+                            System.out.println("respond2: "+respond2);
+                            String[] responds2 = respond2.split(",");
+                            if (responds2[0].equals("200")){
+                                c.lastUpdate = Long.parseLong(responds2[1]);
+                            } else {
+                                c.lastUpdate = Long.parseLong(responds2[1]);    //mestinya hasilnya 0
+                            }
+                            System.out.println("current client's lastupdate: "+c.lastUpdate);
                             
-
-                            //menerima string berisi task_id dan status yang terupdate
-                            respond = inServer.readLine();
-                            responds = respond.split(",");
+                            //menerima semua task milik user
+                            String respond3 = inServer.readLine();
+                            System.out.println("respond3: "+respond3);
+                            
+                            /*String[] responds2 = respond2.split(",");
                             if (responds[0].equals("200")) {
                                 System.out.println("Synchronizing...");
                                 String[] responds2;
@@ -113,26 +126,24 @@ public class Client {
                                 System.out.println("No update...");
                             } else {
                                 System.out.println("unrecognized respond");
-                            }
+                            }*/
                             System.out.println("Creating 'keep update' thread");
                             Runnable task = new MyRunnable();
                             Thread threadUpdate = new Thread(task);
                             threadUpdate.start();
-                        } else if (responds[0].equals("400")) {
-                            System.out.println("Login failed");
                         } else {
-                            System.out.println("Unrecognized respond");
+                            System.out.println("Login failed");
                         }
                         break;
                     }
                     case ("check"): {
                         System.out.print("Enter task_id: ");
                         String task_id = inClient.readLine();
-                        request = ("2," + task_id);
+                        String request1 = ("2," + task_id);
 
-                        outServer.writeBytes(request + '\n');
-                        respond = inServer.readLine();
-                        String[] responds = respond.split(",");
+                        outServer.writeBytes(request1 + '\n');
+                        String respond1 = inServer.readLine();
+                        String[] responds = respond1.split(",");
                         if (responds[0].equals("200")) {
                             c.lastUpdate = Long.parseLong(responds[1]);
                             System.out.println("Check successful, lastUpdate " + c.lastUpdate);
@@ -146,11 +157,11 @@ public class Client {
                     case ("uncheck"): {
                         System.out.print("Enter task_id: ");
                         String task_id = inClient.readLine();
-                        request = ("3," + task_id);
+                        String request1 = ("3," + task_id);
 
-                        outServer.writeBytes(request + '\n');
-                        respond = inServer.readLine();
-                        String[] responds = respond.split(",");
+                        outServer.writeBytes(request1 + '\n');
+                        String respond1 = inServer.readLine();
+                        String[] responds = respond1.split(",");
                         if (responds[0].equals("200")) {
                             c.lastUpdate = Long.parseLong(responds[1]);
                             System.out.println("Uncheck successful, lastUpdate " + c.lastUpdate);
