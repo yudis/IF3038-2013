@@ -4,8 +4,10 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
+import org.json.JSONModel;
+import org.json.JSONObject;
 
-public class User {
+public class User extends JSONModel {
     private String username;
     private String email;
     private String password;
@@ -81,5 +83,31 @@ public class User {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+    
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject jObject = new JSONObject();
+
+        jObject.put("username", username);
+        jObject.put("email", email);
+        jObject.put("password", password);
+        jObject.put("fullName", fullName);
+        jObject.put("tglLahir", tglLahir);
+        jObject.put("avatar", avatar);
+
+        return jObject;
+    }
+
+    @Override
+    public void fromJsonObject(JSONObject jObject) {
+        this.username = jObject.getString("username");
+        this.email = jObject.optString("email");
+        this.password = jObject.optString("password");
+        this.fullName = jObject.optString("fullName");
+        
+        String date = jObject.optString("tglLahir");
+        this.tglLahir = "".equals(date) ? null : java.sql.Date.valueOf(date);
+        this.avatar = jObject.optString("avatar");
     }
 }

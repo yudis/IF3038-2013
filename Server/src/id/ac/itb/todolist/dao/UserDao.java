@@ -7,6 +7,10 @@ package id.ac.itb.todolist.dao;
 import id.ac.itb.todolist.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URLEncoder;
+import java.security.MessageDigest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +19,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 
 public class UserDao extends DataAccessObject {
@@ -40,28 +46,56 @@ public class UserDao extends DataAccessObject {
         }
     }
 
+//    public User getUserLogin(String userId, String passwd) {
+//        User user = null;
+//
+//        try {
+//            PreparedStatement preparedStatement = connection.
+//                    prepareStatement("SELECT * FROM users WHERE username=? AND password=MD5(?)");
+//            preparedStatement.setString(1, userId);
+//            preparedStatement.setString(2, passwd);
+//
+//            ResultSet rs = preparedStatement.executeQuery();
+//
+//            if (rs.next()) {
+//                user = new User();
+//                user.setUsername(rs.getString("username"));
+//                user.setEmail(rs.getString("email"));
+//                user.setHashedPassword(rs.getString("password"));
+//                user.setFullName(rs.getString("full_name"));
+//                user.setTglLahir(rs.getDate("tgl_lahir"));
+//                user.setAvatar(rs.getString("avatar"));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return user;
+//    }
+    
     public User getUserLogin(String userId, String passwd) {
+        // GET
+        // rest/user/[userId]
         User user = null;
 
         try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT * FROM users WHERE username=? AND password=MD5(?)");
-            preparedStatement.setString(1, userId);
-            preparedStatement.setString(2, passwd);
+            HttpURLConnection htc = getHttpURLConnection("/rest/user/" + URLEncoder.encode(userId, "UTF-8"));
+            htc.setRequestMethod("GET");
 
-            ResultSet rs = preparedStatement.executeQuery();
+            User tmpUser = new User();
+            tmpUser.fromJsonObject(new JSONObject(new JSONTokener(htc.getInputStream())));
 
-            if (rs.next()) {
-                user = new User();
-                user.setUsername(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setHashedPassword(rs.getString("password"));
-                user.setFullName(rs.getString("full_name"));
-                user.setTglLahir(rs.getDate("tgl_lahir"));
-                user.setAvatar(rs.getString("avatar"));
+            System.out.println(tmpUser.toJsonObject().toString(4));
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(passwd.getBytes());
+            String hashPassword = new BigInteger(1, md.digest()).toString(16);
+            System.out.println(hashPassword);
+            if (hashPassword.equals(tmpUser.getPassword())) {
+                user = tmpUser;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         return user;

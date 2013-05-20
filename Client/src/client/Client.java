@@ -89,7 +89,6 @@ public class Client {
                     out.writeBoolean(((Log) pairs.getValue()).isValue());
                     it.remove(); // avoids a ConcurrentModificationException
                 }
-
             }
 
             // if ada log, kasih ke server
