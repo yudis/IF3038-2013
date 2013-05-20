@@ -26,7 +26,9 @@ public class ConnectSql {
         ResultSet res= st.executeQuery("select * from tugas");
         while(res.next()){
         String nama= res.getString("nama_tugas");
+        String status = res.getString("status");
         System.out.println(nama);
+        System.out.println(status);
         }
         conn.close();
         }
