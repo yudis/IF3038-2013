@@ -58,6 +58,7 @@ public class Login extends javax.swing.JDialog {
         setBackground(new java.awt.Color(51, 51, 0));
         setFont(new java.awt.Font("Calibri Light", 0, 12)); // NOI18N
         setForeground(new java.awt.Color(255, 255, 102));
+        setIconImage(null);
 
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,10 +66,13 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
         jLabel1.setText("Username");
 
+        jLabel2.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
         jLabel2.setText("Password");
 
+        jLabel3.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
         jLabel3.setText("IP Address");
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +88,7 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         jLabel4.setText("Welcome to the TO DO LIST!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -97,15 +101,18 @@ public class Login extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100))
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(100, 100, 100))
+                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addComponent(jLabel4)
@@ -124,13 +131,13 @@ public class Login extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(49, 49, 49)
                 .addComponent(jButton1)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,8 +229,8 @@ public class Login extends javax.swing.JDialog {
     {
     	int result = 0;
         try {
-            String username = usernameTextPane.getText();
-            String password = passwordTextPane.getText();
+            String username = jTextField1.getText();
+            String password = jPasswordField1.getText();
             System.out.println("Masuk username");
             
             dos = server.getOutputStream();
@@ -301,6 +308,5 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
         private JFrame frmToDoList;
-	private JTextPane usernameTextPane;
-	private JTextPane passwordTextPane;
+	
 }
