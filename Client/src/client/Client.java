@@ -90,8 +90,6 @@ public class Client {
                     it.remove(); // avoids a ConcurrentModificationException
                 }
             }
-
-            // if ada log, kasih ke server
             return true;
         } catch (Exception e) {
             //e.printStackTrace();

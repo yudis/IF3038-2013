@@ -7,7 +7,13 @@ import id.ac.itb.todolist.model.User;
 import id.ac.itb.todolist.util.Message;
 import java.net.*;
 import java.io.*;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerKu extends Thread {
 
@@ -131,6 +137,29 @@ class MultiServerThread extends Thread {
                         System.out.println("masuk exception");
                         out.writeByte(Message.MSG_FAILED);
                         e.printStackTrace();
+                    }
+                } else if (resType == Message.MSG_SYNC) {
+                    System.out.println("masuk sync");
+                    TugasDao td = new TugasDao();
+                    int size = in.readInt();
+                    for (int i = 0; i < size; i++) {
+                        int id = in.readInt();
+                        String timestamp = in.readUTF();
+                        boolean status = in.readBoolean();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+                        Date parsedDate;
+                        try {
+                            parsedDate = dateFormat.parse(timestamp);
+                            Timestamp time = new java.sql.Timestamp(parsedDate.getTime());
+                            System.out.println("waktu:" + td.getTimestamp(id).toString());
+                            if (td.getTimestamp(id).before(time)) {
+                                System.out.println("status diupdate");
+                                td.setStatus(id, status);
+                            }
+                        } catch (ParseException ex) {
+                            Logger.getLogger(MultiServerThread.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
                     }
                 }
             }
