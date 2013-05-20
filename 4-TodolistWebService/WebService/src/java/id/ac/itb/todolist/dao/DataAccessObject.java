@@ -15,6 +15,10 @@ public class DataAccessObject {
     protected Connection connection;
 
     public DataAccessObject() {
-        connection = DB.getConnection();
+        int i = 0;
+        while (connection == null) {
+            connection = DB.getConnection();
+            if (i++ > 100) break;
+        }
     }
 }

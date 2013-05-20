@@ -46,7 +46,7 @@ public class GUI extends javax.swing.JFrame {
             port = Integer.parseInt(prop.getProperty("port"));
         } catch (IOException e) {
             e.printStackTrace();
-            ip = "167.205.86.116";
+            ip = "127.0.0.1";
             port = 9000;
         }
         
@@ -105,7 +105,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        timer = new javax.swing.Timer(5000, new ActionListener() {
+        timer = new javax.swing.Timer(15000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 try {

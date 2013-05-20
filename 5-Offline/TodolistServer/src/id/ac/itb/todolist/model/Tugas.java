@@ -27,7 +27,6 @@ public class Tugas extends JSONModel {
     private Collection<String> tags;
 
     public Tugas() {
-        
     }
 
     public Tugas(int id, String nama, Date tglDeadline, boolean status, Timestamp lastMod, User pemilik, Category kategori, Collection<Attachment> attachments, Collection<User> assignees, Collection<String> tags) {
@@ -122,7 +121,7 @@ public class Tugas extends JSONModel {
     public void setTags(Collection<String> tags) {
         this.tags = tags;
     }
-    
+
     public void writeOut(DataOutputStream out) throws IOException {
         out.writeInt(id);
         out.writeUTF(nama);
@@ -131,26 +130,41 @@ public class Tugas extends JSONModel {
         out.writeLong(lastMod.getTime());
         pemilik.writeOut(out);
         kategori.writeOut(out);
-        Iterator<Attachment>iter = attachments.iterator();
-        out.writeInt(attachments.size());
-        while (iter.hasNext()){
-            Attachment attach = iter.next();
-            attach.writeOut(out);
-        }  
-        Iterator<User>iterUser = assignees.iterator();
-        out.writeInt(assignees.size());
-        while (iterUser.hasNext()){
-            User user = iterUser.next();
-            user.writeOut(out);
+
+        if (attachments == null) {
+            out.writeInt(0);
+        } else {
+            out.writeInt(attachments.size());
+            Iterator<Attachment> iter = attachments.iterator();
+            while (iter.hasNext()) {
+                Attachment attach = iter.next();
+                attach.writeOut(out);
+            }
         }
-        Iterator<String>iterTag = tags.iterator();
-        out.writeInt(tags.size());
-        while (iterTag.hasNext()){
-            String tag = iterTag.next();
-            out.writeUTF(tag);
+
+        if (assignees == null) {
+            out.writeInt(0);
+        } else {
+            Iterator<User> iterUser = assignees.iterator();
+            out.writeInt(assignees.size());
+            while (iterUser.hasNext()) {
+                User user = iterUser.next();
+                user.writeOut(out);
+            }
+        }
+
+        if (tags == null) {
+            out.writeInt(0);
+        } else {
+            Iterator<String> iterTag = tags.iterator();
+            out.writeInt(tags.size());
+            while (iterTag.hasNext()) {
+                String tag = iterTag.next();
+                out.writeUTF(tag);
+            }
         }
     }
-    
+
     public void readIn(DataInputStream in) throws IOException {
         id = in.readInt();
         nama = in.readUTF();
@@ -159,23 +173,23 @@ public class Tugas extends JSONModel {
         lastMod = new Timestamp(in.readLong());
         pemilik.readIn(in);
         kategori.readIn(in);
-        for(int i = 0;i< in.readInt();i++){
+        for (int i = 0; i < in.readInt(); i++) {
             Attachment attach = new Attachment();
             attach.readIn(in);
             attachments.add(null);
         }
-        
-        for(int i = 0;i< in.readInt();i++){
+
+        for (int i = 0; i < in.readInt(); i++) {
             User user = new User();
             user.readIn(in);
             assignees.add(null);
         }
-        for(int i = 0;i< in.readInt();i++){
+        for (int i = 0; i < in.readInt(); i++) {
             String tag = in.readUTF();
             tags.add(null);
         }
     }
-    
+
     @Override
     public JSONObject toJsonObject() {
         JSONObject jObject = new JSONObject();

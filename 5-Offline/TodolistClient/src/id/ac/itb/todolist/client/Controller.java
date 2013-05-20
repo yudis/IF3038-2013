@@ -108,7 +108,7 @@ public class Controller implements Serializable {
                 sockClient.close();
             }
             sockClient = new Socket(serverName, port);
-            sockClient.setSoTimeout(5000);
+            sockClient.setSoTimeout(30000);
         } catch (Exception e) {
             e.printStackTrace();
             sockClient = null;

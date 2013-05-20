@@ -1,15 +1,7 @@
+package id.ac.itb.todolist.server;
 
-import id.ac.itb.todolist.server.Controller;
 import java.util.Scanner;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author Edward Samuel
- */
 public class Program {
 
     public static void main(String[] args) {
