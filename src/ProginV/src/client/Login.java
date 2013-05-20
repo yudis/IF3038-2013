@@ -55,7 +55,7 @@ public class Login extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("TO DO LIST - LOGIN");
-        setBackground(new java.awt.Color(255, 153, 255));
+        setBackground(new java.awt.Color(51, 51, 0));
         setFont(new java.awt.Font("Calibri Light", 0, 12)); // NOI18N
         setForeground(new java.awt.Color(255, 255, 102));
 
