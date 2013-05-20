@@ -37,18 +37,20 @@ public class GUI extends javax.swing.JFrame {
 
         try {
             Properties prop = new Properties();
-            InputStream inputStream = GUI.class.getClassLoader().getResourceAsStream("/client.properties");
+            InputStream inputStream = Controller.class.getClassLoader().getResourceAsStream("/client.properties");
             if (inputStream == null) {
-                throw new IOException();
+                throw new IOException("Lalala");
             }
             prop.load(inputStream);
             ip = prop.getProperty("ip");
             port = Integer.parseInt(prop.getProperty("port"));
         } catch (IOException e) {
             e.printStackTrace();
-            ip = "127.0.0.1";
+            ip = "167.205.86.116";
             port = 9000;
         }
+        
+        System.out.println(ip + ":" + port);
 
         this.addWindowListener(new WindowListener() {
             @Override
@@ -68,6 +70,9 @@ public class GUI extends javax.swing.JFrame {
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
+                    } else {
+                        File fState = new File(STATE_FILENAME);
+                        fState.delete();
                     }
                 }
                 GUI.this.dispose();
@@ -125,11 +130,11 @@ public class GUI extends javax.swing.JFrame {
         });
         timer.setInitialDelay(0);
 
-
         File fState = new File(STATE_FILENAME);
         if (fState.exists() && JOptionPane.showConfirmDialog(GUI.this, "Apakah Anda ingin membuka keadaan saat dari sesi sebelumnya?", "Buka Keadaan", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
             try {
                 control = Controller.loadState(STATE_FILENAME);
+                fState.delete();
 
                 System.out.println("-------------- STATE_FILENAME : " + STATE_FILENAME);
                 System.out.println(control);

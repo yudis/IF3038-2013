@@ -36,7 +36,6 @@ import javax.crypto.NoSuchPaddingException;
 
 public class Controller implements Serializable {
     // Message Code
-
     private static final byte MSG_LOGIN = 0x00;
     private static final byte MSG_LOGOUT = 0x01;
     private static final byte MSG_UPDATE = 0x10;
@@ -109,6 +108,7 @@ public class Controller implements Serializable {
                 sockClient.close();
             }
             sockClient = new Socket(serverName, port);
+            sockClient.setSoTimeout(5000);
         } catch (Exception e) {
             e.printStackTrace();
             sockClient = null;
@@ -265,9 +265,12 @@ public class Controller implements Serializable {
     }
 
     public void updateStatus(int idTugas, boolean status) throws IOException {
+        UpdateStatus us = new UpdateStatus(idTugas, status);
+        
         for (Iterator<Tugas> iter = listTugas.iterator(); iter.hasNext();) {
             Tugas t = iter.next();
             if (t.getId() == idTugas) {
+                t.setLastMod(us.getTimestamp());
                 t.setStatus(status);
                 break;
             }
@@ -276,7 +279,7 @@ public class Controller implements Serializable {
         if (logUpdate.containsKey(idTugas)) {
             logUpdate.remove(idTugas);
         } else {
-            logUpdate.put(idTugas, new UpdateStatus(idTugas, status));
+            logUpdate.put(idTugas, us);
         }
 
         if (!logUpdate.isEmpty()) {
