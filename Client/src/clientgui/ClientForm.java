@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
@@ -216,10 +217,16 @@ public class ClientForm extends javax.swing.JFrame {
                         if (newValue == true){
                             newValue2 = "true";
                         }
-                        LoginForm.getClient().getAc().get(row).setStatus(newValue);
-                        LoginForm.getClient().getFm().appendFile(LoginForm.getClient().getUsername(), new java.sql.Timestamp(new java.util.Date().getTime()).toString(), String.valueOf(LoginForm.getClient().getAc().get(row).getId()), newValue2);
-                        System.out.println("update status!");
                         
+                        if (LoginForm.getClient().updateStatus(LoginForm.getClient().getAc().get(row).getId(), newValue)) {
+                            LoginForm.getClient().getAc().get(row).setStatus(newValue);
+                            LoginForm.getClient().getFm().appendFile(LoginForm.getClient().getUsername(), new java.sql.Timestamp(new java.util.Date().getTime()).toString(), String.valueOf(LoginForm.getClient().getAc().get(row).getId()), newValue2);
+                        } else {
+                            jTable1.setValueAt(!newValue, row, col);
+                            JOptionPane.showMessageDialog(null, "Failed to update status " + LoginForm.getClient().getAc().get(row).getNama() + " !");
+                        }
+                        
+                        System.out.println("update status!");
                     }
                 }
             }

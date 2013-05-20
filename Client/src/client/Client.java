@@ -71,7 +71,32 @@ public class Client {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("aaaa");
+        }
+        return false;
+    }
+    
+    public boolean updateStatus(int idtugas, boolean status) {
+        try {
+            OutputStream outToServer = client.getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+
+            out.writeByte(Message.MSG_UPDATE);
+            out.writeInt(idtugas);
+            out.writeBoolean(status);
+
+            InputStream inFromServer = client.getInputStream();
+            DataInputStream in = new DataInputStream(inFromServer);
+
+            byte resType = in.readByte();
+            if (resType == Message.MSG_SUCCESS) {
+                return true;
+            }
+        } catch (IOException io) {
+            try {
+                connect(servername, port);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return false;
     }
