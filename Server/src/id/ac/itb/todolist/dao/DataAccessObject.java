@@ -37,6 +37,6 @@ public class DataAccessObject {
     }
 
     public HttpURLConnection getHttpURLConnection(String path) throws MalformedURLException, IOException {
-        return (HttpURLConnection) getURL(path).openConnection(ProxyUtil.getProxy());
+        return (HttpURLConnection) getURL(path).openConnection();
     }
 }

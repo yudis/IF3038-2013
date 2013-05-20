@@ -151,8 +151,8 @@ class MultiServerThread extends Thread {
                         try {
                             parsedDate = dateFormat.parse(timestamp);
                             Timestamp time = new java.sql.Timestamp(parsedDate.getTime());
-                            System.out.println("waktu:" + td.getTimestamp(id).toString());
-                            if (td.getTimestamp(id).before(time)) {
+                            Tugas tgs = td.getTugas(id, false, false, false);
+                            if ((tgs.getLastMod().before(time))) {
                                 System.out.println("status diupdate");
                                 td.setStatus(id, status);
                             }

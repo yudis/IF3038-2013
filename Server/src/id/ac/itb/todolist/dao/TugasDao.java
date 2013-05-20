@@ -175,21 +175,6 @@ public class TugasDao extends DataAccessObject {
         return true;
     }
 
-    public Timestamp getTimestamp(int idTugas) {
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT `last_mod` FROM `tugas` WHERE `id` = ?;");
-            preparedStatement.setInt(1, idTugas);
-
-            ResultSet rs = preparedStatement.executeQuery();
-            rs.next();
-            return rs.getTimestamp(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public boolean isAvailable(int idTugas) {
         try {
             PreparedStatement preparedStatement = connection.
