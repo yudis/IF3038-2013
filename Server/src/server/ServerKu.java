@@ -152,6 +152,7 @@ class MultiServerThread extends Thread {
                             parsedDate = dateFormat.parse(timestamp);
                             Timestamp time = new java.sql.Timestamp(parsedDate.getTime());
                             Tugas tgs = td.getTugas(id, false, false, false);
+                            System.out.println("time: "+time);
                             if ((tgs.getLastMod().before(time))) {
                                 System.out.println("status diupdate");
                                 td.setStatus(id, status);
@@ -159,7 +160,6 @@ class MultiServerThread extends Thread {
                         } catch (ParseException ex) {
                             Logger.getLogger(MultiServerThread.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
                     }
                 }
             }
@@ -168,7 +168,6 @@ class MultiServerThread extends Thread {
             e.printStackTrace();
             System.out.println("closed: " + server.isClosed());
             System.out.println("closed: " + server.isConnected());
-
         }
         // }
     }
