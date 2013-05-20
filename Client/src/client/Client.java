@@ -19,26 +19,66 @@ public class Client {
     private int port;
     private FileManager fm;
     ArrayList<Content> ac;
-    // Message
+    private Thread dc;
+    private boolean isDC;
+
+    public void setDc(Thread dc) {
+        this.dc = dc;
+    }
+
+    public void setIsDC(boolean isDC) {
+        this.isDC = isDC;
+    }
+
+    public Thread getDc() {
+        return dc;
+    }
+
+    public boolean getIsDC() {
+        return isDC;
+    }
 
     public Client() {
         client = null;
         fm = new FileManager();
-        ac = new ArrayList<Content>();
+        isDC = false;
+        dc = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("badut thread : " + dc.isAlive());
+                    while (!connect(servername, port)) {
+                    }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
     }
 
     public boolean connect(String serverName, int port) throws InterruptedException {
-        System.out.println("Connecting to " + serverName
-                + " on port " + port);
+        //System.out.println("Connecting to " + serverName
+        //        + " on port " + port);
         this.servername = serverName;
         this.port = port;
         try {
             client = new Socket(serverName, port);
+            client.setSoTimeout(5000);
             System.out.println("CONNECT");
             System.out.println("TIMEOUT : " + client.getSoTimeout());
+            isDC = false;
+            System.out.println("badut " + dc.isAlive());
+//            if (dc.isAlive()) {
+//                 System.out.println("-----------------");
+//                System.out.println("STOPPPPPPPP");
+//
+//        System.out.println("-----------------");
+//                dc.destroy();
+//            }
+            // if ada log, kasih ke server
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
     }
@@ -66,39 +106,74 @@ public class Client {
                 return true;
             }
         } catch (IOException io) {
-            try {
-                connect(servername, port);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            isDC = true;
+            dc = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        System.out.println("badut thread : " + dc.isAlive());
+                        while (!connect(servername, port)) {
+                        }
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            };
+            dc.start();
         }
         return false;
     }
-    
+
     public boolean updateStatus(int idtugas, boolean status) {
-        try {
-            OutputStream outToServer = client.getOutputStream();
-            DataOutputStream out = new DataOutputStream(outToServer);
 
-            out.writeByte(Message.MSG_UPDATE);
-            out.writeInt(idtugas);
-            out.writeBoolean(status);
-
-            InputStream inFromServer = client.getInputStream();
-            DataInputStream in = new DataInputStream(inFromServer);
-
-            byte resType = in.readByte();
-            if (resType == Message.MSG_SUCCESS) {
-                return true;
-            }
-        } catch (IOException io) {
+        System.out.println("di update status : isDC" + isDC);
+        if (!isDC) {
             try {
-                connect(servername, port);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                OutputStream outToServer = client.getOutputStream();
+                DataOutputStream out = new DataOutputStream(outToServer);
+
+                out.writeByte(Message.MSG_UPDATE);
+                out.writeInt(idtugas);
+                out.writeBoolean(status);
+
+                InputStream inFromServer = client.getInputStream();
+                DataInputStream in = new DataInputStream(inFromServer);
+
+                byte resType = in.readByte();
+                if (resType == Message.MSG_SUCCESS) {
+                    return true;
+                }
+
+                if (dc.isAlive()) {
+                    System.out.println("-----------------");
+                    System.out.println("STOPPPPPPPP");
+
+                    System.out.println("-----------------");
+                    dc.destroy();
+                }
+            } catch (IOException io) {
+                isDC = true;
+                System.out.println("dc di updatestatus " + isDC);
+                dc = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            System.out.println("badut thread : " + dc.isAlive());
+                            while (!connect(servername, port)) {
+                            }
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                };
+                dc.start();
             }
+            return false;
+
+        } else {
+            return true;
+
         }
-        return false;
     }
 
     //
@@ -145,65 +220,75 @@ public class Client {
     }
 
     public void getList() {
-        try{
+        ac = new ArrayList<Content>();
+        try {
             System.out.println("masuklist");
-        OutputStream outToServer = LoginForm.getClient().getClient().getOutputStream();
-        DataOutputStream out = new DataOutputStream(outToServer);
-        InputStream inFromServer = LoginForm.getClient().getClient().getInputStream();
-        DataInputStream in = new DataInputStream(inFromServer);
-        out.writeByte(Message.MSG_LIST);
-        out.writeUTF(username);
-        int tugascount = in.readInt();
-        System.out.println(tugascount);
-        for (int idx = 0; idx < tugascount; idx++) {
-            int id = in.readInt();
-            String nama = in.readUTF();
-            System.out.println(nama);
-            String pemilik = in.readUTF();
-            System.out.println(pemilik);
-            String kategori = in.readUTF();
-            System.out.println(kategori);
-            String date = in.readUTF();
-            System.out.println(date);
-            boolean status = in.readBoolean();
-            System.out.println(status);
+            OutputStream outToServer = LoginForm.getClient().getClient().getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+            InputStream inFromServer = LoginForm.getClient().getClient().getInputStream();
+            DataInputStream in = new DataInputStream(inFromServer);
+            out.writeByte(Message.MSG_LIST);
+            out.writeUTF(username);
+            int tugascount = in.readInt();
+            System.out.println(tugascount);
+            for (int idx = 0; idx < tugascount; idx++) {
+                int id = in.readInt();
+                String nama = in.readUTF();
+                System.out.println(nama);
+                String pemilik = in.readUTF();
+                System.out.println(pemilik);
+                String kategori = in.readUTF();
+                System.out.println(kategori);
+                String date = in.readUTF();
+                System.out.println(date);
+                boolean status = in.readBoolean();
+                System.out.println(status);
 
-            String assignees = "";
-            int aSize = in.readInt();
-            System.out.println("Size assignees :" + aSize);
-            if (aSize == 0) {
-                assignees += "-";
-            }
-            for (int i = 0; i < aSize; i++) {
-                assignees += in.readUTF();
-                if (i != (aSize - 1)) {
-                    assignees += ", ";
+                String assignees = "";
+                int aSize = in.readInt();
+                System.out.println("Size assignees :" + aSize);
+                if (aSize == 0) {
+                    assignees += "-";
                 }
-            }
-            System.out.println(assignees);
-            String tags = "";
+                for (int i = 0; i < aSize; i++) {
+                    assignees += in.readUTF();
+                    if (i != (aSize - 1)) {
+                        assignees += ", ";
+                    }
+                }
+                System.out.println(assignees);
+                String tags = "";
 
-            int tSize = in.readInt();
-            System.out.println("size tags : " + tSize);
-            if (tSize == 0) {
-                tags += "-";
-            }
-            for (int i = 0; i < tSize; i++) {
-                tags += in.readUTF();
-                if (i != (tSize - 1)) {
-                    tags += ", ";
+                int tSize = in.readInt();
+                System.out.println("size tags : " + tSize);
+                if (tSize == 0) {
+                    tags += "-";
                 }
+                for (int i = 0; i < tSize; i++) {
+                    tags += in.readUTF();
+                    if (i != (tSize - 1)) {
+                        tags += ", ";
+                    }
+                }
+                System.out.println(tags);
+                Content c = new Content(id, nama, pemilik, kategori, date, assignees, tags, status);
+                ac.add(c);
             }
-            System.out.println(tags);
-            Content c = new Content(id, nama, pemilik, kategori, date, assignees, tags, status);
-            ac.add(c);
-        }
-        }catch(IOException e){
-            try {
-                connect(servername, port);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (IOException e) {
+            isDC = true;
+            dc = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        System.out.println("badut thread : " + dc.isAlive());
+                        while (!connect(servername, port)) {
+                        }
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            };
+            dc.start();
         }
 //            Just Printing
 //        for (int i = 0; i < ac.size(); i++) {
