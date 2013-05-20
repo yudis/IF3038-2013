@@ -130,7 +130,7 @@ public class GUI extends javax.swing.JFrame {
         if (fState.exists() && JOptionPane.showConfirmDialog(GUI.this, "Apakah Anda ingin membuka keadaan saat dari sesi sebelumnya?", "Buka Keadaan", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
             try {
                 control = Controller.loadState(STATE_FILENAME);
-
+                fState.delete();
                 System.out.println("-------------- STATE_FILENAME : " + STATE_FILENAME);
                 System.out.println(control);
                 haslogin = true;
