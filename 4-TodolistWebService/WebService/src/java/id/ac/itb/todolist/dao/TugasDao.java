@@ -278,12 +278,23 @@ public class TugasDao extends DataAccessObject {
     public int setStatus(int idTugas, boolean status, Timestamp timestamp) {
         try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("UPDATE `tugas` SET `status` = ?, `last_mod` = ? WHERE `id` = ?;");
-            preparedStatement.setBoolean(1, status);
-            preparedStatement.setTimestamp(2, timestamp);
-            preparedStatement.setInt(3, idTugas);
-
-            return preparedStatement.executeUpdate();
+                    prepareStatement("SELECT `last_mod` FROM `tugas` WHERE `id` = ?;");
+            preparedStatement.setInt(1, idTugas);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                if (rs.getTimestamp("last_mod").before(timestamp)) {
+                    preparedStatement = connection.
+                            prepareStatement("UPDATE `tugas` SET `status` = ?, `last_mod` = ? WHERE `id` = ?;");
+                    preparedStatement.setBoolean(1, status);
+                    preparedStatement.setTimestamp(2, timestamp);
+                    preparedStatement.setInt(3, idTugas);
+                    return preparedStatement.executeUpdate();
+                }
+                else
+                {
+                    return 0;
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
