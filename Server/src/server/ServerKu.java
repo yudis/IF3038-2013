@@ -49,9 +49,10 @@ class MultiServerThread extends Thread {
     // Message
     private Socket server = null;
 
-    public MultiServerThread(Socket socket) {
+    public MultiServerThread(Socket socket) throws SocketException {
         super("MultiServerThread");
         this.server = socket;
+        //socket.setSoTimeout(1000);
     }
 
     @Override
