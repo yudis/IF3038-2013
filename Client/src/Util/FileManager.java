@@ -52,14 +52,16 @@ public class FileManager {
         Path path = Paths.get(rootPath + fileName);
 
         //Reading from file
-        try (BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())) {
-            String lineFromFile;
-            System.out.println("The contents of file are: ");
-            while ((lineFromFile = reader.readLine()) != null) {
-                System.out.println(lineFromFile);
+        if (Files.exists(path)) {
+            try (BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())) {
+                String lineFromFile;
+                System.out.println("The contents of file are: ");
+                while ((lineFromFile = reader.readLine()) != null) {
+                    System.out.println(lineFromFile);
+                }
+            } catch (IOException exception) {
+                System.out.println("Error while reading file");
             }
-        } catch (IOException exception) {
-            System.out.println("Error while reading file");
         }
     }
 
@@ -68,20 +70,24 @@ public class FileManager {
         Path path = Paths.get(rootPath + fileName);
 
         //Reading from file
-        try (BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())) {
-            String lineFromFile;
-            while ((lineFromFile = reader.readLine()) != null) {
-                String[] component = lineFromFile.split("[\t]");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-                Date parsedDate = dateFormat.parse(component[0]);
-                Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-                Log a = new Log(timestamp, Boolean.parseBoolean(component[2]));
-                map.put(Integer.parseInt(component[1]), a);
-            }
+        if (Files.exists(path)) {
+            try (BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())) {
+                String lineFromFile;
+                while ((lineFromFile = reader.readLine()) != null) {
+                    String[] component = lineFromFile.split("[\t]");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+                    Date parsedDate = dateFormat.parse(component[0]);
+                    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+                    Log a = new Log(timestamp, Boolean.parseBoolean(component[2]));
+                    map.put(Integer.parseInt(component[1]), a);
+                }
 
-        } catch (IOException exception) {
-            System.out.println("Error while reading file");
-        } finally {
+            } catch (IOException exception) {
+                System.out.println("Error while reading file");
+            } finally {
+                return map;
+            }
+        } else {
             return map;
         }
     }

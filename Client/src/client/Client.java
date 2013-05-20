@@ -8,6 +8,9 @@ import id.ac.itb.todolist.model.Content;
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,14 +70,28 @@ public class Client {
             System.out.println("CONNECT");
             System.out.println("TIMEOUT : " + client.getSoTimeout());
             isDC = false;
-            System.out.println("badut " + dc.isAlive());
-//            if (dc.isAlive()) {
-//                 System.out.println("-----------------");
-//                System.out.println("STOPPPPPPPP");
-//
-//        System.out.println("-----------------");
-//                dc.destroy();
-//            }
+            HashMap<Integer, Log> hm = fm.parseFile(username);
+            if (hm.size() > 0) {
+                OutputStream outToServer = client.getOutputStream();
+                DataOutputStream out = new DataOutputStream(outToServer);
+
+                out.writeByte(Message.MSG_SYNC);
+
+                InputStream inFromServer = client.getInputStream();
+                DataInputStream in = new DataInputStream(inFromServer);
+
+                Iterator it = hm.entrySet().iterator();
+                out.writeInt(hm.size());
+                while (it.hasNext()) {
+                    Map.Entry pairs = (Map.Entry) it.next();
+                    out.writeInt((int) pairs.getKey());
+                    out.writeUTF(((Log) pairs.getValue()).getTimestamp().toString());
+                    out.writeBoolean(((Log) pairs.getValue()).isValue());
+                    it.remove(); // avoids a ConcurrentModificationException
+                }
+
+            }
+
             // if ada log, kasih ke server
             return true;
         } catch (Exception e) {

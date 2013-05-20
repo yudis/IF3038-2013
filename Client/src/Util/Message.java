@@ -14,4 +14,5 @@ public class Message {
     public static final byte MSG_LIST = 3;
     public static final byte MSG_SUCCESS = 0;
     public static final byte MSG_FAILED = -1;
+    public static final byte MSG_SYNC = 4;
 }
