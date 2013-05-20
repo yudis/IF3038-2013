@@ -25,7 +25,6 @@ public class Server implements Runnable{
     private String respond;
     private String capitalizedMessage;
     private Database db;
-    private List<Log> logs;
     
     Server(Socket socket, int id) {
         this.connection = socket;
@@ -34,7 +33,6 @@ public class Server implements Runnable{
         this.request = "";
         this.respond = "";
         this.lastUpdate = System.currentTimeMillis();
-        this.logs = new ArrayList<Log>();
     }
         
     public static void main(String[] args) {
