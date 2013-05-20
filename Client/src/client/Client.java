@@ -91,8 +91,6 @@ public class Client {
                 }
 
             }
-
-            // if ada log, kasih ke server
             return true;
         } catch (Exception e) {
             //e.printStackTrace();
