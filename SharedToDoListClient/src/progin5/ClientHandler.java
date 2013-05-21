@@ -68,7 +68,7 @@ public class ClientHandler {
             System.out.println (strLine);
            
             String[] split = strLine.split("_");
-            Task buff = new Task(split[0], split[1], split[2],ConvertBoolean(split[3]), split[4], split[5], split[6],split[7]);
+            Task buff = new Task(split[0], split[1], split[2],ConvertStringToBoolean(split[3]), split[4], split[5], split[6],split[7]);
             client.AddTask(buff);
           }
           in.close();
@@ -78,16 +78,40 @@ public class ClientHandler {
         }
    }
 
+   public void TulisCurrentTaskToFile(String namafile) {
+       PrintWriter writer;
+       try {
+            writer = new PrintWriter(namafile, "UTF-8");
+            for (Task a : client.getTaskList()) {
+                String s = a.GetTaskID()+"_"+a.GetTaskName()+"_"+a.GetDeadline()+"_"+ConvertBooleanToString(a.GetStatus())+"_"+a.GetTag()+"_"+a.GetKategori()+"_"+a.GetTimeStamp()+"_"+a.GetAssignee();
+                writer.println(s);
+            }
+            writer.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
+
    public void PushUpdate(String idtask,boolean stat) {
         client.UpdateTask(idtask, stat,GetCurrentTime());
    }
 
-    boolean ConvertBoolean(String inp) {
+    boolean ConvertStringToBoolean(String inp) {
         if (inp.equals("1")) {
             return true;
         }
         else {
             return false;
+        }
+    }
+    String ConvertBooleanToString(boolean inp) {
+        if (inp) {
+            return "1";
+        }
+        else {
+            return "0";
         }
     }
 

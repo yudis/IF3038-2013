@@ -37,6 +37,7 @@ public class MainFrame extends javax.swing.JFrame {
                         Object stat = TableTask.getModel().getValueAt(row, 6);
                         boolean st = (Boolean) stat;
                         UpdateStatus(taskid, st);
+                       
                     }
                 }
             }
@@ -46,8 +47,8 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void UpdateStatus(String taskid,boolean stat) {
-
         clientHandler.PushUpdate(taskid, stat);
+        clientHandler.TulisCurrentTaskToFile("LOG2.txt");
         clientHandler.AppendLog(taskid, stat);
     }
 
