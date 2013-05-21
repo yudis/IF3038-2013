@@ -43,9 +43,9 @@ public class ListTugas extends JPanel {
 
     private Object [][] data= 
     { {"Makan", 
-         "27041993","ok deh", new Boolean(false)},
+         "27041993","ok deh", false},
         {"Minum", 
-         "17031992", "miscellaneous", new Boolean(true)},
+         "17031992", "miscellaneous", true},
         
         };
     //private Object data = new Object [][];
@@ -82,17 +82,16 @@ public class ListTugas extends JPanel {
     @Override
         public void setValueAt(Object value, int row, int col) {
             if (true) {
-                System.out.println("Setting value at " + row + "," + col
-                                   + " to " + value
-                                   + " (an instance of "
-                                   + value.getClass() + ")");
+                System.out.println("Mengubah " + row + "," + col
+                                   + " menjadi " + value
+                                 );
             }
  
             data[row][col] = value;
             fireTableCellUpdated(row, col);
  
             if (true) {
-                System.out.println("New value of data:");
+                System.out.println("Data baru");
                 printDebugData();
             }
         }
@@ -102,7 +101,7 @@ public class ListTugas extends JPanel {
             int numCols = getColumnCount();
  
             for (int i=0; i < numRows; i++) {
-                System.out.print("    row " + i + ":");
+                System.out.print("    baris " + i + ":");
                 for (int j=0; j < numCols; j++) {
                     System.out.print("  " + data[i][j]);
                 }
@@ -179,6 +178,8 @@ public class ListTugas extends JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setBackground(new java.awt.Color(255, 204, 204));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
