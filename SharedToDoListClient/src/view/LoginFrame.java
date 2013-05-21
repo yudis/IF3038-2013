@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.ConnectionChecker;
 import model.ConnectionHandler;
+import model.SharedToDoListClient;
 
 /**
  *
@@ -18,6 +19,8 @@ import model.ConnectionHandler;
 public class LoginFrame extends javax.swing.JFrame {
 
      Socket socket;
+     public String uName;
+     public String uPass;
     
     /**
      * Creates new form LoginFrame
@@ -26,7 +29,9 @@ public class LoginFrame extends javax.swing.JFrame {
         initComponents();
         
         this.setTitle("SharedToDoList | Login Frame");
+//        inisialisasi atribut
         socket = s;
+        uName = "";uPass = "";
         statusMsg.setText("Selamat Datang, silahkan login :");
     }
 
@@ -121,13 +126,13 @@ public class LoginFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //susun string yang mau dikirim
-        String kode = "001";
-        String uName = uNameField.getText();
+        String kode = "login";
+        uName = uNameField.getText();
         String uNameEnc = uName + "x";
-        String uPass = new String(pswField.getPassword());
+        uPass = new String(pswField.getPassword());
         String uPassEnc = uPass + "x";
         
-        String msg = kode + "&" + uNameEnc + "&" + uPassEnc;
+        String msg = kode + "_" + uNameEnc + "_" + uPassEnc;
         //kirim string
         try {
              ConnectionHandler.sendString(msg);
@@ -135,12 +140,13 @@ public class LoginFrame extends javax.swing.JFrame {
              
              //mengecek validitas login
              if (result.equals("1")) {
-                 MainFrame mainF = new MainFrame(uName);
-                 mainF.setVisible(true);
+//                 SharedToDoListClient.mainF = new MainFrame(uName);
+                 SharedToDoListClient.mainF.setVisible(true);
                  
                  //membuat thread khusus untuk selalu mengecek kondisi koneksi
-                 Thread t = new Thread(new ConnectionChecker(socket, mainF));
-                 t.start();
+//                 Thread t = new Thread(new ConnectionChecker(socket, SharedToDoListClient.mainF));
+//                 t.start();
+//                 System.out.println("checker jalan");
                  
                  this.setVisible(false);
              }

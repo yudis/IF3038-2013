@@ -51,10 +51,17 @@ public class ConnectionHandler {
         }
     }
     
-    public static String listen() throws IOException {
+    public static String listen() {
         String ack = "";
-        ack = is.readUTF();
-//        System.out.println(ack);
+        try {
+//            mendapatkan informasi input stream kembali
+            is = new DataInputStream(socket.getInputStream());
+            
+            ack = is.readUTF();
+        } catch (IOException ex) {
+//            Logger.getLogger(ConnectionHandler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Exception! Gangguan Socket siake");
+        }
         
         return ack;
     }
