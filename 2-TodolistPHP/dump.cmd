@@ -1,1 +1,0 @@
-C:\xampp\mysql\bin\mysqldump -u progin -p progin_439_13510015 > progin_439_13510015.sql
