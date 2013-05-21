@@ -8,10 +8,15 @@ package progin5;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,14 +24,37 @@ import java.util.Calendar;
  */
 public class ClientHandler {
     private Client client;
+    private String LOG;
+
 
     public ClientHandler(String id) {
         client = new Client(id);
+        LOG = "";
     }
 
     public Client getClient() {
         return client;
     }
+    public String getLog() {
+        return LOG;
+    }
+
+    public void AppendLog(String idtask,boolean stat) {
+        String msg = "<"+idtask+","+stat+","+GetCurrentTime()+">";
+        LOG = LOG + msg;
+        PrintWriter writer;
+        try {
+            writer = new PrintWriter("LOG.txt", "UTF-8");
+            writer.println(LOG);
+            writer.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public void GetUpdate(String namafile) {
         try {
           client.DisposeTaskList();
@@ -50,8 +78,8 @@ public class ClientHandler {
         }
    }
 
-   public void PushUpdate(String idtask,String stat) {
-        client.UpdateTask(idtask, ConvertBoolean(stat),GetCurrentTime());
+   public void PushUpdate(String idtask,boolean stat) {
+        client.UpdateTask(idtask, stat,GetCurrentTime());
    }
 
     boolean ConvertBoolean(String inp) {
@@ -63,7 +91,7 @@ public class ClientHandler {
         }
     }
 
-    String GetCurrentTime() {
+    public String GetCurrentTime() {
         Calendar cal = Calendar.getInstance();
     	cal.getTime();
     	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");

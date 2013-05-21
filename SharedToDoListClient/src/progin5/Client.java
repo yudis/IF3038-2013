@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Client {
     private String ClientID;
     private ArrayList<Task> listTask;
-    private String LOG;
+    
 
     public Client(String id) {
         ClientID = id;
