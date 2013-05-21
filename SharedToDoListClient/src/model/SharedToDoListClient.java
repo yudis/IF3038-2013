@@ -15,6 +15,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.LoginFrame;
 import view.MainFrame;
 /**
@@ -33,6 +34,10 @@ public class SharedToDoListClient {
     public static String message = "";
     
     private static final String SUCCESS_MESSAGE = "success_list";
+    private static final String LOGIN_FAIL = "login_fail";
+    private static final String LOGIN_SUCCESS = "login_success";
+    
+    public static boolean isLoggedIn = false;
     
     public static void main(String[] args) throws UnknownHostException, IOException {
 //        create connection
@@ -50,7 +55,6 @@ public class SharedToDoListClient {
         loginF.setVisible(true);
         
         while (!mainF.isVisible()) {
-//            System.out.println("tunggu");
             try {
                 Thread.sleep(400);
             } catch (InterruptedException ex) {
@@ -60,7 +64,7 @@ public class SharedToDoListClient {
         
 //        main frame telah diaktifkan
 //        mengganti nama user aktif pada main frame
-//        mainF.activeUser.setText(loginF.uName);
+        mainF.currentUser.setText(loginF.uName);
         
 //        membuat thread khusus untuk selalu mengecek kondisi koneksi
 //        Thread t = new Thread(new ConnectionChecker(socket, SharedToDoListClient.mainF));
@@ -79,6 +83,10 @@ public class SharedToDoListClient {
                 listenFile();
 //                mengirim pesan berhasil
                 ConnectionHandler.sendString(SUCCESS_MESSAGE);
+            } else if (message.equals(LOGIN_FAIL)) {
+                JOptionPane.showMessageDialog(null, "Password Anda SALAH");
+            } else if (message.equals(LOGIN_SUCCESS)) {
+                isLoggedIn = true;
             }
         }
     }
