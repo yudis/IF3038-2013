@@ -1,24 +1,32 @@
 <?php
 	function ubahStatus($nomor)
 	{	
+		$result = query2('UPDATE tugas SET status = not status WHERE id_tugas=:id_tugas', array("id_tugas" => $nomor));
+        echo json_encode('Success');        
 	}
+	
 	function getCat()
 	{
-		$result = queryAll('SELECT * from kategori');
-	
-		while( $result){
-			echo json_encode("<div id=\"categ\" onclick=\"showAddTask();catTask($row[id_kategori]);  \">");
-			echo json_encode("<div>".$row['nama_kategori']."</div>");
-			echo json_encode("</div>");
-		}
+		$result = queryAll2('SELECT * from kategori');
+		echo json_encode($result);
 	}
 	
 	function getTask()
 	{
-		$result = queryAll ('SELECT * from tugas natural join mengerjakan');
+		$result = queryAll2('SELECT * from tugas');// natural join mengerjakan');
+		/*
+		foreach($result as &$row)
+		{
+			$row['category'] = queryAll('SELECT nama_kategori FROM kategori WHERE (id_kategori=:result[id_kategori])');
+		}
+		*/
+		echo json_encode($result);
+		
+		/*
+		$result = queryAll2('SELECT * from tugas natural join mengerjakan');
 		
 		while( $result){
-			$result2 = queryAll ('SELECT nama_kategori FROM kategori WHERE (id_kategori=:result[id_kategori])');
+			$result2 = queryAll('SELECT nama_kategori FROM kategori WHERE (id_kategori=:result[id_kategori])');
 
 	        echo json_encode("<a href=\"rinciantugas.php?id_tugas=".$row['id_tugas']."\">");
 			echo json_encode("<div id=\"listtask\">");
@@ -35,6 +43,7 @@
 			echo json_encode("<div>".$row2[0]."</div>");
 			echo json_encode("</div></a>");
 		}
+		*/
 	}
 	
 	function catTask($n)
