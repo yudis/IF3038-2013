@@ -4,14 +4,22 @@
  */
 package view;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import model.ClientHandler;
 import model.ConnectionChecker;
 import model.ConnectionHandler;
 import model.SharedToDoListClient;
+import model.Task;
+import model.MessageProtokol;
 
 /**
  *
@@ -22,37 +30,81 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    
+    public ClientHandler clientHandler;
     private Socket socket;
     
-    public MainFrame(Socket s) throws IOException {
+    public String userNameAktif;
+    public ArrayList<String> messageOffLine = new ArrayList<>();
+    
+    public MainFrame(Socket s) {
         initComponents();
-        this.setTitle("SharedToDoList | Main Frame");
-        
-//        inisialisasi atribut
         socket = s;
         
-        //cek status koneksi
+//        cek status koneksi
         if (ConnectionHandler.isConnected) {
             //menonaktifkan tombol connect
             connectBtn.setEnabled(false);
             connectBtn.setText("connected");
         }
         
-//        membuat listener utk string dari server
-//        Thread tListener = new Thread(ConnectionHandler.listen());
-//        tListener.start();
-//        listen();
+        
+        TableTask.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                
+                if (e.getClickCount() ==1) {
+                    JTable target = (JTable)e.getSource();
+                    int row = target.getSelectedRow();
+                    int column = target.getSelectedColumn();
+                    
+                    if (column == 6 && ConnectionHandler.isConnected) {
+                        String taskid = TableTask.getModel().getValueAt(row, 0).toString();
+                        Object stat = TableTask.getModel().getValueAt(row, 6);
+                        boolean st = (Boolean) stat;
+                        try {
+                            ConnectionHandler.sendString(MessageProtokol.PushRequest(clientHandler.getClient().getClientID(), taskid,clientHandler.ConvertBooelantoString(st),clientHandler.GetCurrentTime()));
+                        } catch (IOException ex) {
+                            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                        
+                        UpdateStatus(taskid, st);
+                    } else {
+                        int i = 0;
+                        String taskid = TableTask.getModel().getValueAt(row, 0).toString();
+                        Object stat = TableTask.getModel().getValueAt(row, 6);
+                        boolean st = (Boolean) stat;
+                        UpdateStatus(taskid, st);
+                        messageOffLine.add(MessageProtokol.PushRequest(clientHandler.getClient().getClientID(), taskid,clientHandler.ConvertBooelantoString(st),clientHandler.GetCurrentTime()));
+                    }
+                }
+            }
+        });
+        
+      
+    }
+
+    public void UpdateStatus(String taskid,boolean stat) {
+
+        clientHandler.PushUpdate(taskid, stat);
+        clientHandler.AppendLog(taskid, stat);
     }
     
-    public void listen() throws IOException {
-        //menunggu pesan dari server
-        String message;
-        while (true) {
-            message = ConnectionHandler.listen();
-            System.out.println("message dari server : " + message);
+    public void setClientID(String id) {
+        clientHandler = new ClientHandler(id);
+    }
+
+    public void tampilkanTable() {
+        int rowindex = 0;
+        for (Task a : clientHandler.getClient().getTaskList()) {
+             TableTask.getModel().setValueAt(a.GetTaskID(), rowindex, 0);
+             TableTask.getModel().setValueAt(a.GetTaskName(), rowindex, 1);
+             TableTask.getModel().setValueAt(a.GetDeadline(), rowindex, 2);
+             TableTask.getModel().setValueAt(a.GetAssignee(), rowindex, 3);
+             TableTask.getModel().setValueAt(a.GetTag(), rowindex, 4);
+             TableTask.getModel().setValueAt(a.GetKategori(), rowindex, 5);
+             TableTask.getModel().setValueAt(a.GetStatus(), rowindex, 6);
             
-            //mengirim pesan berhasil ke server
+            rowindex++;
         }
     }
 
@@ -67,17 +119,97 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
+        TableTask = new javax.swing.JTable();
         connectBtn = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        activeUser = new javax.swing.JLabel();
-        logOutBtn = new javax.swing.JButton();
+        logOut = new javax.swing.JButton();
+        synchronizeBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("SharedToDoList");
+
+        TableTask.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Task ID", "Task Name", "Deadline", "Assignee", "Tag", "Kategori", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(TableTask);
+        TableTask.getColumnModel().getColumn(0).setResizable(false);
+        TableTask.getColumnModel().getColumn(1).setResizable(false);
+        TableTask.getColumnModel().getColumn(2).setResizable(false);
+        TableTask.getColumnModel().getColumn(3).setResizable(false);
+        TableTask.getColumnModel().getColumn(4).setResizable(false);
+        TableTask.getColumnModel().getColumn(5).setResizable(false);
+        TableTask.getColumnModel().getColumn(6).setResizable(false);
 
         connectBtn.setText("connect");
         connectBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -87,17 +219,30 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButton2.setText("refresh updates");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("save to log");
-
-        jLabel2.setText("You are logged in as");
-
-        activeUser.setText("default user");
-
-        logOutBtn.setText("log out");
-        logOutBtn.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logOutBtnActionPerformed(evt);
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        logOut.setText("log out");
+        logOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutActionPerformed(evt);
+            }
+        });
+
+        synchronizeBtn.setText("synchronize");
+        synchronizeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                synchronizeBtnActionPerformed(evt);
             }
         });
 
@@ -110,50 +255,73 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 479, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(activeUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(connectBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 765, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(connectBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(logOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(synchronizeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(activeUser))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(connectBtn)
-                        .addGap(45, 45, 45)
-                        .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
-                        .addComponent(logOutBtn)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(synchronizeBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logOut))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (ConnectionHandler.isConnected) {
+            try {
+    //            send request
+                System.out.println("message list : " + MessageProtokol.ListRequest(clientHandler.getClient().getClientID()));
+                ConnectionHandler.sendString(MessageProtokol.ListRequest(clientHandler.getClient().getClientID()));
+
+    //            menunggu data terkirim
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+    //            mengubah table
+                clientHandler.GetUpdate(SharedToDoListClient.UPDATE_TASK_PATHNAME);
+                tampilkanTable();
+                
+                System.out.println("Refresh Update Success");
+            } catch (IOException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void connectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectBtnActionPerformed
+        // TODO add your handling code here:
         try {
-              socket = ConnectionHandler.getConnection();
+//              socket = ConnectionHandler.getConnection();
+            SharedToDoListClient.socket = ConnectionHandler.getConnection();
+            System.out.println("Socket berhasil dibuat kembali");
             } catch (UnknownHostException ex) {
 //                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("Exception! Host tidak ditemukan");
@@ -163,24 +331,48 @@ public class MainFrame extends javax.swing.JFrame {
             }
         
         //menjalankan connection checker kembali
-        Thread t = new Thread(new ConnectionChecker(socket, this));
+        Thread t = new Thread(new ConnectionChecker(SharedToDoListClient.socket, this));
         t.start();
         
-        if (socket!=null) {
+        if (SharedToDoListClient.socket!=null) {
             connectBtn.setEnabled(false);
             connectBtn.setText("connected");
         }
     }//GEN-LAST:event_connectBtnActionPerformed
 
-    private void logOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutBtnActionPerformed
+    private void logOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutActionPerformed
         // TODO add your handling code here:
 //        LoginFrame loginF = new LoginFrame(socket);
         SharedToDoListClient.loginF.statusMsg.setText("Anda telah berhasil melakukan log out");
         SharedToDoListClient.loginF.setVisible(true);
         
-        //menutup main frame
+//        menutup main frame
         this.setVisible(false);
-    }//GEN-LAST:event_logOutBtnActionPerformed
+    }//GEN-LAST:event_logOutActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void synchronizeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_synchronizeBtnActionPerformed
+        // TODO add your handling code here:
+        if (!messageOffLine.isEmpty()) {
+            for (String a : messageOffLine) {
+                try {
+                    ConnectionHandler.sendString(a);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
+            }
+            messageOffLine.clear();
+        } 
+        else 
+        {
+            JOptionPane.showMessageDialog(this, "Tidak ada perubahan yang perlu disinkronisasi");
+        }
+        
+    }//GEN-LAST:event_synchronizeBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,14 +409,13 @@ public class MainFrame extends javax.swing.JFrame {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JLabel activeUser;
+    private javax.swing.JTable TableTask;
     public javax.swing.JButton connectBtn;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton logOutBtn;
+    private javax.swing.JButton logOut;
+    private javax.swing.JButton synchronizeBtn;
     // End of variables declaration//GEN-END:variables
 }
