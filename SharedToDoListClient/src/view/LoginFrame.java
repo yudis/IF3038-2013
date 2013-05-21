@@ -5,10 +5,15 @@
 package view;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.ConnectionChecker;
 import model.ConnectionHandler;
 import model.SharedToDoListClient;
+import static model.SharedToDoListClient.message;
 
 /**
  *
@@ -21,6 +26,8 @@ public class LoginFrame extends javax.swing.JFrame {
      public String uPass;
     
      private final String LOGIN_SUCCESS = "login_success";
+     private static final String LOGIN_FAIL = "login_fail";
+     
      private boolean isFirst;
      
     /**
@@ -126,44 +133,62 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInActionPerformed
-        // TODO add your handling code here:
-        //susun string yang mau dikirim
-        String kode = "login";
-        uName = uNameField.getText();
-        SharedToDoListClient.mainF.setClientID(uName);
-        String uNameEnc = uName + "x";
-        uPass = new String(pswField.getPassword());
-        String uPassEnc = uPass + "x";
-        
-        String msg = kode + "_" + uNameEnc + "_" + uPassEnc;
-        //kirim string
-        try {
-             ConnectionHandler.sendString(msg);
-             System.out.println("mulai listen");
+        try {                                      
+             // TODO add your handling code here:
+             //susun string yang mau dikirim
+             String kode = "login";
+             uName = uNameField.getText();
+             SharedToDoListClient.mainF.setClientID(uName);
+     //        String uNameEnc = uName + "x";
+             String uNameEnc = getEncryptedText(uName);
+             uPass = new String(pswField.getPassword());
+//             String uPassEnc = uPass + "x";
+             String uPassEnc = getEncryptedText(uPass);
              
-             String result = "";
-             if (isFirst) {
-                result = ConnectionHandler.listen();
-                isFirst = false;
-             }
-             System.out.println("selesai listen");
-             
-             //mengecek validitas login
-             if (result.equals(LOGIN_SUCCESS) || SharedToDoListClient.message.equals(LOGIN_SUCCESS)) {
-//                 SharedToDoListClient.mainF = new MainFrame(uName);
-                 SharedToDoListClient.mainF.setVisible(true);
-                 
-                 //membuat thread khusus untuk selalu mengecek kondisi koneksi
-                 Thread t = new Thread(new ConnectionChecker(socket, SharedToDoListClient.mainF));
-                 t.start();
-                 System.out.println("checker jalan");
-                 
-                 this.setVisible(false);
-             }
-         } catch (IOException ex) {
-//             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
-             System.out.println("Exception! koneksi terputus");
-             ConnectionHandler.isConnected = false;
+             String msg = kode + "_" + uNameEnc + "_" + uPassEnc;
+             //kirim string
+             try {
+                  ConnectionHandler.sendString(msg);
+                  System.out.println("mulai listen");
+                  
+                  String result = "";
+//                  jika percobaan pertama dan belum berhasil login
+                  if (!SharedToDoListClient.isLoggedIn) {
+                     result = ConnectionHandler.listen();
+//                     isFirst = false;
+                  }
+                  System.out.println("result : " + result);
+                  System.out.println("selesai listen");
+                 try {
+//                     mengecek validitas login
+                     Thread.sleep(1000);
+                 } catch (InterruptedException ex) {
+                     Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                  System.out.println("message login : " + SharedToDoListClient.message);
+                  if (result.equals(LOGIN_SUCCESS) || SharedToDoListClient.message.equals(LOGIN_SUCCESS)) {
+//                      mengganti variabel isLoggedIn
+                      SharedToDoListClient.isLoggedIn = true;
+                      
+//                      menampilkan halaman utama
+                      SharedToDoListClient.mainF.setVisible(true);
+                      
+                      //membuat thread khusus untuk selalu mengecek kondisi koneksi
+                      Thread t = new Thread(new ConnectionChecker(socket, SharedToDoListClient.mainF));
+                      t.start();
+                      System.out.println("checker jalan");
+                      this.setVisible(false);
+                  } else if (result.equals(LOGIN_FAIL) || message.equals(LOGIN_FAIL)) {
+                      System.out.println("masuk LOGIN SALAH");
+                      JOptionPane.showMessageDialog(null, "Password Anda SALAH");
+                  }
+              } catch (IOException ex) {
+     //             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+                  System.out.println("Exception! koneksi terputus");
+                  ConnectionHandler.isConnected = false;
+              }
+         } catch (UnsupportedEncodingException ex) {
+             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
          }
     }//GEN-LAST:event_logInActionPerformed
 
@@ -209,4 +234,16 @@ public class LoginFrame extends javax.swing.JFrame {
     public javax.swing.JLabel statusMsg;
     private javax.swing.JTextField uNameField;
     // End of variables declaration//GEN-END:variables
+
+    private String getEncryptedText(String uName) throws UnsupportedEncodingException {
+//        ubah string ke dalam bentuk byte array
+        byte[] byteMsg = uName.getBytes("UTF8");
+        
+//        modifikasi byte array
+        for (int i=0; i<byteMsg.length; i++) {
+            byteMsg[i] = (byte) (byteMsg[i] + i);
+        }
+        
+        return new String(byteMsg);
+    }
 }

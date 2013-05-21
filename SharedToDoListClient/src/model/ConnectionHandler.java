@@ -16,7 +16,7 @@ import java.net.UnknownHostException;
  */
 public class ConnectionHandler {
     
-    private static Socket socket;
+//    private static Socket socket;
     private static DataInputStream is;
     private static DataOutputStream os;
     public static boolean isConnected;
@@ -34,7 +34,7 @@ public class ConnectionHandler {
     
     public static Socket getConnection() throws UnknownHostException, IOException {
 //        socket = new Socket("192.168.0.104", 10000);
-        socket = new Socket(IP_ADDRESS, PORT_NUM);
+        Socket socket = new Socket(IP_ADDRESS, PORT_NUM);
         isConnected = true;
         
         return socket;
@@ -47,7 +47,7 @@ public class ConnectionHandler {
 //        if (socket.isClosed()) System.out.println("socket sudah ditutup");
 //        else System.out.println("socket masih dibuka");
         
-        if (socket!=null && os!=null && is!=null) {
+        if (SharedToDoListClient.socket!=null && os!=null && is!=null) {
             os.writeUTF(str);
             os.flush();
         }
@@ -57,7 +57,7 @@ public class ConnectionHandler {
         String ack = "";
         try {
 //            mendapatkan informasi input stream kembali
-            is = new DataInputStream(socket.getInputStream());
+            is = new DataInputStream(SharedToDoListClient.socket.getInputStream());
             
             ack = is.readUTF();
         } catch (IOException ex) {
