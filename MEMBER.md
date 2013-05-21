@@ -1,4 +1,4 @@
-NIM       Nama
-13510019  Andreas Bara Timur
-13510031  Rahmi Yuwan
-13510099  Muhammad Gema Akbar   
+NIM       Nama               Github ID                   
+13510031  Rahmi Yuwan       rahmiyuwan
+13510087  Arief Suharsono   ariefsuharsono
+18210019  Arya Rezavidi      
