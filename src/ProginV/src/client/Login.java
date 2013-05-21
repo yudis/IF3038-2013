@@ -166,10 +166,11 @@ public class Login extends javax.swing.JDialog {
         if (success) {
             success = doLogin();
             if (success) {
-                // go to other form
-                //frmToDoList.setVisible(false);
+                frmToDoList.setVisible(false);
+                ListTugas l=new ListTugas();
+                l.run();
             }
-        }
+        } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public boolean doHandshake() {

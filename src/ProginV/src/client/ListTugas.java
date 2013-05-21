@@ -123,7 +123,7 @@ public class ListTugas extends JPanel {
  
         //Create and set up the content pane.
         ListTugas newContentPane = new ListTugas();
-        newContentPane.setOpaque(true); //content panes must be opaque
+        newContentPane.setOpaque(true);
         frame.setContentPane(newContentPane);
  
         //Display the window.
@@ -135,9 +135,9 @@ public class ListTugas extends JPanel {
         
     }
  
-    public static void main(String[] args) {
+   // public static void main(String[] args) {
  
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+        
             public void run() {
                 
         String url ="jdbc:mysql://localhost:3306/";
@@ -168,8 +168,8 @@ public class ListTugas extends JPanel {
                 createAndShowGUI();
                 
             }
-        });
-    }
+        
+   // }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
