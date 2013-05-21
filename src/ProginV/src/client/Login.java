@@ -59,11 +59,14 @@ public class Login extends javax.swing.JDialog {
         setForeground(new java.awt.Color(255, 255, 102));
         setIconImage(null);
 
+        jPasswordField1.setText("asdasdasd");
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
             }
         });
+
+        jTextField1.setText("asdasdasd");
 
         jLabel1.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
         jLabel1.setText("Username");
@@ -74,6 +77,7 @@ public class Login extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
         jLabel3.setText("IP Address");
 
+        jTextField2.setText("127.0.0.1");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);

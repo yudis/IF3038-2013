@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +25,9 @@ public class ServerForm extends javax.swing.JFrame implements Runnable
     ServerSocket server = null;
     Socket client = null;
     boolean shutdown = false;
+    
+    ArrayList<Socket> clients = new ArrayList<>();
+    
     public ServerForm() {
         initComponents();
         setVisible(true);
@@ -142,7 +146,7 @@ public class ServerForm extends javax.swing.JFrame implements Runnable
     {
         try {
             // TODO add your handling code here:
-            Thread t = null;
+            //Thread t = null;
             while (true)
             {
             	if (!shutdown)
@@ -154,19 +158,30 @@ public class ServerForm extends javax.swing.JFrame implements Runnable
             		}
             		
             		client = server.accept();
-            		t = new Thread(new HandleClient(this, client));
-            		t.start();
+                        if ((!clients.contains(client)) || clients.isEmpty())
+                        {
+                            clients.add(client);
+                        }
+                        
+                        for(Socket c : clients)
+                        {
+                            Thread t = new Thread(new HandleClient(this, c));
+                            t.start();
+                        }
             	}
             	else
             	{
             		System.out.println("off");
+                        /*
             		if (t.isAlive())
             		{
             			t = null;
             		}
+                        */
             		if (server != null)
             		{
-            			server = null;
+                            server = null;
+                            clients.clear();
             		}
             	}
             }
