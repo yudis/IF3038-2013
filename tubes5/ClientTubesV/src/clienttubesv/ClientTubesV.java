@@ -73,22 +73,27 @@ public class ClientTubesV {
                 
                 while (!login) {
                     while (!dialog.isReady()) ;
-                    Connector conn = new Connector("127.0.0.1",3400);
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(0);
-                    sb.append((char)dialog.getUsername().length());
-                    sb.append((char)dialog.getPass().length());
-                    sb.append(dialog.getUsername());
-                    sb.append(dialog.getPass());
-                    conn.setRequest(sb.toString());
-                    conn.sendRequest();
-                    String hasil = conn.getReply();
+                    try {
+                        Connector conn = new Connector("127.0.0.1",3400);
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(0);
+                        sb.append((char)dialog.getUsername().length());
+                        sb.append((char)dialog.getPass().length());
+                        sb.append(dialog.getUsername());
+                        sb.append(dialog.getPass());
+                        conn.setRequest(sb.toString());
+                        conn.sendRequest();
+                        String hasil = conn.getReply();
 
-                    if (hasil.equalsIgnoreCase("LOGIN_SUCCESS")) {
-                        username = dialog.getUsername();
-                        login = true;
-                    } else {
-                        dialog.showWarning("Wrong username / password");
+                        if (hasil.equalsIgnoreCase("LOGIN_SUCCESS")) {
+                            username = dialog.getUsername();
+                            login = true;
+                        } else {
+                            dialog.showWarning("Wrong username / password");
+                        }
+                    } catch(Exception ex) {
+                        Logger.getLogger(ClientTubesV.class.getName()).log(Level.SEVERE, null, ex);
+                        dialog.showWarning("Cannot connect to server.");
                     }
                     dialog.prepare();
                 }
@@ -102,7 +107,7 @@ public class ClientTubesV {
                     BufferedWriter out = new BufferedWriter(new FileWriter(temp1, true));
                     DateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     out.append(dateformat.format(new Date()));
-                    out.append(" - Logout");
+                    out.append(" - Login");
                     out.append("\n");
                     out.close();
                 } catch (IOException ex) {
@@ -136,21 +141,25 @@ public class ClientTubesV {
                 long last = 0;
                 
                 while (dialog.getStatus()) {
-                    if (System.currentTimeMillis() - last > 60000) {
+                    if (System.currentTimeMillis() - last > 15000) {
                         synch.process();
                         while (synch.busy()) ;
                         
                         //Fetch all the new list
-                        Connector conn = new Connector("127.0.0.1",3400);
-                        StringBuilder sb = new StringBuilder();
-                        sb.append(1);
-                        sb.append(username);
-                        conn.setRequest(sb.toString());
-                        conn.sendRequest();
-                        String hasil = conn.getReply();
-                        System.out.println(hasil);
-                        dialog.setData(hasil);
-                        last = System.currentTimeMillis();
+                        try {
+                            Connector conn = new Connector("127.0.0.1",3400);
+                            StringBuilder sb = new StringBuilder();
+                            sb.append(1);
+                            sb.append(username);
+                            conn.setRequest(sb.toString());
+                            conn.sendRequest();
+                            String hasil = conn.getReply();
+                            dialog.setData(hasil);
+                        } catch (IOException ex) {
+                            Logger.getLogger(ClientTubesV.class.getName()).log(Level.SEVERE, null, ex);
+                        } finally {
+                            last = System.currentTimeMillis();
+                        }
                     }
                 }
                 
@@ -164,7 +173,7 @@ public class ClientTubesV {
                     BufferedWriter out = new BufferedWriter(new FileWriter("log/log_"+username+".txt", true));
                     DateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     out.append(dateformat.format(new Date()));
-                    out.append(" - Login");
+                    out.append(" - Logout");
                     out.append("\n");
                     out.close();
                 } catch (IOException ex){

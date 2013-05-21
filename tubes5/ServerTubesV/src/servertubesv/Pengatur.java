@@ -132,12 +132,35 @@ public class Pengatur implements Runnable, Serializable{
                 reply = sb.toString();
             } else if (request.charAt(0) == '2') {
                 //Update status of a task
-                int id_tugas = Integer.parseInt(request.substring(2));
-                PreparedStatement ps = conn.prepareStatement("UPDATE tugas(status_tugas) VALUES (?) WHERE id_tugas = ?");
-                ps.setString(1,request.substring(1,2));
-                ps.setInt(2,id_tugas);
-                int dapat = ps.executeUpdate();
-                reply = Integer.toString(dapat);
+                String[] args = request.split(" ");
+                //System.out.println(args[0]);
+                //System.out.println(args[1]);
+                //System.out.println(args[2]);
+                //System.out.println(args[3]);
+                
+                PreparedStatement ps = conn.prepareStatement("SELECT timestamp FROM tugas WHERE id_tugas = ?");
+                ps.setString(1, args[2]);
+                ResultSet result = ps.executeQuery();
+                boolean flag = false;
+                while (result.next()) {
+                    if (result.getLong(1) < Long.parseLong(args[1])) flag = true;
+                }
+                //System.out.println(result.isAfterLast());                
+                result.close();
+                ps.close();
+                
+                if (flag) {
+                    //System.out.println("UPDATING STATUS");
+                    ps = conn.prepareStatement("UPDATE tugas SET status = ?,timestamp = ? WHERE id_tugas = ?");
+                    ps.setString(1,args[3]);
+                    ps.setString(2,args[1]);
+                    ps.setString(3,args[2]);
+                    int dapat = ps.executeUpdate();
+                    ps.close();
+                    reply = Integer.toString(dapat);
+                } else {
+                    reply = "0";
+                }
             } else {
                 reply = "Unknown Request";
             }

@@ -264,11 +264,11 @@ public class TaskList extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (jTextArea5.getText().equalsIgnoreCase("Done")) {
-            jTextArea5.setText("NOT DONE YET");
+        if (status[chosen_index].equalsIgnoreCase("done")) {
+            status[chosen_index] = "NOT DONE YET";
         } else {
-            jTextArea5.setText("DONE");
-        }        
+            status[chosen_index] = "DONE";
+        }
  
         File temp1 = new File("log/log_"+username+".txt");
         File temp2 = new File("log/log_"+username+"_update.txt");
@@ -283,18 +283,20 @@ public class TaskList extends javax.swing.JFrame {
             out.append(" - CHANGING STATUS OF TASK \"");
             out.append(nama_tugas[chosen_index]);
             out.append("\" TO ");
-            out.append(jTextArea5.getText());
+            out.append(status[chosen_index]);
             out.append("\n");
             out.close();
             
             out = new BufferedWriter(new FileWriter(temp2, true));
             out.append(Long.toString(date.getTime()));
-            out.append(Integer.toString(chosen_index) + " ");
-            if (jTextArea5.getText().equalsIgnoreCase("Done")) {
+            out.append(" ");
+            out.append(Integer.toString(id_tugas[chosen_index]));
+            out.append(" ");
+            if (status[chosen_index].equalsIgnoreCase("Done")) {
                 out.append("1");
             } else {
                 out.append("0");
-            }            
+            }
             out.append("\n");
             out.close();
         } catch (IOException ex) {

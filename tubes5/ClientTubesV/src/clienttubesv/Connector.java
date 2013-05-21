@@ -22,17 +22,11 @@ public class Connector {
     private OutputStream out;
     private String request,reply;
     
-    Connector(String ipaddr, int port) {
+    Connector(String ipaddr, int port) throws UnknownHostException, IOException {
         sock = null;
-        try {
-            sock = new Socket(ipaddr, port);
-            in = sock.getInputStream();
-            out = sock.getOutputStream();
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(Connector.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Connector.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        sock = new Socket(ipaddr, port);
+        in = sock.getInputStream();
+        out = sock.getOutputStream();
     }
     
     public void setRequest(String s) {

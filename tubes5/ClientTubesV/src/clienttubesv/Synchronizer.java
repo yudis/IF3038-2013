@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,24 +41,29 @@ public class Synchronizer implements Runnable, Serializable{
             try {
                 baca = new BufferedReader(new FileReader("log/log_"+username+"_update.txt"));
                 String s = baca.readLine();
-                while (s != null) {
-                    s = baca.readLine();
-                    String[] args = s.split(" ");
+                while (s != null && needed) {
                     Connector conn = new Connector("127.0.0.1",3400);
                     StringBuilder sb = new StringBuilder();
                     sb.append(2);
-                    sb.append(args[1]).append(args[0]);
+                    sb.append(" ");
+                    sb.append(s);
                     conn.setRequest(sb.toString());
                     conn.sendRequest();
                     String hasil = conn.getReply();
+                    //System.out.println(s + " " + hasil);
+                    s = baca.readLine();
                 }
                 baca.close();
                 
-                BufferedWriter out = new BufferedWriter(new FileWriter("log/log_"+username+"_update.txt", false));
-                out.append("");
-                out.close();
+                if (needed) {
+                    BufferedWriter out = new BufferedWriter(new FileWriter("log/log_"+username+"_update.txt", false));
+                    out.append("");
+                    out.close();
+                }
             } catch(IOException ex) {
-                System.err.println("Failed to open log file");
+                Logger.getLogger(ClientTubesV.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                needed = false;
             }
             
             try {
@@ -71,8 +77,6 @@ public class Synchronizer implements Runnable, Serializable{
             } catch (IOException ex) {
                 Logger.getLogger(ClientTubesV.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            needed = false;
         }
     }
     
