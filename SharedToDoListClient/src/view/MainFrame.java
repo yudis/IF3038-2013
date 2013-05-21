@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.ConnectionChecker;
 import model.ConnectionHandler;
+import model.SharedToDoListClient;
 
 /**
  *
@@ -24,11 +25,12 @@ public class MainFrame extends javax.swing.JFrame {
     
     private Socket socket;
     
-    public MainFrame(String uName) throws IOException {
+    public MainFrame(Socket s) throws IOException {
         initComponents();
         this.setTitle("SharedToDoList | Main Frame");
-        //menuliskan pengguna aktif
-        activeUser.setText(uName);
+        
+//        inisialisasi atribut
+        socket = s;
         
         //cek status koneksi
         if (ConnectionHandler.isConnected) {
@@ -37,7 +39,10 @@ public class MainFrame extends javax.swing.JFrame {
             connectBtn.setText("connected");
         }
         
-        listen();
+//        membuat listener utk string dari server
+//        Thread tListener = new Thread(ConnectionHandler.listen());
+//        tListener.start();
+//        listen();
     }
     
     public void listen() throws IOException {
@@ -169,9 +174,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void logOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutBtnActionPerformed
         // TODO add your handling code here:
-        LoginFrame loginF = new LoginFrame(socket);
-        loginF.statusMsg.setText("Anda telah berhasil melakukan log out");
-        loginF.setVisible(true);
+//        LoginFrame loginF = new LoginFrame(socket);
+        SharedToDoListClient.loginF.statusMsg.setText("Anda telah berhasil melakukan log out");
+        SharedToDoListClient.loginF.setVisible(true);
         
         //menutup main frame
         this.setVisible(false);
@@ -212,7 +217,7 @@ public class MainFrame extends javax.swing.JFrame {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel activeUser;
+    public javax.swing.JLabel activeUser;
     public javax.swing.JButton connectBtn;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
