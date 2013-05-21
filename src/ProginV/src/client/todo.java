@@ -149,7 +149,9 @@ public class todo {
 			if (success)
 	        {
 				// go to other form
-	        	//frmToDoList.setVisible(false);
+	        	frmToDoList.setVisible(false);
+                        ListTugas tt = new ListTugas();
+                        tt.run();
 	        }
 		}
     }//GEN-LAST:event_loginButtonActionPerformed
