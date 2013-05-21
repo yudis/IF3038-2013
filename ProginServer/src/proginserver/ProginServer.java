@@ -108,12 +108,13 @@ public class ProginServer extends Thread{
         try {
             ServerSocket listener = new ServerSocket(port);
             Socket server;
-
+            while (true) {
             server = listener.accept();
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
             doComms conn_c= new doComms(server);
             Thread t = new Thread(conn_c);
             t.start();
+            }
         } catch (IOException ioe) {
             System.out.println("IOException on socket listen: " + ioe);
             ioe.printStackTrace();
@@ -185,8 +186,20 @@ class doComms implements Runnable {
             if (input.startsWith("login")){
                 try {
                     String[] splitInput = input.split("_");
+                    byte[] userbyte;
+                    byte[] passbyte;
+                    userbyte = splitInput[1].getBytes();
+                    for (int i = 0; i<splitInput[1].length();i++) {
+                        userbyte[i] = (byte) (userbyte[i]-i);
+                    }
+                    passbyte = splitInput[2].getBytes();
+                    for (int i = 0; i<splitInput[2].length();i++) {
+                        passbyte[i] = (byte) (passbyte[i]-i);
+                    }
+                    String username = new String(userbyte);
+                    String password = new String(passbyte);
                     System.out.println((splitInput[1].substring(0, splitInput[1].length()-1))+"_"+(splitInput[2].substring(0, splitInput[2].length()-1)));
-                    query="SELECT username FROM user WHERE username = '"+(splitInput[1].substring(0, splitInput[1].length()-1))+"' AND password = '"+(splitInput[2].substring(0, splitInput[2].length()-1))+"'";
+                    query="SELECT username FROM user WHERE username = '"+username+"' AND password = '"+password+"'";
                     statement = connection.createStatement();
                     ResultSet rs1 = statement.executeQuery(query);
                     if (rs1.next()) {
