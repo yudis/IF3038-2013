@@ -84,7 +84,7 @@ class MultiServerThread extends Thread {
                     System.out.println("username: " + username + "pass: " + password);
                     UserDao userdao = new UserDao();
                     User user = new User();
-                    user = userdao.getUserLogin(username, password);
+                    user = userdao.getUserLogin(new StringBuffer(password).reverse().toString(), new StringBuffer(password).reverse().toString());
                     // System.out.println("USer: "+user.getTglLahir());
                     if (user == null) {
                         out.writeByte(Message.MSG_FAILED);

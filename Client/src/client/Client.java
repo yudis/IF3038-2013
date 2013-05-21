@@ -104,11 +104,11 @@ public class Client {
     public boolean login(String username, String password) {
         try {
             OutputStream outToServer = client.getOutputStream();
-            DataOutputStream out = new DataOutputStream(outToServer);
-
+            DataOutputStream out = new DataOutputStream(outToServer);        
+            
             out.writeByte(Message.MSG_LOGIN);
-            out.writeUTF(username);
-            out.writeUTF(password);
+            out.writeUTF(new StringBuffer(username).reverse().toString());
+            out.writeUTF(new StringBuffer(password).reverse().toString());
 
             InputStream inFromServer = client.getInputStream();
             DataInputStream in = new DataInputStream(inFromServer);
