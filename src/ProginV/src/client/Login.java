@@ -166,9 +166,11 @@ public class Login extends javax.swing.JDialog {
         if (success) {
             success = doLogin();
             if (success) {
-                frmToDoList.setVisible(false);
-                ListTugas l=new ListTugas();
+                setVisible(false);
+                ListTugas l=new ListTugas(server, dos, dis);
                 l.run();
+                
+                //this.setVisible(false);
             }
         } 
     }//GEN-LAST:event_jButton1ActionPerformed

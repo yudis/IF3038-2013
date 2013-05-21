@@ -16,8 +16,7 @@ import java.util.logging.Logger;
  *
  * @author M Reza MP
  */
-public class ServerForm extends javax.swing.JFrame implements Runnable
-{
+public class ServerForm extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates new form CobaServer
@@ -25,13 +24,12 @@ public class ServerForm extends javax.swing.JFrame implements Runnable
     ServerSocket server = null;
     Socket client = null;
     boolean shutdown = false;
-    
     ArrayList<Socket> clients = new ArrayList<>();
-    
+
     public ServerForm() {
         initComponents();
         setVisible(true);
-        
+
     }
 
     /**
@@ -90,7 +88,7 @@ public class ServerForm extends javax.swing.JFrame implements Runnable
         // TODO add your handling code here:
         shutdown = !shutdown;
         shutdownButton.setText((shutdown) ? "Turn On" : "Turn Off");
-        logTextArea.append((shutdown) ? "Turn On" : "Turn Off");
+        logTextArea.append((shutdown) ? "Turn Off" : "Turn On");
     }//GEN-LAST:event_shutdownButtonActionPerformed
 
     /**
@@ -135,62 +133,49 @@ public class ServerForm extends javax.swing.JFrame implements Runnable
     private javax.swing.JButton shutdownButton;
     // End of variables declaration//GEN-END:variables
 
-    public javax.swing.JTextArea getLogTextArea()
-    {
+    public javax.swing.JTextArea getLogTextArea() {
         return logTextArea;
     }
-    
+
     @SuppressWarnings("deprecation")
-	@Override
-    public void run() 
-    {
+    @Override
+    public void run() {
         try {
             // TODO add your handling code here:
             //Thread t = null;
-            while (true)
-            {
-            	if (!shutdown)
-            	{
-            		System.out.println("on");
-            		if (server == null)
-            		{
-            			server = new ServerSocket(2000, 5);
-            		}
-            		
-            		client = server.accept();
-                        if ((!clients.contains(client)) || clients.isEmpty())
-                        {
-                            clients.add(client);
-                        }
-                        
-                        for(Socket c : clients)
-                        {
-                            Thread t = new Thread(new HandleClient(this, c));
-                            t.start();
-                        }
-            	}
-            	else
-            	{
-            		System.out.println("off");
-                        /*
-            		if (t.isAlive())
-            		{
-            			t = null;
-            		}
-                        */
-            		if (server != null)
-            		{
-                            server = null;
-                            clients.clear();
-            		}
-            	}
+            while (true) {
+                if (!shutdown) {
+                    System.out.println("on");
+                    if (server == null) {
+                        server = new ServerSocket(2000, 5);
+                    }
+
+                    client = server.accept();
+                    if ((!clients.contains(client)) || clients.isEmpty()) {
+                        clients.add(client);
+                    }
+
+                    for (Socket c : clients) {
+                        Thread t = new Thread(new HandleClient(this, c));
+                        t.start();
+                    }
+                } else {
+                    System.out.println("off");
+                    /*
+                     if (t.isAlive())
+                     {
+                     t = null;
+                     }
+                     */
+                    if (server != null) {
+                        server = null;
+                        clients.clear();
+                    }
+                }
             }
             //JOptionPane.showMessageDialog(null, "Client Request Accepted.");
         } catch (IOException ex) {
             Logger.getLogger(ServerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-    
 }

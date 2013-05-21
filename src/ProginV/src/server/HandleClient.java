@@ -57,6 +57,10 @@ public class HandleClient extends Thread {
                     {
                         doLogin(arg);
                     }
+                    else if (arg.contains("getTask"))
+                    {
+                        doGetTask(arg);
+                    }
                 }
                 
                 sleep(1000);
@@ -136,7 +140,21 @@ public class HandleClient extends Thread {
         } catch (NoSuchAlgorithmException | IOException ex) {
             Logger.getLogger(ServerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
+    }
+    
+    public void doGetTask(String arg)
+    {
+        try {
+            frame.getLogTextArea().append(arg + "\n");
+            
+            dos = client.getOutputStream();
+            String url = apiaddress + "getTask";
+            String output = readDataFromWebService(url);
+            dos.write(output.getBytes());
+            dos.flush();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(HandleClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

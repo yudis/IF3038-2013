@@ -150,8 +150,8 @@ public class todo {
 	        {
 				// go to other form
 	        	frmToDoList.setVisible(false);
-                        ListTugas tt = new ListTugas();
-                        tt.run();
+                        //ListTugas tt = new ListTugas();
+                        //tt.run();
 	        }
 		}
     }//GEN-LAST:event_loginButtonActionPerformed
