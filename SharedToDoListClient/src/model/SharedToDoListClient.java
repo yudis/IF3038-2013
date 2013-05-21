@@ -24,12 +24,15 @@ import view.MainFrame;
 public class SharedToDoListClient {
     
     private static ConnectionHandler connHandler;
-    private static Socket socket;
+    public static Socket socket;
     
     public static LoginFrame loginF;
     public static MainFrame mainF;
+    public static final String UPDATE_TASK_PATHNAME = "updatetask.txt";
+//    public static MainFrameKrisna mainF;
+    public static String message = "";
     
-    private static final String SUCCESS_MESSAGE = "002";
+    private static final String SUCCESS_MESSAGE = "success_list";
     
     public static void main(String[] args) throws UnknownHostException, IOException {
 //        create connection
@@ -38,6 +41,7 @@ public class SharedToDoListClient {
         System.out.println("Koneksi berhasil");
         
 //        menciptakan main frame
+//        mainF = new MainFrame(socket);
         mainF = new MainFrame(socket);
         mainF.setVisible(false);
         
@@ -46,7 +50,7 @@ public class SharedToDoListClient {
         loginF.setVisible(true);
         
         while (!mainF.isVisible()) {
-            System.out.println("tunggu");
+//            System.out.println("tunggu");
             try {
                 Thread.sleep(400);
             } catch (InterruptedException ex) {
@@ -56,15 +60,14 @@ public class SharedToDoListClient {
         
 //        main frame telah diaktifkan
 //        mengganti nama user aktif pada main frame
-        mainF.activeUser.setText(loginF.uName);
+//        mainF.activeUser.setText(loginF.uName);
         
 //        membuat thread khusus untuk selalu mengecek kondisi koneksi
-        Thread t = new Thread(new ConnectionChecker(socket, SharedToDoListClient.mainF));
-        t.start();
-        System.out.println("checker jalan");
+//        Thread t = new Thread(new ConnectionChecker(socket, SharedToDoListClient.mainF));
+//        t.start();
+//        System.out.println("checker jalan");
         
 //        memulai listen dari server
-        String message;
         while (true) {
             System.out.println("listening mode to server");
             
@@ -83,7 +86,7 @@ public class SharedToDoListClient {
     public static void listenFile() {
         try {
             int fileSize = 5000000; //max sekali kirim 5MB
-            int bytesRead;
+            int bytesRead = 0;
             int currentTot = 0;
 
             byte[] bytearray = new byte[fileSize];
@@ -95,7 +98,7 @@ public class SharedToDoListClient {
             
 //          bersiap menerima file dari server
             is = socket.getInputStream();
-            File file = new File("dummy.txt");
+            File file = new File(UPDATE_TASK_PATHNAME);
             fos = new FileOutputStream(file);
             bos = new BufferedOutputStream(fos);
             bytesRead = is.read(bytearray, 0, bytearray.length);

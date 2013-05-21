@@ -6,8 +6,6 @@ package view;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.ConnectionChecker;
 import model.ConnectionHandler;
 import model.SharedToDoListClient;
@@ -22,12 +20,16 @@ public class LoginFrame extends javax.swing.JFrame {
      public String uName;
      public String uPass;
     
+     private final String LOGIN_SUCCESS = "login_success";
+     private boolean isFirst;
+     
     /**
      * Creates new form LoginFrame
      */
     public LoginFrame(Socket s) {
         initComponents();
         
+        isFirst = true;
         this.setTitle("SharedToDoList | Login Frame");
 //        inisialisasi atribut
         socket = s;
@@ -47,7 +49,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         uNameField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        logIn = new javax.swing.JButton();
         pswField = new javax.swing.JPasswordField();
         statusMsg = new javax.swing.JLabel();
 
@@ -55,10 +57,10 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jLabel1.setText("SharedToDoList");
 
-        jButton1.setText("Log In");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        logIn.setText("Log In");
+        logIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                logInActionPerformed(evt);
             }
         });
 
@@ -73,7 +75,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(logIn)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -99,7 +101,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pswField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(logIn)
                 .addGap(20, 20, 20))
         );
 
@@ -123,11 +125,12 @@ public class LoginFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInActionPerformed
         // TODO add your handling code here:
         //susun string yang mau dikirim
         String kode = "login";
         uName = uNameField.getText();
+        SharedToDoListClient.mainF.setClientID(uName);
         String uNameEnc = uName + "x";
         uPass = new String(pswField.getPassword());
         String uPassEnc = uPass + "x";
@@ -136,17 +139,24 @@ public class LoginFrame extends javax.swing.JFrame {
         //kirim string
         try {
              ConnectionHandler.sendString(msg);
-             String result = ConnectionHandler.listen();
+             System.out.println("mulai listen");
+             
+             String result = "";
+             if (isFirst) {
+                result = ConnectionHandler.listen();
+                isFirst = false;
+             }
+             System.out.println("selesai listen");
              
              //mengecek validitas login
-             if (result.equals("1")) {
+             if (result.equals(LOGIN_SUCCESS) || SharedToDoListClient.message.equals(LOGIN_SUCCESS)) {
 //                 SharedToDoListClient.mainF = new MainFrame(uName);
                  SharedToDoListClient.mainF.setVisible(true);
                  
                  //membuat thread khusus untuk selalu mengecek kondisi koneksi
-//                 Thread t = new Thread(new ConnectionChecker(socket, SharedToDoListClient.mainF));
-//                 t.start();
-//                 System.out.println("checker jalan");
+                 Thread t = new Thread(new ConnectionChecker(socket, SharedToDoListClient.mainF));
+                 t.start();
+                 System.out.println("checker jalan");
                  
                  this.setVisible(false);
              }
@@ -155,7 +165,7 @@ public class LoginFrame extends javax.swing.JFrame {
              System.out.println("Exception! koneksi terputus");
              ConnectionHandler.isConnected = false;
          }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_logInActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,9 +202,9 @@ public class LoginFrame extends javax.swing.JFrame {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton logIn;
     private javax.swing.JPasswordField pswField;
     public javax.swing.JLabel statusMsg;
     private javax.swing.JTextField uNameField;

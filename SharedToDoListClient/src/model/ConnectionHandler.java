@@ -22,9 +22,11 @@ public class ConnectionHandler {
     public static boolean isConnected;
     private ConnectionChecker connChecker;
     
-    public static final String IP_ADDRESS = "127.0.0.1";
-    public static final int PORT_NUM = 2345;
-//    public final String IP_ADDRESS = "192.168.0.194";
+//    public static final String IP_ADDRESS = "127.0.0.1";
+//    public static final int PORT_NUM = 2345;
+    public static final int PORT_NUM = 10000;
+    public static final String IP_ADDRESS = "192.168.102.51";
+    public static String fileName;
     
     public ConnectionHandler() {
         isConnected = false;
@@ -39,8 +41,8 @@ public class ConnectionHandler {
     }
     
     public static void sendString(String str) throws IOException {
-        os = new DataOutputStream(socket.getOutputStream());
-        is = new DataInputStream(socket.getInputStream());
+        os = new DataOutputStream(SharedToDoListClient.socket.getOutputStream());
+        is = new DataInputStream(SharedToDoListClient.socket.getInputStream());
         
 //        if (socket.isClosed()) System.out.println("socket sudah ditutup");
 //        else System.out.println("socket masih dibuka");
@@ -64,9 +66,5 @@ public class ConnectionHandler {
         }
         
         return ack;
-    }
-    
-    public static void listenFile() {
-        
     }
 }

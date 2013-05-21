@@ -28,7 +28,7 @@ public class ConnectionChecker implements Runnable {
 
     @Override
     public void run() {
-        while (ConnectionHandler.isConnected) { //selama masih terhubung dengan server
+        while (ConnectionHandler.isConnected && SharedToDoListClient.mainF.isVisible()) { //selama masih terhubung dengan server
             String msg = "ping";
             try {
                 os = new DataOutputStream(socket.getOutputStream());
