@@ -1,3 +1,3 @@
-13510019 Andreas Bara Timur 13510019@students.if.itb.ac.id
-13510039 Felix Terahadi 13510039@students.if.itb.ac.id
-13510087 Arief Suharsono 13510087@students.if.itb.ac.id ariefsuharsono
+13510031 Rahmi Yuwan 13510031@students.itb.ac.id ramhiyuwan
+13510087 Arief Suharsono 13510087@students.itb.ac.id ariefsuharsono
+18210019 Arya Rezavidi Viciyudha 18210019@students.itb.ac.id
