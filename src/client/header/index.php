@@ -10,7 +10,7 @@
                      <div class="header">
 			<div id="logo">
 			    <a href="../dashboard/">
-			    <img src="pict/logo.png">
+			    <img src="../pict/logo.png">
 			    </a>
 			</div>
 			<div id="border">
