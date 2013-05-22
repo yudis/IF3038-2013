@@ -1,7 +1,7 @@
 <?php
 	function check($username, $password)
 	{
-		$result = query("SELECT * from pengguna WHERE username = :username AND password = :password", array('username' => $username, 'password' => $password));
+		$result = query("SELECT * FROM pengguna WHERE username = :username AND password = :password", array('username' => $username, 'password' => $password));
 		if ($result)
 		{
 			$output = 1;
