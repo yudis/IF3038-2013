@@ -13,14 +13,14 @@
         <div class="main">
             <div id="addcat" onClick="popup('popUpDiv')">
             </div>
-            <form id="kirim" action="buattask.php" method="POST">
+            <form id="kirim" action="../buattask/" method="POST">
                 <input type="Submit" name= "submit" id="addtask" style="visibility: hidden;" value="" disabled>
             </a>
             <div id="category"> <!-- Sigit-->
 			</div><!--akhir-->
 			<div id="category2"></div><!-- Sigit-->
             <div id="task">
-                <a href="rinciantugas.php">
+                <a href="../rinciantugas/">
                 <div id="div1">
                     
                 </div>
