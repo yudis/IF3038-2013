@@ -8,6 +8,7 @@
 		<script src="js/calendar.js" > </script>
         <link rel="stylesheet" href="css/css.css">
         <script src="indexController.js" > </script>
+        <script src="sha1.js" > </script>
     </head>
     <body onLoad="isLogin()">		<!-----------------------panggil isLogin------------------------->
         <div class="header">
