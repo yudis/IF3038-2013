@@ -78,6 +78,7 @@ public class Coba {
         s = "[5,,2]";
         obj = JSONValue.parse(s);
         System.out.println(obj);
+        System.out.println("exit");
         //String json2 = json.replace("},{", "}],[{");
         //String json3 = json2.replace("[", "").replace("]", "");
 
