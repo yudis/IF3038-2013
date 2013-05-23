@@ -6,9 +6,13 @@ package client;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.Socket;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -19,6 +23,8 @@ import javax.swing.table.AbstractTableModel;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,18 +36,49 @@ public class ListTugas extends JPanel implements Runnable {
     /**
      * Creates new form ListTugas
      */
+    String username;
     private Socket server = null;
     private OutputStream dos = null;
     private InputStream dis = null;
+    JFrame frame;
+    JDialog dialog;
 
-    public ListTugas(Socket _server, OutputStream _dos, InputStream _dis) {
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {
+        frame.setVisible(false);
+        dialog.setVisible(true);
+    }
+    
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {
+        frame.setVisible(false);
+        dialog.setVisible(true);
+    }
+    public ListTugas(String username, JDialog dia, Socket _server, OutputStream _dos, InputStream _dis) {
         super(new GridLayout(1, 0));
+        this.username = username;
+        dialog = dia;
         JTable table = new JTable(new ListTugas.Tabel());
         table.setPreferredScrollableViewportSize(new Dimension(300, 100));
         table.setFillsViewportHeight(true);
         JScrollPane scroll = new JScrollPane(table);
         add(scroll);
+        
+        JButton update = new JButton("Synchronize");
+        add(update);
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
+        
+        JButton logout = new JButton("Logout");
+        add(logout);
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
 
+        
         server = _server;
         dos = _dos;
         dis = _dis;
@@ -52,10 +89,10 @@ public class ListTugas extends JPanel implements Runnable {
 
         private String[] namakolom = {
             "Nama Tugas", "Tanggal Tugas", "Kategori", "Status"};
-        private Object[][] data = {{"Makan",
-                "27041993", "ok deh", false},
-            {"Minum",
-                "17031992", "miscellaneous", true},};
+        private Object[][] data = {{"progin dewa",
+                "2013-03-05", "progin", false},
+            {"tubes1",
+                "2013-03-23", "sister", false},};
         //private Object data = new Object [][];
         //ArrayList <Object> data = new ArrayList<>();
 
@@ -96,11 +133,69 @@ public class ListTugas extends JPanel implements Runnable {
             }
 
             data[row][col] = value;
+            updateData(data, row, getColumnCount());
+
             fireTableCellUpdated(row, col);
 
             if (true) {
                 System.out.println("Data baru");
                 printDebugData();
+            }
+        }
+
+        public void updateData(Object[][] data, int currentRow, int col) {
+            int result = 0;
+            try {
+                //String username = jTextField1.getText();
+                //String password = jPasswordField1.getText();
+                System.out.println("Masuk username");
+
+                dos = server.getOutputStream();
+                String coba = "update/";
+                //coba += (Integer.toString(row) + "/");
+                //coba += (Integer.toString(col) + "/");
+                //dos.write(.getBytes());
+                //dos.write(.getBytes());
+                //dos.write(.getBytes());
+                coba += ("" + data[currentRow][0] + "/");
+                coba += ("" + (((boolean)(data[currentRow][3]) == true) ? 1 : 0) + "/");
+                
+                //dos.write(("login/" + username + "/" + password).getBytes());
+                coba += username;
+                savelog(coba);
+                dos.write(coba.getBytes());
+                dos.flush();
+                System.out.println("berhasil kirim message");
+
+                byte[] b = new byte[1024];
+                dis = server.getInputStream();
+                int r = dis.read(b);
+                System.out.println(new String(b).trim());
+                if (r != -1) {
+                    JOptionPane.showMessageDialog(null, result);
+                    //result = Integer.parseInt(new String(b).trim());
+
+                    //JOptionPane.showMessageDialog(frmToDoList, (result == 1) ? "Success login." : "Username or password incorrect.");
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+        public void savelog(String text) {
+            Writer writer = null;
+
+            try {
+                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("log.txt", true), "utf-8"));
+                writer.write(text + "\n");
+            } catch (IOException ex) {
+                // report
+            } finally {
+                try {
+                    writer.close();
+                } catch (Exception ex) {
+                }
             }
         }
 
@@ -122,7 +217,7 @@ public class ListTugas extends JPanel implements Runnable {
     private void createAndShowGUI() {
         //Create and set up the window.
         System.out.println("masuk tugas");
-        JFrame frame = new JFrame("List Tugas");
+        frame = new JFrame("List Tugas");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.

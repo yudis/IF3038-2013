@@ -167,7 +167,7 @@ public class Login extends javax.swing.JDialog {
             success = doLogin();
             if (success) {
                 setVisible(false);
-                ListTugas l=new ListTugas(server, dos, dis);
+                ListTugas l=new ListTugas(jTextField1.getText(), this, server, dos, dis);
                 l.run();
                 
                 //this.setVisible(false);

@@ -25,7 +25,8 @@ public class ServerForm extends javax.swing.JFrame implements Runnable {
     Socket client = null;
     boolean shutdown = false;
     ArrayList<Socket> clients = new ArrayList<>();
-
+    ArrayList<Thread> threads = new ArrayList<>();
+    
     public ServerForm() {
         initComponents();
         setVisible(true);
@@ -88,7 +89,7 @@ public class ServerForm extends javax.swing.JFrame implements Runnable {
         // TODO add your handling code here:
         shutdown = !shutdown;
         shutdownButton.setText((shutdown) ? "Turn On" : "Turn Off");
-        logTextArea.append((shutdown) ? "Turn Off" : "Turn On");
+        logTextArea.append((shutdown) ? "Turn Off\n" : "Turn On\n");
     }//GEN-LAST:event_shutdownButtonActionPerformed
 
     /**
@@ -146,31 +147,41 @@ public class ServerForm extends javax.swing.JFrame implements Runnable {
             while (true) {
                 if (!shutdown) {
                     System.out.println("on");
-                    if (server == null) {
+                    if (server == null || server.isClosed()) {
                         server = new ServerSocket(2000, 5);
                     }
 
                     client = server.accept();
                     if ((!clients.contains(client)) || clients.isEmpty()) {
                         clients.add(client);
+                        threads.add(new Thread(new HandleClient(this, client)));
                     }
-
-                    for (Socket c : clients) {
-                        Thread t = new Thread(new HandleClient(this, c));
-                        t.start();
+                    
+                    if (!threads.isEmpty())
+                    {
+                        for(Thread t : threads)
+                        {
+                            if (!t.isAlive())
+                            {
+                                t.start();
+                            }
+                        }
                     }
                 } else {
                     System.out.println("off");
-                    /*
-                     if (t.isAlive())
-                     {
-                     t = null;
-                     }
-                     */
-                    if (server != null) {
-                        server = null;
-                        clients.clear();
+                    if (!threads.isEmpty())
+                    {
+                        for(Thread t : threads)
+                        {
+                            if (t.isAlive())
+                            {
+                                t.interrupt();
+                            }
+                        }
                     }
+                     
+                    server.close();
+                    clients.clear();
                 }
             }
             //JOptionPane.showMessageDialog(null, "Client Request Accepted.");

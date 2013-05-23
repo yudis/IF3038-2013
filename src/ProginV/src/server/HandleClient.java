@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.Socket;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.MessageDigest;
@@ -28,7 +29,8 @@ public class HandleClient extends Thread {
     ServerForm frame;
     InputStream dis = null;
     OutputStream dos = null;
-    String apiaddress = "http://tubes4asdasd.aws.af.cm/api.php/";//"http://localhost/GitHub/IF3038-2013/src/server/api.php/";
+    //String apiaddress = "http://tubes4asdasd.aws.af.cm/api.php/";
+    String apiaddress = "http://localhost/GitHub/IF3038-2013/src/server/api.php/";
     
     public HandleClient(ServerForm f, Socket s) {
         frame = f;
@@ -61,6 +63,10 @@ public class HandleClient extends Thread {
                     {
                         doGetTask(arg);
                     }
+                    else if (arg.contains("update"))
+                    {
+                        doUpdate(arg);
+                    }
                 }
                 
                 sleep(1000);
@@ -73,7 +79,7 @@ public class HandleClient extends Thread {
 
     public static String bytesToHex(byte[] b) {
         char hexDigit[] = {'0', '1', '2', '3', '4', '5', '6', '7',
-            '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+            '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
         StringBuilder buf = new StringBuilder();
         for (int j = 0; j < b.length; j++) {
             buf.append(hexDigit[(b[j] >> 4) & 0x0f]);
@@ -86,7 +92,7 @@ public class HandleClient extends Thread {
         String output = "";
 
         try {
-            URL urlObj = new URL(url);
+            URL urlObj = new URL(url.replace(" ", "%20"));
             URLConnection tc = urlObj.openConnection();
             try (BufferedReader in = new BufferedReader(new InputStreamReader(tc.getInputStream(), "UTF-8"))) {
                 String line;
@@ -121,7 +127,7 @@ public class HandleClient extends Thread {
 
             MessageDigest md = MessageDigest.getInstance("SHA1");
             String[] temp = arg.split("/");
-            String username = bytesToHex(md.digest(temp[1].getBytes()));
+            String username = temp[1];
             String password = bytesToHex(md.digest(temp[2].getBytes()));
 
             System.out.println("username: " + username);
@@ -129,9 +135,13 @@ public class HandleClient extends Thread {
 
             String url = apiaddress + "checklogin/" + username + "/" + password;
             String output = readDataFromWebService(url);
+            System.out.println(output);
+            
             String result = (Integer.parseInt(output) == 1) ? "Success login." : "Username or password incorrect.";
 
             frame.getLogTextArea().append(arg + "\n");
+            frame.getLogTextArea().append("result: " + result + "\n");
+            
             dos = client.getOutputStream();
 
             dos.write(output.getBytes());
@@ -150,9 +160,36 @@ public class HandleClient extends Thread {
             dos = client.getOutputStream();
             String url = apiaddress + "getTask";
             String output = readDataFromWebService(url);
-            dos.write(output.getBytes());
+            frame.getLogTextArea().append("data tugas: " + dos + "\n");
+            dos.write("Success".getBytes());
             dos.flush();
             
+        } catch (IOException ex) {
+            Logger.getLogger(HandleClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void doUpdate(String arg)
+    {
+        try {
+            frame.getLogTextArea().append(arg + "\n");
+            
+            dos = client.getOutputStream();
+            String url = apiaddress + arg;
+            String output = readDataFromWebService(url);
+            System.out.println(output);
+            
+            //String url = apiaddress + "getTask";
+            //String output = readDataFromWebService(url);
+            frame.getLogTextArea().append("updates: " + output + "\n");
+            dos.write(("cool").getBytes());
+            dos.flush();
+            /*
+            String url = apiaddress + "getTask";
+            String output = readDataFromWebService(url);
+            frame.getLogTextArea().append("data tugas: " + output + "\n");
+            dos.write(output.getBytes());
+            dos.flush();
+            */
         } catch (IOException ex) {
             Logger.getLogger(HandleClient.class.getName()).log(Level.SEVERE, null, ex);
         }
