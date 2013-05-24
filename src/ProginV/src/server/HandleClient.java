@@ -33,8 +33,8 @@ public class HandleClient extends Thread {
     ServerForm frame;
     InputStream dis = null;
     OutputStream dos = null;
-    //String apiaddress = "http://tubes4asdasd.aws.af.cm/api.php/";
-    String apiaddress = "http://localhost/GitHub/IF3038-2013/src/server/api.php/";
+    String apiaddress = "http://tubes4asdasd.aws.af.cm/api.php/";
+    //String apiaddress = "http://localhost/GitHub/IF3038-2013/src/server/api.php/";
     
     public HandleClient(ServerForm f, Socket s) {
         frame = f;
@@ -142,7 +142,7 @@ public class HandleClient extends Thread {
             System.out.println(output);
             
                     
-            String result = (output.equals("Connection refused: connect")) ? "Cannot access database" : ((Integer.parseInt(output) == 1) ? "Success login" : "Username or password incorrect");
+            String result = (output.contains("Connection error:")) ? "Cannot access database" : ((Integer.parseInt(output) == 1) ? "Success login" : "Username or password incorrect");
 
             frame.getLogTextArea().append(arg + "\n");
             frame.getLogTextArea().append(result + "\n");

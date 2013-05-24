@@ -154,9 +154,11 @@ public class ServerForm extends javax.swing.JFrame implements Runnable {
                     client = server.accept();
                     if ((!clients.contains(client)) || clients.isEmpty()) {
                         clients.add(client);
-                        threads.add(new Thread(new HandleClient(this, client)));
+                        Thread t = new Thread(new HandleClient(this, client));
+                        t.start();
+                        //threads.add(new Thread(new HandleClient(this, client)));
                     }
-                    
+                    /*
                     if (!threads.isEmpty())
                     {
                         for(Thread t : threads)
@@ -167,8 +169,10 @@ public class ServerForm extends javax.swing.JFrame implements Runnable {
                             }
                         }
                     }
+                    */
                 } else {
                     System.out.println("off");
+                    /*
                     if (!threads.isEmpty())
                     {
                         for(Thread t : threads)
@@ -179,7 +183,7 @@ public class ServerForm extends javax.swing.JFrame implements Runnable {
                             }
                         }
                     }
-                     
+                    */
                     server.close();
                     clients.clear();
                 }
