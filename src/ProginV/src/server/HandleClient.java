@@ -16,8 +16,12 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import server.JSON.JSONArray;
+import server.JSON.JSONObject;
+import server.JSON.JSONValue;
 
 /**
  *
@@ -137,19 +141,47 @@ public class HandleClient extends Thread {
             String output = readDataFromWebService(url);
             System.out.println(output);
             
-            String result = (Integer.parseInt(output) == 1) ? "Success login." : "Username or password incorrect.";
+                    
+            String result = (output.equals("Connection refused: connect")) ? "Cannot access database" : ((Integer.parseInt(output) == 1) ? "Success login" : "Username or password incorrect");
 
             frame.getLogTextArea().append(arg + "\n");
-            frame.getLogTextArea().append("result: " + result + "\n");
+            frame.getLogTextArea().append(result + "\n");
             
             dos = client.getOutputStream();
 
-            dos.write(output.getBytes());
+            dos.write(result.getBytes());
             dos.flush();
 
         } catch (NoSuchAlgorithmException | IOException ex) {
             Logger.getLogger(ServerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String[][] json_parse(String data)
+    { 
+        Object json = JSONValue.parse(data);
+        JSONArray jsonArray = (JSONArray) json;
+        System.out.println(jsonArray.size());
+        String[][] result = new String[jsonArray.size()][4];
+        for (int i = 0; i < jsonArray.size(); ++i)
+        {
+            JSONObject tugas = (JSONObject) jsonArray.get(i);
+            System.out.println(tugas.get("nama_tugas"));
+            JSONArray cat = (JSONArray) tugas.get("cat");
+            JSONObject nama_kategori = (JSONObject) cat.get(0);
+            System.out.println(nama_kategori.get("nama_kategori"));
+            
+            result[i][0] = tugas.get("nama_tugas").toString();
+            result[i][1] = tugas.get("deadline").toString();
+            result[i][2] = nama_kategori.get("nama_kategori").toString();
+            result[i][3] = tugas.get("status").toString();
+            for(int j = 0; j < 4; ++j)
+            {
+                System.out.println(result[i][j]);
+            }
+        }
+        
+        return result;
     }
     
     public void doGetTask(String arg)
@@ -158,10 +190,23 @@ public class HandleClient extends Thread {
             frame.getLogTextArea().append(arg + "\n");
             
             dos = client.getOutputStream();
-            String url = apiaddress + "getTask";
+            String url = apiaddress + arg;
             String output = readDataFromWebService(url);
-            frame.getLogTextArea().append("data tugas: " + dos + "\n");
-            dos.write("Success".getBytes());
+            String[][] data = json_parse(output);
+            frame.getLogTextArea().append("data tugas: " + output + "\n");
+            String coba = "";
+            coba += data.length + "_" + "4_";
+            for (int i = 0; i < data.length; ++i)
+            {
+                for (int j = 0; j < 4; ++j)
+                {
+                    coba += data[i][j] + ";";
+                }
+                
+                coba+= "<";
+            }
+            
+            dos.write(coba.getBytes());
             dos.flush();
             
         } catch (IOException ex) {

@@ -221,7 +221,7 @@ public class Login extends javax.swing.JDialog {
     }
 
     public boolean doLogin() {
-        int result = 0;
+        String result = "";
         try {
             String username = jTextField1.getText();
             String password = jPasswordField1.getText();
@@ -236,15 +236,15 @@ public class Login extends javax.swing.JDialog {
             dis = server.getInputStream();
             int r = dis.read(b);
             if (r != -1) {
-                result = Integer.parseInt(new String(b).trim());
+                result = new String(b).trim();
 
-                JOptionPane.showMessageDialog(frmToDoList, (result == 1) ? "Success login." : "Username or password incorrect.");
+                JOptionPane.showMessageDialog(frmToDoList, result);
             }
         } catch (IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return result == 1;
+        return result.equals("Success login");
     }
 
     /**

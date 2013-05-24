@@ -14,13 +14,11 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
-import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -42,7 +40,12 @@ public class ListTugas extends JPanel implements Runnable {
     private InputStream dis = null;
     JFrame frame;
     JDialog dialog;
-
+    JTable table;
+    JButton update;
+    JButton logout;
+    Object[][] tasks;
+    
+    
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {
         frame.setVisible(false);
         dialog.setVisible(true);
@@ -56,28 +59,6 @@ public class ListTugas extends JPanel implements Runnable {
         super(new GridLayout(1, 0));
         this.username = username;
         dialog = dia;
-        JTable table = new JTable(new ListTugas.Tabel());
-        table.setPreferredScrollableViewportSize(new Dimension(300, 100));
-        table.setFillsViewportHeight(true);
-        JScrollPane scroll = new JScrollPane(table);
-        add(scroll);
-        
-        JButton update = new JButton("Synchronize");
-        add(update);
-        update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateActionPerformed(evt);
-            }
-        });
-        
-        JButton logout = new JButton("Logout");
-        add(logout);
-        logout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutActionPerformed(evt);
-            }
-        });
-
         
         server = _server;
         dos = _dos;
@@ -96,6 +77,12 @@ public class ListTugas extends JPanel implements Runnable {
         //private Object data = new Object [][];
         //ArrayList <Object> data = new ArrayList<>();
 
+        public Tabel(Object[][] tasks)
+        {
+            super();
+            data = tasks;
+        }
+        
         @Override
         public int getRowCount() {
             return data.length;
@@ -214,7 +201,7 @@ public class ListTugas extends JPanel implements Runnable {
         }
     }
 
-    private void createAndShowGUI() {
+    private void createAndShowGUI(Object[][] data) {
         //Create and set up the window.
         System.out.println("masuk tugas");
         frame = new JFrame("List Tugas");
@@ -223,6 +210,30 @@ public class ListTugas extends JPanel implements Runnable {
         //Create and set up the content pane.
         //ListTugas newContentPane = new ListTugas();
         //newContentPane.setOpaque(true);
+        
+        table = new JTable(new ListTugas.Tabel(data));
+        table.setPreferredScrollableViewportSize(new Dimension(300, 100));
+        table.setFillsViewportHeight(true);
+        JScrollPane scroll = new JScrollPane(table);
+        add(scroll);
+        
+        update = new JButton("Synchronize");
+        add(update);
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
+        
+        logout = new JButton("Logout");
+        add(logout);
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
+        
+        
         this.setOpaque(true);
         frame.setContentPane(this);
 
@@ -261,7 +272,7 @@ public class ListTugas extends JPanel implements Runnable {
          }
          */
         doGetTask();
-        createAndShowGUI();
+        createAndShowGUI(tasks);
 
     }
 
@@ -269,18 +280,45 @@ public class ListTugas extends JPanel implements Runnable {
         try {
             dos = server.getOutputStream();
             if (dos != null) {
-                dos.write("getTask".getBytes());
+                dos.write(("getTask/" + username).getBytes());
                 dos.flush();
 
                 dis = server.getInputStream();
                 byte[] b = new byte[1024];
                 int r = dis.read(b);
                 if (r != -1) {
-                    System.out.println("data: " + new String(b).trim());
+                    String data = new String(b).trim();
+                    System.out.println("data: " + data);
+                    insertData(data);
                 }
             }
         } catch (IOException ex) {
             Logger.getLogger(ListTugas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void insertData(String inputdata)
+    {
+        String[] c = inputdata.split("_");
+        int row = Integer.parseInt(c[0]);
+        int col = Integer.parseInt(c[1]);
+        tasks = new Object[row][col];
+        String[] r = c[2].split("<");
+        for (int i = 0; i < row; ++i)
+        {
+            System.out.println(r[i]);
+            String[] w = r[i].split(";");
+            for (int j = 0; j < col; ++j)
+            {
+                if (j == 3)
+                {
+                    tasks[i][j] = (w[j].equals("1"));
+                }
+                else
+                {
+                    tasks[i][j] = w[j];
+                }
+            }
         }
     }
     // }

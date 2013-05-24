@@ -52,7 +52,7 @@ public class Coba {
 
 //          String json = "{\"id_tugas\":\"1\",\"id_kategori\":\"1\"},{\"id_tugas\":\"1\",\"id_kategori\":\"1\"}";
         //String json = "[{\"id_tugas\":\"1\",\"id_kategori\":\"1\",\"nama_tugas\":\"progin dewa\",\"deadline\":\"2013-03-05 18:00:00\",\"status\":\"0\",\"tag\":\"\",\"attachment\":\"\",\"username\":\"asdasdasd\",\"status_tugas\":\"0\",\"cat\":[{\"nama_kategori\":\"progin\"}]},{\"id_tugas\":\"2\",\"id_kategori\":\"1\",\"nama_tugas\":\"tubes1\",\"deadline\":\"2013-03-23 00:00:00\",\"status\":\"1\",\"tag\":\"html\",\"attachment\":\"-\",\"username\":\"jo\",\"status_tugas\":\"0\",\"cat\":[{\"nama_kategori\":\"progin\"}]},{\"id_tugas\":\"5\",\"id_kategori\":\"2\",\"nama_tugas\":\"tubes1\",\"deadline\":\"2013-03-23 00:00:00\",\"status\":\"0\",\"tag\":\"gunbound\",\"attachment\":\"-\",\"username\":\"asdasdasd\",\"status_tugas\":\"0\",\"cat\":[{\"nama_kategori\":\"sister\"}]}]";
-
+/*
         System.out.println("=======decode=======");
 
         String s = "[0,{\"1\":{\"2\":{\"3\":{\"4\":[5,{\"6\":7}]}}}}]";
@@ -74,11 +74,27 @@ public class Coba {
         s = "[5,]";
         obj = JSONValue.parse(s);
         System.out.println(obj);
-
-        s = "[5,,2]";
-        obj = JSONValue.parse(s);
-        System.out.println(obj);
+*/
+        String s = "[{\"id_tugas\":\"1\",\"id_kategori\":\"1\",\"nama_tugas\":\"progin dewa\",\"deadline\":\"2013-03-05 18:00:00\",\"status\":\"0\",\"tag\":\"\",\"attachment\":\"\",\"username\":\"asdasdasd\",\"status_tugas\":\"0\",\"cat\":[{\"nama_kategori\":\"progin\"}]},{\"id_tugas\":\"2\",\"id_kategori\":\"1\",\"nama_tugas\":\"tubes1\",\"deadline\":\"2013-03-23 00:00:00\",\"status\":\"1\",\"tag\":\"html\",\"attachment\":\"-\",\"username\":\"jo\",\"status_tugas\":\"0\",\"cat\":[{\"nama_kategori\":\"progin\"}]},{\"id_tugas\":\"5\",\"id_kategori\":\"2\",\"nama_tugas\":\"tubes1\",\"deadline\":\"2013-03-23 00:00:00\",\"status\":\"0\",\"tag\":\"gunbound\",\"attachment\":\"-\",\"username\":\"asdasdasd\",\"status_tugas\":\"0\",\"cat\":[{\"nama_kategori\":\"sister\"}]}]";
+//"[5,,2]";
+        String x = "3_4_asd;asd;asd;asdasd;<asd;asd;asd<asdasdasd<";
+        String[] c = x.split("_");
+        for(String v: c)
+        {
+            System.out.println("result: " + v);
+        }
+        /*
+        int i = 0;
+        Object json = JSONValue.parse(s);
+        JSONArray jsonArray = (JSONArray) json;
+        System.out.println(jsonArray.size());
+        JSONObject tugas = (JSONObject) jsonArray.get(1);
+        System.out.println(tugas.get("nama_tugas"));
+        JSONArray cat = (JSONArray) tugas.get("cat");
+        JSONObject nama_kategori = (JSONObject) cat.get(0);
+        System.out.println(nama_kategori.get("nama_kategori"));
         System.out.println("exit");
+        */
         //String json2 = json.replace("},{", "}],[{");
         //String json3 = json2.replace("[", "").replace("]", "");
 
