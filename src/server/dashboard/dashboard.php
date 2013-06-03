@@ -11,9 +11,14 @@
 		echo json_encode($result);
 	}
 	
-	function getTask()
+	function getTask($username)
 	{
-		$result = queryAll2('SELECT * from tugas');// natural join mengerjakan');
+		$result = queryAll('SELECT * FROM tugas NATURAL JOIN mengerjakan WHERE mengerjakan.username=:username', array('username' => $username));
+		
+		foreach($result as &$row) {
+		 
+			$row['cat'] = queryAll('SELECT nama_kategori FROM kategori WHERE id_kategori=:id_kategori',array('id_kategori' => $row['id_kategori']));
+		}
 		/*
 		foreach($result as &$row)
 		{

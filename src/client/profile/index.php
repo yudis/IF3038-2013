@@ -60,11 +60,11 @@
 			
 		</script>
     
-	<body onload ="getUserName();getAvatar();getNamaLengkap();getTanggalLahir();getEmail();getProfil1Form();getTugasSelesai();">
+	<body onload="getUserInfo(); getProfil1Form();"> <!-- ="getUserName();getAvatar();getNamaLengkap();getTanggalLahir();getEmail();getProfil1Form();getTugasSelesai();"-->
 		<!--====================================================================-->
 		<div id="content">
 			<div id="profheader">
-				<div id="username">
+				<div id="username24">
 				
 				</div>
 				<div id="avatarnya">

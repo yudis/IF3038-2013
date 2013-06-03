@@ -1,7 +1,16 @@
 <?php
 
+	
+
+	function getUserInfo($username)
+	{
+		$result = query("SELECT username, nama_lengkap, tanggal_lahir, email, avatar FROM pengguna WHERE username = :username", array('username' => $username));
+		echo json_encode($result);
+	}
+
 	function getUserName($un)
 	{	
+		/*
 		$con = mysqli_connect("localhost","root","","progin_439_13508105");
 		if(mysqli_connect_errno($con)){
 			echo json_encode("error connect getUserName");	
@@ -9,12 +18,13 @@
 		$query = "SELECT * FROM pengguna WHERE username='$un'";
 		$result = mysqli_query($con,$query);
 		$row = mysqli_fetch_array($result);
-		/*echo json_encode("<div id=\"username\">");
+		//echo json_encode("<div id=\"username\">");
 		echo json_encode("<div>".$row['username']."</div>");
 		echo json_encode("</div>");
+		//
 		*/
 		echo json_encode($un);
-		mysqli_close($con);	
+		//mysqli_close($con);	
 	}
 	
 	function getEmail($un)//
@@ -83,6 +93,18 @@
 	}
 	function getProfil1Form($un)
 	{
+		//$result = queryAll2('SELECT * from tugas');// natural join mengerjakan');
+		//echo json_encode($result);
+		
+		$result = queryAll('SELECT * FROM tugas NATURAL JOIN mengerjakan WHERE username=:username', array('username' => $un));
+		
+		foreach($result as &$row) {
+		 
+			$row['cat'] = queryAll('SELECT nama_kategori FROM kategori WHERE id_kategori=:id_kategori',array('id_kategori' => $row['id_kategori']));
+		}
+		
+		echo json_encode($result);
+		/*
 		$con5 = mysqli_connect("localhost","root","","progin_439_13508105");
 		if(mysqli_connect_errno($con5)){
 			echo json_encode("error connect getProfileForm");	
@@ -105,6 +127,7 @@
 			}
 		}
 		mysqli_close($con5);	
+		*/
 	}
 	function getTugasSelesai($un)
 	{

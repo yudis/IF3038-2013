@@ -5,10 +5,11 @@
     <head>
         <title> Next : You Can't Do it Alone</title>
 		<link rel="stylesheet" href="css/calendar.css">
-		<script src="js/calendar.js" > </script>
+		<script src="js/calendar2.js" > </script>
         <link rel="stylesheet" href="css/css.css">
         <script src="indexController.js" > </script>
         <script src="sha1.js" > </script>
+        <script src="ajax.js" > </script>
     </head>
     <body onLoad="isLogin()">		<!-----------------------panggil isLogin------------------------->
         <div class="header">
@@ -50,7 +51,7 @@
                 </div>
                  <div id="regakhir" style="DISPLAY: none">
                     <div id="formreg">
-                    <form name="registration">
+                    <form name="registration" action="soapregistration.php" method="post" enctype="multipart/form-data" onsubmit="masuk(this)" > <!-- -->
                         <label>username</label>
                         <input name="username" type="text" placeholder="username"  onkeyup="user_validating()" onChange="logingg()" />
 						<img src="pict/blank.png" alt="icon2" id="usericon" onchange="isformvalid()" />
@@ -77,8 +78,8 @@
 						<input type="file" name="avatar" onChange="avatar_validating();logingg()" />
 						<img src="pict/blank.png" alt="icon7" id="avaicon" />
 						<br>
-                        <input class= "submitreg" id="submitb" name="submit" type="button" value="Submit" onClick="masuk(this.form)" disabled />
-                        <input class= "submitreg" name="cancel" type="cancel" onClick="ShowAwal()" value="Cancel">
+                        <input class= "submitreg" id="submitb" name="submit" type="submit" value="Submit" disabled /> <!--"-->
+                        <input class= "submitreg" name="cancel" type="cancel" onClick="ShowAwal()" value="Cancel" />
                     </form>
                 </div>
                 </div>
@@ -89,7 +90,7 @@
 		<!-- slide -->
 		
         <div class="footer">
-            Copyright © Ahmad Faiz - Fandi Pradana - Sigit Aji
+            Copyright © Ahmad Faiz - Fandi Pradana - Sigit Aji - M Reza MP - Yudhistira
         </div>
         
     </body>

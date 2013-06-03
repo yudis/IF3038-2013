@@ -33,6 +33,6 @@
 	{
 		query2("INSERT INTO pengguna (username,password,nama_lengkap,tanggal_lahir,email,avatar) VALUES (:user, :pwd, :nama, :tgl, :email, :avatar)", array('user' => $user, 'pwd' => $pwd, 'nama' => $nama, 'tgl' => $tgl, 'email' => $email, 'avatar' => $avatar));
 		$output = 1;
-		echo json_encode($output);
+		return $output;
 	}
 ?>

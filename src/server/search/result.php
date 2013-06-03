@@ -3,15 +3,8 @@
 	{
 		$length = strlen($data);
 		$result = queryAll("SELECT username FROM pengguna WHERE LEFT(username, :length) = :data", array('length' => $length, 'data' => $data));
-		if ($result)
-		{
-			$output = $result;
-		}
-		else
-		{
-			$output = "";
-		}
-		echo json_encode($output);
+		
+		echo json_encode($result);
 	}
 	
 	function search($cari, $filter)
