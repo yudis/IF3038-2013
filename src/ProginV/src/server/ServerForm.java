@@ -5,10 +5,13 @@
 package server;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,8 +27,6 @@ public class ServerForm extends javax.swing.JFrame implements Runnable {
     ServerSocket server = null;
     Socket client = null;
     boolean shutdown = false;
-    ArrayList<Socket> clients = new ArrayList<>();
-    ArrayList<Thread> threads = new ArrayList<>();
     
     public ServerForm() {
         initComponents();
@@ -152,40 +153,13 @@ public class ServerForm extends javax.swing.JFrame implements Runnable {
                     }
 
                     client = server.accept();
-                    if ((!clients.contains(client)) || clients.isEmpty()) {
-                        clients.add(client);
-                        Thread t = new Thread(new HandleClient(this, client));
-                        t.start();
-                        //threads.add(new Thread(new HandleClient(this, client)));
-                    }
-                    /*
-                    if (!threads.isEmpty())
-                    {
-                        for(Thread t : threads)
-                        {
-                            if (!t.isAlive())
-                            {
-                                t.start();
-                            }
-                        }
-                    }
-                    */
+                    Thread t = new Thread(new HandleClient(this, client));
+                    t.start();
+                    
                 } else {
                     System.out.println("off");
-                    /*
-                    if (!threads.isEmpty())
-                    {
-                        for(Thread t : threads)
-                        {
-                            if (t.isAlive())
-                            {
-                                t.interrupt();
-                            }
-                        }
-                    }
-                    */
+                    
                     server.close();
-                    clients.clear();
                 }
             }
             //JOptionPane.showMessageDialog(null, "Client Request Accepted.");

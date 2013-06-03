@@ -51,6 +51,29 @@ public class ListTugas extends JPanel implements Runnable {
         dialog.setVisible(true);
     }
     
+    public void doLogout()
+    {
+        try {
+            dos = server.getOutputStream();
+            dos.write(("logout/" + username).getBytes());
+            dos.flush();
+            System.out.println("berhasil kirim message");
+
+            byte[] b = new byte[1024];
+            dis = server.getInputStream();
+            int r = dis.read(b);
+            System.out.println();
+            if (r != -1) {
+                JOptionPane.showMessageDialog(null, new String(b).trim());
+                //result = Integer.parseInt(new String(b).trim());
+
+                //JOptionPane.showMessageDialog(frmToDoList, (result == 1) ? "Success login." : "Username or password incorrect.");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ListTugas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {
         frame.setVisible(false);
         dialog.setVisible(true);
@@ -137,7 +160,6 @@ public class ListTugas extends JPanel implements Runnable {
                 //String password = jPasswordField1.getText();
                 System.out.println("Masuk username");
 
-                dos = server.getOutputStream();
                 String coba = "update/";
                 //coba += (Integer.toString(row) + "/");
                 //coba += (Integer.toString(col) + "/");
@@ -150,6 +172,8 @@ public class ListTugas extends JPanel implements Runnable {
                 //dos.write(("login/" + username + "/" + password).getBytes());
                 coba += username;
                 savelog(coba);
+                
+                dos = server.getOutputStream();
                 dos.write(coba.getBytes());
                 dos.flush();
                 System.out.println("berhasil kirim message");

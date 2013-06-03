@@ -10,3 +10,9 @@ update/progin dewa/0/asdasdasd
 update/progin dewa/1/asdasdasd
 update/progin dewa/0/asdasdasd
 update/progin dewa/1/asdasdasd
+update/progin dewax/1/asdasdasd
+update/progin dewax/0/asdasdasd
+update/progin dewax/1/asdasdasd
+update/progin dewax/0/asdasdasd
+update/progin dewax/1/asdasdasd
+update/progin dewax/0/asdasdasd

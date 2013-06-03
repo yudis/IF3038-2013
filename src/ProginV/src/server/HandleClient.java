@@ -17,6 +17,7 @@ import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.JSON.JSONArray;
@@ -28,7 +29,6 @@ import server.JSON.JSONValue;
  * @author M Reza MP
  */
 public class HandleClient extends Thread {
-
     Socket client;
     ServerForm frame;
     InputStream dis = null;
@@ -36,9 +36,11 @@ public class HandleClient extends Thread {
     String apiaddress = "http://tubes4asdasd.aws.af.cm/api.php/";
     //String apiaddress = "http://localhost/GitHub/IF3038-2013/src/server/api.php/";
     
+    ArrayList<String> clients = new ArrayList<>();
+    
     public HandleClient(ServerForm f, Socket s) {
-        frame = f;
-        client = s;
+        this.frame = f;
+        this.client = s;
     }
 
     @Override
@@ -62,6 +64,10 @@ public class HandleClient extends Thread {
                     else if (arg.contains("login")) 
                     {
                         doLogin(arg);
+                    }
+                    if (arg.contains("logout"))
+                    {
+                        doLogout(arg);
                     }
                     else if (arg.contains("getTask"))
                     {
@@ -118,6 +124,13 @@ public class HandleClient extends Thread {
     public void doHandshake(String arg)
     {
         try {
+            if (clients.size() == 1)
+            {
+                dos = client.getOutputStream();
+                dos.write("full".getBytes());
+                dos.flush();
+            }
+            
             dos = client.getOutputStream();
             dos.write("success".getBytes());
             dos.flush();
@@ -141,6 +154,10 @@ public class HandleClient extends Thread {
             String output = readDataFromWebService(url);
             System.out.println(output);
             
+            if (Integer.parseInt(output) == 1)
+            {
+                clients.add(username);
+            }
                     
             String result = (output.contains("Connection error:")) ? "Cannot access database" : ((Integer.parseInt(output) == 1) ? "Success login" : "Username or password incorrect");
 
@@ -157,6 +174,20 @@ public class HandleClient extends Thread {
         }
     }
     
+    public void doLogout(String arg)
+    {
+        try {
+            int id = Integer.parseInt(arg.split("/")[1]);
+            clients.remove((Object)id);
+            
+            frame.getLogTextArea().append("client " + id + " has been log out\n");
+            dos = client.getOutputStream();
+            dos.write("success".getBytes());
+            dos.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(HandleClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public String[][] json_parse(String data)
     { 
         Object json = JSONValue.parse(data);

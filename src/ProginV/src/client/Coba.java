@@ -5,6 +5,7 @@
 package client;
 
 import com.mysql.jdbc.log.Log;
+import java.util.ArrayList;
 import server.JSON.JSONArray;
 import server.JSON.JSONObject;
 import server.JSON.JSONValue;
@@ -83,6 +84,22 @@ public class Coba {
         {
             System.out.println("result: " + v);
         }
+        
+        ArrayList<Integer> b = new ArrayList<>();
+        
+        if(b.contains(4))
+        {
+            System.out.println("ada 3");
+            b.remove((Object)3);
+        }
+        
+        for(int d: b)
+        {
+            System.out.println("result: " + d);
+        }
+        
+        String g = "logout/100";
+        System.out.println(g.split("/")[1]);
         /*
         int i = 0;
         Object json = JSONValue.parse(s);
